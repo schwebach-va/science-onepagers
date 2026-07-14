@@ -1,0 +1,217 @@
+:root {
+  --navy: #16324f;
+  --teal: #2a7f7e;
+  --paper: #fbfaf7;
+  --ink: #1c1c1c;
+  --muted: #5b5b5b;
+  --line: #dfe3e6;
+  --bio: #2a7f4f;
+  --chem: #7f3f2a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+}
+
+header.site-header {
+  background: var(--navy);
+  color: white;
+  padding: 1.75rem 1.5rem;
+}
+
+header.site-header h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.6rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+header.site-header p {
+  margin: 0;
+  color: #cfe0dc;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+}
+
+nav.site-nav {
+  background: var(--teal);
+}
+
+nav.site-nav a {
+  color: white;
+  text-decoration: none;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.5rem;
+  display: inline-block;
+}
+
+nav.site-nav a:hover { text-decoration: underline; }
+
+main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem 1.5rem;
+}
+
+.intro {
+  color: var(--muted);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.subject-block { margin-bottom: 2.5rem; }
+
+.subject-block h2 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 0.4rem;
+}
+
+.subject-block.biology h2 { color: var(--bio); border-color: var(--bio); }
+.subject-block.chemistry h2 { color: var(--chem); border-color: var(--chem); }
+
+ul.topic-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.topic-list li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.05rem;
+}
+
+ul.topic-list li a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+ul.topic-list li a:hover { color: var(--teal); text-decoration: underline; }
+
+ul.topic-list li .tag {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.15rem;
+}
+
+footer.site-footer {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 2rem 1rem 3rem 1rem;
+}
+
+/* ---- One-pager article styles ---- */
+
+article.onepager {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.75rem 4rem 1.75rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.back-link:hover { text-decoration: underline; }
+
+article.onepager .eyebrow {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+article.onepager h1 {
+  font-size: 1.9rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+article.onepager .meta {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+article.onepager h2 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0rem;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2rem;
+}
+
+article.onepager p { font-size: 1.05rem; }
+
+article.onepager .vocab {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+article.onepager .vocab dt { font-weight: 700; margin-top: 0.5rem; }
+article.onepager .vocab dt:first-child { margin-top: 0; }
+article.onepager .vocab dd { margin: 0 0 0.4rem 0; color: var(--muted); }
+
+article.onepager .check-understanding {
+  background: #eef6f4;
+  border-left: 4px solid var(--teal);
+  padding: 1rem 1.25rem;
+  font-size: 0.98rem;
+}
+
+article.onepager .check-understanding ol { margin: 0.5rem 0 0 1.1rem; padding: 0; }
+
+article.onepager .sources {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+@media print {
+  header.site-header, nav.site-nav, .back-link, footer.site-footer { display: none; }
+  body { background: white; }
+  article.onepager { padding: 0; max-width: 100%; }
+}
+
+/* ---- Tablet / iPad friendliness ---- */
+@media (max-width: 900px) {
+  header.site-header { padding: 1.4rem 1.1rem; }
+  header.site-header h1 { font-size: 1.35rem; }
+  main, article.onepager { padding-left: 1.1rem; padding-right: 1.1rem; }
+  nav.site-nav a { padding: 0.75rem 1.1rem; font-size: 0.95rem; }
+  ul.topic-list li { padding: 0.75rem 0; font-size: 1.1rem; }
+  ul.topic-list li a { display: block; padding: 0.25rem 0; }
+  article.onepager h1 { font-size: 1.6rem; }
+  article.onepager p, article.onepager .check-understanding { font-size: 1.08rem; }
+}
