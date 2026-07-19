@@ -7,6 +7,7 @@
   --line: #dfe3e6;
   --bio: #2a7f4f;
   --chem: #7f3f2a;
+  --careers: #5c4b8a;
 }
 
 * { box-sizing: border-box; }
@@ -80,6 +81,7 @@ main {
 
 .subject-block.biology h2 { color: var(--bio); border-color: var(--bio); }
 .subject-block.chemistry h2 { color: var(--chem); border-color: var(--chem); }
+.subject-block.careers h2 { color: var(--careers); border-color: var(--careers); }
 
 ul.topic-list {
   list-style: none;
@@ -198,6 +200,72 @@ article.onepager .sources {
   color: var(--muted);
 }
 
+/* ---- Careers content: data tables and resource links ---- */
+
+article.onepager table.stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.85rem;
+  margin: 1rem 0 1.5rem 0;
+}
+
+article.onepager table.stat-table caption {
+  text-align: left;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+article.onepager table.stat-table th,
+article.onepager table.stat-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+article.onepager table.stat-table th {
+  color: var(--navy);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+article.onepager table.stat-table td.num { white-space: nowrap; }
+
+article.onepager .va-note {
+  background: #f4f1fa;
+  border-left: 4px solid var(--careers);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.95rem;
+  margin: 1.25rem 0;
+}
+
+article.onepager .resource-links {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.88rem;
+}
+
+article.onepager .resource-links ul { margin: 0; padding-left: 1.1rem; }
+article.onepager .resource-links li { margin-bottom: 0.45rem; }
+article.onepager .resource-links a { color: var(--teal); }
+
+article.onepager .reflect {
+  background: #f4f1fa;
+  border-left: 4px solid var(--careers);
+  padding: 1rem 1.25rem;
+  font-size: 0.98rem;
+}
+
+article.onepager .reflect ol,
+article.onepager .reflect ul { margin: 0.5rem 0 0 1.1rem; padding: 0; }
+article.onepager .reflect li { margin-bottom: 0.7rem; }
+
 @media print {
   header.site-header, nav.site-nav, .back-link, footer.site-footer { display: none; }
   body { background: white; }
@@ -214,4 +282,5 @@ article.onepager .sources {
   ul.topic-list li a { display: block; padding: 0.25rem 0; }
   article.onepager h1 { font-size: 1.6rem; }
   article.onepager p, article.onepager .check-understanding { font-size: 1.08rem; }
+  article.onepager table.stat-table { font-size: 0.8rem; }
 }
