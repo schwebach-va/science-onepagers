@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carbon-14: The Isotope That Proves We Did It | Science One-Pagers</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  figure.decay-diagram { margin: 1.5rem 0; text-align: center; }
+  figure.decay-diagram svg { max-width: 100%; height: auto; }
+  figure.decay-diagram figcaption {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .eq-block {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.9rem 1.25rem;
+    margin: 1rem 0;
+    font-family: "Iowan Old Style", Georgia, serif;
+    font-size: 1.15rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Science One-Pagers</h1>
+  <p>Short, college-level readings for Advanced Biology &amp; Chemistry students</p>
+</header>
+
+<nav class="site-nav">
+  <a href="../index.html">Home</a>
+  <a href="../index.html#biology">Biology</a>
+  <a href="../index.html#chemistry">Chemistry</a>
+  <a href="../index.html#careers">Careers</a>
+</nav>
+
+<article class="onepager">
+  <a class="back-link" href="../index.html">&larr; Back to all topics</a>
+  <div class="eyebrow">Chemistry &middot; Atomic Structure &amp; Nuclear Chemistry &middot; Climate Attribution Science</div>
+  <h1>Carbon-14: The Isotope That Proves We Did It</h1>
+  <div class="meta">DRAFT &mdash; review before publishing to students</div>
+
+  <p>
+    Most of the evidence behind "the planet is warming" is statistical or
+    model-based: temperature records, ice cores, satellite data. Carbon-14
+    offers something different &mdash; a direct physical fingerprint,
+    sitting in the atmosphere right now, that identifies exactly where the
+    extra carbon dioxide is coming from. Getting to that fingerprint means
+    understanding what an isotope actually is, how a nucleus decays, why
+    that decay follows an exact mathematical rule, and how chemists
+    measure something as rare as one carbon-14 atom in roughly a trillion
+    carbon atoms.
+  </p>
+
+  <h2>What makes an isotope an isotope</h2>
+  <p>
+    An atom's identity as an element is set entirely by its number of
+    protons &mdash; carbon is carbon because it has 6. Neutrons are a
+    separate matter: they add mass and help hold the nucleus together
+    without changing which element the atom is. <strong>Isotopes</strong>
+    are atoms of the same element with different numbers of neutrons, and
+    therefore different atomic masses. Carbon has three naturally
+    occurring isotopes: carbon-12 (6 protons, 6 neutrons, about 98.9% of
+    all carbon), carbon-13 (6 protons, 7 neutrons, about 1.1%), and
+    carbon-14 (6 protons, 8 neutrons, roughly one atom in every trillion
+    carbon atoms). Carbon-12 and carbon-13 are stable indefinitely.
+    Carbon-14 is not &mdash; its nucleus is unstable and will eventually
+    decay. It forms continuously in the upper atmosphere when cosmic-ray
+    neutrons strike nitrogen-14, gets oxidized into CO<sub>2</sub>, and
+    enters every living thing through photosynthesis and the food chain,
+    which is why a living organism maintains a roughly constant, steady
+    ratio of carbon-14 to ordinary carbon for as long as it's alive.
+  </p>
+
+  <h2>What happens when carbon-14 decays</h2>
+  <p>
+    Once an organism dies, it stops taking in new carbon, and the
+    carbon-14 already inside it simply decays, undisturbed, at a fixed
+    rate. Carbon-14 decays by <strong>beta decay</strong>: one neutron in
+    the nucleus converts into a proton, emitting a high-energy electron
+    (a beta particle) and an antineutrino in the process.
+  </p>
+  <div class="eq-block">
+    <sup>14</sup><sub>6</sub>C &rarr; <sup>14</sup><sub>7</sub>N + &beta;<sup>&minus;</sup> + <span style="font-style: italic;">&#772;&nu;</span><sub>e</sub>
+  </div>
+  <p>
+    Notice what stays fixed and what changes. The mass number (14) doesn't
+    change, because a neutron simply became a proton &mdash; no particles
+    left the nucleus. The atomic number goes up by one, from 6 to 7,
+    because the nucleus now has one more proton than before &mdash; and
+    since the number of protons is what defines an element, that single
+    change turns carbon into a completely different element, nitrogen-14,
+    which is stable and undergoes no further decay.
+  </p>
+
+  <h2>Half-life: the exact rule decay follows</h2>
+  <p>
+    A radioactive isotope's <strong>half-life</strong> is the time it
+    takes for half of a given sample to decay &mdash; not an average or an
+    estimate, but a fixed, measured property of that specific isotope.
+    Carbon-14's physical half-life has been measured at 5,730 &plusmn; 40
+    years, though radiocarbon labs report ages using an older, internationally
+    agreed-upon value of 5,568 years (the original figure calculated by
+    Willard Libby, who developed radiocarbon dating in 1949) purely for
+    historical consistency across decades of published results; a
+    calibration curve then converts that conventional "radiocarbon age"
+    into an actual calendar age. The decay itself follows an exponential
+    rule:
+  </p>
+  <div class="eq-block">
+    N(t) = N<sub>0</sub> &times; (1/2)<sup>t / t<sub>1/2</sub></sup>
+  </div>
+  <p>
+    where N<sub>0</sub> is the original amount of carbon-14, N(t) is the
+    amount remaining after time t, and t<sub>1/2</sub> is the half-life.
+    Every half-life that passes, exactly half of whatever remained is
+    gone &mdash; not half of the original amount, half of what's left.
+  </p>
+
+  <figure class="decay-diagram">
+    <svg viewBox="0 0 620 335" role="img" aria-labelledby="decaytitle decaydesc">
+      <title id="decaytitle">Carbon-14 exponential decay curve</title>
+      <desc id="decaydesc">A curve showing the percent of original carbon-14 remaining, dropping by half with each successive half-life: 100%, 50%, 25%, 12.5%, 6.25%, and 3.125%.</desc>
+      <!-- Axes -->
+      <line x1="60" y1="20" x2="60" y2="280" stroke="var(--ink)" stroke-width="1.5"/>
+      <line x1="60" y1="280" x2="580" y2="280" stroke="var(--ink)" stroke-width="1.5"/>
+      <!-- Horizontal guide lines at each halving -->
+      <line x1="60" y1="160" x2="160" y2="160" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="60" y1="220" x2="260" y2="220" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="60" y1="250" x2="360" y2="250" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="60" y1="265" x2="460" y2="265" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="60" y1="272.5" x2="560" y2="272.5" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- Decay curve -->
+      <path d="M60,40 L110,110.3 L160,160 L210,195.15 L260,220 L310,237.57 L360,250 L410,258.79 L460,265 L510,269.4 L560,272.5"
+            fill="none" stroke="var(--teal)" stroke-width="3"/>
+      <!-- Data points at each whole half-life -->
+      <circle cx="60" cy="40" r="4.5" fill="var(--navy)"/>
+      <circle cx="160" cy="160" r="4.5" fill="var(--navy)"/>
+      <circle cx="260" cy="220" r="4.5" fill="var(--navy)"/>
+      <circle cx="360" cy="250" r="4.5" fill="var(--navy)"/>
+      <circle cx="460" cy="265" r="4.5" fill="var(--navy)"/>
+      <circle cx="560" cy="272.5" r="4.5" fill="var(--navy)"/>
+      <!-- Percent labels -->
+      <text x="68" y="35" font-size="13" fill="var(--ink)" font-family="Helvetica Neue, Arial, sans-serif">100%</text>
+      <text x="168" y="155" font-size="13" fill="var(--ink)" font-family="Helvetica Neue, Arial, sans-serif">50%</text>
+      <text x="268" y="215" font-size="13" fill="var(--ink)" font-family="Helvetica Neue, Arial, sans-serif">25%</text>
+      <text x="368" y="245" font-size="13" fill="var(--ink)" font-family="Helvetica Neue, Arial, sans-serif">12.5%</text>
+      <text x="468" y="260" font-size="13" fill="var(--ink)" font-family="Helvetica Neue, Arial, sans-serif">6.25%</text>
+      <text x="500" y="290" font-size="13" fill="var(--ink)" font-family="Helvetica Neue, Arial, sans-serif">3.125%</text>
+      <!-- X-axis tick labels: half-lives and approx years -->
+      <text x="52" y="298" font-size="12" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">0</text>
+      <text x="160" y="298" font-size="12" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">1</text>
+      <text x="260" y="298" font-size="12" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">2</text>
+      <text x="360" y="298" font-size="12" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">3</text>
+      <text x="460" y="298" font-size="12" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">4</text>
+      <text x="560" y="298" font-size="12" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">5</text>
+      <!-- Axis titles -->
+      <text x="320" y="15" font-size="13" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">Percent of original &#185;&#8308;C remaining</text>
+      <text x="320" y="320" font-size="13" fill="var(--muted)" font-family="Helvetica Neue, Arial, sans-serif" text-anchor="middle">Number of half-lives elapsed (&#215; 5,730 years)</text>
+    </svg>
+    <figcaption>
+      Each half-life cuts the remaining carbon-14 in half again &mdash;
+      100% &rarr; 50% &rarr; 25% &rarr; 12.5% &rarr; 6.25% &rarr; 3.125%
+      &mdash; which is why the curve flattens rather than reaching zero:
+      mathematically, some carbon-14 is always technically left, just an
+      eventually undetectable amount.
+    </figcaption>
+  </figure>
+
+  <h2>Why radiocarbon dating hits a wall, and what geologists use instead</h2>
+  <p>
+    That flattening curve is exactly why radiocarbon dating has a practical
+    limit of roughly 50,000 years. By that point, fewer than 0.2% of the
+    original carbon-14 atoms remain &mdash; a signal too faint to reliably
+    separate from background contamination and instrument noise, no matter
+    how sensitive the equipment gets. Radiocarbon dates also aren't used
+    raw: because the amount of carbon-14 in the atmosphere has varied
+    somewhat over time (due to changes in cosmic-ray intensity and Earth's
+    magnetic field), raw "radiocarbon years" are converted into true
+    calendar years using a calibration curve built from tree rings, lake
+    sediments, corals, and cave formations of known age. The current
+    international standard, IntCal20, extends that calibration back
+    55,000 years.
+  </p>
+  <p>
+    For anything older &mdash; rocks, fossils, and events on a geologic
+    timescale &mdash; chemists and geologists switch to isotope systems
+    with vastly longer half-lives, using the exact same exponential decay
+    principle with a different clock speed and a different material:
+    potassium-argon and argon-argon dating (potassium-40's half-life is
+    about 1.25 billion years, used on volcanic rock layers, which is how
+    many early hominin fossil sites are dated), uranium-lead dating
+    (uranium-238's half-life is about 4.5 billion years, used on zircon
+    crystals and meteorites, including for dating the age of the solar
+    system itself), and rubidium-strontium dating (rubidium-87's half-life
+    is roughly 48.8 billion years, used for some of the oldest rocks on
+    Earth). The isotope changes; the underlying math &mdash; and the
+    figure above &mdash; doesn't.
+  </p>
+
+  <h2>How chemists actually measure one atom in a trillion</h2>
+  <p>
+    For decades, radiocarbon labs measured carbon-14 the way you might
+    expect: wait, and count decay events with a gas proportional counter
+    or liquid scintillation counter, detecting the beta particles as they're
+    emitted. Because carbon-14 is so rare and decays so slowly, this
+    required several grams of carbon and days of counting time per sample.
+    The modern standard method, <strong>accelerator mass spectrometry
+    (AMS)</strong>, does something fundamentally different: instead of
+    waiting for atoms to decay, it counts the carbon-14 atoms directly. A
+    graphitized sample is ionized into a beam of negative carbon ions,
+    accelerated through a high-voltage tandem accelerator, and stripped of
+    electrons partway through &mdash; a step that destroys molecular
+    interferences (like <sup>13</sup>CH<sup>&minus;</sup> or
+    <sup>12</sup>CH<sub>2</sub><sup>&minus;</sup>) that would otherwise be
+    mistaken for mass-14 carbon. A magnetic and electrostatic analyzer
+    then sorts the remaining ions by mass-to-charge ratio, routing
+    carbon-12 and carbon-13 into current-measuring detectors while a
+    separate particle detector counts individual carbon-14 ions one at a
+    time. Comparing those two measurements gives the sample's precise
+    <sup>14</sup>C/<sup>12</sup>C ratio directly. AMS needs roughly 1,000
+    times less material than decay counting &mdash; often under a
+    milligram of carbon &mdash; and finishes in hours instead of days.
+  </p>
+
+  <h2>What's actually improving, and the isotope's biggest case</h2>
+  <p>
+    Radiocarbon instrumentation keeps getting more capable, not less: AMS
+    sample requirements keep shrinking further, toward single milligrams
+    and below, enabling researchers to date individual compounds extracted
+    from a sample rather than the whole thing; calibration keeps getting
+    more precise, as IntCal20's extension to 55,000 years shows. One
+    genuinely clever modern application, "bomb-pulse dating," uses the
+    fact that above-ground nuclear weapons testing between 1955 and 1963
+    nearly doubled the carbon-14 concentration in the atmosphere; as that
+    spike has since worked its way through the biosphere and decayed back
+    down, its precise, known shape has become a forensic tool accurate to
+    about two years, used to determine when a person's tooth enamel or eye
+    lens tissue formed &mdash; effectively dating a birth year from a
+    single measurement.
+  </p>
+  <p>
+    That same precision is what makes carbon-14 direct evidence, not a
+    model, for where today's excess atmospheric CO<sub>2</sub> is coming
+    from. Fossil fuels &mdash; coal, oil, and natural gas &mdash; formed
+    from organic matter tens to hundreds of millions of years ago, tens of
+    thousands of carbon-14 half-lives in the past. Whatever carbon-14 they
+    once contained decayed away almost immeasurably long ago, leaving
+    fossil carbon completely "radiocarbon-dead." When that carbon is
+    burned and released as CO<sub>2</sub>, it measurably dilutes the
+    fraction of carbon-14 in the entire atmosphere, even while total
+    atmospheric CO<sub>2</sub> rises &mdash; an effect first documented by
+    chemist Hans Suess in 1955 and still called the Suess effect. A rising
+    CO<sub>2</sub> level with a falling carbon-14 fraction is a specific,
+    physical signature that fossil combustion, not volcanic activity or
+    ordinary biological respiration, is the source of the increase &mdash;
+    which is the isotope actually proving, rather than modeling, who did
+    it.
+  </p>
+
+  <dl class="vocab">
+    <dt>Isotope</dt>
+    <dd>An atom of a given element (fixed number of protons) with a specific number of neutrons, giving it a specific atomic mass; carbon-12, carbon-13, and carbon-14 are all isotopes of carbon.</dd>
+    <dt>Half-life</dt>
+    <dd>The fixed amount of time required for half of a radioactive sample to decay; a constant, measurable property of a specific isotope.</dd>
+    <dt>Beta decay</dt>
+    <dd>A type of radioactive decay in which a neutron converts into a proton, emitting an electron (beta particle) and an antineutrino, increasing the atomic number by one while leaving the mass number unchanged.</dd>
+    <dt>Accelerator mass spectrometry (AMS)</dt>
+    <dd>A technique that directly counts individual atoms of a rare isotope by ionizing, accelerating, and sorting them by mass-to-charge ratio, rather than waiting to detect their decay.</dd>
+    <dt>Calibration curve</dt>
+    <dd>A reference curve, built from materials of independently known age, used to convert a raw radiocarbon age into an actual calendar age.</dd>
+    <dt>Suess effect</dt>
+    <dd>The measurable dilution of carbon-14 in atmospheric CO2 caused by the combustion of radiocarbon-dead fossil fuels, used as direct isotopic evidence of the source of rising CO2 levels.</dd>
+  </dl>
+
+  <h2>Check your understanding</h2>
+  <div class="check-understanding">
+    <ol>
+      <li>Explain why carbon-12, carbon-13, and carbon-14 are all isotopes of the same element, and identify the number of protons and neutrons in each. (SOL CH.2)</li>
+      <li>Write the nuclear equation for the beta decay of carbon-14, and explain why the mass number stays the same while the atomic number increases by one. (SOL CH.2)</li>
+      <li>Using the half-life equation and the diagram above, calculate what percentage of a sample's original carbon-14 remains after three half-lives, and explain in your own words why the curve never actually reaches zero. (SOL CH.2, CH.1)</li>
+      <li>Explain why radiocarbon dating cannot reliably date anything older than about 50,000 years, and name one isotope system geologists use instead for much older material, along with why its much longer half-life makes that possible. (SOL CH.2)</li>
+      <li>Explain how the Suess effect uses carbon-14 specifically (not just rising CO2 levels) as direct evidence that fossil fuel combustion, rather than volcanic activity or the biosphere, is the source of the atmosphere's added carbon. (SOL CH.1, CH.2)</li>
+    </ol>
+  </div>
+
+  <p class="sources">
+    Sources: Libby W.F., original radiocarbon dating method, 1949, and
+    Nobel Prize in Chemistry, 1960; standard nuclear chemistry references
+    on isotopes and beta decay; Reimer P.J. et al., "The IntCal20 Northern
+    Hemisphere Radiocarbon Age Calibration Curve (0&ndash;55 cal kBP),"
+    <em>Radiocarbon</em>, 2020; standard references on accelerator mass
+    spectrometry methodology (Oxford Radiocarbon Accelerator Unit; Beta
+    Analytic technical documentation); Buchholz B.A., "Carbon-14 Bomb
+    Pulse Dating," Lawrence Livermore National Laboratory technical report;
+    Hua Q. et al., bomb-pulse radiocarbon and forensic age estimation
+    literature; Suess H.E., "Radiocarbon Concentration in Modern Wood,"
+    <em>Science</em>, 1955, and standard climate-science references on the
+    Suess effect; standard geochronology references on potassium-argon,
+    uranium-lead, and rubidium-strontium dating half-lives and
+    applications. DRAFT &mdash; verify current 2018 Virginia Science
+    Standards of Learning chemistry codes with the current Curriculum
+    Framework before publishing.
+  </p>
+</article>
+
+<footer class="site-footer">
+  Written and maintained by Mr. Schwebach
+</footer>
+
+</body>
+</html>
