@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaFold and the Fifty-Year Protein Problem | Science One-Pagers</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Science One-Pagers</h1>
+  <p>Short, college-level readings for Advanced Biology &amp; Chemistry students</p>
+</header>
+
+<nav class="site-nav">
+  <a href="../index.html">Home</a>
+  <a href="../index.html#biology">Biology</a>
+  <a href="../index.html#chemistry">Chemistry</a>
+  <a href="../index.html#careers">Careers</a>
+</nav>
+
+<article class="onepager">
+  <a class="back-link" href="../index.html">&larr; Back to all topics</a>
+  <div class="eyebrow">Biology &middot; Molecular Biology &amp; Biotechnology &middot; Artificial Intelligence in Science</div>
+  <h1>AlphaFold and the Fifty-Year Protein Problem</h1>
+  <div class="meta">DRAFT &mdash; review before publishing to students</div>
+
+  <p>
+    A protein's job depends almost entirely on its shape. Hemoglobin
+    carries oxygen because of the specific pocket it folds into. An
+    enzyme speeds up a reaction because its folded shape holds two
+    molecules in exactly the right position to react. Knowing a protein's
+    amino acid sequence &mdash; the order of building blocks specified by
+    its gene &mdash; tells you almost nothing about that shape on its own.
+    For roughly fifty years, figuring out how a sequence folds into a
+    3D structure was one of biology's most stubborn open problems. In
+    2020, an AI system called <strong>AlphaFold</strong> effectively
+    solved it. This reading covers how AlphaFold's approach actually
+    works, and then &mdash; because knowing about a tool is different
+    from being able to use one &mdash; whether a student can actually put
+    it to work on a real protein.
+  </p>
+
+  <h2>Why folding was ever a "fifty-year problem"</h2>
+  <p>
+    In 1961, biochemist Christian Anfinsen showed that a small enzyme,
+    ribonuclease, could be fully unfolded with chemical treatment and
+    then would refold on its own, with no outside help, back into its
+    original working shape once the treatment was removed. That result
+    &mdash; work he won a share of the 1972 Nobel Prize in Chemistry for
+    &mdash; established what's still called <strong>Anfinsen's
+    dogma</strong>: a protein's amino acid sequence contains all the
+    information needed to determine its final 3D structure. In principle,
+    then, structure should be computable directly from sequence. In
+    practice, nobody could do it. A modest-sized protein has an
+    astronomical number of geometrically possible ways to fold &mdash; far
+    more than could ever be checked one by one, a problem often called
+    <strong>Levinthal's paradox</strong>, since a real protein finds its
+    correct shape in milliseconds despite that search space, while a
+    computer trying every possibility would not finish before the
+    universe grew old. The only reliable way to actually determine a
+    protein's structure was to measure it directly, using slow,
+    expensive, physical methods &mdash; X-ray crystallography, NMR
+    spectroscopy, and later cryo-electron microscopy &mdash; each of which
+    could take months or years of work per protein, and each of which
+    requires a stable, purified, often difficult-to-produce sample. By
+    2020, roughly 170,000 protein structures had been solved this way and
+    deposited in the <strong>Protein Data Bank (PDB)</strong>, the field's
+    shared archive &mdash; a huge body of work, but a small fraction of
+    the hundreds of millions of distinct proteins known to exist across
+    life on Earth. Genome sequencing had gotten fast and cheap. Knowing
+    what the proteins those genomes encode actually look like had not
+    kept pace at all.
+  </p>
+
+  <h2>How AlphaFold's approach actually works</h2>
+  <p>
+    AlphaFold, built by Google DeepMind and led by John Jumper and Demis
+    Hassabis, does not search through possible foldings the way
+    Levinthal's paradox makes sound necessary. It predicts structure
+    directly, using patterns learned from the roughly 170,000 structures
+    already solved and deposited in the PDB. Two ideas make that
+    prediction possible. First, AlphaFold starts not from one sequence
+    but from a <strong>multiple sequence alignment (MSA)</strong>:
+    versions of the same protein family found across many different
+    species, lined up against each other. Positions that mutate together
+    across species &mdash; a change at one site consistently paired with a
+    change at another, even though the two sites are far apart in the raw
+    sequence &mdash; are a strong clue that those two positions sit
+    physically close together in the folded 3D structure, because
+    evolution tends to preserve a working shape even as it tolerates
+    sequence drift. Second, AlphaFold uses <strong>attention</strong>,
+    the same core mechanism behind large language models, in a module
+    called the Evoformer, to let the sequence alignment and a running map
+    of residue-to-residue distances repeatedly inform and refine each
+    other across many internal passes, before a final structure module
+    converts that refined internal representation directly into 3D atomic
+    coordinates. The whole system is trained end-to-end against the
+    experimentally solved PDB structures, learning what shapes real
+    protein sequences actually fold into rather than being told the rules
+    of folding directly. Critically, AlphaFold also outputs a per-position
+    confidence score, called <strong>pLDDT</strong>, alongside every
+    predicted structure &mdash; it does not just guess a shape, it also
+    tells you how much to trust each part of that guess.
+  </p>
+
+  <h2>What AlphaFold actually does today</h2>
+  <p>
+    At the 2020 CASP14 competition &mdash; the field's blind, biennial
+    test where research groups predict structures nobody has solved yet
+    and an independent panel scores the results against the real answer
+    once it's determined &mdash; AlphaFold's predictions were close enough
+    to experimentally measured structures that CASP organizers described
+    the protein-folding problem as effectively solved for single protein
+    chains. DeepMind and the European Bioinformatics Institute then built
+    the <strong>AlphaFold Protein Structure Database</strong>, a free,
+    public library that has grown to more than 200 million predicted
+    structures &mdash; not a slight expansion of the roughly 170,000
+    structures sixty years of crystallography had produced, but nearly
+    every protein sequenced across life on Earth. Researchers have since
+    used it to speed up work on neglected tropical diseases, design new
+    enzymes, identify drug targets, and study antibiotic resistance,
+    among many other applications. A newer version, AlphaFold 3 (2024),
+    extended the approach beyond single proteins to predict how proteins
+    interact with DNA, RNA, and small-molecule drugs together. In October
+    2024, Hassabis and Jumper were awarded half of the Nobel Prize in
+    Chemistry for AlphaFold, with the other half going to David Baker for
+    related work using similar computational methods to design entirely
+    new proteins that don't exist in nature.
+  </p>
+
+  <h2>Can a student actually use it to study a protein?</h2>
+  <p>
+    Yes, and in two genuinely different ways. The easiest is to look up a
+    protein that's already been predicted: the AlphaFold Protein
+    Structure Database (alphafold.ebi.ac.uk) is free and searchable by
+    protein or gene name, and returns an interactive 3D model you can
+    rotate in a browser, color-coded by that same pLDDT confidence score
+    &mdash; dark blue for very high confidence, orange and red for
+    regions the model isn't sure about. Looking up the CFTR protein (the
+    gene involved in cystic fibrosis) or the beta-globin chain of
+    hemoglobin (relevant to sickle cell disease) is a genuinely
+    productive way to connect a structure to a real disease students have
+    likely already heard of. The second, more involved option is
+    predicting a structure that doesn't exist yet: a free tool called
+    <strong>ColabFold</strong> runs in Google Colab, letting anyone paste
+    in their own amino acid sequence and get a predicted structure back,
+    using a graphics processor Google provides for free, with no coding
+    experience required beyond running a notebook cell.
+  </p>
+  <p>
+    Using either tool well means reading the confidence score, not just
+    the pretty picture. A high pLDDT score means AlphaFold has seen
+    enough related sequences and solved structures to make a genuinely
+    trustworthy prediction. A low score in a specific region is not
+    always a failure of the model &mdash; it's frequently the model
+    correctly reporting that a stretch of protein is
+    <strong>intrinsically disordered</strong>, meaning it doesn't settle
+    into one fixed shape in real life either. AlphaFold's predictions are
+    also weakest for proteins with few known relatives to build a useful
+    sequence alignment from, and the model predicts a single resting
+    structure rather than the range of shapes many real proteins shift
+    between while doing their job. A student using AlphaFold to study a
+    protein is doing real science &mdash; the same database professional
+    researchers use &mdash; but reading the confidence score honestly,
+    rather than trusting every colorful ribbon diagram equally, is the
+    actual skill being practiced.
+  </p>
+
+  <dl class="vocab">
+    <dt>Anfinsen's dogma</dt>
+    <dd>The principle, established experimentally in 1961, that a protein's amino acid sequence contains all the information needed to determine its final folded 3D structure.</dd>
+    <dt>Levinthal's paradox</dt>
+    <dd>The observation that a protein has far too many geometrically possible folded shapes to find its correct one by random search, yet real proteins fold correctly in milliseconds.</dd>
+    <dt>Multiple sequence alignment (MSA)</dt>
+    <dd>Versions of the same protein found across many species, lined up against each other so that positions which mutate together across species &mdash; a clue to physical closeness in the folded structure &mdash; can be identified.</dd>
+    <dt>pLDDT</dt>
+    <dd>AlphaFold's per-position confidence score for a predicted structure; high values indicate a trustworthy prediction, and low values often correctly flag a genuinely disordered or uncertain region rather than a modeling failure.</dd>
+    <dt>Protein Data Bank (PDB)</dt>
+    <dd>The shared international archive of protein structures determined experimentally by methods such as X-ray crystallography, NMR spectroscopy, and cryo-electron microscopy; the training data AlphaFold learned from.</dd>
+  </dl>
+
+  <h2>Check your understanding</h2>
+  <div class="check-understanding">
+    <ol>
+      <li>Explain Anfinsen's dogma and why it implies that protein structure should, in principle, be predictable directly from a protein's amino acid sequence. (SOL BIO.5)</li>
+      <li>Describe Levinthal's paradox and explain why it means AlphaFold could not simply "search" through possible folded shapes to find the right one. (SOL BIO.2, BIO.5)</li>
+      <li>Explain how a multiple sequence alignment across different species can reveal which amino acid positions are physically close together in a protein's folded structure, even when they are far apart in the sequence. (SOL BIO.5, BIO.6)</li>
+      <li>A region of a predicted protein structure has a low pLDDT confidence score. Explain two different reasons this could be true, and why one of those reasons does not mean the prediction is wrong. (SOL BIO.1, BIO.2)</li>
+    </ol>
+  </div>
+
+  <p class="sources">
+    Sources: Anfinsen CB, "Principles that Govern the Folding of Protein
+    Chains," Nobel Lecture, 1972; Jumper J, Evans R, Pritzel A, et al.,
+    "Highly accurate protein structure prediction with AlphaFold,"
+    <em>Nature</em>, 596:583&ndash;589, 2021; The Nobel Prize in Chemistry
+    2024, press release and popular science background, NobelPrize.org;
+    EMBL-EBI and DeepMind, AlphaFold Protein Structure Database
+    (alphafold.ebi.ac.uk); Mirdita M, et al., "ColabFold: making protein
+    folding accessible to all," <em>Nature Methods</em>, 2022. DRAFT
+    &mdash; verify current 2018 Virginia Science Standards of Learning
+    biology codes with the current Curriculum Framework before
+    publishing.
+  </p>
+</article>
+
+<footer class="site-footer">
+  Written and maintained by Mr. Schwebach
+</footer>
+
+</body>
+</html>
