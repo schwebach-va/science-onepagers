@@ -7,7 +7,8 @@
   --line: #dfe3e6;
   --bio: #2a7f4f;
   --chem: #7f3f2a;
-  --careers: #5c4b8a;
+  --careers: #16324f;
+  --teach: #5a3f7f;
 }
 
 * { box-sizing: border-box; }
@@ -61,6 +62,15 @@ main {
   padding: 2rem 1.5rem 4rem 1.5rem;
 }
 
+.book-nod {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
 .intro {
   color: var(--muted);
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -82,6 +92,15 @@ main {
 .subject-block.biology h2 { color: var(--bio); border-color: var(--bio); }
 .subject-block.chemistry h2 { color: var(--chem); border-color: var(--chem); }
 .subject-block.careers h2 { color: var(--careers); border-color: var(--careers); }
+.subject-block.teaching h2 { color: var(--teach); border-color: var(--teach); }
+
+.section-note {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
+}
 
 ul.topic-list {
   list-style: none;
@@ -200,71 +219,309 @@ article.onepager .sources {
   color: var(--muted);
 }
 
-/* ---- Careers content: data tables and resource links ---- */
+/* ---- Modular teaching index (table + filter) ---- */
 
-article.onepager table.stat-table {
+.index-search {
   width: 100%;
-  border-collapse: collapse;
+  max-width: 420px;
+  padding: 0.55rem 0.75rem;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.85rem;
-  margin: 1rem 0 1.5rem 0;
+  font-size: 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+  color: var(--ink);
 }
 
-article.onepager table.stat-table caption {
-  text-align: left;
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
+.table-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0;
 }
 
-article.onepager table.stat-table th,
-article.onepager table.stat-table td {
-  border-bottom: 1px solid var(--line);
-  padding: 0.5rem 0.6rem;
+table.modular-index {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.88rem;
+  background: white;
+}
+
+table.modular-index th,
+table.modular-index td {
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 
-article.onepager table.stat-table th {
-  color: var(--navy);
-  font-size: 0.72rem;
+table.modular-index th {
+  background: var(--teach);
+  color: white;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
-article.onepager table.stat-table td.num { white-space: nowrap; }
+table.modular-index td a { color: var(--teal); }
 
-article.onepager .va-note {
-  background: #f4f1fa;
-  border-left: 4px solid var(--careers);
-  padding: 0.9rem 1.1rem;
-  font-size: 0.95rem;
+.part-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.2rem;
+}
+
+/* ---- Teacher protocol boxes and student-question boxes ---- */
+
+.protocol-box {
+  background: white;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--teach);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.protocol-box ol { margin: 0; padding-left: 1.2rem; }
+.protocol-box li { margin-bottom: 0.9rem; }
+.protocol-box li:last-child { margin-bottom: 0; }
+
+.tag-inline {
+  display: inline-block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-left: 0.3rem;
+}
+
+.student-questions {
+  background: #f4eef7;
+  border-left: 4px solid var(--teach);
+  padding: 1rem 1.25rem;
+  font-size: 0.98rem;
+  margin: 1.75rem 0;
+}
+
+.student-questions ol { margin: 0.5rem 0 0 1.1rem; padding: 0; }
+.student-questions li { margin-bottom: 0.6rem; }
+
+.bloom-tag {
+  display: inline-block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--teach);
+  border: 1px solid var(--teach);
+  border-radius: 10px;
+  padding: 1px 8px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+/* ---- Number callout boxes (quick-reference figures) ---- */
+
+.number-callout {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
+.number-callout .big-number {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--teach);
+  display: block;
+  line-height: 1.15;
+}
+
+.number-callout .big-number-label {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.sol-tag {
+  display: inline-block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--teal);
+  background: #eef6f4;
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 0 0.3rem 0.3rem 0;
+}
+
+.classroom-line {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-style: italic;
+  background: #f7f5ef;
+  border-left: 3px solid var(--muted);
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+
+/* ---- Station cards (biotech stations lesson, etc.) ---- */
+
+.station-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.station-card h3 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.05rem;
+  color: var(--teach);
+  margin: 0 0 0.5rem 0;
+}
+
+.station-card .station-label {
+  display: inline-block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-right: 0.4rem;
+}
+
+.station-card p { margin: 0.3rem 0; }
+
+.station-card .hook {
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* ---- AI prompt boxes and handout boxes ---- */
+
+.prompt-box {
+  background: #f4f6fa;
+  border: 1px solid #c7d2e0;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.prompt-box .prompt-label {
+  display: block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #3a5a8c;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.prompt-box p {
+  font-family: "Menlo", "Courier New", monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--ink);
+}
+
+.book-quote {
+  border-left: 3px solid var(--navy);
+  padding: 0.3rem 0 0.3rem 1rem;
+  margin: 1.25rem 0;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.handout-box {
+  background: white;
+  border: 2px dashed var(--line);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.handout-box .fill-line {
+  display: block;
+  border-bottom: 1px solid var(--muted);
+  min-height: 1.6em;
+  margin: 0.3rem 0 1rem 0;
+}
+
+/* ---- Real-case example boxes ---- */
+
+.case-box {
+  background: #fbf8f0;
+  border: 1px solid #e3d9bf;
+  border-left: 4px solid var(--chem);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.case-box h3 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--chem);
+  margin: 0 0 0.5rem 0;
+}
+
+.case-box .case-label {
+  display: inline-block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-right: 0.4rem;
+}
+
+.case-box p { margin: 0.4rem 0; }
+
+/* ---- Teacher-only note box ---- */
+
+.teacher-note {
+  background: #eef1f6;
+  border-left: 4px solid var(--navy);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
   margin: 1.25rem 0;
 }
 
-article.onepager .resource-links {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 1rem 1.25rem;
+.teacher-note .teacher-label {
+  display: block;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
-article.onepager .resource-links ul { margin: 0; padding-left: 1.1rem; }
-article.onepager .resource-links li { margin-bottom: 0.45rem; }
-article.onepager .resource-links a { color: var(--teal); }
-
-article.onepager .reflect {
-  background: #f4f1fa;
-  border-left: 4px solid var(--careers);
-  padding: 1rem 1.25rem;
-  font-size: 0.98rem;
+.handout-box .handout-label {
+  display: block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--teach);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
 }
-
-article.onepager .reflect ol,
-article.onepager .reflect ul { margin: 0.5rem 0 0 1.1rem; padding: 0; }
-article.onepager .reflect li { margin-bottom: 0.7rem; }
 
 @media print {
   header.site-header, nav.site-nav, .back-link, footer.site-footer { display: none; }
@@ -282,5 +539,4 @@ article.onepager .reflect li { margin-bottom: 0.7rem; }
   ul.topic-list li a { display: block; padding: 0.25rem 0; }
   article.onepager h1 { font-size: 1.6rem; }
   article.onepager p, article.onepager .check-understanding { font-size: 1.08rem; }
-  article.onepager table.stat-table { font-size: 0.8rem; }
 }
