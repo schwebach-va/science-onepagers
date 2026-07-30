@@ -32,6 +32,11 @@
     font-weight: normal;
   }
   .flag-note { background: #fff8ec; border-left: 4px solid #c9932a; padding: 0.6rem 1rem; font-size: 0.9rem; margin: 0.5rem 0 0.75rem 0; }
+  .reading-list-box { background: #f7f5ef; border: 1px solid var(--line); border-radius: 4px; padding: 1.1rem 1.4rem; margin: 1.5rem 0 2rem 0; }
+  .reading-list-box h2 { margin-top: 0; }
+  .reading-list-box ol.citation-list li { margin-bottom: 0.6rem; }
+  .locator { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.85rem; color: var(--muted); }
+  .locator a { color: var(--teal); }
 </style>
 </head>
 <body>
@@ -73,10 +78,63 @@
     a claim in the manuscript wasn't specific enough to trace to a real,
     checkable source, it was either replaced with a properly sourced
     figure or flagged rather than guessed at. One item below still
-    carries that flag &mdash; see Chapter 15.
+    carries that flag &mdash; see Chapter 15. Wherever a DOI, stable URL,
+    ISBN, or official record exists for a source, it's included so a
+    reader can go find the thing itself &mdash; also verified individually,
+    never guessed. Where no single stable link exists (an 1854 lecture, a
+    general category of agency reporting), that's said plainly instead of
+    a fabricated one standing in for it.
   </p>
 
+  <div class="reading-list-box">
+    <h2 class="part-title" id="reading-list" style="margin-top:0;">A Short Reading List &mdash; Books Mentioned in the Book</h2>
+    <p>
+      Beyond the sources below, <em>Everybody's Science</em> also names
+      about thirty other books directly &mdash; in passing, as a formative
+      memoir, a novel, or a case someone else made first. Gathered here
+      as a short, standalone list rather than folded into the
+      chapter-by-chapter bibliography, in case a reader wants a place to
+      go next. Alphabetical by author; the chapter noted is where the
+      book is named in the text.
+    </p>
+    <ol class="citation-list">
+      <li>Baker, Theo. <em>How to Rule the World: An Education in Power at Stanford University.</em> Penguin Press, 2026. <span class="locator">ISBN 978-0-593-83283-7 &middot; Ch. 13, 16</span></li>
+      <li>Boden, Margaret A. <em>The Creative Mind: Myths and Mechanisms.</em> Weidenfeld &amp; Nicolson, 1990 (2nd ed., Routledge, 2004). <span class="locator">ISBN 978-0-297-82069-7 (1990) &middot; Ch. 5</span></li>
+      <li>Bush, Vannevar. <em>Science, The Endless Frontier.</em> 1945. <span class="locator">Internet Archive: <a href="https://archive.org/details/scienceendlessfr00unit_0">archive.org/details/scienceendlessfr00unit_0</a> &middot; Ch. 13</span></li>
+      <li>de Kruif, Paul. <em>Microbe Hunters.</em> Harcourt, Brace and Company, 1926. <span class="locator">predates ISBN; Dover reprint ISBN 978-0-486-84995-9 &middot; Ch. 7</span></li>
+      <li>Dewey, John. <em>Reconstruction in Philosophy.</em> Henry Holt, 1920. <span class="locator">public domain &middot; Ch. 12</span></li>
+      <li>Diamond, Jared. <em>Collapse: How Societies Choose to Fail or Succeed.</em> Viking, 2005. <span class="locator">ISBN 978-0-14-303655-5 &middot; Ch. 13, companion reading</span></li>
+      <li>Diamond, Jared. <em>Guns, Germs, and Steel: The Fates of Human Societies.</em> W.W. Norton, 1997. <span class="locator">ISBN 978-0-393-03891-0 &middot; Ch. 10</span></li>
+      <li>Dweck, Carol S. <em>Mindset: The New Psychology of Success.</em> Random House, 2006. <span class="locator">ISBN 978-1-4000-6275-1 &middot; Ch. 4</span></li>
+      <li>Einstein, Albert. <em>Out of My Later Years.</em> Philosophical Library, 1950. <span class="locator">predates ISBN; free text: <a href="https://archive.org/details/outofmylateryear00eins">archive.org/details/outofmylateryear00eins</a> &middot; Prologue</span></li>
+      <li>Fleck, Ludwik. <em>Genesis and Development of a Scientific Fact.</em> University of Chicago Press, 1979 (English translation). <span class="locator">ISBN 978-0-226-25324-4 &middot; Ch. 7</span></li>
+      <li>Grant, Adam. <em>Think Again: The Power of Knowing What You Don't Know.</em> Viking, 2021. <span class="locator">ISBN 978-1-9848-7810-6 &middot; Ch. 6, 11, 12</span></li>
+      <li>Jahren, Hope. <em>Lab Girl.</em> Knopf, 2016. <span class="locator">ISBN 978-1-101-87493-6 &middot; Ch. 6</span></li>
+      <li>Kant, Immanuel. <em>Critique of Pure Reason.</em> 1781. <span class="locator">public domain; standard modern ed.: Cambridge UP, trans. Guyer &amp; Wood, 1998, ISBN 978-0-521-35302-8 &middot; Ch. 12</span></li>
+      <li>Kimmerer, Robin Wall. <em>Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge, and the Teachings of Plants.</em> Milkweed Editions, 2013. <span class="locator">ISBN 978-1-57131-335-5 &middot; Prologue</span></li>
+      <li>Koestler, Arthur. <em>The Act of Creation.</em> Hutchinson, 1964. <span class="locator">predates ISBN &middot; Ch. 5</span></li>
+      <li>Lewis, Sinclair. <em>Arrowsmith.</em> Harcourt, Brace and Company, 1925. <span class="locator">predates ISBN; 1926 Pulitzer Prize (declined) &middot; Ch. 7</span></li>
+      <li>Maclean, Norman. <em>Young Men and Fire.</em> University of Chicago Press, 1992. <span class="locator">ISBN 978-0-226-50062-1 &middot; Ch. 12</span></li>
+      <li>Nichols, John. <em>The Milagro Beanfield War.</em> Holt, Rinehart and Winston, 1974. <span class="locator">Ch. 1</span></li>
+      <li>Oreskes, Naomi. <em>Why Trust Science?</em> Princeton University Press, 2019. <span class="locator">ISBN 978-0-691-17900-1 &middot; Ch. 11, 12</span></li>
+      <li>Oreskes, Naomi, and Erik M. Conway. <em>Merchants of Doubt.</em> Bloomsbury Press, 2010. <span class="locator">ISBN 978-1-59691-610-4 &middot; Ch. 11</span></li>
+      <li>Pauling, Linus. <em>The Nature of the Chemical Bond.</em> Cornell University Press, 1939. <span class="locator">predates ISBN; current CUP ed. ISBN 978-0-8014-0333-0 &middot; Ch. 8</span></li>
+      <li>Popper, Karl. <em>The Logic of Scientific Discovery.</em> Hutchinson, 1959 (English translation). <span class="locator">predates ISBN; Routledge Classics ed. ISBN 978-0-415-27844-7 &middot; Ch. 7</span></li>
+      <li>Quammen, David. <em>Spillover: Animal Infections and the Next Human Pandemic.</em> W.W. Norton, 2012. <span class="locator">ISBN 978-0-393-06680-7 &middot; Ch. 10</span></li>
+      <li>Sacks, Oliver. <em>Uncle Tungsten: Memories of a Chemical Boyhood.</em> Knopf, 2001. <span class="locator">ISBN 978-0-375-40448-1 &middot; Ch. 1</span></li>
+      <li>Sen, Amartya. <em>The Idea of Justice.</em> Belknap Press of Harvard University Press, 2009. <span class="locator">ISBN 978-0-674-03613-0 &middot; Ch. 12</span></li>
+      <li>Sheldrake, Merlin. <em>Entangled Life: How Fungi Make Our Worlds, Change Our Minds, and Shape Our Futures.</em> Random House, 2020. <span class="locator">ISBN 978-0-525-51031-4 &middot; Ch. 2</span></li>
+      <li>Stokes, Donald E. <em>Pasteur's Quadrant: Basic Science and Technological Innovation.</em> Brookings Institution Press, 1997. <span class="locator">ISBN 978-0-8157-8177-6 &middot; Ch. 7</span></li>
+      <li>Thiel, Peter, with Blake Masters. <em>Zero to One: Notes on Startups, or How to Build the Future.</em> Crown Business, 2014. <span class="locator">ISBN 978-0-8041-3929-8 &middot; Ch. 5</span></li>
+      <li>Westover, Tara. <em>Educated: A Memoir.</em> Random House, 2018. <span class="locator">ISBN 978-0-399-59050-4 &middot; Prologue</span></li>
+    </ol>
+  </div>
+
   <div class="chapter-jump">
+    <div class="part-group">
+      <span class="part-group-label">Front Matter</span>
+      <a href="#prologue">Prologue</a>
+    </div>
     <div class="part-group">
       <span class="part-group-label">Part I &middot; Wonder</span>
       <a href="#ch-1">Ch. 1</a><a href="#ch-2">Ch. 2</a><a href="#ch-3">Ch. 3</a>
@@ -99,105 +157,117 @@
     </div>
   </div>
 
+  <h3 class="chapter-heading" id="prologue">Prologue &mdash; &ldquo;Everybody's Science&rdquo;</h3>
+  <ol class="citation-list">
+    <li>Kimmerer, Robin Wall. <em>Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge, and the Teachings of Plants.</em> Milkweed Editions, 2013. <span class="locator">ISBN 978-1-57131-335-5</span></li>
+    <li>Einstein, Albert. <em>Out of My Later Years.</em> Philosophical Library, 1950. <span class="locator">free text: <a href="https://archive.org/details/outofmylateryear00eins">archive.org/details/outofmylateryear00eins</a></span></li>
+    <li>Westover, Tara. <em>Educated: A Memoir.</em> Random House, 2018. <span class="locator">ISBN 978-0-399-59050-4</span></li>
+  </ol>
+
   <h2 class="part-title" id="part-1">Part I &mdash; Wonder</h2>
 
   <h3 class="chapter-heading" id="ch-1">Ch. 1 &mdash; &ldquo;A Farm Boy's Laboratory&rdquo;</h3>
   <ol class="citation-list">
-    <li>Kramnik, I., Dietrich, W.F., Demant, P., and Bloom, B.R. &ldquo;Genetic control of resistance to experimental infection with virulent <em>Mycobacterium tuberculosis</em>.&rdquo; <em>Proceedings of the National Academy of Sciences</em>, 2000.</li>
-    <li>Lax, A., et al. &ldquo;The value of specific MRI features in the evaluation of suspected placental invasion.&rdquo; <em>Magnetic Resonance Imaging</em>, 2007.</li>
-    <li>Sacks, Oliver. <em>Uncle Tungsten: Memories of a Chemical Boyhood.</em> 2001.</li>
-    <li>Nichols, John. <em>The Milagro Beanfield War.</em> 1974.</li>
-    <li><em>Blue Gold: World Water Wars.</em> Directed by Sam Bozzo, 2008.</li>
-    <li>National Center for Education Statistics. School Pulse Panel: &ldquo;Most U.S. Public Elementary and Secondary Schools Faced Hiring Challenges for the Start of the 2024&ndash;25 Academic Year.&rdquo; Press release, October 17, 2024.</li>
+    <li>Kramnik, I., Dietrich, W.F., Demant, P., and Bloom, B.R. &ldquo;Genetic control of resistance to experimental infection with virulent <em>Mycobacterium tuberculosis</em>.&rdquo; <em>Proceedings of the National Academy of Sciences</em>, 2000. <span class="locator">DOI: <a href="https://doi.org/10.1073/pnas.150227197">10.1073/pnas.150227197</a></span></li>
+    <li>Lax, A., et al. &ldquo;The value of specific MRI features in the evaluation of suspected placental invasion.&rdquo; <em>Magnetic Resonance Imaging</em>, 2007. <span class="locator">DOI: <a href="https://doi.org/10.1016/j.mri.2006.10.007">10.1016/j.mri.2006.10.007</a></span></li>
+    <li>Sacks, Oliver. <em>Uncle Tungsten: Memories of a Chemical Boyhood.</em> Knopf, 2001. <span class="locator">ISBN 978-0-375-40448-1</span></li>
+    <li>Nichols, John. <em>The Milagro Beanfield War.</em> Holt, Rinehart and Winston, 1974. <span class="locator">no verified ISBN for this printing</span></li>
+    <li><em>Blue Gold: World Water Wars.</em> Directed by Sam Bozzo, 2008. <span class="locator"><a href="https://www.imdb.com/title/tt1137439/">IMDb: imdb.com/title/tt1137439</a></span></li>
+    <li>National Center for Education Statistics. School Pulse Panel: &ldquo;Most U.S. Public Elementary and Secondary Schools Faced Hiring Challenges for the Start of the 2024&ndash;25 Academic Year.&rdquo; Press release, October 17, 2024. <span class="locator"><a href="https://nces.ed.gov/whatsnew/press_releases/10_17_2024.asp">nces.ed.gov/whatsnew/press_releases/10_17_2024.asp</a></span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-2">Ch. 2 &mdash; &ldquo;All Six Kingdoms in a Virginia Streambank&rdquo;</h3>
   <ol class="citation-list">
-    <li>Sheldrake, Merlin. <em>Entangled Life: How Fungi Make Our Worlds, Change Our Minds, and Shape Our Futures.</em> 2020.</li>
-    <li>Adamala, K., et al. &ldquo;Confronting risks of mirror life.&rdquo; <em>Science</em>, December 2024.</li>
+    <li>Sheldrake, Merlin. <em>Entangled Life: How Fungi Make Our Worlds, Change Our Minds, and Shape Our Futures.</em> Random House, 2020. <span class="locator">ISBN 978-0-525-51031-4</span></li>
+    <li>Adamala, K., et al. &ldquo;Confronting risks of mirror life.&rdquo; <em>Science</em>, December 2024. <span class="locator">DOI: <a href="https://doi.org/10.1126/science.ads9158">10.1126/science.ads9158</a></span></li>
     <li>McKeon, L.A., Fagre, D.B., and Peitzsch, E.H. &ldquo;Glaciers of Glacier National Park Repeat Photography Collection.&rdquo; U.S. Geological Survey data release, 2021. <a href="https://doi.org/10.5066/P9CQDA7S">https://doi.org/10.5066/P9CQDA7S</a></li>
-    <li>Rabus, B.T., and Echelmeyer, K.A. &ldquo;The Mass Balance of McCall Glacier, Brooks Range, Alaska, U.S.A.: Its Regional Relevance and Implications for Climate Change in the Arctic.&rdquo; <em>Journal of Glaciology</em>, 44(147), 1998, pp. 333&ndash;351.</li>
+    <li>Rabus, B.T., and Echelmeyer, K.A. &ldquo;The Mass Balance of McCall Glacier, Brooks Range, Alaska, U.S.A.: Its Regional Relevance and Implications for Climate Change in the Arctic.&rdquo; <em>Journal of Glaciology</em>, 44(147), 1998, pp. 333&ndash;351. <span class="locator">no DOI issued; stable text: <a href="https://www.cambridge.org/core/journals/journal-of-glaciology/article/mass-balance-of-mccall-glacier-brooks-range-alaska-usa-its-regional-relevance-and-implications-for-climate-change-in-the-arctic/BA7399A2FD626EBE7C723FDF6A4C727A">Cambridge Core</a></span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-3">Ch. 3 &mdash; &ldquo;The Edge of the World&rdquo;</h3>
   <ol class="citation-list">
-    <li>Miller, S.L. &ldquo;A Production of Amino Acids Under Possible Primitive Earth Conditions.&rdquo; <em>Science</em>, 1953.</li>
-    <li>Bennett, M.R., et al. &ldquo;Evidence of Humans in North America During the Last Glacial Maximum.&rdquo; <em>Science</em> 373, 2021.</li>
-    <li>Berger, L.R., Hawks, J., et al. &ldquo;Evidence for deliberate burial of the dead by <em>Homo naledi</em>.&rdquo; <em>eLife</em>, 2023.</li>
+    <li>Miller, S.L. &ldquo;A Production of Amino Acids Under Possible Primitive Earth Conditions.&rdquo; <em>Science</em>, 1953. <span class="locator">DOI: <a href="https://doi.org/10.1126/science.117.3046.528">10.1126/science.117.3046.528</a></span></li>
+    <li>Bennett, M.R., et al. &ldquo;Evidence of Humans in North America During the Last Glacial Maximum.&rdquo; <em>Science</em> 373, 2021. <span class="locator">DOI: <a href="https://doi.org/10.1126/science.abg7586">10.1126/science.abg7586</a></span></li>
+    <li>Berger, L.R., Hawks, J., et al. &ldquo;Evidence for deliberate burial of the dead by <em>Homo naledi</em>.&rdquo; <em>eLife</em>, 2023. <span class="locator">DOI: <a href="https://doi.org/10.7554/eLife.89106">10.7554/eLife.89106</a> (peer-reviewed version of record published 2025; the chapter cites the 2023 preprint)</span></li>
   </ol>
 
   <h2 class="part-title" id="part-2">Part II &mdash; How Breakthroughs Happen</h2>
 
   <h3 class="chapter-heading" id="ch-4">Ch. 4 &mdash; &ldquo;The Master Fisherman Problem&rdquo;</h3>
   <ol class="citation-list">
-    <li>Kerr, N.L. &ldquo;HARKing: Hypothesizing After the Results are Known.&rdquo; <em>Personality and Social Psychology Review</em>, 1998.</li>
-    <li>Dweck, Carol S. <em>Mindset: The New Psychology of Success.</em> 2006.</li>
+    <li>Kerr, N.L. &ldquo;HARKing: Hypothesizing After the Results are Known.&rdquo; <em>Personality and Social Psychology Review</em>, 1998. <span class="locator">DOI: <a href="https://doi.org/10.1207/s15327957pspr0203_4">10.1207/s15327957pspr0203_4</a></span></li>
+    <li>Dweck, Carol S. <em>Mindset: The New Psychology of Success.</em> Random House, 2006. <span class="locator">ISBN 978-1-4000-6275-1</span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-5">Ch. 5 &mdash; &ldquo;Thinking Like an Inventor: Creativity, Innovation, and Teams in Science&rdquo;</h3>
   <ol class="citation-list">
-    <li>Pasteur, Louis. Lecture, University of Lille, 1854 (&ldquo;chance favors only the prepared mind&rdquo;).</li>
-    <li>Boden, Margaret A. <em>The Creative Mind: Myths and Mechanisms.</em> 1990.</li>
-    <li>Koestler, Arthur. <em>The Act of Creation.</em> 1964.</li>
-    <li>Thiel, Peter, with Blake Masters. <em>Zero to One: Notes on Startups, or How to Build the Future.</em> 2014.</li>
-    <li>McClintock, Barbara. &ldquo;Chromosome Organization and Genic Expression.&rdquo; <em>Cold Spring Harbor Symposia on Quantitative Biology</em>, 1951.</li>
-    <li>Jacobsen, Kathryn, et al. (Reid Schwebach among seventeen co-authors). &ldquo;Lessons from the Ebola Outbreak: Action Items for Emerging Infectious Disease Preparedness and Response.&rdquo; <em>EcoHealth</em>, 2016.</li>
+    <li>Pasteur, Louis. Lecture, University of Lille, 1854 (&ldquo;chance favors only the prepared mind&rdquo;). <span class="locator">no single archived transcript verified</span></li>
+    <li>Boden, Margaret A. <em>The Creative Mind: Myths and Mechanisms.</em> Weidenfeld &amp; Nicolson, 1990 (2nd ed., Routledge, 2004). <span class="locator">ISBN 978-0-297-82069-7 (1990)</span></li>
+    <li>Koestler, Arthur. <em>The Act of Creation.</em> Hutchinson, 1964. <span class="locator">predates ISBN</span></li>
+    <li>Thiel, Peter, with Blake Masters. <em>Zero to One: Notes on Startups, or How to Build the Future.</em> Crown Business, 2014. <span class="locator">ISBN 978-0-8041-3929-8</span></li>
+    <li>McClintock, Barbara. &ldquo;Chromosome Organization and Genic Expression.&rdquo; <em>Cold Spring Harbor Symposia on Quantitative Biology</em>, 1951. <span class="locator">DOI: <a href="https://doi.org/10.1101/SQB.1951.016.01.004">10.1101/SQB.1951.016.01.004</a></span></li>
+    <li>Jacobsen, Kathryn, et al. (Reid Schwebach among seventeen co-authors). &ldquo;Lessons from the Ebola Outbreak: Action Items for Emerging Infectious Disease Preparedness and Response.&rdquo; <em>EcoHealth</em>, 2016. <span class="locator">DOI: <a href="https://doi.org/10.1007/s10393-016-1100-5">10.1007/s10393-016-1100-5</a> &middot; free text: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7087787/">PMC7087787</a></span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-6">Ch. 6 &mdash; &ldquo;Racing a Pandemic&rdquo;</h3>
   <ol class="citation-list">
-    <li>Jahren, Hope. <em>Lab Girl.</em> 2016.</li>
-    <li>Grant, Adam. <em>Think Again: The Power of Knowing What You Don't Know.</em> 2021.</li>
-    <li>Karik&oacute;, K., Buckstein, M., Ni, H., and Weissman, D. &ldquo;Suppression of RNA Recognition by Toll-like Receptors: The Impact of Nucleoside Modification and the Evolutionary Origin of RNA.&rdquo; <em>Immunity</em>, 2005.</li>
-    <li>Karik&oacute;, Katalin, and Drew Weissman. 2023 Nobel Prize in Physiology or Medicine.</li>
-    <li>Calmette, L., and Gu&eacute;rin, C. Bacillus Calmette-Gu&eacute;rin (BCG) vaccine, first human dose July 18, 1921, Institut Pasteur.</li>
-    <li>Mullis, Kary. Invention of PCR, 1983.</li>
+    <li>Jahren, Hope. <em>Lab Girl.</em> Knopf, 2016. <span class="locator">ISBN 978-1-101-87493-6</span></li>
+    <li>Grant, Adam. <em>Think Again: The Power of Knowing What You Don't Know.</em> Viking, 2021. <span class="locator">ISBN 978-1-9848-7810-6</span></li>
+    <li>Karik&oacute;, K., Buckstein, M., Ni, H., and Weissman, D. &ldquo;Suppression of RNA Recognition by Toll-like Receptors: The Impact of Nucleoside Modification and the Evolutionary Origin of RNA.&rdquo; <em>Immunity</em>, 2005. <span class="locator">DOI: <a href="https://doi.org/10.1016/j.immuni.2005.06.008">10.1016/j.immuni.2005.06.008</a></span></li>
+    <li>Karik&oacute;, Katalin, and Drew Weissman. 2023 Nobel Prize in Physiology or Medicine. <span class="locator"><a href="https://www.nobelprize.org/prizes/medicine/2023/summary/">nobelprize.org/prizes/medicine/2023/summary</a></span></li>
+    <li>Calmette, L., and Gu&eacute;rin, C. Bacillus Calmette-Gu&eacute;rin (BCG) vaccine, first human dose July 18, 1921, Institut Pasteur. <span class="locator">no single primary archival document confirmed; see &ldquo;BCG turns 100,&rdquo; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8159679/">PMC8159679</a>, and Institut Pasteur's own retrospective</span></li>
+    <li>Mullis, Kary. Invention of PCR, 1983. <span class="locator">no single 1983 paper exists; see <a href="https://www.nobelprize.org/prizes/chemistry/1993/mullis/facts/">nobelprize.org/prizes/chemistry/1993/mullis/facts</a></span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-7">Ch. 7 &mdash; &ldquo;Science Argues With Itself on Purpose&rdquo;</h3>
   <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Reproduced in full from the chapter's own &ldquo;Exact sources, for citation&rdquo; note.</p>
   <ol class="citation-list">
-    <li>Open Science Collaboration. &ldquo;Estimating the Reproducibility of Psychological Science.&rdquo; <em>Science</em>, 2015.</li>
-    <li>Ioannidis, John P. A. &ldquo;Why Most Published Research Findings Are False.&rdquo; <em>PLOS Medicine</em>, 2005.</li>
-    <li>Simmons, Joseph P., Leif D. Nelson, and Uri Simonsohn. &ldquo;False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.&rdquo; <em>Psychological Science</em>, 2011 &mdash; source for &ldquo;p-hacking&rdquo; and the preregistration/registered-reports response.</li>
-    <li>Popper, Karl. <em>The Logic of Scientific Discovery.</em> 1959.</li>
-    <li>Fleck, Ludwik. <em>Genesis and Development of a Scientific Fact.</em> 1935.</li>
-    <li>Stokes, Donald E. <em>Pasteur's Quadrant: Basic Science and Technological Innovation.</em> 1997 &mdash; source for the Pasteur's Quadrant breakout box and diagram.</li>
+    <li>Open Science Collaboration. &ldquo;Estimating the Reproducibility of Psychological Science.&rdquo; <em>Science</em>, 2015. <span class="locator">DOI: <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a></span></li>
+    <li>Ioannidis, John P. A. &ldquo;Why Most Published Research Findings Are False.&rdquo; <em>PLOS Medicine</em>, 2005. <span class="locator">DOI: <a href="https://doi.org/10.1371/journal.pmed.0020124">10.1371/journal.pmed.0020124</a></span></li>
+    <li>Simmons, Joseph P., Leif D. Nelson, and Uri Simonsohn. &ldquo;False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.&rdquo; <em>Psychological Science</em>, 2011 &mdash; source for &ldquo;p-hacking&rdquo; and the preregistration/registered-reports response. <span class="locator">DOI: <a href="https://doi.org/10.1177/0956797611417632">10.1177/0956797611417632</a></span></li>
+    <li>Popper, Karl. <em>The Logic of Scientific Discovery.</em> 1959. <span class="locator">Hutchinson, 1959 (Eng. trans.); Routledge Classics ed. ISBN 978-0-415-27844-7</span></li>
+    <li>Fleck, Ludwik. <em>Genesis and Development of a Scientific Fact.</em> 1935. <span class="locator">Eng. trans., University of Chicago Press, 1979, ISBN 978-0-226-25324-4</span></li>
+    <li>Stokes, Donald E. <em>Pasteur's Quadrant: Basic Science and Technological Innovation.</em> 1997 &mdash; source for the Pasteur's Quadrant breakout box and diagram. <span class="locator">Brookings Institution Press, ISBN 978-0-8157-8177-6</span></li>
+  </ol>
+  <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Also named directly in the chapter's narrative, outside the reproduced note above:</p>
+  <ol class="citation-list">
+    <li>de Kruif, Paul. <em>Microbe Hunters.</em> Harcourt, Brace and Company, 1926. <span class="locator">predates ISBN; Dover reprint ISBN 978-0-486-84995-9</span></li>
+    <li>Lewis, Sinclair. <em>Arrowsmith.</em> Harcourt, Brace and Company, 1925. <span class="locator">predates ISBN; 1926 Pulitzer Prize (declined)</span></li>
   </ol>
 
   <h2 class="part-title" id="part-3">Part III &mdash; The Science That Explains Us</h2>
 
   <h3 class="chapter-heading" id="ch-8">Ch. 8 &mdash; &ldquo;The Chemistry of an Ordinary Morning&rdquo;</h3>
   <ol class="citation-list">
-    <li>Pauling, Linus. <em>The Nature of the Chemical Bond.</em> 1939.</li>
+    <li>Pauling, Linus. <em>The Nature of the Chemical Bond.</em> 1939. <span class="locator">Cornell University Press; predates ISBN, current ed. ISBN 978-0-8014-0333-0</span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-9">Ch. 9 &mdash; &ldquo;Warming Seas, Changing Coasts&rdquo;</h3>
   <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Reproduced in full from the chapter's own &ldquo;Exact sources, for citation&rdquo; note (water-scarcity section).</p>
   <ol class="citation-list">
-    <li>New Mexico Office of the State Engineer. Water-use-by-category technical reports (irrigated agriculture at 76&ndash;79% of total withdrawals, 1990&ndash;2015).</li>
-    <li>New Mexico Environment Department and Office of the State Engineer. Domestic-well metering guidance (~13% of New Mexicans on private wells, generally unmetered).</li>
-    <li>NMSA 1978 &sect;&sect; 72-12-1, 72-12-8 (domestic-use applications; water-right forfeiture after four years' non-use).</li>
-    <li>U.S. Geological Survey and NOAA Climate.gov. Reporting on Ogallala Aquifer recharge rates and depletion.</li>
-    <li><em>Santa Fe New Mexican.</em> &ldquo;Concern simmers in Estancia Basin over water trucked to SunZia wind farms.&rdquo; 2026 &mdash; source of the SunZia dust-suppression water-transfer figures.</li>
-    <li>Pattern Energy / SunZia Wind project materials (3.5 GW, 900+ turbines, construction and permanent job figures).</li>
-    <li>CNN and Circle of Blue reporting on Colorado River reservoir levels, July 2026 (Lake Powell 23% full, Lake Mead 27% full).</li>
-    <li>Office of the Governor of New Mexico and Inside Climate News/High Country News reporting on the U.S. Supreme Court's May 2026 Rio Grande Compact settlement (<em>Texas v. New Mexico</em>, 18,200 acre-feet/year reduction over ten years).</li>
-    <li>Office of the Governor of New Mexico. Strategic Water Supply and brackish-groundwater desalination program ($500 million investment, 100,000 acre-feet/year goal by 2028).</li>
-    <li><em>Blue Gold: World Water Wars</em> (dir. Sam Bozzo, 2008, based on Maude Barlow and Tony Clarke's book) &mdash; referenced for its thesis (future conflict over water rather than oil) rather than as a data source.</li>
+    <li>New Mexico Office of the State Engineer. Water-use-by-category technical reports (irrigated agriculture at 76&ndash;79% of total withdrawals, 1990&ndash;2015). <span class="locator"><a href="https://www.ose.nm.gov/Library/tech_reports.php">ose.nm.gov/Library/tech_reports.php</a></span></li>
+    <li>New Mexico Environment Department and Office of the State Engineer. Domestic-well metering guidance (~13% of New Mexicans on private wells, generally unmetered). <span class="locator">no single stable document link confirmed</span></li>
+    <li>NMSA 1978 &sect;&sect; 72-12-1, 72-12-8 (domestic-use applications; water-right forfeiture after four years' non-use). <span class="locator"><a href="https://law.justia.com/codes/new-mexico/chapter-72/article-12/section-72-12-1/">&sect;72-12-1</a> &middot; <a href="https://law.justia.com/codes/new-mexico/chapter-72/article-12/section-72-12-8/">&sect;72-12-8</a> (Justia mirror of the official NM statute)</span></li>
+    <li>U.S. Geological Survey and NOAA Climate.gov. Reporting on Ogallala Aquifer recharge rates and depletion. <span class="locator">general agency reporting; no single document link confirmed</span></li>
+    <li><em>Santa Fe New Mexican.</em> &ldquo;Concern simmers in Estancia Basin over water trucked to SunZia wind farms.&rdquo; 2026 &mdash; source of the SunZia dust-suppression water-transfer figures. <span class="locator">no stable public link confirmed</span></li>
+    <li>Pattern Energy / SunZia Wind project materials (3.5 GW, 900+ turbines, construction and permanent job figures). <span class="locator">no single document link confirmed</span></li>
+    <li>CNN and Circle of Blue reporting on Colorado River reservoir levels, July 2026 (Lake Powell 23% full, Lake Mead 27% full). <span class="locator">no single document link confirmed</span></li>
+    <li>Office of the Governor of New Mexico and Inside Climate News/High Country News reporting on the U.S. Supreme Court's May 2026 Rio Grande Compact settlement (<em>Texas v. New Mexico</em>, 18,200 acre-feet/year reduction over ten years). <span class="locator">Supreme Court docket No. 141, Orig.: <a href="https://www.supremecourt.gov/docket/docketfiles/html/public/22o141.html">supremecourt.gov/docket/docketfiles/html/public/22o141.html</a></span></li>
+    <li>Office of the Governor of New Mexico. Strategic Water Supply and brackish-groundwater desalination program ($500 million investment, 100,000 acre-feet/year goal by 2028). <span class="locator"><a href="https://www.env.nm.gov/strategic-water-supply/">env.nm.gov/strategic-water-supply</a></span></li>
+    <li><em>Blue Gold: World Water Wars</em> (dir. Sam Bozzo, 2008, based on Maude Barlow and Tony Clarke's book) &mdash; referenced for its thesis (future conflict over water rather than oil) rather than as a data source. <span class="locator"><a href="https://www.imdb.com/title/tt1137439/">IMDb: imdb.com/title/tt1137439</a></span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-10">Ch. 10 &mdash; &ldquo;Infectious Disease Shaped Us&rdquo;</h3>
   <ol class="citation-list">
-    <li>Janeway, Charles A., Jr. <em>Immunobiology.</em></li>
-    <li>Janeway, Charles A., Jr. &ldquo;Approaching the Asymptote? Evolution and Revolution in Immunology.&rdquo; <em>Cold Spring Harbor Symposia on Quantitative Biology</em>, 1989.</li>
-    <li>Hoffmann, Jules, and Bruce Beutler. 2011 Nobel Prize in Physiology or Medicine.</li>
-    <li>Sabeti, P.C., et al. &ldquo;Detecting recent positive selection in the human genome from haplotype structure.&rdquo; <em>Nature</em>, 2002.</li>
-    <li>Quammen, David. <em>Spillover: Animal Infections and the Next Human Pandemic.</em> 2012.</li>
-    <li>Diamond, Jared. <em>Guns, Germs, and Steel: The Fates of Human Societies.</em> 1997.</li>
-    <li>NOVA scienceNOW. &ldquo;Meet the Musical Geneticist.&rdquo; PBS.</li>
-    <li><em>TIME.</em> &ldquo;Person of the Year&rdquo; 2014, &ldquo;The Ebola Fighters.&rdquo;</li>
-    <li>Stockmann, C., Ampofo, K., Killpack, J., et al. &ldquo;Procalcitonin Accurately Identifies Hospitalized Children With Low Risk of Bacterial Community-Acquired Pneumonia.&rdquo; <em>Journal of the Pediatric Infectious Diseases Society</em>, 7(1), 2018, pp. 46&ndash;53.</li>
+    <li>Janeway, Charles A., Jr. <em>Immunobiology.</em> <span class="locator">multiple editions/publishers (Garland Science); no single edition specified in the text</span></li>
+    <li>Janeway, Charles A., Jr. &ldquo;Approaching the Asymptote? Evolution and Revolution in Immunology.&rdquo; <em>Cold Spring Harbor Symposia on Quantitative Biology</em>, 1989. <span class="locator">DOI: <a href="https://doi.org/10.1101/SQB.1989.054.01.003">10.1101/SQB.1989.054.01.003</a></span></li>
+    <li>Hoffmann, Jules, and Bruce Beutler. 2011 Nobel Prize in Physiology or Medicine. <span class="locator"><a href="https://www.nobelprize.org/prizes/medicine/2011/summary/">nobelprize.org/prizes/medicine/2011/summary</a></span></li>
+    <li>Sabeti, P.C., et al. &ldquo;Detecting recent positive selection in the human genome from haplotype structure.&rdquo; <em>Nature</em>, 2002. <span class="locator">DOI: <a href="https://doi.org/10.1038/nature01140">10.1038/nature01140</a></span></li>
+    <li>Quammen, David. <em>Spillover: Animal Infections and the Next Human Pandemic.</em> 2012. <span class="locator">W.W. Norton, ISBN 978-0-393-06680-7</span></li>
+    <li>Diamond, Jared. <em>Guns, Germs, and Steel: The Fates of Human Societies.</em> 1997. <span class="locator">W.W. Norton, ISBN 978-0-393-03891-0</span></li>
+    <li>NOVA scienceNOW. &ldquo;Meet the Musical Geneticist.&rdquo; PBS. <span class="locator">no single stable episode link confirmed</span></li>
+    <li><em>TIME.</em> &ldquo;Person of the Year&rdquo; 2014, &ldquo;The Ebola Fighters.&rdquo; <span class="locator">no single stable link confirmed</span></li>
+    <li>Stockmann, C., Ampofo, K., Killpack, J., et al. &ldquo;Procalcitonin Accurately Identifies Hospitalized Children With Low Risk of Bacterial Community-Acquired Pneumonia.&rdquo; <em>Journal of the Pediatric Infectious Diseases Society</em>, 7(1), 2018, pp. 46&ndash;53. <span class="locator">DOI: <a href="https://doi.org/10.1093/jpids/piw091">10.1093/jpids/piw091</a></span></li>
   </ol>
 
   <h2 class="part-title" id="part-4">Part IV &mdash; Science, Challenged</h2>
@@ -205,56 +275,61 @@
   <h3 class="chapter-heading" id="ch-11">Ch. 11 &mdash; &ldquo;A World Competing on Truth&rdquo;</h3>
   <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Reproduced in full from the chapter's own &ldquo;Exact sources, for citation&rdquo; note.</p>
   <ol class="citation-list">
-    <li>Douglas, Karen M., Robbie M. Sutton, and Aleksandra Cichocka. &ldquo;The Psychology of Conspiracy Theories.&rdquo; <em>Current Directions in Psychological Science</em>, 2017.</li>
-    <li>Douglas, Karen M. &ldquo;Understanding Conspiracy Theories.&rdquo; <em>Political Psychology</em>, 2019.</li>
-    <li>Kagan-Kans, Dan. &ldquo;The Rise of &lsquo;Conspiracy Physics.&rsquo;&rdquo; <em>Wall Street Journal</em>, September 11, 2025.</li>
-    <li>Baker, Katie J.M. &ldquo;The Married Scientists Torn Apart by a Covid Bioweapon Theory.&rdquo; <em>The New York Times</em>, December 7, 2025.</li>
-    <li>Grant, Adam. <em>Think Again: The Power of Knowing What You Don't Know.</em> 2021.</li>
-    <li>Tetlock, Philip E. &ldquo;Social Functionalist Frameworks for Judgment and Choice: Intuitive Politicians, Theologians, and Prosecutors.&rdquo; <em>Psychological Review</em>, 2002 &mdash; origin of three of the four mindsets Grant adds &ldquo;scientist&rdquo; to.</li>
-    <li>S&eacute;ralini, G.-E., et al. &ldquo;Long term toxicity of a Roundup herbicide and a Roundup-tolerant genetically modified maize.&rdquo; <em>Food and Chemical Toxicology</em>, 2012 (retracted 2013).</li>
-    <li>S&eacute;ralini, G.-E., et al. &ldquo;Republished study: long-term toxicity of a Roundup herbicide and a Roundup-tolerant genetically modified maize.&rdquo; <em>Environmental Sciences Europe</em>, 2014 (not independently peer-reviewed).</li>
-    <li>Marshall, Barry J., and J. Robin Warren. Nobel Prize in Physiology or Medicine, 2005, &ldquo;for their discovery of the bacterium <em>Helicobacter pylori</em> and its role in gastritis and peptic ulcer disease.&rdquo;</li>
-    <li>Oreskes, Naomi, and Erik M. Conway. <em>Merchants of Doubt: How a Handful of Scientists Obscured the Truth on Issues from Tobacco Smoke to Global Warming.</em> Bloomsbury Press, 2010.</li>
-    <li>Kahan, Dan M., Donald Braman, John Gastil, Paul Slovic, and C.K. Mertz. &ldquo;Culture and Identity-Protective Cognition: Explaining the White-Male Effect in Risk Perception.&rdquo; <em>Journal of Empirical Legal Studies</em>, 2007.</li>
-    <li>Oreskes, Naomi. <em>Why Trust Science?</em> Princeton University Press, 2019.</li>
-    <li>Petty, Richard E., and John T. Cacioppo. &ldquo;The Elaboration Likelihood Model of Persuasion.&rdquo; <em>Advances in Experimental Social Psychology</em>, vol. 19, 1986 &mdash; central-route and peripheral-route entry points in the concept-map diagram.</li>
+    <li>Douglas, Karen M., Robbie M. Sutton, and Aleksandra Cichocka. &ldquo;The Psychology of Conspiracy Theories.&rdquo; <em>Current Directions in Psychological Science</em>, 2017. <span class="locator">DOI: <a href="https://doi.org/10.1177/0963721417718261">10.1177/0963721417718261</a></span></li>
+    <li>Douglas, Karen M. &ldquo;Understanding Conspiracy Theories.&rdquo; <em>Political Psychology</em>, 2019. <span class="locator">DOI: <a href="https://doi.org/10.1111/pops.12568">10.1111/pops.12568</a></span></li>
+    <li>Kagan-Kans, Dan. &ldquo;The Rise of &lsquo;Conspiracy Physics.&rsquo;&rdquo; <em>Wall Street Journal</em>, September 11, 2025. <span class="locator"><a href="https://www.wsj.com/science/physics/the-rise-of-conspiracy-physics-dd79fe36">wsj.com</a> (subscription required)</span></li>
+    <li>Baker, Katie J.M. &ldquo;The Married Scientists Torn Apart by a Covid Bioweapon Theory.&rdquo; <em>The New York Times</em>, December 7, 2025. <span class="locator"><a href="https://www.nytimes.com/2025/12/07/us/china-virologist-li-meng-yan-coronavirus.html">nytimes.com</a> (subscription required)</span></li>
+    <li>Grant, Adam. <em>Think Again: The Power of Knowing What You Don't Know.</em> 2021. <span class="locator">Viking, ISBN 978-1-9848-7810-6</span></li>
+    <li>Tetlock, Philip E. &ldquo;Social Functionalist Frameworks for Judgment and Choice: Intuitive Politicians, Theologians, and Prosecutors.&rdquo; <em>Psychological Review</em>, 2002 &mdash; origin of three of the four mindsets Grant adds &ldquo;scientist&rdquo; to. <span class="locator">DOI: <a href="https://doi.org/10.1037/0033-295X.109.3.451">10.1037/0033-295X.109.3.451</a></span></li>
+    <li>S&eacute;ralini, G.-E., et al. &ldquo;Long term toxicity of a Roundup herbicide and a Roundup-tolerant genetically modified maize.&rdquo; <em>Food and Chemical Toxicology</em>, 2012 (retracted 2013). <span class="locator">DOI: <a href="https://doi.org/10.1016/j.fct.2012.08.005">10.1016/j.fct.2012.08.005</a></span></li>
+    <li>S&eacute;ralini, G.-E., et al. &ldquo;Republished study: long-term toxicity of a Roundup herbicide and a Roundup-tolerant genetically modified maize.&rdquo; <em>Environmental Sciences Europe</em>, 2014 (not independently peer-reviewed). <span class="locator">DOI: <a href="https://doi.org/10.1186/s12302-014-0014-5">10.1186/s12302-014-0014-5</a></span></li>
+    <li>Marshall, Barry J., and J. Robin Warren. Nobel Prize in Physiology or Medicine, 2005, &ldquo;for their discovery of the bacterium <em>Helicobacter pylori</em> and its role in gastritis and peptic ulcer disease.&rdquo; <span class="locator"><a href="https://www.nobelprize.org/prizes/medicine/2005/summary/">nobelprize.org/prizes/medicine/2005/summary</a></span></li>
+    <li>Oreskes, Naomi, and Erik M. Conway. <em>Merchants of Doubt: How a Handful of Scientists Obscured the Truth on Issues from Tobacco Smoke to Global Warming.</em> Bloomsbury Press, 2010. <span class="locator">ISBN 978-1-59691-610-4</span></li>
+    <li>Kahan, Dan M., Donald Braman, John Gastil, Paul Slovic, and C.K. Mertz. &ldquo;Culture and Identity-Protective Cognition: Explaining the White-Male Effect in Risk Perception.&rdquo; <em>Journal of Empirical Legal Studies</em>, 2007. <span class="locator">DOI: <a href="https://doi.org/10.1111/j.1740-1461.2007.00097.x">10.1111/j.1740-1461.2007.00097.x</a></span></li>
+    <li>Oreskes, Naomi. <em>Why Trust Science?</em> Princeton University Press, 2019. <span class="locator">ISBN 978-0-691-17900-1</span></li>
+    <li>Petty, Richard E., and John T. Cacioppo. &ldquo;The Elaboration Likelihood Model of Persuasion.&rdquo; <em>Advances in Experimental Social Psychology</em>, vol. 19, 1986 &mdash; central-route and peripheral-route entry points in the concept-map diagram. <span class="locator">DOI: <a href="https://doi.org/10.1016/S0065-2601(08)60214-2">10.1016/S0065-2601(08)60214-2</a></span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-12">Ch. 12 &mdash; &ldquo;The Shroud of Misinformation&rdquo;</h3>
   <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Reproduced in full from the chapter's own &ldquo;Exact sources, for citation&rdquo; note.</p>
   <ol class="citation-list">
-    <li>Oreskes, Naomi. <em>Why Trust Science?</em> Princeton University Press, 2019.</li>
-    <li>Pew Research Center. &ldquo;Americans' Trust in Scientists and Views of Science.&rdquo; November 2023, with 2024&ndash;2025 follow-up tracking.</li>
-    <li>Sen, Amartya. <em>The Idea of Justice.</em> Harvard University Press/Belknap Press, 2009.</li>
-    <li>Peirce, Charles Sanders. &ldquo;How to Make Our Ideas Clear.&rdquo; <em>Popular Science Monthly</em>, 1878.</li>
-    <li>Dewey, John. <em>Reconstruction in Philosophy.</em> 1920.</li>
-    <li>Kant, Immanuel. <em>Critique of Pure Reason.</em> 1781 &mdash; source of &ldquo;regulative ideal.&rdquo;</li>
-    <li>Valentini, Laura. &ldquo;A Paradigm Shift in Theorizing About Justice? A Critique of Sen.&rdquo; <em>Economics &amp; Philosophy</em>, 27(3), 2011.</li>
-    <li>Biondo, Francesco. &ldquo;Comparative vs. Transcendental Approaches to Justice: A Misleading Dichotomy in Sen's <em>The Idea of Justice</em>.&rdquo; <em>Ratio Juris</em>, 25(4), 2012.</li>
-    <li>Ege, Ragip, Herrade Igersheim, and Charlotte Le Chapelain. &ldquo;Transcendental vs. comparative approaches to justice: a reappraisal of Sen's dichotomy.&rdquo; <em>The European Journal of the History of Economic Thought</em>, 23(4), 2016.</li>
-    <li>Zimmermann, B&eacute;n&eacute;dicte. &ldquo;Pragmatism and the Capability Approach.&rdquo; <em>European Journal of Social Theory</em>, 2006.</li>
-    <li>Grant, Adam. <em>Think Again: The Power of Knowing What You Don't Know.</em> 2021 &mdash; the Wagner Dodge/Mann Gulch &ldquo;escape fire&rdquo; story.</li>
-    <li>Maclean, Norman. <em>Young Men and Fire.</em> 1992 &mdash; original source of the Mann Gulch story.</li>
-    <li>National Wildfire Coordinating Group. Staff-ride materials on the Mann Gulch fire, on Harry Gisborne's investigation and its role in the ten Standard Firefighting Orders.</li>
-    <li>Leopold, A. Starker, et al. &ldquo;Wildlife Management in the National Parks&rdquo; (the Leopold Report). 1963.</li>
-    <li>Forest History Society. &ldquo;U.S. Forest Service Fire Suppression&rdquo; &mdash; on the 1935 &ldquo;10 a.m. policy&rdquo; and its 1978 retirement.</li>
-    <li>Posner, George J., Kenneth A. Strike, Peter W. Hewson, and William A. Gertzog. &ldquo;Accommodation of a Scientific Conception: Toward a Theory of Conceptual Change.&rdquo; <em>Science Education</em>, 1982.</li>
-    <li>Hestenes, David, Malcolm Wells, and Gregg Swackhamer. &ldquo;Force Concept Inventory.&rdquo; <em>The Physics Teacher</em>, 1992.</li>
-    <li>Lewandowsky, Stephan, and John Cook. <em>The Debunking Handbook 2020.</em></li>
+    <li>Oreskes, Naomi. <em>Why Trust Science?</em> Princeton University Press, 2019. <span class="locator">ISBN 978-0-691-17900-1</span></li>
+    <li>Pew Research Center. &ldquo;Americans' Trust in Scientists and Views of Science.&rdquo; November 2023, with 2024&ndash;2025 follow-up tracking. <span class="locator"><a href="https://www.pewresearch.org/science/2023/11/14/americans-trust-in-scientists-positive-views-of-science-continue-to-decline/">pewresearch.org</a></span></li>
+    <li>Sen, Amartya. <em>The Idea of Justice.</em> Harvard University Press/Belknap Press, 2009. <span class="locator">ISBN 978-0-674-03613-0</span></li>
+    <li>Peirce, Charles Sanders. &ldquo;How to Make Our Ideas Clear.&rdquo; <em>Popular Science Monthly</em>, 1878. <span class="locator">public domain; text: <a href="https://en.wikisource.org/wiki/How_to_Make_Our_Ideas_Clear">Wikisource</a></span></li>
+    <li>Dewey, John. <em>Reconstruction in Philosophy.</em> 1920. <span class="locator">public domain; text: <a href="https://archive.org/details/reconstructionin00deweuoft">archive.org/details/reconstructionin00deweuoft</a></span></li>
+    <li>Kant, Immanuel. <em>Critique of Pure Reason.</em> 1781 &mdash; source of &ldquo;regulative ideal.&rdquo; <span class="locator">public domain; standard modern ed.: Cambridge UP, ISBN 978-0-521-35302-8</span></li>
+    <li>Valentini, Laura. &ldquo;A Paradigm Shift in Theorizing About Justice? A Critique of Sen.&rdquo; <em>Economics &amp; Philosophy</em>, 27(3), 2011. <span class="locator">DOI: <a href="https://doi.org/10.1017/S0266267111000228">10.1017/S0266267111000228</a></span></li>
+    <li>Biondo, Francesco. &ldquo;Comparative vs. Transcendental Approaches to Justice: A Misleading Dichotomy in Sen's <em>The Idea of Justice</em>.&rdquo; <em>Ratio Juris</em>, 25(4), 2012. <span class="locator">DOI verification pending; volume/issue corrected from 25(2) after direct check against the journal's table of contents</span></li>
+    <li>Ege, Ragip, Herrade Igersheim, and Charlotte Le Chapelain. &ldquo;Transcendental vs. comparative approaches to justice: a reappraisal of Sen's dichotomy.&rdquo; <em>The European Journal of the History of Economic Thought</em>, 23(4), 2016. <span class="locator">DOI: <a href="https://doi.org/10.1080/09672567.2014.916734">10.1080/09672567.2014.916734</a></span></li>
+    <li>Zimmermann, B&eacute;n&eacute;dicte. &ldquo;Pragmatism and the Capability Approach.&rdquo; <em>European Journal of Social Theory</em>, 2006. <span class="locator">DOI: <a href="https://doi.org/10.1177/1368431006073014">10.1177/1368431006073014</a></span></li>
+    <li>Grant, Adam. <em>Think Again: The Power of Knowing What You Don't Know.</em> 2021 &mdash; the Wagner Dodge/Mann Gulch &ldquo;escape fire&rdquo; story. <span class="locator">Viking, ISBN 978-1-9848-7810-6</span></li>
+    <li>Maclean, Norman. <em>Young Men and Fire.</em> 1992 &mdash; original source of the Mann Gulch story. <span class="locator">University of Chicago Press, ISBN 978-0-226-50062-1</span></li>
+    <li>National Wildfire Coordinating Group. Staff-ride materials on the Mann Gulch fire, on Harry Gisborne's investigation and its role in the ten Standard Firefighting Orders. <span class="locator">no single stable document link confirmed</span></li>
+    <li>Leopold, A. Starker, et al. &ldquo;Wildlife Management in the National Parks&rdquo; (the Leopold Report). 1963. <span class="locator">full text: <a href="https://npshistory.com/publications/wildlife/leopold-1963.pdf">npshistory.com/publications/wildlife/leopold-1963.pdf</a></span></li>
+    <li>Forest History Society. &ldquo;U.S. Forest Service Fire Suppression&rdquo; &mdash; on the 1935 &ldquo;10 a.m. policy&rdquo; and its 1978 retirement. <span class="locator">no single stable document link confirmed</span></li>
+    <li>Posner, George J., Kenneth A. Strike, Peter W. Hewson, and William A. Gertzog. &ldquo;Accommodation of a Scientific Conception: Toward a Theory of Conceptual Change.&rdquo; <em>Science Education</em>, 1982. <span class="locator">DOI: <a href="https://doi.org/10.1002/sce.3730660207">10.1002/sce.3730660207</a></span></li>
+    <li>Hestenes, David, Malcolm Wells, and Gregg Swackhamer. &ldquo;Force Concept Inventory.&rdquo; <em>The Physics Teacher</em>, 1992. <span class="locator">DOI: <a href="https://doi.org/10.1119/1.2343497">10.1119/1.2343497</a></span></li>
+    <li>Lewandowsky, Stephan, and John Cook. <em>The Debunking Handbook 2020.</em> <span class="locator">free text: <a href="https://sks.to/db2020">sks.to/db2020</a> &middot; DOI: <a href="https://doi.org/10.17910/b7.1182">10.17910/b7.1182</a></span></li>
   </ol>
 
   <h3 class="chapter-heading" id="ch-13">Ch. 13 &mdash; &ldquo;The University Crisis&rdquo;</h3>
   <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Reproduced in full from the chapter's own &ldquo;Exact sources, for citation&rdquo; note.</p>
   <ol class="citation-list">
-    <li>Partnership for Public Service. Federal science workforce tracking (2025&ndash;2026).</li>
-    <li>National Science Foundation. Terminated-grants data (2025).</li>
-    <li>U.S. Senate Committee on Commerce, Science, and Transportation. NSF grants database and press materials (February 2025).</li>
-    <li>Information Technology and Innovation Foundation. Federal R&amp;D funding-cut economic modeling.</li>
-    <li>Bush, Vannevar. <em>Science, The Endless Frontier.</em> 1945.</li>
-    <li>Holton, Gerald, and Gerhard Sonnert. On Jeffersonian science.</li>
-    <li>National Student Clearinghouse Research Center. Fall 2025 enrollment data.</li>
-    <li>Federal Reserve Bank of St. Louis. Research on the college wealth premium by birth cohort.</li>
-    <li>Mark, Melvin, Gary Henry, and George Julnes. <em>Evaluation: An Integrated Framework for Understanding, Guiding, and Improving Policies and Programs.</em> 2000.</li>
+    <li>Partnership for Public Service. Federal science workforce tracking (2025&ndash;2026). <span class="locator">no single stable document link confirmed</span></li>
+    <li>National Science Foundation. Terminated-grants data (2025). <span class="locator">no single stable document link confirmed</span></li>
+    <li>U.S. Senate Committee on Commerce, Science, and Transportation. NSF grants database and press materials (February 2025). <span class="locator">no single stable document link confirmed</span></li>
+    <li>Information Technology and Innovation Foundation. Federal R&amp;D funding-cut economic modeling. <span class="locator">no single stable document link confirmed</span></li>
+    <li>Bush, Vannevar. <em>Science, The Endless Frontier.</em> 1945. <span class="locator">NSF's own hosted copies are no longer live; full text: <a href="https://archive.org/details/scienceendlessfr00unit_0">archive.org/details/scienceendlessfr00unit_0</a></span></li>
+    <li>Holton, Gerald, and Gerhard Sonnert. On Jeffersonian science. <span class="locator">no single document specified in the text</span></li>
+    <li>National Student Clearinghouse Research Center. Fall 2025 enrollment data. <span class="locator">no single stable document link confirmed</span></li>
+    <li>Federal Reserve Bank of St. Louis. Research on the college wealth premium by birth cohort. <span class="locator">no single stable document link confirmed</span></li>
+    <li>Mark, Melvin, Gary Henry, and George Julnes. <em>Evaluation: An Integrated Framework for Understanding, Guiding, and Improving Policies and Programs.</em> 2000. <span class="locator">Jossey-Bass, ISBN 978-0-7879-4802-3</span></li>
+  </ol>
+  <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Also named directly in the chapter's narrative, outside the reproduced note above:</p>
+  <ol class="citation-list">
+    <li>Baker, Theo. <em>How to Rule the World: An Education in Power at Stanford University.</em> Penguin Press, 2026. <span class="locator">ISBN 978-0-593-83283-7</span></li>
+    <li>Diamond, Jared. <em>Collapse: How Societies Choose to Fail or Succeed.</em> Viking, 2005 &mdash; named in the site companion-reading note for this chapter. <span class="locator">ISBN 978-0-14-303655-5</span></li>
   </ol>
   <p style="font-family:'Helvetica Neue', Arial, sans-serif; font-size:0.82rem; color:var(--muted);">The specific 2025&ndash;2026 funding, workforce, and enrollment figures behind this chapter are gathered, dated, and kept separate from this citation list in the book's own &ldquo;Notes &mdash; Time-Bound Figures&rdquo; backmatter section, since those numbers move faster than a bibliography entry should imply.</p>
 
@@ -263,36 +338,36 @@
   <h3 class="chapter-heading" id="ch-14">Ch. 14 &mdash; &ldquo;Everybody Votes on Science&rdquo;</h3>
   <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Reproduced in full from the chapter's own &ldquo;Exact sources, for citation&rdquo; note.</p>
   <ol class="citation-list">
-    <li>Miller, Jon D. &ldquo;The Measurement of Civic Scientific Literacy.&rdquo; <em>Public Understanding of Science</em>, 1998, and Civic Scientific Literacy surveys through 2016.</li>
-    <li>Archer, Louise, et al. &ldquo;Science Aspirations, Capital, and Family Habitus.&rdquo; <em>American Educational Research Journal</em>, 2012.</li>
-    <li>Research on school-bond referendum voting behavior (partisan affiliation and self-interest as predictors, and voter unfamiliarity with ballot measures). <em>Applied Economics Letters</em> and <em>Public Budgeting &amp; Finance</em>, 2025.</li>
-    <li>Research!America. National polling on bipartisan public support for federal basic-research funding and U.S. science leadership.</li>
-    <li>Research on trust as a predictor of shared decision-making between patients and physicians. <em>Social and Personality Psychology Compass</em> and related clinical literature.</li>
-    <li>Kahan, Dan M., et al. &ldquo;The Polarizing Impact of Science Literacy and Numeracy on Perceived Climate Change Risks.&rdquo; <em>Nature Climate Change</em>, 2012.</li>
-    <li>Falk, John H., and Lynn D. Dierking. Research on &ldquo;free-choice learning&rdquo; and lifelong adult science learning.</li>
-    <li>Hidi, Suzanne, and K. Ann Renninger. &ldquo;The Four-Phase Model of Interest Development.&rdquo; <em>Educational Psychologist</em>, 2006.</li>
-    <li>U.S. Energy Information Administration. January 2026 short-term energy outlook (strongest four-year U.S. electricity demand growth since 2000).</li>
-    <li>Goldman Sachs Research. U.S. data-center power demand projections, 2025&ndash;2027.</li>
-    <li>Reporting on Loudoun County, Virginia's data-center history (AOL/MAE-East fiber buildout, 2009 state tax exemption, 2014 zoning ordinance) and Dominion Energy's 2026 rate case and new large-user rate class (Virginia State Corporation Commission).</li>
-    <li>Woodbury County and Linn County, Iowa data-center moratoria (2026), reported via local and regional coverage.</li>
-    <li>FERC Order 2023 and 2026 reporting on the national interconnection queue backlog.</li>
-    <li>U.S. Nuclear Regulatory Commission. 10 CFR Part 53 final rule (finalized March 26, 2026; effective April 29, 2026).</li>
-    <li>Centrus Energy and U.S. Department of Energy. Reporting on domestic HALEU production capacity.</li>
-    <li>Industry and IEEE Spectrum/Kearney coverage of the global power-engineering workforce gap (450,000&ndash;1.5 million by 2030).</li>
-    <li>Federal and academic reporting on data-center water use for cooling (Brookings, EESI, and Bloomberg data on national indirect water-consumption footprint).</li>
-    <li>Novva Data Centers (Utah/Nevada) and Microsoft. Reporting on water-free closed-loop cooling deployment.</li>
+    <li>Miller, Jon D. &ldquo;The Measurement of Civic Scientific Literacy.&rdquo; <em>Public Understanding of Science</em>, 1998, and Civic Scientific Literacy surveys through 2016. <span class="locator">DOI: <a href="https://doi.org/10.1088/0963-6625/7/3/001">10.1088/0963-6625/7/3/001</a></span></li>
+    <li>Archer, Louise, et al. &ldquo;Science Aspirations, Capital, and Family Habitus.&rdquo; <em>American Educational Research Journal</em>, 2012. <span class="locator">DOI: <a href="https://doi.org/10.3102/0002831211433290">10.3102/0002831211433290</a></span></li>
+    <li>Research on school-bond referendum voting behavior (partisan affiliation and self-interest as predictors, and voter unfamiliarity with ballot measures). <em>Applied Economics Letters</em> and <em>Public Budgeting &amp; Finance</em>, 2025. <span class="locator">no single article specified in the text</span></li>
+    <li>Research!America. National polling on bipartisan public support for federal basic-research funding and U.S. science leadership. <span class="locator">no single document link confirmed</span></li>
+    <li>Research on trust as a predictor of shared decision-making between patients and physicians. <em>Social and Personality Psychology Compass</em> and related clinical literature. <span class="locator">no single article specified in the text</span></li>
+    <li>Kahan, Dan M., et al. &ldquo;The Polarizing Impact of Science Literacy and Numeracy on Perceived Climate Change Risks.&rdquo; <em>Nature Climate Change</em>, 2012. <span class="locator">DOI: <a href="https://doi.org/10.1038/nclimate1547">10.1038/nclimate1547</a></span></li>
+    <li>Falk, John H., and Lynn D. Dierking. Research on &ldquo;free-choice learning&rdquo; and lifelong adult science learning. <span class="locator">no single document specified in the text</span></li>
+    <li>Hidi, Suzanne, and K. Ann Renninger. &ldquo;The Four-Phase Model of Interest Development.&rdquo; <em>Educational Psychologist</em>, 2006. <span class="locator">DOI: <a href="https://doi.org/10.1207/s15326985ep4102_4">10.1207/s15326985ep4102_4</a></span></li>
+    <li>U.S. Energy Information Administration. January 2026 short-term energy outlook (strongest four-year U.S. electricity demand growth since 2000). <span class="locator">no single stable document link confirmed</span></li>
+    <li>Goldman Sachs Research. U.S. data-center power demand projections, 2025&ndash;2027. <span class="locator">no single stable document link confirmed</span></li>
+    <li>Reporting on Loudoun County, Virginia's data-center history (AOL/MAE-East fiber buildout, 2009 state tax exemption, 2014 zoning ordinance) and Dominion Energy's 2026 rate case and new large-user rate class (Virginia State Corporation Commission). <span class="locator">no single document link confirmed</span></li>
+    <li>Woodbury County and Linn County, Iowa data-center moratoria (2026), reported via local and regional coverage. <span class="locator">no single document link confirmed</span></li>
+    <li>FERC Order 2023 and 2026 reporting on the national interconnection queue backlog. <span class="locator">no single document link confirmed</span></li>
+    <li>U.S. Nuclear Regulatory Commission. 10 CFR Part 53 final rule (finalized March 26, 2026; effective April 29, 2026). <span class="locator">Federal Register: <a href="https://www.federalregister.gov/documents/2026/03/30/2026-06048/risk-informed-technology-inclusive-regulatory-framework-for-advanced-reactors">federalregister.gov, published March 30, 2026</a></span></li>
+    <li>Centrus Energy and U.S. Department of Energy. Reporting on domestic HALEU production capacity. <span class="locator">no single document link confirmed</span></li>
+    <li>Industry and IEEE Spectrum/Kearney coverage of the global power-engineering workforce gap (450,000&ndash;1.5 million by 2030). <span class="locator">no single document link confirmed</span></li>
+    <li>Federal and academic reporting on data-center water use for cooling (Brookings, EESI, and Bloomberg data on national indirect water-consumption footprint). <span class="locator">no single document link confirmed</span></li>
+    <li>Novva Data Centers (Utah/Nevada) and Microsoft. Reporting on water-free closed-loop cooling deployment. <span class="locator">no single document link confirmed</span></li>
   </ol>
   <p style="font-family:'Helvetica Neue', Arial, sans-serif; font-size:0.82rem; color:var(--muted);">As with Chapter 13, the specific grid, nuclear, and workforce figures behind &ldquo;Who Pays When the Grid Blinks&rdquo; are dated and gathered separately in the &ldquo;Notes &mdash; Time-Bound Figures&rdquo; backmatter section.</p>
 
   <h3 class="chapter-heading" id="ch-15">Ch. 15 &mdash; &ldquo;If You Can't Reason, You Can't Ask Good Questions&rdquo;</h3>
   <ol class="citation-list">
-    <li>Wakefield, A.J., et al. &ldquo;Ileal-Lymphoid-Nodular Hyperplasia, Non-Specific Colitis, and Pervasive Developmental Disorder in Children.&rdquo; <em>The Lancet</em>, 1998 (retracted 2010).</li>
-    <li>Madsen, K.M., et al. &ldquo;A Population-Based Study of Measles, Mumps, and Rubella Vaccination and Autism.&rdquo; <em>New England Journal of Medicine</em>, 2002.</li>
-    <li>Hviid, A., et al. &ldquo;Measles, Mumps, Rubella Vaccination and Autism: A Nationwide Cohort Study.&rdquo; <em>Annals of Internal Medicine</em>, 2019.</li>
-    <li>Cohen, J., et al. &ldquo;Linking Arctic variability and change with extreme winter weather in the United States.&rdquo; <em>Science</em>, 2021.</li>
-    <li>Zimmerman, Barry J. &ldquo;Becoming a Self-Regulated Learner: An Overview.&rdquo; <em>Theory Into Practice</em>, 2002.</li>
-    <li><em>Battlefield Science</em>, Volumes I and II. Student-edited and student-created science publications.</li>
-    <li>Peters, E., and Kitsantas, A. &ldquo;The Effect of Nature of Science Metacognitive Prompts on Science Students' Content and Nature of Science Knowledge, Metacognition, and Self-Regulatory Efficacy.&rdquo; <em>School Science and Mathematics</em>, 110(8), 2010, pp. 382&ndash;396.
+    <li>Wakefield, A.J., et al. &ldquo;Ileal-Lymphoid-Nodular Hyperplasia, Non-Specific Colitis, and Pervasive Developmental Disorder in Children.&rdquo; <em>The Lancet</em>, 1998 (retracted 2010). <span class="locator">original DOI: <a href="https://doi.org/10.1016/S0140-6736(97)11096-0">10.1016/S0140-6736(97)11096-0</a> &middot; retraction: <a href="https://doi.org/10.1016/S0140-6736(10)60175-4">10.1016/S0140-6736(10)60175-4</a></span></li>
+    <li>Madsen, K.M., et al. &ldquo;A Population-Based Study of Measles, Mumps, and Rubella Vaccination and Autism.&rdquo; <em>New England Journal of Medicine</em>, 2002. <span class="locator">DOI: <a href="https://doi.org/10.1056/NEJMoa021134">10.1056/NEJMoa021134</a></span></li>
+    <li>Hviid, A., et al. &ldquo;Measles, Mumps, Rubella Vaccination and Autism: A Nationwide Cohort Study.&rdquo; <em>Annals of Internal Medicine</em>, 2019. <span class="locator">DOI: <a href="https://doi.org/10.7326/M18-2101">10.7326/M18-2101</a></span></li>
+    <li>Cohen, J., et al. &ldquo;Linking Arctic variability and change with extreme winter weather in the United States.&rdquo; <em>Science</em>, 2021. <span class="locator">DOI: <a href="https://doi.org/10.1126/science.abi9167">10.1126/science.abi9167</a></span></li>
+    <li>Zimmerman, Barry J. &ldquo;Becoming a Self-Regulated Learner: An Overview.&rdquo; <em>Theory Into Practice</em>, 2002. <span class="locator">DOI: <a href="https://doi.org/10.1207/s15430421tip4102_2">10.1207/s15430421tip4102_2</a></span></li>
+    <li><em>Battlefield Science</em>, Volumes I and II. Student-edited and student-created science publications. <span class="locator">no ISBN/stable catalog link confirmed</span></li>
+    <li>Peters, E., and Kitsantas, A. &ldquo;The Effect of Nature of Science Metacognitive Prompts on Science Students' Content and Nature of Science Knowledge, Metacognition, and Self-Regulatory Efficacy.&rdquo; <em>School Science and Mathematics</em>, 110(8), 2010, pp. 382&ndash;396. <span class="locator">DOI: <a href="https://doi.org/10.1111/j.1949-8594.2010.00050.x">10.1111/j.1949-8594.2010.00050.x</a></span>
       <div class="flag-note">Flagged for a final confirmation: published under &ldquo;Peters,&rdquo; prior to Dr. Erin Peters-Burton's name change. High-confidence match to the chapter's description of her work, not yet confirmed directly with her.</div>
     </li>
   </ol>
@@ -300,15 +375,15 @@
   <h3 class="chapter-heading" id="ch-16">Ch. 16 &mdash; &ldquo;When Fluency Isn't Thinking&rdquo;</h3>
   <p class="flag-note" style="background:#eef6f4; border-left-color:var(--teal);">Reproduced in full from the chapter's own &ldquo;Exact sources, for citation&rdquo; note.</p>
   <ol class="citation-list">
-    <li>Jumper, John, et al. &ldquo;Highly accurate protein structure prediction with AlphaFold.&rdquo; <em>Nature</em>, 596, 2021 &mdash; pLDDT and its calibration against measured accuracy.</li>
-    <li>Vander Meersche, Yann, Julien Diharce, Jean-Christophe Gelly, and Tatiana Galochkina. &ldquo;Flexibility or uncertainty? A critical assessment of AlphaFold 2 pLDDT.&rdquo; <em>Structure</em>, 33(12), 2025 &mdash; the limits of pLDDT, including its failure in the presence of interacting partners.</li>
-    <li>OpenAI. &ldquo;GPT-4 Technical Report.&rdquo; 2023 &mdash; the base model is well calibrated, and calibration is reduced after post-training.</li>
-    <li>Farquhar, Sebastian, Jannik Kossen, Lorenz Kuhn, and Yarin Gal. &ldquo;Detecting hallucinations in large language models using semantic entropy.&rdquo; <em>Nature</em>, 630, 2024 &mdash; reconstructing a confidence signal from outside the model.</li>
-    <li>Baker, Theo. &ldquo;What A.I. Did to My College Class &mdash; We arrived on campus at the dawn of ChatGPT. What was college for?&rdquo; <em>New York Times</em>, May 17, 2026.</li>
+    <li>Jumper, John, et al. &ldquo;Highly accurate protein structure prediction with AlphaFold.&rdquo; <em>Nature</em>, 596, 2021 &mdash; pLDDT and its calibration against measured accuracy. <span class="locator">DOI: <a href="https://doi.org/10.1038/s41586-021-03819-2">10.1038/s41586-021-03819-2</a></span></li>
+    <li>Vander Meersche, Yann, Julien Diharce, Jean-Christophe Gelly, and Tatiana Galochkina. &ldquo;Flexibility or uncertainty? A critical assessment of AlphaFold 2 pLDDT.&rdquo; <em>Structure</em>, 33(12), 2025 &mdash; the limits of pLDDT, including its failure in the presence of interacting partners. <span class="locator">DOI: <a href="https://doi.org/10.1016/j.str.2025.09.001">10.1016/j.str.2025.09.001</a></span></li>
+    <li>OpenAI. &ldquo;GPT-4 Technical Report.&rdquo; 2023 &mdash; the base model is well calibrated, and calibration is reduced after post-training. <span class="locator"><a href="https://arxiv.org/abs/2303.08774">arxiv.org/abs/2303.08774</a></span></li>
+    <li>Farquhar, Sebastian, Jannik Kossen, Lorenz Kuhn, and Yarin Gal. &ldquo;Detecting hallucinations in large language models using semantic entropy.&rdquo; <em>Nature</em>, 630, 2024 &mdash; reconstructing a confidence signal from outside the model. <span class="locator">DOI: <a href="https://doi.org/10.1038/s41586-024-07421-0">10.1038/s41586-024-07421-0</a></span></li>
+    <li>Baker, Theo. &ldquo;What A.I. Did to My College Class &mdash; We arrived on campus at the dawn of ChatGPT. What was college for?&rdquo; <em>New York Times</em>, May 17, 2026. <span class="locator"><a href="https://www.nytimes.com/2026/05/17/opinion/chatgpt-ai-college-school-graduation.html">nytimes.com</a> (subscription required; headline as published may vary by edition)</span></li>
   </ol>
 
   <p class="sources">
-    Compiled from the manuscript's own chapter-end citations and backmatter Bibliography, organized by Part to mirror the book's own five-part structure (Wonder; How Breakthroughs Happen; The Science That Explains Us; Science, Challenged; The Path Forward), then by chapter within each Part. Every chapter carrying its own inline &ldquo;Exact sources, for citation&rdquo; note (Ch. 7, 9, 11, 12, 13, 14, and 16) has that note reproduced here in full, verified directly against the chapter text rather than assumed from a prior compilation. Four originally unconfirmed items (a chemistry-teacher-vacancy statistic, a glacier-retreat figure, a procalcitonin study, and a metacognition-intervention citation) were each resolved to a specific, checkable source or, in one case, replaced with a properly sourced figure &mdash; see Ch. 1, Ch. 2, and Ch. 10 above. This page will be updated if later drafts add or correct sources; the standing rule behind it is simple: no citation appears here unless it traces to something real.
+    Compiled from the manuscript's own chapter-end citations and backmatter Bibliography, organized by Part to mirror the book's own five-part structure (Wonder; How Breakthroughs Happen; The Science That Explains Us; Science, Challenged; The Path Forward), then by chapter within each Part, with the Prologue and a whole-book reading list added as their own sections. Every chapter carrying its own inline &ldquo;Exact sources, for citation&rdquo; note (Ch. 7, 9, 11, 12, 13, 14, and 16) has that note reproduced here in full, verified directly against the chapter text rather than assumed from a prior compilation; a small number of chapters also name real books in their narrative prose that fall outside that reproduced note, and those are listed immediately below it rather than folded silently in. Four originally unconfirmed items (a chemistry-teacher-vacancy statistic, a glacier-retreat figure, a procalcitonin study, and a metacognition-intervention citation) were each resolved to a specific, checkable source or, in one case, replaced with a properly sourced figure &mdash; see Ch. 1, Ch. 2, and Ch. 10 above. DOIs, ISBNs, and stable URLs were added wherever a real, checkable one exists, each verified individually; where none exists, that's stated plainly rather than filled in. This page will be updated if later drafts add or correct sources; the standing rule behind it is simple: no citation appears here unless it traces to something real.
   </p>
 </article>
 
