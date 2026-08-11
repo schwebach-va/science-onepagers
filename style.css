@@ -110,28 +110,28 @@ ol.topic-list {
   counter-reset: list-item;
 }
 
-ol.topic-list li {
+ol.topic-list li, ul.topic-list li {
   padding: 0.55rem 0;
   padding-left: 0.4rem;
   border-bottom: 1px solid var(--line);
   font-size: 1.05rem;
 }
 
-ol.topic-list li::marker {
+ol.topic-list li::marker, ul.topic-list li::marker {
   font-family: "Helvetica Neue", Arial, sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--teal);
 }
 
-ol.topic-list li a {
+ol.topic-list li a, ul.topic-list li a {
   color: var(--ink);
   text-decoration: none;
 }
 
-ol.topic-list li a:hover { color: var(--teal); text-decoration: underline; }
+ol.topic-list li a:hover, ul.topic-list li a:hover { color: var(--teal); text-decoration: underline; }
 
-ol.topic-list li .tag {
+ol.topic-list li .tag, ul.topic-list li .tag {
   font-family: "Helvetica Neue", Arial, sans-serif;
   font-size: 0.72rem;
   color: var(--muted);
@@ -581,8 +581,8 @@ table.modular-index td a { color: var(--teal); }
   header.site-header h1 { font-size: 1.35rem; }
   main, article.onepager { padding-left: 1.1rem; padding-right: 1.1rem; }
   nav.site-nav a { padding: 0.75rem 1.1rem; font-size: 0.95rem; }
-  ol.topic-list li { padding: 0.75rem 0; font-size: 1.1rem; }
-  ol.topic-list li a { display: block; padding: 0.25rem 0; }
+  ol.topic-list li, ul.topic-list li { padding: 0.75rem 0; font-size: 1.1rem; }
+  ol.topic-list li a, ul.topic-list li a { display: block; padding: 0.25rem 0; }
   article.onepager h1 { font-size: 1.6rem; }
   article.onepager p, article.onepager .check-understanding { font-size: 1.08rem; }
 }
@@ -592,7 +592,7 @@ header.site-header h1 a { color: inherit; text-decoration: none; }
 header.site-header h1 a:hover { text-decoration: underline; }
 
 /* section accents */
-.subject-block.how-science-works h2 { color: var(--hsw); border-color: var(--hsw); }
+.subject-block.evidence h2 { color: var(--hsw); border-color: var(--hsw); }
 .subject-block.the-book h2 { color: var(--navy); border-color: var(--navy); }
 
 /* one-line description under each section heading */
@@ -609,3 +609,33 @@ header.site-header h1 a:hover { text-decoration: underline; }
 .framework-list { list-style: none; padding-left: 0; }
 .framework-list li { margin-bottom: 0.9rem; padding-left: 1.1rem; text-indent: -1.1rem; }
 .framework-list strong { color: var(--navy); }
+
+/* Permanent article numbers.
+   The number lives in the page as .idnum, never in a list marker, so that
+   reordering the homepage can never renumber an article the book cites.
+   book.html keeps a real <ol class="topic-list"> for the five Parts -- that
+   IS a sequence, and its numbers are not article numbers. */
+ul.topic-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.topic-list.unnumbered li { padding-left: 0.4rem; }
+.idnum {
+  display: inline-block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: rgba(42,127,126,0.09);
+  border-radius: 3px;
+  padding: 0.12rem 0.4rem;
+  margin-bottom: 0.2rem;
+}
+.subject-block.evidence .idnum { color: var(--hsw); background: rgba(42,127,126,0.09); }
+.subject-block.biology .idnum { color: var(--bio); background: rgba(42,127,79,0.09); }
+.subject-block.chemistry .idnum { color: var(--chem); background: rgba(127,63,42,0.09); }
+.subject-block.teaching .idnum { color: var(--teach); background: rgba(90,63,127,0.09); }
+.subject-block.careers .idnum { color: var(--careers); background: rgba(22,50,79,0.09); }
