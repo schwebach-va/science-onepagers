@@ -639,3 +639,15 @@ ul.topic-list.unnumbered li { padding-left: 0.4rem; }
 .subject-block.chemistry .idnum { color: var(--chem); background: rgba(127,63,42,0.09); }
 .subject-block.teaching .idnum { color: var(--teach); background: rgba(90,63,127,0.09); }
 .subject-block.careers .idnum { color: var(--careers); background: rgba(22,50,79,0.09); }
+
+/* The welcome line. This is the first sentence a teacher reads, so it is not
+   set in the small muted style the rest of the front matter uses. */
+.book-nod {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+
+/* front-matter links on the homepage -- default browser blue was showing through */
+main > p a { color: var(--teal); }
