@@ -651,3 +651,6 @@ ul.topic-list.unnumbered li { padding-left: 0.4rem; }
 
 /* front-matter links on the homepage -- default browser blue was showing through */
 main > p a { color: var(--teal); }
+
+/* in-article links -- were falling through to default browser blue */
+article.onepager p a, article.onepager li a { color: var(--teal); }
