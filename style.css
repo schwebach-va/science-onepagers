@@ -654,3 +654,10 @@ main > p a { color: var(--teal); }
 
 /* in-article links -- were falling through to default browser blue */
 article.onepager p a, article.onepager li a { color: var(--teal); }
+
+/* The hand-to-a-student material stops here. */
+hr.teacher-wall { border: 0; border-top: 3px double var(--navy); margin: 3rem 0 1.5rem; }
+
+/* Outcome boxes carry the evidence accent, not the chemistry one. */
+.case-box.outcome { background: #f1f7f6; border-color: #cfe0dc; border-left-color: var(--teal); }
+.case-box.outcome h3 { color: var(--teal); }
