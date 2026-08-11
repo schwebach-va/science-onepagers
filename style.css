@@ -78,7 +78,21 @@ main {
   font-size: 0.95rem;
   margin-bottom: 2rem;
 }
+.intro-list {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0 0 2rem 0;
+  padding-left: 1.4rem;
+}
 
+.intro-list li {
+  margin-bottom: 0.5rem;
+}
+
+.intro-list strong {
+  color: var(--ink);
+}
 .subject-block { margin-bottom: 2.5rem; }
 
 .subject-block h2 {
