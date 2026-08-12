@@ -694,3 +694,15 @@ hr.teacher-wall { border: 0; border-top: 3px double var(--navy); margin: 3rem 0 
 footer.site-footer .license { display: block; margin-top: .45rem; font-size: .82rem;
   opacity: .85; line-height: 1.4; }
 footer.site-footer .license a { color: inherit; text-decoration: underline; }
+
+/* Small print at the foot of an article -- a dated note, a caveat about codes, a
+   pointer. Used by Evidence #7 and the Four Tools standards block; it was falling
+   through to ordinary body type, which made a caveat read like a claim. */
+article.onepager p.footnote {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.55;
+  border-top: 1px solid var(--line);
+  padding-top: 0.9rem;
+  margin-top: 1.6rem;
+}
