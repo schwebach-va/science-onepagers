@@ -706,3 +706,17 @@ article.onepager p.footnote {
   padding-top: 0.9rem;
   margin-top: 1.6rem;
 }
+
+/* Index of Terms: a definition drafted for this page rather than harvested from an
+   article's own key-vocabulary list. Visible on purpose -- the reader should be able to
+   see which sentences have been through a read and which are waiting on one. */
+table.modular-index .drafted {
+  display: inline-block; font-size: 0.68rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--teach); border: 1px solid var(--teach);
+  border-radius: 3px; padding: 0.05rem 0.3rem; margin-right: 0.35rem;
+  vertical-align: 0.08em;
+}
+table.modular-index .from { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; }
+table.modular-index td.pages { white-space: normal; font-variant-numeric: tabular-nums; }
+table.modular-index td.arts { font-size: 0.82rem; }
+table.modular-index .none { color: var(--muted); }
