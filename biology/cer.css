@@ -1,0 +1,128 @@
+/* ============================================================
+   CER PRACTICE PAGES — append to style.css
+   Everything is scoped to article.onepager.cer, so no existing
+   page changes appearance. Print rules are tuned so that one
+   page = one side of one sheet of Letter paper:
+     front  = title + reading (2 columns) + data table + vocabulary
+     back   = four CER practice items + sources
+   Verified by headless-Chromium PDF render, Aug 2026.
+   ============================================================ */
+
+/* ---------- data table ---------- */
+article.onepager.cer table.cer-data {
+  width: 100%; border-collapse: collapse; margin: 1.2rem 0 0.4rem; font-size: 0.95rem;
+}
+article.onepager.cer table.cer-data caption {
+  caption-side: bottom; text-align: left; font-size: 0.85rem;
+  color: var(--muted); padding-top: 0.4rem; font-style: italic;
+}
+article.onepager.cer table.cer-data th {
+  background: rgba(42,127,79,0.09); color: var(--bio); text-align: left;
+  font-size: 0.85rem; letter-spacing: 0.02em; text-transform: uppercase;
+  padding: 0.4rem 0.6rem; border-bottom: 2px solid var(--bio);
+}
+article.onepager.cer table.cer-data td {
+  padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--line);
+}
+
+/* ---------- practice side ---------- */
+article.onepager.cer .cer-howto {
+  background: #f2f7f4; border: 1px solid #cfe0d6; border-left: 4px solid var(--bio);
+  padding: 0.7rem 0.9rem; font-size: 0.95rem; margin: 0 0 1.4rem;
+}
+article.onepager.cer .cer-howto strong { color: var(--bio); }
+
+article.onepager.cer ol.cer-items { list-style: none; margin: 0; padding: 0; counter-reset: cer; }
+article.onepager.cer li.cer-item {
+  counter-increment: cer; border: 1px solid var(--line); border-left: 4px solid var(--bio);
+  background: #fff; padding: 0.8rem 1rem 0.9rem; margin-bottom: 1.1rem;
+}
+article.onepager.cer li.cer-item.mastery { border-left-color: var(--navy); }
+article.onepager.cer li.cer-item.mastery .item-label { color: var(--navy); }
+article.onepager.cer li.cer-item .item-label {
+  display: block; font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase;
+  font-weight: 700; color: var(--bio); margin-bottom: 0.3rem;
+}
+article.onepager.cer li.cer-item .prompt { margin: 0 0 0.6rem; }
+article.onepager.cer li.cer-item .prompt::before {
+  content: counter(cer) ". "; font-weight: 700; color: var(--navy);
+}
+article.onepager.cer .fill { margin: 0 0 0.55rem; }
+article.onepager.cer .fill-tag {
+  display: block; font-size: 0.78rem; font-weight: 700; color: var(--muted);
+  letter-spacing: 0.04em; margin-bottom: 0.15rem;
+}
+article.onepager.cer .fill-line { display: block; border-bottom: 1px solid #b9c2c6; height: 1.45rem; }
+article.onepager.cer .cer-return { margin-top: 1.6rem; font-size: 0.95rem; }
+
+/* ---------- print: exactly one sheet, front and back ---------- */
+@media print {
+  @page { size: Letter; margin: 0.5in; }
+
+  article.onepager.cer { font-size: 9pt; line-height: 1.26; }
+  article.onepager.cer p { font-size: 9pt; margin: 0 0 0.38rem; }
+  article.onepager.cer h1 { font-size: 14pt; margin: 0 0 0.15rem; }
+  article.onepager.cer h2 { font-size: 9.8pt; margin: 0.55rem 0 0.2rem; }
+  article.onepager.cer .eyebrow { font-size: 7.6pt; margin-bottom: 0.15rem; }
+  article.onepager.cer .meta { font-size: 8pt; margin: 0 0 0.5rem; }
+
+  header.site-header { padding: 0 0 3pt; margin-bottom: 6pt; }
+  header.site-header h1 { font-size: 9pt; }
+
+  /* FRONT: reading runs in two columns; table and vocabulary are full width
+     and MUST sit outside section.reading — a column-span element inside a
+     fragmented multicol is pushed to the next page by Chromium. */
+  article.onepager.cer section.reading { column-count: 2; column-gap: 0.30in; }
+  article.onepager.cer section.reading > h2 { break-after: avoid; }
+  article.onepager.cer > table.cer-data { break-inside: avoid; font-size: 8pt; margin: 6pt 0 2pt; }
+  article.onepager.cer > table.cer-data th,
+  article.onepager.cer > table.cer-data td { padding: 1.5pt 4pt; }
+  article.onepager.cer > table.cer-data caption { font-size: 7.6pt; padding-top: 2pt; }
+  article.onepager.cer > dl.vocab {
+    column-count: 2; column-gap: 0.30in; break-inside: avoid;
+    font-size: 8pt; padding: 4pt 6pt; margin: 6pt 0 0;
+  }
+  article.onepager.cer > dl.vocab dt { margin-top: 2.5pt; }
+  article.onepager.cer > dl.vocab dd { margin-bottom: 1.5pt; }
+
+  /* BACK: practice always starts a new side */
+  article.onepager.cer section.practice { break-before: page; page-break-before: always; }
+  article.onepager.cer section.practice > h2 { margin-top: 0; }
+  article.onepager.cer .cer-howto {
+    font-size: 8pt; padding: 3pt 5pt; margin-bottom: 5pt;
+    border: 0.75pt solid #000; border-left: 2pt solid #000; background: none;
+  }
+  article.onepager.cer li.cer-item {
+    break-inside: avoid; page-break-inside: avoid;
+    border: 0.75pt solid #000; border-left: 2pt solid #000;
+    padding: 3pt 5pt 4pt; margin-bottom: 5pt; background: none;
+  }
+  article.onepager.cer li.cer-item .item-label { font-size: 6.8pt; color: #000; margin-bottom: 1.5pt; }
+  article.onepager.cer li.cer-item .prompt { margin-bottom: 3pt; }
+  article.onepager.cer .fill { margin-bottom: 2.5pt; }
+  article.onepager.cer .fill-tag { font-size: 7.2pt; color: #000; margin-bottom: 0; }
+  article.onepager.cer .fill-line { border-bottom: 0.5pt solid #000; height: 13pt; }
+
+  article.onepager.cer .sources { font-size: 7.4pt; margin-top: 6pt; }
+  article.onepager.cer .cer-return { display: none; }
+  footer.site-footer { font-size: 7pt; padding: 3pt 0 0; margin-top: 6pt; }
+}
+
+/* ---- fit pass: five-item back side (four common + one advanced) ---- */
+@media print {
+  article.onepager.cer .fill-line { height: 12pt; }
+  article.onepager.cer li.cer-item { margin-bottom: 4pt; }
+  article.onepager.cer li.cer-item.advanced { border-left-color: #000; }
+  article.onepager.cer ~ footer.site-footer,
+  body > footer.site-footer { font-size: 6.4pt; margin-top: 3pt; padding: 2pt 0 0; line-height: 1.25; }
+  body > footer.site-footer .license { font-size: 6.4pt; margin-top: 1pt; }
+}
+
+/* ---- fit pass 2: reclaim space on the practice side ---- */
+@media print {
+  article.onepager.cer section.practice > h2 { font-size: 9.2pt; margin: 0 0 3pt; }
+  article.onepager.cer .cer-howto { font-size: 7.8pt; padding: 2.5pt 5pt; margin-bottom: 4pt; }
+  article.onepager.cer li.cer-item { padding: 2.5pt 5pt 3pt; margin-bottom: 3.5pt; }
+  article.onepager.cer li.cer-item .prompt { margin-bottom: 2.5pt; }
+  article.onepager.cer .fill { margin-bottom: 2pt; }
+}
