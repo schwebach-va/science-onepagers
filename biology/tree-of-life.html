@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A zoomable tree of life from the first cell to the organisms alive today, with a picture and a short story for every branch. Free, for students and teachers.">
+<title>The Tree of Life | Science One-Pagers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+:root{
+  --bg:#f5f6f8; --ink:#141a2b; --muted:#5b6478; --panel:#ffffff; --line:rgba(20,26,43,.14); --line2:rgba(20,26,43,.28);
+  --chip:#eceef3; --accent:#1d4ed8; --shadow:0 12px 40px rgba(20,26,43,.18);
+  --fd:'Fraunces',Georgia,'Times New Roman',serif; --fb:'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+:root[data-mode="dark"]{
+  --bg:#0b1020; --ink:#e6edf7; --muted:#8b95a7; --panel:#111a2e; --line:rgba(230,237,247,.14); --line2:rgba(230,237,247,.3);
+  --chip:#1b2540; --accent:#7dd3fc; --shadow:0 12px 40px rgba(0,0,0,.5);
+}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.45;overflow:hidden}
+*{box-sizing:border-box}
+#app{display:grid;grid-template-rows:auto 1fr;height:100vh;height:100dvh}
+header{display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--bg);z-index:5;flex-wrap:wrap}
+header h1{font-family:var(--fd);font-weight:500;font-size:22px;margin:0;letter-spacing:-.01em;white-space:nowrap}
+header h1 em{font-style:italic;font-weight:700}
+.sub{color:var(--muted);font-size:13px;white-space:nowrap}
+.spacer{flex:1}
+.search{position:relative}
+.search input{width:260px;max-width:50vw;padding:7px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--panel);color:var(--ink);font:inherit;font-size:14px}
+.search input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.results{position:absolute;top:100%;left:0;right:0;background:var(--panel);border:1px solid var(--line2);border-radius:6px;box-shadow:var(--shadow);max-height:300px;overflow:auto;z-index:20;display:none}
+.results div{padding:7px 10px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.results div:hover,.results div.on{background:var(--chip)}
+.results .sw{width:10px;height:10px;border-radius:50%;flex:none}
+.results small{color:var(--muted)}
+button{font:inherit;font-size:13px;font-weight:600;padding:6px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--panel);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.group{display:flex;gap:6px;align-items:center}
+main{position:relative;overflow:hidden}
+#stage{position:absolute;inset:0;cursor:grab;touch-action:none}
+#stage.dragging{cursor:grabbing}
+#stage svg{width:100%;height:100%;display:block}
+#stage .node{cursor:pointer}
+#stage .node text{pointer-events:none}
+#stage .node.sel circle:first-child{stroke:var(--ink);stroke-width:3}
+#stage .flagged-ring{pointer-events:none}
+#stage.dim #branches *{opacity:.18}
+#stage.dim #branches .lit{opacity:1}
+#stage.dim #nodes .node{opacity:.25}
+#stage.dim #nodes .node.lit{opacity:1}
+.zoom{position:absolute;left:14px;bottom:14px;display:flex;flex-direction:column;gap:6px}
+.zoom button{width:36px;height:36px;padding:0;font-size:18px;font-weight:400}
+.legend{position:absolute;left:14px;top:14px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;display:grid;gap:4px;max-width:210px}
+.legend .row{display:flex;gap:8px;align-items:center}
+.legend .sw{width:16px;height:9px;border-radius:2px;flex:none}
+.legend .note{color:var(--muted);margin-top:4px;line-height:1.35}
+.hint{position:absolute;right:14px;bottom:14px;color:var(--muted);font-size:12.5px;background:color-mix(in srgb,var(--bg) 82%,transparent);padding:6px 10px;border-radius:6px;border:1px solid var(--line)}
+aside{position:absolute;top:0;right:0;bottom:0;width:380px;max-width:100%;background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(105%);transition:transform .25s ease;overflow:auto;z-index:6;display:flex;flex-direction:column}
+aside.open{transform:none}
+@media (prefers-reduced-motion:reduce){aside{transition:none}}
+.stripe{height:6px;flex:none}
+.card{padding:16px 20px 24px;display:grid;gap:14px}
+.card .eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.card h2{font-family:var(--fd);font-weight:500;font-size:28px;line-height:1.1;margin:0;text-wrap:balance}
+.pic{margin:0;display:grid;gap:6px}
+.pic[hidden]{display:none}
+.pic img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:var(--chip);display:block}
+.pic figcaption{font-size:12px;color:var(--muted);line-height:1.35}
+.pic figcaption a{color:var(--muted)}
+.pic .note{font-size:13px;color:var(--ink);line-height:1.4}
+.card .common{color:var(--muted);font-size:15px;margin-top:2px}
+.card .age{font-size:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-variant-numeric:tabular-nums}
+.card .age b{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.card p{margin:0;font-size:15.5px;line-height:1.5;max-width:60ch}
+.card h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:4px 0 0;font-weight:600}
+.lineage{display:flex;flex-wrap:wrap;gap:4px 2px;align-items:center;font-size:13.5px}
+.lineage a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--line2);cursor:pointer}
+.lineage a:hover{border-bottom-style:solid}
+.lineage span{color:var(--muted);padding:0 4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--chip);border-radius:999px;padding:3px 10px;font-size:13px;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--line2)}
+.chip .sw{width:8px;height:8px;border-radius:50%}
+textarea{width:100%;min-height:84px;font:inherit;font-size:14px;padding:8px;border:1px solid var(--line2);border-radius:6px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.tagrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tagrow input{flex:1;min-width:120px;font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line2);border-radius:6px;background:var(--bg);color:var(--ink)}
+.close{position:absolute;top:12px;right:12px;width:30px;height:30px;padding:0;border-radius:50%;font-size:16px;line-height:1}
+.evolving{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:4px 10px;border-radius:6px;background:var(--chip)}
+dialog{border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink);max-width:640px;width:92vw;padding:20px;box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h2{font-family:var(--fd);font-weight:500;margin:0 0 6px}
+dialog .list{display:grid;gap:6px;max-height:50vh;overflow:auto;margin:10px 0}
+dialog .list a{display:flex;gap:10px;align-items:baseline;padding:6px 8px;border-radius:6px;cursor:pointer;border:1px solid var(--line)}
+dialog .list a:hover{background:var(--chip)}
+dialog .list small{color:var(--muted)}
+dialog textarea{min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+.toast{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.show{opacity:1}
+@media (max-width:760px){
+  header{gap:8px;padding:8px 10px}
+  .sub,.hint{display:none}
+  aside{top:auto;height:62%;width:100%;border-left:0;border-top:1px solid var(--line);transform:translateY(105%)}
+  aside.open{transform:none}
+  .legend{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <div><h1>The <em>Tree of Life</em></h1><div class="sub">From the first cell to the branches still growing today · <a href="../index.html#biology" style="color:inherit">Science One-Pagers</a></div></div>
+  <div class="spacer"></div>
+  <div class="search"><input id="q" type="search" placeholder="Find a group — try “fungi” or “whales”" aria-label="Find a group" autocomplete="off"><div class="results" id="results"></div></div>
+  <div class="group">
+    <button id="bColor" class="on" title="Full colour">Colour</button>
+    <button id="bGrey" title="Greyscale for accessibility checks and B&amp;W printing">Greyscale</button>
+  </div>
+  <button id="bKing" title="Shade the tree by the six kingdoms: Eubacteria, Archaebacteria, Protista, Fungi, Plantae, Animalia">Kingdoms</button>
+  <div class="group">
+    <button id="bDark" class="on">Dark</button>
+    <button id="bLight">Light</button>
+  </div>
+  <button id="bFlags" title="Everything you have flagged for discussion">Flagged <span id="flagCount">0</span></button>
+  <button id="bNotes" title="Copy or paste your notes and flags as text, to move them between computers">Notes…</button>
+</header>
+<main>
+  <div id="stage"></div>
+  <div class="legend" id="legend"></div>
+  <div class="zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zfit" aria-label="Fit whole tree" title="Fit whole tree">⌂</button></div>
+  <div class="hint">Scroll to zoom · drag to pan · click a branch or a tip</div>
+  <aside id="panel" aria-live="polite">
+    <div class="stripe" id="stripe"></div>
+    <button class="close" id="close" aria-label="Close">×</button>
+    <div class="card" id="card"></div>
+  </aside>
+  <div class="toast" id="toast"></div>
+</main>
+</div>
+<dialog id="dlgFlags"><h2>Flagged for discussion</h2><div class="list" id="flagList"></div><div class="tagrow"><button id="dlgFlagsClose">Close</button></div></dialog>
+<dialog id="dlgNotes"><h2>Your notes and flags</h2><p style="margin:0 0 8px;color:var(--muted);font-size:14px">Notes and flags live in this browser. Copy the text below to keep a backup or move it to another computer; paste a backup and press Load to restore it.</p><textarea id="notesText"></textarea><div class="tagrow" style="margin-top:10px"><button id="copyNotes">Copy</button><button id="loadNotes">Load</button><span class="spacer"></span><button id="dlgNotesClose">Close</button></div></dialog>
+<script>
+// Tree of Life dataset — v1 (2026-09-07)
+// Fields: n = name, c = common name / plain English, a = age in millions of years
+// (for an internal node: when its children split apart; leaves are living today = 0),
+// d = one-line description, g = colour group, w = label weight for print (1 small, 2 show, 3 headline),
+// e = true when this lineage is a well-known case of evolution observed in our own time,
+// k = children.
+// Ages are rounded consensus estimates (TimeTree-style); many are uncertain by ±20% or more.
+const TREE = {
+n:"LUCA", c:"the last universal common ancestor", a:3800, g:"root", w:3,
+d:"The first cell every living thing descends from. Not the first life, but the last ancestor shared by all of it.",
+k:[
+{n:"Bacteria", a:3400, g:"bac", w:3, d:"Cells without a nucleus, the most numerous organisms on Earth. Your body carries about as many bacterial cells as human ones.",
+k:[
+ {n:"Thermotogae & Aquificae", c:"deep-branching heat lovers", a:0, g:"bac", w:1, d:"Bacteria of hot springs and vents, among the earliest-diverging bacterial lineages."},
+ {n:"Terrabacteria", a:3200, g:"bac", w:2, d:"A large bacterial group that includes the photosynthesizers and many soil and gut bacteria.",
+ k:[
+  {n:"Cyanobacteria", c:"blue-green algae", a:2700, g:"bac", w:3, d:"Invented oxygen-making photosynthesis and, about 2.4 billion years ago, changed the air of the whole planet. Chloroplasts are their descendants.",
+  k:[
+   {n:"Prochlorococcus", a:0, g:"bac", w:1, d:"The most abundant photosynthetic organism on Earth, a tiny ocean cell that makes a good share of the oxygen you breathe."},
+   {n:"Nostoc & Anabaena", c:"filament formers", a:0, g:"bac", w:1, d:"Chains of cells with special nitrogen-fixing cells; some live inside plants and lichens."}
+  ]},
+  {n:"Bacillota", c:"Firmicutes", a:2500, g:"bac", w:2, d:"Thick-walled bacteria: spore formers, yogurt makers, and some serious pathogens.",
+  k:[
+   {n:"Bacillus", a:0, g:"bac", w:1, d:"Soil spore formers; Bacillus subtilis is a lab workhorse, B. anthracis causes anthrax."},
+   {n:"Clostridium", a:0, g:"bac", w:1, d:"Oxygen-hating spore formers; sources of botulism, tetanus and the gut infection C. diff."},
+   {n:"Lactobacillus", a:0, g:"bac", w:1, d:"The sour-milk bacteria behind yogurt, sauerkraut and a healthy gut."},
+   {n:"Streptococcus", a:0, g:"bac", w:1, d:"Chains of round cells; strep throat and pneumonia, but also harmless mouth residents."},
+   {n:"Staphylococcus aureus (MRSA)", c:"resistant staph", a:0, g:"bac", w:2, e:true, d:"A skin bacterium that evolved resistance to methicillin within decades of the drug's introduction. Evolution measured in hospital records."}
+  ]},
+  {n:"Actinomycetota", c:"Actinobacteria", a:2500, g:"bac", w:2, d:"Branching soil bacteria that give dirt its smell and gave us most antibiotics.",
+  k:[
+   {n:"Streptomyces", a:0, g:"bac", w:1, d:"Soil bacteria that produce streptomycin, tetracycline and dozens of other antibiotics."},
+   {n:"Mycobacterium", a:0, g:"bac", w:1, d:"Waxy-walled bacteria; tuberculosis and leprosy."}
+  ]},
+  {n:"Deinococcus", c:"the radiation survivor", a:0, g:"bac", w:1, d:"Deinococcus radiodurans survives radiation doses thousands of times what would kill a person, by rebuilding its shattered DNA."},
+  {n:"Chloroflexota", c:"green non-sulfur bacteria", a:0, g:"bac", w:1, d:"Filament-forming bacteria of hot-spring mats, some photosynthetic without making oxygen."}
+ ]},
+ {n:"Gracilicutes", a:3000, g:"bac", w:2, d:"Bacteria with a double membrane, including most of the ones you have heard of.",
+ k:[
+  {n:"Pseudomonadota", c:"Proteobacteria", a:2500, g:"bac", w:3, d:"The largest bacterial phylum; the ancestor of your mitochondria was one of these.",
+  k:[
+   {n:"Alphaproteobacteria", a:1800, g:"bac", w:2, d:"The group that gave rise to mitochondria through an ancient partnership with an archaeal host.",
+   k:[
+    {n:"Rickettsia", a:0, g:"bac", w:1, d:"Tiny bacteria that live only inside other cells; the closest living relatives of mitochondria."},
+    {n:"Rhizobium", a:0, g:"bac", w:1, d:"Lives in root nodules of beans and clover, turning air nitrogen into fertilizer for the plant."},
+    {n:"Agrobacterium", a:0, g:"bac", w:1, d:"Injects its own DNA into plants; biologists borrowed the trick to engineer crops."}
+   ]},
+   {n:"Betaproteobacteria", a:0, g:"bac", w:1, d:"Includes Neisseria (meningitis, gonorrhea) and many nitrogen-cycling soil bacteria."},
+   {n:"Gammaproteobacteria", a:1800, g:"bac", w:2, d:"The group with the famous lab and gut bacteria.",
+   k:[
+    {n:"Escherichia coli", c:"E. coli", a:0, g:"bac", w:2, e:true, d:"The best-studied organism on Earth. In Richard Lenski's lab, one line has been evolving in flasks since 1988, past 75,000 generations."},
+    {n:"Salmonella", a:0, g:"bac", w:1, d:"Food-poisoning bacteria that invade the gut lining."},
+    {n:"Vibrio", a:0, g:"bac", w:1, d:"Curved sea bacteria; V. cholerae causes cholera, V. fischeri makes squid glow."},
+    {n:"Pseudomonas", a:0, g:"bac", w:1, d:"Versatile soil and water bacteria; one species is a stubborn hospital pathogen."}
+   ]},
+   {n:"Campylobacterota", c:"Helicobacter and relatives", a:0, g:"bac", w:1, d:"Helicobacter pylori lives in the stomach lining of half of humanity and causes ulcers."},
+   {n:"Myxococcota", c:"slime-forming predators", a:0, g:"bac", w:1, d:"Bacteria that hunt in swarms and build fruiting bodies when food runs out."}
+  ]},
+  {n:"Bacteroidota", c:"Bacteroidetes", a:0, g:"bac", w:1, d:"Major gut bacteria that break down plant fibre you cannot digest yourself."},
+  {n:"Spirochaetota", c:"spirochetes", a:0, g:"bac", w:1, d:"Corkscrew-shaped swimmers; syphilis and Lyme disease."},
+  {n:"Chlamydiota", a:0, g:"bac", w:1, d:"Bacteria that can only grow inside another cell."},
+  {n:"Planctomycetota", a:0, g:"bac", w:1, d:"Odd bacteria with internal compartments; some make rocket fuel (hydrazine) as they burn ammonia."}
+ ]},
+ {n:"Patescibacteria (CPR)", c:"the ultra-small bacteria", a:0, g:"bac", w:2, d:"A huge radiation of very small bacteria with tiny genomes, discovered only by sequencing groundwater; most have never been grown in a lab."}
+]},
+{n:"Archaea", a:3300, g:"arc", w:3, d:"Cells without a nucleus but with chemistry unlike bacteria. Many love heat, salt or acid. Eukaryotes, including you, arose from within this group.",
+k:[
+ {n:"DPANN", c:"tiny archaea", a:0, g:"arc", w:2, d:"Miniature archaea with stripped-down genomes that live attached to other archaea; Nanoarchaeum is one."},
+ {n:"Euryarchaeota", a:3000, g:"arc", w:2, d:"Archaea of the extremes: methane makers, salt lovers and heat lovers.",
+ k:[
+  {n:"Methanogens", a:0, g:"arc", w:2, d:"Make methane from hydrogen and carbon dioxide. They live in cow stomachs, swamps and your own gut (Methanobrevibacter)."},
+  {n:"Halobacteria", c:"salt lovers", a:0, g:"arc", w:1, d:"Turn salt flats and evaporation ponds pink; some catch light with a purple pigment related to the one in your eye."},
+  {n:"Thermococcus & Pyrococcus", c:"hot-vent archaea", a:0, g:"arc", w:1, d:"Grow best near 100 °C at deep-sea vents; their enzymes are used in DNA copying."}
+ ]},
+ {n:"TACK", a:2800, g:"arc", w:2, d:"A group named from its initials; includes ocean ammonia-oxidizers and acid hot-spring archaea.",
+ k:[
+  {n:"Thaumarchaeota", c:"ocean ammonia oxidizers", a:0, g:"arc", w:1, d:"Nitrosopumilus is among the most common cells in the sea, quietly running the nitrogen cycle."},
+  {n:"Sulfolobus", c:"acid hot-spring archaea", a:0, g:"arc", w:1, d:"Thrives in boiling acid in Yellowstone hot springs."}
+ ]},
+ {n:"Asgard", c:"Asgard archaea", a:2300, g:"arc", w:3, d:"Sediment archaea named after Norse gods (Loki, Thor, Odin, Heimdall) that carry many 'eukaryote-only' genes. Our closest relatives outside the eukaryotes.",
+ k:[
+  {n:"Lokiarchaeota", a:0, g:"arc", w:1, d:"Found in Arctic sea-floor mud in 2015; grew in a lab only in 2020, after 12 years of effort."},
+  {n:"Heimdallarchaeota", a:0, g:"arc", w:1, d:"The Asgard branch that sits closest to eukaryotes in most analyses."},
+  {n:"Eukarya", c:"eukaryotes", a:1800, g:"euk", w:3, d:"Cells with a nucleus and mitochondria, built about two billion years ago when an archaeal host took in a bacterium and kept it. Every plant, animal, fungus and protist.",
+  k:[
+   {n:"Discoba", c:"Euglena, trypanosomes and kin", a:1500, g:"pro", w:2, d:"Flagellates with a distinctive mitochondrial structure; some photosynthesize, some cause disease.",
+   k:[
+    {n:"Euglena", a:0, g:"pro", w:1, d:"A pond flagellate with an eyespot that swims toward light and photosynthesizes, but eats when it is dark."},
+    {n:"Trypanosoma", a:0, g:"pro", w:1, d:"Blood parasites carried by tsetse flies and kissing bugs; sleeping sickness and Chagas disease."},
+    {n:"Naegleria", a:0, g:"pro", w:1, d:"A warm-water amoeba that is harmless in the water and deadly in the nose."}
+   ]},
+   {n:"Metamonada", c:"Giardia and relatives", a:0, g:"pro", w:2, d:"Flagellates that live without oxygen and have lost most of their mitochondria. Giardia (hikers' diarrhea) and the gut symbionts of termites."},
+   {n:"Diaphoretickes", a:1700, g:"euk", w:2, d:"The great branch that holds plants, algae and most single-celled photosynthesizers.",
+   k:[
+    {n:"SAR", c:"Stramenopiles, Alveolates, Rhizaria", a:1300, g:"sar", w:3, d:"A huge assembly of mostly single-celled eukaryotes, discovered to be one group only through DNA. Half the ocean's photosynthesis happens here.",
+    k:[
+     {n:"Stramenopila", c:"heterokonts", a:900, g:"sar", w:2, d:"Cells with one hairy flagellum; from microscopic diatoms to 50-metre kelp.",
+     k:[
+      {n:"Diatoms", a:0, g:"sar", w:2, d:"Glass-shelled algae that make about a fifth of the oxygen on Earth and whose shells form chalky rock."},
+      {n:"Brown algae", c:"kelp and rockweed", a:0, g:"sar", w:2, d:"Kelp forests grow half a metre a day; not plants, but algae that evolved leaf-like forms on their own."},
+      {n:"Oomycetes", c:"water moulds", a:0, g:"sar", w:1, d:"Look like fungi but are not; Phytophthora caused the Irish potato famine and still kills oaks and cacao."}
+     ]},
+     {n:"Alveolata", a:900, g:"sar", w:2, d:"Cells with a layer of flattened sacs under the membrane: ciliates, dinoflagellates and the malaria parasites.",
+     k:[
+      {n:"Ciliates", c:"Paramecium, Stentor, Tetrahymena", a:0, g:"sar", w:2, d:"Single cells covered in beating hairs, with two kinds of nucleus; some are visible to the naked eye."},
+      {n:"Dinoflagellates", a:0, g:"sar", w:2, d:"Spinning armoured cells; the partners inside coral, the glow in a night-time wake, and the poison of red tides."},
+      {n:"Apicomplexa", c:"Plasmodium and Toxoplasma", a:0, g:"sar", w:2, d:"Parasites with a spring-loaded entry organ. Plasmodium causes malaria, which has killed more people than any other single disease."}
+     ]},
+     {n:"Rhizaria", a:900, g:"sar", w:2, d:"Amoebas with thread-like extensions, many building intricate mineral shells.",
+     k:[
+      {n:"Foraminifera", c:"forams", a:0, g:"sar", w:1, d:"Shelled amoebas whose fossils build limestone and let geologists read past ocean temperatures."},
+      {n:"Radiolaria", a:0, g:"sar", w:1, d:"Amoebas in lace-like glass skeletons that drift through the open ocean."}
+     ]}
+    ]},
+    {n:"Haptophyta", c:"coccolithophores", a:0, g:"sar", w:1, d:"Algae covered in chalk plates; their blooms are visible from space and their shells built the White Cliffs of Dover."},
+    {n:"Cryptista", c:"cryptomonads", a:0, g:"sar", w:1, d:"Small flagellates carrying a captured red alga, with the remains of a second nucleus inside."},
+    {n:"Archaeplastida", c:"plants and their algal relatives", a:1500, g:"pla", w:3, d:"The lineage that swallowed a cyanobacterium and kept it as a chloroplast. Every green thing on land descends from that one event.",
+    k:[
+     {n:"Glaucophytes", a:0, g:"pla", w:1, d:"Rare freshwater algae whose chloroplasts still keep a bit of bacterial cell wall, a fossil of the original partnership."},
+     {n:"Rhodophyta", c:"red algae", a:0, g:"pla", w:2, d:"Nori on sushi, agar in petri dishes, and the pink crusts that cement coral reefs together."},
+     {n:"Viridiplantae", c:"green plants", a:1200, g:"pla", w:2, d:"Green algae and land plants, sharing chlorophyll b and starch.",
+     k:[
+      {n:"Chlorophyta", c:"green algae", a:0, g:"pla", w:2, d:"Chlamydomonas, Volvox and sea lettuce; from single swimming cells to colonies of thousands."},
+      {n:"Streptophyta", a:900, g:"pla", w:2, d:"The freshwater algae that led to land plants, plus the land plants themselves.",
+      k:[
+       {n:"Charophytes", c:"stoneworts and Spirogyra", a:0, g:"pla", w:1, d:"Pond algae that are the closest living relatives of land plants."},
+       {n:"Embryophyta", c:"land plants", a:470, g:"pla", w:3, d:"Plants that moved onto land about 470 million years ago and, with fungi, built soil.",
+       k:[
+        {n:"Bryophytes", c:"mosses, liverworts, hornworts", a:0, g:"pla", w:2, d:"Small plants without true veins that hold water like a sponge; the first greenery of the land."},
+        {n:"Tracheophyta", c:"vascular plants", a:420, g:"pla", w:2, d:"Plants with pipes (xylem and phloem), which let them grow tall.",
+        k:[
+         {n:"Lycophytes", c:"club mosses and quillworts", a:0, g:"pla", w:1, d:"Small today, but their tree-sized ancestors formed the coal swamps of 300 million years ago."},
+         {n:"Euphyllophytes", a:400, g:"pla", w:1, d:"Plants with true leaves.",
+         k:[
+          {n:"Ferns & horsetails", a:0, g:"pla", w:2, d:"Spore-spreading plants with fiddleheads; horsetails are living fossils with silica in their stems."},
+          {n:"Spermatophyta", c:"seed plants", a:330, g:"pla", w:2, d:"Plants that package the embryo in a seed with a lunch and a coat.",
+          k:[
+           {n:"Gymnosperms", a:300, g:"pla", w:2, d:"Naked-seed plants: conifers, cycads, Ginkgo and the odd gnetophytes.",
+           k:[
+            {n:"Conifers", a:0, g:"pla", w:2, d:"Pines, spruces, firs, redwoods and the bristlecone pines that have lived nearly 5,000 years."},
+            {n:"Cycads", a:0, g:"pla", w:1, d:"Palm-like plants that fed dinosaurs and still stand in tropical gardens."},
+            {n:"Ginkgo", a:0, g:"pla", w:1, d:"A single surviving species of a 270-million-year-old line, planted on city streets worldwide."},
+            {n:"Gnetophytes", a:0, g:"pla", w:1, d:"Welwitschia of the Namib desert lives 1,000 years on two leaves."}
+           ]},
+           {n:"Angiosperms", c:"flowering plants", a:140, g:"pla", w:3, d:"Flowers, fruit and most of what you eat. Rose from nowhere in the Cretaceous and now make up nine tenths of plant species.",
+           k:[
+            {n:"Amborella", a:0, g:"pla", w:1, d:"A shrub from New Caledonia, the sole survivor of the first flowering-plant branch."},
+            {n:"Water lilies", a:0, g:"pla", w:1, d:"An early flowering lineage, floating on ponds since the age of dinosaurs."},
+            {n:"Magnoliids", a:0, g:"pla", w:1, d:"Magnolia, avocado, cinnamon, nutmeg, black pepper and bay leaf."},
+            {n:"Monocots", a:120, g:"pla", w:2, d:"One seed leaf, parallel veins: grasses, lilies, orchids and palms.",
+            k:[
+             {n:"Grasses", c:"Poaceae", a:0, g:"pla", w:2, d:"Wheat, rice, corn, sugar cane and bamboo. Grasslands appeared only in the last 30 million years and reshaped the world's mammals."},
+             {n:"Orchids", a:0, g:"pla", w:1, d:"The largest plant family, with flowers shaped for a single pollinator; vanilla is one."},
+             {n:"Lilies, onions & asparagus", a:0, g:"pla", w:1, d:"Bulbs and blooms: tulips, garlic, aloe and agave."},
+             {n:"Palms", a:0, g:"pla", w:1, d:"Coconut, date and oil palms; single stems that never branch."}
+            ]},
+            {n:"Eudicots", a:125, g:"pla", w:2, d:"Two seed leaves and net-veined leaves: most trees, shrubs and garden flowers.",
+            k:[
+             {n:"Rosids", a:100, g:"pla", w:1, d:"A vast group: roses, beans, oaks, mustards and citrus.",
+             k:[
+              {n:"Rosaceae", c:"roses, apples, cherries, strawberries", a:0, g:"pla", w:1, d:"Roses, apples, pears, cherries, almonds, strawberries and raspberries."},
+              {n:"Fabaceae", c:"beans and peas", a:0, g:"pla", w:1, d:"Beans, peas, lentils, peanuts, clover and acacia; partners of nitrogen-fixing bacteria."},
+              {n:"Fagaceae", c:"oaks, beeches, chestnuts", a:0, g:"pla", w:1, d:"The dominant hardwoods of the eastern forests."},
+              {n:"Brassicaceae", c:"mustards, cabbage, Arabidopsis", a:0, g:"pla", w:1, d:"Cabbage, broccoli, kale and mustard, plus Arabidopsis, the lab plant whose genome was read first."},
+              {n:"Cucurbits & citrus", a:0, g:"pla", w:1, d:"Pumpkins, cucumbers, melons; oranges and lemons."}
+             ]},
+             {n:"Asterids", a:100, g:"pla", w:1, d:"Sunflowers, tomatoes, mint, coffee and blueberries.",
+             k:[
+              {n:"Asteraceae", c:"sunflowers and daisies", a:0, g:"pla", w:1, d:"Sunflowers, dandelions, lettuce and daisies; each 'flower' is a crowd of tiny ones."},
+              {n:"Solanaceae", c:"nightshades", a:0, g:"pla", w:1, d:"Tomato, potato, pepper, eggplant and tobacco."},
+              {n:"Lamiaceae", c:"mints", a:0, g:"pla", w:1, d:"Mint, basil, oregano, lavender and rosemary."},
+              {n:"Ericaceae & coffee", a:0, g:"pla", w:1, d:"Blueberries, cranberries, rhododendrons; coffee and quinine."}
+             ]},
+             {n:"Cacti & carnations", c:"Caryophyllales", a:0, g:"pla", w:1, d:"Cacti, beets, spinach, quinoa and the Venus flytrap."},
+             {n:"Maples & buttercups", a:0, g:"pla", w:1, d:"Maples, buttercups and poppies; among the earliest eudicot branches."}
+            ]}
+           ]}
+          ]}
+         ]}
+        ]}
+       ]}
+      ]}
+     ]}
+    ]}
+   ]},
+   {n:"Amorphea", a:1600, g:"euk", w:2, d:"The branch of eukaryotes that holds amoebas, fungi and animals.",
+   k:[
+    {n:"Amoebozoa", a:1000, g:"pro", w:2, d:"Crawling cells that engulf food with false feet; some gather into slugs and fruiting towers.",
+    k:[
+     {n:"Amoeba proteus", a:0, g:"pro", w:1, d:"The classic pond amoeba of biology class."},
+     {n:"Dictyostelium", c:"cellular slime mould", a:0, g:"pro", w:1, d:"Thousands of amoebas that gather into a crawling slug when starved, then build a tower of spores."},
+     {n:"Physarum", c:"plasmodial slime mould", a:0, g:"pro", w:1, d:"A single giant cell with millions of nuclei that can solve mazes and plan efficient networks."}
+    ]},
+    {n:"Obazoa", a:1400, g:"euk", w:1, d:"Fungi, animals and a few flagellate relatives.",
+    k:[
+     {n:"Apusomonads", a:0, g:"pro", w:1, d:"Small gliding flagellates from soil and water, cousins to both fungi and animals."},
+     {n:"Opisthokonta", a:1300, g:"euk", w:2, d:"Fungi and animals together: cells that swim with a single rear flagellum, like a sperm.",
+     k:[
+      {n:"Holomycota", a:1100, g:"fun", w:1, d:"Fungi and their nearest relatives.",
+      k:[
+       {n:"Nucleariids", a:0, g:"fun", w:1, d:"Amoebas that eat algae; the closest living relatives of fungi."},
+       {n:"Fungi", a:1000, g:"fun", w:3, d:"Digest food outside their bodies and absorb it. Closer to animals than to plants. The great recyclers.",
+       k:[
+        {n:"Chytrids", a:0, g:"fun", w:2, d:"Fungi with swimming spores; Batrachochytrium is wiping out frogs worldwide."},
+        {n:"Mucoromycota", c:"bread moulds and mycorrhizae", a:600, g:"fun", w:2, d:"Fast fuzzy moulds and the fungi that plug into most plant roots.",
+        k:[
+         {n:"Rhizopus", c:"black bread mould", a:0, g:"fun", w:1, d:"The fuzz on old bread and strawberries."},
+         {n:"Glomeromycota", c:"arbuscular mycorrhizal fungi", a:0, g:"fun", w:1, d:"Live inside the roots of four fifths of land plants, trading phosphorus for sugar; a partnership as old as land plants."}
+        ]},
+        {n:"Dikarya", a:600, g:"fun", w:2, d:"Fungi with paired nuclei in their cells: the yeasts, moulds, mushrooms and lichens.",
+        k:[
+         {n:"Ascomycota", c:"sac fungi", a:500, g:"fun", w:2, d:"Spores made in sacs; yeasts, moulds, morels, truffles and most lichens.",
+         k:[
+          {n:"Saccharomyces", c:"baker's and brewer's yeast", a:0, g:"fun", w:1, d:"Bread, beer and wine; also the first eukaryote with its genome read."},
+          {n:"Penicillium & Aspergillus", a:0, g:"fun", w:1, d:"Blue cheese, penicillin, soy sauce, and the mould on oranges."},
+          {n:"Morels & truffles", a:0, g:"fun", w:1, d:"Prized wild foods; truffles grow underground and smell like pigs so they will be dug up."},
+          {n:"Lichen fungi", a:0, g:"fun", w:1, d:"Fungi farming algae or cyanobacteria inside their bodies, coating rocks on every continent."}
+         ]},
+         {n:"Basidiomycota", c:"club fungi", a:500, g:"fun", w:2, d:"Mushrooms, puffballs, shelf fungi, rusts and smuts.",
+         k:[
+          {n:"Agaricus", c:"button mushroom", a:0, g:"fun", w:1, d:"The grocery-store mushroom and its meadow relatives."},
+          {n:"Amanita", c:"death caps and fly agarics", a:0, g:"fun", w:1, d:"The red-and-white toadstool of fairy tales and the death cap that causes most mushroom deaths."},
+          {n:"Armillaria", c:"honey fungus", a:0, g:"fun", w:1, d:"One Oregon individual spans nearly ten square kilometres and may be the largest living thing."},
+          {n:"Rusts & smuts", a:0, g:"fun", w:1, d:"Crop-destroying parasites; wheat stem rust has shaped agriculture and empires."}
+         ]}
+        ]}
+       ]}
+      ]},
+      {n:"Holozoa", a:1100, g:"ani", w:1, d:"Animals and their closest single-celled relatives.",
+      k:[
+       {n:"Ichthyosporea", a:0, g:"pro", w:1, d:"Fish parasites and symbionts whose cells divide inside a shared wall, a hint of how animal bodies began."},
+       {n:"Choanoflagellates", c:"collar flagellates", a:0, g:"pro", w:2, d:"Single cells with a collar of tentacles around one flagellum, identical to the feeding cells of sponges. Some form colonies. The closest living relatives of animals."},
+       {n:"Animalia", c:"animals", a:750, g:"ani", w:3, d:"Many-celled eaters that move. Rose from a colony of collared cells and now include about 1.5 million named species.",
+       k:[
+        {n:"Porifera", c:"sponges", a:0, g:"ani", w:2, d:"No nerves, no muscles, no organs, just cells pumping water through a body; animal life at its simplest."},
+        {n:"Ctenophora", c:"comb jellies", a:0, g:"ani", w:2, d:"Transparent swimmers with rows of beating combs that scatter rainbows. May be the first animal branch of all."},
+        {n:"Placozoa", c:"Trichoplax", a:0, g:"ani", w:1, d:"A flat plate of a few thousand cells with no front, back, mouth or nerves; the simplest animal body plan known."},
+        {n:"Cnidaria", a:650, g:"ani", w:2, d:"Stinging animals with a single body opening: jellyfish, corals, anemones and Hydra.",
+        k:[
+         {n:"Anthozoa", c:"corals and sea anemones", a:0, g:"ani", w:1, d:"Reef-building corals house dinoflagellates and shelter a quarter of ocean species."},
+         {n:"Medusozoa", c:"jellyfish and Hydra", a:0, g:"ani", w:1, d:"Jellyfish, box jellies and Hydra; one small jellyfish can revert to its juvenile stage and may never die of old age."}
+        ]},
+        {n:"Bilateria", a:600, g:"ani", w:2, d:"Animals with a left and a right, a head end and a tail end; nearly all animals.",
+        k:[
+         {n:"Xenacoelomorpha", c:"acoel flatworms", a:0, g:"ani", w:1, d:"Tiny worms with no gut cavity, possibly the earliest surviving bilaterian branch."},
+         {n:"Protostomia", a:580, g:"ani", w:2, d:"Animals whose embryonic first opening becomes the mouth: arthropods, molluscs, worms.",
+         k:[
+          {n:"Ecdysozoa", c:"moulting animals", a:560, g:"ani", w:2, d:"Animals that shed their skin to grow: arthropods, roundworms, tardigrades.",
+          k:[
+           {n:"Nematoda", c:"roundworms", a:0, g:"ani", w:2, d:"Possibly the most numerous animals on Earth; C. elegans, hookworms, heartworms."},
+           {n:"Tardigrada", c:"water bears", a:0, g:"ani", w:1, d:"Eight-legged micro-animals that survive vacuum, radiation and being frozen for decades."},
+           {n:"Onychophora", c:"velvet worms", a:0, g:"ani", w:1, d:"Soft-bodied hunters that squirt glue; living relatives of the first arthropods."},
+           {n:"Arthropoda", a:540, g:"ani", w:3, d:"Jointed legs and an external skeleton. Four out of five known animal species.",
+           k:[
+            {n:"Chelicerata", a:480, g:"ani", w:2, d:"Fanged mouthparts and no antennae: spiders, scorpions, mites, horseshoe crabs.",
+            k:[
+             {n:"Horseshoe crabs", a:0, g:"ani", w:1, d:"Unchanged in form for 445 million years; their blue blood tests medicines for contamination."},
+             {n:"Arachnida", c:"spiders, scorpions, ticks, mites", a:0, g:"ani", w:2, d:"Spiders spin silk stronger than steel; ticks and mites are among the most numerous land animals."}
+            ]},
+            {n:"Myriapoda", c:"centipedes and millipedes", a:0, g:"ani", w:1, d:"Among the first animals on land; a millipede was the first known land animal to breathe air."},
+            {n:"Pancrustacea", a:520, g:"ani", w:2, d:"Crustaceans and insects, which evolved from within them.",
+            k:[
+             {n:"Crustacea", a:500, g:"ani", w:2, d:"Crabs, lobsters, shrimp, barnacles, krill and copepods.",
+             k:[
+              {n:"Decapods", c:"crabs, lobsters, shrimp", a:0, g:"ani", w:1, d:"Ten-legged crustaceans; crab shape has evolved at least five separate times."},
+              {n:"Copepods & krill", a:0, g:"ani", w:1, d:"The grazers of the sea; krill feed the great whales."},
+              {n:"Barnacles", a:0, g:"ani", w:1, d:"Crustaceans that glue their heads to rocks and kick food into their mouths; Darwin spent eight years on them."},
+              {n:"Isopods & Daphnia", a:0, g:"ani", w:1, d:"Pill bugs in the garden, water fleas in the pond."}
+             ]},
+             {n:"Hexapoda", c:"insects", a:410, g:"ani", w:3, d:"Six legs, three body parts, and the first animals to fly. Over a million named species.",
+             k:[
+              {n:"Silverfish & bristletails", a:0, g:"ani", w:1, d:"Wingless insects, the earliest surviving branch."},
+              {n:"Odonata", c:"dragonflies and damselflies", a:0, g:"ani", w:1, d:"Flying hunters with near-360° vision; 300 million years ago some had wingspans of 70 cm."},
+              {n:"Orthoptera", c:"grasshoppers, crickets, katydids", a:0, g:"ani", w:1, d:"Jumpers and singers; locust swarms can darken the sky."},
+              {n:"Hemiptera", c:"true bugs: cicadas, aphids, stink bugs", a:0, g:"ani", w:1, d:"Piercing straw mouthparts; periodical cicadas emerge on 13- and 17-year clocks."},
+              {n:"Holometabola", c:"insects with complete metamorphosis", a:330, g:"ani", w:2, d:"Egg, larva, pupa, adult: beetles, butterflies, flies, bees, ants.",
+              k:[
+               {n:"Coleoptera", c:"beetles", a:0, g:"ani", w:2, d:"A quarter of all named animal species; ladybugs, fireflies, weevils, scarabs."},
+               {n:"Lepidoptera", c:"butterflies and moths", a:0, g:"ani", w:2, e:true, d:"Scaled wings and coiled tongues. The peppered moth turned dark in sooty industrial England, then light again as the air cleared."},
+               {n:"Diptera", c:"flies and mosquitoes", a:0, g:"ani", w:2, e:true, d:"Two wings. Drosophila is genetics' favourite animal; a mosquito population in the London Underground has diverged from its surface relatives in about a century."},
+               {n:"Hymenoptera", c:"ants, bees, wasps", a:0, g:"ani", w:2, d:"Ants alone outweigh all wild mammals; honeybees pollinate a third of crops."}
+              ]}
+             ]}
+            ]}
+           ]}
+          ]},
+          {n:"Spiralia", c:"Lophotrochozoa", a:560, g:"ani", w:2, d:"Molluscs, segmented worms, flatworms and their relatives, named for a spiral pattern in early cell division.",
+          k:[
+           {n:"Platyhelminthes", c:"flatworms", a:0, g:"ani", w:2, d:"Planarians that regrow a head from a sliver; tapeworms and flukes that live inside us."},
+           {n:"Rotifera", c:"rotifers", a:0, g:"ani", w:1, d:"Wheel-mouthed micro-animals; the bdelloid rotifers have gone tens of millions of years without sex."},
+           {n:"Bryozoa & Brachiopoda", c:"moss animals and lamp shells", a:0, g:"ani", w:1, d:"Filter feeders; brachiopods dominated Palaeozoic seas and a few survive today."},
+           {n:"Annelida", c:"segmented worms", a:0, g:"ani", w:2, d:"Earthworms that build soil, leeches, and the tube worms of deep-sea vents."},
+           {n:"Mollusca", a:530, g:"ani", w:3, d:"Soft bodies, often a shell, and a rasping tongue: snails, clams, octopuses.",
+           k:[
+            {n:"Chitons", a:0, g:"ani", w:1, d:"Eight-plated shore grazers with teeth of magnetite, the hardest material any animal makes."},
+            {n:"Gastropoda", c:"snails and slugs", a:0, g:"ani", w:2, d:"The largest mollusc class: garden snails, sea slugs, conchs, limpets."},
+            {n:"Bivalvia", c:"clams, oysters, mussels, scallops", a:0, g:"ani", w:2, d:"Two-shelled filter feeders; one Arctic clam lived more than 500 years."},
+            {n:"Cephalopoda", c:"octopus, squid, nautilus", a:0, g:"ani", w:2, d:"Big brains, colour-changing skin and jet propulsion; an intelligence that evolved separately from ours."}
+           ]}
+          ]}
+         ]},
+         {n:"Deuterostomia", a:570, g:"ani", w:2, d:"Animals whose embryonic first opening becomes the anus: echinoderms and chordates, including us.",
+         k:[
+          {n:"Echinodermata", c:"sea stars, urchins, sea cucumbers", a:0, g:"ani", w:2, d:"Five-way symmetry, a water-powered hydraulic system and no brain."},
+          {n:"Hemichordata", c:"acorn worms", a:0, g:"ani", w:1, d:"Burrowing worms with gill slits, hinting at what the first chordates were like."},
+          {n:"Chordata", a:540, g:"ani", w:3, d:"A stiff rod down the back, a nerve cord above it, gill slits and a tail, at least as embryos.",
+          k:[
+           {n:"Cephalochordata", c:"lancelets", a:0, g:"ani", w:1, d:"Amphioxus, a fish-shaped sliver that buries itself in sand; a living sketch of the first chordate."},
+           {n:"Tunicata", c:"sea squirts", a:0, g:"ani", w:1, d:"Larvae that swim like tadpoles, then glue their heads down and digest their own brains. Our closest invertebrate relatives."},
+           {n:"Vertebrata", a:500, g:"ani", w:3, d:"A backbone, a skull and a big brain in a box.",
+           k:[
+            {n:"Cyclostomata", c:"lampreys and hagfish", a:0, g:"ani", w:2, d:"Jawless fishes; hagfish tie themselves in knots and make buckets of slime."},
+            {n:"Gnathostomata", c:"jawed vertebrates", a:460, g:"ani", w:2, d:"Jaws evolved from the front gill arches and turned fishes into hunters.",
+            k:[
+             {n:"Chondrichthyes", c:"sharks, rays, chimaeras", a:0, g:"ani", w:2, d:"Skeletons of cartilage; sharks are older than trees and Greenland sharks live 400 years."},
+             {n:"Osteichthyes", c:"bony vertebrates", a:430, g:"ani", w:2, d:"Bone skeletons; ray-finned fishes and the lobe-finned line that walked onto land.",
+             k:[
+              {n:"Actinopterygii", c:"ray-finned fishes", a:380, g:"ani", w:2, d:"Half of all vertebrate species: fins held up by bony rays.",
+              k:[
+               {n:"Sturgeons, gars & bowfin", a:0, g:"ani", w:1, d:"Ancient-style fishes; sturgeon give caviar and can live a century."},
+               {n:"Teleostei", c:"teleost fishes", a:300, g:"ani", w:2, d:"About 30,000 species with a protrusible jaw: nearly every fish you can name.",
+               k:[
+                {n:"Salmon & trout", a:0, g:"ani", w:1, d:"Migrate from sea to the stream of their birth, navigating by smell."},
+                {n:"Zebrafish & minnows", a:0, g:"ani", w:1, d:"Zebrafish embryos are transparent, making them a favourite for studying development."},
+                {n:"Cichlids", a:0, g:"ani", w:2, e:true, d:"Lake Victoria's 500 cichlid species arose in about 15,000 years, one of the fastest bursts of speciation known."},
+                {n:"Tuna, cod & perch", a:0, g:"ani", w:1, d:"The great fisheries; bluefin tuna are warm-blooded and cross oceans."},
+                {n:"Seahorses & sticklebacks", a:0, g:"ani", w:1, e:true, d:"Male seahorses give birth; sticklebacks have lost their armour again and again as they colonized fresh water since the last ice age."},
+                {n:"Clownfish, gobies & eels", a:0, g:"ani", w:1, d:"Reef fishes and the eels that spawn in the Sargasso Sea."}
+               ]}
+              ]},
+              {n:"Sarcopterygii", c:"lobe-finned vertebrates", a:420, g:"ani", w:2, d:"Fleshy fins with bones inside, the fins that became limbs.",
+              k:[
+               {n:"Coelacanths", a:0, g:"ani", w:1, d:"Thought extinct for 66 million years until one turned up in a South African fish market in 1938."},
+               {n:"Lungfishes", a:0, g:"ani", w:1, d:"Breathe air and survive drought sealed in a mud cocoon; the closest fishes to land animals."},
+               {n:"Tetrapoda", c:"four-limbed vertebrates", a:370, g:"ani", w:3, d:"Animals with four limbs and fingers, which came ashore about 370 million years ago.",
+               k:[
+                {n:"Amphibia", a:290, g:"ani", w:2, d:"Frogs, salamanders and caecilians; thin skins that breathe and eggs that need water.",
+                k:[
+                 {n:"Anura", c:"frogs and toads", a:0, g:"ani", w:2, d:"Tailless jumpers with the widest mouths; nearly 8,000 species, many vanishing to a chytrid fungus."},
+                 {n:"Caudata", c:"salamanders and newts", a:0, g:"ani", w:1, d:"Axolotls regrow whole limbs; the hellbender of Appalachian streams reaches 70 cm."},
+                 {n:"Gymnophiona", c:"caecilians", a:0, g:"ani", w:1, d:"Legless burrowers that look like worms; some mothers feed their young with their own skin."}
+                ]},
+                {n:"Amniota", a:320, g:"ani", w:2, d:"Eggs with a private pond inside (the amnion), so they can be laid on dry land.",
+                k:[
+                 {n:"Sauropsida", c:"reptiles and birds", a:280, g:"ani", w:2, d:"Reptiles, including birds, which are living dinosaurs.",
+                 k:[
+                  {n:"Lepidosauria", a:250, g:"ani", w:2, d:"Scaly reptiles: lizards, snakes and the tuatara.",
+                  k:[
+                   {n:"Tuatara", a:0, g:"ani", w:1, d:"A single New Zealand survivor of a group older than the dinosaurs, with a third eye on top of its head."},
+                   {n:"Squamata", c:"lizards and snakes", a:0, g:"ani", w:2, e:true, d:"Snakes are lizards that lost their legs. Italian wall lizards moved to a new island in 1971 and evolved a new gut structure within 36 years."}
+                  ]},
+                  {n:"Archelosauria", a:260, g:"ani", w:1, d:"Turtles, crocodilians and birds.",
+                  k:[
+                   {n:"Testudines", c:"turtles and tortoises", a:0, g:"ani", w:2, d:"Ribs turned into a shell; giant tortoises pass 150 years."},
+                   {n:"Archosauria", a:250, g:"ani", w:2, d:"Ruling reptiles: crocodilians, the extinct dinosaurs and pterosaurs, and birds.",
+                   k:[
+                    {n:"Crocodilia", c:"crocodiles, alligators, gharials", a:0, g:"ani", w:2, d:"Armoured ambush hunters with the strongest bite measured; they care for their young."},
+                    {n:"Aves", c:"birds", a:100, g:"ani", w:3, d:"Feathered dinosaurs that survived the asteroid. Warm-blooded, hollow-boned, and 11,000 species strong.",
+                    k:[
+                     {n:"Palaeognathae", c:"ostrich, emu, kiwi, tinamous", a:0, g:"ani", w:1, d:"Mostly flightless runners; the ostrich egg is the largest single cell."},
+                     {n:"Galloanserae", c:"chickens, turkeys, ducks, geese", a:0, g:"ani", w:1, d:"The fowl and waterfowl; the chicken is the most numerous bird on Earth."},
+                     {n:"Neoaves", a:65, g:"ani", w:2, d:"Nearly all other birds, which radiated explosively after the dinosaurs died.",
+                     k:[
+                      {n:"Passeriformes", c:"songbirds", a:0, g:"ani", w:2, e:true, d:"Six in ten bird species: crows, sparrows, finches, warblers. Darwin's finches on the Galápagos change beak size within single droughts."},
+                      {n:"Hummingbirds & swifts", a:0, g:"ani", w:1, d:"Hummingbirds hover with hearts beating 1,200 times a minute."},
+                      {n:"Raptors & owls", a:0, g:"ani", w:1, d:"Eagles, hawks, falcons and owls; a peregrine dives past 300 km/h."},
+                      {n:"Parrots", a:0, g:"ani", w:1, d:"Brainy, long-lived, and the closest relatives of the songbirds."},
+                      {n:"Penguins & seabirds", a:0, g:"ani", w:1, d:"Penguins fly underwater; albatrosses circle the Southern Ocean for years without landing."},
+                      {n:"Pigeons, cuckoos & shorebirds", a:0, g:"ani", w:1, d:"City pigeons, migrating sandpipers, and cuckoos that lay eggs in other birds' nests."}
+                     ]}
+                    ]}
+                   ]}
+                  ]}
+                 ]},
+                 {n:"Synapsida", c:"the mammal line", a:200, g:"ani", w:2, d:"The lineage that split from reptiles 320 million years ago and led, through the sail-backs and the cynodonts, to mammals.",
+                 k:[
+                  {n:"Mammalia", c:"mammals", a:180, g:"ani", w:3, d:"Hair, milk and three tiny ear bones. About 6,500 species.",
+                  k:[
+                   {n:"Monotremata", c:"platypus and echidnas", a:0, g:"ani", w:2, d:"Mammals that lay eggs; the platypus has a duck bill, venom and no nipples."},
+                   {n:"Theria", a:160, g:"ani", w:1, d:"Mammals that give birth to live young.",
+                   k:[
+                    {n:"Marsupialia", c:"marsupials", a:0, g:"ani", w:2, d:"Kangaroos, koalas, wombats, Tasmanian devils and the opossum; born tiny and finished in a pouch."},
+                    {n:"Placentalia", c:"placental mammals", a:100, g:"ani", w:2, d:"Young nourished inside the mother by a placenta; most living mammals.",
+                    k:[
+                     {n:"Afrotheria", a:0, g:"ani", w:2, d:"An African-rooted group: elephants, manatees, aardvarks, hyraxes, tenrecs and elephant shrews."},
+                     {n:"Xenarthra", c:"sloths, armadillos, anteaters", a:0, g:"ani", w:2, d:"South American mammals with extra joints in the spine; sloths move so slowly algae grows on them."},
+                     {n:"Laurasiatheria", a:80, g:"ani", w:2, d:"A northern-rooted group: bats, carnivores, hoofed mammals and whales.",
+                     k:[
+                      {n:"Eulipotyphla", c:"shrews, moles, hedgehogs", a:0, g:"ani", w:1, d:"Small, fast-burning insect eaters; a shrew must eat every few hours or starve."},
+                      {n:"Chiroptera", c:"bats", a:0, g:"ani", w:2, d:"The only flying mammals and a fifth of all mammal species; they navigate by echo."},
+                      {n:"Carnivora", a:50, g:"ani", w:2, d:"Meat-eating teeth: cats, dogs, bears, seals, weasels and hyenas.",
+                      k:[
+                       {n:"Felidae", c:"cats", a:0, g:"ani", w:1, d:"Lions, tigers, cheetahs and the house cat; retractable claws and pure meat diets."},
+                       {n:"Canidae", c:"dogs, wolves, foxes", a:0, g:"ani", w:1, e:true, d:"Wolves became dogs at human campfires 15,000 to 30,000 years ago, the first domesticated animal."},
+                       {n:"Ursidae", c:"bears", a:0, g:"ani", w:1, d:"Polar bears split from brown bears only a few hundred thousand years ago."},
+                       {n:"Pinnipedia", c:"seals, sea lions, walrus", a:0, g:"ani", w:1, d:"Carnivores that went back to sea; elephant seals dive a mile deep."}
+                      ]},
+                      {n:"Perissodactyla", c:"horses, rhinos, tapirs", a:0, g:"ani", w:1, d:"Odd-toed hoofed mammals; the horse fossil record is one of evolution's classic sequences."},
+                      {n:"Artiodactyla", c:"even-toed hoofed mammals and whales", a:55, g:"ani", w:2, d:"Pigs, camels, deer, cattle, giraffes, hippos and, from within them, the whales.",
+                      k:[
+                       {n:"Cattle, sheep, deer, giraffes", c:"ruminants", a:0, g:"ani", w:1, d:"Four-chambered stomachs full of microbes that digest grass for them."},
+                       {n:"Pigs & camels", a:0, g:"ani", w:1, d:"Pigs, warthogs, camels, llamas."},
+                       {n:"Hippopotamus", a:0, g:"ani", w:1, d:"The closest living land relatives of whales."},
+                       {n:"Cetacea", c:"whales and dolphins", a:0, g:"ani", w:2, d:"Hoofed mammals that returned to the sea 50 million years ago; the blue whale is the largest animal that has ever lived."}
+                      ]}
+                     ]},
+                     {n:"Euarchontoglires", a:85, g:"ani", w:2, d:"Rodents, rabbits, tree shrews and primates.",
+                     k:[
+                      {n:"Rodentia", c:"rodents", a:0, g:"ani", w:2, d:"Two in five mammal species: mice, rats, squirrels, beavers, porcupines, capybaras. Teeth that never stop growing."},
+                      {n:"Lagomorpha", c:"rabbits, hares, pikas", a:0, g:"ani", w:1, d:"Not rodents; they have a second pair of upper front teeth behind the first."},
+                      {n:"Primates", a:65, g:"ani", w:3, d:"Grasping hands, forward eyes and big brains, first evolved for life in trees.",
+                      k:[
+                       {n:"Strepsirrhini", c:"lemurs, lorises, galagos", a:0, g:"ani", w:1, d:"Wet-nosed primates; lemurs evolved alone on Madagascar."},
+                       {n:"Tarsiers", a:0, g:"ani", w:1, d:"Tiny night hunters with eyes each as big as their brain."},
+                       {n:"Platyrrhini", c:"New World monkeys", a:0, g:"ani", w:1, d:"Capuchins, howlers, spider monkeys and marmosets, with grasping tails."},
+                       {n:"Catarrhini", c:"Old World monkeys and apes", a:25, g:"ani", w:2, d:"Baboons, macaques, colobus monkeys, and the apes.",
+                       k:[
+                        {n:"Cercopithecidae", c:"Old World monkeys", a:0, g:"ani", w:1, d:"Baboons, macaques, mandrills and langurs."},
+                        {n:"Hominoidea", c:"apes", a:18, g:"ani", w:2, d:"Tailless primates with flexible shoulders: gibbons and the great apes.",
+                        k:[
+                         {n:"Gibbons", a:0, g:"ani", w:1, d:"Small apes that swing arm over arm through the canopy and sing duets."},
+                         {n:"Orangutans", a:0, g:"ani", w:1, d:"Solitary Asian apes; mothers teach their young for eight years."},
+                         {n:"Gorillas", a:0, g:"ani", w:1, d:"Gentle leaf-eaters; the largest living primates."},
+                         {n:"Chimpanzees & bonobos", a:0, g:"ani", w:2, d:"Our closest living relatives, sharing about 98.8% of our DNA; they use tools and hold grudges."},
+                         {n:"Homo sapiens", c:"humans", a:0, g:"ani", w:3, e:true, d:"One surviving species of a once-bushy branch, about 300,000 years old, still evolving: lactose tolerance, high-altitude breathing and malaria resistance all arose in the last 10,000 years."}
+                        ]}
+                       ]}
+                      ]}
+                     ]}
+                    ]}
+                   ]}
+                  ]}
+                 ]}
+                ]}
+               ]}
+              ]}
+             ]}
+            ]}
+           ]}
+          ]}
+         ]}
+        ]}
+       ]}
+      ]}
+     ]}
+    ]}
+   ]}
+  ]}
+ ]}
+]}
+]};
+
+const GROUPS = {
+ // color = on the dark poster, light = on white; gd/gl = greyscale on dark / on white; dash = pattern used only in greyscale
+ root:{name:"Common ancestor", color:"#e2e8f0", light:"#334155", gd:"#d9d9d9", gl:"#333333", dash:""},
+ bac: {name:"Bacteria",        color:"#2dd4bf", light:"#0f766e", gd:"#bdbdbd", gl:"#3d3d3d", dash:""},
+ arc: {name:"Archaea",         color:"#f59e0b", light:"#b45309", gd:"#e8e8e8", gl:"#1f1f1f", dash:"12 7"},
+ euk: {name:"Eukaryote stem",  color:"#cbd5e1", light:"#475569", gd:"#d9d9d9", gl:"#333333", dash:""},
+ pro: {name:"Other protists",  color:"#a78bfa", light:"#6d28d9", gd:"#9e9e9e", gl:"#6a6a6a", dash:"3 6"},
+ sar: {name:"SAR & algae",     color:"#f472b6", light:"#be185d", gd:"#cfcfcf", gl:"#4f4f4f", dash:"14 5 3 5"},
+ pla: {name:"Plants",          color:"#a3e635", light:"#4d7c0f", gd:"#f2f2f2", gl:"#262626", dash:"6 5"},
+ fun: {name:"Fungi",           color:"#fde047", light:"#a16207", gd:"#8c8c8c", gl:"#7a7a7a", dash:""},
+ ani: {name:"Animals",         color:"#38bdf8", light:"#1d4ed8", gd:"#ffffff", gl:"#111111", dash:""}
+};
+
+// Time scale breakpoints: age (Ma) -> fraction of radius. Piecewise linear so recent
+// history, where most branching happens, gets room; the rings are labelled honestly.
+const TIME_SCALE = [[3800,0],[2500,0.25],[1800,0.35],[1000,0.47],[540,0.58],[250,0.74],[100,0.86],[0,1]];
+// Angular weight per group: microbial tips get wider slots so their deep branches are legible.
+const SLOT_WEIGHT = {bac:1.9, arc:1.9, pro:1.4, sar:1.4};
+
+const EVENTS = [
+ {a:2400, t:"Great Oxidation, 2.4 Ga"},
+ {a:1800, t:"First eukaryotes, ~1.8 Ga"},
+ {a:540,  t:"Cambrian explosion, 540 Ma"},
+ {a:470,  t:"Plants reach land, 470 Ma"},
+ {a:252,  t:"End-Permian extinction, 252 Ma"},
+ {a:66,   t:"Asteroid impact, 66 Ma"},
+ {a:0,    t:"Today, still evolving"}
+];
+
+if (typeof module !== "undefined") module.exports = {TREE, GROUPS, TIME_SCALE, EVENTS, SLOT_WEIGHT};
+
+// Radial time-tree layout + SVG renderer. Shared by the interactive page and the print script.
+(function(global){
+function scaleAge(age, TIME_SCALE){
+  // piecewise-linear map from age (Ma) to radius fraction 0..1
+  for (let i=0;i<TIME_SCALE.length-1;i++){
+    const [a0,f0]=TIME_SCALE[i],[a1,f1]=TIME_SCALE[i+1];
+    if (age<=a0 && age>=a1){ const t=(a0-age)/(a0-a1); return f0+(f1-f0)*t; }
+  }
+  return age>TIME_SCALE[0][0]?0:1;
+}
+
+function layout(TREE, TIME_SCALE, opts){
+  opts = opts||{};
+  const gapDeg = opts.gapDeg==null?22:opts.gapDeg;
+  const SW = opts.slotWeight||{};
+  const nodes=[]; let leafCount=0, slotTotal=0;
+  (function count(n,parent,depth,path){
+    n._id = path; n._parent=parent; n._depth=depth; nodes.push(n);
+    if (n.k && n.k.length){ n._leaves=0; n._slots=0; n.k.forEach((c,i)=>{ count(c,n,depth+1,path+"."+i); n._leaves+=c._leaves; n._slots+=c._slots; }); }
+    else { n._leaves=1; n._slots=SW[n.g]||1; leafCount++; slotTotal+=n._slots; }
+  })(TREE,null,0,"0");
+  const total=leafCount;
+  const start = -Math.PI/2 + (gapDeg/2)*Math.PI/180;
+  const span  = 2*Math.PI - gapDeg*Math.PI/180;
+  // Six-kingdom membership (Whittaker/Woese scheme used in school): Eubacteria, Archaebacteria,
+  // Protista, Fungi, Plantae (land plants), Animalia. Everything eukaryotic outside fungi, land
+  // plants and animals counts as Protista, which is exactly the point worth discussing.
+  (function assign(n, k){
+    let kk = k;
+    if (n.n==='Bacteria') kk='eub'; else if (n.n==='Archaea') kk='arb'; else if (n.n==='Eukarya') kk='pro';
+    else if (n.n==='Embryophyta') kk='pla'; else if (n.n==='Fungi') kk='fun'; else if (n.n==='Animalia') kk='ani';
+    n._k = kk || 'root';
+    (n.k||[]).forEach(c=>assign(c, kk));
+  })(TREE, null);
+  let li=0;
+  (function place(n){
+    n._r = scaleAge(n.a, TIME_SCALE);
+    if (n.k && n.k.length){ n.k.forEach(place); n._t = (n.k[0]._t + n.k[n.k.length-1]._t)/2; }
+    else { n._t = start + span*(li+n._slots/2)/slotTotal; li+=n._slots; }
+    n._w = 1 + 5*Math.sqrt(n._leaves/total);
+  })(TREE);
+  return {nodes, total, start, span};
+}
+
+const KINGDOMS = {
+ root:{name:"Common ancestor", color:"#e2e8f0", light:"#334155", gd:"#d9d9d9", gl:"#333333", dash:""},
+ eub: {name:"Eubacteria",      color:"#2dd4bf", light:"#0f766e", gd:"#bdbdbd", gl:"#3d3d3d", dash:""},
+ arb: {name:"Archaebacteria",  color:"#f59e0b", light:"#b45309", gd:"#e8e8e8", gl:"#1f1f1f", dash:"12 7"},
+ pro: {name:"Protista",        color:"#c084fc", light:"#7e22ce", gd:"#a3a3a3", gl:"#5c5c5c", dash:"3 6"},
+ fun: {name:"Fungi",           color:"#fde047", light:"#a16207", gd:"#8c8c8c", gl:"#7a7a7a", dash:""},
+ pla: {name:"Plantae",         color:"#a3e635", light:"#4d7c0f", gd:"#f2f2f2", gl:"#262626", dash:"6 5"},
+ ani: {name:"Animalia",        color:"#38bdf8", light:"#1d4ed8", gd:"#ffffff", gl:"#111111", dash:""}
+};
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+// theme: 'dark' | 'light' | 'grey' | 'greylight'
+function themeColors(theme, GROUPS, kingdoms){
+  if (kingdoms) GROUPS = KINGDOMS;
+  const dark = theme==='dark' || theme==='grey';
+  const bg = dark?'#0b1020':'#ffffff';
+  const fg = dark?'#e6edf7':'#1a1a1a';
+  const faint = dark?'rgba(230,237,247,0.16)':'rgba(0,0,0,0.14)';
+  const faint2 = dark?'rgba(230,237,247,0.45)':'rgba(0,0,0,0.5)';
+  const grey = theme==='grey'||theme==='greylight';
+  const col = g => {
+    const G=GROUPS[g]||GROUPS.root;
+    if (grey) return dark?G.gd:G.gl;
+    return dark?G.color:G.light;
+  };
+  const dash = g => grey ? ((GROUPS[g]||GROUPS.root).dash||'') : '';
+  return {bg,fg,faint,faint2,col,dash,dark,grey};
+}
+
+function renderSVG(TREE, GROUPS, TIME_SCALE, EVENTS, opts){
+  opts=opts||{};
+  const S = opts.size||2600, cx=S/2, cy=S/2;
+  const R = opts.radius||1000;
+  const theme = opts.theme||'dark';
+  const chrome = opts.chrome!==false; // title, legend
+  const labelLevel = opts.labelLevel==null?1:opts.labelLevel; // show leaf labels with w>=labelLevel
+  const KM = !!opts.kingdoms;
+  const T = themeColors(theme, GROUPS, KM);
+  const L = layout(TREE, TIME_SCALE, Object.assign({slotWeight:opts.slotWeight},opts));
+  const key = n => KM ? n._k : n.g; // which palette key colours this node
+  const font = opts.font||"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif";
+  const P = (r,t)=>[cx+R*r*Math.cos(t), cy+R*r*Math.sin(t)];
+  let out=[];
+  out.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${S} ${S}" width="${S}" height="${S}" font-family="${font}">`);
+  out.push(`<rect width="${S}" height="${S}" fill="${T.bg}"/>`);
+  out.push(`<g id="tol-root">`);
+
+  // rings for time scale + events
+  out.push(`<g id="rings">`);
+  const ringAges = TIME_SCALE.map(x=>x[0]);
+  ringAges.forEach(age=>{
+    const r=scaleAge(age,TIME_SCALE)*R; if(r<=0)return;
+    out.push(`<circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}" fill="none" stroke="${T.faint}" stroke-width="1"/>`);
+  });
+  // the axis in the top gap
+  const gapT = -Math.PI/2;
+  out.push(`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${(cy-R).toFixed(1)}" stroke="${T.faint2}" stroke-width="1.2"/>`);
+  EVENTS.forEach(ev=>{
+    const r=scaleAge(ev.a,TIME_SCALE)*R;
+    const y=cy-r;
+    out.push(`<circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}" fill="none" stroke="${T.faint2}" stroke-width="1" stroke-dasharray="3 8"/>`);
+    out.push(`<circle cx="${cx}" cy="${y.toFixed(1)}" r="4" fill="${T.fg}"/>`);
+    if (r/R>0.8) out.push(`<text x="${cx}" y="${(y-9).toFixed(1)}" text-anchor="middle" font-size="13" fill="${T.fg}" fill-opacity="0.85" stroke="${T.bg}" stroke-width="3" paint-order="stroke">${esc(ev.t)}</text>`);
+    else out.push(`<text x="${cx-12}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="13" fill="${T.fg}" fill-opacity="0.85" stroke="${T.bg}" stroke-width="3" paint-order="stroke">${esc(ev.t)}</text>`);
+  });
+  out.push(`<text x="${cx}" y="${cy+26}" text-anchor="middle" font-size="12" fill="${T.fg}" fill-opacity="0.7">~3.8 billion years ago</text>`);
+  out.push(`</g>`);
+
+  // kingdom sectors: one translucent wedge per contiguous run of tips in the same kingdom
+  if (KM){
+    out.push(`<g id="kingdoms">`);
+    const leaves = L.nodes.filter(n=>!(n.k&&n.k.length)).sort((a,b)=>a._t-b._t);
+    const runs=[]; leaves.forEach(n=>{ const half=(L.span*(n._slots||1)/leaves.reduce((s,x)=>s+(x._slots||1),0))/2; const r=runs[runs.length-1]; if(r&&r.k===n._k){ r.t1=n._t+half; r.n++; } else runs.push({k:n._k,t0:n._t-half,t1:n._t+half,n:1}); });
+    const r0=0.06, r1=1.0, rl=1.16;
+    runs.forEach(run=>{
+      const c=T.col(run.k);
+      const [ax,ay]=P(r1,run.t0),[bx,by]=P(r1,run.t1),[cx2,cy2]=P(r0,run.t1),[dx,dy]=P(r0,run.t0);
+      const large=(run.t1-run.t0)>Math.PI?1:0;
+      out.push(`<path d="M${ax.toFixed(1)},${ay.toFixed(1)} A${(R*r1).toFixed(1)},${(R*r1).toFixed(1)} 0 ${large} 1 ${bx.toFixed(1)},${by.toFixed(1)} L${cx2.toFixed(1)},${cy2.toFixed(1)} A${(R*r0).toFixed(1)},${(R*r0).toFixed(1)} 0 ${large} 0 ${dx.toFixed(1)},${dy.toFixed(1)} Z" fill="${c}" fill-opacity="${T.grey?0.10:0.13}" stroke="${c}" stroke-opacity="0.35" stroke-width="1"/>`);
+      const spanDeg=(run.t1-run.t0)*180/Math.PI;
+      if (spanDeg>7){
+        const mid=(run.t0+run.t1)/2, midDeg=mid*180/Math.PI;
+        const bottom = midDeg>0 && midDeg<180; // text on the lower half is drawn the other way round so it stays readable
+        const a0=bottom?run.t1:run.t0, a1=bottom?run.t0:run.t1;
+        const [px,py]=P(rl,a0),[qx,qy]=P(rl,a1);
+        const id='karc'+runs.indexOf(run);
+        out.push(`<path id="${id}" d="M${px.toFixed(1)},${py.toFixed(1)} A${(R*rl).toFixed(1)},${(R*rl).toFixed(1)} 0 ${large} ${bottom?0:1} ${qx.toFixed(1)},${qy.toFixed(1)}" fill="none"/>`);
+        out.push(`<text font-size="${spanDeg>20?26:16}" font-weight="800" letter-spacing="2" fill="${c}" fill-opacity="0.9"><textPath href="#${id}" startOffset="50%" text-anchor="middle">${esc(KINGDOMS[run.k].name.toUpperCase())}</textPath></text>`);
+      }
+    });
+    out.push(`</g>`);
+  }
+
+  // branches
+  out.push(`<g id="branches" fill="none" stroke-linecap="round" stroke-linejoin="round">`);
+  L.nodes.forEach(n=>{
+    if(!n.k||!n.k.length) return;
+    const r=n._r*R;
+    const ts=n.k.map(c=>c._t); const t0=Math.min(...ts), t1=Math.max(...ts);
+    // arc at parent's radius, coloured by parent
+    const [ax,ay]=P(n._r,t0),[bx,by]=P(n._r,t1);
+    const large = (t1-t0)>Math.PI?1:0;
+    out.push(`<path d="M${ax.toFixed(1)},${ay.toFixed(1)} A${r.toFixed(1)},${r.toFixed(1)} 0 ${large} 1 ${bx.toFixed(1)},${by.toFixed(1)}" stroke="${T.col(key(n))}" stroke-width="${n._w.toFixed(2)}"${T.dash(key(n))?` stroke-dasharray="${T.dash(key(n))}"`:''} data-id="${n._id}"/>`);
+    n.k.forEach(c=>{
+      const [x0,y0]=P(n._r,c._t),[x1,y1]=P(c._r,c._t);
+      out.push(`<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="${T.col(key(c))}" stroke-width="${c._w.toFixed(2)}"${T.dash(key(c))?` stroke-dasharray="${T.dash(key(c))}"`:''} data-id="${c._id}"/>`);
+    });
+  });
+  out.push(`</g>`);
+
+  // nodes + labels
+  out.push(`<g id="nodes">`);
+  L.nodes.forEach(n=>{
+    const [x,y]=P(n._r,n._t);
+    const isLeaf=!(n.k&&n.k.length);
+    const colr=T.col(key(n));
+    const rad = n.w>=3?7:(n.w===2?5:3.5);
+    let g=`<g class="node w${n.w}${isLeaf?' leaf':''}${n.e?' evolving':''}" data-id="${n._id}" data-name="${esc(n.n)}">`;
+    if (isLeaf){
+      g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad}" fill="${colr}"/>`;
+      if (n.e){ g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad+5}" fill="none" stroke="${colr}" stroke-width="1.5" stroke-dasharray="3 3"/>`; }
+    } else {
+      g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad}" fill="${T.bg}" stroke="${colr}" stroke-width="${n.w>=3?3:2}"/>`;
+    }
+    // label
+    const deg = n._t*180/Math.PI;
+    const flip = (deg>90 && deg<270) || (deg<-90);
+    if (isLeaf && n.w>=labelLevel){
+      const off = rad+9 + (n.e?5:0);
+      const fs = n.w>=3?15:(n.w===2?13:11.5);
+      const anchor = flip?'end':'start';
+      const rot = flip?deg+180:deg;
+      g+=`<text transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(2)})" x="${flip?-off:off}" y="4" text-anchor="${anchor}" font-size="${fs}" font-weight="${n.w>=2?600:400}" fill="${colr}">${esc(n.n)}${n.e?' ✦':''}</text>`;
+    } else if (!isLeaf && n.w>=2){
+      const fs = n.w>=3?17:12.5;
+      const halo = T.bg;
+      // place label just outside the node along its angle, but keep upright
+      const off = rad+6;
+      const inward = n._r>0.84; // near the rim: point the label back toward the centre so it clears the tip labels
+      const anchor = (flip!==inward)?'end':'start';
+      const rot = flip?deg+180:deg;
+      const text = n.w>=3?n.n.toUpperCase():n.n;
+      const xo = (flip!==inward)?-off:off;
+      g+=`<text transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(2)})" x="${xo}" y="${n.w>=3?-9:-7}" text-anchor="${anchor}" font-size="${fs}" font-weight="${n.w>=3?800:600}" letter-spacing="${n.w>=3?1.2:0}" fill="${colr}" stroke="${halo}" stroke-width="4" paint-order="stroke" stroke-linejoin="round">${esc(text)}</text>`;
+    }
+    g+=`</g>`;
+    out.push(g);
+  });
+  out.push(`</g>`);
+  out.push(`</g>`); // tol-root
+
+  if (chrome){
+    const title = opts.title||"The Tree of Life";
+    const sub = opts.subtitle||"Every living thing, from the first cell to the branches still growing today";
+    out.push(`<g id="chrome">`);
+    out.push(`<text x="60" y="110" font-size="64" font-weight="800" letter-spacing="-1" fill="${T.fg}">${esc(title)}</text>`);
+    out.push(`<text x="62" y="150" font-size="22" fill="${T.fg}" fill-opacity="0.8">${esc(sub)}</text>`);
+    // legend
+    const keys=KM?['eub','arb','pro','fun','pla','ani']:['bac','arc','pro','sar','pla','fun','ani'];
+    const PAL=KM?KINGDOMS:GROUPS;
+    let ly=S-60-keys.length*30;
+    out.push(`<text x="60" y="${ly-14}" font-size="16" font-weight="700" fill="${T.fg}" letter-spacing="1">${KM?'THE SIX KINGDOMS':'GROUPS'}</text>`);
+    keys.forEach(k=>{
+      out.push(`<line x1="60" y1="${ly+10}" x2="92" y2="${ly+10}" stroke="${T.col(k)}" stroke-width="5" stroke-linecap="round"${T.dash(k)?` stroke-dasharray="${T.dash(k)}"`:''}/>`);
+      out.push(`<text x="102" y="${ly+15}" font-size="17" fill="${T.fg}">${esc(PAL[k].name)}</text>`);
+      ly+=30;
+    });
+    // right-side notes
+    const rx=S-60;
+    out.push(`<text x="${rx}" y="${S-150}" text-anchor="end" font-size="17" font-weight="700" fill="${T.fg}" letter-spacing="1">HOW TO READ IT</text>`);
+    out.push(`<text x="${rx}" y="${S-124}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">The centre is LUCA, the last ancestor shared by all life. Time runs outward; the rim is today.</text>`);
+    out.push(`<text x="${rx}" y="${S-102}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">The scale stretches recent time so the crowded last 600 million years have room. Rings mark the ages on the axis.</text>`);
+    out.push(`<text x="${rx}" y="${S-80}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">Line width follows how many living groups a branch holds. Eukaryotes, including us, branch from within the archaea.</text>`);
+    out.push(`<text x="${rx}" y="${S-58}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">✦ marks a lineage in which evolution has been watched happening in our own lifetimes. Every tip is still evolving.</text>`);
+    out.push(`</g>`);
+  }
+  out.push(`</svg>`);
+  return {svg: out.join("\n"), layout: L};
+}
+
+const api={scaleAge, layout, renderSVG, themeColors, KINGDOMS};
+if (typeof module!=="undefined") module.exports=api; else global.TOL=api;
+})(typeof window!=="undefined"?window:globalThis);
+
+const IMAGES={
+"LUCA":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Blacksmoker_in_Atlantic_Ocean.jpg/500px-Blacksmoker_in_Atlantic_Ocean.jpg","p":"https://commons.wikimedia.org/wiki/File:Blacksmoker_in_Atlantic_Ocean.jpg","l":"Public domain","b":"P. Rona, NOAA National Undersea Research Program","n":"No photograph can exist. A deep-sea hydrothermal vent, the kind of place where the first cells may have lived."},
+"Bacteria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/E._coli_Bacteria_(7316101966).jpg/500px-E._coli_Bacteria_(7316101966).jpg","p":"https://commons.wikimedia.org/wiki/File:E._coli_Bacteria_(7316101966).jpg","l":"Public domain","b":"NIAID"},
+"Thermotogae & Aquificae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Tepiditoga_spiralis.jpg/500px-Tepiditoga_spiralis.jpg","p":"https://commons.wikimedia.org/wiki/File:Tepiditoga_spiralis.jpg","l":"CC BY-SA 4.0","b":"Koji Mori et al."},
+"Terrabacteria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Actinomyces_israelii.jpg/500px-Actinomyces_israelii.jpg","p":"https://commons.wikimedia.org/wiki/File:Actinomyces_israelii.jpg","l":"CC BY 3.0","b":"Graham Beards"},
+"Cyanobacteria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/CSIRO_ScienceImage_4203_A_bluegreen_algae_species_Cylindrospermum_sp_under_magnification.jpg/500px-CSIRO_ScienceImage_4203_A_bluegreen_algae_species_Cylindrospermum_sp_under_magnification.jpg","p":"https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_4203_A_bluegreen_algae_species_Cylindrospermum_sp_under_magnification.jpg","l":"CC BY 3.0","b":"Willem van Aken, CSIRO"},
+"Prochlorococcus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Prochlorococcus_marinus.jpg/500px-Prochlorococcus_marinus.jpg","p":"https://commons.wikimedia.org/wiki/File:Prochlorococcus_marinus.jpg","l":"CC0","b":"Luke Thompson, Chisholm Lab, and Nikki Watson"},
+"Nostoc & Anabaena":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Nostoc_commune.jpg/500px-Nostoc_commune.jpg","p":"https://commons.wikimedia.org/wiki/File:Nostoc_commune.jpg","l":"CC BY-SA 3.0","b":"YAMAMAYA"},
+"Bacillota":{"u":"https://upload.wikimedia.org/wikipedia/commons/b/b9/Bacillus_subtilis_Gram.jpg","p":"https://commons.wikimedia.org/wiki/File:Bacillus_subtilis_Gram.jpg","l":"CC BY-SA 3.0","b":"Y tambe"},
+"Bacillus":{"u":"https://upload.wikimedia.org/wikipedia/commons/b/b9/Bacillus_subtilis_Gram.jpg","p":"https://commons.wikimedia.org/wiki/File:Bacillus_subtilis_Gram.jpg","l":"CC BY-SA 3.0","b":"Y tambe"},
+"Clostridium":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Clostridium_botulinum_01.png/500px-Clostridium_botulinum_01.png","p":"https://commons.wikimedia.org/wiki/File:Clostridium_botulinum_01.png","l":"Public domain","b":"CDC"},
+"Lactobacillus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Lactobacillus_sp_01.png/500px-Lactobacillus_sp_01.png","p":"https://commons.wikimedia.org/wiki/File:Lactobacillus_sp_01.png","l":"Public domain","b":"Janice Carr, CDC"},
+"Streptococcus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Streptococci.jpg/500px-Streptococci.jpg","p":"https://commons.wikimedia.org/wiki/File:Streptococci.jpg","l":"CC BY-SA 3.0","b":"Graham Beards"},
+"Staphylococcus aureus (MRSA)":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Human_neutrophil_ingesting_MRSA.jpg/500px-Human_neutrophil_ingesting_MRSA.jpg","p":"https://commons.wikimedia.org/wiki/File:Human_neutrophil_ingesting_MRSA.jpg","l":"Public domain","b":"NIH"},
+"Actinomycetota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Actinomyces_israelii.jpg/500px-Actinomyces_israelii.jpg","p":"https://commons.wikimedia.org/wiki/File:Actinomyces_israelii.jpg","l":"CC BY 3.0","b":"Graham Beards"},
+"Streptomyces":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Streptomyces_sp_01.png/500px-Streptomyces_sp_01.png","p":"https://commons.wikimedia.org/wiki/File:Streptomyces_sp_01.png","l":"Public domain","b":"CDC"},
+"Mycobacterium":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mycobacterium_tuberculosis_01.jpg/500px-Mycobacterium_tuberculosis_01.jpg","p":"https://commons.wikimedia.org/wiki/File:Mycobacterium_tuberculosis_01.jpg","l":"Public domain","b":"CDC"},
+"Deinococcus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Deinococcus_radiodurans.jpg/500px-Deinococcus_radiodurans.jpg","p":"https://commons.wikimedia.org/wiki/File:Deinococcus_radiodurans.jpg","l":"Public domain","b":"TEM, laboratory of Michael Daly"},
+"Chloroflexota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Phylum-Chloroflexi-isolate-Anaerolineae-bacterium-HOT-439-is-dependent-on-a-helper-strain.png/500px-Phylum-Chloroflexi-isolate-Anaerolineae-bacterium-HOT-439-is-dependent-on-a-helper-strain.png","p":"https://commons.wikimedia.org/wiki/File:Phylum-Chloroflexi-isolate-Anaerolineae-bacterium-HOT-439-is-dependent-on-a-helper-strain.png","l":"FAL","b":"Sonia R. Vartoukian"},
+"Gracilicutes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/E._coli_Bacteria_(7316101966).jpg/500px-E._coli_Bacteria_(7316101966).jpg","p":"https://commons.wikimedia.org/wiki/File:E._coli_Bacteria_(7316101966).jpg","l":"Public domain","b":"NIAID"},
+"Pseudomonadota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/E._coli_Bacteria_(7316101966).jpg/500px-E._coli_Bacteria_(7316101966).jpg","p":"https://commons.wikimedia.org/wiki/File:E._coli_Bacteria_(7316101966).jpg","l":"Public domain","b":"NIAID"},
+"Alphaproteobacteria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Wolbachia.png/500px-Wolbachia.png","p":"https://commons.wikimedia.org/wiki/File:Wolbachia.png","l":"CC BY 2.5","b":"Scott O'Neill"},
+"Rickettsia":{"u":"https://upload.wikimedia.org/wikipedia/commons/8/86/Rickettsia_rickettsii.jpg","p":"https://commons.wikimedia.org/wiki/File:Rickettsia_rickettsii.jpg","l":"Public domain","b":"CDC"},
+"Rhizobium":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Rhizobium_tropici_strain_BR816_on_TY_agar.JPG/500px-Rhizobium_tropici_strain_BR816_on_TY_agar.JPG","p":"https://commons.wikimedia.org/wiki/File:Rhizobium_tropici_strain_BR816_on_TY_agar.JPG","l":"CC BY-SA 3.0","b":"Ninjatacoshell"},
+"Agrobacterium":{"u":"https://upload.wikimedia.org/wikipedia/commons/a/ae/Agrobacterium-tumefaciens.png","p":"https://commons.wikimedia.org/wiki/File:Agrobacterium-tumefaciens.png","l":"Public domain","b":"A. G. Matthysse, K. V. Holmes, R. H. G. Gurlitz"},
+"Betaproteobacteria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Burkholderia_pseudomallei_01.jpg/500px-Burkholderia_pseudomallei_01.jpg","p":"https://commons.wikimedia.org/wiki/File:Burkholderia_pseudomallei_01.jpg","l":"Public domain","b":"CDC"},
+"Gammaproteobacteria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Vibrio_cholerae.jpg/500px-Vibrio_cholerae.jpg","p":"https://commons.wikimedia.org/wiki/File:Vibrio_cholerae.jpg","l":"Public domain","b":"Tom Kirn, Ron Taylor, Louisa Howard, Dartmouth"},
+"Escherichia coli":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/E_coli_at_10000x%2C_original.jpg/500px-E_coli_at_10000x%2C_original.jpg","p":"https://commons.wikimedia.org/wiki/File:E_coli_at_10000x%2C_original.jpg","l":"Public domain","b":"Eric Erbe, USDA ARS"},
+"Salmonella":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/SalmonellaNIAID.jpg/500px-SalmonellaNIAID.jpg","p":"https://commons.wikimedia.org/wiki/File:SalmonellaNIAID.jpg","l":"Public domain","b":"NIAID"},
+"Vibrio":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vibrio_cholerae_01.jpg/500px-Vibrio_cholerae_01.jpg","p":"https://commons.wikimedia.org/wiki/File:Vibrio_cholerae_01.jpg","l":"Public domain","b":"CDC"},
+"Pseudomonas":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Pseudomonas_aeruginosa_01.jpg/500px-Pseudomonas_aeruginosa_01.jpg","p":"https://commons.wikimedia.org/wiki/File:Pseudomonas_aeruginosa_01.jpg","l":"Public domain","b":"CDC"},
+"Campylobacterota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/EMpylori.jpg/500px-EMpylori.jpg","p":"https://commons.wikimedia.org/wiki/File:EMpylori.jpg","l":"Copyrighted free use","b":"Yutaka Tsutsumi"},
+"Myxococcota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/M._xanthus_development.png/500px-M._xanthus_development.png","p":"https://commons.wikimedia.org/wiki/File:M._xanthus_development.png","l":"CC BY-SA 3.0","b":"Trance Gemini"},
+"Bacteroidota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Bacteroides_biacutis_01.jpg/500px-Bacteroides_biacutis_01.jpg","p":"https://commons.wikimedia.org/wiki/File:Bacteroides_biacutis_01.jpg","l":"Public domain","b":"CDC"},
+"Spirochaetota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Treponema_pallidum.jpg/500px-Treponema_pallidum.jpg","p":"https://commons.wikimedia.org/wiki/File:Treponema_pallidum.jpg","l":"Public domain","b":"CDC / Dr. David Cox"},
+"Chlamydiota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/ChlamydiaTrachomatisEinschlussk%C3%B6rperchen.jpg/500px-ChlamydiaTrachomatisEinschlussk%C3%B6rperchen.jpg","p":"https://commons.wikimedia.org/wiki/File:ChlamydiaTrachomatisEinschlussk%C3%B6rperchen.jpg","l":"Public domain","b":"Marcus007"},
+"Planctomycetota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Brocadia_anammoxidans.jpg/500px-Brocadia_anammoxidans.jpg","p":"https://commons.wikimedia.org/wiki/File:Brocadia_anammoxidans.jpg","l":"CC BY-SA 4.0","b":"LoPorto"},
+"Patescibacteria (CPR)":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ultra-small_bacteria.png/500px-Ultra-small_bacteria.png","p":"https://commons.wikimedia.org/wiki/File:Ultra-small_bacteria.png","l":"CC BY-SA 4.0","b":"Dorita de Lucioni"},
+"Archaea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Archaea.png/500px-Archaea.png","p":"https://commons.wikimedia.org/wiki/File:Archaea.png","l":"CC BY-SA 4.0","b":"Maulucioni"},
+"DPANN":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/25K15pA9Def4sec_Arman_4_Box1.png/500px-25K15pA9Def4sec_Arman_4_Box1.png","p":"https://commons.wikimedia.org/wiki/File:25K15pA9Def4sec_Arman_4_Box1.png","l":"Public domain","b":"Brett J. Baker"},
+"Euryarchaeota":{"u":"https://upload.wikimedia.org/wikipedia/commons/a/a1/Halobacteria.jpg","p":"https://commons.wikimedia.org/wiki/File:Halobacteria.jpg","l":"Public domain","b":"NASA"},
+"Methanogens":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Methanosarcina_barkeri_MS.jpg/500px-Methanosarcina_barkeri_MS.jpg","p":"https://commons.wikimedia.org/wiki/File:Methanosarcina_barkeri_MS.jpg","l":"CC BY-SA 4.0","b":"Microvenator"},
+"Halobacteria":{"u":"https://upload.wikimedia.org/wikipedia/commons/a/a1/Halobacteria.jpg","p":"https://commons.wikimedia.org/wiki/File:Halobacteria.jpg","l":"Public domain","b":"NASA"},
+"Thermococcus & Pyrococcus":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/60/P_furiosus.jpg","p":"https://commons.wikimedia.org/wiki/File:P_furiosus.jpg","l":"CC BY-SA 4.0","b":"Michelle Kropf"},
+"TACK":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/MW001-good_022-new.jpg/500px-MW001-good_022-new.jpg","p":"https://commons.wikimedia.org/wiki/File:MW001-good_022-new.jpg","l":"CC BY-SA 3.0","b":"Ag.archaea"},
+"Thaumarchaeota":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/62/ThaspiviridaeFig1rv2.png","p":"https://commons.wikimedia.org/wiki/File:ThaspiviridaeFig1rv2.png","l":"CC BY-SA 4.0","b":"Jong-Geol Kim et al."},
+"Sulfolobus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/RT8-4.jpg/500px-RT8-4.jpg","p":"https://commons.wikimedia.org/wiki/File:RT8-4.jpg","l":"Public domain","b":"Xiangyux"},
+"Asgard":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Promethearchaeum_syntrophicum.jpg/500px-Promethearchaeum_syntrophicum.jpg","p":"https://commons.wikimedia.org/wiki/File:Promethearchaeum_syntrophicum.jpg","l":"CC BY-SA 4.0","b":"Hiroyuki Imachi et al.","n":"The first Asgard archaeon grown in a lab, after twelve years of effort."},
+"Lokiarchaeota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Promethearchaeum_syntrophicum.jpg/500px-Promethearchaeum_syntrophicum.jpg","p":"https://commons.wikimedia.org/wiki/File:Promethearchaeum_syntrophicum.jpg","l":"CC BY-SA 4.0","b":"Hiroyuki Imachi et al."},
+"Heimdallarchaeota":{"u":"https://upload.wikimedia.org/wikipedia/commons/7/7e/HCR-FISH_image_of_a_Heimdallarchaeia_cell.png","p":"https://commons.wikimedia.org/wiki/File:HCR-FISH_image_of_a_Heimdallarchaeia_cell.png","l":"CC BY 4.0","b":"MacLeod et al."},
+"Eukarya":{"u":"https://upload.wikimedia.org/wikipedia/commons/c/ce/Rhodomonas_salina_CCMP_322_(cropped).jpg","p":"https://commons.wikimedia.org/wiki/File:Rhodomonas_salina_CCMP_322_(cropped).jpg","l":"CC BY-SA 2.5","b":"Daniel Vaulot, CNRS, Station Biologique de Roscoff","n":"A cryptomonad, a small single-celled eukaryote; the first eukaryotes are known only by inference."},
+"Discoba":{"u":"https://upload.wikimedia.org/wikipedia/commons/9/91/Moramonas_marocensis_fig1a.jpg","p":"https://commons.wikimedia.org/wiki/File:Moramonas_marocensis_fig1a.jpg","l":"CC BY 4.0","b":"Jürgen F. H. Strassert et al."},
+"Euglena":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Euglena_sociabilis_433143410.jpg/500px-Euglena_sociabilis_433143410.jpg","p":"https://commons.wikimedia.org/wiki/File:Euglena_sociabilis_433143410.jpg","l":"CC BY 4.0","b":"Petr Knotek"},
+"Trypanosoma":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Trypanosoma_sp._PHIL_613_lores.jpg/500px-Trypanosoma_sp._PHIL_613_lores.jpg","p":"https://commons.wikimedia.org/wiki/File:Trypanosoma_sp._PHIL_613_lores.jpg","l":"Public domain","b":"CDC / Dr. Myron G. Schultz"},
+"Naegleria":{"u":"https://upload.wikimedia.org/wikipedia/commons/1/15/Nfowleri_LifeCycle.gif","p":"https://commons.wikimedia.org/wiki/File:Nfowleri_LifeCycle.gif","l":"Public domain","b":"CDC"},
+"Metamonada":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Giardia_lamblia_SEM_8698_lores.jpg/500px-Giardia_lamblia_SEM_8698_lores.jpg","p":"https://commons.wikimedia.org/wiki/File:Giardia_lamblia_SEM_8698_lores.jpg","l":"Public domain","b":"CDC / Mahmud Tari"},
+"Diaphoretickes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Paramecium.jpg/500px-Paramecium.jpg","p":"https://commons.wikimedia.org/wiki/File:Paramecium.jpg","l":"CC BY-SA 3.0","b":"Barfooz"},
+"SAR":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Harosa.png/500px-Harosa.png","p":"https://commons.wikimedia.org/wiki/File:Harosa.png","l":"CC BY-SA 4.0","b":"Maulucioni"},
+"Stramenopila":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Stramenopiles_diversity.png/500px-Stramenopiles_diversity.png","p":"https://commons.wikimedia.org/wiki/File:Stramenopiles_diversity.png","l":"CC0","b":"Snoteleks"},
+"Diatoms":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Diatoms_through_the_microscope.jpg/500px-Diatoms_through_the_microscope.jpg","p":"https://commons.wikimedia.org/wiki/File:Diatoms_through_the_microscope.jpg","l":"Public domain","b":"Gordon T. Taylor, Stony Brook University"},
+"Brown algae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Kelp-forest-Monterey.jpg/500px-Kelp-forest-Monterey.jpg","p":"https://commons.wikimedia.org/wiki/File:Kelp-forest-Monterey.jpg","l":"CC BY-SA 2.0","b":"Stef Maruch"},
+"Oomycetes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Phytophtora_reproduction.png/500px-Phytophtora_reproduction.png","p":"https://commons.wikimedia.org/wiki/File:Phytophtora_reproduction.png","l":"CC BY 2.5","b":"Matteo Garbelotto, UC Berkeley"},
+"Alveolata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Ceratium_furca.jpg/500px-Ceratium_furca.jpg","p":"https://commons.wikimedia.org/wiki/File:Ceratium_furca.jpg","l":"CC BY-SA 3.0","b":"Minami Himemiya"},
+"Ciliates":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Ciliate_collage.jpg/500px-Ciliate_collage.jpg","p":"https://commons.wikimedia.org/wiki/File:Ciliate_collage.jpg","l":"CC BY-SA 4.0","b":"Picturepest, Anatoly Mikhaltsov, Bernd Laber and others"},
+"Dinoflagellates":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Ceratium_hirundinella.jpg/500px-Ceratium_hirundinella.jpg","p":"https://commons.wikimedia.org/wiki/File:Ceratium_hirundinella.jpg","l":"Public domain","b":"Ernst Haeckel"},
+"Apicomplexa":{"u":"https://upload.wikimedia.org/wikipedia/commons/d/df/Apicomplexa_Composite_Image.png","p":"https://commons.wikimedia.org/wiki/File:Apicomplexa_Composite_Image.png","l":"CC BY 3.0","b":"US CDC and others"},
+"Rhizaria":{"u":"https://upload.wikimedia.org/wikipedia/commons/a/a6/Ammonia_tepida.jpg","p":"https://commons.wikimedia.org/wiki/File:Ammonia_tepida.jpg","l":"CC BY 2.5","b":"Scott Fay"},
+"Foraminifera":{"u":"https://upload.wikimedia.org/wikipedia/commons/a/a6/Ammonia_tepida.jpg","p":"https://commons.wikimedia.org/wiki/File:Ammonia_tepida.jpg","l":"CC BY 2.5","b":"Scott Fay"},
+"Radiolaria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Radiolaria.jpg/500px-Radiolaria.jpg","p":"https://commons.wikimedia.org/wiki/File:Radiolaria.jpg","l":"Public domain","b":"Wikimedia Commons"},
+"Haptophyta":{"u":"https://upload.wikimedia.org/wikipedia/commons/3/33/Coccolithus_pelagicus.jpg","p":"https://commons.wikimedia.org/wiki/File:Coccolithus_pelagicus.jpg","l":"CC BY 2.5","b":"Richard Lampitt, Jeremy Young, Natural History Museum, London"},
+"Cryptista":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Rhodomonas_salina_CCMP_322.jpg/500px-Rhodomonas_salina_CCMP_322.jpg","p":"https://commons.wikimedia.org/wiki/File:Rhodomonas_salina_CCMP_322.jpg","l":"CC BY-SA 2.5","b":"Daniel Vaulot, CNRS, Station Biologique de Roscoff"},
+"Archaeplastida":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Glaucocystis_sp.jpg/500px-Glaucocystis_sp.jpg","p":"https://commons.wikimedia.org/wiki/File:Glaucocystis_sp.jpg","l":"CC BY-SA 2.5","b":"NEON ja"},
+"Glaucophytes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Glaucocystis_sp.jpg/500px-Glaucocystis_sp.jpg","p":"https://commons.wikimedia.org/wiki/File:Glaucocystis_sp.jpg","l":"CC BY-SA 2.5","b":"NEON ja"},
+"Rhodophyta":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Sea_grapes_(Botryocladia_pseudodichotoma)_2.jpg/500px-Sea_grapes_(Botryocladia_pseudodichotoma)_2.jpg","p":"https://commons.wikimedia.org/wiki/File:Sea_grapes_(Botryocladia_pseudodichotoma)_2.jpg","l":"CC BY-SA 4.0","b":"Coughdrop12"},
+"Viridiplantae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Green_algae.png/500px-Green_algae.png","p":"https://commons.wikimedia.org/wiki/File:Green_algae.png","l":"CC0","b":"Snoteleks"},
+"Chlorophyta":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Haeckel_Siphoneae.jpg/500px-Haeckel_Siphoneae.jpg","p":"https://commons.wikimedia.org/wiki/File:Haeckel_Siphoneae.jpg","l":"Public domain","b":"Ernst Haeckel"},
+"Streptophyta":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/CharaGlobularis.jpg/500px-CharaGlobularis.jpg","p":"https://commons.wikimedia.org/wiki/File:CharaGlobularis.jpg","l":"CC BY-SA 3.0","b":"Christian Fischer"},
+"Charophytes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/CharaGlobularis.jpg/500px-CharaGlobularis.jpg","p":"https://commons.wikimedia.org/wiki/File:CharaGlobularis.jpg","l":"CC BY-SA 3.0","b":"Christian Fischer"},
+"Embryophyta":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Fr%C3%BChling_bl%C3%BChender_Kirschenbaum.jpg/500px-Fr%C3%BChling_bl%C3%BChender_Kirschenbaum.jpg","p":"https://commons.wikimedia.org/wiki/File:Fr%C3%BChling_bl%C3%BChender_Kirschenbaum.jpg","l":"CC BY-SA 3.0","b":"Benjamin Gimmel"},
+"Bryophytes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/MarchantiophytaSp.NonD%C3%A9termin%C3%A9eFL3.jpg/500px-MarchantiophytaSp.NonD%C3%A9termin%C3%A9eFL3.jpg","p":"https://commons.wikimedia.org/wiki/File:MarchantiophytaSp.NonD%C3%A9termin%C3%A9eFL3.jpg","l":"CC BY-SA 3.0","b":"F. Lamiot"},
+"Tracheophyta":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Selaginella_uncinata_(Desv._ex_Poir.)Spring.jpg/500px-Selaginella_uncinata_(Desv._ex_Poir.)Spring.jpg","p":"https://commons.wikimedia.org/wiki/File:Selaginella_uncinata_(Desv._ex_Poir.)Spring.jpg","l":"CC BY 4.0","b":"Freddo213"},
+"Lycophytes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Lycophyta.png/500px-Lycophyta.png","p":"https://commons.wikimedia.org/wiki/File:Lycophyta.png","l":"CC BY-SA 4.0","b":"Kingfiser"},
+"Euphyllophytes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Psilophyton_dawsonii-rev.jpg/500px-Psilophyton_dawsonii-rev.jpg","p":"https://commons.wikimedia.org/wiki/File:Psilophyton_dawsonii-rev.jpg","l":"CC BY-SA 3.0","b":"Ghedoghedo, modified by Peter Coxhead","n":"Psilophyton, a fossil plant from about 400 million years ago near the origin of true leaves."},
+"Ferns & horsetails":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/The_ferns_of_Great_Britain%2C_and_their_allies_the_club-mosses%2C_pepperworts%2C_and_horsetails_(Pl._2)_(8515393495).jpg/500px-The_ferns_of_Great_Britain%2C_and_their_allies_the_club-mosses%2C_pepperworts%2C_and_horsetails_(Pl._2)_(8515393495).jpg","p":"https://commons.wikimedia.org/wiki/File:The_ferns_of_Great_Britain%2C_and_their_allies_the_club-mosses%2C_pepperworts%2C_and_horsetails_(Pl._2)_(8515393495).jpg","l":"Public domain","b":"Anne Pratt (historic plate)"},
+"Spermatophyta":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Scots_Pine_(Pinus_sylvestris)_-_Kristiansand%2C_Norway_2021-08-10.jpg/500px-Scots_Pine_(Pinus_sylvestris)_-_Kristiansand%2C_Norway_2021-08-10.jpg","p":"https://commons.wikimedia.org/wiki/File:Scots_Pine_(Pinus_sylvestris)_-_Kristiansand%2C_Norway_2021-08-10.jpg","l":"CC BY-SA 4.0","b":"Ryan Hodnett"},
+"Gymnosperms":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Gymnospermae.jpg/500px-Gymnospermae.jpg","p":"https://commons.wikimedia.org/wiki/File:Gymnospermae.jpg","l":"Public domain","b":"F. A. Brockhaus (historic plate)"},
+"Conifers":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Sapins_pectin%C3%A9s.jpg/500px-Sapins_pectin%C3%A9s.jpg","p":"https://commons.wikimedia.org/wiki/File:Sapins_pectin%C3%A9s.jpg","l":"CC BY-SA 3.0","b":"Sapin88"},
+"Cycads":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Cycas_circinalis.jpg/500px-Cycas_circinalis.jpg","p":"https://commons.wikimedia.org/wiki/File:Cycas_circinalis.jpg","l":"CC BY-SA 3.0","b":"Wikimedia Commons contributor"},
+"Ginkgo":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/GINKGOBAUM-2.jpg/500px-GINKGOBAUM-2.jpg","p":"https://commons.wikimedia.org/wiki/File:GINKGOBAUM-2.jpg","l":"CC BY-SA 3.0","b":"Cayambe / Ginkgotree"},
+"Gnetophytes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Welwitschia_mirabilis(2).jpg/500px-Welwitschia_mirabilis(2).jpg","p":"https://commons.wikimedia.org/wiki/File:Welwitschia_mirabilis(2).jpg","l":"CC BY-SA 3.0","b":"Thomas Schoch"},
+"Angiosperms":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Ranunculus_repens_1_(cropped).JPG/500px-Ranunculus_repens_1_(cropped).JPG","p":"https://commons.wikimedia.org/wiki/File:Ranunculus_repens_1_(cropped).JPG","l":"CC BY-SA 3.0","b":"Aiwok"},
+"Amborella":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Amborella_trichopoda.jpg/500px-Amborella_trichopoda.jpg","p":"https://commons.wikimedia.org/wiki/File:Amborella_trichopoda.jpg","l":"CC BY 2.0","b":"Scott Zona"},
+"Water lilies":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Nymphaea_nouchali5.JPG/500px-Nymphaea_nouchali5.JPG","p":"https://commons.wikimedia.org/wiki/File:Nymphaea_nouchali5.JPG","l":"CC BY 3.0","b":"TC Tao"},
+"Magnoliids":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Magnolia_Watsoni.JPG/500px-Magnolia_Watsoni.JPG","p":"https://commons.wikimedia.org/wiki/File:Magnolia_Watsoni.JPG","l":"Public domain","b":"WibblyWibby"},
+"Monocots":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Ginger_plants.jpg/500px-Ginger_plants.jpg","p":"https://commons.wikimedia.org/wiki/File:Ginger_plants.jpg","l":"CC BY-SA 4.0","b":"Ramjchandran"},
+"Grasses":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Meadow_Foxtail_head.jpg/500px-Meadow_Foxtail_head.jpg","p":"https://commons.wikimedia.org/wiki/File:Meadow_Foxtail_head.jpg","l":"CC BY-SA 3.0","b":"Wikimedia Commons contributor"},
+"Orchids":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Plant_Orchid_Cymbidium_aloifolium_P1110661_05_-_cropped.jpg/500px-Plant_Orchid_Cymbidium_aloifolium_P1110661_05_-_cropped.jpg","p":"https://commons.wikimedia.org/wiki/File:Plant_Orchid_Cymbidium_aloifolium_P1110661_05_-_cropped.jpg","l":"CC BY-SA 4.0","b":"Rohit Naniwadekar"},
+"Lilies, onions & asparagus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Lilium_candidum_1.jpg/500px-Lilium_candidum_1.jpg","p":"https://commons.wikimedia.org/wiki/File:Lilium_candidum_1.jpg","l":"CC BY-SA 3.0","b":"Stan Shebs"},
+"Palms":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/1859-Martinique.web.jpg/500px-1859-Martinique.web.jpg","p":"https://commons.wikimedia.org/wiki/File:1859-Martinique.web.jpg","l":"Copyrighted free use","b":"Patrick Verdier, Free On Line Photos"},
+"Eudicots":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Bladmoes_kiemplanten.jpg/500px-Bladmoes_kiemplanten.jpg","p":"https://commons.wikimedia.org/wiki/File:Bladmoes_kiemplanten.jpg","l":"CC BY-SA 3.0","b":"Wikimedia Commons contributor"},
+"Rosids":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Rosids-montage.jpg/500px-Rosids-montage.jpg","p":"https://commons.wikimedia.org/wiki/File:Rosids-montage.jpg","l":"CC0","b":"Caehlla2357"},
+"Rosaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Rosa_pouzinii_FlowerCloseup_SierraMadrona.jpg/500px-Rosa_pouzinii_FlowerCloseup_SierraMadrona.jpg","p":"https://commons.wikimedia.org/wiki/File:Rosa_pouzinii_FlowerCloseup_SierraMadrona.jpg","l":"Public domain","b":"Javier Martin"},
+"Fabaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Flowering_kudzu.jpg/500px-Flowering_kudzu.jpg","p":"https://commons.wikimedia.org/wiki/File:Flowering_kudzu.jpg","l":"Public domain","b":"Peggy Greb, USDA"},
+"Fagaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Fagus_sylvatica_020-2.jpg/500px-Fagus_sylvatica_020-2.jpg","p":"https://commons.wikimedia.org/wiki/File:Fagus_sylvatica_020-2.jpg","l":"CC BY 2.5","b":"Willow"},
+"Brassicaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Barbarea_vulgaris_002.JPG/500px-Barbarea_vulgaris_002.JPG","p":"https://commons.wikimedia.org/wiki/File:Barbarea_vulgaris_002.JPG","l":"CC BY-SA 3.0","b":"H. Zell"},
+"Cucurbits & citrus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Hodgsonia_heteroclita_male.jpg/500px-Hodgsonia_heteroclita_male.jpg","p":"https://commons.wikimedia.org/wiki/File:Hodgsonia_heteroclita_male.jpg","l":"Public domain","b":"John Fergusson Cathcart (historic plate)"},
+"Asterids":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Potapsco_fg13.jpg/500px-Potapsco_fg13.jpg","p":"https://commons.wikimedia.org/wiki/File:Potapsco_fg13.jpg","l":"CC BY-SA 2.5","b":"Fritz Geller-Grimm"},
+"Asteraceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Asteracea_poster_3.jpg/500px-Asteracea_poster_3.jpg","p":"https://commons.wikimedia.org/wiki/File:Asteracea_poster_3.jpg","l":"CC BY-SA 3.0","b":"Alvesgaspar, Tony Wills"},
+"Solanaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Brugmansia_lg.jpg/500px-Brugmansia_lg.jpg","p":"https://commons.wikimedia.org/wiki/File:Brugmansia_lg.jpg","l":"Public domain","b":"Wikimedia Commons"},
+"Lamiaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Lamium_purpureum_jamestown1.jpg/500px-Lamium_purpureum_jamestown1.jpg","p":"https://commons.wikimedia.org/wiki/File:Lamium_purpureum_jamestown1.jpg","l":"CC BY-SA 4.0","b":"Daniel J. Layton"},
+"Ericaceae & coffee":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Leptecophylla_juniperina.jpg/500px-Leptecophylla_juniperina.jpg","p":"https://commons.wikimedia.org/wiki/File:Leptecophylla_juniperina.jpg","l":"CC BY-SA 3.0","b":"JJ Harrison"},
+"Cacti & carnations":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Various_Cactaceae.jpg/500px-Various_Cactaceae.jpg","p":"https://commons.wikimedia.org/wiki/File:Various_Cactaceae.jpg","l":"Public domain","b":"G. Mützel (historic plate)"},
+"Maples & buttercups":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Ranunculus_auricomis.jpg/500px-Ranunculus_auricomis.jpg","p":"https://commons.wikimedia.org/wiki/File:Ranunculus_auricomis.jpg","l":"CC BY-SA 3.0","b":"Wikimedia Commons contributor"},
+"Amorphea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Unikonta_collage.jpg/500px-Unikonta_collage.jpg","p":"https://commons.wikimedia.org/wiki/File:Unikonta_collage.jpg","l":"CC BY-SA 4.0","b":"Onderwijsgek, Ak ccm, Sergey Karpov and others"},
+"Amoebozoa":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Leocarpus_fragilis_10649909.jpg/500px-Leocarpus_fragilis_10649909.jpg","p":"https://commons.wikimedia.org/wiki/File:Leocarpus_fragilis_10649909.jpg","l":"CC BY 4.0","b":"Suzanne Carriere, ENR GNWT"},
+"Amoeba proteus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Amoeba_proteus_with_many_pseudopodia.jpg/500px-Amoeba_proteus_with_many_pseudopodia.jpg","p":"https://commons.wikimedia.org/wiki/File:Amoeba_proteus_with_many_pseudopodia.jpg","l":"CC BY-SA 4.0","b":"SmallRex"},
+"Dictyostelium":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Dictyostelium_Fruiting_Bodies.JPG/500px-Dictyostelium_Fruiting_Bodies.JPG","p":"https://commons.wikimedia.org/wiki/File:Dictyostelium_Fruiting_Bodies.JPG","l":"Public domain","b":"Bruno in Columbus"},
+"Physarum":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Physarum_polycephalum_plasmodium.jpg/500px-Physarum_polycephalum_plasmodium.jpg","p":"https://commons.wikimedia.org/wiki/File:Physarum_polycephalum_plasmodium.jpg","l":"CC BY 2.5","b":"frankenstoen"},
+"Obazoa":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Unikonta_collage.jpg/500px-Unikonta_collage.jpg","p":"https://commons.wikimedia.org/wiki/File:Unikonta_collage.jpg","l":"CC BY-SA 4.0","b":"Onderwijsgek, Ak ccm, Sergey Karpov and others"},
+"Apusomonads":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Podomonas_kaiyoae_C.jpg/500px-Podomonas_kaiyoae_C.jpg","p":"https://commons.wikimedia.org/wiki/File:Podomonas_kaiyoae_C.jpg","l":"CC BY 4.0","b":"Akinori Yabuki, Akihiro Tame and Keiko Mizuno"},
+"Opisthokonta":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Opisthokonta_collage.jpg/500px-Opisthokonta_collage.jpg","p":"https://commons.wikimedia.org/wiki/File:Opisthokonta_collage.jpg","l":"CC BY-SA 4.0","b":"Onderwijsgek, Ak ccm, Sergey Karpov and others"},
+"Holomycota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Nuclearia_sp_Nikko.jpg/500px-Nuclearia_sp_Nikko.jpg","p":"https://commons.wikimedia.org/wiki/File:Nuclearia_sp_Nikko.jpg","l":"CC BY-SA 2.5","b":"NEON ja"},
+"Nucleariids":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Nuclearia_sp_Nikko.jpg/500px-Nuclearia_sp_Nikko.jpg","p":"https://commons.wikimedia.org/wiki/File:Nuclearia_sp_Nikko.jpg","l":"CC BY-SA 2.5","b":"NEON ja"},
+"Fungi":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Fungi_collage.jpg/500px-Fungi_collage.jpg","p":"https://commons.wikimedia.org/wiki/File:Fungi_collage.jpg","l":"CC BY-SA 2.5","b":"BorgQueen"},
+"Chytrids":{"u":"https://upload.wikimedia.org/wikipedia/commons/2/2c/Spizellomycete.jpg","p":"https://commons.wikimedia.org/wiki/File:Spizellomycete.jpg","l":"CC BY-SA 2.5","b":"MidgleyDJ"},
+"Mucoromycota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Mature_sporangium_of_a_Mucor_sp._fungus.jpg/500px-Mature_sporangium_of_a_Mucor_sp._fungus.jpg","p":"https://commons.wikimedia.org/wiki/File:Mature_sporangium_of_a_Mucor_sp._fungus.jpg","l":"Public domain","b":"CDC / Dr. Lucille K. Georg"},
+"Rhizopus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Rhizopus_stolonifer4.JPG/500px-Rhizopus_stolonifer4.JPG","p":"https://commons.wikimedia.org/wiki/File:Rhizopus_stolonifer4.JPG","l":"CC BY-SA 4.0","b":"WDKeeper"},
+"Glomeromycota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Gigaspora_margarita.JPG/500px-Gigaspora_margarita.JPG","p":"https://commons.wikimedia.org/wiki/File:Gigaspora_margarita.JPG","l":"CC BY 3.0","b":"Mike Guether"},
+"Dikarya":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Basidiomycota_collage.jpg/500px-Basidiomycota_collage.jpg","p":"https://commons.wikimedia.org/wiki/File:Basidiomycota_collage.jpg","l":"CC BY-SA 4.0","b":"148LENIN and others"},
+"Ascomycota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Scarlet_elf_cap_cadnant_dingle.jpg/500px-Scarlet_elf_cap_cadnant_dingle.jpg","p":"https://commons.wikimedia.org/wiki/File:Scarlet_elf_cap_cadnant_dingle.jpg","l":"Public domain","b":"Wikimedia Commons"},
+"Saccharomyces":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Saccharomyces_cerevisiae_SEM.jpg/500px-Saccharomyces_cerevisiae_SEM.jpg","p":"https://commons.wikimedia.org/wiki/File:Saccharomyces_cerevisiae_SEM.jpg","l":"CC BY 3.0","b":"Mogana Das Murtey and Patchamuthu Ramasamy"},
+"Penicillium & Aspergillus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Penicillium_Pengo.jpg/500px-Penicillium_Pengo.jpg","p":"https://commons.wikimedia.org/wiki/File:Penicillium_Pengo.jpg","l":"CC BY-SA 3.0","b":"Pengo"},
+"Morels & truffles":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Morchella_conica_1_beentree.jpg/500px-Morchella_conica_1_beentree.jpg","p":"https://commons.wikimedia.org/wiki/File:Morchella_conica_1_beentree.jpg","l":"CC BY-SA 4.0","b":"Beentree"},
+"Lichen fungi":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Letharia_vulpina_JHollinger_crop.jpg/500px-Letharia_vulpina_JHollinger_crop.jpg","p":"https://commons.wikimedia.org/wiki/File:Letharia_vulpina_JHollinger_crop.jpg","l":"CC BY-SA 3.0","b":"Jason Hollinger"},
+"Basidiomycota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Haeckel_Basimycetes.jpg/500px-Haeckel_Basimycetes.jpg","p":"https://commons.wikimedia.org/wiki/File:Haeckel_Basimycetes.jpg","l":"Public domain","b":"Ernst Haeckel"},
+"Agaricus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/ChampignonMushroom.jpg/500px-ChampignonMushroom.jpg","p":"https://commons.wikimedia.org/wiki/File:ChampignonMushroom.jpg","l":"CC BY-SA 3.0","b":"chris_73"},
+"Amanita":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Amanita_muscaria_3_vliegenzwammen_op_rij.jpg/500px-Amanita_muscaria_3_vliegenzwammen_op_rij.jpg","p":"https://commons.wikimedia.org/wiki/File:Amanita_muscaria_3_vliegenzwammen_op_rij.jpg","l":"CC BY-SA 3.0 nl","b":"Onderwijsgek"},
+"Armillaria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Armillaria_ostoyae.jpg/500px-Armillaria_ostoyae.jpg","p":"https://commons.wikimedia.org/wiki/File:Armillaria_ostoyae.jpg","l":"CC BY-SA 3.0","b":"Walter J. Pilsak"},
+"Rusts & smuts":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bruine_roest_op_tarwe_(Puccinia_recondita_f.sp._tritici_on_Triticum_aestivum).jpg/500px-Bruine_roest_op_tarwe_(Puccinia_recondita_f.sp._tritici_on_Triticum_aestivum).jpg","p":"https://commons.wikimedia.org/wiki/File:Bruine_roest_op_tarwe_(Puccinia_recondita_f.sp._tritici_on_Triticum_aestivum).jpg","l":"CC BY-SA 3.0","b":"Rasbak"},
+"Holozoa":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Holozoan_diversity_v2.png/500px-Holozoan_diversity_v2.png","p":"https://commons.wikimedia.org/wiki/File:Holozoan_diversity_v2.png","l":"CC BY-SA 4.0","b":"Arnau Sebé-Pedrós and Iñaki Ruiz-Trillo"},
+"Ichthyosporea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sphaeroforma_arctica.jpg/500px-Sphaeroforma_arctica.jpg","p":"https://commons.wikimedia.org/wiki/File:Sphaeroforma_arctica.jpg","l":"CC BY 3.0","b":"Arnau Sebé-Pedrós and Iñaki Ruiz-Trillo"},
+"Choanoflagellates":{"u":"https://upload.wikimedia.org/wikipedia/commons/1/12/1singlelate.jpg","p":"https://commons.wikimedia.org/wiki/File:1singlelate.jpg","l":"CC BY-SA 3.0","b":"Daniel Stoupin"},
+"Animalia":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/6f/Animal_diversity_b.png","p":"https://commons.wikimedia.org/wiki/File:Animal_diversity_b.png","l":"CC BY-SA 4.0","b":"Chiswick Chap"},
+"Porifera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Sponges_in_Caribbean_Sea%2C_Cayman_Islands.jpg/500px-Sponges_in_Caribbean_Sea%2C_Cayman_Islands.jpg","p":"https://commons.wikimedia.org/wiki/File:Sponges_in_Caribbean_Sea%2C_Cayman_Islands.jpg","l":"Public domain","b":"Twilight Zone Expedition Team 2007, NOAA"},
+"Ctenophora":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Comb_jelly.jpg/500px-Comb_jelly.jpg","p":"https://commons.wikimedia.org/wiki/File:Comb_jelly.jpg","l":"CC BY 2.0","b":"Orin Zebest"},
+"Placozoa":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Trichoplax_mic.jpg/500px-Trichoplax_mic.jpg","p":"https://commons.wikimedia.org/wiki/File:Trichoplax_mic.jpg","l":"CC BY-SA 3.0","b":"Oliver Voigt"},
+"Cnidaria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Cnidaria.png/500px-Cnidaria.png","p":"https://commons.wikimedia.org/wiki/File:Cnidaria.png","l":"CC BY-SA 4.0","b":"Frédéric Ducarme"},
+"Anthozoa":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Coral_Outcrop_Flynn_Reef.jpg/500px-Coral_Outcrop_Flynn_Reef.jpg","p":"https://commons.wikimedia.org/wiki/File:Coral_Outcrop_Flynn_Reef.jpg","l":"CC BY-SA 3.0","b":"Toby Hudson"},
+"Medusozoa":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Jelly_cc11.jpg/500px-Jelly_cc11.jpg","p":"https://commons.wikimedia.org/wiki/File:Jelly_cc11.jpg","l":"CC BY-SA 2.0","b":"Dan90266"},
+"Bilateria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Dugesia_subtentaculata_1.jpg/500px-Dugesia_subtentaculata_1.jpg","p":"https://commons.wikimedia.org/wiki/File:Dugesia_subtentaculata_1.jpg","l":"CC BY-SA 3.0","b":"Eduard Solà","n":"A planarian flatworm: a simple living animal with a head end, a tail end, a left and a right."},
+"Xenacoelomorpha":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Proporus_sp.png/500px-Proporus_sp.png","p":"https://commons.wikimedia.org/wiki/File:Proporus_sp.png","l":"CC BY 2.5","b":"Marco Curini-Galletti et al."},
+"Protostomia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Protostomia.jpg/500px-Protostomia.jpg","p":"https://commons.wikimedia.org/wiki/File:Protostomia.jpg","l":"CC BY-SA 4.0","b":"148LENIN and others"},
+"Ecdysozoa":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Ecdysozoa.jpg/500px-Ecdysozoa.jpg","p":"https://commons.wikimedia.org/wiki/File:Ecdysozoa.jpg","l":"CC BY-SA 4.0","b":"148LENIN and others"},
+"Nematoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/6a/CelegansGoldsteinLabUNC.jpg","p":"https://commons.wikimedia.org/wiki/File:CelegansGoldsteinLabUNC.jpg","l":"CC BY-SA 3.0","b":"Bob Goldstein, UNC Chapel Hill"},
+"Tardigrada":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/SEM_image_of_Milnesium_tardigradum_in_active_state_-_journal.pone.0045682.g001-2_(white_background).png/500px-SEM_image_of_Milnesium_tardigradum_in_active_state_-_journal.pone.0045682.g001-2_(white_background).png","p":"https://commons.wikimedia.org/wiki/File:SEM_image_of_Milnesium_tardigradum_in_active_state_-_journal.pone.0045682.g001-2_(white_background).png","l":"CC BY 2.5","b":"Schokraie E. et al."},
+"Onychophora":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Onycophora.jpg/500px-Onycophora.jpg","p":"https://commons.wikimedia.org/wiki/File:Onycophora.jpg","l":"CC BY-SA 2.0","b":"Bruno Vellutini"},
+"Arthropoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Arthropoda_collage.png/500px-Arthropoda_collage.png","p":"https://commons.wikimedia.org/wiki/File:Arthropoda_collage.png","l":"CC BY-SA 4.0","b":"Cédric Aria et al."},
+"Chelicerata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Chelicerata_collage_2-3.png/500px-Chelicerata_collage_2-3.png","p":"https://commons.wikimedia.org/wiki/File:Chelicerata_collage_2-3.png","l":"CC BY-SA 4.0","b":"Ken-ichi Ueda, Hans Hillewaert and others"},
+"Horseshoe crabs":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Tachypleus_gigas.JPG/500px-Tachypleus_gigas.JPG","p":"https://commons.wikimedia.org/wiki/File:Tachypleus_gigas.JPG","l":"CC BY-SA 3.0","b":"Shubham Chatterjee"},
+"Arachnida":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Arachnida_collage.png/500px-Arachnida_collage.png","p":"https://commons.wikimedia.org/wiki/File:Arachnida_collage.png","l":"CC BY-SA 4.0","b":"Lucarelli, Maximilian Paradiz, Jorge Armín and others"},
+"Myriapoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Myriapod_collage.png/500px-Myriapod_collage.png","p":"https://commons.wikimedia.org/wiki/File:Myriapod_collage.png","l":"CC BY-SA 4.0","b":"Animalparty and others"},
+"Pancrustacea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Sally_Lightfoot_Crab_(Grapsus_grapsus)_-_Gal%C3%A1pagos_Islands.jpg/500px-Sally_Lightfoot_Crab_(Grapsus_grapsus)_-_Gal%C3%A1pagos_Islands.jpg","p":"https://commons.wikimedia.org/wiki/File:Sally_Lightfoot_Crab_(Grapsus_grapsus)_-_Gal%C3%A1pagos_Islands.jpg","l":"CC BY 2.0","b":"A. Davey"},
+"Crustacea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Artemia_monica.jpg/500px-Artemia_monica.jpg","p":"https://commons.wikimedia.org/wiki/File:Artemia_monica.jpg","l":"CC BY 2.0","b":"djpmapleferryman"},
+"Decapods":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Decapoda_montage.jpg/500px-Decapoda_montage.jpg","p":"https://commons.wikimedia.org/wiki/File:Decapoda_montage.jpg","l":"CC BY-SA 4.0","b":"various contributors"},
+"Copepods & krill":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/%D0%92%D0%B5%D1%81%D0%BB%D0%BE%D0%BD%D0%BE%D0%B3%D0%B8%D0%B5_%D1%80%D0%B0%D0%BA%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%B5_%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85_%D0%B2%D0%B8%D0%B4%D0%BE%D0%B2.jpg/500px-%D0%92%D0%B5%D1%81%D0%BB%D0%BE%D0%BD%D0%BE%D0%B3%D0%B8%D0%B5_%D1%80%D0%B0%D0%BA%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%B5_%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85_%D0%B2%D0%B8%D0%B4%D0%BE%D0%B2.jpg","p":"https://commons.wikimedia.org/wiki/File:%D0%92%D0%B5%D1%81%D0%BB%D0%BE%D0%BD%D0%BE%D0%B3%D0%B8%D0%B5_%D1%80%D0%B0%D0%BA%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%B5_%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85_%D0%B2%D0%B8%D0%B4%D0%BE%D0%B2.jpg","l":"CC BY-SA 4.0","b":"Andrei Savitsky"},
+"Barnacles":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Chthamalus_stellatus.jpg/500px-Chthamalus_stellatus.jpg","p":"https://commons.wikimedia.org/wiki/File:Chthamalus_stellatus.jpg","l":"CC BY-SA 3.0","b":"MichaelMaggs"},
+"Isopods & Daphnia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Daphnia_pulex.png/500px-Daphnia_pulex.png","p":"https://commons.wikimedia.org/wiki/File:Daphnia_pulex.png","l":"CC BY 2.5","b":"Paul Hebert"},
+"Hexapoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Insects_-_Neoptera_-_Paleoptera_-_Apterygota.jpg/500px-Insects_-_Neoptera_-_Paleoptera_-_Apterygota.jpg","p":"https://commons.wikimedia.org/wiki/File:Insects_-_Neoptera_-_Paleoptera_-_Apterygota.jpg","l":"CC BY-SA 4.0","b":"Chiswick Chap"},
+"Silverfish & bristletails":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/LepismaSaccharina.jpg/500px-LepismaSaccharina.jpg","p":"https://commons.wikimedia.org/wiki/File:LepismaSaccharina.jpg","l":"CC BY-SA 3.0","b":"Christian Fischer"},
+"Odonata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/On_the_wing_(cropped).jpg/500px-On_the_wing_(cropped).jpg","p":"https://commons.wikimedia.org/wiki/File:On_the_wing_(cropped).jpg","l":"CC BY 2.0","b":"Paul Balfe"},
+"Orthoptera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Roesel's_bush-cricket_(Metrioptera_roeselii_diluta)_male.jpg/500px-Roesel's_bush-cricket_(Metrioptera_roeselii_diluta)_male.jpg","p":"https://commons.wikimedia.org/wiki/File:Roesel's_bush-cricket_(Metrioptera_roeselii_diluta)_male.jpg","l":"CC BY-SA 4.0","b":"Charles J. Sharp"},
+"Hemiptera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Hemiptera_suborders.jpg/500px-Hemiptera_suborders.jpg","p":"https://commons.wikimedia.org/wiki/File:Hemiptera_suborders.jpg","l":"Public domain","b":"respective owners"},
+"Holometabola":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Panorpa_communis_V.jpg/500px-Panorpa_communis_V.jpg","p":"https://commons.wikimedia.org/wiki/File:Panorpa_communis_V.jpg","l":"CC BY-SA 3.0","b":"Soebe"},
+"Coleoptera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Coleoptera_collage.png/500px-Coleoptera_collage.png","p":"https://commons.wikimedia.org/wiki/File:Coleoptera_collage.png","l":"CC BY-SA 3.0","b":"Bugboy52.40"},
+"Lepidoptera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Peacock_butterfly_(Aglais_io)_2.jpg/500px-Peacock_butterfly_(Aglais_io)_2.jpg","p":"https://commons.wikimedia.org/wiki/File:Peacock_butterfly_(Aglais_io)_2.jpg","l":"CC BY-SA 3.0","b":"Charles J. Sharp"},
+"Diptera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Bessenbandzweefvlieg_Vrouwtje_(2).JPG/500px-Bessenbandzweefvlieg_Vrouwtje_(2).JPG","p":"https://commons.wikimedia.org/wiki/File:Bessenbandzweefvlieg_Vrouwtje_(2).JPG","l":"Public domain","b":"Sjonnoh"},
+"Hymenoptera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Hymenoptera.jpg/500px-Hymenoptera.jpg","p":"https://commons.wikimedia.org/wiki/File:Hymenoptera.jpg","l":"Public domain","b":"respective owners"},
+"Spiralia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Spiralia_clade.jpg/500px-Spiralia_clade.jpg","p":"https://commons.wikimedia.org/wiki/File:Spiralia_clade.jpg","l":"CC BY-SA 4.0","b":"148LENIN and others"},
+"Platyhelminthes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Platyhelminthes_diversity.jpg/500px-Platyhelminthes_diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Platyhelminthes_diversity.jpg","l":"CC BY-SA 4.0","b":"OJJ"},
+"Rotifera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mikrofoto.de-Raedertier-14.jpg/500px-Mikrofoto.de-Raedertier-14.jpg","p":"https://commons.wikimedia.org/wiki/File:Mikrofoto.de-Raedertier-14.jpg","l":"CC BY-SA 3.0 de","b":"Frank Fox"},
+"Bryozoa & Brachiopoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Terebratalia_transversa_141510036.jpg/500px-Terebratalia_transversa_141510036.jpg","p":"https://commons.wikimedia.org/wiki/File:Terebratalia_transversa_141510036.jpg","l":"CC BY 4.0","b":"Marilynne Box"},
+"Annelida":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Annelida_collage_(2).png/500px-Annelida_collage_(2).png","p":"https://commons.wikimedia.org/wiki/File:Annelida_collage_(2).png","l":"CC0","b":"OJJ"},
+"Mollusca":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mollusca_Diversity.png/500px-Mollusca_Diversity.png","p":"https://commons.wikimedia.org/wiki/File:Mollusca_Diversity.png","l":"CC BY 4.0","b":"PaleoNeolitic"},
+"Chitons":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Tonicella-lineata.jpg/500px-Tonicella-lineata.jpg","p":"https://commons.wikimedia.org/wiki/File:Tonicella-lineata.jpg","l":"CC BY-SA 3.0","b":"Taollan82"},
+"Gastropoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Gastropod_collage.jpg/500px-Gastropod_collage.jpg","p":"https://commons.wikimedia.org/wiki/File:Gastropod_collage.jpg","l":"Public domain","b":"respective owners"},
+"Bivalvia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Haeckel_Acephala.jpg/500px-Haeckel_Acephala.jpg","p":"https://commons.wikimedia.org/wiki/File:Haeckel_Acephala.jpg","l":"Public domain","b":"Ernst Haeckel"},
+"Cephalopoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Cephalopoda_diversity.jpg/500px-Cephalopoda_diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Cephalopoda_diversity.jpg","l":"Public domain","b":"respective owners"},
+"Deuterostomia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Deuterostome.png/500px-Deuterostome.png","p":"https://commons.wikimedia.org/wiki/File:Deuterostome.png","l":"CC BY 4.0","b":"ZKevinTheCat"},
+"Echinodermata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Echinoderm_collage_2.jpg/500px-Echinoderm_collage_2.jpg","p":"https://commons.wikimedia.org/wiki/File:Echinoderm_collage_2.jpg","l":"CC BY-SA 4.0","b":"François Michonneau, Hectonichus, Philippe Bourjon and others"},
+"Hemichordata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Enteropneusta_USNM_1431735%2C_MBIO32531%2C_BMOO_08254_-_Specimen_Image.jpg/500px-Enteropneusta_USNM_1431735%2C_MBIO32531%2C_BMOO_08254_-_Specimen_Image.jpg","p":"https://commons.wikimedia.org/wiki/File:Enteropneusta_USNM_1431735%2C_MBIO32531%2C_BMOO_08254_-_Specimen_Image.jpg","l":"CC0","b":"Gustav Paulay"},
+"Chordata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Chordata.png/500px-Chordata.png","p":"https://commons.wikimedia.org/wiki/File:Chordata.png","l":"CC BY-SA 4.0","b":"Biopics, Nhobgood, Albert Kok and others"},
+"Cephalochordata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Branchiostoma_lanceolatum.jpg/500px-Branchiostoma_lanceolatum.jpg","p":"https://commons.wikimedia.org/wiki/File:Branchiostoma_lanceolatum.jpg","l":"CC BY-SA 4.0","b":"Hans Hillewaert"},
+"Tunicata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tunicate_komodo.jpg/500px-Tunicate_komodo.jpg","p":"https://commons.wikimedia.org/wiki/File:Tunicate_komodo.jpg","l":"CC BY-SA 3.0","b":"Nick Hobgood"},
+"Vertebrata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Vertebrata_002.png/500px-Vertebrata_002.png","p":"https://commons.wikimedia.org/wiki/File:Vertebrata_002.png","l":"CC BY-SA 4.0","b":"Follix, Jamez42, Albert Kok and others"},
+"Cyclostomata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/J%C3%B5esilmud2.jpg/500px-J%C3%B5esilmud2.jpg","p":"https://commons.wikimedia.org/wiki/File:J%C3%B5esilmud2.jpg","l":"CC BY-SA 3.0","b":"Tiit Hunt"},
+"Gnathostomata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Dunkleosteus_terrelli_skull_(TMP_2006.000.0062)%2C_Royal_Tyrrell_Museum%2C_Drumheller%2C_Alberta%2C_2025-07-13.jpg/500px-Dunkleosteus_terrelli_skull_(TMP_2006.000.0062)%2C_Royal_Tyrrell_Museum%2C_Drumheller%2C_Alberta%2C_2025-07-13.jpg","p":"https://commons.wikimedia.org/wiki/File:Dunkleosteus_terrelli_skull_(TMP_2006.000.0062)%2C_Royal_Tyrrell_Museum%2C_Drumheller%2C_Alberta%2C_2025-07-13.jpg","l":"CC BY-SA 4.0","b":"Chris Woodrich","n":"Dunkleosteus, a 360-million-year-old armoured fish with some of the first jaws; a fossil skull."},
+"Chondrichthyes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Chondrichthyes.jpg/500px-Chondrichthyes.jpg","p":"https://commons.wikimedia.org/wiki/File:Chondrichthyes.jpg","l":"CC BY-SA 4.0","b":"Prehistoricplanes"},
+"Osteichthyes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Osteichthyes.jpg/500px-Osteichthyes.jpg","p":"https://commons.wikimedia.org/wiki/File:Osteichthyes.jpg","l":"CC BY-SA 4.0","b":"Prehistoricplanes"},
+"Actinopterygii":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Actinopterygii.jpg/500px-Actinopterygii.jpg","p":"https://commons.wikimedia.org/wiki/File:Actinopterygii.jpg","l":"CC BY-SA 4.0","b":"Stevenj, NOAA Photo Library, Pedro Lastra and others"},
+"Sturgeons, gars & bowfin":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Huge_sturgeon_in_the_Gulf_of_St._Lawrence_ecosystem_-_panoramio.jpg/500px-Huge_sturgeon_in_the_Gulf_of_St._Lawrence_ecosystem_-_panoramio.jpg","p":"https://commons.wikimedia.org/wiki/File:Huge_sturgeon_in_the_Gulf_of_St._Lawrence_ecosystem_-_panoramio.jpg","l":"CC BY 3.0","b":"Jiaqian AirplaneFan"},
+"Teleostei":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/F_de_Castelnau-poissons_-_Diversity_of_Fishes_(Composite_Image).jpg/500px-F_de_Castelnau-poissons_-_Diversity_of_Fishes_(Composite_Image).jpg","p":"https://commons.wikimedia.org/wiki/File:F_de_Castelnau-poissons_-_Diversity_of_Fishes_(Composite_Image).jpg","l":"Public domain","b":"Francis de Laporte de Castelnau; Chiswick Chap"},
+"Salmon & trout":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Salmo_salar.jpg/500px-Salmo_salar.jpg","p":"https://commons.wikimedia.org/wiki/File:Salmo_salar.jpg","l":"Public domain","b":"Timothy Knepp, USFWS"},
+"Zebrafish & minnows":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Zebrafisch.jpg/500px-Zebrafisch.jpg","p":"https://commons.wikimedia.org/wiki/File:Zebrafisch.jpg","l":"Copyrighted free use","b":"Azul"},
+"Cichlids":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Sea_Life_Centre%2C_Blackpool_2016_009_-_Malawi_Cichlid.jpg/500px-Sea_Life_Centre%2C_Blackpool_2016_009_-_Malawi_Cichlid.jpg","p":"https://commons.wikimedia.org/wiki/File:Sea_Life_Centre%2C_Blackpool_2016_009_-_Malawi_Cichlid.jpg","l":"CC BY-SA 4.0","b":"Mike Peel"},
+"Tuna, cod & perch":{"u":"https://upload.wikimedia.org/wikipedia/commons/2/21/Tuna_assortment.png","p":"https://commons.wikimedia.org/wiki/File:Tuna_assortment.png","l":"Public domain","b":"NOAA"},
+"Seahorses & sticklebacks":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Hippocampus_hippocampus_(on_Ascophyllum_nodosum).jpg/500px-Hippocampus_hippocampus_(on_Ascophyllum_nodosum).jpg","p":"https://commons.wikimedia.org/wiki/File:Hippocampus_hippocampus_(on_Ascophyllum_nodosum).jpg","l":"CC BY-SA 4.0","b":"Hans Hillewaert"},
+"Clownfish, gobies & eels":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Amphiprion_ocellaris_(Clown_anemonefish)_by_Nick_Hobgood.jpg/500px-Amphiprion_ocellaris_(Clown_anemonefish)_by_Nick_Hobgood.jpg","p":"https://commons.wikimedia.org/wiki/File:Amphiprion_ocellaris_(Clown_anemonefish)_by_Nick_Hobgood.jpg","l":"CC BY-SA 3.0","b":"Nick Hobgood"},
+"Sarcopterygii":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Sarcopterygii.png/500px-Sarcopterygii.png","p":"https://commons.wikimedia.org/wiki/File:Sarcopterygii.png","l":"CC BY-SA 4.0","b":"ArthurWeasley, Bruce A. S. Henderson and others"},
+"Coelacanths":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Coelacanth_off_Pumula_on_the_KwaZulu-Natal_South_Coast%2C_South_Africa%2C_on_22_November_2019.png/500px-Coelacanth_off_Pumula_on_the_KwaZulu-Natal_South_Coast%2C_South_Africa%2C_on_22_November_2019.png","p":"https://commons.wikimedia.org/wiki/File:Coelacanth_off_Pumula_on_the_KwaZulu-Natal_South_Coast%2C_South_Africa%2C_on_22_November_2019.png","l":"CC BY 4.0","b":"Bruce A. S. Henderson"},
+"Lungfishes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Neoceratodus_forsteri%2C_2014-09-19.JPG/500px-Neoceratodus_forsteri%2C_2014-09-19.JPG","p":"https://commons.wikimedia.org/wiki/File:Neoceratodus_forsteri%2C_2014-09-19.JPG","l":"CC BY-SA 4.0","b":"Mitch Ames"},
+"Tetrapoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Tiktaalik_Chicago.JPG/500px-Tiktaalik_Chicago.JPG","p":"https://commons.wikimedia.org/wiki/File:Tiktaalik_Chicago.JPG","l":"CC BY-SA 3.0","b":"Eduard Solà","n":"Tiktaalik, a 375-million-year-old fish with the beginnings of limbs; a fossil, not a living animal."},
+"Amphibia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Litoria_phyllochroa.JPG/500px-Litoria_phyllochroa.JPG","p":"https://commons.wikimedia.org/wiki/File:Litoria_phyllochroa.JPG","l":"CC BY-SA 3.0","b":"Froggydarb"},
+"Anura":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Red-eyed_Leaf_Frog_(49661076226).jpg/500px-Red-eyed_Leaf_Frog_(49661076226).jpg","p":"https://commons.wikimedia.org/wiki/File:Red-eyed_Leaf_Frog_(49661076226).jpg","l":"CC BY 2.0","b":"Charlie Jackson"},
+"Caudata":{"u":"https://upload.wikimedia.org/wikipedia/commons/b/b2/SpottedSalamander.jpg","p":"https://commons.wikimedia.org/wiki/File:SpottedSalamander.jpg","l":"CC BY-SA 3.0","b":"Scott Camazine"},
+"Gymnophiona":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Oscaecilia_ochrocephala_(16983972190).jpg/500px-Oscaecilia_ochrocephala_(16983972190).jpg","p":"https://commons.wikimedia.org/wiki/File:Oscaecilia_ochrocephala_(16983972190).jpg","l":"CC BY 2.0","b":"Brian Gratwicke"},
+"Amniota":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Amniota.jpg/500px-Amniota.jpg","p":"https://commons.wikimedia.org/wiki/File:Amniota.jpg","l":"CC BY-SA 4.0","b":"Andrew Y. Huang, Minette Layne and others"},
+"Sauropsida":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Sauropsida_exemple.jpg/500px-Sauropsida_exemple.jpg","p":"https://commons.wikimedia.org/wiki/File:Sauropsida_exemple.jpg","l":"CC BY-SA 4.0","b":"Haplochromis, Leigh Bedford, Dmitry Bogdanov and others"},
+"Lepidosauria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Lepidosauria_Diversity.jpg/500px-Lepidosauria_Diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Lepidosauria_Diversity.jpg","l":"CC BY 2.0","b":"Sid Mosdell and others"},
+"Tuatara":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Tuatara_(5205719005).jpg/500px-Tuatara_(5205719005).jpg","p":"https://commons.wikimedia.org/wiki/File:Tuatara_(5205719005).jpg","l":"CC BY 2.0","b":"Sid Mosdell"},
+"Squamata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Squamata-01.jpg/500px-Squamata-01.jpg","p":"https://commons.wikimedia.org/wiki/File:Squamata-01.jpg","l":"CC BY-SA 4.0","b":"MathKnight"},
+"Archelosauria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Caiman_crocodilus_in_Barbados_Wildlife_Reserve_06.jpg/500px-Caiman_crocodilus_in_Barbados_Wildlife_Reserve_06.jpg","p":"https://commons.wikimedia.org/wiki/File:Caiman_crocodilus_in_Barbados_Wildlife_Reserve_06.jpg","l":"CC BY-SA 3.0","b":"Postdlf"},
+"Testudines":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Turtle_diversity.jpg/500px-Turtle_diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Turtle_diversity.jpg","l":"CC BY-SA 4.0","b":"respective owners"},
+"Archosauria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Crocodile_Front_Egret_Kabini_Nagarhole_Apr22_D72_23712.jpg/500px-Crocodile_Front_Egret_Kabini_Nagarhole_Apr22_D72_23712.jpg","p":"https://commons.wikimedia.org/wiki/File:Crocodile_Front_Egret_Kabini_Nagarhole_Apr22_D72_23712.jpg","l":"CC BY-SA 4.0","b":"Timothy A. Gonsalves"},
+"Crocodilia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Crocodilia_montage.jpg/500px-Crocodilia_montage.jpg","p":"https://commons.wikimedia.org/wiki/File:Crocodilia_montage.jpg","l":"CC BY-SA 4.0","b":"LittleJerry"},
+"Aves":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Archaeopteryx_lithographica_(Berlin_specimen).jpg/500px-Archaeopteryx_lithographica_(Berlin_specimen).jpg","p":"https://commons.wikimedia.org/wiki/File:Archaeopteryx_lithographica_(Berlin_specimen).jpg","l":"CC BY-SA 3.0","b":"H. Raab","n":"Archaeopteryx, a 150-million-year-old feathered dinosaur near the base of the bird line; the Berlin fossil."},
+"Palaeognathae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Struthio_Diversity.jpg/500px-Struthio_Diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Struthio_Diversity.jpg","l":"CC BY 2.0","b":"PaleoNeolitic and others"},
+"Galloanserae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alectura_lathami_-_Centenary_Lakes.jpg/500px-Alectura_lathami_-_Centenary_Lakes.jpg","p":"https://commons.wikimedia.org/wiki/File:Alectura_lathami_-_Centenary_Lakes.jpg","l":"CC BY 3.0","b":"JJ Harrison"},
+"Neoaves":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/House_sparrow_David_Raju_(2).jpg/500px-House_sparrow_David_Raju_(2).jpg","p":"https://commons.wikimedia.org/wiki/File:House_sparrow_David_Raju_(2).jpg","l":"CC BY-SA 4.0","b":"David Raju"},
+"Passeriformes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Passeriformes-01v01.jpg/500px-Passeriformes-01v01.jpg","p":"https://commons.wikimedia.org/wiki/File:Passeriformes-01v01.jpg","l":"CC BY-SA 4.0","b":"MathKnight"},
+"Hummingbirds & swifts":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Trinidad_and_Tobago_hummingbirds_composite.jpg/500px-Trinidad_and_Tobago_hummingbirds_composite.jpg","p":"https://commons.wikimedia.org/wiki/File:Trinidad_and_Tobago_hummingbirds_composite.jpg","l":"CC BY-SA 4.0","b":"Charles J. Sharp"},
+"Raptors & owls":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Birds_of_Prey_Diversity.jpg/500px-Birds_of_Prey_Diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Birds_of_Prey_Diversity.jpg","l":"CC BY 2.0","b":"Peter K. Burian, Quartl and others"},
+"Parrots":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Rainbow_lorikeet_(Trichoglossus_moluccanus_moluccanus)_Sydney.jpg/500px-Rainbow_lorikeet_(Trichoglossus_moluccanus_moluccanus)_Sydney.jpg","p":"https://commons.wikimedia.org/wiki/File:Rainbow_lorikeet_(Trichoglossus_moluccanus_moluccanus)_Sydney.jpg","l":"CC BY-SA 4.0","b":"Charles J. Sharp"},
+"Penguins & seabirds":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg/500px-South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg","p":"https://commons.wikimedia.org/wiki/File:South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg","l":"CC BY-SA 4.0","b":"Godot13"},
+"Pigeons, cuckoos & shorebirds":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Treron_vernans_male_-_Kent_Ridge_Park.jpg/500px-Treron_vernans_male_-_Kent_Ridge_Park.jpg","p":"https://commons.wikimedia.org/wiki/File:Treron_vernans_male_-_Kent_Ridge_Park.jpg","l":"CC BY-SA 4.0","b":"JJ Harrison"},
+"Synapsida":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Dimetrodon_incisivum_01.jpg/500px-Dimetrodon_incisivum_01.jpg","p":"https://commons.wikimedia.org/wiki/File:Dimetrodon_incisivum_01.jpg","l":"CC BY-SA 3.0","b":"H. Zell","n":"Dimetrodon, an early relative on the mammal line, 290 million years ago; not a dinosaur."},
+"Mammalia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Mammal_collage.png/500px-Mammal_collage.png","p":"https://commons.wikimedia.org/wiki/File:Mammal_collage.png","l":"CC BY 4.0","b":"ZKevinTheCat"},
+"Monotremata":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Duck-billed_platypus_(Ornithorhynchus_anatinus)_Scottsdale.jpg/500px-Duck-billed_platypus_(Ornithorhynchus_anatinus)_Scottsdale.jpg","p":"https://commons.wikimedia.org/wiki/File:Duck-billed_platypus_(Ornithorhynchus_anatinus)_Scottsdale.jpg","l":"CC BY-SA 4.0","b":"Charles J. Sharp"},
+"Theria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Mammal_Diversity_(Theria).png/500px-Mammal_Diversity_(Theria).png","p":"https://commons.wikimedia.org/wiki/File:Mammal_Diversity_(Theria).png","l":"CC BY-SA 4.0","b":"HFoxii"},
+"Marsupialia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Marsupialia.jpg/500px-Marsupialia.jpg","p":"https://commons.wikimedia.org/wiki/File:Marsupialia.jpg","l":"CC BY-SA 4.0","b":"LittleJerry"},
+"Placentalia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Placental_Mammals_2021_Montage.jpg/500px-Placental_Mammals_2021_Montage.jpg","p":"https://commons.wikimedia.org/wiki/File:Placental_Mammals_2021_Montage.jpg","l":"Public domain","b":"respective owners"},
+"Afrotheria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Afrotheria.jpg/500px-Afrotheria.jpg","p":"https://commons.wikimedia.org/wiki/File:Afrotheria.jpg","l":"CC BY 3.0","b":"Esculapio"},
+"Xenarthra":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Xenarthra.jpg/500px-Xenarthra.jpg","p":"https://commons.wikimedia.org/wiki/File:Xenarthra.jpg","l":"CC BY-SA 3.0","b":"ДиБгд and others"},
+"Laurasiatheria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Laurasiatheria.jpg/500px-Laurasiatheria.jpg","p":"https://commons.wikimedia.org/wiki/File:Laurasiatheria.jpg","l":"CC BY-SA 4.0","b":"The Explaner"},
+"Eulipotyphla":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Montage_of_Eulipotyphla_V.2.0.jpg/500px-Montage_of_Eulipotyphla_V.2.0.jpg","p":"https://commons.wikimedia.org/wiki/File:Montage_of_Eulipotyphla_V.2.0.jpg","l":"CC BY-SA 4.0","b":"Wikimedia Commons contributors"},
+"Chiroptera":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Big-eared-townsend-fledermaus.jpg/500px-Big-eared-townsend-fledermaus.jpg","p":"https://commons.wikimedia.org/wiki/File:Big-eared-townsend-fledermaus.jpg","l":"Public domain","b":"US government"},
+"Carnivora":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg/500px-020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg","p":"https://commons.wikimedia.org/wiki/File:020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg","l":"CC BY-SA 4.0","b":"Giles Laurent"},
+"Felidae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Panthera_tigris_tigris_edit2.jpg/500px-Panthera_tigris_tigris_edit2.jpg","p":"https://commons.wikimedia.org/wiki/File:Panthera_tigris_tigris_edit2.jpg","l":"Public domain","b":"John and Karen Hollingsworth, USFWS"},
+"Canidae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Eurasian_wolf_2.jpg/500px-Eurasian_wolf_2.jpg","p":"https://commons.wikimedia.org/wiki/File:Eurasian_wolf_2.jpg","l":"CC BY-SA 4.0","b":"Mas3cf"},
+"Ursidae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Ours_brun_parcanimalierpyrenees_1.jpg/500px-Ours_brun_parcanimalierpyrenees_1.jpg","p":"https://commons.wikimedia.org/wiki/File:Ours_brun_parcanimalierpyrenees_1.jpg","l":"FAL","b":"Jean-noël Lafargue"},
+"Pinnipedia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Pinnipeds_vertical_version_montage.jpg/500px-Pinnipeds_vertical_version_montage.jpg","p":"https://commons.wikimedia.org/wiki/File:Pinnipeds_vertical_version_montage.jpg","l":"CC0","b":"various contributors"},
+"Perissodactyla":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/The_Perissodactyl.jpg/500px-The_Perissodactyl.jpg","p":"https://commons.wikimedia.org/wiki/File:The_Perissodactyl.jpg","l":"CC BY-SA 4.0","b":"LittleJerry"},
+"Artiodactyla":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/The_Cetartiodactyla.jpg/500px-The_Cetartiodactyla.jpg","p":"https://commons.wikimedia.org/wiki/File:The_Cetartiodactyla.jpg","l":"CC BY-SA 4.0","b":"LittleJerry"},
+"Cattle, sheep, deer, giraffes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Ruminantia.jpg/500px-Ruminantia.jpg","p":"https://commons.wikimedia.org/wiki/File:Ruminantia.jpg","l":"Public domain","b":"various contributors"},
+"Pigs & camels":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg/500px-07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg","p":"https://commons.wikimedia.org/wiki/File:07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg","l":"CC BY-SA 3.0","b":"Jjron"},
+"Hippopotamus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Portrait_Hippopotamus_in_the_water.jpg/500px-Portrait_Hippopotamus_in_the_water.jpg","p":"https://commons.wikimedia.org/wiki/File:Portrait_Hippopotamus_in_the_water.jpg","l":"CC BY-SA 4.0","b":"Muhammad Mahdi Karim"},
+"Cetacea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Mother_and_baby_sperm_whale.jpg/500px-Mother_and_baby_sperm_whale.jpg","p":"https://commons.wikimedia.org/wiki/File:Mother_and_baby_sperm_whale.jpg","l":"CC BY-SA 2.0","b":"Gabriel Barathieu"},
+"Euarchontoglires":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Euarchontoglires_1.jpg/500px-Euarchontoglires_1.jpg","p":"https://commons.wikimedia.org/wiki/File:Euarchontoglires_1.jpg","l":"CC BY-SA 4.0","b":"蕭漫 (montage)"},
+"Rodentia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Hydrochoeris_hydrochaeris_in_Brazil_in_Petr%C3%B3polis%2C_Rio_de_Janeiro%2C_Brazil_09.jpg/500px-Hydrochoeris_hydrochaeris_in_Brazil_in_Petr%C3%B3polis%2C_Rio_de_Janeiro%2C_Brazil_09.jpg","p":"https://commons.wikimedia.org/wiki/File:Hydrochoeris_hydrochaeris_in_Brazil_in_Petr%C3%B3polis%2C_Rio_de_Janeiro%2C_Brazil_09.jpg","l":"CC0","b":"Wilfredor"},
+"Lagomorpha":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Eastern_Cottontail.JPG/500px-Eastern_Cottontail.JPG","p":"https://commons.wikimedia.org/wiki/File:Eastern_Cottontail.JPG","l":"CC BY-SA 3.0","b":"Gareth Rasberry"},
+"Primates":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Lemur_catta_001.jpg/500px-Lemur_catta_001.jpg","p":"https://commons.wikimedia.org/wiki/File:Lemur_catta_001.jpg","l":"CC BY 3.0","b":"Alex Dunkel"},
+"Strepsirrhini":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Suborder_Strepsirrhini.jpg/500px-Suborder_Strepsirrhini.jpg","p":"https://commons.wikimedia.org/wiki/File:Suborder_Strepsirrhini.jpg","l":"CC BY-SA 3.0","b":"various contributors"},
+"Tarsiers":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Philippine_tarsier_(Carlito_syrichta_fraterculus)_Bohol_2.jpg/500px-Philippine_tarsier_(Carlito_syrichta_fraterculus)_Bohol_2.jpg","p":"https://commons.wikimedia.org/wiki/File:Philippine_tarsier_(Carlito_syrichta_fraterculus)_Bohol_2.jpg","l":"CC BY-SA 4.0","b":"Charles J. Sharp"},
+"Platyrrhini":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/BrownSpiderMonkey_(edit2).jpg/500px-BrownSpiderMonkey_(edit2).jpg","p":"https://commons.wikimedia.org/wiki/File:BrownSpiderMonkey_(edit2).jpg","l":"CC BY-SA 3.0","b":"birdphotos.com"},
+"Catarrhini":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Drill_and_Gorilla_.jpg/500px-Drill_and_Gorilla_.jpg","p":"https://commons.wikimedia.org/wiki/File:Drill_and_Gorilla_.jpg","l":"CC BY-SA 4.0","b":"Detroit Zoo"},
+"Cercopithecidae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Lightmatter_guenon.jpg/500px-Lightmatter_guenon.jpg","p":"https://commons.wikimedia.org/wiki/File:Lightmatter_guenon.jpg","l":"CC BY 1.0","b":"Aaron Logan"},
+"Hominoidea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/013_Alpha_male_chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg/500px-013_Alpha_male_chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","p":"https://commons.wikimedia.org/wiki/File:013_Alpha_male_chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","l":"CC BY-SA 4.0","b":"Giles Laurent"},
+"Gibbons":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Hylobates_lar_-_Kaeng_Krachan_WB.jpg/500px-Hylobates_lar_-_Kaeng_Krachan_WB.jpg","p":"https://commons.wikimedia.org/wiki/File:Hylobates_lar_-_Kaeng_Krachan_WB.jpg","l":"CC BY 3.0","b":"JJ Harrison"},
+"Orangutans":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG/500px-Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG","p":"https://commons.wikimedia.org/wiki/File:Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG","l":"CC BY-SA 3.0","b":"Eleifert"},
+"Gorillas":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg/500px-Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg","p":"https://commons.wikimedia.org/wiki/File:Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg","l":"CC BY-SA 4.0","b":"Thurundir"},
+"Chimpanzees & bonobos":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg/500px-015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","p":"https://commons.wikimedia.org/wiki/File:015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","l":"CC BY-SA 4.0","b":"Giles Laurent"},
+"Homo sapiens":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/68/Akha_cropped_hires.JPG","p":"https://commons.wikimedia.org/wiki/File:Akha_cropped_hires.JPG","l":"CC BY-SA 2.0 de","b":"Weltenbummler84"}
+};
+(function(){
+const $=s=>document.querySelector(s);
+const stage=$('#stage'), panel=$('#panel'), card=$('#card');
+const ST={theme:'dark', grey:false, kingdoms:false, sel:null, notes:{}, flags:{}};
+try{ const s=JSON.parse(localStorage.getItem('tol.notes')||'{}'); ST.notes=s.notes||{}; ST.flags=s.flags||{}; }catch(e){}
+try{ const m=localStorage.getItem('tol.mode'); if(m==='light'||m==='dark') ST.theme=m; }catch(e){}
+function save(){ try{ localStorage.setItem('tol.notes',JSON.stringify({notes:ST.notes,flags:ST.flags})); localStorage.setItem('tol.mode',ST.theme);}catch(e){} }
+document.documentElement.setAttribute('data-mode',ST.theme);
+
+// index nodes
+const byId={}, list=[];
+(function walk(n,p,path){ n._p=p; n._id=path; byId[path]=n; list.push(n); (n.k||[]).forEach((c,i)=>walk(c,n,path+'.'+i)); })(TREE,null,'0');
+
+let VB={x:0,y:0,w:2600,h:2600}, svg=null;
+const S=2600;
+function themeName(){ return ST.grey ? (ST.theme==='dark'?'grey':'greylight') : ST.theme; }
+function TC(){ return TOL.themeColors(themeName(),GROUPS,ST.kingdoms); }
+function ckey(n){ return ST.kingdoms ? n._k : n.g; }
+function render(){
+  const {svg:s}=TOL.renderSVG(TREE,GROUPS,TIME_SCALE,EVENTS,{theme:themeName(),chrome:false,kingdoms:ST.kingdoms,slotWeight:SLOT_WEIGHT,font:"'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif"});
+  stage.innerHTML=s; svg=stage.querySelector('svg');
+  svg.removeAttribute('width'); svg.removeAttribute('height');
+  list.forEach(n=>{ byId[n._id]=n; });
+  applyVB(); drawFlags(); if(ST.sel) markSel();
+  buildLegend();
+}
+function applyVB(){ svg.setAttribute('viewBox',`${VB.x} ${VB.y} ${VB.w} ${VB.h}`); }
+function fit(){ const r=stage.getBoundingClientRect(); const a=r.width/r.height; if(a>=1){VB={x:S/2-(S*a)/2,y:0,w:S*a,h:S};} else {VB={x:0,y:S/2-(S/a)/2,w:S,h:S/a};} applyVB(); }
+function zoomAt(factor, cx, cy){ // cx,cy in client coords
+  const r=stage.getBoundingClientRect();
+  const px=VB.x+(cx-r.left)/r.width*VB.w, py=VB.y+(cy-r.top)/r.height*VB.h;
+  const nw=Math.min(Math.max(VB.w/factor,120),S*4), nh=nw*(VB.h/VB.w);
+  VB={x:px-(px-VB.x)*(nw/VB.w), y:py-(py-VB.y)*(nh/VB.h), w:nw, h:nh}; applyVB();
+}
+let anim=null;
+function flyTo(n, targetW){
+  const T=TOL.themeColors(themeName(),GROUPS);
+  const cx=S/2+1000*n._r*Math.cos(n._t), cy=S/2+1000*n._r*Math.sin(n._t);
+  const asp=VB.h/VB.w; const w=targetW||Math.min(VB.w,700); const h=w*asp;
+  const r=stage.getBoundingClientRect(); const panelW=(window.innerWidth>760)?Math.min(380,r.width*0.5):0; const panelH=(window.innerWidth<=760)?r.height*0.62:0;
+  const offx=(panelW/2)/r.width*w, offy=(panelH/2)/r.height*h; // keep the target centred in the uncovered part of the stage
+  const from={...VB}, to={x:cx-w/2+offx,y:cy-h/2+offy,w,h};
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){VB=to;applyVB();return;}
+  const t0=performance.now(); cancelAnimationFrame(anim);
+  (function step(t){ const k=Math.min(1,(t-t0)/450), e=1-Math.pow(1-k,3);
+    VB={x:from.x+(to.x-from.x)*e,y:from.y+(to.y-from.y)*e,w:from.w+(to.w-from.w)*e,h:from.h+(to.h-from.h)*e}; applyVB();
+    if(k<1) anim=requestAnimationFrame(step); })(t0);
+}
+// pointer interactions
+let drag=null, pinch=null;
+stage.addEventListener('wheel',e=>{ e.preventDefault(); zoomAt(Math.exp(-e.deltaY*0.0016), e.clientX, e.clientY); },{passive:false});
+stage.addEventListener('pointerdown',e=>{ stage.setPointerCapture(e.pointerId); if(pinch===null && drag===null){ drag={id:e.pointerId,x:e.clientX,y:e.clientY,vx:VB.x,vy:VB.y,moved:false}; } else if(drag && !pinch){ pinch={a:drag.id,b:e.pointerId,ax:drag.x,ay:drag.y,bx:e.clientX,by:e.clientY,w:VB.w}; } });
+stage.addEventListener('pointermove',e=>{
+  if(pinch){ if(e.pointerId===pinch.a){pinch.ax=e.clientX;pinch.ay=e.clientY;} if(e.pointerId===pinch.b){pinch.bx=e.clientX;pinch.by=e.clientY;}
+    const d=Math.hypot(pinch.ax-pinch.bx,pinch.ay-pinch.by); if(!pinch.d0){pinch.d0=d;return;} const f=d/pinch.d0; pinch.d0=d; zoomAt(f,(pinch.ax+pinch.bx)/2,(pinch.ay+pinch.by)/2); return; }
+  if(!drag||e.pointerId!==drag.id) return;
+  const r=stage.getBoundingClientRect(); const dx=(e.clientX-drag.x)/r.width*VB.w, dy=(e.clientY-drag.y)/r.height*VB.h;
+  if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>4){ drag.moved=true; stage.classList.add('dragging'); }
+  VB.x=drag.vx-dx; VB.y=drag.vy-dy; applyVB();
+});
+function endPointer(e){ if(pinch){ pinch=null; drag=null; return; } if(drag&&e.pointerId===drag.id){ if(!drag.moved){ const g=e.target.closest('.node'); if(g) select(byId[g.dataset.id],true); else { const b=e.target.closest('[data-id]'); if(b) select(byId[b.dataset.id],true); } } drag=null; stage.classList.remove('dragging'); } }
+stage.addEventListener('pointerup',endPointer); stage.addEventListener('pointercancel',endPointer);
+// hover highlight of lineage
+stage.addEventListener('pointerover',e=>{ const g=e.target.closest('[data-id]'); if(!g){return;} light(byId[g.dataset.id]); });
+stage.addEventListener('pointerout',e=>{ if(!e.relatedTarget||!e.relatedTarget.closest||!e.relatedTarget.closest('[data-id]')) unlight(); });
+function light(n){ unlight(); if(!n) return; stage.classList.add('dim'); let x=n; const ids=new Set(); while(x){ids.add(x._id); x=x._p;} (function sub(m){ ids.add(m._id); (m.k||[]).forEach(sub); })(n);
+  svg.querySelectorAll('[data-id]').forEach(el=>{ if(ids.has(el.dataset.id)) el.classList.add('lit'); }); }
+function unlight(){ stage.classList.remove('dim'); svg.querySelectorAll('.lit').forEach(el=>el.classList.remove('lit')); }
+
+// selection + card
+function fmtAge(a){ if(a<=0) return 'Living today'; if(a>=1000) return (a/1000).toFixed(1).replace(/\.0$/,'')+' billion years ago'; return a+' million years ago'; }
+function select(n,fly){ ST.sel=n; markSel(); card.innerHTML=cardHTML(n); wireCard(n); $('#stripe').style.background=TC().col(ckey(n)); panel.classList.add('open'); if(fly) flyTo(n, Math.min(VB.w, n.k?900:600)); }
+function markSel(){ svg.querySelectorAll('.node.sel').forEach(e=>e.classList.remove('sel')); if(ST.sel){ const g=svg.querySelector(`.node[data-id="${ST.sel._id}"]`); if(g) g.classList.add('sel'); } }
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+function picHTML(n){
+  const im=(typeof IMAGES!=='undefined')&&IMAGES[n.n]; if(!im) return '';
+  return `<figure class="pic"><img src="${im.u}" alt="${esc(n.c||n.n)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').hidden=true">${im.n?`<div class="note">${esc(im.n)}</div>`:''}<figcaption>Photo: ${esc(im.b||'Wikimedia Commons')} · ${esc(im.l)} · <a href="${im.p}" target="_blank" rel="noopener">source</a></figcaption></figure>`;
+}
+function cardHTML(n){
+  const G=GROUPS[n.g]||GROUPS.root; const isLeaf=!(n.k&&n.k.length);
+  const lin=[]; let x=n._p; while(x){ lin.unshift(x); x=x._p; }
+  const nleaves=n._leaves||1;
+  return `
+  <div class="eyebrow"><span>${esc(G.name)}${n.e?' · evolution watched today':''}</span><span>${isLeaf?'tip':'branch'}</span></div>
+  <div><h2>${esc(n.n)}</h2>${n.c?`<div class="common">${esc(n.c)}</div>`:''}</div>
+  ${picHTML(n)}
+  <div class="age">
+    <b>${isLeaf?'Status':'Split'}</b><span>${fmtAge(n.a)}${!isLeaf?' (approx.)':''}</span>
+    ${n._k&&n._k!=='root'?`<b>Kingdom</b><span>${esc(TOL.KINGDOMS[n._k].name)} <span style="color:var(--muted)">(six-kingdom scheme)</span></span>`:''}
+    ${!isLeaf?`<b>Holds</b><span>${nleaves} living groups on this tree</span>`:''}
+    ${n.e?`<b>Now</b><span>✦ a lineage in which evolution has been observed within human lifetimes</span>`:''}
+  </div>
+  <p>${esc(n.d)}</p>
+  ${lin.length?`<h3>Lineage</h3><div class="lineage">${lin.map(m=>`<a data-go="${m._id}">${esc(m.n)}</a><span>›</span>`).join('')}<strong>${esc(n.n)}</strong></div>`:''}
+  ${!isLeaf?`<h3>Branches from here</h3><div class="chips">${n.k.map(c=>`<span class="chip" data-go="${c._id}"><span class="sw" style="background:${TC().col(ckey(c))}"></span>${esc(c.n)}</span>`).join('')}</div>`:''}
+  <h3>Discussion</h3>
+  <div class="tagrow"><button id="flagBtn" class="${ST.flags[n._id]?'on':''}">${ST.flags[n._id]?'⚑ Flagged':'⚐ Flag for discussion'}</button><input id="tagIn" placeholder="tag, e.g. Unit 3" value="${esc(ST.flags[n._id]||'')}" ${ST.flags[n._id]?'':'hidden'}></div>
+  <textarea id="noteIn" placeholder="Your notes on this branch: what to say in class, what to ask, a page reference…">${esc(ST.notes[n._id]||'')}</textarea>`;
+}
+function wireCard(n){
+  card.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>select(byId[el.dataset.go],true)));
+  const fb=$('#flagBtn'), ti=$('#tagIn'), ni=$('#noteIn');
+  fb.addEventListener('click',()=>{ if(ST.flags[n._id]!==undefined){ delete ST.flags[n._id]; } else { ST.flags[n._id]=ti.value||'discuss'; } save(); drawFlags(); card.innerHTML=cardHTML(n); wireCard(n); });
+  ti.addEventListener('input',()=>{ ST.flags[n._id]=ti.value||'discuss'; save(); });
+  ni.addEventListener('input',()=>{ if(ni.value) ST.notes[n._id]=ni.value; else delete ST.notes[n._id]; save(); });
+}
+function drawFlags(){
+  svg.querySelectorAll('.flagged-ring').forEach(e=>e.remove());
+  const layer=svg.querySelector('#nodes'); const T=TC();
+  Object.keys(ST.flags).forEach(id=>{ const n=byId[id]; if(!n) return; const cx=S/2+1000*n._r*Math.cos(n._t), cy=S/2+1000*n._r*Math.sin(n._t);
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle'); c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',14); c.setAttribute('fill','none'); c.setAttribute('stroke',T.fg); c.setAttribute('stroke-width','2.5'); c.setAttribute('class','flagged-ring'); layer.appendChild(c); });
+  $('#flagCount').textContent=Object.keys(ST.flags).length;
+}
+function buildLegend(){
+  const T=TC(); const keys=ST.kingdoms?['eub','arb','pro','fun','pla','ani']:['bac','arc','pro','sar','pla','fun','ani']; const PAL=ST.kingdoms?TOL.KINGDOMS:GROUPS;
+  $('#legend').innerHTML=(ST.kingdoms?'<div class="row"><b>The six kingdoms</b></div>':'')+keys.map(k=>`<div class="row"><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${T.col(k)}" stroke-width="4" stroke-linecap="round"${T.dash(k)?` stroke-dasharray="${T.dash(k)}"`:''}/></svg>${esc(PAL[k].name)}</div>`).join('')+`<div class="note">${ST.kingdoms?'Shaded wedges show where each kingdom sits on the tree. Notice that Protista is scattered: it is every eukaryote that is not a fungus, a land plant or an animal, not one branch of its own.':'Centre is LUCA, ~3.8 billion years ago; the rim is today. Recent time is stretched so the crowded last 600 million years have room. ✦ = evolution watched in our lifetimes.'}</div>`;
+}
+// search
+const q=$('#q'), res=$('#results'); let hi=-1;
+q.addEventListener('input',()=>{ const v=q.value.trim().toLowerCase(); hi=-1; if(!v){res.style.display='none';return;}
+  const T=TC();
+  const hits=list.filter(n=>n.n.toLowerCase().includes(v)||(n.c||'').toLowerCase().includes(v)||(n.d||'').toLowerCase().includes(v)||((typeof IMAGES!=='undefined')&&IMAGES[n.n]&&IMAGES[n.n].n&&IMAGES[n.n].n.toLowerCase().includes(v))).slice(0,14);
+  res.innerHTML=hits.map(n=>`<div data-id="${n._id}"><span class="sw" style="background:${T.col(ckey(n))}"></span>${esc(n.n)}${n.c?` <small>${esc(n.c)}</small>`:''}</div>`).join('')||'<div><small>No match</small></div>';
+  res.style.display='block'; res.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>{ select(byId[el.dataset.id],true); res.style.display='none'; q.value=''; })); });
+q.addEventListener('keydown',e=>{ const items=[...res.querySelectorAll('[data-id]')]; if(e.key==='ArrowDown'){hi=Math.min(items.length-1,hi+1);} else if(e.key==='ArrowUp'){hi=Math.max(0,hi-1);} else if(e.key==='Enter'){ if(items[hi>=0?hi:0]) items[hi>=0?hi:0].click(); return;} else if(e.key==='Escape'){res.style.display='none';return;} else return; items.forEach((it,i)=>it.classList.toggle('on',i===hi)); });
+document.addEventListener('click',e=>{ if(!e.target.closest('.search')) res.style.display='none'; });
+// controls
+$('#bColor').onclick=()=>{ST.grey=false;$('#bColor').classList.add('on');$('#bGrey').classList.remove('on');render();};
+$('#bGrey').onclick=()=>{ST.grey=true;$('#bGrey').classList.add('on');$('#bColor').classList.remove('on');render();};
+$('#bKing').onclick=()=>{ST.kingdoms=!ST.kingdoms;$('#bKing').classList.toggle('on',ST.kingdoms);render();};
+$('#bDark').onclick=()=>{ST.theme='dark';document.documentElement.setAttribute('data-mode','dark');$('#bDark').classList.add('on');$('#bLight').classList.remove('on');save();render();};
+$('#bLight').onclick=()=>{ST.theme='light';document.documentElement.setAttribute('data-mode','light');$('#bLight').classList.add('on');$('#bDark').classList.remove('on');save();render();};
+$('#zin').onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(1.5,r.left+r.width/2,r.top+r.height/2);};
+$('#zout').onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(1/1.5,r.left+r.width/2,r.top+r.height/2);};
+$('#zfit').onclick=fit;
+$('#close').onclick=()=>{panel.classList.remove('open');ST.sel=null;markSel();};
+document.addEventListener('keydown',e=>{ if(e.target.matches('input,textarea')) return; if(e.key==='Escape'){panel.classList.remove('open');} if(e.key==='+'||e.key==='=') $('#zin').click(); if(e.key==='-') $('#zout').click(); if(e.key==='0') fit(); if(e.key==='/'){e.preventDefault();q.focus();} });
+// flagged list
+$('#bFlags').onclick=()=>{ const ids=Object.keys(ST.flags); $('#flagList').innerHTML=ids.length?ids.map(id=>{const n=byId[id]; return n?`<a data-id="${id}"><b>${esc(n.n)}</b><small>${esc(ST.flags[id])}${ST.notes[id]?' · '+esc(ST.notes[id].slice(0,80)):''}</small></a>`:'';}).join(''):'<small>Nothing flagged yet. Open a branch and press “Flag for discussion”.</small>';
+  $('#flagList').querySelectorAll('a').forEach(a=>a.onclick=()=>{$('#dlgFlags').close();select(byId[a.dataset.id],true);}); $('#dlgFlags').showModal(); };
+$('#dlgFlagsClose').onclick=()=>$('#dlgFlags').close();
+$('#bNotes').onclick=()=>{ $('#notesText').value=JSON.stringify({notes:ST.notes,flags:ST.flags},null,1); $('#dlgNotes').showModal(); };
+$('#dlgNotesClose').onclick=()=>$('#dlgNotes').close();
+$('#copyNotes').onclick=async()=>{ try{ await navigator.clipboard.writeText($('#notesText').value); toast('Copied'); }catch(e){ $('#notesText').select(); toast('Select all and copy'); } };
+$('#loadNotes').onclick=()=>{ try{ const o=JSON.parse($('#notesText').value); ST.notes=o.notes||{}; ST.flags=o.flags||{}; save(); drawFlags(); if(ST.sel) select(ST.sel,false); toast('Loaded'); $('#dlgNotes').close(); }catch(e){ toast('That is not a notes backup'); } };
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
+// mode buttons initial
+if(ST.theme==='light'){$('#bLight').classList.add('on');$('#bDark').classList.remove('on');}
+render(); fit();
+window.addEventListener('resize',()=>{ /* keep centre, refit aspect */ const r=stage.getBoundingClientRect(); const cx=VB.x+VB.w/2, cy=VB.y+VB.h/2; const a=r.width/r.height; VB.h=VB.w/a; VB.x=cx-VB.w/2; VB.y=cy-VB.h/2; applyVB(); });
+})();
+</script>
+
+</body>
+</html>
