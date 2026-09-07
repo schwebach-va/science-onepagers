@@ -97,6 +97,12 @@ dialog .list a{display:flex;gap:10px;align-items:baseline;padding:6px 8px;border
 dialog .list a:hover{background:var(--chip)}
 dialog .list small{color:var(--muted)}
 dialog textarea{min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+dialog .more{display:grid;gap:8px;max-height:60vh;overflow:auto}
+dialog .more a{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.35}
+dialog .more a:hover{background:var(--chip)}
+dialog .more a b{font-family:var(--fd);font-weight:500;font-size:16px}
+dialog .more a .who{color:var(--muted);font-size:12px;white-space:nowrap;align-self:center}
+dialog .more a>span:last-child{grid-column:1/-1;color:var(--muted)}
 .toast{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
 .toast.show{opacity:1}
 @media (max-width:760px){
@@ -125,6 +131,7 @@ dialog textarea{min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospa
   </div>
   <button id="bFlags" title="Everything you have flagged for discussion">Flagged <span id="flagCount">0</span></button>
   <button id="bNotes" title="Copy or paste your notes and flags as text, to move them between computers">Notes…</button>
+  <button id="bMore" title="Other tree-of-life explorers, and when each one is the right tool">Go further</button>
 </header>
 <main>
   <div id="stage"></div>
@@ -141,6 +148,17 @@ dialog textarea{min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospa
 </div>
 <dialog id="dlgFlags"><h2>Flagged for discussion</h2><div class="list" id="flagList"></div><div class="tagrow"><button id="dlgFlagsClose">Close</button></div></dialog>
 <dialog id="dlgNotes"><h2>Your notes and flags</h2><p style="margin:0 0 8px;color:var(--muted);font-size:14px">Notes and flags live in this browser. Copy the text below to keep a backup or move it to another computer; paste a backup and press Load to restore it.</p><textarea id="notesText"></textarea><div class="tagrow" style="margin-top:10px"><button id="copyNotes">Copy</button><button id="loadNotes">Load</button><span class="spacer"></span><button id="dlgNotesClose">Close</button></div></dialog>
+<dialog id="dlgMore"><h2>Go further</h2>
+<p style="margin:0 0 10px;color:var(--muted);font-size:14px">This page is the orientation map: 270 branches, one picture and one story each, drawn to time. Once you know where something sits, these are the places to go deeper. Each is free and runs in a browser.</p>
+<div class="more">
+  <a href="https://www.onezoom.org/" target="_blank" rel="noopener"><b>OneZoom</b><span class="who">Grades 9–10 · first look</span><span>Every one of 2.2 million living species, on one endlessly zooming page. Best for the sheer size of life, and for finding your own animal or plant and following its branch back to ours.</span></a>
+  <a href="https://timetree.org/" target="_blank" rel="noopener"><b>TimeTree</b><span class="who">Grades 10–12 · time</span><span>Type two organisms and get the best estimate of when their lines split, with the studies behind it. Best for the questions this page raises: how long ago did humans and chimps part? Plants and fungi?</span></a>
+  <a href="https://lifemap.cnrs.fr/" target="_blank" rel="noopener"><b>Lifemap</b><span class="who">Grades 10–12 · names</span><span>Pan and zoom like a road map through the full scientific naming hierarchy (domain, kingdom, phylum … genus, species). Best when a student wants the proper names behind a branch here.</span></a>
+  <a href="https://tree.opentreeoflife.org/" target="_blank" rel="noopener"><b>Open Tree of Life</b><span class="who">Grades 11–14 · evidence</span><span>The research synthesis this page is simplified from: thousands of published studies stitched into one tree. Best for how scientists decide the shape of the tree, and for citing a source in a CER.</span></a>
+  <a href="https://treeoflife.kew.org/" target="_blank" rel="noopener"><b>Kew Tree of Life Explorer</b><span class="who">Grades 11–16 · plants</span><span>A DNA-sequence tree of flowering plants from Kew Gardens. Best for plant units: where corn, the mustards, and the crops of the Americas sit, and which genes were used to place them.</span></a>
+  <a href="https://itol.embl.de/" target="_blank" rel="noopener"><b>iTOL</b><span class="who">Grades 12–16 · build your own</span><span>Upload a tree file from a DNA or protein alignment and draw, colour and annotate it yourself. Best for AP and college work where students make the tree instead of reading one.</span></a>
+</div>
+<div class="tagrow" style="margin-top:10px"><span class="spacer"></span><button id="dlgMoreClose">Close</button></div></dialog>
 <script>
 // Tree of Life dataset — v1 (2026-09-07)
 // Fields: n = name, c = common name / plain English, a = age in millions of years
@@ -1270,6 +1288,8 @@ $('#bFlags').onclick=()=>{ const ids=Object.keys(ST.flags); $('#flagList').inner
 $('#dlgFlagsClose').onclick=()=>$('#dlgFlags').close();
 $('#bNotes').onclick=()=>{ $('#notesText').value=JSON.stringify({notes:ST.notes,flags:ST.flags},null,1); $('#dlgNotes').showModal(); };
 $('#dlgNotesClose').onclick=()=>$('#dlgNotes').close();
+$('#bMore').onclick=()=>$('#dlgMore').showModal();
+$('#dlgMoreClose').onclick=()=>$('#dlgMore').close();
 $('#copyNotes').onclick=async()=>{ try{ await navigator.clipboard.writeText($('#notesText').value); toast('Copied'); }catch(e){ $('#notesText').select(); toast('Select all and copy'); } };
 $('#loadNotes').onclick=()=>{ try{ const o=JSON.parse($('#notesText').value); ST.notes=o.notes||{}; ST.flags=o.flags||{}; save(); drawFlags(); if(ST.sel) select(ST.sel,false); toast('Loaded'); $('#dlgNotes').close(); }catch(e){ toast('That is not a notes backup'); } };
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
