@@ -138,7 +138,7 @@ dialog .more a>span:last-child{grid-column:1/-1;color:var(--muted)}
   <div id="stage"></div>
   <div class="legend" id="legend"></div>
   <div class="zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zfit" aria-label="Fit whole tree" title="Fit whole tree">⌂</button></div>
-  <div class="hint">Scroll to zoom · drag to pan · click a branch or a tip</div>
+  <div class="hint">Scroll or pinch to zoom · drag to pan · double-tap to zoom in</div>
   <aside id="panel" aria-live="polite">
     <div class="stripe" id="stripe"></div>
     <button class="close" id="close" aria-label="Close">×</button>
@@ -1441,50 +1441,141 @@ const S=2600;
 function themeName(){ return ST.grey ? (ST.theme==='dark'?'grey':'greylight') : ST.theme; }
 function TC(){ return TOL.themeColors(themeName(),GROUPS,ST.kingdoms); }
 function ckey(n){ return ST.kingdoms ? n._k : n.g; }
+// ---- smooth camera ----------------------------------------------------------------------
+// Redrawing two thousand SVG elements on every frame is too slow for a smooth zoom, so the page
+// works the way map sites do: while anything is moving it shows a snapshot picture of the tree and
+// only slides and scales that (cheap for the browser); when the motion settles it redraws the real
+// SVG at the new view, sharp, and quietly takes a fresh snapshot for the next gesture.
+const cam={img:null, snap:null, motion:false, settleTimer:null, building:false, dirty:true, fontCSS:null};
+cam.img=document.createElement('img'); cam.img.alt=''; cam.img.draggable=false;
+cam.img.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;display:none;pointer-events:none;transform-origin:0 0;will-change:transform;user-select:none';
+let TG=null, anchor=null, raf=null, vel=null, lastTs=0;   // TG = where the view is heading; VB = what is on screen
 function render(){
   const {svg:s}=TOL.renderSVG(TREE,GROUPS,TIME_SCALE,EVENTS,{theme:themeName(),chrome:false,kingdoms:ST.kingdoms,slotWeight:SLOT_WEIGHT,font:"'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif"});
-  stage.innerHTML=s; svg=stage.querySelector('svg');
+  stage.innerHTML=s; svg=stage.querySelector('svg'); stage.appendChild(cam.img);
   svg.removeAttribute('width'); svg.removeAttribute('height');
   list.forEach(n=>{ byId[n._id]=n; });
+  cam.snap=null; cam.dirty=true; cam.motion=false; cam.img.style.display='none';
   applyVB(); drawFlags(); if(ST.sel) markSel();
   buildLegend();
+  scheduleSnap();
 }
 function applyVB(){ svg.setAttribute('viewBox',`${VB.x} ${VB.y} ${VB.w} ${VB.h}`); }
-function fit(){ const r=stage.getBoundingClientRect(); const a=r.width/r.height; if(a>=1){VB={x:S/2-(S*a)/2,y:0,w:S*a,h:S};} else {VB={x:0,y:S/2-(S/a)/2,w:S,h:S/a};} applyVB(); }
-function zoomAt(factor, cx, cy){ // cx,cy in client coords
-  const r=stage.getBoundingClientRect();
-  const px=VB.x+(cx-r.left)/r.width*VB.w, py=VB.y+(cy-r.top)/r.height*VB.h;
-  const nw=Math.min(Math.max(VB.w/factor,120),S*4), nh=nw*(VB.h/VB.w);
-  VB={x:px-(px-VB.x)*(nw/VB.w), y:py-(py-VB.y)*(nh/VB.h), w:nw, h:nh}; applyVB();
+function clampW(w){ return Math.min(Math.max(w,120),S*4); }
+// show the current VB: through the snapshot while moving, through the real SVG when still
+function showFrame(){
+  clearTimeout(cam.settleTimer); cam.settleTimer=setTimeout(settle,150);
+  if(!cam.motion && cam.snap && !cam.dirty){ cam.motion=true; cam.img.style.display='block'; }
+  if(cam.motion){
+    const sv=cam.snap.vb, r=stage.getBoundingClientRect();
+    const k=sv.w/VB.w, tx=(sv.x-VB.x)/VB.w*r.width, ty=(sv.y-VB.y)/VB.h*r.height;
+    cam.img.style.transform=`translate(${tx}px,${ty}px) scale(${k})`;
+  } else applyVB();
 }
-let anim=null;
+function settle(){
+  cam.settleTimer=null;
+  if(TG||vel||(drag&&drag.moved)||pinch){ cam.settleTimer=setTimeout(settle,150); return; }
+  applyVB();
+  if(cam.motion){ cam.motion=false; // let the SVG paint underneath before the snapshot is lifted
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ if(!cam.motion){ cam.img.style.display='none'; cam.dirty=true; scheduleSnap(); } })); }
+  else { cam.dirty=true; scheduleSnap(); }
+}
+function scheduleSnap(){ clearTimeout(cam.snapTimer); cam.snapTimer=setTimeout(buildSnap,60); }
+function buildSnap(){
+  if(cam.building||cam.motion||!svg) { if(cam.building) cam.pending=true; return; }
+  cam.building=true;
+  const vb={...VB}; const r=stage.getBoundingClientRect(); const dpr=Math.min(2,window.devicePixelRatio||1);
+  const clone=svg.cloneNode(true);
+  clone.setAttribute('width',Math.round(r.width*dpr)); clone.setAttribute('height',Math.round(r.height*dpr));
+  clone.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+  clone.querySelectorAll('.hit,.flagged-ring').forEach(e=>e.remove());
+  if(cam.fontCSS){ const st=document.createElementNS('http://www.w3.org/2000/svg','style'); st.textContent=cam.fontCSS; clone.insertBefore(st,clone.firstChild); }
+  const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'}));
+  const im=new Image();
+  im.onload=()=>{ const old=cam.img.src; cam.img.src=url; if(old&&old.startsWith('blob:')) URL.revokeObjectURL(old); cam.snap={vb}; cam.dirty=false; cam.building=false; if(cam.pending){cam.pending=false; scheduleSnap();} };
+  im.onerror=()=>{ URL.revokeObjectURL(url); cam.building=false; };
+  im.src=url;
+}
+// the snapshot is an SVG image, which cannot see the page's web font, so the font is inlined once
+(async function(){ try{
+  const css=await fetch('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap').then(r=>r.text());
+  const blocks=css.split('@font-face').slice(1).filter(b=>/U\+0000-00FF/.test(b));
+  const out=[]; for(const b of blocks){ const m=b.match(/url\((https:[^)]+)\)/); if(!m) continue; const buf=await fetch(m[1]).then(r=>r.arrayBuffer()); let bin=''; const u8=new Uint8Array(buf); for(let i=0;i<u8.length;i+=0x8000) bin+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000)); out.push('@font-face'+b.replace(m[1],'data:font/woff2;base64,'+btoa(bin))); }
+  if(out.length){ cam.fontCSS=out.join('\n'); cam.dirty=true; scheduleSnap(); }
+}catch(e){} })();
+// easing loop: log-space zoom toward TG with the anchor point held still under the cursor; pan glide with friction
+function goTo(t, anc, rate){ TG=t; TG.k=rate||0.22; anchor=anc||null; vel=null; if(!raf) raf=requestAnimationFrame(tick); }
+function tick(ts){
+  raf=null; const dt=Math.min(50, ts-(lastTs||ts)); lastTs=ts; let moving=false;
+  if(TG){
+    const k=1-Math.pow(1-TG.k, dt/16.7);
+    const lw=Math.log(VB.w), lt=Math.log(TG.w); let nw=Math.exp(lw+(lt-lw)*k); if(Math.abs(lt-Math.log(nw))<0.0015) nw=TG.w;
+    const nh=nw*(VB.h/VB.w); let nx,ny;
+    if(anchor){ nx=anchor.ax-anchor.sx*nw; ny=anchor.ay-anchor.sy*nh; }
+    else { nx=VB.x+(TG.x-VB.x)*k; ny=VB.y+(TG.y-VB.y)*k; if(Math.abs(TG.x-nx)<nw*0.0004) nx=TG.x; if(Math.abs(TG.y-ny)<nh*0.0004) ny=TG.y; }
+    VB={x:nx,y:ny,w:nw,h:nh};
+    if(nw===TG.w && (anchor||(nx===TG.x&&ny===TG.y))){ VB={x:TG.x,y:TG.y,w:TG.w,h:TG.h}; TG=null; anchor=null; } else moving=true;
+  } else if(vel){
+    VB.x+=vel.x*dt; VB.y+=vel.y*dt; const f=Math.exp(-dt/220); vel.x*=f; vel.y*=f;
+    if(Math.hypot(vel.x,vel.y)*16<VB.w*0.0003) vel=null; else moving=true;
+  }
+  showFrame();
+  if(moving) raf=requestAnimationFrame(tick); else lastTs=0;
+}
+function stopMotion(){ TG=null; anchor=null; vel=null; if(raf){cancelAnimationFrame(raf); raf=null; lastTs=0;} }
+function fit(now){ stopMotion(); const r=stage.getBoundingClientRect(); const a=r.width/r.height; const to=a>=1?{x:S/2-(S*a)/2,y:0,w:S*a,h:S}:{x:0,y:S/2-(S/a)/2,w:S,h:S/a}; if(now===true){ VB=to; applyVB(); cam.dirty=true; scheduleSnap(); return; } goTo(to,null,0.14); }
+function zoomAt(factor, cx, cy){ // eased zoom that keeps the point under (cx,cy) fixed; repeated wheel ticks accumulate on the pending target
+  const r=stage.getBoundingClientRect(); const sx=(cx-r.left)/r.width, sy=(cy-r.top)/r.height;
+  const ax=VB.x+sx*VB.w, ay=VB.y+sy*VB.h;
+  const base=TG?TG.w:VB.w; const nw=clampW(base/factor), nh=nw*(VB.h/VB.w);
+  goTo({x:ax-sx*nw,y:ay-sy*nh,w:nw,h:nh},{ax,ay,sx,sy});
+}
 function flyTo(n, targetW){
-  const T=TOL.themeColors(themeName(),GROUPS);
   const cx=S/2+1000*n._r*Math.cos(n._t), cy=S/2+1000*n._r*Math.sin(n._t);
   const asp=VB.h/VB.w; const w=targetW||Math.min(VB.w,700); const h=w*asp;
   const r=stage.getBoundingClientRect(); const panelW=(window.innerWidth>760)?Math.min(380,r.width*0.5):0; const panelH=(window.innerWidth<=760)?r.height*0.62:0;
   const offx=(panelW/2)/r.width*w, offy=(panelH/2)/r.height*h; // keep the target centred in the uncovered part of the stage
-  const from={...VB}, to={x:cx-w/2+offx,y:cy-h/2+offy,w,h};
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce){VB=to;applyVB();return;}
-  const t0=performance.now(); cancelAnimationFrame(anim);
-  (function step(t){ const k=Math.min(1,(t-t0)/450), e=1-Math.pow(1-k,3);
-    VB={x:from.x+(to.x-from.x)*e,y:from.y+(to.y-from.y)*e,w:from.w+(to.w-from.w)*e,h:from.h+(to.h-from.h)*e}; applyVB();
-    if(k<1) anim=requestAnimationFrame(step); })(t0);
+  const to={x:cx-w/2+offx,y:cy-h/2+offy,w,h};
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ stopMotion(); VB=to; showFrame(); return; }
+  goTo(to,null,0.13);
 }
 // pointer interactions
-let drag=null, pinch=null;
-stage.addEventListener('wheel',e=>{ e.preventDefault(); zoomAt(Math.exp(-e.deltaY*0.0016), e.clientX, e.clientY); },{passive:false});
-stage.addEventListener('pointerdown',e=>{ const hit=(e.target.closest&&e.target.closest('[data-id]'))||null; stage.setPointerCapture(e.pointerId); /* capture retargets later events to the stage, so remember what was under the pointer now */ if(pinch===null && drag===null){ drag={id:e.pointerId,x:e.clientX,y:e.clientY,vx:VB.x,vy:VB.y,moved:false,hit}; } else if(drag && !pinch){ pinch={a:drag.id,b:e.pointerId,ax:drag.x,ay:drag.y,bx:e.clientX,by:e.clientY,w:VB.w}; } });
+let drag=null, pinch=null, lastTap=null;
+stage.addEventListener('wheel',e=>{ e.preventDefault();
+  let d=e.deltaY; if(e.deltaMode===1) d*=16; else if(e.deltaMode===2) d*=120; d=Math.max(-160,Math.min(160,d));
+  zoomAt(Math.exp(-d*(e.ctrlKey?0.009:0.0022)), e.clientX, e.clientY); // ctrlKey = trackpad pinch, which sends small deltas
+},{passive:false});
+stage.addEventListener('pointerdown',e=>{ const hit=(e.target.closest&&e.target.closest('[data-id]'))||null; stage.setPointerCapture(e.pointerId); /* capture retargets later events to the stage, so remember what was under the pointer now */
+  if(pinch===null && drag===null){ stopMotion(); drag={id:e.pointerId,x:e.clientX,y:e.clientY,vx:VB.x,vy:VB.y,moved:false,hit,type:e.pointerType,trail:[[performance.now(),e.clientX,e.clientY]]}; }
+  else if(drag && !pinch){ stopMotion(); pinch={a:drag.id,b:e.pointerId,ax:drag.x,ay:drag.y,bx:e.clientX,by:e.clientY}; pinch.d0=Math.hypot(pinch.ax-pinch.bx,pinch.ay-pinch.by); pinch.mx=(pinch.ax+pinch.bx)/2; pinch.my=(pinch.ay+pinch.by)/2; } });
 stage.addEventListener('pointermove',e=>{
-  if(pinch){ if(e.pointerId===pinch.a){pinch.ax=e.clientX;pinch.ay=e.clientY;} if(e.pointerId===pinch.b){pinch.bx=e.clientX;pinch.by=e.clientY;}
-    const d=Math.hypot(pinch.ax-pinch.bx,pinch.ay-pinch.by); if(!pinch.d0){pinch.d0=d;return;} const f=d/pinch.d0; pinch.d0=d; zoomAt(f,(pinch.ax+pinch.bx)/2,(pinch.ay+pinch.by)/2); return; }
+  if(pinch){ if(e.pointerId===pinch.a){pinch.ax=e.clientX;pinch.ay=e.clientY;} else if(e.pointerId===pinch.b){pinch.bx=e.clientX;pinch.by=e.clientY;} else return;
+    const d=Math.hypot(pinch.ax-pinch.bx,pinch.ay-pinch.by), mx=(pinch.ax+pinch.bx)/2, my=(pinch.ay+pinch.by)/2; if(d<1) return;
+    const r=stage.getBoundingClientRect(); const f=d/pinch.d0;
+    const sxo=(pinch.mx-r.left)/r.width, syo=(pinch.my-r.top)/r.height, sxn=(mx-r.left)/r.width, syn=(my-r.top)/r.height;
+    const wx=VB.x+sxo*VB.w, wy=VB.y+syo*VB.h; const nw=clampW(VB.w/f), nh=nw*(VB.h/VB.w);
+    VB={x:wx-sxn*nw, y:wy-syn*nh, w:nw, h:nh}; // the point that was between the fingers stays between the fingers
+    pinch.d0=d; pinch.mx=mx; pinch.my=my; showFrame(); return; }
   if(!drag||e.pointerId!==drag.id) return;
   const r=stage.getBoundingClientRect(); const dx=(e.clientX-drag.x)/r.width*VB.w, dy=(e.clientY-drag.y)/r.height*VB.h;
   if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>(e.pointerType==='touch'?10:4)){ drag.moved=true; stage.classList.add('dragging'); }
-  if(drag.moved){ VB.x=drag.vx-dx; VB.y=drag.vy-dy; applyVB(); }
+  if(drag.moved){ VB.x=drag.vx-dx; VB.y=drag.vy-dy; const now=performance.now(); drag.trail.push([now,e.clientX,e.clientY]); while(drag.trail.length>2&&now-drag.trail[0][0]>90) drag.trail.shift(); showFrame(); }
 });
-function endPointer(e){ if(pinch){ pinch=null; drag=null; return; } if(drag&&e.pointerId===drag.id){ if(!drag.moved && e.type==='pointerup'){ const h=drag.hit; if(h&&byId[h.dataset.id]) select(byId[h.dataset.id],true); } drag=null; stage.classList.remove('dragging'); } }
+function endPointer(e){
+  if(pinch){ if(e.pointerId===pinch.a||e.pointerId===pinch.b){ pinch=null; drag=null; showFrame(); } return; }
+  if(!drag||e.pointerId!==drag.id) return;
+  const d=drag; drag=null; stage.classList.remove('dragging');
+  if(d.moved){ // glide on: velocity from the last ~90 ms of the drag
+    const r=stage.getBoundingClientRect(); const t0=d.trail[0], t1=d.trail[d.trail.length-1]; const dt=t1[0]-t0[0];
+    if(dt>8 && e.type==='pointerup'){ const vx=-(t1[1]-t0[1])/dt/r.width*VB.w, vy=-(t1[2]-t0[2])/dt/r.height*VB.h; const sp=Math.hypot(vx,vy), cap=VB.w*0.0025; const s=sp>cap?cap/sp:1; if(sp*16>VB.w*0.002){ vel={x:vx*s,y:vy*s}; if(!raf) raf=requestAnimationFrame(tick); return; } }
+    showFrame(); return;
+  }
+  if(e.type!=='pointerup') return;
+  const h=d.hit; if(h&&byId[h.dataset.id]){ lastTap=null; select(byId[h.dataset.id],true); return; }
+  const now=performance.now(); // double-tap (or double-click) on empty space zooms in there
+  if(lastTap && now-lastTap.t<320 && Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<30){ lastTap=null; zoomAt(2,e.clientX,e.clientY); }
+  else lastTap={t:now,x:e.clientX,y:e.clientY};
+}
 stage.addEventListener('pointerup',endPointer); stage.addEventListener('pointercancel',endPointer);
 // hover highlight of lineage
 stage.addEventListener('pointerover',e=>{ const g=e.target.closest('[data-id]'); if(!g){return;} light(byId[g.dataset.id]); });
@@ -1558,7 +1649,7 @@ $('#bDark').onclick=()=>{ST.theme='dark';document.documentElement.setAttribute('
 $('#bLight').onclick=()=>{ST.theme='light';document.documentElement.setAttribute('data-mode','light');$('#bLight').classList.add('on');$('#bDark').classList.remove('on');save();render();};
 $('#zin').onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(1.5,r.left+r.width/2,r.top+r.height/2);};
 $('#zout').onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(1/1.5,r.left+r.width/2,r.top+r.height/2);};
-$('#zfit').onclick=fit;
+$('#zfit').onclick=()=>fit();
 $('#close').onclick=()=>{panel.classList.remove('open');ST.sel=null;markSel();};
 document.addEventListener('keydown',e=>{ if(e.target.matches('input,textarea')) return; if(e.key==='Escape'){panel.classList.remove('open');} if(e.key==='+'||e.key==='=') $('#zin').click(); if(e.key==='-') $('#zout').click(); if(e.key==='0') fit(); if(e.key==='/'){e.preventDefault();q.focus();} });
 // flagged list
@@ -1574,8 +1665,8 @@ $('#loadNotes').onclick=()=>{ try{ const o=JSON.parse($('#notesText').value); ST
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
 // mode buttons initial
 if(ST.theme==='light'){$('#bLight').classList.add('on');$('#bDark').classList.remove('on');}
-render(); fit();
-window.addEventListener('resize',()=>{ /* keep centre, refit aspect */ const r=stage.getBoundingClientRect(); const cx=VB.x+VB.w/2, cy=VB.y+VB.h/2; const a=r.width/r.height; VB.h=VB.w/a; VB.x=cx-VB.w/2; VB.y=cy-VB.h/2; applyVB(); });
+render(); fit(true);
+window.addEventListener('resize',()=>{ /* keep centre, refit aspect */ stopMotion(); const r=stage.getBoundingClientRect(); const cx=VB.x+VB.w/2, cy=VB.y+VB.h/2; const a=r.width/r.height; VB.h=VB.w/a; VB.x=cx-VB.w/2; VB.y=cy-VB.h/2; applyVB(); cam.snap=null; cam.dirty=true; cam.motion=false; cam.img.style.display='none'; scheduleSnap(); });
 })();
 </script>
 
