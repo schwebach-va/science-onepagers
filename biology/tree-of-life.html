@@ -149,7 +149,7 @@ dialog .more a>span:last-child{grid-column:1/-1;color:var(--muted)}
 <dialog id="dlgFlags"><h2>Flagged for discussion</h2><div class="list" id="flagList"></div><div class="tagrow"><button id="dlgFlagsClose">Close</button></div></dialog>
 <dialog id="dlgNotes"><h2>Your notes and flags</h2><p style="margin:0 0 8px;color:var(--muted);font-size:14px">Notes and flags live in this browser. Copy the text below to keep a backup or move it to another computer; paste a backup and press Load to restore it.</p><textarea id="notesText"></textarea><div class="tagrow" style="margin-top:10px"><button id="copyNotes">Copy</button><button id="loadNotes">Load</button><span class="spacer"></span><button id="dlgNotesClose">Close</button></div></dialog>
 <dialog id="dlgMore"><h2>Go further</h2>
-<p style="margin:0 0 10px;color:var(--muted);font-size:14px">This page is the orientation map: 270 branches, one picture and one story each, drawn to time. Once you know where something sits, these are the places to go deeper. Each is free and runs in a browser.</p>
+<p style="margin:0 0 10px;color:var(--muted);font-size:14px">This page is the orientation map: a few hundred branches, living and extinct, one picture and one story each, drawn to time. Once you know where something sits, these are the places to go deeper. Each is free and runs in a browser.</p>
 <div class="more">
   <a href="https://www.onezoom.org/" target="_blank" rel="noopener"><b>OneZoom</b><span class="who">Grades 9–10 · first look</span><span>Every one of 2.2 million living species, on one endlessly zooming page. Best for the sheer size of life, and for finding your own animal or plant and following its branch back to ours.</span></a>
   <a href="https://timetree.org/" target="_blank" rel="noopener"><b>TimeTree</b><span class="who">Grades 10–12 · time</span><span>Type two organisms and get the best estimate of when their lines split, with the studies behind it. Best for the questions this page raises: how long ago did humans and chimps part? Plants and fungi?</span></a>
@@ -160,7 +160,7 @@ dialog .more a>span:last-child{grid-column:1/-1;color:var(--muted)}
 </div>
 <div class="tagrow" style="margin-top:10px"><span class="spacer"></span><button id="dlgMoreClose">Close</button></div></dialog>
 <script>
-// Tree of Life dataset — v1 (2026-09-07)
+// Tree of Life dataset — v4 (2026-09-08): extinct branches (x:true, a = last appearance), the human line, dinosaurs, the fish-to-tetrapod fossils, and Reid's must-have living species. li:true = draw the branch label pointing inward.
 // Fields: n = name, c = common name / plain English, a = age in millions of years
 // (for an internal node: when its children split apart; leaves are living today = 0),
 // d = one-line description, g = colour group, w = label weight for print (1 small, 2 show, 3 headline),
@@ -299,7 +299,12 @@ k:[
           k:[
            {n:"Gymnosperms", a:300, g:"pla", w:2, d:"Naked-seed plants: conifers, cycads, Ginkgo and the odd gnetophytes.",
            k:[
-            {n:"Conifers", a:0, g:"pla", w:2, d:"Pines, spruces, firs, redwoods and the bristlecone pines that have lived nearly 5,000 years."},
+            {n:"Conifers", a:250, g:"pla", w:2, d:"Cone-bearing trees with needles: the forests of the North and of the mountains.",
+            k:[
+             {n:"Pines", a:0, g:"pla", w:1, d:"Virginia pine, loblolly and white pine in the East; ponderosa and the nut-bearing piñon of New Mexico, whose seeds fed people for thousands of years. Bristlecone pines have lived nearly 5,000 years."},
+             {n:"Spruces, firs & hemlocks", a:0, g:"pla", w:1, d:"The trees of the high ridges and the far north; the eastern hemlock of Virginia's coves is being lost to a tiny sap-sucking insect."},
+             {n:"Cypresses, redwoods & junipers", a:0, g:"pla", w:1, d:"Bald cypress standing knee-deep in Florida and Virginia swamps, coast redwoods taller than a football field is long, and the junipers of the Southwest."}
+            ]},
             {n:"Cycads", a:0, g:"pla", w:1, d:"Palm-like plants that fed dinosaurs and still stand in tropical gardens."},
             {n:"Ginkgo", a:0, g:"pla", w:1, d:"A single surviving species of a 270-million-year-old line, planted on city streets worldwide."},
             {n:"Gnetophytes", a:0, g:"pla", w:1, d:"Welwitschia of the Namib desert lives 1,000 years on two leaves."}
@@ -308,30 +313,72 @@ k:[
            k:[
             {n:"Amborella", a:0, g:"pla", w:1, d:"A shrub from New Caledonia, the sole survivor of the first flowering-plant branch."},
             {n:"Water lilies", a:0, g:"pla", w:1, d:"An early flowering lineage, floating on ponds since the age of dinosaurs."},
-            {n:"Magnoliids", a:0, g:"pla", w:1, d:"Magnolia, avocado, cinnamon, nutmeg, black pepper and bay leaf."},
+            {n:"Magnoliids", a:0, g:"pla", w:1, d:"Magnolia, avocado, cinnamon, nutmeg, black pepper, bay leaf, and the pawpaw, the largest fruit native to eastern North America."},
             {n:"Monocots", a:120, g:"pla", w:2, d:"One seed leaf, parallel veins: grasses, lilies, orchids and palms.",
             k:[
-             {n:"Grasses", c:"Poaceae", a:0, g:"pla", w:2, d:"Wheat, rice, corn, sugar cane and bamboo. Grasslands appeared only in the last 30 million years and reshaped the world's mammals."},
+             {n:"Grasses", c:"Poaceae", a:60, g:"pla", w:2, d:"Wheat, rice, corn, sugar cane and bamboo. Grasslands appeared only in the last 30 million years and reshaped the world's mammals.",
+             k:[
+              {n:"Corn", c:"maize, Zea mays", a:0, g:"pla", w:2, e:true, d:"Bred by farmers in southern Mexico about 9,000 years ago from teosinte, a wild grass with a dozen hard kernels per ear. Evolution by human selection, and the first of the Three Sisters planted together with beans and squash."},
+              {n:"Wheat, rice & barley", a:0, g:"pla", w:1, d:"The grains that fed the first cities; between them, half the calories people eat."},
+              {n:"Bamboo, sugar cane & lawn grasses", a:0, g:"pla", w:1, d:"Bamboo is a grass that grows a metre a day; sugar cane is a grass you can chew."}
+             ]},
              {n:"Orchids", a:0, g:"pla", w:1, d:"The largest plant family, with flowers shaped for a single pollinator; vanilla is one."},
-             {n:"Lilies, onions & asparagus", a:0, g:"pla", w:1, d:"Bulbs and blooms: tulips, garlic, aloe and agave."},
-             {n:"Palms", a:0, g:"pla", w:1, d:"Coconut, date and oil palms; single stems that never branch."}
+             {n:"Lilies, onions & asparagus", a:100, g:"pla", w:1, d:"Bulbs and blooms: tulips, garlic, aloe and agave.",
+             k:[
+              {n:"Yucca & agave", a:0, g:"pla", w:1, d:"The yucca is New Mexico's state flower, pollinated by a single kind of moth that no other insect can replace; agave gives tequila and fibre."},
+              {n:"Onions, garlic & asparagus", a:0, g:"pla", w:1, d:"Kitchen bulbs and spears; wild ramps carpet Appalachian slopes in spring."},
+              {n:"Lilies & tulips", a:0, g:"pla", w:1, d:"Six-petalled flowers from bulbs; the Turk's-cap lily of the Virginia mountains."}
+             ]},
+             {n:"Palms", a:80, g:"pla", w:1, d:"Single stems that never branch, crowned with giant leaves.",
+             k:[
+              {n:"Sabal palmetto", c:"cabbage palm", a:0, g:"pla", w:1, d:"Florida's state tree, hurricane-proof and salt-tolerant; its growing bud was eaten as swamp cabbage."},
+              {n:"Coconut, date & oil palms", a:0, g:"pla", w:1, d:"Coconuts float across oceans to sprout on new beaches; oil palm plantations are replacing rainforest."}
+             ]}
             ]},
             {n:"Eudicots", a:125, g:"pla", w:2, d:"Two seed leaves and net-veined leaves: most trees, shrubs and garden flowers.",
             k:[
              {n:"Rosids", a:100, g:"pla", w:1, d:"A vast group: roses, beans, oaks, mustards and citrus.",
              k:[
               {n:"Rosaceae", c:"roses, apples, cherries, strawberries", a:0, g:"pla", w:1, d:"Roses, apples, pears, cherries, almonds, strawberries and raspberries."},
-              {n:"Fabaceae", c:"beans and peas", a:0, g:"pla", w:1, d:"Beans, peas, lentils, peanuts, clover and acacia; partners of nitrogen-fixing bacteria."},
-              {n:"Fagaceae", c:"oaks, beeches, chestnuts", a:0, g:"pla", w:1, d:"The dominant hardwoods of the eastern forests."},
-              {n:"Brassicaceae", c:"mustards, cabbage, Arabidopsis", a:0, g:"pla", w:1, d:"Cabbage, broccoli, kale and mustard, plus Arabidopsis, the lab plant whose genome was read first."},
-              {n:"Cucurbits & citrus", a:0, g:"pla", w:1, d:"Pumpkins, cucumbers, melons; oranges and lemons."}
+              {n:"Fabaceae", c:"beans and peas", a:60, g:"pla", w:1, d:"Beans, peas, lentils, peanuts, clover and acacia; partners of nitrogen-fixing bacteria that put nitrogen back into the soil.",
+              k:[
+               {n:"Common bean", c:"Phaseolus, the beans of the Americas", a:0, g:"pla", w:1, d:"Kidney, pinto, black and navy beans, domesticated in Mexico and the Andes; the second of the Three Sisters, climbing the corn and feeding the soil."},
+               {n:"Peas, lentils, soybeans & peanuts", a:0, g:"pla", w:1, d:"Old World and New: the pea that Mendel counted, lentils from the first farms, soy, and the peanut of South America."},
+               {n:"Clover, redbud & acacia", a:0, g:"pla", w:1, d:"Clover in every lawn, the redbud that flowers pink along Virginia roads in April, and the thorn trees of the African savanna."}
+              ]},
+              {n:"Fagaceae", c:"oaks, beeches, chestnuts", a:60, g:"pla", w:1, d:"The dominant hardwoods of the eastern forests.",
+              k:[
+               {n:"Oaks", a:0, g:"pla", w:1, d:"White oak, red oak, chestnut oak and live oak: acorns feed deer, bears, turkeys and jays, and the Virginia forest is largely theirs."},
+               {n:"American chestnut", a:0, g:"pla", w:1, d:"Once one tree in four in the Appalachian forest, killed back to sprouts by a fungus introduced around 1904; blight-resistant hybrids are being bred to bring it back."},
+               {n:"Beeches", a:0, g:"pla", w:1, d:"Smooth grey bark that people carve initials into; beech nuts fed the passenger pigeon."}
+              ]},
+              {n:"Walnuts, hickories & pecans", a:0, g:"pla", w:1, d:"Hickory nuts and black walnuts were staple foods of the eastern Native American nations; pecan is a hickory of the Mississippi valley."},
+              {n:"Mangroves", a:0, g:"pla", w:1, d:"Trees that stand in salt water on stilt roots; Florida's red mangroves build shoreline, nurse young fish and blunt hurricane surge."},
+              {n:"Brassicaceae", c:"the mustard family", a:25, g:"pla", w:1, d:"Four-petalled flowers in a cross and a peppery bite: mustards, cabbages, radishes and the lab plant Arabidopsis.",
+              k:[
+               {n:"Brassica oleracea crops", c:"kale, cabbage, broccoli, cauliflower, Brussels sprouts, kohlrabi", a:0, g:"pla", w:2, e:true, d:"One wild Mediterranean mustard, bred into six vegetables by selecting for leaves (kale, cabbage), flower buds (broccoli, cauliflower), side buds (Brussels sprouts) or stem (kohlrabi). All of them are still one species that can cross."},
+               {n:"Wild mustards, radish & turnip", a:0, g:"pla", w:1, d:"Field mustard, canola, radish, turnip and horseradish; the yellow sheets of flowers along spring roadsides."},
+               {n:"Arabidopsis", c:"thale cress", a:0, g:"pla", w:1, d:"A roadside weed that became the fruit fly of plant biology: small genome, six-week life, the first plant genome read, in 2000."}
+              ]},
+              {n:"Squashes & gourds", c:"cucurbits", a:0, g:"pla", w:1, d:"Pumpkins, zucchini, butternut, cucumbers and melons. Squash was domesticated in Mexico 10,000 years ago, before corn, and is the third of the Three Sisters, shading the soil beneath."},
+              {n:"Citrus", a:0, g:"pla", w:1, d:"Oranges, grapefruit, lemons and limes; Florida's orange groves descend from trees the Spanish planted in the 1500s."}
              ]},
              {n:"Asterids", a:100, g:"pla", w:1, d:"Sunflowers, tomatoes, mint, coffee and blueberries.",
              k:[
-              {n:"Asteraceae", c:"sunflowers and daisies", a:0, g:"pla", w:1, d:"Sunflowers, dandelions, lettuce and daisies; each 'flower' is a crowd of tiny ones."},
-              {n:"Solanaceae", c:"nightshades", a:0, g:"pla", w:1, d:"Tomato, potato, pepper, eggplant and tobacco."},
+              {n:"Asteraceae", c:"sunflowers and daisies", a:40, g:"pla", w:1, d:"Each 'flower' is a crowd of tiny ones packed into a head; the largest plant family after the orchids.",
+              k:[
+               {n:"Sunflower", a:0, g:"pla", w:1, d:"Domesticated about 4,000 years ago in what is now the eastern United States, one of the few crops that began north of Mexico; grown for seed and oil."},
+               {n:"Daisies, dandelions & lettuce", a:0, g:"pla", w:1, d:"Dandelion, aster, goldenrod, black-eyed Susan, lettuce, artichoke and chamomile."}
+              ]},
+              {n:"Solanaceae", c:"nightshades", a:30, g:"pla", w:1, d:"A family of the Americas that fed and changed the world: tomato, potato, pepper, tobacco; also deadly nightshade.",
+              k:[
+               {n:"Chile peppers", a:0, g:"pla", w:1, d:"Capsicum, domesticated in Mexico 6,000 years ago; the heat is capsaicin, which birds cannot taste. New Mexico's state vegetable, red or green."},
+               {n:"Potato & tomato", a:0, g:"pla", w:1, d:"Both from the Andes and Mexico; the potato is a swollen underground stem, and the tomato is a fruit that Europeans once thought poisonous."},
+               {n:"Tobacco", a:0, g:"pla", w:1, d:"Grown and smoked in the Americas for thousands of years; Virginia's first cash crop, from the 1610s, and the reason the colony survived."}
+              ]},
               {n:"Lamiaceae", c:"mints", a:0, g:"pla", w:1, d:"Mint, basil, oregano, lavender and rosemary."},
-              {n:"Ericaceae & coffee", a:0, g:"pla", w:1, d:"Blueberries, cranberries, rhododendrons; coffee and quinine."}
+              {n:"Ericaceae & coffee", a:0, g:"pla", w:1, d:"Blueberries, cranberries, rhododendrons; coffee and quinine."},
+              {n:"Dogwoods", a:0, g:"pla", w:1, d:"The flowering dogwood is Virginia's state tree and state flower; what look like four white petals are leaves around a cluster of tiny flowers."}
              ]},
              {n:"Cacti & carnations", c:"Caryophyllales", a:0, g:"pla", w:1, d:"Cacti, beets, spinach, quinoa and the Venus flytrap."},
              {n:"Maples & buttercups", a:0, g:"pla", w:1, d:"Maples, buttercups and poppies; among the earliest eudicot branches."}
@@ -424,7 +471,11 @@ k:[
             k:[
              {n:"Crustacea", a:500, g:"ani", w:2, d:"Crabs, lobsters, shrimp, barnacles, krill and copepods.",
              k:[
-              {n:"Decapods", c:"crabs, lobsters, shrimp", a:0, g:"ani", w:1, d:"Ten-legged crustaceans; crab shape has evolved at least five separate times."},
+              {n:"Decapods", c:"crabs, lobsters, shrimp", a:150, g:"ani", w:1, d:"Ten-legged crustaceans; crab shape has evolved at least five separate times.",
+              k:[
+               {n:"Blue crab & true crabs", a:0, g:"ani", w:1, d:"The Chesapeake blue crab, Callinectes sapidus, the savoury beautiful swimmer, with paddle-shaped back legs; the bay's signature catch."},
+               {n:"Lobsters, crayfish & shrimp", a:0, g:"ani", w:1, d:"Long-bodied decapods; Appalachian streams hold dozens of crayfish species found nowhere else."}
+              ]},
               {n:"Copepods & krill", a:0, g:"ani", w:1, d:"The grazers of the sea; krill feed the great whales."},
               {n:"Barnacles", a:0, g:"ani", w:1, d:"Crustaceans that glue their heads to rocks and kick food into their mouths; Darwin spent eight years on them."},
               {n:"Isopods & Daphnia", a:0, g:"ani", w:1, d:"Pill bugs in the garden, water fleas in the pond."}
@@ -456,7 +507,7 @@ k:[
            k:[
             {n:"Chitons", a:0, g:"ani", w:1, d:"Eight-plated shore grazers with teeth of magnetite, the hardest material any animal makes."},
             {n:"Gastropoda", c:"snails and slugs", a:0, g:"ani", w:2, d:"The largest mollusc class: garden snails, sea slugs, conchs, limpets."},
-            {n:"Bivalvia", c:"clams, oysters, mussels, scallops", a:0, g:"ani", w:2, d:"Two-shelled filter feeders; one Arctic clam lived more than 500 years."},
+            {n:"Bivalvia", c:"clams, oysters, mussels, scallops", a:0, g:"ani", w:2, d:"Two-shelled filter feeders; one Arctic clam lived more than 500 years. A single Chesapeake oyster filters 50 gallons of water a day, and the bay's reefs once filtered its whole volume in a week."},
             {n:"Cephalopoda", c:"octopus, squid, nautilus", a:0, g:"ani", w:2, d:"Big brains, colour-changing skin and jet propulsion; an intelligence that evolved separately from ours."}
            ]}
           ]}
@@ -482,7 +533,7 @@ k:[
                {n:"Sturgeons, gars & bowfin", a:0, g:"ani", w:1, d:"Ancient-style fishes; sturgeon give caviar and can live a century."},
                {n:"Teleostei", c:"teleost fishes", a:300, g:"ani", w:2, d:"About 30,000 species with a protrusible jaw: nearly every fish you can name.",
                k:[
-                {n:"Salmon & trout", a:0, g:"ani", w:1, d:"Migrate from sea to the stream of their birth, navigating by smell."},
+                {n:"Salmon & trout", a:0, g:"ani", w:1, d:"Migrate from sea to the stream of their birth, navigating by smell. The brook trout, Virginia's state fish, is the native trout of the cold Appalachian headwaters."},
                 {n:"Zebrafish & minnows", a:0, g:"ani", w:1, d:"Zebrafish embryos are transparent, making them a favourite for studying development."},
                 {n:"Cichlids", a:0, g:"ani", w:2, e:true, d:"Lake Victoria's 500 cichlid species arose in about 15,000 years, one of the fastest bursts of speciation known."},
                 {n:"Tuna, cod & perch", a:0, g:"ani", w:1, d:"The great fisheries; bluefin tuna are warm-blooded and cross oceans."},
@@ -494,7 +545,17 @@ k:[
               k:[
                {n:"Coelacanths", a:0, g:"ani", w:1, d:"Thought extinct for 66 million years until one turned up in a South African fish market in 1938."},
                {n:"Lungfishes", a:0, g:"ani", w:1, d:"Breathe air and survive drought sealed in a mud cocoon; the closest fishes to land animals."},
-               {n:"Tetrapoda", c:"four-limbed vertebrates", a:370, g:"ani", w:3, d:"Animals with four limbs and fingers, which came ashore about 370 million years ago.",
+               {n:"Tetrapodomorpha", c:"the fishes on the way to land", a:395, li:true, g:"ani", w:2, d:"Lobe-finned fishes whose fins grew shoulders, elbows and wrists. Every animal with four limbs, including you, is on this branch.",
+               k:[
+                {n:"Eusthenopteron", a:380, x:true, g:"ani", w:1, d:"A metre-long fish of Devonian rivers with the bones of an upper arm and forearm inside its front fins, but still fully a fish."},
+                {n:"Elpistostegalia", c:"flat-headed fishes with wrists", a:385, g:"ani", w:1, d:"Fishes with flattened heads, eyes on top, and fins that could prop the body up in shallow water.",
+                k:[
+                 {n:"Tiktaalik", c:"the fish with a neck and a wrist", a:375, x:true, g:"ani", w:3, d:"Found in Arctic Canada in 2004 in rocks of exactly the age and setting where its discoverers predicted it would be. A flat head, a neck, ribs, and fins with a wrist that could do a push-up. A fish, and also the beginning of a limb."},
+                 {n:"Stegocephali", c:"the first animals with fingers", a:372, g:"ani", w:1, d:"Animals with true digits instead of fin rays. The earliest of them had eight fingers and still lived in water.",
+                 k:[
+                  {n:"Acanthostega", a:365, x:true, g:"ani", w:1, d:"Eight fingers on each hand, gills, and a tail fin: legs evolved for shallow water, before there was any walking on land."},
+                  {n:"Ichthyostega", a:360, x:true, g:"ani", w:1, d:"Sturdier than Acanthostega, with a rib cage that could hold up its body out of water, though it probably moved like a seal."},
+               {n:"Tetrapoda", c:"four-limbed vertebrates", a:350, li:true, g:"ani", w:2, d:"The living four-limbed animals and everything descended from their common ancestor: amphibians, reptiles, birds and mammals.",
                k:[
                 {n:"Amphibia", a:290, g:"ani", w:2, d:"Frogs, salamanders and caecilians; thin skins that breathe and eggs that need water.",
                 k:[
@@ -509,26 +570,66 @@ k:[
                   {n:"Lepidosauria", a:250, g:"ani", w:2, d:"Scaly reptiles: lizards, snakes and the tuatara.",
                   k:[
                    {n:"Tuatara", a:0, g:"ani", w:1, d:"A single New Zealand survivor of a group older than the dinosaurs, with a third eye on top of its head."},
-                   {n:"Squamata", c:"lizards and snakes", a:0, g:"ani", w:2, e:true, d:"Snakes are lizards that lost their legs. Italian wall lizards moved to a new island in 1971 and evolved a new gut structure within 36 years."}
+                   {n:"Squamata", c:"lizards and snakes", a:190, g:"ani", w:2, d:"Scaly, with a loosely hinged jaw; snakes are lizards that lost their legs.",
+                   k:[
+                    {n:"Iguanas, geckos & wall lizards", a:0, g:"ani", w:1, e:true, d:"Italian wall lizards moved to a new island in 1971 and evolved a new gut structure within 36 years. Green anoles and fence lizards are the everyday lizards of Virginia and Florida."},
+                    {n:"Gila monster & monitors", a:0, g:"ani", w:1, d:"The Gila monster of the Southwest is one of the few venomous lizards; a compound in its saliva became a diabetes drug. Its cousins include the Komodo dragon."},
+                    {n:"Snakes", a:0, g:"ani", w:1, d:"Legless, with a jaw that unhinges to swallow prey whole. The timber rattlesnake and copperhead are Virginia's venomous species; the diamondback is New Mexico's."}
+                   ]}
                   ]},
                   {n:"Archelosauria", a:260, g:"ani", w:1, d:"Turtles, crocodilians and birds.",
                   k:[
-                   {n:"Testudines", c:"turtles and tortoises", a:0, g:"ani", w:2, d:"Ribs turned into a shell; giant tortoises pass 150 years."},
+                   {n:"Testudines", c:"turtles and tortoises", a:160, g:"ani", w:2, d:"Ribs turned into a shell; giant tortoises pass 150 years.",
+                   k:[
+                    {n:"Eastern box turtle", a:0, g:"ani", w:1, d:"Virginia's woodland turtle, with a hinged lower shell that closes it up completely; it can live a century and spends it within a few acres."},
+                    {n:"Gopher tortoise", a:0, g:"ani", w:1, d:"Florida's digging tortoise. Its burrows, up to 12 metres long, shelter more than 350 other species, which makes it a keystone of the sandhills."},
+                    {n:"Sea turtles", a:0, g:"ani", w:1, d:"Loggerheads and green turtles nest on Florida and Virginia beaches, then return decades later to the same sand, steering by the Earth's magnetic field."}
+                   ]},
                    {n:"Archosauria", a:250, g:"ani", w:2, d:"Ruling reptiles: crocodilians, the extinct dinosaurs and pterosaurs, and birds.",
                    k:[
-                    {n:"Crocodilia", c:"crocodiles, alligators, gharials", a:0, g:"ani", w:2, d:"Armoured ambush hunters with the strongest bite measured; they care for their young."},
+                    {n:"Crocodilia", c:"crocodiles, alligators, gharials", a:80, g:"ani", w:2, d:"Armoured ambush hunters with the strongest bite measured; they care for their young.",
+                    k:[
+                     {n:"American alligator", a:0, g:"ani", w:1, d:"The big reptile of Florida's swamps and rivers, hunted nearly to extinction by 1960 and now over a million strong; mothers guard the nest and carry hatchlings in their mouths."},
+                     {n:"Crocodiles & gharials", a:0, g:"ani", w:1, d:"Saltwater crocodiles reach six metres; the gharial's needle snout is built for catching fish."}
+                    ]},
+                    {n:"Dinosauria", c:"dinosaurs", a:235, li:true, g:"ani", w:2, d:"Upright legs tucked under the body, unlike a lizard's sprawl. They ruled the land for 165 million years, and one branch of them is still here: the birds.",
+                    k:[
+                     {n:"Triceratops", a:66, x:true, g:"ani", w:2, d:"A three-horned, frilled plant eater the size of a truck, among the last dinosaurs alive when the asteroid struck 66 million years ago."},
+                     {n:"Saurischia", c:"lizard-hipped dinosaurs", a:230, g:"ani", w:1, d:"The long-necked sauropods and the meat-eating theropods, which include the birds.",
+                     k:[
+                      {n:"Sauropods", c:"long-necked giants", a:66, x:true, g:"ani", w:1, d:"Brachiosaurus, Diplodocus and Argentinosaurus, the largest animals ever to walk on land, at up to 70 tonnes."},
+                      {n:"Theropoda", c:"meat-eating dinosaurs and birds", a:200, g:"ani", w:2, d:"Two-legged hunters with hollow bones. Feathers appeared here long before flight did.",
+                      k:[
+                       {n:"Tyrannosaurus rex", c:"T. rex", a:66, x:true, g:"ani", w:3, d:"Twelve metres long, with a bite of about six tonnes and eyes that faced forward like a hawk's. Lived in western North America until the very end of the Cretaceous. Closer kin to a chicken than to Triceratops."},
+                       {n:"Avialae", c:"the bird line", a:155, g:"ani", w:1, d:"Small feathered theropods that could fly, or nearly.",
+                       k:[
+                        {n:"Archaeopteryx", a:150, x:true, g:"ani", w:2, d:"A crow-sized animal with feathered wings and also teeth, clawed fingers and a long bony tail. Found in 1861, two years after Darwin's book, it was the first fossil to sit squarely between two groups."},
                     {n:"Aves", c:"birds", a:100, g:"ani", w:3, d:"Feathered dinosaurs that survived the asteroid. Warm-blooded, hollow-boned, and 11,000 species strong.",
                     k:[
                      {n:"Palaeognathae", c:"ostrich, emu, kiwi, tinamous", a:0, g:"ani", w:1, d:"Mostly flightless runners; the ostrich egg is the largest single cell."},
                      {n:"Galloanserae", c:"chickens, turkeys, ducks, geese", a:0, g:"ani", w:1, d:"The fowl and waterfowl; the chicken is the most numerous bird on Earth."},
                      {n:"Neoaves", a:65, g:"ani", w:2, d:"Nearly all other birds, which radiated explosively after the dinosaurs died.",
                      k:[
-                      {n:"Passeriformes", c:"songbirds", a:0, g:"ani", w:2, e:true, d:"Six in ten bird species: crows, sparrows, finches, warblers. Darwin's finches on the Galápagos change beak size within single droughts."},
+                      {n:"Passeriformes", c:"songbirds", a:50, g:"ani", w:2, d:"Six in ten bird species: crows, sparrows, finches, warblers; perching feet that lock onto a branch while they sleep.",
+                      k:[
+                       {n:"Cardinals, finches & Darwin's finches", a:0, g:"ani", w:1, e:true, d:"The northern cardinal, Virginia's state bird, and the seed-cracking finches. Darwin's finches on the Galápagos change beak size within single droughts."},
+                       {n:"Crows, jays & ravens", a:0, g:"ani", w:1, d:"The brainiest birds: they make tools, remember faces, and hold funerals of a kind."},
+                       {n:"Warblers, thrushes & sparrows", a:0, g:"ani", w:1, d:"The small migrants that fill Virginia's woods each May, many of them flying by night across the Gulf of Mexico."}
+                      ]},
                       {n:"Hummingbirds & swifts", a:0, g:"ani", w:1, d:"Hummingbirds hover with hearts beating 1,200 times a minute."},
                       {n:"Raptors & owls", a:0, g:"ani", w:1, d:"Eagles, hawks, falcons and owls; a peregrine dives past 300 km/h."},
                       {n:"Parrots", a:0, g:"ani", w:1, d:"Brainy, long-lived, and the closest relatives of the songbirds."},
                       {n:"Penguins & seabirds", a:0, g:"ani", w:1, d:"Penguins fly underwater; albatrosses circle the Southern Ocean for years without landing."},
-                      {n:"Pigeons, cuckoos & shorebirds", a:0, g:"ani", w:1, d:"City pigeons, migrating sandpipers, and cuckoos that lay eggs in other birds' nests."}
+                      {n:"Pigeons, cuckoos & shorebirds", a:60, g:"ani", w:1, d:"City pigeons, migrating sandpipers, and cuckoos that lay eggs in other birds' nests.",
+                      k:[
+                       {n:"Roadrunner & cuckoos", a:0, g:"ani", w:1, d:"The greater roadrunner of New Mexico runs down lizards and rattlesnakes at 30 km/h and rarely bothers to fly; its cuckoo cousins lay eggs in other birds' nests."},
+                       {n:"Pigeons & doves", a:0, g:"ani", w:1, d:"City pigeons and mourning doves; the passenger pigeon, once the most numerous bird in North America, was hunted to extinction by 1914."},
+                       {n:"Sandpipers, gulls & plovers", c:"shorebirds", a:0, g:"ani", w:1, d:"Red knots refuel on horseshoe-crab eggs in the Chesapeake and Delaware bays on a flight from the tip of South America to the Arctic."}
+                      ]}
+                     ]}
+                    ]}
+                       ]}
+                      ]}
                      ]}
                     ]}
                    ]}
@@ -544,7 +645,12 @@ k:[
                     {n:"Marsupialia", c:"marsupials", a:0, g:"ani", w:2, d:"Kangaroos, koalas, wombats, Tasmanian devils and the opossum; born tiny and finished in a pouch."},
                     {n:"Placentalia", c:"placental mammals", a:100, g:"ani", w:2, d:"Young nourished inside the mother by a placenta; most living mammals.",
                     k:[
-                     {n:"Afrotheria", a:0, g:"ani", w:2, d:"An African-rooted group: elephants, manatees, aardvarks, hyraxes, tenrecs and elephant shrews."},
+                     {n:"Afrotheria", a:65, g:"ani", w:2, d:"An African-rooted group: elephants, manatees, aardvarks, hyraxes, tenrecs and elephant shrews.",
+                     k:[
+                      {n:"Elephants", a:0, g:"ani", w:1, d:"The largest land animals, with a nose that can pick up a peanut; their closest relatives are the sea cows and the rabbit-sized hyrax."},
+                      {n:"Manatees & dugongs", c:"sea cows", a:0, g:"ani", w:1, d:"Slow plant-eaters of warm shallow water. The Florida manatee winters in springs and power-plant outflows; boat strikes are its main danger."},
+                      {n:"Aardvarks, hyraxes & tenrecs", a:0, g:"ani", w:1, d:"An odd African assortment that DNA showed to be close kin: ant-eating aardvarks, rock hyraxes, and the hedgehog-like tenrecs of Madagascar."}
+                     ]},
                      {n:"Xenarthra", c:"sloths, armadillos, anteaters", a:0, g:"ani", w:2, d:"South American mammals with extra joints in the spine; sloths move so slowly algae grows on them."},
                      {n:"Laurasiatheria", a:80, g:"ani", w:2, d:"A northern-rooted group: bats, carnivores, hoofed mammals and whales.",
                      k:[
@@ -552,15 +658,35 @@ k:[
                       {n:"Chiroptera", c:"bats", a:0, g:"ani", w:2, d:"The only flying mammals and a fifth of all mammal species; they navigate by echo."},
                       {n:"Carnivora", a:50, g:"ani", w:2, d:"Meat-eating teeth: cats, dogs, bears, seals, weasels and hyenas.",
                       k:[
-                       {n:"Felidae", c:"cats", a:0, g:"ani", w:1, d:"Lions, tigers, cheetahs and the house cat; retractable claws and pure meat diets."},
+                       {n:"Felidae", c:"cats", a:11, g:"ani", w:1, d:"Retractable claws and pure meat diets, from the house cat to the tiger.",
+                       k:[
+                        {n:"Big cats", c:"lions, tigers, jaguars, leopards", a:0, g:"ani", w:1, d:"The roaring cats; the jaguar once ranged into the American Southwest."},
+                        {n:"Cougar", c:"mountain lion, Florida panther", a:0, g:"ani", w:1, d:"One species from the Yukon to Patagonia; the Florida panther is its last population east of the Mississippi, about 200 animals."},
+                        {n:"Domestic cat & small cats", a:0, g:"ani", w:1, d:"Bobcats, lynx, ocelots, and the house cat, which domesticated itself around Middle Eastern grain stores 10,000 years ago."}
+                       ]},
                        {n:"Canidae", c:"dogs, wolves, foxes", a:0, g:"ani", w:1, e:true, d:"Wolves became dogs at human campfires 15,000 to 30,000 years ago, the first domesticated animal."},
-                       {n:"Ursidae", c:"bears", a:0, g:"ani", w:1, d:"Polar bears split from brown bears only a few hundred thousand years ago."},
+                       {n:"Ursidae", c:"bears", a:5, g:"ani", w:1, d:"Big, flat-footed omnivores that sleep through winter.",
+                       k:[
+                        {n:"American black bear", a:0, g:"ani", w:1, d:"The bear of Virginia's mountains and New Mexico's forests; a fine climber that lives mostly on plants, nuts and insects."},
+                        {n:"Brown & polar bears", a:0, g:"ani", w:1, e:true, d:"Polar bears split from brown bears only a few hundred thousand years ago, and the two still interbreed where the sea ice retreats."},
+                        {n:"Giant panda", a:0, g:"ani", w:1, d:"A carnivore by ancestry that eats bamboo all day, with a thumb made from a wrist bone."}
+                       ]},
                        {n:"Pinnipedia", c:"seals, sea lions, walrus", a:0, g:"ani", w:1, d:"Carnivores that went back to sea; elephant seals dive a mile deep."}
                       ]},
                       {n:"Perissodactyla", c:"horses, rhinos, tapirs", a:0, g:"ani", w:1, d:"Odd-toed hoofed mammals; the horse fossil record is one of evolution's classic sequences."},
                       {n:"Artiodactyla", c:"even-toed hoofed mammals and whales", a:55, g:"ani", w:2, d:"Pigs, camels, deer, cattle, giraffes, hippos and, from within them, the whales.",
                       k:[
-                       {n:"Cattle, sheep, deer, giraffes", c:"ruminants", a:0, g:"ani", w:1, d:"Four-chambered stomachs full of microbes that digest grass for them."},
+                       {n:"Ruminantia", c:"cattle, sheep, deer, giraffes", a:30, g:"ani", w:1, d:"Four-chambered stomachs full of microbes that digest grass for them.",
+                       k:[
+                        {n:"Bovidae", c:"cattle, sheep, goats, bison, antelope", a:0, g:"ani", w:1, d:"Horns that are never shed: cows, sheep, goats, the American bison, and the true antelopes of Africa and Asia."},
+                        {n:"Pronghorn", c:"American antelope", a:0, g:"ani", w:2, d:"Not an antelope at all, but the last of a family found only in North America. The fastest runner in the Americas, built to outrun a cheetah that went extinct 12,000 years ago."},
+                        {n:"Giraffes & okapi", a:0, g:"ani", w:1, d:"The giraffe's neck has the same seven bones as yours, each one stretched."},
+                        {n:"Cervidae", c:"deer", a:15, g:"ani", w:1, d:"Antlers of bone, grown and shed every year.",
+                        k:[
+                         {n:"Caribou", c:"reindeer", a:0, g:"ani", w:2, d:"The only deer in which females grow antlers; herds migrate farther than any other land mammal, up to 1,300 km a year across the Arctic."},
+                         {n:"White-tailed deer", a:0, g:"ani", w:1, d:"The deer of Virginia's woods and suburbs, more numerous now than when the colonists arrived."}
+                        ]}
+                       ]},
                        {n:"Pigs & camels", a:0, g:"ani", w:1, d:"Pigs, warthogs, camels, llamas."},
                        {n:"Hippopotamus", a:0, g:"ani", w:1, d:"The closest living land relatives of whales."},
                        {n:"Cetacea", c:"whales and dolphins", a:0, g:"ani", w:2, d:"Hoofed mammals that returned to the sea 50 million years ago; the blue whale is the largest animal that has ever lived."}
@@ -578,13 +704,57 @@ k:[
                        {n:"Catarrhini", c:"Old World monkeys and apes", a:25, g:"ani", w:2, d:"Baboons, macaques, colobus monkeys, and the apes.",
                        k:[
                         {n:"Cercopithecidae", c:"Old World monkeys", a:0, g:"ani", w:1, d:"Baboons, macaques, mandrills and langurs."},
-                        {n:"Hominoidea", c:"apes", a:18, g:"ani", w:2, d:"Tailless primates with flexible shoulders: gibbons and the great apes.",
+                        {n:"Hominoidea", c:"apes", a:18, g:"ani", w:2, d:"Tailless primates with flexible shoulders that can swing overhead: gibbons and the great apes.",
                         k:[
                          {n:"Gibbons", a:0, g:"ani", w:1, d:"Small apes that swing arm over arm through the canopy and sing duets."},
-                         {n:"Orangutans", a:0, g:"ani", w:1, d:"Solitary Asian apes; mothers teach their young for eight years."},
-                         {n:"Gorillas", a:0, g:"ani", w:1, d:"Gentle leaf-eaters; the largest living primates."},
-                         {n:"Chimpanzees & bonobos", a:0, g:"ani", w:2, d:"Our closest living relatives, sharing about 98.8% of our DNA; they use tools and hold grudges."},
-                         {n:"Homo sapiens", c:"humans", a:0, g:"ani", w:3, e:true, d:"One surviving species of a once-bushy branch, about 300,000 years old, still evolving: lactose tolerance, high-altitude breathing and malaria resistance all arose in the last 10,000 years."}
+                         {n:"Hominidae", c:"great apes", a:16, g:"ani", w:1, d:"Orangutans, gorillas, chimpanzees, bonobos and humans: big-brained, long-lived, slow to grow up.",
+                         k:[
+                          {n:"Orangutans", a:0, g:"ani", w:1, d:"Solitary Asian apes; mothers teach their young for eight years."},
+                          {n:"Homininae", c:"African great apes", a:9, g:"ani", w:1, d:"Gorillas, chimpanzees, bonobos and the human line.",
+                          k:[
+                           {n:"Gorillas", a:0, g:"ani", w:1, d:"Gentle leaf-eaters; the largest living primates."},
+                           {n:"Hominini", c:"chimpanzees and the human line", a:7, g:"ani", w:1, d:"The split that matters most to us, about seven million years ago. No living ape is our ancestor; chimpanzees are cousins who took the other fork.",
+                           k:[
+                            {n:"Chimpanzees & bonobos", a:0, g:"ani", w:2, d:"Our closest living relatives, sharing about 98.8% of our DNA; they use tools and hold grudges. A chimpanzee's shoulder is built for hanging; ours is built for throwing."},
+                            {n:"Hominina", c:"the human line", a:6.8, g:"ani", w:2, d:"Everything on our side of the chimpanzee split. A bush of at least twenty species, of which one is left.",
+                            k:[
+                             {n:"Sahelanthropus", a:6.5, x:true, g:"ani", w:1, d:"A skull from Chad about seven million years old, with the spinal cord entering from below, the sign of a head held upright. The oldest candidate for our line."},
+                             {n:"Ardipithecus & the australopiths", a:6, g:"ani", w:1, d:"Upright walkers with small brains, still good climbers.",
+                             k:[
+                              {n:"Ardipithecus", c:"Ardi", a:4.4, x:true, g:"ani", w:1, d:"A grasping big toe for climbing and a pelvis for walking, 4.4 million years ago in Ethiopia. Walking came long before the big brain."},
+                              {n:"Australopiths & Homo", a:4.2, g:"ani", w:1, d:"Fully upright walkers; the Laetoli footprints, 3.7 million years old, were made by feet much like yours.",
+                              k:[
+                               {n:"Australopithecus afarensis", c:"Lucy's species", a:2.9, x:true, g:"ani", w:2, d:"Lucy, found in 1974: a metre tall, a chimp-sized brain, and knees and hips that walked upright. Small-brained and bipedal for a million years."},
+                               {n:"Paranthropus & Homo", a:3, g:"ani", w:1, d:"Two answers to a drying Africa: huge grinding teeth, or bigger brains and tools.",
+                               k:[
+                                {n:"Paranthropus", c:"the robust australopiths", a:1.2, x:true, g:"ani", w:1, d:"Massive jaws and molars for chewing tough plants, and a crest on the skull to anchor the muscles. A side branch that lasted a million years beside early Homo."},
+                                {n:"Homo", c:"our genus", a:2.8, g:"ani", w:2, d:"Bigger brains, smaller teeth, stone tools, and eventually fire. Several species of Homo were alive at the same time for most of the last two million years.",
+                                k:[
+                                 {n:"Homo habilis", c:"handy man", a:1.65, x:true, g:"ani", w:1, d:"The first toolmaker we know by name, chipping sharp flakes from cobbles 2.4 million years ago; brain half the size of yours."},
+                                 {n:"Homo erectus & later Homo", a:2, g:"ani", w:1, d:"Long legs, a body built for walking far, and the first spread out of Africa.",
+                                 k:[
+                                  {n:"Homo erectus", a:0.11, x:true, g:"ani", w:2, d:"Tall and long-legged, with a brain two thirds the size of ours; used fire, made hand axes, and walked from Africa to Java and China. Lasted nearly two million years, longer than any other human species."},
+                                  {n:"Homo floresiensis", c:"the hobbit", a:0.05, x:true, g:"ani", w:1, d:"A metre-tall human from the island of Flores, Indonesia, alive until about 50,000 years ago; probably a shrunken island descendant of an erectus-like ancestor."},
+                                  {n:"Homo naledi", a:0.24, x:true, g:"ani", w:1, d:"Found deep in a South African cave in 2013: a small brain and a mix of old and new features, alive as recently as 240,000 years ago, alongside early Homo sapiens."},
+                                  {n:"Homo heidelbergensis & descendants", a:0.8, g:"ani", w:1, d:"Big-brained humans who made spears and, later, split into three peoples.",
+                                  k:[
+                                   {n:"Homo heidelbergensis", a:0.3, x:true, g:"ani", w:1, d:"Hunted big game with wooden spears 400,000 years ago in Europe and Africa; the likely common ancestor of Neanderthals, Denisovans and us."},
+                                   {n:"Neanderthals, Denisovans & us", a:0.6, g:"ani", w:1, d:"Three sister peoples who met and had children together; their DNA is in most people alive.",
+                                   k:[
+                                    {n:"Neanderthals", c:"Homo neanderthalensis", a:0.04, x:true, g:"ani", w:2, d:"Stocky, big-brained Ice Age Europeans who buried their dead, made ornaments and glue, and vanished 40,000 years ago. About two percent of the DNA of everyone outside Africa is theirs."},
+                                    {n:"Denisovans", a:0.05, x:true, g:"ani", w:1, d:"Known first from a finger bone in a Siberian cave and its DNA, in 2010; a whole people reconstructed from a genome. Their genes help Tibetans breathe thin air today."},
+                                    {n:"Homo sapiens", c:"humans", a:0, g:"ani", w:3, e:true, d:"One surviving species of a once-bushy branch, about 300,000 years old, still evolving: lactose tolerance, high-altitude breathing and malaria resistance all arose in the last 10,000 years."}
+                                   ]}
+                                  ]}
+                                 ]}
+                                ]}
+                               ]}
+                              ]}
+                             ]}
+                            ]}
+                           ]}
+                          ]}
+                         ]}
                         ]}
                        ]}
                       ]}
@@ -592,6 +762,9 @@ k:[
                     ]}
                    ]}
                   ]}
+                 ]}
+                ]}
+               ]}
                  ]}
                 ]}
                ]}
@@ -627,7 +800,7 @@ const GROUPS = {
 
 // Time scale breakpoints: age (Ma) -> fraction of radius. Piecewise linear so recent
 // history, where most branching happens, gets room; the rings are labelled honestly.
-const TIME_SCALE = [[3800,0],[2500,0.25],[1800,0.35],[1000,0.47],[540,0.58],[250,0.74],[100,0.86],[0,1]];
+const TIME_SCALE = [[3800,0],[2500,0.25],[1800,0.35],[1000,0.47],[540,0.58],[250,0.74],[100,0.86],[10,0.955],[1,0.985],[0,1]];
 // Angular weight per group: microbial tips get wider slots so their deep branches are legible.
 const SLOT_WEIGHT = {bac:1.9, arc:1.9, pro:1.4, sar:1.4};
 
@@ -662,7 +835,7 @@ function layout(TREE, TIME_SCALE, opts){
   (function count(n,parent,depth,path){
     n._id = path; n._parent=parent; n._depth=depth; nodes.push(n);
     if (n.k && n.k.length){ n._leaves=0; n._slots=0; n.k.forEach((c,i)=>{ count(c,n,depth+1,path+"."+i); n._leaves+=c._leaves; n._slots+=c._slots; }); }
-    else { n._leaves=1; n._slots=SW[n.g]||1; leafCount++; slotTotal+=n._slots; }
+    else { n._leaves=n.x?0:1; n._slots=SW[n.g]||1; if(!n.x) leafCount++; slotTotal+=n._slots; }
   })(TREE,null,0,"0");
   const total=leafCount;
   const start = -Math.PI/2 + (gapDeg/2)*Math.PI/180;
@@ -682,7 +855,7 @@ function layout(TREE, TIME_SCALE, opts){
     n._r = scaleAge(n.a, TIME_SCALE);
     if (n.k && n.k.length){ n.k.forEach(place); n._t = (n.k[0]._t + n.k[n.k.length-1]._t)/2; }
     else { n._t = start + span*(li+n._slots/2)/slotTotal; li+=n._slots; }
-    n._w = 1 + 5*Math.sqrt(n._leaves/total);
+    n._w = 1 + 5*Math.sqrt(Math.max(n._leaves,0.35)/total);
   })(TREE);
   return {nodes, total, start, span};
 }
@@ -805,8 +978,13 @@ function renderSVG(TREE, GROUPS, TIME_SCALE, EVENTS, opts){
     const isLeaf=!(n.k&&n.k.length);
     const colr=T.col(key(n));
     const rad = n.w>=3?7:(n.w===2?5:3.5);
-    let g=`<g class="node w${n.w}${isLeaf?' leaf':''}${n.e?' evolving':''}" data-id="${n._id}" data-name="${esc(n.n)}">`;
-    if (isLeaf){
+    let g=`<g class="node w${n.w}${isLeaf?' leaf':''}${n.e?' evolving':''}${n.x?' extinct':''}" data-id="${n._id}" data-name="${esc(n.n)}">`;
+    if (isLeaf && n.x){
+      // extinct: a hollow ring with a bar through it, drawn at the age the lineage was last alive
+      g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad+1}" fill="${T.bg}" stroke="${colr}" stroke-width="2"/>`;
+      const ct=Math.cos(n._t+Math.PI/2), st=Math.sin(n._t+Math.PI/2), rr=rad+3;
+      g+=`<line x1="${(x-ct*rr).toFixed(1)}" y1="${(y-st*rr).toFixed(1)}" x2="${(x+ct*rr).toFixed(1)}" y2="${(y+st*rr).toFixed(1)}" stroke="${colr}" stroke-width="2"/>`;
+    } else if (isLeaf){
       g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad}" fill="${colr}"/>`;
       if (n.e){ g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad+5}" fill="none" stroke="${colr}" stroke-width="1.5" stroke-dasharray="3 3"/>`; }
     } else {
@@ -817,16 +995,17 @@ function renderSVG(TREE, GROUPS, TIME_SCALE, EVENTS, opts){
     const flip = (deg>90 && deg<270) || (deg<-90);
     if (isLeaf && n.w>=labelLevel){
       const off = rad+9 + (n.e?5:0);
-      const fs = n.w>=3?15:(n.w===2?13:11.5);
-      const anchor = flip?'end':'start';
+      const fs = n.x?(n.w>=3?13.5:(n.w===2?12.5:11.5)):(n.w>=3?15:(n.w===2?13:11.5));
+      const inw = false; // extinct tips keep outward labels; their own ray is the emptiest direction
+      const anchor = (flip!==inw)?'end':'start';
       const rot = flip?deg+180:deg;
-      g+=`<text transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(2)})" x="${flip?-off:off}" y="4" text-anchor="${anchor}" font-size="${fs}" font-weight="${n.w>=2?600:400}" fill="${colr}">${esc(n.n)}${n.e?' ✦':''}</text>`;
+      g+=`<text transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(2)})" x="${(flip!==inw)?-off:off}" y="4" text-anchor="${anchor}" font-size="${fs}" font-weight="${n.w>=2?600:400}" fill="${colr}"${n.x?` stroke="${T.bg}" stroke-width="4" paint-order="stroke" stroke-linejoin="round"`:''}>${n.x?'† ':''}${esc(n.n)}${n.e?' ✦':''}</text>`;
     } else if (!isLeaf && n.w>=2){
       const fs = n.w>=3?17:12.5;
       const halo = T.bg;
       // place label just outside the node along its angle, but keep upright
       const off = rad+6;
-      const inward = n._r>0.84; // near the rim: point the label back toward the centre so it clears the tip labels
+      const inward = !!n.li || n._r>0.84; // near the rim (or flagged li in the data): point the label back toward the centre so it clears the tip labels
       const anchor = (flip!==inward)?'end':'start';
       const rot = flip?deg+180:deg;
       const text = n.w>=3?n.n.toUpperCase():n.n;
@@ -861,7 +1040,7 @@ function renderSVG(TREE, GROUPS, TIME_SCALE, EVENTS, opts){
     out.push(`<text x="${rx}" y="${S-124}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">The centre is LUCA, the last ancestor shared by all life. Time runs outward; the rim is today.</text>`);
     out.push(`<text x="${rx}" y="${S-102}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">The scale stretches recent time so the crowded last 600 million years have room. Rings mark the ages on the axis.</text>`);
     out.push(`<text x="${rx}" y="${S-80}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">Line width follows how many living groups a branch holds. Eukaryotes, including us, branch from within the archaea.</text>`);
-    out.push(`<text x="${rx}" y="${S-58}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">✦ marks a lineage in which evolution has been watched happening in our own lifetimes. Every tip is still evolving.</text>`);
+    out.push(`<text x="${rx}" y="${S-58}" text-anchor="end" font-size="15" fill="${T.fg}" fill-opacity="0.85">✦ marks a lineage in which evolution has been watched happening in our own lifetimes. † marks an extinct branch, drawn to when it was last alive.</text>`);
     out.push(`</g>`);
   }
   out.push(`</svg>`);
@@ -977,7 +1156,6 @@ const IMAGES={
 "Fabaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Flowering_kudzu.jpg/500px-Flowering_kudzu.jpg","p":"https://commons.wikimedia.org/wiki/File:Flowering_kudzu.jpg","l":"Public domain","b":"Peggy Greb, USDA"},
 "Fagaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Fagus_sylvatica_020-2.jpg/500px-Fagus_sylvatica_020-2.jpg","p":"https://commons.wikimedia.org/wiki/File:Fagus_sylvatica_020-2.jpg","l":"CC BY 2.5","b":"Willow"},
 "Brassicaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Barbarea_vulgaris_002.JPG/500px-Barbarea_vulgaris_002.JPG","p":"https://commons.wikimedia.org/wiki/File:Barbarea_vulgaris_002.JPG","l":"CC BY-SA 3.0","b":"H. Zell"},
-"Cucurbits & citrus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Hodgsonia_heteroclita_male.jpg/500px-Hodgsonia_heteroclita_male.jpg","p":"https://commons.wikimedia.org/wiki/File:Hodgsonia_heteroclita_male.jpg","l":"Public domain","b":"John Fergusson Cathcart (historic plate)"},
 "Asterids":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Potapsco_fg13.jpg/500px-Potapsco_fg13.jpg","p":"https://commons.wikimedia.org/wiki/File:Potapsco_fg13.jpg","l":"CC BY-SA 2.5","b":"Fritz Geller-Grimm"},
 "Asteraceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Asteracea_poster_3.jpg/500px-Asteracea_poster_3.jpg","p":"https://commons.wikimedia.org/wiki/File:Asteracea_poster_3.jpg","l":"CC BY-SA 3.0","b":"Alvesgaspar, Tony Wills"},
 "Solanaceae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Brugmansia_lg.jpg/500px-Brugmansia_lg.jpg","p":"https://commons.wikimedia.org/wiki/File:Brugmansia_lg.jpg","l":"Public domain","b":"Wikimedia Commons"},
@@ -1082,7 +1260,7 @@ const IMAGES={
 "Sarcopterygii":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Sarcopterygii.png/500px-Sarcopterygii.png","p":"https://commons.wikimedia.org/wiki/File:Sarcopterygii.png","l":"CC BY-SA 4.0","b":"ArthurWeasley, Bruce A. S. Henderson and others"},
 "Coelacanths":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Coelacanth_off_Pumula_on_the_KwaZulu-Natal_South_Coast%2C_South_Africa%2C_on_22_November_2019.png/500px-Coelacanth_off_Pumula_on_the_KwaZulu-Natal_South_Coast%2C_South_Africa%2C_on_22_November_2019.png","p":"https://commons.wikimedia.org/wiki/File:Coelacanth_off_Pumula_on_the_KwaZulu-Natal_South_Coast%2C_South_Africa%2C_on_22_November_2019.png","l":"CC BY 4.0","b":"Bruce A. S. Henderson"},
 "Lungfishes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Neoceratodus_forsteri%2C_2014-09-19.JPG/500px-Neoceratodus_forsteri%2C_2014-09-19.JPG","p":"https://commons.wikimedia.org/wiki/File:Neoceratodus_forsteri%2C_2014-09-19.JPG","l":"CC BY-SA 4.0","b":"Mitch Ames"},
-"Tetrapoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Tiktaalik_Chicago.JPG/500px-Tiktaalik_Chicago.JPG","p":"https://commons.wikimedia.org/wiki/File:Tiktaalik_Chicago.JPG","l":"CC BY-SA 3.0","b":"Eduard Solà","n":"Tiktaalik, a 375-million-year-old fish with the beginnings of limbs; a fossil, not a living animal."},
+"Tetrapoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Extant_tetrapoda.jpg/500px-Extant_tetrapoda.jpg","p":"https://commons.wikimedia.org/wiki/File:Extant_tetrapoda.jpg","l":"Public domain","b":"Petter Bøckman","n":"The four living groups of tetrapods: amphibians, reptiles, birds and mammals."},
 "Amphibia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Litoria_phyllochroa.JPG/500px-Litoria_phyllochroa.JPG","p":"https://commons.wikimedia.org/wiki/File:Litoria_phyllochroa.JPG","l":"CC BY-SA 3.0","b":"Froggydarb"},
 "Anura":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Red-eyed_Leaf_Frog_(49661076226).jpg/500px-Red-eyed_Leaf_Frog_(49661076226).jpg","p":"https://commons.wikimedia.org/wiki/File:Red-eyed_Leaf_Frog_(49661076226).jpg","l":"CC BY 2.0","b":"Charlie Jackson"},
 "Caudata":{"u":"https://upload.wikimedia.org/wikipedia/commons/b/b2/SpottedSalamander.jpg","p":"https://commons.wikimedia.org/wiki/File:SpottedSalamander.jpg","l":"CC BY-SA 3.0","b":"Scott Camazine"},
@@ -1096,7 +1274,7 @@ const IMAGES={
 "Testudines":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Turtle_diversity.jpg/500px-Turtle_diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Turtle_diversity.jpg","l":"CC BY-SA 4.0","b":"respective owners"},
 "Archosauria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Crocodile_Front_Egret_Kabini_Nagarhole_Apr22_D72_23712.jpg/500px-Crocodile_Front_Egret_Kabini_Nagarhole_Apr22_D72_23712.jpg","p":"https://commons.wikimedia.org/wiki/File:Crocodile_Front_Egret_Kabini_Nagarhole_Apr22_D72_23712.jpg","l":"CC BY-SA 4.0","b":"Timothy A. Gonsalves"},
 "Crocodilia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Crocodilia_montage.jpg/500px-Crocodilia_montage.jpg","p":"https://commons.wikimedia.org/wiki/File:Crocodilia_montage.jpg","l":"CC BY-SA 4.0","b":"LittleJerry"},
-"Aves":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Archaeopteryx_lithographica_(Berlin_specimen).jpg/500px-Archaeopteryx_lithographica_(Berlin_specimen).jpg","p":"https://commons.wikimedia.org/wiki/File:Archaeopteryx_lithographica_(Berlin_specimen).jpg","l":"CC BY-SA 3.0","b":"H. Raab","n":"Archaeopteryx, a 150-million-year-old feathered dinosaur near the base of the bird line; the Berlin fossil."},
+"Aves":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/House_sparrow_David_Raju_(2).jpg/500px-House_sparrow_David_Raju_(2).jpg","p":"https://commons.wikimedia.org/wiki/File:House_sparrow_David_Raju_(2).jpg","l":"CC BY-SA 4.0","b":"David Raju","n":"A house sparrow: a small living dinosaur."},
 "Palaeognathae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Struthio_Diversity.jpg/500px-Struthio_Diversity.jpg","p":"https://commons.wikimedia.org/wiki/File:Struthio_Diversity.jpg","l":"CC BY 2.0","b":"PaleoNeolitic and others"},
 "Galloanserae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alectura_lathami_-_Centenary_Lakes.jpg/500px-Alectura_lathami_-_Centenary_Lakes.jpg","p":"https://commons.wikimedia.org/wiki/File:Alectura_lathami_-_Centenary_Lakes.jpg","l":"CC BY 3.0","b":"JJ Harrison"},
 "Neoaves":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/House_sparrow_David_Raju_(2).jpg/500px-House_sparrow_David_Raju_(2).jpg","p":"https://commons.wikimedia.org/wiki/File:House_sparrow_David_Raju_(2).jpg","l":"CC BY-SA 4.0","b":"David Raju"},
@@ -1124,7 +1302,6 @@ const IMAGES={
 "Pinnipedia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Pinnipeds_vertical_version_montage.jpg/500px-Pinnipeds_vertical_version_montage.jpg","p":"https://commons.wikimedia.org/wiki/File:Pinnipeds_vertical_version_montage.jpg","l":"CC0","b":"various contributors"},
 "Perissodactyla":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/The_Perissodactyl.jpg/500px-The_Perissodactyl.jpg","p":"https://commons.wikimedia.org/wiki/File:The_Perissodactyl.jpg","l":"CC BY-SA 4.0","b":"LittleJerry"},
 "Artiodactyla":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/The_Cetartiodactyla.jpg/500px-The_Cetartiodactyla.jpg","p":"https://commons.wikimedia.org/wiki/File:The_Cetartiodactyla.jpg","l":"CC BY-SA 4.0","b":"LittleJerry"},
-"Cattle, sheep, deer, giraffes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Ruminantia.jpg/500px-Ruminantia.jpg","p":"https://commons.wikimedia.org/wiki/File:Ruminantia.jpg","l":"Public domain","b":"various contributors"},
 "Pigs & camels":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg/500px-07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg","p":"https://commons.wikimedia.org/wiki/File:07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg","l":"CC BY-SA 3.0","b":"Jjron"},
 "Hippopotamus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Portrait_Hippopotamus_in_the_water.jpg/500px-Portrait_Hippopotamus_in_the_water.jpg","p":"https://commons.wikimedia.org/wiki/File:Portrait_Hippopotamus_in_the_water.jpg","l":"CC BY-SA 4.0","b":"Muhammad Mahdi Karim"},
 "Cetacea":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Mother_and_baby_sperm_whale.jpg/500px-Mother_and_baby_sperm_whale.jpg","p":"https://commons.wikimedia.org/wiki/File:Mother_and_baby_sperm_whale.jpg","l":"CC BY-SA 2.0","b":"Gabriel Barathieu"},
@@ -1142,7 +1319,106 @@ const IMAGES={
 "Orangutans":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG/500px-Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG","p":"https://commons.wikimedia.org/wiki/File:Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG","l":"CC BY-SA 3.0","b":"Eleifert"},
 "Gorillas":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg/500px-Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg","p":"https://commons.wikimedia.org/wiki/File:Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg","l":"CC BY-SA 4.0","b":"Thurundir"},
 "Chimpanzees & bonobos":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg/500px-015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","p":"https://commons.wikimedia.org/wiki/File:015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","l":"CC BY-SA 4.0","b":"Giles Laurent"},
-"Homo sapiens":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/68/Akha_cropped_hires.JPG","p":"https://commons.wikimedia.org/wiki/File:Akha_cropped_hires.JPG","l":"CC BY-SA 2.0 de","b":"Weltenbummler84"}
+"Homo sapiens":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/68/Akha_cropped_hires.JPG","p":"https://commons.wikimedia.org/wiki/File:Akha_cropped_hires.JPG","l":"CC BY-SA 2.0 de","b":"Weltenbummler84"},
+"Pines":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Pinus_edulis_Torrey-UT.jpg/500px-Pinus_edulis_Torrey-UT.jpg","p":"https://commons.wikimedia.org/wiki/File:Pinus_edulis_Torrey-UT.jpg","l":"CC BY-SA 2.0","b":"jotor (Flickr)"},
+"Spruces, firs & hemlocks":{"u":"https://upload.wikimedia.org/wikipedia/commons/2/24/Tsuga_canadensis_morton.jpg","p":"https://commons.wikimedia.org/wiki/File:Tsuga_canadensis_morton.jpg","l":"CC BY-SA 3.0","b":"Bruce Marlin"},
+"Cypresses, redwoods & junipers":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Taxodium_distichum_NRCSMS01010.jpg/500px-Taxodium_distichum_NRCSMS01010.jpg","p":"https://commons.wikimedia.org/wiki/File:Taxodium_distichum_NRCSMS01010.jpg","l":"Public domain","b":"USDA NRCS"},
+"Corn":{"u":"https://upload.wikimedia.org/wikipedia/commons/e/e3/Zea_mays_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-283.jpg","p":"https://commons.wikimedia.org/wiki/File:Zea_mays_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-283.jpg","l":"Public domain","b":"Franz Eugen Köhler, Köhler's Medizinal-Pflanzen","n":"Maize, from an 1887 German pharmacy plate."},
+"Wheat, rice & barley":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Vehn%C3%A4pelto_6.jpg/500px-Vehn%C3%A4pelto_6.jpg","p":"https://commons.wikimedia.org/wiki/File:Vehn%C3%A4pelto_6.jpg","l":"CC BY-SA 4.0","b":"kallerna"},
+"Bamboo, sugar cane & lawn grasses":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Bamboo_forest.jpg/500px-Bamboo_forest.jpg","p":"https://commons.wikimedia.org/wiki/File:Bamboo_forest.jpg","l":"CC BY-SA 3.0","b":"Kamakura"},
+"Yucca & agave":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Yucca_elata_-_tmcelrath_01.jpg/500px-Yucca_elata_-_tmcelrath_01.jpg","p":"https://commons.wikimedia.org/wiki/File:Yucca_elata_-_tmcelrath_01.jpg","l":"CC0","b":"tmcelrath (iNaturalist)"},
+"Onions, garlic & asparagus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Wild_Leeks6.jpeg/500px-Wild_Leeks6.jpeg","p":"https://commons.wikimedia.org/wiki/File:Wild_Leeks6.jpeg","l":"Public domain","b":"Hardyplants"},
+"Lilies & tulips":{"u":"https://upload.wikimedia.org/wikipedia/commons/7/74/LiliumSuperbum1.jpg","p":"https://commons.wikimedia.org/wiki/File:LiliumSuperbum1.jpg","l":"CC BY-SA 3.0","b":"Arx Fortis"},
+"Sabal palmetto":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Spalmetto2.JPG/500px-Spalmetto2.JPG","p":"https://commons.wikimedia.org/wiki/File:Spalmetto2.JPG","l":"Public domain","b":"Mmcknight4","n":"Cabbage palms in Florida."},
+"Coconut, date & oil palms":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Cocos_nucifera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-187.jpg/500px-Cocos_nucifera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-187.jpg","p":"https://commons.wikimedia.org/wiki/File:Cocos_nucifera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-187.jpg","l":"Public domain","b":"Franz Eugen Köhler, Köhler's Medizinal-Pflanzen"},
+"Common bean":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Snijboon_peulen_Phaseolus_vulgaris.jpg/500px-Snijboon_peulen_Phaseolus_vulgaris.jpg","p":"https://commons.wikimedia.org/wiki/File:Snijboon_peulen_Phaseolus_vulgaris.jpg","l":"CC BY-SA 3.0","b":"Rasbak"},
+"Peas, lentils, soybeans & peanuts":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Peas_in_pods_-_Studio.jpg/500px-Peas_in_pods_-_Studio.jpg","p":"https://commons.wikimedia.org/wiki/File:Peas_in_pods_-_Studio.jpg","l":"CC BY-SA 3.0","b":"Bill Ebbesen"},
+"Clover, redbud & acacia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/RedbudOhio02.jpg/500px-RedbudOhio02.jpg","p":"https://commons.wikimedia.org/wiki/File:RedbudOhio02.jpg","l":"CC BY-SA 3.0","b":"Greg Hume"},
+"Oaks":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Keeler_Oak_Tree_-_distance_photo%2C_May_2013.jpg/500px-Keeler_Oak_Tree_-_distance_photo%2C_May_2013.jpg","p":"https://commons.wikimedia.org/wiki/File:Keeler_Oak_Tree_-_distance_photo%2C_May_2013.jpg","l":"CC BY-SA 3.0","b":"Marty Aligata"},
+"American chestnut":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/American_Chestnut.JPG/500px-American_Chestnut.JPG","p":"https://commons.wikimedia.org/wiki/File:American_Chestnut.JPG","l":"CC BY-SA 3.0","b":"Timothy Van Vliet"},
+"Beeches":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Beech_with_Branches.jpg/500px-Beech_with_Branches.jpg","p":"https://commons.wikimedia.org/wiki/File:Beech_with_Branches.jpg","l":"CC BY-SA 3.0","b":"Marqqq"},
+"Walnuts, hickories & pecans":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Carya_illinoinensis.jpg/500px-Carya_illinoinensis.jpg","p":"https://commons.wikimedia.org/wiki/File:Carya_illinoinensis.jpg","l":"CC BY 3.0","b":"Bruce Marlin"},
+"Mangroves":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Rhizophora_mangle00.jpg/500px-Rhizophora_mangle00.jpg","p":"https://commons.wikimedia.org/wiki/File:Rhizophora_mangle00.jpg","l":"Public domain","b":"Johannes Zorn (historic plate)"},
+"Brassica oleracea crops":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Brassica_oleracea0.jpg/500px-Brassica_oleracea0.jpg","p":"https://commons.wikimedia.org/wiki/File:Brassica_oleracea0.jpg","l":"CC BY 2.5","b":"MPF","n":"The wild cabbage itself, growing on a sea cliff; every one of its six vegetables came from this."},
+"Wild mustards, radish & turnip":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Brassica_rapa_plant.jpg/500px-Brassica_rapa_plant.jpg","p":"https://commons.wikimedia.org/wiki/File:Brassica_rapa_plant.jpg","l":"CC BY-SA 3.0","b":"TeunSpaans"},
+"Arabidopsis":{"u":"https://upload.wikimedia.org/wikipedia/commons/6/6f/Arabidopsis_thaliana.jpg","p":"https://commons.wikimedia.org/wiki/File:Arabidopsis_thaliana.jpg","l":"CC BY-SA 3.0","b":"Brona / Roepers"},
+"Squashes & gourds":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Squashes_at_Kew_Gardens_IncrEdibles_2013.jpg/500px-Squashes_at_Kew_Gardens_IncrEdibles_2013.jpg","p":"https://commons.wikimedia.org/wiki/File:Squashes_at_Kew_Gardens_IncrEdibles_2013.jpg","l":"CC BY-SA 4.0","b":"Chiswick Chap"},
+"Citrus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Oranges_-_whole-halved-segment.jpg/500px-Oranges_-_whole-halved-segment.jpg","p":"https://commons.wikimedia.org/wiki/File:Oranges_-_whole-halved-segment.jpg","l":"CC BY-SA 4.0","b":"Ivar Leidus"},
+"Sunflower":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Sunflower_head_2015_G1.jpg/500px-Sunflower_head_2015_G1.jpg","p":"https://commons.wikimedia.org/wiki/File:Sunflower_head_2015_G1.jpg","l":"Public domain","b":"George Chernilevsky"},
+"Daisies, dandelions & lettuce":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Rudbeckia_hirta_kz03.jpg/500px-Rudbeckia_hirta_kz03.jpg","p":"https://commons.wikimedia.org/wiki/File:Rudbeckia_hirta_kz03.jpg","l":"CC BY-SA 4.0","b":"Krzysztof Ziarnek, Kenraiz"},
+"Chile peppers":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Hatch_green_chile.jpg/500px-Hatch_green_chile.jpg","p":"https://commons.wikimedia.org/wiki/File:Hatch_green_chile.jpg","l":"CC BY 2.0","b":"vxla"},
+"Potato & tomato":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/500px-Tomato_je.jpg","p":"https://commons.wikimedia.org/wiki/File:Tomato_je.jpg","l":"CC BY-SA 3.0","b":"Softeis"},
+"Tobacco":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Tabak_P9290021.JPG/500px-Tabak_P9290021.JPG","p":"https://commons.wikimedia.org/wiki/File:Tabak_P9290021.JPG","l":"CC BY 2.5","b":"Joachim Müllerchen"},
+"Dogwoods":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cornus_florida_Arkansas.jpg/500px-Cornus_florida_Arkansas.jpg","p":"https://commons.wikimedia.org/wiki/File:Cornus_florida_Arkansas.jpg","l":"CC BY-SA 4.0","b":"Eric Hunt"},
+"Blue crab & true crabs":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/The_Childrens_Museum_of_Indianapolis_-_Atlantic_blue_crab.jpg/500px-The_Childrens_Museum_of_Indianapolis_-_Atlantic_blue_crab.jpg","p":"https://commons.wikimedia.org/wiki/File:The_Childrens_Museum_of_Indianapolis_-_Atlantic_blue_crab.jpg","l":"CC BY-SA 3.0","b":"The Children's Museum of Indianapolis"},
+"Lobsters, crayfish & shrimp":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Nur01521_-_Flickr_-_NOAA_Photo_Library.jpg/500px-Nur01521_-_Flickr_-_NOAA_Photo_Library.jpg","p":"https://commons.wikimedia.org/wiki/File:Nur01521_-_Flickr_-_NOAA_Photo_Library.jpg","l":"Public domain","b":"NOAA / NURP"},
+"Tetrapodomorpha":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Eusthenopteron_BW.jpg/500px-Eusthenopteron_BW.jpg","p":"https://commons.wikimedia.org/wiki/File:Eusthenopteron_BW.jpg","l":"CC BY 2.5","b":"Nobu Tamura","n":"Eusthenopteron, an early member of the branch, drawn as it probably looked."},
+"Eusthenopteron":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Eusthenopteron_BW.jpg/500px-Eusthenopteron_BW.jpg","p":"https://commons.wikimedia.org/wiki/File:Eusthenopteron_BW.jpg","l":"CC BY 2.5","b":"Nobu Tamura","n":"A drawing of the living animal; fossils come from Miguasha, Quebec."},
+"Elpistostegalia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Panderichthys_skull.JPG/500px-Panderichthys_skull.JPG","p":"https://commons.wikimedia.org/wiki/File:Panderichthys_skull.JPG","l":"CC BY-SA 4.0","b":"Ghedoghedo","n":"A fossil skull of Panderichthys, flat and eyed on top like a crocodile's."},
+"Tiktaalik":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Tiktaalik_Chicago.JPG/500px-Tiktaalik_Chicago.JPG","p":"https://commons.wikimedia.org/wiki/File:Tiktaalik_Chicago.JPG","l":"CC BY-SA 3.0","b":"Eduard Solà","n":"The Field Museum cast: a flat head, the neck behind it, and the fin bones that make a wrist. 375 million years old."},
+"Stegocephali":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Stegocephali.png/500px-Stegocephali.png","p":"https://commons.wikimedia.org/wiki/File:Stegocephali.png","l":"CC BY-SA 4.0","b":"Froggydarb, Günter Bechly and others","n":"Living and extinct four-limbed animals from the group."},
+"Acanthostega":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Acanthostega_gunnari_(Journal.pone.0118882.g001).TIF/lossy-page1-500px-Acanthostega_gunnari_(Journal.pone.0118882.g001).TIF.jpg","p":"https://commons.wikimedia.org/wiki/File:Acanthostega_gunnari_(Journal.pone.0118882.g001).TIF","l":"CC BY 4.0","b":"Porro, Rayfield & Clack (2015)","n":"Photographs of the original fossils from Greenland, from a 2015 study."},
+"Ichthyostega":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Skeleton_of_Ichthyostega.JPG/500px-Skeleton_of_Ichthyostega.JPG","p":"https://commons.wikimedia.org/wiki/File:Skeleton_of_Ichthyostega.JPG","l":"CC BY-SA 3.0","b":"OlegTarabanov","n":"A mounted skeleton in Moscow; note the ribs and the paddle-like limbs."},
+"Iguanas, geckos & wall lizards":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Anole_Lizard_Hilo_Hawaii_edit.jpg/500px-Anole_Lizard_Hilo_Hawaii_edit.jpg","p":"https://commons.wikimedia.org/wiki/File:Anole_Lizard_Hilo_Hawaii_edit.jpg","l":"CC BY-SA 2.5","b":"Paul Hirst"},
+"Gila monster & monitors":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gila_monster2.JPG/500px-Gila_monster2.JPG","p":"https://commons.wikimedia.org/wiki/File:Gila_monster2.JPG","l":"CC BY-SA 3.0","b":"Blueag9"},
+"Snakes":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Timber_Rattlesnake_(Crotalus_horridus)_-_Flickr_-_2ndPeter.jpg/500px-Timber_Rattlesnake_(Crotalus_horridus)_-_Flickr_-_2ndPeter.jpg","p":"https://commons.wikimedia.org/wiki/File:Timber_Rattlesnake_(Crotalus_horridus)_-_Flickr_-_2ndPeter.jpg","l":"CC BY 2.0","b":"Peter Paplanus"},
+"Eastern box turtle":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Eastern_Box_Turtle%2C_North_Carolina%2C_US_imported_from_iNaturalist_photo_71168521_(cropped).jpg/500px-Eastern_Box_Turtle%2C_North_Carolina%2C_US_imported_from_iNaturalist_photo_71168521_(cropped).jpg","p":"https://commons.wikimedia.org/wiki/File:Eastern_Box_Turtle%2C_North_Carolina%2C_US_imported_from_iNaturalist_photo_71168521_(cropped).jpg","l":"CC BY 4.0","b":"Joshua Liverman"},
+"Gopher tortoise":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Gopher_Tortoise_-_Gopherus_polyphemus%2C_Lake_June-in-Winter_Scrub_State_Park%2C_Lake_Placid%2C_Florida_-_31527638716.jpg/500px-Gopher_Tortoise_-_Gopherus_polyphemus%2C_Lake_June-in-Winter_Scrub_State_Park%2C_Lake_Placid%2C_Florida_-_31527638716.jpg","p":"https://commons.wikimedia.org/wiki/File:Gopher_Tortoise_-_Gopherus_polyphemus%2C_Lake_June-in-Winter_Scrub_State_Park%2C_Lake_Placid%2C_Florida_-_31527638716.jpg","l":"CC BY 2.0","b":"Judy Gallagher"},
+"Sea turtles":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Loggerhead_sea_turtle.jpg/500px-Loggerhead_sea_turtle.jpg","p":"https://commons.wikimedia.org/wiki/File:Loggerhead_sea_turtle.jpg","l":"CC BY 2.0","b":"ukanda"},
+"American alligator":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/American_Alligator.jpg/500px-American_Alligator.jpg","p":"https://commons.wikimedia.org/wiki/File:American_Alligator.jpg","l":"CC BY-SA 3.0","b":"Postdlf"},
+"Crocodiles & gharials":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/SaltwaterCrocodile('Maximo').jpg/500px-SaltwaterCrocodile('Maximo').jpg","p":"https://commons.wikimedia.org/wiki/File:SaltwaterCrocodile('Maximo').jpg","l":"Public domain","b":"Molly Ebersold, St. Augustine Alligator Farm"},
+"Dinosauria":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sinosauropteryxfossil.jpg/500px-Sinosauropteryxfossil.jpg","p":"https://commons.wikimedia.org/wiki/File:Sinosauropteryxfossil.jpg","l":"CC BY-SA 2.0","b":"Sam / Olai Ose / Skjaervoy","n":"Sinosauropteryx, the first dinosaur found with feathers, in 1996."},
+"Triceratops":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/LA-Triceratops_mount-2.jpg/500px-LA-Triceratops_mount-2.jpg","p":"https://commons.wikimedia.org/wiki/File:LA-Triceratops_mount-2.jpg","l":"CC BY-SA 3.0","b":"Allie Caulfield / MathKnight","n":"A mounted skeleton in Los Angeles; the frill and three horns are unmistakable."},
+"Saurischia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Saurischia.jpg/500px-Saurischia.jpg","p":"https://commons.wikimedia.org/wiki/File:Saurischia.jpg","l":"CC BY 4.0","b":"Auckland War Memorial Museum"},
+"Sauropods":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Brachiosaurus_mount.jpg/500px-Brachiosaurus_mount.jpg","p":"https://commons.wikimedia.org/wiki/File:Brachiosaurus_mount.jpg","l":"CC BY 3.0","b":"Matt Wedel","n":"Brachiosaurus outside the Field Museum in Chicago; the real bones are inside."},
+"Theropoda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carnotaurus_skeleton_in_Bonn_White_Background.jpg/500px-Carnotaurus_skeleton_in_Bonn_White_Background.jpg","p":"https://commons.wikimedia.org/wiki/File:Carnotaurus_skeleton_in_Bonn_White_Background.jpg","l":"CC BY 2.0","b":"Flickr user 23992608@N06","n":"Carnotaurus, a horned theropod from Argentina, in Bonn."},
+"Tyrannosaurus rex":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Tyrannosaurus_Rex_Holotype.jpg/500px-Tyrannosaurus_Rex_Holotype.jpg","p":"https://commons.wikimedia.org/wiki/File:Tyrannosaurus_Rex_Holotype.jpg","l":"CC BY-SA 3.0","b":"ScottRobertAnselmo","n":"The very first T. rex skeleton ever described, found in 1902, in Pittsburgh."},
+"Avialae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Jeholornis_prima_NMNS.jpg/500px-Jeholornis_prima_NMNS.jpg","p":"https://commons.wikimedia.org/wiki/File:Jeholornis_prima_NMNS.jpg","l":"CC BY-SA 4.0","b":"Tiouraren (Y.-C. Tsai)","n":"Jeholornis, a long-tailed early bird from China, 120 million years old."},
+"Archaeopteryx":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Archaeopteryx_lithographica_(Berlin_specimen).jpg/500px-Archaeopteryx_lithographica_(Berlin_specimen).jpg","p":"https://commons.wikimedia.org/wiki/File:Archaeopteryx_lithographica_(Berlin_specimen).jpg","l":"CC BY-SA 3.0","b":"H. Raab","n":"The Berlin specimen, found in 1874: feathers, claws, teeth and a long bony tail in one slab."},
+"Cardinals, finches & Darwin's finches":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Male_northern_cardinal_in_Central_Park_(52612).jpg/500px-Male_northern_cardinal_in_Central_Park_(52612).jpg","p":"https://commons.wikimedia.org/wiki/File:Male_northern_cardinal_in_Central_Park_(52612).jpg","l":"CC BY-SA 4.0","b":"Rhododendrites"},
+"Crows, jays & ravens":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Blue_jay_in_PP_(30960).jpg/500px-Blue_jay_in_PP_(30960).jpg","p":"https://commons.wikimedia.org/wiki/File:Blue_jay_in_PP_(30960).jpg","l":"CC BY-SA 4.0","b":"Rhododendrites"},
+"Warblers, thrushes & sparrows":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Wood_thrush_(Hylocichla_mustelina)_Peten.jpg/500px-Wood_thrush_(Hylocichla_mustelina)_Peten.jpg","p":"https://commons.wikimedia.org/wiki/File:Wood_thrush_(Hylocichla_mustelina)_Peten.jpg","l":"CC BY-SA 4.0","b":"Charles J. Sharp"},
+"Roadrunner & cuckoos":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Greater_Roadrunner_Tingley_Beach.jpg/500px-Greater_Roadrunner_Tingley_Beach.jpg","p":"https://commons.wikimedia.org/wiki/File:Greater_Roadrunner_Tingley_Beach.jpg","l":"CC BY-SA 4.0","b":"Polinova"},
+"Pigeons & doves":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Av_Mourning_Dove_JG.jpg/500px-Av_Mourning_Dove_JG.jpg","p":"https://commons.wikimedia.org/wiki/File:Av_Mourning_Dove_JG.jpg","l":"CC BY 4.0","b":"JeffreyGammon"},
+"Sandpipers, gulls & plovers":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Rufa_red_knot_(Calidris_canutus_rufa)_in_Delaware_Bay%2C_New_Jersey.jpg/500px-Rufa_red_knot_(Calidris_canutus_rufa)_in_Delaware_Bay%2C_New_Jersey.jpg","p":"https://commons.wikimedia.org/wiki/File:Rufa_red_knot_(Calidris_canutus_rufa)_in_Delaware_Bay%2C_New_Jersey.jpg","l":"CC BY-SA 4.0","b":"Chuck Homler, Focus On Wildlife"},
+"Elephants":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/178_Male_African_bush_elephant_in_Etosha_National_Park_Photo_by_Giles_Laurent.jpg/500px-178_Male_African_bush_elephant_in_Etosha_National_Park_Photo_by_Giles_Laurent.jpg","p":"https://commons.wikimedia.org/wiki/File:178_Male_African_bush_elephant_in_Etosha_National_Park_Photo_by_Giles_Laurent.jpg","l":"CC BY-SA 4.0","b":"Giles Laurent"},
+"Manatees & dugongs":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Manatee_with_calf.PD_-_colour_corrected.jpg/500px-Manatee_with_calf.PD_-_colour_corrected.jpg","p":"https://commons.wikimedia.org/wiki/File:Manatee_with_calf.PD_-_colour_corrected.jpg","l":"Public domain","b":"Galen Rathbun"},
+"Aardvarks, hyraxes & tenrecs":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Orycteropus_afer_175359469.jpg/500px-Orycteropus_afer_175359469.jpg","p":"https://commons.wikimedia.org/wiki/File:Orycteropus_afer_175359469.jpg","l":"CC BY 4.0","b":"Kelly Abram"},
+"Big cats":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Standing_jaguar.jpg/500px-Standing_jaguar.jpg","p":"https://commons.wikimedia.org/wiki/File:Standing_jaguar.jpg","l":"Public domain","b":"USFWS"},
+"Cougar":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Everglades_National_Park_Florida_Panther.jpg/500px-Everglades_National_Park_Florida_Panther.jpg","p":"https://commons.wikimedia.org/wiki/File:Everglades_National_Park_Florida_Panther.jpg","l":"Public domain","b":"Rodney Cammauf, National Park Service"},
+"Domestic cat & small cats":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Bobcat_at_Columbus_Zoo_Boo.jpg/500px-Bobcat_at_Columbus_Zoo_Boo.jpg","p":"https://commons.wikimedia.org/wiki/File:Bobcat_at_Columbus_Zoo_Boo.jpg","l":"CC BY 2.0","b":"Becker1999"},
+"American black bear":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Vancouver_Island_black_bear_(Ursus_americanus_vancouveri)_Tofino_4.jpg/500px-Vancouver_Island_black_bear_(Ursus_americanus_vancouveri)_Tofino_4.jpg","p":"https://commons.wikimedia.org/wiki/File:Vancouver_Island_black_bear_(Ursus_americanus_vancouveri)_Tofino_4.jpg","l":"CC BY-SA 4.0","b":"Charles J. Sharp"},
+"Brown & polar bears":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Polar_Bear_-_Alaska_(cropped).jpg/500px-Polar_Bear_-_Alaska_(cropped).jpg","p":"https://commons.wikimedia.org/wiki/File:Polar_Bear_-_Alaska_(cropped).jpg","l":"CC BY-SA 3.0","b":"Alan Wilson"},
+"Giant panda":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/500px-Grosser_Panda.JPG","p":"https://commons.wikimedia.org/wiki/File:Grosser_Panda.JPG","l":"CC BY-SA 3.0","b":"J. Patrick Fischer"},
+"Ruminantia":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Ruminantia.jpg/500px-Ruminantia.jpg","p":"https://commons.wikimedia.org/wiki/File:Ruminantia.jpg","l":"Public domain","b":"various contributors"},
+"Bovidae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/American_bison_k5680-1.jpg/500px-American_bison_k5680-1.jpg","p":"https://commons.wikimedia.org/wiki/File:American_bison_k5680-1.jpg","l":"Public domain","b":"Jack Dykinga, USDA"},
+"Pronghorn":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Antilocapra_americana.jpg/500px-Antilocapra_americana.jpg","p":"https://commons.wikimedia.org/wiki/File:Antilocapra_americana.jpg","l":"CC BY-SA 3.0","b":"naturespicsonline.com"},
+"Giraffes & okapi":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Serengeti_National_Park_13_-_giraffe_-_Giraffa_camelopardalis.jpg/500px-Serengeti_National_Park_13_-_giraffe_-_Giraffa_camelopardalis.jpg","p":"https://commons.wikimedia.org/wiki/File:Serengeti_National_Park_13_-_giraffe_-_Giraffa_camelopardalis.jpg","l":"CC BY-SA 4.0","b":"Thomas Fuhrmann"},
+"Cervidae":{"u":"https://upload.wikimedia.org/wikipedia/commons/d/d9/Family_Cervidae_five_species.jpg","p":"https://commons.wikimedia.org/wiki/File:Family_Cervidae_five_species.jpg","l":"CC BY-SA 3.0","b":"various contributors"},
+"Caribou":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Reinbukken_p%C3%A5_frisk_gr%C3%B8nt_beite._-_panoramio.jpg/500px-Reinbukken_p%C3%A5_frisk_gr%C3%B8nt_beite._-_panoramio.jpg","p":"https://commons.wikimedia.org/wiki/File:Reinbukken_p%C3%A5_frisk_gr%C3%B8nt_beite._-_panoramio.jpg","l":"CC BY-SA 3.0","b":"Are G Nilsen"},
+"White-tailed deer":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/White-tailed_deer.jpg/500px-White-tailed_deer.jpg","p":"https://commons.wikimedia.org/wiki/File:White-tailed_deer.jpg","l":"Public domain","b":"Scott Bauer, USDA"},
+"Hominidae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG/500px-Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG","p":"https://commons.wikimedia.org/wiki/File:Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG","l":"CC BY-SA 3.0","b":"Eleifert"},
+"Homininae":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg/500px-Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg","p":"https://commons.wikimedia.org/wiki/File:Gorille_des_plaines_de_l'ouest_%C3%A0_l'Espace_Zoologique.jpg","l":"CC BY-SA 4.0","b":"Thurundir"},
+"Hominini":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg/500px-015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","p":"https://commons.wikimedia.org/wiki/File:015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg","l":"CC BY-SA 4.0","b":"Giles Laurent"},
+"Hominina":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Skulls_of_our_Ancestors.jpg/500px-Skulls_of_our_Ancestors.jpg","p":"https://commons.wikimedia.org/wiki/File:Skulls_of_our_Ancestors.jpg","l":"CC BY-SA 2.0","b":"Ryan Somma","n":"A wall of hominin skulls at the Smithsonian; the human line is a bush, not a ladder."},
+"Sahelanthropus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Sahelanthropus_tchadensis_-_TM_266-01-060-1.jpg/500px-Sahelanthropus_tchadensis_-_TM_266-01-060-1.jpg","p":"https://commons.wikimedia.org/wiki/File:Sahelanthropus_tchadensis_-_TM_266-01-060-1.jpg","l":"CC BY-SA 4.0","b":"Didier Descouens","n":"A cast of the Toumaï skull from Chad, about seven million years old."},
+"Ardipithecus & the australopiths":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Australopithecus_sediba.JPG/500px-Australopithecus_sediba.JPG","p":"https://commons.wikimedia.org/wiki/File:Australopithecus_sediba.JPG","l":"CC BY-SA 4.0","b":"Brett Eloff / Wits University","n":"The skull of Australopithecus sediba from South Africa, about two million years old."},
+"Ardipithecus":{"u":"https://upload.wikimedia.org/wikipedia/commons/e/e1/Ardi.jpg","p":"https://commons.wikimedia.org/wiki/File:Ardi.jpg","l":"CC BY 2.0","b":"T. Michael Keesey","n":"A reconstruction of Ardi's skeleton, 4.4 million years old."},
+"Australopiths & Homo":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Laetoli_footprints_replica.jpg/500px-Laetoli_footprints_replica.jpg","p":"https://commons.wikimedia.org/wiki/File:Laetoli_footprints_replica.jpg","l":"CC BY-SA 3.0","b":"Momotarou2012","n":"A replica of the Laetoli footprints: upright walking, 3.7 million years ago."},
+"Australopithecus afarensis":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Reconstruction_of_the_fossil_skeleton_of_%22Lucy%22_the_Australopithecus_afarensis.jpg/500px-Reconstruction_of_the_fossil_skeleton_of_%22Lucy%22_the_Australopithecus_afarensis.jpg","p":"https://commons.wikimedia.org/wiki/File:Reconstruction_of_the_fossil_skeleton_of_%22Lucy%22_the_Australopithecus_afarensis.jpg","l":"CC BY 2.5","b":"120 (Wikimedia Commons)","n":"A cast of Lucy's skeleton, about 40 percent of her bones, found in Ethiopia in 1974."},
+"Paranthropus & Homo":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Australophithecus_boisei_(cast)%2C_Olduvai_Gorge_-_Springfield_Science_Museum_-_Springfield%2C_MA_-_DSC03368.JPG/500px-Australophithecus_boisei_(cast)%2C_Olduvai_Gorge_-_Springfield_Science_Museum_-_Springfield%2C_MA_-_DSC03368.JPG","p":"https://commons.wikimedia.org/wiki/File:Australophithecus_boisei_(cast)%2C_Olduvai_Gorge_-_Springfield_Science_Museum_-_Springfield%2C_MA_-_DSC03368.JPG","l":"CC0","b":"Daderot"},
+"Paranthropus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Australophithecus_boisei_(cast)%2C_Olduvai_Gorge_-_Springfield_Science_Museum_-_Springfield%2C_MA_-_DSC03368.JPG/500px-Australophithecus_boisei_(cast)%2C_Olduvai_Gorge_-_Springfield_Science_Museum_-_Springfield%2C_MA_-_DSC03368.JPG","p":"https://commons.wikimedia.org/wiki/File:Australophithecus_boisei_(cast)%2C_Olduvai_Gorge_-_Springfield_Science_Museum_-_Springfield%2C_MA_-_DSC03368.JPG","l":"CC0","b":"Daderot","n":"A cast of a Paranthropus boisei skull from Olduvai Gorge; note the huge jaw."},
+"Homo":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Members_of_Genus_Homo_2.png/500px-Members_of_Genus_Homo_2.png","p":"https://commons.wikimedia.org/wiki/File:Members_of_Genus_Homo_2.png","l":"CC BY-SA 4.0","b":"Nahleghini","n":"Four members of the genus Homo; only one is alive."},
+"Homo habilis":{"u":"https://upload.wikimedia.org/wikipedia/commons/8/80/KNM_ER_1813_(H._habilis).png","p":"https://commons.wikimedia.org/wiki/File:KNM_ER_1813_(H._habilis).png","l":"CC BY 4.0","b":"John Hawks et al.","n":"The KNM-ER 1813 skull from Kenya, about 1.9 million years old."},
+"Homo erectus & later Homo":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Turkana_Boy.jpg/500px-Turkana_Boy.jpg","p":"https://commons.wikimedia.org/wiki/File:Turkana_Boy.jpg","l":"CC BY-SA 2.0","b":"Claire Houck","n":"Turkana Boy, a nearly complete Homo erectus skeleton of a child, 1.6 million years old."},
+"Homo erectus":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Java_Man_holotype.jpg/500px-Java_Man_holotype.jpg","p":"https://commons.wikimedia.org/wiki/File:Java_Man_holotype.jpg","l":"CC BY 4.0","b":"Eduard Pop et al.","n":"The first Homo erectus ever found: the Java Man skullcap and thigh bone, 1891."},
+"Homo floresiensis":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Homo_Florensiensis-MGL_95216-P5030051-white.jpg/500px-Homo_Florensiensis-MGL_95216-P5030051-white.jpg","p":"https://commons.wikimedia.org/wiki/File:Homo_Florensiensis-MGL_95216-P5030051-white.jpg","l":"CC BY-SA 3.0 fr","b":"Rama","n":"A skull of the Flores hobbit, brain the size of a chimpanzee's."},
+"Homo naledi":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Homo_naledi_skeletal_specimens.jpg/500px-Homo_naledi_skeletal_specimens.jpg","p":"https://commons.wikimedia.org/wiki/File:Homo_naledi_skeletal_specimens.jpg","l":"CC BY 4.0","b":"Lee Berger research team","n":"The bones from the Dinaledi chamber laid out; more than 1,500 pieces from one cave."},
+"Homo heidelbergensis & descendants":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Mandibel_from_Mauer.JPG/500px-Mandibel_from_Mauer.JPG","p":"https://commons.wikimedia.org/wiki/File:Mandibel_from_Mauer.JPG","l":"CC BY 3.0","b":"Gerbil"},
+"Homo heidelbergensis":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Mandibel_from_Mauer.JPG/500px-Mandibel_from_Mauer.JPG","p":"https://commons.wikimedia.org/wiki/File:Mandibel_from_Mauer.JPG","l":"CC BY 3.0","b":"Gerbil","n":"The Mauer jaw, found in a German sand pit in 1907, the type specimen of the species."},
+"Neanderthals, Denisovans & us":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Sapiens_neanderthal_comparison_en.png/500px-Sapiens_neanderthal_comparison_en.png","p":"https://commons.wikimedia.org/wiki/File:Sapiens_neanderthal_comparison_en.png","l":"CC BY-SA 2.0","b":"hairymuseummatt / KaterBegemot","n":"A modern human skull beside a Neanderthal skull, Cleveland Museum of Natural History."},
+"Neanderthals":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Neanderthal_at_AMNH.jpg/500px-Neanderthal_at_AMNH.jpg","p":"https://commons.wikimedia.org/wiki/File:Neanderthal_at_AMNH.jpg","l":"CC0","b":"Ryan Schwark","n":"A composite Neanderthal skeleton at the American Museum of Natural History."},
+"Denisovans":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Homo_longi_holotype.jpg/500px-Homo_longi_holotype.jpg","p":"https://commons.wikimedia.org/wiki/File:Homo_longi_holotype.jpg","l":"CC BY 4.0","b":"Fu et al. (2025)","n":"The Harbin skull, described as Homo longi in 2021 and matched to Denisovan proteins and DNA in 2025."}
 };
 (function(){
 const $=s=>document.querySelector(s);
@@ -1215,7 +1491,7 @@ function light(n){ unlight(); if(!n) return; stage.classList.add('dim'); let x=n
 function unlight(){ stage.classList.remove('dim'); svg.querySelectorAll('.lit').forEach(el=>el.classList.remove('lit')); }
 
 // selection + card
-function fmtAge(a){ if(a<=0) return 'Living today'; if(a>=1000) return (a/1000).toFixed(1).replace(/\.0$/,'')+' billion years ago'; return a+' million years ago'; }
+function fmtAge(a){ if(a<=0) return 'Living today'; if(a>=1000) return (a/1000).toFixed(1).replace(/\.0$/,'')+' billion years ago'; if(a<1) return Math.round(a*1000)+',000 years ago'; return a+' million years ago'; }
 function select(n,fly){ ST.sel=n; markSel(); card.innerHTML=cardHTML(n); wireCard(n); $('#stripe').style.background=TC().col(ckey(n)); panel.classList.add('open'); if(fly) flyTo(n, Math.min(VB.w, n.k?900:600)); }
 function markSel(){ svg.querySelectorAll('.node.sel').forEach(e=>e.classList.remove('sel')); if(ST.sel){ const g=svg.querySelector(`.node[data-id="${ST.sel._id}"]`); if(g) g.classList.add('sel'); } }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
@@ -1228,11 +1504,11 @@ function cardHTML(n){
   const lin=[]; let x=n._p; while(x){ lin.unshift(x); x=x._p; }
   const nleaves=n._leaves||1;
   return `
-  <div class="eyebrow"><span>${esc(G.name)}${n.e?' · evolution watched today':''}</span><span>${isLeaf?'tip':'branch'}</span></div>
+  <div class="eyebrow"><span>${esc(G.name)}${n.e?' · evolution watched today':''}${n.x?' · extinct':''}</span><span>${n.x?'† extinct tip':(isLeaf?'living tip':'branch')}</span></div>
   <div><h2>${esc(n.n)}</h2>${n.c?`<div class="common">${esc(n.c)}</div>`:''}</div>
   ${picHTML(n)}
   <div class="age">
-    <b>${isLeaf?'Status':'Split'}</b><span>${fmtAge(n.a)}${!isLeaf?' (approx.)':''}</span>
+    <b>${n.x?'Last alive':(isLeaf?'Status':'Split')}</b><span>${n.x?'about '+fmtAge(n.a)+', then extinct':fmtAge(n.a)}${!isLeaf?' (approx.)':''}</span>
     ${n._k&&n._k!=='root'?`<b>Kingdom</b><span>${esc(TOL.KINGDOMS[n._k].name)} <span style="color:var(--muted)">(six-kingdom scheme)</span></span>`:''}
     ${!isLeaf?`<b>Holds</b><span>${nleaves} living groups on this tree</span>`:''}
     ${n.e?`<b>Now</b><span>✦ a lineage in which evolution has been observed within human lifetimes</span>`:''}
@@ -1260,13 +1536,13 @@ function drawFlags(){
 }
 function buildLegend(){
   const T=TC(); const keys=ST.kingdoms?['eub','arb','pro','fun','pla','ani']:['bac','arc','pro','sar','pla','fun','ani']; const PAL=ST.kingdoms?TOL.KINGDOMS:GROUPS;
-  $('#legend').innerHTML=(ST.kingdoms?'<div class="row"><b>The six kingdoms</b></div>':'')+keys.map(k=>`<div class="row"><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${T.col(k)}" stroke-width="4" stroke-linecap="round"${T.dash(k)?` stroke-dasharray="${T.dash(k)}"`:''}/></svg>${esc(PAL[k].name)}</div>`).join('')+`<div class="note">${ST.kingdoms?'Shaded wedges show where each kingdom sits on the tree. Notice that Protista is scattered: it is every eukaryote that is not a fungus, a land plant or an animal, not one branch of its own.':'Centre is LUCA, ~3.8 billion years ago; the rim is today. Recent time is stretched so the crowded last 600 million years have room. ✦ = evolution watched in our lifetimes.'}</div>`;
+  $('#legend').innerHTML=(ST.kingdoms?'<div class="row"><b>The six kingdoms</b></div>':'')+keys.map(k=>`<div class="row"><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${T.col(k)}" stroke-width="4" stroke-linecap="round"${T.dash(k)?` stroke-dasharray="${T.dash(k)}"`:''}/></svg>${esc(PAL[k].name)}</div>`).join('')+`<div class="note">${ST.kingdoms?'Shaded wedges show where each kingdom sits on the tree. Notice that Protista is scattered: it is every eukaryote that is not a fungus, a land plant or an animal, not one branch of its own.':'Centre is LUCA, ~3.8 billion years ago; the rim is today. Recent time is stretched so the crowded last 600 million years have room. ✦ = evolution watched in our lifetimes. † = an extinct branch, drawn to when it was last alive.'}</div>`;
 }
 // search
 const q=$('#q'), res=$('#results'); let hi=-1;
 q.addEventListener('input',()=>{ const v=q.value.trim().toLowerCase(); hi=-1; if(!v){res.style.display='none';return;}
   const T=TC();
-  const hits=list.filter(n=>n.n.toLowerCase().includes(v)||(n.c||'').toLowerCase().includes(v)||(n.d||'').toLowerCase().includes(v)||((typeof IMAGES!=='undefined')&&IMAGES[n.n]&&IMAGES[n.n].n&&IMAGES[n.n].n.toLowerCase().includes(v))).slice(0,14);
+  const hits=list.filter(n=>n.n.toLowerCase().includes(v)||(n.x&&'extinct fossil'.includes(v))||(n.c||'').toLowerCase().includes(v)||(n.d||'').toLowerCase().includes(v)||((typeof IMAGES!=='undefined')&&IMAGES[n.n]&&IMAGES[n.n].n&&IMAGES[n.n].n.toLowerCase().includes(v))).slice(0,14);
   res.innerHTML=hits.map(n=>`<div data-id="${n._id}"><span class="sw" style="background:${T.col(ckey(n))}"></span>${esc(n.n)}${n.c?` <small>${esc(n.c)}</small>`:''}</div>`).join('')||'<div><small>No match</small></div>';
   res.style.display='block'; res.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>{ select(byId[el.dataset.id],true); res.style.display='none'; q.value=''; })); });
 q.addEventListener('keydown',e=>{ const items=[...res.querySelectorAll('[data-id]')]; if(e.key==='ArrowDown'){hi=Math.min(items.length-1,hi+1);} else if(e.key==='ArrowUp'){hi=Math.max(0,hi-1);} else if(e.key==='Enter'){ if(items[hi>=0?hi:0]) items[hi>=0?hi:0].click(); return;} else if(e.key==='Escape'){res.style.display='none';return;} else return; items.forEach((it,i)=>it.classList.toggle('on',i===hi)); });
