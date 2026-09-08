@@ -43,7 +43,8 @@ main{position:relative;overflow:hidden}
 #stage.dragging{cursor:grabbing}
 #stage svg{width:100%;height:100%;display:block}
 #stage .node{cursor:pointer}
-#stage .node text{pointer-events:none}
+#stage .node text{pointer-events:all;cursor:pointer}
+#stage svg text{cursor:pointer}
 #stage .node.sel circle:first-child{stroke:var(--ink);stroke-width:3}
 #stage .flagged-ring{pointer-events:none}
 #stage.dim #branches *{opacity:.18}
@@ -117,7 +118,7 @@ dialog .more a>span:last-child{grid-column:1/-1;color:var(--muted)}
 <body>
 <div id="app">
 <header>
-  <div><h1>The <em>Tree of Life</em></h1><div class="sub">From the first cell to the branches still growing today · <a href="../index.html#biology" style="color:inherit">Science One-Pagers</a></div></div>
+  <div><h1>The <em>Tree of Life</em></h1><div class="sub">From the first cell to the branches still growing today · tap any name or dot to open it · <a href="../index.html#biology" style="color:inherit">Science One-Pagers</a></div></div>
   <div class="spacer"></div>
   <div class="search"><input id="q" type="search" placeholder="Find a group — try “fungi” or “whales”" aria-label="Find a group" autocomplete="off"><div class="results" id="results"></div></div>
   <div class="group">
@@ -1012,6 +1013,8 @@ function renderSVG(TREE, GROUPS, TIME_SCALE, EVENTS, opts){
       const xo = (flip!==inward)?-off:off;
       g+=`<text transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(2)})" x="${xo}" y="${n.w>=3?-9:-7}" text-anchor="${anchor}" font-size="${fs}" font-weight="${n.w>=3?800:600}" letter-spacing="${n.w>=3?1.2:0}" fill="${colr}" stroke="${halo}" stroke-width="4" paint-order="stroke" stroke-linejoin="round">${esc(text)}</text>`;
     }
+    // invisible hit disc so a fingertip or a click lands on the node without needing to hit the dot itself (last in the group so circle:first-child stays the visible dot)
+    g+=`<circle class="hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isLeaf?16:22}" fill="transparent" stroke="none" pointer-events="all"/>`;
     g+=`</g>`;
     out.push(g);
   });
@@ -1472,16 +1475,16 @@ function flyTo(n, targetW){
 // pointer interactions
 let drag=null, pinch=null;
 stage.addEventListener('wheel',e=>{ e.preventDefault(); zoomAt(Math.exp(-e.deltaY*0.0016), e.clientX, e.clientY); },{passive:false});
-stage.addEventListener('pointerdown',e=>{ stage.setPointerCapture(e.pointerId); if(pinch===null && drag===null){ drag={id:e.pointerId,x:e.clientX,y:e.clientY,vx:VB.x,vy:VB.y,moved:false}; } else if(drag && !pinch){ pinch={a:drag.id,b:e.pointerId,ax:drag.x,ay:drag.y,bx:e.clientX,by:e.clientY,w:VB.w}; } });
+stage.addEventListener('pointerdown',e=>{ const hit=(e.target.closest&&e.target.closest('[data-id]'))||null; stage.setPointerCapture(e.pointerId); /* capture retargets later events to the stage, so remember what was under the pointer now */ if(pinch===null && drag===null){ drag={id:e.pointerId,x:e.clientX,y:e.clientY,vx:VB.x,vy:VB.y,moved:false,hit}; } else if(drag && !pinch){ pinch={a:drag.id,b:e.pointerId,ax:drag.x,ay:drag.y,bx:e.clientX,by:e.clientY,w:VB.w}; } });
 stage.addEventListener('pointermove',e=>{
   if(pinch){ if(e.pointerId===pinch.a){pinch.ax=e.clientX;pinch.ay=e.clientY;} if(e.pointerId===pinch.b){pinch.bx=e.clientX;pinch.by=e.clientY;}
     const d=Math.hypot(pinch.ax-pinch.bx,pinch.ay-pinch.by); if(!pinch.d0){pinch.d0=d;return;} const f=d/pinch.d0; pinch.d0=d; zoomAt(f,(pinch.ax+pinch.bx)/2,(pinch.ay+pinch.by)/2); return; }
   if(!drag||e.pointerId!==drag.id) return;
   const r=stage.getBoundingClientRect(); const dx=(e.clientX-drag.x)/r.width*VB.w, dy=(e.clientY-drag.y)/r.height*VB.h;
-  if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>4){ drag.moved=true; stage.classList.add('dragging'); }
-  VB.x=drag.vx-dx; VB.y=drag.vy-dy; applyVB();
+  if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>(e.pointerType==='touch'?10:4)){ drag.moved=true; stage.classList.add('dragging'); }
+  if(drag.moved){ VB.x=drag.vx-dx; VB.y=drag.vy-dy; applyVB(); }
 });
-function endPointer(e){ if(pinch){ pinch=null; drag=null; return; } if(drag&&e.pointerId===drag.id){ if(!drag.moved){ const g=e.target.closest('.node'); if(g) select(byId[g.dataset.id],true); else { const b=e.target.closest('[data-id]'); if(b) select(byId[b.dataset.id],true); } } drag=null; stage.classList.remove('dragging'); } }
+function endPointer(e){ if(pinch){ pinch=null; drag=null; return; } if(drag&&e.pointerId===drag.id){ if(!drag.moved && e.type==='pointerup'){ const h=drag.hit; if(h&&byId[h.dataset.id]) select(byId[h.dataset.id],true); } drag=null; stage.classList.remove('dragging'); } }
 stage.addEventListener('pointerup',endPointer); stage.addEventListener('pointercancel',endPointer);
 // hover highlight of lineage
 stage.addEventListener('pointerover',e=>{ const g=e.target.closest('[data-id]'); if(!g){return;} light(byId[g.dataset.id]); });
