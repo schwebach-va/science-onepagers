@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Three interactive vocabulary crosswords for Virginia Biology Unit 1, one per learning target: properties of water, macromolecules, and chemical reactions and enzymes. Works on iPads.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/biochemistry-vocabulary-crosswords.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Biochemistry Vocabulary Crosswords">
+<meta property="og:description" content="Three interactive vocabulary crosswords for Virginia Biology Unit 1, one per learning target: properties of water, macromolecules, and chemical reactions and enzymes. Works on iPads.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/biochemistry-vocabulary-crosswords.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<title>Biochemistry Vocabulary Crosswords | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<style>
+:root{
+  --ground:#EEF3F5; --paper:#FFFFFF; --ink:#13303A; --muted:#51666E; --line:#C4D2D7;
+  --cellline:#1F4E5F; --wrong:#B3261E; --ok:#2E7D4F;
+  --lt11:#2F6FB0; --lt12:#A86F14; --lt13:#1F7A8C;
+  --lt:var(--lt11);
+  --serif:"Source Serif 4","Cambria",Georgia,serif;
+  --sans:"Atkinson Hyperlegible","Calibri","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E191D; --paper:#15242A; --ink:#E3EDF0; --muted:#9BB0B7; --line:#2B3F47;
+    --cellline:#7EA7B6; --wrong:#F2877E; --ok:#7CCB9A;
+    --lt11:#72A6E0; --lt12:#E2AA4C; --lt13:#55B7C8;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E191D; --paper:#15242A; --ink:#E3EDF0; --muted:#9BB0B7; --line:#2B3F47;
+  --cellline:#7EA7B6; --wrong:#F2877E; --ok:#7CCB9A;
+  --lt11:#72A6E0; --lt12:#E2AA4C; --lt13:#55B7C8;
+}
+html,body{background:var(--ground)}
+body{color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;-webkit-text-size-adjust:100%}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:14px 28px}
+body.kb-on .wrap{padding-bottom:calc(var(--kbh,190px) + 24px)}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 20px;margin-bottom:12px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(1.45rem,2.6vw,2rem);line-height:1.15;margin:.1rem 0 0;text-wrap:balance}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{font:inherit;font-size:.95rem;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px 7px 10px;display:flex;align-items:center;gap:8px;cursor:pointer;touch-action:manipulation}
+.tab .dot{width:12px;height:12px;border-radius:50%;background:var(--c)}
+.tab .count{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums}
+.tab[aria-selected="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c);font-weight:700}
+.target{display:flex;gap:12px;align-items:baseline;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.ltbadge{flex:none;font-weight:700;color:#fff;background:var(--lt);border-radius:6px;padding:2px 8px;font-size:.9rem;font-variant-numeric:tabular-nums}
+:root[data-theme="dark"] .ltbadge{color:#0E191D}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ltbadge{color:#0E191D}}
+.target p{margin:0}
+.target b{font-family:var(--serif)}
+.main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,1fr);gap:18px;align-items:start}
+@media (max-width:900px){.main{grid-template-columns:1fr}}
+.board{display:flex;flex-direction:column;gap:10px;min-width:0}
+.clueBar{background:var(--paper);border:1.5px solid var(--lt);border-radius:10px;padding:8px 8px 8px 12px;display:flex;align-items:center;gap:8px;min-height:3.2em;position:sticky;top:env(safe-area-inset-top,0px);z-index:3}
+.clueBar .txt{flex:1;min-width:0}
+.clueBar .num{font-weight:700;color:var(--lt);margin-right:.35em;white-space:nowrap}
+.clueBar .enum{color:var(--muted);white-space:nowrap}
+.iconbtn{font:inherit;flex:none;width:40px;height:40px;border-radius:8px;border:1px solid var(--line);background:var(--ground);color:var(--ink);font-size:1.1rem;cursor:pointer;touch-action:manipulation}
+.gridwrap{overflow-x:auto}
+.grid{display:grid;width:max-content;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.cell{position:relative;width:var(--cell);height:var(--cell)}
+.cell.on{background:var(--paper);outline:1.5px solid var(--cellline);outline-offset:-0.75px;cursor:pointer}
+.cell.inword{background:color-mix(in srgb,var(--lt) 16%,var(--paper))}
+.cell.active{background:color-mix(in srgb,var(--lt) 42%,var(--paper))}
+.cell .n{position:absolute;top:1px;left:2px;font-size:calc(var(--cell)*.28);line-height:1;color:var(--muted);font-variant-numeric:tabular-nums;pointer-events:none}
+.cell .l{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-top:calc(var(--cell)*.12);font-weight:700;font-size:calc(var(--cell)*.56);pointer-events:none}
+.cell.wrong .l{color:var(--wrong)}
+.cell.wrong::after{content:"";position:absolute;left:12%;right:12%;bottom:14%;height:2px;background:var(--wrong);transform:rotate(-35deg)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font:inherit;font-size:.95rem;border-radius:8px;padding:8px 14px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;touch-action:manipulation}
+.btn.primary{background:var(--lt);border-color:var(--lt);color:#fff;font-weight:700}
+:root[data-theme="dark"] .btn.primary{color:#0E191D}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0E191D}}
+.btn:focus-visible,.tab:focus-visible,.iconbtn:focus-visible,.clue:focus-visible,.key:focus-visible{outline:3px solid var(--lt);outline-offset:2px}
+.status{font-size:.95rem;color:var(--muted)}
+.status.good{color:var(--ok);font-weight:700}
+.status.bad{color:var(--wrong)}
+.bank{background:var(--paper);border:1px dashed var(--lt);border-radius:10px;padding:10px 14px}
+.bank h3{margin:0 0 6px;font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.bank ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px}
+.bank li{font-weight:700}
+.bank li.used{color:var(--muted);text-decoration:line-through;font-weight:400}
+.clues{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:560px) and (max-width:900px){.clues{grid-template-columns:1fr 1fr}}
+.clues section{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 6px 8px}
+.clues h2{font-family:var(--serif);font-size:1.15rem;margin:0 8px 6px}
+.clues ol{list-style:none;margin:0;padding:0}
+.clue{display:grid;grid-template-columns:2.1em 1fr;gap:4px;padding:6px 8px;border-radius:7px;cursor:pointer;touch-action:manipulation}
+.clue .cn{font-weight:700;font-variant-numeric:tabular-nums;color:var(--lt)}
+.clue .ce{color:var(--muted);white-space:nowrap}
+.clue.cur{background:color-mix(in srgb,var(--lt) 16%,var(--paper))}
+.clue.done .ct{color:var(--muted)}
+.clue.done .cn::after{content:" ✓";color:var(--ok)}
+.hint{font-size:.85rem;color:var(--muted);margin:2px 0 0}
+.kb{position:fixed;left:0;right:0;bottom:0;z-index:10;background:color-mix(in srgb,var(--ground) 92%,var(--ink));border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px;align-items:center}
+.kb .row{display:flex;gap:5px;width:100%;max-width:760px;justify-content:center}
+.key{font:inherit;font-weight:700;font-size:1.1rem;flex:1 1 0;max-width:64px;height:48px;border-radius:7px;border:1px solid var(--line);background:var(--paper);color:var(--ink);touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.key.wide{max-width:96px;flex:1.5 1 0;font-size:.95rem}
+.key:active{background:color-mix(in srgb,var(--lt) 35%,var(--paper))}
+@media (prefers-reduced-motion:no-preference){.cell,.clue{transition:background-color .12s}}
+@media print{.kb,.actions,.tabs,.iconbtn,.hint{display:none!important}body.kb-on .wrap{padding-bottom:0}.clueBar{position:static}}
+.back{display:inline-block;margin-bottom:8px;font-size:.9rem;color:var(--lt11);text-decoration:none}.back:hover{text-decoration:underline}.foot{margin-top:22px;padding-top:10px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}.foot a{color:inherit}
+</style>
+
+<style>body{margin:0}[hidden]{display:none!important}*{box-sizing:border-box}</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+  <header class="top">
+    <div>
+      <div class="eyebrow">Bio Tool #2 · Unit 1 Biochemistry · Virginia SOL BIO.2a–c</div>
+      <h1>Module 1 Biochemistry Crosswords</h1>
+    </div>
+    <nav class="tabs" role="tablist" id="tabs" aria-label="Choose a learning target"></nav>
+  </header>
+
+  <div class="target" id="target"></div>
+
+  <div class="main">
+    <div class="board">
+      <div class="clueBar" aria-live="polite">
+        <button class="iconbtn" id="prevBtn" aria-label="Previous clue">‹</button>
+        <div class="txt" id="clueText"></div>
+        <button class="iconbtn" id="nextBtn" aria-label="Next clue">›</button>
+      </div>
+      <div class="gridwrap"><div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div></div>
+      <div class="actions">
+        <button class="btn primary" id="checkBtn">Check my letters</button>
+        <button class="btn" id="bankBtn" aria-expanded="false">Show word bank</button>
+        <button class="btn" id="kbBtn">Keyboard</button>
+        <button class="btn" id="clearBtn">Clear</button>
+        <span class="status" id="status" role="status"></span>
+      </div>
+      <div class="bank" id="bank" hidden></div>
+      <p class="hint">Tap a square or a clue to start. Tap the same square again to switch between Across and Down. Your letters are saved on this device.</p>
+    </div>
+    <div class="clues">
+      <section><h2>Across</h2><ol id="across"></ol></section>
+      <section><h2>Down</h2><ol id="down"></ol></section>
+    </div>
+  </div>
+  <footer class="foot">Unit 1 Biochemistry &middot; Virginia SOL BIO.2a, 2b, 2c &middot; PWCS LT 1.1, 1.2, 1.3. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+
+<div class="kb" id="kb" hidden></div>
+
+<script>
+const PUZZLES = [{"lt": "1.1", "title": "Properties of Water", "statement": "I can explain how and why water is such a unique molecule.", "width": 17, "height": 15, "clues": [{"n": 1, "dir": "A", "row": 0, "col": 2, "answer": "COVALENTBOND", "display": "COVALENT BOND", "enum": "8,4", "clue": "The strong link inside one water molecule, where oxygen and a hydrogen share a pair of electrons, drawn as a solid line"}, {"n": 7, "dir": "A", "row": 3, "col": 2, "answer": "COHESION", "display": "COHESION", "enum": "8", "clue": "The attraction that lets you pile a dome of drops on a penny before the water spills over"}, {"n": 8, "dir": "A", "row": 5, "col": 2, "answer": "CAPILLARYACTION", "display": "CAPILLARY ACTION", "enum": "9,6", "clue": "Water climbing a narrow glass tube or a plant stem against gravity, as it sticks both to itself and to the walls"}, {"n": 9, "dir": "A", "row": 10, "col": 0, "answer": "THERMALREGULATION", "display": "THERMAL REGULATION", "enum": "7,10", "clue": "Water soaks up a lot of heat before its temperature climbs, which lets sweat cool your body and keeps coastal weather mild"}, {"n": 10, "dir": "A", "row": 14, "col": 0, "answer": "SURFACETENSION", "display": "SURFACE TENSION", "enum": "7,7", "clue": "A water strider stands on a pond without sinking because molecules at the top layer hold tightly to one another"}, {"n": 2, "dir": "D", "row": 0, "col": 5, "answer": "ADHESION", "display": "ADHESION", "enum": "8", "clue": "Water clinging to glass or creeping into the fibers of a paper towel: attraction to a different substance"}, {"n": 3, "dir": "D", "row": 0, "col": 13, "answer": "DENSITY", "display": "DENSITY", "enum": "7", "clue": "Mass packed into a given volume; ice has less of it than liquid water, so a frozen lake keeps its fish alive underneath"}, {"n": 4, "dir": "D", "row": 1, "col": 15, "answer": "HYDROGENBOND", "display": "HYDROGEN BOND", "enum": "8,4", "clue": "The weak attraction between the slightly positive end of one water molecule and the slightly negative oxygen of its neighbor, drawn as a dotted line"}, {"n": 5, "dir": "D", "row": 2, "col": 0, "answer": "SOLUBILITY", "display": "SOLUBILITY", "enum": "10", "clue": "How readily a substance dissolves; sugar and salt have plenty of it in water, while cooking oil has almost none"}, {"n": 6, "dir": "D", "row": 2, "col": 8, "answer": "POLARMOLECULE", "display": "POLAR MOLECULE", "enum": "5,8", "clue": "Water is one: electrons are shared unequally, leaving the oxygen end slightly negative and the hydrogen ends slightly positive"}]}, {"lt": "1.2", "title": "Macromolecules", "statement": "I can describe the four organic macromolecules (proteins, lipids, nucleic acids, and carbohydrates), how they are synthesized and broken down, and explain their importance for organisms.", "width": 14, "height": 13, "clues": [{"n": 2, "dir": "A", "row": 1, "col": 1, "answer": "MACROMOLECULE", "display": "MACROMOLECULE", "enum": "13", "clue": "A giant organic compound assembled from many small repeating subunits; starch and DNA both qualify"}, {"n": 6, "dir": "A", "row": 4, "col": 2, "answer": "NUCLEOTIDE", "display": "NUCLEOTIDE", "enum": "10", "clue": "Building block of DNA and RNA: a phosphate, a five-carbon sugar and a base"}, {"n": 8, "dir": "A", "row": 7, "col": 2, "answer": "CARBOHYDRATE", "display": "CARBOHYDRATE", "enum": "12", "clue": "Sugars and starches: the cell's quickest energy, made of carbon, hydrogen and oxygen, with names that often end in -ose"}, {"n": 9, "dir": "A", "row": 9, "col": 0, "answer": "HYDROLYSIS", "display": "HYDROLYSIS", "enum": "10", "clue": "Adding water to split a large molecule back into its units, as your digestive system does to bread; the reverse of dehydration synthesis"}, {"n": 10, "dir": "A", "row": 11, "col": 1, "answer": "MONOMER", "display": "MONOMER", "enum": "7", "clue": "A single building-block unit, such as the glucose that chains together into starch"}, {"n": 1, "dir": "D", "row": 0, "col": 11, "answer": "NUCLEICACID", "display": "NUCLEIC ACID", "enum": "7,4", "clue": "The group of large molecules that includes DNA and RNA and stores hereditary information"}, {"n": 3, "dir": "D", "row": 1, "col": 2, "answer": "AMINOACID", "display": "AMINO ACID", "enum": "5,4", "clue": "Twenty kinds of this subunit, strung together in different orders, fold into enzymes and muscle fibers"}, {"n": 4, "dir": "D", "row": 3, "col": 9, "answer": "LIPID", "display": "LIPID", "enum": "5", "clue": "Fats, oils and waxes; built from glycerol and fatty acids, it stores long-term energy, forms the cell membrane and will not dissolve in water"}, {"n": 5, "dir": "D", "row": 3, "col": 13, "answer": "PROTEIN", "display": "PROTEIN", "enum": "7", "clue": "Enzymes, antibodies and hair all belong to this group, and each one's shape decides its job"}, {"n": 7, "dir": "D", "row": 6, "col": 6, "answer": "POLYMER", "display": "POLYMER", "enum": "7", "clue": "A long chain of many building blocks joined by dehydration synthesis"}]}, {"lt": "1.3", "title": "Chemical Reactions and Enzymes", "statement": "I can describe and label the components of a chemical reaction and explain how various factors can affect the rate of a reaction.", "width": 16, "height": 13, "clues": [{"n": 1, "dir": "A", "row": 0, "col": 0, "answer": "CATALYST", "display": "CATALYST", "enum": "8", "clue": "Something that speeds up a reaction and comes out unchanged, ready to work again"}, {"n": 7, "dir": "A", "row": 5, "col": 6, "answer": "REACTANT", "display": "REACTANT", "enum": "8", "clue": "A starting substance, written to the left of the arrow in a chemical equation"}, {"n": 8, "dir": "A", "row": 7, "col": 0, "answer": "ACTIVATIONENERGY", "display": "ACTIVATION ENERGY", "enum": "10,6", "clue": "The energy hill a reaction has to get over before it can start; on a reaction graph, the right protein makes this hump shorter"}, {"n": 10, "dir": "A", "row": 11, "col": 4, "answer": "OPTIMUM", "display": "OPTIMUM", "enum": "7", "clue": "The temperature or pH at the very top of a rate curve, where catalase or amylase works fastest"}, {"n": 2, "dir": "D", "row": 0, "col": 3, "answer": "ACTIVESITE", "display": "ACTIVE SITE", "enum": "6,4", "clue": "The pocket left by the way a protein chain folds, where one particular molecule fits like a key in a lock"}, {"n": 3, "dir": "D", "row": 0, "col": 6, "answer": "SUBSTRATE", "display": "SUBSTRATE", "enum": "9", "clue": "The specific molecule catalase breaks apart in the potato lab: hydrogen peroxide"}, {"n": 4, "dir": "D", "row": 1, "col": 13, "answer": "DENATURE", "display": "DENATURE", "enum": "8", "clue": "What boiling did to the catalase in the cooked potato cube: the protein unfolded, lost its shape, and no foam formed"}, {"n": 5, "dir": "D", "row": 2, "col": 1, "answer": "PRODUCT", "display": "PRODUCT", "enum": "7", "clue": "Written to the right of the arrow; in the potato lab, the oxygen gas that made the foam was one"}, {"n": 6, "dir": "D", "row": 2, "col": 8, "answer": "METABOLISM", "display": "METABOLISM", "enum": "10", "clue": "All the chemical reactions going on in an organism, building up and breaking down together"}, {"n": 9, "dir": "D", "row": 7, "col": 10, "answer": "ENZYME", "display": "ENZYME", "enum": "6", "clue": "A protein that speeds up one specific reaction in a cell; its name often ends in -ase, like the catalase in a potato"}]}];
+const COLORS = {"1.1":"--lt11","1.2":"--lt12","1.3":"--lt13"};
+const $ = id => document.getElementById(id);
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
+  del(k){ try { localStorage.removeItem(k); } catch(e){} }
+};
+
+// Build per-puzzle lookups
+PUZZLES.forEach(p => {
+  p.sol = Array.from({length:p.height},()=>Array(p.width).fill(null));
+  p.num = Array.from({length:p.height},()=>Array(p.width).fill(null));
+  p.wordAt = {A:Array.from({length:p.height},()=>Array(p.width).fill(-1)), D:Array.from({length:p.height},()=>Array(p.width).fill(-1))};
+  p.clues.forEach((c,i) => {
+    c.cells = [];
+    for (let k=0;k<c.answer.length;k++){
+      const r = c.dir==='A'?c.row:c.row+k, col = c.dir==='A'?c.col+k:c.col;
+      p.sol[r][col] = c.answer[k]; p.wordAt[c.dir][r][col] = i; c.cells.push([r,col]);
+    }
+    p.num[c.row][c.col] = c.n;
+  });
+  p.order = p.clues.map((c,i)=>i); // already sorted Across then Down
+  p.key = 'm1-bio-xw-' + p.lt;
+  const saved = store.get(p.key);
+  p.fill = Array.from({length:p.height},(_,r)=>Array.from({length:p.width},(_,c)=>{
+    const ch = saved ? saved[r*p.width+c] : ' ';
+    return (ch && ch !== ' ' && ch !== '.') ? ch : '';
+  }));
+  p.wrong = new Set();
+  p.checkedDone = new Set();
+});
+
+let P, cur = {r:0,c:0,dir:'A'};
+const tabIdx = parseInt(store.get('m1-bio-xw-tab') || '0',10);
+
+function save(){
+  const s = P.fill.map((row,r)=>row.map((ch,c)=>P.sol[r][c] ? (ch||' ') : '.').join('')).join('');
+  store.set(P.key, s);
+}
+function wordIndex(){ return P.wordAt[cur.dir][cur.r][cur.c]; }
+
+function renderTabs(){
+  $('tabs').innerHTML = '';
+  PUZZLES.forEach((p,i) => {
+    const b = document.createElement('button');
+    b.className='tab'; b.role='tab'; b.id='tab'+i;
+    b.style.setProperty('--c', `var(${COLORS[p.lt]})`);
+    b.setAttribute('aria-selected', p===P);
+    const filled = p.clues.filter(c=>c.cells.every(([r,cc])=>p.fill[r][cc])).length;
+    b.innerHTML = `<span class="dot"></span>LT ${p.lt} <span class="count">${filled}/10</span>`;
+    b.addEventListener('click', ()=>select(i));
+    $('tabs').appendChild(b);
+  });
+}
+
+function select(i){
+  P = PUZZLES[i] || PUZZLES[0];
+  store.set('m1-bio-xw-tab', String(PUZZLES.indexOf(P)));
+  document.documentElement.style.setProperty('--lt', `var(${COLORS[P.lt]})`);
+  $('target').innerHTML = `<span class="ltbadge">LT ${P.lt}</span><p><b>${P.title}.</b> ${P.statement}</p>`;
+  const first = P.clues[0]; cur = {r:first.row,c:first.col,dir:first.dir};
+  $('bank').hidden = true; $('bankBtn').setAttribute('aria-expanded','false'); $('bankBtn').textContent='Show word bank';
+  setStatus('');
+  buildGrid(); buildClues(); renderTabs(); update();
+}
+
+function sizeCells(){
+  const wrap = document.querySelector('.board');
+  const avail = wrap.clientWidth;
+  let size = Math.max(22, Math.min(44, Math.floor(avail / P.width)));
+  const kbOn = !$('kb').hidden;
+  if (kbOn){
+    const room = window.innerHeight - ($('kb').offsetHeight||170) - document.querySelector('.clueBar').offsetHeight - 24;
+    size = Math.max(22, Math.min(size, Math.floor(room / P.height)));
+  }
+  $('grid').style.setProperty('--cell', size+'px');
+}
+
+function buildGrid(){
+  const g = $('grid'); g.innerHTML='';
+  g.style.gridTemplateColumns = `repeat(${P.width}, var(--cell))`;
+  sizeCells();
+  for (let r=0;r<P.height;r++) for (let c=0;c<P.width;c++){
+    const d = document.createElement('div');
+    d.className = 'cell' + (P.sol[r][c] ? ' on' : '');
+    if (P.sol[r][c]){
+      d.dataset.r=r; d.dataset.c=c; d.setAttribute('role','gridcell');
+      d.innerHTML = (P.num[r][c] ? `<span class="n">${P.num[r][c]}</span>` : '') + `<span class="l"></span>`;
+      d.addEventListener('click', ()=>tapCell(r,c));
+    }
+    g.appendChild(d);
+  }
+}
+
+function buildClues(){
+  ['across','down'].forEach(id=>$(id).innerHTML='');
+  P.clues.forEach((c,i)=>{
+    const li = document.createElement('li');
+    li.className='clue'; li.tabIndex=0; li.id='clue'+i;
+    li.innerHTML = `<span class="cn">${c.n}</span><span><span class="ct">${c.clue}</span> <span class="ce">(${c.enum})</span></span>`;
+    const go = ()=>{ cur={r:c.row,c:c.col,dir:c.dir}; const e=c.cells.find(([r,cc])=>!P.fill[r][cc]); if(e){cur.r=e[0];cur.c=e[1];} update(); if (matchMedia('(max-width:900px)').matches) $('grid').scrollIntoView({block:'nearest',behavior:'smooth'}); };
+    li.addEventListener('click', go);
+    li.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); go(); }});
+    $(c.dir==='A'?'across':'down').appendChild(li);
+  });
+}
+
+function tapCell(r,c){
+  if (cur.r===r && cur.c===c){
+    const other = cur.dir==='A'?'D':'A';
+    if (P.wordAt[other][r][c] >= 0) cur.dir = other;
+  } else {
+    cur.r=r; cur.c=c;
+    if (P.wordAt[cur.dir][r][c] < 0) cur.dir = cur.dir==='A'?'D':'A';
+  }
+  update();
+}
+
+function update(){
+  const wi = wordIndex(); const w = P.clues[wi];
+  const inWord = new Set(w.cells.map(([r,c])=>r+','+c));
+  document.querySelectorAll('#grid .cell.on').forEach(el=>{
+    const r=+el.dataset.r, c=+el.dataset.c, k=r+','+c;
+    el.classList.toggle('inword', inWord.has(k));
+    el.classList.toggle('active', r===cur.r && c===cur.c);
+    el.classList.toggle('wrong', P.wrong.has(k));
+    el.querySelector('.l').textContent = P.fill[r][c];
+  });
+  document.querySelectorAll('.clue').forEach((el,i)=>{
+    el.classList.toggle('cur', i===wi);
+    el.classList.toggle('done', P.checkedDone.has(i));
+  });
+  $('clueText').innerHTML = `<span class="num">${w.n} ${w.dir==='A'?'Across':'Down'}</span>${w.clue} <span class="enum">(${w.enum})</span>`;
+  if ($('bank') && !$('bank').hidden) renderBank();
+  renderTabs();
+}
+
+function type(ch){
+  if (!P.sol[cur.r][cur.c]) return;
+  P.fill[cur.r][cur.c] = ch;
+  P.wrong.delete(cur.r+','+cur.c);
+  const w = P.clues[wordIndex()];
+  const idx = w.cells.findIndex(([r,c])=>r===cur.r&&c===cur.c);
+  if (idx < w.cells.length-1){ cur.r=w.cells[idx+1][0]; cur.c=w.cells[idx+1][1]; }
+  save(); update();
+}
+function backspace(){
+  const w = P.clues[wordIndex()];
+  const idx = w.cells.findIndex(([r,c])=>r===cur.r&&c===cur.c);
+  if (!P.fill[cur.r][cur.c] && idx>0){ cur.r=w.cells[idx-1][0]; cur.c=w.cells[idx-1][1]; }
+  P.fill[cur.r][cur.c]=''; P.wrong.delete(cur.r+','+cur.c);
+  save(); update();
+}
+function move(dr,dc){
+  let r=cur.r+dr, c=cur.c+dc;
+  while (r>=0&&r<P.height&&c>=0&&c<P.width){
+    if (P.sol[r][c]){ cur.r=r; cur.c=c; cur.dir = dc? 'A':'D'; if (P.wordAt[cur.dir][r][c]<0) cur.dir = cur.dir==='A'?'D':'A'; update(); return; }
+    r+=dr; c+=dc;
+  }
+}
+function stepClue(delta){
+  const n = P.clues.length; const i = (wordIndex()+delta+n)%n; const c=P.clues[i];
+  cur={r:c.row,c:c.col,dir:c.dir}; update();
+}
+
+document.addEventListener('keydown', e=>{
+  const t = e.target;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (t && (t.tagName==='BUTTON' || t.classList?.contains('clue')) && (e.key==='Enter' || e.key===' ')) return;
+  if (/^[a-zA-Z]$/.test(e.key)){ e.preventDefault(); type(e.key.toUpperCase()); }
+  else if (e.key==='Backspace' || e.key==='Delete'){ e.preventDefault(); backspace(); }
+  else if (e.key==='ArrowRight'){ e.preventDefault(); move(0,1); }
+  else if (e.key==='ArrowLeft'){ e.preventDefault(); move(0,-1); }
+  else if (e.key==='ArrowDown'){ e.preventDefault(); move(1,0); }
+  else if (e.key==='ArrowUp'){ e.preventDefault(); move(-1,0); }
+  else if (e.key==='Tab'){ e.preventDefault(); stepClue(e.shiftKey?-1:1); }
+  else if (e.key===' '){ e.preventDefault(); tapCell(cur.r,cur.c); }
+});
+
+function setStatus(msg, cls){ const s=$('status'); s.textContent=msg; s.className='status'+(cls?' '+cls:''); }
+
+$('checkBtn').addEventListener('click', ()=>{
+  P.wrong.clear(); P.checkedDone.clear();
+  let empty=0, total=0;
+  for (let r=0;r<P.height;r++) for (let c=0;c<P.width;c++){
+    if (!P.sol[r][c]) continue; total++;
+    if (!P.fill[r][c]) empty++;
+    else if (P.fill[r][c]!==P.sol[r][c]) P.wrong.add(r+','+c);
+  }
+  P.clues.forEach((w,i)=>{ if (w.cells.every(([r,c])=>P.fill[r][c]===P.sol[r][c])) P.checkedDone.add(i); });
+  const bad=P.wrong.size;
+  if (!bad && !empty) setStatus(`All ten LT ${P.lt} words are correct.`, 'good');
+  else if (!bad) setStatus(`No wrong letters so far. ${empty} square${empty===1?'':'s'} still blank.`);
+  else setStatus(`${bad} letter${bad===1?' needs':'s need'} another look (marked in red).`, 'bad');
+  update();
+});
+
+function renderBank(){
+  const used = new Set(P.clues.filter(w=>w.cells.every(([r,c])=>P.fill[r][c]===P.sol[r][c])).map(w=>w.display));
+  const terms = P.clues.map(w=>w.display).sort();
+  $('bank').innerHTML = `<h3>Word bank · LT ${P.lt}</h3><ul>${terms.map(t=>`<li class="${used.has(t)?'used':''}">${t.toLowerCase()}</li>`).join('')}</ul>`;
+}
+$('bankBtn').addEventListener('click', ()=>{
+  const b=$('bank'); b.hidden=!b.hidden;
+  $('bankBtn').setAttribute('aria-expanded', String(!b.hidden));
+  $('bankBtn').textContent = b.hidden ? 'Show word bank' : 'Hide word bank';
+  if (!b.hidden) renderBank();
+});
+
+let clearArmed=null;
+$('clearBtn').addEventListener('click', ()=>{
+  if (!clearArmed){
+    $('clearBtn').textContent='Tap again to clear';
+    clearArmed=setTimeout(()=>{ clearArmed=null; $('clearBtn').textContent='Clear'; }, 3000);
+    return;
+  }
+  clearTimeout(clearArmed); clearArmed=null; $('clearBtn').textContent='Clear';
+  P.fill = P.fill.map(row=>row.map(()=>'')); P.wrong.clear(); P.checkedDone.clear();
+  store.del(P.key); setStatus(''); update();
+});
+
+// On-screen keyboard for touch screens
+function buildKeyboard(){
+  const rows=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'];
+  const kb=$('kb'); kb.innerHTML='';
+  rows.forEach((row,ri)=>{
+    const d=document.createElement('div'); d.className='row';
+    if (ri===2){ d.appendChild(key('⇅','flip','wide','Switch Across or Down')); }
+    [...row].forEach(ch=>d.appendChild(key(ch,ch)));
+    if (ri===2){ d.appendChild(key('⌫','back','wide','Delete')); }
+    kb.appendChild(d);
+  });
+  function key(label,val,cls,aria){
+    const b=document.createElement('button'); b.className='key'+(cls?' '+cls:''); b.textContent=label; b.type='button';
+    if (aria) b.setAttribute('aria-label',aria);
+    b.addEventListener('pointerdown', e=>{ e.preventDefault();
+      if (val==='back') backspace(); else if (val==='flip') tapCell(cur.r,cur.c); else type(val);
+    });
+    return b;
+  }
+}
+function setKeyboard(on){
+  $('kb').hidden=!on; document.body.classList.toggle('kb-on',on);
+  $('kbBtn').textContent = on ? 'Hide keyboard' : 'Keyboard';
+  requestAnimationFrame(()=>{ if (on) document.documentElement.style.setProperty('--kbh', $('kb').offsetHeight+'px'); if (P) sizeCells(); });
+  store.set('m1-bio-xw-kb', on?'1':'0');
+}
+buildKeyboard();
+$('kbBtn').addEventListener('click', ()=>setKeyboard($('kb').hidden));
+$('prevBtn').addEventListener('click', ()=>stepClue(-1));
+$('nextBtn').addEventListener('click', ()=>stepClue(1));
+window.addEventListener('resize', ()=>{ if (P) sizeCells(); if (!$('kb').hidden) document.documentElement.style.setProperty('--kbh', $('kb').offsetHeight+'px'); });
+
+select(isNaN(tabIdx)?0:tabIdx);
+const kbPref = store.get('m1-bio-xw-kb');
+setKeyboard(kbPref ? kbPref==='1' : matchMedia('(pointer: coarse)').matches);
+</script>
+
+</body>
+</html>
