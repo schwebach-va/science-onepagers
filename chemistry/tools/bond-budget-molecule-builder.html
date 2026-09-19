@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="An interactive bonding activity: carbon four, nitrogen three, oxygen two, hydrogen one. Students build seven molecules by spending each atom's bond budget to zero. Works on iPads, no login.">
+<link rel="canonical" href="https://scienceonepagers.org/chemistry/tools/bond-budget-molecule-builder.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Bond Budget - Building Molecules From Valence">
+<meta property="og:description" content="An interactive bonding activity: carbon four, nitrogen three, oxygen two, hydrogen one. Students build seven molecules by spending each atom's bond budget to zero. Works on iPads, no login.">
+<meta property="og:url" content="https://scienceonepagers.org/chemistry/tools/bond-budget-molecule-builder.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Bond Budget | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F5F2;--card:#FFFFFF;--ink:#16211F;--ink-soft:#4C5A56;
+  --bond:#255C68;--bond-soft:#DCE8EA;--rule:#D4DCD8;
+  --flag:#8C5222;--flag-soft:#F3E7DA;--solid:#356B4C;--solid-soft:#DFEBE2;
+  --atomC:#2F3E3A;--atomN:#255C68;--atomO:#8C5222;--atomH:#8FA29C;
+  --serif:"Source Serif 4",Georgia,serif;--sans:"Archivo",Helvetica,Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111917;--card:#18211F;--ink:#E8EEEB;--ink-soft:#9DACA7;
+  --bond:#7FB8C4;--bond-soft:#1E3238;--rule:#2A3634;
+  --flag:#D9A06A;--flag-soft:#2E2318;--solid:#7DBE96;--solid-soft:#1B2C22;
+  --atomC:#C6D2CE;--atomN:#7FB8C4;--atomO:#D9A06A;--atomH:#5C6D68;
+}}
+:root[data-theme="dark"]{
+  --paper:#111917;--card:#18211F;--ink:#E8EEEB;--ink-soft:#9DACA7;
+  --bond:#7FB8C4;--bond-soft:#1E3238;--rule:#2A3634;
+  --flag:#D9A06A;--flag-soft:#2E2318;--solid:#7DBE96;--solid-soft:#1B2C22;
+  --atomC:#C6D2CE;--atomN:#7FB8C4;--atomO:#D9A06A;--atomH:#5C6D68;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:44rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.7rem,5.5vw,2.4rem);
+  line-height:1.1;letter-spacing:-0.015em;margin:0 0 .7rem}
+p{margin:0 0 1rem;max-width:34rem}
+.lede{color:var(--ink-soft);font-size:1.05rem}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+button{font:inherit;cursor:pointer}
+.go{font-family:var(--sans);font-weight:600;font-size:.98rem;background:var(--bond);
+  color:var(--paper);border:none;border-radius:3px;padding:.8rem 1.35rem;min-height:2.9rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#0E1614}}
+:root[data-theme="dark"] .go{color:#0E1614}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);font-family:var(--sans);
+  font-weight:600;font-size:.9rem;border-radius:3px;padding:.65rem 1.1rem;min-height:2.6rem}
+.go:focus-visible,.ghost:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:1.1rem}
+
+.head{display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);
+  border-bottom:1.5px solid var(--rule);padding-bottom:.5rem;margin:2rem 0 1.1rem}
+.target{font-family:var(--sans);font-weight:700;font-size:1.5rem;letter-spacing:-0.01em;margin:0 0 .2rem}
+.ask{margin:0 0 1rem;color:var(--ink-soft);font-size:1rem}
+
+.stage{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;
+  padding:.5rem;touch-action:manipulation}
+svg{display:block;width:100%;height:auto}
+.atom{cursor:pointer}
+.atom circle{transition:stroke-width .12s ease}
+@media (prefers-reduced-motion:reduce){.atom circle{transition:none}}
+.sym{font-family:var(--sans);font-weight:700;pointer-events:none}
+.cap{font-family:var(--sans);font-weight:600;font-size:10px;pointer-events:none}
+.bondline{cursor:pointer}
+
+.status{font-family:var(--sans);font-weight:600;font-size:.95rem;margin:1rem 0 0;min-height:1.5rem}
+.status.ok{color:var(--solid)}
+.status.no{color:var(--flag)}
+.note{border-left:3px solid var(--solid);background:var(--card);padding:.9rem 1.1rem;
+  border-radius:0 3px 3px 0;margin-top:1.1rem}
+.note p{margin:0;font-size:1rem}
+.note .tag{font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--solid);
+  display:block;margin-bottom:.3rem}
+.hidden{display:none}
+.ladder{display:flex;gap:.35rem;flex-wrap:wrap;margin:1.3rem 0 0;padding:0;list-style:none}
+.ladder li{font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--ink-soft);
+  border:1.5px solid var(--rule);border-radius:2px;padding:.3rem .5rem}
+.ladder li.done{border-color:var(--solid);background:var(--solid-soft);color:var(--solid)}
+.ladder li.now{border-color:var(--bond);background:var(--bond-soft);color:var(--bond)}
+.key{display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:1rem;font-family:var(--sans);
+  font-size:.8rem;font-weight:600;color:var(--ink-soft)}
+.key span::before{content:"";display:inline-block;width:.6rem;height:.6rem;border-radius:50%;
+  margin-right:.35rem;vertical-align:baseline}
+.kC::before{background:var(--atomC)}.kN::before{background:var(--atomN)}
+.kO::before{background:var(--atomO)}.kH::before{background:var(--atomH)}
+.task{background:var(--card);border:1.5px solid var(--rule);border-left:3px solid var(--flag);border-radius:0 3px 3px 0;padding:.95rem 1.15rem;margin-top:1.4rem}
+.task p{margin:0;font-size:1rem}
+.tasktag{font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--flag);display:block;margin-bottom:.3rem}
+.back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.back:hover{text-decoration:underline}
+.eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.foot a{color:inherit}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="../classroom-tools.html">&larr; Chemistry Classroom Tools</a>
+<p class="eyebrow">Chem Tool #1 &middot; DE Bio 101 Unit 2 &middot; Campbell Ch. 2 and 3</p>
+<h1>Bond Budget</h1>
+<p class="lede">An atom&rsquo;s outer shell wants eight electrons, and hydrogen wants two. However many it is short by is how many bonds it makes, and that number never changes: carbon four, nitrogen three, oxygen two, hydrogen one. Build seven molecules by spending each atom&rsquo;s budget down to zero.</p>
+<p class="fine">Tap one atom, then another, to bond them. Tap a bond again to make it a double. Tap a finished bond to remove it. The number on each atom is how many bonds it still owes.</p>
+
+<div class="head"><span id="stepName"></span><span id="stepCount"></span></div>
+<p class="target" id="formula"></p>
+<p class="ask" id="ask"></p>
+
+<div class="stage"><svg id="board" viewBox="0 0 400 300" role="img" aria-label="Molecule building area"></svg></div>
+
+<div class="key"><span class="kC">carbon, 4</span><span class="kN">nitrogen, 3</span><span class="kO">oxygen, 2</span><span class="kH">hydrogen, 1</span></div>
+
+<p class="status" id="status"></p>
+
+<div class="note hidden" id="note"><span class="tag" id="noteTag"></span><p id="noteText"></p></div>
+
+<div class="row">
+  <button class="go hidden" id="next">Next molecule</button>
+  <button class="ghost" id="reset">Clear the bonds</button>
+</div>
+
+<ul class="ladder" id="ladder"></ul>
+
+<p class="fine" style="margin-top:2rem">When all seven are built, look back at the last three. Each one hangs a small group off a carbon skeleton, and each of those groups is what gives a macromolecule its behaviour in water. That is where Unit 3 begins.</p>
+
+<div class="task">
+<span class="tasktag">Do this away from the screen</span>
+<p>On paper, draw a chain of five carbons joined to each other. Give every carbon its full four bonds using hydrogens, then replace one end hydrogen with an &mdash;OH. Mark which end of that molecule water will stick to. Do it without looking anything up. If you stall, the atom you stalled on is the one to go back to.</p>
+</div>
+
+
+<footer class="foot">Unit 2, Chemical Context of Life, and the opening of Unit 3, Carbon and Molecular Diversity &middot; NVCC BIO 101 &middot; also serves Virginia Biology SOL BIO.2b.
+&copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.
+Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+
+</div>
+<script>
+const CAP={C:4,N:3,O:2,H:1};
+const COLOR={C:"var(--atomC)",N:"var(--atomN)",O:"var(--atomO)",H:"var(--atomH)"};
+const R={C:24,N:24,O:24,H:16};
+
+const LEVELS=[
+ {name:"Water",formula:"H\u2082O",atoms:["O","H","H"],
+  ask:"Oxygen owes two bonds. Each hydrogen owes one.",
+  tag:"Why this one first",
+  note:"Two bonds from oxygen, one from each hydrogen, and the budget closes exactly. The two pairs oxygen keeps to itself are what bend the molecule and make it polar \u2014 the reason water behaves the way it does in every lab you will run."},
+ {name:"Ammonia",formula:"NH\u2083",atoms:["N","H","H","H"],
+  ask:"Nitrogen owes three. Count before you tap.",
+  tag:"Where you meet this again",
+  note:"Nitrogen's three bonds are why an amino group is \u2014NH\u2082 and not \u2014NH\u2083. One of its three is already spent holding on to the carbon skeleton."},
+ {name:"Methane",formula:"CH\u2084",atoms:["C","H","H","H","H"],
+  ask:"Carbon owes four. This is the shape everything else is built from.",
+  tag:"The fact the unit rests on",
+  note:"Four bonds, four hydrogens, nothing left over. Replace any one of those hydrogens with another carbon and you have started a skeleton; replace one with an oxygen and you have started a functional group."},
+ {name:"Carbon dioxide",formula:"CO\u2082",atoms:["C","O","O"],
+  ask:"Two oxygens cannot spend four carbon bonds singly. Tap a bond twice.",
+  tag:"What a double bond is for",
+  note:"Carbon still owes four and each oxygen still owes two, so both bonds have to be doubles. A double bond is not a stronger kind of glue \u2014 it is two bonds between the same pair, and it counts twice against both budgets."},
+ {name:"Ethane",formula:"C\u2082H\u2086",atoms:["C","C","H","H","H","H","H","H"],
+  ask:"Bond the two carbons to each other first, then spend what is left.",
+  tag:"The first skeleton",
+  note:"Each carbon spends one bond on the other and three on hydrogens. Chain more carbons this way and the skeleton gets as long as you like, which is the property that makes carbon the element life is built from."},
+ {name:"Formaldehyde",formula:"CH\u2082O",atoms:["C","O","H","H"],
+  ask:"One carbon, one oxygen, two hydrogens. Carbon still owes four.",
+  tag:"A carbonyl group",
+  note:"Carbon double-bonds the oxygen and single-bonds both hydrogens. That C=O is the carbonyl group, and it is what distinguishes a sugar from an alcohol and an aldehyde from a ketone."},
+ {name:"Ethanol",formula:"C\u2082H\u2086O",atoms:["C","C","O","H","H","H","H","H","H"],
+  ask:"Build the two-carbon skeleton, then hang the oxygen off one end with a hydrogen on it.",
+  tag:"A hydroxyl group, and the point of all seven",
+  note:"The \u2014OH on the end is a hydroxyl group. Oxygen pulls hard, the bond goes polar, and water can hydrogen-bond to that end while the C\u2013H end stays indifferent to it. One molecule, two personalities \u2014 which is exactly how a phospholipid builds a membrane."}
+];
+
+const $=id=>document.getElementById(id);
+let li=0,atoms=[],bonds=[],sel=null,solved=new Array(LEVELS.length).fill(false);
+
+function layout(n){
+  const cx=200,cy=150,rad=n<=3?78:n<=5?96:112,out=[];
+  for(let k=0;k<n;k++){
+    const a=-Math.PI/2+(2*Math.PI*k)/n;
+    out.push({x:cx+rad*Math.cos(a),y:cy+rad*Math.sin(a)});
+  }
+  return out;
+}
+function load(n){
+  li=n;sel=null;bonds=[];
+  const L=LEVELS[n],pos=layout(L.atoms.length);
+  atoms=L.atoms.map((el,k)=>({el,x:pos[k].x,y:pos[k].y}));
+  $("stepName").textContent=L.name;
+  $("stepCount").textContent="Molecule "+(n+1)+" of "+LEVELS.length;
+  $("formula").textContent=L.formula;
+  $("ask").textContent=L.ask;
+  $("note").classList.add("hidden");
+  $("next").classList.add("hidden");
+  draw();ladder();
+}
+function used(i){return bonds.reduce((s,b)=>s+((b.a===i||b.b===i)?b.n:0),0);}
+function owed(i){return CAP[atoms[i].el]-used(i);}
+
+function draw(){
+  const svg=$("board");svg.innerHTML="";
+  const NS="http://www.w3.org/2000/svg";
+  bonds.forEach((b,k)=>{
+    const A=atoms[b.a],B=atoms[b.b];
+    const dx=B.x-A.x,dy=B.y-A.y,len=Math.hypot(dx,dy)||1;
+    const px=-dy/len,py=dx/len;
+    const offs=b.n===1?[0]:b.n===2?[-4,4]:[-6,0,6];
+    const g=document.createElementNS(NS,"g");
+    g.setAttribute("class","bondline");
+    const hit=document.createElementNS(NS,"line");
+    hit.setAttribute("x1",A.x);hit.setAttribute("y1",A.y);
+    hit.setAttribute("x2",B.x);hit.setAttribute("y2",B.y);
+    hit.setAttribute("stroke","transparent");hit.setAttribute("stroke-width","22");
+    g.appendChild(hit);
+    offs.forEach(o=>{
+      const l=document.createElementNS(NS,"line");
+      l.setAttribute("x1",A.x+px*o);l.setAttribute("y1",A.y+py*o);
+      l.setAttribute("x2",B.x+px*o);l.setAttribute("y2",B.y+py*o);
+      l.setAttribute("stroke","var(--ink)");l.setAttribute("stroke-width","3");
+      l.setAttribute("stroke-linecap","round");
+      g.appendChild(l);
+    });
+    g.addEventListener("click",()=>tapBond(k));
+    svg.appendChild(g);
+  });
+  atoms.forEach((a,i)=>{
+    const g=document.createElementNS(NS,"g");
+    g.setAttribute("class","atom");
+    g.setAttribute("tabindex","0");
+    g.setAttribute("role","button");
+    g.setAttribute("aria-label",a.el+", "+owed(i)+" bonds remaining");
+    const c=document.createElementNS(NS,"circle");
+    c.setAttribute("cx",a.x);c.setAttribute("cy",a.y);c.setAttribute("r",R[a.el]);
+    c.setAttribute("fill",COLOR[a.el]);
+    c.setAttribute("stroke",sel===i?"var(--bond)":"transparent");
+    c.setAttribute("stroke-width",sel===i?"4":"0");
+    g.appendChild(c);
+    const t=document.createElementNS(NS,"text");
+    t.setAttribute("class","sym");t.setAttribute("x",a.x);t.setAttribute("y",a.y+5);
+    t.setAttribute("text-anchor","middle");t.setAttribute("fill","var(--card)");
+    t.setAttribute("font-size",a.el==="H"?"14":"18");
+    t.textContent=a.el;g.appendChild(t);
+    const n=document.createElementNS(NS,"text");
+    n.setAttribute("class","cap");
+    n.setAttribute("x",a.x);n.setAttribute("y",a.y+R[a.el]+14);
+    n.setAttribute("text-anchor","middle");
+    n.setAttribute("fill",owed(i)===0?"var(--solid)":"var(--ink-soft)");
+    n.textContent=owed(i)===0?"\u2713":owed(i);
+    g.appendChild(n);
+    g.addEventListener("click",()=>tapAtom(i));
+    g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tapAtom(i);}});
+    svg.appendChild(g);
+  });
+  check();
+}
+function tapAtom(i){
+  if(sel===null){sel=i;draw();return;}
+  if(sel===i){sel=null;draw();return;}
+  const a=sel,b=i;sel=null;
+  if(owed(a)<1||owed(b)<1){say("Both atoms need a bond left. Check the numbers.","no");draw();return;}
+  const ex=bonds.findIndex(x=>(x.a===a&&x.b===b)||(x.a===b&&x.b===a));
+  if(ex>=0){if(bonds[ex].n<3)bonds[ex].n++;}
+  else bonds.push({a,b,n:1});
+  draw();
+}
+function tapBond(k){
+  const b=bonds[k];
+  if(owed(b.a)>=1&&owed(b.b)>=1&&b.n<3){b.n++;}
+  else bonds.splice(k,1);
+  sel=null;draw();
+}
+function say(msg,cls){$("status").textContent=msg;$("status").className="status "+(cls||"");}
+function check(){
+  const total=atoms.reduce((s,a,i)=>s+owed(i),0);
+  if(bonds.length===0){say("");return;}
+  if(total===0){
+    solved[li]=true;
+    say("Every budget is spent. "+LEVELS[li].formula+" is built.","ok");
+    $("noteTag").textContent=LEVELS[li].tag;
+    $("noteText").textContent=LEVELS[li].note;
+    $("note").classList.remove("hidden");
+    if(li<LEVELS.length-1){$("next").classList.remove("hidden");}
+    ladder();
+  }else{
+    say(total+" bond"+(total===1?"":"s")+" still owed.","");
+    $("note").classList.add("hidden");$("next").classList.add("hidden");
+  }
+}
+function ladder(){
+  const ul=$("ladder");ul.innerHTML="";
+  LEVELS.forEach((L,k)=>{
+    const el=document.createElement("li");
+    el.textContent=L.formula;
+    if(solved[k])el.className="done";else if(k===li)el.className="now";
+    el.addEventListener("click",()=>load(k));
+    el.style.cursor="pointer";
+    ul.appendChild(el);
+  });
+}
+$("next").addEventListener("click",()=>load(Math.min(li+1,LEVELS.length-1)));
+$("reset").addEventListener("click",()=>load(li));
+load(0);
+</script>
+</body>
+</html>
