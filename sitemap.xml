@@ -348,6 +348,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+<url>
+    <loc>https://scienceonepagers.org/teaching/student-authored-modules.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://scienceonepagers.org/biology/de-biology-101-resources.html</loc>
     <lastmod>2026-09-19</lastmod>
