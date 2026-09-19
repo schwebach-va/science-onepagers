@@ -1,0 +1,8 @@
+# Local working files — never publish these
+_bak/
+_THIS IS THE LIVE SITE.md
+_SITE EDIT QUEUE.md
+Claude outputs/
+.DS_Store
+*.bak-*
+*.superseded-*
