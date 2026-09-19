@@ -143,7 +143,12 @@ const GROUPS = [{"key":"hydroxyl","name":"Hydroxyl","formula":"—OH","cue":"—
 const COL={C:'#3a3a3a',H:'#c9c9c9',O:'#c0392b',N:'#2d6ca8',S:'#c9a227',P:'#d2762b'};
 const RAD={C:13,H:8.5,O:12.5,N:12.5,S:16,P:16};
 const SVGNS='http://www.w3.org/2000/svg';
-let cur=0, rx=-0.32, ry=0.55, scale=60, drag=false, lx=0, ly=0;
+// Each group opens at the angle that shows its own point: the planar groups face-on
+// so their bond angle reads true, the amino lone pair clear of the hydrogens, and the
+// phosphate turned so both negative oxygens face you and sit wide apart. Every one of
+// these was chosen so no two atoms or lone pairs overlap on first view.
+const VIEW={"hydroxyl":[-0.30,2.69],"carbonyl":[-0.20,0.28],"carboxyl":[-0.10,3.39],"amino":[-0.50,1.95],"sulfhydryl":[-0.30,0.35],"methyl":[0.80,1.57],"phosphate":[0.70,4.82]};
+let cur=0, rx=VIEW.hydroxyl[0], ry=VIEW.hydroxyl[1], scale=60, drag=false, lx=0, ly=0;
 const CX=210, CY=168;
 
 function rot(p){
@@ -208,6 +213,7 @@ function draw(){
 }
 function paint(){
   const g=GROUPS[cur];
+  const v=VIEW[g.key]; if(v){ rx=v[0]; ry=v[1]; }
   document.getElementById('gname').textContent=g.name;
   document.getElementById('gform').innerHTML=g.formula;
   document.getElementById('facts').innerHTML=
