@@ -176,7 +176,7 @@ button{font:inherit;cursor:pointer}
 
 <!-- ========== RESULTS ========== -->
 <section id="results" class="hidden">
-  <h1>Seven ideas, scored</h1>
+  <h1>Seven ideas, to map your understanding of carbon chemistry</h1>
   <p class="lede" id="summary"></p>
   <div class="grid" id="resultGrid"></div>
   <p class="fine">The outlined tiles are the ones worth a weekend. The filled ones you can skip.</p>
@@ -305,9 +305,9 @@ const ITEMS=[
  {b:6,q:"A sample of double-stranded DNA is 20% guanine. What percentage is cytosine?",
   o:["20%","30%","40%","It cannot be determined"],a:0,
   w:"Guanine pairs only with cytosine, so the two counts match. That leaves 60% for adenine and thymine, split evenly at 30% each. This pattern held across every organism anyone tested, and it was one of the clues that gave away the double helix."},
- {b:6,q:"A supplement is analysed and found to contain only carbon, hydrogen, oxygen and sulfur. What can you safely conclude?",
+ {b:6,q:"A supplement is analysed and found to contain only carbon, hydrogen, oxygen, nitrogen and sulfur. What can you safely conclude?",
   o:["It contains no protein","It contains no nucleic acid","It contains no lipid","It contains only carbohydrate"],a:1,
-  w:"Every nucleotide carries a phosphate, so no phosphorus means no nucleic acid. Protein is still possible — sulfur points toward it, since two amino acids carry sulfur. Each class has an element signature, and the missing element is often the fastest way to answer."}
+  w:"Every nucleotide carries a phosphate, so no phosphorus on the list means no nucleic acid. Nitrogen will not settle it on its own, because proteins and nucleic acids both carry nitrogen; sulfur is what points at protein, since two amino acids carry it. Phosphorus is the element that separates the two, and a missing element is often the fastest way to answer."}
 ];
 
 const $=id=>document.getElementById(id);
@@ -383,7 +383,7 @@ function finish(){
   const weak=scores.filter(s=>s<=1).length;
   $("summary").textContent=
     total+" of 21 correct. "+
-    (weak===0?"Nothing here is broken. Take the two lowest tiles, work their tasks once, and put your time into the Checkpoint instead."
+    (weak===0?"These will help you map where to study more. Take the two lowest tiles, work their tasks once, and put your time into the Checkpoint instead. Then come back and try this self-check again, another day after sleeping well and starting fresh."
      :weak===1?"One idea is carrying all the damage. Everything else is in reach once that one is fixed."
      :weak+" ideas need real work. Take them one at a time, in the order they appear below, and re-run the check once you have worked two of them.");
   const g=$("resultGrid");g.innerHTML="";
