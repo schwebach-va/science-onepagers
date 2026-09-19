@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Seven Functional Groups, in Three Dimensions | Science One-Pagers</title>
+<meta name="description" content="The seven functional groups of biochemistry in real VSEPR geometry: spin each one, see where its lone pairs actually sit, and learn what it does to a molecule in water. Flashcard drill included. Works on iPads, no login.">
+<link rel="canonical" href="https://scienceonepagers.org/chemistry/tools/functional-groups-in-3d.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Seven Functional Groups, in Three Dimensions">
+<meta property="og:description" content="Spin each of the seven functional groups in real geometry, see where its lone pairs sit, and learn what it does in water.">
+<meta property="og:url" content="https://scienceonepagers.org/chemistry/tools/functional-groups-in-3d.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../style.css">
+<style>
+:root{--ink:#1a1a1a;--paper:#fdfcfa;--card:#fff;--rule:#d8d2c8;--muted:#5a5248;
+  --accent:#1F7A8C;--lp:#7a6ad8;--bond:#3a3a3a;--bond-soft:#eef2f4}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1rem 3rem}
+.picker{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.1rem 0 .9rem}
+.picker button{font-family:"Helvetica Neue",Arial,sans-serif;font-size:.82rem;font-weight:600;
+  border:1.5px solid var(--rule);background:var(--card);color:var(--ink);border-radius:3px;
+  padding:.5rem .7rem;min-height:2.6rem;cursor:pointer;line-height:1.1}
+.picker button .f{display:block;font-size:.72rem;font-weight:400;color:var(--muted);margin-top:.12rem}
+.picker button[aria-pressed="true"]{color:#fff;border-color:transparent}
+.picker button[aria-pressed="true"] .f{color:rgba(255,255,255,.85)}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:1.1rem;align-items:start}
+@media(max-width:720px){.two{grid-template-columns:1fr}}
+.stage{position:relative;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;
+  touch-action:none;user-select:none}
+.stage svg{display:block;width:100%;height:auto}
+.spintag{position:absolute;right:.55rem;bottom:.5rem;font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:.7rem;color:var(--muted);background:var(--bond-soft);border-radius:2px;padding:.2rem .45rem}
+.gname{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:1.15rem;margin:0 0 .1rem}
+.gform{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--muted);font-size:.9rem;margin:0 0 .7rem}
+.fact{margin:0 0 .65rem;font-size:.95rem;line-height:1.45}
+.fact b.lab{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:.7rem;
+  text-transform:uppercase;letter-spacing:.055em;color:var(--accent);margin-bottom:.12rem}
+.key{font-family:"Helvetica Neue",Arial,sans-serif;font-size:.74rem;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:.7rem;margin:.55rem 0 0}
+.key span.el::before{content:"";display:inline-block;width:.6rem;height:.6rem;border-radius:50%;
+  margin-right:.25rem;vertical-align:-.03rem;background:var(--c)}
+.klp i{display:inline-block;width:.3rem;height:.3rem;border-radius:50%;background:var(--lp);margin-right:.1rem}
+.drill{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:1rem 1.15rem;margin:1.6rem 0 0}
+.drill h2{margin:0 0 .5rem;font-size:1.05rem}
+.card{border-left:4px solid var(--accent);background:var(--bond-soft);padding:.85rem 1rem;border-radius:0 3px 3px 0;margin:.7rem 0}
+.card .q{font-size:1.05rem;margin:0 0 .5rem}
+.card .a{margin:0;display:none}
+.card.show .a{display:block}
+.row{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.6rem}
+.row button{font-family:"Helvetica Neue",Arial,sans-serif;font-size:.85rem;font-weight:600;
+  border:1.5px solid var(--accent);background:var(--accent);color:#fff;border-radius:3px;
+  padding:.55rem .95rem;min-height:2.6rem;cursor:pointer}
+.row button.ghost{background:var(--card);color:var(--accent)}
+.fine{font-size:.85rem;color:var(--muted);line-height:1.5}
+.note{border-left:4px solid var(--accent);background:var(--bond-soft);padding:.9rem 1.1rem;border-radius:0 3px 3px 0;margin:1.4rem 0}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+<h1><a href="../../index.html">Science One-Pagers</a></h1>
+<p>A working folder for teachers, students, parents, and anyone putting evidence to use.</p>
+</header>
+
+<nav class="site-nav">
+<a href="../../book.html">The Book</a>
+<a href="../../index.html#evidence">Evidence</a>
+<a href="../../index.html#biology">Biology</a>
+<a href="../../index.html#chemistry">Chemistry</a>
+<a href="../../index.html#teaching">Teaching</a>
+<a href="../../index.html#careers">Careers</a>
+</nav>
+
+<div class="wrap">
+  <p class="intro"><a class="back-link" href="../classroom-tools.html">&larr; Back to Chemistry tools</a></p>
+  <div class="eyebrow">Chem Tool #3 &middot; DE Biology 101 Units 2 and 3 &middot; Interactive, works on iPads</div>
+  <h1 style="margin:.15rem 0 .35rem">The Seven Functional Groups, in Three Dimensions</h1>
+  <p class="fine" style="margin:0 0 .2rem">A carbon skeleton holds a molecule together. The functional groups hanging off it are the parts that react, and each one has a shape it actually takes in space. Pick a group, then drag the model to turn it.</p>
+
+  <div class="picker" id="picker"></div>
+
+  <div class="two">
+    <div>
+      <div class="stage" id="stage">
+        <svg id="svg" viewBox="0 0 420 340" aria-label="rotatable molecular model"></svg>
+        <span class="spintag">Drag to rotate</span>
+      </div>
+      <div class="key">
+        <span class="el" style="--c:#3a3a3a">carbon</span>
+        <span class="el" style="--c:#c9c9c9">hydrogen</span>
+        <span class="el" style="--c:#c0392b">oxygen</span>
+        <span class="el" style="--c:#2d6ca8">nitrogen</span>
+        <span class="el" style="--c:#c9a227">sulfur</span>
+        <span class="el" style="--c:#d2762b">phosphorus</span>
+        <span class="klp"><i></i><i></i> lone pair</span>
+      </div>
+      <p class="fine" style="margin-top:.5rem">Atoms nearer to you are drawn larger and brighter. Two dots beside an atom are a lone pair &mdash; electrons it keeps rather than shares. Lone pairs take up room and push the bonds, which is why the oxygen in a hydroxyl is bent and the carbon in a methyl is not.</p>
+    </div>
+    <div>
+      <p class="gname" id="gname"></p>
+      <p class="gform" id="gform"></p>
+      <div id="facts"></div>
+    </div>
+  </div>
+
+  <div class="drill">
+    <h2>Drill</h2>
+    <p class="fine" style="margin:0">Three ways through: name it from the structure, draw it from the name, or say what it does. Answer out loud or on paper before you turn the card over.</p>
+    <div class="row">
+      <button id="mName">Name it</button>
+      <button id="mDraw" class="ghost">Draw it</button>
+      <button id="mDoes" class="ghost">What it does</button>
+    </div>
+    <div class="card" id="card">
+      <p class="q" id="cq"></p>
+      <div class="a" id="ca"></div>
+    </div>
+    <div class="row">
+      <button id="flip">Turn it over</button>
+      <button id="next" class="ghost">Next group</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <p style="margin:0 0 .5rem"><b>Two of these carry a charge inside a cell, and one carries two.</b> A carboxyl gives up its hydrogen and goes negative; an amino picks one up and goes positive; a phosphate sits at minus two. That is why an amino acid has a positive end and a negative end at the same time, and why the backbone of DNA repels itself down its whole length.</p>
+    <p style="margin:0"><b>On paper.</b> Draw a four-carbon chain. Put a carboxyl on one end and an amino on the other, then mark the charge each one carries at cell pH. Now put a methyl group in the middle and mark which part of the molecule water will avoid. Do it without looking anything up. Whichever group you stall on is the one to come back to.</p>
+  </div>
+
+  <p class="fine" style="margin-top:1.4rem">Bond angles here are built from internal coordinates and measured back out, against values for methanol, acetic acid, methylamine, methanethiol and phosphate esters. Lone pairs are placed by construction, in the plane that bisects the bonds, rather than drawn where they look right.</p>
+</div>
+
+<footer class="site-footer">
+Written and maintained by Mr. Schwebach &middot; last updated see page history on GitHub
+  <span class="license">All one-pagers &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a> &mdash; free to use, adapt, and hand to a class; not for resale.</span>
+</footer>
+
+<script>
+const MODELS = {"hydroxyl":{"atoms":[{"el":"C","p":[0.0,0.0,0.0]},{"el":"O","p":[1.43,0.0,0.0]},{"el":"H","p":[1.738,0.92,0.0]},{"el":"H","p":[-0.363,0.514,-0.89]},{"el":"H","p":[-0.363,-1.028,-0.0]},{"el":"H","p":[-0.363,0.514,0.89]}],"lp":{"1":[[1.625,-0.27,-0.523],[1.625,-0.27,0.523]]},"bonds":[[0,1,1],[1,2,1],[0,3,1],[0,4,1],[0,5,1]],"charge":{}},"carbonyl":{"atoms":[{"el":"C","p":[0.0,0.0,0.0]},{"el":"C","p":[1.54,0.0,0.0]},{"el":"O","p":[2.155,1.065,0.0]},{"el":"H","p":[2.085,-0.944,0.0]},{"el":"H","p":[-0.363,0.514,-0.89]},{"el":"H","p":[-0.363,-1.028,-0.0]},{"el":"H","p":[-0.363,0.514,0.89]}],"lp":{"2":[[1.845,1.602,0.0],[2.775,1.065,0.0]]},"bonds":[[0,1,1],[1,2,2],[1,3,1],[0,4,1],[0,5,1],[0,6,1]],"charge":{}},"carboxyl":{"atoms":[{"el":"C","p":[0.0,0.0,0.0]},{"el":"C","p":[1.54,0.0,0.0]},{"el":"O","p":[2.21,1.032,0.0]},{"el":"O","p":[2.064,-1.331,0.0]},{"el":"H","p":[3.031,-1.254,0.0]},{"el":"H","p":[-0.363,0.514,-0.89]},{"el":"H","p":[-0.363,-1.028,-0.0]},{"el":"H","p":[-0.363,0.514,0.89]}],"lp":{"2":[[2.829,0.999,0.0],[1.928,1.584,-0.0]],"3":[[1.888,-1.613,-0.523],[1.888,-1.613,0.523]]},"bonds":[[0,1,1],[1,2,2],[1,3,1],[3,4,1],[0,5,1],[0,6,1],[0,7,1]],"charge":{}},"amino":{"atoms":[{"el":"C","p":[0.0,0.0,0.0]},{"el":"N","p":[1.47,0.0,0.0]},{"el":"H","p":[1.815,0.949,0.0]},{"el":"H","p":[1.815,-0.435,0.844]},{"el":"H","p":[-0.363,0.514,-0.89]},{"el":"H","p":[-0.363,-1.028,-0.0]},{"el":"H","p":[-0.363,0.514,0.89]}],"lp":{"1":[[1.661,-0.307,-0.504]]},"bonds":[[0,1,1],[1,2,1],[1,3,1],[0,4,1],[0,5,1],[0,6,1]],"charge":{}},"sulfhydryl":{"atoms":[{"el":"C","p":[0.0,0.0,0.0]},{"el":"S","p":[1.82,0.0,0.0]},{"el":"H","p":[1.972,1.331,0.0]},{"el":"H","p":[-0.363,0.514,-0.89]},{"el":"H","p":[-0.363,-1.028,-0.0]},{"el":"H","p":[-0.363,0.514,0.89]}],"lp":{"1":[[2.091,-0.303,-0.468],[2.091,-0.303,0.468]]},"bonds":[[0,1,1],[1,2,1],[0,3,1],[0,4,1],[0,5,1]],"charge":{}},"methyl":{"atoms":[{"el":"C","p":[0.0,0.0,0.0]},{"el":"C","p":[1.54,0.0,0.0]},{"el":"H","p":[1.903,1.028,0.0]},{"el":"H","p":[1.903,-0.514,0.89]},{"el":"H","p":[1.903,-0.514,-0.89]},{"el":"H","p":[-0.363,0.514,-0.89]},{"el":"H","p":[-0.363,-1.028,-0.0]},{"el":"H","p":[-0.363,0.514,0.89]}],"lp":{},"bonds":[[0,1,1],[1,2,1],[1,3,1],[1,4,1],[0,5,1],[0,6,1],[0,7,1]],"charge":{}},"phosphate":{"atoms":[{"el":"C","p":[0.0,0.0,0.0]},{"el":"O","p":[1.61,0.0,0.0]},{"el":"P","p":[2.366,1.421,0.0]},{"el":"O","p":[3.838,1.267,0.0]},{"el":"O","p":[1.951,2.171,-1.244]},{"el":"O","p":[1.951,2.171,1.244]},{"el":"H","p":[-0.363,0.514,-0.89]},{"el":"H","p":[-0.363,-1.028,-0.0]},{"el":"H","p":[-0.363,0.514,0.89]}],"lp":{"3":[[4.174,1.497,-0.468],[4.119,0.972,0.468]],"4":[[2.454,2.308,-1.58],[1.66,2.694,-1.083],[1.568,1.817,-1.58]],"5":[[2.454,2.308,1.58],[1.568,1.817,1.58],[1.66,2.694,1.083]]},"bonds":[[0,1,1],[1,2,1],[2,3,2],[2,4,1],[2,5,1],[0,6,1],[0,7,1],[0,8,1]],"charge":{"4":"-","5":"-"}}};
+const GROUPS = [{"key":"hydroxyl","name":"Hydroxyl","formula":"—OH","cue":"—OH","colour":"2F6F4E","shape":"Bent at the oxygen, about 108.5°, with two lone pairs taking up the other two corners.","water":"Strongly polar. The oxygen pulls electron density off the hydrogen, so this end of a molecule carries a partial negative charge and the hydrogen a partial positive.","hbond":"Both. The hydrogen donates a hydrogen bond and the two lone pairs each accept one.","charge":"Neutral at the pH inside a cell.","meet":"Every sugar carries several. Serine, threonine and tyrosine carry one each.","does":"Makes a molecule soluble in water. Hang enough of them on a carbon skeleton and it dissolves."},{"key":"carbonyl","name":"Carbonyl","formula":">C=O","cue":"C=O","colour":"B85042","shape":"Trigonal planar at the carbon, 120° all round, and flat — every atom sits in one plane. The oxygen keeps two lone pairs, both in that same plane.","water":"Polar. The double bond pulls hard toward the oxygen.","hbond":"Accepts only. There is no hydrogen on the oxygen to donate.","charge":"Neutral at the pH inside a cell.","meet":"At the end of a carbon skeleton it makes an aldehyde; in the middle, a ketone. That one difference is what separates glucose from fructose.","does":"Marks where a sugar will open and close its ring, and where one sugar joins another."},{"key":"carboxyl","name":"Carboxyl","formula":"—COOH","cue":"COOH","colour":"C98A2E","shape":"Trigonal planar at the carbon: 123° to the double-bonded oxygen, 111.5° to the hydroxyl oxygen. One oxygen holds two lone pairs in the plane, the other holds two out of it.","water":"Very polar, and it does not stay neutral.","hbond":"Both, while it still has its hydrogen.","charge":"<b>Ionized at the pH inside a cell.</b> It gives up the hydrogen and becomes —COO<sup>−</sup>, carrying a negative charge.","meet":"Every amino acid has one. So does every fatty acid.","does":"Acts as an acid. The charge it carries is what lets proteins attract and repel each other."},{"key":"amino","name":"Amino","formula":"—NH₂","cue":"NH₂","colour":"1F7A8C","shape":"Trigonal pyramidal at the nitrogen, not flat: 110° to the carbon, 106.7° between the hydrogens, with the lone pair sitting at the apex above them.","water":"Polar.","hbond":"Both. The hydrogens donate; the lone pair accepts.","charge":"<b>Protonated at the pH inside a cell.</b> It picks up a hydrogen ion and becomes —NH<sub>3</sub><sup>+</sup>, carrying a positive charge.","meet":"Every amino acid has one, which is where the name comes from. The bases in DNA and RNA carry them too.","does":"Acts as a base. Together with the carboxyl group it gives an amino acid one positive and one negative end."},{"key":"sulfhydryl","name":"Sulfhydryl","formula":"—SH","cue":"SH","colour":"6B4E8C","shape":"Bent at the sulfur, and much tighter than the hydroxyl — 96.5° rather than 108.5°. The lone pairs sit correspondingly wide of the bonds.","water":"Weakly polar. Sulfur and hydrogen have similar pull on electrons, so this is far less polar than an —OH.","hbond":"Weakly, and much less than a hydroxyl.","charge":"Neutral at the pH inside a cell.","meet":"Cysteine, and nowhere else among the amino acids.","does":"Two of them can join into a disulfide bridge, —S—S—, which pins a folded protein in place. Hair is full of them."},{"key":"methyl","name":"Methyl","formula":"—CH₃","cue":"CH₃","colour":"7A6A55","shape":"Tetrahedral at the carbon, 109.5° exactly, and no lone pairs at all.","water":"Nonpolar. Carbon and hydrogen pull on electrons almost equally, so there is no charged end.","hbond":"None.","charge":"Neutral at the pH inside a cell.","meet":"All over the carbon skeleton of a fat, and on the bases of DNA.","does":"Pushes water away. It is also a tag: adding methyl groups to DNA or to the proteins it wraps around changes which genes get read, without changing a single letter of the sequence."},{"key":"phosphate","name":"Phosphate","formula":"—OPO₃²⁻","cue":"PO₄","colour":"3E5C8A","shape":"Tetrahedral at the phosphorus, about 110° between the oxygens, with one double-bonded oxygen and two carrying a negative charge.","water":"Very polar and very soluble.","hbond":"Accepts, strongly.","charge":"<b>Carries two negative charges at the pH inside a cell.</b> This is the most strongly charged group of the seven.","meet":"The backbone of DNA and RNA. The head of a phospholipid. The business end of ATP.","does":"Chains of phosphates store energy in an unstable arrangement of like charges forced together. Breaking one off is what powers most of what a cell does."}];
+const COL={C:'#3a3a3a',H:'#c9c9c9',O:'#c0392b',N:'#2d6ca8',S:'#c9a227',P:'#d2762b'};
+const RAD={C:13,H:8.5,O:12.5,N:12.5,S:16,P:16};
+const SVGNS='http://www.w3.org/2000/svg';
+let cur=0, rx=-0.32, ry=0.55, scale=60, drag=false, lx=0, ly=0;
+const CX=210, CY=168;
+
+function rot(p){
+  let [x,y,z]=p;
+  let c=Math.cos(ry), s=Math.sin(ry);  [x,z]=[x*c+z*s, -x*s+z*c];
+  c=Math.cos(rx); s=Math.sin(rx);      [y,z]=[y*c-z*s,  y*s+z*c];
+  return [x,y,z];
+}
+function proj(p){ const r=rot(p); return {x:CX+r[0]*scale, y:CY-r[1]*scale, z:r[2]}; }
+function depth(z){ return Math.max(0.62, Math.min(1.34, 1 + z*scale/300)); }
+function el(n,a){ const e=document.createElementNS(SVGNS,n); for(const k in a) e.setAttribute(k,a[k]); return e; }
+
+function fit(){
+  const m=MODELS[GROUPS[cur].key];
+  let mx=0;
+  for(const a of m.atoms){ const r=rot(a.p); mx=Math.max(mx, Math.hypot(r[0],r[1])); }
+  for(const i in m.lp) for(const q of m.lp[i]){ const r=rot(q); mx=Math.max(mx, Math.hypot(r[0],r[1])); }
+  scale = mx ? Math.min(92, 150/mx) : 60;
+}
+function draw(){
+  const m=MODELS[GROUPS[cur].key];
+  const svg=document.getElementById('svg');
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  fit();
+  const P=m.atoms.map(a=>proj(a.p));
+  const items=[];
+  for(const [i,j,o] of m.bonds){
+    const A=P[i],B=P[j], z=(A.z+B.z)/2;
+    items.push({z:z,kind:'bond',A:A,B:B,o:o});
+  }
+  for(const i in m.lp) for(const q of m.lp[i]){
+    const Q=proj(q), A=P[+i];
+    const dx=Q.x-A.x, dy=Q.y-A.y, L=Math.hypot(dx,dy)||1;
+    items.push({z:Q.z,kind:'lp',x:Q.x,y:Q.y,px:-dy/L,py:dx/L,r:2.9*depth(Q.z)});
+  }
+  m.atoms.forEach((a,i)=>items.push({z:P[i].z,kind:'atom',el:a.el,x:P[i].x,y:P[i].y,
+    r:RAD[a.el]*depth(P[i].z),d:depth(P[i].z),idx:i}));
+  items.sort((p,q)=>p.z-q.z);
+  for(const it of items){
+    if(it.kind==='bond'){
+      const w=3.2*depth(it.z), op=(0.42+0.58*depth(it.z)).toFixed(2);
+      if(it.o===2){
+        const dx=it.B.x-it.A.x, dy=it.B.y-it.A.y, L=Math.hypot(dx,dy)||1, ox=-dy/L*2.6, oy=dx/L*2.6;
+        for(const s of [1,-1]) svg.appendChild(el('line',{x1:it.A.x+ox*s,y1:it.A.y+oy*s,x2:it.B.x+ox*s,y2:it.B.y+oy*s,
+          stroke:'var(--bond)','stroke-width':w*0.72,'stroke-linecap':'round',opacity:op}));
+      } else {
+        svg.appendChild(el('line',{x1:it.A.x,y1:it.A.y,x2:it.B.x,y2:it.B.y,
+          stroke:'var(--bond)','stroke-width':w,'stroke-linecap':'round',opacity:op}));
+      }
+    } else if(it.kind==='lp'){
+      for(const s of [1,-1]) svg.appendChild(el('circle',{cx:it.x+it.px*3.1*s,cy:it.y+it.py*3.1*s,
+        r:it.r,fill:'var(--lp)',opacity:(0.45+0.55*depth(it.z)).toFixed(2)}));
+    } else {
+      svg.appendChild(el('circle',{cx:it.x,cy:it.y,r:it.r,fill:COL[it.el],
+        stroke:'#fff','stroke-width':1.4,opacity:(0.55+0.45*it.d).toFixed(2)}));
+      const ch=(MODELS[GROUPS[cur].key].charge||{})[it.idx];
+      if(ch) svg.appendChild(el('text',{x:it.x+it.r*1.05,y:it.y-it.r*0.7,'font-size':24*it.d,
+        'font-family':'Helvetica Neue, Arial, sans-serif','font-weight':'700',fill:'#c0392b',
+        stroke:'#fff','stroke-width':3.2,'paint-order':'stroke','stroke-linejoin':'round'})).textContent=ch;
+    }
+  }
+}
+function paint(){
+  const g=GROUPS[cur];
+  document.getElementById('gname').textContent=g.name;
+  document.getElementById('gform').innerHTML=g.formula;
+  document.getElementById('facts').innerHTML=
+    [['The shape it takes',g.shape],['In water',g.water],['Hydrogen bonding',g.hbond],
+     ['Charge inside a cell',g.charge],['Where you meet it',g.meet],['What it does',g.does]]
+    .map(([l,v])=>'<p class="fact"><b class="lab">'+l+'</b>'+v+'</p>').join('');
+  document.querySelectorAll('#picker button').forEach((b,i)=>{
+    b.setAttribute('aria-pressed', i===cur?'true':'false');
+    b.style.background = i===cur ? '#'+GROUPS[i].colour : 'var(--card)';
+  });
+  drawCard();
+  draw();
+}
+const picker=document.getElementById('picker');
+GROUPS.forEach((g,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML=g.name+'<span class="f">'+g.formula+'</span>';
+  b.onclick=()=>{cur=i;paint();};
+  picker.appendChild(b);
+});
+
+let mode='name';
+function drawCard(){
+  const g=GROUPS[cur], c=document.getElementById('card');
+  c.classList.remove('show');
+  const q=document.getElementById('cq'), a=document.getElementById('ca');
+  if(mode==='name'){ q.innerHTML='Look at the model. What is this group called, and what is its formula?';
+    a.innerHTML='<p style="margin:0"><b>'+g.name+'</b>, '+g.formula+'</p>'; }
+  else if(mode==='draw'){ q.innerHTML='Draw <b>'+g.name+'</b> on paper, in its real shape, with every lone pair shown.';
+    a.innerHTML='<p style="margin:0">'+g.shape+'</p>'; }
+  else { q.innerHTML='What does <b>'+g.name+'</b> do to the molecule it sits on?';
+    a.innerHTML='<p style="margin:0 0 .4rem">'+g.does+'</p><p style="margin:0"><b>Charge inside a cell:</b> '+g.charge+'</p>'; }
+}
+for(const [id,m] of [['mName','name'],['mDraw','draw'],['mDoes','does']]){
+  document.getElementById(id).onclick=()=>{
+    mode=m; drawCard();
+    for(const [i2,m2] of [['mName','name'],['mDraw','draw'],['mDoes','does']])
+      document.getElementById(i2).classList.toggle('ghost', m2!==m);
+  };
+}
+document.getElementById('flip').onclick=()=>document.getElementById('card').classList.add('show');
+document.getElementById('next').onclick=()=>{cur=(cur+1)%GROUPS.length;paint();};
+
+const stage=document.getElementById('stage');
+function down(e){drag=true;const t=e.touches?e.touches[0]:e;lx=t.clientX;ly=t.clientY;}
+function move(e){ if(!drag)return; const t=e.touches?e.touches[0]:e;
+  ry+=(t.clientX-lx)*0.011; rx+=(t.clientY-ly)*0.011;
+  rx=Math.max(-1.45,Math.min(1.45,rx)); lx=t.clientX; ly=t.clientY; draw(); e.preventDefault(); }
+function up(){drag=false;}
+stage.addEventListener('mousedown',down); window.addEventListener('mousemove',move); window.addEventListener('mouseup',up);
+stage.addEventListener('touchstart',down,{passive:true}); stage.addEventListener('touchmove',move,{passive:false}); stage.addEventListener('touchend',up);
+
+paint();
+</script>
+</body>
+</html>
