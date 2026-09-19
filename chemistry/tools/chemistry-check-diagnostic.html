@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="An eighteen-question self-check across six ideas - bonding, valence electrons, isotopes, reactions, water, and carbon skeletons - with the reasoning after every answer and a practice task for whatever it finds. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/chemistry/tools/chemistry-check-diagnostic.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Chemistry Check - Find Where the Chemistry Stopped Making Sense">
+<meta property="og:description" content="An eighteen-question self-check across six ideas - bonding, valence electrons, isotopes, reactions, water, and carbon skeletons - with the reasoning after every answer and a practice task for whatever it finds. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/chemistry/tools/chemistry-check-diagnostic.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Chemistry Check | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F5F2;
+  --card:#FFFFFF;
+  --ink:#16211F;
+  --ink-soft:#4C5A56;
+  --bond:#255C68;
+  --bond-soft:#DCE8EA;
+  --shell:#C3D1CC;
+  --rule:#D4DCD8;
+  --flag:#8C5222;
+  --flag-soft:#F3E7DA;
+  --solid:#356B4C;
+  --solid-soft:#DFEBE2;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#111917;
+    --card:#18211F;
+    --ink:#E8EEEB;
+    --ink-soft:#9DACA7;
+    --bond:#7FB8C4;
+    --bond-soft:#1E3238;
+    --shell:#3A4A46;
+    --rule:#2A3634;
+    --flag:#D9A06A;
+    --flag-soft:#2E2318;
+    --solid:#7DBE96;
+    --solid-soft:#1B2C22;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111917;--card:#18211F;--ink:#E8EEEB;--ink-soft:#9DACA7;
+  --bond:#7FB8C4;--bond-soft:#1E3238;--shell:#3A4A46;--rule:#2A3634;
+  --flag:#D9A06A;--flag-soft:#2E2318;--solid:#7DBE96;--solid-soft:#1B2C22;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);
+  line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+p{margin:0 0 1rem;max-width:36rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+
+/* ---- tile grid : a fragment of a periodic table ---- */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.6rem 0 1.8rem}
+@media (max-width:26rem){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{
+  position:relative;background:var(--card);border:1.5px solid var(--shell);
+  border-radius:3px;padding:.7rem .6rem .6rem;min-height:5.6rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.tile .idx{font-family:var(--sans);font-size:.7rem;font-weight:600;color:var(--ink-soft)}
+.tile .sym{font-family:var(--sans);font-size:1.9rem;font-weight:700;line-height:1;margin:.1rem 0 .25rem;letter-spacing:-0.02em}
+.tile .nm{font-family:var(--sans);font-size:.76rem;font-weight:500;color:var(--ink-soft);line-height:1.25}
+.tile.solid{border-color:var(--solid);background:var(--solid-soft)}
+.tile.solid .sym{color:var(--solid)}
+.tile.mid{border-color:var(--bond);background:var(--bond-soft)}
+.tile.mid .sym{color:var(--bond)}
+.tile.flag{border-color:var(--flag);background:var(--flag-soft);border-width:2.5px}
+.tile.flag .sym{color:var(--flag)}
+.tile .score{position:absolute;top:.55rem;right:.6rem;font-family:var(--sans);
+  font-size:.72rem;font-weight:700;color:var(--ink-soft)}
+
+/* ---- buttons ---- */
+button{font:inherit;cursor:pointer}
+.go{
+  font-family:var(--sans);font-weight:600;font-size:1rem;
+  background:var(--bond);color:var(--paper);border:none;border-radius:3px;
+  padding:.85rem 1.5rem;min-height:3rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#0E1614}}
+:root[data-theme="dark"] .go{color:#0E1614}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);
+  font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+
+/* ---- question ---- */
+.meta{display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);
+  border-bottom:1.5px solid var(--rule);padding-bottom:.5rem;margin-bottom:1.4rem}
+.q{font-size:1.2rem;line-height:1.45;margin:0 0 1.3rem;max-width:34rem}
+.opts{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem}
+.opt{
+  text-align:left;background:var(--card);border:1.5px solid var(--rule);
+  border-radius:3px;padding:.85rem 1rem;min-height:3.1rem;color:var(--ink);
+  font-family:var(--serif);font-size:1rem;line-height:1.4;width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--bond)}
+.opt:disabled{cursor:default;opacity:.55}
+.opt.right{border-color:var(--solid);background:var(--solid-soft);opacity:1;font-weight:600}
+.opt.wrong{border-color:var(--flag);background:var(--flag-soft);opacity:1}
+.why{border-left:3px solid var(--bond);background:var(--card);
+  padding:.9rem 1.1rem;margin-bottom:1.3rem;border-radius:0 3px 3px 0}
+.why p{margin:0;font-size:1rem;line-height:1.5}
+.why .tag{font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--bond);display:block;margin-bottom:.35rem}
+.bar{height:3px;background:var(--rule);border-radius:2px;overflow:hidden;margin-bottom:1.5rem}
+.bar i{display:block;height:100%;background:var(--bond);transition:width .25s ease}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+
+/* ---- results ---- */
+.band{border-top:1.5px solid var(--rule);padding:1.3rem 0}
+.band h3{font-family:var(--sans);font-size:1.05rem;font-weight:700;margin:0 0 .15rem}
+.band .verdict{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);margin:0 0 .7rem}
+.band.flag h3{color:var(--flag)}
+.do{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:1rem 1.1rem}
+.do h4{font-family:var(--sans);font-size:.88rem;font-weight:700;margin:0 0 .45rem;color:var(--bond)}
+.do p{margin:0;font-size:1rem}
+.hidden{display:none}
+
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" href="../classroom-tools.html">&larr; Chemistry Classroom Tools</a>
+<p class="sop-eyebrow">Chem Tool #2 &middot; DE Bio 101 Unit 2 &middot; before carbon chemistry starts</p>
+
+
+<!-- ========== INTRO ========== -->
+<section id="intro">
+  <h1>Chemistry Check</h1>
+  <p class="lede">Eighteen questions that find the exact spot where the chemistry stopped making sense. Fifteen minutes, one question at a time, with the reasoning after every answer.</p>
+  <p class="fine">Nothing is submitted and no score leaves this page. Your teacher does not see it. It is here so you can find out for yourself what to work on before carbon chemistry starts.</p>
+
+  <div class="grid" id="introGrid"></div>
+
+  <p class="fine" style="margin-bottom:1.6rem">Six ideas. Three questions each. Every one of them shows up again in Unit 3, because the molecules of life are built out of exactly these rules.</p>
+  <button class="go" id="start">Start the check</button>
+</section>
+
+<!-- ========== QUESTION ========== -->
+<section id="quiz" class="hidden">
+  <div class="bar"><i id="fill" style="width:0%"></i></div>
+  <div class="meta"><span id="bandName"></span><span id="counter"></span></div>
+  <p class="q" id="stem"></p>
+  <div class="opts" id="opts"></div>
+  <div class="why hidden" id="why"><span class="tag" id="whyTag"></span><p id="whyText"></p></div>
+  <button class="go hidden" id="next">Next</button>
+</section>
+
+<!-- ========== RESULTS ========== -->
+<section id="results" class="hidden">
+  <h1>What the check found</h1>
+  <p class="lede" id="summary"></p>
+  <div class="grid" id="resultGrid"></div>
+  <p class="fine">A tile with a heavy outline is where to spend your time. A filled tile is one you can trust.</p>
+  <h2>What to do about it</h2>
+  <div id="bands"></div>
+  <h2>Then test it</h2>
+  <p>Checkpoint Chapter 2 on the NOVA site takes unlimited attempts and shows you the right answer after each one. Take it, work the tasks above, take it again. The second score is the one that means something.</p>
+  <p style="margin-top:1.8rem"><button class="ghost" id="again">Run the check again</button></p>
+</section>
+
+
+<footer class="sop-foot">Unit 2, Chemical Context of Life, taken before Unit 3 opens &middot; NVCC BIO 101 &middot; six ideas, three questions each, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+<script>
+const BANDS=[
+ {id:"bonds",sym:"Bo",name:"Ionic and covalent bonds",
+  task:"Open a periodic table and pick ten pairs of elements. For each pair write down metal + nonmetal or nonmetal + nonmetal, then say out loud which bond you expect before you look it up. Ten pairs is enough for the pattern to become automatic."},
+ {id:"electrons",sym:"e\u2212",name:"Valence electrons and bond count",
+  task:"Draw the electron shells for hydrogen, carbon, nitrogen and oxygen. Under each, write how many more electrons it needs. That number is how many bonds the atom makes, and it never changes. Then draw each atom with that many lines coming off it."},
+ {id:"isotopes",sym:"Is",name:"Isotopes and atomic counts",
+  task:"Build a three-column table: protons, neutrons, electrons. Fill it for five atoms, and change only one column at a time. Name what you changed after each row \u2014 a different element, a different isotope, or an ion."},
+ {id:"reactions",sym:"Rx",name:"Balancing and equilibrium",
+  task:"Balance five equations the slow way: make a table with one row per element, count both sides, and only then change a coefficient. Counting before adjusting is the whole skill."},
+ {id:"water",sym:"H",name:"Hydrogen bonding and water",
+  task:"Draw two water molecules and the hydrogen bond between them, labelling the partial charges on both. Then draw one water molecule next to a chain of C\u2013H bonds and say out loud why nothing forms there."},
+ {id:"carbon",sym:"C",name:"Carbon skeletons and functional groups",
+  task:"Draw a chain of five carbons. Hang an \u2014OH on one end and a \u2014CH\u2083 on the other. Mark which end water will stick to. That one drawing is most of what Unit 3 asks you to understand."}
+];
+
+const ITEMS=[
+ {b:0,q:"Magnesium sits in group 2 and chlorine in group 17. What kind of bond forms between them?",
+  o:["Covalent \u2014 they share electrons so both shells fill",
+     "Ionic \u2014 magnesium gives up electrons and chlorine takes them",
+     "Hydrogen \u2014 chlorine pulls hard on magnesium's electrons",
+     "Nonpolar covalent \u2014 they pull on electrons about equally"],a:1,
+  w:"Magnesium has two electrons it loses easily. Chlorine needs one. So one magnesium hands one electron to each of two chlorines, and the charged atoms hold together. Metal plus nonmetal is the signal to look for."},
+ {b:0,q:"The O\u2013H bond in water is polar. The C\u2013H bond in a fat is not. What makes the difference?",
+  o:["Oxygen is a larger atom than carbon",
+     "Water has more bonds in it than a fat does",
+     "Oxygen pulls shared electrons much harder than hydrogen; carbon and hydrogen pull almost equally",
+     "Carbon behaves like a metal in that bond"],a:2,
+  w:"Polarity is a tug of war. When one atom pulls much harder, the electrons sit closer to it and that end goes slightly negative. Carbon and hydrogen pull almost the same, so nothing shifts and the bond stays neutral along its length."},
+ {b:0,q:"Which pair would you expect to share electrons rather than transfer them?",
+  o:["Sodium and fluorine","Potassium and oxygen","Carbon and oxygen","Calcium and chlorine"],a:2,
+  w:"Carbon and oxygen are both nonmetals, and neither gives an electron up easily, so they share. The other three pairs each put a metal next to a nonmetal, which is the setup for a transfer."},
+
+ {b:1,q:"Nitrogen has five valence electrons. How many covalent bonds does it usually form?",
+  o:["Five","Three","Two","One"],a:1,
+  w:"Five electrons are already there, and a full outer shell takes eight. Three short means three bonds. Count what is missing, not what is present."},
+ {b:1,q:"Why does carbon form four bonds?",
+  o:["It has four electron shells",
+     "It has four valence electrons and needs four more to fill its shell",
+     "It has four protons in its nucleus",
+     "It sits in the fourth period of the table"],a:1,
+  w:"Four out, four needed, four bonds. That single fact is why carbon can build long skeletons and branch in several directions at once, which is where the next unit starts."},
+ {b:1,q:"The second electron shell holds at most how many electrons?",
+  o:["Two","Six","Eight","Eighteen"],a:2,
+  w:"Two in the first shell, eight in the second. Nearly every atom in biology \u2014 carbon, nitrogen, oxygen \u2014 is working toward that eight, which is why the number keeps reappearing."},
+
+ {b:2,q:"Carbon-12 and carbon-14 differ in their number of:",
+  o:["Protons","Electrons","Neutrons","Charge"],a:2,
+  w:"Protons decide which element it is, so both are still carbon. The number after the name is protons plus neutrons, so carbon-14 carries two extra neutrons and nothing else changes."},
+ {b:2,q:"An atom has 8 protons and 10 neutrons and carries no charge. How many electrons does it have?",
+  o:["Eight","Ten","Eighteen","Two"],a:0,
+  w:"No charge means the positives and negatives cancel, so electrons match protons. Neutrons carry no charge and never enter that count \u2014 they change the isotope, not the balance."},
+ {b:2,q:"Carbon-14 dating cannot date a dinosaur bone. Why not?",
+  o:["Bone contains no carbon",
+     "Carbon-14 decays fast enough that after roughly 50,000 years too little is left to measure",
+     "Carbon-14 only forms inside living plants",
+     "The bone is too large for the instrument"],a:1,
+  w:"Every dating method has a window set by how fast its isotope decays. Carbon-14 runs out in tens of thousands of years; uranium-235 takes hundreds of millions, which is what makes it the one for rock and fossils."},
+
+ {b:3,q:"Which set of coefficients balances \u2014 H\u2082 + O\u2082 \u2192 H\u2082O?",
+  o:["1, 1, 1","2, 1, 2","1, 2, 1","2, 2, 2"],a:1,
+  w:"Two H\u2082 gives four hydrogens; one O\u2082 gives two oxygens; two H\u2082O uses exactly four hydrogens and two oxygens. Count one element at a time and the set falls out."},
+ {b:3,q:"A balanced equation means that:",
+  o:["Both sides weigh the same in grams",
+     "The same number of each kind of atom appears on both sides",
+     "Both sides have the same number of molecules",
+     "The energy released equals the energy absorbed"],a:1,
+  w:"Atoms are conserved: none appear and none vanish, they only get rearranged. Molecule counts change all the time, which is why counting molecules will mislead you."},
+ {b:3,q:"A reaction sitting at equilibrium is best described as:",
+  o:["Stopped, with nothing left to react",
+     "Still running in both directions at the same rate, so the amounts stop changing",
+     "Finished, with all reactants used up",
+     "Producing no products at all"],a:1,
+  w:"Steady amounts are not the same as no activity. Both directions keep running at matched rates, which is why an equilibrium can be pushed back and forth by changing conditions."},
+
+ {b:4,q:"A hydrogen bond in liquid water forms between:",
+  o:["Two hydrogen atoms within the same molecule",
+     "The slightly positive hydrogen of one molecule and the slightly negative oxygen of another",
+     "Two oxygen atoms sharing a pair of electrons",
+     "The nucleus of one atom and the shell of another"],a:1,
+  w:"It is an attraction between molecules, not a bond inside one. Weak on its own, but there are so many of them at once that they set water's boiling point, its surface tension and how it behaves around everything dissolved in it."},
+ {b:4,q:"Oil separates from water because:",
+  o:["Oil is lighter than water",
+     "Oil molecules are mostly nonpolar C\u2013H bonds, so water molecules hold on to each other instead",
+     "Oil is technically a solid at room temperature",
+     "Water is denser than oil"],a:1,
+  w:"Nothing pushes the oil away. The water molecules simply have a better option \u2014 each other \u2014 and the oil gets squeezed out of the way. That same logic builds every cell membrane you will meet later."},
+ {b:4,q:"Which property of water follows most directly from hydrogen bonding?",
+  o:["It is colorless",
+     "It takes a large amount of heat to raise its temperature",
+     "It contains oxygen",
+     "It is made of two different elements"],a:1,
+  w:"Heat has to break hydrogen bonds before it can speed the molecules up, so water absorbs a lot of energy for a small temperature change. That is why lakes and bodies and cells hold steady temperatures."},
+
+ {b:5,q:"Carbon can build long chains and rings mainly because:",
+  o:["It is one of the most abundant elements on Earth",
+     "It forms four strong covalent bonds, including bonds to other carbon atoms",
+     "It conducts electrons like a metal",
+     "It has several naturally occurring isotopes"],a:1,
+  w:"Four bonds means a carbon can hold two neighbours and still have two hands free for something else. Chain them and you get a skeleton; every macromolecule in the next unit hangs off one."},
+ {b:5,q:"Two molecules share the formula C\u2086H\u2081\u2082O\u2086 but have different structures. They are:",
+  o:["Isotopes","Ions","Isomers","Polymers"],a:2,
+  w:"Same atoms, different arrangement, different behaviour \u2014 glucose and fructose are exactly this. It is the first clear case where structure, not composition, decides what a molecule does."},
+ {b:5,q:"A hydroxyl group (\u2014OH) attached to a carbon skeleton makes that part of the molecule:",
+  o:["Nonpolar, so it avoids water",
+     "Polar, so it can hydrogen-bond with water",
+     "Positively charged overall",
+     "Chemically unreactive"],a:1,
+  w:"Oxygen pulls hard, the bond goes polar, and water can hydrogen-bond to it. Functional groups are how a plain carbon chain gets a personality, and this is the one that makes a region water-friendly."}
+];
+
+const $=id=>document.getElementById(id);
+let i=0,answers=new Array(ITEMS.length).fill(null);
+
+function tile(b,idx,score){
+  const d=document.createElement("div");
+  d.className="tile";
+  if(score!==undefined){
+    if(score===3)d.classList.add("solid");
+    else if(score===2)d.classList.add("mid");
+    else d.classList.add("flag");
+  }
+  d.innerHTML='<span class="idx">'+(idx+1)+'</span>'+
+    (score!==undefined?'<span class="score">'+score+'/3</span>':'')+
+    '<span class="sym">'+b.sym+'</span><span class="nm">'+b.name+'</span>';
+  return d;
+}
+BANDS.forEach((b,n)=>$("introGrid").appendChild(tile(b,n)));
+
+function render(){
+  const it=ITEMS[i];
+  $("bandName").textContent=BANDS[it.b].name;
+  $("counter").textContent=(i+1)+" of "+ITEMS.length;
+  $("fill").style.width=(i/ITEMS.length*100)+"%";
+  $("stem").textContent=it.q;
+  $("why").classList.add("hidden");
+  $("next").classList.add("hidden");
+  const box=$("opts");box.innerHTML="";
+  it.o.forEach((text,n)=>{
+    const btn=document.createElement("button");
+    btn.className="opt";btn.type="button";btn.textContent=text;
+    btn.addEventListener("click",()=>choose(n));
+    box.appendChild(btn);
+  });
+  window.scrollTo(0,0);
+}
+
+function choose(n){
+  const it=ITEMS[i];
+  answers[i]=(n===it.a);
+  [...$("opts").children].forEach((b,k)=>{
+    b.disabled=true;
+    if(k===it.a)b.classList.add("right");
+    else if(k===n)b.classList.add("wrong");
+  });
+  $("whyTag").textContent=(n===it.a)?"Right \u2014 and here is why":"The reasoning";
+  $("whyText").textContent=it.w;
+  $("why").classList.remove("hidden");
+  $("next").textContent=(i===ITEMS.length-1)?"See what it found":"Next";
+  $("next").classList.remove("hidden");
+  save();
+}
+
+$("next").addEventListener("click",()=>{
+  if(i===ITEMS.length-1){finish();}
+  else{i++;render();save();}
+});
+
+$("start").addEventListener("click",()=>{
+  $("intro").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  render();
+});
+
+function finish(){
+  $("quiz").classList.add("hidden");
+  $("results").classList.remove("hidden");
+  const scores=BANDS.map((b,n)=>
+    ITEMS.reduce((s,it,k)=>s+((it.b===n&&answers[k])?1:0),0));
+  const total=scores.reduce((a,c)=>a+c,0);
+  const weak=scores.filter(s=>s<=1).length;
+  $("summary").textContent=
+    total+" of 18 correct. "+
+    (weak===0?"No single idea is holding you back \u2014 work the two lowest tiles and move on to carbon chemistry."
+     :weak===1?"One idea is doing most of the damage. Fix that one and the rest gets easier quickly."
+     :weak+" ideas need real work. Take them one at a time, in the order they appear below.");
+  const g=$("resultGrid");g.innerHTML="";
+  BANDS.forEach((b,n)=>g.appendChild(tile(b,n,scores[n])));
+  const holder=$("bands");holder.innerHTML="";
+  BANDS.map((b,n)=>({b,n,s:scores[n]})).sort((x,y)=>x.s-y.s).forEach(({b,n,s})=>{
+    const sec=document.createElement("section");
+    sec.className="band"+(s<=1?" flag":"");
+    sec.innerHTML='<h3>'+b.name+'</h3><p class="verdict">'+s+' of 3 \u2014 '+
+      (s===3?"solid, leave it alone":s===2?"close; one gap left":"this is where to start")+'</p>'+
+      (s<3?'<div class="do"><h4>Do this, not more reading</h4><p>'+b.task+'</p></div>':'');
+    holder.appendChild(sec);
+  });
+  window.scrollTo(0,0);
+  save();
+}
+
+$("again").addEventListener("click",()=>{
+  i=0;answers.fill(null);
+  $("results").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  render();save();
+});
+
+function save(){
+  try{localStorage.setItem("chemcheck",JSON.stringify({i,answers}));}catch(e){}
+}
+try{
+  const raw=localStorage.getItem("chemcheck");
+  if(raw){
+    const st=JSON.parse(raw);
+    if(st&&Array.isArray(st.answers)&&st.answers.length===ITEMS.length&&st.answers.some(a=>a!==null)){
+      answers=st.answers;i=Math.min(st.i||0,ITEMS.length-1);
+      $("start").textContent="Pick up where you left off";
+    }
+  }
+}catch(e){}
+</script>
+</body>
+</html>
