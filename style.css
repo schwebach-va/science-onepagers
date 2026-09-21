@@ -720,3 +720,45 @@ table.modular-index .from { font-size: 0.8rem; color: var(--muted); margin-top: 
 table.modular-index td.pages { white-space: normal; font-variant-numeric: tabular-nums; }
 table.modular-index td.arts { font-size: 0.82rem; }
 table.modular-index .none { color: var(--muted); }
+
+/* Site search. The magnifying glass sits at the right end of the tab bar on every
+   page and opens search.html; the word "Search" drops away on narrow screens. */
+nav.site-nav a.nav-search { float: right; display: inline-flex; align-items: center; gap: 0.4rem; }
+nav.site-nav a.nav-search svg { display: block; }
+@media (max-width: 640px) { nav.site-nav a.nav-search .nav-search-label { display: none; } }
+.search-box { display: flex; gap: 0.5rem; margin: 1.2rem 0 0.4rem; }
+.search-box input { flex: 1; font: inherit; font-size: 1.1rem; padding: 0.6rem 0.8rem;
+  border: 2px solid var(--teal); border-radius: 6px; background: white; color: var(--ink); min-width: 0; }
+.search-box input:focus { outline: 3px solid rgba(42,127,126,0.35); outline-offset: 1px; }
+.search-count { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.85rem; color: var(--muted); min-height: 1.2em; }
+ul.search-results { list-style: none; margin: 0.6rem 0 0; padding: 0; }
+ul.search-results li { padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+ul.search-results a.hit { color: var(--ink); text-decoration: none; font-size: 1.08rem; font-weight: 600; }
+ul.search-results a.hit:hover { color: var(--teal); text-decoration: underline; }
+ul.search-results .where { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.75rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.15rem; }
+ul.search-results .snip { display: block; color: var(--muted); font-size: 0.95rem; margin-top: 0.25rem; }
+ul.search-results mark { background: rgba(42,127,126,0.18); color: inherit; padding: 0 1px; border-radius: 2px; }
+
+/* Publications page */
+.pub-list { list-style: none; margin: 0; padding: 0; }
+.pub-list li { padding: 0.85rem 0; border-bottom: 1px solid var(--line); }
+.pub-list li:last-child { border-bottom: none; }
+.pub-list .cite { margin: 0; font-size: 1rem; }
+.pub-list .me { font-weight: 700; }
+.pub-list .links { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.85rem; margin-top: 0.3rem; }
+.pub-list .links a { margin-right: 0.9rem; color: var(--teal); }
+.pub-list .why { font-size: 0.93rem; color: var(--muted); margin: 0.35rem 0 0; }
+.access { display: inline-block; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; border-radius: 3px; padding: 0.1rem 0.4rem; margin-right: 0.5rem; }
+.access.free { color: #2a7f4f; background: rgba(42,127,79,0.1); }
+.access.paid { color: #7f3f2a; background: rgba(127,63,42,0.1); }
+.access.none { color: var(--muted); background: rgba(0,0,0,0.05); }
+article.onepager .pub-note { font-size: 0.95rem; color: var(--muted); margin: -0.4rem 0 0.6rem; }
+
+/* Second-level Teaching hub (teaching/index.html) */
+.subject-block h3.subhead { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.8rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--teach); margin: 1.6rem 0 0.2rem; }
+.section-blurb a, .more-link a { color: var(--teal); }
+ul.topic-list li.more-link { border-bottom: none; padding-top: 0.9rem; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.95rem; }
+ul.topic-list li.more-link a { color: var(--teach); font-weight: 600; }

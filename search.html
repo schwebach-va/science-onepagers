@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search | Science One-Pagers</title>
+<meta name="description" content="Search every reading, teaching guide, classroom tool and career page on Science One-Pagers by word, topic, or article number.">
+<link rel="canonical" href="https://scienceonepagers.org/search.html">
+<meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+<h1><a href="index.html">Science One-Pagers</a></h1>
+<p>A working folder for teachers, students, parents, and anyone putting evidence to use.</p>
+</header>
+
+<nav class="site-nav">
+<a href="book.html">The Book</a>
+<a href="index.html#evidence">Evidence</a>
+<a href="index.html#biology">Biology</a>
+<a href="index.html#chemistry">Chemistry</a>
+<a href="index.html#teaching">Teaching</a>
+<a href="index.html#careers">Careers</a>
+<a class="nav-search" href="search.html" aria-label="Search the site" title="Search the site" aria-current="page"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><line x1="15.4" y1="15.4" x2="21" y2="21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span class="nav-search-label">Search</span></a>
+</nav>
+
+<article class="onepager">
+  <a class="back-link" href="index.html">&larr; Back to the home page</a>
+  <h1>Search the site</h1>
+  <form class="search-box" role="search" onsubmit="return false">
+    <label for="q" class="visually-hidden" style="position:absolute;left:-9999px">Search words</label>
+    <input id="q" type="search" autocomplete="off" placeholder="Try &ldquo;enzymes&rdquo;, &ldquo;CER&rdquo;, or &ldquo;Teaching #12&rdquo;" autofocus>
+  </form>
+  <div class="search-count" id="count" aria-live="polite"></div>
+  <ul class="search-results" id="results"></ul>
+  <noscript><p>Search needs JavaScript. Every page is also listed on the <a href="index.html">home page</a>.</p></noscript>
+</article>
+
+<footer class="site-footer">
+  Written and maintained by Mr. Schwebach
+  <span class="license">All one-pagers &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a> &mdash; free to use, adapt, and hand to a class; not for resale.</span>
+</footer>
+
+<script src="search-index.js"></script>
+<script>
+(function () {
+  var IDX = window.SEARCH_INDEX || [];
+  var q = document.getElementById('q'), out = document.getElementById('results'), count = document.getElementById('count');
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’]/g, "'"); }
+  IDX.forEach(function (e) { e._t = norm(e.t); e._n = norm(e.n); e._h = norm(e.e + ' ' + e.d); e._b = norm(e.b); });
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function mark(text, terms) {
+    var s = esc(text);
+    terms.forEach(function (t) {
+      if (t.length < 2) return;
+      var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      s = s.replace(re, '<mark>$1</mark>');
+    });
+    return s;
+  }
+  function snippet(e, terms) {
+    var b = e.b, nb = e._b, at = -1;
+    for (var i = 0; i < terms.length && at < 0; i++) at = nb.indexOf(terms[i]);
+    if (at < 0) return e.d || b.slice(0, 180);
+    var start = Math.max(0, at - 80), end = Math.min(b.length, at + 150);
+    return (start ? '…' : '') + b.slice(start, end).trim() + (end < b.length ? '…' : '');
+  }
+  function run() {
+    var raw = q.value.trim(), terms = norm(raw).split(/\s+/).filter(Boolean);
+    if (!terms.length) { out.innerHTML = ''; count.textContent = IDX.length + ' pages to search.'; return; }
+    var phrase = norm(raw), hits = [];
+    IDX.forEach(function (e) {
+      var score = 0;
+      for (var i = 0; i < terms.length; i++) {
+        var t = terms[i], s = 0;
+        if (e._n.indexOf(t) >= 0) s += 12;
+        if (e._t.indexOf(t) >= 0) s += 10;
+        if (e._h.indexOf(t) >= 0) s += 4;
+        var c = 0, p = e._b.indexOf(t);
+        while (p >= 0 && c < 20) { c++; p = e._b.indexOf(t, p + t.length); }
+        s += Math.min(c, 20) * 0.5;
+        if (!s) return;
+        score += s;
+      }
+      if (terms.length > 1 && (e._t + ' ' + e._n + ' ' + e._b).indexOf(phrase) >= 0) score += 15;
+      hits.push([score, e]);
+    });
+    hits.sort(function (a, b) { return b[0] - a[0]; });
+    count.textContent = hits.length ? hits.length + (hits.length === 1 ? ' page' : ' pages') + ' match.' : 'No pages match. Try fewer or shorter words.';
+    out.innerHTML = hits.slice(0, 40).map(function (h) {
+      var e = h[1], where = [e.n, e.s].filter(Boolean).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(' · ');
+      return '<li><span class="where">' + esc(where) + '</span><a class="hit" href="' + e.u + '">' + mark(e.t, terms) +
+        '</a><span class="snip">' + mark(snippet(e, terms), terms) + '</span></li>';
+    }).join('');
+  }
+  var t0; q.addEventListener('input', function () { clearTimeout(t0); t0 = setTimeout(function () {
+    run(); try { history.replaceState(null, '', q.value.trim() ? '?q=' + encodeURIComponent(q.value.trim()) : location.pathname); } catch (e) {}
+  }, 120); });
+  var m = location.search.match(/[?&]q=([^&]*)/);
+  if (m) { try { q.value = decodeURIComponent(m[1].replace(/\+/g, ' ')); } catch (e) {} }
+  run();
+})();
+</script>
+</body>
+</html>
