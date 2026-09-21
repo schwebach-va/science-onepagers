@@ -384,8 +384,8 @@ function finish(){
   $("summary").textContent=
     total+" of 21 correct. "+
     (weak===0?"These will help you map where to study more. Take the two lowest tiles, work their tasks once, and put your time into the Checkpoint instead. Then come back and try this self-check again, another day after sleeping well and starting fresh."
-     :weak===1?"One idea is carrying all the damage. Everything else is in reach once that one is fixed."
-     :weak+" ideas need real work. Take them one at a time, in the order they appear below, and re-run the check once you have worked two of them.");
+     :weak===1?"One idea is the place to study next. Work its tasks first; the other six are already in reach."
+     :weak+" ideas are the places to study next. Take them one at a time, in the order below, and try this self-check again after you have worked two of them.");
   const g=$("resultGrid");g.innerHTML="";
   BANDS.forEach((b,n)=>g.appendChild(tile(b,n,scores[n])));
   const holder=$("bands");holder.innerHTML="";
