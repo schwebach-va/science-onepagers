@@ -68,26 +68,53 @@ html[data-level="de"] .bio-only{display:none!important}
 .legend{display:flex;flex-wrap:wrap;gap:.45rem .9rem;margin:0 0 1.2rem;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft)}
 .legend span::before{content:"";display:inline-block;width:.8em;height:.8em;border-radius:2px;background:var(--c);vertical-align:-1px;margin-right:.35em}
 
-/* stage + card */
-.build{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
-@media (min-width:820px){.build{grid-template-columns:60fr 40fr;align-items:start}.stagecol{position:sticky;top:.6rem}}
-.stagecol{min-width:0}
-.stage{position:relative;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;overflow:hidden}
+/* stage + card.
+   Narrow screens (an iPad held upright, a phone): the patch, its view buttons and the step
+   numbers are pinned at the top of the screen and the card scrolls beneath them.
+   Wide screens (an iPad on its side, a laptop): the same block sits beside the card and
+   stays put while the card scrolls. The build block is a plain block on narrow screens so
+   the sticky patch can travel the full height of the card. */
+.build{display:block;margin-top:1rem}
+.stagecol{position:sticky;top:0;z-index:5;min-width:0;background:var(--paper);padding:.35rem 0 .45rem;box-shadow:0 1px 0 var(--rule)}
+.stage{position:relative;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;margin:0 auto;max-width:calc(36vh * 1.5);max-width:calc(36svh * 1.5)}
+.cardcol{margin-top:.9rem;min-width:0}
+@media (min-width:900px){
+  .build{display:grid;grid-template-columns:58fr 42fr;gap:1.2rem;align-items:start}
+  .stagecol{top:.6rem;padding:0;background:none;box-shadow:none}
+  .stage{margin:0;max-width:calc(66vh * 1.5);max-width:calc(66svh * 1.5)}
+  .cardcol{margin-top:0}
+}
+@media (max-height:520px){.stagecol{position:static}}
 .stage canvas{display:block;width:100%;aspect-ratio:3/2;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:grab}
 .stage canvas:active{cursor:grabbing}
 .lab{position:absolute;left:.6rem;font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink-soft);background:var(--card);padding:.1rem .4rem;border-radius:3px;pointer-events:none;opacity:.92}
 .lab.top{top:.45rem}.lab.bot{bottom:.45rem}
-.views{display:flex;flex-wrap:wrap;gap:.45rem;margin:.55rem 0 0;align-items:center}
-.views .ghost{padding:.5rem .8rem;font-size:.85rem;min-height:44px}
+.views{display:flex;flex-wrap:wrap;gap:.35rem .45rem;margin:.45rem 0 0;align-items:center;justify-content:center}
+.views .ghost{padding:.4rem .7rem;font-size:.82rem;min-height:40px}
 .views .fine{margin:0 0 0 .2rem}
-.dots{display:flex;flex-wrap:wrap;gap:.3rem;margin:0 0 .8rem}
+.steprow{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center;justify-content:center;margin:.4rem 0 0}
+.dots{display:flex;flex-wrap:wrap;gap:.25rem;justify-content:center}
+@media (min-width:900px){.views,.steprow,.dots{justify-content:flex-start}.views .ghost{min-height:44px;font-size:.85rem;padding:.5rem .8rem}.steprow{margin-top:.5rem}}
 .clearrow{margin:0 0 .5rem}.clearrow .ghost{min-height:2.75rem;padding:.55rem .9rem;font-size:.85rem}
-.dots button{font-family:var(--sans);font-weight:700;font-size:.85rem;min-width:44px;min-height:44px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink-soft);border-radius:3px;padding:0}
-.dots button.done{border-color:var(--solid);color:var(--solid)}
+.dots button{font-family:var(--sans);font-weight:700;font-size:.85rem;min-width:42px;min-height:42px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink-soft);border-radius:3px;padding:0}
+.dots button.done{border-color:var(--solid);color:var(--solid);background:var(--solid-soft)}
 .dots button.cur{background:var(--bond);border-color:var(--bond);color:var(--paper)}
+.dots button.cur.done{box-shadow:inset 0 0 0 2px var(--solid-soft)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dots button.cur{color:#12100D}}
 :root[data-theme="dark"] .dots button.cur{color:#12100D}
-.dots button:disabled{opacity:.45;cursor:default}
+.teach{font-size:.78rem;padding:.35rem .65rem;min-height:42px;color:var(--ink-soft)}
+.teach[aria-pressed="true"]{background:var(--solid);border-color:var(--solid);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .teach[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .teach[aria-pressed="true"]{color:#12100D}
+.teachnote{background:var(--solid-soft);border-radius:3px;padding:.5rem .7rem;margin:0 0 .9rem}
+.go.ghostnext{background:none;border:1.5px solid var(--rule);color:var(--ink-soft)}
+/* phones: keep the pinned block short */
+@media (max-width:600px){
+  .stage{max-width:calc(30vh * 1.5);max-width:calc(30svh * 1.5)}
+  .views .fine{display:none}.views .ghost{min-height:36px;padding:.3rem .6rem;font-size:.78rem}
+  .dots button{min-width:34px;min-height:36px;font-size:.8rem}.dots{gap:.2rem}
+  .teach{min-height:36px;padding:.3rem .55rem}
+}
 .card{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);border-radius:3px;padding:1rem 1.1rem;min-width:0}
 .card h2{margin:0 0 .7rem;font-size:1.12rem;line-height:1.3}
 .card p{max-width:none}
@@ -162,7 +189,7 @@ button{font:inherit;cursor:pointer}
 <section id="intro" class="narrow">
   <h1>The Membrane Patch</h1>
   <p class="lede">Start with two thin sheets of water and build a piece of cell membrane between them, one kind of molecule at a time: phospholipids, cholesterol, three proteins with three different jobs, and the fibres that hold the patch in place on each side. Predict before every step, then act and watch. Turn the patch with a finger at any point: straight down it is a mosaic, edge-on it is a bilayer. About twenty-five minutes.</p>
-  <p class="fine">Nothing is submitted. Progress saves on this device, so a second sitting picks up where the first stopped. In my own college cell-biology classes, the topics students named hardest were pumps moving ions against a gradient, passive versus active transport, and how the membrane stays fluid. Steps 3 to 6 are built around those three.</p>
+  <p class="fine">Nothing is submitted. Progress saves on this device, so a second sitting picks up where the first stopped. Any of the nine numbers under the patch opens that step, and the patch shows what the earlier steps built; a number lights up only for a step you have finished yourself. In my own college cell-biology classes, the topics students named hardest were pumps moving ions against a gradient, passive versus active transport, and how the membrane stays fluid. Steps 3 to 6 are built around those three.</p>
   <div class="legend">
     <span style="--c:#A33A2B">Lipid: dark red circle head, tan capsule tails</span>
     <span style="--c:#2FA84F">Cholesterol (also a lipid): green rings, so it stands out</span>
@@ -173,7 +200,7 @@ button{font:inherit;cursor:pointer}
 </section>
 
 <div class="build" id="build">
-  <div class="stagecol">
+  <div class="stagecol" id="stagecol">
     <div class="stage" id="stage">
       <canvas id="cv" width="900" height="600" role="img" aria-label="A three-dimensional patch of cell membrane that can be turned by dragging"></canvas>
       <span class="lab top">Outside the cell</span>
@@ -185,10 +212,13 @@ button{font:inherit;cursor:pointer}
       <button type="button" class="ghost" data-view="top">Straight down</button>
       <span class="fine">or drag to turn it</span>
     </div>
+    <div class="steprow">
+      <div class="dots" id="dots" role="group" aria-label="Steps: tap any number to open that step"></div>
+      <button type="button" class="ghost teach" id="teach" aria-pressed="false" title="Opens every part of the current step at once, for showing the patch to a class. Nothing counts as done until it is done.">Teaching view</button>
+    </div>
   </div>
-  <div>
+  <div class="cardcol">
     <p class="clearrow"><button type="button" class="ghost" id="reset2">Clear the build</button></p>
-    <div class="dots" id="dots" role="group" aria-label="Steps"></div>
     <div class="card" id="card" aria-live="polite"></div>
   </div>
 </div>
@@ -726,17 +756,28 @@ function resize(){
 
 /* ================= state ================= */
 const KEY="membranepatch";
-let st={level:"bio",step:0,max:0,ans:{},acts:{},dragged:false,rx:55,ry:-25,map:false};
+let st={level:"bio",step:0,max:0,ans:{},acts:{},dragged:false,rx:55,ry:-25,map:false,teach:false};
 function save(){st.rx=Math.round(cam.rx*10)/10;st.ry=Math.round(cam.ry*10)/10;try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 let saveT=0;function saveSoon(){clearTimeout(saveT);saveT=setTimeout(save,250);}
 try{const raw=localStorage.getItem(KEY);if(raw){const s=JSON.parse(raw);if(s&&typeof s==="object"){
   st.level=s.level==="de"?"de":"bio";st.step=clamp(s.step|0,0,STEPS.length-1);st.max=clamp(Math.max(s.max|0,st.step),0,STEPS.length-1);
   if(s.ans&&typeof s.ans==="object")Object.keys(s.ans).forEach(k=>{if(ITEMS[k]&&s.ans[k]&&typeof s.ans[k].f==="boolean")st.ans[k]={f:s.ans[k].f,c:s.ans[k].c};});
   if(s.acts&&typeof s.acts==="object")Object.keys(s.acts).forEach(k=>{if(DUR[k])st.acts[k]=1;});
-  st.dragged=!!s.dragged;st.map=!!s.map;
+  st.dragged=!!s.dragged;st.map=!!s.map;st.teach=!!s.teach;
   if(typeof s.rx==="number"&&typeof s.ry==="number"){st.rx=s.rx;st.ry=s.ry;}}}}catch(e){}
 const isDE=()=>st.level==="de";
 const ADDS=["phos","chol","aqp","pump","rec","anchor"];
+/* which step adds each thing, and which added thing each run needs */
+const ADD_STEP={phos:0,chol:3,aqp:4,pump:5,rec:6,anchor:7};
+const REQ={water:"aqp",run:"pump",signal:"rec"};
+/* Opening a step draws everything the earlier steps add, in place and without animation,
+   so the patch is right for that step whether or not those steps were done. The dots for
+   skipped steps stay unlit: this touches the scene, never the record. */
+function ensureScene(i){
+  let changed=false;
+  ADDS.forEach(n=>{if(ADD_STEP[n]<i&&sc[n]<1&&!anims.some(a=>a.name===n)){setFinal(n);changed=true;}});
+  if(changed)requestDraw();
+}
 
 /* ================= scoring ================= */
 function visItems(){return ORDER.filter(id=>!ITEMS[id].de||isDE());}
@@ -782,38 +823,58 @@ function tapBlock(S){
 }
 function renderCard(){
   syncOverlay();
-  const i=st.step,S=STEPS[i];card.innerHTML="";
-  card.appendChild(el("div","bar",`<i style="width:${Math.round(i/STEPS.length*100)}%"></i>`));
+  const i=st.step,S=STEPS[i],T=st.teach;card.innerHTML="";
+  const nd=STEPS.reduce((n,_,k)=>n+(stepDone(k)?1:0),0);
+  card.appendChild(el("div","bar",`<i style="width:${Math.round(nd/STEPS.length*100)}%"></i>`));
   card.appendChild(el("div","meta",`<span>Step ${i+1} of ${STEPS.length}</span><span>${esc(S.short)}</span>`));
   card.appendChild(el("h2","",esc(S.head)));
+  if(T)card.appendChild(el("p","fine teachnote","Teaching view: every part of this step is open. The step lights up only once its question, its action and its taps are done."));
   if(S.intro)card.appendChild(el("p","",esc(S.intro)));
+  /* Students meet the prediction first and the rest of the step opens once it is answered.
+     Teaching view lays the whole step out at once. */
   let gate=true;
-  (S.pre||[]).forEach(id=>{if(!gate)return;card.appendChild(mcBlock(ITEMS[id]));if(!st.ans[id])gate=false;});
-  if(gate&&S.taps)card.appendChild(tapBlock(S));
-  if(gate&&S.drag){card.appendChild(el("p","prompt",st.dragged?"Turned. Keep dragging to watch the loose lipids slosh and settle back.":"Now drag across the patch to turn it, and watch the lipids."));}
-  if(gate&&S.acts){const row=el("div","acts");let prevDone=true;
+  (S.pre||[]).forEach(id=>{if(!gate&&!T)return;card.appendChild(mcBlock(ITEMS[id]));if(!st.ans[id])gate=false;});
+  const open=gate||T;
+  if(open&&S.taps)card.appendChild(tapBlock(S));
+  if(open&&S.drag){card.appendChild(el("p","prompt",st.dragged?"Turned. Keep dragging to watch the loose lipids slosh and settle back.":"Now drag across the patch to turn it, and watch the lipids."));}
+  if(open&&S.acts){const row=el("div","acts");
     S.acts.forEach(([name,lab])=>{const b=el("button","go");b.type="button";const done=!!st.acts[name],add=ADDS.indexOf(name)>=0;
       b.textContent=done?(add?"✓ "+lab:lab+" again"):lab;if(done&&add){b.disabled=true;b.classList.add("did");}
-      if(!prevDone)b.disabled=true;prevDone=done;
+      /* a run needs its protein in the patch, however the protein got there */
+      if(REQ[name]&&sc[REQ[name]]<1)b.disabled=true;
       b.addEventListener("click",()=>doAction(name));row.appendChild(b);});
     card.appendChild(row);}
-  if(stepCore(i)){const ex=el("div","explain");ex.appendChild(el("p","",esc(S.bio)));ex.appendChild(el("p","de",esc(S.de)));card.appendChild(ex);
+  if(stepCore(i)||T){const ex=el("div","explain");ex.appendChild(el("p","",esc(S.bio)));ex.appendChild(el("p","de",esc(S.de)));card.appendChild(ex);
     (S.post||[]).forEach(id=>card.appendChild(mcBlock(ITEMS[id])));}
-  if(stepDone(i)){const b=el("button","go");b.type="button";b.textContent=i<STEPS.length-1?"Next step":"Map the build";b.style.marginTop=".4rem";
-    b.addEventListener("click",()=>{if(i<STEPS.length-1)goStep(i+1);else showMap();});card.appendChild(b);}
+  const done=stepDone(i),last=i>=STEPS.length-1;
+  const b=el("button","go"+(done?"":" ghostnext"));b.type="button";b.textContent=last?"Map the build":(done?"Next step":"Skip to the next step");b.style.marginTop=".4rem";
+  b.addEventListener("click",()=>{if(!last)goStep(i+1);else showMap();});card.appendChild(b);
   renderDots();requestDraw();
 }
 function renderDots(){
   const d=$("dots");d.innerHTML="";
-  STEPS.forEach((S,i)=>{const b=el("button","");b.type="button";b.textContent=i+1;b.setAttribute("aria-label","Step "+(i+1)+": "+S.short);
-    if(i===st.step)b.classList.add("cur");else if(stepDone(i))b.classList.add("done");
-    if(i>st.max)b.disabled=true;b.addEventListener("click",()=>goStep(i));d.appendChild(b);});
+  STEPS.forEach((S,i)=>{const b=el("button","");b.type="button";b.textContent=i+1;
+    const done=stepDone(i);b.setAttribute("aria-label","Step "+(i+1)+": "+S.short+(done?" (done)":""));
+    if(i===st.step){b.classList.add("cur");b.setAttribute("aria-current","step");}
+    if(done)b.classList.add("done");
+    b.addEventListener("click",()=>goStep(i));d.appendChild(b);});
+}
+/* After a step change, bring the top of the card into view under the pinned patch. On a
+   wide screen the card top is usually already visible, so this only scrolls when it is not. */
+function scrollToCard(){
+  const sticky=getComputedStyle($("stagecol")).position==="sticky",stacked=window.innerWidth<900;
+  /* narrow: the card top goes just under the pinned patch; wide: the whole build block comes to the top */
+  const off=(sticky&&stacked?$("stagecol").offsetHeight:0)+10;
+  const r=(stacked?card:$("build")).getBoundingClientRect();
+  if(r.top>=off-2&&r.top<window.innerHeight-160)return;
+  window.scrollTo({top:Math.max(0,r.top+window.scrollY-off),behavior:REDUCE?"auto":"smooth"});
 }
 function goStep(i){
   st.step=clamp(i,0,STEPS.length-1);st.max=Math.max(st.max,st.step);
+  ensureScene(st.step);
   const c=STEPS[st.step].cam;if(c)camTo(c[0],c[1]);
   overlay.rings=null;save();renderCard();
-  if(window.innerWidth<820)$("build").scrollIntoView({block:"start",behavior:REDUCE?"auto":"smooth"});
+  scrollToCard();
 }
 
 /* ================= actions ================= */
@@ -875,7 +936,7 @@ let armed=false,armT=0;
 const RESET_LABELS={reset:"Start over",reset2:"Clear the build"};
 function resetLabels(){for(const k in RESET_LABELS){const b=$(k);if(b)b.textContent=RESET_LABELS[k];}}
 function doReset(){
-  const lv=st.level;st={level:lv,step:0,max:0,ans:{},acts:{},dragged:false,rx:55,ry:-25,map:false};
+  const lv=st.level,tv=st.teach;st={level:lv,step:0,max:0,ans:{},acts:{},dragged:false,rx:55,ry:-25,map:false,teach:tv};
   anims=[];Object.assign(sc,{phos:0,chol:0,aqp:0,water:-1,pump:0,run:-1,runDone:false,rec:0,sig:-1,sigDone:false,anchor:0});
   LIPS.forEach(l=>{l.dx=l.dz=l.vx=l.vz=0;});dragTotal=0;
   $("map").classList.add("hidden");save();goStep(0);window.scrollTo(0,0);
@@ -894,15 +955,22 @@ function setLevel(lv){
 }
 document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv)));
 
+/* ================= teaching view ================= */
+function syncTeach(){$("teach").setAttribute("aria-pressed",String(!!st.teach));}
+function setTeach(on){st.teach=!!on;save();syncTeach();renderCard();}
+$("teach").addEventListener("click",()=>setTeach(!st.teach));
+
 /* ================= boot ================= */
 Object.keys(st.acts).forEach(setFinal);
+ensureScene(st.step);
+syncTeach();
 cam.rx=st.rx;cam.ry=st.ry;setCam();
 if(window.ResizeObserver)new ResizeObserver(()=>resize()).observe(cv);else window.addEventListener("resize",resize);
 resize();
 setLevel(st.level);
 if(st.map){renderMap();$("map").classList.remove("hidden");}
 
-window.__MP={STEPS,ITEMS,TILES,scores,state:()=>st,setLevel,doAction,
+window.__MP={STEPS,ITEMS,TILES,scores,state:()=>st,setLevel,setTeach,ensureScene,scene:()=>sc,doAction,
   tapRegion:n=>judge(n),tapObject:k=>judge(k),
   drag:(dx,dy)=>{const n=Math.max(1,Math.ceil(Math.hypot(dx,dy)/15));for(let i=0;i<n;i++)dragBy(dx/n,dy/n);saveSoon();},
   goStep,camTo,drawOnce:()=>{const t=performance.now();draw();return performance.now()-t;},prims:()=>prims.length,
