@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The plasma membrane as an assembly of all four macromolecule classes - phospholipids and cholesterol, the proteins that move things across, the sugar name tags of the glycocalyx, and where nucleic acids come in. Tap any part; switch between a ninth-grade and a college depth. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/membrane-macromolecules.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Four Classes, One Membrane">
+<meta property="og:description" content="The plasma membrane as an assembly of all four macromolecule classes. Tap any part; switch between a ninth-grade and a college depth. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/membrane-macromolecules.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Four Classes, One Membrane | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE; --card:#FFFFFF; --ink:#1D1A15; --ink-soft:#5A544A;
+  --bond:#1F7A8C; --bond-soft:#DEEBEE; --shell:#D2CCC0; --rule:#DDD8CE;
+  --flag:#B85042; --flag-soft:#F7E9E6; --solid:#3F7A55; --solid-soft:#E2EDE6;
+  /* macromolecule class colours - use these for class coding */
+  --carb:#C98A2E; --carb-soft:#F6ECD8;
+  --prot:#1F7A8C; --prot-soft:#DEEBEE;
+  --lip:#B85042;  --lip-soft:#F7E9E6;
+  --nuc:#6B4E8C;  --nuc-soft:#ECE6F2;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F; --card:#1D1A15; --ink:#EDE9E1; --ink-soft:#A8A198;
+    --bond:#6FC0CE; --bond-soft:#172E33; --shell:#423D34; --rule:#332E27;
+    --flag:#E08A7C; --flag-soft:#2E1E1A; --solid:#7FC395; --solid-soft:#18291E;
+    --carb:#E0AE5C; --carb-soft:#2C2413; --prot:#6FC0CE; --prot-soft:#172E33;
+    --lip:#E08A7C;  --lip-soft:#2E1E1A;  --nuc:#B49AD6; --nuc-soft:#201A2B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+  --carb:#E0AE5C;--carb-soft:#2C2413;--prot:#6FC0CE;--prot-soft:#172E33;
+  --lip:#E08A7C;--lip-soft:#2E1E1A;--nuc:#B49AD6;--nuc-soft:#201A2B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:46rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+p{margin:0 0 1rem;max-width:36rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+button{font:inherit;cursor:pointer}
+.go{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--bond);color:var(--paper);border:none;border-radius:3px;padding:.85rem 1.5rem;min-height:3rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+.hidden{display:none}
+
+/* ===================== Bio Tool #6 components ===================== */
+/* level switching: text carries data-lvl="core" | "college" */
+body[data-level="core"] [data-lvl="college"]{display:none !important}
+body[data-level="college"] [data-lvl="core"]{display:none !important}
+
+/* class colour tokens on any element */
+.lip{--c:var(--lip);--cs:var(--lip-soft)}
+.prot{--c:var(--prot);--cs:var(--prot-soft)}
+.carb{--c:var(--carb);--cs:var(--carb-soft)}
+.nuc{--c:var(--nuc);--cs:var(--nuc-soft)}
+
+/* focus for every new interactive element */
+.seg:focus-visible,.chip:focus-visible,.pbtn:focus-visible,.cargo:focus-visible,.tone:focus-visible,summary:focus-visible,.part:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+
+/* level toggle */
+.level{display:flex;margin:1.1rem 0 1.6rem;border:1.5px solid var(--shell);border-radius:3px;background:var(--card);overflow:hidden}
+.seg{flex:1 1 50%;background:none;border:0;padding:.7rem .5rem;min-height:3.25rem;font-family:var(--sans);font-weight:600;font-size:.95rem;line-height:1.2;color:var(--ink-soft);border-radius:0}
+.seg+.seg{border-left:1.5px solid var(--shell)}
+.seg small{display:block;font-weight:500;font-size:.78rem;margin-top:.15rem;opacity:.85}
+.seg[aria-pressed="true"]{background:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg[aria-pressed="true"],:root:not([data-theme="light"]) .badge,:root:not([data-theme="light"]) .chip[aria-pressed="true"],:root:not([data-theme="light"]) .cargo[aria-pressed="true"],:root:not([data-theme="light"]) .tone[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .seg[aria-pressed="true"],:root[data-theme="dark"] .badge,:root[data-theme="dark"] .chip[aria-pressed="true"],:root[data-theme="dark"] .cargo[aria-pressed="true"],:root[data-theme="dark"] .tone[aria-pressed="true"]{color:#12100D}
+.level-note{font-family:var(--sans);font-size:.82rem;color:var(--ink-soft);margin:-1rem 0 1.4rem}
+
+/* figure surfaces */
+.fig{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.35rem .35rem .15rem;margin:0 0 .8rem}
+.fig svg{display:block;width:100%;height:auto}
+
+/* shared SVG styling */
+.zone-out{fill:var(--bond-soft);opacity:.45}
+.zone-in{fill:var(--solid-soft);opacity:.5}
+.zlabel{font-family:var(--sans);font-weight:700;font-size:20px;letter-spacing:.08em;fill:var(--ink-soft)}
+.head{fill:var(--lip)}
+.tail{fill:var(--lip-soft);stroke:var(--lip);stroke-width:1.5}
+.chol-bar,.chol-oh{fill:var(--lip);stroke:var(--ink);stroke-width:1}
+.protein{fill:var(--prot-soft);stroke:var(--prot);stroke-width:2.5}
+.pore{fill:var(--card);stroke:var(--prot);stroke-width:1.5;stroke-dasharray:4 3}
+.helix{stroke:var(--prot);stroke-width:1.5;opacity:.45;fill:none}
+.sugar{fill:var(--carb-soft);stroke:var(--carb);stroke-width:2}
+.sugar-link{stroke:var(--carb);stroke-width:2.5;fill:none}
+.atp{fill:var(--card);stroke:var(--ink-soft);stroke-width:1.5}
+.atp-t{font-family:var(--sans);font-weight:700;font-size:14px;fill:var(--ink);text-anchor:middle}
+.atp-link{stroke:var(--ink-soft);stroke-width:1.5}
+.hit{fill:transparent;pointer-events:all}
+.part{cursor:pointer;outline:none;transition:opacity .25s}
+.halo{fill:none;stroke:var(--bond);stroke-width:4;opacity:0;transition:opacity .2s;pointer-events:none}
+.part.sel .halo,.route.on .halo{opacity:1}
+.part:focus .halo{opacity:1;stroke-dasharray:7 5}
+.part.sel:focus .halo{stroke-dasharray:none}
+.hero.f-lip .part:not(.c-lip),.hero.f-prot .part:not(.c-prot),.hero.f-carb .part:not(.c-carb),.hero.f-nuc .part{opacity:.14}
+.rlabel{font-family:var(--sans);font-weight:600;font-size:17px;fill:var(--ink-soft);text-anchor:middle}
+
+/* class chips */
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 .9rem}
+.chip{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--sans);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c);background:var(--card);border:1.5px solid var(--c);border-radius:3px;padding:.55rem .8rem;min-height:2.75rem;transition:background .15s}
+.chip::before{content:"";width:.7rem;height:.7rem;flex:none;background:var(--c);border-radius:50%}
+.chip.prot::before{border-radius:2px}
+.chip.carb::before{border-radius:0;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.chip.nuc::before{border-radius:0;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.chip[aria-pressed="true"]{background:var(--c);color:var(--paper)}
+.chip[aria-pressed="true"]::before{background:var(--paper)}
+.chips .ghost{min-height:2.75rem;padding:.55rem .9rem;font-size:.82rem}
+
+/* part name buttons under the diagram */
+.plist{display:flex;flex-wrap:wrap;gap:.45rem;margin:.2rem 0 0}
+.pbtn{display:inline-flex;align-items:center;gap:.45rem;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.5rem .8rem;min-height:2.75rem;font-family:var(--sans);font-weight:600;font-size:.86rem;color:var(--ink)}
+.pbtn::before{content:"";width:.72rem;height:.72rem;border-radius:50%;background:var(--c);flex:none}
+.pbtn.prot::before{border-radius:2px}
+.pbtn.carb::before{border-radius:0;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.pbtn[aria-pressed="true"]{border-color:var(--bond);box-shadow:inset 0 0 0 1.5px var(--bond)}
+
+/* detail panel + role line */
+.detail{border:1.5px solid var(--shell);border-left:6px solid var(--c,var(--shell));border-radius:3px;background:var(--card);padding:1rem 1.1rem;margin:.9rem 0 0;min-height:5.5rem}
+.detail h3{font-family:var(--sans);font-size:1.05rem;line-height:1.3;margin:0;display:inline}
+.cchip{display:inline-block;vertical-align:middle;font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--c);background:var(--cs);border-radius:3px;padding:.2rem .5rem;margin-left:.45rem;position:relative;top:-.1rem}
+.detail p{margin:.55rem 0 0;max-width:none}
+.detail .hint{color:var(--ink-soft);font-family:var(--sans);font-size:.95rem;margin:0}
+.role{font-family:var(--sans);font-size:.95rem;line-height:1.45;color:var(--ink);margin:.6rem 0 0;padding:.65rem .85rem;border-radius:3px;background:var(--cs);border-left:4px solid var(--c)}
+
+/* nucleic-acid inset */
+.inset{border:1.5px solid var(--nuc);border-radius:3px;background:var(--card);padding:1rem 1.1rem;margin:.9rem 0 0}
+.inset h3{font-family:var(--sans);font-size:1.05rem;color:var(--nuc);margin:0 0 .75rem}
+.inset p{max-width:none;margin:0}
+.path{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .3rem;margin:0 0 .9rem}
+.node{display:inline-flex;flex-direction:column;background:var(--nuc-soft);color:var(--nuc);border:1.5px solid var(--nuc);border-radius:3px;padding:.35rem .6rem;font-family:var(--sans);font-weight:700;font-size:.82rem;line-height:1.2}
+.node small{font-weight:500;font-size:.72rem;opacity:.9}
+.arr{width:1.2rem;height:.9rem;flex:none}
+.arr path{stroke:var(--nuc);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* transport */
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:0 0 1rem}
+@media (max-width:520px){.contrast{grid-template-columns:1fr}}
+.cc{border-radius:3px;padding:.8rem .9rem;font-family:var(--sans);font-size:.92rem;line-height:1.4}
+.cc.pas{background:var(--solid-soft);border-left:5px solid var(--solid)}
+.cc.act{background:var(--flag-soft);border-left:5px solid var(--flag)}
+.cc b{display:block;font-size:1rem;margin-bottom:.2rem}
+.cargos{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 .8rem}
+.cargo{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.6rem .9rem;min-height:2.75rem;font-family:var(--sans);font-weight:600;font-size:.9rem;color:var(--ink);flex:1 1 auto;text-align:left}
+.cargo[aria-pressed="true"]{background:var(--bond);color:var(--paper);border-color:var(--bond)}
+.cap{border:1.5px solid var(--shell);border-radius:3px;background:var(--card);padding:1rem 1.1rem;margin:0}
+.cap .hint{color:var(--ink-soft);font-family:var(--sans);font-size:.95rem;margin:0}
+.badge{display:inline-block;font-family:var(--sans);font-weight:700;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;border-radius:3px;padding:.45rem .7rem;margin:0 0 .7rem;color:var(--paper)}
+.badge.pas{background:var(--solid)}
+.badge.act{background:var(--flag)}
+.cap dl{display:grid;grid-template-columns:auto 1fr;gap:.3rem .8rem;margin:0 0 .7rem;font-size:.98rem;line-height:1.4}
+.cap dt{font-family:var(--sans);font-weight:700;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding-top:.2rem}
+.cap dd{margin:0}
+.cap p{margin:0;max-width:none}
+.cap .ghost{margin-top:.8rem}
+.dot{fill:var(--ink-soft);opacity:.75}
+.salt{fill:var(--ink-soft);opacity:.7}
+.pax-o2{fill:var(--ink-soft)}
+.pax-h2o{fill:var(--bond);stroke:var(--card);stroke-width:1.5}
+.pax-glc{fill:var(--carb-soft);stroke:var(--carb);stroke-width:2.5}
+.pax-ion{fill:var(--card);stroke:var(--ink);stroke-width:2}
+.pax-t{font-family:var(--sans);font-weight:700;font-size:13px;fill:var(--ink);text-anchor:middle}
+.spark{fill:var(--carb);stroke:var(--ink);stroke-width:1;opacity:0;transform-box:fill-box;transform-origin:center}
+.sparking .spark{animation:spark 1.3s ease-out}
+@keyframes spark{0%{opacity:0;transform:scale(.4)}25%{opacity:1;transform:scale(1.25)}100%{opacity:0;transform:scale(1.7)}}
+#pax{transition:none}
+
+/* tonicity */
+.tones{display:flex;gap:.5rem;margin:0 0 .8rem}
+.tone{flex:1 1 0;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.55rem .3rem;min-height:3rem;font-family:var(--sans);font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.tone[aria-pressed="true"]{background:var(--bond);color:var(--paper);border-color:var(--bond)}
+.beaker{fill:var(--bond-soft);stroke:var(--ink-soft);stroke-width:2;opacity:.9}
+.cellg{transition:transform 1.2s cubic-bezier(.4,0,.2,1);transform-origin:300px 150px}
+.cell-smooth{fill:var(--lip-soft);stroke:var(--lip);stroke-width:3;transition:opacity .7s}
+.cell-wavy{fill:var(--lip-soft);stroke:var(--lip);stroke-width:3;transition:opacity .7s;stroke-linejoin:round}
+.arw{stroke:var(--bond);stroke-width:3.5;fill:var(--bond);stroke-linecap:round;stroke-linejoin:round}
+.arrows{transition:opacity .5s}
+.tlabel{font-family:var(--sans);font-weight:600;font-size:16px;fill:var(--ink-soft)}
+.tcap{border:1.5px solid var(--shell);border-radius:3px;background:var(--card);padding:1rem 1.1rem;margin:0}
+.tcap p{margin:0;max-width:none}
+.tcap .fine{margin-top:.6rem}
+
+/* junctions */
+.junc{border:1.5px solid var(--shell);border-radius:3px;background:var(--card);padding:.2rem 1.1rem .5rem;margin:0 0 1rem}
+.junc summary{cursor:pointer;font-family:var(--sans);font-weight:600;font-size:1rem;min-height:2.9rem;display:flex;align-items:center;list-style:none}
+.junc summary::-webkit-details-marker{display:none}
+.junc summary::before{content:"+";display:inline-block;width:1.4rem;font-weight:700;color:var(--bond)}
+.junc[open] summary::before{content:"\2212"}
+.junc ul{margin:.2rem 0 .6rem;padding-left:1.2rem}
+.junc li{margin:0 0 .5rem}
+
+/* quick check */
+.q{border:1.5px solid var(--shell);border-radius:3px;background:var(--card);padding:1rem 1.1rem;margin:0 0 1rem}
+.q .stem{font-weight:600;margin:0 0 .6rem;max-width:none}
+.q .num{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .3rem}
+.opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;background:var(--paper);border:1.5px solid var(--rule);border-radius:3px;padding:.65rem .85rem;min-height:2.75rem;margin:.4rem 0;font-family:var(--serif);font-size:1rem;line-height:1.35;color:var(--ink)}
+.opt .tag{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-left:auto;flex:none;padding:.15rem .4rem;border-radius:3px}
+.opt:disabled{cursor:default;opacity:.85}
+.opt.correct{border-color:var(--solid);background:var(--solid-soft);opacity:1}
+.opt.correct .tag{background:var(--solid);color:var(--paper)}
+.opt.miss{border-color:var(--flag);background:var(--flag-soft);opacity:1}
+.opt.miss .tag{background:var(--flag);color:var(--paper)}
+.why{margin:.7rem 0 0;padding:.7rem .9rem;border-left:4px solid var(--bond);background:var(--bond-soft);font-size:.98rem;line-height:1.45;border-radius:0 3px 3px 0}
+.result{border:1.5px solid var(--bond);background:var(--bond-soft);padding:1rem 1.1rem;border-radius:3px;font-family:var(--sans);font-size:.98rem;line-height:1.5}
+.result ul{margin:.5rem 0 0;padding-left:1.2rem}
+.result li{margin:0 0 .3rem}
+.result a{color:var(--bond)}
+.result .ghost{margin-top:.8rem}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+</style>
+</head>
+<body data-level="core">
+<div class="wrap">
+<a class="sop-back" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+<p class="sop-eyebrow">Bio Tool #6 &middot; DE Bio 101 Unit 5 &amp; Biology I Module 2 &middot; The plasma membrane</p>
+
+<h1>Four Classes, One Membrane</h1>
+<p class="lede"><span data-lvl="core">You met the four macromolecule classes as four separate boxes. The plasma membrane is where all four are built into one working thing. Tap any part to see what it is and what it does &mdash; then watch the parts do their jobs.</span><span data-lvl="college">The four macromolecule classes converge in one structure. Read the plasma membrane as an assembly &mdash; phospholipids and cholesterol, the proteins that do most of the work, the carbohydrate glycocalyx, and the nucleic acids that author all of it &mdash; then work through transport, tonicity and junctions.</span></p>
+<p class="fine">Nothing is submitted. No score leaves this iPad. Switch the level anytime.</p>
+
+<div class="level" role="group" aria-label="Reading level">
+  <button class="seg" type="button" data-level="core" aria-pressed="true">Biology I / Adv<small>9th grade</small></button>
+  <button class="seg" type="button" data-level="college" aria-pressed="false">DE Bio 101<small>college</small></button>
+</div>
+<p class="level-note" id="levelNote">Every explanation on the page follows this switch.</p>
+
+<!-- ============ SECTION 1 ============ -->
+<h2 id="s1">The parts, by class</h2>
+<p><span data-lvl="core">Tap any part of the membrane, or a name under it. Then tap a class chip to light up everything made of that class.</span><span data-lvl="college">Tap any component, or its name below. The class chips filter the mosaic by macromolecule class.</span></p>
+
+<div class="chips" role="group" aria-label="Filter by macromolecule class">
+  <button class="chip lip" type="button" data-cls="lip" aria-pressed="false">Lipid</button>
+  <button class="chip prot" type="button" data-cls="prot" aria-pressed="false">Protein</button>
+  <button class="chip carb" type="button" data-cls="carb" aria-pressed="false">Carbohydrate</button>
+  <button class="chip nuc" type="button" data-cls="nuc" aria-pressed="false">Nucleic acid</button>
+  <button class="ghost hidden" type="button" id="showAll">Show all</button>
+</div>
+
+<div class="fig">
+<svg id="hero" class="hero" viewBox="0 0 800 440" width="100%" preserveAspectRatio="xMidYMid meet" aria-label="Cross-section of the plasma membrane: outside the cell above, cytoplasm below, a phospholipid bilayer with cholesterol, five kinds of protein, and two sugar chains on the outside face. Each part is a button.">
+<defs>
+  <g id="plt"><circle class="head" cx="0" cy="150" r="12"/><rect class="tail" x="-9" y="161" width="7" height="46" rx="3.5"/><rect class="tail" x="2" y="161" width="7" height="46" rx="3.5"/></g>
+  <g id="plb"><circle class="head" cx="0" cy="270" r="12"/><rect class="tail" x="-9" y="213" width="7" height="46" rx="3.5"/><rect class="tail" x="2" y="213" width="7" height="46" rx="3.5"/></g>
+  <g id="chol"><circle class="chol-oh" cx="0" cy="0" r="4"/><rect class="chol-bar" x="-6" y="4" width="12" height="30" rx="2"/><rect class="chol-bar" x="-3" y="34" width="6" height="8" rx="2"/></g>
+  <polygon id="hex" class="sugar" points="9,0 4.5,7.8 -4.5,7.8 -9,0 -4.5,-7.8 4.5,-7.8"/>
+</defs>
+<rect class="zone-out" x="0" y="0" width="800" height="150"/>
+<rect class="zone-in" x="0" y="270" width="800" height="170"/>
+<text class="zlabel" x="20" y="38">OUTSIDE THE CELL</text>
+<text class="zlabel" x="20" y="424">INSIDE THE CELL (cytoplasm)</text>
+
+<!-- phospholipid bilayer: one button for the whole fabric -->
+<g class="part c-lip" data-part="phospholipid" role="button" tabindex="0" aria-label="Phospholipid, a lipid: the membrane's double sheet">
+  <rect class="hit" x="0" y="132" width="800" height="156"/>
+  <use href="#plt" x="30"/><use href="#plb" x="30"/>
+  <use href="#plt" x="70"/><use href="#plb" x="70"/>
+  <use href="#plt" x="110"/><use href="#plb" x="110"/>
+  <use href="#plt" x="215"/><use href="#plb" x="215"/>
+  <use href="#plt" x="255"/><use href="#plb" x="255"/>
+  <use href="#plt" x="370"/><use href="#plb" x="370"/>
+  <use href="#plt" x="410"/><use href="#plb" x="410"/>
+  <use href="#plt" x="520"/><use href="#plb" x="520"/>
+  <use href="#plt" x="560"/><use href="#plb" x="560"/>
+  <use href="#plt" x="675"/><use href="#plb" x="675"/>
+  <use href="#plt" x="715"/><use href="#plb" x="715"/>
+  <use href="#plt" x="755"/><use href="#plb" x="755"/>
+  <rect class="halo" x="388" y="132" width="44" height="156" rx="10"/>
+</g>
+
+<!-- cholesterol, two of them -->
+<g class="part c-lip" data-part="cholesterol" role="button" tabindex="0" aria-label="Cholesterol, a lipid wedged between the tails">
+  <rect class="hit" x="219" y="156" width="32" height="52"/>
+  <rect class="hit" x="524" y="212" width="32" height="52"/>
+  <use href="#chol" x="235" y="163"/>
+  <use href="#chol" transform="translate(540,257) scale(1,-1)"/>
+  <rect class="halo" x="221" y="155" width="28" height="52" rx="8"/>
+  <rect class="halo" x="526" y="213" width="28" height="52" rx="8"/>
+</g>
+
+<!-- integral protein (with glycoprotein chain on top) -->
+<g class="part c-prot" data-part="integral" role="button" tabindex="0" aria-label="Integral protein, spanning the membrane">
+  <rect class="hit" x="132" y="112" width="66" height="196"/>
+  <rect class="protein" x="138" y="118" width="54" height="184" rx="12"/>
+  <path class="helix" d="M148 150 q8 -6 16 0 t16 0 M148 180 q8 -6 16 0 t16 0 M148 210 q8 -6 16 0 t16 0 M148 240 q8 -6 16 0 t16 0 M148 270 q8 -6 16 0 t16 0"/>
+  <rect class="halo" x="132" y="112" width="66" height="196" rx="14"/>
+</g>
+<g class="part c-carb" data-part="glycoprotein" role="button" tabindex="0" aria-label="Glycoprotein: a sugar chain on a membrane protein, outside face">
+  <rect class="hit" x="146" y="52" width="48" height="66"/>
+  <path class="sugar-link" d="M165 118 L165 105 L170 88 L177 72"/>
+  <use href="#hex" x="165" y="105"/>
+  <use href="#hex" x="170" y="88"/>
+  <use href="#hex" x="177" y="71"/>
+  <rect class="halo" x="146" y="54" width="46" height="64" rx="10"/>
+</g>
+
+<!-- glycolipid chain on the lipid head at x=70 -->
+<g class="part c-carb" data-part="glycolipid" role="button" tabindex="0" aria-label="Glycolipid: a sugar chain on a lipid head, outside face">
+  <rect class="hit" x="52" y="92" width="44" height="48"/>
+  <path class="sugar-link" d="M70 138 L70 124 L76 107"/>
+  <use href="#hex" x="70" y="124"/>
+  <use href="#hex" x="76" y="107"/>
+  <rect class="halo" x="54" y="94" width="40" height="44" rx="10"/>
+</g>
+
+<!-- channel protein with a pore -->
+<g class="part c-prot" data-part="channel" role="button" tabindex="0" aria-label="Channel protein, with a pore through the middle">
+  <rect class="hit" x="277" y="112" width="76" height="196"/>
+  <rect class="protein" x="283" y="118" width="64" height="184" rx="12"/>
+  <rect class="pore" x="307" y="114" width="16" height="192"/>
+  <rect class="halo" x="277" y="112" width="76" height="196" rx="14"/>
+</g>
+
+<!-- carrier protein with a binding pocket -->
+<g class="part c-prot" data-part="carrier" role="button" tabindex="0" aria-label="Carrier protein, with a binding pocket">
+  <rect class="hit" x="432" y="112" width="70" height="196"/>
+  <rect class="protein" x="438" y="118" width="58" height="184" rx="12"/>
+  <circle class="pore" cx="467" cy="134" r="10"/>
+  <path class="helix" d="M450 200 q8 -6 17 0 t17 0 M450 230 q8 -6 17 0 t17 0 M450 260 q8 -6 17 0 t17 0"/>
+  <rect class="halo" x="432" y="112" width="70" height="196" rx="14"/>
+</g>
+
+<!-- pump protein with ATP tag on the cytoplasm side -->
+<g class="part c-prot" data-part="pump" role="button" tabindex="0" aria-label="Pump protein, using ATP on the inside">
+  <rect class="hit" x="582" y="112" width="76" height="232"/>
+  <rect class="protein" x="588" y="118" width="64" height="184" rx="12"/>
+  <circle class="pore" cx="620" cy="286" r="10"/>
+  <path class="helix" d="M600 150 q8 -6 20 0 t20 0 M600 180 q8 -6 20 0 t20 0 M600 210 q8 -6 20 0 t20 0 M600 240 q8 -6 20 0 t20 0"/>
+  <line class="atp-link" x1="620" y1="302" x2="620" y2="312"/>
+  <rect class="atp" x="598" y="312" width="44" height="24" rx="4"/>
+  <text class="atp-t" x="620" y="329">ATP</text>
+  <rect class="halo" x="582" y="112" width="76" height="232" rx="14"/>
+</g>
+
+<!-- peripheral protein resting on the inside face -->
+<g class="part c-prot" data-part="peripheral" role="button" tabindex="0" aria-label="Peripheral protein, resting on the inside surface">
+  <rect class="hit" x="678" y="278" width="88" height="48"/>
+  <rect class="protein" x="684" y="286" width="72" height="30" rx="15"/>
+  <rect class="halo" x="678" y="280" width="84" height="42" rx="14"/>
+</g>
+</svg>
+</div>
+
+<div class="plist" role="group" aria-label="Membrane parts">
+  <button class="pbtn lip" type="button" data-part="phospholipid" aria-pressed="false">Phospholipid</button>
+  <button class="pbtn lip" type="button" data-part="cholesterol" aria-pressed="false">Cholesterol</button>
+  <button class="pbtn prot" type="button" data-part="integral" aria-pressed="false">Integral protein</button>
+  <button class="pbtn prot" type="button" data-part="channel" aria-pressed="false">Channel</button>
+  <button class="pbtn prot" type="button" data-part="carrier" aria-pressed="false">Carrier</button>
+  <button class="pbtn prot" type="button" data-part="pump" aria-pressed="false">Pump</button>
+  <button class="pbtn prot" type="button" data-part="peripheral" aria-pressed="false">Peripheral protein</button>
+  <button class="pbtn carb" type="button" data-part="glycoprotein" aria-pressed="false">Glycoprotein</button>
+  <button class="pbtn carb" type="button" data-part="glycolipid" aria-pressed="false">Glycolipid</button>
+</div>
+
+<div id="roleLine" class="role hidden" aria-live="polite"></div>
+
+<div id="detail" class="detail" aria-live="polite">
+  <p class="hint">Tap a part of the membrane, or a name above, to see what it is and what it does.</p>
+</div>
+
+<div id="nucInset" class="inset hidden" aria-live="polite">
+  <h3>Not here &mdash; but the author of everything here</h3>
+  <div class="path" aria-label="From gene to membrane: DNA in the nucleus, to mRNA, to ribosomes on the rough ER, to a vesicle from the Golgi, to the plasma membrane">
+    <span class="node">DNA<small>in the nucleus</small></span>
+    <svg class="arr" viewBox="0 0 24 18" aria-hidden="true"><path d="M2 9h18M14 3l6 6-6 6"/></svg>
+    <span class="node">mRNA<small>the copy</small></span>
+    <svg class="arr" viewBox="0 0 24 18" aria-hidden="true"><path d="M2 9h18M14 3l6 6-6 6"/></svg>
+    <span class="node">Ribosomes<small>on the rough ER</small></span>
+    <svg class="arr" viewBox="0 0 24 18" aria-hidden="true"><path d="M2 9h18M14 3l6 6-6 6"/></svg>
+    <span class="node">Vesicle<small>from the Golgi</small></span>
+    <svg class="arr" viewBox="0 0 24 18" aria-hidden="true"><path d="M2 9h18M14 3l6 6-6 6"/></svg>
+    <span class="node">Plasma membrane<small>the destination</small></span>
+  </div>
+  <p><span data-lvl="core">No nucleic acid sits in the membrane itself. But every protein here started as a gene. The instructions travel: DNA in the nucleus is copied into mRNA, which is carried to ribosomes on the rough ER; the new protein is threaded into the ER membrane as it's built; then a vesicle carries it to the surface, where it becomes part of the plasma membrane. The sugar name tags get added along the way, in the ER and Golgi.</span><span data-lvl="college">Nucleic acids are absent from the membrane but author it. A gene is transcribed to mRNA; ribosomes on the rough ER translate it and insert the new membrane protein into the ER membrane as it is made. Vesicles carry it through the Golgi &mdash; where the sugar chains are added, making glycoproteins &mdash; to the plasma membrane, where the vesicle fuses. The protein face that pointed into the ER lumen ends up facing outside the cell.</span></p>
+</div>
+
+<!-- ============ SECTION 2 ============ -->
+<h2 id="s2">Getting across</h2>
+<p><span data-lvl="core">Some things cross the membrane on their own, downhill, for free. Others have to be pushed uphill, and that costs energy. Pick a passenger and watch.</span><span data-lvl="college">Transport splits on two questions: which way relative to the gradient, and does it cost energy? Passive transport runs down the gradient for free; active transport runs against it and spends ATP. Pick a solute.</span></p>
+
+<div class="contrast" aria-label="Passive versus active transport">
+  <div class="cc pas"><b>Downhill &mdash; passive</b><span data-lvl="core">From the crowded side toward the emptier side. Free: no energy spent, whether or not a protein helps.</span><span data-lvl="college">Down the concentration gradient. No ATP, whether by simple diffusion or through a channel or carrier (facilitated diffusion).</span></div>
+  <div class="cc act"><b>Uphill &mdash; active</b><span data-lvl="core">Toward the side that's already crowded. Costs energy: the cell's energy molecule, ATP, paid to a pump.</span><span data-lvl="college">Against the concentration gradient. Costs ATP, spent by a pump (primary active transport).</span></div>
+</div>
+
+<div class="cargos" role="group" aria-label="Pick a passenger">
+  <button class="cargo" type="button" data-cargo="0" aria-pressed="false">Oxygen / CO<sub>2</sub></button>
+  <button class="cargo" type="button" data-cargo="1" aria-pressed="false">Water</button>
+  <button class="cargo" type="button" data-cargo="2" aria-pressed="false">Glucose</button>
+  <button class="cargo" type="button" data-cargo="3" aria-pressed="false">Sodium / potassium ions (against the gradient)</button>
+</div>
+
+<div class="fig">
+<svg id="tsvg" viewBox="0 0 800 330" width="100%" preserveAspectRatio="xMidYMid meet" aria-label="A strip of membrane with four routes across it: the oily middle, a water channel, a carrier, and a pump with ATP. Dots show where the passenger is crowded and where it is sparse.">
+  <rect class="zone-out" x="0" y="0" width="800" height="136"/>
+  <rect class="zone-in" x="0" y="194" width="800" height="136"/>
+  <text class="zlabel" x="16" y="28">OUTSIDE THE CELL</text>
+  <text class="zlabel" x="16" y="320">INSIDE THE CELL</text>
+  <text class="rlabel" id="lblTop" x="740" y="28" style="text-anchor:end">crowded</text>
+  <text class="rlabel" id="lblBot" x="740" y="320" style="text-anchor:end">sparse</text>
+  <g id="tbil"></g>
+  <g id="tdots"></g>
+  <g class="route" id="r-lipid"><rect class="halo" x="106" y="122" width="88" height="86" rx="10"/></g>
+  <g class="route" id="r-aqp"><rect class="protein" x="285" y="122" width="70" height="86" rx="12"/><rect class="pore" x="312" y="118" width="16" height="94"/><rect class="halo" x="279" y="116" width="82" height="98" rx="14"/></g>
+  <g class="route" id="r-car"><rect class="protein" x="455" y="122" width="80" height="86" rx="12"/><circle class="pore" cx="495" cy="136" r="10"/><path class="helix" d="M468 170 q8 -6 18 0 t18 0 M468 190 q8 -6 18 0 t18 0"/><rect class="halo" x="449" y="116" width="92" height="98" rx="14"/></g>
+  <g class="route" id="r-pump"><rect class="protein" x="635" y="122" width="80" height="86" rx="12"/><circle class="pore" cx="675" cy="194" r="10"/><path class="helix" d="M648 145 q8 -6 18 0 t18 0 M648 165 q8 -6 18 0 t18 0"/><line class="atp-link" x1="675" y1="208" x2="675" y2="224"/><rect class="atp" x="653" y="224" width="44" height="24" rx="4"/><text class="atp-t" x="675" y="241">ATP</text><polygon class="spark" points="675,204 681,222 700,222 685,233 690,251 675,240 660,251 665,233 650,222 669,222"/><rect class="halo" x="629" y="116" width="92" height="140" rx="14"/></g>
+  <g>
+    <text class="rlabel" x="150" y="236">oily middle</text>
+    <text class="rlabel" x="320" y="236">water channel</text>
+    <text class="rlabel" x="495" y="236">carrier</text>
+    <text class="rlabel" x="675" y="272">pump</text>
+  </g>
+  <g id="pax" aria-hidden="true"></g>
+</svg>
+</div>
+
+<div id="tcap" class="cap" aria-live="polite">
+  <p class="hint">Pick a passenger above. The badge answers the one question that matters: downhill for free, or uphill at a cost?</p>
+</div>
+
+<!-- ============ SECTION 3 ============ -->
+<h2 id="s3">Water follows solute</h2>
+<p><span data-lvl="core">Water moves toward the side with more dissolved stuff. Change what's outside the cell and watch the cell.</span><span data-lvl="college">Osmosis moves water toward higher solute concentration. Tonicity describes the outside solution relative to the cell.</span></p>
+
+<div class="tones" role="group" aria-label="Solution outside the cell">
+  <button class="tone" type="button" data-tone="hypo" aria-pressed="false">Hypotonic</button>
+  <button class="tone" type="button" data-tone="iso" aria-pressed="true">Isotonic</button>
+  <button class="tone" type="button" data-tone="hyper" aria-pressed="false">Hypertonic</button>
+</div>
+
+<div class="fig">
+<svg id="osvg" viewBox="0 0 600 300" width="100%" preserveAspectRatio="xMidYMid meet" aria-label="An animal cell in a beaker of solution. Dots show dissolved solute; arrows show which way water moves.">
+  <rect class="beaker" x="50" y="30" width="500" height="246" rx="10"/>
+  <text class="tlabel" x="62" y="26">Solution outside the cell</text>
+  <text class="tlabel" id="oLabel" x="538" y="26" style="text-anchor:end">isotonic</text>
+  <g id="outDots"></g>
+  <g id="cellg" class="cellg">
+    <circle id="cellSmooth" class="cell-smooth" cx="300" cy="150" r="60"/>
+    <path id="cellWavy" class="cell-wavy" d="" style="opacity:0"/>
+    <g id="inDots"></g>
+  </g>
+  <g id="arrIn" class="arrows" style="opacity:0"></g>
+  <g id="arrOut" class="arrows" style="opacity:0"></g>
+  <g id="arrEq" class="arrows" style="opacity:1"></g>
+  <text class="tlabel" x="300" y="290" style="text-anchor:middle">animal cell</text>
+</svg>
+</div>
+
+<div id="ocap" class="tcap" aria-live="polite"></div>
+
+<!-- ============ SECTION 4 ============ -->
+<h2 id="s4">Where cells meet</h2>
+<p data-lvl="core">Cells also link to their neighbors &mdash; some joins seal, some fasten them together, and some open tunnels for direct signals.</p>
+<details class="junc" data-lvl="college">
+  <summary>Four kinds of junction</summary>
+  <ul>
+    <li><b>Tight junctions</b> &mdash; seal neighboring cells so nothing leaks between them (e.g., lining the gut).</li>
+    <li><b>Desmosomes</b> &mdash; rivets that fasten cells into a sheet that can take stress (e.g., skin, muscle).</li>
+    <li><b>Gap junctions</b> &mdash; tunnels that let ions and small molecules pass straight from one cell to the next, for direct communication (e.g., heart muscle).</li>
+    <li><b>Plasmodesmata</b> &mdash; the plant version: channels through the cell walls connecting plant cells.</li>
+  </ul>
+</details>
+
+<!-- ============ SECTION 5 ============ -->
+<h2 id="s5">Quick check</h2>
+<p class="fine">Five items. Pick an answer and the reasoning appears, right or wrong. Nothing is sent anywhere.</p>
+<div id="quiz"></div>
+<div id="result" class="result hidden" aria-live="polite"></div>
+
+<footer class="sop-foot">The plasma membrane &middot; DE Bio 101 Unit 5 (Campbell <i>Biology in Focus</i> 3e) &amp; Biology I / Adv Biology I Module 2 &middot; every part written and drawn fresh, nothing submitted. &copy;&nbsp;J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var SVGNS='http://www.w3.org/2000/svg';
+  var $=function(s,root){return (root||document).querySelector(s);};
+  var $$=function(s,root){return Array.prototype.slice.call((root||document).querySelectorAll(s));};
+  function el(tag,attrs,parent){var e=document.createElementNS(SVGNS,tag);if(attrs){for(var k in attrs){e.setAttribute(k,attrs[k]);}}if(parent){parent.appendChild(e);}return e;}
+  function rng(seed){return function(){seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296;};}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var reduced=false;
+  try{reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+
+  /* ---------------- level ---------------- */
+  var LEVEL='core';
+  function loadLevel(){try{var v=localStorage.getItem('fcom-level');if(v==='core'||v==='college')return v;}catch(e){}return 'core';}
+  function saveLevel(v){try{localStorage.setItem('fcom-level',v);}catch(e){}}
+  function T(o){return o[LEVEL]||o.core;}
+  var segs=$$('.seg');
+  function setLevel(v,persist){
+    LEVEL=v;
+    document.body.setAttribute('data-level',v);
+    segs.forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-level')===v));});
+    if(persist)saveLevel(v);
+    renderDetail();renderCargo(false);renderTone(false);
+  }
+  segs.forEach(function(b){b.addEventListener('click',function(){setLevel(b.getAttribute('data-level'),true);});});
+
+  /* ---------------- section 1: parts ---------------- */
+  var CLS={lip:'Lipid',prot:'Protein',carb:'Carbohydrate',nuc:'Nucleic acid'};
+  var PARTS={
+    phospholipid:{name:'Phospholipid',cls:'lip',
+      core:"The membrane's main fabric. Each one has a head that likes water (the circle) and two tails that avoid water (the capsules). They line up into a double sheet — heads facing the water on both sides, tails hidden in the oily middle. That middle is why most things can't just drift across.",
+      college:"Amphipathic: a hydrophilic phosphate head and two hydrophobic fatty-acid tails. In water they self-assemble into a bilayer — heads facing the extracellular fluid and cytosol, tails packed inward. The bilayer is the permeability barrier, and it's fluid: individual phospholipids drift sideways within their layer."},
+    cholesterol:{name:'Cholesterol',cls:'lip',
+      core:"A stiff little lipid wedged among the tails (in animal cells). It's a temperature buffer: when it's warm it keeps the membrane from getting too runny, and when it's cold it keeps the tails from packing tight and stiffening up.",
+      college:"A steroid tucked between phospholipid tails in animal membranes — a fluidity buffer. At higher temperatures it restrains phospholipid movement and lowers fluidity; at lower temperatures it hinders tight packing and keeps the membrane fluid."},
+    integral:{name:'Integral (transmembrane) protein',cls:'prot',
+      core:"A protein built right into the sheet, reaching all the way through from outside to inside. Most of the membrane's real work happens at proteins like this one.",
+      college:"An integral protein whose transmembrane stretch — often an alpha-helix of water-avoiding amino acids — spans the bilayer. Most transport, receptor and enzyme jobs are integral-protein jobs; the membrane is a mosaic of them set in the lipid."},
+    channel:{name:'Channel protein',cls:'prot',
+      core:"A protein with a tunnel through the middle. It lets one specific kind of thing slip through — but only downhill, from where there's a lot to where there's less. No energy needed.",
+      college:"Forms a hydrophilic pore that lets a specific solute cross by facilitated diffusion, down its gradient, no energy. Many are gated; aquaporins are water channels."},
+    carrier:{name:'Carrier protein',cls:'prot',
+      core:"A protein that grabs its cargo on one side, changes shape, and lets it go on the other side. Some carriers move things downhill for free; the pump version pushes uphill and costs energy.",
+      college:"Binds a specific solute and changes shape to release it across the membrane. Passive carriers do facilitated diffusion (down-gradient, no ATP); active carriers are pumps."},
+    pump:{name:'Pump protein',cls:'prot',
+      core:"A carrier that spends the cell's energy molecule, ATP, to move things the hard way — uphill, toward the side that's already crowded. This is how a cell keeps its inside different from its outside.",
+      college:"A pump uses energy — usually ATP — to move a solute against its gradient (primary active transport). The sodium-potassium pump exports 3 Na+ and imports 2 K+ per ATP, building the gradients behind the resting membrane potential."},
+    peripheral:{name:'Peripheral protein',cls:'prot',
+      core:"A protein resting on one face of the membrane instead of passing through it. It often sits on top of an embedded protein and helps with signals or with holding the cell's shape.",
+      college:"Not embedded in the bilayer; binds loosely to the surface or to integral proteins, usually on the cytoplasmic side, supporting signalling and the cytoskeleton."},
+    glycoprotein:{name:'Glycoprotein',cls:'carb',
+      core:"A protein wearing a short chain of sugars on the outside face. Those sugar chains are the cell's name tags — how one cell recognizes another.",
+      college:"A membrane protein with sugar chains attached on the extracellular face. With glycolipids these carbohydrates form the glycocalyx, which handles cell-to-cell recognition, adhesion and protection; the sugar patterns differ between cell types and people."},
+    glycolipid:{name:'Glycolipid',cls:'carb',
+      core:"A lipid wearing a sugar chain on the outside — another name tag on the cell's surface.",
+      college:"A membrane lipid carrying a carbohydrate chain on the extracellular face; part of the glycocalyx (for example, the ABO blood-group markers)."}
+  };
+  var ROLES={
+    lip:"The fabric — a double sheet of phospholipids that water can't cross, kept flexible by cholesterol.",
+    prot:"The machinery — channels, carriers, pumps, receptors and anchors. Most of what the membrane does, it does with proteins.",
+    carb:"The name tags — short sugar chains on the outside face (the glycocalyx) that let cells recognize each other."
+  };
+  var hero=$('#hero'), detail=$('#detail'), roleLine=$('#roleLine'), nucInset=$('#nucInset'), showAll=$('#showAll');
+  var svgParts=$$('.part',hero), pbtns=$$('.pbtn');
+  var selected=null, filter=null;
+
+  function selectPart(id){
+    selected=id;
+    svgParts.forEach(function(g){g.classList.toggle('sel',g.getAttribute('data-part')===id);});
+    pbtns.forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-part')===id));});
+    renderDetail();
+  }
+  function renderDetail(){
+    if(!selected){
+      detail.className='detail';
+      detail.innerHTML='<p class="hint">Tap a part of the membrane, or a name above, to see what it is and what it does.</p>';
+      return;
+    }
+    var p=PARTS[selected];
+    detail.className='detail '+p.cls;
+    detail.innerHTML='<h3>'+esc(p.name)+'</h3><span class="cchip">'+esc(CLS[p.cls])+'</span><p>'+esc(T(p))+'</p>';
+  }
+  svgParts.forEach(function(g){
+    var id=g.getAttribute('data-part');
+    g.addEventListener('click',function(){selectPart(id);});
+    g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '||ev.key==='Spacebar'){ev.preventDefault();selectPart(id);}});
+  });
+  pbtns.forEach(function(b){b.addEventListener('click',function(){selectPart(b.getAttribute('data-part'));});});
+
+  function applyFilter(){
+    hero.classList.remove('f-lip','f-prot','f-carb','f-nuc');
+    if(filter)hero.classList.add('f-'+filter);
+    $$('.chip').forEach(function(c){c.setAttribute('aria-pressed',String(c.getAttribute('data-cls')===filter));});
+    showAll.classList.toggle('hidden',!filter);
+    if(filter&&filter!=='nuc'){
+      roleLine.className='role '+filter;
+      roleLine.textContent=ROLES[filter];
+    } else {
+      roleLine.className='role hidden';
+      roleLine.textContent='';
+    }
+    nucInset.classList.toggle('hidden',filter!=='nuc');
+  }
+  $$('.chip').forEach(function(c){
+    c.addEventListener('click',function(){
+      var v=c.getAttribute('data-cls');
+      filter=(filter===v)?null:v;
+      applyFilter();
+    });
+  });
+  showAll.addEventListener('click',function(){filter=null;applyFilter();});
+
+  /* ---------------- section 2: transport ---------------- */
+  var CARGO=[
+    {label:'Oxygen / CO2',x:150,active:false,shape:'o2',
+     route:'straight through the oily middle — simple diffusion',dir:'downhill, toward the emptier side',energy:'none',type:'passive',
+     core:"Small and oily-friendly, so it slips straight through the tail layer on its own, no protein and no energy.",
+     college:"Small nonpolar molecules cross the bilayer directly by simple diffusion, down their gradient, no protein, no energy."},
+    {label:'Water',x:320,active:false,shape:'h2o',salt:true,
+     route:'slowly through the middle, or fast through a water channel — osmosis',dir:'downhill, toward the saltier side',energy:'none',type:'passive',
+     core:"Water leaks slowly through the oily middle and pours quickly through water channels. Either way it moves on its own toward the saltier side.",
+     college:"Water crosses slowly through the bilayer and quickly through aquaporins — osmosis, water diffusing down its own gradient toward higher solute, no energy."},
+    {label:'Glucose',x:495,active:false,shape:'glc',
+     route:'through a carrier protein — facilitated diffusion',dir:'downhill',energy:'none',type:'passive',
+     core:"Too big and too water-loving to cross the oily middle, so it rides a carrier that changes shape to pass it through — still downhill, still free. A protein helping does NOT make it cost energy.",
+     college:"A polar solute too large for simple diffusion; a carrier moves it by facilitated diffusion down its gradient, no ATP. Protein involvement alone does not make transport active."},
+    {label:'Sodium / potassium ions (against the gradient)',x:675,active:true,shape:'ion',
+     route:'through a pump — active transport',dir:'UPHILL, toward the already-crowded side',energy:'ATP',type:'active',
+     core:"Moving an ion toward the side that's already crowded is uphill work. A pump spends the cell's energy molecule, ATP, to force it. That is what active transport means.",
+     college:"Moving Na+ out (already high outside) and K+ in (already high inside) runs against both gradients; the sodium-potassium pump hydrolyses ATP to do it — primary active transport that maintains the cell's gradients."}
+  ];
+  var ROUTE_IDS=['r-lipid','r-aqp','r-car','r-pump'];
+  var tsvg=$('#tsvg'), tbil=$('#tbil'), tdots=$('#tdots'), pax=$('#pax'), tcap=$('#tcap');
+  var cargoBtns=$$('.cargo'), curCargo=null, sparkTimer=null;
+
+  // simplified bilayer, skipping the protein spans
+  (function buildStrip(){
+    var skip=[[276,364],[446,544],[626,724]];
+    for(var x=14;x<=790;x+=20){
+      var inSkip=skip.some(function(s){return x>s[0]&&x<s[1];});
+      if(inSkip)continue;
+      el('circle',{'class':'head',cx:x,cy:138,r:6},tbil);
+      el('rect',{'class':'tail',x:x-5,y:144,width:4,height:18,rx:2},tbil);
+      el('rect',{'class':'tail',x:x+1,y:144,width:4,height:18,rx:2},tbil);
+      el('circle',{'class':'head',cx:x,cy:192,r:6},tbil);
+      el('rect',{'class':'tail',x:x-5,y:168,width:4,height:18,rx:2},tbil);
+      el('rect',{'class':'tail',x:x+1,y:168,width:4,height:18,rx:2},tbil);
+    }
+  })();
+
+  function dotShape(shape,parent,x,y,small){
+    var s=small?0.55:1;
+    var g=el('g',{transform:'translate('+x+','+y+') scale('+s+')'},parent);
+    if(shape==='o2'){el('circle',{'class':'pax-o2',cx:-6,cy:0,r:7},g);el('circle',{'class':'pax-o2',cx:6,cy:0,r:7},g);}
+    else if(shape==='h2o'){el('path',{'class':'pax-h2o',d:'M0 -12 C6 -4 10 1 10 5 A10 10 0 1 1 -10 5 C-10 1 -6 -4 0 -12 Z'},g);}
+    else if(shape==='glc'){el('polygon',{'class':'pax-glc',points:'11,0 5.5,9.5 -5.5,9.5 -11,0 -5.5,-9.5 5.5,-9.5'},g);}
+    else {el('circle',{'class':'pax-ion',cx:0,cy:0,r:12},g);if(!small){var t=el('text',{'class':'pax-t',x:0,y:5},g);t.textContent='Na⁺';}}
+    return g;
+  }
+
+  function drawDots(c){
+    tdots.innerHTML='';
+    var r=rng(97+c.x);
+    // crowded outside (top), sparse inside (bottom) - same for every passenger
+    for(var i=0;i<30;i++){dotShape(c.shape,tdots,20+r()*760,46+r()*62,true);}
+    for(var j=0;j<4;j++){dotShape(c.shape,tdots,20+r()*760,262+r()*40,true);}
+    if(c.salt){ // why water heads inward: the inside is saltier
+      for(var k=0;k<18;k++){el('rect',{'class':'salt',x:20+r()*760,y:256+r()*46,width:7,height:7,rx:1.5},tdots);}
+    }
+  }
+
+  function runPassenger(c){
+    pax.innerHTML='';
+    dotShape(c.shape,pax,0,0,false);
+    var y0=c.active?282:58, y1=c.active?58:282;
+    pax.style.transition='none';
+    pax.style.transform='translate('+c.x+'px,'+y0+'px)';
+    void pax.getBoundingClientRect();
+    pax.style.transition='transform 2.4s cubic-bezier(.45,0,.3,1)';
+    pax.style.transform='translate('+c.x+'px,'+y1+'px)';
+    var pump=$('#r-pump');
+    pump.classList.remove('sparking');
+    if(sparkTimer)clearTimeout(sparkTimer);
+    if(c.active){
+      sparkTimer=setTimeout(function(){pump.classList.add('sparking');},reduced?0:700);
+    }
+  }
+
+  function renderCargo(animate){
+    ROUTE_IDS.forEach(function(id,i){$('#'+id).classList.toggle('on',curCargo===i);});
+    cargoBtns.forEach(function(b){b.setAttribute('aria-pressed',String(parseInt(b.getAttribute('data-cargo'),10)===curCargo));});
+    if(curCargo===null){
+      tcap.innerHTML='<p class="hint">Pick a passenger above. The badge answers the one question that matters: downhill for free, or uphill at a cost?</p>';
+      return;
+    }
+    var c=CARGO[curCargo];
+    var badge=c.active?'<span class="badge act">Active — uphill, costs ATP</span>':'<span class="badge pas">Passive — downhill, free</span>';
+    tcap.innerHTML=badge+
+      '<dl><dt>Passenger</dt><dd>'+esc(c.label)+'</dd>'+
+      '<dt>Route</dt><dd>'+esc(c.route)+'</dd>'+
+      '<dt>Direction</dt><dd>'+esc(c.dir)+'</dd>'+
+      '<dt>Energy</dt><dd>'+esc(c.energy)+'</dd>'+
+      '<dt>Type</dt><dd>'+esc(c.type)+'</dd></dl>'+
+      '<p>'+esc(T(c))+'</p>'+
+      '<button class="ghost" type="button" id="replay">Watch it again</button>';
+    $('#replay').addEventListener('click',function(){runPassenger(c);});
+    if(animate){drawDots(c);runPassenger(c);}
+  }
+  cargoBtns.forEach(function(b){
+    b.addEventListener('click',function(){curCargo=parseInt(b.getAttribute('data-cargo'),10);renderCargo(true);});
+  });
+
+  /* ---------------- section 3: tonicity ---------------- */
+  var TONE={
+    hypo:{label:'hypotonic',scale:1.28,out:5,
+      core:"Outside is more watery than inside, so water moves IN. An animal cell swells and can burst. (A plant cell just gets firm — its wall holds it.)",
+      college:"Lower solute outside than in: net water entry. An animal cell swells and may lyse; a walled plant cell becomes turgid."},
+    iso:{label:'isotonic',scale:1,out:16,
+      core:"Both sides are equally dissolved, so water moves both ways equally — no net change. The cell holds steady.",
+      college:"Equal solute concentrations: no net water movement; an animal cell keeps its normal volume."},
+    hyper:{label:'hypertonic',scale:0.8,out:36,
+      core:"Outside is saltier than inside, so water moves OUT and the cell shrivels.",
+      college:"Higher solute outside than in: net water loss. An animal cell shrivels; a plant cell's membrane pulls from the wall (plasmolysis)."}
+  };
+  var PLANT_NOTE="Plant cells, for contrast: the same three solutions leave a walled cell turgid (hypotonic), flaccid (isotonic) or plasmolysed (hypertonic). Turgid is the healthy state.";
+  var CX=300, CY=150;
+  var cellg=$('#cellg'), cellSmooth=$('#cellSmooth'), cellWavy=$('#cellWavy'), outDots=$('#outDots'), inDots=$('#inDots');
+  var arrIn=$('#arrIn'), arrOut=$('#arrOut'), arrEq=$('#arrEq'), oLabel=$('#oLabel'), ocap=$('#ocap');
+  var toneBtns=$$('.tone'), tone='iso';
+
+  // shriveled outline: a crenated circle
+  (function(){
+    var d='';
+    for(var i=0;i<=72;i++){
+      var th=i/72*Math.PI*2, rr=57+6*Math.cos(9*th);
+      d+=(i===0?'M':'L')+(CX+rr*Math.cos(th)).toFixed(1)+' '+(CY+rr*Math.sin(th)).toFixed(1);
+    }
+    cellWavy.setAttribute('d',d+'Z');
+  })();
+  // solute inside the cell: fixed, so its density changes as the cell changes size
+  (function(){
+    var r=rng(11);
+    for(var i=0;i<14;i++){
+      var a=r()*Math.PI*2, rad=Math.sqrt(r())*46;
+      el('circle',{'class':'dot',cx:(CX+rad*Math.cos(a)).toFixed(1),cy:(CY+rad*Math.sin(a)).toFixed(1),r:4},inDots);
+    }
+  })();
+  function arrow(parent,x1,y1,x2,y2){
+    var dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy),ux=dx/len,uy=dy/len;
+    el('line',{'class':'arw',x1:x1,y1:y1,x2:x2-ux*8,y2:y2-uy*8},parent);
+    var bx=x2-ux*12,by=y2-uy*12,px=-uy*7,py=ux*7;
+    el('polygon',{'class':'arw',points:x2+','+y2+' '+(bx+px)+','+(by+py)+' '+(bx-px)+','+(by-py)},parent);
+  }
+  (function(){
+    var angs=[0,Math.PI/2,Math.PI,3*Math.PI/2];
+    angs.forEach(function(a){
+      var c=Math.cos(a),s=Math.sin(a);
+      arrow(arrIn,CX+c*108,CY+s*108,CX+c*86,CY+s*86);      // water moving in (cell swollen to r~77)
+      arrow(arrOut,CX+c*58,CY+s*58,CX+c*92,CY+s*92);       // water moving out (cell shrunk to r~46)
+    });
+    // isotonic: equal traffic both ways, on the left and right
+    arrow(arrEq,CX-100,CY-12,CX-74,CY-12); arrow(arrEq,CX-74,CY+12,CX-100,CY+12);
+    arrow(arrEq,CX+100,CY-12,CX+74,CY-12); arrow(arrEq,CX+74,CY+12,CX+100,CY+12);
+  })();
+  function drawOutDots(n){
+    outDots.innerHTML='';
+    var r=rng(5+n), placed=0, guard=0;
+    while(placed<n&&guard<2000){
+      guard++;
+      var x=62+r()*476,y=48+r()*212;
+      var dx=x-CX,dy=y-CY;
+      if(dx*dx+dy*dy<118*118)continue;
+      el('circle',{'class':'dot',cx:x.toFixed(1),cy:y.toFixed(1),r:4},outDots);
+      placed++;
+    }
+  }
+  function renderTone(animate){
+    var t=TONE[tone];
+    toneBtns.forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-tone')===tone));});
+    cellg.style.transform='scale('+t.scale+')';
+    cellSmooth.style.opacity=(tone==='hyper')?0:1;
+    cellWavy.style.opacity=(tone==='hyper')?1:0;
+    arrIn.style.opacity=(tone==='hypo')?1:0;
+    arrOut.style.opacity=(tone==='hyper')?1:0;
+    arrEq.style.opacity=(tone==='iso')?1:0;
+    oLabel.textContent=t.label;
+    drawOutDots(t.out);
+    ocap.innerHTML='<p><b>'+esc(t.label.charAt(0).toUpperCase()+t.label.slice(1))+'.</b> '+esc(T(t))+'</p>'+
+      (LEVEL==='college'?'<p class="fine">'+esc(PLANT_NOTE)+'</p>':'');
+  }
+  toneBtns.forEach(function(b){b.addEventListener('click',function(){tone=b.getAttribute('data-tone');renderTone(true);});});
+
+  /* ---------------- section 5: quick check ---------------- */
+  var QUIZ=[
+    {stem:"The short sugar chains on the outside of the membrane — the glycocalyx — are themselves made of which macromolecule class?",
+     opts:["Lipid","Protein","Carbohydrate","Nucleic acid"],key:2,
+     why:"The sugar chains themselves are carbohydrate, even though each one is anchored to a protein (making a glycoprotein) or a lipid (a glycolipid). Those sugars are the cell's recognition tags. When you reach the immune system, this is how a cell gets read as 'self' or 'foreign.'",
+     look:'the glycoprotein and glycolipid in the diagram (try the Carbohydrate chip)',href:'#s1'},
+    {stem:"A pump moves an ion toward the side of the membrane where that ion is already crowded. The ion is moving:",
+     opts:["down its gradient, for free","against its gradient, using energy","by simple diffusion through the oily middle","it can't move that way at all"],key:1,
+     why:"Toward the crowded side is uphill, and uphill costs energy — the pump spends ATP to do it. That is exactly what makes it active transport instead of diffusion. It's how a cell holds its inside chemically different from its outside.",
+     look:'the pump in Getting across (pick the sodium / potassium passenger)',href:'#s2'},
+    {stem:"Glucose is too large and too water-loving to slip through the oily middle, so it crosses through a carrier protein, moving from where there's more to where there's less. This is:",
+     opts:["active transport, because a protein is involved","active transport, because glucose is large","facilitated diffusion — passive, no energy","osmosis"],key:2,
+     why:"A protein is helping — that's the 'facilitated' part — but glucose is still moving downhill, so no energy is spent; it's passive. Needing a protein does not make transport active; moving uphill does. Osmosis is the word saved for water.",
+     look:'glucose in Getting across',href:'#s2'},
+    {stem:"You drop an animal cell into a hypertonic solution — more dissolved solute outside the cell than inside. What happens?",
+     opts:["It swells as water moves in","It shrivels as water moves out","Nothing — water doesn't move","It bursts"],key:1,
+     why:"Water moves toward the side with more dissolved solute — here that's outside — so water leaves and the cell shrivels. Swelling and bursting are the opposite case, a hypotonic solution. 'Hyper' means more solute outside, so water heads out.",
+     look:'the hypertonic beaker in Water follows solute',href:'#s3'},
+    {stem:"Nucleic acids are not part of the finished membrane. So where do the membrane's proteins actually come from?",
+     opts:["Copied straight from DNA inside the membrane","Built by ribosomes on the rough ER and delivered by vesicles","They form on their own from the phospholipids","Absorbed from outside the cell"],key:1,
+     why:"A gene is copied into mRNA, ribosomes on the rough ER read it and thread the new protein into the ER membrane, and a vesicle carries it to the surface. DNA writes the protein, but the building happens away from the membrane. This same delivery route is how the sugar tags get added, in the ER and Golgi.",
+     look:'the Nucleic acid chip under The parts, by class',href:'#s1'}
+  ];
+  var quiz=$('#quiz'), result=$('#result'), answers;
+
+  function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+  function buildQuiz(){
+    answers=QUIZ.map(function(){return null;});
+    result.classList.add('hidden');result.innerHTML='';
+    quiz.innerHTML='';
+    QUIZ.forEach(function(q,qi){
+      var correctText=q.opts[q.key];
+      var card=document.createElement('div');card.className='q';
+      card.innerHTML='<p class="num">Item '+(qi+1)+' of '+QUIZ.length+'</p><p class="stem">'+esc(q.stem)+'</p>';
+      var list=document.createElement('div');list.setAttribute('role','group');list.setAttribute('aria-label','Item '+(qi+1)+' options');
+      shuffle(q.opts).forEach(function(text){
+        var b=document.createElement('button');b.type='button';b.className='opt';
+        b.innerHTML='<span>'+esc(text)+'</span>';
+        b.addEventListener('click',function(){
+          if(answers[qi]!==null)return;
+          var right=(text===correctText);
+          answers[qi]=right;
+          $$('.opt',list).forEach(function(o){
+            o.disabled=true;
+            var t=o.firstChild.textContent;
+            if(t===correctText){o.classList.add('correct');o.insertAdjacentHTML('beforeend','<span class="tag">correct</span>');}
+            else if(o===b){o.classList.add('miss');o.insertAdjacentHTML('beforeend','<span class="tag">your pick</span>');}
+          });
+          var why=document.createElement('div');why.className='why';
+          why.textContent=(right?'Yes. ':'Not this one. ')+q.why;
+          card.appendChild(why);
+          if(answers.every(function(a){return a!==null;}))showResult();
+        });
+        list.appendChild(b);
+      });
+      card.appendChild(list);
+      quiz.appendChild(card);
+    });
+  }
+  function showResult(){
+    var n=answers.filter(Boolean).length, total=QUIZ.length, html;
+    if(n===total){
+      html='<b>'+n+' of '+total+'.</b> Every item landed. For a second pass, flip the level switch at the top and read each part in the other voice — the same ideas, different words.';
+    } else {
+      var missed=[];
+      answers.forEach(function(a,i){if(!a)missed.push('<li>Item '+(i+1)+' &rarr; <a href="'+QUIZ[i].href+'">'+esc(QUIZ[i].look)+'</a></li>');});
+      html='<b>'+n+' of '+total+'.</b> '+(missed.length===1?'The one you missed lives in a single spot above; go back to it.':'Each one you missed lives in one spot above; go back to those first.')+'<ul>'+missed.join('')+'</ul>';
+    }
+    html+='<div><button class="ghost" type="button" id="again">Try the five again</button></div>';
+    result.innerHTML=html;
+    result.classList.remove('hidden');
+    $('#again').addEventListener('click',function(){buildQuiz();quiz.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});});
+  }
+  buildQuiz();
+
+  /* ---------------- init ---------------- */
+  setLevel(loadLevel(),false);
+  renderTone(false);
+})();
+</script>
+</body>
+</html>
