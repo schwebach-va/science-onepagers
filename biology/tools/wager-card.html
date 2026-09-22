@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wager Card | Science One-Pagers</title>
+<meta name="description" content="The team card for a Wager Round: pick an answer, bet 1, 2 or 3 on how sure you are, and hold it up. Works on iPads, no login.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/wager-card.html">
+<meta name="author" content="J. R. Schwebach">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#16232A">
+<style>
+:root{
+  --ground:#EDF1F0; --panel:#FFFFFF; --ink:#16232A; --muted:#52636B; --line:#CBD6D4;
+  --cA:#1F7A8C; --cB:#B85042; --cC:#C98A2E; --cD:#6B4E8C;
+  --onA:#fff; --onB:#fff; --onC:#1B1305; --onD:#fff;
+  --font:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root{ --ground:#0F171B; --panel:#172229; --ink:#E7EEF0; --muted:#9AAEB5; --line:#2A3A42; } }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--font);-webkit-text-size-adjust:100%;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-appearance:none;appearance:none}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.screen{min-height:100%;display:flex;flex-direction:column;gap:16px;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));max-width:900px;margin:0 auto}
+[hidden]{display:none!important}
+h1{margin:0;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;letter-spacing:-.01em}
+p{margin:0}
+.muted{color:var(--muted)}
+.teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.team{border:2px solid var(--line);background:var(--panel);border-radius:16px;padding:18px 14px;text-align:left;min-height:88px}
+.team b{display:block;font-size:1.3rem}
+.team span{color:var(--muted);font-size:1rem}
+.top{display:flex;align-items:center;gap:10px}
+.top .name{font-weight:800;font-size:1.25rem}
+.top .name small{font-weight:400;color:var(--muted);margin-left:6px}
+.top .sp{flex:1}
+.link{border:0;background:none;color:var(--muted);text-decoration:underline;padding:10px 4px;font-size:.95rem}
+.label{font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.letters{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;min-height:260px}
+.let{border-radius:20px;border:4px solid transparent;font-size:clamp(3.5rem,14vw,7rem);font-weight:800;display:grid;place-items:center;transition:transform .12s,opacity .12s}
+.let.A{background:var(--cA);color:var(--onA)}.let.B{background:var(--cB);color:var(--onB)}.let.C{background:var(--cC);color:var(--onC)}.let.D{background:var(--cD);color:var(--onD)}
+.letters.chosen .let{opacity:.35}
+.letters.chosen .let[aria-pressed="true"]{opacity:1;border-color:var(--ink);transform:scale(1.02)}
+.bets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bet{border:2px solid var(--line);background:var(--panel);border-radius:16px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bet b{font-size:2rem;line-height:1}
+.bet .dots{display:flex;gap:5px;height:12px}
+.bet .dots i{width:12px;height:12px;border-radius:50%;background:var(--ink);display:block}
+.bet small{color:var(--muted);font-size:.9rem}
+.bet[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.bet[aria-pressed="true"] .dots i{background:var(--panel)}
+.bet[aria-pressed="true"] small{color:var(--panel)}
+.lock{border:0;border-radius:16px;background:var(--ink);color:var(--panel);font-weight:800;font-size:1.4rem;padding:18px;min-height:64px}
+.lock[disabled]{opacity:.3;cursor:not-allowed}
+/* locked */
+#locked{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vh;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));text-align:center}
+#locked.A{background:var(--cA);color:var(--onA)}#locked.B{background:var(--cB);color:var(--onB)}#locked.C{background:var(--cC);color:var(--onC)}#locked.D{background:var(--cD);color:var(--onD)}
+#locked .tn{font-size:clamp(1.3rem,4vw,2.2rem);font-weight:800;opacity:.9}
+#locked .big{font-size:min(55vh,62vw);font-weight:800;line-height:.85}
+#locked .wager{display:flex;align-items:center;gap:14px;font-size:clamp(1.6rem,5vw,3rem);font-weight:800}
+#locked .wager i{width:.55em;height:.55em;border-radius:50%;background:currentColor;display:block}
+.hold{margin-top:2vh;position:relative;overflow:hidden;border:2px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:14px 26px;font-weight:700;font-size:1.05rem;opacity:.85}
+.hold span{position:relative}
+.hold .fill{position:absolute;inset:0 auto 0 0;width:0;background:currentColor;opacity:.25}
+@media (prefers-reduced-motion:reduce){.let{transition:none}}
+</style>
+</head>
+<body>
+
+<section class="screen" id="pick">
+  <div>
+    <h1>Wager card</h1>
+    <p class="muted" style="margin-top:6px">Pick your team. One iPad per team.</p>
+  </div>
+  <div class="teams" id="teams"></div>
+</section>
+
+<section class="screen" id="play" hidden>
+  <div class="top">
+    <span class="name" id="tname"></span>
+    <span class="sp"></span>
+    <button class="link" type="button" id="change">Change team</button>
+  </div>
+  <div class="label">Your answer</div>
+  <div class="letters" id="letters">
+    <button type="button" class="let A" data-c="A" aria-pressed="false">A</button>
+    <button type="button" class="let B" data-c="B" aria-pressed="false">B</button>
+    <button type="button" class="let C" data-c="C" aria-pressed="false">C</button>
+    <button type="button" class="let D" data-c="D" aria-pressed="false">D</button>
+  </div>
+  <div class="label">How sure is the team?</div>
+  <div class="bets" id="bets">
+    <button type="button" class="bet" data-w="1" aria-pressed="false"><span class="dots"><i></i></span><b>1</b><small>guess · +1 or 0</small></button>
+    <button type="button" class="bet" data-w="2" aria-pressed="false"><span class="dots"><i></i><i></i></span><b>2</b><small>fairly sure · +2 or −1</small></button>
+    <button type="button" class="bet" data-w="3" aria-pressed="false"><span class="dots"><i></i><i></i><i></i></span><b>3</b><small>certain · +3 or −2</small></button>
+  </div>
+  <button class="lock" type="button" id="lock" disabled>Lock it in</button>
+</section>
+
+<section id="locked" hidden aria-live="assertive">
+  <div class="tn" id="ltn"></div>
+  <div class="big" id="lbig"></div>
+  <div class="wager" id="lw"></div>
+  <button class="hold" type="button" id="hold"><span class="fill" id="hfill"></span><span>Hold to clear for the next question</span></button>
+</section>
+
+<script>
+(function(){
+  var TEAMS=[["Hydroxyl","–OH"],["Carbonyl","C=O"],["Carboxyl","–COOH"],["Amino","–NH₂"],["Sulfhydryl","–SH"],["Phosphate","–OPO₃²⁻"],["Methyl","–CH₃"],["Ketone","C–CO–C"]];
+  var st={team:null,c:null,w:0,locked:false};
+  try{var s=JSON.parse(localStorage.getItem("wager-card-v1"));if(s)st=s;}catch(e){}
+  function save(){try{localStorage.setItem("wager-card-v1",JSON.stringify(st));}catch(e){}}
+  var $=function(id){return document.getElementById(id);};
+  $("teams").innerHTML=TEAMS.map(function(t,k){return '<button type="button" class="team" data-k="'+k+'"><b>'+t[0]+'</b><span>'+t[1]+'</span></button>';}).join("");
+  function render(){
+    $("pick").hidden=st.team!==null;
+    $("play").hidden=st.team===null||st.locked;
+    $("locked").hidden=!st.locked;
+    if(st.team===null)return;
+    var t=TEAMS[st.team];
+    $("tname").innerHTML=t[0]+'<small>'+t[1]+'</small>';
+    [].forEach.call(document.querySelectorAll(".let"),function(b){b.setAttribute("aria-pressed",String(b.dataset.c===st.c));});
+    $("letters").classList.toggle("chosen",!!st.c);
+    [].forEach.call(document.querySelectorAll(".bet"),function(b){b.setAttribute("aria-pressed",String(+b.dataset.w===st.w));});
+    $("lock").disabled=!(st.c&&st.w);
+    $("lock").textContent=(st.c&&st.w)?("Lock in "+st.c+", bet "+st.w):(!st.c?"Pick an answer":"Pick a bet");
+    if(st.locked){
+      $("locked").className=st.c;
+      $("ltn").textContent=t[0];
+      $("lbig").textContent=st.c;
+      $("lw").innerHTML="Bet "+st.w+" "+new Array(st.w+1).join("<i></i>");
+    }
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    if(b.dataset.k!=null){st.team=+b.dataset.k;st.c=null;st.w=0;st.locked=false;}
+    else if(b.dataset.c){st.c=(st.c===b.dataset.c)?null:b.dataset.c;}
+    else if(b.dataset.w){st.w=(st.w===+b.dataset.w)?0:+b.dataset.w;}
+    else if(b.id==="lock"&&st.c&&st.w){st.locked=true;}
+    else if(b.id==="change"){st.team=null;}
+    else return;
+    save();render();
+  });
+  var timer=null,t0=0,HOLD=800;
+  function start(e){e.preventDefault();t0=Date.now();clearInterval(timer);timer=setInterval(function(){var p=Math.min(1,(Date.now()-t0)/HOLD);$("hfill").style.width=(p*100)+"%";if(p>=1){stop();st.locked=false;st.c=null;st.w=0;save();render();}},30);}
+  function stop(){clearInterval(timer);timer=null;$("hfill").style.width="0";}
+  var h=$("hold");
+  h.addEventListener("pointerdown",start);
+  ["pointerup","pointerleave","pointercancel"].forEach(function(ev){h.addEventListener(ev,stop);});
+  h.addEventListener("contextmenu",function(e){e.preventDefault();});
+  h.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){st.locked=false;st.c=null;st.w=0;save();render();}});
+  render();
+})();
+</script>
+</body>
+</html>
