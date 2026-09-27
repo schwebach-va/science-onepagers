@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom CER Readings with ChatGPT: The Prompts, the Checks, and a Tested Example | Science One-Pagers</title>
+<meta name="description" content="Copy-ready ChatGPT prompts for building a one-page science reading with a CER task, the four checks students run on any AI-written text, and what happened when the prompt was tested on a PWCS account.">
+<link rel="canonical" href="https://scienceonepagers.org/teaching/custom-cer-readings-chatgpt.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Custom CER Readings with ChatGPT: The Prompts, the Checks, and a Tested Example">
+<meta property="og:description" content="Copy-ready ChatGPT prompts for building a one-page science reading with a CER task, and the four checks students run on any AI-written text.">
+<meta property="og:url" content="https://scienceonepagers.org/teaching/custom-cer-readings-chatgpt.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Custom CER Readings with ChatGPT: The Prompts, the Checks, and a Tested Example","description":"Copy-ready ChatGPT prompts for building a one-page science reading with a CER task, the four checks students run on any AI-written text, and what happened when the prompt was tested.","url":"https://scienceonepagers.org/teaching/custom-cer-readings-chatgpt.html","inLanguage":"en","learningResourceType":"Teacher guide","educationalLevel":"High school","audience":[{"@type":"EducationalAudience","educationalRole":"teacher"}],"isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-nc/4.0/","author":{"@type":"Person","name":"J. R. Schwebach"},"publisher":{"@type":"Organization","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"isPartOf":{"@type":"CollectionPage","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"about":{"@type":"Thing","name":"Science teaching"}}</script>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .prompt-box { position: relative; }
+  .prompt-box p { white-space: pre-wrap; }
+  .copy-btn {
+    position: absolute; top: 0.6rem; right: 0.75rem;
+    font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.75rem; font-weight: 700;
+    color: #3a5a8c; background: white; border: 1px solid #c7d2e0; border-radius: 6px;
+    padding: 0.3rem 0.7rem; cursor: pointer;
+  }
+  .copy-btn:hover { background: #eef2f8; }
+  .check-word { font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 700; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+<h1><a href="../index.html">Science One-Pagers</a></h1>
+<p>A working folder for teachers, students, parents, and anyone putting evidence to use.</p>
+</header>
+
+<nav class="site-nav">
+<a href="../book.html">The Book</a>
+<a href="../index.html#evidence">Evidence</a>
+<a href="../index.html#biology">Biology</a>
+<a href="../index.html#chemistry">Chemistry</a>
+<a href="../index.html#teaching">Teaching</a>
+<a href="../index.html#careers">Careers</a>
+<a class="nav-search" href="../search.html" aria-label="Search the site" title="Search the site"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><line x1="15.4" y1="15.4" x2="21" y2="21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span class="nav-search-label">Search</span></a>
+</nav>
+
+<article class="onepager">
+  <a class="back-link" href="index.html">&larr; Back to Teaching</a>
+  <div class="eyebrow">Teaching &middot; AI in the Science Classroom &middot; Prompts to Copy</div>
+  <h1>Custom CER Readings with ChatGPT: The Prompts, the Checks, and a Tested Example</h1>
+
+  <p>
+    A one-page reading built on a local phenomenon, with a claim-evidence-reasoning
+    task at the end, takes an evening to write by hand. With ChatGPT it takes about
+    twenty minutes, provided the teacher sets the rules before the AI writes a word.
+    The prompts below were built for high school science teachers in Prince William
+    County working on the division ChatGPT account, and they work for Biology,
+    Chemistry, Earth Science and AP courses alike. The workflow is four moves:
+    generate the reading, check it, copy the checked text into a Word file, and put
+    the file where students get their work.
+  </p>
+
+  <h2>Start with one short prompt</h2>
+
+  <p>
+    Fill the three brackets and send it. The last sentence matters most: it makes
+    ChatGPT ask you which words your students already know and which units they have
+    not reached, so the reading is built for your class instead of an imagined one.
+  </p>
+
+  <div class="prompt-box">
+    <span class="prompt-label">Starter prompt</span>
+    <button class="copy-btn" type="button">Copy</button>
+    <p>Help me, a high school [COURSE] teacher in Prince William County, Virginia, write a one-page student reading with a claim-evidence-reasoning task. Learning target: [TARGET]. Phenomenon: [A SPECIFIC PLACE, PERSON, OR MEASURED VALUE NEAR HERE]. Before you write, ask me what vocabulary my students have met and what they have not studied yet.</p>
+  </div>
+
+  <h2>The full scaffold</h2>
+
+  <p>
+    This version does the whole job in one message. Replace every bracket, including
+    the brackets inside the rules, before you send it. The vocabulary list is the
+    single most important blank: paste in every term your students have met this
+    year, unit by unit.
+  </p>
+
+  <div class="prompt-box">
+    <span class="prompt-label">Full scaffold</span>
+    <button class="copy-btn" type="button">Copy</button>
+    <p>You are helping a high school [COURSE] teacher in Prince William County Schools, Virginia build a one-page student reading with a claim, evidence, and reasoning task attached.
+
+LEARNING TARGET: [CODE AND WORDING]
+STANDARD: [SOL CODE, OR AP COURSE FRAMEWORK OBJECTIVE]
+PHENOMENON: [ONE SPECIFIC PLACE, PERSON, OR MEASURED VALUE NEAR HERE]
+VOCABULARY STUDENTS HAVE MET: [LIST, UNIT BY UNIT]
+NOT YET STUDIED: [LATER UNITS AND TOPICS, BY NAME]
+THE TRAP IN THIS TOPIC: [THE IDEA STUDENTS MOST OFTEN CONFUSE]
+
+HARD RULES
+1. Use no scientific term outside the vocabulary list unless you define it in plain words in the same sentence.
+2. Do not depend on anything under NOT YET STUDIED. Where it is needed, describe it in plain words without naming it.
+3. Define each key idea once and use it the same way every time. Watch THE TRAP.
+4. Every real-world claim must be checkable. Under a heading SOURCES TO VERIFY, list each claim and the specific source to check it against. Do not invent citations, page numbers, or numbers.
+5. Include at least three real quantities with units, each listed under SOURCES TO VERIFY. If you are unsure of a number, put it under UNCERTAIN instead of in the reading.
+6. Put anything you are unsure about under a heading called UNCERTAIN.
+
+WHAT TO PRODUCE
+Title: concrete and specific, not a question.
+Opening of 100 to 150 words: the first sentence names a place, a person, or a number.
+Three body sections of 120 to 150 words each, with plain headings that teach rather than tease.
+Key vocabulary: four terms from the list, one sentence each.
+One CER task: a claim prompt the student answers, told to cite at least two pieces of evidence from the reading and explain the reasoning. Put the STANDARD code after the task.
+Total 600 to 750 words, written for [GRADE OR COURSE LEVEL].
+
+Write the reading.</p>
+  </div>
+
+  <p>
+    If your account lets you choose, use a reasoning model rather than the fast
+    default. In testing, the fast model produced flatter writing and the one real
+    science error described below.
+  </p>
+
+  <h2>Follow-up prompts that fix the usual problems</h2>
+
+  <p>Send these in the same chat, after the first draft comes back.</p>
+
+  <div class="prompt-box">
+    <span class="prompt-label">Find words your students have not met</span>
+    <button class="copy-btn" type="button">Copy</button>
+    <p>List every scientific term you used that is not on my vocabulary list, and rewrite each sentence that uses one.</p>
+  </div>
+
+  <div class="prompt-box">
+    <span class="prompt-label">Catch a definition that shifts</span>
+    <button class="copy-btn" type="button">Copy</button>
+    <p>Quote every sentence where you define or explain [KEY IDEA]. Do they all mean the same thing? If not, fix the reading so they do.</p>
+  </div>
+
+  <div class="prompt-box">
+    <span class="prompt-label">Replace a flat opening</span>
+    <button class="copy-btn" type="button">Copy</button>
+    <p>Rewrite the opening so the first sentence names a specific place, a person, or a number. Keep everything else the same.</p>
+  </div>
+
+  <div class="prompt-box">
+    <span class="prompt-label">Support students learning English</span>
+    <button class="copy-btn" type="button">Copy</button>
+    <p>Keep every fact, number, and vocabulary term the same, and rewrite this reading in shorter sentences for students who are still learning English.</p>
+  </div>
+
+  <h2>What happened when the prompt was tested</h2>
+
+  <div class="case-box">
+    <h3><span class="case-label">Tested September 13, 2026</span>Road salt and cell transport</h3>
+    <p>
+      The first version of the scaffold was run on the PWCS division account, using
+      the default fast model, against Biology LT 2.5 Cell Transport with road salt on
+      Northern Virginia roads as the phenomenon.
+    </p>
+    <p>
+      <strong>What held.</strong> Every scientific term came from the vocabulary list.
+      Asked not to name ATP, it wrote "energy" instead. The sources it listed to verify
+      were real and specific (VDOT, USGS, the Federal Highway Administration, Virginia
+      Cooperative Extension, the EPA), with no invented citations, and it volunteered
+      an honest UNCERTAIN note.
+    </p>
+    <p>
+      <strong>What broke.</strong> Diffusion was defined as movement "from an area of
+      higher concentration to an area of lower concentration." A few lines later,
+      water moved "from where there is more water to where there is less available
+      water." Each sentence can be defended alone; together they point a careful
+      student in opposite directions. The draft also opened on a general statement
+      rather than a place, and it contained no numbers at all.
+    </p>
+    <p>
+      Those findings became the extra rules in the full scaffold: one consistent
+      definition and a named trap, three real quantities with units, an opening that
+      names something specific, word budgets for each section, and the standard's code
+      on the task.
+    </p>
+  </div>
+
+  <h2>Filling the blanks in other courses</h2>
+
+  <p>
+    Only the biology row was tested. The others are starting points showing how the
+    same blanks fill in other courses.
+  </p>
+
+  <div class="table-scroll">
+  <table class="modular-index">
+    <thead>
+      <tr><th>Course</th><th>Phenomenon</th><th>The trap</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Biology &middot; cell transport</td><td>Road salt on Northern Virginia roads, roadside plants, and the streams it drains into</td><td>Concentration of dissolved material versus concentration of water</td></tr>
+      <tr><td>Chemistry &middot; gas laws</td><td>The tire-pressure light on a cold October morning</td><td>Temperature in degrees Celsius versus kelvins</td></tr>
+      <tr><td>AP Biology &middot; evolution</td><td>Who can still digest milk as an adult, and why</td><td>Individuals adapting versus populations changing</td></tr>
+      <tr><td>AP Chemistry &middot; acids and bases</td><td>Changing water chemistry at Chesapeake Bay oyster reefs</td><td>A strong acid versus a concentrated one</td></tr>
+      <tr><td>Earth Science &middot; water</td><td>The Occoquan Reservoir after a heavy rain</td><td>Dissolved material versus suspended sediment</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>The four checks, for you and your students</h2>
+
+  <p>
+    AI writes with the same smooth confidence whether it is right or wrong, so every
+    draft gets checked before it reaches a student. Students run the same four checks
+    on any AI-written science text, which puts the judgment in their hands.
+  </p>
+
+  <div class="protocol-box">
+    <ol>
+      <li><span class="check-word">TRACE.</span> Underline every claim about the real world. Find it under Sources to Verify, open one source, and confirm it says the same thing.</li>
+      <li><span class="check-word">FLAG.</span> Circle every science word students have not learned. If the sentence does not explain it, flag it.</li>
+      <li><span class="check-word">COUNT.</span> Box every number. Each needs a unit, and a good reading gives at least three. A reading with no numbers gives students no evidence to cite.</li>
+      <li><span class="check-word">MATCH.</span> Find the key idea and highlight every place it is explained. Every explanation should mean the same thing.</li>
+    </ol>
+  </div>
+
+  <h2>Getting the reading onto the student iPad</h2>
+
+  <ul>
+    <li>Copy the checked text into a Word file. Students type their CER straight into it on the iPad, and it saves as they go.</li>
+    <li>Post the file where students get their work, and have them upload the finished file.</li>
+    <li>Keep PDFs out of anything students type into.</li>
+    <li>Canvas Student Annotation seals each attempt, so a student cannot pick the work back up at home.</li>
+    <li>Word on the iPad cannot insert a chart. If the task needs a graph, give students the graph.</li>
+    <li>Several students can work in one shared Word file, which opens up tasks built on class data.</li>
+  </ul>
+
+  <p class="sources">
+    Written for "From Learning Target to iPad: Creating Custom CER Readings with AI,"
+    a session by Reid Schwebach and Katie Novinger at the PWCS October ACT Conference,
+    October 12, 2026, Hylton High School. Test run: ChatGPT (GPT-5.5 Instant) on the
+    PWCS education account, September 13, 2026; quotations are from that draft. Finished
+    CER readings to use as models are in the Biology section of this site.
+  </p>
+</article>
+
+<footer class="site-footer">
+  Written and maintained by Mr. Schwebach
+  <span class="license">All one-pagers &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a> &mdash; free to use, adapt, and hand to a class; not for resale.</span>
+</footer>
+
+<script>
+document.querySelectorAll('.prompt-box .copy-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var text = btn.parentElement.querySelector('p').innerText;
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 1600);
+    });
+  });
+});
+</script>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82bc6616569842b9ab63b89bf80ed3c5"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
