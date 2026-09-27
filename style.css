@@ -667,6 +667,16 @@ ul.topic-list.unnumbered li { padding-left: 0.4rem; }
 .subject-block.teaching .idnum { color: var(--teach); background: rgba(90,63,127,0.09); }
 .subject-block.careers .idnum { color: var(--careers); background: rgba(22,50,79,0.09); }
 
+/* Second-level hub links (DE Bio, CER, Tree, Tools) point to a whole
+   sub-page, not a single one-pager -- their badge reads at a second,
+   larger size so they stand out from the numbered articles around them. */
+.cer-hub-link .idnum {
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  padding: 0.16rem 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
 /* The welcome line. This is the first sentence a teacher reads, so it is not
    set in the small muted style the rest of the front matter uses. */
 .book-nod {

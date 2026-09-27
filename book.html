@@ -62,8 +62,48 @@
 .book-page table.corrections th:first-child,
 .book-page table.corrections td:first-child { width: 8.5rem; white-space: nowrap; }
 .book-page table.corrections td.empty { color: var(--muted); font-style: italic; }
-.book-page .book-audience { margin: 1.1rem 0; }
-.book-page .book-audience p { margin: 0 0 0.45rem 0; }
+.book-page .book-audience {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem 1.5rem;
+  margin: 1.3rem 0;
+}
+.book-page .book-audience p { margin: 0; }
+@media (max-width: 640px) {
+  .book-page .book-audience { grid-template-columns: 1fr; }
+}
+.book-page .card-questions.questions-detailed {
+  padding: 1.3rem 1.6rem;
+}
+.book-page .card-questions.questions-detailed li {
+  list-style: none;
+  margin: 0 0 1.3rem 0;
+}
+.book-page .card-questions.questions-detailed li:last-child { margin-bottom: 0; }
+.book-page .card-questions.questions-detailed .q {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+}
+.book-page .card-questions.questions-detailed .q-tool {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #9fd3d2;
+  margin: 0 0 0.5rem 0;
+}
+.book-page .card-questions.questions-detailed .q-ch { text-transform: none; font-weight: 400; opacity: 0.8; }
+.book-page .card-questions.questions-detailed .q-detail {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.88);
+  margin: 0;
+}
+.book-page .card-questions.questions-detailed .q-detail a { color: #9fd3d2; }
 </style>
 </head>
 <body>
@@ -98,16 +138,27 @@
   <p>
     That way of reasoning is <strong>everyday scientific thinking</strong>. A farmer reads a field
     before cutting hay. A mechanic listens to an engine before pulling it apart. A parent watches a
-    fever through the night and weighs when to call the doctor. Each works from evidence &#x2014; and
-    science is that same habit, written down in public.
+    fever through the night and weighs when to call the doctor. None of them started out expert.
+    The farmer misjudged a field before he learned to read one; the mechanic once tore into an
+    engine that didn&#x2019;t need it. What turns the practice into expertise is the same thing every
+    time: get it wrong, notice what the evidence actually said, and carry that forward to the next
+    field, the next engine, the next fever.
+  </p>
+
+  <p>
+    That practice is what science runs through a parallel loop &#x2014; propose, test, get corrected,
+    go again in a putative best direction. Both keep records. Both belong to a community that hands
+    it down, farmer to farmer, lab to lab. What science adds is a stranger&#x2019;s check: someone with
+    no stake in your harvest has to be able to pick your evidence apart before anyone trusts it. You
+    already have a version of that practice running. This book means to draw the capacity out of
+    you, not hand you its conclusions.
   </p>
 
   <div class="book-audience">
-    <p>For parents &#x2014; because a kid&#x2019;s first science teacher is the parent or guardian who takes a &#x201C;why&#x201D; seriously.</p>
-    <p>For readers who want to think more clearly.</p>
-    <p>For the reader who&#x2019;s been told not to trust any of it and has good reason to wonder &#x2014; who wants to know whether what they&#x2019;re sure of is something they checked or something they were handed.</p>
-    <p>For teachers who want science taught as a process, not a syllabus.</p>
-    <p>For policymakers, school boards, and anyone who has to act on evidence they can&#x2019;t verify themselves.</p>
+    <p><strong>Parents.</strong> A kid&#x2019;s first science teacher is the parent or guardian who takes a &#x201C;why&#x201D; seriously.</p>
+    <p><strong>Readers.</strong> Anyone who wants to think more clearly &#x2014; especially the reader who&#x2019;s been told not to trust any of it and has good reason to wonder, who wants to know whether what they&#x2019;re sure of is something they checked or something they were handed.</p>
+    <p><strong>Teachers.</strong> Science taught as a process, not a syllabus.</p>
+    <p><strong>Policymakers &amp; school boards.</strong> Anyone who has to act on evidence they can&#x2019;t verify themselves.</p>
   </div>
 
   <p>
@@ -119,66 +170,149 @@
     page as they are settled.</p>
   </div>
 
-  <p>
-    I grew up on my family&#x2019;s farm in the Estancia Valley of New Mexico. I earned a PhD in
-    microbiology and immunology studying tuberculosis, taught science in New York City public
-    schools, worked in federal science policy at the National Research Council, AAAS, and the
-    National Science Foundation, and served on the biology faculty at George Mason University.
-    For the last eight years I have taught biology and chemistry at Battlefield High School in
-    Virginia. I wrote the book from that classroom, because it is where the rest of that career
-    finally came together.
-  </p>
-
   <h2>Four questions to carry with you</h2>
 
   <p>
-    If you came here from a card, these are the four questions on its blue side. The book hands
-    them over at the end, sorted by the situation you are in, and each one is shown at work in its
-    home chapter before it gets a name.
+    These four questions are the spine of the book: every chapter works toward one of them before
+    naming it, and the last chapter hands all four back to you, sorted by the situation you are in.
+    If a card brought you to this page, you have already met them &#x2014; they are the blue side.
+    Nothing here is claimed as final. A method that tells you to keep testing your own conclusions
+    should be willing to test its own; these four questions are where the process has landed so
+    far, not where it has to stop.
   </p>
 
-  <ul class="card-questions">
-    <li>What are you seeing that hasn&#x2019;t been explained yet?</li>
-    <li>What is the claim, what is the evidence, and how do they connect?</li>
-    <li>Does the person making the claim welcome the test?</li>
-    <li>Which real option in front of you is better?</li>
+  <ul class="card-questions questions-detailed">
+    <li>
+      <p class="q">What are you seeing that hasn&#x2019;t been explained yet?</p>
+      <p class="q-tool">The hypothesis space <span class="q-ch">&#xB7; Ch. 6</span></p>
+      <p class="q-detail">For finding a question worth asking, one that belongs to you and not to
+        the textbook. The noticing comes in two kinds: the small irritation you can&#x2019;t account
+        for, and the new pattern that shows up with nothing wrong at all. Chapter 6 adds a second
+        half, <em>what if it&#x2019;s real?</em>, and that half commits you to testing what you
+        noticed. <a href="careers/finding-your-big-idea.html">Read the companion piece &#x2192;</a></p>
+    </li>
+    <li>
+      <p class="q">What is the claim, what is the evidence, and how do they connect?</p>
+      <p class="q-tool">Claim, Evidence, Reasoning <span class="q-ch">&#xB7; Ch. 16</span></p>
+      <p class="q-detail">For a claim whose evidence is within your reach. Asking how they connect
+        makes you lay the reasoning out, where a yes-or-no check would let you skip it. Two more
+        questions keep the answer fair: what would change my mind, and who benefits from my
+        believing this? <a href="teaching/cer-pragmatically-advanced-courses.html">Read the companion piece &#x2192;</a></p>
+    </li>
+    <li>
+      <p class="q">Does the person making the claim welcome the test?</p>
+      <p class="q-tool">The Welcome Test <span class="q-ch">&#xB7; Ch. 12</span></p>
+      <p class="q-detail">For a claim you can&#x2019;t check yourself, which covers most claims that
+        matter. You are judging how someone behaves when their work gets checked, and you can
+        answer that without rerunning anyone&#x2019;s experiment.
+        <a href="teaching/welcome-test-in-practice.html">Read the companion piece &#x2192;</a></p>
+    </li>
+    <li>
+      <p class="q">Which real option in front of you is better?</p>
+      <p class="q-tool">The Reaching Standard <span class="q-ch">&#xB7; Ch. 13</span></p>
+      <p class="q-detail">For when the checking runs out before the decision does. Rank the options
+        you have, act on the better one, and keep the ideal out ahead as the direction you are
+        moving. <a href="careers/what-makes-science-good.html">Read the companion piece &#x2192;</a></p>
+    </li>
   </ul>
 
-  <ul class="framework-list">
-    <li><strong>The hypothesis space</strong> <em>(Ch. 6)</em>, for finding a question worth
-      asking, one that belongs to you and not to the textbook. <em>What are you seeing that
-      hasn&#x2019;t been explained yet?</em> The noticing comes in two kinds: the small irritation you
-      can&#x2019;t account for, and the new pattern that shows up with nothing wrong at all. Chapter 6
-      adds a second half, <em>what if it&#x2019;s real?</em>, and that half commits you to testing what
-      you noticed.
-      <a href="careers/finding-your-big-idea.html">Read the companion piece &#x2192;</a></li>
-    <li><strong>Claim, Evidence, Reasoning</strong> <em>(Ch. 16)</em>, for a claim whose evidence
-      is within your reach. <em>What is the claim, what is the evidence, and how do they
-      connect?</em> Asking how they connect makes you lay the reasoning out, where a yes-or-no
-      check would let you skip it. Two more questions keep the answer fair: what would change my
-      mind, and who benefits from my believing this?
-      <a href="teaching/cer-pragmatically-advanced-courses.html">Read the companion piece &#x2192;</a></li>
-    <li><strong>The Welcome Test</strong> <em>(Ch. 12)</em>, for a claim you can&#x2019;t check yourself,
-      which covers most claims that matter. <em>Does the person making the claim welcome the
-      test?</em> You are judging how someone behaves when their work gets checked, and you can
-      answer that without rerunning anyone&#x2019;s experiment.
-      <a href="teaching/welcome-test-in-practice.html">Read the companion piece &#x2192;</a></li>
-    <li><strong>The Reaching Standard</strong> <em>(Ch. 13)</em>, for when the checking runs out
-      before the decision does. <em>Which real option in front of you is better?</em> Rank the
-      options you have, act on the better one, and keep the ideal out ahead as the direction you
-      are moving.
-      <a href="careers/what-makes-science-good.html">Read the companion piece &#x2192;</a></li>
-  </ul>
-
-  <p class="book-quote">
-    Two tools for claims you can check. One for claimants you can&#x2019;t. One for acting anyway.
-  </p>
-
-  <p>
-    All four fit on one sheet,
-    <a href="teaching/four-tools-method-at-a-glance.html">Teaching #13, &#x201C;The Four Tools &#x2014; the
-    Method at a Glance,&#x201D;</a> made to hand to a class or leave on a kitchen table.
-  </p>
+  <!-- PLACEHOLDER DIAGRAM: mirrors teaching/four-tools-method-at-a-glance.html; keep both in sync (task item 77) -->
+<figure class="onepager-figure">
+    <svg width="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 1474" font-family="Georgia, 'Times New Roman', 'DejaVu Serif', serif">
+  <rect width="940" height="1474" fill="#ffffff"></rect>
+  <text x="470" y="66" font-size="33" text-anchor="middle" font-weight="bold" fill="#1a1a1a">The Four Tools</text>
+  <text x="470" y="92" font-size="18.5" text-anchor="middle" font-style="italic" fill="#5a5347">How the tools of Everybody’s Science divide the work · the situation comes first, the tool second</text>
+  <text x="470" y="113" font-size="17" text-anchor="middle" font-style="italic" fill="#8a8378">a one-pager for teachers, and for anyone deciding what to believe</text>
+  <rect x="190" y="122" width="560" height="62" rx="8" fill="#fdfaf2" stroke="#1a1a1a" stroke-width="2.2"></rect>
+  <text x="470" y="149" font-size="19" text-anchor="middle" font-weight="bold" fill="#1a1a1a">A question forming — or a claim in front of you.</text>
+  <text x="470" y="172" font-size="17.5" text-anchor="middle" font-style="italic" fill="#6b5b3e">Start from where you're actually standing:</text>
+  <line x1="470" y1="184" x2="470" y2="206" stroke="#8a7a4a" stroke-width="1.8"></line>
+  <path d="M470 212 l-5 -10 h10 z" fill="#8a7a4a"></path>
+  <text x="127.0" y="220" font-size="16" text-anchor="middle" letter-spacing="2.2" fill="#6b5b3e">THE SITUATION</text>
+  <text x="605.0" y="220" font-size="16" text-anchor="middle" letter-spacing="2.2" fill="#6b5b3e">THE TOOL</text>
+  <rect x="20" y="283" width="214" height="136" rx="9" fill="#ffffff" stroke="#8a7a4a" stroke-width="1.6"></rect>
+  <text x="127.0" y="320.0" font-size="19" text-anchor="middle" fill="#2a2a2a">You need a</text>
+  <text x="127.0" y="345.0" font-size="19" text-anchor="middle" fill="#2a2a2a">question worth</text>
+  <text x="127.0" y="370.0" font-size="19" text-anchor="middle" fill="#2a2a2a">asking — yours,</text>
+  <text x="127.0" y="395.0" font-size="19" text-anchor="middle" fill="#2a2a2a">not the textbook's.</text>
+  <line x1="242" y1="351" x2="270" y2="351" stroke="#8a7a4a" stroke-width="1.8"></line>
+  <path d="M278 351 l-9 -5 v10 z" fill="#8a7a4a"></path>
+  <rect x="292" y="234" width="626" height="234" rx="9" fill="#fdfaf2" stroke="#1a1a1a" stroke-width="2.2"></rect>
+  <text x="605.0" y="266" font-size="22" text-anchor="middle" font-weight="bold" fill="#1a1a1a">THE HYPOTHESIS SPACE</text>
+  <text x="605.0" y="289" font-size="16.5" text-anchor="middle" letter-spacing="1.6" fill="#6b5b3e">CHAPTER 6</text>
+  <text x="605.0" y="309" font-size="18" text-anchor="middle" font-style="italic" fill="#7c3128">“What isn't sitting right — and what if the anomaly isn't a</text>
+  <text x="605.0" y="331" font-size="18" text-anchor="middle" font-style="italic" fill="#7c3128">mistake?”</text>
+  <text x="605.0" y="359" font-size="18.5" text-anchor="middle" fill="#2a2a2a">The territory of questions a field could still ask, visible only</text>
+  <text x="605.0" y="382" font-size="18.5" text-anchor="middle" fill="#2a2a2a">once you know where the known answers stop. A course hands</text>
+  <text x="605.0" y="405" font-size="18.5" text-anchor="middle" fill="#2a2a2a">you the mapped part. Your question lives past the edge of it.</text>
+  <text x="605.0" y="432" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">In practice: keep an idea journal · collide two fields on purpose · say</text>
+  <text x="605.0" y="451" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">the half-formed idea out loud</text>
+  <rect x="20" y="539" width="214" height="136" rx="9" fill="#ffffff" stroke="#8a7a4a" stroke-width="1.6"></rect>
+  <text x="127.0" y="576.1666666666666" font-size="19" text-anchor="middle" fill="#2a2a2a">You've met a</text>
+  <text x="127.0" y="601.1666666666666" font-size="19" text-anchor="middle" fill="#2a2a2a">claim, and the</text>
+  <text x="127.0" y="626.1666666666666" font-size="19" text-anchor="middle" fill="#2a2a2a">evidence is within</text>
+  <text x="127.0" y="651.1666666666666" font-size="19" text-anchor="middle" fill="#2a2a2a">your reach.</text>
+  <line x1="242" y1="607" x2="270" y2="607" stroke="#8a7a4a" stroke-width="1.8"></line>
+  <path d="M278 607 l-9 -5 v10 z" fill="#8a7a4a"></path>
+  <rect x="292" y="478.66666666666663" width="626" height="257" rx="9" fill="#fdfaf2" stroke="#1a1a1a" stroke-width="2.2"></rect>
+  <text x="605.0" y="510.66666666666663" font-size="22" text-anchor="middle" font-weight="bold" fill="#1a1a1a">CLAIM–EVIDENCE–REASONING</text>
+  <text x="605.0" y="533.6666666666666" font-size="16.5" text-anchor="middle" letter-spacing="1.6" fill="#6b5b3e">CHAPTER 16</text>
+  <text x="605.0" y="553.6666666666666" font-size="18" text-anchor="middle" font-style="italic" fill="#7c3128">“What is the claim? What is the evidence? Does the reasoning</text>
+  <text x="605.0" y="575.6666666666666" font-size="18" text-anchor="middle" font-style="italic" fill="#7c3128">connect them?”</text>
+  <text x="605.0" y="603.6666666666666" font-size="18.5" text-anchor="middle" fill="#2a2a2a">Then the two questions that keep you honest: what would</text>
+  <text x="605.0" y="626.6666666666666" font-size="18.5" text-anchor="middle" fill="#2a2a2a">change my mind — and who benefits from my believing this? If</text>
+  <text x="605.0" y="649.6666666666666" font-size="18.5" text-anchor="middle" fill="#2a2a2a">nothing would change your mind, that isn't science; it's</text>
+  <text x="605.0" y="672.6666666666666" font-size="18.5" text-anchor="middle" fill="#2a2a2a">ideology.</text>
+  <text x="605.0" y="699.6666666666666" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">In practice: run it on a lab report, a headline, and an AI's answer — the</text>
+  <text x="605.0" y="718.6666666666666" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">same five questions each time</text>
+  <rect x="20" y="807" width="214" height="136" rx="9" fill="#ffffff" stroke="#8a7a4a" stroke-width="1.6"></rect>
+  <text x="127.0" y="843.8333333333333" font-size="19" text-anchor="middle" fill="#2a2a2a">You've met a claim</text>
+  <text x="127.0" y="868.8333333333333" font-size="19" text-anchor="middle" fill="#2a2a2a">you can't check</text>
+  <text x="127.0" y="893.8333333333333" font-size="19" text-anchor="middle" fill="#2a2a2a">yourself — most</text>
+  <text x="127.0" y="918.8333333333333" font-size="19" text-anchor="middle" fill="#2a2a2a">claims that matter.</text>
+  <line x1="242" y1="875" x2="270" y2="875" stroke="#8a7a4a" stroke-width="1.8"></line>
+  <path d="M278 875 l-9 -5 v10 z" fill="#8a7a4a"></path>
+  <rect x="292" y="746.3333333333333" width="626" height="257" rx="9" fill="#fdfaf2" stroke="#1a1a1a" stroke-width="2.2"></rect>
+  <text x="605.0" y="778.3333333333333" font-size="22" text-anchor="middle" font-weight="bold" fill="#1a1a1a">THE WELCOME TEST</text>
+  <text x="605.0" y="801.3333333333333" font-size="16.5" text-anchor="middle" letter-spacing="1.6" fill="#6b5b3e">CHAPTER 12</text>
+  <text x="605.0" y="821.3333333333333" font-size="18" text-anchor="middle" font-style="italic" fill="#7c3128">“Does the claim survive testing — and does the person making</text>
+  <text x="605.0" y="843.3333333333333" font-size="18" text-anchor="middle" font-style="italic" fill="#7c3128">it welcome the test?”</text>
+  <text x="605.0" y="871.3333333333333" font-size="18.5" text-anchor="middle" fill="#2a2a2a">You're not re-running the science; you're judging the</text>
+  <text x="605.0" y="894.3333333333333" font-size="18.5" text-anchor="middle" fill="#2a2a2a">claimant's relationship to being checked. What did they do</text>
+  <text x="605.0" y="917.3333333333333" font-size="18.5" text-anchor="middle" fill="#2a2a2a">when the test came back against them — revise in public, or</text>
+  <text x="605.0" y="940.3333333333333" font-size="18.5" text-anchor="middle" fill="#2a2a2a">take the claim to the audience that already agreed?</text>
+  <text x="605.0" y="967.3333333333333" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">In practice: checking the checkers — the version of checking most</text>
+  <text x="605.0" y="986.3333333333333" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">claims actually allow</text>
+  <rect x="20" y="1051" width="214" height="161" rx="9" fill="#ffffff" stroke="#8a7a4a" stroke-width="1.6"></rect>
+  <text x="127.0" y="1088.0" font-size="19" text-anchor="middle" fill="#2a2a2a">Checking runs out</text>
+  <text x="127.0" y="1113.0" font-size="19" text-anchor="middle" fill="#2a2a2a">before the</text>
+  <text x="127.0" y="1138.0" font-size="19" text-anchor="middle" fill="#2a2a2a">decision does —</text>
+  <text x="127.0" y="1163.0" font-size="19" text-anchor="middle" fill="#2a2a2a">and you still have</text>
+  <text x="127.0" y="1188.0" font-size="19" text-anchor="middle" fill="#2a2a2a">to act.</text>
+  <line x1="242" y1="1132" x2="270" y2="1132" stroke="#8a7a4a" stroke-width="1.8"></line>
+  <path d="M278 1132 l-9 -5 v10 z" fill="#8a7a4a"></path>
+  <rect x="292" y="1014.0" width="626" height="235" rx="9" fill="#fdfaf2" stroke="#1a1a1a" stroke-width="2.2"></rect>
+  <text x="605.0" y="1046.0" font-size="22" text-anchor="middle" font-weight="bold" fill="#1a1a1a">THE REACHING STANDARD</text>
+  <text x="605.0" y="1069.0" font-size="16.5" text-anchor="middle" letter-spacing="1.6" fill="#6b5b3e">CHAPTER 13</text>
+  <text x="605.0" y="1089.0" font-size="18" text-anchor="middle" font-style="italic" fill="#7c3128">“Which of the real options in front of you is better?”</text>
+  <text x="605.0" y="1117.0" font-size="18.5" text-anchor="middle" fill="#2a2a2a">You will never hold the finished picture, and you don't need it</text>
+  <text x="605.0" y="1140.0" font-size="18.5" text-anchor="middle" fill="#2a2a2a">to act. Rank the real options, act on the better one, and keep</text>
+  <text x="605.0" y="1163.0" font-size="18.5" text-anchor="middle" fill="#2a2a2a">the ideal as the direction you're moving in — reached for,</text>
+  <text x="605.0" y="1186.0" font-size="18.5" text-anchor="middle" fill="#2a2a2a">never fully held.</text>
+  <text x="605.0" y="1213.0" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">In practice: a ballot, a budget, a career choice — anywhere the</text>
+  <text x="605.0" y="1232.0" font-size="16" text-anchor="middle" font-style="italic" fill="#8a8378">deciding outruns the knowing</text>
+  <rect x="36" y="1267" width="868" height="94" rx="6" fill="#fdfaf2" stroke="#1a1a1a" stroke-width="4.5"></rect>
+  <text x="470" y="1295" font-size="19" text-anchor="middle" font-weight="bold" letter-spacing="1.2" fill="#1a1a1a">HOW THEY DIVIDE THE WORK</text>
+  <text x="470" y="1321" font-size="18.5" text-anchor="middle" fill="#2a2a2a">Two tools for claims you can check. One for claimants you can't. One for acting anyway.</text>
+  <text x="470" y="1347" font-size="18.5" text-anchor="middle" font-style="italic" fill="#7c3128">Not certainty. Not expertise. A practice.</text>
+  <text x="470" y="1421" font-size="13.5" text-anchor="middle" fill="#8a8378">From Everybody’s Science · companion resources at scienceonepagers.org · free to use, adapt, and hand to a class</text>
+  <text x="470" y="1453" font-size="15.5" text-anchor="middle" font-weight="bold" letter-spacing="1.4" fill="#4a4a4a">COMPANION ONE-PAGER · TEACHING #13 · TOOLS: CH. 6, 12, 13, 16</text>
+</svg>
+    <figcaption>The four tools as one decision map &#x2014; the book&#x2019;s Epilogue
+    carries it as its closing plate. Full practice notes and a worked example for each tool are at
+    <a href="teaching/four-tools-method-at-a-glance.html">Teaching #13, &#x201C;The Four Tools &#x2014;
+    the Method at a Glance,&#x201D;</a> made to hand to a class or leave on a kitchen table.</figcaption>
+  </figure>
 
   <h2>Wonder comes first</h2>
 
@@ -267,13 +401,18 @@
   </ul>
 
   <p>
-    Several more run through the book without a box and turn up often on this site: the
-    <strong>master fisherman problem</strong>, mastery that never shrinks into a formula you can
-    hand to someone else; the <strong>misinformation spectrum</strong>, from scarcity to
-    fabrication, and the <strong>evidentiary self-defense</strong> that answers it;
-    <strong>checking the checkers</strong>; and <strong>the shroud</strong>, the layer that settles
-    over a good process once people stop testing it and trust it out of habit.
+    Several more run through the book without a box and turn up often on this site:
   </p>
+
+  <ul class="framework-list">
+    <li><strong>The master fisherman problem.</strong> Mastery that never shrinks into a formula
+      you can hand to someone else.</li>
+    <li><strong>The misinformation spectrum.</strong> From scarcity to fabrication, and the
+      evidentiary self-defense that answers it.</li>
+    <li><strong>Checking the checkers.</strong></li>
+    <li><strong>The shroud.</strong> The layer that settles over a good process once people stop
+      testing it and trust it out of habit.</li>
+  </ul>
 
   <h2>What this site keeps for the book</h2>
 
@@ -297,6 +436,16 @@
       which piece fits the unit you are already teaching.</li>
     <li><strong><a href="index.html#evidence">Evidence</a></strong>, the ideas above, applied.</li>
   </ul>
+
+  <p>
+    I grew up on my family&#x2019;s farm in the Estancia Valley of New Mexico. I earned a PhD in
+    microbiology and immunology studying tuberculosis, taught science in New York City public
+    schools, worked in federal science policy at the National Research Council, AAAS, and the
+    National Science Foundation, and served on the biology faculty at George Mason University.
+    For the last eight years I have taught biology and chemistry at Battlefield High School in
+    Virginia. I wrote the book from that classroom, because it is where the rest of that career
+    finally came together.
+  </p>
 
   <h2>How the book was made</h2>
 
