@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en" data-level="bio" data-dev="ipad">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Drag water molecules together and watch hydrogen bonds snap into place, then heat, cool, squeeze, stir and salt them: ice, vapor, the phase diagram, flowing water, hydration spheres and boiling point elevation. A second module folds a protein in water and runs an enzyme through induced fit and catalysis. Biology I, Chemistry and DE Bio 101. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/water-patch.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Water Patch - Hydrogen Bonds, Phases, Solutions and Enzymes">
+<meta property="og:description" content="Drag water molecules together and watch hydrogen bonds snap into place, then heat, cool, squeeze, stir and salt them. A second module folds a protein in water and runs an enzyme through induced fit and catalysis. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/water-patch.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>The Water Patch | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--solid:#3F7A55;--solid-soft:#E2EDE6;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:74rem;margin:0 auto;padding:1.4rem 1.15rem 5rem}
+.narrow{max-width:46rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;margin:1.4rem 0 .5rem}
+p{margin:0 0 1rem;max-width:38rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+button{font:inherit;cursor:pointer}
+
+/* the two switches at the top: device and module */
+.topbar{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:flex-end;margin:0 0 1rem;padding:0 0 .9rem;border-bottom:1.5px solid var(--rule)}
+.sw{display:flex;flex-direction:column;gap:.25rem}
+.sw .swl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--card)}
+.seg button{font-family:var(--sans);font-weight:600;font-size:.92rem;background:none;border:none;color:var(--ink-soft);padding:.55rem 1rem;min-height:44px;min-width:44px;line-height:1.2}
+.seg button + button{border-left:1.5px solid var(--rule)}
+.seg button small{display:block;font-weight:500;font-size:.72rem;opacity:.85}
+.seg button[aria-pressed="true"],.seg button[aria-selected="true"]{background:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"],:root:not([data-theme="light"]) .seg button[aria-selected="true"]{color:#12100D}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"],:root[data-theme="dark"] .seg button[aria-selected="true"]{color:#12100D}
+.tabs button{font-size:1rem;padding:.6rem 1.15rem}
+.levelrow{margin:.2rem 0 1rem}
+
+.legend{display:flex;flex-wrap:wrap;gap:.45rem .9rem;margin:0 0 1.2rem;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft)}
+.legend span::before{content:"";display:inline-block;width:.8em;height:.8em;border-radius:50%;background:var(--c);border:1.5px solid var(--e,transparent);vertical-align:-1px;margin-right:.35em}
+.legend span.dash::before{border-radius:0;height:0;width:1.4em;border:none;border-top:2.5px dashed var(--c);background:none;vertical-align:4px}
+
+/* stage + card, the same arrangement as the Membrane Patch: pinned above the card on
+   narrow screens, beside it on wide ones */
+.build{display:block;margin-top:.6rem}
+.stagecol{position:sticky;top:0;z-index:5;min-width:0;background:var(--paper);padding:.35rem 0 .45rem;box-shadow:0 1px 0 var(--rule)}
+.stagerow{display:flex;gap:.5rem;align-items:flex-start;justify-content:center;margin:0 auto;max-width:calc(34vh * 1.5);max-width:calc(34svh * 1.5)}
+.stagerow.withpd{max-width:calc(34vh * 2.1);max-width:calc(34svh * 2.1)}
+.stage{position:relative;flex:1 1 0;min-width:0;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;overflow:hidden}
+.pdbox{flex:0 0 38%;min-width:0;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;overflow:hidden}
+.pdbox canvas{display:block;width:100%;aspect-ratio:1/1;touch-action:none;user-select:none;-webkit-user-select:none}
+.cardcol{margin-top:.9rem;min-width:0}
+@media (min-width:900px){
+  .build{display:grid;grid-template-columns:60fr 40fr;gap:1.2rem;align-items:start}
+  .stagecol{top:.6rem;padding:0;background:none;box-shadow:none}
+  .stagerow,.stagerow.withpd{margin:0;max-width:none}
+  .cardcol{margin-top:0}
+}
+@media (max-height:560px){.stagecol{position:static}}
+.stage canvas{display:block;width:100%;aspect-ratio:3/2;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+html[data-dev="pc"] .stage canvas{cursor:default}
+.lab{position:absolute;left:.5rem;top:.4rem;font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--ink-soft);background:var(--card);padding:.1rem .4rem;border-radius:3px;pointer-events:none;opacity:.92}
+
+/* controls under the stage */
+.ctl{display:flex;flex-wrap:wrap;gap:.45rem .8rem;align-items:center;justify-content:center;margin:.5rem 0 0}
+.ctl.locked{opacity:.45;pointer-events:none}
+.slider{display:flex;align-items:center;gap:.5rem;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft);flex:1 1 15rem;max-width:26rem}
+.slider output{min-width:5.2em;text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.slider input{flex:1;min-width:6rem;accent-color:var(--bond);height:2rem}
+.readout{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);text-align:center;margin:.35rem 0 0;min-height:1.3em;font-variant-numeric:tabular-nums}
+.lockmsg{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);text-align:center;margin:.35rem 0 0}
+.steprow{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center;justify-content:center;margin:.45rem 0 0}
+.dots{display:flex;flex-wrap:wrap;gap:.25rem;justify-content:center}
+@media (min-width:900px){.ctl,.steprow,.dots{justify-content:flex-start}.readout,.lockmsg{text-align:left}}
+.dots button{font-family:var(--sans);font-weight:700;font-size:.85rem;min-width:42px;min-height:42px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink-soft);border-radius:3px;padding:0}
+.dots button.done{border-color:var(--solid);color:var(--solid);background:var(--solid-soft)}
+.dots button.cur{background:var(--bond);border-color:var(--bond);color:var(--paper)}
+.dots button.cur.done{box-shadow:inset 0 0 0 2px var(--solid-soft)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dots button.cur{color:#12100D}}
+:root[data-theme="dark"] .dots button.cur{color:#12100D}
+.teach{font-size:.78rem;padding:.35rem .65rem;min-height:42px;color:var(--ink-soft)}
+.ghost.teach[aria-pressed="true"]{background:var(--solid);border-color:var(--solid);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ghost.teach[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .ghost.teach[aria-pressed="true"]{color:#12100D}
+.teachnote{background:var(--solid-soft);border-radius:3px;padding:.5rem .7rem;margin:0 0 .9rem}
+
+/* iPad mode: everything a finger touches is at least 48px and sliders get fat thumbs.
+   Computer mode: tighter controls, since a mouse is precise. */
+html[data-dev="ipad"] .ctl .go,html[data-dev="ipad"] .ctl .ghost{min-height:48px;font-size:1rem;padding:.6rem 1.1rem}
+html[data-dev="ipad"] .slider input{height:2.6rem}
+html[data-dev="ipad"] .slider input::-webkit-slider-thumb{width:30px;height:30px}
+html[data-dev="ipad"] .dots button{min-width:46px;min-height:46px}
+html[data-dev="pc"] .ctl .go,html[data-dev="pc"] .ctl .ghost{min-height:36px;font-size:.88rem;padding:.4rem .85rem}
+html[data-dev="pc"] .dots button{min-width:36px;min-height:36px}
+html[data-dev="pc"] .opt:hover:not(:disabled){background:var(--bond-soft)}
+
+@media (max-width:600px){
+  .stagerow{max-width:calc(28vh * 1.5);max-width:calc(28svh * 1.5)}
+  .stagerow.withpd{max-width:calc(28vh * 2.1);max-width:calc(28svh * 2.1)}
+  .dots button{min-width:34px;min-height:38px;font-size:.8rem}.dots{gap:.2rem}
+  .teach{min-height:38px;padding:.3rem .55rem}
+  .slider{flex-basis:100%}
+  .lab{display:none}
+}
+
+.card{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);border-radius:3px;padding:1rem 1.1rem;min-width:0}
+.card h2{margin:0 0 .7rem;font-size:1.12rem;line-height:1.3}
+.card p{max-width:none}
+.bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden;margin-bottom:.8rem}
+.bar i{display:block;height:100%;background:var(--bond);transition:width .25s}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);border-bottom:1.5px solid var(--rule);padding-bottom:.45rem;margin-bottom:.9rem}
+.badge{display:inline-block;font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--bond);border:1.5px solid var(--bond);border-radius:3px;padding:.05rem .4rem;margin:0 0 .6rem}
+.q{font-size:1.08rem;line-height:1.45;margin:0 0 .9rem}
+.opts{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.opt{text-align:left;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.75rem .95rem;min-height:3rem;color:var(--ink);font-family:var(--serif);font-size:1rem;line-height:1.4;width:100%}
+.opt:hover:not(:disabled){border-color:var(--bond)}
+.opt:disabled{cursor:default;opacity:1}
+.opt.right{border-color:var(--solid);background:var(--solid-soft);font-weight:600}
+.opt.wrong{border-color:var(--flag);background:var(--flag-soft)}
+.go{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--bond);color:var(--paper);border:none;border-radius:3px;padding:.8rem 1.3rem;min-height:3rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:disabled{opacity:.4;cursor:default}
+.go.on{background:var(--solid)}
+.go.ghostnext{background:none;border:1.5px solid var(--rule);color:var(--ink-soft)}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible,.seg button:focus-visible,.dots button:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+.ghost[aria-pressed="true"]{border-color:var(--bond);background:var(--bond-soft)}
+.why{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);border-radius:3px;padding:.85rem 1rem;margin-bottom:1rem}
+.why .tag{display:block;font-family:var(--sans);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.35rem}
+.why p{margin:0;font-size:.98rem;line-height:1.5}
+.explain{border-top:1.5px solid var(--rule);padding-top:.8rem;margin-top:.4rem}
+.explain p{font-size:1rem}
+.explain .deep{border-left:3px solid var(--bond);padding-left:.7rem}
+.explain .deep b{font-family:var(--sans);font-size:.8rem;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);margin-right:.3rem}
+.prompt{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--bond-soft);border-radius:3px;padding:.7rem .9rem;margin:0 0 .7rem}
+.goals{list-style:none;margin:0 0 1rem;padding:0;font-family:var(--sans);font-size:.92rem;font-weight:600}
+.goals li{padding:.35rem 0;border-bottom:1px solid var(--rule);color:var(--ink-soft)}
+.goals li::before{content:"○";display:inline-block;width:1.4em;color:var(--ink-soft)}
+.goals li.ok{color:var(--solid)}
+.goals li.ok::before{content:"✓";color:var(--solid)}
+.goals li.opt2{font-weight:500}
+.sub{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin:1rem 0 .45rem}
+.record{margin-top:2rem}
+.record table{border-collapse:collapse;width:100%;font-size:.95rem;margin:0 0 1rem}
+.record th,.record td{text-align:left;padding:.45rem .5rem;border-bottom:1px solid var(--rule);vertical-align:top}
+.record th{font-family:var(--sans);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.record .ok{color:var(--solid);font-weight:600}.record .no{color:var(--flag);font-weight:600}
+.do{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.9rem 1rem;margin-bottom:.6rem}
+.do h4{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .4rem}
+.do p{margin:0;font-size:1rem;line-height:1.5}
+.further ul{list-style:none;margin:.3rem 0 0;padding:0}
+.further li{padding:.45rem 0;border-top:1px solid var(--rule);font-size:.98rem;line-height:1.45}
+.further li:first-child{border-top:none}
+.further a{font-family:var(--sans);font-weight:700;color:var(--bond)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+
+<div class="topbar">
+  <div class="sw">
+    <span class="swl" id="devL">Running on</span>
+    <div class="seg" role="group" aria-labelledby="devL">
+      <button type="button" data-dev="ipad" aria-pressed="true">iPad<small>touch &middot; 18 molecules</small></button>
+      <button type="button" data-dev="pc" aria-pressed="false">Computer<small>mouse &middot; 120 molecules</small></button>
+    </div>
+  </div>
+  <div class="sw">
+    <span class="swl" id="tabL">Module</span>
+    <div class="seg tabs" role="tablist" aria-labelledby="tabL">
+      <button type="button" role="tab" data-tab="0" aria-selected="true">1 &middot; Water &amp; Phases</button>
+      <button type="button" role="tab" data-tab="1" aria-selected="false">2 &middot; Enzyme Activity</button>
+    </div>
+  </div>
+</div>
+
+<p class="sop-eyebrow" id="eyebrow">Bio Tool #10 &middot; Biology I Unit 1 &middot; SOL BIO.2a, 2c</p>
+
+<section id="intro" class="narrow">
+  <h1>The Water Patch</h1>
+  <p class="lede" id="lede"></p>
+  <div class="levelrow">
+    <div class="seg" role="group" aria-label="How deep the explanations go">
+      <button type="button" data-lv="bio" aria-pressed="true">9th Grade SOL Bio</button>
+      <button type="button" data-lv="chem" aria-pressed="false">Chemistry</button>
+      <button type="button" data-lv="de" aria-pressed="false">DE Bio</button>
+    </div>
+  </div>
+  <p class="fine">Nothing is submitted. Progress saves on this device, so a second sitting picks up where the first stopped. Tap any step number to open that step; a number lights up only for a step you have finished. <b>iPad</b> keeps the water to 18 molecules so the simulation stays smooth on a tablet; <b>Computer</b> runs 120 for a denser picture.</p>
+  <div class="legend" id="legend"></div>
+</section>
+
+<div class="build" id="build">
+  <div class="stagecol" id="stagecol">
+    <div class="stagerow" id="stagerow">
+      <div class="stage" id="stage">
+        <canvas id="cv" width="900" height="600" role="img" aria-label="Water molecules"></canvas>
+        <span class="lab" id="stagelab"></span>
+      </div>
+      <div class="pdbox hidden" id="pdbox"><canvas id="pd" width="300" height="300" role="img" aria-label="Phase diagram of water. Tap or drag on it to move the dot."></canvas></div>
+    </div>
+    <div class="ctl" id="ctl"></div>
+    <p class="readout" id="readout" aria-live="polite"></p>
+    <div class="steprow">
+      <div class="dots" id="dots" role="group" aria-label="Steps: tap any number to open that step"></div>
+      <button type="button" class="ghost teach" id="teach" aria-pressed="false" title="Opens every part of the current step at once, for showing it to a class. Nothing counts as done until it is done.">Teaching view</button>
+    </div>
+  </div>
+  <div class="cardcol">
+    <div class="card" id="card" aria-live="polite"></div>
+  </div>
+</div>
+
+<section id="record" class="record narrow hidden">
+  <h2 id="recH">Your record</h2>
+  <p class="lede" id="recSum"></p>
+  <div id="recBody"></div>
+  <p class="fine">First answers only: a prediction answered wrong and then understood is the point of the tool, not a failure. Come back another day and run the module again; the second record is the one to trust.</p>
+  <p><button type="button" class="ghost" id="reset">Start this module over</button></p>
+</section>
+
+<section class="narrow" style="margin-top:2rem">
+  <div class="do further">
+    <h4>Real structures behind the pictures</h4>
+    <ul>
+      <li><a href="https://molstar.org/viewer/?pdb-provider=rcsb&amp;pdb=1BAG" target="_blank" rel="noopener">1BAG</a> &alpha;-Amylase from <i>Bacillus subtilis</i> with a sugar in its active site: an enzyme that splits starch by hydrolysis, using one water molecule per cut, just as in Module 2.</li>
+      <li><a href="https://molstar.org/viewer/?pdb-provider=rcsb&amp;pdb=1HKG" target="_blank" rel="noopener">1HKG</a> and <a href="https://molstar.org/viewer/?pdb-provider=rcsb&amp;pdb=2YHX" target="_blank" rel="noopener">2YHX</a> Yeast hexokinase without and with glucose. Put the two side by side and the cleft closes: induced fit, measured.</li>
+      <li><a href="https://molstar.org/viewer/?pdb-provider=rcsb&amp;pdb=1UBQ" target="_blank" rel="noopener">1UBQ</a> Ubiquitin, a small, tightly folded protein. Colour it by hydrophobicity and the oily side chains sit inside.</li>
+      <li><a href="https://molstar.org/" target="_blank" rel="noopener">molstar.org</a> Mol* is free and open source; paste any PDB ID.</li>
+    </ul>
+  </div>
+  <p class="fine">What the model simplifies: it is flat, so ice is drawn as a honeycomb with three hydrogen bonds per molecule rather than the four of real, three-dimensional ice. Molecules are drawn to scale with one another, and the hydrogen bond is about three times the length of the O&ndash;H bond, as it really is. The protein has sixteen amino acids; real enzymes have hundreds. Where a number is exaggerated so it can be seen, the step says so.</p>
+</section>
+
+<footer class="sop-foot"><span id="footlv">Unit 1, Biochemistry &middot; Biology I, SOL BIO.2a and 2c &middot; PWCS LT 1.1 and 1.3</span> &middot; two modules, nine steps, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const REDUCE=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ease=t=>t<=0?0:t>=1?1:t*t*(3-2*t);
+let seed=20260927;
+function rnd(){seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}
+function gauss(){let u=0,v=0;while(u===0)u=rnd();v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v);}
+
+/* ================= content: questions ================= */
+/* lv: which course levels see the question (all three when absent) */
+const ITEMS={
+ w1:{q:"A water molecule's oxygen end is slightly negative (δ−) and its two hydrogen ends are slightly positive (δ+). When two water molecules meet, which parts will line up?",
+  o:["Oxygen of one to oxygen of the other","A hydrogen of one to the oxygen of the other","Hydrogen of one to hydrogen of the other","Nothing lines up; water molecules ignore each other"],a:1,
+  w:"Opposite partial charges attract, so a δ+ hydrogen on one molecule turns to point at the δ− oxygen of its neighbour. That attraction is a hydrogen bond. It is about twenty times weaker than the covalent bonds inside each molecule, which is why hydrogen bonds break and re-form all the time while the molecules themselves stay whole."},
+ w2:{q:"You heat liquid water. What happens to its hydrogen bonds?",
+  o:["They get stronger, holding the molecules tighter","The molecules move faster and break more of them, and the fastest escape as vapor","The heat turns them into covalent bonds","Nothing; temperature does not affect them"],a:1,
+  w:"Temperature is a measure of how fast the molecules are moving on average. Faster molecules pull apart more often than they stay bonded, and a molecule at the surface moving fast enough breaks all its bonds and leaves: evaporation. Cooling does the reverse, until every molecule is held in place."},
+ w2b:{q:"Ice floats on liquid water. Using the lattice you just froze, what is the reason?",
+  o:["Ice molecules are lighter than liquid water molecules","The lattice holds the molecules farther apart than in the liquid, so ice is less dense","Every ice crystal traps an air bubble","Cold things always float"],a:1,
+  w:"The molecules are identical in ice and water. In ice each one is locked to its neighbours at the full length of a hydrogen bond, leaving the open hexagons you can see; in the liquid, molecules keep breaking bonds and slipping into those gaps. The same mass takes up more room as ice, about 9% more, so ice floats."},
+ w3:{q:"On a high mountain the air pressure is lower. Water there boils at…",
+  o:["a higher temperature than 100 °C","exactly 100 °C, as everywhere","a lower temperature than 100 °C","it cannot boil at all"],a:2,
+  w:"Water boils when its molecules escape fast enough to push back against the air pressing down on it. With less pressure pushing down, that happens at a lower temperature: near the top of Mount Everest, water boils at about 70 °C. A pressure cooker does the opposite and raises the boiling point."},
+ w3b:{lv:["chem","de"],q:"Food left for months in a freezer dries out without ever thawing (freezer burn). On the phase diagram, which line has the ice crossed?",
+  o:["Solid to liquid (melting)","Liquid to gas (boiling)","Solid to gas (sublimation)","None; ice cannot lose molecules below 0 °C"],a:2,
+  w:"Ice has a small vapor pressure of its own. In the dry air of a freezer, molecules leave the ice surface straight into the gas without passing through the liquid: sublimation, the solid–gas line. Freeze-drying speeds it up by pulling the pressure below the triple point."},
+ w3c:{lv:["chem","de"],q:"Water's solid–liquid line tilts to the left (steeper than drawn in real life, but in the same direction). What does that tilt mean?",
+  o:["Squeezing ice can melt it, because the liquid is the denser phase","Squeezing liquid water freezes it","Ice melts at a higher temperature when squeezed","Pressure has no effect on melting"],a:0,
+  w:"Raising the pressure favours whichever phase takes up less room. For almost every substance that is the solid, so the line tilts right. For water it is the liquid, because ice's open lattice is less dense, so more pressure means a lower melting point. The effect is tiny, about 0.007 °C per atm; ice skates glide mostly on a thin film made by friction, not by pressure melting."},
+ w4:{q:"In January a still pond freezes over while a fast stream beside it, in the same cold air, stays open. What is the best reason?",
+  o:["Friction makes moving water many degrees warmer","The current keeps mixing the water and knocking apart small patches of lattice before they can grow","Moving water holds more dissolved salt","Moving water has no hydrogen bonds"],a:1,
+  w:"Friction adds almost no heat. What matters is mixing: the current keeps carrying warmer water up from below, so the whole stream has to cool to 0 °C, not just its surface, and any small cluster of molecules that starts to lock into a lattice is sheared apart before it can grow."},
+ w4b:{q:"Why does a still pond freeze from the top down rather than from the bottom up?",
+  o:["Ice is denser than water, so it forms at the top and then sinks","Water is densest at about 4 °C, so colder water stays at the surface and freezes there, and the ice floats","The mud at the bottom freezes first","Fish keep the bottom warm"],a:1,
+  w:"As a pond cools, water sinks until the whole pond reaches about 4 °C, water's densest temperature. Water colder than that is less dense, so it stays on top, reaches 0 °C first and freezes. The ice floats and works as a lid, slowing further freezing and keeping the water beneath it liquid for the fish."},
+ w5:{q:"Salt (NaCl) is dropped into water. Around a positive sodium ion (Na⁺), which end of each water molecule will face the ion?",
+  o:["The oxygen end (δ−)","The hydrogen end (δ+)","Neither; water ignores ions","Half one way, half the other, at random"],a:0,
+  w:"Opposite charges attract, so the δ− oxygen ends crowd toward Na⁺. Around the negative chloride ion, Cl⁻, the molecules turn the other way and point a δ+ hydrogen at it. Watch both kinds of shell form as the crystal breaks up."},
+ w5b:{lv:["chem","de"],q:"Magnesium phosphate, Mg₃(PO₄)₂, is ionic too, but barely dissolves. Why?",
+  o:["It has no charged particles","Its ions carry larger charges (+2 and −3), so they hold each other more tightly than water can pull them apart","It sinks too fast for water to reach it","It reacts with water and gives off a gas"],a:1,
+  w:"The pull between two ions grows with the product of their charges: 2 × 3 = 6 for Mg²⁺ and PO₄³⁻, against 1 × 1 for Na⁺ and Cl⁻. The lattice energy is then far larger than anything the hydration shells can repay, so the crystal stays together; its Ksp is about 10⁻²⁴. Hence the solubility rule: phosphates are insoluble except with Group 1 cations and ammonium."},
+ w6:{q:"You stir salt into a pot of water. Compared with pure water, the salt water will boil at…",
+  o:["a slightly higher temperature","a slightly lower temperature","exactly the same temperature","it will not boil at all"],a:0,
+  w:"Dissolved particles take up part of the surface and hold water molecules in their hydration shells, so fewer water molecules escape at any given temperature. The water has to get a little hotter before it boils. The same particles make it harder for water to lock into ice, so salt water also freezes at a lower temperature."},
+ w6b:{lv:["chem","de"],q:"Which raises the boiling point of 1 kg of water more: 1 mol of NaCl or 1 mol of sugar?",
+  o:["Sugar, because its molecules are bigger","NaCl, because each formula unit splits into two ions, doubling the particles","Both the same, since both are 1 mol","Neither changes the boiling point"],a:1,
+  w:"Boiling point elevation is a colligative property: it counts particles, not their size or kind. Sugar stays as whole molecules, so 1 mol gives 1 mol of particles (i = 1). NaCl splits into Na⁺ and Cl⁻, so 1 mol gives about 2 mol of particles (i ≈ 2) and roughly twice the shift: ΔT_b = i·K_b·m ≈ 2 × 0.512 × 1 ≈ 1.0 °C."},
+ e1:{q:"A newly made protein chain has some amino acids that avoid water (hydrophobic) and some that attract it (hydrophilic). Once it folds in water, where will the hydrophobic ones be?",
+  o:["On the outside, touching the water","Tucked into the middle, away from the water","Left sticking out in a straight line","Spread evenly all through the protein"],a:1,
+  w:"Hydrophobic amino acids cannot hydrogen-bond with water, so the fold that lasts is the one that hides them in a core, with the hydrophilic amino acids on the outside, where water molecules can bond to them. It is the same reason oil gathers into drops in water."},
+ e1b:{lv:["chem","de"],q:"What mainly pushes the hydrophobic amino acids together?",
+  o:["Strong covalent bonds form between their side chains","Water molecules can hydrogen-bond with each other more freely once the nonpolar side chains are packed out of their way","The side chains are magnetic","The ribosome squeezes them together"],a:1,
+  w:"The attraction between nonpolar side chains themselves is weak, only London dispersion forces. The main driving force is the water: exposed nonpolar groups force nearby water molecules into ordered cages, and burying the groups frees that water. The gain in water's freedom, an increase in entropy, is the hydrophobic effect."},
+ e2:{q:"When the right substrate settles into an enzyme's active site, what happens to the enzyme's shape?",
+  o:["Nothing; the enzyme stays rigid, like a lock","It closes a little around the substrate, gripping it more tightly","It unfolds completely","It breaks into pieces"],a:1,
+  w:"The contacts the substrate makes, hydrogen bonds and attractions with the active-site amino acids, pull on the enzyme's chain, and the active site closes around it. This is induced fit: the substrate helps shape the final fit, rather than dropping into a rigid, ready-made lock."},
+ e2b:{q:"A mutation changes one amino acid deep in the hydrophobic core, far from the active site, and the enzyme stops working. How can that be?",
+  o:["It cannot; only active-site amino acids matter","The core holds the whole fold together, so changing it can change the shape of the active site","The mutation adds an extra substrate","The enzyme becomes a product"],a:1,
+  w:"The active site is only the right shape because the rest of the chain folds around the hydrophobic core. Swap a core amino acid for a hydrophilic or much larger one and the packing shifts, the fold changes, and the shape of the active site changes with it. Structure decides function all the way through the protein."},
+ e3:{q:"After the enzyme splits the substrate and lets the products go, what happens to the enzyme?",
+  o:["It is used up, like the substrate","It returns to its starting shape and can work again","It becomes one of the products","It stays closed for good"],a:1,
+  w:"An enzyme is a catalyst: it comes out of the reaction exactly as it went in. Once the products leave, it springs back to its open shape, ready for the next substrate. A single enzyme molecule can do this thousands of times a second."},
+ e3b:{q:"A student heats this enzyme to 80 °C and then cools it. It no longer works. What happened?",
+  o:["The heat used up the enzyme's energy","Heat broke the hydrogen bonds and other weak interactions holding the fold, so it lost its shape and its active site (denaturation)","The heat turned it into a substrate","The heat made the active site bigger, so it works faster"],a:1,
+  w:"The fold is held by the same weak interactions as water: hydrogen bonds, ionic attractions and the hydrophobic effect. Enough heat breaks them, the chain loses its shape and the active site no longer fits the substrate. The chain's covalent peptide bonds survive, but the enzyme is denatured, and usually it does not refold correctly on cooling."},
+ e3c:{lv:["chem","de"],q:"What does the enzyme change about the reaction it catalyzes?",
+  o:["It lowers the activation energy, so the reaction goes faster","It changes which products form","It makes the reaction release more energy","It supplies the water that the reaction uses up"],a:0,
+  w:"A catalyst gives the reaction a lower-energy path by holding the substrate in a strained shape and stabilizing the transition state. It changes neither the products nor the overall energy change (ΔH or ΔG); the reaction simply reaches the same end far faster. The water comes from the surroundings, not the enzyme."}
+};
+Object.keys(ITEMS).forEach(k=>ITEMS[k].id=k);
+
+/* ================= content: steps ================= */
+const TABS=[
+ {key:"water",name:"Water & Phases",
+  lede:"Drag water molecules together and watch them turn until a hydrogen bond snaps into place. Then heat them, freeze them, squeeze them, stir them and salt them, and see what the same bond does each time. Six steps, about thirty minutes.",
+  legend:[["#D2382F","Oxygen (δ−)","#8E1F18"],["#FFFFFF","Hydrogen (δ+)","#8A857C"],["var(--bond)","Hydrogen bond","","dash"],["#7B61B8","Na⁺ / Mg²⁺ (positive ion)"],["#3E9B4F","Cl⁻ / PO₄³⁻ (negative ion)"]],
+  steps:[
+ {key:"bond",scene:"bond",short:"The hydrogen bond",head:"A hydrogen bond forms where δ+ meets δ−",pre:"w1",
+  task:"Drag one water molecule toward another and let go close by. Watch it turn until a hydrogen points at the other's oxygen. Make three hydrogen bonds yourself.",
+  goals:[["bond3","Hydrogen bonds you made by dragging",3]],
+  bio:"Each water molecule is polar. Oxygen pulls the shared electrons toward itself, so the oxygen end carries a partial negative charge (δ−) and each hydrogen a partial positive charge (δ+). When a hydrogen of one molecule comes near the oxygen of another, they attract, and the molecule swings round until the hydrogen points straight at the oxygen. That attraction, drawn as a dashed line, is a hydrogen bond. One water molecule can hold up to four: two through its hydrogens and two through its oxygen. Hydrogen bonds are why water sticks to itself (cohesion) and to other polar surfaces (adhesion), which is how water climbs a plant's xylem.",
+  chem:"Oxygen (electronegativity 3.44) is far more electronegative than hydrogen (2.20), so each O–H bond is polar, and water's bent shape, 104.5° because of the two lone pairs, keeps the two bond dipoles from cancelling: the molecule has a net dipole of about 1.85 D. A hydrogen bond is an especially strong dipole–dipole attraction, around 20 kJ/mol, against about 460 kJ/mol for the covalent O–H bond. The model keeps the true proportions: O–H 0.96 Å, O···O about 2.8 Å.",
+  de:"A hydrogen bond has a direction: it is strongest when O–H···O lies in a straight line, which is why the molecule rotates as it docks. That directionality lets water build the open tetrahedral network of ice, and the same kind of bond, N–H···O=C, holds α-helices and β-sheets together and pairs the bases of DNA."},
+ {key:"heat",scene:"heat",short:"Heat and cold",head:"Temperature decides how many hydrogen bonds survive",pre:"w2",post:["w2b"],
+  task:"Slide the temperature below 0 °C and let the ice lattice lock. Then slide it past 100 °C and watch the bonds break as molecules escape.",
+  goals:[["freeze","Freeze it: most molecules locked in the lattice"],["boil","Boil it: most molecules escaped as vapor"]],
+  bio:"Temperature measures the average kinetic energy of the molecules, the energy of their motion. Warm them and they jiggle and tumble faster; more hydrogen bonds break than form, and the fastest molecules at the surface escape as vapor. That is evaporation, and because the fastest molecules leave, the liquid left behind is cooler: sweating cools you this way. Cool them and every molecule settles into a hexagonal lattice (flat here, so three bonds each instead of four). The lattice holds the molecules farther apart than in the liquid, so ice is less dense than water and floats. Because so much energy goes into breaking hydrogen bonds, water warms and cools slowly, which steadies the temperature of lakes, oceans and bodies.",
+  chem:"Water's high specific heat (4.18 J/g·°C) and high heat of vaporization (40.7 kJ/mol) both come from hydrogen bonding: added energy goes into breaking bonds before the molecules can speed up or leave. During a phase change the temperature holds steady while that energy is absorbed, which is why a heating curve has flat plateaus at 0 °C and 100 °C. Ice Ih is about 9% less dense than liquid water at 0 °C.",
+  de:"Liquid water is a hydrogen-bond network that rearranges every few picoseconds; each molecule has about 3.5 partners at any instant, against 4 in ice. Evaporative cooling is also how transpiration keeps a leaf in full sun from overheating, and the same pull of evaporation at the leaf, passed down unbroken columns of cohesive water, lifts water up the xylem."},
+ {key:"phase",scene:"phase",short:"The phase diagram",head:"Pressure and temperature together decide the state",pre:"w3",post:["w3b","w3c"],focus:true,
+  task:"Move both sliders, or drag the dot on the diagram. Make the dot cross each line: melt the ice, condense the vapor, and turn ice straight into vapor at very low pressure.",
+  goals:[["melt","Melt: solid to liquid"],["condense","Condense: gas to liquid"],["sublime","Sublimate: solid straight to gas"]],
+  bio:"A phase diagram is a map of which state water takes at each temperature and pressure. The lines are the boundaries, where two states can exist together. Lower the pressure and water boils at a lower temperature: at the top of Mount Everest it boils at about 70 °C, so food cooks slowly there. At very low pressure, ice turns straight into vapor without melting: sublimation, the reason frozen food dries out.",
+  chem:"Along the liquid–gas line, water's vapor pressure equals the pressure above it: boiling begins when vapor pressure reaches the surrounding pressure. The triple point (0.01 °C, 0.006 atm) is the one point where solid, liquid and gas coexist. Water's solid–liquid line tilts to the left, unlike nearly every other substance, because ice is less dense than the liquid, so squeezing favours the liquid. The tilt is drawn about 160 times steeper than it is; the real line moves only 0.0074 °C per atm. The critical point, 374 °C and 218 atm, is off this chart.",
+  de:"The Clausius–Clapeyron relation, ln(P₂/P₁) = −(ΔH_vap/R)(1/T₂ − 1/T₁), gives the curve of the liquid–gas line. Autoclaves use the same curve from the other side: at about 2 atm, water boils near 121 °C, hot enough to kill bacterial endospores that survive boiling at 100 °C."},
+ {key:"flow",scene:"flow",short:"Flow and freezing",head:"Still water freezes from the top down; moving water resists",pre:"w4",post:["w4b"],
+  task:"The air above the channel is −10 °C. Leave the water still and watch where the ice forms and which way it grows. Then press Flow.",
+  goals:[["still","Let the still water freeze from the top"],["flowed","Run the flow and watch the ice"]],
+  bio:"In still water, ice forms at the surface first. Water is densest at about 4 °C, so as the surface cools, the colder water stays on top while the 4 °C water settles to the bottom, and the surface reaches 0 °C first. The ice floats and acts as a lid, slowing further freezing and keeping the water below liquid for fish and plants. In moving water, the current keeps stirring: warmer water from below is carried up, and any small patch of lattice that starts to lock is knocked apart before it can grow. The whole stream has to cool to 0 °C before ice can hold, so fast streams stay open long after ponds freeze.",
+  chem:"Freezing needs nucleation, a cluster of molecules held in the lattice long enough for others to join. Turbulence mixes heat through the whole water column and shears young clusters apart, so flowing water often supercools a little below 0 °C. When it does freeze, it makes frazil ice, loose needles and discs that drift in the current, instead of a solid sheet.",
+  de:"That ice floats is an anomaly with ecological weight: if ice sank, lakes would fill with ice from the bottom up and many would never thaw completely. In fast rivers, frazil ice can pile onto the stream bed as anchor ice, reshaping habitat for insect larvae and fish eggs, and it blocks the water intakes of power plants on northern rivers."},
+ {key:"salt",scene:"salt",short:"Salt dissolves",head:"Water pulls ions loose and wraps each one in a hydration sphere",pre:"w5",post:["w5b"],
+  task:"Drop a crystal of NaCl and watch the water molecules turn to face each ion as it comes loose. Then drop Mg₃(PO₄)₂ and compare.",
+  goals:[["nacl","Dissolve an NaCl crystal"],["mg","Try Mg₃(PO₄)₂",0,true]],
+  bio:"Water is called the universal solvent because its charged ends can surround other charged or polar particles. In salt, sodium ions (Na⁺) and chloride ions (Cl⁻) are held together by their opposite charges. Water molecules crowd around the ions at the crystal's edge, oxygen ends toward each Na⁺ and hydrogen ends toward each Cl⁻. Enough of those pulls tip an ion loose, and once free it stays wrapped in a shell of water, a sphere of hydration, that keeps it from rejoining the crystal. Not every ionic compound dissolves, though, as magnesium phosphate shows.",
+  chem:"Dissolving is a contest between lattice energy (the ions holding each other) and hydration energy (water holding the ions). For NaCl the two nearly balance, and solubility is high, about 36 g per 100 g of water. Mg₃(PO₄)₂ has ions of charge +2 and −3; the attraction scales with the product of the charges, so its lattice energy is far larger and water cannot repay it: Ksp is about 10⁻²⁴. That is the rule 'phosphates are insoluble except with Group 1 cations and ammonium' at work.",
+  de:"Hydration shells matter for transport. A potassium channel's selectivity filter strips K⁺ of its water and replaces it with backbone carbonyl oxygens spaced just as the water had been. Na⁺, smaller, fits that replacement poorly, so the channel passes K⁺ about a thousand times more readily. Insoluble calcium phosphate, a cousin of the magnesium salt here, is the mineral of bone and tooth enamel."},
+ {key:"bpe",scene:"bpe",short:"Salty water boils higher",head:"Dissolved ions move the boiling and freezing points",pre:"w6",post:["w6b"],focus:true,
+  task:"Add at least two scoops of salt. Heat the salty water until it boils, then cool it until it freezes, and compare with the pure-water marks on the diagram.",
+  goals:[["salt2","Add two scoops of salt"],["boilSalt","Boil the salty water"],["freezeSalt","Freeze the salty water"]],
+  bio:"Dissolved particles get in the way, both of water molecules leaving the liquid and of water molecules locking into ice. Salt water therefore boils at a slightly higher temperature and freezes at a lower one than pure water. That is why roads are salted in winter: salty meltwater stays liquid below 0 °C. It is also why the ocean freezes at about −2 °C, and why the ice that does form on seawater is mostly fresh: the lattice pushes the ions out, as you can see here.",
+  chem:"Boiling point elevation and freezing point depression are colligative properties: they depend on how many solute particles there are, not what they are. ΔT_b = i·K_b·m and ΔT_f = i·K_f·m, with K_b = 0.512 °C·kg/mol and K_f = 1.86 °C·kg/mol for water, and i ≈ 2 for NaCl. Each scoop here is 1 mol NaCl per kg of water. The model draws the boiling shift five times larger than it really is so it can be seen; the freezing shift is to scale. A tablespoon of salt in a pot of pasta water raises the boiling point by less than a tenth of a degree.",
+  de:"Underneath, this is entropy: solute particles raise the disorder of the liquid, which lowers water's chemical potential there and so its tendency to leave as vapor or to join the ordered solid. The same drop in water potential drives osmosis, which is why a cell placed in seawater loses water. Antifreeze proteins in polar fish work differently: they bind to the faces of ice crystals and stop them growing, lowering the freezing point without large amounts of solute."}
+ ]},
+ {key:"enzyme",name:"Enzyme Activity",
+  lede:"Drop a new protein chain into water and watch it fold, hydrophobic amino acids in and hydrophilic ones out. Then feed the folded enzyme its substrate and watch it change shape, split the substrate with a water molecule, let the products go and reset. Three steps, about fifteen minutes, all at room temperature.",
+  legend:[["#D9A35A","Hydrophobic amino acid","#8A5A1C"],["#4A86C5","Hydrophilic amino acid","#1E4F80"],["#4A86C5","Active-site amino acid","#C0398F"],["#D08C2E","Substrate / products"],["#D2382F","Water","#8E1F18"],["var(--bond)","Hydrogen bond","","dash"]],
+  steps:[
+ {key:"fold",scene:"enzyme",short:"The chain folds",head:"In water, the chain folds with its hydrophobic amino acids inside",pre:"e1",post:["e1b"],
+  task:"Press Drop the chain. Watch where the tan (hydrophobic) amino acids go, and which amino acids the water molecules bond to.",
+  goals:[["fold","Drop the chain and let it fold"]],
+  bio:"A protein starts as a chain of amino acids joined by peptide bonds, its primary structure. In water the chain folds on its own. Hydrophobic amino acids (tan) cannot hydrogen-bond with water, so they end up packed together in the middle, while hydrophilic amino acids (blue) stay on the outside, where water molecules bond to them. The folded shape is what lets a protein do its job; for an enzyme, the shape includes a pocket called the active site.",
+  chem:"Hydrophilic side chains are polar or charged (–OH, –NH₃⁺, –COO⁻) and form hydrogen bonds or ion–dipole attractions with water. Hydrophobic side chains are hydrocarbon (–CH₃, rings) and attract only through weak London dispersion forces. Burying them is favoured mainly because it frees the surrounding water to hydrogen-bond with itself: the hydrophobic effect.",
+  de:"The hydrophobic effect is chiefly entropic: water forms ordered, cage-like shells around exposed nonpolar groups, and burying the groups releases that water. Collapse comes first; hydrogen bonds between backbone groups then set the secondary structure, and the final tertiary fold also depends on ionic bonds, disulfide bridges and van der Waals contacts. Anfinsen showed that the sequence alone holds the information for the fold, though in the cell chaperones such as Hsp70 keep new chains from clumping while they fold."},
+ {key:"fit",scene:"enzyme",short:"Induced fit",head:"The substrate binds, and the enzyme changes shape around it",pre:"e2",post:["e2b"],
+  task:"Press Add substrate, or drag one yourself. It drifts and bumps into things; only a hit on the active site counts. Watch the enzyme's shape when it binds.",
+  goals:[["bind","A substrate binds and the enzyme closes"]],
+  bio:"The substrate is the molecule an enzyme acts on. It drifts through the water and bumps into many things, but only a collision with the active site, where the shapes and charges match, lets it bind. As it binds, the enzyme changes shape and closes its active site around it. This is induced fit: the substrate itself shapes the final fit, rather than sliding into a rigid lock. The tight grip is part of what makes each enzyme work on one particular substrate, its specificity.",
+  chem:"Binding uses the same weak forces as water does: hydrogen bonds, ionic attractions and hydrophobic contacts between the substrate and the active-site amino acids. Water molecules in the empty site are pushed out as the substrate enters. The shape change happens because these new contacts pull on the enzyme's chain, and the neighbouring parts of the protein follow.",
+  de:"Hexokinase is the classic case: glucose binding swings its two lobes about 12° closed, shutting out the water so that ATP's phosphate goes onto glucose instead of being hydrolyzed. Kinetic studies often describe binding as a mix of induced fit and conformational selection, in which the enzyme already flickers between open and closed shapes and the substrate stabilizes the closed one. Either way, the change is triggered by the substrate, not by the solvent."},
+ {key:"cat",scene:"enzyme",short:"Catalysis and release",head:"The enzyme splits the substrate, lets go of the products and resets",pre:"e3",post:["e3b","e3c"],
+  task:"Watch the bound substrate get split. Keep adding substrate and complete two full reactions.",
+  goals:[["turn2","Reactions completed",2]],
+  bio:"In the active site the enzyme holds the substrate in a strained position and brings a water molecule right up to the bond. The bond breaks and the water is split between the two pieces, giving two products; a reaction that uses water to break a bond is hydrolysis, and digestive enzymes break down food this way. The products no longer fit, so they drift off, and the enzyme springs back to its resting shape, unchanged and ready for the next substrate. Enzymes are catalysts: they speed up reactions by lowering the activation energy, and they are not used up.",
+  chem:"A catalyst lowers the activation energy by stabilizing the transition state, but it changes neither ΔH nor which products form, and it is regenerated at the end. Hydrolysis is the reverse of dehydration synthesis: A–B + H₂O → A–OH + H–B. Sucrase, for example, hydrolyzes sucrose into glucose and fructose.",
+  de:"The cycle is E + S ⇌ ES → EP → E + P. The enzyme cannot change ΔG or the position of equilibrium, only the rate. Turnover numbers run from about one reaction per second to about a million per second for carbonic anhydrase. Temperature, pH and salt all act on the weak interactions from the folding step, which is why an enzyme pushed out of its range denatures and loses its active site."}
+ ]}
+];
+
+/* ================= devices ================= */
+/* The simulated box is smaller on an iPad and drawn larger, so 18 molecules fill it the way
+   120 fill the computer's box. Everything is measured in the same world units either way. */
+const DEV={ipad:{W:450,H:300,N:18,hit:30,ps:1.3,dpr:2},pc:{W:1200,H:800,N:120,hit:18,ps:2,dpr:2.5}};
+
+/* ================= theme ================= */
+const cv=$("cv"),ctx=cv.getContext("2d"),pd=$("pd"),pctx=pd.getContext("2d");
+const NW=900,NH=600;
+let BG="#FFFFFF",INK="#1D1A15",SOFT="#5A544A",BOND="#1F7A8C",RULE="#DDD8CE",DARK=false;
+function readTheme(){try{const cs=getComputedStyle(document.documentElement);const g=(n,f)=>(cs.getPropertyValue(n)||"").trim()||f;BG=g("--card",BG);INK=g("--ink",INK);SOFT=g("--ink-soft",SOFT);BOND=g("--bond",BOND);RULE=g("--rule",RULE);
+  DARK=parseInt(BG.replace("#","").slice(0,2),16)<100;}catch(e){}pdCache=null;}
+let pdCache=null;
+readTheme();
+if(window.matchMedia){const mq=window.matchMedia("(prefers-color-scheme: dark)");const h=()=>readTheme();if(mq.addEventListener)mq.addEventListener("change",h);else if(mq.addListener)mq.addListener(h);}
+const OC="#D2382F",OE="#8E1F18";
+const HC=()=>DARK?"#F2EFE9":"#FFFFFF",HE=()=>DARK?"#BDB6AA":"#8A857C";
+const TINT=()=>DARK?"rgba(90,140,190,0.13)":"rgba(143,184,216,0.2)";
+const PHOB="#D9A35A",PHOBE="#8A5A1C",PHIL="#4A86C5",PHILE="#1E4F80",SITE="#C0398F",SUBA="#D08C2E",SUBB="#7A5BB0";
+
+/* ================= water geometry and phase rules ================= */
+const RO=13,RH=7.5,DOH=15,HA=52.25*Math.PI/180,BO=44,RHB=BO-DOH,V0=55;
+const EB=6*V0*V0;
+function pVap(Tc){const K=Tc+273.15;return Math.exp(-5215*(1/K-1/373.15));}
+function pSub(Tc){const K=Tc+273.15;return 0.006*Math.exp(-6134*(1/K-1/273.16));}
+/* the solid-liquid line: flat to 1 atm, then tilted left about 160x more than the real
+   0.0074 °C/atm so the tilt shows; the step text says so */
+function tMelt(P){return P<=1?0.01-0.01*(P-0.006)/0.994:-1.2*(P-1);}
+/* 0 solid, 1 liquid, 2 gas; dB and dF are the solution's boiling rise and freezing drop */
+function phaseOf(Tc,P,dB,dF){
+  if(Tc<tMelt(P)-(dF||0))return P<pSub(Tc)?2:0;
+  return P>=pVap(Tc-(dB||0))?1:2;
+}
+const PHN=["solid (ice)","liquid","gas (vapor)"];
+
+/* honeycomb sites for ice. b = O···O distance. Each site gets an orientation: its
+   hydrogens point at the neighbours it donates to. */
+function honeycomb(b,x0,x1,y0,y1,period){
+  const out=[],a1=Math.sqrt(3)*b,a2x=a1/2,a2y=1.5*b;
+  for(let j=-2;j<(y1-y0)/a2y+3;j++)for(let i=-Math.ceil(j/2)-2;i<(x1-x0)/a1+3;i++){
+    const bx=x0+i*a1+j*a2x,by=y0+j*a2y;
+    [[bx,by,0],[bx,by+b,1]].forEach(([x,y,s])=>{let xx=x;if(period){xx=((x-x0)%period+period)%period+x0;}
+      if(xx>=x0&&xx<=x1&&y>=y0&&y<=y1&&!out.some(p=>Math.abs(p.x-xx)<1&&Math.abs(p.y-y)<1))out.push({x:xx,y,s});});
+  }
+  return out;
+}
+function orientSites(sites,b,period){
+  const n=sites.length,don=new Array(n).fill(0),dirs=sites.map(()=>[]);
+  sites.forEach(s=>{s.nb=[];});
+  for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){let dx=sites[j].x-sites[i].x;const dy=sites[j].y-sites[i].y;
+    if(period){if(dx>period/2)dx-=period;else if(dx<-period/2)dx+=period;}
+    if(Math.abs(Math.hypot(dx,dy)-b)<3){sites[i].nb.push(j);sites[j].nb.push(i);
+      const d=don[i]<=don[j]?i:j;if(don[d]<2){don[d]++;dirs[d].push(d===i?Math.atan2(dy,dx):Math.atan2(-dy,-dx));}}}
+  sites.forEach((s,i)=>{const d=dirs[i];
+    if(d.length===2){s.ang=Math.atan2(Math.sin(d[0])+Math.sin(d[1]),Math.cos(d[0])+Math.cos(d[1]));}
+    else if(d.length===1)s.ang=d[0]+HA;else s.ang=-Math.PI/2;
+    s.who=-1;});
+  return sites;
+}
+function clusterSites(N,cx,floorY,l,r){
+  /* a slab of ice about 1.8 times wider than tall, resting on the floor */
+  const A=Math.sqrt(1.8*N*2515/Math.PI),Bh=A/1.8,cy=floorY-Bh-4;
+  let all=honeycomb(BO,l+RO+2,r-RO-2,cy-Bh*2.5,floorY-RO-3);
+  all.sort((p,q)=>Math.hypot(p.x-cx,(p.y-cy)*1.8)-Math.hypot(q.x-cx,(q.y-cy)*1.8));
+  const pick=all.slice(0,N);let my=-1e9;pick.forEach(p=>{my=Math.max(my,p.y);});const sh=floorY-RO-3-my;pick.forEach(p=>{p.y+=sh;});
+  return orientSites(pick,BO);
+}
+
+/* ================= simulation state ================= */
+let SIM=null;
+const mkMol=(x,y,a)=>({x,y,vx:0,vy:0,a,w:0,ax:0,ay:0,al:0,r1:rnd(),r2:rnd(),st:1,site:-1,hid:0,rec:0,drag:0,dragT:-9,hyd:0});
+function dev(){return DEV[st.dev];}
+function newSim(key){
+  const D=dev(),W=D.W,H=D.H;
+  const S={key,W,H,s:NW/W,mol:[],ions:[],crystals:[],prot:null,subs:[],prods:[],
+    T:20,P:1,dB:0,dF:0,scoops:0,flow:false,frozen:0,flowT:0,
+    b:{l:4,r:W-4,t:4,b:H-4},periodic:0,g:0,coh:0,fill:false,vmul:1,gL:6,sites:null,phase:true,
+    prevBonds:new Set(),bonds:[],hbx:[],ionLinks:[],counts:[0,0,0],t:0,turn:0,
+    enz:null,madeBonds:new Set(),dot:null,label:""};
+  SIM=S;
+  const N=D.N;
+  if(key==="bond"){
+    S.phase=false;S.vmul=.16;S.gL=5;
+    placeSpread(N,S.b.l+20,S.b.r-20,S.b.t+20,S.b.b-20,72);
+  }else if(key==="heat"||key==="phase"||key==="bpe"){
+    S.b={l:W*.1,r:W*.9,t:H*.05,b:H*.95};S.g=110;S.coh=16;
+    S.sites=clusterSites(N,W/2,S.b.b,S.b.l,S.b.r);
+    S.sites.forEach(p=>S.mol.push(mkMol(p.x+(rnd()-.5)*6,p.y+(rnd()-.5)*6,p.ang+(rnd()-.5)*.8)));
+    S.T=20;S.P=1;
+    if(key==="phase")S.dot={T:20,P:1,ph:1};
+  }else if(key==="flow"){
+    S.phase=false;S.fill=true;S.periodic=W;S.b={l:0,r:W,t:H*.2,b:H*.9};S.T=2;
+    const k=Math.max(3,Math.round(W/(Math.sqrt(3)*BO))),b=W/(Math.sqrt(3)*k);S.fb=b;
+    S.sites=orientSites(honeycomb(b,0,W,S.b.t+RO+2,S.b.t+(S.b.b-S.b.t)*.62).filter(p=>p.x<W-1),b,W);
+    placeSpread(N,6,W-6,S.b.t+RO+4,S.b.b-RO-4,40);
+  }else if(key==="salt"){
+    S.phase=false;S.fill=true;S.T=25;S.b={l:W*.06,r:W*.94,t:H*.05,b:H*.95};
+    placeSpread(N,S.b.l+16,S.b.r-16,S.b.t+16,S.b.b-16,40);
+  }else if(key==="enzyme"){
+    S.phase=false;S.fill=true;S.T=25;S.b={l:4,r:W-4,t:4,b:H-4};
+    placeSpread(N,20,W-20,20,H-20,40);
+    S.enz={C:{x:W*.44,y:H*.5},ps:D.ps};
+  }
+  S.mol.forEach(m=>{m.st=1;});
+  return S;
+}
+function placeSpread(N,x0,x1,y0,y1,minD){
+  const S=SIM;let tries=0;
+  while(S.mol.length<N&&tries<20000){tries++;const x=x0+rnd()*(x1-x0),y=y0+rnd()*(y1-y0);
+    const md=tries<8000?minD:minD*.6;
+    if(S.mol.every(m=>Math.hypot(m.x-x,m.y-y)>md))S.mol.push(mkMol(x,y,rnd()*6.2832));}
+  while(S.mol.length<N)S.mol.push(mkMol(x0+rnd()*(x1-x0),y0+rnd()*(y1-y0),rnd()*6.2832));
+}
+function hpos(m,k){const a=m.a+(k?HA:-HA);return[m.x+DOH*Math.cos(a),m.y+DOH*Math.sin(a)];}
+
+/* ================= ions and crystals ================= */
+const ION={na:{r:9.5,q:1,c:"#7B61B8",e:"#46307A",t:"+"},cl:{r:17,q:-1,c:"#3E9B4F",e:"#1F5E2A",t:"−"},
+  mg:{r:7.5,q:2,c:"#7B61B8",e:"#46307A",t:"2+"},po:{r:21,q:-3,c:"#3E9B4F",e:"#1F5E2A",t:"3−"}};
+function dropCrystal(kind,small){
+  const S=SIM,D=dev(),cx=S.b.l+(S.b.r-S.b.l)*(.42+rnd()*.16);
+  const cr={x:cx,y:-40,vy:0,ions:[],land:S.key==="bpe"?S.b.b-60:(S.b.t+S.b.b)/2,t:0,rel:0,kind,label:kind==="nacl"?"NaCl crystal":"Mg₃(PO₄)₂ crystal"};
+  if(kind==="nacl"){
+    const n=small?(st.dev==="pc"?[3,2]:[2,1]):(st.dev==="pc"?[4,4]:[2,2]),sp=27.5;
+    for(let j=0;j<n[1];j++)for(let i=0;i<n[0];i++){const k=(i+j)%2?"cl":"na";
+      cr.ions.push(mkIon(k,cr,(i-(n[0]-1)/2)*sp,(j-(n[1]-1)/2)*sp,i,j));}
+  }else{
+    /* 3 Mg : 2 PO4, laid out as rows of PO4 with Mg between */
+    const reps=st.dev==="pc"?2:1,sp=31;
+    for(let r=0;r<reps;r++){const y=(r-(reps-1)/2)*sp*1.9;
+      [[-1.5,"mg"],[-.75,"po"],[0,"mg"],[.75,"po"],[1.5,"mg"]].forEach(([u,k],i)=>{cr.ions.push(mkIon(k,cr,u*sp*1.1,y+(k==="mg"?(i%4?sp*.5:-sp*.5):0),i,r));});}
+  }
+  S.crystals.push(cr);
+  if(S.crystals.length>3){const old=S.crystals.shift();old.ions.forEach(io=>{io.cr=null;});}
+}
+function mkIon(k,cr,lx,ly,i,j){const io={k,x:cr.x+lx,y:cr.y+ly,vx:0,vy:0,lx,ly,cr,gi:i,gj:j,shell:0,...ION[k]};SIM.ions.push(io);return io;}
+
+/* ================= the enzyme ================= */
+/* Folded target shape, in the protein's own frame (active-site mouth facing +x). Residues
+   0-12 alternate outer (hydrophilic) and inner (hydrophobic) around a ring with a 72°
+   opening; 13-15 fill the core. Residues 0 and 12 line the active site. */
+const RES=[];
+for(let k=0;k<13;k++)RES.push({r:k%2?36:48,th:36+k*24,phob:k%2===1,site:k===0||k===12});
+RES.push({r:24,th:335,phob:true},{r:8,th:245,phob:true},{r:18,th:135,phob:true});
+/* the closed (substrate-bound) shape: the jaws swing in */
+const CLOSE={0:[52,20],12:[52,340],1:[36,48],11:[36,312],2:[48,76],10:[48,284]};
+function resTarget(k,c){const R=RES[k];let r=R.r,th=R.th;const q=CLOSE[k];if(q){r=lerp(r,q[0],c);th=lerp(th,q[1],c);}
+  const a=th*Math.PI/180;return[r*Math.cos(a),r*Math.sin(a)];}
+const BR=10,BL=22,SITE_X=52;
+function dropChain(){
+  const S=SIM,E=S.enz,ps=E.ps,n=RES.length;
+  E.beads=[];for(let k=0;k<n;k++){E.beads.push({x:E.C.x+(k-(n-1)/2)*BL*ps*.8,y:-30*ps,vx:0,vy:0,phob:RES[k].phob,site:RES[k].site});}
+  E.foldT=0;E.folded=false;E.c=0;E.state="open";E.drop=true;
+  S.subs=[];S.prods=[];
+}
+function foldNow(){const S=SIM,E=S.enz,ps=E.ps;E.beads=RES.map((R,k)=>{const t=resTarget(k,0);return{x:E.C.x+t[0]*ps,y:E.C.y+t[1]*ps,vx:0,vy:0,phob:R.phob,site:R.site};});
+  E.foldT=99;E.folded=true;E.c=0;E.state="open";E.drop=false;
+  /* shift water out from under the protein */
+  S.mol.forEach(m=>{const dx=m.x-E.C.x,dy=m.y-E.C.y,d=Math.hypot(dx,dy);if(d<75*ps){const f=(75*ps+5)/Math.max(d,1);m.x=E.C.x+dx*f;m.y=E.C.y+dy*f;}});}
+function siteXY(){const E=SIM.enz;return[E.C.x+SITE_X*E.ps,E.C.y];}
+function addSubstrate(){
+  const S=SIM,E=S.enz,ps=E.ps;if(!E||!E.folded)return;
+  if(S.subs.filter(s=>s.state==="free").length>=5)return;
+  /* dropped in above and to the right of the enzyme, so it has some way to drift */
+  S.subs.push({x:Math.min(S.b.r-30*ps,E.C.x+(110+rnd()*120)*ps),y:Math.max(S.b.t+20*ps,E.C.y-(90+rnd()*40)*ps),vx:0,vy:40,ang:rnd()*6.2832,va:0,state:"free",t:0});
+}
+
+/* ================= physics ================= */
+const PAIR=90;
+function stateOf(m){
+  const S=SIM;
+  if(!S.phase)return 1;
+  /* each molecule gets its own small offset, so a state change runs through the sample
+     rather than flipping all at once: the fastest liquid molecules leave well before
+     boiling (evaporation), while ice gives up only a few molecules near its line */
+  const base=phaseOf(S.T,S.P,S.dB,S.dF);
+  if(base===2)return 2;
+  if(base===0)return phaseOf(S.T+3*m.r2,S.P,S.dB,S.dF)===2?2:0;
+  if(phaseOf(S.T+14*m.r2,S.P,S.dB,S.dF)===2)return 2;
+  if(phaseOf(S.T-1.5*m.r1,S.P,S.dB,S.dF)===0)return 0;
+  return 1;
+}
+function freeSite(m){const S=SIM;if(m.site>=0){S.sites[m.site].who=-1;m.site=-1;}}
+function takeSite(m,i){const S=SIM;S.sites[i].who=S.mol.indexOf(m);m.site=i;}
+function nearestFreeSite(m,filter){const S=SIM;let best=-1,bd=1e9;S.sites.forEach((p,i)=>{if(p.who>=0||(filter&&!filter(p)))return;let dx=p.x-m.x;if(S.periodic){if(dx>S.W/2)dx-=S.W;else if(dx<-S.W/2)dx+=S.W;}const d=Math.hypot(dx,p.y-m.y);if(d<bd){bd=d;best=i;}});return best;}
+function pdx(dx){const S=SIM;if(S.periodic){if(dx>S.W/2)return dx-S.W;if(dx<-S.W/2)return dx+S.W;}return dx;}
+
+function simStep(dt){
+  const S=SIM,M=S.mol,n=M.length;S.t+=dt;
+  const TK=(S.key==="flow"?Math.max(S.T,1):S.key==="enzyme"||S.key==="salt"?25:S.T)+273.15;
+  const vth=V0*Math.pow(TK/293,1.2)*S.vmul;
+  const ps=S.enz?S.enz.ps:1;
+  /* states */
+  const cnt=[0,0,0];
+  for(let i=0;i<n;i++){const m=M[i];if(m.hid)continue;
+    let s;
+    if(S.key==="flow"){s=m.site>=0?0:1;}
+    else s=stateOf(m);
+    if(s!==0&&m.site>=0)freeSite(m);
+    if(s===0&&m.site<0&&S.sites){const k=nearestFreeSite(m);if(k>=0)takeSite(m,k);else s=1;}
+    m.st=s;cnt[s]++;m.ax=0;m.ay=0;m.al=0;}
+  S.counts=cnt;
+  /* the channel: ice grows down from the cold surface when still, and breaks up when flowing */
+  if(S.key==="flow"){
+    const maxD=(S.b.b-S.b.t)*.6;
+    if(!S.flow)S.frozen=Math.min(maxD,S.frozen+dt*maxD/14);else S.frozen=Math.max(0,S.frozen-dt*maxD/3.5);
+    const lim=S.b.t+S.frozen;
+    for(let i=0;i<n;i++){const m=M[i];if(m.hid||m.drag)continue;
+      if(m.site>=0&&S.sites[m.site].y>lim+2){freeSite(m);m.st=1;m.vy+=30;m.vx+=S.flow?60:0;}
+      else if(m.site<0&&!S.flow&&m.y<lim+30){const k=nearestFreeSite(m,p=>p.y<=lim+2);if(k>=0){takeSite(m,k);m.st=0;}}}
+    S.counts=[0,0,0];M.forEach(m=>{if(!m.hid)S.counts[m.st]++;});
+  }
+  /* pair loop: cohesion and hydrogen-bond candidates */
+  const bestJ=new Int32Array(n*2).fill(-1),bestD=new Float32Array(n*2).fill(1e9);
+  const hx=new Float32Array(n*2),hy=new Float32Array(n*2);
+  for(let i=0;i<n;i++){const m=M[i];for(let k=0;k<2;k++){const p=hpos(m,k);hx[i*2+k]=p[0];hy[i*2+k]=p[1];}}
+  const capture=S.key==="bond"?56:46;
+  for(let i=0;i<n;i++){const mi=M[i];if(mi.hid)continue;
+    for(let j=i+1;j<n;j++){const mj=M[j];if(mj.hid)continue;
+      const dx=pdx(mj.x-mi.x),dy=mj.y-mi.y;if(Math.abs(dx)>PAIR||Math.abs(dy)>PAIR)continue;
+      const d=Math.hypot(dx,dy);if(d>PAIR||d<1e-3)continue;
+      if(S.coh&&mi.st===1&&mj.st===1&&d>BO){const f=S.coh*Math.min(1,(d-BO)/22);const ux=dx/d,uy=dy/d;mi.ax+=f*ux;mi.ay+=f*uy;mj.ax-=f*ux;mj.ay-=f*uy;}
+      if(mi.st===2||mj.st===2)continue;
+      for(let k=0;k<2;k++){
+        /* H of i toward O of j */
+        let ex=pdx(mj.x-hx[i*2+k]),ey=mj.y-hy[i*2+k],e=Math.hypot(ex,ey);
+        if(e<capture&&e<bestD[i*2+k]){const cs=((hx[i*2+k]-mi.x)*ex+(hy[i*2+k]-mi.y)*ey)/(DOH*e);if(cs>.2){bestD[i*2+k]=e;bestJ[i*2+k]=j;}}
+        ex=pdx(mi.x-hx[j*2+k]);ey=mi.y-hy[j*2+k];e=Math.hypot(ex,ey);
+        if(e<capture&&e<bestD[j*2+k]){const cs=((hx[j*2+k]-mj.x)*ex+(hy[j*2+k]-mj.y)*ey)/(DOH*e);if(cs>.2){bestD[j*2+k]=e;bestJ[j*2+k]=i;}}
+      }}}
+  /* hydrogen bonds: stateful, so they do not flicker. A bond forms when the H is close,
+     pointing the right way and the pair is not moving apart too fast; it breaks when
+     stretched or when the pair's kinetic energy beats it. */
+  const acc=new Uint8Array(n),nb=new Set(),bonds=[];
+  const kb=S.key==="bond"?120:90;
+  for(let h=0;h<n*2;h++){const j=bestJ[h];if(j<0)continue;const i=h>>1,k=h&1,mi=M[i],mj=M[j];
+    const key=h*1024+j,had=S.prevBonds.has(key),e=bestD[h];
+    const cs=((hx[h]-mi.x)*pdx(mj.x-hx[h])+(hy[h]-mi.y)*(mj.y-hy[h]))/(DOH*e);
+    const dvx=mi.vx-mj.vx,dvy=mi.vy-mj.vy,ke=.5*(dvx*dvx+dvy*dvy),dragd=mi.drag||mj.drag;
+    let ok;
+    if(had)ok=e<52&&cs>.2&&(dragd||!(ke>EB&&rnd()<.1));
+    else ok=e<capture&&cs>.45&&(dragd||ke<EB*.7);
+    if(!ok||acc[j]>=2)continue;
+    acc[j]++;nb.add(key);bonds.push([i,k,j]);
+    if(!had&&S.key==="bond"&&(S.t-mi.dragT<1.6||S.t-mj.dragT<1.6||mi.drag||mj.drag))noteMadeBond(i,j);
+    if(mi.st===0&&mj.st===0)continue;
+    /* spring pulls the H toward the right distance from O; applied at the H, so it turns the donor */
+    const ux=pdx(mj.x-hx[h])/e,uy=(mj.y-hy[h])/e,f=kb*(e-RHB);
+    const fx=f*ux,fy=f*uy,rx=hx[h]-mi.x,ry=hy[h]-mi.y;
+    if(!mi.drag){mi.ax+=fx*.5;mi.ay+=fy*.5;}
+    mi.al+=(rx*fy-ry*fx)/60;
+    if(!mj.drag){mj.ax-=fx*.5;mj.ay-=fy*.5;}
+    /* acceptor turns its δ− side to the donor */
+    const want=Math.atan2(-uy,-ux)+Math.PI;mj.al+=30*Math.sin(want-mj.a);
+  }
+  S.prevBonds=nb;S.bonds=bonds;
+  /* ions: hydration shells */
+  S.ionLinks=[];
+  if(S.ions.length)ionForces(dt);
+  /* protein and substrates */
+  S.hbx=[];
+  if(S.enz&&S.enz.beads)proteinWater(dt);
+  /* integrate water */
+  const B=S.b;
+  for(let i=0;i<n;i++){const m=M[i];if(m.hid)continue;
+    if(m.drag){m.w*=.8;m.w+=m.al*dt;m.w=clamp(m.w,-14,14);m.a+=m.w*dt;continue;}
+    if(m.rec){continue;}
+    let g=0,gam=S.gL,v=vth,gw=6,wt=3*vth/V0;
+    if(m.st===2){g=S.g?6:0;gam=.5;gw=1;}
+    else if(m.st===1){g=S.g;}
+    else{gam=8;v=vth*.55;const p=S.sites[m.site];
+      const dx=pdx(p.x-m.x),dy=p.y-m.y;let ax=150*dx,ay=150*dy;const am=Math.hypot(ax,ay);if(am>900){ax*=900/am;ay*=900/am;}
+      m.ax+=ax;m.ay+=ay;m.al+=90*Math.sin(p.ang-m.a);gw=9;}
+    if(S.key==="flow"&&m.st===1&&S.flow){const y=(m.y-B.t)/(B.b-B.t),prof=Math.max(0,1-Math.pow(2*y-1,2));m.ax+=520*prof;m.ay+=gauss()*140;}
+    m.ay+=g;
+    m.vx+=(m.ax-gam*m.vx)*dt+v*Math.sqrt(2*gam*dt)*gauss();
+    m.vy+=(m.ay-gam*m.vy)*dt+v*Math.sqrt(2*gam*dt)*gauss();
+    const sp=Math.hypot(m.vx,m.vy);if(sp>600){m.vx*=600/sp;m.vy*=600/sp;}
+    m.w+=(m.al-gw*m.w)*dt+wt*Math.sqrt(2*gw*dt)*gauss();m.w=clamp(m.w,-20,20);
+    m.x+=m.vx*dt;m.y+=m.vy*dt;m.a+=m.w*dt;
+    walls(m,RO+3);
+  }
+  /* overlaps: O-O, and a hydrogen poking into another oxygen */
+  for(let i=0;i<n;i++){const mi=M[i];if(mi.hid)continue;
+    for(let j=i+1;j<n;j++){const mj=M[j];if(mj.hid)continue;
+      const dx=pdx(mj.x-mi.x),dy=mj.y-mi.y;if(Math.abs(dx)>34||Math.abs(dy)>34)continue;const d=Math.hypot(dx,dy);
+      if(d<30&&d>1e-4){const o=(30-d),ux=dx/d,uy=dy/d;sep(mi,mj,ux,uy,o);}
+      else if(d<1e-4){mj.x+=1;}
+    }}
+  if(S.key==="bond"||S.coh){for(let h=0;h<n*2;h++){const i=h>>1,mi=M[i];if(mi.hid)continue;const p=hpos(mi,h&1);
+    for(let j=0;j<n;j++){if(j===i||M[j].hid)continue;const mj=M[j];const dx=pdx(mj.x-p[0]),dy=mj.y-p[1];if(Math.abs(dx)>20||Math.abs(dy)>20)continue;const d=Math.hypot(dx,dy);
+      if(d<19&&d>1e-4)sep(mi,mj,dx/d,dy/d,(19-d)*.5);}}}
+  if(S.ions.length)ionMove(dt,vth);
+  if(S.enz&&S.enz.beads)proteinMove(dt);
+  if(S.subs.length||S.prods.length)subMove(dt);
+}
+function sep(a,b,ux,uy,o){
+  const wa=a.drag||a.rec?0:(a.st===0?.3:1),wb=b.drag||b.rec?0:(b.st===0?.3:1),t=wa+wb;if(!t)return;
+  a.x-=ux*o*wa/t;a.y-=uy*o*wa/t;b.x+=ux*o*wb/t;b.y+=uy*o*wb/t;
+  const rv=(b.vx-a.vx)*ux+(b.vy-a.vy)*uy;if(rv<0){const imp=rv;if(wa){a.vx+=ux*imp*wa/t;a.vy+=uy*imp*wa/t;}if(wb){b.vx-=ux*imp*wb/t;b.vy-=uy*imp*wb/t;}}
+}
+function walls(m,r){const B=SIM.b;
+  if(SIM.periodic){if(m.x<0)m.x+=SIM.W;else if(m.x>=SIM.W)m.x-=SIM.W;}
+  else{if(m.x<B.l+r){m.x=B.l+r;m.vx=Math.abs(m.vx);}else if(m.x>B.r-r){m.x=B.r-r;m.vx=-Math.abs(m.vx);}}
+  const top=SIM.key==="phase"?pistonY():B.t;
+  if(m.y<top+r){m.y=top+r;m.vy=Math.abs(m.vy);}else if(m.y>B.b-r){m.y=B.b-r;m.vy=-Math.abs(m.vy);}
+}
+/* the piston comes down as pressure rises, stopping just above where the ice slab would sit */
+function pistonY(){const S=SIM,B=S.b;if(S.pmin==null){let my=1e9;S.sites.forEach(p=>{my=Math.min(my,p.y);});S.pmin=my-RO-DOH-12;}
+  const f=(Math.log10(S.P)+3)/4;return B.t+f*Math.max(0,S.pmin-B.t);}
+
+function ionForces(dt){
+  const S=SIM,M=S.mol;
+  S.ions.forEach(io=>{
+    const cap=io.r+RO+34;
+    const near=[];M.forEach((m,i)=>{if(m.hid||m.st!==1||m.drag)return;const dx=m.x-io.x,dy=m.y-io.y;if(Math.abs(dx)>cap||Math.abs(dy)>cap)return;const d=Math.hypot(dx,dy);if(d<cap)near.push([d,i]);});
+    near.sort((a,b)=>a[0]-b[0]);
+    const K=io.cr?(io.k==="po"?3:2):(io.r>12?7:5);io.shell=0;
+    for(let q=0;q<Math.min(K,near.length);q++){const m=M[near[q][1]];
+      if(io.q>0){ /* oxygen toward a cation */
+        const dx=io.x-m.x,dy=io.y-m.y,d=Math.hypot(dx,dy),d0=io.r+RO+2,f=70*(d-d0);
+        m.ax+=f*dx/d;m.ay+=f*dy/d;m.al+=60*Math.sin(Math.atan2(-dy,-dx)-m.a);
+        if(d<d0+9){io.shell++;S.ionLinks.push([m.x,m.y,io.x,io.y,io.q]);}
+      }else{ /* a hydrogen toward an anion */
+        let best=0,bd=1e9,bp=null;for(let k=0;k<2;k++){const p=hpos(m,k),d=Math.hypot(io.x-p[0],io.y-p[1]);if(d<bd){bd=d;best=k;bp=p;}}
+        const ux=(io.x-bp[0])/bd,uy=(io.y-bp[1])/bd,d0=io.r+RH+3,f=70*(bd-d0),fx=f*ux,fy=f*uy,rx=bp[0]-m.x,ry=bp[1]-m.y;
+        m.ax+=fx;m.ay+=fy;m.al+=(rx*fy-ry*fx)/40;
+        if(bd<d0+9){io.shell++;S.ionLinks.push([bp[0],bp[1],io.x,io.y,io.q]);}
+      }
+      m.hyd=1;
+    }
+  });
+}
+function ionMove(dt,vth){
+  const S=SIM,M=S.mol,B=S.b;
+  /* crystals fall, land, and (NaCl only) give up their edge ions one at a time */
+  S.crystals.forEach(cr=>{
+    if(cr.y<cr.land){cr.vy=Math.min(cr.vy+300*dt,160);cr.y+=cr.vy*dt;if(cr.y>=cr.land){cr.y=cr.land;cr.vy=0;}}
+    else{cr.t+=dt;
+      if(cr.kind==="nacl"){const att=cr.ions.filter(io=>io.cr===cr);
+        const gap=S.key==="bpe"?.35:(st.dev==="pc"?.55:.8);
+        if(att.length&&cr.t>.6&&cr.t-cr.rel>gap){cr.rel=cr.t;
+          let best=null,bn=9;att.forEach(io=>{const nn=att.filter(o=>o!==io&&Math.abs(o.gi-io.gi)+Math.abs(o.gj-io.gj)===1).length;if(nn<bn||(nn===bn&&rnd()<.5)){bn=nn;best=io;}});
+          if(best){best.cr=null;const dx=best.x-cr.x,dy=best.y-cr.y,d=Math.hypot(dx,dy)||1;best.vx=dx/d*70+(rnd()-.5)*30;best.vy=dy/d*70+(rnd()-.5)*30;}}
+        if(!att.length)cr.done=true;}
+    }
+    cr.ions.forEach(io=>{if(io.cr===cr){io.x=cr.x+io.lx;io.y=cr.y+io.ly;io.vx=io.vy=0;}});
+  });
+  S.crystals=S.crystals.filter(cr=>cr.ions.some(io=>io.cr===cr)||cr.y<cr.land);
+  const g=S.key==="bpe"?60:0;
+  S.ions.forEach(io=>{if(io.cr)return;
+    const gam=4,v=26*Math.sqrt(vth/V0);
+    io.vy+=g*dt;
+    io.vx+=(-gam*io.vx)*dt+v*Math.sqrt(2*gam*dt)*gauss();io.vy+=(-gam*io.vy)*dt+v*Math.sqrt(2*gam*dt)*gauss();
+    io.x+=io.vx*dt;io.y+=io.vy*dt;
+    if(io.x<B.l+io.r){io.x=B.l+io.r;io.vx=Math.abs(io.vx);}if(io.x>B.r-io.r){io.x=B.r-io.r;io.vx=-Math.abs(io.vx);}
+    if(io.y<B.t+io.r){io.y=B.t+io.r;io.vy=Math.abs(io.vy);}if(io.y>B.b-io.r){io.y=B.b-io.r;io.vy=-Math.abs(io.vy);}
+  });
+  /* ions keep apart from each other (their shells sit between them) and push water aside */
+  const I=S.ions;
+  for(let a=0;a<I.length;a++)for(let b=a+1;b<I.length;b++){const p=I[a],q=I[b];if(p.cr&&p.cr===q.cr)continue;
+    const dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy),md=p.r+q.r+(p.cr||q.cr?4:14);
+    if(d<md&&d>1e-3){const o=md-d,ux=dx/d,uy=dy/d,wp=p.cr?0:1,wq=q.cr?0:1,t=wp+wq;if(t){p.x-=ux*o*wp/t;p.y-=uy*o*wp/t;q.x+=ux*o*wq/t;q.y+=uy*o*wq/t;}}}
+  I.forEach(io=>{M.forEach(m=>{if(m.hid)return;const dx=m.x-io.x,dy=m.y-io.y;const md=io.r+RO+1;if(Math.abs(dx)>md||Math.abs(dy)>md)return;const d=Math.hypot(dx,dy);
+    if(d<md&&d>1e-3){const o=md-d,ux=dx/d,uy=dy/d;
+      if(io.cr||m.drag||m.st===0){if(!m.drag){m.x+=ux*o;m.y+=uy*o;}else{io.x-=ux*o;io.y-=uy*o;}}
+      else{m.x+=ux*o*.6;m.y+=uy*o*.6;io.x-=ux*o*.4;io.y-=uy*o*.4;}}});});
+}
+
+function proteinWater(dt){
+  const S=SIM,E=S.enz,M=S.mol,ps=E.ps,br=BR*ps;
+  E.beads.forEach((b,bi)=>{
+    if(b.phob){ /* hydrophobic: water is pushed away, no bonds */
+      const R=br+RO+12;M.forEach(m=>{if(m.hid||m.drag||m.rec)return;const dx=m.x-b.x,dy=m.y-b.y;if(Math.abs(dx)>R||Math.abs(dy)>R)return;const d=Math.hypot(dx,dy);if(d<R&&d>1e-3){const f=260*(1-d/R);m.ax+=f*dx/d;m.ay+=f*dy/d;}});
+    }else{ /* hydrophilic: up to two water molecules hydrogen-bond to it */
+      const R=br+RO+34,near=[];M.forEach((m,i)=>{if(m.hid||m.drag||m.rec)return;const dx=m.x-b.x,dy=m.y-b.y;if(Math.abs(dx)>R||Math.abs(dy)>R)return;const d=Math.hypot(dx,dy);if(d<R)near.push([d,i]);});
+      near.sort((a,c)=>a[0]-c[0]);
+      for(let q=0;q<Math.min(2,near.length);q++){const m=M[near[q][1]];
+        let bk=0,bd=1e9,bp=null;for(let k=0;k<2;k++){const p=hpos(m,k),d=Math.hypot(b.x-p[0],b.y-p[1]);if(d<bd){bd=d;bk=k;bp=p;}}
+        const ux=(b.x-bp[0])/bd,uy=(b.y-bp[1])/bd,d0=br+RH+9,f=60*(bd-d0),fx=f*ux,fy=f*uy,rx=bp[0]-m.x,ry=bp[1]-m.y;
+        m.ax+=fx;m.ay+=fy;m.al+=(rx*fy-ry*fx)/50;
+        if(bd<d0+10)S.hbx.push([bp[0],bp[1],b.x-ux*br,b.y-uy*br]);
+      }
+    }
+  });
+}
+function proteinMove(dt){
+  const S=SIM,E=S.enz,ps=E.ps,B=E.beads,n=B.length,br=BR*ps,bl=BL*ps;
+  E.foldT+=dt;
+  /* dropping in: a straight chain sinks into view */
+  if(E.drop){const t=E.foldT/1.1;const y=lerp(-30*ps,E.C.y-10*ps,ease(t));B.forEach((b,k)=>{b.x=E.C.x+(k-(n-1)/2)*bl*.8;b.y=y+Math.sin(k*.9)*bl*.35;b.vx=b.vy=0;});if(t>=1)E.drop=false;}
+  else{
+    /* hydrophobic collapse first, then the chain settles into its fold */
+    const tf=E.foldT-1.1,kT=E.folded?40:40*ease((tf-.7)/3.2),kH=E.folded?0:90*(1-ease((tf-3)/2));
+    let hx=0,hy=0,hn=0;B.forEach(b=>{if(b.phob){hx+=b.x;hy+=b.y;hn++;}});hx/=hn;hy/=hn;
+    B.forEach((b,k)=>{let ax=0,ay=0;
+      if(kT>0){const t=resTarget(k,E.c);ax+=kT*(E.C.x+t[0]*ps-b.x);ay+=kT*(E.C.y+t[1]*ps-b.y);}
+      if(kH>0&&b.phob){const dx=hx-b.x,dy=hy-b.y,d=Math.hypot(dx,dy);if(d>12*ps){ax+=kH*dx/d*Math.min(1,d/(40*ps))*2.2;ay+=kH*dy/d*Math.min(1,d/(40*ps))*2.2;}}
+      if(kH>0&&!b.phob){const dx=b.x-hx,dy=b.y-hy,d=Math.hypot(dx,dy)||1;ax+=kH*.5*dx/d;ay+=kH*.5*dy/d;}
+      const gam=6,v=E.folded?7:14;
+      b.vx+=(ax-gam*b.vx)*dt+v*Math.sqrt(2*gam*dt)*gauss();b.vy+=(ay-gam*b.vy)*dt+v*Math.sqrt(2*gam*dt)*gauss();
+      b.x+=b.vx*dt;b.y+=b.vy*dt;});
+    for(let it=0;it<4;it++){
+      for(let k=0;k<n-1;k++){const a=B[k],c=B[k+1],dx=c.x-a.x,dy=c.y-a.y,d=Math.hypot(dx,dy)||1,o=(d-bl)/2;a.x+=dx/d*o;a.y+=dy/d*o;c.x-=dx/d*o;c.y-=dy/d*o;}
+      for(let a=0;a<n;a++)for(let c=a+2;c<n;c++){const p=B[a],q=B[c],dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy),md=2*br-2*ps;if(d<md&&d>1e-3){const o=(md-d)/2;p.x-=dx/d*o;p.y-=dy/d*o;q.x+=dx/d*o;q.y+=dy/d*o;}}
+    }
+    if(!E.folded&&tf>5.4){E.folded=true;markGoal("fold");}
+  }
+  /* water stays out of the protein: out of each amino acid, and out of the folded core
+     (the open mouth of the active site excepted) */
+  if(E.folded||E.foldT>3.2){const Rx=46*ps;S.mol.forEach(m=>{if(m.hid||m.rec||m.drag)return;const dx=m.x-E.C.x,dy=m.y-E.C.y,d=Math.hypot(dx,dy);
+    if(d<Rx&&d>1e-3&&!(dx>18*ps&&Math.abs(Math.atan2(dy,dx))<.5)){m.x=E.C.x+dx/d*Rx;m.y=E.C.y+dy/d*Rx;m.vx+=dx/d*30;m.vy+=dy/d*30;}});}
+  S.mol.forEach(m=>{if(m.hid||m.rec)return;B.forEach(b=>{const dx=m.x-b.x,dy=m.y-b.y,md=br+RO-1;if(Math.abs(dx)>md||Math.abs(dy)>md)return;const d=Math.hypot(dx,dy);if(d<md&&d>1e-3){const o=md-d;if(m.drag)return;m.x+=dx/d*o;m.y+=dy/d*o;}});});
+  /* induced fit: the closure eases toward whatever the state asks for */
+  const want=E.state==="closing"||E.state==="closed"||E.state==="cat"?1:0;
+  E.c+=clamp(want-E.c,-dt/.7,dt/.7);
+  if(E.state==="closing"&&E.c>=.98){E.state="closed";E.tc=0;markGoal("bind");}
+  if(E.state==="closed"){E.tc+=dt;if(curStepKey()==="cat"&&E.tc>.5){E.state="cat";E.tcat=0;}}
+  if(E.state==="cat")catalyze(dt);
+  if(E.state==="opening"&&E.c<=.02){E.state="open";}
+}
+function catalyze(dt){
+  const S=SIM,E=S.enz,ps=E.ps,[sx,sy]=siteXY();E.tcat+=dt;const t=E.tcat;
+  const sub=S.subs.find(s=>s.state==="bound");if(!sub){E.state="opening";return;}
+  if(!E.wat){let best=null,bd=1e9;S.mol.forEach(m=>{if(m.hid||m.drag)return;const d=Math.hypot(m.x-sx,m.y-sy);if(d<bd){bd=d;best=m;}});E.wat=best;if(best){best.rec=1;best.fx=best.x;best.fy=best.y;best.fa=best.a;}}
+  const m=E.wat;
+  if(m){const tx=sx+2*ps,ty=sy-(RO+12)*ps*.9-8,e=ease(t/.9);m.x=lerp(m.fx,tx,e);m.y=lerp(m.fy,ty,e);m.a=lerp(m.fa,Math.PI/2,e);m.vx=m.vy=0;}
+  if(t>1.25&&!E.split){E.split=true;
+    if(m){m.hid=1;m.rec=0;m.respawn=S.t+1.6;}
+    sub.state="gone";
+    const a=sub.ang,cx=Math.cos(a),sn=Math.sin(a),h=9*ps;
+    S.prods.push({x:sub.x-cx*h,y:sub.y-sn*h,vx:-10,vy:-50,ang:a,va:0,kind:"A",born:S.t},{x:sub.x+cx*h,y:sub.y+sn*h,vx:70,vy:40,ang:a,va:0,kind:"B",born:S.t});
+    S.flash=S.t;
+  }
+  if(t>1.6){E.state="opening";E.wat=null;E.split=false;S.subs=S.subs.filter(s=>s.state!=="gone");S.turn++;bumpCount("turn2",S.turn);
+    S.prods.slice(-2).forEach((p,i)=>{p.vx=110+(i?20:-10);p.vy=i?60:-60;});}
+}
+function subMove(dt){
+  const S=SIM,E=S.enz,ps=E.ps,B=S.b,[sx,sy]=siteXY(),ar=9*ps;
+  S.mol.forEach(m=>{if(m.hid&&m.respawn&&S.t>m.respawn){m.hid=0;m.respawn=0;m.x=S.b.l+10;m.y=S.b.t+20+rnd()*(S.H-40);m.vx=40;m.vy=0;}});
+  const all=S.subs.concat(S.prods);
+  all.forEach(s=>{
+    if(s.state==="bound"){return;}
+    if(s.state==="dock"){s.t+=dt;const e=ease(s.t/.35);s.x=lerp(s.fx,sx,e);s.y=lerp(s.fy,sy,e);s.ang=lerp(s.fa,s.fa+(((0-s.fa)%6.2832+9.4248)%6.2832-3.1416),e);if(s.t>=.35){s.state="bound";s.ang=0;E.state="closing";}return;}
+    if(s.drag){return;}
+    const gam=3,v=34;let ax=0,ay=0;
+    if(s.state==="free"){
+      if(s.vy>0&&s.y<40*ps)ay+=120;
+      if(E.state==="open"){const dx=sx-s.x,dy=sy-s.y,d=Math.hypot(dx,dy);
+        /* long-range steering toward the site (electrostatic steering is real); from behind, go round */
+        if(d<190*ps){let tx=sx,ty=sy;if(s.x<sx-6*ps){tx=sx+70*ps;ty=s.y<sy?sy-80*ps:sy+80*ps;}const ex=tx-s.x,ey=ty-s.y,ed=Math.hypot(ex,ey)||1;ax+=55*ex/ed;ay+=55*ey/ed;}
+        if(d<13*ps){s.state="dock";s.t=0;s.fx=s.x;s.fy=s.y;s.fa=s.ang;return;}}
+    }
+    s.vx+=(ax-gam*s.vx)*dt+v*Math.sqrt(2*gam*dt)*gauss();s.vy+=(ay-gam*s.vy)*dt+v*Math.sqrt(2*gam*dt)*gauss();
+    s.va+=(-3*s.va)*dt+2*Math.sqrt(6*dt)*gauss();
+    s.x+=s.vx*dt;s.y+=s.vy*dt;s.ang+=s.va*dt;
+    const r=ar*2;if(s.x<B.l+r){s.x=B.l+r;s.vx=Math.abs(s.vx);}if(s.x>B.r-r){s.x=B.r-r;s.vx=-Math.abs(s.vx);}if(s.y>B.b-r){s.y=B.b-r;s.vy=-Math.abs(s.vy);}if(s.y<B.t+r&&s.vy<0){s.y=B.t+r;s.vy=Math.abs(s.vy);}
+  });
+  /* substrates and products bump off the protein and push water aside */
+  all.forEach(s=>{if(s.state==="bound"||s.state==="dock")return;const pts=subAtoms(s);
+    pts.forEach(p=>{if(E.beads)E.beads.forEach(b=>{const dx=p[0]-b.x,dy=p[1]-b.y,md=p[2]+BR*ps,d=Math.hypot(dx,dy);if(d<md&&d>1e-3){const o=md-d;s.x+=dx/d*o;s.y+=dy/d*o;s.vx+=dx/d*20;s.vy+=dy/d*20;}});});});
+  all.forEach(s=>{if(s.state==="gone")return;const pts=subAtoms(s);S.mol.forEach(m=>{if(m.hid||m.rec)return;pts.forEach(p=>{const dx=m.x-p[0],dy=m.y-p[1],md=p[2]+RO,d=Math.hypot(dx,dy);if(d<md&&d>1e-3){const o=md-d;if(m.drag){if(!s.drag&&s.state==="free"){s.x-=dx/d*o;s.y-=dy/d*o;}}else{m.x+=dx/d*o;m.y+=dy/d*o;}}});});});
+  if(S.prods.length>8)S.prods.splice(0,S.prods.length-8);
+}
+function subAtoms(s){const ps=SIM.enz.ps,h=9*ps,r=9*ps,c=Math.cos(s.ang),sn=Math.sin(s.ang);
+  if(s.kind==="A"||s.kind==="B")return[[s.x,s.y,r]];
+  return[[s.x-c*h,s.y-sn*h,r],[s.x+c*h,s.y+sn*h,r]];}
+
+/* ================= drawing ================= */
+let kpx=1,hs=1,pdk=1;
+function W2(){return SIM.s*kpx;}
+function lw(px){return px/SIM.s;}
+function draw(){
+  const S=SIM;if(!S)return;
+  ctx.setTransform(kpx,0,0,kpx,0,0);ctx.fillStyle=BG;ctx.fillRect(0,0,NW,NH);
+  ctx.setTransform(W2(),0,0,W2(),0,0);ctx.lineCap="round";ctx.lineJoin="round";
+  const B=S.b;
+  /* backgrounds and containers */
+  if(S.key==="flow"){
+    ctx.fillStyle=DARK?"rgba(160,170,190,0.08)":"rgba(200,210,225,0.35)";ctx.fillRect(0,0,S.W,B.t);
+    ctx.fillStyle=TINT();ctx.fillRect(0,B.t,S.W,B.b-B.t);
+    if(S.frozen>1){ctx.fillStyle=DARK?"rgba(180,225,245,0.12)":"rgba(190,230,248,0.55)";ctx.fillRect(0,B.t,S.W,S.frozen+8);}
+    ctx.fillStyle=DARK?"#3A3024":"#C9B79A";ctx.fillRect(0,B.b,S.W,S.H-B.b);
+    ctx.strokeStyle=SOFT;ctx.lineWidth=lw(2);ctx.beginPath();ctx.moveTo(0,B.t);ctx.lineTo(S.W,B.t);ctx.stroke();
+    if(S.flow){ctx.strokeStyle=BOND;ctx.lineWidth=lw(2.5);ctx.globalAlpha=.55;for(let i=0;i<4;i++){const y=B.t+(B.b-B.t)*(.3+.14*i),x0=((S.t*90+i*170)%(S.W+160))-120;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x0+60,y);ctx.lineTo(x0+50,y-7);ctx.moveTo(x0+60,y);ctx.lineTo(x0+50,y+7);ctx.stroke();}ctx.globalAlpha=1;}
+  }else if(S.fill){ctx.fillStyle=TINT();ctx.fillRect(B.l,B.t,B.r-B.l,B.b-B.t);}
+  if(S.key==="heat"||S.key==="phase"||S.key==="bpe"||S.key==="salt"){
+    ctx.strokeStyle=SOFT;ctx.lineWidth=lw(2.5);ctx.beginPath();ctx.moveTo(B.l,B.t);ctx.lineTo(B.l,B.b);ctx.lineTo(B.r,B.b);ctx.lineTo(B.r,B.t);ctx.stroke();
+    if(S.key==="phase"){const y=pistonY();ctx.fillStyle=DARK?"#4A443A":"#B9B2A5";ctx.fillRect(B.l,y-lw(12),B.r-B.l,lw(12));ctx.fillRect((B.l+B.r)/2-lw(5),0,lw(10),y-lw(12));}
+  }
+  /* hydrogen bonds under the atoms */
+  ctx.strokeStyle=BOND;ctx.lineWidth=lw(st.dev==="pc"?1.6:2.4);ctx.setLineDash([lw(4),lw(3.5)]);ctx.beginPath();
+  S.bonds.forEach(([i,k,j])=>{const mi=S.mol[i],mj=S.mol[j],p=hpos(mi,k);let dx=mj.x-p[0];if(S.periodic&&Math.abs(dx)>S.W/2)return;const dy=mj.y-p[1],d=Math.hypot(dx,dy)||1;
+    ctx.moveTo(p[0]+dx/d*RH,p[1]+dy/d*RH);ctx.lineTo(mj.x-dx/d*RO,mj.y-dy/d*RO);});
+  S.hbx.forEach(([x1,y1,x2,y2])=>{const dx=x2-x1,dy=y2-y1,d=Math.hypot(dx,dy)||1;ctx.moveTo(x1+dx/d*RH,y1+dy/d*RH);ctx.lineTo(x2,y2);});
+  ctx.stroke();
+  /* ion-dipole attractions, dotted */
+  ctx.lineWidth=lw(1.6);ctx.setLineDash([lw(1.5),lw(3)]);
+  S.ionLinks.forEach(([x1,y1,x2,y2,q])=>{ctx.strokeStyle=q>0?"#7B61B8":"#3E9B4F";ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();});
+  ctx.setLineDash([]);
+  /* hydration spheres */
+  S.ions.forEach(io=>{if(io.cr||io.shell<3)return;ctx.strokeStyle=io.q>0?"rgba(123,97,184,0.35)":"rgba(62,155,79,0.35)";ctx.lineWidth=lw(1.5);ctx.beginPath();ctx.arc(io.x,io.y,io.r+RO*2+4,0,6.2832);ctx.stroke();});
+  /* protein */
+  if(S.enz&&S.enz.beads)drawProtein();
+  /* water */
+  const hc=HC(),he=HE(),showD=S.key==="bond"&&(st.dev==="ipad"||true);
+  S.mol.forEach((m,i)=>{if(m.hid)return;
+    const h0=hpos(m,0),h1=hpos(m,1);
+    [h0,h1].forEach(p=>{const xs=S.periodic?[p[0],p[0]-S.W,p[0]+S.W]:[p[0]];xs.forEach(x=>{ctx.fillStyle=hc;ctx.strokeStyle=he;ctx.lineWidth=lw(1.3);ctx.beginPath();ctx.arc(x,p[1],RH,0,6.2832);ctx.fill();ctx.stroke();});});
+    const xs=S.periodic?[m.x,m.x-S.W,m.x+S.W]:[m.x];
+    xs.forEach(x=>{ctx.fillStyle=OC;ctx.strokeStyle=OE;ctx.lineWidth=lw(1.4);ctx.beginPath();ctx.arc(x,m.y,RO,0,6.2832);ctx.fill();ctx.stroke();});
+    if(i===hover||m.drag){ctx.strokeStyle=BOND;ctx.lineWidth=lw(2.5);ctx.beginPath();ctx.arc(m.x,m.y,RO+5,0,6.2832);ctx.stroke();}
+  });
+  /* partial charges: always on the iPad's few molecules in step 1; on the computer, only on the one under the mouse */
+  if(S.key==="bond"){S.mol.forEach((m,i)=>{if(m.hid)return;if(st.dev==="pc"&&i!==hover&&!m.drag)return;
+    const back=m.a+Math.PI;labelW("δ−",m.x+Math.cos(back)*(RO+8),m.y+Math.sin(back)*(RO+8),SOFT,st.dev==="pc"?14:12);
+    for(let k=0;k<2;k++){const a=m.a+(k?HA:-HA);labelW("δ+",m.x+Math.cos(a)*(DOH+RH+8),m.y+Math.sin(a)*(DOH+RH+8),SOFT,st.dev==="pc"?14:12);}});}
+  /* ions */
+  S.ions.forEach(io=>{ctx.fillStyle=io.c;ctx.strokeStyle=io.e;ctx.lineWidth=lw(1.5);ctx.beginPath();
+    if(io.k==="po"){ctx.arc(io.x,io.y,io.r*.55,0,6.2832);ctx.fill();ctx.stroke();for(let q=0;q<4;q++){const a=q*1.5708+.785;ctx.beginPath();ctx.arc(io.x+Math.cos(a)*io.r*.62,io.y+Math.sin(a)*io.r*.62,io.r*.38,0,6.2832);ctx.fill();ctx.stroke();}}
+    else{ctx.arc(io.x,io.y,io.r,0,6.2832);ctx.fill();ctx.stroke();}
+    labelW(io.t,io.x,io.y,"#FFFFFF",io.r>12?15:12,true);});
+  S.crystals.forEach(cr=>{if(cr.ions.some(io=>io.cr===cr)){let y0=1e9;cr.ions.forEach(io=>{if(io.cr===cr)y0=Math.min(y0,io.y-io.r);});labelW(cr.label,cr.x,y0-12,SOFT,14);}});
+  /* substrates and products */
+  if(S.enz){S.subs.concat(S.prods).forEach(drawSub);
+    if(S.flash&&S.t-S.flash<.5){const[sx,sy]=siteXY();ctx.globalAlpha=1-(S.t-S.flash)/.5;ctx.fillStyle="#FFD34D";ctx.beginPath();ctx.arc(sx,sy,16*S.enz.ps,0,6.2832);ctx.fill();ctx.globalAlpha=1;}}
+  drawOverlay();
+}
+function labelW(t,x,y,col,px,bold){ /* text at a fixed screen size, placed in world coordinates */
+  ctx.save();ctx.setTransform(kpx,0,0,kpx,0,0);const X=x*SIM.s,Y=y*SIM.s;
+  ctx.font=(bold?"700 ":"600 ")+px+"px Archivo, 'Helvetica Neue', Arial, sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=col;ctx.fillText(t,X,Y);ctx.restore();}
+function tag(t,x,y,align){ /* a boxed label in screen coordinates */
+  ctx.save();ctx.setTransform(kpx,0,0,kpx,0,0);ctx.font="600 16px Archivo, 'Helvetica Neue', Arial, sans-serif";ctx.textBaseline="middle";ctx.textAlign=align||"center";
+  const w=ctx.measureText(t).width,x0=align==="left"?x:align==="right"?x-w:x-w/2;ctx.fillStyle=BG;ctx.globalAlpha=.88;ctx.fillRect(x0-5,y-12,w+10,24);ctx.globalAlpha=1;ctx.fillStyle=SOFT;ctx.fillText(t,x,y);ctx.restore();}
+function drawProtein(){
+  const S=SIM,E=S.enz,ps=E.ps,B=E.beads,br=BR*ps;
+  ctx.strokeStyle=DARK?"#8C857A":"#9A9388";ctx.lineWidth=br*.7;ctx.beginPath();B.forEach((b,k)=>{if(k)ctx.lineTo(b.x,b.y);else ctx.moveTo(b.x,b.y);});ctx.stroke();
+  B.forEach(b=>{ctx.fillStyle=b.phob?PHOB:PHIL;ctx.strokeStyle=b.phob?PHOBE:PHILE;ctx.lineWidth=lw(1.6);ctx.beginPath();ctx.arc(b.x,b.y,br,0,6.2832);ctx.fill();ctx.stroke();
+    if(b.site){ctx.strokeStyle=SITE;ctx.lineWidth=lw(3.5);ctx.beginPath();ctx.arc(b.x,b.y,br+lw(3),0,6.2832);ctx.stroke();}});
+  /* binding contacts */
+  const sub=S.subs.find(s=>s.state==="bound");
+  if(sub){const at=subAtoms(sub);ctx.strokeStyle=SITE;ctx.lineWidth=lw(2);ctx.setLineDash([lw(2),lw(3)]);ctx.beginPath();
+    B.forEach(b=>{if(!b.site)return;const p=Math.hypot(b.x-at[0][0],b.y-at[0][1])<Math.hypot(b.x-at[1][0],b.y-at[1][1])?at[0]:at[1];ctx.moveTo(b.x,b.y);ctx.lineTo(p[0],p[1]);});ctx.stroke();ctx.setLineDash([]);}
+}
+function drawSub(s){
+  if(s.state==="gone")return;const ps=SIMenzPS(),r=9*ps;
+  const at=subAtoms(s);
+  if(!s.kind){ctx.strokeStyle=DARK?"#D8D2C6":"#5A544A";ctx.lineWidth=lw(4);ctx.beginPath();ctx.moveTo(at[0][0],at[0][1]);ctx.lineTo(at[1][0],at[1][1]);ctx.stroke();
+    hexAt(at[0][0],at[0][1],r,SUBA,s.ang);circAt(at[1][0],at[1][1],r,SUBB);}
+  else{const fade=Math.max(.35,1-(SIM.t-s.born)/14);ctx.globalAlpha=fade;
+    if(s.kind==="A"){hexAt(s.x,s.y,r,SUBA,s.ang);const a=s.ang;ctx.fillStyle=OC;ctx.beginPath();ctx.arc(s.x+Math.cos(a)*(r+4*ps),s.y+Math.sin(a)*(r+4*ps),4.5*ps,0,6.2832);ctx.fill();ctx.fillStyle=HC();ctx.strokeStyle=HE();ctx.lineWidth=lw(1);ctx.beginPath();ctx.arc(s.x+Math.cos(a)*(r+10*ps),s.y+Math.sin(a)*(r+10*ps),3*ps,0,6.2832);ctx.fill();ctx.stroke();}
+    else{circAt(s.x,s.y,r,SUBB);const a=s.ang+Math.PI;ctx.fillStyle=HC();ctx.strokeStyle=HE();ctx.lineWidth=lw(1);ctx.beginPath();ctx.arc(s.x+Math.cos(a)*(r+3*ps),s.y+Math.sin(a)*(r+3*ps),3.2*ps,0,6.2832);ctx.fill();ctx.stroke();}
+    ctx.globalAlpha=1;}
+  if(s.drag){ctx.strokeStyle=BOND;ctx.lineWidth=lw(2.5);ctx.beginPath();ctx.arc(s.x,s.y,r*2.4,0,6.2832);ctx.stroke();}
+}
+function SIMenzPS(){return SIM.enz?SIM.enz.ps:1;}
+function hexAt(x,y,r,c,a){ctx.fillStyle=c;ctx.strokeStyle="#7A4E12";ctx.lineWidth=lw(1.5);ctx.beginPath();for(let i=0;i<6;i++){const t=a+i*1.0472;const px=x+Math.cos(t)*r*1.08,py=y+Math.sin(t)*r*1.08;if(i)ctx.lineTo(px,py);else ctx.moveTo(px,py);}ctx.closePath();ctx.fill();ctx.stroke();}
+function circAt(x,y,r,c){ctx.fillStyle=c;ctx.strokeStyle="#3E2A66";ctx.lineWidth=lw(1.5);ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();ctx.stroke();}
+function drawOverlay(){
+  const S=SIM,B=S.b,s=S.s;
+  if(S.key==="flow"){tag("cold air, −10 °C",NW/2,B.t*s/2);
+    tag(S.flow?"flowing: stirred top to bottom":S.frozen>8?"still: ice grows down from the surface":"still water",NW/2,(B.b*s+NH)/2);
+    if(!S.flow)tag("4 °C, densest water, at the bottom",NW-12,B.b*s-18,"right");}
+  if(S.key==="phase"){const y=pistonY()*s;tag("piston: "+fmtP(S.P),B.r*s-10,y+18,"right");}
+  if(S.key==="enzyme"){const E=S.enz;
+    if(!E.beads)tag("Press Drop the chain",NW/2,NH/2);
+    else if(E.folded&&curStepKey()==="fold"){let hx=0,hy=0,hn=0,R=0;E.beads.forEach(b=>{if(b.phob){hx+=b.x;hy+=b.y;hn++;}});hx/=hn;hy/=hn;E.beads.forEach(b=>{if(b.phob)R=Math.max(R,Math.hypot(b.x-hx,b.y-hy));});
+      ctx.strokeStyle=PHOBE;ctx.lineWidth=lw(2);ctx.setLineDash([lw(6),lw(5)]);ctx.beginPath();ctx.arc(hx,hy,R+BR*E.ps+lw(4),0,6.2832);ctx.stroke();ctx.setLineDash([]);
+      tag("hydrophobic core",hx*s,(hy-R-BR*E.ps)*s-26);}
+    else if(E.folded&&E.state==="open"&&!S.subs.some(q=>q.state!=="free")){const[sx,sy]=siteXY();tag("active site",sx*s+48,sy*s,"left");}
+    const topY=(E.C.y-64*E.ps)*s-16,botY=Math.min(NH-18,(E.C.y+64*E.ps)*s+16),midX=(E.C.x+20*E.ps)*s;
+    if(E.state==="closing"||E.state==="closed")tag(curStepKey()==="cat"?"substrate bound":"induced fit: the active site closes",midX,topY);
+    if(E.state==="cat"&&E.tcat<1.25)tag("a water molecule moves in",midX,botY);
+    else if(E.state==="opening"||(S.flash&&S.t-S.flash<2))tag("bond split: two products leave, the enzyme reopens",midX,botY);
+  }
+}
+function fmtP(P){return P>=.1?P.toFixed(P>=10?0:2)+" atm":P>=.01?P.toFixed(3)+" atm":P.toFixed(4)+" atm";}
+
+/* ================= phase diagram ================= */
+const PDX0=-40,PDX1=160,PDY0=-3,PDY1=1,PDM={l:50,r:10,t:12,b:44},PDS=300;
+function pdX(T){return PDM.l+(T-PDX0)/(PDX1-PDX0)*(PDS-PDM.l-PDM.r);}
+function pdY(P){return PDS-PDM.b-(Math.log10(P)-PDY0)/(PDY1-PDY0)*(PDS-PDM.t-PDM.b);}
+function pdInv(x,y){return{T:PDX0+(x-PDM.l)/(PDS-PDM.l-PDM.r)*(PDX1-PDX0),P:Math.pow(10,PDY0+(PDS-PDM.b-y)/(PDS-PDM.t-PDM.b)*(PDY1-PDY0))};}
+function pdCurves(c,dB,dF,dash,col){
+  c.strokeStyle=col;c.lineWidth=2;c.setLineDash(dash?[5,4]:[]);
+  /* sublimation */
+  c.beginPath();for(let T=PDX0;T<=.01;T+=.5){const x=pdX(T),y=pdY(Math.max(pSub(T),1e-3));if(T===PDX0)c.moveTo(x,y);else c.lineTo(x,y);}c.stroke();
+  /* vaporization */
+  c.beginPath();let first=true;for(let T=.01;T<=PDX1;T+=.5){const P=pVap(T-dB);if(P<.006&&dB>0)continue;const x=pdX(T),y=pdY(Math.min(P,10));if(first){c.moveTo(x,y);first=false;}else c.lineTo(x,y);if(P>10)break;}c.stroke();
+  /* melting */
+  c.beginPath();first=true;for(let lp=Math.log10(.006);lp<=1;lp+=.02){const P=Math.pow(10,lp),x=pdX(tMelt(P)-dF),y=pdY(P);if(first){c.moveTo(x,y);first=false;}else c.lineTo(x,y);}c.stroke();c.setLineDash([]);
+}
+function drawPD(){
+  if(!SIM||(SIM.key!=="phase"&&SIM.key!=="bpe"))return;
+  const S=SIM,c=pctx;c.setTransform(pdk,0,0,pdk,0,0);
+  if(!pdCache||pdCache.w!==pd.width||pdCache.dB!==S.dB){
+    /* region tint, cached */
+    const off=document.createElement("canvas");off.width=pd.width;off.height=pd.height;const o=off.getContext("2d");o.setTransform(pdk,0,0,pdk,0,0);
+    o.fillStyle=BG;o.fillRect(0,0,PDS,PDS);
+    const cols=DARK?["rgba(150,200,235,0.16)","rgba(80,140,200,0.2)","rgba(220,170,120,0.12)"]:["rgba(170,210,235,0.55)","rgba(110,165,215,0.35)","rgba(240,200,160,0.35)"];
+    const step=3;for(let x=PDM.l;x<PDS-PDM.r;x+=step)for(let y=PDM.t;y<PDS-PDM.b;y+=step){const q=pdInv(x+step/2,y+step/2);o.fillStyle=cols[phaseOf(q.T,q.P,0,0)];o.fillRect(x,y,step,step);}
+    pdCurves(o,0,0,false,INK);
+    if(S.dB>0)pdCurves(o,S.dB,S.dF,true,"#7B61B8");
+    o.strokeStyle=SOFT;o.lineWidth=1.2;o.strokeRect(PDM.l,PDM.t,PDS-PDM.l-PDM.r,PDS-PDM.t-PDM.b);
+    o.font="600 13px Archivo, 'Helvetica Neue', Arial, sans-serif";o.fillStyle=SOFT;o.textAlign="center";o.textBaseline="top";
+    [-40,0,50,100,150].forEach(T=>{o.fillText(T,pdX(T),PDS-PDM.b+4);});o.fillText("temperature (°C)",(PDM.l+PDS-PDM.r)/2,PDS-PDM.b+22);
+    o.textAlign="right";o.textBaseline="middle";[[.001,"0.001"],[.01,"0.01"],[.1,"0.1"],[1,"1"],[10,"10"]].forEach(([P,t])=>o.fillText(t,PDM.l-4,pdY(P)));
+    o.save();o.translate(11,(PDM.t+PDS-PDM.b)/2);o.rotate(-Math.PI/2);o.textAlign="center";o.fillText("pressure (atm)",0,0);o.restore();
+    o.setLineDash([2,3]);o.strokeStyle=SOFT;o.beginPath();o.moveTo(PDM.l,pdY(1));o.lineTo(PDS-PDM.r,pdY(1));o.stroke();o.setLineDash([]);
+    o.font="700 14px Archivo, 'Helvetica Neue', Arial, sans-serif";o.fillStyle=INK;o.textAlign="center";
+    o.fillText("SOLID",pdX(-24),pdY(.5));o.fillText("LIQUID",pdX(52),pdY(3));o.fillText("GAS",pdX(100),pdY(.012));
+    o.font="600 12.5px Archivo, 'Helvetica Neue', Arial, sans-serif";o.fillStyle=SOFT;o.textAlign="left";
+    o.beginPath();o.arc(pdX(.01),pdY(.006),3,0,6.2832);o.fillStyle=INK;o.fill();o.fillStyle=SOFT;o.fillText("triple point",pdX(.01)+5,pdY(.006)+9);
+    o.fillText("1 atm",PDM.l+4,pdY(1)-9);o.fillText("100 °C",pdX(100)+5,pdY(1)+10);
+    if(S.dB>0){o.fillStyle="#7B61B8";o.fillText("salt water (dashed)",pdX(20),pdY(7));}
+    pdCache={img:off,w:pd.width,dB:S.dB};
+  }
+  c.setTransform(1,0,0,1,0,0);c.drawImage(pdCache.img,0,0);c.setTransform(pdk,0,0,pdk,0,0);
+  const x=pdX(clamp(S.T,PDX0,PDX1)),y=pdY(clamp(S.P,.001,10));
+  c.fillStyle="#D2382F";c.strokeStyle=BG;c.lineWidth=2.5;c.beginPath();c.arc(x,y,7,0,6.2832);c.fill();c.stroke();
+}
+
+/* ================= state and saving ================= */
+const KEY="waterpatch";
+let st={dev:"ipad",tab:0,level:"bio",step:[0,0],ans:{},goals:{},cnt:{},teach:false,rec:[false,false]};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+try{const raw=localStorage.getItem(KEY);if(raw){const s=JSON.parse(raw);if(s&&typeof s==="object"){
+  st.dev=s.dev==="pc"?"pc":"ipad";st.tab=s.tab===1?1:0;st.level=["bio","chem","de"].indexOf(s.level)>=0?s.level:"bio";
+  if(Array.isArray(s.step))st.step=[clamp(s.step[0]|0,0,TABS[0].steps.length-1),clamp(s.step[1]|0,0,TABS[1].steps.length-1)];
+  if(s.ans&&typeof s.ans==="object")Object.keys(s.ans).forEach(k=>{if(ITEMS[k]&&s.ans[k]&&typeof s.ans[k].f==="boolean")st.ans[k]={f:s.ans[k].f,c:s.ans[k].c|0};});
+  if(s.goals&&typeof s.goals==="object")Object.keys(s.goals).forEach(k=>{if(s.goals[k])st.goals[k]=1;});
+  if(s.cnt&&typeof s.cnt==="object")Object.keys(s.cnt).forEach(k=>{st.cnt[k]=Math.max(0,s.cnt[k]|0);});
+  st.teach=!!s.teach;if(Array.isArray(s.rec))st.rec=[!!s.rec[0],!!s.rec[1]];}}}catch(e){}
+const TAB=()=>TABS[st.tab];
+const curStep=()=>TAB().steps[st.step[st.tab]];
+const curStepKey=()=>curStep().key;
+const gk=k=>TAB().key+"."+k;
+function goalDone(S,g){return !!st.goals[TAB().key+"."+S.key+"."+g[0]];}
+function markGoal(k,force){const S=curStep();if(!S.goals.some(g=>g[0]===k))return;const id=TAB().key+"."+S.key+"."+k;if(st.goals[id])return;st.goals[id]=1;save();renderCard();}
+function bumpCount(k,v){const S=curStep();const g=S.goals.find(q=>q[0]===k);if(!g)return;const id=TAB().key+"."+S.key+"."+k;const nv=Math.min(g[2],Math.max(st.cnt[id]||0,v));
+  if(nv!==(st.cnt[id]||0)){st.cnt[id]=nv;if(nv>=g[2])st.goals[id]=1;save();renderCard();}}
+function noteMadeBond(i,j){const S=SIM,key=Math.min(i,j)+"-"+Math.max(i,j);if(S.madeBonds.has(key))return;S.madeBonds.add(key);
+  const id=TAB().key+".bond.bond3";bumpCount("bond3",(st.cnt[id]||0)+1);}
+const visPost=S=>(S.post||[]).filter(id=>!ITEMS[id].lv||ITEMS[id].lv.indexOf(st.level)>=0);
+function goalsMet(S){return S.goals.every(g=>g[3]||goalDone(S,g));}
+function stepDone(ti,i){const S=TABS[ti].steps[i],tk=TABS[ti].key;
+  if(S.pre&&!st.ans[S.pre])return false;
+  if(!S.goals.every(g=>g[3]||st.goals[tk+"."+S.key+"."+g[0]]))return false;
+  return !visPost(S).some(id=>!st.ans[id]);}
+
+/* ================= card ================= */
+const card=$("card");
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e;}
+function whyBox(it){const r=st.ans[it.id];const b=el("div","why");b.appendChild(el("span","tag",r.f?"Right. Here is the reasoning":"The reasoning"));b.appendChild(el("p","",esc(it.w)));return b;}
+function mcBlock(it){
+  const w=el("div","");w.appendChild(el("p","q",esc(it.q)));
+  const box=el("div","opts"),r=st.ans[it.id];
+  it.o.forEach((t,n)=>{const b=el("button","opt");b.type="button";b.textContent=t;
+    if(r){b.disabled=true;if(n===it.a)b.classList.add("right");else if(n===r.c)b.classList.add("wrong");}
+    b.addEventListener("click",()=>{if(st.ans[it.id])return;st.ans[it.id]={f:n===it.a,c:n};save();renderCard();syncCtl();});
+    box.appendChild(b);});
+  w.appendChild(box);if(r)w.appendChild(whyBox(it));return w;
+}
+function unlocked(){const S=curStep();return st.teach||!S.pre||!!st.ans[S.pre];}
+function goalsList(S){
+  const ul=el("ul","goals");
+  S.goals.forEach(g=>{const done=goalDone(S,g),id=TAB().key+"."+S.key+"."+g[0];let t=esc(g[1]);
+    if(g[2])t+=": "+Math.min(g[2],st.cnt[id]||0)+" of "+g[2];if(g[3])t+=" (optional)";
+    const li=el("li",(done?"ok":"")+(g[3]?" opt2":""),t);ul.appendChild(li);});
+  return ul;
+}
+function renderCard(){
+  const T=TAB(),i=st.step[st.tab],S=T.steps[i],TV=st.teach;card.innerHTML="";
+  const nd=T.steps.reduce((n,_,k)=>n+(stepDone(st.tab,k)?1:0),0);
+  card.appendChild(el("div","bar",`<i style="width:${Math.round(nd/T.steps.length*100)}%"></i>`));
+  card.appendChild(el("div","meta",`<span>Module ${st.tab+1} &middot; Step ${i+1} of ${T.steps.length}</span><span>${esc(S.short)}</span>`));
+  if(S.focus)card.appendChild(el("span","badge",st.level==="bio"?"Chemistry &amp; DE focus: a stretch for Biology I":"Chemistry &amp; DE focus"));
+  card.appendChild(el("h2","",esc(S.head)));
+  if(TV)card.appendChild(el("p","fine teachnote","Teaching view: every part of this step is open. The step lights up only once its prediction and its tasks are done."));
+  if(S.pre)card.appendChild(mcBlock(ITEMS[S.pre]));
+  const open=unlocked();
+  if(open){card.appendChild(el("p","prompt",esc(S.task)));card.appendChild(goalsList(S));}
+  else card.appendChild(el("p","fine","Answer the prediction first; the controls under the picture unlock once you have committed to an answer."));
+  if(goalsMet(S)&&open||TV){const ex=el("div","explain");ex.appendChild(el("p","",esc(S.bio)));
+    if(st.level==="chem")ex.appendChild(el("p","deep","<b>Chemistry</b>"+esc(S.chem)));
+    if(st.level==="de")ex.appendChild(el("p","deep","<b>DE Bio</b>"+esc(S.de)));
+    card.appendChild(ex);
+    const posts=visPost(S);if(posts.length){card.appendChild(el("p","sub","Check yourself"));posts.forEach(id=>card.appendChild(mcBlock(ITEMS[id])));}}
+  const done=stepDone(st.tab,i),last=i>=T.steps.length-1;
+  const b=el("button","go"+(done?"":" ghostnext"));b.type="button";b.textContent=last?"See my record":(done?"Next step":"Skip to the next step");b.style.marginTop=".4rem";
+  b.addEventListener("click",()=>{if(!last)goStep(i+1);else showRecord();});card.appendChild(b);
+  if(last&&st.tab===0){const b2=el("button","ghost");b2.type="button";b2.textContent="Go to Module 2: Enzyme Activity";b2.style.margin=".4rem 0 0 .5rem";b2.addEventListener("click",()=>setTab(1,true));card.appendChild(b2);}
+  renderDots();
+}
+function renderDots(){
+  const d=$("dots");d.innerHTML="";
+  TAB().steps.forEach((S,i)=>{const b=el("button","");b.type="button";b.textContent=i+1;
+    const done=stepDone(st.tab,i);b.setAttribute("aria-label","Step "+(i+1)+": "+S.short+(done?" (done)":""));
+    if(i===st.step[st.tab]){b.classList.add("cur");b.setAttribute("aria-current","step");}
+    if(done)b.classList.add("done");
+    b.addEventListener("click",()=>goStep(i));d.appendChild(b);});
+}
+function scrollToCard(){
+  const sticky=getComputedStyle($("stagecol")).position==="sticky",stacked=window.innerWidth<900;
+  const off=(sticky&&stacked?$("stagecol").offsetHeight:0)+10;
+  const r=(stacked?card:$("build")).getBoundingClientRect();
+  if(r.top>=off-2&&r.top<window.innerHeight-160)return;
+  window.scrollTo({top:Math.max(0,r.top+window.scrollY-off),behavior:REDUCE?"auto":"smooth"});
+}
+
+/* ================= controls under the stage ================= */
+const ctl=$("ctl");
+function btn(label,fn,cls){const b=el("button",cls||"go");b.type="button";b.textContent=label;b.addEventListener("click",fn);return b;}
+function slider(id,label,min,max,val,step,fmt,fn){
+  const w=el("label","slider");w.appendChild(el("span","",label));const i=document.createElement("input");i.type="range";i.min=min;i.max=max;i.step=step;i.value=val;i.id=id;
+  const o=document.createElement("output");o.textContent=fmt(+val);i.addEventListener("input",()=>{o.textContent=fmt(+i.value);fn(+i.value);});
+  w.appendChild(i);w.appendChild(o);w._set=v=>{i.value=v;o.textContent=fmt(v);};return w;}
+let sliders={};
+function buildCtl(){
+  ctl.innerHTML="";sliders={};const S=SIM,k=S.key,sk=curStepKey();
+  if(k==="bond"){ctl.appendChild(btn("Scatter them again",()=>{const keep=SIM.madeBonds;newSim("bond");SIM.madeBonds=keep;},"ghost"));}
+  if(k==="heat"||k==="bpe"){sliders.T=slider("sT","Temperature",-30,140,S.T,1,v=>v+" °C",v=>{SIM.T=v;});ctl.appendChild(sliders.T);}
+  if(k==="phase"){
+    sliders.T=slider("sT","Temperature",-40,160,S.T,1,v=>v+" °C",v=>{SIM.T=v;phaseMoved();});
+    const pv=Math.round((Math.log10(S.P)+3)/4*400);
+    sliders.P=slider("sP","Pressure",0,400,pv,1,v=>fmtP(Math.pow(10,-3+v/100)),v=>{SIM.P=Math.pow(10,-3+v/100);phaseMoved();});
+    ctl.appendChild(sliders.T);ctl.appendChild(sliders.P);}
+  if(k==="flow"){const b=btn(S.flow?"Flow: on":"Flow: off",()=>{SIM.flow=!SIM.flow;SIM.flowT=0;b.textContent=SIM.flow?"Flow: on":"Flow: off";b.classList.toggle("on",SIM.flow);});if(S.flow)b.classList.add("on");ctl.appendChild(b);
+    ctl.appendChild(btn("Reset the channel",()=>{newSim("flow");buildCtl();},"ghost"));}
+  if(k==="salt"){ctl.appendChild(btn("Drop NaCl",()=>dropCrystal("nacl")));ctl.appendChild(btn("Drop Mg₃(PO₄)₂",()=>{dropCrystal("mg");markGoal("mg");}));
+    ctl.appendChild(btn("Fresh water",()=>{newSim("salt");},"ghost"));}
+  if(k==="bpe"){ctl.appendChild(btn("Add a scoop of salt",()=>{if(SIM.scoops>=3)return;SIM.scoops++;setShifts();dropCrystal("nacl",true);if(SIM.scoops>=2)markGoal("salt2");updateScoopBtn();}));
+    ctl.appendChild(btn("Fresh water",()=>{const T=SIM.T;newSim("bpe");SIM.T=T;setShifts();updateScoopBtn();},"ghost"));updateScoopBtn();}
+  if(k==="enzyme"){
+    if(sk==="fold")ctl.appendChild(btn(S.enz.beads?"Drop a new chain":"Drop the chain",e=>{dropChain();e.target.textContent="Drop a new chain";}));
+    else{ctl.appendChild(btn("Add substrate",()=>addSubstrate()));}
+  }
+  syncCtl();
+}
+function updateScoopBtn(){const b=[...ctl.querySelectorAll("button")].find(x=>x.textContent.indexOf("scoop")>=0||x.textContent.indexOf("Salt:")>=0);if(b){b.textContent=SIMscoopLabel();b.disabled=SIM.scoops>=3;}}
+function SIMscoopLabel(){return SIM.scoops>=3?"Salt: 3 of 3 scoops":"Add a scoop of salt ("+SIM.scoops+" of 3)";}
+function setShifts(){const S=SIM;/* 1 mol NaCl/kg per scoop, i = 2 */S.dBreal=S.scoops*2*.512;S.dB=S.dBreal*5;S.dF=S.scoops*2*1.86;pdCache=null;}
+function syncCtl(){const open=unlocked();ctl.classList.toggle("locked",!open);ctl.querySelectorAll("button,input").forEach(x=>{if(!open)x.setAttribute("tabindex","-1");else x.removeAttribute("tabindex");});}
+function phaseMoved(){const S=SIM,now=phaseOf(S.T,S.P,0,0),prev=S.dot?S.dot.ph:now;
+  if(prev!==now){if(prev===0&&now===1)markGoal("melt");if(prev===2&&now===1)markGoal("condense");if(prev===0&&now===2&&S.P<.006)markGoal("sublime");}
+  S.dot={T:S.T,P:S.P,ph:now};}
+
+/* ================= readout and goal watching ================= */
+let roT=0;
+function readout(){
+  const S=SIM,c=S.counts,n=c[0]+c[1]+c[2]||1,hb=S.bonds.length+S.hbx.length;let t="";
+  const phases=()=>[c[0]?c[0]+" ice":"",c[1]?c[1]+" liquid":"",c[2]?c[2]+" vapor":""].filter(Boolean).join(" · ");
+  if(S.key==="bond")t="Hydrogen bonds on screen: "+S.bonds.length;
+  else if(S.key==="heat")t=S.T+" °C at 1 atm · "+phases()+" · H-bonds: "+hb;
+  else if(S.key==="phase")t=S.T+" °C, "+fmtP(S.P)+" · the dot says "+PHN[phaseOf(S.T,S.P,0,0)]+" · molecules: "+phases();
+  else if(S.key==="bpe"){const bp=100+(S.dBreal||0),fp=-(S.dF||0);t=(S.scoops?"Salt water ("+S.scoops+" mol/kg NaCl) boils at "+bp.toFixed(1)+" °C and freezes at "+fp.toFixed(1)+" °C · ":"Pure water: boils at 100 °C, freezes at 0 °C · ")+S.T+" °C now · "+phases();}
+  else if(S.key==="flow")t="Air −10 °C · "+(S.flow?"flowing":"still")+" · molecules locked in ice: "+c[0]+" of "+n;
+  else if(S.key==="salt"){const f=ks=>{const a=S.ions.filter(io=>ks.indexOf(io.k)>=0);return a.length?a.filter(io=>!io.cr).length+" of "+a.length+" free":"";};const na=f(["na","cl"]),mg=f(["mg","po"]);
+    t=S.ions.length?[na?"NaCl ions: "+na:"",mg?"Mg₃(PO₄)₂ ions: "+mg:"","water molecules in hydration shells: "+S.ionLinks.length].filter(Boolean).join(" · "):"Drop a crystal into the water";}
+  else if(S.key==="enzyme"){const E=S.enz;t=!E.beads?"No protein yet":!E.folded?"Folding…":"Folded · "+({open:"active site open",closing:"closing around the substrate",closed:"substrate bound, site closed",cat:"splitting the substrate",opening:"releasing products, reopening"})[E.state]+" · reactions: "+S.turn+" · water–protein H-bonds: "+S.hbx.length;}
+  $("readout").textContent=t;
+}
+function watchGoals(){
+  const S=SIM,c=S.counts,n=(c[0]+c[1]+c[2])||1;
+  if(S.key==="heat"){if(c[0]/n>.75)markGoal("freeze");if(c[2]/n>.75)markGoal("boil");}
+  if(S.key==="bpe"&&S.scoops>=1){if(c[0]/n>.75&&S.T<0)markGoal("freezeSalt");if(c[2]/n>.75)markGoal("boilSalt");}
+  if(S.key==="flow"){if(!S.flow&&c[0]/n>.3)markGoal("still");if(S.flow){S.flowT+=.25;if(S.flowT>3)markGoal("flowed");}}
+  if(S.key==="salt"){if(S.crystals.length===0&&S.ions.some(io=>io.k==="na")&&S.ions.filter(io=>io.k==="na"||io.k==="cl").every(io=>!io.cr))markGoal("nacl");}
+}
+
+/* ================= step changes ================= */
+function goStep(i,noScroll){
+  const T=TAB();st.step[st.tab]=clamp(i,0,T.steps.length-1);save();
+  const S=curStep();
+  if(!SIM||SIM.key!==S.scene||SIM.dev!==st.dev){newSim(S.scene);SIM.dev=st.dev;}
+  if(S.scene==="enzyme"&&S.key!=="fold"&&!(SIM.enz.beads&&SIM.enz.folded))foldNow();
+  if(S.scene==="enzyme"&&S.key==="fit"&&SIM.enz.state==="cat")SIM.enz.state="closed";
+  if(S.scene==="bpe")setShifts();
+  $("pdbox").classList.toggle("hidden",!(S.scene==="phase"||S.scene==="bpe"));
+  $("stagerow").classList.toggle("withpd",S.scene==="phase"||S.scene==="bpe");
+  $("stagelab").textContent={bond:"Water molecules, free to drag",heat:"A closed container at 1 atm",phase:"A cylinder with a piston",flow:"A channel of water, seen from the side",salt:"A beaker of water at 25 °C",bpe:"A beaker at 1 atm",enzyme:"Water at room temperature (25 °C)"}[S.scene];
+  cv.setAttribute("aria-label",S.head);
+  buildCtl();renderCard();$("record").classList.add("hidden");
+  requestAnimationFrame(()=>resize());
+  if(!noScroll)scrollToCard();
+}
+function setTab(t,scroll){st.tab=t?1:0;save();
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",String(+b.dataset.tab===st.tab)));
+  $("lede").textContent=TAB().lede;
+  const lg=$("legend");lg.innerHTML="";TAB().legend.forEach(([c,t,e,cls])=>{const s=el("span",cls||"",esc(t));s.style.setProperty("--c",c);if(e)s.style.setProperty("--e",e);lg.appendChild(s);});
+  setEyebrow();SIM=null;goStep(st.step[st.tab],!scroll);
+  if(st.rec[st.tab])renderRecord();
+}
+function setEyebrow(){
+  const lv=st.level;
+  $("eyebrow").innerHTML=lv==="de"?(st.tab?"Bio Tool #10 &middot; DE Bio 101 Unit 6 &middot; An Introduction to Metabolism":"Bio Tool #10 &middot; DE Bio 101 Unit 2 &middot; Chemical Context of Life")
+    :lv==="chem"?(st.tab?"Bio Tool #10 &middot; Chemistry &middot; intermolecular forces and catalysis":"Bio Tool #10 &middot; Chemistry &middot; states of matter, phase diagrams, solutions")
+    :(st.tab?"Bio Tool #10 &middot; Biology I Unit 1 &middot; SOL BIO.2b, 2c":"Bio Tool #10 &middot; Biology I Unit 1 &middot; SOL BIO.2a");
+}
+function setLevel(lv){st.level=["bio","chem","de"].indexOf(lv)>=0?lv:"bio";save();
+  document.documentElement.setAttribute("data-level",st.level);
+  document.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
+  setEyebrow();renderCard();if(!$("record").classList.contains("hidden"))renderRecord();}
+function setDev(d){st.dev=d==="pc"?"pc":"ipad";save();
+  document.documentElement.setAttribute("data-dev",st.dev);
+  document.querySelectorAll("[data-dev]").forEach(b=>{if(b.tagName==="BUTTON")b.setAttribute("aria-pressed",String(b.dataset.dev===st.dev));});
+  SIM=null;goStep(st.step[st.tab],true);}
+
+/* ================= record ================= */
+function renderRecord(){
+  const T=TAB(),body=$("recBody");body.innerHTML="";
+  $("recH").textContent="Your record: Module "+(st.tab+1)+", "+T.name;
+  let right=0,tot=0,done=0;
+  const tb=el("table","");tb.appendChild(el("tr","","<th>Step</th><th>Tasks</th><th>First answers</th>"));
+  T.steps.forEach((S,i)=>{const ids=[S.pre].concat(visPost(S)).filter(Boolean);const cells=ids.map(id=>{const r=st.ans[id];if(!r)return"<span>not yet</span>";tot++;if(r.f)right++;return r.f?'<span class="ok">right</span>':'<span class="no">missed</span>';}).join(", ");
+    const sd=stepDone(st.tab,i);if(sd)done++;
+    tb.appendChild(el("tr","",`<td>${i+1}. ${esc(S.short)}</td><td>${sd?'<span class="ok">done</span>':"open"}</td><td>${cells}</td>`));});
+  body.appendChild(tb);
+  $("recSum").textContent=done+" of "+T.steps.length+" steps finished; "+right+" of "+tot+" predictions and checks right on the first try.";
+}
+function showRecord(){st.rec[st.tab]=true;save();renderRecord();$("record").classList.remove("hidden");$("record").scrollIntoView({behavior:REDUCE?"auto":"smooth"});}
+let armed=false,armT=0;
+$("reset").addEventListener("click",()=>{const b=$("reset");
+  if(!armed){armed=true;b.textContent="Tap again within 4 seconds to clear this module";armT=setTimeout(()=>{armed=false;b.textContent="Start this module over";},4000);return;}
+  clearTimeout(armT);armed=false;b.textContent="Start this module over";
+  const T=TAB();T.steps.forEach(S=>{[S.pre].concat(S.post||[]).forEach(id=>{if(id)delete st.ans[id];});S.goals.forEach(g=>{const id=T.key+"."+S.key+"."+g[0];delete st.goals[id];delete st.cnt[id];});});
+  st.rec[st.tab]=false;st.step[st.tab]=0;save();SIM=null;$("record").classList.add("hidden");goStep(0);window.scrollTo(0,0);});
+
+/* ================= pointer ================= */
+let drag=null,hover=-1;
+function toWorld(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*hs/SIM.s,(e.clientY-r.top)*hs/SIM.s];}
+function pickAt(x,y){
+  const S=SIM,R=dev().hit;let best=null,bd=R;
+  if(S.enz){S.subs.forEach(s=>{if(s.state!=="free")return;const d=Math.hypot(s.x-x,s.y-y)-9*S.enz.ps;if(d<bd){bd=d;best={sub:s};}});if(best)return best;}
+  S.mol.forEach((m,i)=>{if(m.hid||m.rec||m.st===0)return;const d=Math.hypot(m.x-x,m.y-y);if(d<bd){bd=d;best={m,i};}});
+  return best;
+}
+cv.addEventListener("pointerdown",e=>{if(!SIM||!unlocked())return;const[x,y]=toWorld(e);const p=pickAt(x,y);if(!p)return;
+  drag={id:e.pointerId,p,x,y,lx:x,ly:y,t:performance.now()};if(p.m){p.m.drag=1;p.m.vx=p.m.vy=0;}else p.sub.drag=1;
+  try{cv.setPointerCapture(e.pointerId);}catch(_){}e.preventDefault();});
+cv.addEventListener("pointermove",e=>{if(!SIM)return;const[x,y]=toWorld(e);
+  if(drag&&e.pointerId===drag.id){drag.x=x;drag.y=y;e.preventDefault();return;}
+  if(st.dev==="pc"&&e.pointerType==="mouse"){const p=pickAt(x,y);hover=p&&p.m?p.i:-1;cv.style.cursor=p?"grab":"default";}});
+function endDrag(e){if(!drag||e.pointerId!==drag.id)return;const p=drag.p;
+  if(p.m){p.m.drag=0;p.m.dragT=SIM.t;p.m.vx=clamp(p.m.vx,-80,80);p.m.vy=clamp(p.m.vy,-80,80);}else{p.sub.drag=0;p.sub.vx=p.sub.vy=0;}
+  drag=null;}
+cv.addEventListener("pointerup",endDrag);cv.addEventListener("pointercancel",endDrag);
+cv.addEventListener("pointerleave",()=>{hover=-1;});
+cv.addEventListener("touchmove",e=>{if(drag)e.preventDefault();},{passive:false});
+function applyDrag(dt){if(!drag)return;const S=SIM,B=S.b,o=drag.p.m||drag.p.sub,r=RO+3;
+  const tx=clamp(drag.x,B.l+r,B.r-r),ty=clamp(drag.y,(S.key==="phase"?pistonY():B.t)+r,B.b-r);
+  o.vx=(tx-o.x)/dt;o.vy=(ty-o.y)/dt;o.x=tx;o.y=ty;if(drag.p.m)drag.p.m.dragT=S.t;}
+/* the phase diagram is a control too: tap or drag on it */
+let pdDrag=false;
+function pdSet(e){if(!SIM||SIM.key!=="phase"||!unlocked())return;const r=pd.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*PDS,y=(e.clientY-r.top)/r.height*PDS;const q=pdInv(x,y);
+  SIM.T=Math.round(clamp(q.T,-40,160));SIM.P=clamp(q.P,.001,10);const pv=Math.round((Math.log10(SIM.P)+3)*100);SIM.P=Math.pow(10,-3+pv/100);
+  if(sliders.T)sliders.T._set(SIM.T);if(sliders.P)sliders.P._set(pv);phaseMoved();}
+pd.addEventListener("pointerdown",e=>{pdDrag=true;try{pd.setPointerCapture(e.pointerId);}catch(_){}pdSet(e);e.preventDefault();});
+pd.addEventListener("pointermove",e=>{if(pdDrag)pdSet(e);});
+pd.addEventListener("pointerup",()=>{pdDrag=false;});pd.addEventListener("pointercancel",()=>{pdDrag=false;});
+
+/* ================= loop ================= */
+let last=0,visible=true,acc=0;
+const DT=1/120;
+function frame(now){
+  requestAnimationFrame(frame);
+  if(!SIM||!visible||document.hidden){last=now;return;}
+  let el2=Math.min(.05,(now-last)/1000||0);last=now;acc+=el2;let n=0;
+  while(acc>=DT&&n<5){applyDrag(DT);simStep(DT);acc-=DT;n++;}if(n>=5)acc=0;
+  draw();drawPD();
+  roT+=el2;if(roT>.25){roT=0;readout();watchGoals();}
+}
+if(window.IntersectionObserver)new IntersectionObserver(es=>{es.forEach(e=>{visible=e.isIntersecting;});}).observe(cv);
+function resize(){
+  const w=cv.clientWidth||900,dpr=Math.min(window.devicePixelRatio||1,dev().dpr);
+  cv.style.height=(w*2/3)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*2/3*dpr);kpx=cv.width/NW;hs=NW/w;
+  const pw=pd.clientWidth;if(pw){pd.width=Math.round(pw*dpr);pd.height=Math.round(pw*dpr);pdk=pd.width/PDS;pdCache=null;}
+  if(SIM){draw();drawPD();}
+}
+
+/* ================= boot ================= */
+document.querySelectorAll("button[data-dev]").forEach(b=>b.addEventListener("click",()=>setDev(b.dataset.dev)));
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setTab(+b.dataset.tab,true)));
+document.querySelectorAll("[data-lv]").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv)));
+function syncTeach(){$("teach").setAttribute("aria-pressed",String(!!st.teach));}
+$("teach").addEventListener("click",()=>{st.teach=!st.teach;save();syncTeach();renderCard();syncCtl();});
+document.documentElement.setAttribute("data-dev",st.dev);
+document.querySelectorAll("button[data-dev]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.dev===st.dev)));
+document.documentElement.setAttribute("data-level",st.level);
+document.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
+syncTeach();
+if(window.ResizeObserver){new ResizeObserver(()=>resize()).observe(cv);new ResizeObserver(()=>resize()).observe(pd);}else window.addEventListener("resize",resize);
+setTab(st.tab,false);
+resize();
+requestAnimationFrame(frame);
+
+window.__WP={st:()=>st,sim:()=>SIM,goStep,setTab,setDev,setLevel,markGoal,dropCrystal,dropChain,addSubstrate,foldNow,simStep,draw,phaseOf,
+  setT:v=>{SIM.T=v;if(sliders.T)sliders.T._set(v);},setP:p=>{SIM.P=p;phaseMoved();}};
+})();
+</script>
+</body>
+</html>
