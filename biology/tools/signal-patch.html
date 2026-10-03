@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en" data-level="nine" data-dev="ipad">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A hormone, its receptor and the enzyme that cuts it. Run your own GLP-1, the Gila monster's exendin-4 and the drug semaglutide through the same pancreas beta cell, watch the receptor light up from the outside, watch the scissors enzyme end the signal, switch blood sugar low and high, and zoom to the one amino acid that decides what the enzyme can cut. A live graph of hormone remaining against real time shows why a lizard's hormone outlasts ours. Biology I Unit 4 (SOL BIO.2d, BIO.5e) and DE Bio 101 Unit 5. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/signal-patch.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Signal Patch - A Hormone, Its Receptor and the Enzyme That Cuts It">
+<meta property="og:description" content="Run GLP-1, exendin-4 and semaglutide through the same beta cell and find out why a lizard's hormone outlasts your own. A hormone signals from the cell surface, an enzyme ends the signal, and one changed amino acid changes how long a molecule lasts, not how strong its signal is. 9th-grade and DE levels. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/signal-patch.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>The Signal Patch | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--solid:#3F7A55;--solid-soft:#E2EDE6;
+  --sam:#1F4E5F;--sam-soft:#E4ECEF;--gold:#C98A2E;--purple:#6B4E8C;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+    --sam:#8FB8C6;--sam-soft:#1A2A30;--gold:#E0A64A;--purple:#B39BD1;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+  --sam:#8FB8C6;--sam-soft:#1A2A30;--gold:#E0A64A;--purple:#B39BD1;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+.wrap{max-width:82rem;margin:0 auto;padding:1.4rem 1.15rem 5rem}
+.narrow{max-width:46rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;margin:1.4rem 0 .5rem}
+p{margin:0 0 1rem;max-width:38rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+button{font:inherit;cursor:pointer}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+/* the switches at the top: device, level, Advanced */
+.topbar{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:flex-end;margin:0 0 1rem;padding:0 0 .9rem;border-bottom:1.5px solid var(--rule)}
+.sw{display:flex;flex-direction:column;gap:.25rem}
+.sw .swl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--card)}
+.seg button{font-family:var(--sans);font-weight:600;font-size:.92rem;background:none;border:none;color:var(--ink-soft);padding:.55rem 1rem;min-height:44px;min-width:44px;line-height:1.2}
+.seg button + button{border-left:1.5px solid var(--rule)}
+.seg button small{display:block;font-weight:500;font-size:.72rem;opacity:.85}
+.seg button[aria-pressed="true"]{background:var(--bond);color:var(--paper)}
+.seg button:disabled{opacity:.45;cursor:default}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#12100D}
+html[data-dev="ipad"] .seg button{min-height:48px;min-width:48px}
+.levelrow{margin:.2rem 0 1rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:flex-end}
+.advrow{display:flex;flex-direction:column;gap:.25rem}
+.advrow .swl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.advrow .seg button{font-size:.85rem;padding:.45rem .8rem}
+html[data-level="de"] .advrow{display:none}
+
+.legend{display:flex;flex-wrap:wrap;gap:.45rem .9rem;margin:0 0 1.2rem;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:.35em}
+.legend svg{width:1.6em;height:1.1em;flex:none}
+
+/* ===== the tool area: fills an iPad landscape screen at >=900px wide ===== */
+.build{display:block;margin-top:.6rem;position:relative}
+.stagecol{position:sticky;top:0;z-index:5;min-width:0;background:var(--paper);padding:.35rem 0 .45rem;box-shadow:0 1px 0 var(--rule);display:flex;flex-direction:column}
+.compact{display:none;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;margin:0 0 .4rem}
+.compact .seg button{padding:.4rem .7rem;font-size:.85rem}
+html[data-dev="ipad"] .compact .seg button{min-height:48px}
+.stage{position:relative;flex:1 1 auto;min-width:0;min-height:0;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+.scenebox{position:relative;flex:3 1 0;min-height:0}
+.graphbox{position:relative;flex:2 1 0;min-height:0;border-top:1.5px solid var(--rule)}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+html[data-dev="pc"] .stage canvas{cursor:default}
+html[data-dev="pc"] .stage canvas.hov{cursor:pointer}
+.lab{position:absolute;left:.5rem;top:.4rem;font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--ink-soft);background:var(--card);padding:.1rem .4rem;border-radius:3px;pointer-events:none;opacity:.92;z-index:2}
+.clock{position:absolute;right:.6rem;top:.3rem;z-index:3;font-family:var(--sans);font-weight:700;font-size:1.5rem;letter-spacing:.02em;font-variant-numeric:tabular-nums;color:var(--ink);background:var(--card);padding:.05rem .5rem;border-radius:3px;border:1.5px solid var(--rule);pointer-events:none;line-height:1.3}
+.clock small{display:block;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);line-height:1.2}
+html[data-teach="1"] .clock{font-size:2.1rem}
+/* transparent buttons laid over canvas parts (S5 beads, S6 receptors) */
+.over{position:absolute;inset:0;z-index:4;pointer-events:none}
+.over button{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:50%;min-width:48px;min-height:48px;padding:0;color:transparent;overflow:hidden;font-size:1px;transform:translate(-50%,-50%)}
+.over button:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+html[data-dev="pc"] .over button:hover{border-color:var(--bond)}
+.cardcol{margin-top:.9rem;min-width:0}
+@media (min-width:900px) and (orientation:landscape){
+  .build{display:grid;grid-template-columns:62fr 38fr;gap:1rem;align-items:stretch;height:100vh;height:100svh}
+  .build.nocard{grid-template-columns:1fr}
+  .build.nocard .cardcol{display:none}
+  .stagecol{position:static;top:auto;padding:0;background:none;box-shadow:none;min-height:0;height:100%}
+  .cardcol{margin-top:0;min-height:0;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+}
+@media (max-width:899.9px),(orientation:portrait){
+  .build{height:auto}
+  .stage{height:var(--stageh,60vw)}
+}
+@media (max-height:560px) and (orientation:portrait){.stagecol{position:static}}
+/* Fill screen: only the tool shows, with compact copies of the switches inside it */
+html[data-fill="1"] .wrap{padding:0 .3rem;max-width:none}
+html[data-fill="1"] .wrap > :not(#build){display:none!important}
+html[data-fill="1"] #build{margin:0;height:100vh;height:100svh;background:var(--paper)}
+#build:fullscreen{background:var(--paper);padding:0 .3rem}
+#build::backdrop{background:var(--paper)}
+html[data-fill="1"] .compact{display:flex}
+html[data-fill="1"] body{overflow:hidden}
+@media (min-width:900px) and (orientation:landscape){html[data-fill="1"] .stagecol{padding:.3rem 0 .2rem}}
+/* the card as an overlay when the card column is hidden */
+.cardtab{position:absolute;right:0;top:34%;z-index:8;writing-mode:vertical-rl;min-width:48px;min-height:120px;padding:.8rem .4rem;font-family:var(--sans);font-weight:700;font-size:.95rem;background:var(--bond);color:var(--paper);border:none;border-radius:3px 0 0 3px;display:none}
+.build.nocard .cardtab{display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cardtab{color:#12100D}}
+:root[data-theme="dark"] .cardtab{color:#12100D}
+.cardover{position:absolute;right:0;top:0;height:100%;width:380px;max-width:92%;z-index:9;background:var(--paper);border-left:1.5px solid var(--rule);box-shadow:-6px 0 18px rgba(0,0,0,.18);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:.6rem .7rem 1rem;display:none}
+.cardover.open{display:block}
+.cardover .closeover{margin:0 0 .5rem}
+
+/* controls under the stage */
+.ctl{display:flex;flex-wrap:wrap;gap:.35rem .6rem;align-items:center;justify-content:flex-start;margin:.45rem 0 0}
+.ctl.locked{opacity:.45;pointer-events:none}
+.ctl .seg button{padding:.4rem .7rem;font-size:.85rem}
+.gf{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);border:1.5px dashed var(--rule);border-radius:3px;padding:.25rem .5rem;display:inline-flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.gf .seg button{text-transform:none;letter-spacing:0}
+.glyph{display:inline-block;width:.9em;height:.9em;vertical-align:-1px;margin-right:.3em}
+.readout{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);text-align:left;margin:.35rem 0 0;min-height:1.3em;font-variant-numeric:tabular-nums;line-height:1.5}
+.readout .g{display:inline-block;width:5.2em;height:.72em;border:1.5px solid var(--rule);border-radius:2px;vertical-align:-1px;background:var(--card);position:relative;margin:0 .15em}
+.readout .g i{position:absolute;left:0;top:0;bottom:0;background:var(--purple);border-radius:1px}
+.readout .g.ins i{background:var(--solid)}
+.readout .note{color:var(--flag)}
+.steprow{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center;justify-content:flex-start;margin:.45rem 0 0}
+.dots{display:flex;flex-wrap:wrap;gap:.25rem}
+.dots button{font-family:var(--sans);font-weight:700;font-size:.85rem;min-width:44px;min-height:44px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink-soft);border-radius:3px;padding:0}
+.dots button.done{border-color:var(--solid);color:var(--solid);background:var(--solid-soft)}
+.dots button.cur{background:var(--bond);border-color:var(--bond);color:var(--paper)}
+.dots button.cur.done{box-shadow:inset 0 0 0 2px var(--solid-soft)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dots button.cur{color:#12100D}}
+:root[data-theme="dark"] .dots button.cur{color:#12100D}
+.teach{font-size:.78rem;padding:.35rem .65rem;min-height:44px;color:var(--ink-soft)}
+.ghost.teach[aria-pressed="true"]{background:var(--solid);border-color:var(--solid);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ghost.teach[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .ghost.teach[aria-pressed="true"]{color:#12100D}
+.teachnote{background:var(--solid-soft);border-radius:3px;padding:.5rem .7rem;margin:0 0 .9rem}
+
+/* iPad mode: every touch target is at least 48px. Computer: tighter, with hover in addition to tap. */
+html[data-dev="ipad"] .ctl .go,html[data-dev="ipad"] .ctl .ghost{min-height:48px;min-width:48px;font-size:.95rem;padding:.5rem .9rem}
+html[data-dev="ipad"] .ctl .seg button{min-height:48px;min-width:48px}
+html[data-dev="ipad"] .ghost,html[data-dev="ipad"] .go{min-height:48px}
+html[data-dev="ipad"] .dots button{min-width:48px;min-height:48px}
+html[data-dev="ipad"] .teach,html[data-dev="ipad"] .steprow .ghost{min-height:48px}
+html[data-dev="ipad"] .chip{min-height:48px}
+html[data-dev="ipad"] .opt{min-height:48px}
+html[data-dev="ipad"] details.teachers summary{min-height:48px}
+html[data-dev="pc"] .ctl .go,html[data-dev="pc"] .ctl .ghost{min-height:36px;font-size:.86rem;padding:.35rem .75rem}
+html[data-dev="pc"] .ctl .seg button{min-height:36px;min-width:36px}
+html[data-dev="pc"] .dots button{min-width:36px;min-height:36px}
+html[data-dev="pc"] .opt:hover:not(:disabled){background:var(--bond-soft)}
+
+@media (max-width:600px){
+  .topbar .seg,.compact .seg,.ctl .seg{flex-wrap:wrap}.topbar .seg button{flex:1 1 auto;padding:.45rem .6rem}
+  .dots button{min-width:34px;min-height:38px;font-size:.8rem}.dots{gap:.2rem}
+  .teach{min-height:38px;padding:.3rem .55rem}
+  .lab{display:none}
+  .clock{font-size:1.1rem}
+}
+
+.card{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);border-radius:3px;padding:1rem 1.1rem;min-width:0}
+.card h2{margin:0 0 .7rem;font-size:1.12rem;line-height:1.3}
+.card p{max-width:none}
+.bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden;margin-bottom:.8rem}
+.bar i{display:block;height:100%;background:var(--bond);transition:width .25s}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);border-bottom:1.5px solid var(--rule);padding-bottom:.45rem;margin-bottom:.9rem}
+.badge{display:inline-block;font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--bond);border:1.5px solid var(--bond);border-radius:3px;padding:.05rem .4rem;margin:0 0 .6rem}
+.badge.adv{color:var(--purple);border-color:var(--purple)}
+.q{font-size:1.08rem;line-height:1.45;margin:0 0 .9rem}
+.opts{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.opt{text-align:left;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.75rem .95rem;min-height:3rem;color:var(--ink);font-family:var(--serif);font-size:1rem;line-height:1.4;width:100%}
+.opt:hover:not(:disabled){border-color:var(--bond)}
+.opt:disabled{cursor:default;opacity:1}
+.opt.right{border-color:var(--solid);background:var(--solid-soft);font-weight:600}
+.opt.wrong{border-color:var(--flag);background:var(--flag-soft)}
+.go{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--bond);color:var(--paper);border:none;border-radius:3px;padding:.8rem 1.3rem;min-height:3rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:disabled{opacity:.4;cursor:default}
+.go.on{background:var(--solid)}
+.go.ghostnext{background:none;border:1.5px solid var(--rule);color:var(--ink-soft)}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible,.seg button:focus-visible,.dots button:focus-visible,.chip:focus-visible,textarea:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+.ghost[aria-pressed="true"]{border-color:var(--bond);background:var(--bond-soft)}
+.miss{background:var(--flag-soft);border-left:4px solid var(--flag);border-radius:3px;padding:.7rem .9rem;margin:0 0 .7rem;font-size:.98rem;line-height:1.5}
+.miss .tag,.why .tag{display:block;font-family:var(--sans);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.35rem}
+.why{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);border-radius:3px;padding:.85rem 1rem;margin-bottom:1rem}
+.why p{margin:0;font-size:.98rem;line-height:1.5}
+.samq{background:var(--sam-soft);border:1.5px solid var(--sam);border-radius:3px;padding:.7rem .9rem;margin:.5rem 0 .8rem;font-family:var(--sans);font-size:.92rem;line-height:1.5}
+.samq .lbl{display:block;font-weight:700;color:var(--sam);font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;margin:0 0 .3rem}
+.samq .lbl a{color:inherit}
+.samq p{margin:0;max-width:none;font-family:var(--serif);font-size:.98rem}
+.explain{border-top:1.5px solid var(--rule);padding-top:.8rem;margin-top:.4rem}
+.explain p{font-size:1rem}
+.prompt{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--bond-soft);border-radius:3px;padding:.7rem .9rem;margin:0 0 .7rem}
+.goals{list-style:none;margin:0 0 1rem;padding:0;font-family:var(--sans);font-size:.92rem;font-weight:600}
+.goals li{padding:.35rem 0;border-bottom:1px solid var(--rule);color:var(--ink-soft)}
+.goals li::before{content:"○";display:inline-block;width:1.4em;color:var(--ink-soft)}
+.goals li.ok{color:var(--solid)}
+.goals li.ok::before{content:"✓";color:var(--solid)}
+.sub{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin:1rem 0 .45rem}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .6rem;align-items:center}
+.chips .lbl{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-right:.2rem}
+.chip{font-family:var(--sans);font-weight:600;font-size:.85rem;background:var(--bond-soft);color:var(--ink);border:1.5px solid transparent;border-radius:999px;padding:.35rem .8rem;min-height:44px}
+.chip[aria-expanded="true"]{border-color:var(--bond)}
+.chipdef{font-family:var(--sans);font-size:.9rem;background:var(--bond-soft);border-radius:3px;padding:.55rem .8rem;margin:0 0 .8rem}
+.chipdef b{font-weight:700}
+/* "What you found": one typed sentence per step, saved on this device only */
+.found{border:1.5px solid var(--rule);border-left:5px solid var(--solid);border-radius:3px;padding:.75rem .9rem;margin:.6rem 0 1rem;background:var(--card)}
+.found .lbl{display:block;font-family:var(--sans);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .3rem}
+.found .fq{font-family:var(--sans);font-weight:600;font-size:.95rem;margin:0 0 .5rem}
+.found textarea{width:100%;min-height:3.4rem;font:inherit;font-size:1rem;line-height:1.4;color:var(--ink);background:var(--paper);border:1.5px solid var(--rule);border-radius:3px;padding:.5rem .6rem;resize:vertical}
+.found .cnt{font-family:var(--sans);font-size:.76rem;color:var(--ink-soft);margin:.3rem 0 0;display:flex;justify-content:space-between;gap:.6rem}
+.found .cnt .ok{color:var(--solid);font-weight:700}
+.record{margin-top:2rem}
+.record table{border-collapse:collapse;width:100%;font-size:.95rem;margin:0 0 1rem}
+.record th,.record td{text-align:left;padding:.45rem .5rem;border-bottom:1px solid var(--rule);vertical-align:top}
+.record th{font-family:var(--sans);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.record .ok{color:var(--solid);font-weight:600}.record .no{color:var(--flag);font-weight:600}
+.record ol{margin:0 0 1rem;padding-left:1.3rem}
+.record ol li{margin:0 0 .4rem}
+.record textarea{width:100%;min-height:6rem;font:inherit;font-size:.95rem;color:var(--ink);background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.5rem .6rem}
+.btnrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem}
+.do{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.9rem 1rem;margin-bottom:.6rem}
+.do h4{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .4rem}
+.do h4 + ul + h4{margin-top:.9rem}
+.do p{margin:0;font-size:1rem;line-height:1.5}
+.further ul{list-style:none;margin:.3rem 0 0;padding:0}
+.further li{padding:.45rem 0;border-top:1px solid var(--rule);font-size:.98rem;line-height:1.45}
+.further li:first-child{border-top:none}
+.further a{font-family:var(--sans);font-weight:700;color:var(--bond)}
+.cer{border-left:5px solid var(--solid)}
+.sources{font-size:.88rem;color:var(--ink-soft);line-height:1.5}
+.sources ol{margin:.3rem 0 0;padding-left:1.3rem}
+.sources li{margin:0 0 .35rem}
+.sources a{color:var(--bond);word-break:break-all}
+details.teachers{border:1.5px solid var(--rule);border-radius:3px;padding:.6rem .9rem;margin:1.2rem 0 .8rem;background:var(--card)}
+details.teachers summary{font-family:var(--sans);font-weight:700;font-size:.95rem;cursor:pointer;min-height:44px;display:flex;align-items:center}
+details.teachers ul{margin:.4rem 0 .6rem;padding-left:1.2rem;font-size:.95rem;line-height:1.5}
+details.teachers li{margin:0 0 .35rem}
+.simp ul{margin:.2rem 0 0;padding-left:1.2rem}
+.simp li{margin:0 0 .2rem}
+.hidden{display:none!important}
+
+/* teaching callouts and toasts, over the scene */
+.callout{position:absolute;left:50%;transform:translateX(-50%);bottom:8%;z-index:5;max-width:88%;background:var(--card);border:2px solid var(--bond);border-radius:4px;padding:.6rem .9rem;box-shadow:0 4px 14px rgba(0,0,0,.18);display:none;pointer-events:none}
+.callout.open{display:block}
+.callout b{display:block;font-family:var(--sans);font-size:1.8rem;line-height:1.15;color:var(--ink)}
+.callout span{display:block;font-size:1.25rem;line-height:1.35;color:var(--ink-soft);margin-top:.2rem}
+.toast{position:absolute;left:50%;top:.5rem;transform:translateX(-50%);z-index:7;background:var(--bond);color:var(--paper);font-family:var(--sans);font-weight:600;font-size:.88rem;padding:.4rem .8rem;border-radius:3px;display:none;pointer-events:none;max-width:90%}
+.toast.on{display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .toast{color:#12100D}}
+:root[data-theme="dark"] .toast{color:#12100D}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+
+<div class="topbar">
+  <div class="sw">
+    <span class="swl" id="devL">Running on</span>
+    <div class="seg" role="group" aria-labelledby="devL">
+      <button type="button" data-dev="ipad" aria-pressed="true" aria-label="Running on iPad">iPad<small>touch &middot; fewer tokens</small></button>
+      <button type="button" data-dev="pc" aria-pressed="false" aria-label="Running on a computer">Computer<small>mouse &middot; denser picture</small></button>
+    </div>
+  </div>
+</div>
+
+<p class="sop-eyebrow" id="eyebrow">Bio Tool #15 &middot; Biology I Unit 4 &middot; SOL BIO.2d, BIO.5e</p>
+
+<section id="intro" class="narrow">
+  <h1>The Signal Patch</h1>
+  <p class="lede" id="lede"></p>
+  <div class="levelrow">
+    <div class="seg" role="group" aria-label="How deep the explanations go">
+      <button type="button" data-lv="nine" aria-pressed="true">9th Grade SOL Bio</button>
+      <button type="button" data-lv="de" aria-pressed="false">DE Bio</button>
+    </div>
+    <div class="advrow">
+      <span class="swl" id="advL">Advanced Biology</span>
+      <div class="seg" role="group" aria-labelledby="advL">
+        <button type="button" data-adv="0" aria-pressed="true" aria-label="Advanced Biology off">Off</button>
+        <button type="button" data-adv="1" aria-pressed="false" aria-label="Advanced Biology on">On</button>
+      </div>
+    </div>
+  </div>
+  <p class="fine" id="finenote">Nothing is submitted. Your progress and what you type stay on this device, so a second sitting picks up where the first stopped. Tap any step number to open that step; a number lights up only when that step is finished. <b>iPad</b> keeps the picture to fewer moving pieces so it stays smooth on a tablet; <b>Computer</b> draws a denser picture. <b>Fill screen</b> hides everything but the tool.</p>
+  <div class="legend" id="legend" aria-label="Key to the picture"></div>
+</section>
+
+<div class="build" id="build">
+  <div class="stagecol" id="stagecol">
+    <div class="compact" id="compact">
+      <div class="seg" role="group" aria-label="Level">
+        <button type="button" data-lv="nine" aria-pressed="true">9th</button>
+        <button type="button" data-lv="de" aria-pressed="false">DE</button>
+      </div>
+      <div class="seg advrow2" role="group" aria-label="Advanced Biology" id="compactAdv">
+        <button type="button" data-adv="0" aria-pressed="true" aria-label="Advanced Biology off">Advanced off</button>
+        <button type="button" data-adv="1" aria-pressed="false" aria-label="Advanced Biology on">Advanced on</button>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="scenebox" id="scenebox">
+        <canvas id="cv" width="1200" height="600" role="img" aria-label="The Signal Patch: a blood vessel beside a pancreas beta cell"></canvas>
+        <span class="lab" id="stagelab"></span>
+        <div class="over" id="over"></div>
+        <div class="callout" id="callout" aria-live="polite"><b id="calT"></b><span id="calD"></span></div>
+        <div class="toast" id="toast" aria-live="polite"></div>
+      </div>
+      <div class="graphbox" id="graphbox">
+        <canvas id="gv" width="1200" height="400" role="img" aria-label="Graph of hormone remaining in the blood against time"></canvas>
+        <div class="clock" id="clock" aria-live="off"><small id="clockL">Clock</small><span id="clockV">0:00:00</span></div>
+      </div>
+    </div>
+    <div class="ctl" id="ctl"></div>
+    <p class="readout" id="readout" aria-live="polite"></p>
+    <div class="steprow">
+      <div class="dots" id="dots" role="group" aria-label="Steps: tap any number to open that step"></div>
+      <button type="button" class="ghost teach" id="teach" aria-pressed="false" title="Opens every part of the current step at once, for showing it to a class, and enlarges the labels. Nothing counts as done until it is done.">Teaching view</button>
+      <button type="button" class="ghost teach" id="hidecard" aria-pressed="false" aria-label="Hide the card so the picture takes the full width">Hide card</button>
+    </div>
+    <p class="vh" id="live" aria-live="polite"></p>
+  </div>
+  <div class="cardcol" id="cardcol">
+    <div class="card" id="card" aria-live="polite"></div>
+  </div>
+  <button type="button" class="cardtab" id="cardtab" aria-label="Show the step card">Card &#9656;</button>
+  <div class="cardover" id="cardover" role="dialog" aria-label="Step card"><button type="button" class="ghost closeover" id="closeover" aria-label="Close the card">Close card &#9666;</button></div>
+</div>
+
+<section id="record" class="record narrow hidden">
+  <h2 id="recH">Your record</h2>
+  <p class="lede" id="recSum"></p>
+  <div id="recBody"></div>
+  <h3>What you found, in step order</h3>
+  <ol id="recFound"></ol>
+  <textarea id="recCopy" class="hidden" aria-label="Your sentences, ready to copy" readonly></textarea>
+  <div class="btnrow">
+    <button type="button" class="go" id="copyFound">Copy my sentences</button>
+    <button type="button" class="ghost" id="clearFound">Clear what I typed</button>
+  </div>
+  <p class="fine">First answers only: a prediction answered wrong and then understood is the point of the tool, not a failure. Paste your sentences into your CER as your evidence lines. Nothing here is sent anywhere.</p>
+  <p><button type="button" class="ghost" id="reset">Start over</button></p>
+</section>
+
+<section class="narrow" style="margin-top:2rem">
+  <div class="do cer hidden" id="cer"></div>
+  <div class="do further" id="further"></div>
+  <div class="sources" id="sources"></div>
+  <details class="teachers" id="teachers">
+    <summary>For teachers</summary>
+    <ul id="teachersBody"></ul>
+  </details>
+  <div class="fine simp" id="simplifies"></div>
+  <p class="fine" id="notmedical"></p>
+</section>
+
+<footer class="sop-foot"><span id="footlv">Unit 4, Nucleic Acids &amp; Protein Synthesis &middot; Biology I, SOL BIO.2d (protein synthesis) and BIO.5e (synthetic biology)</span> &middot; six steps, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const REDUCE=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const lerp=(a,b,t)=>a+(b-a)*t;
+let seed=20261003;
+function rnd(){seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}
+
+/* ================= the data block (§4.1): the single source for every number on the page ================= */
+// SIGNAL_DATA — verified 2026-10-03 (sources in §4.3). Single source for every number on the page.
+// halfLifeMin is the MODEL value used by the simulation; text9 / textDE are what the page displays.
+const SIGNAL_DATA = {
+  version: "2026-10-03",
+  molecules: {
+    glp1: {
+      label9: "GLP-1 (your own hormone)", labelDE: "GLP-1(7-37)",
+      from9: "made by cells lining your gut after a meal",
+      fromDE: "secreted by intestinal L-cells after a meal; native form",
+      lengthAA: 31,                       // GLP-1(7-37); the 7-36 amide form is 30
+      first10: ["H","A","E","G","T","F","T","S","D","V"],
+      first10NumberDE: [7,8,9,10,11,12,13,14,15,16],
+      pos2: "A",                          // Ala8 in GLP-1 numbering
+      cutByDPP4: true,
+      albumin: false,
+      mainExit9: "the scissors enzyme cuts it",
+      mainExitDE: "DPP-4 cleavage (His7-Ala8 removed); the product, GLP-1(9-37) (9-36 amide from the amide form), is inactive at the receptor",
+      halfLifeMin: 1.5,                   // model value inside the published 1–2 min range
+      text9: "about 1 to 2 minutes", textDE: "~1–2 min (half-life)"
+    },
+    ex4: {
+      label9: "Exendin-4 (Gila monster)", labelDE: "exendin-4 / exenatide (Byetta)",
+      from9: "found in Gila monster venom in 1992; the medicine is a copy made in a lab",
+      fromDE: "isolated from Heloderma suspectum venom (Eng et al., 1992); exenatide is the synthetic peptide, FDA-approved 2005",
+      lengthAA: 39,
+      first10: ["H","G","E","G","T","F","T","S","D","L"],
+      pos2: "G",                          // Gly2
+      cutByDPP4: false,
+      albumin: false,
+      mainExit9: "the kidneys filter it out of the blood",
+      mainExitDE: "renal clearance (glomerular filtration), then proteolysis",
+      halfLifeMin: 144,                   // 2.4 h, Byetta label
+      text9: "about 2 and a half hours", textDE: "~2.4 h (half-life)"
+    },
+    sema: {
+      label9: "Semaglutide (Ozempic)", labelDE: "semaglutide (Ozempic)",
+      from9: "human GLP-1 with two amino acids swapped and a fatty acid attached; the protein chain is made by yeast",
+      fromDE: "GLP-1(7-37) with Aib8 and Arg34, C18 fatty diacid on Lys26 via a linker; backbone made by yeast; FDA-approved 2017",
+      lengthAA: 31,
+      first10: ["H","Aib","E","G","T","F","T","S","D","V"],
+      pos2: "Aib",
+      cutByDPP4: false,
+      albumin: true,
+      mainExit9: "it rides on a big blood protein, so the kidneys barely filter it; it is broken down slowly",
+      mainExitDE: "albumin-bound (>99%), so renal filtration is slow; slow proteolysis",
+      halfLifeMin: 9600,                  // 160 h, ~1 week
+      text9: "about 1 week", textDE: "~1 week, about 160 h (half-life)"
+    }
+  },
+  identityEx4vsGLP1: { same: 16, of: 30, text: "16 of the first 30 amino acids match (about 53%)" },
+  signalOnThreshold: 0.10,                // model: signal counts as "on" while ≥10% of the starting amount is left
+  // derived (model): time signal stays on = halfLife × log2(10) ≈ 3.32 × halfLife
+  //   glp1 ≈ 5 min · ex4 ≈ 8 h · sema ≈ 22 days
+  glucose: {                              // model gate; mg/dL shown at DE only, marked "approximate"
+    low:    { mgdl: 60,  basal: 0.00, boost: 0.0 },
+    normal: { mgdl: 90,  basal: 0.10, boost: 0.0 },
+    high:   { mgdl: 180, basal: 0.30, boost: 0.7 }
+  },
+  // insulin release rate (0–1) = basal + boost × signal   (signal 0–1 = fraction of receptors occupied)
+  amplification: { hormone: 1, gProteins: 10, cAMP: 1000, illustrative: true }
+};
+/* The S2 thought experiment ("What if nothing cut it?") is NOT a SIGNAL_DATA value and is never shown as a measured number. */
+const NOCUT_HALFLIFE_MIN=30;
+const NOCUT_LABEL="What if nothing cut it? (thought experiment)";
+
+/* CER links: shipped empty. The follow-up job fills it; the box renders only when it has entries. */
+const CER_LINKS = [];
+
+/* The 9th-grade forbidden-word list (§7.1), kept here so the vocabulary test can read it. Whole-word, case-insensitive; "Gs" case-sensitive. */
+const NINTH_FORBIDDEN = ["DPP-4","DPP4","dipeptidyl","peptidase","protease","GPCR","G protein","G-protein","Gs","cAMP","cyclic AMP",
+ "adenylyl","adenylate","PKA","protein kinase","Epac","Epac2","second messenger","transduction","exocytosis","exocytose","granule",
+ "half-life","half life","agonist","antagonist","incretin","albumin","glomerular","renal","clearance","peptide","polypeptide",
+ "N-terminal","N-terminus","residue","ligand","affinity","occupancy","potency","persistence","K_ATP","hypoglycaemia","hypoglycemia",
+ "exenatide","Byetta","liraglutide","acylated","diacid","Heloderma","L-cell","L-cells","endothelial","plasma","β cell","β-cell"];
+
+/* ================= the banks (§8, §9): used exactly as written ================= */
+// 9th-grade bank. Permanent numbers: N1–N10, A1–A2. Never renumber; retire with retired:true.
+// key = index (0–3) of the right option. miss = note for each wrong option.
+// adv:true = shown only with Advanced Biology on, with an "Advanced Biology" badge; optional, never blocks a step.
+const BANK9 = [
+{n:"N1", step:"S1", role:"pre", topic:"Where the hormone goes",
+ stem:"GLP-1 travels in the blood to a beta cell in the pancreas. What will it do when it gets there?",
+ opts:["Go inside the cell and start making insulin","Fit into a receptor on the outside of the cell","Turn into insulin","Break the cell membrane open"], key:1,
+ why:"GLP-1 does not need to enter the cell. It fits into a receptor, a protein in the cell membrane shaped to hold it. The receptor changes shape on the inside, and that change is the message the cell answers.",
+ miss:{0:"It stays outside. Watch the receptor: the hormone sits in the cup on the outside while the cell responds inside.",
+       2:"GLP-1 and insulin are different molecules. GLP-1 is the message; insulin is the cell's answer.",
+       3:"Breaking the membrane would damage the cell. The message gets in through a receptor's change of shape, not through a hole."},
+ src:"Misconception 1 (card §2)"},
+
+{n:"N2", step:"S1", role:"post", topic:"How the message crosses the membrane",
+ stem:"The hormone stayed outside the cell, yet the cell released insulin. How did the message get in?",
+ opts:["The receptor changed shape inside the membrane when the hormone fit into it","Insulin leaked out of the blood into the cell","The hormone slipped through the phospholipid bilayer","Sugar carried the hormone in"], key:0,
+ why:"The receptor spans the membrane. When the hormone fits its outside part, the receptor changes shape on the inside, and that change sets off the cell's response. The messenger stays out; the message gets in.",
+ miss:{1:"Insulin moves the other way: the cell makes it and releases it into the blood.",
+       2:"In the animation the hormone stayed outside the membrane. The receptor carried the message across.",
+       3:"Sugar does not carry hormones. The hormone fits the receptor on its own."},
+ src:"Unit 2 membrane structure; S1"},
+
+{n:"N3", step:"S2", role:"pre", topic:"What ends the signal",
+ stem:"Right after a meal, your gut releases GLP-1 into your blood. Predict: about how long until most of it is no longer working?",
+ opts:["A few minutes","A few hours","About a day","It keeps working until you eat again"], key:0,
+ why:"Half of your own GLP-1 is cut and useless within about 1 to 2 minutes, and almost all of it within 10. The scissors enzyme in your blood cuts it at its front end.",
+ miss:{1:"That is how long the Gila monster's version lasts, as you'll see in step 3. Yours is far shorter.",
+       2:"Far too long. Run the clock in the 15-minute window and watch the curve.",
+       3:"Your body clears it within minutes of every release, so the signal follows the meal you just ate."},
+ src:"SIGNAL_DATA glp1.text9"},
+
+{n:"N4", step:"S2", role:"post", topic:"Why a short signal is useful",
+ stem:"Why might it help your body that GLP-1 is destroyed so quickly?",
+ opts:["It saves energy by making less insulin forever","It lets GLP-1 get into the cell","It makes the receptor stronger","It keeps the insulin signal tied to the meal you just ate"], key:3,
+ why:"Because GLP-1 is gone within minutes, its signal only lasts while food is arriving. When the meal is over, the message stops. That is homeostasis: a response that switches off when it is no longer needed.",
+ miss:{0:"Insulin release goes back up after the next meal. Nothing about it is permanent.",
+       1:"GLP-1 works from outside the cell, and a cut GLP-1 cannot even fit the receptor.",
+       2:"Cutting the hormone does not change the receptor. A cut hormone simply cannot fit."},
+ src:"S2; homeostasis (Unit 2)"},
+
+{n:"N5", step:"S3", role:"pre", topic:"Longer vs stronger",
+ stem:"Semaglutide lasts much longer in the blood than your own GLP-1. Predict what that means for the receptor.",
+ opts:["It switches the receptor on harder","It cannot fit the receptor at all","It switches the receptor on just as hard, but for much longer","It goes into the cell instead"], key:2,
+ why:"In the model, all three molecules switch the receptor on equally hard at the start. The 'Signal strength at the start' gauge is the same for each. What differs is how long the signal lasts. Longer is not stronger.",
+ miss:{0:"Check the gauge: the starting signal is the same for all three. Semaglutide's advantage is time, not strength.",
+       1:"It fits the same receptor; the receptor lights the same way in the animation.",
+       3:"All three work from the receptor on the surface; none has to enter the cell."},
+ src:"Misconception 2; Lau 2015"},
+
+{n:"N6", step:"S3", role:"post", topic:"Venom vs medicine",
+ stem:"Which statement about the Gila monster and the diabetes medicine is accurate?",
+ opts:["The medicine is venom collected from Gila monsters","The medicine is the lizard's insulin","The venom molecule cannot fit human receptors","The medicine is a copy of a venom molecule, made in a lab"], key:3,
+ why:"Scientists found exendin-4 in Gila monster venom in 1992. The medicine made from it is a copy built in a lab, so no lizards are milked. It fits the same human receptor as your own GLP-1, but the scissors enzyme can't cut it.",
+ miss:{0:"No venom is collected. The medicine is a lab-made copy of one molecule found in the venom.",
+       1:"Exendin-4 is not insulin. It is a message that tells your beta cells to release insulin.",
+       2:"It fits the human receptor; that is exactly why it works as a medicine."},
+ src:"Misconception 4; Eng 1992; Byetta label"},
+
+{n:"N7", step:"S4", role:"pre", topic:"Does blood sugar matter?",
+ stem:"The hormone is bound to the receptors, but blood sugar is low. Predict what the cell does.",
+ opts:["Releases lots of insulin anyway","Releases no extra insulin","Takes the hormone inside","Makes more receptors"], key:1,
+ why:"The cell adds extra insulin only when blood sugar is high. At low or normal blood sugar the hormone adds nothing, which is why this signal can't push blood sugar too low on its own.",
+ miss:{0:"Run it: at low blood sugar the insulin bar stays the same with the hormone on or off.",
+       2:"The hormone works from the receptor on the surface at every blood sugar level.",
+       3:"Nothing in the model changes the number of receptors. Watch the insulin bar instead."},
+ src:"Misconception 3; Nauck 1993"},
+
+{n:"N8", step:"S4", role:"post", topic:"Reading the evidence",
+ stem:"At normal blood sugar, insulin release was the same with the hormone on and off. What does that show?",
+ opts:["The hormone was cut before it arrived","Normal blood sugar blocks the receptor","The hormone's effect depends on blood sugar being high","Insulin was not being made at all"], key:2,
+ why:"With the hormone bound and blood sugar normal, nothing extra happened; at high blood sugar, the hormone added a lot. So the hormone's effect depends on blood sugar. Doctors saw this in people in 1993.",
+ miss:{0:"In step 4 the receptors were glowing, so the hormone had arrived and bound.",
+       1:"The receptors stayed bound and glowing; the cell simply didn't add extra insulin.",
+       3:"There was some insulin release at normal blood sugar, with or without the hormone. Blood sugar itself causes some."},
+ src:"S4 readout"},
+
+{n:"N9", step:"S5", role:"pre", topic:"What the enzyme reads",
+ stem:"The scissors enzyme cuts GLP-1 but not exendin-4. Exendin-4 differs at position 2. Predict why one difference matters.",
+ opts:["The enzyme only fits a molecule with the right amino acid at that spot","Exendin-4 is too long to cut","Exendin-4 is made of DNA","The enzyme is turned off in lizards"], key:0,
+ why:"An enzyme fits its substrate by shape, like a key in a lock. The scissors grip GLP-1 because position 2 is alanine. Change that one amino acid and the enzyme can't hold on, so it can't cut.",
+ miss:{1:"Its length isn't the reason. Watch the scissors slip at position 2, near the front end.",
+       2:"Exendin-4 is a chain of amino acids, a protein, not DNA.",
+       3:"The scissors in the model are in human blood. They meet exendin-4 and still can't cut it."},
+ src:"S5; Unit 1 enzymes (active site)"},
+
+{n:"N10", step:"S5", role:"post", topic:"Aib and the genetic code",
+ stem:"Semaglutide has Aib at position 2. Why can't a cell put Aib into a protein by itself?",
+ opts:["Aib is a sugar, not an amino acid","Cells have no ribosomes","There is no codon for Aib in the genetic code","Aib is only found in Gila monsters"], key:2,
+ why:"Cells build proteins by reading codons, and the genetic code has codons for only 20 amino acids. Aib is not one of them, so no cell builds it in from DNA instructions. Chemists add it. That is synthetic biology: changing a natural molecule on purpose.",
+ miss:{0:"Aib is an amino acid. It just isn't one of the 20 the genetic code uses.",
+       1:"Cells do have ribosomes; they read codons, and no codon calls for Aib.",
+       3:"Aib is made by chemists. The Gila monster's molecule has glycine at position 2, not Aib."},
+ src:"Unit 4 codons; LT synthetic biology (BIO.5e)"},
+
+{n:"A1", step:"S3", role:"post", adv:true, topic:"Two different reasons",
+ stem:"Exendin-4 and semaglutide both escape the scissors. Why does semaglutide last so much longer than exendin-4?",
+ opts:["It binds the receptor more tightly","It enters the beta cell and hides there","It has more amino acids","Its fatty piece rides on a big blood protein that the kidneys don't filter"], key:3,
+ why:"Both escape the scissors, but exendin-4 is still filtered out by the kidneys over hours. Semaglutide's fatty piece lets it ride on a large blood protein that is too big for the kidney filter, so it stays in the blood for about a week.",
+ miss:{0:"In the model all three switch the receptor on equally. Lasting longer is not binding harder.",
+       1:"The signal starts at the surface receptor; nothing in this tool hides inside the cell.",
+       2:"Exendin-4 is actually longer: 39 amino acids against semaglutide's 31."},
+ src:"Lau 2015; Byetta label (renal clearance)"},
+
+{n:"A2", step:"S6", role:"pre", adv:true, topic:"A small signal, a big response",
+ stem:"One hormone binds one receptor. Predict: how many insulin packets can that start moving?",
+ opts:["Exactly one","Many, because each step inside the cell switches on many of the next","None until a second hormone arrives","Only the packets touching that receptor"], key:1,
+ why:"The receptor switches on relay molecules inside the cell, and each of those switches on many more. A single message outside becomes a large response inside. The tool's numbers are illustrative, but the pattern of multiplying at each step is real.",
+ miss:{0:"Follow the tally: the count grows at every step.",
+       2:"One bound receptor is enough to start the relay.",
+       3:"The relay molecules spread through the cell, so packets far from the receptor respond too."},
+ src:"S6"}
+];
+
+// DE bank. Permanent numbers: D1–D12. Never renumber. sam = Student-Authored Module prompt per wrong option.
+const BANKDE = [
+{n:"D1", step:"S1", role:"pre", topic:"Reception without entry",
+ stem:"GLP-1 is a 30–31-residue peptide. Which statement best describes how it signals a β cell?",
+ opts:["It binds the extracellular domain and outer transmembrane core of a membrane GPCR from outside the cell","It diffuses through the bilayer and binds an intracellular receptor","It enters by endocytosis and is converted to insulin","It opens a ligand-gated ion channel that lets glucose in"], key:0,
+ why:"A peptide this size and this polar cannot cross the bilayer. GLP-1R is a class B GPCR; ligand binding changes its conformation, and transduction proceeds intracellularly without the ligand.",
+ miss:{1:"That is the route for small hydrophobic signals such as steroids, not a polar peptide.",
+       2:"Receptor internalisation happens, but signalling does not depend on the ligand entering, and GLP-1 is never converted to insulin.",
+       3:"GLP-1R is a GPCR, not an ion channel, and glucose enters β cells through transporters."},
+ sam:{1:"Write a SAM question that sorts signals by whether they can cross the bilayer, and names the receptor location for each.",
+      2:"Write a SAM question on why a hormone and the response it triggers are different molecules.",
+      3:"Write a SAM question contrasting a GPCR with a ligand-gated ion channel."},
+ src:"Campbell Ch. 5 reception (concept only); Müller 2019"},
+
+{n:"D2", step:"S1", role:"post", topic:"Which stage is which",
+ stem:"In the order reception → transduction → response, which pairing is correct for this system?",
+ opts:["Reception: insulin exocytosis","Transduction: GLP-1 binding the receptor","Response: insulin granule exocytosis","Response: cAMP synthesis"], key:2,
+ why:"Reception is GLP-1 binding GLP-1R; transduction is the Gs–adenylyl cyclase–cAMP relay; the response is insulin granule exocytosis.",
+ miss:{0:"Exocytosis is the end of the pathway: the response.",
+       1:"Binding is reception; transduction is the relay inside.",
+       3:"cAMP is a second messenger, which makes it part of transduction."},
+ sam:{0:"Write a SAM question that has a student place five events from this pathway into reception, transduction or response.",
+      1:"Write a SAM question that asks where reception ends and transduction begins.",
+      3:"Write a SAM question on what makes a molecule a second messenger."},
+ src:"Ch. 5 three stages"},
+
+{n:"D3", step:"S2", role:"pre", topic:"What DPP-4 does",
+ stem:"DPP-4 inactivates GLP-1(7-37) within minutes. What does it do?",
+ opts:["Removes the N-terminal dipeptide His-Ala, leaving GLP-1(9-37), which is inactive at the receptor","Cleaves GLP-1 into single amino acids","Adds a phosphate that blocks binding","Removes the C-terminal Gly-Arg-Gly"], key:0,
+ why:"DPP-4 is an exopeptidase that removes N-terminal dipeptides, strongly preferring Ala or Pro at position 2. Losing His7-Ala8 leaves a product that no longer activates the receptor.",
+ miss:{1:"It removes only the first two residues; the rest of the chain is left intact.",
+       2:"DPP-4 is a protease; it cuts peptide bonds. It does not phosphorylate.",
+       3:"It works from the N-terminus, which is the end the receptor needs."},
+ sam:{1:"Write a SAM question distinguishing an exopeptidase from an enzyme that digests a protein completely.",
+      2:"Write a SAM question on how proteases and kinases change a protein differently.",
+      3:"Write a SAM question on why the N-terminal residues matter for GLP-1R activation."},
+ src:"Mentlein 1993; Kieffer 1995"},
+
+{n:"D4", step:"S2", role:"post", topic:"Reading a half-life",
+ stem:"In this model, native GLP-1's half-life is 1.5 min (the published range is 1–2 min). Starting from 100%, about how much intact GLP-1 is left at 10 min?",
+ opts:["About 50%","About 25%","About 10%","About 1%"], key:3,
+ why:"10 min is about 6.7 half-lives, and 0.5^6.7 ≈ 0.01. After 10 minutes, roughly 1% is left, which is why the 15-minute window shows the curve flat on the floor.",
+ miss:{0:"50% is what remains after one half-life, about 1.5 min.",
+       1:"25% is after two half-lives, about 3 min.",
+       2:"10% is after about 3.3 half-lives, about 5 min, and the model calls that the end of the signal."},
+ sam:{0:"Write a SAM question that has students compute remaining fraction after n half-lives.",
+      1:"Write a SAM question that converts a time into a number of half-lives.",
+      2:"Write a SAM question on why 'signal on' needs a threshold and what choosing one assumes."},
+ src:"SIGNAL_DATA; Müller 2019"},
+
+{n:"D5", step:"S3", role:"pre", topic:"Potency vs persistence",
+ stem:"Semaglutide's half-life is more than 5,000 times longer than native GLP-1's. Predict its peak effect at the receptor, relative to GLP-1.",
+ opts:["More than 5,000 times greater","Zero, because it is never released from albumin","Similar; the difference is duration, not peak activation","Greater, because the fatty acid opens the receptor"], key:2,
+ why:"Half-life measures persistence, not potency. In this model the peak occupancy is the same for all three. In reality semaglutide's receptor affinity is slightly lower than liraglutide's; its advantage is that it stays in circulation.",
+ miss:{0:"That confuses how long a ligand lasts with how hard it activates the receptor.",
+       1:"Albumin binding is reversible; the free fraction binds the receptor.",
+       3:"The fatty diacid binds albumin. It is not what activates GLP-1R."},
+ sam:{0:"Write a SAM question that separates potency, efficacy and duration of action.",
+      1:"Write a SAM question on how reversible binding to a carrier protein can lengthen a drug's life.",
+      3:"Write a SAM question on what each of semaglutide's three changes is for."},
+ src:"Lau 2015"},
+
+{n:"D6", step:"S3", role:"post", topic:"Why exenatide still clears",
+ stem:"Exendin-4 resists DPP-4, yet exenatide's half-life is only about 2.4 h. What mainly removes it?",
+ opts:["Hepatic conversion to insulin","DPP-4 acting more slowly","Uptake into β cells","Renal filtration, followed by proteolysis"], key:3,
+ why:"The Byetta label states that exenatide is predominantly eliminated by glomerular filtration with subsequent proteolytic degradation. Escaping DPP-4 removes the fast route, but not the kidney.",
+ miss:{0:"Peptides are not converted into insulin; insulin is a separate gene product.",
+       1:"Gly2 blocks DPP-4 cleavage outright; the clearance comes from elsewhere.",
+       2:"β cells respond to the ligand; they are not where it is cleared."},
+ sam:{0:"Write a SAM question on the difference between a signal and the response it triggers.",
+      1:"Write a SAM question on why resistance to one enzyme does not make a peptide permanent.",
+      2:"Write a SAM question that lists the routes by which a peptide drug leaves the blood."},
+ src:"Byetta label §12.3"},
+
+{n:"D7", step:"S4", role:"pre", topic:"Glucose dependence",
+ stem:"With GLP-1R occupied and plasma glucose low, what does the β cell do?",
+ opts:["Secretes insulin at maximum rate","Secretes little or no extra insulin; GLP-1 amplifies glucose-triggered secretion","Stops making cAMP","Releases GLP-1R into the blood"], key:1,
+ why:"cAMP via PKA and Epac2 amplifies exocytosis triggered by glucose metabolism and Ca²⁺ entry. With glucose low, there is little to amplify, so the hormone adds little or nothing.",
+ miss:{0:"That would cause hypoglycaemia, and it is exactly what GLP-1 does not do.",
+       2:"The receptor still signals; the response is limited downstream by the glucose trigger.",
+       3:"Receptors are membrane proteins; they are not released."},
+ sam:{0:"Write a SAM question on why a glucose-dependent drug carries low hypoglycaemia risk.",
+      2:"Write a SAM question on where in the pathway glucose and cAMP meet.",
+      3:"Write a SAM question on what limits a cell's response when the receptor is fully occupied."},
+ src:"Nauck 1993; Müller 2019"},
+
+{n:"D8", step:"S4", role:"post", topic:"Reading Nauck 1993",
+ stem:"GLP-1 was infused into people with type 2 diabetes. Glucose fell to normal, and insulin then returned toward basal despite continued infusion. What does this support?",
+ opts:["GLP-1's insulinotropic effect is glucose-dependent","GLP-1 is degraded once glucose is normal","Insulin secretion is independent of glucose","The receptor was destroyed"], key:0,
+ why:"The hormone was still being infused, so ligand was present, but insulin fell as glucose normalised. The response depends on glucose, not on the ligand alone.",
+ miss:{1:"Degradation rate does not depend on glucose, and the infusion kept supplying intact hormone.",
+       2:"The study shows the opposite: insulin tracked glucose.",
+       3:"Nothing requires receptor loss: the hormone was still present, so the limit is downstream, at glucose."},
+ sam:{1:"Write a SAM question that asks what a continuous infusion controls for in this experiment.",
+      2:"Write a SAM question that asks students to state the evidence and the claim separately for Nauck 1993.",
+      3:"Write a SAM question on how to tell receptor loss from a downstream limit."},
+ src:"Nauck 1993 (doi:10.1007/BF00401145)"},
+
+{n:"D9", step:"S5", role:"pre", topic:"The residue DPP-4 reads",
+ stem:"DPP-4 strongly prefers Ala or Pro at position 2 from the N-terminus. Exendin-4 has Gly2; semaglutide has Aib8 (its position 2). Predict DPP-4's effect on each.",
+ opts:["Cleaves both","Cleaves neither","Cleaves exendin-4 only","Cleaves semaglutide only"], key:1,
+ why:"Neither residue fits DPP-4's specificity at that position, so both N-termini survive. Run the scissors in S5: they slip on both.",
+ miss:{0:"DPP-4 needs Ala or Pro at position 2 to cut efficiently; neither molecule has one.",
+       2:"Gly2 is exactly what protects exendin-4.",
+       3:"Aib8 was put there to block DPP-4."},
+ sam:{0:"Write a SAM question on enzyme specificity at a single residue.",
+      2:"Write a SAM question comparing Gly and Ala side chains and what that does to fit.",
+      3:"Write a SAM question on why engineers chose a non-coded amino acid for position 8."},
+ src:"Müller 2019; Lau 2015"},
+
+{n:"D10", step:"S5", role:"post", topic:"Sequence identity and function",
+ stem:"Exendin-4 shares 16 of its first 30 residues with GLP-1(7-36), about 53%, yet activates the same receptor. What is the best inference?",
+ opts:["Any two peptides with 50% identity bind the same receptor","Exendin-4 must use a different receptor","Identity above 90% is required for receptor binding","Receptor activation depends on specific key residues and the overall fold, not total identity"], key:3,
+ why:"Function tracks the residues that contact the receptor and the shape they adopt. The N-terminal region is critical, and exendin-4 matches GLP-1 at 8 of its first 10 positions.",
+ miss:{0:"Percent identity alone predicts little; which residues match matters.",
+       1:"Göke et al. (1993) showed exendin-4 acts at the GLP-1 receptor on β cells.",
+       2:"Exendin-4 binds at ~53% identity, so no such cutoff exists here."},
+ sam:{0:"Write a SAM question on why percent identity can mislead about function.",
+      1:"Write a SAM question on the evidence that exendin-4 uses GLP-1R.",
+      2:"Write a SAM question linking primary sequence to tertiary structure to binding."},
+ src:"Müller 2019; Göke 1993; UniProt P01275, P26349"},
+
+{n:"D11", step:"S6", role:"pre", topic:"Where amplification happens",
+ stem:"In the GLP-1R pathway, which step multiplies the signal most, so one bound receptor yields many messenger molecules?",
+ opts:["Ligand binding","Insulin binding its own receptor","Gs activating adenylyl cyclase, which makes many cAMP","DPP-4 cleavage"], key:2,
+ why:"An activated receptor activates multiple G proteins, and each active adenylyl cyclase converts many ATP to cAMP. The enzymatic step is where the count jumps.",
+ miss:{0:"One ligand binds one receptor; binding itself does not multiply anything.",
+       1:"That is a different pathway, in the insulin's target cells.",
+       3:"DPP-4 ends the signal; it does not amplify it."},
+ sam:{0:"Write a SAM question on why enzymatic steps, not binding steps, amplify.",
+      1:"Write a SAM question that separates the GLP-1R pathway in β cells from insulin signalling in muscle.",
+      3:"Write a SAM question on the steps that terminate a GPCR signal."},
+ src:"Ch. 5 transduction (concept only)"},
+
+{n:"D12", step:"S6", role:"post", topic:"Second messengers",
+ stem:"Why is cAMP called a second messenger in this pathway?",
+ opts:["It is the second hormone released after a meal","It carries the signal inside the cell after the first messenger, GLP-1, binds outside","It is made by DPP-4","It enters the blood and reaches the liver"], key:1,
+ why:"GLP-1 is the first messenger, outside. cAMP is made inside in response and spreads the signal through the cytosol to PKA and Epac2.",
+ miss:{0:"cAMP is an intracellular molecule, not a hormone.",
+       2:"Adenylyl cyclase makes cAMP from ATP; DPP-4 is a protease in the blood.",
+       3:"cAMP acts inside the cell that made it."},
+ sam:{0:"Write a SAM question contrasting first and second messengers with an example of each.",
+      2:"Write a SAM question tracing cAMP from its synthesis to its breakdown.",
+      3:"Write a SAM question on why second messengers stay inside the cell."},
+ src:"Ch. 5 second messengers (concept only)"}
+];
+
+
+/* ================= content: words, labels, parts ================= */
+/* Tool-native words for the 9th-grade view, each defined on screen in every step that uses it (§7.1). */
+const WORDS={
+ hormone:{w:"hormone",d:"a chemical message carried in the blood"},
+ receptor:{w:"receptor",d:"a protein in the cell membrane shaped to fit one message"},
+ bind:{w:"bind",d:"fit into and hold on"},
+ signal:{w:"signal",d:"a message that changes what a cell does"},
+ insulin:{w:"insulin",d:"the hormone that tells body cells to take sugar out of the blood"},
+ pancreas:{w:"pancreas",d:"the organ that makes insulin"},
+ betacell:{w:"beta cell",d:"the pancreas cell that makes insulin"},
+ scissors:{w:"scissors enzyme",d:"an enzyme in the blood that cuts GLP-1 at its front end"},
+ kidney:{w:"kidney filter",d:"where the kidneys strain small molecules out of the blood"},
+ venom:{w:"venom",d:"the toxic saliva some animals bite with"},
+ t2d:{w:"type 2 diabetes",d:"a disease where blood sugar stays too high"},
+ aib:{w:"Aib",d:"a lab-made amino acid that is not in the genetic code"},
+ relay:{w:"relay molecule",d:"a molecule inside the cell that passes the message along"}
+};
+/* the regex that decides whether a step's text uses a tool-native word (the chip check reads these too) */
+const WORDRX={hormone:/\bhormones?\b/i,receptor:/\breceptors?\b/i,bind:/\b(bind|binds|bound|binding)\b/i,signal:/\bsignals?\b/i,insulin:/\binsulin\b/i,pancreas:/\bpancreas\b/i,betacell:/\bbeta cells?\b/i,
+ scissors:/\bscissors\b/i,kidney:/\bkidneys?\b/i,venom:/\bvenom\b/i,t2d:/type 2 diabetes/i,aib:/\bAib\b/,relay:/\brelay\b/i};
+
+/* Stage labels. nine = the 9th-grade words (§7.1), de = the DE words. */
+const LBL={
+ nine:{gut:"Gut",vessel:"Blood vessel",sciss:"Scissors enzyme",kidney:"Kidney filter",alb:"Big blood protein",cell:"Beta cell (pancreas)",rec:"Receptor",pkt:"Insulin packet",ins:"Insulin",gluc:"Blood sugar",
+   glp1:"GLP-1",ex4:"Exendin-4 (Gila monster)",sema:"Semaglutide (Ozempic)",cut:"Cut GLP-1",pos2:"Position 2",aib:"Aib (not in the genetic code)",inj:"Injection",cant:"✕ can't cut",
+   low:"low",normal:"normal",high:"high",relay1:"relay switches",relay2:"small relay molecules",wave:"a wave of insulin packets",hormone1:"hormone",nocut:NOCUT_LABEL,
+   inside:"Inside the cell",outside:"Outside the cell",tapRec:"Tap a glowing receptor",illus:"Numbers are illustrative, not measured.",key:"H = histidine · A = alanine · G = glycine · Aib = a lab-made amino acid, not in the genetic code",
+   match:"same amino acid",cutlbl:"cut",sliplbl:"slips: can't cut"},
+ de:{gut:"Intestinal L-cell",vessel:"Capillary lumen",sciss:"DPP-4",kidney:"Renal clearance",alb:"Albumin",cell:"β cell",rec:"GLP-1R (class B GPCR)",pkt:"Insulin granule",ins:"Insulin",gluc:"Plasma glucose",
+   glp1:"GLP-1(7-37)",ex4:"Exendin-4 / exenatide",sema:"Semaglutide",cut:"GLP-1(9-37), inactive",pos2:"Position 2",aib:"Aib8",inj:"Injection",cant:"✕ not cleaved",
+   low:"low",normal:"normal",high:"high",relay1:"active Gs",relay2:"cAMP",wave:"a wave of insulin granules",hormone1:"hormone",nocut:NOCUT_LABEL,
+   inside:"Cytosol",outside:"Extracellular",tapRec:"Tap an occupied receptor",illus:"Numbers are illustrative, not measured.",key:"His7 · Ala8 / Gly2 / Aib8 at position 2 · Arg34 · Lys26–C18 diacid",
+   match:"identical residue",cutlbl:"cleaved",sliplbl:"not cleaved",gs:"Gs",ac:"Adenylyl cyclase",camp:"cAMP",pka:"PKA",epac:"Epac2",his7:"His7",ala8:"Ala8",gly2:"Gly2",arg34:"Arg34",lys26:"Lys26–C18 diacid",approx:"approximate"}
+};
+/* Parts a teacher can pin a callout on (Teaching view). One line each, in the level's words. */
+const PARTS={
+ nine:{gut:["Gut","Cells lining your gut make GLP-1 after a meal and release it into the blood."],vessel:["Blood vessel","One strip stands for your whole bloodstream. It flows left to right."],inj:["Injection","Where exendin-4 and semaglutide enter the blood. They are medicines, not meals."],
+   sciss:["Scissors enzyme","An enzyme in the blood that cuts GLP-1 at its front end. A cut GLP-1 can't fit the receptor."],kidney:["Kidney filter","Where the kidneys strain small molecules out of the blood. Exendin-4 leaves here."],alb:["Big blood protein","Semaglutide's fatty piece rides on it, and it is too big for the kidney filter."],
+   cell:["Beta cell (pancreas)","The pancreas cell that makes insulin. The hormone works on it from outside."],rec:["Receptor","A protein in the cell membrane shaped to fit one message. The hormone sits in the cup on the outside."],pkt:["Insulin packet","Insulin waiting inside the cell. It leaves when the cell is told to and blood sugar is high."],
+   ins:["Insulin","The hormone that tells body cells to take sugar out of the blood."],gluc:["Blood sugar","The cell releases extra insulin only when this is high."],pulse:["The signal","The ring is the message moving inward. The hormone stays outside."],
+   glp1:["GLP-1","Your own hormone: a chain of amino acids with a round head."],ex4:["Exendin-4 (Gila monster)","The lizard's hormone: a longer chain with a diamond head."],sema:["Semaglutide (Ozempic)","Your GLP-1 with two amino acids changed and a fatty piece added: a square head and a squiggle."],cut:["Cut GLP-1","The scissors took its front two amino acids. It no longer fits the receptor."],
+   pos2:["Position 2","The amino acid the scissors enzyme grips. A for GLP-1, G for exendin-4, Aib for semaglutide."],aib:["Aib","A lab-made amino acid. There is no codon for it, so chemists add it."],tally:["The relay inside","One hormone outside switches on many relay molecules inside. The numbers are illustrative."],graph:["The graph","How much of the hormone is still in the blood, against real time."]},
+ de:{gut:["Intestinal L-cell","Secretes GLP-1(7-37) and the 7-36 amide into the portal blood after a meal."],vessel:["Capillary lumen","One strip stands for the circulation. Flow is left to right."],inj:["Injection","Subcutaneous entry for exenatide and semaglutide. The model skips the absorption phase."],
+   sciss:["DPP-4","A serine protease, on endothelial cells and in plasma, that removes the N-terminal dipeptide His7-Ala8."],kidney:["Renal clearance","Glomerular filtration, then proteolysis. This is what sets exenatide's half-life."],alb:["Albumin","Semaglutide's C18 diacid binds albumin reversibly, so little is filtered."],
+   cell:["β cell","Responds to GLP-1R occupancy with cAMP, but releases insulin only when glucose is high."],rec:["GLP-1R (class B GPCR)","The ligand's N-terminus reaches into the receptor core from outside. Binding is reception."],pkt:["Insulin granule","Exocytosis is the response, triggered by Ca²⁺ and amplified by cAMP through PKA and Epac2."],
+   ins:["Insulin","Secreted into the blood; the pathway's response."],gluc:["Plasma glucose","Glucose metabolism closes K_ATP channels and raises Ca²⁺. Without that, cAMP has little to amplify."],pulse:["Transduction","Gs → adenylyl cyclase → cAMP. The signal crosses the membrane; the ligand does not."],
+   glp1:["GLP-1(7-37)","Native hormone. Round head bead; cleaved by DPP-4 within minutes."],ex4:["Exendin-4 / exenatide","Heloderma suspectum venom peptide; synthetic exenatide. Diamond head, Gly2."],sema:["Semaglutide","GLP-1(7-37) with Aib8, Arg34 and a C18 diacid on Lys26. Square head, fatty-acid squiggle."],cut:["GLP-1(9-37), inactive","Missing His7-Ala8. Inactive at the receptor."],
+   pos2:["Position 2 (P1 for DPP-4)","DPP-4's S1 pocket strongly prefers Ala or Pro here. Gly2 and Aib8 are poor fits."],aib:["Aib8","α-aminoisobutyric acid. Not one of the 20 coded amino acids; no codon."],tally:["Amplification","One receptor → many Gs → many cAMP. Illustrative counts; see the Signal Relay for the full cascade."],graph:["The graph","Per cent of the starting amount remaining against real time. Half-life is read where the curve crosses 50%."]}
+};
+
+/* ================= content: steps ================= */
+/* pre/post/task/goals/short/head are per level (nine, de). adv:true = at 9th the step shows only with Advanced Biology on. goals: [id, label, target?] */
+const STEPS=[
+ {key:"S1",short:{nine:"A meal",de:"Reception"},head:{nine:"A meal sends a message",de:"A meal sends a message"},
+  pre:{nine:"N1",de:"D1"},post:{nine:["N2"],de:["D2"]},gluc:"high",
+  task:{nine:"Tap Eat a meal. Watch where the GLP-1 goes when it reaches the cell.",de:"Tap Eat a meal. Watch where the GLP-1 goes when it reaches the cell."},
+  goals:{nine:[["bind","Hormone bound to a receptor",3],["ins","Insulin released at high blood sugar"],["out","No hormone drawn inside the cell"]],de:[["bind","Ligand bound to GLP-1R",3],["ins","Insulin released at high glucose"],["out","No ligand drawn inside the cell"]]},
+  words:["hormone","receptor","insulin","signal"],
+  nine:"GLP-1 is a hormone, a chemical message carried in the blood. It does not need to go into the cell. It fits into a receptor, a protein in the cell membrane shaped to hold it, the way a substrate fits an enzyme's active site. When it binds, the receptor changes shape on the inside of the membrane, and that change is the message. The cell answers by moving insulin packets to its membrane and releasing them. The message gets in; the messenger stays out.",
+  de:"GLP-1 is a peptide hormone. It cannot cross the bilayer, and it does not need to. It binds the extracellular domain of the GLP-1 receptor, a class B G protein-coupled receptor, and its N-terminus reaches into the outer face of the receptor's transmembrane core; and the conformational change is relayed across the membrane. That is reception. Transduction and response happen inside; the ligand does not need to enter for them to start. The β cell responds by exocytosing insulin granules.",
+  found:"Where did the hormone go, and how did the cell know it was there?"},
+ {key:"S2",short:{nine:"The scissors",de:"DPP-4"},head:{nine:"The scissors",de:"The scissors: DPP-4"},
+  pre:{nine:"N3",de:"D3"},post:{nine:["N4"],de:["D4"]},gluc:"high",
+  task:{nine:"Eat a meal and watch the clock in the First 15 minutes window. Then turn the scissors off and run it again.",de:"Eat a meal and watch the clock in the First 15 minutes window. Then turn the scissors off and run it again."},
+  goals:{nine:[["on10","One run with scissors On reaching 10 minutes on the clock"],["cut","GLP-1 cut by the scissors",3],["off","One run with the scissors Off"]],de:[["on10","One run with DPP-4 On reaching 10 min on the clock"],["cut","GLP-1 cleaved by DPP-4",3],["off","One run with DPP-4 Off"]]},
+  words:["hormone","receptor","signal","scissors"],
+  nine:"The scissors are an enzyme in your blood, and they cut GLP-1 off at its front end. A cut GLP-1 can no longer fit the receptor, so the message stops. Half of it is gone in about 1 to 2 minutes, and almost all of it within 10. That sounds wasteful, but it is how your body keeps the message tied to the meal you just ate: when the food is gone, the signal is gone too.",
+  de:"DPP-4, on endothelial cells and in plasma, removes the N-terminal dipeptide His7-Ala8. The product, GLP-1(9-37), is inactive at the receptor. The intact hormone's half-life is about 1–2 min. Much of it is degraded before it even leaves the gut's capillary bed. A short half-life keeps the signal coupled to the meal; the cost is that the native hormone is useless as a drug.",
+  found:"What ended the signal, and how long did it take?"},
+ {key:"S3",short:{nine:"Swap",de:"Swap"},head:{nine:"Swap the molecule",de:"Swap the molecule"},
+  pre:{nine:"N5",de:"D5"},post:{nine:["N6","A1"],de:["D6"]},gluc:"high",
+  task:{nine:"Run GLP-1, then exendin-4, then semaglutide. Use Overlay all three and change windows until GLP-1 and exendin-4 have dropped below the 10% line, and semaglutide is still above it at three weeks.",de:"Run GLP-1, then exendin-4, then semaglutide. Use Overlay all three and change windows until GLP-1 and exendin-4 have dropped below the 10% line, and semaglutide is still above it at three weeks."},
+  goals:{nine:[["all3","All three molecules run"],["w3","First 3 weeks viewed with all three overlaid"],["gauge","Signal strength at the start seen equal (open the overlay)"]],de:[["all3","All three molecules run"],["w3","First 3 weeks viewed with all three overlaid"],["gauge","Peak signal seen equal (open the overlay)"]]},
+  words:["hormone","receptor","signal","scissors","kidney","venom"],
+  nine:"In this model, all three fit the same receptor and switch it on just as hard at the start. What changes is how long they last. Your GLP-1 is cut in minutes. Exendin-4, from Gila monster venom, cannot be cut by the scissors, so it lasts until your kidneys filter it out: about two and a half hours for half to go. The medicine made from it is a copy built in a lab, not venom. Semaglutide is your own GLP-1 with two amino acids changed and a fatty piece added. The scissors can't cut it, and the fatty piece rides on a big blood protein the kidneys don't filter, so half is still there after about a week. A longer signal is not a stronger one.",
+  de:"Peak receptor occupancy is the same in this model for all three. Persistence is what differs, and for different reasons. Exendin-4 has Gly2, so DPP-4 cannot cleave it; renal filtration sets its 2.4 h half-life (exenatide, approved 2005, is the synthetic peptide). Semaglutide carries Aib8, which blocks DPP-4, and a C18 fatty diacid on Lys26, which binds albumin and slows renal clearance; its half-life is about a week (approved 2017). Potency and persistence are separate properties: semaglutide's receptor affinity is, if anything, slightly lower than its predecessor liraglutide's.",
+  found:"Which lasted longest, and was its signal stronger or just longer?"},
+ {key:"S4",short:{nine:"Blood sugar",de:"Glucose"},head:{nine:"Blood sugar decides",de:"Glucose decides"},
+  pre:{nine:"N7",de:"D7"},post:{nine:["N8"],de:["D8"]},gluc:"normal",
+  task:{nine:"With hormone On, try Low, Normal and High blood sugar. Then turn the hormone Off and compare.",de:"With hormone On, try Low, Normal and High glucose. Then turn the hormone Off and compare."},
+  goals:{nine:[["trio","Low, Normal and High each run with hormone On"],["offHigh","Hormone Off run at High"],["equal","Insulin release at Normal read with hormone On and Off: equal"]],de:[["trio","Low, Normal and High each run with hormone On"],["offHigh","Hormone Off run at High"],["equal","Insulin release at Normal read with hormone On and Off: equal"]]},
+  words:["hormone","receptor","insulin","signal","t2d"],
+  nine:"Even with the hormone bound, the cell releases extra insulin only when blood sugar is high. At low or normal blood sugar the hormone adds nothing. That is a safety feature: this signal cannot push blood sugar too low on its own, because once sugar falls back to normal the extra insulin stops. In 1993, doctors gave GLP-1 to people with type 2 diabetes and watched exactly this: insulin rose until blood sugar reached normal, then fell back even though the hormone was still being given.",
+  de:"GLP-1R signalling is glucose-dependent. Glucose metabolism closes K_ATP channels and raises Ca²⁺; cAMP via PKA and Epac2 amplifies the exocytosis that Ca²⁺ triggers. With glucose low, there is little to amplify. In Nauck et al. (1993), GLP-1 infusion normalised fasting glucose in type 2 diabetes, and insulin then returned toward basal despite continued infusion. That is the basis for the low hypoglycaemia risk of GLP-1 agonists used alone.",
+  found:"When did the hormone change insulin release, and when didn't it?"},
+ {key:"S5",short:{nine:"Position 2",de:"Position 2"},head:{nine:"Zoom to the cut site",de:"Zoom to the cut site"},
+  pre:{nine:"N9",de:"D9"},post:{nine:["N10"],de:["D10"]},gluc:"high",
+  task:{nine:"Tap each row's position 2 to see what is there. Run the scissors on all three.",de:"Tap each row's position 2 to see what is there. Run the scissors on all three."},
+  goals:{nine:[["pos2","Position 2 tapped in all three rows"],["sciss","Scissors run on all three"]],de:[["pos2","Position 2 tapped in all three rows"],["sciss","DPP-4 run on all three"]]},
+  words:["scissors","aib"],
+  nine:"A protein's job depends on its shape, and its shape depends on the order of its amino acids, the order your DNA codes for. The scissors enzyme grips GLP-1 because position 2 is alanine (A). Exendin-4 has glycine (G) there, a different amino acid, and the scissors can't get a grip. Semaglutide has Aib there. Aib is not one of the 20 amino acids in the genetic code; there is no codon for it, so no cell builds it in from DNA. Chemists add it. One changed amino acid, and the enzyme can't cut. (The yeast cells that make semaglutide's protein chain follow DNA instructions; the fatty piece is added afterward by chemists.)",
+  de:"DPP-4 is a serine protease whose S1 pocket strongly prefers Ala or Pro at P1 (position 2 from the free N-terminus). Gly2 in exendin-4 and the gem-dimethyl Aib8 in semaglutide are poor fits, so the N-terminus survives. Exendin-4 shares 16 of its first 30 residues with GLP-1(7-36) (~53%) yet activates the same receptor: it matches GLP-1 at 8 of the first 10 positions, and the N-terminal region is what the receptor's core needs. Position 2 is where the enzyme reads, so position 2 is what both evolution and engineering changed.",
+  found:"What is at position 2 in each molecule, and what did the scissors do?"},
+ {key:"S6",adv:true,short:{nine:"Many packets",de:"Amplification"},head:{nine:"One message, many packets",de:"One message, many packets"},
+  pre:{nine:"A2",de:"D11"},post:{nine:[],de:["D12"]},gluc:"high",
+  task:{nine:"Tap one glowing receptor. Follow the tally.",de:"Tap one glowing receptor. Follow the tally."},
+  goals:{nine:[["amp","The tally reached its last stage"]],de:[["amp","The tally reached its last stage"]]},
+  words:["hormone","receptor","insulin","signal","relay"],
+  nine:"One hormone on the outside can move a lot of insulin, because the receptor switches on relay molecules inside the cell, each relay switches on many more, and together they tell the packets to go. A small signal outside becomes a big response inside.",
+  de:"One ligand-bound receptor activates many Gs proteins in turn; each active adenylyl cyclase makes many cAMP. PKA and Epac2 then act on the granule machinery. The fold numbers here are illustrative. For a cascade traced to its end, with blockable steps, see the Signal Relay (Bio Tool #14).",
+  found:"How can one hormone outside move so much insulin inside?"}
+];
+
+const LEDE={
+ nine:"Your gut makes a hormone after every meal that tells your pancreas to release insulin, and your blood destroys it within minutes. A lizard in the Arizona desert makes one that lasts for hours. Run all three molecules through the same cell and find out why.",
+ de:"GLP-1 is cleared from plasma in one to two minutes; its venom analogue lasts hours and its engineered descendant about a week. Run each through the same β cell and separate potency from persistence."
+};
+const EYEBROW={nine:"Bio Tool #15 · Biology I Unit 4 · SOL BIO.2d, BIO.5e",de:"Bio Tool #15 · DE Bio 101 Unit 5 · Membrane Transport and Cell Signaling (Campbell Ch. 5)"};
+const FOOT={nine:"Unit 4, Nucleic Acids & Protein Synthesis · Biology I, SOL BIO.2d (protein synthesis) and BIO.5e (synthetic biology)",de:"Unit 5, Membrane Transport and Cell Signaling · NVCC BIO 101, Campbell Chapter 5; enzymes, Chapter 6"};
+/* legend per level: [token key, label] */
+const LEGEND={
+ nine:[["glp1","GLP-1 (your own hormone): round head"],["ex4","Exendin-4 (Gila monster): diamond head, longer tail"],["sema","Semaglutide (Ozempic): square head, fatty squiggle"],["cut","Cut GLP-1: grey, no head"],["sciss","Scissors enzyme"],["rec","Receptor (glows when bound)"],["ins","Insulin packet / insulin"],["alb","Big blood protein"],["gluc","Blood sugar"]],
+ de:[["glp1","GLP-1(7-37): round head"],["ex4","Exendin-4 / exenatide: diamond head, 39 aa"],["sema","Semaglutide: square head, fatty-acid squiggle"],["cut","GLP-1(9-37), inactive: grey, no head"],["sciss","DPP-4"],["rec","GLP-1R (glows when occupied)"],["ins","Insulin granule / insulin"],["alb","Albumin"],["gluc","Plasma glucose"]]
+};
+/* control labels per level, listed so the vocabulary test can read them */
+const CTLTEXT={
+ nine:["▶ Play","❚❚ Pause","◂","▸","½×","1×","2×","Speed","Fill screen","Restore page","Reset this step","Window","First 15 minutes","First day","First 3 weeks","Eat a meal","Scissors","On","Off","Off: what if nothing cut it?","Molecule","GLP-1","Exendin-4","Semaglutide","Release / Inject","Overlay all three","Blood sugar","Low","Normal","High","Hormone","Run the scissors","Tap a glowing receptor on the picture","Teaching view","Hide card","Show card","Card ▸","Close card","Position 2","Scissors enzyme"],
+ de:["▶ Play","❚❚ Pause","◂","▸","½×","1×","2×","Speed","Fill screen","Restore page","Reset this step","Window","First 15 minutes","First day","First 3 weeks","All on one axis (log)","Eat a meal","DPP-4","On","Off","Off: what if nothing cut it?","Molecule","GLP-1","Exendin-4","Semaglutide","Release / Inject","Overlay all three","Plasma glucose","Low","Normal","High","Hormone","Run DPP-4","Tap an occupied receptor on the picture","Teaching view","Hide card","Show card","Card ▸","Close card","Position 2","DPP-4"]
+};
+const RT={
+ nine:{peak:"Signal strength at the start",stays:"Signal stays on for",model:"(in this model)",insOn:"Insulin release: hormone on",insOff:"hormone off",gluc:"Blood sugar",boundRec:"Bound receptors",nocutNote:"Scissors off: "+NOCUT_LABEL,yaxis:"Hormone left in the blood (% of start)",thresh:"signal fades out",clock:"Clock",startMeal:"Eat a meal to start the clock",startInject:"Release or inject to start the clock",tapRec:"Tap a glowing receptor",illus:"Numbers are illustrative, not measured.",notyet:"not yet run",hl:"Half of it is gone in",held:"held while the hormone is on"},
+ de:{peak:"Signal strength at the start",stays:"Signal stays on for",model:"(in this model)",insOn:"Insulin release: hormone on",insOff:"hormone off",gluc:"Plasma glucose",boundRec:"Occupied receptors",nocutNote:"DPP-4 off: "+NOCUT_LABEL,yaxis:"% remaining",thresh:"≈ threshold (model)",half50:"half-life (50%)",clock:"Clock",startMeal:"Eat a meal to start the clock",startInject:"Release or inject to start the clock",tapRec:"Tap an occupied receptor",illus:"Numbers are illustrative, not measured.",notyet:"not yet run",hl:"Half-life:",approx:"approximate",mgdl:"mg/dL",held:"held while the hormone is on"}
+};
+const SIMPLIFIES={
+ nine:["the molecules are drawn as bead chains, far larger than scale;","one strip of vessel stands for the whole bloodstream;","the drop in hormone is drawn as one smooth curve, with no absorption phase (a real injection takes hours to days to peak);","all three molecules are given the same receptor strength;","the blood-sugar gate is on/off where the real response is graded;","the relay numbers in the last step are illustrative;","GLP-1 also slows the stomach and acts on appetite centres in the brain; this tool stays on the pancreas;","bound receptors in real cells are later pulled into the cell with their hormone and can keep signalling for a while; the model keeps every hormone outside;","this is a model of how molecules behave, not medical advice."],
+ de:["the molecules are drawn as bead chains, far larger than scale;","one strip of vessel stands for the whole bloodstream;","decay is drawn as a single smooth half-life with no absorption phase (a real injection takes hours to days to peak);","all three molecules are given the same receptor strength;","the glucose gate is on/off where the real response is graded;","amplification numbers are illustrative;","GLP-1 also slows the stomach and acts on appetite centres in the brain; this tool stays on the pancreas;","bound receptors in real cells are later pulled into the cell with their hormone and can keep signalling for a while; the model keeps every hormone outside;","this is a model of how molecules behave, not medical advice."]
+};
+const NOTMEDICAL="This tool shows how molecules behave in a model. It is not medical advice, shows no doses, and does not compare the medicines as treatments.";
+const FURTHER={
+ nine:{site:[["membrane-patch.html","The Membrane Patch","the membrane the receptor sits in."],["water-patch.html","The Water Patch","enzymes and shape."]],
+   mol:[["5VAI","the GLP-1 receptor holding GLP-1"],["1JRJ","exendin-4"],["1N1M","the human scissors enzyme"]]},
+ de:{site:[["signal-relay.html","The Signal Relay","three receptor types and the full cascade."],["membrane-patch.html","The Membrane Patch","the membrane the receptor sits in."],["water-patch.html","The Water Patch","enzymes and shape."],["checkpoint-companion.html","Checkpoint Companion","practice for the Ch. 5 and Ch. 6 Checkpoints."]],
+   mol:[["5VAI","the GLP-1 receptor with GLP-1 and its G protein"],["1JRJ","exendin-4"],["1N1M","human DPP-4"]]}
+};
+/* Sources (§4.3), shown at both levels. Citations and names, not teaching text. */
+const SOURCES=[
+ ["Exendin-4: 39 aa, from H. suspectum venom, VA Bronx","Eng J, et al. J Biol Chem 1992;267:7402–5.","10.1016/S0021-9258(18)42531-8"],
+ ["Exendin-4 is a GLP-1 receptor agonist on beta cells","Göke R, et al. J Biol Chem 1993;268:19650–5.","10.1016/S0021-9258(19)36565-2"],
+ ["DPP-4 removes His-Ala from GLP-1 and inactivates it","Mentlein R, et al. Eur J Biochem 1993;214:829–35.","10.1111/j.1432-1033.1993.tb17986.x"],
+ ["GLP-1(9-36) is biologically inactive; fast degradation in vivo","Kieffer TJ, et al. Endocrinology 1995;136:3585–96.","10.1210/endo.136.8.7628397"],
+ ["Native GLP-1 is rapidly degraded from the N-terminus in people","Deacon CF, et al. Diabetes 1995;44:1126–31.","10.2337/diab.44.9.1126"],
+ ["Insulin effect is glucose-dependent; insulin returns toward basal at normal glucose","Nauck MA, et al. Diabetologia 1993;36:741–4.","10.1007/BF00401145"],
+ ["Half-life 1–2 min; Gly2 protects exendin-4; ~53% identity; class B GPCR; cAMP → PKA/Epac","Müller TD, et al. Mol Metab 2019;30:72–130.","10.1016/j.molmet.2019.09.010"],
+ ["Semaglutide design: Aib8, Arg34, acylated Lys26, albumin binding","Lau J, et al. J Med Chem 2015;58:7370–80.","10.1021/acs.jmedchem.5b00726"],
+ ["Exenatide: synthetic; t½ 2.4 h; cleared by glomerular filtration","BYETTA (exenatide) prescribing information, FDA, NDA 021773.","fda"],
+ ["Semaglutide: t½ ≈ 1 week; backbone by yeast fermentation; approval 2017","OZEMPIC (semaglutide) prescribing information, FDA, NDA 209637. The \"about 160 h\" figure (subcutaneous, in humans) is from Müller 2019.","fda"],
+ ["Sequences","UniProt P01275 (human proglucagon; GLP-1(7-37) = residues 98–128) and P26349 (exendin-4, residues 48–86).","uniprot"]
+];
+/* For teachers (§5.8 item 5), as written. Shown collapsed at both levels. */
+const TEACHERS=[
+ "<b>Goal:</b> students show, with evidence they generate, that a hormone signals from the cell surface, that an enzyme ends the signal by cutting a specific spot, and that changing one amino acid changes how long a molecule lasts, not how strong its signal is.",
+ "<b>Misconceptions it is built to surface:</b> “The hormone goes into the cell to deliver its message” → S1. “Longer-lasting means a stronger signal” → S3. “Insulin comes out whenever the hormone is there,” whatever the glucose level → S4. “The lizard venom is the drug” → S3 and S5.",
+ "<b>Read–Talk–Write:</b> students read the CER at home, run the tool in class during the talk, then write. Each step's “What you found” sentence is their evidence line, and <b>Copy my sentences</b> gathers them.",
+ "<b>Timing:</b> 15–20 minutes for S1–S5; add 5 for S6.",
+ "<b>Suggested board prompt:</b> “Your GLP-1 is gone in two minutes. Is that a design flaw or a feature?”",
+ "<b>9th / Unit 4 link:</b> S5 is protein synthesis in reverse. The order of amino acids sets the shape, and the shape decides what an enzyme can cut. Aib has no codon.",
+ "<b>DE link:</b> Ch. 5 reception → transduction → response; Ch. 6 enzyme specificity."
+];
+/* amino-acid names for the position-2 overlay buttons and the S5 key */
+const AANAME={H:"histidine",A:"alanine",G:"glycine",Aib:"Aib, a lab-made amino acid",E:"glutamate",T:"threonine",F:"phenylalanine",S:"serine",D:"aspartate",V:"valine",L:"leucine"};
+const MOLS=["glp1","ex4","sema"];
+const molLabel=(m,lvl)=>lvl==="nine"?SIGNAL_DATA.molecules[m].label9:SIGNAL_DATA.molecules[m].labelDE;
+const molShort={glp1:"GLP-1",ex4:"Exendin-4",sema:"Semaglutide"};
+
+/* ================= devices ================= */
+/* The science is identical; only drawing density, DPR cap and control sizes change. */
+const DEV={ipad:{dpr:2,n0:12,sciss:6,rec:6,alb:2,gluc:{low:2,normal:5,high:9},pkt:8},pc:{dpr:2.5,n0:24,sciss:10,rec:10,alb:3,gluc:{low:4,normal:10,high:18},pkt:12}};
+const dev=()=>DEV[st.dev]||DEV.ipad;
+
+/* ================= theme and colours ================= */
+const cv=$("cv"),ctx=cv.getContext("2d"),gv=$("gv"),gtx=gv.getContext("2d");
+let BG="#FFFFFF",INK="#1D1A15",SOFT="#5A544A",BOND="#1F7A8C",RULE="#DDD8CE",PAPER="#F5F3EE",SOLID="#3F7A55",FLAG="#B85042",DARK=false;
+function readTheme(){try{const cs=getComputedStyle(document.documentElement);const g=(n,f)=>(cs.getPropertyValue(n)||"").trim()||f;BG=g("--card",BG);INK=g("--ink",INK);SOFT=g("--ink-soft",SOFT);BOND=g("--bond",BOND);RULE=g("--rule",RULE);PAPER=g("--paper",PAPER);SOLID=g("--solid",SOLID);FLAG=g("--flag",FLAG);
+  DARK=parseInt(BG.replace("#","").slice(0,2),16)<100;}catch(e){}}
+readTheme();
+if(window.matchMedia){const mq=window.matchMedia("(prefers-color-scheme: dark)");const h=()=>readTheme();if(mq.addEventListener)mq.addEventListener("change",h);else if(mq.addListener)mq.addListener(h);}
+/* each token colour once, [light, dark] (§5.3). Glucose gold is #C47F22 in light mode, a shade darker than the site gold so it clears 3:1 on the stage. */
+const COL={glp1:["#1F7A8C","#6FC0CE"],ex4:["#6B4E8C","#B9A3D9"],sema:["#C9731E","#E8A867"],cut:["#9A948A","#6E685F"],sciss:["#5A544A","#A8A198"],glow:["#F2C230","#F2C230"],ins:["#3F7A55","#7FC395"],alb:["#E9E3D6","#3A352D"],albE:["#5A544A","#A8A198"],gluc:["#C47F22","#C98A2E"],
+  wall:["#E3B3AA","#5C3A35"],cellF:["#EEF4EF","#1F2A22"],memb:["#7A9A86","#5E8A6C"],sieve:["#CFC7B8","#4A443A"],nocut:["#1F7A8C","#6FC0CE"],glp1off:["#1F7A8C","#6FC0CE"]};
+const col=k=>COL[k][DARK?1:0];
+
+/* ================= geometry (scene world 1200 x 600, graph world 1200 x 400) ================= */
+const W1=1200,H1=600,GW=1200,GH=400;
+const VES={x0:0,x1:640,y0:165,y1:345,wall:12};
+const GUT={x1:64};
+const INJ={x:150,y:119};
+const KID={x0:560,x1:640,y0:345,y1:415};
+const CELL={x0:700,x1:1180,y0:60,y1:560,r:110};
+const DOCKX=680;
+const GAUGE={x:1132,y0:150,y1:400};
+const PACE=160; /* world units per second at 1x */
+const PLOT={x0:150,x1:1150,y0:36,y1:330};
+const WINDOWS={
+ "15m":{max:15,label:{nine:"Time (minutes)",de:"Time (minutes)"},ticks:()=>{const a=[];for(let m=0;m<=15;m++)a.push([m,String(m),true]);return a;}},
+ "1d":{max:1440,label:{nine:"Time (hours)",de:"Time (hours)"},ticks:()=>{const a=[];for(let h=0;h<=24;h+=3)a.push([h*60,String(h),true]);return a;}},
+ "3w":{max:21*1440,label:{nine:"Time (days; a tick each day, labelled each week)",de:"Time (days; a tick each day, labelled each week)"},ticks:()=>{const a=[];for(let d=0;d<=21;d++)a.push([d*1440,d%7===0?String(d):"",d%7===0]);return a;}},
+ "log":{max:30*1440,min:0.1,log:true,label:{de:"Time (log scale)",nine:"Time (log scale)"},ticks:()=>[[1,"1 min",true],[10,"10 min",true],[60,"1 h",true],[600,"10 h",true],[1440,"1 day",true],[10080,"1 week",true],[43200,"30 days",true]]}
+};
+const WINNAMES={"15m":"First 15 minutes","1d":"First day","3w":"First 3 weeks","log":"All on one axis (log)"};
+const CURVES={glp1:{mol:"glp1",dash:[]},glp1off:{mol:"glp1",dash:[7,7],nocut:true},ex4:{mol:"ex4",dash:[18,10]},sema:{mol:"sema",dash:[14,6,3,6]}};
+
+/* ================= the model (§4.1): every number from SIGNAL_DATA ================= */
+const M=SIGNAL_DATA.molecules;
+function halfLifeOf(key){return key==="glp1off"?NOCUT_HALFLIFE_MIN:M[key].halfLifeMin;}
+function remaining(key,tMin){return 100*Math.pow(.5,Math.max(0,tMin)/halfLifeOf(key));}   /* per cent of the starting amount */
+function onTimeMin(key){return halfLifeOf(key)*Math.log2(1/SIGNAL_DATA.signalOnThreshold);}  /* minutes the signal stays on in this model */
+function onTimeText(key){const m=onTimeMin(key);if(m<90)return "about "+Math.round(m)+" minutes";const h=m/60;if(h<48)return "about "+Math.round(h)+" hours";const d=h/24;if(d<14)return "about "+Math.round(d)+" days";return "about "+Math.round(d/7)+" weeks";}
+function insulinRateOf(gluc,signal){const g=SIGNAL_DATA.glucose[gluc]||SIGNAL_DATA.glucose.normal;return clamp(g.basal+g.boost*clamp(signal,0,1),0,1);}
+function activeKey(S){return (S.mol==="glp1"&&!S.scissors)?"glp1off":S.mol;}
+function signalNow(S){ /* fraction of receptors occupied, 0–1, read straight from the formula at the model clock */
+  if(S.stepKey==="S4"||S.stepKey==="S6")return S.hormone?1:0;
+  if(!S.started)return 0;
+  return clamp(remaining(activeKey(S),S.clockMin)/100,0,1);
+}
+
+/* ================= simulation state ================= */
+let SIM=null,nextId=1;
+function newSim(){
+  const S=curStep();
+  const d=dev();
+  SIM={t:0,stepKey:S.key,level:st.level,
+    mol:"glp1",scissors:true,hormone:true,gluc:S.gluc||"high",overlay:false,
+    clockMin:0,started:false,reach:{glp1:0,glp1off:0,ex4:0,sema:0},lastRun:null,
+    tok:[],sciss:[],alb:[],glucTok:[],pkt:[],ins:[],rec:[],
+    cnt:{bindings:0,cutCount:0,slipCount:0,filtered:0,filteredAlbumin:0,insulinReleased:0,hormoneInsideCell:0},
+    spawnT:0,removeT:0,slipT:0,insT:0,jumpT:0,liveT:0,
+    seen:{low:{on:null,off:null},normal:{on:null,off:null},high:{on:null,off:null}},onT:{low:0,normal:0,high:0},offHighT:0,offNormalT:0,onNormalT:0,
+    pos2:{},sciss5:{glp1:"idle",ex4:"idle",sema:"idle"},scissT:{},scissDone:{},tip:null,tipT:0,
+    tally:{on:false,t:0,stage:0,h:0,g:0,c:0,wave:0},tapped:false,amplificationViewed:false,
+    lastEv:""};
+  for(let i=0;i<d.sciss;i++)SIM.sciss.push({x:80+rnd()*520,y:VES.y0+30+rnd()*(VES.y1-VES.y0-60),v:.7+rnd()*.5,ph:rnd()*6.28,close:0,tag:0});
+  for(let i=0;i<d.alb;i++)SIM.alb.push({x:120+i*230+rnd()*80,y:VES.y0+50+rnd()*(VES.y1-VES.y0-100),v:.75+rnd()*.3,ph:rnd()*6.28});
+  const n=d.rec,y0=n<=6?165:135,y1=n<=6?345:375;
+  for(let i=0;i<n;i++)SIM.rec.push({i,y:y0+(y1-y0)*i/(n-1),tok:null,pulse:0,glow:0});
+  for(let i=0;i<d.pkt;i++)SIM.pkt.push(newPkt(i,true));
+  setGlucTok();
+  if(S.key==="S4"||S.key==="S6"){SIM.started=true;}
+  return SIM;
+}
+function newPkt(i,home){const p={i,x:0,y:0,hx:0,hy:0,state:"home",t:0,targetY:0};const d=dev();const cols=Math.ceil(d.pkt/4);const c=i%cols,r=Math.floor(i/cols);p.hx=790+c*46+(r%2)*18;p.hy=140+r*62;p.x=p.hx;p.y=p.hy;return p;}
+function setGlucTok(){const S=SIM,n=dev().gluc[S.gluc]||0;while(S.glucTok.length<n)S.glucTok.push({x:60+rnd()*560,y:VES.y0+22+rnd()*(VES.y1-VES.y0-44),v:.8+rnd()*.4,ph:rnd()*6.28});S.glucTok.length=n;}
+function live(t){const S=SIM;if(S.liveT>0)return;S.liveT=1.2;S.lastEv=t;const e=$("live");if(e)e.textContent=t;}
+function inCell(x,y){ /* inside the beta cell's membrane? (the model rule: this must never be true for a hormone token) */
+  const C=CELL,r=C.r;if(x<C.x0+6||x>C.x1-6||y<C.y0+6||y>C.y1-6)return false;
+  const cx=clamp(x,C.x0+r,C.x1-r),cy=clamp(y,C.y0+r,C.y1-r);return Math.hypot(x-cx,y-cy)<=r-6;}
+
+/* tokens: visual samples of the curve. The curve itself is computed from the formula, never from tokens. */
+function newTok(kind,fromGut){const S=SIM;const t={id:nextId++,kind,x:fromGut?GUT.x1+4:INJ.x,y:fromGut?VES.y0+30+rnd()*(VES.y1-VES.y0-60):VES.y0+20,v:.85+rnd()*.3,ph:rnd()*6.28,state:"flow",rec:-1,alb:-1,t:0,a:1,dx:0,dy:0,toFilter:false,rush:1.2};
+  if(kind==="sema"&&S.alb.length){t.alb=Math.floor(rnd()*S.alb.length);t.state="onAlb";}
+  t.dx=t.x;t.dy=t.y;return t;}
+function aliveHormone(S){return S.tok.filter(t=>t.kind!=="cut"&&t.state!=="fade"&&t.state!=="filter");}
+function targetCount(S){const d=dev();if(S.stepKey==="S5")return 0;if(S.stepKey==="S4"||S.stepKey==="S6")return S.hormone?d.n0:0;if(!S.started)return 0;
+  const r=remaining(activeKey(S),S.clockMin);if(r<1)return 0;return Math.max(1,Math.round(d.n0*r/100));}
+function removeOne(S){
+  const free=aliveHormone(S).filter(t=>t.state==="flow"||t.state==="onAlb");if(!free.length)return;
+  const pool=free.filter(q=>!q.toFilter);if(!pool.length)return;let t=pool.reduce((b,q)=>q.x<b.x?q:b,pool[0]);
+  if(t.kind==="glp1"&&S.scissors){ /* cut by the scissors: drop the head beads, turn grey, drift and fade */
+    const sc=S.sciss.reduce((b,q)=>Math.abs(q.x-t.x)<Math.abs(b.x-t.x)?q:b,S.sciss[0]);if(sc){sc.x=t.x;sc.y=t.y-26;sc.close=1;}
+    t.kind="cut";t.state="fade";t.t=2.6;S.cnt.cutCount++;live(st.level==="nine"?"GLP-1 cut by the scissors":"GLP-1 cleaved by DPP-4");}
+  else{ /* leaves at the kidney filter: only a free token can be filtered; the one nearest the filter goes first */
+    t=pool.reduce((b,q)=>(q.x<=KID.x1&&q.x>b.x)||b.x>KID.x1?q:b,pool[0]);
+    if(t.state==="onAlb"){t.state="flow";t.alb=-1;}
+    t.toFilter=true;}
+}
+function moveTok(t,dt,sp){const S=SIM;
+  if(t.state==="flow"||t.state==="fade"){if(t.rush>0)t.rush-=dt*sp;t.x+=PACE*t.v*sp*dt*(t.toFilter?2.4:t.rush>0?2.8:1);t.ph+=dt*2;t.y+=Math.sin(t.ph)*8*dt;t.y=clamp(t.y,VES.y0+18,VES.y1-18);
+    if(t.toFilter&&t.x>=KID.x0+12&&t.x<=KID.x1-12){t.state="filter";t.t=0;}
+    if(t.x>VES.x1-8){t.x=GUT.x1+4;t.y=VES.y0+30+rnd()*(VES.y1-VES.y0-60);}}
+  else if(t.state==="filter"){t.t+=dt;t.y+=140*dt*sp;t.a=Math.max(0,1-t.t*1.2);if(t.y>KID.y1-8||t.a<=0){t.state="gone";S.cnt.filtered++;if(t.alb>=0)S.cnt.filteredAlbumin++;live(st.level==="nine"?"Filtered out by the kidneys":"Cleared by renal filtration");}}
+  else if(t.state==="onAlb"){const a=S.alb[t.alb];if(!a){t.state="flow";t.alb=-1;return;}t.x=a.x+Math.cos(t.ph)*22;t.y=a.y-6+Math.sin(t.ph*.5)*4;t.ph+=dt*.6;}
+  else if(t.state==="toRec"){const R=S.rec[t.rec];t.t+=dt*2.6*sp;const k=clamp(t.t,0,1);t.x=lerp(t.sx,DOCKX,k);t.y=lerp(t.sy,R.y,k);if(k>=1){t.state="bound";t.t=0;R.tok=t.id;R.glow=1;S.cnt.bindings++;bumpCount("bind",S.cnt.bindings);live((st.level==="nine"?"Receptor ":"Receptor ")+(R.i+1)+" bound");}}
+  else if(t.state==="bound"){const R=S.rec[t.rec];t.x=DOCKX;t.y=R.y;t.t+=dt*sp;if(t.t>(S.stepKey==="S4"||S.stepKey==="S6"?6:1.8)&&!(S.stepKey==="S4"||S.stepKey==="S6")){R.tok=null;t.state="return";t.t=0;t.sx=t.x;t.sy=t.y;t.ty=clamp(R.y,VES.y0+20,VES.y1-20);}}
+  else if(t.state==="return"){t.t+=dt*1.8*sp;const k=clamp(t.t,0,1);t.x=lerp(t.sx,600,k);t.y=lerp(t.sy,t.ty,k);if(k>=1){t.state="flow";if(t.kind==="sema"&&S.alb.length){const a=S.alb.reduce((b,q,i)=>Math.abs(q.x-t.x)<Math.abs(S.alb[b].x-t.x)?i:b,0);t.alb=a;t.state="onAlb";}}}
+  if(t.state==="fade"){t.t-=dt;t.a=clamp(t.t/1.2,0,1);if(t.t<=0)t.state="gone";}
+}
+function simStep(dt){
+  const S=SIM;if(!S)return;const sp=speed;S.t+=dt;if(S.liveT>0)S.liveT-=dt;
+  const k=S.stepKey,d=dev();
+  /* the model clock (S1–S3): the window plays in about 20 real seconds at 1x */
+  if(S.started&&!S.clockHold&&(k==="S1"||k==="S2"||k==="S3")){const W=WINDOWS[st.win];
+    if(W.log){const l0=Math.log10(W.min),l1=Math.log10(W.max);let l=Math.log10(Math.max(S.clockMin,W.min));if(S.clockMin<W.min)l=l0;l+=dt*sp*(l1-l0)/20;S.clockMin=Math.min(W.max,Math.pow(10,l));}
+    else S.clockMin=Math.min(W.max,S.clockMin+dt*sp*W.max/20);
+    noteReach(S);}
+  const signal=signalNow(S);
+  /* tokens follow the curve */
+  const alive=aliveHormone(S),target=targetCount(S);
+  S.spawnT-=dt;S.removeT-=dt;
+  if(alive.length<target&&S.spawnT<=0&&k!=="S5"){S.tok.push(newTok(S.mol,S.mol==="glp1"));S.spawnT=.08;}
+  if(alive.length>target&&S.removeT<=0){removeOne(S);S.removeT=alive.length-target>4?.05:.14;}
+  /* binding: tokens near the cell hop to a free receptor while occupancy is below the signal */
+  const wantBound=signal>=SIGNAL_DATA.signalOnThreshold?Math.ceil(S.rec.length*signal):Math.round(S.rec.length*signal),bound=S.rec.filter(R=>R.tok!=null).length+S.tok.filter(t=>t.state==="toRec").length;
+  if(bound<wantBound){const cand=S.tok.filter(t=>(t.state==="flow"||t.state==="onAlb")&&!t.toFilter&&t.kind!=="cut"&&t.x>470);
+    if(cand.length){const t=cand[Math.floor(rnd()*cand.length)];const free=S.rec.filter(R=>R.tok==null&&!S.tok.some(q=>q.state==="toRec"&&q.rec===R.i));
+      if(free.length){const R=free[Math.floor(rnd()*free.length)];t.state="toRec";t.rec=R.i;t.t=0;t.sx=t.x;t.sy=t.y;if(t.alb>=0)t.alb=-1;}}}
+  else if(bound>wantBound&&(k==="S4"||k==="S6")&&!S.hormone){S.rec.forEach(R=>{if(R.tok!=null){const t=S.tok.find(q=>q.id===R.tok);if(t){t.state="return";t.t=0;t.sx=t.x;t.sy=t.y;t.ty=clamp(R.y,VES.y0+20,VES.y1-20);}R.tok=null;}});}
+  S.tok.forEach(t=>moveTok(t,dt,sp));
+  S.tok=S.tok.filter(t=>t.state!=="gone");
+  /* bound tokens in S4/S6 stay bound while the hormone is on; elsewhere they unbind after a dwell */
+  S.rec.forEach(R=>{if(R.tok!=null&&!S.tok.some(t=>t.id===R.tok))R.tok=null;R.glow=lerp(R.glow,R.tok!=null?1:0,Math.min(1,dt*6));if(R.tok!=null)R.pulse=(R.pulse+dt*sp*.9)%1;});
+  /* scissors drift, close and reopen; slips on molecules they cannot cut */
+  S.sciss.forEach(sc=>{if(sc.close>0){sc.close-=dt*1.6;}else{sc.x+=PACE*.45*sc.v*sp*dt;sc.ph+=dt;sc.y+=Math.sin(sc.ph)*10*dt;sc.y=clamp(sc.y,VES.y0+20,VES.y1-20);if(sc.x>VES.x1-20)sc.x=GUT.x1+10;}if(sc.tag>0)sc.tag-=dt;});
+  S.slipT-=dt;
+  if(S.slipT<=0&&(S.mol==="ex4"||S.mol==="sema")&&k!=="S5"){const cand=S.tok.filter(t=>(t.state==="flow"||t.state==="onAlb")&&t.kind!=="cut");
+    if(cand.length){const t=cand[Math.floor(rnd()*cand.length)];const sc=S.sciss.reduce((b,q)=>Math.abs(q.x-t.x)<Math.abs(b.x-t.x)?q:b,S.sciss[0]);if(sc){sc.x=t.x;sc.y=t.y-26;sc.close=1;sc.tag=1.4;S.cnt.slipCount++;}}S.slipT=2.4;}
+  /* albumin and glucose drift with the flow */
+  S.alb.forEach(a=>{a.x+=PACE*.5*a.v*sp*dt;a.ph+=dt*.7;a.y+=Math.sin(a.ph)*6*dt;a.y=clamp(a.y,VES.y0+40,VES.y1-40);if(a.x>VES.x1+20)a.x=GUT.x1-40;});
+  S.glucTok.forEach(g=>{g.x+=PACE*.8*g.v*sp*dt;g.ph+=dt*2;g.y+=Math.sin(g.ph)*10*dt;g.y=clamp(g.y,VES.y0+16,VES.y1-16);if(g.x>VES.x1-10)g.x=GUT.x1+6;});
+  /* insulin: release rate = basal + boost x signal, at the current glucose setting */
+  const rate=insulinRateOf(S.gluc,signal);S.insRate=rate;
+  S.insT-=dt*sp;
+  if(rate>0&&S.insT<=0&&k!=="S5"){const p=S.pkt.find(q=>q.state==="home");if(p){p.state="go";p.t=0;p.sx=p.x;p.sy=p.y;p.targetY=120+rnd()*240;}S.insT=1.5/(rate+.02);}
+  if(S.tally.on&&S.tally.wave>0){S.tally.waveT=(S.tally.waveT||0)-dt;if(S.tally.waveT<=0){const p=S.pkt.find(q=>q.state==="home");if(p){p.state="go";p.t=0;p.sx=p.x;p.sy=p.y;p.targetY=120+rnd()*240;S.tally.wave--;}S.tally.waveT=.25;}}
+  S.pkt.forEach(p=>{if(p.state==="go"){p.t+=dt*1.4*sp;const q=clamp(p.t,0,1);p.x=lerp(p.sx,722,q);p.y=lerp(p.sy,p.targetY,q);if(q>=1){p.state="fuse";p.t=0;}}
+    else if(p.state==="fuse"){p.t+=dt*sp;if(p.t>.35){p.state="away";p.t=0;for(let i=0;i<3;i++)S.ins.push({x:690,y:p.y+(i-1)*10,vx:-(60+rnd()*60),vy:(rnd()-.5)*40,t:2.4,a:1});S.cnt.insulinReleased++;live("Insulin released");}}
+    else if(p.state==="away"){p.t+=dt*sp;if(p.t>1.4){Object.assign(p,newPkt(p.i,true));}}});
+  S.ins.forEach(i=>{i.x+=i.vx*sp*dt;i.y+=i.vy*sp*dt;i.t-=dt*sp;i.a=clamp(i.t/1.2,0,1);if(i.x<VES.x1-10){i.vx=lerp(i.vx,PACE*.8,dt*2);}});
+  S.ins=S.ins.filter(i=>i.t>0);
+  /* the S6 tally */
+  if(S.tally.on){const T=S.tally;T.t+=dt*sp;const A=SIGNAL_DATA.amplification;
+    T.h=A.hormone;T.g=Math.round(clamp((T.t-.4)/1.4,0,1)*A.gProteins);T.c=Math.round(clamp((T.t-1.9)/2.2,0,1)*A.cAMP);
+    const stage=T.t<.4?0:T.t<1.8?1:T.t<4.1?2:3;if(stage>T.stage){T.stage=stage;if(stage===3){T.wave=6;if(!S.amplificationViewed){S.amplificationViewed=true;markGoal("amp");}}}}
+  /* the S5 scissors animation */
+  if(k==="S5"){MOLS.forEach(m=>{const s=S.sciss5[m];if(s==="moving"){S.scissT[m]=(S.scissT[m]||0)+dt*sp;if(S.scissT[m]>=1){S.sciss5[m]=M[m].cutByDPP4?"cut":"slip";S.scissT[m]=0;S.scissDone[m]=true;if(MOLS.every(q=>S.scissDone[q]))markGoal("sciss");live(M[m].cutByDPP4?(st.level==="nine"?"The scissors cut GLP-1 at position 2":"DPP-4 cleaved GLP-1 after Ala8"):(st.level==="nine"?"The scissors slipped on "+molShort[m]:"DPP-4 could not cleave "+molShort[m]));}}
+      else if(s==="cut"||s==="slip"){S.scissT[m]=(S.scissT[m]||0)+dt*sp;}});
+    if(S.tipT>0)S.tipT-=dt;}
+  /* model rule check: no hormone token inside the cell */
+  S.cnt.hormoneInsideCell=S.tok.filter(t=>t.kind!=="cut"&&inCell(t.x,t.y)).length;
+  /* drawn positions: with reduced motion, tokens jump every half second instead of tweening */
+  S.jumpT+=dt;const jump=!REDUCE||S.jumpT>=.5;if(jump){S.jumpT=REDUCE?0:S.jumpT;S.tok.forEach(t=>{t.dx=t.x;t.dy=t.y;});S.drawSnap=snapshotDraw(S);}
+  watchGoals(dt,signal);
+}
+function snapshotDraw(S){ /* positions of everything that moves, frozen for drawing (reduced motion jumps between these) */
+  return{sciss:S.sciss.map(s=>({x:s.x,y:s.y,close:s.close,tag:s.tag})),alb:S.alb.map(a=>({x:a.x,y:a.y})),gluc:S.glucTok.map(g=>({x:g.x,y:g.y})),pkt:S.pkt.map(p=>({x:p.x,y:p.y,state:p.state})),ins:S.ins.map(i=>({x:i.x,y:i.y,a:i.a})),pulse:S.rec.map(R=>R.pulse),glow:S.rec.map(R=>R.glow),tally:Object.assign({},S.tally),sc5:Object.assign({},S.scissT)};}
+function noteReach(S){const key=activeKey(S);S.reach[key]=Math.max(S.reach[key],S.clockMin);
+  if(S.overlay)Object.keys(S.reach).forEach(q=>{if(q!==key&&q!=="glp1off"&&st.ran[q])S.reach[q]=Math.max(S.reach[q],S.clockMin);});}
+
+/* ================= actions ================= */
+function meal(){const S=SIM;if(S.stepKey==="S4"||S.stepKey==="S5"||S.stepKey==="S6")return;S.mol="glp1";release();}
+function inject(){const S=SIM;if(S.stepKey==="S4"||S.stepKey==="S5"||S.stepKey==="S6")return;release();}
+function release(){const S=SIM;S.started=true;S.clockMin=0;S.clockHold=false;paused=false;if(UI.play)UI.play.textContent="❚❚ Pause";
+  const key=activeKey(S);S.reach[key]=Math.max(S.reach[key],0.0001);S.lastRun=S.mol;
+  if(!CURVES[key].nocut){st.ran[S.mol]=true;save();}
+  S.tok=S.tok.filter(t=>t.kind!==S.mol||t.state==="fade");S.rec.forEach(R=>{R.tok=null;});
+  if(S.stepKey==="S3"){if(MOLS.every(m=>st.ran[m]))markGoal("all3");}
+  live(S.mol==="glp1"?(st.level==="nine"?"A meal: GLP-1 released from the gut":"GLP-1 secreted from the L-cells"):molShort[S.mol]+" injected");
+  renderCard();}
+function setCtl(name,v){
+  const S=SIM;if(!S)return;
+  if(name==="glucose"){S.gluc=SIGNAL_DATA.glucose[v]?v:"normal";setGlucTok();if(UI.gluc)UI.gluc._set(S.gluc);}
+  else if(name==="scissors"){S.scissors=!!v;if(UI.sciss)UI.sciss._set(S.scissors?"on":"off");S.clockMin=0;S.started=false;S.tok=S.tok.filter(t=>t.kind==="cut");S.rec.forEach(R=>{R.tok=null;});}
+  else if(name==="molecule"){S.mol=MOLS.indexOf(v)>=0?v:"glp1";if(UI.mol)UI.mol._set(S.mol);if(S.stepKey!=="S5"){S.clockMin=0;S.started=S.stepKey==="S4"||S.stepKey==="S6";S.tok=S.tok.filter(t=>t.kind==="cut");S.rec.forEach(R=>{R.tok=null;});}}
+  else if(name==="hormone"){S.hormone=!!v;if(UI.horm)UI.horm._set(S.hormone?"on":"off");}
+  else if(name==="window"){const w=WINDOWS[v]?v:"15m";st.win=(w==="log"&&st.level!=="de")?"3w":w;save();if(UI.win)UI.win._set(st.win);S.clockMin=0;S.clockHold=false;if(S.started)S.tok=S.tok.filter(t=>t.kind==="cut");}
+  else if(name==="speed"){speed=[.5,1,2].indexOf(+v)>=0?+v:1;if(UI.speed)UI.speed._set(String(speed));}
+  else if(name==="teach"){setTeach(!!v);}
+  else if(name==="overlay"){S.overlay=!!v;if(UI.over){UI.over.setAttribute("aria-pressed",String(S.overlay));}if(S.overlay&&S.stepKey==="S3"&&MOLS.some(m=>st.ran[m]))markGoal("gauge");}
+  if(S.stepKey==="S3"&&st.win==="3w"&&S.overlay&&MOLS.every(m=>st.ran[m]))markGoal("w3");
+  readout();
+}
+function tapPos2(row){const S=SIM;if(S.stepKey!=="S5"||MOLS.indexOf(row)<0)return;S.pos2[row]=true;S.tip=row;S.tipT=3.5;
+  const aa=M[row].pos2,L=LBL[st.level];toast(L.pos2+" of "+molShort[row]+": "+(aa==="Aib"?L.aib:AANAME[aa]+" ("+aa+")"));live("Position 2 of "+molShort[row]+": "+AANAME[aa]+(aa.length===1?" ("+aa+")":""));
+  if(MOLS.every(m=>S.pos2[m]))markGoal("pos2");renderCard();}
+function runScissors(row){const S=SIM;if(MOLS.indexOf(row)<0)return null;const cut=M[row].cutByDPP4;
+  if(S.stepKey==="S5"){S.sciss5[row]="moving";S.scissT[row]=0;}
+  else{S.cnt.slipCount+=cut?0:1;}
+  return cut?"cut":"slip";}
+function tapReceptor(k){const S=SIM;if(S.stepKey!=="S6")return;const R=S.rec[k|0];if(!R)return;S.tapped=true;S.tapRec=R.i;S.tally={on:true,t:0,stage:0,h:0,g:0,c:0,wave:0};live(st.level==="nine"?"Receptor "+(R.i+1)+" tapped: follow the tally":"Receptor "+(R.i+1)+" tapped: follow the tally");}
+
+/* ================= goal watching (from the simulation state) ================= */
+function watchGoals(dt,signal){
+  const S=SIM,k=S.stepKey,cn=S.cnt;
+  if(k==="S1"){bumpCount("bind",cn.bindings);if(cn.insulinReleased>0&&S.gluc==="high")markGoal("ins");if(cn.bindings>=1&&cn.hormoneInsideCell===0)markGoal("out");}
+  if(k==="S2"){bumpCount("cut",cn.cutCount);if(S.started&&S.scissors&&S.mol==="glp1"&&S.clockMin>=10)markGoal("on10");if(S.started&&!S.scissors&&S.mol==="glp1"&&S.clockMin>=1)markGoal("off");}
+  if(k==="S4"&&!paused){const g=S.gluc;
+    if(S.hormone){S.onT[g]+=dt;S.seen[g].on=insulinRateOf(g,1);if(g==="normal")S.onNormalT+=dt;}
+    else{S.seen[g].off=insulinRateOf(g,0);if(g==="high")S.offHighT+=dt;if(g==="normal")S.offNormalT+=dt;}
+    if(S.onT.low>=5&&S.onT.normal>=5&&S.onT.high>=5)markGoal("trio");
+    if(S.offHighT>=1)markGoal("offHigh");
+    if(S.onNormalT>=1&&S.offNormalT>=1&&S.seen.normal.on===S.seen.normal.off)markGoal("equal");}
+}
+
+/* ================= drawing: the scene ================= */
+let kpx=1,cw=1200,ch=600,VXs={k:1,ox:0,oy:0},hits=[],pinned=null,hover=null,fpsT=0,fpsHist=[];
+const TAU=Math.PI*2;
+function sPx(x,y){return[VXs.ox+x*VXs.k,VXs.oy+y*VXs.k];} /* scene world -> CSS px on the scene canvas */
+function labelPx(){return st.teach?28:16;}
+function circ(c,x,y,r,f,e,w){c.beginPath();c.arc(x,y,r,0,TAU);if(f){c.fillStyle=f;c.fill();}if(e){c.strokeStyle=e;c.lineWidth=w||2;c.stroke();}}
+function rrect(c,x,y,w,h,r,f,e,lw){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();if(f){c.fillStyle=f;c.fill();}if(e){c.strokeStyle=e;c.lineWidth=lw||2;c.stroke();}}
+/* a boxed label at a fixed screen size on a backing plate; registers a hit area for Teaching view (the Water Patch's label-on-a-plate helper) */
+function tag(text,x,y,key,align,big,c,px0,minor){
+  if(!text)return;if(minor&&st.teach)return;c=c||ctx;const[X,Y]=c===ctx?sPx(x,y):gPx(x,y);const px=px0||(big?labelPx()+4:labelPx());
+  c.save();c.setTransform(kpx,0,0,kpx,0,0);c.font="600 "+px+"px Archivo, 'Helvetica Neue', Arial, sans-serif";c.textBaseline="middle";c.textAlign=align||"center";
+  const w=c.measureText(text).width,x0=align==="left"?X:align==="right"?X-w:X-w/2,h=px*1.5;
+  c.fillStyle=BG;c.globalAlpha=.9;c.fillRect(x0-5,Y-h/2,w+10,h);c.globalAlpha=1;
+  if(pinned&&pinned===key){c.strokeStyle=BOND;c.lineWidth=2;c.strokeRect(x0-5,Y-h/2,w+10,h);}
+  c.fillStyle=SOFT;c.fillText(text,X,Y);c.restore();
+  if(key&&c===ctx)hits.push({key,x0:x0-5,y0:Y-h/2,x1:x0+w+5,y1:Y+h/2});
+}
+function part(key,x,y,r){const[X,Y]=sPx(x,y);const R=r*VXs.k;hits.push({key,x0:X-R,y0:Y-R,x1:X+R,y1:Y+R});}
+/* head-shape glyphs: round (GLP-1), diamond (exendin-4), square (semaglutide) */
+function head(c,kind,x,y,r,f,e){c.beginPath();
+  if(kind==="ex4"){c.moveTo(x,y-r*1.25);c.lineTo(x+r*1.25,y);c.lineTo(x,y+r*1.25);c.lineTo(x-r*1.25,y);c.closePath();}
+  else if(kind==="sema"){c.rect(x-r,y-r,2*r,2*r);}
+  else c.arc(x,y,r,0,TAU);
+  c.fillStyle=f;c.fill();if(e){c.strokeStyle=e;c.lineWidth=1.5;c.stroke();}}
+function drawMolecule(c,kind,x,y,sc,a,dir){ /* a bead chain with its head bead; dir = +1 flows right */
+  const f=col(kind==="cut"?"cut":kind),e=DARK?"#15130F":"#FFFFFF";c.save();c.globalAlpha=a==null?1:a;
+  const n=kind==="ex4"?7:kind==="cut"?4:5,r=6*sc,gap=9*sc;
+  for(let i=n-1;i>=1;i--){const bx=x-dir*i*gap,by=y+Math.sin(i*1.1)*2.5*sc;circ(c,bx,by,r*(kind==="cut"?.9:.8),f,e,1.2);}
+  if(kind!=="cut")head(c,kind,x,y,r*1.15,f,e);else{c.strokeStyle=f;c.lineWidth=2;c.beginPath();c.moveTo(x-dir*2*sc,y-6*sc);c.lineTo(x+dir*4*sc,y+6*sc);c.moveTo(x-dir*2*sc,y+6*sc);c.lineTo(x+dir*4*sc,y-6*sc);c.stroke();}
+  if(kind==="ex4"){c.strokeStyle=f;c.lineWidth=2*sc;c.beginPath();c.moveTo(x-dir*(n-1)*gap,y);c.quadraticCurveTo(x-dir*(n+1)*gap,y-8*sc,x-dir*(n+2.5)*gap,y+2*sc);c.stroke();}
+  if(kind==="sema"){c.strokeStyle=f;c.lineWidth=2*sc;c.beginPath();const sx=x-dir*2*gap,sy=y-r*1.2;c.moveTo(sx,sy);for(let i=1;i<=5;i++)c.lineTo(sx+((i%2)?3:-3)*sc,sy-i*4*sc);c.stroke();}
+  c.restore();}
+function drawScissor(c,x,y,close,sc,f){const o=lerp(.65,.12,clamp(close,0,1));c.save();c.translate(x,y);c.strokeStyle=f;c.lineWidth=3*sc;c.lineCap="round";
+  [1,-1].forEach(s=>{c.save();c.rotate(s*o);c.beginPath();c.moveTo(-16*sc,0);c.lineTo(14*sc,0);c.stroke();circ(c,-21*sc,0,6*sc,null,f,2.5*sc);c.restore();});
+  circ(c,-2*sc,0,2.2*sc,f);c.restore();}
+function drawHex(c,x,y,r,f,e){c.beginPath();for(let i=0;i<6;i++){const a=i*TAU/6+TAU/12;c.lineTo(x+r*Math.cos(a),y+r*Math.sin(a));}c.closePath();c.fillStyle=f;c.fill();if(e){c.strokeStyle=e;c.lineWidth=1.2;c.stroke();}}
+function drawInsulin(c,x,y,r,f,withI){circ(c,x,y,r,f,DARK?"#15130F":"#FFFFFF",1.2);if(withI){c.fillStyle=DARK?"#12100D":"#FFFFFF";c.font="700 "+Math.round(r*1.3)+"px Archivo, Arial, sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText("i",x,y+r*.05);}}
+function drawReceptor(c,x,y,glow,sc){ /* a Y-shaped cup in the outer membrane, open toward the vessel */
+  c.save();c.lineCap="round";c.lineWidth=5*sc;c.strokeStyle=INK;
+  if(glow>0.02){c.save();c.globalAlpha=glow*.85;c.fillStyle=col("glow");c.beginPath();c.arc(x-4,y,22*sc,0,TAU);c.fill();c.restore();}
+  c.beginPath();c.moveTo(x+8*sc,y);c.lineTo(x-4*sc,y);c.lineTo(x-16*sc,y-13*sc);c.moveTo(x-4*sc,y);c.lineTo(x-16*sc,y+13*sc);c.stroke();
+  c.restore();}
+function drawScene(){
+  const S=SIM,lvl=st.level,L=LBL[lvl],D=S.drawSnap||snapshotDraw(S),k=S.stepKey;
+  hits=[];
+  if(k==="S5"){drawAlignment();return;}
+  /* vessel: soft red wall, lumen on the card background */
+  ctx.fillStyle=col("wall");rrect(ctx,VES.x0-20,VES.y0-VES.wall,VES.x1+20,VES.y1-VES.y0+2*VES.wall,22,col("wall"));
+  ctx.fillStyle=BG;ctx.fillRect(VES.x0-20,VES.y0,VES.x1+40,VES.y1-VES.y0);
+  /* the right end opens toward the cell: a dashed, leaky wall */
+  ctx.save();ctx.setLineDash([10,10]);ctx.strokeStyle=col("wall");ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(VES.x1+20,VES.y0);ctx.lineTo(VES.x1+20,VES.y1);ctx.stroke();ctx.restore();
+  /* gut cells at the left end */
+  for(let i=0;i<4;i++)rrect(ctx,2,VES.y0+6+i*44,GUT.x1-8,38,8,DARK?"#3A2D2A":"#F6DDD6",col("wall"),2);
+  /* injection port: a small port, no needle */
+  rrect(ctx,INJ.x-18,INJ.y-14,36,22,5,DARK?"#2A2620":"#E8E4DC",SOFT,2);ctx.fillStyle=SOFT;ctx.fillRect(INJ.x-5,INJ.y+8,10,VES.y0-INJ.y-8);
+  /* kidney filter: a sieve under the right end */
+  rrect(ctx,KID.x0,KID.y0,KID.x1-KID.x0,KID.y1-KID.y0,10,col("sieve"),SOFT,2);
+  for(let r=0;r<3;r++)for(let q=0;q<5;q++)circ(ctx,KID.x0+10+q*15,KID.y0+14+r*20,3.2,BG);
+  /* flow arrows */
+  ctx.save();ctx.strokeStyle=col("wall");ctx.lineWidth=3;ctx.globalAlpha=.9;[200,380].forEach(x=>{ctx.beginPath();ctx.moveTo(x-18,VES.y1-16);ctx.lineTo(x+14,VES.y1-16);ctx.moveTo(x+4,VES.y1-24);ctx.lineTo(x+14,VES.y1-16);ctx.lineTo(x+4,VES.y1-8);ctx.stroke();});ctx.restore();
+  /* the beta cell */
+  rrect(ctx,CELL.x0,CELL.y0,CELL.x1-CELL.x0,CELL.y1-CELL.y0,CELL.r,col("cellF"),col("memb"),10);
+  rrect(ctx,CELL.x0,CELL.y0,CELL.x1-CELL.x0,CELL.y1-CELL.y0,CELL.r,null,BG,2.5);
+  part("cell",940,470,70);
+  /* glucose gauge on the cell */
+  const gl=SIGNAL_DATA.glucose,gfrac=S.gluc==="low"?.18:S.gluc==="normal"?.5:.88;
+  rrect(ctx,GAUGE.x-9,GAUGE.y0,18,GAUGE.y1-GAUGE.y0,9,BG,SOFT,2);
+  ctx.fillStyle=col("gluc");const ghh=(GAUGE.y1-GAUGE.y0-8)*gfrac;rrect(ctx,GAUGE.x-5,GAUGE.y1-4-ghh,10,ghh,5,col("gluc"));
+  circ(ctx,GAUGE.x,GAUGE.y1+8,13,col("gluc"),SOFT,2);
+  [["high",.88],["normal",.5],["low",.18]].forEach(([n,f])=>{const y=GAUGE.y1-4-(GAUGE.y1-GAUGE.y0-8)*f;ctx.strokeStyle=SOFT;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(GAUGE.x-9,y);ctx.lineTo(GAUGE.x-16,y);ctx.stroke();tag(L[n]+(lvl==="de"?" ~"+gl[n].mgdl+" mg/dL":""),GAUGE.x-22,y,null,"right",false,ctx,st.teach?22:14);});
+  part("gluc",GAUGE.x,(GAUGE.y0+GAUGE.y1)/2,40);
+  /* insulin packets inside, near the membrane */
+  D.pkt.forEach(p=>{if(p.state==="away")return;drawInsulin(ctx,p.x,p.y,13,col("ins"),true);});
+  if(D.pkt.length)part("pkt",820,250,70);
+  /* released insulin */
+  D.ins.forEach(i=>{ctx.save();ctx.globalAlpha=i.a;drawInsulin(ctx,i.x,i.y,5,col("ins"),false);ctx.restore();});
+  /* receptors with pulse rings running inward: the ring is the signal, not the hormone */
+  S.rec.forEach((R,i)=>{const g=D.glow[i]||0;
+    if(g>.05){ctx.save();ctx.beginPath();ctx.rect(CELL.x0+6,CELL.y0,CELL.x1-CELL.x0,CELL.y1-CELL.y0);ctx.clip();ctx.strokeStyle=col("glow");ctx.lineWidth=3;
+      for(let q=0;q<3;q++){const ph=REDUCE?q/3:((D.pulse[i]||0)+q/3)%1;ctx.globalAlpha=g*(1-ph)*.8;ctx.beginPath();ctx.arc(CELL.x0,R.y,12+ph*70,-1.2,1.2);ctx.stroke();}ctx.restore();}
+    drawReceptor(ctx,CELL.x0,R.y,g,1);part("rec",CELL.x0,R.y,20);});
+  if(S.rec.some((R,i)=>(D.glow[i]||0)>.3))part("pulse",CELL.x0+50,(S.rec[0].y+S.rec[S.rec.length-1].y)/2,36);
+  /* glucose hexagons in the vessel */
+  D.gluc.forEach(g=>drawHex(ctx,g.x,g.y,8,col("gluc"),DARK?"#15130F":"#FFFFFF"));
+  /* albumin, only while semaglutide is the molecule */
+  const showAlb=S.mol==="sema";
+  if(showAlb)D.alb.forEach((a,i)=>{ctx.save();ctx.beginPath();ctx.ellipse(a.x,a.y,38,22,0,0,TAU);ctx.fillStyle=col("alb");ctx.fill();ctx.strokeStyle=col("albE");ctx.lineWidth=2.5;ctx.stroke();ctx.restore();if(i===0)tag(L.alb,a.x,a.y+36,"alb");});
+  /* scissors */
+  D.sciss.forEach((sc,i)=>{drawScissor(ctx,sc.x,sc.y,sc.close,1,col("sciss"));if(sc.tag>0)tag(L.cant,sc.x,sc.y-28,null);if(i===0)part("sciss",sc.x,sc.y,24);});
+  /* hormone tokens: drawn positions (jump with reduced motion) */
+  let labelled=false,cutLabelled=false;
+  S.tok.forEach(t=>{drawMolecule(ctx,t.kind,t.dx,t.dy,1.7,t.a,1);
+    if(t.kind!=="cut"&&!labelled&&t.state==="flow"&&t.dx>160&&t.dx<520){labelled=true;tag(L[t.kind],t.dx-40,t.dy-32,t.kind,"center",false,ctx,0,true);}
+    if(t.kind==="cut"&&!cutLabelled&&t.a>.5&&t.dx<540){cutLabelled=true;tag(L.cut,t.dx-20,t.dy+32,"cut","center",false,ctx,0,true);}});
+  /* static labels */
+  if(k!=="S6"){tag(L.gut,34,VES.y0-30,"gut");tag(L.inj,INJ.x,INJ.y-30,"inj","center",false,ctx,0,true);tag(L.vessel,380,VES.y0-30,"vessel","center",false,ctx,0,true);tag(L.sciss,300,VES.y1+32,"sciss");}tag(L.kidney,KID.x1-40,KID.y1+22,"kidney");
+  tag(L.cell,940,CELL.y1-40,"cell");tag(L.rec,CELL.x0+40,S.rec[S.rec.length-1].y+46,"rec","left");tag(L.pkt,870,CELL.y0+44,"pkt");tag(L.gluc,GAUGE.x+30,GAUGE.y1+44,"gluc","right");
+  if(D.ins.length)tag(L.ins,560,VES.y0+22,"ins","center",false,ctx,0,true);
+  if(!S.started&&k!=="S4"&&k!=="S6")tag(k==="S3"?RT[lvl].startInject:RT[lvl].startMeal,320,240,null,"center",true);
+  if(k==="S6")drawTally();
+}
+function drawTally(){
+  const S=SIM,lvl=st.level,L=LBL[lvl],T=S.drawSnap?S.drawSnap.tally:S.tally,A=SIGNAL_DATA.amplification;
+  /* a vertical chain beside the cell, over the vessel area */
+  const x=40,y0=40,w=400;ctx.save();ctx.globalAlpha=.97;rrect(ctx,x,y0,w,520,10,BG,RULE,2);ctx.restore();
+  const rows=[[L.hormone1,A.hormone,T.on?T.h:0],[L.relay1,A.gProteins,T.on?T.g:0],[L.relay2,A.cAMP,T.on?T.c:0],[L.wave,null,T.on&&T.stage>=3?1:0]];
+  rows.forEach(([name,max,val],i)=>{const y=y0+70+i*118;
+    ctx.save();ctx.setTransform(kpx,0,0,kpx,0,0);const[X,Y]=sPx(x+w/2,y);ctx.font="700 "+(max==null?(st.teach?26:19):(st.teach?34:26))+"px Archivo, Arial, sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=max==null?col("ins"):INK;
+    ctx.fillText(max==null?(val?"→ "+name:"…"):String(val).replace(/\B(?=(\d{3})+(?!\d))/g,","),X,Y);ctx.restore();
+    if(max!=null)tag(name,x+w/2,y+32,i===1?"tally":null,"center");
+    if(i<3){ctx.strokeStyle=SOFT;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+w/2,y+52);ctx.lineTo(x+w/2,y+84);ctx.moveTo(x+w/2-8,y+74);ctx.lineTo(x+w/2,y+84);ctx.lineTo(x+w/2+8,y+74);ctx.stroke();}});
+  tag(L.illus,x+w/2,y0+500,null,"center",false,ctx,st.teach?22:14);
+  part("tally",x+w/2,y0+260,120);
+  if(!S.tapped){const R=S.rec[0];ctx.save();ctx.strokeStyle=BOND;ctx.lineWidth=5;ctx.lineCap="round";const ph=REDUCE?0:(S.t%1);const ax=CELL.x0-70-ph*10;ctx.beginPath();ctx.moveTo(ax-70,R.y-70);ctx.lineTo(ax,R.y-6);ctx.moveTo(ax-22,R.y-10);ctx.lineTo(ax,R.y-6);ctx.lineTo(ax-8,R.y-30);ctx.stroke();ctx.restore();tag(L.tapRec,CELL.x0-120,S.rec[0].y-96,null,"center",true);}
+}
+/* the S5 alignment panel: the first 10 amino acids of each molecule, position 2 highlighted */
+const ALN={x0:262,dx:88,r:28,rows:{glp1:175,ex4:325,sema:475}};
+const ALNLBL={nine:{glp1:"GLP-1",ex4:"Exendin-4",sema:"Semaglutide"},de:{glp1:"GLP-1(7-37)",ex4:"Exendin-4",sema:"Semaglutide"}};
+function drawAlignment(){
+  const S=SIM,lvl=st.level,L=LBL[lvl],D=S.drawSnap?S.drawSnap.sc5:S.scissT;
+  ctx.fillStyle=BG;ctx.fillRect(0,0,W1,H1);
+  if(lvl==="de"){M.glp1.first10NumberDE.forEach((n,i)=>tag(String(n),ALN.x0+i*ALN.dx,ALN.rows.glp1-86,null,"center",false,ctx,st.teach?22:14));tag("GLP-1 numbering",ALN.x0-ALN.r-16,ALN.rows.glp1-86,null,"right",false,ctx,st.teach?22:14);}
+  /* identity lines between adjacent rows */
+  ctx.save();ctx.strokeStyle=RULE;ctx.lineWidth=3;
+  [["glp1","ex4"],["ex4","sema"]].forEach(([a,b])=>{for(let i=0;i<10;i++){if(M[a].first10[i]===M[b].first10[i]){ctx.beginPath();ctx.moveTo(ALN.x0+i*ALN.dx,ALN.rows[a]+ALN.r+2);ctx.lineTo(ALN.x0+i*ALN.dx,ALN.rows[b]-ALN.r-2);ctx.stroke();}}});
+  ctx.restore();
+  MOLS.forEach(m=>{const y=ALN.rows[m],st5=S.sciss5[m],tt=D[m]||0,f=col(m);
+    tag(ALNLBL[lvl][m],ALN.x0-ALN.r-16,y,m,"right");
+    for(let i=0;i<10;i++){let x=ALN.x0+i*ALN.dx,yy=y,a=1;
+      if(st5==="cut"&&i<2){const q=clamp(tt*1.2,0,1);yy=y+q*90;x-=q*30;a=1-q*.85;}
+      ctx.save();ctx.globalAlpha=a;
+      if(i===1)circ(ctx,x,yy,ALN.r+7,null,col("glow"),5);
+      const aa=M[m].first10[i];if(i===0)head(ctx,m,x,yy,ALN.r,f,DARK?"#15130F":"#FFFFFF");else circ(ctx,x,yy,ALN.r,f,DARK?"#15130F":"#FFFFFF",2);
+      ctx.fillStyle=DARK?"#12100D":"#FFFFFF";ctx.font="700 "+(aa.length>1?20:24)+"px Archivo, Arial, sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(aa,x,yy+1);
+      ctx.restore();
+      if(i<9&&!(st5==="cut"&&i<1)){ctx.strokeStyle=f;ctx.lineWidth=4;ctx.beginPath();const x2=ALN.x0+(i+1)*ALN.dx;ctx.moveTo(x+ALN.r,y);ctx.lineTo(x2-ALN.r,y);ctx.stroke();}}
+    /* the scissors: move to the gap between positions 2 and 3, cut or slip */
+    const gx=ALN.x0+1.5*ALN.dx;
+    const sy=y-ALN.r-26;
+    if(st5==="moving"){const q=clamp(tt,0,1);drawScissor(ctx,lerp(1140,gx,q),sy,q>.8?(q-.8)*5:0,1.3,col("sciss"));}
+    else if(st5==="cut"){drawScissor(ctx,gx,sy,1,1.3,col("sciss"));tag(L.cutlbl,gx+40,sy,null,"left");}
+    else if(st5==="slip"){const wob=REDUCE?0:Math.sin(tt*9)*6;drawScissor(ctx,gx+wob,sy,.5,1.3,col("sciss"));tag(L.sliplbl,gx+40,sy,null,"left");}
+    else drawScissor(ctx,1140,sy,0,1.1,col("sciss"));
+    part("pos2",ALN.x0+ALN.dx,y,ALN.r+8);});
+  tag(L.pos2+" ↓",ALN.x0+ALN.dx,ALN.rows.glp1-(lvl==="de"?116:86),"pos2","center");
+  tag(molShort.ex4+" vs "+molShort.glp1+": "+SIGNAL_DATA.identityEx4vsGLP1.text,620,548,null,"center");
+  tag(L.key,620,582,"aib","center",false,ctx,st.teach?20:14);
+}
+function draw(){
+  const S=SIM;if(!S)return;
+  ctx.setTransform(kpx,0,0,kpx,0,0);ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);
+  const k=Math.min(cw/W1,ch/H1);VXs={k,ox:(cw-W1*k)/2,oy:(ch-H1*k)/2};
+  ctx.setTransform(kpx*k,0,0,kpx*k,kpx*VXs.ox,kpx*VXs.oy);ctx.lineCap="round";ctx.lineJoin="round";
+  drawScene();
+  drawGraph();
+  placeOverlays();
+}
+
+/* ================= drawing: the graph ================= */
+let gw=1200,gh=400,GX={k:1,ox:0,oy:0};
+function gPx(x,y){return[GX.ox+x*GX.k,GX.oy+y*GX.k];}
+function xOf(W,tMin){if(W.log){const l0=Math.log10(W.min),l1=Math.log10(W.max);return PLOT.x0+(PLOT.x1-PLOT.x0)*clamp((Math.log10(Math.max(tMin,W.min))-l0)/(l1-l0),0,1);}return PLOT.x0+(PLOT.x1-PLOT.x0)*clamp(tMin/W.max,0,1);}
+function yOf(pct){return PLOT.y1-(PLOT.y1-PLOT.y0)*clamp(pct,0,100)/100;}
+function visibleCurves(S){const out=[];const act=activeKey(S);
+  Object.keys(CURVES).forEach(key=>{const ran=S.reach[key]>0;if(!ran)return;if(key===act||(S.overlay&&!CURVES[key].nocut&&st.ran[CURVES[key].mol]))out.push(key);});
+  return out;}
+function drawGraph(){
+  const S=SIM,lvl=st.level,W=WINDOWS[st.win]||WINDOWS["15m"],c=gtx;
+  c.setTransform(kpx,0,0,kpx,0,0);c.fillStyle=BG;c.fillRect(0,0,gw,gh);
+  const k=Math.min(gw/GW,gh/GH);GX={k,ox:(gw-GW*k)/2,oy:(gh-GH*k)/2};
+  c.setTransform(kpx*k,0,0,kpx*k,kpx*GX.ox,kpx*GX.oy);c.lineCap="round";c.lineJoin="round";
+  /* axes */
+  c.strokeStyle=SOFT;c.lineWidth=2.5;c.beginPath();c.moveTo(PLOT.x0,PLOT.y0-6);c.lineTo(PLOT.x0,PLOT.y1);c.lineTo(PLOT.x1+6,PLOT.y1);c.stroke();
+  [0,25,50,75,100].forEach(p=>{const y=yOf(p);c.strokeStyle=RULE;c.lineWidth=1.5;c.beginPath();c.moveTo(PLOT.x0,y);c.lineTo(PLOT.x1,y);c.stroke();tag(p+"%",PLOT.x0-10,y,null,"right",false,c,st.teach?20:12);});
+  W.ticks().forEach(([t,lab,major])=>{const x=xOf(W,t);c.strokeStyle=SOFT;c.lineWidth=major?2:1.2;c.beginPath();c.moveTo(x,PLOT.y1);c.lineTo(x,PLOT.y1+(major?12:7));c.stroke();if(lab)tag(lab,x,PLOT.y1+28,null,"center",false,c,st.teach?20:13);});
+  tag(W.label[lvl],(PLOT.x0+PLOT.x1)/2,PLOT.y1+58,null,"center",false,c,st.teach?22:14);
+  /* y-axis title, rotated */
+  c.save();c.setTransform(kpx,0,0,kpx,0,0);const[tx,ty]=gPx(16,(PLOT.y0+PLOT.y1)/2);c.translate(tx,ty);c.rotate(-Math.PI/2);c.font="600 "+(st.teach?20:13)+"px Archivo, Arial, sans-serif";c.fillStyle=SOFT;c.textAlign="center";c.textBaseline="middle";
+  const yt=RT[lvl].yaxis,avail=(PLOT.y1-PLOT.y0)*GX.k;if(c.measureText(yt).width<=avail)c.fillText(yt,0,0);else{const sp=yt.lastIndexOf(" (")>0?yt.lastIndexOf(" ("):yt.lastIndexOf(" ",yt.length/2+4);const a=yt.slice(0,sp),b=yt.slice(sp+1);
+    if(c.measureText(a).width>avail)c.font="600 "+Math.max(11,Math.floor((st.teach?20:13)*avail/c.measureText(a).width))+"px Archivo, Arial, sans-serif";c.fillText(a,0,-8);c.fillText(b,0,8);}c.restore();
+  /* threshold line at 10%, and the 50% guide at DE */
+  const th=SIGNAL_DATA.signalOnThreshold*100;c.save();c.setLineDash([8,8]);c.strokeStyle=FLAG;c.lineWidth=2;c.beginPath();c.moveTo(PLOT.x0,yOf(th));c.lineTo(PLOT.x1,yOf(th));c.stroke();
+  if(lvl==="de"){c.strokeStyle=SOFT;c.setLineDash([3,7]);c.beginPath();c.moveTo(PLOT.x0,yOf(50));c.lineTo(PLOT.x1,yOf(50));c.stroke();}c.restore();
+  tag(RT[lvl].thresh,PLOT.x1-6,yOf(th)-16,null,"right",false,c,st.teach?20:13);
+  if(lvl==="de")tag(RT.de.half50,PLOT.x1-6,yOf(50)-16,null,"right",false,c,st.teach?20:13);
+  /* curves, drawn as far as the clock has run for each; end labels avoid each other and the guide labels */
+  const keys=visibleCurves(S),placed=[{x:PLOT.x1-6,y:yOf(th)-16}];if(lvl==="de")placed.push({x:PLOT.x1-6,y:yOf(50)-16});
+  keys.forEach(key=>{const C=CURVES[key],mol=C.mol,f=col(key==="glp1off"?"glp1":mol);const reach=Math.min(S.reach[key],W.max);if(reach<=0)return;
+    c.save();c.strokeStyle=f;c.lineWidth=4;c.setLineDash(C.dash.slice());c.beginPath();
+    const N=220,t0=W.log?W.min:0;let lastX=PLOT.x0,lastY=yOf(100);
+    for(let i=0;i<=N;i++){const x=PLOT.x0+(PLOT.x1-PLOT.x0)*i/N;let t;if(W.log){const l0=Math.log10(W.min),l1=Math.log10(W.max);t=Math.pow(10,l0+(l1-l0)*i/N);}else t=W.max*i/N;
+      if(t>reach&&i>0){break;}const y=yOf(remaining(key,t));if(i===0)c.moveTo(x,y);else c.lineTo(x,y);lastX=x;lastY=y;}
+    if(!W.log||reach>W.min){const xe=xOf(W,reach),ye=yOf(remaining(key,reach));c.lineTo(xe,ye);lastX=xe;lastY=ye;}
+    c.stroke();c.setLineDash([]);
+    /* end-of-line label with the head-shape glyph */
+    head(c,mol,lastX,lastY,9,f,DARK?"#15130F":"#FFFFFF");
+    const lab=key==="glp1off"?NOCUT_LABEL:molShort[mol];let lx=Math.min(lastX,PLOT.x1-40),ly=clamp(lastY-22,PLOT.y0-10,PLOT.y1-8);
+    while(placed.some(p=>Math.abs(p.x-lx)<300&&Math.abs(p.y-ly)<28))ly-=30;placed.push({x:lx,y:ly});
+    tag(lab,lx,ly,null,lastX>PLOT.x1-200?"right":"left",false,c,st.teach?20:13);
+    /* half-life marker at DE */
+    if(lvl==="de"&&!C.nocut){const hl=halfLifeOf(key);if(hl<=W.max&&hl>=(W.min||0)&&reach>=hl){const x=xOf(W,hl);c.strokeStyle=f;c.lineWidth=2;c.beginPath();c.moveTo(x,yOf(50)-10);c.lineTo(x,yOf(50)+10);c.stroke();}}
+    c.restore();});
+  /* the clock cursor */
+  if(S.started&&(S.stepKey==="S1"||S.stepKey==="S2"||S.stepKey==="S3")){const x=xOf(W,S.clockMin);c.save();c.strokeStyle=BOND;c.lineWidth=2;c.globalAlpha=.7;c.beginPath();c.moveTo(x,PLOT.y0);c.lineTo(x,PLOT.y1);c.stroke();c.restore();}
+  updateClock();
+}
+function fmtClock(min,W){
+  if(W.log||min<60){const s=Math.round(min*60);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;if(min<60)return h+":"+String(m).padStart(2,"0")+":"+String(ss).padStart(2,"0");}
+  if(min<48*60){const h=Math.floor(min/60),m=Math.round(min%60);return h+" h"+(m?" "+m+" min":"");}
+  const d=min/1440;return "day "+Math.max(1,Math.ceil(d-1e-9));
+}
+function updateClock(){const S=SIM,W=WINDOWS[st.win]||WINDOWS["15m"];const e=$("clockV");if(!e)return;const hold=S.stepKey==="S4"||S.stepKey==="S5"||S.stepKey==="S6";
+  e.textContent=hold?(S.stepKey==="S4"?"held":"—"):fmtClock(S.started?S.clockMin:0,W);$("clockL").textContent=RT[st.level].clock+(hold?"":" · "+WINNAMES[st.win]);}
+
+/* ================= DOM buttons laid over canvas parts (S5 beads, S6 receptors): touch targets with labels ================= */
+function placeOverlays(){
+  const S=SIM,o=$("over");if(!S)return;const k=S.stepKey;
+  const want=k==="S5"?MOLS.map(m=>({id:"p2-"+m,x:ALN.x0+ALN.dx,y:ALN.rows[m],r:ALN.r+8,aria:"Position 2 of "+molShort[m]+": "+AANAME[M[m].pos2]+(M[m].pos2==="Aib"?"":" ("+M[m].pos2+")"),fn:()=>tapPos2(m)}))
+    :k==="S6"?S.rec.map(R=>({id:"rec-"+R.i,x:CELL.x0,y:R.y,r:22,aria:"Receptor "+(R.i+1)+(R.tok!=null?" (bound): tap to follow the tally":""),fn:()=>tapReceptor(R.i)})):[];
+  const have=Array.prototype.slice.call(o.children);
+  if(have.length!==want.length||have.some((b,i)=>b.dataset.id!==want[i].id)){o.innerHTML="";want.forEach(w=>{const b=document.createElement("button");b.type="button";b.dataset.id=w.id;b.addEventListener("click",e=>{e.preventDefault();w.fn();});o.appendChild(b);});}
+  want.forEach((w,i)=>{const b=o.children[i];const[X,Y]=sPx(w.x,w.y);const sz=Math.max(48,Math.round(2*w.r*VXs.k));b.style.left=X+"px";b.style.top=Y+"px";b.style.width=sz+"px";b.style.height=sz+"px";b.setAttribute("aria-label",w.aria);b.textContent=w.aria;});
+}
+
+/* ================= items ================= */
+const ITEMS={};BANK9.forEach(it=>{it.id=it.n;it.lvl="nine";ITEMS[it.n]=it;});BANKDE.forEach(it=>{it.id=it.n;it.lvl="de";ITEMS[it.n]=it;});
+
+/* ================= state and saving (§5.7) ================= */
+const KEY="signalpatch";
+let st={dev:"ipad",level:"nine",adv:false,step:0,ans:{},goals:{},cnt:{},found:{S1:"",S2:"",S3:"",S4:"",S5:"",S6:""},win:"15m",teach:false,fill:false,cardHidden:false,ran:{glp1:false,ex4:false,sema:false},rec:[]};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+try{const raw=localStorage.getItem(KEY);if(raw){const s=JSON.parse(raw);if(s&&typeof s==="object"){
+  st.dev=s.dev==="pc"?"pc":"ipad";st.level=s.level==="de"?"de":"nine";st.adv=!!s.adv;st.step=clamp(s.step|0,0,STEPS.length-1);
+  if(s.ans&&typeof s.ans==="object")Object.keys(s.ans).forEach(k=>{if(ITEMS[k]&&s.ans[k]&&typeof s.ans[k].f==="boolean")st.ans[k]={f:s.ans[k].f,c:clamp(s.ans[k].c|0,0,3)};});
+  if(s.goals&&typeof s.goals==="object")Object.keys(s.goals).forEach(k=>{if(s.goals[k])st.goals[k]=1;});
+  if(s.cnt&&typeof s.cnt==="object")Object.keys(s.cnt).forEach(k=>{st.cnt[k]=Math.max(0,s.cnt[k]|0);});
+  if(s.found&&typeof s.found==="object")Object.keys(st.found).forEach(k=>{if(typeof s.found[k]==="string")st.found[k]=s.found[k].slice(0,300);});
+  st.win=WINDOWS[s.win]?s.win:"15m";st.teach=!!s.teach;st.fill=!!s.fill;st.cardHidden=!!s.cardHidden;
+  if(s.ran&&typeof s.ran==="object")MOLS.forEach(m=>{st.ran[m]=!!s.ran[m];});
+  if(Array.isArray(s.rec))st.rec=s.rec.filter(k=>typeof k==="string"&&ITEMS[k]).slice(0,40);}}}catch(e){}
+if(st.win==="log"&&st.level!=="de")st.win="3w";
+const visSteps=()=>STEPS.filter(S=>!S.adv||st.level==="de"||st.adv);
+function fixStep(){ /* S6 has no dot at 9th with Advanced off: open S5 */
+  let i=clamp(st.step,0,STEPS.length-1);while(i>0&&STEPS[i].adv&&!(st.level==="de"||st.adv))i--;st.step=i;}
+const curStep=()=>{fixStep();return STEPS[st.step];};
+const L=(S,f)=>{const v=S[f];return v&&typeof v==="object"&&!Array.isArray(v)?(Object.prototype.hasOwnProperty.call(v,st.level)?v[st.level]:v.de):v;};
+const preOf=S=>L(S,"pre");
+const postOf=S=>(L(S,"post")||[]).filter(id=>ITEMS[id]);
+const goalsOf=S=>L(S,"goals")||[];
+function gid(S,g){return S.key+"."+g;}
+function goalDone(S,g){return !!st.goals[gid(S,g[0])];}
+function markGoal(k){const S=curStep();const g=goalsOf(S).find(q=>q[0]===k);if(!g)return;const id=gid(S,k);if(st.goals[id])return;st.goals[id]=1;save();renderCard();}
+function bumpCount(k,v){const S=curStep();const g=goalsOf(S).find(q=>q[0]===k);if(!g||!g[2])return;const id=gid(S,k);const nv=Math.min(g[2],Math.max(st.cnt[id]||0,v));
+  if(nv!==(st.cnt[id]||0)){st.cnt[id]=nv;if(nv>=g[2])st.goals[id]=1;save();renderCard();}}
+function goalsMet(S){return goalsOf(S).every(g=>goalDone(S,g));}
+function foundOk(S){return (st.found[S.key]||"").trim().length>=8;}
+function stepDoneS(S){const pre=preOf(S);if(pre&&ITEMS[pre]&&!ITEMS[pre].adv&&!st.ans[pre])return false;
+  if(!goalsMet(S))return false;
+  if(postOf(S).some(id=>!ITEMS[id].adv&&!st.ans[id]))return false;
+  return foundOk(S);}
+
+/* ================= card ================= */
+const card=$("card");
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e;}
+function mcBlock(it){
+  const w=el("div","");if(it.adv)w.appendChild(el("span","badge adv","Advanced Biology"));
+  w.appendChild(el("p","q",esc(it.stem)));
+  const box=el("div","opts"),r=st.ans[it.id];
+  it.opts.forEach((t,n)=>{const b=el("button","opt");b.type="button";b.textContent=t;b.setAttribute("aria-label","Option "+(n+1)+": "+t);
+    if(r){b.disabled=true;if(n===it.key)b.classList.add("right");else if(n===r.c)b.classList.add("wrong");}
+    b.addEventListener("click",()=>answer(it.id,n));box.appendChild(b);});
+  w.appendChild(box);
+  if(r){
+    if(!r.f){const m=el("div","miss");m.appendChild(el("span","tag","Not quite"));const p=el("p","",esc(it.miss[r.c]||""));p.style.margin="0";m.appendChild(p);w.appendChild(m);
+      if(it.sam&&it.sam[r.c]){const s=el("div","samq");s.appendChild(el("span","lbl",'<a href="../../teaching/student-authored-modules.html">Build a SAM from this miss</a>'));s.appendChild(el("p","",esc(it.sam[r.c])));w.appendChild(s);}}
+    const b=el("div","why");b.appendChild(el("span","tag",r.f?"Right. Here is the reasoning":"The reasoning"));b.appendChild(el("p","",esc(it.why)));w.appendChild(b);}
+  return w;
+}
+function answer(id,n){const it=ITEMS[id];if(!it||st.ans[id])return;st.ans[id]={f:n===it.key,c:n};if(st.rec.indexOf(id)<0)st.rec.push(id);save();renderCard();syncCtl();}
+function unlocked(){const S=curStep();const pre=preOf(S);return st.teach||!pre||!!st.ans[pre]||(ITEMS[pre]&&ITEMS[pre].adv&&!st.adv);}
+function goalsList(S){
+  const ul=el("ul","goals");
+  goalsOf(S).forEach(g=>{const done=goalDone(S,g),id=gid(S,g[0]);let t=esc(g[1]);
+    if(g[2])t+=": "+Math.min(g[2],st.cnt[id]||0)+" of "+g[2];
+    ul.appendChild(el("li",done?"ok":"",t));});
+  return ul;
+}
+function stepWords(S){ /* every tool-native word the step's text, labels or items use, at 9th grade */
+  const txt=[S.nine||"",L(S,"task")||"",L(S,"head")||"",S.found||""].concat(goalsOf(S).map(g=>g[1]));
+  [preOf(S)].concat(postOf(S)).filter(Boolean).forEach(id=>{const it=ITEMS[id];if(it.adv&&!st.adv)return;txt.push(it.stem,it.why);it.opts.forEach(o=>txt.push(o));Object.keys(it.miss).forEach(k=>txt.push(it.miss[k]));});
+  const all=txt.join(" ");const ws=(S.words||[]).filter(k=>k!=="relay"||st.adv);
+  Object.keys(WORDRX).forEach(k=>{if(WORDRX[k].test(all)&&ws.indexOf(k)<0)ws.push(k);});return ws;
+}
+function foundBox(S){
+  const w=el("div","found");w.appendChild(el("span","lbl","What you found"));w.appendChild(el("p","fq",esc(S.found)));
+  const ta=document.createElement("textarea");ta.maxLength=300;ta.value=st.found[S.key]||"";ta.setAttribute("aria-label","What you found in "+L(S,"head")+": one sentence, saved only on this device");ta.placeholder="One sentence, in your own words.";
+  const cnt=el("p","cnt");const upd=()=>{const n=ta.value.length;cnt.innerHTML=(n>=8?'<span class="ok">Saved on this device</span>':"<span>At least 8 characters</span>")+"<span>"+n+" / 300</span>";};
+  ta.addEventListener("input",()=>{st.found[S.key]=ta.value.slice(0,300);save();upd();renderDots();const nb=card.querySelector(".nextbtn");if(nb){const done=stepDoneS(S);nb.classList.toggle("ghostnext",!done);nb.textContent=nextLabel(S,done);}});
+  upd();w.appendChild(ta);w.appendChild(cnt);return w;
+}
+function nextLabel(S,done){const vis=visSteps(),i=vis.indexOf(S),last=i>=vis.length-1;return last?"See my record":(done?"Next step":"Skip to the next step");}
+function renderCard(){
+  const S=curStep(),vis=visSteps(),i=vis.indexOf(S),TV=st.teach,lvl=st.level;card.innerHTML="";
+  const nd=vis.reduce((n,q)=>n+(stepDoneS(q)?1:0),0);
+  card.appendChild(el("div","bar",`<i style="width:${Math.round(nd/vis.length*100)}%"></i>`));
+  card.appendChild(el("div","meta",`<span>Step ${i+1} of ${vis.length}</span><span>${esc(L(S,"short"))}</span>`));
+  if(S.adv&&lvl==="nine")card.appendChild(el("span","badge adv","Advanced Biology"));
+  card.appendChild(el("h2","",esc(L(S,"head"))));
+  if(TV)card.appendChild(el("p","fine teachnote","Teaching view: every part of this step is open and the labels are board-sized. Tap a part of the picture to pin a big callout. The step lights up only once its prediction, its tasks, its checks and its sentence are done."));
+  if(lvl==="nine"){const ws=stepWords(S);if(ws.length){const row=el("div","chips");row.appendChild(el("span","lbl","Words in this step"));const def=el("div","chipdef hidden");
+      ws.forEach(k=>{const b=el("button","chip",esc(WORDS[k].w));b.type="button";b.setAttribute("aria-expanded","false");b.setAttribute("aria-label","Define: "+WORDS[k].w);
+        b.addEventListener("click",()=>{const on=b.getAttribute("aria-expanded")==="true";row.querySelectorAll(".chip").forEach(q=>q.setAttribute("aria-expanded","false"));if(on){def.classList.add("hidden");}else{b.setAttribute("aria-expanded","true");def.innerHTML="<b>"+esc(WORDS[k].w)+":</b> "+esc(WORDS[k].d);def.classList.remove("hidden");}});
+        row.appendChild(b);});
+      card.appendChild(row);card.appendChild(def);}}
+  const pre=preOf(S);if(pre&&ITEMS[pre]&&(!ITEMS[pre].adv||st.adv))card.appendChild(mcBlock(ITEMS[pre]));
+  const open=unlocked();
+  if(open){card.appendChild(el("p","prompt",esc(L(S,"task"))));card.appendChild(goalsList(S));}
+  else card.appendChild(el("p","fine","Answer the prediction first; the controls under the picture unlock once you have committed to an answer."));
+  if(goalsMet(S)&&open||TV){const ex=el("div","explain");
+    ex.appendChild(el("p","",esc(lvl==="nine"?S.nine:S.de)));
+    card.appendChild(ex);
+    card.appendChild(foundBox(S));
+    const posts=postOf(S).filter(id=>!ITEMS[id].adv||st.adv);if(posts.length){card.appendChild(el("p","sub","Check yourself"));posts.forEach(id=>card.appendChild(mcBlock(ITEMS[id])));}}
+  const done=stepDoneS(S),last=i>=vis.length-1;
+  const b=el("button","nextbtn go"+(done?"":" ghostnext"));b.type="button";b.textContent=nextLabel(S,done);b.style.marginTop=".4rem";
+  b.addEventListener("click",()=>{if(!last)goStep(i+1);else showRecord();});card.appendChild(b);
+  renderDots();renderCer();
+}
+function renderDots(){
+  const d=$("dots");d.innerHTML="";const vis=visSteps(),S=curStep();
+  vis.forEach((q,i)=>{const b=el("button","");b.type="button";b.textContent=i+1;
+    const done=stepDoneS(q);b.setAttribute("aria-label","Step "+(i+1)+": "+L(q,"short")+(done?" (done)":""));
+    if(q===S){b.classList.add("cur");b.setAttribute("aria-current","step");}
+    if(done)b.classList.add("done");
+    b.addEventListener("click",()=>goStep(i));d.appendChild(b);});
+}
+function scrollToCard(){
+  if(st.fill)return;
+  const stacked=!(window.innerWidth>=900&&window.innerWidth>window.innerHeight);
+  const r=(stacked?card:$("build")).getBoundingClientRect(),off=stacked?$("stagecol").offsetHeight+10:0;
+  if(r.top>=off-2&&r.top<window.innerHeight-160&&!stacked)return;
+  window.scrollTo({top:Math.max(0,r.top+window.scrollY-off),behavior:REDUCE?"auto":"smooth"});
+}
+
+/* ================= controls under the stage (§5.5, built per step) ================= */
+const ctl=$("ctl");
+let paused=false,speed=1;
+function btn(label,fn,cls,aria){const b=el("button",cls||"go");b.type="button";b.textContent=label;b.setAttribute("aria-label",aria||label);b.addEventListener("click",fn);return b;}
+function seg(name,opts,val,fn,aria){const s=el("div","seg");s.setAttribute("role","group");s.setAttribute("aria-label",aria||name);
+  opts.forEach(([v,t,html])=>{const b=el("button","");b.type="button";if(html)b.innerHTML=html;else b.textContent=t;b.dataset.v=v;b.setAttribute("aria-pressed",String(v===val));b.setAttribute("aria-label",name+": "+t);
+    b.addEventListener("click",()=>{s.querySelectorAll("button").forEach(q=>q.setAttribute("aria-pressed",String(q===b)));fn(v);});s.appendChild(b);});
+  s._set=v=>{s.querySelectorAll("button").forEach(q=>q.setAttribute("aria-pressed",String(q.dataset.v===String(v))));};return s;}
+function glyphSvg(kind){const f=col(kind);const e=DARK?"#15130F":"#FFFFFF";
+  if(kind==="ex4")return `<svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1 19 10 10 19 1 10Z" fill="${f}" stroke="${e}" stroke-width="1.5"/></svg>`;
+  if(kind==="sema")return `<svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="16" height="16" fill="${f}" stroke="${e}" stroke-width="1.5"/></svg>`;
+  return `<svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="${f}" stroke="${e}" stroke-width="1.5"/></svg>`;}
+let UI={};
+function molSeg(){return seg("Molecule",MOLS.map(m=>[m,molShort[m],glyphSvg(m)+esc(molShort[m])]),SIM.mol,v=>setCtl("molecule",v),"Molecule");}
+function buildCtl(){
+  ctl.innerHTML="";UI={};const S=curStep(),k=S.key,lvl=st.level,C=SIM;
+  UI.play=btn(paused?"▶ Play":"❚❚ Pause",()=>{paused=!paused;UI.play.textContent=paused?"▶ Play":"❚❚ Pause";},"ghost","Play or pause");ctl.appendChild(UI.play);
+  ctl.appendChild(btn("◂",()=>nudge(-1),"ghost","Step the clock back"));
+  ctl.appendChild(btn("▸",()=>nudge(1),"ghost","Step the clock forward"));
+  UI.speed=seg("Speed",[["0.5","½×"],["1","1×"],["2","2×"]],String(speed),v=>setCtl("speed",v),"Speed");ctl.appendChild(UI.speed);
+  UI.fill=btn(st.fill?"Restore page":"Fill screen",()=>setFill(!st.fill),"ghost","Fill the screen with the tool, or restore the page");ctl.appendChild(UI.fill);
+  ctl.appendChild(btn("Reset this step",()=>{newSim();buildCtl();renderCard();readout();},"ghost","Reset this step"));
+  const wins=[["15m","First 15 minutes"],["1d","First day"],["3w","First 3 weeks"]];if(lvl==="de")wins.push(["log","All on one axis (log)"]);
+  const ww=el("span","gf");ww.appendChild(el("span","","Window"));UI.win=seg("Window",wins,st.win,v=>setCtl("window",v),"Time window");ww.appendChild(UI.win);ctl.appendChild(ww);
+  if(k==="S1"||k==="S2"){ctl.appendChild(btn("Eat a meal",meal,"go","Eat a meal: release GLP-1 from the gut"));}
+  if(k==="S2"){const w=el("span","gf");w.appendChild(el("span","",lvl==="nine"?"Scissors":"DPP-4"));UI.sciss=seg(lvl==="nine"?"Scissors":"DPP-4",[["on","On"],["off","Off: what if nothing cut it?"]],C.scissors?"on":"off",v=>setCtl("scissors",v==="on"));w.appendChild(UI.sciss);ctl.appendChild(w);}
+  if(k==="S3"||k==="S4"||k==="S5"){const w=el("span","gf");w.appendChild(el("span","","Molecule"));UI.mol=molSeg();w.appendChild(UI.mol);ctl.appendChild(w);}
+  if(k==="S3"){ctl.appendChild(btn("Release / Inject",inject,"go","Release or inject the chosen molecule"));
+    UI.over=btn("Overlay all three",()=>setCtl("overlay",!SIM.overlay),"ghost","Overlay the curves of every molecule run so far");UI.over.setAttribute("aria-pressed",String(C.overlay));ctl.appendChild(UI.over);}
+  if(k==="S4"){const w=el("span","gf");w.appendChild(el("span","",lvl==="nine"?"Blood sugar":"Plasma glucose"));UI.gluc=seg(lvl==="nine"?"Blood sugar":"Plasma glucose",[["low","Low"],["normal","Normal"],["high","High"]],C.gluc,v=>setCtl("glucose",v));w.appendChild(UI.gluc);ctl.appendChild(w);
+    const h=el("span","gf");h.appendChild(el("span","","Hormone"));UI.horm=seg("Hormone",[["on","On"],["off","Off"]],C.hormone?"on":"off",v=>setCtl("hormone",v==="on"));h.appendChild(UI.horm);ctl.appendChild(h);}
+  if(k==="S5"){ctl.appendChild(btn(lvl==="nine"?"Run the scissors":"Run DPP-4",()=>runScissors(SIM.mol),"go",(lvl==="nine"?"Run the scissors":"Run DPP-4")+" on the chosen molecule"));}
+  if(k==="S6"){ctl.appendChild(el("span","gf",esc(lvl==="nine"?"Tap a glowing receptor on the picture":"Tap an occupied receptor on the picture")));}
+  syncCtl();
+}
+function nudge(dir){const S=SIM;if(!S.started||!(S.stepKey==="S1"||S.stepKey==="S2"||S.stepKey==="S3"))return;paused=true;if(UI.play)UI.play.textContent="▶ Play";const W=WINDOWS[st.win];
+  if(W.log){const l0=Math.log10(W.min),l1=Math.log10(W.max);let l=Math.log10(Math.max(S.clockMin,W.min))+dir*(l1-l0)/20;S.clockMin=clamp(Math.pow(10,l),0,W.max);if(S.clockMin<=W.min&&dir<0)S.clockMin=0;}
+  else S.clockMin=clamp(S.clockMin+dir*W.max/20,0,W.max);
+  noteReach(S);draw();readout();}
+function syncCtl(){const open=unlocked();ctl.classList.toggle("locked",!open);ctl.querySelectorAll("button,input").forEach(x=>{if(!open)x.setAttribute("tabindex","-1");else x.removeAttribute("tabindex");});}
+
+/* ================= readout under the graph ================= */
+let roT=0;
+function gauge(v,cls){return '<span class="g'+(cls?" "+cls:"")+'" aria-hidden="true"><i style="width:'+Math.round(clamp(v,0,1)*100)+'%"></i></span>';}
+function peakGauge(m){return 1;} /* the peak signal is identical for all three (§4.1): only the duration differs */
+function readout(){
+  const S=SIM;if(!S)return;const lvl=st.level,R=RT[lvl],k=S.stepKey,parts=[];
+  if(k==="S1"||k==="S2"||k==="S3"){
+    const ranList=MOLS.filter(m=>st.ran[m]);
+    if(k==="S3"&&ranList.length){parts.push(R.peak+": "+ranList.map(m=>molShort[m]+" "+gauge(peakGauge(m))).join(" "));}
+    else if(S.started)parts.push(R.peak+": "+gauge(1));
+    const last=S.lastRun||(S.started?S.mol:null);
+    if(last&&S.started){if(activeKey(S)==="glp1off")parts.push('<span class="note">'+esc(R.nocutNote)+"</span>");else parts.push(R.stays+" "+onTimeText(last)+" "+R.model);}
+    else if(k==="S2"&&!S.scissors)parts.push('<span class="note">'+esc(R.nocutNote)+"</span>");
+    if(S.started&&!CURVES[activeKey(S)].nocut)parts.push(R.hl+" "+(lvl==="de"?M[S.mol].textDE:M[S.mol].text9));
+    parts.push(R.boundRec+": "+S.rec.filter(q=>q.tok!=null).length+" of "+S.rec.length);
+  }
+  if(k==="S4"){const g=S.gluc,sn=S.seen[g];const fmt=v=>v==null?'<span>'+R.notyet+'</span>':gauge(v,"ins")+(lvl==="de"?" "+v.toFixed(2):"");
+    parts.push(R.insOn+" "+fmt(sn.on)+" · "+R.insOff+" "+fmt(sn.off));
+    parts.push(R.gluc+": "+LBL[lvl][g]+(lvl==="de"?" (~"+SIGNAL_DATA.glucose[g].mgdl+" "+R.mgdl+", "+R.approx+")":""));}
+  if(k==="S5"){parts.push(MOLS.map(m=>molShort[m]+": "+(S.sciss5[m]==="cut"?LBL[lvl].cutlbl:S.sciss5[m]==="slip"?LBL[lvl].sliplbl:"…")).join(" · "));}
+  if(k==="S6"){parts.push(R.tapRec);if(S.tally.on)parts.push(R.illus);}
+  $("readout").innerHTML=parts.join(" · ");
+}
+
+/* ================= step, level, Advanced, device ================= */
+function goStep(i,noScroll){
+  const vis=visSteps(),S=vis[clamp(i,0,vis.length-1)];st.step=STEPS.indexOf(S);save();
+  newSim();
+  $("stagelab").textContent=S.key==="S5"?(st.level==="nine"?"The first 10 amino acids of each molecule":"The first 10 residues of each molecule (GLP-1 numbering)"):(st.level==="nine"?"A blood vessel (left) beside a pancreas beta cell (right)":"A capillary (left) beside a pancreatic β cell (right)");
+  cv.setAttribute("aria-label","The Signal Patch: "+L(S,"head"));
+  pinned=null;$("callout").classList.remove("open");$("toast").classList.remove("on");paused=false;
+  buildCtl();renderCard();readout();$("record").classList.add("hidden");
+  requestAnimationFrame(()=>resize());
+  if(!noScroll)scrollToCard();
+}
+function setTexts(){
+  const lvl=st.level;
+  $("lede").textContent=LEDE[lvl];
+  const lg=$("legend");lg.innerHTML="";LEGEND[lvl].forEach(([kind,t])=>{const s=el("span","");s.innerHTML=legendGlyph(kind)+esc(t);lg.appendChild(s);});
+  $("eyebrow").textContent=EYEBROW[lvl];$("footlv").textContent=FOOT[lvl];
+  const sm=$("simplifies");sm.innerHTML="<b>What the model simplifies:</b>";const ul=el("ul","");SIMPLIFIES[lvl].forEach(t=>ul.appendChild(el("li","",esc(t))));sm.appendChild(ul);
+  $("notmedical").textContent=NOTMEDICAL;
+  const F=FURTHER[lvl],f=$("further");f.innerHTML="";f.appendChild(el("h4","","Go further"));f.appendChild(el("h4","","On this site"));
+  let u=el("ul","");F.site.forEach(([h,t,d])=>u.appendChild(el("li","",'<a href="'+h+'">'+esc(t)+'</a> '+esc(d))));f.appendChild(u);
+  f.appendChild(el("h4","","Real structures, on Mol*"));u=el("ul","");F.mol.forEach(([id,d])=>u.appendChild(el("li","",'<a href="https://molstar.org/viewer/?pdb-provider=rcsb&amp;pdb='+id+'" target="_blank" rel="noopener">'+id+'</a>, '+esc(d)+'.')));
+  u.appendChild(el("li","",'<a href="https://molstar.org/" target="_blank" rel="noopener">molstar.org</a> Mol* is free and open source; paste any PDB ID.'));f.appendChild(u);
+  const so=$("sources");so.innerHTML="<b>Sources</b>";const ol=el("ol","");
+  SOURCES.forEach(([claim,cite,ref])=>{let link="";if(ref==="fda")link=' <a href="https://www.accessdata.fda.gov/scripts/cder/daf/" target="_blank" rel="noopener">Drugs@FDA</a>';else if(ref==="uniprot")link="";else link=' <a href="https://doi.org/'+esc(ref)+'" target="_blank" rel="noopener">https://doi.org/'+esc(ref)+'</a>';
+    ol.appendChild(el("li","",esc(claim)+": "+esc(cite)+link));});so.appendChild(ol);
+  const tb=$("teachersBody");tb.innerHTML="";TEACHERS.forEach(t=>tb.appendChild(el("li","",t)));
+  renderCer();
+}
+function legendGlyph(kind){const f=col(kind==="rec"?"glow":kind==="alb"?"alb":kind),e=DARK?"#15130F":"#FFFFFF",ink=INK;
+  switch(kind){
+    case "glp1":return `<svg viewBox="0 0 32 20" aria-hidden="true"><circle cx="4" cy="11" r="3" fill="${f}"/><circle cx="11" cy="9" r="3" fill="${f}"/><circle cx="18" cy="11" r="3" fill="${f}"/><circle cx="26" cy="10" r="5" fill="${f}" stroke="${e}" stroke-width="1.2"/></svg>`;
+    case "ex4":return `<svg viewBox="0 0 32 20" aria-hidden="true"><path d="M1 12 Q4 6 7 11" stroke="${f}" fill="none" stroke-width="1.5"/><circle cx="9" cy="11" r="2.6" fill="${f}"/><circle cx="14" cy="9" r="2.6" fill="${f}"/><circle cx="19" cy="11" r="2.6" fill="${f}"/><path d="M26 4 32 10 26 16 20 10Z" fill="${f}" stroke="${e}" stroke-width="1.2"/></svg>`;
+    case "sema":return `<svg viewBox="0 0 32 20" aria-hidden="true"><circle cx="5" cy="12" r="3" fill="${f}"/><circle cx="12" cy="11" r="3" fill="${f}"/><path d="M12 8 l2 -3 l-2 -3" stroke="${f}" fill="none" stroke-width="1.5"/><circle cx="19" cy="12" r="3" fill="${f}"/><rect x="22" y="6" width="9" height="9" fill="${f}" stroke="${e}" stroke-width="1.2"/></svg>`;
+    case "cut":return `<svg viewBox="0 0 32 20" aria-hidden="true"><circle cx="6" cy="11" r="3" fill="${f}"/><circle cx="13" cy="9" r="3" fill="${f}"/><circle cx="20" cy="11" r="3" fill="${f}"/><path d="M24 7 30 13 M30 7 24 13" stroke="${f}" stroke-width="2"/></svg>`;
+    case "sciss":return `<svg viewBox="0 0 32 20" aria-hidden="true"><path d="M4 4 L26 16 M4 16 L26 4" stroke="${f}" stroke-width="2.4" stroke-linecap="round"/><circle cx="4" cy="4" r="2.6" fill="none" stroke="${f}" stroke-width="2"/><circle cx="4" cy="16" r="2.6" fill="none" stroke="${f}" stroke-width="2"/></svg>`;
+    case "rec":return `<svg viewBox="0 0 32 20" aria-hidden="true"><circle cx="12" cy="10" r="8" fill="${f}" opacity=".8"/><path d="M26 10 H14 L6 3 M14 10 L6 17" stroke="${ink}" fill="none" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+    case "ins":return `<svg viewBox="0 0 32 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="${f}"/><text x="10" y="14" font-family="Archivo,Arial,sans-serif" font-weight="700" font-size="11" fill="${e}" text-anchor="middle">i</text><circle cx="24" cy="7" r="3" fill="${f}"/><circle cx="28" cy="14" r="3" fill="${f}"/></svg>`;
+    case "alb":return `<svg viewBox="0 0 32 20" aria-hidden="true"><ellipse cx="16" cy="10" rx="14" ry="7.5" fill="${f}" stroke="${col("albE")}" stroke-width="1.6"/></svg>`;
+    case "gluc":return `<svg viewBox="0 0 32 20" aria-hidden="true"><path d="M16 1 24 5.5 24 14.5 16 19 8 14.5 8 5.5Z" fill="${f}"/></svg>`;
+  }return "";}
+function renderCer(){const c=$("cer");if(!CER_LINKS.length){c.classList.add("hidden");c.innerHTML="";return;}
+  c.classList.remove("hidden");c.innerHTML="";c.appendChild(el("h4","","Use this in your CER"));const ul=el("ul","");CER_LINKS.forEach(x=>{if(!x||!x.href)return;ul.appendChild(el("li","",'<a href="'+esc(x.href)+'">'+esc(x.title||x.href)+'</a>'+(x.note?" "+esc(x.note):"")));});c.appendChild(ul);
+  c.appendChild(el("p","fine","Copy my sentences in Your record gathers your evidence lines; paste them into the CER."));}
+function setLevel(lv){st.level=lv==="de"?"de":"nine";if(st.win==="log"&&st.level!=="de")st.win="3w";save();
+  document.documentElement.setAttribute("data-level",st.level);
+  document.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
+  const before=STEPS[st.step];fixStep();const after=STEPS[st.step];
+  setTexts();
+  if(before!==after)goStep(visSteps().indexOf(after),true);else{if(SIM)SIM.level=st.level;buildCtl();renderCard();readout();}
+  if(!$("record").classList.contains("hidden"))renderRecord();}
+function setAdv(on){st.adv=!!on;save();
+  document.querySelectorAll("[data-adv]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.adv==="1")===st.adv)));
+  const before=STEPS[st.step];fixStep();const after=STEPS[st.step];
+  if(before!==after)goStep(visSteps().indexOf(after),true);else{renderCard();}
+  if(!$("record").classList.contains("hidden"))renderRecord();}
+function setDev(d){st.dev=d==="pc"?"pc":"ipad";save();
+  document.documentElement.setAttribute("data-dev",st.dev);
+  document.querySelectorAll("button[data-dev]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.dev===st.dev)));
+  newSim();buildCtl();readout();resize();}
+function setFill(on){st.fill=!!on;save();document.documentElement.setAttribute("data-fill",st.fill?"1":"0");
+  if(UI.fill)UI.fill.textContent=st.fill?"Restore page":"Fill screen";
+  try{const b=$("build");if(st.fill&&!document.fullscreenElement){if(b.requestFullscreen)b.requestFullscreen().catch(()=>{});else if(b.webkitRequestFullscreen)b.webkitRequestFullscreen();}
+    else if(!st.fill&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}
+  window.scrollTo(0,0);requestAnimationFrame(()=>resize());}
+function setCardHidden(on){st.cardHidden=!!on;save();$("build").classList.toggle("nocard",st.cardHidden);$("hidecard").setAttribute("aria-pressed",String(st.cardHidden));$("hidecard").textContent=st.cardHidden?"Show card":"Hide card";
+  if(!st.cardHidden){closeOver();}requestAnimationFrame(()=>resize());}
+function openOver(){$("cardover").appendChild(card);$("cardover").classList.add("open");}
+function closeOver(){$("cardcol").appendChild(card);$("cardover").classList.remove("open");}
+$("cardtab").addEventListener("click",openOver);$("closeover").addEventListener("click",closeOver);
+$("hidecard").addEventListener("click",()=>setCardHidden(!st.cardHidden));
+function setTeach(on){st.teach=!!on;save();$("teach").setAttribute("aria-pressed",String(st.teach));document.documentElement.setAttribute("data-teach",st.teach?"1":"0");if(!st.teach){pinned=null;$("callout").classList.remove("open");}renderCard();syncCtl();}
+$("teach").addEventListener("click",()=>setTeach(!st.teach));
+let toastT=0;function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove("on"),3500);}
+
+/* ================= record (§5.8 item 1) ================= */
+function renderRecord(){
+  const body=$("recBody"),vis=visSteps();body.innerHTML="";
+  let right=0,tot=0,done=0;
+  const tb=el("table","");tb.appendChild(el("tr","","<th>Step</th><th>Tasks</th><th>First answers</th>"));
+  vis.forEach((S,i)=>{const ids=[preOf(S)].concat(postOf(S)).filter(id=>id&&ITEMS[id]&&(!ITEMS[id].adv||st.adv));const cells=ids.map(id=>{const r=st.ans[id];if(!r)return"<span>"+id+": not yet</span>";tot++;if(r.f)right++;return id+": "+(r.f?'<span class="ok">right</span>':'<span class="no">missed</span>');}).join(", ");
+    const sd=stepDoneS(S);if(sd)done++;
+    tb.appendChild(el("tr","",`<td>${i+1}. ${esc(L(S,"short"))}</td><td>${sd?'<span class="ok">done</span>':"open"}</td><td>${cells||"—"}</td>`));});
+  body.appendChild(tb);
+  $("recSum").textContent=done+" of "+vis.length+" steps finished; "+right+" of "+tot+" predictions and checks right on the first try.";
+  const ol=$("recFound");ol.innerHTML="";const lines=[];
+  vis.forEach((S,i)=>{const t=(st.found[S.key]||"").trim();ol.appendChild(el("li","",t?esc(t):'<span class="fine">(nothing typed yet)</span>'));if(t)lines.push((i+1)+". "+t);});
+  $("recCopy").value=lines.join("\n");
+}
+function showRecord(){renderRecord();$("record").classList.remove("hidden");if(st.fill)setFill(false);$("record").scrollIntoView({behavior:REDUCE?"auto":"smooth"});}
+$("copyFound").addEventListener("click",()=>{const ta=$("recCopy"),b=$("copyFound");const txt=ta.value;const ok=()=>{b.textContent="Copied";setTimeout(()=>{b.textContent="Copy my sentences";},2500);};
+  const fallback=()=>{ta.classList.remove("hidden");ta.focus();ta.select();b.textContent="Select all and copy";};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,fallback);else fallback();}catch(e){fallback();}});
+let clearArmed=false,clearT=0;
+$("clearFound").addEventListener("click",()=>{const b=$("clearFound");if(!clearArmed){clearArmed=true;b.textContent="Tap again within 4 seconds to clear your sentences";clearT=setTimeout(()=>{clearArmed=false;b.textContent="Clear what I typed";},4000);return;}
+  clearTimeout(clearT);clearArmed=false;b.textContent="Clear what I typed";Object.keys(st.found).forEach(k=>{st.found[k]="";});save();renderRecord();renderCard();});
+let armed=false,armT=0;
+$("reset").addEventListener("click",()=>{const b=$("reset");
+  if(!armed){armed=true;b.textContent="Tap again within 4 seconds to start over";armT=setTimeout(()=>{armed=false;b.textContent="Start over";},4000);return;}
+  clearTimeout(armT);armed=false;b.textContent="Start over";
+  st.ans={};st.goals={};st.cnt={};st.rec=[];st.ran={glp1:false,ex4:false,sema:false};Object.keys(st.found).forEach(k=>{st.found[k]="";});st.step=0;save();$("record").classList.add("hidden");goStep(0);window.scrollTo(0,0);});
+
+/* ================= pointer: Teaching view callouts, hover on a computer ================= */
+function hitAt(e){const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;for(let i=hits.length-1;i>=0;i--){const h=hits[i];if(x>=h.x0&&x<=h.x1&&y>=h.y0&&y<=h.y1)return h.key;}return null;}
+function pin(key){const p=PARTS[st.level][key];if(!p)return;pinned=key;$("calT").textContent=p[0];$("calD").textContent=p[1];$("callout").classList.add("open");}
+cv.addEventListener("pointerdown",e=>{if(!SIM)return;const key=hitAt(e);
+  if(st.teach){if(key&&PARTS[st.level][key])pin(key);else{pinned=null;$("callout").classList.remove("open");}}
+  else if(key==="pos2"&&SIM.stepKey==="S5"){ /* a tap on a row's position 2 that missed the overlay button */ }
+  e.preventDefault();});
+cv.addEventListener("pointermove",e=>{if(st.dev==="pc"&&e.pointerType==="mouse"){const key=hitAt(e);hover=key;cv.classList.toggle("hov",!!key);}});
+cv.addEventListener("pointerleave",()=>{hover=null;cv.classList.remove("hov");});
+gv.addEventListener("pointerdown",e=>{if(st.teach){if(pinned==="graph"){pinned=null;$("callout").classList.remove("open");}else pin("graph");}e.preventDefault();});
+
+/* ================= loop ================= */
+let last=0,visible=true,acc=0;
+const DT=1/60;
+function frame(now){
+  requestAnimationFrame(frame);
+  if(!SIM||!visible||document.hidden){last=now;return;}
+  let el2=Math.min(.05,(now-last)/1000||0);last=now;
+  if(!paused){acc+=el2;let n=0;while(acc>=DT&&n<4){simStep(DT);acc-=DT;n++;}if(n>=4)acc=0;}
+  draw();
+  roT+=el2;if(roT>.25){roT=0;readout();}
+  fpsT+=el2;fpsHist.push(el2);while(fpsHist.length&&fpsT>3){fpsT-=fpsHist.shift();}
+}
+if(window.IntersectionObserver)new IntersectionObserver(es=>{es.forEach(e=>{visible=e.isIntersecting;});}).observe($("stage"));
+function resize(){
+  const stage=$("stage");
+  const stacked=!(window.innerWidth>=900&&window.innerWidth>window.innerHeight);
+  if(stacked){const w=stage.clientWidth||800;const h=Math.min(window.innerHeight*.5,w*.78);stage.style.setProperty("--stageh",h+"px");}
+  else stage.style.removeProperty("--stageh");
+  const dpr=Math.min(window.devicePixelRatio||1,dev().dpr);
+  const sb=$("scenebox"),gb=$("graphbox");
+  cw=sb.clientWidth||1200;ch=sb.clientHeight||600;cv.width=Math.round(cw*dpr);cv.height=Math.round(ch*dpr);
+  gw=gb.clientWidth||1200;gh=gb.clientHeight||400;gv.width=Math.round(gw*dpr);gv.height=Math.round(gh*dpr);kpx=dpr;
+  if(SIM)draw();
+}
+
+/* ================= boot ================= */
+document.querySelectorAll("button[data-dev]").forEach(b=>b.addEventListener("click",()=>setDev(b.dataset.dev)));
+document.querySelectorAll("[data-lv]").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv)));
+document.querySelectorAll("[data-adv]").forEach(b=>b.addEventListener("click",()=>setAdv(b.dataset.adv==="1")));
+document.documentElement.setAttribute("data-dev",st.dev);
+document.querySelectorAll("button[data-dev]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.dev===st.dev)));
+document.documentElement.setAttribute("data-level",st.level);
+document.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
+document.querySelectorAll("[data-adv]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.adv==="1")===st.adv)));
+$("teach").setAttribute("aria-pressed",String(st.teach));document.documentElement.setAttribute("data-teach",st.teach?"1":"0");
+$("build").classList.toggle("nocard",st.cardHidden);$("hidecard").textContent=st.cardHidden?"Show card":"Hide card";$("hidecard").setAttribute("aria-pressed",String(st.cardHidden));
+document.documentElement.setAttribute("data-fill",st.fill?"1":"0");
+if(window.ResizeObserver){new ResizeObserver(()=>resize()).observe($("stage"));}else window.addEventListener("resize",resize);
+window.addEventListener("orientationchange",()=>setTimeout(resize,60));
+setTexts();
+goStep(visSteps().indexOf(curStep()),true);
+resize();
+requestAnimationFrame(frame);
+
+/* ================= the test hook (§10.1): drives the page, changes no behaviour ================= */
+function allText(level){
+  const out=[];const add=s=>{if(s==null)return;if(Array.isArray(s))s.forEach(add);else if(typeof s==="object")Object.keys(s).forEach(k=>add(s[k]));else out.push(String(s));};
+  add(LEDE[level]);
+  STEPS.forEach(S=>{add(S.short&&S.short[level]);add(S.head&&S.head[level]);add(S.task&&S.task[level]);(S.goals&&S.goals[level]||[]).forEach(g=>add(g[1]));add(S.found);add(level==="nine"?S.nine:S.de);});
+  if(level==="nine")add(WORDS);
+  add(LBL[level]);add(PARTS[level]);add(RT[level]);add(CTLTEXT[level]);LEGEND[level].forEach(l=>add(l[1]));add(EYEBROW[level]);add(FOOT[level]);add(SIMPLIFIES[level]);add(NOTMEDICAL);add(NOCUT_LABEL);
+  FURTHER[level].site.forEach(x=>{add(x[1]);add(x[2]);});FURTHER[level].mol.forEach(x=>add(x[1]));
+  Object.keys(WINDOWS).forEach(w=>{if(w==="log"&&level!=="de")return;add(WINNAMES[w]);add(WINDOWS[w].label[level]);});
+  MOLS.forEach(m=>{add(onTimeText(m));add(level==="nine"?[M[m].label9,M[m].text9,M[m].from9,M[m].mainExit9]:[M[m].labelDE,M[m].textDE,M[m].fromDE,M[m].mainExitDE]);});
+  add(SIGNAL_DATA.identityEx4vsGLP1.text);add(Object.keys(AANAME).map(k=>AANAME[k]));
+  add($("finenote").textContent);add("Words in this step");add("Check yourself");add("Advanced Biology");add("Not quite");add("Right. Here is the reasoning");add("The reasoning");add("Build a SAM from this miss");add("What you found");add("Saved on this device");add("At least 8 characters");add("One sentence, in your own words.");
+  add("Answer the prediction first; the controls under the picture unlock once you have committed to an answer.");add("Teaching view: every part of this step is open and the labels are board-sized. Tap a part of the picture to pin a big callout. The step lights up only once its prediction, its tasks, its checks and its sentence are done.");
+  add(["Your record","What you found, in step order","Copy my sentences","Clear what I typed","Start over","Go further","On this site","Real structures, on Mol*","Sources","For teachers","What the model simplifies:","Next step","Skip to the next step","See my record","not yet","right","missed","done","open"]);
+  add(level==="nine"?["The first 10 amino acids of each molecule","A blood vessel (left) beside a pancreas beta cell (right)"]:["The first 10 residues of each molecule (GLP-1 numbering)","A capillary (left) beside a pancreatic β cell (right)"]);
+  add(["A meal: GLP-1 released from the gut","GLP-1 secreted from the L-cells","injected","bound","Insulin released","GLP-1 cut by the scissors","GLP-1 cleaved by DPP-4","Filtered out by the kidneys","Cleared by renal filtration"].filter(s=>level==="de"||!/cleaved|L-cells|renal/i.test(s)));
+  (level==="nine"?BANK9:BANKDE).forEach(it=>{add(it.topic);add(it.stem);add(it.opts);add(it.why);add(it.miss);add(it.sam);});
+  /* Sources show at both levels; they are citations, exempt from the 9th-grade vocabulary test (§5.8 item 4). The teacher notes are teacher-facing and listed for DE only. */
+  if(level==="de"){SOURCES.forEach(s=>{add(s[0]);add(s[1]);});TEACHERS.forEach(t=>add(t.replace(/<[^>]+>/g,"")));}
+  return out;
+}
+function colours(){
+  const out=[{name:"label ink on plate",fg:SOFT,bg:BG,kind:"label"},{name:"axis label on graph",fg:SOFT,bg:BG,kind:"label"},{name:"clock digits on card",fg:INK,bg:BG,kind:"label"}];
+  const toks=[["GLP-1","glp1"],["exendin-4","ex4"],["semaglutide","sema"],["cut GLP-1","cut"],["scissors","sciss"],["glucose","gluc"],["released insulin","ins"]];
+  toks.forEach(([n,k])=>out.push({name:n+" on stage",fg:col(k),bg:BG,kind:"token"}));
+  out.push({name:"insulin packet on cell interior",fg:col("ins"),bg:col("cellF"),kind:"token"});
+  out.push({name:"albumin outline on stage",fg:col("albE"),bg:BG,kind:"token"});
+  out.push({name:"albumin fill on stage (pale by design; its outline and label carry it)",fg:col("alb"),bg:BG,kind:"fill-pale"});
+  return out;
+}
+function tokensOut(){const S=SIM;return S.tok.map(t=>({kind:t.kind,x:t.dx,y:t.dy,inCell:t.kind!=="cut"&&inCell(t.x,t.y),onAlbumin:t.state==="onAlb",state:t.state}));}
+function graphLayout(){const W=WINDOWS[st.win];return{win:st.win,plot:{x0:gPx(PLOT.x0,PLOT.y0)[0],y0:gPx(PLOT.x0,PLOT.y0)[1],x1:gPx(PLOT.x1,PLOT.y1)[0],y1:gPx(PLOT.x1,PLOT.y1)[1]},xOf:null,
+  px:(tMin,pct)=>{const[x,y]=gPx(xOf(W,tMin),yOf(pct));return[x,y];},dpr:kpx,curves:visibleCurves(SIM),reach:Object.assign({},SIM.reach)};}
+function requests(){try{return [location.href].concat(performance.getEntriesByType("resource").map(e=>e.name));}catch(e){return [location.href];}}
+function runModel(sec){ /* advance the model clock by sec seconds of body time, and the picture by the equivalent playback, without drawing */
+  const S=SIM;const k=S.stepKey,W=WINDOWS[st.win];
+  const clockSteps=(k==="S1"||k==="S2"||k==="S3")&&S.started;
+  const addMin=sec/60;const rate=W.max/20*speed;let realSec=clockSteps?addMin/rate:sec;realSec=clamp(realSec,0.25,20);
+  const n=Math.max(1,Math.round(realSec/DT));const t0=S.clockMin,t1=Math.min(W.max,t0+addMin);
+  S.clockHold=true;for(let i=1;i<=n;i++){if(clockSteps){S.clockMin=t0+(t1-t0)*i/n;noteReach(S);}simStep(DT);}S.clockHold=false;
+  S.tok.forEach(t=>{t.dx=t.x;t.dy=t.y;});S.drawSnap=snapshotDraw(S);readout();
+}
+window.__SP={
+  st:()=>st,sim:()=>SIM,
+  goStep:i=>goStep(i,true),setLevel,setAdv,setDev,fill:setFill,cardHidden:setCardHidden,
+  set:(n,v)=>setCtl(n,v),meal,inject,tapPos2,runScissors,tapReceptor,answer,
+  type:(key,text)=>{if(st.found[key]==null)return;st.found[key]=String(text).slice(0,300);save();renderCard();},
+  run:runModel,
+  tokens:tokensOut,gauge:m=>peakGauge(m),
+  stepDone:i=>stepDoneS(visSteps()[i]),visSteps:()=>visSteps().map(s=>s.key),curStep:()=>curStep().key,
+  remaining:(m,t)=>remaining(m,t),onTime:m=>onTimeMin(m),onTimeText,
+  counts:()=>Object.assign({},SIM.cnt,{insulinRate:insulinRateOf(SIM.gluc,signalNow(SIM)),signal:signalNow(SIM),clockMin:SIM.clockMin,ran:Object.assign({},st.ran),amplificationViewed:SIM.amplificationViewed,slipCount:SIM.cnt.slipCount,activeKey:activeKey(SIM),started:SIM.started,gluc:SIM.gluc,hormone:SIM.hormone,overlay:SIM.overlay}),
+  items:level=>JSON.parse(JSON.stringify(level==="de"?BANKDE:BANK9)).map(it=>{delete it.id;delete it.lvl;return it;}),allText,colours,
+  fps:()=>{const n=fpsHist.length,t=fpsHist.reduce((a,b)=>a+b,0);return t>0?n/t:0;},requests,
+  graph:graphLayout,hits:()=>hits.slice(),paused:()=>paused,draw,forbidden:()=>NINTH_FORBIDDEN.slice(),data:()=>SIGNAL_DATA,cerLinks:()=>CER_LINKS,renderCer,
+  pin:k=>pin(k),nocutLabel:NOCUT_LABEL,windows:()=>Object.keys(WINDOWS)
+};
+})();
+</script>
+</body>
+</html>
