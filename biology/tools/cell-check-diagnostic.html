@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Two courses in one self-check. Eighteen questions across the six ideas Checkpoint Chapter 4 tests - seeing and separating cells, prokaryote and eukaryote, the route a protein takes, organelles with one job, the cytoskeleton, and what a cell builds outside itself - each answered with the reasoning and followed by something to draw, plus a Biology I Module 2 version across learning targets 2.1 to 2.5. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/cell-check-diagnostic.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Cell Check - The Six Ideas Behind the Tour of the Cell">
+<meta property="og:description" content="Eighteen questions across the six ideas Checkpoint Chapter 4 tests, each answered with the reasoning and followed by something to draw. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/cell-check-diagnostic.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Cell Check | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;
+  --card:#FFFFFF;
+  --ink:#1D1A15;
+  --ink-soft:#5A544A;
+  --bond:#1F7A8C;
+  --bond-soft:#DEEBEE;
+  --shell:#D2CCC0;
+  --rule:#DDD8CE;
+  --flag:#B85042;
+  --flag-soft:#F7E9E6;
+  --solid:#3F7A55;
+  --solid-soft:#E2EDE6;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;
+    --card:#1D1A15;
+    --ink:#EDE9E1;
+    --ink-soft:#A8A198;
+    --bond:#6FC0CE;
+    --bond-soft:#172E33;
+    --shell:#423D34;
+    --rule:#332E27;
+    --flag:#E08A7C;
+    --flag-soft:#2E1E1A;
+    --solid:#7FC395;
+    --solid-soft:#18291E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);
+  line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+p{margin:0 0 1rem;max-width:36rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+
+/* ---- tile grid : one card per idea, coloured the way the board is coloured ---- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin:1.6rem 0 1.8rem}
+@media (max-width:34rem){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:24rem){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{
+  position:relative;background:var(--card);border:1.5px solid var(--shell);
+  border-left:5px solid var(--accent,var(--shell));
+  border-radius:3px;padding:.7rem .6rem .6rem;min-height:6rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.tile .idx{font-family:var(--sans);font-size:.7rem;font-weight:600;color:var(--ink-soft)}
+.tile .sym{font-family:var(--sans);font-size:1.35rem;font-weight:700;line-height:1;margin:.2rem 0 .3rem;letter-spacing:-0.01em;color:var(--accent,var(--ink))}
+.tile .nm{font-family:var(--sans);font-size:.74rem;font-weight:500;color:var(--ink-soft);line-height:1.25}
+.tile.solid{background:var(--solid-soft);border-color:var(--solid)}
+.tile.mid{background:var(--bond-soft);border-color:var(--bond)}
+.tile.flag{background:var(--flag-soft);border-color:var(--flag);border-width:2.5px;border-left-width:5px}
+.tile .score{position:absolute;top:.55rem;right:.6rem;font-family:var(--sans);
+  font-size:.72rem;font-weight:700;color:var(--ink-soft)}
+
+/* ---- buttons ---- */
+button{font:inherit;cursor:pointer}
+.go{
+  font-family:var(--sans);font-weight:600;font-size:1rem;
+  background:var(--bond);color:var(--paper);border:none;border-radius:3px;
+  padding:.85rem 1.5rem;min-height:3rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);
+  font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+
+/* ---- question ---- */
+.bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden;margin-bottom:1rem}
+.bar i{display:block;height:100%;background:var(--bond);transition:width .25s}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);
+  border-bottom:1.5px solid var(--rule);padding-bottom:.5rem;margin-bottom:1.4rem}
+.q{font-size:1.2rem;line-height:1.45;margin:0 0 1.3rem;max-width:34rem}
+.opts{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem}
+.opt{
+  text-align:left;background:var(--card);border:1.5px solid var(--rule);
+  border-radius:3px;padding:.85rem 1rem;min-height:3.1rem;color:var(--ink);
+  font-family:var(--serif);font-size:1rem;line-height:1.4;width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--bond)}
+.opt:disabled{cursor:default;opacity:1}
+.opt.right{border-color:var(--solid);background:var(--solid-soft);font-weight:600}
+.opt.wrong{border-color:var(--flag);background:var(--flag-soft)}
+.why{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);
+  border-radius:3px;padding:1rem 1.1rem;margin-bottom:1.2rem}
+.why .tag{display:block;font-family:var(--sans);font-size:.76rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+.why p{margin:0;font-size:1rem;line-height:1.5}
+
+/* ---- results ---- */
+.band{border-top:1.5px solid var(--rule);padding:1.1rem 0 .3rem}
+.band.flag{border-top-color:var(--flag);border-top-width:2.5px}
+.band h3{font-family:var(--sans);font-weight:700;font-size:1.05rem;margin:0 0 .2rem}
+.band .verdict{font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft);margin:0 0 .7rem}
+.do{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.9rem 1rem}
+.do h4{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 .4rem}
+.do p{margin:0;font-size:1rem;line-height:1.5}
+.hidden{display:none}
+</style>
+<style>
+/* ---- course tabs : the top-level split between the two courses ---- */
+.courses{display:flex;gap:.5rem;margin:.2rem 0 1.1rem;flex-wrap:wrap}
+.course{
+  flex:1 1 13rem;text-align:left;background:var(--card);
+  border:1.5px solid var(--shell);border-bottom-width:3px;border-radius:3px;
+  padding:.6rem .8rem;min-height:3.2rem;color:var(--ink-soft);
+  font-family:var(--sans);line-height:1.25;
+}
+.course .cname{display:block;font-size:.98rem;font-weight:700;letter-spacing:-0.01em}
+.course .cdesc{display:block;font-size:.74rem;font-weight:500;margin-top:.1rem}
+.course[aria-selected="true"]{
+  background:var(--bond-soft);border-color:var(--bond);color:var(--ink);
+}
+.course:hover:not([aria-selected="true"]){border-color:var(--bond)}
+.course:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+@media (max-width:28rem){.course{flex:1 1 100%}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" id="backLink" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+
+<!-- ========== COURSE TABS ========== -->
+<div class="courses" role="tablist" aria-label="Choose your course">
+  <button class="course" id="tab-de"   role="tab" type="button" data-course="de">
+    <span class="cname">DE Bio 101</span><span class="cdesc">Chapter 4 &middot; Tour of the Cell</span></button>
+  <button class="course" id="tab-bio1" role="tab" type="button" data-course="bio1">
+    <span class="cname">Biology I</span><span class="cdesc">Module 2 &middot; Cell Structure &amp; Function</span></button>
+</div>
+
+<p class="sop-eyebrow" id="eyebrow"></p>
+
+<!-- ========== INTRO ========== -->
+<section id="intro">
+  <h1>Cell Check</h1>
+  <p class="lede" id="lede"></p>
+  <p class="fine">Nothing is submitted. No score leaves this iPad and I never see it. Answer honestly and the result is worth something.</p>
+
+  <div class="grid" id="introGrid"></div>
+
+  <p class="fine" id="gridNote" style="margin-bottom:1.6rem"></p>
+  <button class="go" id="start">Start the check</button>
+</section>
+
+<!-- ========== QUESTION ========== -->
+<section id="quiz" class="hidden">
+  <div class="bar"><i id="fill" style="width:0%"></i></div>
+  <div class="meta"><span id="bandName"></span><span id="counter"></span></div>
+  <p class="q" id="stem"></p>
+  <div class="opts" id="opts"></div>
+  <div class="why hidden" id="why"><span class="tag" id="whyTag"></span><p id="whyText"></p></div>
+  <button class="go hidden" id="next">Next</button>
+</section>
+
+<!-- ========== RESULTS ========== -->
+<section id="results" class="hidden">
+  <h1 id="resultsH1">Which two ideas to take to your desk</h1>
+  <p class="lede" id="summary"></p>
+  <div class="grid" id="resultGrid"></div>
+  <p class="fine">The outlined tiles are the ones worth a weekend. The filled ones you can skip.</p>
+  <h2>Start with these two</h2>
+  <div id="bands"></div>
+  <h2 id="testedH2">Where this gets tested</h2>
+  <p id="testedP"></p>
+  <p style="margin-top:1.8rem"><button class="ghost" id="again">Run the check again</button></p>
+</section>
+
+
+<footer class="sop-foot" id="foot"></footer>
+</div>
+<script>
+const DE_BANDS=[
+ {id:"seeing",sym:"µm",name:"Seeing and separating cells",color:"#4A6472",
+  task:"Draw a ladder of scale down the side of a page, marked in powers of ten from one millimetre to one nanometre. Place on it, from memory: a typical animal cell, a bacterium, a mitochondrion, a ribosome, the thickness of a membrane, a glucose molecule. Then rule a line across at 200 nanometres and label it as the closest two points a light microscope can still show as two. Everything you drew below that line is the reason electron microscopes exist, and the ladder tells you which instrument any question is actually about."},
+ {id:"built",sym:"SA/V",name:"Prokaryote, eukaryote, and how cells are built",color:"#3F7A55",
+  task:"Draw a bacterium and a eukaryotic cell side by side on one page, roughly to scale, so the bacterium comes out about a tenth as wide. In the first colour put only what both of them have: plasma membrane, cytosol, ribosomes as small dots, DNA. Switch colours and add everything only the eukaryote gets. Give the mitochondrion and the chloroplast two membranes each, and write beside them where the second membrane came from. That two-colour split answers every question that asks what all cells share."},
+ {id:"route",sym:"ER&rarr;",name:"The route a protein takes",color:"#1F6F8B",
+  task:"Draw the export route as one strip across the page: nucleus, nuclear pore, ribosome on the rough ER, transport vesicle, Golgi cis face, Golgi trans face, vesicle, plasma membrane, outside. Now cross out one arrow with a pencil and write beside the cut which compartment fills first and which one backs up behind it. Do it three times, cutting a different arrow each time. Predicting where the traffic piles up is the version of this that gets asked."},
+ {id:"jobs",sym:"H&#8322;O&#8322;",name:"Organelles with one job",color:"#A86F14",
+  task:"Make four cards: lysosome, peroxisome, central vacuole, Golgi apparatus. On each front draw the organelle the way it is drawn on the board. On the back write three lines — the chemistry it runs, one thing that goes wrong if it fails, and whether it belongs to the endomembrane system. Then turn them drawing-side up and sort them into endomembrane and not, by the picture alone. Save lysosome and peroxisome for last, put them side by side, and say the difference out loud; those two are the pair that get swapped."},
+ {id:"skeleton",sym:"&alpha;&beta;",name:"The cytoskeleton",color:"#6B4E8C",
+  task:"Draw the three fibres at three thicknesses on one page: a hollow tube for the microtubule, two twisted strands for the microfilament, a woven rope for the intermediate filament. Label each with the protein it is built from, one structure it makes, and whether the cell takes it apart and rebuilds it or leaves it alone. Then draw a cell dividing and trace which fibre pulls the chromosomes, and a cell crawling and trace which fibre pushes the leading edge out. The fibre you cannot name off a drawing is the one that will come up."},
+ {id:"outside",sym:"ECM",name:"Outside the membrane",color:"#A0503A",
+  task:"Draw two cells touching, with a gap between their membranes, and then fill that gap three times in three small sketches: once sealed shut all the way round, once with rivets holding the cells together and the gap still open, once with an open channel joining the two insides. Name each and write what can cross and what cannot. Then draw, outside both cells, a mesh of collagen fibres and the integrin that pins it to the cytoskeleton within, with an arrow showing the direction that material was built and exported."}
+];
+
+const DE_ITEMS=[
+ {b:0,q:"Two structures sit 100 nanometres apart. A light microscope cannot show them as two. The reason is:",
+  o:["No lens can be ground accurately enough",
+     "Light’s wavelength is longer than the gap, so the two points blur into one",
+     "The specimen is too thin to stain",
+     "The eyepiece cannot enlarge the image any further"],a:1,
+  w:"Resolution is set by wavelength, not by lens quality and not by how much you enlarge. Visible light runs 400 to 700 nanometres, so two points closer together than about 200 nanometres arrive as a single point, and magnifying that blur only gives you a bigger blur. Electrons have wavelengths thousands of times shorter, which is the entire reason the electron microscope was built. A ribosome is about 25 nanometres across, so no light microscope will ever show you one."},
+ {b:0,q:"You break liver cells open and spin them. The gentlest spin throws down a pellet; you pour off the liquid and spin it harder, and collect a second pellet. Compared with the first, the second pellet holds parts that are:",
+  o:["Larger and denser",
+     "Smaller and less dense",
+     "Chemically identical to the first",
+     "Only broken membrane, never whole organelles"],a:1,
+  w:"Each spin takes down whatever is heavy enough to reach the bottom at that speed, so the big pieces leave first — nuclei early, ribosomes last — and the liquid poured off each time is richer in the small, light parts. This is how we know which organelle does which job: isolate a fraction, test what it can still do in a tube, and the activity travels with the part that carries it."},
+ {b:0,q:"A typical eukaryotic cell is about 50 micrometres across and a ribosome is about 25 nanometres. Roughly how many ribosome-widths fit across that cell?",
+  o:["About 20","About 200","About 2,000","About 20,000"],a:2,
+  w:"50 micrometres is 50,000 nanometres, and 50,000 divided by 25 is 2,000. Keeping those two units a thousand apart is what holds the whole tour in proportion: bacteria at one to five micrometres, organelles at a few hundred nanometres, molecules below that. The same arithmetic explains why a cell cannot rely on diffusion alone and needs tracks and vesicles to move things 2,000 ribosome-widths."},
+
+ {b:1,q:"Which of these is found in every cell on Earth, bacterial and eukaryotic alike?",
+  o:["A nucleus bounded by a double membrane",
+     "Ribosomes",
+     "Mitochondria",
+     "A cell wall made of cellulose"],a:1,
+  w:"Every cell makes protein, so every cell has ribosomes, along with a plasma membrane, cytosol and DNA. The nucleus and the mitochondrion are eukaryotic additions, and cellulose walls belong to plants rather than to cells in general — a bacterial wall is built from something else entirely. That short shared list is the evidence for one common ancestor, and it is also why an antibiotic aimed at bacterial ribosomes has to be selective enough to leave yours working."},
+ {b:1,q:"A cell that needs to absorb far more than its outer surface allows does not solve the problem by growing. Instead it:",
+  o:["Thickens its plasma membrane",
+     "Folds its surface into many small projections",
+     "Divides its nucleus",
+     "Fills with more cytosol"],a:1,
+  w:"Growing makes it worse. Volume climbs as the cube of the radius while surface climbs only as the square, so a larger cell has less membrane for every unit of contents it has to supply. Folding buys surface without buying much volume, which is exactly what the microvilli lining your small intestine do. Keep the ratio in hand — it comes back when you meet the folded inner membrane of a mitochondrion and the stacked membranes inside a chloroplast, both built under the same pressure."},
+ {b:1,q:"If mitochondria really descend from a bacterium taken inside another cell, how many membranes should surround one, and why?",
+  o:["One, inherited from the bacterium",
+     "Two — the bacterium’s own, plus the host membrane that wrapped it",
+     "Three, one added at each stage",
+     "None; it sits free in the cytosol"],a:1,
+  w:"Taking something inside in a vesicle wraps it in a piece of your own membrane, so the swallowed cell keeps the membrane it had and gains a second from its host. Mitochondria and chloroplasts have exactly two, and the inner one still resembles a bacterial membrane in its lipids and its transport proteins. Predicting a structure from a history and then finding it is what lifts endosymbiosis above a good story."},
+
+ {b:2,q:"A cell is making two proteins: an enzyme that will work in the cytosol, and a hormone that will be released from the cell. What differs about how the two are made?",
+  o:["The hormone is made on a ribosome attached to the ER; the enzyme on a free ribosome",
+     "The hormone is made in the nucleus",
+     "The enzyme is made without a ribosome",
+     "They are made identically and sorted afterwards"],a:0,
+  w:"The ribosome does not differ between the two. What decides is a short signal at the front of the protein that docks the whole works onto the ER, so the growing chain is threaded inside and is already in the shipping system. Without that signal the chain finishes in the cytosol and stays there. The address is set before the protein is finished, so the sorting happens as it is built rather than afterwards, which is the part most people have backwards."},
+ {b:2,q:"Messenger RNA leaves the nucleus and newly made ribosomal proteins enter it. Both cross:",
+  o:["Through the nuclear pores",
+     "By dissolving through the double membrane",
+     "In vesicles that bud from the envelope",
+     "Only while the envelope breaks down at cell division"],a:0,
+  w:"The envelope is two membranes and nothing of that size crosses lipid directly, so the traffic goes through protein-lined pores that check what is allowed in each direction. Watch which way each thing travels: the message out, the proteins in, and ribosomal subunits assembled in the nucleolus and then exported. Vesicles do carry cargo between other compartments, but not across this envelope, and that is the distinction worth holding."},
+ {b:2,q:"A drug blocks vesicles from leaving the Golgi. In a cell that secretes digestive enzymes, where does the enzyme pile up?",
+  o:["In the nucleus",
+     "In the rough ER only",
+     "In the Golgi, and then back up the line behind it",
+     "Outside the cell"],a:2,
+  w:"The route runs nucleus to ribosome on the rough ER, vesicle to Golgi, vesicle to the plasma membrane. Cut the last step and the Golgi fills first, then the traffic behind it backs up into the ER, the way a closed road backs up the lane feeding it. Reading a pathway by blocking one step and asking what accumulates is a move Checkpoint Chapter 4 uses, so practise predicting the pile-up instead of reciting the order."},
+
+ {b:3,q:"Both a lysosome and a peroxisome break molecules down. The clearest difference between them is:",
+  o:["Lysosomes use hydrolytic enzymes at low pH; peroxisomes strip hydrogen and hand it to oxygen",
+     "Lysosomes are found only in plants",
+     "Peroxisomes have no membrane",
+     "Lysosomes are the ones that make hydrogen peroxide"],a:0,
+  w:"Lysosomes digest with water — hydrolytic enzymes working in an acidic interior — and they belong to the endomembrane system. Peroxisomes run oxidation reactions that generate hydrogen peroxide and then destroy it with catalase, and they are not part of that shipping system. Naming the chemistry rather than the appearance is what keeps them apart, because the two look much alike in a micrograph and sorting them by sight is where it goes wrong."},
+ {b:3,q:"A mitochondrion is damaged. It gets wrapped in membrane, delivered to a lysosome, taken apart, and the pieces returned to the cytosol. This is:",
+  o:["Phagocytosis","Autophagy","Exocytosis","Endosymbiosis"],a:1,
+  w:"Auto for self: the cell is recycling its own worn-out part, not importing something from outside, which is what phagocytosis means. The amino acids and lipids that come back get reused, so a lysosome is as much a recycling plant as a disposal unit. This is also the clinical hook — several inherited diseases are a single missing lysosomal enzyme, and the material it should have digested builds up instead."},
+ {b:3,q:"A houseplant left unwatered goes limp, and stands back up within an hour of being watered. What changed?",
+  o:["Cellulose in the cell walls was rebuilt",
+     "Water left and re-entered the central vacuoles, changing the pressure they push with",
+     "The plant made new chloroplasts",
+     "The cell walls became more permeable"],a:1,
+  w:"The central vacuole holds most of the water in a mature plant cell, and the pressure of that water pushing out against the wall is what holds a stem upright. Lose the water and the push falls away; replace it and the push returns, which is why recovery is quick and needs nothing new built. Hold on to this one: it is the same pressure you will meet as turgor when osmosis and tonicity come up in the membrane unit."},
+
+ {b:4,q:"Which fibre of the cytoskeleton bears tension and anchors the nucleus in place — the one built from keratins and similar durable proteins rather than from a single globular subunit?",
+  o:["Microtubules","Microfilaments","Intermediate filaments","Cellulose fibrils"],a:2,
+  w:"Three fibres, three jobs. Microtubules are hollow tubes of tubulin that serve as tracks and pushers; microfilaments are twisted actin strands behind shape change and crawling; intermediate filaments are rope-like and permanent, and they take the pulling. The first two are built and dismantled constantly, the intermediate ones stay put. Cellulose is a wall material outside the cell, not part of the skeleton inside it."},
+ {b:4,q:"A drug binds microtubules and prevents them from being taken apart. Which process stops first?",
+  o:["Protein synthesis",
+     "Separation of chromosomes in cell division",
+     "Hydrolysis inside the lysosome",
+     "Fusion of a vesicle that has already reached the plasma membrane"],a:1,
+  w:"The spindle pulls chromosomes apart by shortening its microtubules, so a fibre that cannot be dismantled cannot pull. That is why several cancer drugs target tubulin: the cells that divide most often are hit hardest. Vesicles do travel along microtubule tracks on the way to the membrane, but one that has already arrived needs only its membrane to fuse, and protein synthesis and lysosomal digestion never required a tubule to come apart at all."},
+ {b:4,q:"Your windpipe is lined with cells carrying many short beating projections that sweep mucus upward; a sperm cell has one long one that drives it forward. What is true of both?",
+  o:["They are built from actin and powered by myosin",
+     "They are built from microtubules in a 9+2 arrangement and bent by a motor protein",
+     "They are extensions of the cell wall",
+     "They spin like a propeller"],a:1,
+  w:"Same machine, different number and length: nine microtubule doublets in a ring around a central pair, with dynein motors walking along neighbouring doublets so the whole structure bends rather than turns. A bacterial flagellum really does rotate like a propeller and is built from an unrelated protein, which makes it two structures sharing one name and no ancestry. Actin and myosin are the pair that shorten a muscle, and that is the next place a motor protein turns up."},
+
+ {b:5,q:"Cells lining your bladder are joined so that urine cannot seep between them into the tissue underneath. That seal is made by:",
+  o:["Gap junctions","Desmosomes","Tight junctions","Plasmodesmata"],a:2,
+  w:"Tight junctions fuse neighbouring membranes into a continuous belt, so a sheet of cells becomes a barrier and anything crossing has to go through a cell rather than around it. Desmosomes rivet cells together against mechanical stress without sealing the gap; gap junctions open a channel so ions and small molecules pass directly from one cytosol to the next; plasmodesmata are the plant version of that channel. Three animal junctions, three jobs — seal, rivet, connect."},
+ {b:5,q:"The collagen and other material packed between the cells of your skin came from:",
+  o:["The bloodstream, filtered out of plasma",
+     "The cells themselves, built inside and then secreted",
+     "The walls of neighbouring cells breaking down",
+     "Minerals deposited from the diet"],a:1,
+  w:"Collagen, proteoglycans and fibronectin are proteins and protein–sugar complexes, so they are made on the rough ER, finished in the Golgi and exported — the same route traced earlier, used here to build the cell’s own surroundings. Integrins then span the membrane and link that outside material to the cytoskeleton within, which is how a cell senses what it is attached to and responds. Animal cells have no wall; the matrix is what stands in for one."},
+ {b:5,q:"An animal cell placed in pure water swells and may burst. A plant cell in the same water swells and then stops. What accounts for the difference?",
+  o:["The plant cell’s plasma membrane is less permeable to water",
+     "The plant cell wall resists the pressure once the cell is full",
+     "The plant cell has no vacuole to fill",
+     "The animal cell lacks a cytoskeleton"],a:1,
+  w:"Water crosses both membranes freely; what differs is what pushes back. The wall of cellulose outside the plant cell’s membrane takes the load once the vacuole is full, pressure builds, and water stops coming in. An animal cell has only its membrane and its cytoskeleton, and neither can hold that pressure. This is the structural half of the osmosis problem; the membrane unit supplies the other half."}
+];
+
+const B1_BANDS=[
+ {id:"theory",sym:"C&larr;C",name:"Cell theory, and what a theory is",color:"#4A6472",
+  task:"Make three cards: hypothesis, theory, law. On each write a one-sentence definition in your own words and one example from biology. Then on a fourth card write the three tenets of the cell theory, and under each one name an observation or an experiment that supports it. If you cannot name the evidence for a tenet, that is the one to go back to — a theory with its evidence stripped off is just a claim."},
+ {id:"types",sym:"P|E",name:"Cell types, plant and animal",color:"#3F7A55",
+  task:"Draw a plant cell and an animal cell side by side, large, and label every organelle you can from memory before checking. Then circle in one colour everything that appears in both, and in a second colour the three that only the plant has. Underneath, draw a bacterium about a tenth the size and label only the four things it carries. Those two colours answer every question that asks what one type has and another does not."},
+ {id:"homeo",sym:"&#8652;",name:"Homeostasis and levels of organization",color:"#1F6F8B",
+  task:"Draw a ladder with five rungs — cell, tissue, organ, organ system, organism — and put a real example on each rung from one body system you choose. Beside it, write what changes in that system when you start exercising, and how the body brings each condition back. Levels of organization and homeostasis get asked together, so practise them on one page."},
+ {id:"membrane",sym:"&#9675;=",name:"The cell membrane",color:"#A86F14",
+  task:"Draw a phospholipid the way it is drawn on the board — a circle for the head, two capsules for the tails — then draw twenty of them as a bilayer. Label head, tail, hydrophilic and hydrophobic, and mark which side faces the watery inside and which the watery outside. Then add and label cholesterol, an integral protein with a channel through it, a peripheral protein and a surface carbohydrate. Naming a part off a picture is the version that gets asked."},
+ {id:"transport",sym:"&Delta;c",name:"Cell transport",color:"#A0503A",
+  task:"Draw the same cell three times — in a hypertonic solution, a hypotonic one and an isotonic one. In each, put dots for the solute inside and outside, draw an arrow for which way the water moves, and sketch what the cell looks like afterwards. Then add a fourth drawing of a pump moving a particle against its gradient, and mark where the ATP is spent. Arrows for the water and a separate mark for the energy are what keep passive and active apart."}
+];
+
+const B1_ITEMS=[
+ {b:0,q:"In science, what makes something a theory rather than a hypothesis?",
+  o:["A theory is a guess that has not been tested yet",
+     "A theory explains a wide range of observations and is supported by a large body of evidence",
+     "A theory becomes a law once enough scientists accept it",
+     "A theory is an opinion held by most scientists"],a:1,
+  w:"A hypothesis is a testable proposed explanation, usually for one specific observation. A theory is bigger: it explains many observations at once, has survived repeated testing, and ties separate findings together. A law describes what happens, often as a pattern or an equation, while a theory explains why — so a theory is never promoted to a law. They are different jobs, not different ranks."},
+ {b:0,q:"A student lists the three parts of the classical cell theory but includes one that does not belong. Which of these is NOT one of the three?",
+  o:["All living things are made of cells",
+     "Cells are the basic unit of structure and function in living things",
+     "All cells come from existing cells",
+     "All cells contain a nucleus"],a:3,
+  w:"The three tenets are that living things are made of cells, that the cell is the basic unit of structure and function, and that cells come from existing cells. A nucleus is not required: bacteria have none and are certainly cells. Notice that all three had to wait on the microscope — nobody could propose a cell theory before there was a way to see a cell."},
+ {b:0,q:"Redi, and later Pasteur, showed that sealed sterilized broth stayed clear while broth left open grew microbes. Which tenet of the cell theory did that work support?",
+  o:["Cells are the basic unit of structure",
+     "Cells come from existing cells, rather than from nonliving material",
+     "All living things are made of cells",
+     "Cells contain DNA"],a:1,
+  w:"Before those experiments many people accepted spontaneous generation — that living things could simply arise out of nonliving matter. Showing that nothing grew unless living cells could get in is what settled the third tenet. It is also a clean example of how evidence works: a prediction, an experiment that could have proved it wrong, and a result that held up."},
+
+ {b:1,q:"Under a microscope you see a cell with no nucleus and no membrane-bound organelles, but it does have a cell membrane, cytoplasm, ribosomes and DNA. What is it?",
+  o:["A eukaryotic cell that has lost its nucleus",
+     "A prokaryotic cell",
+     "A plant cell",
+     "Not a cell at all"],a:1,
+  w:"No nucleus and no membrane-bound organelles is the definition of a prokaryote — a bacterium or an archaeon. Look at what it still has, though: membrane, cytoplasm, ribosomes and DNA. Those four turn up in every cell on Earth, and they are the reason biologists think every living thing traces back to one ancestor."},
+ {b:1,q:"Which set of structures would you find in a plant cell but NOT in an animal cell?",
+  o:["Cell wall, chloroplasts, large central vacuole",
+     "Nucleus, mitochondria, ribosomes",
+     "Cell membrane, cytoplasm, Golgi apparatus",
+     "Lysosomes, centrioles, rough ER"],a:0,
+  w:"Plants add three things an animal cell does not have: a cellulose wall outside the membrane, chloroplasts to capture light, and one large central vacuole. Everything in the second and third lists is shared. Plants do have mitochondria — photosynthesis does not replace respiration, it feeds it — and that is the part most people get wrong here."},
+ {b:1,q:"A root cell from deep underground has mitochondria but no chloroplasts, while a leaf cell from the same plant has both. What does that tell you?",
+  o:["The root cell is not really a plant cell",
+     "Chloroplasts get built only where there is light to capture, but both cells still need mitochondria to release energy",
+     "The root cell has no way to use energy",
+     "Mitochondria and chloroplasts do the same job"],a:1,
+  w:"Every cell in that plant carries the same genes, but a cell builds what its own job requires. Underground there is no light, so a chloroplast would be useless and none is made; energy still has to be released from sugar, so mitochondria are in both. This is structure following function at its clearest, and it is why “plant cells have chloroplasts” needs the words “where there is light” attached to it."},
+
+ {b:2,q:"You start running, your heart rate climbs, and it settles back down after you stop. This is an example of:",
+  o:["The body failing to maintain homeostasis",
+     "Homeostasis — holding internal conditions steady as the demand on the body changes",
+     "A permanent change to your circulatory system",
+     "Cell division speeding up"],a:1,
+  w:"Homeostasis does not mean nothing changes. It means the body adjusts in order to hold its internal conditions — oxygen delivery, temperature, pH — inside a workable range. The heart rate rose because the demand rose and fell when the demand did, so the response is the regulation working rather than failing."},
+ {b:2,q:"A single-celled paramecium and a human both need oxygen delivered to where it is used. How do their solutions differ?",
+  o:["The paramecium gets it by diffusion across its surface; the human needs organ systems to carry it",
+     "The paramecium uses lungs; the human uses its skin",
+     "Neither one needs oxygen",
+     "The human relies on diffusion across the skin"],a:0,
+  w:"A single cell is small enough that diffusion across its surface reaches every part of its inside. You are not — most of your cells sit nowhere near the outside — so you need a respiratory system to take oxygen in and a circulatory system to deliver it. The size limit that forces that on you is the same surface-area-to-volume problem that keeps cells small to begin with."},
+ {b:2,q:"Put these in order from smallest to largest: organ, tissue, cell, organ system.",
+  o:["Cell, tissue, organ, organ system",
+     "Tissue, cell, organ, organ system",
+     "Cell, organ, tissue, organ system",
+     "Organ system, organ, tissue, cell"],a:0,
+  w:"Cells of one kind working together make a tissue, tissues working together make an organ, and organs working together make an organ system. Each level does something the level below it cannot, which is what division of labour means: a single heart muscle cell cannot circulate anything, but organized into a heart those cells can."},
+
+ {b:3,q:"A phospholipid has a phosphate head and two fatty acid tails. Dropped into water, large numbers of them line up into a bilayer because:",
+  o:["The heads repel one another",
+     "The heads are attracted to water and the tails are not, so the tails turn inward and the heads face out",
+     "The tails are heavier than the heads and sink",
+     "Water pushes all of them into a flat sheet"],a:1,
+  w:"The head is hydrophilic and mixes with water; the tails are hydrophobic and do not. Put many of them in water and the one arrangement that satisfies both is a double layer, heads facing the water on each side and tails tucked together in the middle. Nothing assembles them — that arrangement is simply the stable one, which is also why a small tear in a membrane can seal itself."},
+ {b:3,q:"Which component of the membrane forms a passage that lets specific molecules cross the hydrophobic middle of the bilayer?",
+  o:["Cholesterol",
+     "An integral protein spanning the membrane",
+     "A carbohydrate on the outer surface",
+     "A peripheral protein attached to the inner surface"],a:1,
+  w:"Only an integral protein reaches all the way through, so only an integral protein can make a passage from one side to the other. Cholesterol sits among the tails and keeps the membrane's fluidity steady, surface carbohydrates are the cell's identification tags, and peripheral proteins attach to one face without crossing. When a question asks what gets across, look for the component that spans."},
+ {b:3,q:"What does calling the cell membrane selectively permeable actually mean?",
+  o:["Nothing can cross it",
+     "Everything can cross it freely",
+     "It lets some substances through while controlling or blocking others",
+     "It lets only water through"],a:2,
+  w:"Selective means the membrane chooses. Small nonpolar molecules slip through the lipid middle unaided, water and ions need protein channels, and large or charged particles may not get through at all without help. That control is how a cell holds its inside different from its outside, and keeping that difference is what homeostasis means at the level of one cell."},
+
+ {b:4,q:"A plant root sits in soil where nitrate is scarce, yet its cells keep taking nitrate in until there is far more inside the cell than outside. This requires:",
+  o:["No energy, because the nitrate simply diffuses in",
+     "Energy, because the nitrate is being moved against its concentration gradient",
+     "A tear in the cell membrane",
+     "Osmosis"],a:1,
+  w:"Diffusion only ever runs downhill, from crowded to less crowded, and it costs nothing. Here the move is uphill — into a cell where nitrate is already more concentrated — so it has to be active transport, paid for with ATP through a pump protein. Checking the direction against the gradient is what tells active and passive apart, and it is also why root cells are packed with mitochondria."},
+
+ {b:4,q:"An animal cell is placed in a hypertonic solution. What happens, and why?",
+  o:["It swells, because water moves in toward the higher solute concentration outside",
+     "It shrinks, because water moves out toward the higher solute concentration outside",
+     "Nothing, because water cannot cross the membrane",
+     "It bursts, because solute rushes in"],a:1,
+  w:"Hypertonic means the solution outside holds more dissolved solute than the cell does. Water moves toward the more crowded solute, so it leaves the cell and the cell shrivels. Read any tonicity question by finding where the solute is crowded and sending the water that way — and keep hold of the fact that in osmosis it is the water that moves, not the solute."},
+ {b:4,q:"A cell has finished making a hormone and needs to release it. A vesicle carries it to the membrane, fuses with it, and the contents end up outside the cell. This is:",
+  o:["Endocytosis","Exocytosis","Facilitated diffusion","Osmosis"],a:1,
+  w:"Exo means out: a vesicle merges with the membrane from the inside and its cargo is released outside. Endocytosis is the same process run backwards, the membrane folding inward to bring something in. Both of them handle material far too large for any channel, and both cost energy — which is exactly what separates them from diffusion and osmosis, where nothing is spent."}
+];
+
+
+const COURSES={
+ de:{
+  key:"cellcheck-de",
+  label:"DE Bio 101",
+  eyebrow:'Bio Tool #13 &middot; DE Bio 101 Unit 4 &middot; Campbell Chapter 4',
+  back:{href:"../de-biology-101-resources.html",text:"← DE Biology 101 Resources"},
+  lede:"Chapter 4 names more structures than any chapter so far, and the names are the easy part. Eighteen questions sort out which six ideas you can already use and which one is quietly costing you the others. About fifteen minutes.",
+  gridNote:'Three questions on each idea. The six are the six that Checkpoint Chapter 4 tests, and they carry the same colours and the same names as learning targets 4.A to 4.F on the Unit 4 crosswords, so a tile here and a puzzle there point at the same thing.',
+  resultsH1:"Which two ideas to take to your desk",
+  testedH2:"Where this gets tested",
+  testedP:"Checkpoint Chapter 4 sits on the NOVA Canvas Quizzes tab. Eighteen questions, unlimited attempts, highest score kept, and it shows the right answer after every try. Take it cold, work the tasks above, take it again. Several of its questions name a structure and ask what a cell could no longer do without it, so practise reasoning from a part to its consequence rather than from a part to its label.",
+  foot:'Unit 4, Tour of the Cell &middot; NVCC BIO 101, Campbell Chapter 4 &middot; six ideas, three questions each, nothing submitted.',
+  bands:DE_BANDS,items:DE_ITEMS
+ },
+ bio1:{
+  key:"cellcheck-bio1",
+  label:"Biology I",
+  eyebrow:'Bio Tool #13 &middot; Biology I Module 2 &middot; Cell Structure &amp; Function &middot; SOL BIO.3',
+  back:{href:"../classroom-tools.html",text:"← Biology Classroom Tools"},
+  lede:"Module 2 runs from what a theory is all the way to how a cell moves things across its membrane. Fifteen questions sort out which of the five learning targets you can already use and which one is quietly costing you the others. About twelve minutes.",
+  gridNote:'Three questions on each target. The five are learning targets 2.1 to 2.5 for this module, in the order the lessons take them, so a tile here and a target on the board point at the same thing.',
+  resultsH1:"Which two targets to take to your desk",
+  testedH2:"Where this gets tested",
+  testedP:"The Module 2 mastery check and the summative assessment both come back to these five targets, and the Quarter 1 benchmark draws on SOL BIO.3. Take this cold, work the tasks above, and take it again. Several of the questions you will meet put a labelled picture in front of you — a cell, a membrane, a beaker — and ask you to name a part or predict which way something moves, so practise working off a drawing rather than off a list.",
+  foot:'Module 2, Cell Structure &amp; Function &middot; Biology I, SOL BIO.3a, 3b, 3d &middot; five learning targets, three questions each, nothing submitted.',
+  bands:B1_BANDS,items:B1_ITEMS
+ }
+};
+
+const $=id=>document.getElementById(id);
+let COURSE="de", BANDS=[], ITEMS=[], i=0, answers=[];
+
+function tile(b,idx,score){
+  const d=document.createElement("div");
+  d.className="tile";
+  d.style.setProperty("--accent",b.color);
+  if(score!==undefined){
+    if(score===3)d.classList.add("solid");
+    else if(score===2)d.classList.add("mid");
+    else d.classList.add("flag");
+  }
+  d.innerHTML='<span class="idx">'+(idx+1)+'</span>'+
+    (score!==undefined?'<span class="score">'+score+'/3</span>':'')+
+    '<span class="sym">'+b.sym+'</span><span class="nm">'+b.name+'</span>';
+  return d;
+}
+
+function show(which){
+  ["intro","quiz","results"].forEach(s=>$(s).classList.toggle("hidden",s!==which));
+}
+
+function save(){
+  try{localStorage.setItem(COURSES[COURSE].key,JSON.stringify({i,answers}));}catch(e){}
+}
+
+function loadCourse(id,fromUser){
+  COURSE=(id in COURSES)?id:"de";
+  const c=COURSES[COURSE];
+  BANDS=c.bands; ITEMS=c.items;
+  i=0; answers=new Array(ITEMS.length).fill(null);
+
+  document.querySelectorAll(".course").forEach(b=>{
+    const on=b.dataset.course===COURSE;
+    b.setAttribute("aria-selected",on?"true":"false");
+    b.tabIndex=on?0:-1;
+  });
+  $("backLink").href=c.back.href;
+  $("backLink").textContent=c.back.text;
+  $("eyebrow").innerHTML=c.eyebrow;
+  $("lede").textContent=c.lede;
+  $("gridNote").innerHTML=c.gridNote;
+  $("resultsH1").textContent=c.resultsH1;
+  $("testedH2").textContent=c.testedH2;
+  $("testedP").textContent=c.testedP;
+  $("foot").innerHTML=c.foot+' &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.';
+
+  const g=$("introGrid"); g.innerHTML="";
+  BANDS.forEach((b,n)=>g.appendChild(tile(b,n)));
+  $("start").textContent="Start the check";
+
+  // each course keeps its own saved run
+  try{
+    const raw=localStorage.getItem(c.key);
+    if(raw){
+      const st=JSON.parse(raw);
+      if(st&&Array.isArray(st.answers)&&st.answers.length===ITEMS.length&&st.answers.some(a=>a!==null)){
+        answers=st.answers; i=Math.min(st.i||0,ITEMS.length-1);
+        $("start").textContent="Pick up where you left off";
+      }
+    }
+  }catch(e){}
+
+  show("intro");
+  if(fromUser){
+    try{history.replaceState(null,"","?course="+COURSE);}catch(e){}
+    window.scrollTo(0,0);
+  }
+}
+
+function render(){
+  const it=ITEMS[i];
+  $("bandName").textContent=BANDS[it.b].name;
+  $("counter").textContent=(i+1)+" of "+ITEMS.length;
+  $("fill").style.width=(i/ITEMS.length*100)+"%";
+  $("stem").textContent=it.q;
+  $("why").classList.add("hidden");
+  $("next").classList.add("hidden");
+  const box=$("opts");box.innerHTML="";
+  it.o.forEach((text,n)=>{
+    const btn=document.createElement("button");
+    btn.className="opt";btn.type="button";btn.textContent=text;
+    btn.addEventListener("click",()=>choose(n));
+    box.appendChild(btn);
+  });
+  window.scrollTo(0,0);
+}
+
+function choose(n){
+  const it=ITEMS[i];
+  answers[i]=(n===it.a);
+  [...$("opts").children].forEach((b,k)=>{
+    b.disabled=true;
+    if(k===it.a)b.classList.add("right");
+    else if(k===n)b.classList.add("wrong");
+  });
+  $("whyTag").textContent=(n===it.a)?"Right — and here is why":"The reasoning";
+  $("whyText").textContent=it.w;
+  $("why").classList.remove("hidden");
+  $("next").textContent=(i===ITEMS.length-1)?"See what it mapped":"Next";
+  $("next").classList.remove("hidden");
+  save();
+}
+
+function finish(){
+  show("results");
+  const scores=BANDS.map((b,n)=>
+    ITEMS.reduce((s,it,k)=>s+((it.b===n&&answers[k])?1:0),0));
+  const total=scores.reduce((a,c)=>a+c,0);
+  const weak=scores.filter(s=>s<=1).length;
+  const noun=(COURSE==="bio1")?"targets":"ideas";
+  const nounS=(COURSE==="bio1")?"target":"idea";
+  $("summary").textContent=
+    total+" of "+ITEMS.length+" correct. "+
+    (weak===0?"These "+BANDS.length+" tiles are a map of where your time goes next, not a score. Take the two lowest, work their tasks once, and give the rest of the session to what comes after. Then come back another day, rested, and run it again."
+     :weak===1?"One "+nounS+" is where your time goes next. Work its tasks first — the other "+(BANDS.length-1)+" are already within reach."
+     :weak+" "+noun+" are where your time goes next. Take them one at a time, in the order below, and run this again once you have worked two of them.");
+  const g=$("resultGrid");g.innerHTML="";
+  BANDS.forEach((b,n)=>g.appendChild(tile(b,n,scores[n])));
+  const holder=$("bands");holder.innerHTML="";
+  BANDS.map((b,n)=>({b,n,s:scores[n]})).sort((x,y)=>x.s-y.s).forEach(({b,n,s})=>{
+    const sec=document.createElement("section");
+    sec.className="band"+(s<=1?" flag":"");
+    sec.innerHTML='<h3>'+b.name+'</h3><p class="verdict">'+s+' of 3 — '+
+      (s===3?"steady":s===2?"mostly mapped":"give this the time")+'</p>'+
+      (s<3?'<div class="do"><h4>Build the picture yourself</h4><p>'+b.task+'</p></div>':'');
+    holder.appendChild(sec);
+  });
+  window.scrollTo(0,0);
+  save();
+}
+
+$("next").addEventListener("click",()=>{
+  if(i===ITEMS.length-1){finish();}
+  else{i++;render();save();}
+});
+$("start").addEventListener("click",()=>{show("quiz");render();});
+$("again").addEventListener("click",()=>{
+  i=0;answers.fill(null);
+  show("quiz");render();save();
+});
+document.querySelectorAll(".course").forEach(b=>{
+  b.addEventListener("click",()=>{ if(b.dataset.course!==COURSE) loadCourse(b.dataset.course,true); });
+});
+
+const q=new URLSearchParams(location.search).get("course");
+loadCourse(q==="bio1"||q==="bio"||q==="sol"?"bio1":"de",false);
+</script>
+</body>
+</html>
