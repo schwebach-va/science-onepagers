@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="A discussion game for advisory and biology: sixteen real scientists, each at one documented moment, sorted into Battlefield's Four Paws, Courage, Honesty, Impact and Purpose. Teams read a story, place it, bet on their reasoning and argue to move it. Advisory and Advanced modes.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/chip-scientists.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Which Paw? Sixteen Scientists and the Four Paws">
+<meta property="og:description" content="Courage, Honesty, Impact, Purpose. Read a true story, pick the paw, bet on your reasoning, and argue to move it.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/chip-scientists.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Which Paw? Sixteen Scientists and the Four Paws | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--solid:#3F7A55;--solid-soft:#E2EDE6;
+  --gold:#A9701F;--gold-soft:#F6EBD8;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+    --gold:#E0B060;--gold-soft:#2E2414;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+  --gold:#E0B060;--gold-soft:#2E2414;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+.wrap{max-width:60rem;margin:0 auto;padding:2rem 1rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.25rem;letter-spacing:-0.01em;margin:2.4rem 0 .6rem}
+p{margin:0 0 1rem;max-width:40rem}
+a{color:var(--bond)}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--bond);outline-offset:3px}
+[data-paw="courage"]{--accent:var(--flag);--accent-soft:var(--flag-soft)}
+[data-paw="honesty"]{--accent:var(--bond);--accent-soft:var(--bond-soft)}
+[data-paw="impact"]{--accent:var(--solid);--accent-soft:var(--solid-soft)}
+[data-paw="purpose"]{--accent:var(--gold);--accent-soft:var(--gold-soft)}
+
+/* ---- controls ---- */
+.controls{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:flex-end;margin:1.3rem 0 .4rem;padding:.8rem .9rem;background:var(--card);border:1.5px solid var(--shell);border-radius:6px}
+.ctl{display:flex;flex-direction:column;gap:.3rem}
+.ctl > span{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.seg{display:inline-flex;flex-wrap:wrap;border:1.5px solid var(--shell);border-radius:5px;overflow:hidden}
+.seg button{background:none;border:0;border-right:1.5px solid var(--shell);font-family:var(--sans);font-weight:600;font-size:.88rem;padding:.55rem .85rem;min-height:2.75rem}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.seg button small{display:block;font-weight:500;font-size:.72rem;opacity:.8}
+
+/* ---- the four paws ---- */
+.paws{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin:1rem 0 .4rem}
+@media (max-width:52rem){.paws{grid-template-columns:1fr 1fr}}
+@media (max-width:26rem){.paws{grid-template-columns:1fr}}
+.paw{background:var(--card);border:1.5px solid var(--shell);border-top:6px solid var(--accent);border-radius:5px;padding:.7rem .8rem .8rem;position:relative}
+.paw.focus{box-shadow:0 0 0 3px var(--accent)}
+.paw h3{font-family:var(--sans);font-size:1.15rem;margin:0;display:flex;align-items:baseline;gap:.45rem}
+.paw h3 .letter{font-size:1.7rem;line-height:1;color:var(--accent);font-weight:700}
+.paw .q{font-family:var(--sans);font-weight:600;font-size:.9rem;margin:.25rem 0 .3rem;color:var(--accent)}
+.paw .m{font-size:.9rem;line-height:1.4;margin:0 0 .4rem}
+.paw ul{margin:0;padding-left:1.05rem;font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);line-height:1.4}
+.paw .lab{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);margin:.3rem 0 0;line-height:1.4}
+.paw .lab b{color:var(--ink)}
+.paw .month{position:absolute;top:.55rem;right:.6rem;font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--accent);color:var(--card);border-radius:3px;padding:.15rem .4rem}
+body[data-mode="advisory"] .adv-only{display:none!important}
+body[data-mode="advanced"] .ady-only{display:none!important}
+
+/* ---- how to play ---- */
+details.how{background:var(--card);border:1.5px solid var(--shell);border-radius:6px;margin:1.2rem 0;padding:0}
+details.how > summary{font-family:var(--sans);font-weight:700;font-size:1rem;padding:.75rem .95rem;cursor:pointer}
+.how-body{padding:0 1rem 1rem}
+.how-body ol{margin:.2rem 0 1rem;padding-left:1.25rem}
+.how-body li{margin-bottom:.35rem}
+table.ladder{border-collapse:collapse;width:100%;max-width:40rem;font-family:var(--sans);font-size:.86rem;margin:.3rem 0 .8rem}
+.ladder th,.ladder td{border-bottom:1px solid var(--rule);padding:.4rem .5rem;text-align:left;vertical-align:top}
+.ladder th{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
+.ladder td:first-child{font-weight:700;width:3rem}
+
+/* ---- the board ---- */
+.board-head{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.6rem 0 .8rem}
+.btn{background:var(--ink);color:var(--paper);border:0;border-radius:4px;font-family:var(--sans);font-weight:700;font-size:.92rem;padding:.65rem 1.1rem;min-height:2.75rem}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);font-family:var(--sans);font-weight:600;font-size:.9rem;border-radius:4px;padding:.6rem 1rem;min-height:2.75rem}
+.ghost:hover{border-color:var(--ink-soft)}
+.teamsel{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--sans);font-size:.88rem}
+.teamsel select{font:inherit;padding:.45rem .5rem;min-height:2.75rem;border:1.5px solid var(--shell);border-radius:4px;background:var(--card);color:var(--ink)}
+.deckline{font-family:var(--sans);font-size:.9rem;color:var(--ink-soft);margin:0 0 .6rem}
+.rows{display:grid;gap:.7rem}
+.row{display:grid;grid-template-columns:9.5rem 1fr;gap:.8rem;background:var(--card);border:1.5px solid var(--shell);border-radius:6px;padding:.75rem}
+@media (max-width:40rem){.row{grid-template-columns:1fr}}
+.who{display:flex;flex-direction:column;align-items:center;gap:.3rem;text-align:center}
+.who .tm{font-family:var(--sans);font-weight:700;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
+.face{display:flex;flex-direction:column;align-items:center;gap:.3rem;background:none;border:0;padding:.2rem;border-radius:6px;text-align:center}
+.pic{width:5.5rem;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:2px solid var(--shell);background:var(--bond-soft);display:flex;align-items:center;justify-content:center;transition:box-shadow .15s}
+.face:hover .pic,.face:focus-visible .pic{box-shadow:0 0 0 3px var(--bond)}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.initials{font-family:var(--sans);font-weight:700;font-size:1.5rem;color:var(--bond)}
+.face .nm{font-family:var(--sans);font-size:.82rem;font-weight:700;line-height:1.2}
+.face .nm small{display:block;font-weight:500;color:var(--ink-soft);font-size:.7rem}
+.face .readme{font-family:var(--sans);font-size:.72rem;color:var(--bond);font-weight:600}
+.play{display:flex;flex-direction:column;gap:.55rem;min-width:0}
+.line{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem}
+.line > .lbl{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);min-width:4.2rem}
+.chipbtn{border:1.5px solid var(--shell);background:var(--card);border-radius:999px;font-family:var(--sans);font-weight:600;font-size:.85rem;padding:.4rem .8rem;min-height:2.75rem;min-width:2.75rem}
+.chipbtn[aria-pressed="true"]{background:var(--accent,var(--ink));border-color:var(--accent,var(--ink));color:var(--card)}
+.chipbtn[data-paw]{color:var(--accent)}
+.chipbtn[data-paw][aria-pressed="true"]{color:var(--card)}
+.reveal{background:var(--accent-soft);border-left:4px solid var(--accent);padding:.55rem .75rem;border-radius:0 4px 4px 0;font-size:.95rem}
+.reveal b.k{font-family:var(--sans);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.reveal p{margin:.15rem 0 .35rem;max-width:none}
+.reveal p:last-child{margin-bottom:0}
+.score{font-family:var(--sans);font-weight:700;font-size:.95rem}
+.score .pp{display:inline-block;margin-left:.4rem;background:var(--gold);color:var(--card);border-radius:3px;padding:.1rem .4rem;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}
+.totals{display:flex;flex-wrap:wrap;gap:.5rem;margin:.9rem 0 0;font-family:var(--sans);font-size:.9rem}
+.totals span{background:var(--card);border:1.5px solid var(--shell);border-radius:4px;padding:.35rem .7rem}
+.totals b{font-size:1.05rem}
+.empty{font-family:var(--sans);color:var(--ink-soft);font-size:.92rem;padding:1rem;border:1.5px dashed var(--shell);border-radius:6px;text-align:center}
+
+/* ---- all sixteen ---- */
+details.all{margin:1.6rem 0 0;border:1.5px solid var(--shell);border-radius:6px;background:var(--card)}
+details.all > summary{font-family:var(--sans);font-weight:700;padding:.75rem .95rem;cursor:pointer}
+.squares{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;padding:0 .9rem .9rem}
+@media (max-width:40rem){.squares{grid-template-columns:1fr}}
+.sq{border:1.5px solid var(--shell);border-top:6px solid var(--accent);border-radius:4px;padding:.6rem .6rem .7rem}
+.sq h3{font-family:var(--sans);font-size:1.05rem;margin:0 0 .5rem}
+.faces{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin:0;padding:0;list-style:none}
+.faces .pic{width:100%;max-width:5rem}
+.faces .face{width:100%}
+.faces .face .nm{font-size:.7rem}
+
+/* ---- the panel ---- */
+dialog.panel{width:min(42rem,calc(100vw - 2rem));max-width:none;max-height:calc(100vh - 2rem);max-height:calc(100dvh - 2rem);margin:auto;padding:0;border:1.5px solid var(--shell);border-radius:6px;background:var(--card);color:var(--ink);box-shadow:0 18px 50px rgba(0,0,0,.28);overflow:hidden}
+dialog.panel::backdrop{background:rgba(20,16,10,.55)}
+dialog.panel:not([open]){display:none}
+.panel-inner{max-height:calc(100vh - 2rem);max-height:calc(100dvh - 2rem);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.1rem 1.2rem 1.4rem}
+.panel-top{display:flex;gap:1rem;align-items:flex-start;margin-bottom:.9rem;padding-right:2.8rem}
+.panel-top .pic{flex:0 0 6.5rem;width:6.5rem}
+.panel-top h3{font-family:var(--sans);font-size:1.4rem;line-height:1.15;margin:0 0 .25rem;letter-spacing:-0.01em}
+.panel-top .dates{font-family:var(--sans);font-size:.86rem;color:var(--ink-soft);margin:0}
+.close{position:absolute;top:.6rem;right:.6rem;width:2.75rem;height:2.75rem;border-radius:50%;border:1.5px solid var(--rule);background:var(--card);font-family:var(--sans);font-size:1.3rem;line-height:1;display:flex;align-items:center;justify-content:center}
+.story p{max-width:none}
+.pickbox{border-top:1px solid var(--rule);padding-top:.7rem;margin-top:.4rem}
+.pickbox .line{margin-bottom:.5rem}
+.why{background:var(--accent-soft);border-left:4px solid var(--accent);padding:.6rem .85rem;margin:.9rem 0;font-size:.97rem}
+.why b,.record b,.talk b{font-family:var(--sans);font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:.2rem}
+.why b{color:var(--accent)}
+.record{font-size:.92rem;color:var(--ink-soft);border:1px dashed var(--shell);border-radius:4px;padding:.55rem .8rem;margin:0 0 1rem}
+.record b{color:var(--ink)}
+.talk{font-size:.98rem;margin:.6rem 0}
+.sources{font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);margin:0}
+.sources b{display:block;font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.25rem;color:var(--ink)}
+.sources ul{margin:0;padding-left:1.1rem}
+.sources li{margin-bottom:.25rem}
+.credit{font-family:var(--sans);font-size:.76rem;color:var(--ink-soft);margin:.9rem 0 0;padding-top:.6rem;border-top:1px solid var(--rule)}
+.credits{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);columns:2;column-gap:1.5rem;padding-left:1.1rem;margin:.4rem 0 0}
+@media (max-width:40rem){.credits{columns:1}}
+.credits li{break-inside:avoid;margin-bottom:.35rem}
+ol.closing{padding-left:1.2rem}
+ol.closing li{margin-bottom:.4rem}
+
+/* ---- print ---- */
+.printset{display:none}
+@media print{
+  body{background:#fff;color:#000;font-size:12pt}
+  .sop-back,.controls,.board,.close,.how,.noprint,details.all,dialog::backdrop{display:none!important}
+  body.print-panel .wrap{display:none}
+  body.print-panel dialog.panel{position:static;display:block;width:auto;max-height:none;border:0;box-shadow:none}
+  body.print-panel .panel-inner{max-height:none;overflow:visible}
+  body.print-panel .pickbox,body.print-panel .noprint{display:none!important}
+  body.print-cards .wrap > *:not(.printset){display:none!important}
+  body.print-cards .printset{display:block}
+  .pcard{break-inside:avoid;border:1px solid #888;border-radius:6px;padding:10pt 12pt;margin:0 0 10pt;display:flex;gap:12pt}
+  .pcard .pic{flex:0 0 70pt;width:70pt;height:70pt;align-self:flex-start;border:1px solid #888}
+  .pcard h3{font-family:var(--sans);font-size:13pt;margin:0 0 2pt}
+  .pcard .d{font-family:var(--sans);font-size:9pt;color:#444;margin:0 0 4pt}
+  .pcard p{font-size:11pt;line-height:1.4;margin:0 0 4pt;max-width:none}
+  .pkey{break-before:page}
+  .pkey table{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:10pt}
+  .pkey td,.pkey th{border:1px solid #999;padding:4pt 6pt;text-align:left;vertical-align:top}
+}
+</style>
+</head>
+<body data-mode="advisory">
+<div class="wrap">
+
+<a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+<p class="sop-eyebrow">Bio Tool #16 &middot; All year &middot; Advisory and Biology &middot; SOL BIO.1</p>
+
+<h1>Which Paw? Sixteen Scientists and the Four Paws</h1>
+<p class="lede">Courage, Honesty, Impact and Purpose are the Four Paws at Battlefield High School. Sixteen real scientists each showed one of them at a documented moment, with something to lose. Read a story, pick the paw, bet on your reasoning, and argue about it.</p>
+<p class="fine">Every account was checked against at least two sources. Most of these people could fairly sit under more than one paw, and that is the point of the game: a strong argument can move a card.</p>
+
+<div class="controls" role="group" aria-label="Game settings">
+  <div class="ctl"><span id="lbl-mode">Mode</span>
+    <div class="seg" id="modeSeg" aria-labelledby="lbl-mode">
+      <button type="button" data-mode="advisory" aria-pressed="true">Advisory<small>any class, grades 9&ndash;12</small></button>
+      <button type="button" data-mode="advanced" aria-pressed="false">Advanced<small>science class, full accounts</small></button>
+    </div>
+  </div>
+  <div class="ctl"><span id="lbl-deck">Cards</span>
+    <div class="seg" id="deckSeg" aria-labelledby="lbl-deck"></div>
+  </div>
+</div>
+
+<div class="paws" id="paws"></div>
+
+<details class="how" id="how" open>
+  <summary>How to run a round (about 25 minutes, no preparation)</summary>
+  <div class="how-body">
+    <ol>
+      <li><b>Deal.</b> Pick the number of teams and press <b>Deal</b>. Each team gets one scientist.</li>
+      <li><b>Read.</b> Tap the face. Two minutes, out loud or silently.</li>
+      <li><b>Place it.</b> The team picks the paw the moment shows. <span class="ady-only">With a single-paw deck, the question is whether the card belongs there or should move.</span><span class="adv-only">Name the line in the story that decides it.</span></li>
+      <li><b>Bet 1, 2 or 3</b> on how well <em>anyone</em> on the team can defend it.</li>
+      <li><b>Call a seat.</b> The advisor calls one seat number. That person explains, with no help from the team.</li>
+      <li><b>Reveal.</b> Press Reveal for the placement and the best case for a second paw. Any other team can call <b>Move it!</b>, take 30 seconds to argue for a different paw, and the room votes.</li>
+      <li><b>Score the reasoning</b> with the ladder below, then close with the talk question.</li>
+    </ol>
+    <table class="ladder">
+      <thead><tr><th>Level</th><th>What the called seat did</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Could not explain. The team loses its bet.</td></tr>
+        <tr><td>1</td><td>Named a paw.</td></tr>
+        <tr><td>2</td><td>Pointed to the moment in the story that shows it.</td></tr>
+        <tr><td>3</td><td>Used the paw&rsquo;s question (&ldquo;Did I leave it better?&rdquo;) and answered an objection.</td></tr>
+        <tr><td>4</td><td>Transfer: said where the same choice shows up in their own life today.</td></tr>
+      </tbody>
+    </table>
+    <p class="fine">Points are the level times the bet. A level 4 earns a Paw Print: a Pawsitive card or a QR nomination. Points go to the reasoning, so a team can disagree with the placement and still score high.</p>
+  </div>
+</details>
+
+<section class="board" aria-labelledby="h-board">
+  <h2 id="h-board">The board</h2>
+  <p class="deckline" id="deckline"></p>
+  <div class="board-head">
+    <label class="teamsel">Teams
+      <select id="teamCount"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select>
+    </label>
+    <button class="btn" type="button" id="dealBtn">Deal</button>
+    <button class="ghost" type="button" id="resetBtn">New game</button>
+    <button class="ghost" type="button" id="printBtn">Print the cards</button>
+  </div>
+  <div class="rows" id="rows"><p class="empty">Press Deal to give each team a scientist.</p></div>
+  <div class="totals" id="totals" aria-live="polite"></div>
+</section>
+
+<details class="all" id="allDetails">
+  <summary>All sixteen, and the paw each one is placed under</summary>
+  <div class="squares" id="squares"></div>
+</details>
+
+<h2>Talk about it</h2>
+<ol class="closing ady-only">
+  <li>Where did you see one of the Four Paws at Battlefield this week?</li>
+  <li>Which card was hardest to place? What made it hard?</li>
+  <li>Pick one scientist. What would the same choice look like in a hallway, on a team, or at a job?</li>
+</ol>
+<ol class="closing adv-only">
+  <li>Which card did your class move, and what evidence won the vote?</li>
+  <li>Arnold and Goodall each reported something that hurt their own story. Why does science depend on people doing that?</li>
+  <li>What does one of the paws look like in a lab, or in the field you want to work in?</li>
+</ol>
+
+<h2>Image credits</h2>
+<p class="fine">All portraits are public domain or openly licensed, from Wikimedia Commons, cropped to a square and resized. No likeness here was drawn or generated.</p>
+<ol class="credits" id="credits"></ol>
+
+<div class="printset" id="printset" aria-hidden="true"></div>
+
+<footer class="sop-foot">The Four Paws are Battlefield High School&rsquo;s CHIP values; their questions and meanings are quoted from the school&rsquo;s PBIS plan. Sixteen documented moments, nothing submitted. Text &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>; portraits carry their own licences, listed above. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+
+<dialog class="panel" id="panel" aria-labelledby="p-name">
+  <div class="panel-inner" id="panelInner">
+    <button class="close" id="closeBtn" type="button" aria-label="Close">&times;</button>
+    <div class="panel-top">
+      <div class="pic" id="p-pic"></div>
+      <div>
+        <h3 id="p-name"></h3>
+        <p class="dates" id="p-dates"></p>
+      </div>
+    </div>
+    <div class="story" id="p-story"></div>
+    <div class="pickbox" id="p-pick"></div>
+    <div id="p-reveal"></div>
+    <div class="noprint" style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+      <button class="ghost" type="button" id="p-print">Print this card</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+const DATA={"paws":{"courage":{"name":"Courage","letter":"C","q":"Did I do what’s right?","meaning":"To take risks, ask for help, and do the right thing.","shows":["Speak up respectfully","Ask for help","Try difficult things","Stand up for others","Take healthy risks"],"lab":"Tell your group the setup looks wrong while there is still time to fix it."},"honesty":{"name":"Honesty","letter":"H","q":"Was I truthful?","meaning":"To build trust and take responsibility.","shows":["Tell the truth","Own your mistakes","Complete your own work","Act with integrity even when no one is watching"],"lab":"Write down the number you measured, not the number you expected."},"impact":{"name":"Impact","letter":"I","q":"Did I leave it better?","meaning":"To positively influence others and leave situations better than they found them.","shows":["Make positive contributions","Help others","Improve school climate","Leave people and places better than you found them"],"lab":"Leave the bench cleaner than you found it, and help the next group get theirs working."},"purpose":{"name":"Purpose","letter":"P","q":"Did my actions move me toward my goals?","meaning":"To stay focused on goals, growth, and the future.","shows":["Stay focused","Prioritize learning","Set goals","Make choices aligned with your future"],"lab":"Run the failed trial again instead of giving up on the lab."}},"cards":[{"id":"semmelweis","name":"Ignaz Semmelweis","dates":"1818–1865","field":"Physician, obstetrics","img":"01-semmelweis.jpg","initials":"IS","account":["In 1847 Ignaz Semmelweis ran a maternity ward at Vienna General Hospital where new mothers were dying of “childbed fever” at a terrible rate. In April of that year about 18 of every 100 women in his clinic died. Then a friend, Jakob Kolletschka, died after a student’s scalpel cut him during an autopsy, and his body showed the same damage as the mothers’.","Semmelweis realized that doctors were carrying something from the dead bodies to the women they examined. He ordered every doctor and student to scrub their hands in chlorinated lime water before entering the ward. By August the death rate had dropped below 2 in 100.","Nobody knew about bacteria yet, so he could not explain why it worked. Many senior doctors were insulted by the idea that their hands were killing patients, and they rejected him. He lost his position in Vienna and spent the rest of his life fighting for the idea. He died in 1865, before Pasteur and Lister proved him right."],"why":"Evidence that something works counts even before anyone can explain why, and the people who hold onto it under ridicule are the ones who move medicine forward.","record":null,"sources":[["Ignaz Semmelweis, Wikipedia","https://en.wikipedia.org/wiki/Ignaz_Semmelweis"],["Ignaz Semmelweis, Encyclopaedia Britannica","https://www.britannica.com/biography/Ignaz-Semmelweis"]],"credit":["Engraving after Jenő Doby, 1860","Public domain","https://commons.wikimedia.org/wiki/File:Ignaz_Semmelweis_1860.jpg"],"paw":"courage","alt":"honesty","short":"In 1847 Ignaz Semmelweis ran a maternity ward in Vienna where about 18 of every 100 new mothers were dying of fever. He noticed that doctors came straight from cutting open dead bodies to deliver babies. He ordered every doctor to scrub their hands in chlorine water first, and by August deaths fell below 2 in 100. Nobody knew about germs yet, so he could not explain why it worked. Senior doctors were insulted by the idea that their own hands were killing patients, and they pushed him out of his job. He argued for handwashing for the rest of his life.","altCase":"He told powerful doctors a truth about themselves that they did not want to hear.","talkA":"Is it harder to tell a stranger they are wrong, or your own boss?","talkB":"Semmelweis had strong numbers but no explanation. Should a result count before anyone knows why it works?"},{"id":"drew","name":"Charles R. Drew","dates":"1904–1950","field":"Surgeon and blood-bank pioneer, Howard University","img":"10-drew.jpg","initials":"CD","account":["Charles Drew was a surgeon who worked out how to collect, store and ship blood plasma on a large scale. In 1940 he directed Blood for Britain, which sent thousands of vials of plasma to Britain during the bombing of London. In 1941 he helped set up the first American Red Cross blood bank and introduced the bloodmobile.","Then the U.S. military announced that it would not accept blood from Black donors, which meant the program’s own medical director could not give blood. Later the policy changed to taking Black donors’ blood but keeping it in separate, labeled supplies.","Drew said in public, again and again through the war, that this was unscientific and an insult. Blood has types, A, B, AB and O, and none of them is tied to race. He returned to Howard University to train Black surgeons and kept speaking against the policy until his death in a car crash in 1950. The Red Cross dropped the rule later that year."],"why":"Blood types are A, B, AB and O whatever anyone wants them to be, and saying so out loud to people in power took nerve.","record":"Often said, not true: that Drew resigned from the Red Cross in protest, and that he died because a white hospital refused to treat him. The National Library of Medicine’s record shows he had already arranged to return to Howard before the policy was set, and witnesses at the crash said his injuries were too severe for any hospital to save him. The protest was in what he said, and he said it plainly.","sources":[["Charles R. Drew, Profiles in Science, U.S. National Library of Medicine","https://profiles.nlm.nih.gov/spotlight/bg/feature/biographical-overview"],["Remembering the Father of Blood Banking, a Black Doctor Who Took a Stand, NPR, 2021","https://www.npr.org/2021/08/06/1025372235/pioneer-charles-drew-blood-plasma-preservation-red-cross"],["Charles R. Drew, Wikipedia","https://en.wikipedia.org/wiki/Charles_R._Drew"]],"credit":["Portrait by Betsy Graves Reyneau, U.S. National Archives","Public domain","https://commons.wikimedia.org/wiki/File:Charles_R._Drew_-_NARA_-_559199.jpg"],"paw":"courage","alt":"honesty","short":"In 1940 Charles Drew, a surgeon, worked out how to store and ship blood plasma on a large scale, and in 1941 he helped start the first American Red Cross blood bank. Then the U.S. military announced it would not accept blood from Black donors, which meant Drew himself could not give blood to his own program. Later the rule changed to keeping Black donors’ blood separate. Drew said in public, again and again, that this was unscientific and an insult, because blood types have nothing to do with race. The Red Cross dropped the rule in 1950.","altCase":"He kept saying what the science showed when officials wanted a different answer.","talkA":"Drew could not change the rule himself. Was speaking out still worth it?","talkB":"Which facts about blood types made the separate-supply rule unscientific? What would a hospital have to test before a transfusion?"},{"id":"kelsey","name":"Frances Oldham Kelsey","dates":"1914–2015","field":"Pharmacologist and physician, U.S. Food and Drug Administration","img":"03-kelsey.jpg","initials":"FK","account":["In September 1960, one month after Frances Kelsey started reviewing drugs at the U.S. Food and Drug Administration, a company asked her to approve a sleeping pill called Kevadon. Its active ingredient was thalidomide, already sold in Europe, and the company expected a quick yes.","Kelsey read the application and found that the safety “evidence” was mostly testimonials, not real studies. She refused to approve it and asked for more data. The company’s representative called her repeatedly, complained to her bosses, and pressed her to meet a Christmas sales deadline. Then she saw a letter in a British medical journal reporting nerve damage in patients who took the drug. She asked whether it was safe for pregnant women, and nobody could show that it was. She held out for more than a year.","In 1961 doctors in Germany discovered that thalidomide was causing thousands of babies to be born with missing or shortened limbs. The United States was spared. In 1962 President Kennedy gave Kelsey the President’s Award for Distinguished Federal Civilian Service."],"why":"Saying “not enough evidence yet” under pressure is a scientific act, and it is often the one that protects people.","record":null,"sources":[["Frances Oldham Kelsey, Wikipedia","https://en.wikipedia.org/wiki/Frances_Oldham_Kelsey"],["Was Thalidomide Safe? Frances Oldham Kelsey Was Not Convinced, Scientific American","https://www.scientificamerican.com/article/was-thalidomide-safe-frances-oldham-kelsey-was-not-convinced"]],"credit":["U.S. Food and Drug Administration, 1960s","Public domain","https://commons.wikimedia.org/wiki/File:Frances_O._Kelsey_(FDA_171)_(8211251003).jpg"],"paw":"courage","alt":"impact","short":"Frances Kelsey had been reviewing drugs at the U.S. Food and Drug Administration for one month in 1960 when a company asked her to approve a sleeping pill already sold in Europe. Its ingredient was thalidomide. The safety evidence was mostly testimonials, so she said no and asked for real studies. The company called her again and again and complained to her bosses. She held out for more than a year. Then doctors in Germany discovered the drug was causing thousands of babies to be born with missing or shortened limbs. The United States was spared.","altCase":"Thousands of American families never knew what she had saved them from.","talkA":"When is “not yet, I need more information” the brave answer?","talkB":"Testimonials are not studies. What would a real safety study of a new drug need to include?"},{"id":"maathai","name":"Wangari Maathai","dates":"1940–2011","field":"Biologist (veterinary anatomy), University of Nairobi","img":"04-maathai.jpg","initials":"WM","account":["Wangari Maathai earned a PhD in veterinary anatomy in 1971, the first woman in East or Central Africa to earn a doctorate, and taught at the University of Nairobi. She saw that Kenya’s forests were being cut down, streams were drying up, and rural women were walking farther every year for firewood and water. In 1977 she started the Green Belt Movement, paying women a small amount for every tree seedling they planted and kept alive.","Planting trees sounds harmless, but Maathai also spoke out when the government handed public land to developers, and the government treated her as an enemy. In 1989 she fought a plan to build a 60-story tower in Nairobi’s Uhuru Park, and the project was dropped. On March 3, 1992, she joined mothers of political prisoners in a hunger strike in the same park. Riot police beat her unconscious, and she was hospitalized.","She kept going. By the time she won the Nobel Peace Prize in 2004, the movement had planted tens of millions of trees."],"why":"Ecology is not only something you measure; sometimes the data say a forest must be defended, and Maathai acted on her data.","record":null,"sources":[["Wangari Maathai, biographical, The Nobel Prize","https://www.nobelprize.org/prizes/peace/2004/maathai/biographical/"],["Kenya: Women hunger-strikers beaten, Amnesty International, March 1992 (PDF)","https://www.amnesty.org/en/wp-content/uploads/2021/06/afr320041992en.pdf"],["Wangari Maathai, Wikipedia","https://en.wikipedia.org/wiki/Wangari_Maathai"]],"credit":["Antônio Cruz / Agência Brasil, 2006","CC BY 3.0 BR","https://commons.wikimedia.org/wiki/File:Wangari_Maathai,_2006_(cropped).jpg"],"paw":"courage","alt":"impact","short":"Wangari Maathai was the first woman in East or Central Africa to earn a doctorate. In Kenya she watched forests being cut down and streams drying up, so in 1977 she started paying women to plant trees. When the government handed public parkland to developers, she spoke out. In 1989 she stopped a plan for a 60-story tower in Nairobi’s Uhuru Park. In 1992 she joined mothers of political prisoners in a hunger strike in that same park, and police beat her unconscious. She kept going, and her movement planted tens of millions of trees.","altCase":"Tens of millions of new trees left Kenya better than she found it.","talkA":"Maathai started by planting trees and ended up facing riot police. Where does doing good turn into needing courage?","talkB":"How does cutting a forest dry up a stream? Trace the path of the water."},{"id":"arnold","name":"Frances Arnold","dates":"born 1956","field":"Chemical engineer, Caltech; Nobel Prize in Chemistry 2018","img":"05-arnold.jpg","initials":"FA","account":["Frances Arnold won the 2018 Nobel Prize in Chemistry for inventing a way to evolve enzymes in the lab, the way breeders select plants. In 2019 her lab published a paper in Science, one of the world’s top journals, reporting a new enzyme reaction that could build a class of molecules used in antibiotics.","Other scientists tried to repeat it and could not. When her lab looked again, the enzymes did not do what the paper claimed, and the first author’s lab notebook was missing records and raw data for key experiments.","Arnold did not wait for someone else to expose the problem. On January 2, 2020, the paper was retracted, and she announced it herself, publicly, on the first working day of the year. She wrote that it was painful to admit but important to do so. She apologized to everyone and said she had been too busy when the paper was submitted and had not done her job well. Scientists around the world praised the way she handled it."],"why":"The scientific record only stays trustworthy if the people who put mistakes into it are willing to take them back out.","record":null,"sources":[["Nobel winner retracts paper from Science, Retraction Watch, 2 January 2020","https://retractionwatch.com/2020/01/02/nobel-winner-retracts-paper-from-science"],["Frances Arnold’s masterful retraction, Chemistry World","https://www.chemistryworld.com/opinion/frances-arnolds-retraction-and-the-case-for-slow-science/4010994.article"],["Frances Arnold, Wikipedia","https://en.wikipedia.org/wiki/Frances_Arnold"]],"credit":["Bengt Nyman, 2018","CC BY 2.0","https://commons.wikimedia.org/wiki/File:Frances_Arnold_EM1B5925_(32361896448)_(cropped).jpg"],"paw":"honesty","alt":"courage","short":"Frances Arnold won the Nobel Prize in Chemistry in 2018. A year later her lab published a paper in Science, one of the world’s top journals, about a new way enzymes could build useful molecules. Other scientists tried to repeat the experiments and could not. When her lab checked, the results did not hold up, and records were missing from a lab notebook. On January 2, 2020, Arnold took the paper back, a step called a retraction, and announced it herself. She said it was painful, apologized, and admitted she had not done her job well.","altCase":"Admitting a mistake in public, as a Nobel winner, took nerve.","talkA":"Arnold could have stayed quiet and let someone else find the problem. What would that have cost her later?","talkB":"Why do scientists trust a result only after other labs can repeat it?"},{"id":"goodall","name":"Jane Goodall","dates":"1934–2025","field":"Primatologist, Gombe Stream, Tanzania","img":"07-goodall.jpg","initials":"JG","account":["Jane Goodall began watching the chimpanzees of Gombe, Tanzania, in 1960 and spent the next decade showing the world that chimps make tools, eat meat, and have personalities and families. By the early 1970s her chimps were famous, and so was the picture she had painted of them as gentler than people.","Then, starting in 1974, the community she studied split in two. Over four years the males of the larger group hunted down and killed every male of the smaller group, one by one. Goodall’s team watched and recorded the attacks in detail.","She could have played them down. Instead she reported them fully, in articles and in her books, including the fact that the violence changed her view of the animals she loved. She wrote that for ten years she had believed the chimpanzees were rather nicer than human beings, and that she had been wrong. Some scientists at first doubted her. Later studies at other sites confirmed what she had seen."],"why":"Reporting the observation that breaks your own story is the hardest kind of honesty, and it is the kind science runs on.","record":null,"sources":[["Jane Goodall, Wikipedia","https://en.wikipedia.org/wiki/Jane_Goodall"],["Gombe Chimpanzee War, Wikipedia","https://en.wikipedia.org/wiki/Gombe_Chimpanzee_War"],["Jane Goodall biography, Washington State University","https://old-www.wsu.edu/goodall/bio3.html"]],"credit":["U.S. Department of State, 2015","Public domain","https://commons.wikimedia.org/wiki/File:Jane_Goodall_2015.jpg"],"paw":"honesty","alt":"courage","short":"Jane Goodall began studying chimpanzees in Gombe, Tanzania, in 1960. For years she showed the world that chimps use tools, raise families and have personalities, and many people came to see them as gentler than humans. Then, starting in 1974, the group she studied split in two. Over four years the males of the larger group hunted down and killed the males of the smaller one. Goodall could have played it down. She reported all of it, and wrote that she had been wrong about the animals she loved.","altCase":"Reporting something that upset her own fans and her own beliefs took nerve.","talkA":"Have you ever had to say something that made a person or group you like look bad? What made it hard?","talkB":"What happens to science if researchers publish only the observations that fit their story?"},{"id":"feynman","name":"Richard Feynman","dates":"1918–1988","field":"Physicist, Caltech; Nobel Prize in Physics 1965","img":"08-feynman.jpg","initials":"RF","account":["On January 28, 1986, the space shuttle Challenger broke apart 73 seconds after launch, killing all seven astronauts. Physicist Richard Feynman was appointed to the presidential commission investigating the accident. Engineers told him that rubber seals called O-rings in the rocket boosters lost their flexibility in the cold, and that the morning of the launch had been unusually cold.","At a televised hearing in February, Feynman did not give a speech about it. He clamped a piece of O-ring rubber, dropped it into a glass of ice water, pulled it out, and showed that it stayed squashed. Viewers understood the cause of the disaster in a few seconds.","Then he dug into NASA’s safety claims and found that managers put the odds of losing a shuttle at 1 in 100,000 while their own engineers said about 1 in 100. He insisted that his findings go into the final report as an appendix, and ended it: “For a successful technology, reality must take precedence over public relations, for nature cannot be fooled.”"],"why":"Honest science means showing the evidence in a way anyone can check, even when it embarrasses powerful people.","record":null,"sources":[["Appendix F: Personal Observations on the Reliability of the Shuttle, by R. P. Feynman, NASA History","https://www.nasa.gov/history/rogersrep/v2appf.htm"],["Rogers Commission Report, Wikipedia","https://en.wikipedia.org/wiki/Rogers_Commission_Report"]],"credit":["Tamiko Thiel, 1984","CC BY-SA 3.0","https://commons.wikimedia.org/wiki/File:RichardFeynman-PaineMansionWoods1984_copyrightTamikoThiel_bw.jpg"],"paw":"honesty","alt":"courage","short":"On January 28, 1986, the space shuttle Challenger broke apart 73 seconds after launch, killing all seven astronauts. The physicist Richard Feynman joined the commission investigating why. At a televised hearing he dropped a piece of the rocket’s rubber seal into a glass of ice water, pulled it out, and showed that the cold rubber stayed squashed instead of springing back. The launch morning had been unusually cold. He also found that NASA managers claimed far better safety odds than their own engineers believed, and he made sure that went into the final report.","altCase":"He embarrassed NASA’s leaders on live television.","talkA":"Feynman used a glass of ice water instead of a long speech. Why can a simple demonstration be more honest than a lot of words?","talkB":"Managers said 1 in 100,000; engineers said about 1 in 100. Where could a gap like that come from, and how would you find out who was right?"},{"id":"darwin","name":"Charles Darwin","dates":"1809–1882","field":"Naturalist","img":"12-darwin.jpg","initials":"CD","account":["By 1858 Charles Darwin had been working on his theory of natural selection for twenty years, writing privately and telling only a few friends. On June 18, 1858, a package arrived from Alfred Russel Wallace, a young naturalist collecting specimens in what is now Indonesia. Inside was an essay laying out almost the same idea.","Darwin could have quietly rushed his own book into print. Instead he wrote to his friend Charles Lyell and sent along Wallace’s essay, saying that he would rather burn his whole book than have Wallace or anyone think he had behaved in a paltry spirit. He asked whether he could honorably publish at all.","Lyell and the botanist Joseph Hooker arranged for Wallace’s essay and extracts from Darwin’s earlier writing to be read together at the Linnean Society of London on July 1, 1858, giving both men credit. Darwin was not there; his baby son had died of scarlet fever three days earlier. On the Origin of Species came out the next year."],"why":"Giving credit honestly when you could get away with taking it is what keeps a community of scientists able to trust each other.","record":null,"sources":[["Darwin to Charles Lyell, 25 June 1858, Darwin Correspondence Project (letter DCP-LETT-2294)","https://epsilon.ac.uk/view/dcp-data/letters/DCP-LETT-2294"],["Publication of Darwin’s theory, Wikipedia","https://en.wikipedia.org/wiki/Publication_of_Darwin%27s_theory"]],"credit":["Photograph, c. 1854","Public domain","https://commons.wikimedia.org/wiki/File:Charles_Darwin_sentado_-_1854_-_Image_225735.jpg"],"paw":"honesty","alt":"purpose","short":"By 1858 Charles Darwin had worked on his idea of natural selection for twenty years without publishing it. Then a package arrived from a younger naturalist, Alfred Russel Wallace, with an essay laying out almost the same idea. Darwin could have rushed his own book into print and claimed it first. Instead he sent Wallace’s essay to a friend and wrote that he would rather burn his whole book than have anyone think he had acted unfairly. On July 1, 1858, their ideas were presented together in London, with credit to both men.","altCase":"Twenty years of steady work toward one big idea is Purpose.","talkA":"When a group project goes well, how do you make sure everyone gets fair credit?","talkB":"Why do scientists care so much about who published an idea first, and what does sharing credit protect?"},{"id":"salk","name":"Jonas Salk","dates":"1914–1995","field":"Physician and virologist, University of Pittsburgh","img":"09-salk.jpg","initials":"JS","account":["In the early 1950s polio paralyzed or killed tens of thousands of American children every year, and parents kept kids away from pools and movie theaters each summer. Jonas Salk and his team at the University of Pittsburgh built a vaccine from killed poliovirus. On April 12, 1955, the results of a trial involving more than a million children were announced: the vaccine was safe, and it worked. Salk became one of the most famous people in the country overnight.","Days later the broadcaster Edward R. Murrow asked him on television who owned the patent on the vaccine. Salk answered, “Well, the people, I would say. There is no patent. Could you patent the sun?” He never took money from the vaccine, and he wanted it made and given as widely as possible.","By 1962 polio cases in the United States had fallen from about 45,000 a year to under a thousand."],"why":"A discovery changes the world only when it reaches people, and Salk wanted his to reach everyone.","record":"The foundation that paid for the work did ask its lawyers whether the vaccine could be patented, and they concluded it could not be, because the methods were not new enough. Salk’s choice to treat the vaccine as belonging to everyone was still his own, and he never profited from it.","sources":[["Jonas Salk, Salk Institute for Biological Studies","https://www.salk.edu/about/history-of-salk/jonas-salk/"],["Jonas Salk, Wikipedia","https://en.wikipedia.org/wiki/Jonas_Salk"],["Jonas Salk, Encyclopaedia Britannica","https://www.britannica.com/biography/Jonas-Salk"]],"credit":["SAS Scandinavian Airlines, Copenhagen, 1959","Public domain","https://commons.wikimedia.org/wiki/File:Jonas_Salk_candid.jpg"],"paw":"impact","alt":"purpose","short":"In the early 1950s polio paralyzed or killed tens of thousands of American children every year, and parents kept kids away from pools and movie theaters each summer. Jonas Salk and his team built a vaccine, and on April 12, 1955, a trial with more than a million children showed that it worked. On television he was asked who owned the patent. “Well, the people, I would say,” he answered. “Could you patent the sun?” He never made money from it. By 1962 U.S. polio cases had fallen from about 45,000 a year to under a thousand.","altCase":"Years of lab work aimed at defeating one disease is Purpose.","talkA":"Salk gave up a fortune. What could you keep for yourself that would do more good if you shared it?","talkB":"The lawyers thought the vaccine probably could not be patented anyway. Does that change how you judge Salk’s answer?"},{"id":"curie","name":"Marie Curie","dates":"1867–1934","field":"Physicist and chemist; Nobel Prizes 1903 and 1911","img":"13-curie.jpg","initials":"MC","account":["When the First World War began in August 1914, Marie Curie had already won two Nobel Prizes. She realized that X-rays, discovered only nineteen years earlier, could show surgeons exactly where a bullet or a piece of shrapnel sat in a wounded soldier, and that France had almost no X-ray equipment near the front.","So she built a mobile X-ray unit: a car carrying an X-ray tube, a generator run off the engine, and a darkroom. She taught herself to drive, studied anatomy and auto repair, and drove to field hospitals herself, often with her 17-year-old daughter Irène as her assistant. Soldiers called the vehicles “petites Curies.” She raised the money for twenty of them, set up about 200 fixed X-ray posts in hospitals, and trained other women to run them.","Her units examined an estimated one million wounded soldiers. She asked for no pay. It was the same purpose she had shown years earlier, when she and Pierre refused to patent their method for isolating radium."],"why":"Curie carried a laboratory discovery to the place it could help most, and she did the driving herself.","record":null,"sources":[["Marie Curie: War Duty (1914–1919), American Institute of Physics","https://history.aip.org/exhibits/curie/war1_text.htm"],["Marie Curie, Wikipedia","https://en.wikipedia.org/wiki/Marie_Curie"],["Marie Curie, Encyclopaedia Britannica","https://www.britannica.com/biography/Marie-Curie"]],"credit":["Henri Manuel, c. 1920","Public domain","https://commons.wikimedia.org/wiki/File:Marie_Curie_c._1920s.jpg"],"paw":"impact","alt":"purpose","short":"When World War I began in 1914, Marie Curie had already won two Nobel Prizes. She knew X-rays could show surgeons exactly where a bullet sat inside a wounded soldier, but there were almost no X-ray machines near the front. So she put X-ray equipment into cars, learned to drive and repair them, and drove to field hospitals herself, often with her 17-year-old daughter Irène. She raised money for twenty of these “little Curies,” set up about 200 X-ray rooms in hospitals, and trained women to run them. An estimated one million soldiers were examined.","altCase":"She asked for no pay and kept at it through four years of war.","talkA":"Curie learned to drive and fix cars to get her work where it was needed. What skill outside your best subject might you need to make a difference?","talkB":"X-rays had been discovered only nineteen years earlier. How fast should a new discovery move from the lab to real people?"},{"id":"carver","name":"George Washington Carver","dates":"c. 1864–1943","field":"Agricultural scientist, Tuskegee Institute","img":"15-carver.jpg","initials":"GC","account":["George Washington Carver was born into slavery in Missouri near the end of the Civil War; the exact year is not known. He became the first Black student and then the first Black faculty member at Iowa State, and in 1896 Booker T. Washington hired him to run the agriculture program at Tuskegee Institute in Alabama. He stayed 47 years.","His purpose was plain: help the poorest farmers in the South, most of them Black sharecroppers whose cotton fields were worn out. Carver showed that planting peanuts, sweet potatoes and cowpeas put nitrogen back into the soil, then found hundreds of uses for those crops so farmers could sell them. He wrote 44 plain-language bulletins that any farmer could follow, and in 1906 built a “movable school,” a wagon loaded with tools and demonstrations, to reach people who would never come to campus.","He held only three patents in his life and gave his findings away. Before he died in 1943 he put his life savings into a foundation at Tuskegee to carry the work on."],"why":"Carver aimed his science at the people who needed it most and measured success by their harvests.","record":"Often said, not true: that Carver invented peanut butter. A Canadian pharmacist patented a peanut-butter process in 1884, before Carver’s career began. Sources also differ on his birth year, from 1861 to 1865.","sources":[["George Washington Carver, Wikipedia","https://en.wikipedia.org/wiki/George_Washington_Carver"],["George Washington Carver, Encyclopaedia Britannica","https://www.britannica.com/biography/George-Washington-Carver"]],"credit":["Photograph c. 1910, restored by Adam Cuerden","Public domain","https://commons.wikimedia.org/wiki/File:George_Washington_Carver_c1910_-_Restoration.jpg"],"paw":"impact","alt":"purpose","short":"George Washington Carver was born into slavery in Missouri near the end of the Civil War. In 1896 he went to Tuskegee Institute in Alabama and stayed 47 years. Most farmers around him were poor Black sharecroppers whose cotton had worn out the soil. Carver showed them that peanuts, sweet potatoes and cowpeas put nitrogen back into the soil, then found hundreds of uses for those crops so farmers could sell them. He wrote guides any farmer could follow and sent a “movable school,” a wagon full of tools and demonstrations, out to the farms. He gave most of his findings away.","altCase":"For 47 years he aimed his work at one goal: helping the poorest farmers.","talkA":"Carver took the lesson to farmers instead of waiting for them to come to campus. Who at Battlefield could use something brought to them?","talkB":"How do peanuts and other legumes put nitrogen back into soil, and why does that matter after years of cotton?"},{"id":"snow","paw":"impact","alt":"courage","name":"John Snow","dates":"1813–1858","field":"Physician, London","img":"17-snow.jpg","initials":"JS","short":"Cholera swept through a London neighborhood around Broad Street in 1854, and within three days 127 people nearby were dead. Most doctors blamed “bad air.” John Snow, a London doctor, believed the disease spread through dirty water. He went door to door, marked each death on a map, and found the deaths clustered around one public water pump. Workers at a nearby brewery, who drank beer instead of pump water, stayed healthy. On September 8 the parish board removed the pump handle. Officials went on rejecting his idea for years afterward.","account":["In the 1850s most doctors believed cholera spread through “bad air” from filth and rotting garbage. John Snow, a London physician, had argued since 1849 that it spread through contaminated water, and few people listened.","On August 31, 1854, cholera broke out in the streets around Broad Street in Soho. Within three days 127 people on or near the street were dead. Snow went door to door, with help from a local minister named Henry Whitehead, and marked each death on a map. The deaths clustered around one public water pump. Workers at a nearby brewery, who were given a daily allowance of beer and did not drink from the pump, stayed healthy.","On September 7 Snow took his evidence to the parish board, and the next day the pump handle was removed. After the outbreak ended, officials put the handle back and rejected his theory. Snow died in 1858. In 1866 William Farr, one of his chief opponents, finally accepted that he had been right."],"why":"Snow turned scattered deaths into a pattern anyone could see, and that kind of careful evidence is how public health protects whole neighborhoods.","record":"Often said: removing the handle stopped the outbreak. Snow himself wrote that deaths were already falling because many residents had fled. The handle mattered most as a test of his idea, and the map is what lasted.","altCase":"He stood alone against what nearly every doctor believed.","talkA":"Snow learned the most by knocking on doors and asking. When is asking people better than guessing about them?","talkB":"The brewery workers made a natural comparison group. What makes a good comparison group in an experiment?","sources":[["1854 Broad Street cholera outbreak, Wikipedia","https://en.wikipedia.org/wiki/1854_Broad_Street_cholera_outbreak"],["John Snow, Wikipedia","https://en.wikipedia.org/wiki/John_Snow"],["John Snow, Encyclopaedia Britannica","https://www.britannica.com/biography/John-Snow-British-physician"]],"credit":["Autotype from an 1856 photograph","Public domain","https://commons.wikimedia.org/wiki/File:John_Snow.jpg"]},{"id":"kariko","name":"Katalin Karikó","dates":"born 1955","field":"Biochemist; Nobel Prize in Physiology or Medicine 2023","img":"14-kariko.jpg","initials":"KK","account":["Katalin Karikó came to the United States from Hungary convinced that messenger RNA, the molecule cells use to carry instructions for making proteins, could be turned into medicine. Almost nobody agreed. Lab-made mRNA set off a strong immune reaction when injected and broke down fast. Through the 1990s at the University of Pennsylvania her grant applications were rejected one after another. In 1995 the university demoted her off the path to a permanent professorship.","She stayed and kept working. With the immunologist Drew Weissman, she found in 2005 that swapping one of mRNA’s building blocks for a slightly different version, one found naturally in cells, stopped the immune reaction and later increased how much protein the mRNA produced. Top journals turned the paper down before a smaller one accepted it.","Fifteen years later that modification was the core of the Pfizer-BioNTech and Moderna COVID-19 vaccines, developed in under a year. Counting every kind of COVID-19 vaccine, more than 13 billion doses have been given worldwide. In 2023 Karikó and Weissman won the Nobel Prize."],"why":"Purpose is what keeps a scientist going through twenty years of “no,” and it is why the vaccine existed when it was needed.","record":null,"sources":[["Press release, Nobel Prize in Physiology or Medicine 2023","https://www.nobelprize.org/prizes/medicine/2023/press-release/"],["Katalin Karikó, Wikipedia","https://en.wikipedia.org/wiki/Katalin_Karik%C3%B3"]],"credit":["U.S. Embassy Sweden, 2023","CC BY 2.0","https://commons.wikimedia.org/wiki/File:Katalin_Karik%C3%B3_at_the_United_States_Embassy_Sweden,_2023_Nobel_Reception_(cropped).jpg"],"paw":"purpose","alt":"courage","short":"Katalin Karikó came to the United States from Hungary sure that messenger RNA, the molecule cells use to carry instructions for building proteins, could become medicine. Almost nobody agreed. Through the 1990s her grant applications were rejected one after another, and in 1995 her university demoted her. She kept working. In 2005 she and Drew Weissman found a small change that stopped lab-made mRNA from setting off the immune system. Fifteen years later that change was at the heart of the first COVID-19 vaccines. In 2023 she won the Nobel Prize.","altCase":"Staying with an idea everyone else had given up on took nerve.","talkA":"Karikó heard “no” for years. How do you tell a goal worth sticking with from one worth letting go?","talkB":"Why would mRNA made in a lab set off the immune system, and why would swapping one building block help?"},{"id":"tu","name":"Tu Youyou","dates":"born 1930","field":"Pharmaceutical chemist; Nobel Prize in Physiology or Medicine 2015","img":"16-tu-youyou.jpg","initials":"TY","account":["In 1969, during the Vietnam War, China’s government set up a secret program, Project 523, to find a new malaria drug, because the parasite had become resistant to the old ones. Tu Youyou, a 39-year-old researcher trained in both modern pharmacology and traditional Chinese medicine, was put in charge of a team.","In three months they combed through more than 2,000 old herbal recipes, then tested hundreds of extracts on malaria-infected mice. Most failed. One, from the sweet wormwood plant qinghao, worked sometimes. Rereading a 1,600-year-old text by Ge Hong, she noticed it said to soak the plant in cold water and wring out the juice, not boil it. Heat was destroying the active ingredient. On October 4, 1971, extract number 191, made at low temperature, stopped the parasite completely in mice.","To test safety fast, Tu and two colleagues took the extract themselves first, under hospital observation. Then 21 patients on Hainan Island recovered. The drug, artemisinin, has since saved millions of lives. She won the Nobel Prize in 2015."],"why":"A clear goal, a drug that worked, kept Tu reading old books and running failed tests for years until one succeeded.","record":null,"sources":[["Tu Youyou, biographical, The Nobel Prize","https://www.nobelprize.org/prizes/medicine/2015/tu/biographical/"],["Tu Youyou, Wikipedia","https://en.wikipedia.org/wiki/Tu_Youyou"]],"credit":["Bengt Nyman, 2015","CC BY-SA 4.0","https://commons.wikimedia.org/wiki/File:Tu_Youyou_5012-1-2015.jpg"],"paw":"purpose","alt":"courage","short":"Tu Youyou was 39 in 1969 when China put her in charge of a team searching for a new malaria drug, because the parasite had become resistant to the old ones. Her team went through more than 2,000 old herbal recipes and tested hundreds of plant extracts on mice. Most failed. Rereading a 1,600-year-old text, she noticed it said to soak the sweet wormwood plant in cold water, not boil it. Heat had been destroying the medicine. In 1971 an extract made at low temperature worked. To test its safety, she took it herself first. The drug, artemisinin, has saved millions of lives.","altCase":"She and two colleagues tested the extract on themselves first.","talkA":"Tu found the answer by rereading something very old. When has a second look at something helped you?","talkB":"One detail, cold instead of hot, decided whether the experiment worked. What other experiments depend on temperature?"},{"id":"marshall","paw":"purpose","alt":"courage","name":"Barry Marshall","dates":"born 1951","field":"Physician, Royal Perth Hospital, Australia; Nobel Prize in Physiology or Medicine 2005","img":"19-marshall.jpg","initials":"BM","short":"Barry Marshall was a young doctor in Australia in 1981 when he began working with Robin Warren, who had found curved bacteria living in people’s stomachs. They believed the bacteria caused stomach ulcers. Experts said ulcers came from stress and lifestyle, and a medical society rated their findings in the bottom 10 percent. Marshall could not infect piglets to prove it. So in 1984 he drank a broth full of the bacteria himself. Within a week he was vomiting, and a test showed his stomach badly inflamed. Today ulcers caused by the bacteria are cured with antibiotics.","account":["In 1981 Barry Marshall, a young doctor training at Royal Perth Hospital in Australia, began working with the pathologist Robin Warren. Warren had found curved bacteria living in the acid of patients’ stomachs. The two came to believe the bacteria caused gastritis and stomach ulcers, which doctors then blamed on stress and lifestyle.","Almost nobody believed them. In 1983 reviewers at the Gastroenterological Society of Australia rated their findings in the bottom 10 percent of the papers received that year. Marshall tried to infect piglets to prove the link, and it did not work.","In 1984, after a test showed his own stomach was healthy, Marshall drank a broth of the cultured bacteria. By the fifth day he was vomiting. On day eight a second look inside his stomach showed severe inflammation, and the bacteria grew from the sample. He treated himself with antibiotics. In 1994 a U.S. National Institutes of Health panel agreed that ulcer patients with the bacteria should get antibiotics. Marshall and Warren won the Nobel Prize in 2005."],"why":"An idea the experts reject on sight still deserves a test, and Marshall kept testing until the evidence was too strong to wave away.","record":"Often said: Marshall gave himself an ulcer. He got gastritis, the inflammation that can lead to an ulcer, and he treated it before an ulcer formed.","altCase":"Drinking the bacteria was a huge personal risk. The Four Paws say healthy risks. Was this one?","talkA":"The Four Paws talk about taking healthy risks. Was drinking the bacteria a healthy risk? Where is the line?","talkB":"An experiment on one person: what could it prove, and what could it not?","sources":[["Barry J. Marshall, biographical, The Nobel Prize","https://www.nobelprize.org/prizes/medicine/2005/marshall/biographical/"],["Press release, Nobel Prize in Physiology or Medicine 2005","https://www.nobelprize.org/prizes/medicine/2005/press-release/"],["Barry Marshall, Wikipedia","https://en.wikipedia.org/wiki/Barry_Marshall"]],"credit":["Barjammar, 2008","Public domain","https://commons.wikimedia.org/wiki/File:Barry_Marshall_2008.jpg"]},{"id":"elion","paw":"purpose","alt":"courage","name":"Gertrude B. Elion","dates":"1918–1999","field":"Biochemist and pharmacologist, Burroughs Wellcome; Nobel Prize in Physiology or Medicine 1988","img":"18-elion.jpg","initials":"GE","short":"When Gertrude Elion was 15, her grandfather died of cancer, and she decided to spend her life fighting the disease. She earned a chemistry degree at 19, but no lab would pay a woman to do research. She worked as a secretary, a high school teacher and an unpaid lab assistant, and saved up for graduate school. In 1944 a drug company finally hired her. Over the next decades her lab created medicines for leukemia, for organ transplants and for herpes infections. She never finished a PhD, and in 1988 she won the Nobel Prize.","account":["When Gertrude Elion was 15, her grandfather died of stomach cancer, and she decided to spend her life looking for cures. In 1937, at 19, she graduated from Hunter College in New York with a chemistry degree. No lab would pay a woman to do research. She worked as a secretary, a high school teacher, an unpaid lab assistant and a food-quality checker for a grocery chain. She saved enough to attend New York University and earned a master’s degree in 1941 while teaching high school during the day.","In 1944 she became assistant to the chemist George Hitchings at the drug company Burroughs Wellcome. She began a PhD at night, but the school told her she could no longer study part time. She kept her job and never finished the degree.","Her lab designed drugs instead of finding them by luck: 6-mercaptopurine for childhood leukemia, azathioprine to keep transplanted organs from being rejected, and acyclovir for herpes. In 1988 she shared the Nobel Prize."],"why":"A goal set at 15 carried Elion through years when no lab would hire her, and her medicines still reach patients today.","record":"She never earned a PhD by study, but she was later given honorary doctorates, including one from Polytechnic University of New York in 1989 and one from Harvard in 1998. In 1991 she became the first woman in the National Inventors Hall of Fame.","altCase":"Pushing into a field that would not hire women took nerve.","talkA":"Elion took jobs that were not her dream and kept her goal anyway. Has a job or class you did not choose ever moved you toward something you wanted?","talkB":"Elion’s drugs were built to look like the building blocks of DNA. Why might a fake building block hurt fast-dividing cancer cells more than most other cells?","sources":[["Gertrude B. Elion, biographical, The Nobel Prize","https://www.nobelprize.org/prizes/medicine/1988/elion/biographical/"],["Gertrude B. Elion, Wikipedia","https://en.wikipedia.org/wiki/Gertrude_B._Elion"]],"credit":["GlaxoSmithKline plc, GSK Heritage Archives, 1983","CC BY 4.0","https://commons.wikimedia.org/wiki/File:Gertrude_Elion_(cropped).jpg"]}]};
+const IMG='img/chip-scientists/';
+const P=DATA.paws, CARDS=DATA.cards, ORDER=['courage','honesty','impact','purpose'];
+const byId=Object.fromEntries(CARDS.map(c=>[c.id,c]));
+const $=id=>document.getElementById(id);
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function picHTML(c){
+  return `<img src="${IMG}${c.img}" alt="" width="400" height="400" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'initials',textContent:'${esc(c.initials)}'}))">`;
+}
+
+/* ---------- the school calendar: Sept Courage, Oct Honesty, Nov Impact, Dec Purpose, then again Jan-Apr ---------- */
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const FOCUS={8:'courage',9:'honesty',10:'impact',11:'purpose',0:'courage',1:'honesty',2:'impact',3:'purpose'};
+const now=new Date(), m=now.getMonth(), lm=(m+11)%12;
+const thisPaw=FOCUS[m]||null, lastPaw=FOCUS[lm]||null;
+
+/* ---------- state ---------- */
+const qs=new URLSearchParams(location.search);
+let mode=qs.get('mode')==='advanced'?'advanced':'advisory';
+let deck=(()=>{const d=qs.get('deck');
+  if(ORDER.includes(d)||d==='all') return d;
+  if(d==='last'&&lastPaw) return lastPaw;
+  return thisPaw||'all';})();
+let teams=[], totals={}, cur=null, opener=null;
+
+/* ---------- controls ---------- */
+function buildDeckSeg(){
+  const opts=[];
+  if(thisPaw) opts.push([thisPaw,`${MONTHS[m]}: ${P[thisPaw].name}`,'this month']);
+  if(lastPaw && lastPaw!==thisPaw) opts.push([lastPaw,`${MONTHS[lm]}: ${P[lastPaw].name}`,'last month']);
+  opts.push(['all','All four paws','sort all sixteen']);
+  if(!opts.some(o=>o[0]===deck)) opts.splice(opts.length-1,0,[deck,P[deck].name,'one paw']);
+  $('deckSeg').innerHTML=opts.map(([k,t,s])=>`<button type="button" data-deck="${k}" aria-pressed="${k===deck}">${esc(t)}<small>${esc(s)}</small></button>`).join('');
+}
+function setMode(v){
+  mode=v; document.body.dataset.mode=v;
+  document.querySelectorAll('#modeSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===v));
+  syncURL(); if(cur) showCard(cur.id,cur.team,true); renderPrint();
+}
+function setDeck(v){
+  deck=v; buildDeckSeg(); renderPaws(); renderDeckline(); syncURL();
+  teams=[]; renderRows();
+}
+function syncURL(){
+  const u=new URL(location.href); u.searchParams.set('mode',mode); u.searchParams.set('deck',deck);
+  if(cur) u.searchParams.set('s',cur.id); else u.searchParams.delete('s');
+  history.replaceState(null,'',u);
+}
+$('modeSeg').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) setMode(b.dataset.mode)});
+$('deckSeg').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) setDeck(b.dataset.deck)});
+
+/* ---------- the four paws ---------- */
+function renderPaws(){
+  $('paws').innerHTML=ORDER.map(k=>{const p=P[k];
+    const tag=k===thisPaw?`<span class="month">${MONTHS[m]}</span>`:'';
+    return `<section class="paw${deck===k?' focus':''}" data-paw="${k}" aria-labelledby="pw-${k}">${tag}
+      <h3 id="pw-${k}"><span class="letter" aria-hidden="true">${p.letter}</span>${p.name}</h3>
+      <p class="q">${esc(p.q)}</p><p class="m">${esc(p.meaning)}</p>
+      <ul class="ady-only">${p.shows.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>
+      <p class="lab adv-only"><b>In the lab:</b> ${esc(p.lab)}</p></section>`}).join('');
+}
+function renderDeckline(){
+  $('deckline').textContent = deck==='all'
+    ? 'All sixteen cards, shuffled. Each team places its scientist under the paw the moment shows.'
+    : `The four ${P[deck].name} cards. Each team defends its card as ${P[deck].name}, or argues to move it to another paw.`;
+}
+
+/* ---------- dealing ---------- */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function deal(){
+  const n=+$('teamCount').value;
+  let pool;
+  if(deck==='all'){ // one from each paw first, so a round shows all four
+    const firsts=shuffle(ORDER).map(k=>shuffle(CARDS.filter(c=>c.paw===k))[0]);
+    const used=new Set(firsts.map(c=>c.id));
+    pool=firsts.concat(shuffle(CARDS.filter(c=>!used.has(c.id))));
+    pool=shuffle(pool.slice(0,Math.min(4,n))).concat(pool.slice(Math.min(4,n)));
+  } else pool=shuffle(CARDS.filter(c=>c.paw===deck));
+  teams=[]; for(let i=0;i<n;i++){ teams.push({team:i+1,id:pool[i%pool.length].id,pick:null,bet:null,level:null,revealed:false});
+    if(!(i+1 in totals)) totals[i+1]=0; }
+  renderRows(); renderTotals();
+}
+$('dealBtn').addEventListener('click',deal);
+$('resetBtn').addEventListener('click',()=>{totals={};teams=[];renderRows();renderTotals();});
+
+/* ---------- rows ---------- */
+function points(t){ if(t.level==null||t.bet==null) return null; return t.level===0?-t.bet:t.level*t.bet; }
+function rowHTML(t){
+  const c=byId[t.id];
+  const paws=ORDER.map(k=>`<button class="chipbtn" type="button" data-act="pick" data-v="${k}" data-paw="${k}" aria-pressed="${t.pick===k}">${P[k].letter} ${P[k].name}</button>`).join('');
+  const bets=[1,2,3].map(v=>`<button class="chipbtn" type="button" data-act="bet" data-v="${v}" aria-pressed="${t.bet===v}">${v}</button>`).join('');
+  let rev='';
+  if(t.revealed){
+    const lv=[0,1,2,3,4].map(v=>`<button class="chipbtn" type="button" data-act="level" data-v="${v}" aria-pressed="${t.level===v}">${v}</button>`).join('');
+    const pts=points(t);
+    rev=`<div class="reveal" data-paw="${c.paw}"><p><b class="k">Placed under</b> ${P[c.paw].name}${t.pick?(t.pick===c.paw?' (your team agreed)':` (your team said ${P[t.pick].name}: make the case!)`):''}</p>
+      <p><b class="k">Case for ${P[c.alt].name}</b> ${esc(c.altCase)}</p>
+      <p><b class="k">Talk</b> ${esc(mode==='advanced'?c.talkB:c.talkA)}</p></div>
+      <div class="line"><span class="lbl">Reasoning</span>${lv}</div>
+      <p class="score">${pts==null?'Pick a level once the called seat has explained.':`${pts>0?'+':''}${pts} points`}${t.level===4?'<span class="pp">Paw Print</span>':''}</p>`;
+  }
+  return `<div class="row" data-team="${t.team}">
+    <div class="who"><span class="tm">Team ${t.team}</span>
+      <button class="face" type="button" data-act="open" aria-haspopup="dialog"><span class="pic">${picHTML(c)}</span>
+      <span class="nm">${esc(c.name)}<small>${esc(c.dates)}</small></span><span class="readme">Read the story</span></button></div>
+    <div class="play">
+      <div class="line"><span class="lbl">Paw</span>${paws}</div>
+      <div class="line"><span class="lbl">Bet</span>${bets}</div>
+      ${t.revealed?rev:`<div class="line"><button class="ghost" type="button" data-act="reveal">Reveal</button></div>`}
+    </div></div>`;
+}
+function renderRows(){
+  $('rows').innerHTML=teams.length?teams.map(rowHTML).join(''):'<p class="empty">Press Deal to give each team a scientist.</p>';
+}
+function renderTotals(){
+  const ks=Object.keys(totals);
+  $('totals').innerHTML=ks.length?ks.map(k=>`<span>Team ${k}: <b>${totals[k]}</b></span>`).join(''):'';
+}
+function applyLevel(t,v){
+  const before=points(t)||0; t.level=v; const after=points(t)||0; totals[t.team]=(totals[t.team]||0)-before+after;
+}
+$('rows').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const row=b.closest('.row'); const t=teams.find(x=>x.team===+row.dataset.team); if(!t) return;
+  const a=b.dataset.act;
+  if(a==='open'){opener=b; showCard(t.id,t.team); return;}
+  if(a==='pick') t.pick=t.pick===b.dataset.v?null:b.dataset.v;
+  if(a==='bet') { const v=+b.dataset.v; if(t.level!=null){const before=points(t)||0; t.bet=v; totals[t.team]+= (points(t)||0)-before;} else t.bet=v; }
+  if(a==='reveal') t.revealed=true;
+  if(a==='level') applyLevel(t,+b.dataset.v);
+  const i=teams.indexOf(t); row.outerHTML=rowHTML(t); renderTotals();
+  const nr=document.querySelector(`.row[data-team="${t.team}"] [data-act="${a}"]${a==='reveal'?'':`[data-v="${b.dataset.v||''}"]`}`)||document.querySelector(`.row[data-team="${t.team}"] [data-act="level"]`);
+  if(nr) nr.focus();
+});
+
+/* ---------- all sixteen ---------- */
+function renderSquares(){
+  $('squares').innerHTML=ORDER.map(k=>`<section class="sq" data-paw="${k}"><h3>${P[k].letter} &middot; ${P[k].name}</h3><ul class="faces">${
+    CARDS.filter(c=>c.paw===k).map(c=>`<li><button class="face" type="button" data-id="${c.id}" aria-haspopup="dialog"><span class="pic">${picHTML(c)}</span><span class="nm">${esc(c.name)}</span></button></li>`).join('')}</ul></section>`).join('');
+}
+$('squares').addEventListener('click',e=>{const b=e.target.closest('.face'); if(!b) return; opener=b; showCard(b.dataset.id,null);});
+$('credits').innerHTML=CARDS.map(c=>`<li>${esc(c.name)}: ${esc(c.credit[0])}, ${esc(c.credit[1])}, via <a href="${c.credit[2]}" rel="noopener">Wikimedia Commons</a>.</li>`).join('');
+
+/* ---------- the card panel ---------- */
+const panel=$('panel');
+function revealHTML(c){
+  let h=`<div class="reveal" data-paw="${c.paw}" style="margin-top:.8rem"><p><b class="k">Placed under</b> ${P[c.paw].name}: ${esc(P[c.paw].q)}</p>
+    <p><b class="k">Case for ${P[c.alt].name}</b> ${esc(c.altCase)}</p></div>
+    <p class="talk"><b>Talk</b>${esc(mode==='advanced'?c.talkB:c.talkA)}</p>`;
+  if(mode==='advanced'){
+    h+=`<div class="why" data-paw="${c.paw}"><b>Why it matters for science</b>${esc(c.why)}</div>`;
+    if(c.record) h+=`<div class="record"><b>For the record</b>${esc(c.record)}</div>`;
+    h+=`<div class="sources"><b>Sources</b><ul>${c.sources.map(([t,u])=>`<li><a href="${u}" rel="noopener">${esc(t)}</a></li>`).join('')}</ul></div>`;
+  }
+  h+=`<p class="credit">Portrait: ${esc(c.credit[0])}, ${esc(c.credit[1])}, via <a href="${c.credit[2]}" rel="noopener">Wikimedia Commons</a>.</p>`;
+  return h;
+}
+function showCard(id,team,keepScroll){
+  const c=byId[id]; cur={id,team};
+  $('p-pic').innerHTML=picHTML(c);
+  $('p-name').textContent=c.name;
+  $('p-dates').textContent=`${c.dates} · ${c.field}`;
+  $('p-story').innerHTML=(mode==='advanced'?c.account:[c.short]).map(p=>`<p>${esc(p)}</p>`).join('');
+  const t=team?teams.find(x=>x.team===team):null;
+  if(t){
+    $('p-pick').hidden=false;
+    $('p-pick').innerHTML=`<div class="line"><span class="lbl">Team ${t.team}</span>${ORDER.map(k=>`<button class="chipbtn" type="button" data-pick="${k}" data-paw="${k}" aria-pressed="${t.pick===k}">${P[k].letter} ${P[k].name}</button>`).join('')}</div>
+      ${t.revealed?'':'<button class="ghost" type="button" id="p-revealBtn">Reveal</button>'}`;
+    $('p-reveal').innerHTML=t.revealed?revealHTML(c):'';
+  } else {
+    $('p-pick').hidden=true; $('p-pick').innerHTML='';
+    $('p-reveal').innerHTML=revealHTML(c);
+  }
+  if(!keepScroll) $('panelInner').scrollTop=0;
+  if(!panel.open){ panel.showModal?panel.showModal():panel.setAttribute('open',''); $('closeBtn').focus(); }
+  syncURL();
+}
+$('p-pick').addEventListener('click',e=>{
+  if(!cur||!cur.team) return; const t=teams.find(x=>x.team===cur.team); if(!t) return;
+  const b=e.target.closest('[data-pick]');
+  if(b){ t.pick=t.pick===b.dataset.pick?null:b.dataset.pick; }
+  else if(e.target.id==='p-revealBtn'){ t.revealed=true; }
+  else return;
+  renderRows(); showCard(cur.id,cur.team,true);
+});
+function closePanel(){
+  if(panel.open){ panel.close?panel.close():panel.removeAttribute('open'); }
+  cur=null; syncURL();
+  if(opener&&document.body.contains(opener)) opener.focus(); opener=null;
+}
+$('closeBtn').addEventListener('click',closePanel);
+panel.addEventListener('cancel',e=>{e.preventDefault();closePanel()});
+panel.addEventListener('click',e=>{ if(e.target===panel) closePanel(); });
+
+/* ---------- printing ---------- */
+function renderPrint(){
+  const cards=CARDS.map(c=>`<div class="pcard"><div class="pic">${picHTML(c).replace(' loading="lazy"','')}</div><div><h3>${esc(c.name)}</h3><p class="d">${esc(c.dates)} &middot; ${esc(c.field)}</p>${(mode==='advanced'?c.account:[c.short]).map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>`).join('');
+  const key=`<div class="pkey"><h2>Placements and talk questions</h2><table><thead><tr><th>Scientist</th><th>Placed under</th><th>Case for another paw</th><th>Talk</th></tr></thead><tbody>${
+    CARDS.map(c=>`<tr><td>${esc(c.name)}</td><td>${P[c.paw].name}</td><td>${P[c.alt].name}: ${esc(c.altCase)}</td><td>${esc(mode==='advanced'?c.talkB:c.talkA)}</td></tr>`).join('')}</tbody></table></div>`;
+  $('printset').innerHTML=`<h2>Which Paw? Cards (${mode==='advanced'?'Advanced':'Advisory'})</h2>${cards}${key}`;
+}
+$('printBtn').addEventListener('click',()=>{document.body.classList.add('print-cards');window.print();});
+$('p-print').addEventListener('click',()=>{document.body.classList.add('print-panel');window.print();});
+window.addEventListener('afterprint',()=>document.body.classList.remove('print-cards','print-panel'));
+
+/* ---------- start ---------- */
+document.body.dataset.mode=mode;
+document.querySelectorAll('#modeSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode));
+buildDeckSeg(); renderPaws(); renderDeckline(); renderSquares(); renderPrint(); syncURL();
+const want=qs.get('s'); if(want&&byId[want]) showCard(want,null);
+</script>
+</body>
+</html>
