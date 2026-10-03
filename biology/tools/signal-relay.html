@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Three ways a cell receives a signal - a G protein-coupled receptor, a ligand-gated ion channel, and an intracellular receptor for a steroid - run one stage at a time, with a live count of how far the signal is amplified and a switch to block any step and see what fails downstream.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/signal-relay.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Signal Relay - Three Ways a Cell Hears a Message">
+<meta property="og:description" content="Run a signal through a GPCR, an ion channel and an intracellular receptor, one stage at a time, and watch where the signal gets amplified.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/signal-relay.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>The Signal Relay | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;
+  --card:#FFFFFF;
+  --ink:#1D1A15;
+  --ink-soft:#5A544A;
+  --bond:#1F7A8C;
+  --bond-soft:#DEEBEE;
+  --shell:#D2CCC0;
+  --rule:#DDD8CE;
+  --flag:#B85042;
+  --flag-soft:#F7E9E6;
+  --solid:#3F7A55;
+  --solid-soft:#E2EDE6;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;
+    --card:#1D1A15;
+    --ink:#EDE9E1;
+    --ink-soft:#A8A198;
+    --bond:#6FC0CE;
+    --bond-soft:#172E33;
+    --shell:#423D34;
+    --rule:#332E27;
+    --flag:#E08A7C;
+    --flag-soft:#2E1E1A;
+    --solid:#7FC395;
+    --solid-soft:#18291E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);
+  line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+p{margin:0 0 1rem;max-width:36rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+
+/* ---- tile grid : one card per idea, coloured the way the board is coloured ---- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin:1.6rem 0 1.8rem}
+@media (max-width:34rem){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:24rem){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{
+  position:relative;background:var(--card);border:1.5px solid var(--shell);
+  border-left:5px solid var(--accent,var(--shell));
+  border-radius:3px;padding:.7rem .6rem .6rem;min-height:6rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.tile .idx{font-family:var(--sans);font-size:.7rem;font-weight:600;color:var(--ink-soft)}
+.tile .sym{font-family:var(--sans);font-size:1.35rem;font-weight:700;line-height:1;margin:.2rem 0 .3rem;letter-spacing:-0.01em;color:var(--accent,var(--ink))}
+.tile .nm{font-family:var(--sans);font-size:.74rem;font-weight:500;color:var(--ink-soft);line-height:1.25}
+.tile.solid{background:var(--solid-soft);border-color:var(--solid)}
+.tile.mid{background:var(--bond-soft);border-color:var(--bond)}
+.tile.flag{background:var(--flag-soft);border-color:var(--flag);border-width:2.5px;border-left-width:5px}
+.tile .score{position:absolute;top:.55rem;right:.6rem;font-family:var(--sans);
+  font-size:.72rem;font-weight:700;color:var(--ink-soft)}
+
+/* ---- buttons ---- */
+button{font:inherit;cursor:pointer}
+.go{
+  font-family:var(--sans);font-weight:600;font-size:1rem;
+  background:var(--bond);color:var(--paper);border:none;border-radius:3px;
+  padding:.85rem 1.5rem;min-height:3rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);
+  font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+
+/* ---- question ---- */
+.bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden;margin-bottom:1rem}
+.bar i{display:block;height:100%;background:var(--bond);transition:width .25s}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);
+  border-bottom:1.5px solid var(--rule);padding-bottom:.5rem;margin-bottom:1.4rem}
+.q{font-size:1.2rem;line-height:1.45;margin:0 0 1.3rem;max-width:34rem}
+.opts{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem}
+.opt{
+  text-align:left;background:var(--card);border:1.5px solid var(--rule);
+  border-radius:3px;padding:.85rem 1rem;min-height:3.1rem;color:var(--ink);
+  font-family:var(--serif);font-size:1rem;line-height:1.4;width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--bond)}
+.opt:disabled{cursor:default;opacity:1}
+.opt.right{border-color:var(--solid);background:var(--solid-soft);font-weight:600}
+.opt.wrong{border-color:var(--flag);background:var(--flag-soft)}
+.why{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);
+  border-radius:3px;padding:1rem 1.1rem;margin-bottom:1.2rem}
+.why .tag{display:block;font-family:var(--sans);font-size:.76rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+.why p{margin:0;font-size:1rem;line-height:1.5}
+
+/* ---- results ---- */
+.band{border-top:1.5px solid var(--rule);padding:1.1rem 0 .3rem}
+.band.flag{border-top-color:var(--flag);border-top-width:2.5px}
+.band h3{font-family:var(--sans);font-weight:700;font-size:1.05rem;margin:0 0 .2rem}
+.band .verdict{font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft);margin:0 0 .7rem}
+.do{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.9rem 1rem}
+.do h4{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 .4rem}
+.do p{margin:0;font-size:1rem;line-height:1.5}
+.hidden{display:none}
+</style>
+
+<style>
+/* ---- signal chooser ---- */
+.signals{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.4rem 0 1.5rem}
+@media (max-width:40rem){.signals{grid-template-columns:1fr}}
+.sig{
+  text-align:left;background:var(--card);border:1.5px solid var(--shell);
+  border-left:5px solid var(--accent,var(--shell));border-radius:3px;
+  padding:.75rem .8rem;min-height:3rem;color:var(--ink);font-family:var(--sans);line-height:1.3;
+}
+.sig .sname{display:block;font-size:1rem;font-weight:700;letter-spacing:-0.01em;color:var(--accent,var(--ink))}
+.sig .sprop{display:block;font-size:.74rem;font-weight:500;color:var(--ink-soft);margin-top:.22rem}
+.sig[aria-pressed="true"]{background:var(--bond-soft);border-color:var(--bond);border-left-color:var(--accent)}
+.sig:hover:not([aria-pressed="true"]){border-color:var(--bond)}
+.sig:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+
+/* ---- the membrane scene ---- */
+.scene{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.5rem;margin:0 0 1.1rem;
+  overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scene svg{display:block;width:100%;height:auto;min-width:500px}
+.lbl{font-family:var(--sans);font-size:11px;font-weight:600;fill:var(--ink-soft)}
+.lbl-s{font-family:var(--sans);font-size:9.5px;font-weight:500;fill:var(--ink-soft)}
+.glow{opacity:0;transition:opacity .35s}
+.glow.on{opacity:1}
+.fade{opacity:.22;transition:opacity .3s}
+
+/* ---- stage rail ---- */
+.stage{border-top:1.5px solid var(--rule);padding:.8rem 0 .2rem;transition:opacity .25s}
+.stage.pending{opacity:.42}
+.stage.blocked{border-top-color:var(--flag);border-top-width:2.5px}
+.stage .shead{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem;flex-wrap:wrap}
+.stage h3{font-family:var(--sans);font-weight:700;font-size:1rem;margin:0}
+.stage .count{font-family:var(--sans);font-size:.82rem;font-weight:700;color:var(--bond);white-space:nowrap}
+.stage.blocked .count{color:var(--flag)}
+.stage p{margin:.35rem 0 .5rem;font-size:.98rem;line-height:1.5;max-width:34rem}
+.blockbtn{
+  background:none;border:1.5px solid var(--rule);border-radius:3px;color:var(--ink-soft);
+  font-family:var(--sans);font-size:.78rem;font-weight:600;padding:.45rem .75rem;min-height:2.75rem;
+}
+.blockbtn[aria-pressed="true"]{border-color:var(--flag);background:var(--flag-soft);color:var(--flag)}
+.blockbtn:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.consequence{background:var(--flag-soft);border-left:5px solid var(--flag);border-radius:3px;
+  padding:.7rem .85rem;margin:.3rem 0 .2rem;font-size:.95rem;line-height:1.45}
+
+/* ---- amplification bar ---- */
+.amp{height:10px;background:var(--rule);border-radius:5px;overflow:hidden;margin:.15rem 0 .2rem}
+.amp i{display:block;height:100%;background:var(--accent,var(--bond));width:0;transition:width .45s}
+
+/* ---- compare table ---- */
+.cmp{width:100%;border-collapse:collapse;margin:.6rem 0 0;font-size:.9rem}
+.cmp th,.cmp td{text-align:left;padding:.5rem .55rem;border-bottom:1px solid var(--rule);vertical-align:top}
+.cmp th{font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--ink-soft);
+  text-transform:uppercase;letter-spacing:.04em}
+.cmp td.un{color:var(--ink-soft);font-style:italic}
+.cmp tr td:first-child{font-family:var(--sans);font-weight:600;font-size:.86rem}
+@media (max-width:34rem){.cmp{font-size:.84rem}.cmp th,.cmp td{padding:.4rem .35rem}}
+
+.controls{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.1rem 0 0}
+.note{background:var(--bond-soft);border-left:5px solid var(--bond);border-radius:3px;
+  padding:.75rem .9rem;margin:1rem 0;font-size:.95rem;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+<p class="sop-eyebrow">Bio Tool #14 &middot; DE Bio 101 Unit 5 &middot; Campbell Chapter 5</p>
+
+<h1>The Signal Relay</h1>
+<p class="lede">A cell is covered in receptors, and which one a signal can use is decided before anything else happens &mdash; by whether the signal can get through the membrane at all. Pick a signal, send it, and run the pathway one stage at a time.</p>
+<p class="fine">Nothing is submitted. The point is the three pathways side by side: how a signal is received, how far it gets amplified on the way, and what stops working when one step is blocked.</p>
+
+<h2>Pick a signal</h2>
+<div class="signals" id="signals" role="group" aria-label="Choose a signal molecule"></div>
+
+<div class="scene" id="scene"></div>
+<p class="fine" id="sceneNote"></p>
+
+<div class="note" id="receptionNote"></div>
+
+<h2 id="railHead">The relay, one stage at a time</h2>
+<div id="rail"></div>
+
+<div class="controls">
+  <button class="go" id="step">Run the next stage</button>
+  <button class="ghost" id="reset">Start this pathway over</button>
+</div>
+
+<h2>The three, side by side</h2>
+<p class="fine">A row fills in once you have run that pathway to the end.</p>
+<table class="cmp" id="cmp"><tbody></tbody></table>
+
+<footer class="sop-foot">Unit 5, Membrane Transport and Cell Signaling &middot; NVCC BIO 101, Campbell Chapter 5 &middot; three receptor types, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+<script>
+/* ---------------- the three signals ---------------- */
+const SIGNALS=[
+ {id:"gpcr", name:"Epinephrine", colour:"#1F6F8B",
+  props:"water-soluble · a hormone, carried in the blood · long-distance",
+  soluble:false,
+  right:"gpcr",
+  why:"Epinephrine is water-soluble, so it cannot slip through the oily middle of the bilayer. It has to be heard from outside, by a receptor that spans the membrane and passes the message across — and the one it uses is a G protein-coupled receptor."},
+ {id:"channel", name:"Acetylcholine", colour:"#3F7A55",
+  props:"water-soluble · released from a nerve ending · local, across a synapse",
+  soluble:false,
+  right:"channel",
+  why:"Acetylcholine is also water-soluble and also has to be heard from outside. But this one binds a receptor that is itself a gate: the receptor and the channel are the same protein, so binding opens a pore directly rather than starting a chain of messengers."},
+ {id:"steroid", name:"Aldosterone", colour:"#A0503A",
+  props:"lipid-soluble steroid · a hormone, carried in the blood · long-distance",
+  soluble:true,
+  right:"steroid",
+  why:"Aldosterone is a steroid, built on a lipid skeleton, so it dissolves straight through the bilayer and walks into the cytosol. It needs no surface receptor at all — its receptor is waiting inside. That is why a steroid reaches every cell in the body and still changes only a few: only the cells holding that receptor can answer."}
+];
+
+const WRONG={
+ gpcr:{
+  channel:"Close, but this receptor is a gate, and epinephrine is not its ligand. Both are water-soluble and both are heard at the surface — the difference is what the receptor does once it binds, not where it sits.",
+  steroid:"This receptor is inside the cytosol, and epinephrine can never get there. It is water-soluble, and the middle of the bilayer is oily. A water-soluble signal has to be heard at the surface."},
+ channel:{
+  gpcr:"Both are surface receptors, so the solubility rule does not separate them — you have to go by what happens next. A G protein-coupled receptor passes the message to a relay of other molecules; acetylcholine's receptor opens a pore itself.",
+  steroid:"Acetylcholine is water-soluble, so it cannot cross the bilayer to reach a receptor sitting in the cytosol. Surface only."},
+ steroid:{
+  gpcr:"Aldosterone does not need to be heard at the surface at all. It is lipid-soluble, so it goes straight through the membrane — look for its receptor on the inside.",
+  channel:"A gate in the membrane is for signals that cannot cross it. Aldosterone can, so it has no use for one."}
+};
+
+/* ---------------- the three pathways ---------------- */
+const PATHWAYS={
+ gpcr:{
+  label:"G protein-coupled receptor",
+  colour:"#1F6F8B",
+  speed:"seconds",
+  amplified:"about a hundred million to one",
+  lasts:"short — ends when the G protein hydrolyses its GTP",
+  stages:[
+   {h:"Reception — the signal binds",n:1,
+    p:"Epinephrine binds a pocket on the receptor's outside face. This receptor is a single protein whose chain crosses the membrane seven times, and binding on the outside changes its shape on the cytoplasmic side. Nothing has entered the cell: the message crossed, the molecule did not.",
+    blocked:"With the binding site blocked, nothing downstream happens at all. This is how a beta blocker works — it occupies the receptor so the body's own epinephrine cannot."},
+   {h:"Transduction — a G protein is switched on",n:100,
+    p:"The reshaped receptor grabs a G protein waiting on the inner face and makes it swap its GDP for GTP, which switches it on. One bound receptor can switch on many G proteins before the signal lets go, and this is the first place the number grows.",
+    blocked:"The receptor still binds the signal, but the message stops at the membrane. Cholera toxin does the opposite — it locks the G protein on, so the signal never stops."},
+   {h:"Transduction — an enzyme is activated",n:100,
+    p:"Each switched-on G protein slides along the membrane and activates adenylyl cyclase, an enzyme embedded beside it. The signal is now being carried by proteins inside the cell rather than by the hormone.",
+    blocked:"G proteins are active and have nothing to act on, so no second messenger is ever made."},
+   {h:"Transduction — a second messenger spreads",n:10000,
+    p:"Adenylyl cyclase converts ATP into cAMP, and makes a great deal of it. cAMP is small and free in the cytosol, so unlike every step before it, the message now spreads in all directions at once instead of travelling protein to protein. This is the step that turns a signal at one spot on the membrane into a signal throughout the cell.",
+    blocked:"The enzyme is active but no messenger reaches the cytosol, so the signal stays stuck at the membrane."},
+   {h:"Transduction — a kinase cascade",n:1000000,
+    p:"cAMP switches on protein kinase A, which phosphorylates its targets — and several of those targets are themselves kinases, which phosphorylate more. Each layer multiplies, and a phosphate group added to a protein changes its shape and therefore what it does.",
+    blocked:"The second messenger is everywhere and nothing reads it. Many cancer drugs act here, because a kinase stuck in the on position is a common way a cell starts dividing when it should not."},
+   {h:"Response",n:100000000,
+    p:"The last kinase activates the enzyme that breaks glycogen apart, and the liver cell dumps glucose into the blood. One epinephrine molecule has produced on the order of a hundred million glucose molecules — which is what amplification buys, and why a hormone can be present in vanishingly small amounts and still change a whole body.",
+    blocked:"Everything upstream has fired and nothing happens, which is the cleanest demonstration that the response is a separate step from the signal."}
+  ]},
+ channel:{
+  label:"Ligand-gated ion channel",
+  colour:"#3F7A55",
+  speed:"milliseconds",
+  amplified:"no cascade — the gain is ions through an open pore",
+  lasts:"very short — the gate shuts as soon as the ligand leaves",
+  stages:[
+   {h:"Reception — the signal binds",n:1,
+    p:"Acetylcholine, released from a nerve ending, binds the receptor on the outside face of a muscle cell. Here the receptor and the channel are one and the same protein, which is the whole difference from the pathway next door.",
+    blocked:"The gate stays shut. Curare does exactly this — it sits in the acetylcholine site without opening anything, and the muscle cannot be told to contract."},
+   {h:"Transduction — the gate opens",n:1,
+    p:"Binding changes the protein's shape and a pore opens straight through it. There is no G protein, no enzyme and no second messenger: the reception step and the transduction step are the same event, which is why this pathway is so much faster than the one beside it.",
+    blocked:"The signal is bound and the pore never opens, so nothing crosses."},
+   {h:"Ions cross",n:10000,
+    p:"Sodium ions pour through the open pore, down the electrochemical gradient the cell spent ATP building earlier. No energy is spent now — this is passive, and the pump that set the gradient up did the paying in advance.",
+    blocked:"The gate is open and nothing moves, which only happens if the gradient has already run down — a useful reminder that a channel moves nothing on its own."},
+   {h:"Response",n:10000,
+    p:"The inrush of positive charge changes the voltage across the membrane, and that change triggers the muscle cell to contract. Then the ligand leaves, the gate shuts, and the pumps restore the gradient. Fast, local and immediately reversible — the opposite trade from the cascade.",
+    blocked:"Charge has entered and nothing follows, separating the ion movement from what the cell does about it."}
+  ]},
+ steroid:{
+  label:"Intracellular receptor",
+  colour:"#A0503A",
+  speed:"hours",
+  amplified:"moderate — one complex, many copies of a protein",
+  lasts:"long — the new proteins persist",
+  stages:[
+   {h:"Reception — the signal crosses the membrane",n:1,
+    p:"Aldosterone dissolves straight through the bilayer, because a steroid is built on a lipid skeleton and the middle of the membrane is lipid. No receptor is involved yet and no message is passed across — the molecule itself simply arrives inside.",
+    blocked:"If the membrane could somehow keep it out, this pathway would have no way in at all; it has no surface receptor to fall back on."},
+   {h:"Reception — it binds a receptor in the cytosol",n:1,
+    p:"Inside, aldosterone finds its receptor protein and binds. The receptor changes shape and uncovers a region that can grip DNA. This is the step that decides who responds: the hormone reaches every cell in the body, and only cells carrying this receptor can do anything about it.",
+    blocked:"The hormone is inside the cell and nothing recognises it, which is precisely the situation in every cell that is not a target cell."},
+   {h:"Transduction — the complex enters the nucleus",n:1,
+    p:"The hormone-receptor pair moves through a nuclear pore and binds a specific stretch of DNA, acting as a transcription factor. Notice how short this pathway is: no second messenger, no cascade of kinases, just one complex travelling to the gene.",
+    blocked:"The complex forms and never reaches the DNA, so the gene is never switched on."},
+   {h:"Response — a gene is transcribed",n:1000,
+    p:"The gene is transcribed into mRNA, the mRNA is translated, and the cell ends up with many copies of a new protein — in this case the pumps and channels that make a kidney cell hold on to sodium. That is why this pathway takes hours rather than seconds, and why its effect outlasts the hormone.",
+    blocked:"Everything is in position at the gene and no protein is made, which is where several hormone-resistance conditions sit."}
+  ]}
+};
+
+/* ---------------- the membrane scene ---------------- */
+function lipids(){
+  let s='';
+  for(let x=8;x<522;x+=15){
+    s+='<circle cx="'+x+'" cy="128" r="4.6" fill="var(--shell)"/>'+
+       '<line x1="'+x+'" y1="132" x2="'+(x-2)+'" y2="142" stroke="var(--shell)" stroke-width="1.6"/>'+
+       '<line x1="'+x+'" y1="132" x2="'+(x+2)+'" y2="142" stroke="var(--shell)" stroke-width="1.6"/>'+
+       '<circle cx="'+x+'" cy="157" r="4.6" fill="var(--shell)"/>'+
+       '<line x1="'+x+'" y1="153" x2="'+(x-2)+'" y2="143" stroke="var(--shell)" stroke-width="1.6"/>'+
+       '<line x1="'+x+'" y1="153" x2="'+(x+2)+'" y2="143" stroke="var(--shell)" stroke-width="1.6"/>';
+  }
+  return s;
+}
+function helices(){
+  let s='';
+  for(let i=0;i<7;i++){const x=98+i*7.4;
+    s+='<line x1="'+x+'" y1="114" x2="'+x+'" y2="171" stroke="var(--card)" stroke-width="2.2" opacity=".55"/>';}
+  return s;
+}
+const SCENE=
+'<svg viewBox="0 0 600 340" role="img" aria-label="A cell membrane with a G protein-coupled receptor and a ligand-gated ion channel crossing it, and an intracellular receptor in the cytosol below.">'+
+ '<rect x="0" y="0" width="600" height="340" fill="transparent"/>'+
+ '<text class="lbl" x="8" y="18">OUTSIDE THE CELL</text>'+
+ '<text class="lbl" x="8" y="196">CYTOSOL</text>'+
+ lipids()+
+ '<text class="lbl-s" x="532" y="132">heads</text>'+
+ '<text class="lbl-s" x="532" y="152">tails</text>'+
+ /* --- GPCR --- */
+ '<g id="r-gpcr">'+
+  '<rect x="92" y="112" width="56" height="61" rx="9" fill="#1F6F8B"/>'+ helices()+
+  '<path d="M106 112 q10 -9 20 0" fill="none" stroke="#1F6F8B" stroke-width="3"/>'+
+  '<text class="lbl" x="120" y="190" text-anchor="middle">G protein-coupled</text>'+
+  '<text class="lbl" x="120" y="202" text-anchor="middle">receptor</text>'+
+  '<text class="lbl-s" x="120" y="214" text-anchor="middle">seven helices through</text>'+
+ '</g>'+
+ /* --- ion channel --- */
+ '<g id="r-channel">'+
+  '<rect x="262" y="112" width="22" height="61" rx="8" fill="#3F7A55"/>'+
+  '<rect x="296" y="112" width="22" height="61" rx="8" fill="#3F7A55"/>'+
+  '<rect id="pore" x="284" y="114" width="12" height="57" fill="var(--card)"/>'+
+  '<text class="lbl" x="290" y="190" text-anchor="middle">Ligand-gated</text>'+
+  '<text class="lbl" x="290" y="202" text-anchor="middle">ion channel</text>'+
+  '<text class="lbl-s" x="290" y="214" text-anchor="middle">receptor and gate in one</text>'+
+ '</g>'+
+ /* --- nucleus --- */
+ '<ellipse cx="462" cy="288" rx="118" ry="46" fill="none" stroke="var(--rule)" stroke-width="2.5"/>'+
+ '<ellipse cx="462" cy="288" rx="110" ry="39" fill="none" stroke="var(--rule)" stroke-width="1.4"/>'+
+ '<text class="lbl" x="462" y="292" text-anchor="middle">NUCLEUS &middot; DNA</text>'+
+ /* --- intracellular receptor --- */
+ '<g id="r-steroid">'+
+  '<rect x="424" y="208" width="58" height="26" rx="11" fill="#A0503A"/>'+
+  '<path d="M444 208 q9 -8 18 0" fill="none" stroke="#A0503A" stroke-width="3"/>'+
+  '<text class="lbl" x="453" y="250" text-anchor="middle">Intracellular receptor</text>'+
+  '<text class="lbl-s" x="453" y="262" text-anchor="middle">waiting in the cytosol</text>'+
+ '</g>'+
+ /* --- the travelling signal --- */
+ '<g id="ligand" class="glow"><circle cx="0" cy="0" r="9" fill="var(--flag)"/>'+
+   '<circle cx="0" cy="0" r="9" fill="none" stroke="var(--paper)" stroke-width="1.6"/></g>'+
+ /* --- tap targets, drawn last so they sit on top --- */
+ '<rect class="hit" data-r="gpcr"    x="82"  y="100" width="76" height="120" fill="transparent" style="cursor:pointer"/>'+
+ '<rect class="hit" data-r="channel" x="252" y="100" width="76" height="120" fill="transparent" style="cursor:pointer"/>'+
+ '<rect class="hit" data-r="steroid" x="408" y="196" width="90" height="76"  fill="transparent" style="cursor:pointer"/>'+
+'</svg>';
+
+const HOME={gpcr:[120,62], channel:[290,62], steroid:[453,150]};
+const $=id=>document.getElementById(id);
+let SIG=null, PATH=null, shown=0, blockedAt=null, done={};
+
+/* ---------------- signal chooser ---------------- */
+SIGNALS.forEach(s=>{
+  const b=document.createElement("button");
+  b.className="sig"; b.type="button"; b.setAttribute("aria-pressed","false");
+  b.style.setProperty("--accent",s.colour);
+  b.innerHTML='<span class="sname">'+s.name+'</span><span class="sprop">'+s.props+'</span>';
+  b.addEventListener("click",()=>pickSignal(s.id));
+  $("signals").appendChild(b);
+});
+
+function pickSignal(id){
+  SIG=SIGNALS.find(s=>s.id===id); PATH=null; shown=0; blockedAt=null;
+  [...$("signals").children].forEach((b,i)=>b.setAttribute("aria-pressed",SIGNALS[i].id===id?"true":"false"));
+  $("scene").innerHTML=SCENE;
+  $("scene").querySelectorAll(".hit").forEach(h=>h.addEventListener("click",()=>tapReceptor(h.dataset.r)));
+  $("sceneNote").textContent="Tap the receptor you think "+SIG.name+" can use.";
+  $("receptionNote").innerHTML="<strong>Which receptor can "+SIG.name+" use?</strong> Decide from what you were told about the molecule, not from the picture — the one property that settles it is whether it can get through the membrane on its own.";
+  $("railHead").textContent="The relay, one stage at a time";
+  $("rail").innerHTML="";
+  $("step").disabled=true; $("reset").disabled=true;
+  window.scrollTo({top:$("scene").offsetTop-70,behavior:"smooth"});
+}
+
+function tapReceptor(r){
+  if(!SIG) return;
+  const lg=$("ligand");
+  if(r!==SIG.right){
+    const [x,y]=HOME[r]; lg.setAttribute("transform","translate("+x+","+y+")"); lg.classList.add("on");
+    $("receptionNote").innerHTML="<strong>Not this one.</strong> "+WRONG[SIG.id][r]+" Try again.";
+    return;
+  }
+  const [x,y]=HOME[r]; lg.setAttribute("transform","translate("+x+","+y+")"); lg.classList.add("on");
+  if(SIG.soluble) $("scene").querySelector("#r-steroid").classList.remove("fade");
+  $("receptionNote").innerHTML="<strong>Yes.</strong> "+SIG.why;
+  $("sceneNote").textContent="";
+  PATH=PATHWAYS[SIG.right]; shown=0; blockedAt=null;
+  $("railHead").textContent=PATH.label+" — "+PATH.stages.length+" stages";
+  renderRail();
+  $("step").disabled=false; $("reset").disabled=false;
+  $("step").textContent="Run the first stage";
+}
+
+/* ---------------- the stage rail ---------------- */
+function fmt(n){
+  if(n>=1e8) return "~100,000,000";
+  if(n>=1e6) return "~1,000,000";
+  return n.toLocaleString("en-US");
+}
+function renderRail(){
+  const holder=$("rail"); holder.innerHTML="";
+  const max=Math.log10(Math.max.apply(null,PATH.stages.map(s=>s.n)))||1;
+  PATH.stages.forEach((st,i)=>{
+    const open=i<shown;
+    const after=blockedAt!==null && i>blockedAt;
+    const sec=document.createElement("section");
+    sec.className="stage"+(open?"":" pending")+(blockedAt===i?" blocked":"");
+    sec.style.setProperty("--accent",PATH.colour);
+    let html='<div class="shead"><h3>'+(i+1)+'. '+st.h+'</h3>';
+    if(open) html+='<span class="count">'+(after?"0 — stopped upstream":fmt(st.n)+(st.n===1?" molecule":" molecules"))+'</span>';
+    html+='</div>';
+    if(open){
+      const pct=after?0:Math.max(6,Math.round(Math.log10(st.n)/max*100));
+      html+='<div class="amp"><i style="width:'+pct+'%"></i></div>';
+      html+='<p>'+(after?"Nothing reaches this stage: the relay was cut at step "+(blockedAt+1)+".":st.p)+'</p>';
+      html+='<button class="blockbtn" type="button" data-i="'+i+'" aria-pressed="'+(blockedAt===i)+'">'+
+            (blockedAt===i?"Blocked — tap to unblock":"Block this step")+'</button>';
+      if(blockedAt===i) html+='<div class="consequence">'+st.blocked+'</div>';
+    }
+    sec.innerHTML=html;
+    holder.appendChild(sec);
+  });
+  holder.querySelectorAll(".blockbtn").forEach(b=>b.addEventListener("click",()=>{
+    const i=+b.dataset.i;
+    blockedAt=(blockedAt===i)?null:i;
+    renderRail();
+  }));
+  const last=shown>=PATH.stages.length;
+  $("step").textContent=last?"Pathway complete":(shown===0?"Run the first stage":"Run the next stage");
+  $("step").disabled=last;
+  if(last){ done[SIG.right]=true; renderCompare(); }
+  if($("scene").querySelector("#pore") && SIG.right==="channel")
+    $("scene").querySelector("#pore").setAttribute("width", shown>=2 && blockedAt===null ? "18":"12");
+}
+
+$("step").addEventListener("click",()=>{
+  if(!PATH) return;
+  if(blockedAt!==null && shown>blockedAt){ shown=PATH.stages.length; }
+  else shown=Math.min(shown+1,PATH.stages.length);
+  renderRail();
+  const secs=$("rail").querySelectorAll(".stage");
+  if(secs[shown-1]) secs[shown-1].scrollIntoView({behavior:"smooth",block:"center"});
+});
+$("reset").addEventListener("click",()=>{ shown=0; blockedAt=null; renderRail(); });
+
+/* ---------------- compare the three ---------------- */
+const ROWS=[["label","Receptor"],["speed","How fast"],["amplified","How much it is amplified"],["lasts","How long it lasts"]];
+function renderCompare(){
+  const tb=$("cmp").querySelector("tbody"); tb.innerHTML="";
+  const head=document.createElement("tr");
+  head.innerHTML='<th></th>'+["gpcr","channel","steroid"].map(k=>
+    '<th>'+(done[k]?PATHWAYS[k].label:"not run yet")+'</th>').join("");
+  tb.appendChild(head);
+  ROWS.slice(1).forEach(([key,label])=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML='<td>'+label+'</td>'+["gpcr","channel","steroid"].map(k=>
+      done[k]?'<td>'+PATHWAYS[k][key]+'</td>':'<td class="un">run it</td>').join("");
+    tb.appendChild(tr);
+  });
+  const n=Object.keys(done).length;
+  if(n===3){
+    const tr=document.createElement("tr");
+    tr.innerHTML='<td colspan="4" style="padding-top:.8rem;font-family:var(--serif);font-weight:400">'+
+      'All three run. The trade is the thing worth remembering: the cascade buys enormous amplification and pays for it in time, '+
+      'the gate buys speed and pays for it in reach, and the steroid buys a lasting change and pays for it in hours. '+
+      'A cell picks the pathway that fits the job, not the fastest one.</td>';
+    tb.appendChild(tr);
+  }
+}
+renderCompare();
+
+/* ---------------- initial state ---------------- */
+$("scene").innerHTML=SCENE;
+$("scene").querySelectorAll(".hit").forEach(h=>h.addEventListener("click",()=>tapReceptor(h.dataset.r)));
+$("sceneNote").textContent="Three ways in. Pick a signal above and the tool will ask you which one it can use.";
+$("receptionNote").innerHTML="<strong>Before you pick.</strong> Every one of these receptors is waiting all the time. What decides which one a signal uses is a property of the signal, not of the cell \u2014 and the first thing to check is whether the molecule can cross an oily bilayer on its own.";
+$("step").disabled=true; $("reset").disabled=true;
+</script>
+</body>
+</html>
