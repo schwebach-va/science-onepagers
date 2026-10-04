@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
-<!-- Bio Tool #20, published 2026-10-04 at Reid's direction. Built 2026-10-04 from Reid's notes on the semester paper,
+<!-- Bio Tool #20, published 2026-10-04 at Reid's direction; Part 5 outline A-D and milestone labels aligned with his NVCC spec the same night. Built 2026-10-04 from Reid's notes on the semester paper,
      his NVCC assignment "Annotated Bibliography for Paper #1" (the three reflection questions, ten Google
      Scholar sources, the annotation questions) and the syllabus (25 points, revisable, topic of the
      student's choosing). Sentences are Claude's draft for Reid to mark up. Stores only in this browser
@@ -169,7 +169,7 @@ function or(x,fallback){return x?x:fallback;}
 
 /* ---------- the prompts (built from what the student typed) ---------- */
 var COPILOT="https://m365.cloud.microsoft/chat/?auth=2";
-var WHO="I am a high school student taking a college biology course (dual enrollment, BIO 101). I am planning a review paper of a few pages that will cite peer-reviewed sources with numbered citations. ";
+var WHO="I am a high school student taking a college biology course (dual enrollment, BIO 101). I am planning a two-page paper that will cite at least ten peer-reviewed sources with numbered citations. ";
 var RULE="Do not write any part of my paper for me, and do not give me references: I will find every source myself in Google Scholar.";
 function kw(){return or(v("keywords"),or(v("narrow"),or(v("broad"),"[your keywords]")));}
 var PROMPTS={
@@ -182,7 +182,7 @@ var PROMPTS={
     "3. Then ask me three questions that would help me choose between them.\n"+RULE;},
   push:function(){return WHO+"My broad area is: "+or(v("broad"),"[broad area]")+"\nMy narrower topic is: "+or(v("narrow"),"[narrower topic]")+"\nMy question right now is: "+or(v("question"),"[your question]")+"\n\n"+
     "Act as a tough but friendly research advisor.\n"+
-    "1. Tell me whether this question is too broad, about right, or too narrow for a paper of a few pages, and why.\n"+
+    "1. Tell me whether this question is too broad, about right, or too narrow for a two-page paper, and why.\n"+
     "2. Offer three sharper versions, each naming a specific molecule, cell, organism or process.\n"+
     "3. Ask me five questions back that would make me think harder about what I actually want to know.\n"+
     "Do not answer my question yet. "+RULE;},
@@ -229,7 +229,7 @@ var SECTIONS=[
    {id:"scope",label:"Check your question",type:"checks",options:[
      "Published, peer-reviewed papers can answer it.",
      "It names a specific molecule, cell, organism or process.",
-     "It fits a paper of a few pages, not a book.",
+     "It fits a two-page paper, not a book.",
      "It connects to something we study in this course.",
      "I would still want to know the answer in January."]}
   ],
@@ -245,9 +245,13 @@ var SECTIONS=[
  {id:"s4",short:"Sources",num:"Part 4",title:"Ten sources from Google Scholar",
   intro:"Find ten sources in Google Scholar. Under each paper, tap Cite (the quotation mark), choose Vancouver, copy it and paste it here. Then fix what Scholar gets wrong: capitalize the journal name, list the first six authors and then “et al.”, and add the DOI if there is one. It is fine to begin with Wikipedia or a news story to learn the words, but the ten here must be papers you opened yourself.",
   sources:10},
- {id:"s5",short:"Figures",num:"Part 5",title:"Plan the figures and tables that carry your argument",
-  intro:"Each figure should make one point a reader sees at a glance. Plan one figure and one table now; you can add more in the draft.",
+ {id:"s5",short:"Outline",num:"Part 5",title:"Outline your four parts, then plan the figures",
+  intro:"Two pages hold four parts of about half a page each. Write a line or two for each part, in any order that suits your paper. Then plan one figure and one table; each should make one point a reader sees at a glance.",
   fields:[
+   {id:"outA",label:"A. What is really interesting to you in biology, and why",type:"area"},
+   {id:"outB",label:"B. Explain the topic: what the research shows",type:"area"},
+   {id:"outC",label:"C. What in this course connects to it: the biology concepts you will explain",type:"area"},
+   {id:"outD",label:"D. A career or a big idea in science (Part 6 helps)",type:"area"},
    {id:"fig1what",label:"Figure 1 will show…",hint:"A diagram of a process, a graph redrawn from a paper’s data, a comparison of structures.",type:"area"},
    {id:"fig1point",label:"The one point Figure 1 makes",hint:"Finish the sentence: “This figure shows that…”",type:"text"},
    {id:"fig1source",label:"Where it comes from",type:"checks",options:[
@@ -259,8 +263,8 @@ var SECTIONS=[
    {id:"tab1",label:"Table 1 will compare…",hint:"Rows and columns. Example: four animals (rows) by body size, life span, TP53 copies and cancer rate (columns).",type:"area"}
   ],
   prompt:{key:"figure",title:"Ask AI to review your figure plan"}},
- {id:"s6",short:"Future",num:"Part 6",title:"Future research, and what could come next",
-  intro:"Every good science paper ends by looking forward. Use what you found in Part 3, and think for yourself here: this is the part of the paper that is most yours.",
+ {id:"s6",short:"Big idea",num:"Part 6",title:"Part D: future research, and what could come next",
+  intro:"Every good science paper ends by looking forward, and in your paper that is Part D. Use what you found in Part 3, and think for yourself here: this is the part of the paper that is most yours.",
   fields:[
    {id:"unknown",label:"What is still unknown",type:"area"},
    {id:"nextexp",label:"The next experiment you would run",hint:"What would you change, what would you measure, and what would your control be?",type:"area"},
@@ -275,14 +279,14 @@ var SECTIONS=[
   intro:"Copy the due dates from Canvas, so the whole path is in one place.",
   fields:[
    {id:"ptitle",label:"Putative title",hint:"A working title you can change as the paper grows. Make it specific enough that a reader knows your question.",type:"text"},
-   {id:"m1",label:"Milestone 1 · Paper Idea Form, Parts 1–3 · due",type:"text"},
+   {id:"m1",label:"Milestone 1 · Topic and question, Parts 1–3 · due",type:"text"},
    {id:"m2",label:"Milestone 2 · Ten sources, annotated (Part 4) · due",type:"text"},
-   {id:"m3",label:"Milestone 3 · Outline and figure plan (Parts 5–6) · due",type:"text"},
-   {id:"m4",label:"Milestone 4 · First full draft with figures and references · due",type:"text"},
+   {id:"m3",label:"Milestone 3 · Outline and figure plan, Parts 5–6 · due",type:"text"},
+   {id:"m4",label:"Milestone 4 · First full draft, for feedback in Flex · due",type:"text"},
    {id:"m5",label:"Milestone 5 · Peer review and AI log · due",type:"text"},
-   {id:"m6",label:"Milestone 6 · Final manuscript · due",type:"text"},
+   {id:"m6",label:"Milestone 6 · Final paper, on NOVA Canvas · due",type:"text"},
    {id:"bfs",label:"Battlefield Science, Volume III",type:"checks",options:[
-     "I would like my paper considered for Battlefield Science, Volume III.",
+     "I plan to submit my paper to Battlefield Science, Volume III.",
      "Maybe; I will decide when I see my draft."]},
    {id:"help",label:"What you want help with first",type:"area"}
   ]}
