@@ -6,6 +6,7 @@ Follow insulin out of a pancreas beta cell, from the gene in the nucleus to the 
 - **Who reads this:** the Claude Code cloud session that builds the page. This file is the whole spec. Everything the build needs is here.
 - **Where it lives:** `_briefs/protein-route-tool.md` in `schwebach-va/science-onepagers`. Jekyll skips folders that start with `_`, so this file is never served. Do not add a `.nojekyll`.
 - **Amended 2026-10-04, after Reid's review of the build:** N1's first miss note reworded ("builds only the copy, the message") and a Unit-4-words variant added as `missU4` ("builds only mRNA"); the level switch reads "SOL Bio" / "DE Bio"; the fine note gained the screenshot, Fill-screen and pinch-zoom sentences; a next-step ring (lime green, one control at a time) marks what to press next. Tests T1–T21 re-run; T22 added for the ring.
+- **Amended 2026-10-04, second pass (Step 8, the mission):** a new Step 8, "An athlete's day" / "Regulated secretion, one day", at both levels: one 60-second day clock (breakfast, rest, a walk, a sprint, sleep), one gauge (the blood-sugar trace on the graph canvas), one control (Release a packet), one score (seconds in the band), and two what-if switches (Type 1: no packets, Inject insulin; Type 2: each packet does a third as much). Items N15, N16, D15, D16 added to §8–§9 below; every number lives in `ROUTE_DATA.mission` and is labelled illustrative. Tests T23 (the mission model: a no-tap day stays high, a thoughtful day reaches the 30-second goal, three taps in the sprint crash it, Type 1 and Type 2 behave as claimed), T24 (eight dots, eight record rows, state survives reload) and T25 (real pointer and keyboard: the N15 tap, Start the day, three Release taps, the Type 1 switch, Inject, typing in the sentence box) added; T1 and T22 extended. 48 checks pass at both device settings. The design is in the DE Bio project doc "2026-10-04 Step 8 mission design".
 - **Checked before handoff:** every key in §8–§9 against its option list; a `miss` for every wrong option; a `sam` for every DE wrong option; the 9th-grade forbidden-word list over every 9th string in §6 and §8; the insulin numbers against UniProt P01308; the four sources in §4.3 against PubMed (PMIDs given). An independent review pass then read the brief cold; 16 of its 17 findings are applied (option lengths evened so no key stands out, the proinsulin arithmetic closed with its four linking residues, the chase run at Low and High so it agrees with the glucose gate, 9th sorting matched to DE, history and wording fixes). The one not applied: it questioned "BIO.2d (protein synthesis)", but in the 2018 Virginia standards BIO.2d is protein synthesis, matching Reid's Year Analysis.
 
 ---
@@ -582,7 +583,25 @@ const BANK9 = [
  miss:{0:"Only one piece is cut out. The rest stays as chains.",
        1:"Cutting a piece out makes the molecule shorter, not longer.",
        3:"The cut finishes insulin. It does not destroy it."},
- src:"S5 Advanced"}
+ src:"S5 Advanced"},
+
+{n:"N15", step:"S8", role:"pre", topic:"Right amount, right time",
+ stem:"The sprint starts. Working muscles take in sugar on their own, without insulin. What should the beta cell do with its packets?",
+ opts:["Release many more packets to keep up with the muscles","Release fewer; the blood sugar is already falling","Release the same amount, no matter what the body is doing","Send the packets back to the Golgi to be refilled"], key:1,
+ why:"During a sprint the muscles pull sugar out of the blood on their own, so the blood sugar is already falling. Releasing more insulin now would push it too low. The beta cell releases less when sugar falls and more when it rises: that is homeostasis.",
+ miss:{0:"More insulin on top of hard-working muscles pushes the blood sugar too low. Watch the gauge in the sprint before you tap.",
+       2:"The beta cell changes its release as the blood sugar changes. The same amount all day would be a cell that cannot listen.",
+       3:"Packets do not go back. They wait at the membrane until they are released or replaced."},
+ src:"S8 mission; Module 2 homeostasis"},
+
+{n:"N16", step:"S8", role:"post", topic:"When the loop breaks",
+ stem:"In the Type 1 what-if, the beta cell had no packets and the person ate the same breakfast. What happened to the blood sugar, and what fixed it?",
+ opts:["It stayed high, because no packets could release; injected insulin brought it down","It fell too low, because the packets released all at once; eating fixed it","Nothing changed, because other cells released insulin instead","It stayed in range on its own; the injection was not needed"], key:0,
+ why:"With no beta cells there is no insulin, so after a meal the blood sugar climbs and stays high. Insulin made outside the body, like the insulin from the bacterium in Step 7, is injected to do the job the packets cannot. Type 2 is a different break: the packets release, but the cells answer less.",
+ miss:{1:"With no packets there is nothing to release. The trace went up, not down.",
+       2:"Only beta cells make insulin. No other cell steps in.",
+       3:"Without insulin the sugar stayed high after the meal. Something had to bring it down."},
+ src:"S8 mission, Type 1 what-if; S7 bacterium"}
 ];
 ```
 
@@ -759,7 +778,31 @@ const BANKDE = [
  sam:{0:"Write a SAM question: 'What limits the length of a protein a ribosome can make?' Answer it, then compare a bacterial ribosome with yours.",
       2:"Write a SAM question that explains what had to be done to a human gene so a bacterium could express it.",
       3:"Write a SAM question that compares where insulin ends up in a β cell and in a bacterium, and why."},
- src:"Goeddel et al. 1979"}
+ src:"Goeddel et al. 1979"},
+
+{n:"D15", step:"S8", role:"pre", topic:"Regulated secretion during exercise",
+ stem:"During a sprint, contracting muscle moves GLUT4 to its membrane and takes up glucose without insulin. What should regulated insulin secretion do, and why?",
+ opts:["Fall: exercise lowers plasma glucose on its own, so more secretion would risk hypoglycemia","Rise: muscle cannot take up any glucose without insulin","Stay constant: insulin secretion is constitutive","Switch to secreting C-peptide alone"], key:0,
+ why:"Contraction drives glucose uptake independently of insulin, so plasma glucose falls during exercise and β cells secrete less. Secretion tracks glucose: that is what regulated means.",
+ miss:{1:"Contraction-stimulated uptake does not need insulin. That is why exercise lowers glucose even in insulin resistance.",
+       2:"Insulin secretion is regulated, not constitutive: granules wait for rising glucose.",
+       3:"C-peptide and insulin are released together, one for one, from the same granules."},
+ sam:{1:"Write a SAM question: 'Why does exercise lower blood glucose in a person with type 2 diabetes?' Answer it with GLUT4.",
+      2:"Write a SAM question that contrasts constitutive and regulated secretion with one example of each.",
+      3:"Write a SAM question about what a C-peptide test can and cannot tell a clinician."},
+ src:"S8 mission; Campbell Ch. 5 and 7 (exercise and GLUT4)"},
+
+{n:"D16", step:"S8", role:"post", topic:"Insulin resistance",
+ stem:"In the Type 2 what-if, each granule lowered glucose less, and the trace drifted high despite steady secretion. Which term names that, and what does the β cell do in response?",
+ opts:["Insulin resistance; the β cell secretes more, and over years may fail to keep up","Insulin deficiency; no granules could fuse at all","Hypoglycemia; glucose fell below the band","Constitutive secretion; granules fused without a signal"], key:0,
+ why:"In type 2 diabetes target cells respond less to insulin, so β cells secrete more to compensate; over time they may not keep up. In type 1 the β cells are gone and there is no secretion at all.",
+ miss:{1:"The granules fused in the what-if. The problem was downstream, in the responding cells.",
+       2:"The trace drifted high, not low. Hypoglycemia is the opposite problem.",
+       3:"Secretion was still triggered by glucose. Regulated secretion that is answered less is resistance."},
+ sam:{1:"Write a SAM question that distinguishes type 1 and type 2 diabetes by where the loop breaks.",
+      2:"Write a SAM question: 'What would a glucose trace look like with too much insulin?' and answer it.",
+      3:"Write a SAM question on why metformin and exercise help in type 2 but injected insulin is the only option in type 1."},
+ src:"S8 mission, Type 2 what-if"}
 ];
 ```
 

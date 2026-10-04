@@ -419,7 +419,7 @@ details.teachers li{margin:0 0 .35rem}
   <div class="fine simp" id="simplifies"></div>
 </section>
 
-<footer class="sop-foot"><span id="footlv">Module 2, Cell Structure and Function &middot; Biology I, SOL BIO.3b (cell structures and their functions); Unit 4, SOL BIO.2d (protein synthesis) and BIO.5e (synthetic biology)</span> &middot; seven steps, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+<footer class="sop-foot"><span id="footlv">Module 2, Cell Structure and Function &middot; Biology I, SOL BIO.3b (cell structures and their functions); Unit 4, SOL BIO.2d (protein synthesis) and BIO.5e (synthetic biology)</span> &middot; eight steps, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
 </div>
 
 <script>
@@ -481,7 +481,31 @@ const ROUTE_DATA = {
     approvalYear: 1982,  // first insulin from engineered bacteria approved for patients in the US
     text9: "In 1979 scientists reported bacteria building human insulin chains. In 1982 the first insulin made this way was approved for patients."
   },
-  palade: { year: 1967, nobel: 1974 }
+  palade: { year: 1967, nobel: 1974 },
+  // Step 8, "An athlete's day" (both levels). ILLUSTRATIVE numbers: the shape of the loop is the point.
+  // Every screen that shows the trace says "numbers illustrative".
+  mission: {
+    band: { low: 70, high: 140 },  // mg/dL, the green band (approximate normal range)
+    start: 95,                     // mg/dL at the start of the day
+    floor: 40, ceiling: 260,       // the gauge's range
+    sceneSec: 12,                  // each scene, in seconds; five scenes make the 60-second day
+    scenes: [                      // drift in mg/dL per second with no insulin acting; sens = how strongly insulin acts (exercise raises it)
+      { key: "breakfast", drift:  8.0, sens: 1.0 },
+      { key: "rest",      drift:  0.5, sens: 1.0 },
+      { key: "walk",      drift: -0.8, sens: 1.2 },   // working muscle takes up glucose on its own, and insulin acts harder
+      { key: "sprint",    drift: -2.0, sens: 1.4 },
+      { key: "sleep",     drift: -0.3, sens: 1.0 }
+    ],
+    // with no taps at all: 95 → 191 after breakfast, 197, 187, 163, 159 at the end: high all day, never in the band.
+    // Four or five packets through breakfast and rest, and none in the sprint, keep the day in the band; three packets in the sprint crash it.
+    perPacket: 1.0,                // insulin units one released packet adds
+    dropPerUnit: 2.4,              // mg/dL per second per insulin unit
+    halfLifeSec: 4,                // insulin units decay with this half-life (one packet ≈ 14 mg/dL in all)
+    refillSec: 5,                  // a released packet is replaced from the Golgi after this long
+    rangeGoalSec: 30,              // the step's goal: this many seconds in the band in one day
+    type2Factor: 0.33,             // type 2 what-if: each packet does this much
+    inject: { units: 1.5, halfLifeSec: 14, onsetSec: 3 }   // type 1 what-if: injected insulin, slower on, longer acting (≈ 73 mg/dL per shot)
+  }
 };
 // 9th-grade forbidden words. Whole word, case-insensitive (except "SRP", "M6P", "COPII" case-sensitive).
 // Checked over allText("nine") in every switch combination (T8), excluding the Sources list.
@@ -665,7 +689,25 @@ const BANK9 = [
  miss:{0:"Only one piece is cut out. The rest stays as chains.",
        1:"Cutting a piece out makes the molecule shorter, not longer.",
        3:"The cut finishes insulin. It does not destroy it."},
- src:"S5 Advanced"}
+ src:"S5 Advanced"},
+
+{n:"N15", step:"S8", role:"pre", topic:"Right amount, right time",
+ stem:"The sprint starts. Working muscles take in sugar on their own, without insulin. What should the beta cell do with its packets?",
+ opts:["Release many more packets to keep up with the muscles","Release fewer; the blood sugar is already falling","Release the same amount, no matter what the body is doing","Send the packets back to the Golgi to be refilled"], key:1,
+ why:"During a sprint the muscles pull sugar out of the blood on their own, so the blood sugar is already falling. Releasing more insulin now would push it too low. The beta cell releases less when sugar falls and more when it rises: that is homeostasis.",
+ miss:{0:"More insulin on top of hard-working muscles pushes the blood sugar too low. Watch the gauge in the sprint before you tap.",
+       2:"The beta cell changes its release as the blood sugar changes. The same amount all day would be a cell that cannot listen.",
+       3:"Packets do not go back. They wait at the membrane until they are released or replaced."},
+ src:"S8 mission; Module 2 homeostasis"},
+
+{n:"N16", step:"S8", role:"post", topic:"When the loop breaks",
+ stem:"In the Type 1 what-if, the beta cell had no packets and the person ate the same breakfast. What happened to the blood sugar, and what fixed it?",
+ opts:["It stayed high, because no packets could release; injected insulin brought it down","It fell too low, because the packets released all at once; eating fixed it","Nothing changed, because other cells released insulin instead","It stayed in range on its own; the injection was not needed"], key:0,
+ why:"With no beta cells there is no insulin, so after a meal the blood sugar climbs and stays high. Insulin made outside the body, like the insulin from the bacterium in Step 7, is injected to do the job the packets cannot. Type 2 is a different break: the packets release, but the cells answer less.",
+ miss:{1:"With no packets there is nothing to release. The trace went up, not down.",
+       2:"Only beta cells make insulin. No other cell steps in.",
+       3:"Without insulin the sugar stayed high after the meal. Something had to bring it down."},
+ src:"S8 mission, Type 1 what-if; S7 bacterium"}
 ];
 // DE bank. Permanent numbers D1–D14. sam = a SAM question to write from that wrong choice.
 const BANKDE = [
@@ -835,7 +877,31 @@ const BANKDE = [
  sam:{0:"Write a SAM question: 'What limits the length of a protein a ribosome can make?' Answer it, then compare a bacterial ribosome with yours.",
       2:"Write a SAM question that explains what had to be done to a human gene so a bacterium could express it.",
       3:"Write a SAM question that compares where insulin ends up in a β cell and in a bacterium, and why."},
- src:"Goeddel et al. 1979"}
+ src:"Goeddel et al. 1979"},
+
+{n:"D15", step:"S8", role:"pre", topic:"Regulated secretion during exercise",
+ stem:"During a sprint, contracting muscle moves GLUT4 to its membrane and takes up glucose without insulin. What should regulated insulin secretion do, and why?",
+ opts:["Fall: exercise lowers plasma glucose on its own, so more secretion would risk hypoglycemia","Rise: muscle cannot take up any glucose without insulin","Stay constant: insulin secretion is constitutive","Switch to secreting C-peptide alone"], key:0,
+ why:"Contraction drives glucose uptake independently of insulin, so plasma glucose falls during exercise and β cells secrete less. Secretion tracks glucose: that is what regulated means.",
+ miss:{1:"Contraction-stimulated uptake does not need insulin. That is why exercise lowers glucose even in insulin resistance.",
+       2:"Insulin secretion is regulated, not constitutive: granules wait for rising glucose.",
+       3:"C-peptide and insulin are released together, one for one, from the same granules."},
+ sam:{1:"Write a SAM question: 'Why does exercise lower blood glucose in a person with type 2 diabetes?' Answer it with GLUT4.",
+      2:"Write a SAM question that contrasts constitutive and regulated secretion with one example of each.",
+      3:"Write a SAM question about what a C-peptide test can and cannot tell a clinician."},
+ src:"S8 mission; Campbell Ch. 5 and 7 (exercise and GLUT4)"},
+
+{n:"D16", step:"S8", role:"post", topic:"Insulin resistance",
+ stem:"In the Type 2 what-if, each granule lowered glucose less, and the trace drifted high despite steady secretion. Which term names that, and what does the β cell do in response?",
+ opts:["Insulin resistance; the β cell secretes more, and over years may fail to keep up","Insulin deficiency; no granules could fuse at all","Hypoglycemia; glucose fell below the band","Constitutive secretion; granules fused without a signal"], key:0,
+ why:"In type 2 diabetes target cells respond less to insulin, so β cells secrete more to compensate; over time they may not keep up. In type 1 the β cells are gone and there is no secretion at all.",
+ miss:{1:"The granules fused in the what-if. The problem was downstream, in the responding cells.",
+       2:"The trace drifted high, not low. Hypoglycemia is the opposite problem.",
+       3:"Secretion was still triggered by glucose. Regulated secretion that is answered less is resistance."},
+ sam:{1:"Write a SAM question that distinguishes type 1 and type 2 diabetes by where the loop breaks.",
+      2:"Write a SAM question: 'What would a glucose trace look like with too much insulin?' and answer it.",
+      3:"Write a SAM question on why metformin and exercise help in type 2 but injected insulin is the only option in type 1."},
+ src:"S8 mission, Type 2 what-if"}
 ];
 
 /* ================= content: words, labels, parts ================= */
@@ -863,12 +929,13 @@ const WORDS={
  transcription:{u4:true,w:"transcription",d:"copying a gene into mRNA, inside the nucleus"},
  translation:{u4:true,w:"translation",d:"reading the mRNA at a ribosome to build the protein"},
  synbio:{u4:true,w:"synthetic biology",d:"putting a gene into another organism on purpose so it makes a protein"},
- sulfur:{adv:true,w:"sulfur bridge",d:"a link between two sulfur atoms in a protein that holds its fold in place"}
+ sulfur:{adv:true,w:"sulfur bridge",d:"a link between two sulfur atoms in a protein that holds its fold in place"},
+ diabetes:{w:"diabetes",d:"when the body cannot keep its blood sugar in range: in type 1 the beta cells are gone; in type 2 the cells answer insulin less"}
 };
 /* the regex that decides whether a step's text uses a tool-native word (the chip check reads these too) */
 const WORDRX={insulin:/\binsulin\b/i,hormone:/\bhormones?\b/i,pancreas:/\bpancreas\b/i,betacell:/\bbeta cells?\b/i,pore:/\bnuclear pores?\b/i,copy:/\b(copy|copies|message)\b/i,receptor:/\breceptors?\b/i,tag:/\baddress tags?\b/i,packet:/\bpackets?\b/i,bloodsugar:/\bblood sugar\b/i,bacterium:/\bbacteri(um|a)\b/i,
  exo:/\bexo-|\bexocytosis\b/i,endo:/\bendo-|\bendocytosis\b/i,cyto:/\bcyto\b/i,
- gene:/\bgenes?\b/i,mrna:/\bm?RNA\b|\bmessenger RNA\b/,trna:/\btRNA\b|\btransfer RNA\b/i,codon:/\bcodons?\b/i,transcription:/\btranscription\b/i,translation:/\btranslation\b/i,synbio:/\bsynthetic biology\b/i,sulfur:/\bsulfur\b/i};
+ gene:/\bgenes?\b/i,mrna:/\bm?RNA\b|\bmessenger RNA\b/,trna:/\btRNA\b|\btransfer RNA\b/i,codon:/\bcodons?\b/i,transcription:/\btranscription\b/i,translation:/\btranslation\b/i,synbio:/\bsynthetic biology\b/i,sulfur:/\bsulfur\b/i,diabetes:/\bdiabetes\b/i};
 
 /* Stage labels. nine = the 9th-grade words (§7.1), de = the DE words (§7.2). msgU4 / tagU4 replace msg / tag when Unit 4 words are On. */
 const LBL={
@@ -877,14 +944,16 @@ const LBL={
    trna:"tRNA",codon:"codon",rec:"receptor",lysoE:"digestive enzyme",cytoE:"cytoplasm enzyme",fold:"folds",cut:"ticket cut off",bridge:"sulfur bridges",dnaHome:"the DNA stays home",exo:"exocytosis: exo- (out) + cyto (cell)",endo:"endocytosis: endo- (in) + cyto (cell)",
    blocked:"✕ blocked",whatif:"What if? (a thought experiment)",piling:"piling up",dry:"running dry",bact:"Bacterium (a prokaryote)",bactDNA:"DNA, loose in the cytoplasm",bactRibo:"ribosomes",chains:"insulin chains, piling up",noGolgi:"no nucleus, no ER, no Golgi",forScale:"beta cell, for scale",
    low:"low",normal:"normal",high:"high",middle:"middle piece cut out",released:"insulin and the middle piece, released",membrane:"Cell membrane",cyto:"Cytoplasm",outside:"Outside the cell",tapTicket:"Tap the ticket",start:"Tap Copy the instructions to start",
-   startBuild:"Tap Start building",startFold:"Tap Fold when the chain is inside the ER",pick:"Pick a protein and tap Send it",pickBlock:"Pick a place to block, then tap Run",give:"Tap Give the bacterium the insulin instructions",insGene:"insulin instructions, added"},
+   startBuild:"Tap Start building",startFold:"Tap Fold when the chain is inside the ER",pick:"Pick a protein and tap Send it",pickBlock:"Pick a place to block, then tap Run",give:"Tap Give the bacterium the insulin instructions",insGene:"insulin instructions, added",
+   startDay:"Tap Start the day",scenes:{breakfast:"Breakfast",rest:"Rest",walk:"A walk",sprint:"A sprint",sleep:"Sleep"},inRange:"in range",tooHigh:"too high",tooLow:"too low",band:"the green band: blood sugar in range",dayDone:"The day is over",inject:"insulin, injected",illusNum:"numbers illustrative"},
  de:{cell:"β cell",vessel:"Capillary",nucleus:"Nucleus",dna:"DNA",ins_instr:"INS gene",pore:"nuclear pore complex",msg:"mRNA",msgU4:"mRNA",ribo:"ribosome",riboFree:"free ribosome",riboBound:"bound ribosome",
    er:"Rough ER",golgi:"Golgi apparatus",golgiIn:"cis face",golgiOut:"trans face",lyso:"Lysosome",mito:"Mitochondrion",pkts:"Secretory granules",ins:"Insulin",gluc:"Plasma glucose",vesicle:"transport vesicle",chain:"nascent chain",ticket:"signal peptide",tag:"M6P",
    trna:"tRNA",codon:"codon",rec:"GLP-1 receptor",lysoE:"lysosomal hydrolase",cytoE:"cytosolic enzyme",fold:"folds",cut:"signal peptide removed",bridge:"disulfide bonds",dnaHome:"the gene stays put",exo:"exocytosis",endo:"endocytosis",
    blocked:"✕ blocked",whatif:"Block a step",piling:"accumulating",dry:"starved",bact:"E. coli (a prokaryote)",bactDNA:"chromosome, in the cytosol",bactRibo:"70S ribosomes",chains:"insulin chains, accumulating",noGolgi:"no nucleus, no ER, no Golgi",forScale:"β cell, for scale",
    low:"low",normal:"normal",high:"high",middle:"C-peptide cut out",released:"insulin + C-peptide, released 1:1",membrane:"Plasma membrane",cyto:"Cytosol",outside:"Extracellular",tapTicket:"Tap the signal peptide",start:"Tap Copy the instructions to start",
    startBuild:"Tap Start building",startFold:"Tap Fold when the chain is in the ER lumen",pick:"Pick a cargo and tap Send it",pickBlock:"Pick a block, then tap Run",give:"Tap Give the bacterium the insulin instructions",insGene:"insulin gene on a plasmid",
-   srp:"SRP",label:"radioactive label",pulse:"pulse",chase:"chase",plasmid:"plasmid",illus:"times illustrative",approx:"approximate",mgdl:"mg/dL",brefeldin:"Real drugs can stop traffic from the ER to the Golgi; brefeldin A is one used in labs."}
+   srp:"SRP",label:"radioactive label",pulse:"pulse",chase:"chase",plasmid:"plasmid",illus:"times illustrative",approx:"approximate",mgdl:"mg/dL",
+   startDay:"Tap Start the day",scenes:{breakfast:"Breakfast",rest:"Rest",walk:"A walk",sprint:"A sprint",sleep:"Sleep"},inRange:"in range",tooHigh:"hyperglycemic",tooLow:"hypoglycemic",band:"the band: plasma glucose 70–140 mg/dL",dayDone:"The day is over",inject:"insulin, injected",illusNum:"numbers illustrative",brefeldin:"Real drugs can stop traffic from the ER to the Golgi; brefeldin A is one used in labs."}
 };
 /* Parts a teacher can pin a callout on (Teaching view). One line each, in the level's words. */
 const PARTS={
@@ -892,13 +961,13 @@ const PARTS={
    er:["Rough ER","Flattened sacs joined to the nucleus's covering, studded with ribosomes. Chains are threaded in here to fold."],ribo:["Free ribosomes","Builders that link amino acids into a chain. One ends up on the ER only if its chain's front sends it there."],golgi:["Golgi apparatus","Finishes each protein and sorts it into its own kind of vesicle. Some get a chemical address tag."],
    pkts:["Insulin packets","Vesicles holding insulin, waiting near the membrane for blood sugar to rise."],lyso:["Lysosome","A vesicle of digestive enzymes. Its enzymes arrive from the Golgi with an address tag."],mito:["Mitochondrion","Scenery here: it makes the cell's ATP. It builds no proteins on this route."],
    membrane:["Cell membrane","A phospholipid bilayer. A packet's membrane is the same bilayer, so the two can merge."],vessel:["Blood vessel","Where released insulin goes. The hexagons are blood sugar."],gluc:["Blood sugar","Glucose in the blood. High blood sugar opens the packets."],
-   vesicle:["Vesicle","A small bubble of membrane that carries a protein from one stop to the next."],bact:["Bacterium","A prokaryote: ribosomes and DNA, but no nucleus, ER or Golgi. It can build chains but not finish them."],block:["Block","A stop that cannot hand its protein on. Everything before it piles up; everything after runs dry."]},
+   vesicle:["Vesicle","A small bubble of membrane that carries a protein from one stop to the next."],sugar:["Blood sugar over the day","The line is the blood sugar through one day. The green band is the range the body keeps it in. Each packet you release pulls the line down for a few seconds."],bact:["Bacterium","A prokaryote: ribosomes and DNA, but no nucleus, ER or Golgi. It can build chains but not finish them."],block:["Block","A stop that cannot hand its protein on. Everything before it piles up; everything after runs dry."]},
  de:{nucleus:["Nucleus","INS is transcribed here. The gene stays; the processed mRNA is exported through nuclear pore complexes."],pore:["Nuclear pore complex","Gated channel through the nuclear envelope. mRNA exits here; nothing crosses the envelope's bilayers directly."],dna:["DNA","The INS gene. Nearly every cell carries it; β cells transcribe it at a high rate."],
    er:["Rough ER","Continuous with the outer nuclear membrane. Signal peptides dock ribosomes here; chains enter the lumen, fold and form disulfide bonds."],ribo:["Free ribosomes","Identical to bound ones. A ribosome binds the ER only when the chain it is making carries a signal peptide."],golgi:["Golgi apparatus","cis face receives ER vesicles; the trans face sorts: M6P-tagged hydrolases to lysosomes, membrane proteins in vesicle membrane, insulin into secretory granules."],
    pkts:["Secretory granules","Stored insulin, released by regulated exocytosis when glucose rises. Proinsulin is processed to insulin and C-peptide inside them."],lyso:["Lysosome","Acid hydrolases delivered by M6P receptors from the trans Golgi."],mito:["Mitochondrion","Scenery here. Its own proteins arrive by a different targeting signal."],
    membrane:["Plasma membrane","Granule membrane is added to it at every fusion. Membrane proteins arrive in vesicle membrane, ER-lumen side facing out."],vessel:["Capillary","Where released insulin and C-peptide go, one for one."],gluc:["Plasma glucose","Glucose metabolism raises cytosolic Ca²⁺ and triggers granule fusion."],
    vesicle:["Transport vesicle","COPII-coated from the ER; carries cargo and membrane to the cis Golgi."],bact:["E. coli","70S ribosomes in the cytosol, no endomembrane system. It translates the chains; people fold and join them."],block:["Block","A step that cannot pass cargo on. The compartment before it accumulates; everything downstream is starved."],
-   graph:["The chase graph","Fraction of the labelled cohort in each compartment against chase time. The order is the point; the times are illustrative."],srp:["SRP","Signal-recognition particle: binds the emerging signal peptide, pauses translation, docks the ribosome at the ER."]}
+   graph:["The chase graph","Fraction of the labelled cohort in each compartment against chase time. The order is the point; the times are illustrative."],sugar:["Plasma glucose over the day","Plasma glucose through one compressed day; the band is 70–140 mg/dL. Each granule you release adds insulin that decays with a short half-life. Numbers illustrative."],srp:["SRP","Signal-recognition particle: binds the emerging signal peptide, pauses translation, docks the ribosome at the ER."]}
 };
 
 /* ================= content: steps (§6) ================= */
@@ -964,7 +1033,15 @@ const STEPS=[
   nine:"A bacterium is a prokaryote: no nucleus, no ER, no Golgi, but it does have ribosomes, because every cell builds proteins. Given the human instructions for insulin, its ribosomes can build the chains. It has nowhere to fold, trim and pack them the way a beta cell does, so the chains pile up inside. People break the bacteria open, fold and join the chains, and clean up the insulin. In 1979 scientists reported bacteria building human insulin chains; in 1982 the first insulin made this way was approved for patients.",
   nineU4:"Putting a human gene into a bacterium so it makes a human protein is synthetic biology.",
   de:"Prokaryotes translate on 70S ribosomes in the cytosol and have no endomembrane system. Goeddel et al. (1979) expressed synthetic genes for the A and B chains separately in E. coli and joined them in vitro; later processes made proinsulin in E. coli or yeast and converted it with enzymes. The β cell does in its ER and granules what the factory does in tanks.",
-  found:"What could the bacterium do on its own, and what did people have to finish?"}
+  found:"What could the bacterium do on its own, and what did people have to finish?"},
+ {key:"S8",short:{nine:"Mission",de:"Mission"},head:{nine:"Mission: an athlete's day",de:"Mission: regulated secretion, one day"},
+  pre:{nine:"N15",de:"D15"},post:{nine:["N16"],de:["D16"]},
+  task:{nine:"Tap Start the day. Watch the blood sugar line, and tap Release a packet to keep it in the green band through breakfast, rest, a walk, a sprint and sleep. Then try the two what-ifs.",de:"Tap Start the day. Watch the glucose trace, and tap Release a packet to keep it in the band through breakfast, rest, a walk, a sprint and sleep. Then run the two what-ifs."},
+  goals:{nine:[["day","A whole day run"],["range","Seconds in the green band in one day",30],["t1","Type 1 what-if run"],["t2","Type 2 what-if run"]],de:[["day","A whole day run"],["range","Seconds in the band in one day",30],["t1","Type 1 what-if run"],["t2","Type 2 what-if run"]]},
+  words:["insulin","packet","bloodsugar","diabetes"],
+  nine:"Now you are the beta cell. Blood sugar rises after breakfast and falls when muscles work, and each packet you release pulls it down for a few seconds. The right amount at the right time keeps the line in the green band: that is homeostasis. Too few packets after a meal and the sugar stays high; too many during a sprint and it crashes. In type 1 diabetes the beta cells are gone, so there are no packets and insulin has to be injected. In type 2 the packets release, but the cells answer less, so the sugar drifts high even when the beta cell works hard.",
+  de:"You run the β cell. Plasma glucose rises after a meal and falls as contracting muscle takes up glucose on its own; each granule you release adds insulin that decays with a short half-life. Secretion that tracks glucose keeps the trace in the band. Type 1 diabetes: no β cells, no granules, insulin must be injected and its dose timed. Type 2: granules fuse, but target cells respond less (insulin resistance), so glucose drifts high despite steady secretion and the β cell works harder to compensate. The clock compresses a day into a minute; the numbers are illustrative.",
+  found:"What told the beta cell when to release, and what happened when it could not?"}
 ];
 
 const LEDE={
@@ -981,8 +1058,8 @@ const LEGEND={
 };
 /* control labels per level, listed so the vocabulary test can read them */
 const CTLTEXT={
- nine:["▶ Play","❚❚ Pause","½×","1×","2×","Speed","Fill screen","Restore page","Reset this step","Copy the instructions","Send the DNA out","Start building","Fold","Ship to the Golgi","Protein","insulin","a receptor for the cell membrane","a digestive enzyme for a lysosome","an enzyme that works in the cytoplasm","Send it","Blood sugar","Low","Normal","High","Block","none","nuclear pore","ribosome to the ER","ER to Golgi","Golgi to packets","packets to outside","Run","Clear block","Give the bacterium the insulin instructions","Finish in the lab","Teaching view","Hide card","Show card","Card ▸","Close card"],
- de:["▶ Play","❚❚ Pause","½×","1×","2×","Speed","Fill screen","Restore page","Reset this step","Copy the instructions","Send the DNA out","Start building","Show the codons","Fold","Ship to the Golgi","Cargo","insulin (secreted, regulated)","GLP-1 receptor (integral membrane protein)","a lysosomal hydrolase","a cytosolic enzyme","Send it","Blood sugar","Low","Normal","High","Block","none","nuclear pore","ribosome docking","ER to Golgi","Golgi to granules","granules to outside","Run","Clear block","Pulse","Chase","Chase at","Give the bacterium the insulin instructions","Finish in the lab","Teaching view","Hide card","Show card","Card ▸","Close card"]
+ nine:["▶ Play","❚❚ Pause","½×","1×","2×","Speed","Fill screen","Restore page","Reset this step","Copy the instructions","Send the DNA out","Start building","Fold","Ship to the Golgi","Protein","insulin","a receptor for the cell membrane","a digestive enzyme for a lysosome","an enzyme that works in the cytoplasm","Send it","Blood sugar","Low","Normal","High","Block","none","nuclear pore","ribosome to the ER","ER to Golgi","Golgi to packets","packets to outside","Run","Clear block","Give the bacterium the insulin instructions","Finish in the lab","Start the day","The day is running","Run the day again","Release a packet","Inject insulin","What if","A healthy day","Type 1: no packets","Type 2: the cells answer less","Teaching view","Hide card","Show card","Card ▸","Close card"],
+ de:["▶ Play","❚❚ Pause","½×","1×","2×","Speed","Fill screen","Restore page","Reset this step","Copy the instructions","Send the DNA out","Start building","Show the codons","Fold","Ship to the Golgi","Cargo","insulin (secreted, regulated)","GLP-1 receptor (integral membrane protein)","a lysosomal hydrolase","a cytosolic enzyme","Send it","Blood sugar","Low","Normal","High","Block","none","nuclear pore","ribosome docking","ER to Golgi","Golgi to granules","granules to outside","Run","Clear block","Pulse","Chase","Chase at","Give the bacterium the insulin instructions","Finish in the lab","Start the day","The day is running","Run the day again","Release a packet","Inject insulin","What if","A healthy day","Type 1: no β cells","Type 2: insulin resistance","Teaching view","Hide card","Show card","Card ▸","Close card"]
 };
 const CTLU4=["Show the codons"];
 /* cargo names per level (§3) and the destination table words */
@@ -1002,12 +1079,14 @@ const BLOCKS=[["pore",{nine:"nuclear pore",de:"nuclear pore"},"nucleus"],["dock"
 const PLACE={nine:{nucleus:"the nucleus",cytoplasm:"the cytoplasm (free ribosomes)",roughER:"the rough ER",golgi:"the Golgi",packet:"the insulin packets",outside:"the blood"},de:{nucleus:"the nucleus",cytoplasm:"the cytosol (free ribosomes)",roughER:"the rough ER",golgi:"the Golgi",packet:"the secretory granules",outside:"the capillary"}};
 const CHAIN_ORDER=["nucleus","cytoplasm","roughER","golgi","packet","outside"];
 const RT={
- nine:{linked:"Amino acids linked",gluc:"Blood sugar",rel:"Insulin release",piling:"Piling up in",dry:"Running dry",none:"nothing yet",noBlock:"No block set",chains:"Chains built by the bacterium",packets:"Packets formed",left:"Insulin that left the cell",tries:"Tries to send the DNA out",copies:"Copies out",folded:"Folded",vesicles:"Vesicles to the Golgi",tapped:"Ticket seen",notyet:"not yet",yes:"yes",no:"no",docked:"Ribosome docked"},
- de:{linked:"Residues linked",gluc:"Plasma glucose",rel:"Insulin release",piling:"Accumulating in",dry:"Starved",none:"nothing yet",noBlock:"No block set",chains:"Chains translated in E. coli",packets:"Granules formed",left:"Insulin that left the cell",tries:"Tries to send the gene out",copies:"Transcripts exported",folded:"Folded",vesicles:"Vesicles to the cis Golgi",tapped:"Signal peptide tapped",notyet:"not yet",yes:"yes",no:"no",docked:"Ribosome docked",chaseT:"Chase time",label:"label in",outside:"outside",illus:"times illustrative",yaxis:"% of label",xaxis:"Chase time (minutes)",pulseFirst:"Tap Pulse, then Chase"}
+ nine:{linked:"Amino acids linked",gluc:"Blood sugar",rel:"Insulin release",piling:"Piling up in",dry:"Running dry",none:"nothing yet",noBlock:"No block set",chains:"Chains built by the bacterium",packets:"Packets formed",left:"Insulin that left the cell",tries:"Tries to send the DNA out",copies:"Copies out",folded:"Folded",vesicles:"Vesicles to the Golgi",tapped:"Ticket seen",notyet:"not yet",yes:"yes",no:"no",docked:"Ribosome docked",
+   scene:"Now",sugar:"Blood sugar",acting:"Insulin working",inRange:"In the green band",ready:"Packets ready",best:"Best day",taps:"Packets released",shots:"Injections",startDay:"Start the day",dayRunning:"The day is running",again:"Run the day again",release:"Release a packet",inject:"Inject insulin",whatif:"What if",wNone:"A healthy day",wT1:"Type 1: no packets",wT2:"Type 2: the cells answer less",yaxis:"Blood sugar",xaxis:"The day (seconds)",dayPrompt:"Tap Start the day",illusNum:"numbers illustrative",sec:"s"},
+ de:{linked:"Residues linked",gluc:"Plasma glucose",rel:"Insulin release",piling:"Accumulating in",dry:"Starved",none:"nothing yet",noBlock:"No block set",chains:"Chains translated in E. coli",packets:"Granules formed",left:"Insulin that left the cell",tries:"Tries to send the gene out",copies:"Transcripts exported",folded:"Folded",vesicles:"Vesicles to the cis Golgi",tapped:"Signal peptide tapped",notyet:"not yet",yes:"yes",no:"no",docked:"Ribosome docked",chaseT:"Chase time",label:"label in",outside:"outside",illus:"times illustrative",yaxis:"% of label",xaxis:"Chase time (minutes)",pulseFirst:"Tap Pulse, then Chase",
+   scene:"Now",sugar:"Plasma glucose",acting:"Insulin acting",inRange:"In the band",ready:"Granules ready",best:"Best day",taps:"Granules released",shots:"Injections",startDay:"Start the day",dayRunning:"The day is running",again:"Run the day again",release:"Release a packet",inject:"Inject insulin",whatif:"What if",wNone:"A healthy day",wT1:"Type 1: no β cells",wT2:"Type 2: insulin resistance",gyaxis:"Plasma glucose (mg/dL)",gxaxis:"The day (seconds)",dayPrompt:"Tap Start the day",illusNum:"numbers illustrative",sec:"s"}
 };
 const SIMPLIFIES={
- nine:["structures are far larger than scale and far fewer;","one insulin molecule stands for thousands;","the copy, the chain and the packets move much faster than in a real cell;","the glucose gate is three settings where the real response is graded;","GLP-1 and other signals that boost release are left out (they are in the Signal Patch);","the cytoskeleton tracks the vesicles ride along are not drawn;","this is a model of a cell, not medical advice."],
- de:["structures are far larger than scale and far fewer;","one insulin molecule stands for thousands;","the transcript, the chain and the granules move much faster than in a real cell;","the glucose gate is three settings where the real response is graded;","GLP-1 and other signals that boost release are left out (they are in the Signal Patch);","the pulse-chase times are illustrative;","the cytoskeleton tracks the vesicles ride along are not drawn;","this is a model of a cell, not medical advice."]
+ nine:["structures are far larger than scale and far fewer;","one insulin molecule stands for thousands;","the copy, the chain and the packets move much faster than in a real cell;","the glucose gate is three settings where the real response is graded;","GLP-1 and other signals that boost release are left out (they are in the Signal Patch);","the cytoskeleton tracks the vesicles ride along are not drawn;","the mission's day clock squeezes a day into a minute, and its numbers are illustrative;","this is a model of a cell, not medical advice."],
+ de:["structures are far larger than scale and far fewer;","one insulin molecule stands for thousands;","the transcript, the chain and the granules move much faster than in a real cell;","the glucose gate is three settings where the real response is graded;","GLP-1 and other signals that boost release are left out (they are in the Signal Patch);","the pulse-chase times are illustrative;","the mission's day clock squeezes a day into a minute, and its glucose numbers are illustrative;","the cytoskeleton tracks the vesicles ride along are not drawn;","this is a model of a cell, not medical advice."]
 };
 const DRAWIT="Close the tool. On paper, draw the cell with the route from the nucleus to the outside, name every stop, and write one job beside each. Then cross out one arrow and write what piles up.";
 const FURTHER={
@@ -1029,14 +1108,15 @@ const TEACHERS=[
  "<b>Misconceptions it is built to surface:</b> M1 the nucleus makes the protein (S1–S2) · M2 monomers and polymers (S2) · M3 organelles as a list, not a route (S3, S4, S6) · M4 every protein goes through the Golgi and leaves (S4) · M5 endo- and exo- confused (S5) · M6 insulin pours out all the time (S5) · M7 what a prokaryote can and cannot do (S7) · M8, with Unit 4 words on, which molecule carries amino acids to the ribosome (S2).",
  "<b>Where it fits:</b> Biology I Module 2, Lesson 2 (Follow the Insulin and the organelle stations), and as review before the Module 2 test; again in Unit 4 with Unit 4 words on, before the Signal Patch. DE Unit 4, the route a protein takes and the organelles with one job.",
  "<b>Read–Talk–Write:</b> students read the Follow the Insulin passage, run the tool in pairs while one retells the route, then write. Each step's \"What you found\" sentence is an evidence line.",
- "<b>Timing:</b> 20–25 minutes for S1–S7 at SOL Bio; 25–30 at DE with the pulse-chase.",
+ "<b>Timing:</b> 20–25 minutes for S1–S7 at SOL Bio; 25–30 at DE with the pulse-chase. S8, the mission, is about four more minutes (one healthy day, then the two what-ifs); it can be the second sitting.",
+ "<b>S8, the mission:</b> the student is the β cell for one compressed day (breakfast, rest, a walk, a sprint, sleep). One control, Release a packet; one gauge, the glucose trace; one score, seconds in the band. Type 1 greys out the packets and adds Inject insulin; Type 2 makes each packet do a third as much. Misconception it surfaces: M9 insulin is released at one rate whatever the body is doing. Drift and dose numbers are illustrative (see Sources: the loop shape, not the values, is the content).",
  "<b>Board prompt:</b> \"Which stop on the route would you protect if you could only protect one? Defend it.\"",
  "<b>Deep links for Canvas or a video:</b> <code>?level=nine&amp;step=5</code>, <code>?level=nine&amp;u4=1&amp;step=2</code>, <code>?level=de&amp;step=6</code>."
 ];
 const STAGELAB={nine:{cell:"A pancreas beta cell, with a blood vessel down the right edge",bact:"A bacterium, drawn beside a faded beta cell for scale"},de:{cell:"A pancreatic β cell, with a capillary down the right edge",bact:"E. coli, drawn beside a faded β cell for scale"}};
 const LIVE={
- nine:{copyOut:"The copy left through a nuclear pore",dnaHome:"The DNA bumped the covering and stayed in the nucleus",linked:n=>"Amino acid "+n+" linked",docked:"The ribosome docked on the rough ER",folded:"The chain folded in the ER",shipped:"A vesicle fused with the Golgi",arrived:(c,p)=>c+" arrived: "+p,released:"Packet released insulin",blocked:(b,p)=>"Blocked: "+b+"; "+p+" is filling",cleared:"Block cleared",chains:n=>"Chain "+n+" built inside the bacterium",lab:"Finished in the lab: cells opened, chains folded and joined, insulin purified",ticket:"The ticket at the front of the chain sent the ribosome to the ER"},
- de:{copyOut:"The mRNA left through a nuclear pore complex",dnaHome:"The gene stayed in the nucleus",linked:n=>"Residue "+n+" linked",docked:"SRP docked the ribosome on the rough ER",folded:"Proinsulin folded; three disulfide bonds formed",shipped:"A transport vesicle fused with the cis Golgi",arrived:(c,p)=>c+" arrived: "+p,released:"Granule released insulin and C-peptide",blocked:(b,p)=>"Blocked: "+b+"; "+p+" is filling",cleared:"Block cleared",chains:n=>"Chain "+n+" translated in E. coli",lab:"Finished in the lab: cells lysed, chains folded and joined, insulin purified",ticket:"Signal peptide tapped: SRP bound it",pulse:"Pulse: new chains in the rough ER are labelled",chaseDone:g=>"Chase finished at "+g+" glucose"}
+ nine:{copyOut:"The copy left through a nuclear pore",dnaHome:"The DNA bumped the covering and stayed in the nucleus",linked:n=>"Amino acid "+n+" linked",docked:"The ribosome docked on the rough ER",folded:"The chain folded in the ER",shipped:"A vesicle fused with the Golgi",arrived:(c,p)=>c+" arrived: "+p,released:"Packet released insulin",blocked:(b,p)=>"Blocked: "+b+"; "+p+" is filling",cleared:"Block cleared",chains:n=>"Chain "+n+" built inside the bacterium",lab:"Finished in the lab: cells opened, chains folded and joined, insulin purified",ticket:"The ticket at the front of the chain sent the ribosome to the ER",dayStart:"The day started: breakfast first",scene:n=>"Now: "+n,dayDone:(s,b)=>"The day is over: "+s+" seconds in the green band"+(b?"; best so far "+b:""),tooLow:"Blood sugar too low: fewer packets",tooHigh:"Blood sugar too high: release a packet",injected:"Insulin injected; it starts working in a few seconds"},
+ de:{copyOut:"The mRNA left through a nuclear pore complex",dnaHome:"The gene stayed in the nucleus",linked:n=>"Residue "+n+" linked",docked:"SRP docked the ribosome on the rough ER",folded:"Proinsulin folded; three disulfide bonds formed",shipped:"A transport vesicle fused with the cis Golgi",arrived:(c,p)=>c+" arrived: "+p,released:"Granule released insulin and C-peptide",blocked:(b,p)=>"Blocked: "+b+"; "+p+" is filling",cleared:"Block cleared",chains:n=>"Chain "+n+" translated in E. coli",lab:"Finished in the lab: cells lysed, chains folded and joined, insulin purified",ticket:"Signal peptide tapped: SRP bound it",pulse:"Pulse: new chains in the rough ER are labelled",chaseDone:g=>"Chase finished at "+g+" glucose",dayStart:"The day started: breakfast first",scene:n=>"Now: "+n,dayDone:(s,b)=>"The day is over: "+s+" seconds in the band"+(b?"; best so far "+b:""),tooLow:"Hypoglycemic: secrete less",tooHigh:"Hyperglycemic: release a granule",injected:"Insulin injected; onset in a few seconds"}
 };
 
 /* ================= devices ================= */
@@ -1115,6 +1195,7 @@ function newSim(){
     bact:{given:false,running:false,chains:[],spawnT:0,lab:false,labT:0},
     s2:{started:false,tok:null,srpT:0,codons:(st.level==="de"||st.u4)},
     s3:{tok:null,inER:false},
+    m:newMission("none"),
     liveT:0,jumpT:0,lastEv:""};
   for(let i=0;i<d.ribo;i++)SIM.ribos.push({x:RIBOFREE.x-70+rnd()*140,y:RIBOFREE.y-30+rnd()*50});
   for(let i=0;i<d.pkt;i++)SIM.pkt.push(newPkt(i));
@@ -1235,6 +1316,35 @@ function placeLabels(t,g){const S=SIM,f=chaseAt(t,g),N=S.labels.length;const ord
 function bacterium(){const S=SIM;if(!S||S.stepKey!=="S7")return;S.bact.given=true;S.bact.running=true;live(st.level==="de"?"Insulin gene added on a plasmid; translation begins":"Insulin instructions added; the ribosomes start building");}
 function runBact(){const S=SIM;if(!S||S.stepKey!=="S7"||!S.bact.given)return;S.bact.running=true;}
 function labFinish(){const S=SIM;if(!S||S.stepKey!=="S7")return;if(!S.bact.given)bacterium();S.bact.lab=true;S.bact.labT=0;S.cnt.labFinished=true;markGoal("lab");live(LIVE[st.level].lab);renderLab();}
+/* ================= Step 8, the mission (§4.4 of the brief as amended): one clock, one gauge, one control, one score ================= */
+function newMission(whatif){const M=RD.mission;return{whatif:whatif||"none",started:false,done:false,t:0,scene:0,G:M.start,I:0,J:0,jOn:[],hist:[[0,M.start]],histT:0,inRange:0,highS:0,lowS:0,taps:0,shots:0,warnT:0};}
+function missionScene(m){const M=RD.mission;return M.scenes[clamp(Math.floor(m.t/M.sceneSec),0,M.scenes.length-1)];}
+function missionStart(){const S=SIM;if(!S||S.stepKey!=="S8")return false;const m=S.m;if(m.started&&!m.done)return false;
+  const w=m.whatif;S.m=newMission(w);S.m.started=true;S.ins=[];S.pkt=[];if(w!=="t1"){for(let i=0;i<dev().pkt;i++)S.pkt.push(newPkt(i));}
+  S.gluc="normal";setGlucTok();live(LIVE[st.level].dayStart);buildCtl();readout();return true;}
+function missionRelease(){const S=SIM;if(!S||S.stepKey!=="S8")return false;const m=S.m;if(!m.started||m.done||m.whatif==="t1")return false;
+  const p=S.pkt.find(q=>q.state==="home");if(!p)return false;p.state="go";p.t=0;p.sx=p.x;p.sy=p.y;p.targetY=clamp(p.hy+(rnd()-.5)*40,CELL.y0+150,CELL.y1-150);m.taps++;return true;}
+function missionInject(){const S=SIM;if(!S||S.stepKey!=="S8")return false;const m=S.m;if(!m.started||m.done||m.whatif!=="t1")return false;
+  m.jOn.push({u:RD.mission.inject.units,t:0});m.shots++;spawnIns(CELL.y0+90,false);live(LIVE[st.level].injected);return true;}
+function setWhatif(v){const S=SIM;if(!S||S.stepKey!=="S8")return;v=v==="t1"||v==="t2"?v:"none";const m=S.m;if(m.started&&!m.done)return;
+  S.m=newMission(v);S.ins=[];S.pkt=[];if(v!=="t1"){for(let i=0;i<dev().pkt;i++)S.pkt.push(newPkt(i));}S.gluc="normal";setGlucTok();buildCtl();readout();}
+function missionStep(sdt){
+  const S=SIM,M=RD.mission,m=S.m,lvl=st.level;if(!m.started||m.done)return;
+  m.t+=sdt;const sc=missionScene(m),si=M.scenes.indexOf(sc);if(si!==m.scene){m.scene=si;live(LIVE[lvl].scene(LBL[lvl].scenes[sc.key]));}
+  const decay=h=>Math.pow(.5,sdt/h);
+  m.I*=decay(M.halfLifeSec);
+  m.jOn.forEach(j=>{j.t+=sdt;});m.jOn.filter(j=>j.t>=M.inject.onsetSec).forEach(j=>{m.J+=j.u;});m.jOn=m.jOn.filter(j=>j.t<M.inject.onsetSec);
+  m.J*=decay(M.inject.halfLifeSec);
+  m.G=clamp(m.G+(sc.drift-M.dropPerUnit*(sc.sens||1)*(m.I+m.J))*sdt,M.floor,M.ceiling);
+  if(m.G>=M.band.low&&m.G<=M.band.high)m.inRange+=sdt;else if(m.G>M.band.high)m.highS+=sdt;else m.lowS+=sdt;
+  m.histT-=sdt;if(m.histT<=0){m.hist.push([+m.t.toFixed(2),Math.round(m.G)]);m.histT=.25;}
+  m.warnT-=sdt;if(m.warnT<=0){if(m.G>M.band.high){live(LIVE[lvl].tooHigh);m.warnT=4;}else if(m.G<M.band.low){live(LIVE[lvl].tooLow);m.warnT=4;}}
+  const g=m.G<M.band.low?"low":m.G>M.band.high?"high":"normal";if(S.gluc!==g){S.gluc=g;setGlucTok();}
+  bumpCount("range",Math.floor(m.inRange));
+  if(m.t>=M.sceneSec*M.scenes.length){m.done=true;const sec=Math.round(m.inRange);st.cnt["S8.best"]=Math.max(st.cnt["S8.best"]||0,sec);save();
+    markGoal("day");if(m.whatif==="t1")markGoal("t1");if(m.whatif==="t2")markGoal("t2");
+    live(LIVE[lvl].dayDone(sec,st.cnt["S8.best"]));buildCtl();renderCard();readout();}
+}
 function setCtl(name,v){
   const S=SIM;if(!S)return;
   if(name==="glucose"){S.gluc=RD.glucose[v]?v:"normal";setGlucTok();if(UI.gluc)UI.gluc._set(S.gluc);}
@@ -1242,6 +1352,7 @@ function setCtl(name,v){
   else if(name==="teach"){setTeach(!!v);}
   else if(name==="codons"){S.s2.codons=!!v;if(UI.codons)UI.codons._set(S.s2.codons?"on":"off");}
   else if(name==="chaseGluc"){S.chaseGluc=v==="high"?"high":"low";if(UI.chaseG)UI.chaseG._set(S.chaseGluc);}
+  else if(name==="whatif"){setWhatif(v);}
   readout();
 }
 
@@ -1274,13 +1385,17 @@ function simStep(dt){
   S.tok=S.tok.filter(t=>!t.done);
   /* S6: keep sending insulin while running */
   if(k==="S6"&&S.running){S.spawnT-=sdt;if(S.spawnT<=0){if(aliveCargo(S).length<d.maxCargo)sendCargo("insulin");S.spawnT=2.4;}}
-  /* S5: packets fuse at the glucose gate's rate */
+  /* S5: packets fuse at the glucose gate's rate. S8: packets fuse when the student releases them (missionRelease). */
   if(k==="S5"){const r=releaseOf(S.gluc);S.insRate=r;if(!paused){S.glucT[S.gluc]+=sdt;bumpCount("three",["low","normal","high"].filter(g=>S.glucT[g]>=5).length);}
-    S.insT-=sdt;if(r>0&&S.insT<=0){const p=S.pkt.find(q=>q.state==="home");if(p){p.state="go";p.t=0;p.sx=p.x;p.sy=p.y;p.targetY=clamp(p.hy+(rnd()-.5)*40,CELL.y0+150,CELL.y1-150);}S.insT=1.2/r;}
-    S.pkt.forEach(p=>{if(p.state==="go"){p.t+=sdt*1.1;const q=clamp(p.t,0,1);p.x=lerp(p.sx,CELL.x1-16,q);p.y=lerp(p.sy,p.targetY,q);p.mature=q;if(q>=1){p.state="fuse";p.t=0;}}
-      else if(p.state==="fuse"){p.t+=sdt;if(p.t>.45){p.state="away";p.t=0;spawnIns(p.y,false);c.fusions++;c.insulinReleased++;bumpCount("fuse",c.fusions);if(S.gluc==="high")markGoal("rel");live(LIVE[st.level].released);}}
-      else if(p.state==="away"){p.t+=sdt;if(p.t>1.6){Object.assign(p,newPkt(p.i));}}});}
+    S.insT-=sdt;if(r>0&&S.insT<=0){const p=S.pkt.find(q=>q.state==="home");if(p){p.state="go";p.t=0;p.sx=p.x;p.sy=p.y;p.targetY=clamp(p.hy+(rnd()-.5)*40,CELL.y0+150,CELL.y1-150);}S.insT=1.2/r;}}
   else S.insRate=0;
+  if(k==="S8")missionStep(sdt);
+  if(k==="S5"||k==="S8"){const M=RD.mission,m=S.m;
+    S.pkt.forEach(p=>{if(p.state==="go"){p.t+=sdt*1.1;const q=clamp(p.t,0,1);p.x=lerp(p.sx,CELL.x1-16,q);p.y=lerp(p.sy,p.targetY,q);p.mature=q;if(q>=1){p.state="fuse";p.t=0;}}
+      else if(p.state==="fuse"){p.t+=sdt;if(p.t>.45){p.state="away";p.t=0;spawnIns(p.y,false);c.fusions++;c.insulinReleased++;
+        if(k==="S5"){bumpCount("fuse",c.fusions);if(S.gluc==="high")markGoal("rel");live(LIVE[st.level].released);}
+        else{m.I+=M.perPacket*(m.whatif==="t2"?M.type2Factor:1);}}}
+      else if(p.state==="away"){p.t+=sdt;if(p.t>(k==="S8"?M.refillSec:1.6)){Object.assign(p,newPkt(p.i));}}});}
   /* released insulin drifts down the vessel */
   S.ins.forEach(i=>{i.x+=i.vx*sdt;i.y+=i.vy*sdt;i.t-=sdt;i.a=clamp(i.t/1.2,0,1);if(i.x>VES.x0+20){i.vx=lerp(i.vx,0,sdt*3);i.vy=lerp(i.vy,90,sdt*2);}i.x=Math.min(i.x,VES.x1-14);});
   S.ins=S.ins.filter(i=>i.t>0&&i.y<H1+10);
@@ -1527,6 +1642,7 @@ function drawScene(){
   if(k==="S4"&&!S.tok.length)tag(L.pick,470,60,null,"center",true);
   if(k==="S6"&&!S.block&&!S.tok.length)tag(L.pickBlock,470,60,null,"center",true);
   if(k==="S5"){tag(L.gluc+": "+L[S.gluc]+(lvl==="de"?" ~"+RD.glucose[S.gluc].mgdl+" mg/dL ("+LBL.de.approx+")":""),VES.x1-2,58,null,"right",false,ctx,0,true);}
+  if(k==="S8"){if(!S.m.started)tag(L.startDay,470,60,null,"center",true);else{tag(L.gluc+": "+(lvl==="de"?Math.round(S.m.G)+" mg/dL":L[S.gluc]),VES.x1-2,58,null,"right",false,ctx,0,true);if(S.m.whatif==="t1")tag(L.inject,CELL.x1-150,CELL.y0+70,null,"center");}}
   if(st.teach&&S.tok.some(t=>t.draw==="vesicle"))part("vesicle",EREXIT.x+20,EREXIT.y,30);
   if(k==="S6"&&S.block)part("block",blockPos(S.block)[0],blockPos(S.block)[1],40);
 }
@@ -1550,7 +1666,7 @@ function draw(){
   if(showGraph())drawGraph();
   placeOverlays();
 }
-function showGraph(){return SIM&&SIM.stepKey==="S6"&&st.level==="de";}
+function showGraph(){return !!SIM&&((SIM.stepKey==="S6"&&st.level==="de")||SIM.stepKey==="S8");}
 
 /* ================= drawing: the chase graph (DE, S6) ================= */
 let gw=1200,gh=360,GX={k:1,ox:0,oy:0};
@@ -1563,6 +1679,7 @@ function drawGraph(){
   c.setTransform(kpx,0,0,kpx,0,0);c.fillStyle=BG;c.fillRect(0,0,gw,gh);
   const k=Math.min(gw/GW,gh/GH);GX={k,ox:(gw-GW*k)/2,oy:(gh-GH*k)/2};
   c.setTransform(kpx*k,0,0,kpx*k,kpx*GX.ox,kpx*GX.oy);c.lineCap="round";c.lineJoin="round";
+  if(S.stepKey==="S8"){drawSugar(c);return;}
   c.strokeStyle=SOFT;c.lineWidth=2.5;c.beginPath();c.moveTo(PLOT.x0,PLOT.y0-6);c.lineTo(PLOT.x0,PLOT.y1);c.lineTo(PLOT.x1+6,PLOT.y1);c.stroke();
   [0,.25,.5,.75,1].forEach(p=>{const y=yOf(p);c.strokeStyle=RULE;c.lineWidth=1.5;c.beginPath();c.moveTo(PLOT.x0,y);c.lineTo(PLOT.x1,y);c.stroke();tag(Math.round(p*100)+"%",PLOT.x0-10,y,null,"right",false,c,st.teach?20:12);});
   for(let t=0;t<=CHASE_MAX;t+=20){const x=xOf(t);c.strokeStyle=SOFT;c.lineWidth=2;c.beginPath();c.moveTo(x,PLOT.y1);c.lineTo(x,PLOT.y1+10);c.stroke();tag(String(t),x,PLOT.y1+26,null,"center",false,c,st.teach?20:13);}
@@ -1580,6 +1697,34 @@ function drawGraph(){
     tag(name,px,py,null,"left",false,c,st.teach?20:13);});
   tag(R.chaseT+": "+Math.round(reach)+" min · "+LBL.de.gluc+" "+ch.gluc,PLOT.x0+10,PLOT.y0-14,null,"left",false,c,st.teach?20:13);
   const x=xOf(reach);c.save();c.strokeStyle=BOND;c.lineWidth=2;c.globalAlpha=.7;c.beginPath();c.moveTo(x,PLOT.y0);c.lineTo(x,PLOT.y1);c.stroke();c.restore();
+}
+
+/* ================= drawing: the mission's sugar trace (S8, both levels) ================= */
+function drawSugar(c){
+  const S=SIM,m=S.m,M=RD.mission,lvl=st.level,R=RT[lvl],L=LBL[lvl],DAY=M.sceneSec*M.scenes.length;
+  const fs=st.teach?17:13;
+  const xs=t=>PLOT.x0+(PLOT.x1-PLOT.x0)*clamp(t/DAY,0,1),ys=g=>PLOT.y1-(PLOT.y1-PLOT.y0)*clamp((g-M.floor)/(M.ceiling-M.floor),0,1);
+  /* the band */
+  c.save();c.globalAlpha=DARK?.22:.16;c.fillStyle=SOLID;c.fillRect(PLOT.x0,ys(M.band.high),PLOT.x1-PLOT.x0,ys(M.band.low)-ys(M.band.high));c.restore();
+  /* scenes along the top */
+  M.scenes.forEach((sc,i)=>{const x0=xs(i*M.sceneSec),x1=xs((i+1)*M.sceneSec);if(i>0){c.strokeStyle=RULE;c.lineWidth=1.5;c.beginPath();c.moveTo(x0,PLOT.y0);c.lineTo(x0,PLOT.y1);c.stroke();}
+    const on=m.started&&!m.done&&m.scene===i;tag(L.scenes[sc.key],(x0+x1)/2,PLOT.y0-14,null,"center",false,c,on?fs+3:fs);});
+  /* axes */
+  c.strokeStyle=SOFT;c.lineWidth=2.5;c.beginPath();c.moveTo(PLOT.x0,PLOT.y0-6);c.lineTo(PLOT.x0,PLOT.y1);c.lineTo(PLOT.x1+6,PLOT.y1);c.stroke();
+  if(lvl==="de"){[M.floor,M.band.low,M.band.high,200,M.ceiling].forEach(g=>{tag(String(g),PLOT.x0-10,ys(g),null,"right",false,c,fs);});}
+  else{tag(L.tooHigh,PLOT.x0-10,(ys(M.band.high)+PLOT.y0)/2,null,"right",false,c,fs);tag(L.inRange,PLOT.x0-10,(ys(M.band.high)+ys(M.band.low))/2,null,"right",false,c,fs);tag(L.tooLow,PLOT.x0-10,(ys(M.band.low)+PLOT.y1)/2,null,"right",false,c,fs);}
+  for(let t=0;t<=DAY;t+=M.sceneSec){const x=xs(t);c.strokeStyle=SOFT;c.lineWidth=2;c.beginPath();c.moveTo(x,PLOT.y1);c.lineTo(x,PLOT.y1+10);c.stroke();tag(String(t),x,PLOT.y1+26,null,"center",false,c,fs);}
+  tag(R.gxaxis||R.xaxis,PLOT.x0,PLOT.y1+52,null,"left",false,c,fs+1);
+  c.save();c.setTransform(kpx,0,0,kpx,0,0);const[tx,ty]=gPx(22,(PLOT.y0+PLOT.y1)/2);c.translate(tx,ty);c.rotate(-Math.PI/2);c.font="600 "+fs+"px Archivo, Arial, sans-serif";c.fillStyle=SOFT;c.textAlign="center";c.textBaseline="middle";c.fillText(R.gyaxis||R.yaxis,0,0);c.restore();
+  tag(R.illusNum,PLOT.x1-4,PLOT.y1+52,null,"right",false,c,fs);
+  if(!m.started){tag(R.dayPrompt,(PLOT.x0+PLOT.x1)/2,(PLOT.y0+PLOT.y1)/2,null,"center",true,c);return;}
+  /* the trace */
+  const H=m.hist;c.save();c.strokeStyle=col("gluc");c.lineWidth=4;c.beginPath();H.forEach((h,i)=>{const x=xs(h[0]),y=ys(h[1]);if(i===0)c.moveTo(x,y);else c.lineTo(x,y);});const xe=xs(m.t),ye=ys(m.G);c.lineTo(xe,ye);c.stroke();
+  circ(c,xe,ye,8,col("gluc"),DARK?"#15130F":"#FFFFFF",1.5);c.restore();
+  if(!m.done){c.save();c.strokeStyle=BOND;c.lineWidth=2;c.globalAlpha=.7;c.beginPath();c.moveTo(xe,PLOT.y0);c.lineTo(xe,PLOT.y1);c.stroke();c.restore();}
+  const state=m.G>M.band.high?L.tooHigh:m.G<M.band.low?L.tooLow:L.inRange;
+  tag(R.inRange+": "+Math.round(m.inRange)+" "+R.sec+" / "+DAY+(m.done?" · "+L.dayDone:""),PLOT.x0+10,PLOT.y0+14,null,"left",false,c,fs);
+  tag(R.sugar+": "+(lvl==="de"?Math.round(m.G)+" "+LBL.de.mgdl+", ":"")+state,xe+(xe>PLOT.x1-260?-12:12),clamp(ye-24,PLOT.y0+30,PLOT.y1-10),null,xe>PLOT.x1-260?"right":"left",false,c,fs);
 }
 
 /* ================= DOM buttons laid over canvas parts (the S2 signal piece): touch targets with labels ================= */
@@ -1608,7 +1753,7 @@ const itemShown=it=>!!it&&(!it.u4||st.u4)&&(!it.adv||st.adv);
 
 /* ================= state and saving (§5.7) ================= */
 const KEY="proteinroute";
-let st={dev:"ipad",level:"nine",u4:false,adv:false,step:0,ans:{},goals:{},cnt:{},found:{S1:"",S2:"",S3:"",S4:"",S5:"",S6:"",S7:""},teach:false,fill:false,cardHidden:false,cargoDone:{insulin:false,receptor:false,lysosome:false,cytosol:false},blocks:[],chase:{low:false,high:false},rec:[]};
+let st={dev:"ipad",level:"nine",u4:false,adv:false,step:0,ans:{},goals:{},cnt:{},found:{S1:"",S2:"",S3:"",S4:"",S5:"",S6:"",S7:"",S8:""},teach:false,fill:false,cardHidden:false,cargoDone:{insulin:false,receptor:false,lysosome:false,cytosol:false},blocks:[],chase:{low:false,high:false},rec:[]};
 /* URL parameters override the saved state for this visit only (§3): the overridden fields are not written back until the student changes that switch */
 const OVR={};
 function save(){try{const out=JSON.parse(JSON.stringify(st));Object.keys(OVR).forEach(k=>{out[k]=OVR[k];});localStorage.setItem(KEY,JSON.stringify(out));}catch(e){}}
@@ -1769,8 +1914,19 @@ function buildCtl(){
     if(lvl==="de"){UI.pulse=btn("Pulse",()=>pulse(),"go","Pulse: label the chains being made now");ctl.appendChild(UI.pulse);UI.chase=btn("Chase",()=>chase(C.chaseGluc),"go","Chase: follow the labelled chains through the route");ctl.appendChild(UI.chase);
       const g=el("span","gf");g.appendChild(el("span","","Chase at"));UI.chaseG=seg("Chase at",[["low","Low"],["high","High"]],C.chaseGluc,v=>setCtl("chaseGluc",v),"Blood sugar during the chase");g.appendChild(UI.chaseG);ctl.appendChild(g);}}
   if(k==="S7"){UI.give=btn("Give the bacterium the insulin instructions",()=>bacterium(),"go","Give the bacterium the insulin instructions");ctl.appendChild(UI.give);ctl.appendChild(btn("Run",()=>runBact(),"ghost","Run the bacterium's ribosomes"));UI.lab=btn("Finish in the lab",()=>labFinish(),"go","Finish the insulin in the lab");ctl.appendChild(UI.lab);}
+  if(k==="S8"){const R=RT[lvl],m=C.m;
+    UI.day=btn(R.startDay,()=>missionStart(),"go","Start the day, or run it again");ctl.appendChild(UI.day);
+    UI.release=btn(R.release,()=>missionRelease(),"go","Release one insulin packet");ctl.appendChild(UI.release);
+    UI.inject=btn(R.inject,()=>missionInject(),"go","Inject insulin (type 1 what-if)");ctl.appendChild(UI.inject);
+    const w=el("span","gf");w.appendChild(el("span","",R.whatif));UI.whatif=seg(R.whatif,[["none",R.wNone],["t1",R.wT1],["t2",R.wT2]],m.whatif,v=>setCtl("whatif",v),"What if");w.appendChild(UI.whatif);ctl.appendChild(w);
+    syncMission();}
   syncCtl();syncNext();
 }
+function syncMission(){const S=SIM;if(!S||S.stepKey!=="S8"||!UI.day)return;const m=S.m,R=RT[st.level],running=m.started&&!m.done;
+  UI.day.textContent=running?R.dayRunning:(m.done?R.again:R.startDay);UI.day.disabled=running;
+  UI.release.disabled=!running||m.whatif==="t1";UI.release.style.display=m.whatif==="t1"?"none":"";
+  UI.inject.style.display=m.whatif==="t1"?"":"none";UI.inject.disabled=!running;
+  UI.whatif.querySelectorAll("button").forEach(b=>{b.disabled=running;});}
 /* ================= the next-step ring: one control at a time, the one the step is waiting for ================= */
 function segBtn(sg,v){return sg?sg.querySelector('button[data-v="'+v+'"]'):null;}
 function nextTarget(){
@@ -1789,6 +1945,10 @@ function nextTarget(){
         const piled=(C.piled&&C.piled[BLOCKS.find(b=>b[0]===C.block)[2]])||0;if(piled>=3&&nb)return segBtn(UI.block,nb);return null;}
       if(lvl==="de"){if(!C.pulsed)return UI.pulse;if(!C.chase)return UI.chase;if(C.chase.done){const g=!st.chase.low?"low":!st.chase.high?"high":null;if(!g)return null;if(C.chaseGluc!==g)return segBtn(UI.chaseG,g);return UI.pulse;}}return null;}
     if(k==="S7"){if(!C.bact.given)return UI.give;if(c.bactChains>=3&&!c.labFinished)return UI.lab;return null;}
+    if(k==="S8"){const m=C.m;if(m.started&&!m.done)return m.whatif==="t1"?UI.inject:UI.release;
+      const g=q=>!!st.goals[gid(S,q)];
+      if(m.done||g("day")){if(!g("t1")&&m.whatif!=="t1")return segBtn(UI.whatif,"t1");if(g("t1")&&!g("t2")&&m.whatif!=="t2")return segBtn(UI.whatif,"t2");}
+      return UI.day;}
     return null;}
   if(k==="S7"&&!c.labFinished)return UI.lab;
   const posts=postOf(S).filter(id=>itemShown(ITEMS[id])&&!isExtra(ITEMS[id])&&!st.ans[id]);if(posts.length&&!st.teach)return card.querySelector('.opts[data-item="'+posts[0]+'"]');
@@ -1820,6 +1980,11 @@ function readout(){
     else parts.push(R.noBlock);
     if(lvl==="de"&&S.chase){const f=chaseAt(S.chase.t,S.chase.gluc);parts.push(R.chaseT+": "+Math.round(S.chase.t)+" min · "+R.label+" rough ER "+Math.round(f.roughER*100)+"% · Golgi "+Math.round(f.golgi*100)+"% · granules "+Math.round(f.packets*100)+"% · "+R.outside+" "+Math.round(f.outside*100)+"% · "+R.illus);}}
   if(k==="S7"){parts.push(R.chains+": "+c.bactChains);parts.push(R.packets+": "+c.bactPackets);parts.push(R.left+": "+c.bactReleased);}
+  if(k==="S8"){const m=S.m,M=RD.mission,Lb=LBL[lvl],DAY=M.sceneSec*M.scenes.length;syncMission();
+    if(m.started){parts.push(R.scene+": "+Lb.scenes[missionScene(m).key]);parts.push(R.sugar+": "+(lvl==="de"?Math.round(m.G)+" "+Lb.mgdl+" ("+(m.G>M.band.high?Lb.tooHigh:m.G<M.band.low?Lb.tooLow:Lb.inRange)+")":(m.G>M.band.high?Lb.tooHigh:m.G<M.band.low?Lb.tooLow:Lb.inRange)));
+      parts.push(R.acting+" "+gauge((m.I+m.J)/3));parts.push(R.inRange+": "+Math.round(m.inRange)+" "+R.sec+" / "+DAY);}
+    if(m.whatif!=="t1")parts.push(R.ready+": "+S.pkt.filter(p=>p.state==="home").length);
+    parts.push(m.whatif==="t1"?R.shots+": "+m.shots:R.taps+": "+m.taps);if(st.cnt["S8.best"])parts.push(R.best+": "+st.cnt["S8.best"]+" "+R.sec);}
   $("readout").innerHTML=parts.join(" · ");
 }
 
@@ -1941,7 +2106,7 @@ cv.addEventListener("pointerdown",e=>{if(!SIM)return;const key=hitAt(e);
   e.preventDefault();});
 cv.addEventListener("pointermove",e=>{if(st.dev==="pc"&&e.pointerType==="mouse"){const key=hitAt(e);hover=key;cv.classList.toggle("hov",!!key);}});
 cv.addEventListener("pointerleave",()=>{hover=null;cv.classList.remove("hov");});
-gv.addEventListener("pointerdown",e=>{if(st.teach){if(pinned==="graph"){pinned=null;$("callout").classList.remove("open");}else pin("graph");}e.preventDefault();});
+gv.addEventListener("pointerdown",e=>{if(st.teach){const key=SIM&&SIM.stepKey==="S8"?"sugar":"graph";if(pinned===key){pinned=null;$("callout").classList.remove("open");}else pin(key);}e.preventDefault();});
 
 /* ================= loop ================= */
 let last=0,visible=true,acc=0;
@@ -2039,7 +2204,7 @@ function runModel(sec){ /* advance the model by sec seconds of playback at 1x, w
   const sp=speed;speed=1;const n=Math.max(1,Math.round(sec/DT));for(let i=0;i<n;i++)simStep(DT);speed=sp;
   SIM.tok.forEach(t=>{t.jx=t.x;t.jy=t.y;});SIM.drawSnap=snapshotDraw(SIM);readout();renderLab();
 }
-function countsOut(){const S=SIM,c=S.cnt;return Object.assign({},c,{insulinRate:S.stepKey==="S5"?releaseOf(S.gluc):0,cargoDone:Object.assign({},st.cargoDone),piled:Object.assign({},S.piled||{}),arrived:Object.assign({},S.arrived||{}),blocksTried:st.blocks.length,blocks:st.blocks.slice(),chaseRuns:Object.assign({},st.chase),chaseT:S.chase?S.chase.t:0,block:S.block,gluc:S.gluc,running:S.running,alive:aliveCargo(S).length});}
+function countsOut(){const S=SIM,c=S.cnt;return Object.assign({},c,{insulinRate:S.stepKey==="S5"?releaseOf(S.gluc):0,cargoDone:Object.assign({},st.cargoDone),piled:Object.assign({},S.piled||{}),arrived:Object.assign({},S.arrived||{}),blocksTried:st.blocks.length,blocks:st.blocks.slice(),chaseRuns:Object.assign({},st.chase),chaseT:S.chase?S.chase.t:0,block:S.block,gluc:S.gluc,running:S.running,alive:aliveCargo(S).length,mission:S.m?{started:S.m.started,done:S.m.done,t:S.m.t,scene:S.m.scene,G:S.m.G,I:S.m.I,J:S.m.J,inRange:S.m.inRange,highS:S.m.highS,lowS:S.m.lowS,taps:S.m.taps,shots:S.m.shots,whatif:S.m.whatif,best:st.cnt["S8.best"]||0,ready:S.pkt.filter(p=>p.state==="home").length}:null});}
 window.__PR={
   st:()=>st,sim:()=>SIM,
   goStep:i=>goStep(i,true,true),setLevel:lv=>setLevel(lv,true),setU4:v=>setU4(v,true),setAdv:v=>setAdv(v,true),setDev,fill:setFill,cardHidden:setCardHidden,
@@ -2051,7 +2216,8 @@ window.__PR={
   items:level=>JSON.parse(JSON.stringify(level==="de"?BANKDE:BANK9)).map(it=>{delete it.id;delete it.lvl;return it;}),allText,colours,
   fps:()=>{const n=fpsHist.length,t=fpsHist.reduce((a,b)=>a+b,0);return t>0?n/t:0;},requests,
   hits:()=>hits.slice(),paused:()=>paused,draw,forbidden:()=>({all:NINTH_FORBIDDEN.slice(),u4:NINTH_U4_ONLY.slice(),adv:NINTH_ADV_ONLY.slice()}),data:()=>ROUTE_DATA,
-  pin:k=>pin(k),runRoute,overrides:()=>Object.assign({},OVR),key:KEY,next:nextLabelOut
+  pin:k=>pin(k),runRoute,overrides:()=>Object.assign({},OVR),key:KEY,next:nextLabelOut,
+  missionStart,release:missionRelease,inject:missionInject,whatif:setWhatif,mission:()=>{const m=SIM&&SIM.m;return m?JSON.parse(JSON.stringify(m)):null;}
 };
 })();
 </script>
