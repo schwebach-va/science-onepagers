@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Paper Idea Form | Science One-Pagers</title>
+<meta name="description" content="Bio Tool #20 for DE Biology 101: take a science paper from first interest to a question, ten Google Scholar sources in Vancouver style, a figure plan, a future-research section and an AI log. Builds your Copilot prompts and Scholar searches; downloads as a Word file. Nothing is sent anywhere.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/paper-idea-form.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Paper Idea Form - from first interest to a paper plan">
+<meta property="og:description" content="Interests, a question, ten Google Scholar sources in Vancouver style, a figure plan, future research and an AI log, in one form that downloads as a Word file.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/paper-idea-form.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"The Paper Idea Form","description":"A planning form for a student science review paper in DE Biology 101: interests, a researchable question, Google Scholar sources in Vancouver style, figures and legends, future research, and a log of AI use. Downloads as a Word file; nothing is submitted.","url":"https://scienceonepagers.org/biology/tools/paper-idea-form.html","author":{"@type":"Person","name":"J. R. Schwebach"},"license":"https://creativecommons.org/licenses/by-nc/4.0/","educationalLevel":"Dual enrollment / introductory college biology","inLanguage":"en"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<!-- Bio Tool #20, published 2026-10-04 at Reid's direction. Built 2026-10-04 from Reid's notes on the semester paper,
+     his NVCC assignment "Annotated Bibliography for Paper #1" (the three reflection questions, ten Google
+     Scholar sources, the annotation questions) and the syllabus (25 points, revisable, topic of the
+     student's choosing). Sentences are Claude's draft for Reid to mark up. Stores only in this browser
+     (localStorage key paperIdeaForm.v1); nothing is submitted. -->
+<style>
+:root{
+  --paper:#F5F3EE; --card:#FFFFFF; --ink:#1D1A15; --ink-soft:#5A544A;
+  --bond:#1F7A8C; --bond-soft:#DEEBEE; --rule:#DDD8CE; --field:#FBFAF7;
+  --flag:#B85042; --flag-soft:#F7E9E6; --solid:#3F7A55; --solid-soft:#E2EDE6;
+  --core:#6B4E8C; --core-soft:#EDE7F3; --stuck:#B8741F; --stuck-soft:#F8EEDD;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F; --card:#1D1A15; --ink:#EDE9E1; --ink-soft:#A8A198;
+    --bond:#6FC0CE; --bond-soft:#172E33; --rule:#332E27; --field:#221F1A;
+    --flag:#E08A7C; --flag-soft:#2E1E1A; --solid:#7FC395; --solid-soft:#18291E;
+    --core:#B69BD6; --core-soft:#241C2E; --stuck:#E0A65A; --stuck-soft:#2E2314;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F; --card:#1D1A15; --ink:#EDE9E1; --ink-soft:#A8A198;
+  --bond:#6FC0CE; --bond-soft:#172E33; --rule:#332E27; --field:#221F1A;
+  --flag:#E08A7C; --flag-soft:#2E1E1A; --solid:#7FC395; --solid-soft:#18291E;
+  --core:#B69BD6; --core-soft:#241C2E; --stuck:#E0A65A; --stuck-soft:#2E2314;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:46rem;margin:0 auto;padding:2rem 1rem 6rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.7rem,5.5vw,2.4rem);line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:0 0 .4rem}
+p{margin:0 0 1rem}
+a{color:var(--bond)}
+.eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.88rem;color:var(--ink-soft);line-height:1.45}
+.back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.note{background:var(--bond-soft);border-radius:10px;padding:.85rem 1rem;margin:0 0 1.4rem;font-size:.95rem}
+.note p:last-child{margin:0}
+.progress{position:sticky;top:0;z-index:5;background:var(--paper);padding:.55rem 0;margin:0 0 1rem;border-bottom:1px solid var(--rule);display:flex;gap:.35rem;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;font-family:var(--sans);font-size:.8rem}
+.progress a{flex:none;white-space:nowrap;text-decoration:none;color:var(--ink-soft);border:1px solid var(--rule);border-radius:999px;padding:.2rem .6rem;background:var(--card);min-height:30px;display:inline-flex;align-items:center}
+.progress a.done{background:var(--solid-soft);color:var(--solid);border-color:var(--solid)}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:1.15rem 1.1rem 1rem;margin:0 0 1.2rem;scroll-margin-top:3.5rem}
+.card .num{font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--bond);letter-spacing:.05em;text-transform:uppercase}
+.card .intro{font-size:.96rem;color:var(--ink-soft);margin:.2rem 0 .9rem}
+label.f{display:block;font-family:var(--sans);font-weight:600;font-size:.92rem;margin:.9rem 0 .3rem}
+.hint{display:block;font-family:var(--serif);font-weight:400;font-size:.86rem;color:var(--ink-soft);margin-top:.15rem}
+input[type=text],textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--field);border:1px solid var(--rule);border-radius:8px;padding:.6rem .7rem;min-height:44px}
+textarea{min-height:5.2rem;resize:vertical;line-height:1.45}
+input:focus,textarea:focus{outline:2px solid var(--bond);outline-offset:1px;border-color:var(--bond)}
+.checks{display:grid;gap:.35rem;margin:.6rem 0 0}
+.checks label{display:flex;gap:.6rem;align-items:flex-start;font-size:.95rem;min-height:36px;cursor:pointer}
+.checks input{width:22px;height:22px;flex:none;margin-top:.15rem;accent-color:var(--bond)}
+.btnrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 0}
+button,.btn{font-family:var(--sans);font-weight:600;font-size:.9rem;border-radius:999px;border:1px solid var(--bond);background:var(--card);color:var(--bond);padding:.55rem 1rem;min-height:44px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem}
+button.primary,.btn.primary{background:var(--bond);color:var(--card)}
+button.warn{border-color:var(--flag);color:var(--flag)}
+button:focus-visible,.btn:focus-visible{outline:3px solid var(--stuck);outline-offset:2px}
+.prompt{border:1px dashed var(--core);background:var(--core-soft);border-radius:10px;padding:.8rem .9rem;margin:1rem 0 0}
+.prompt .ptitle{font-family:var(--sans);font-weight:700;font-size:.85rem;color:var(--core);text-transform:uppercase;letter-spacing:.04em}
+.prompt pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--serif);font-size:.9rem;line-height:1.45;margin:.5rem 0 0;max-height:13rem;overflow:auto;background:var(--card);border-radius:8px;padding:.6rem .7rem;border:1px solid var(--rule)}
+.prompt .fine{margin:.5rem 0 0}
+.scholar{border:1px solid var(--rule);background:var(--field);border-radius:10px;padding:.8rem .9rem;margin:1rem 0 0}
+.src{border-top:1px solid var(--rule);padding:.6rem 0 .2rem}
+.src:first-of-type{border-top:0}
+.src .n{font-family:var(--sans);font-weight:700;color:var(--bond);font-size:.9rem}
+.reflist{font-size:.92rem;margin:.6rem 0 0;padding-left:1.8rem}
+.reflist li{margin:0 0 .35rem;word-wrap:break-word}
+.flagline{font-family:var(--sans);font-size:.8rem;color:var(--flag);margin:.2rem 0 0}
+.log{border-top:1px solid var(--rule);padding:.5rem 0}
+.toast{position:fixed;left:50%;bottom:1.2rem;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:.9rem;padding:.6rem 1rem;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.finish{background:var(--solid-soft);border-color:var(--solid)}
+.save-state{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);margin:.6rem 0 0}
+footer{font-size:.82rem;color:var(--ink-soft);margin-top:2rem;border-top:1px solid var(--rule);padding-top:1rem}
+#printview{display:none}
+@media print{
+  body{background:#fff;color:#000;font-size:11pt}
+  .wrap{display:none}
+  #printview{display:block;font-family:Georgia,serif;line-height:1.4}
+  #printview h1{font-size:18pt;margin:0 0 4pt}
+  #printview h2{font-size:12.5pt;margin:14pt 0 4pt;border-bottom:1px solid #999}
+  #printview .q{font-weight:bold;margin:6pt 0 1pt}
+  #printview .a{margin:0 0 4pt;white-space:pre-wrap}
+}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../de-biology-101-resources.html#anytime">&larr; DE Biology 101 resources</a>
+  <div class="eyebrow">Bio Tool #20 &middot; DE Biology 101 &middot; the semester paper</div>
+  <h1>The Paper Idea Form: Your Question, Your Sources, Your Plan</h1>
+  <p class="lede">From what interests you to a paper you can start writing, in eight short parts: a question narrow enough to answer, ten real sources, the figures that will carry your argument, and where the science goes next.</p>
+
+  <div class="note">
+    <p><b>Your work stays on this iPad.</b> Everything you type saves in this browser as you go. Nothing is sent to me or anyone else. When a milestone is due, tap <b>Download Word file</b> at the bottom and upload that file to the Canvas assignment.</p>
+    <p><b>Keep a backup.</b> Download the Word file each time you finish a part. If this iPad is reset, you change iPads or the form comes up empty, tap <b>Load a saved Word file</b> at the bottom and choose the last file you downloaded from this form. Everything comes back.</p>
+    <p>The guide that goes with this form: <a href="../../teaching/writing-a-science-paper.html">Writing a Science Paper in DE Biology</a>.</p>
+  </div>
+
+  <nav class="progress" id="progress" aria-label="Parts of the form"></nav>
+  <div id="form"></div>
+
+  <section class="card finish" id="finish">
+    <div class="num">When a milestone is due</div>
+    <h2>Download it, upload it, talk it through</h2>
+    <p class="intro">The Word file opens in Word on your iPad, so you can keep writing in it. Upload it to the Canvas assignment for that milestone, then bring it to Flex or class and talk me through it.</p>
+    <div class="btnrow">
+      <button class="primary" id="dlWord" type="button">Download Word file</button>
+      <button id="dlPdf" type="button">Save as PDF</button>
+      <button id="copyAll" type="button">Copy everything as text</button>
+    </div>
+    <div class="btnrow">
+      <button id="loadWord" type="button">Load a saved Word file</button>
+      <input type="file" id="loadFile" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
+      <button class="warn" id="clearAll" type="button">Start over</button>
+    </div>
+    <p class="save-state" id="saveState">Nothing typed yet.</p>
+    <p class="fine">Safari can clear saved work if you switch iPads, clear its history, or leave the site unopened for a week or more. The Word file is your backup: loading it puts every answer back, including your sources and your AI log.</p>
+  </section>
+
+  <footer>
+    Bio Tool #20 &middot; written and maintained by Mr. Schwebach &middot; &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. The Copilot and Google Scholar buttons open those sites in a new tab. Copilot is the AI tool PWCS approves for high school students; use it with your PWCS account and your teacher&rsquo;s permission, and leave your name and anything personal out of what you send.
+  </footer>
+</div>
+<div id="printview" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var KEY="paperIdeaForm.v1";
+var state={};
+try{var raw=localStorage.getItem(KEY); if(raw) state=JSON.parse(raw)||{};}catch(e){state={};}
+function save(){
+  state._saved=new Date().toISOString();
+  try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  showSaved(); updateProgress();
+}
+function v(id){return (state[id]||"").toString().trim();}
+function el(t,a,c){var e=document.createElement(t); if(a)for(var k in a){if(k==="text")e.textContent=a[k]; else if(k==="html")e.innerHTML=a[k]; else e.setAttribute(k,a[k]);} if(c)c.forEach(function(x){if(x)e.appendChild(x)}); return e;}
+function toast(msg){var t=document.getElementById("toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(toast._t); toast._t=setTimeout(function(){t.classList.remove("on")},2200);}
+function or(x,fallback){return x?x:fallback;}
+
+/* ---------- the prompts (built from what the student typed) ---------- */
+var COPILOT="https://m365.cloud.microsoft/chat/?auth=2";
+var WHO="I am a high school student taking a college biology course (dual enrollment, BIO 101). I am planning a review paper of a few pages that will cite peer-reviewed sources with numbered citations. ";
+var RULE="Do not write any part of my paper for me, and do not give me references: I will find every source myself in Google Scholar.";
+function kw(){return or(v("keywords"),or(v("narrow"),or(v("broad"),"[your keywords]")));}
+var PROMPTS={
+  map:function(){return WHO+"Here is what interests me.\n\n"+
+    "Outside class: "+or(v("q1"),"[part 1, first answer]")+"\n"+
+    "In this course so far: "+or(v("q2"),"[part 1, second answer]")+"\n"+
+    "Useful for a future course or career: "+or(v("q3"),"[part 1, third answer]")+"\n\n"+
+    "1. Suggest five biology topics where these interests meet, each one sentence long, and say which unit of an introductory biology course each one connects to (chemistry of life, cells, membranes, metabolism, genetics, evolution).\n"+
+    "2. For each, give me three search terms I could type into Google Scholar.\n"+
+    "3. Then ask me three questions that would help me choose between them.\n"+RULE;},
+  push:function(){return WHO+"My broad area is: "+or(v("broad"),"[broad area]")+"\nMy narrower topic is: "+or(v("narrow"),"[narrower topic]")+"\nMy question right now is: "+or(v("question"),"[your question]")+"\n\n"+
+    "Act as a tough but friendly research advisor.\n"+
+    "1. Tell me whether this question is too broad, about right, or too narrow for a paper of a few pages, and why.\n"+
+    "2. Offer three sharper versions, each naming a specific molecule, cell, organism or process.\n"+
+    "3. Ask me five questions back that would make me think harder about what I actually want to know.\n"+
+    "Do not answer my question yet. "+RULE;},
+  frontier:function(){return WHO+"My question is: "+or(v("question"),"[your question]")+"\n\n"+
+    "1. What is already well established about this, in plain language, in five sentences or fewer?\n"+
+    "2. What are three things scientists still do not know, or still argue about?\n"+
+    "3. Which new tools are changing this area (for example AI models, CRISPR, sequencing, imaging), and how?\n"+
+    "4. What kinds of papers should I look for in Google Scholar (review articles, specific experiments, model organisms), and what search terms would find them?\n"+
+    "Flag anything you are unsure of, because I will check every claim against a published paper. "+RULE;},
+  figure:function(){return WHO+"My question is: "+or(v("question"),"[your question]")+"\nFigure 1 will show: "+or(v("fig1what"),"[what figure 1 shows]")+"\nThe point it makes: "+or(v("fig1point"),"[the point it makes]")+"\nMy draft legend: "+or(v("fig1legend"),"[your legend]")+"\nTable 1 will compare: "+or(v("tab1"),"[what table 1 compares]")+"\n\n"+
+    "Critique this plan the way a journal reviewer would.\n"+
+    "1. Does each figure and table make one clear point that supports my question?\n"+
+    "2. Is my legend specific enough that a reader understands the figure without reading the paper? What is missing?\n"+
+    "3. Is there a figure or table I am missing that would make the argument stronger?\n"+
+    "Do not draw or write the figure for me. "+RULE;},
+  future:function(){return WHO+"My question is: "+or(v("question"),"[your question]")+"\nWhat I think is still unknown: "+or(v("unknown"),"[what is unknown]")+"\nThe next experiment I would run: "+or(v("nextexp"),"[your experiment]")+"\nAn innovation this might lead to: "+or(v("innovation"),"[your idea]")+"\n\n"+
+    "1. Is my next experiment testable? What would I measure, what would my control be, and what result would change my mind?\n"+
+    "2. Is my innovation realistic in the next ten to twenty years? What stands in the way?\n"+
+    "3. Ask me two questions that would push my future-research section further.\n"+RULE;},
+  tighten:function(){return "I am a high school student in a college biology course. Below is a paragraph I wrote for my science paper. Do not rewrite it. Instead:\n"+
+    "1. Point out sentences that are wordy, vague or hard to follow, and say why.\n"+
+    "2. Point out any claim that needs a citation.\n"+
+    "3. Point out any word I use incorrectly as a biologist would use it.\n"+
+    "I will make the changes myself.\n\nMy paragraph:\n[paste one paragraph you wrote]";}
+};
+
+/* ---------- the form schema ---------- */
+var SECTIONS=[
+ {id:"s1",short:"Interests",num:"Part 1",title:"Start with what pulls at you",
+  intro:"Answer from what you already know. Nothing here is graded for being right; a paper you care about in October is a paper you will still work on in January.",
+  fields:[
+   {id:"q1",label:"What are you interested in personally that could connect to a research topic?",hint:"A sport, a pet, a relative's job, a news story, something you keep reading about.",type:"area"},
+   {id:"q2",label:"Which parts of this course have interested you most so far?",hint:"A lab, a slide, a Checkpoint question you wanted to know more about.",type:"area"},
+   {id:"q3",label:"What topic could you write about now that you could use in a future course, probably a science course?",hint:"Or a career you are thinking about.",type:"area"},
+   {id:"keywords",label:"Words you would search with",hint:"Three to six words or short phrases, separated by commas.",type:"text"}
+  ],
+  prompt:{key:"map",title:"Ask AI to map where your interests meet biology"}},
+ {id:"s2",short:"Question",num:"Part 2",title:"Turn a topic into a question",
+  intro:"A topic is a starting point; a question gives your paper something to answer. Narrow it step by step, from a general subject to a biological mechanism, until your question names the molecule, cell, organism or process it is about.",
+  fields:[
+   {id:"broad",label:"Broad area",hint:"Example: cancer.",type:"text"},
+   {id:"narrow",label:"Narrower topic",hint:"Example: how some animals resist cancer.",type:"text"},
+   {id:"question",label:"Your question",hint:"Example: Do extra copies of the TP53 gene explain why elephants rarely die of cancer, and could that idea help human patients?",type:"area"},
+   {id:"scope",label:"Check your question",type:"checks",options:[
+     "Published, peer-reviewed papers can answer it.",
+     "It names a specific molecule, cell, organism or process.",
+     "It fits a paper of a few pages, not a book.",
+     "It connects to something we study in this course.",
+     "I would still want to know the answer in January."]}
+  ],
+  prompt:{key:"push",title:"Ask AI to push on your question"}},
+ {id:"s3",short:"Frontier",num:"Part 3",title:"Explore the frontier",
+  intro:"Use AI and Google Scholar together. AI is fast at showing you the shape of a field and the words scientists use. Google Scholar shows you the papers that are actually there. Trust the papers.",
+  fields:[
+   {id:"learned",label:"Three things you learned that you did not know",hint:"Write each one in your own words, and note where you saw it.",type:"area"},
+   {id:"openq",label:"One question scientists are still working on",type:"area"}
+  ],
+  prompt:{key:"frontier",title:"Ask AI what is known, unknown and new"},
+  scholar:true},
+ {id:"s4",short:"Sources",num:"Part 4",title:"Ten sources from Google Scholar",
+  intro:"Find ten sources in Google Scholar. Under each paper, tap Cite (the quotation mark), choose Vancouver, copy it and paste it here. Then fix what Scholar gets wrong: capitalize the journal name, list the first six authors and then “et al.”, and add the DOI if there is one. It is fine to begin with Wikipedia or a news story to learn the words, but the ten here must be papers you opened yourself.",
+  sources:10},
+ {id:"s5",short:"Figures",num:"Part 5",title:"Plan the figures and tables that carry your argument",
+  intro:"Each figure should make one point a reader sees at a glance. Plan one figure and one table now; you can add more in the draft.",
+  fields:[
+   {id:"fig1what",label:"Figure 1 will show…",hint:"A diagram of a process, a graph redrawn from a paper’s data, a comparison of structures.",type:"area"},
+   {id:"fig1point",label:"The one point Figure 1 makes",hint:"Finish the sentence: “This figure shows that…”",type:"text"},
+   {id:"fig1source",label:"Where it comes from",type:"checks",options:[
+     "I will draw it myself.",
+     "I will redraw data from one of my sources and cite it in the legend.",
+     "I will use an openly licensed image (Creative Commons) and credit it.",
+     "I am not sure yet; I will ask Mr. Schwebach."]},
+   {id:"fig1legend",label:"Draft legend",hint:"Start with a bold title sentence that states the finding. Then say what the reader is looking at, what each color or symbol means, and the source number: “Redrawn from [3].”",type:"area"},
+   {id:"tab1",label:"Table 1 will compare…",hint:"Rows and columns. Example: four animals (rows) by body size, life span, TP53 copies and cancer rate (columns).",type:"area"}
+  ],
+  prompt:{key:"figure",title:"Ask AI to review your figure plan"}},
+ {id:"s6",short:"Future",num:"Part 6",title:"Future research, and what could come next",
+  intro:"Every good science paper ends by looking forward. Use what you found in Part 3, and think for yourself here: this is the part of the paper that is most yours.",
+  fields:[
+   {id:"unknown",label:"What is still unknown",type:"area"},
+   {id:"nextexp",label:"The next experiment you would run",hint:"What would you change, what would you measure, and what would your control be?",type:"area"},
+   {id:"innovation",label:"An innovation this could lead to",hint:"A treatment, a tool, a crop, a test. Say what would have to be true for it to work.",type:"area"}
+  ],
+  prompt:{key:"future",title:"Ask AI to test your future-research ideas"}},
+ {id:"s7",short:"AI log",num:"Part 7",title:"Your AI log",
+  intro:"Scientists now use AI to search, summarize and check their work, and they report how they used it. Do the same. Every time you use Copilot for this paper, add a line. We will talk through this log together.",
+  ailog:6,
+  prompt:{key:"tighten",title:"Later, when you have a draft: ask AI to tighten a paragraph you wrote"}},
+ {id:"s8",short:"Plan",num:"Part 8",title:"Your plan to the finish",
+  intro:"Copy the due dates from Canvas, so the whole path is in one place.",
+  fields:[
+   {id:"ptitle",label:"Putative title",hint:"A working title you can change as the paper grows. Make it specific enough that a reader knows your question.",type:"text"},
+   {id:"m1",label:"Milestone 1 · Paper Idea Form, Parts 1–3 · due",type:"text"},
+   {id:"m2",label:"Milestone 2 · Ten sources, annotated (Part 4) · due",type:"text"},
+   {id:"m3",label:"Milestone 3 · Outline and figure plan (Parts 5–6) · due",type:"text"},
+   {id:"m4",label:"Milestone 4 · First full draft with figures and references · due",type:"text"},
+   {id:"m5",label:"Milestone 5 · Peer review and AI log · due",type:"text"},
+   {id:"m6",label:"Milestone 6 · Final manuscript · due",type:"text"},
+   {id:"bfs",label:"Battlefield Science, Volume III",type:"checks",options:[
+     "I would like my paper considered for Battlefield Science, Volume III.",
+     "Maybe; I will decide when I see my draft."]},
+   {id:"help",label:"What you want help with first",type:"area"}
+  ]}
+];
+
+/* ---------- render ---------- */
+var form=document.getElementById("form"), prog=document.getElementById("progress");
+function bindInput(node,id){
+  node.value=state[id]||"";
+  node.addEventListener("input",function(){state[id]=node.value; save(); refreshPrompts(); if(/^src\d+v$/.test(id)) refreshRefs();});
+}
+function fieldNode(f){
+  var wrap=el("div");
+  if(f.type==="checks"){
+    wrap.appendChild(el("label",{"class":"f",text:f.label}));
+    var box=el("div",{"class":"checks"});
+    f.options.forEach(function(o,i){
+      var id=f.id+"_"+i, cb=el("input",{type:"checkbox",id:id});
+      cb.checked=!!state[id];
+      cb.addEventListener("change",function(){state[id]=cb.checked?"yes":""; save();});
+      box.appendChild(el("label",{"for":id},[cb,el("span",{text:o})]));
+    });
+    wrap.appendChild(box); return wrap;
+  }
+  var lab=el("label",{"class":"f","for":f.id,text:f.label});
+  if(f.hint) lab.appendChild(el("span",{"class":"hint",text:f.hint}));
+  wrap.appendChild(lab);
+  var inp=f.type==="area"?el("textarea",{id:f.id,rows:"3"}):el("input",{type:"text",id:f.id,autocomplete:"off"});
+  bindInput(inp,f.id); wrap.appendChild(inp); return wrap;
+}
+var promptPres=[];
+function promptNode(p){
+  var pre=el("pre",{"data-key":p.key});
+  promptPres.push(pre);
+  var copy=el("button",{type:"button","class":"primary",text:"Copy prompt"});
+  copy.addEventListener("click",function(){copyText(PROMPTS[p.key](),"Prompt copied. Open Copilot and paste it into the message box.");});
+  var cop=el("a",{"class":"btn",href:COPILOT,target:"_blank",rel:"noopener",text:"Open Copilot (PWCS account)"});
+  cop.addEventListener("click",function(){copyText(PROMPTS[p.key](),"Prompt copied. Paste it into Copilot\u2019s message box.");});
+  return el("div",{"class":"prompt"},[
+    el("div",{"class":"ptitle",text:p.title}),
+    pre,
+    el("div",{"class":"btnrow"},[copy,cop]),
+    el("p",{"class":"fine",text:"The prompt fills in from what you typed above. Tap Copy prompt, open Copilot signed in with your PWCS account, paste into the message box and send. Then write one line in your AI log (Part 7)."})
+  ]);
+}
+function scholarNode(){
+  var a1=el("a",{"class":"btn primary",target:"_blank",rel:"noopener",text:"Search Google Scholar"});
+  var a2=el("a",{"class":"btn",target:"_blank",rel:"noopener",text:"Only papers since 2021"});
+  var a3=el("a",{"class":"btn",target:"_blank",rel:"noopener",text:"Review articles only"});
+  function set(){var q=encodeURIComponent(kw()); a1.href="https://scholar.google.com/scholar?q="+q; a2.href="https://scholar.google.com/scholar?as_ylo=2021&q="+q; a3.href="https://scholar.google.com/scholar?as_rr=1&q="+q;}
+  set(); scholarNode._set=set;
+  return el("div",{"class":"scholar"},[
+    el("div",{"class":"ptitle",style:"font-family:var(--sans);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em",text:"Search Google Scholar with your words"}),
+    el("p",{"class":"fine",style:"margin:.4rem 0 0",text:"The searches use the words from Part 1, or your topic from Part 2. A review article summarizes a whole area and is the best first read; its reference list is a map to the papers that matter."}),
+    el("div",{"class":"btnrow"},[a1,a2,a3]),
+    el("p",{"class":"fine",style:"margin:.6rem 0 0",html:"To open papers through the NOVA library for free: in Google Scholar, open the menu (&#9776;), tap <b>Settings</b>, then <b>Library links</b>, search <b>Northern Virginia Community College</b>, check it and save. A link for the library then appears beside papers it can open."})
+  ]);
+}
+function sourcesNode(n){
+  var box=el("div");
+  for(var i=1;i<=n;i++){
+    (function(i){
+      var id="src"+i, row=el("div",{"class":"src"});
+      row.appendChild(el("div",{"class":"n",text:"Source ["+i+"]"}));
+      var lab=el("label",{"class":"f","for":id+"v",text:"Vancouver reference from Google Scholar"});
+      var inp=el("textarea",{id:id+"v",rows:"2",placeholder:"Paste from Cite → Vancouver, then fix the journal name, authors and DOI."});
+      bindInput(inp,id+"v");
+      var flag=el("p",{"class":"flagline"}); inp._flag=flag;
+      inp.addEventListener("input",function(){checkRef(inp)}); checkRef(inp);
+      var why=el("textarea",{id:id+"w",rows:"2",placeholder:"Why is this source interesting to me, and what will it do in my paper?"}); bindInput(why,id+"w");
+      var chk=el("div",{"class":"checks"});
+      [["p","It is peer-reviewed (a journal article, not a website or news story)."],["r","I opened it and read at least the abstract, the figures and the discussion."],["m","It explains how the research was done, or points to future research."]].forEach(function(o){
+        var cid=id+o[0], cb=el("input",{type:"checkbox",id:cid}); cb.checked=!!state[cid];
+        cb.addEventListener("change",function(){state[cid]=cb.checked?"yes":""; save();});
+        chk.appendChild(el("label",{"for":cid},[cb,el("span",{text:o[1]})]));
+      });
+      row.appendChild(lab); row.appendChild(inp); row.appendChild(flag);
+      row.appendChild(el("label",{"class":"f","for":id+"w",text:"Your annotation"})); row.appendChild(why); row.appendChild(chk);
+      box.appendChild(row);
+    })(i);
+  }
+  box.appendChild(el("label",{"class":"f",text:"Your reference list so far, numbered as it will appear"}));
+  var ol=el("ol",{"class":"reflist",id:"reflist"}); box.appendChild(ol);
+  box.appendChild(el("p",{"class":"fine",text:"In your paper, number sources in the order you first cite them. The numbering here is only a list; it will change as you write."}));
+  return box;
+}
+function checkRef(inp){
+  var t=inp.value.trim(), m=[];
+  if(t){
+    if(!/\b(1[89]|20)\d\d\b/.test(t)) m.push("no year found");
+    if(/\.\s*(nature|science|cell|plos one|jama)\.\s/.test(t)) m.push("capitalize the journal name");
+    if(!/doi|10\.\d{4,}\//i.test(t)) m.push("add the DOI if the paper has one");
+    var authors=t.split(/\.\s/)[0].split(",").length;
+    if(authors>6 && !/et al/i.test(t)) m.push("list the first six authors, then “et al.”");
+    if(/^https?:/i.test(t)) m.push("this is a link, not a reference: use Cite → Vancouver");
+  }
+  inp._flag.textContent=m.length?"Check: "+m.join("; ")+".":"";
+}
+function refreshRefs(){
+  var ol=document.getElementById("reflist"); if(!ol) return; ol.innerHTML="";
+  for(var i=1;i<=10;i++){var t=v("src"+i+"v"); if(t) ol.appendChild(el("li",{text:t}));}
+  if(!ol.children.length) ol.appendChild(el("li",{style:"list-style:none;margin-left:-1.8rem;color:var(--ink-soft)",text:"Nothing pasted yet."}));
+}
+function aiLogNode(n){
+  var box=el("div");
+  for(var i=1;i<=n;i++){
+    var row=el("div",{"class":"log"});
+    row.appendChild(el("div",{"class":"n",style:"font-family:var(--sans);font-weight:700;color:var(--bond);font-size:.9rem",text:"Use "+i}));
+    [["t","Tool and date","Example: Copilot, Oct 12"],["a","What I asked","Which prompt, or what I typed"],["k","What I kept, and how I checked it","Which ideas I used, and the paper that confirmed each one"],["c","What I rejected or changed, and why",""]].forEach(function(o){
+      var id="ai"+i+o[0];
+      var lab=el("label",{"class":"f","for":id,text:o[1]}); if(o[2]) lab.appendChild(el("span",{"class":"hint",text:o[2]}));
+      var inp=o[0]==="t"?el("input",{type:"text",id:id}):el("textarea",{id:id,rows:"2"});
+      bindInput(inp,id); row.appendChild(lab); row.appendChild(inp);
+    });
+    box.appendChild(row);
+  }
+  return box;
+}
+SECTIONS.forEach(function(s){
+  var card=el("section",{"class":"card",id:s.id});
+  card.appendChild(el("div",{"class":"num",text:s.num}));
+  card.appendChild(el("h2",{text:s.title}));
+  card.appendChild(el("p",{"class":"intro",text:s.intro}));
+  (s.fields||[]).forEach(function(f){card.appendChild(fieldNode(f));});
+  if(s.sources) card.appendChild(sourcesNode(s.sources));
+  if(s.ailog) card.appendChild(aiLogNode(s.ailog));
+  if(s.scholar) card.appendChild(scholarNode());
+  if(s.prompt) card.appendChild(promptNode(s.prompt));
+  form.appendChild(card);
+  prog.appendChild(el("a",{href:"#"+s.id,"data-s":s.id,text:s.num.replace("Part ","")+" · "+s.short}));
+});
+function refreshPrompts(){promptPres.forEach(function(p){p.textContent=PROMPTS[p.getAttribute("data-key")]();}); scholarNode._set&&scholarNode._set();}
+function sectionDone(s){
+  if(s.sources){var c=0; for(var i=1;i<=10;i++) if(v("src"+i+"v")) c++; return c>=10;}
+  if(s.ailog) return !!v("ai1a");
+  return (s.fields||[]).filter(function(f){return f.type!=="checks"}).every(function(f){return !!v(f.id)});
+}
+function updateProgress(){
+  SECTIONS.forEach(function(s){var a=prog.querySelector('[data-s="'+s.id+'"]'); if(a) a.classList.toggle("done",sectionDone(s));});
+}
+function showSaved(){
+  var s=document.getElementById("saveState");
+  if(state._saved){var d=new Date(state._saved); s.textContent="Saved on this iPad at "+d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})+", "+d.toLocaleDateString()+".";}
+}
+refreshPrompts(); refreshRefs(); updateProgress(); showSaved();
+
+/* ---------- export: one outline used by Word, PDF and text ---------- */
+function outline(){
+  var out=[];
+  SECTIONS.forEach(function(s){
+    var items=[];
+    (s.fields||[]).forEach(function(f){
+      if(f.type==="checks"){var on=f.options.filter(function(o,i){return state[f.id+"_"+i]}); items.push([f.label,on.length?on.map(function(o){return "☑ "+o}).join("\n"):"(none checked)"]);}
+      else items.push([f.label,v(f.id)||"—"]);
+    });
+    if(s.sources){
+      for(var i=1;i<=s.sources;i++){var r=v("src"+i+"v"); if(!r) continue;
+        var marks=[state["src"+i+"p"]?"peer-reviewed":"",state["src"+i+"r"]?"read":"",state["src"+i+"m"]?"methods or future research":""].filter(Boolean).join(", ");
+        items.push(["["+i+"] "+r,(v("src"+i+"w")||"(no annotation yet)")+(marks?"\nChecked: "+marks:"")]);}
+      if(!items.length) items.push(["Sources","None pasted yet."]);
+    }
+    if(s.ailog){
+      for(var j=1;j<=s.ailog;j++){if(!v("ai"+j+"a")&&!v("ai"+j+"t")) continue;
+        items.push(["Use "+j+": "+(v("ai"+j+"t")||"tool and date not given"),"Asked: "+(v("ai"+j+"a")||"—")+"\nKept and checked: "+(v("ai"+j+"k")||"—")+"\nRejected or changed: "+(v("ai"+j+"c")||"—")]);}
+      if(!items.length) items.push(["AI log","No AI use recorded yet."]);
+    }
+    out.push({title:s.num+" · "+s.title,items:items});
+  });
+  return out;
+}
+var STAMP=function(){return "The Paper Idea Form · DE Biology 101 · downloaded "+new Date().toLocaleDateString()+" · Bio Tool #20, scienceonepagers.org";};
+function asText(){
+  var t="THE PAPER IDEA FORM\n"+STAMP()+"\n";
+  outline().forEach(function(s){t+="\n\n"+s.title.toUpperCase()+"\n"; s.items.forEach(function(it){t+="\n"+it[0]+"\n"+it[1]+"\n";});});
+  return t;
+}
+function copyText(t,msg){
+  function fallback(){var ta=el("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy"); toast(msg);}catch(e){toast("Copy did not work; select the text and copy it.");} ta.remove();}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){toast(msg)},fallback);} else fallback();
+}
+document.getElementById("copyAll").addEventListener("click",function(){copyText(asText(),"Everything copied. Paste it into Word or Notes.");});
+document.getElementById("dlPdf").addEventListener("click",function(){
+  var pv=document.getElementById("printview"); pv.innerHTML="";
+  pv.appendChild(el("h1",{text:"The Paper Idea Form"})); pv.appendChild(el("p",{text:STAMP()}));
+  outline().forEach(function(s){pv.appendChild(el("h2",{text:s.title})); s.items.forEach(function(it){pv.appendChild(el("p",{"class":"q",text:it[0]})); pv.appendChild(el("p",{"class":"a",text:it[1]}));});});
+  window.print();
+});
+document.getElementById("clearAll").addEventListener("click",function(){
+  var b=this;
+  if(b.dataset.armed){state={}; try{localStorage.removeItem(KEY);}catch(e){} location.reload(); return;}
+  b.dataset.armed="1"; b.textContent="Tap again to erase everything on this iPad";
+  setTimeout(function(){delete b.dataset.armed; b.textContent="Start over";},4000);
+});
+
+
+/* ---------- load a saved Word file back into the form ---------- */
+function dataOnly(){var o={}; for(var k in state){if(k.charAt(0)!=="_"&&state[k]) o[k]=state[k];} return o;}
+function readZip(buf){
+  var dv=new DataView(buf), u8=new Uint8Array(buf), e=-1;
+  for(var i=buf.byteLength-22;i>=Math.max(0,buf.byteLength-66000);i--){if(dv.getUint32(i,true)===0x06054b50){e=i;break;}}
+  if(e<0) return Promise.reject(new Error("not a zip"));
+  var n=dv.getUint16(e+10,true), p=dv.getUint32(e+16,true), dec=new TextDecoder(), jobs=[];
+  for(var k=0;k<n;k++){
+    if(dv.getUint32(p,true)!==0x02014b50) break;
+    var method=dv.getUint16(p+10,true), csize=dv.getUint32(p+20,true), nl=dv.getUint16(p+28,true), xl=dv.getUint16(p+30,true), cl=dv.getUint16(p+32,true), lo=dv.getUint32(p+42,true);
+    var name=dec.decode(u8.subarray(p+46,p+46+nl));
+    var start=lo+30+dv.getUint16(lo+26,true)+dv.getUint16(lo+28,true), raw=u8.subarray(start,start+csize);
+    if(/^(word\/document\.xml|customXml\/item\d+\.xml)$/.test(name)) jobs.push(inflate(raw,method).then(function(name){return function(d){return [name,dec.decode(d)];};}(name)));
+    p+=46+nl+xl+cl;
+  }
+  return Promise.all(jobs).then(function(pairs){var m={}; pairs.forEach(function(x){m[x[0]]=x[1];}); return m;});
+}
+function inflate(raw,method){
+  if(method===0) return Promise.resolve(raw);
+  if(method!==8||typeof DecompressionStream==="undefined") return Promise.reject(new Error("unsupported"));
+  var ds=new DecompressionStream("deflate-raw"), w=ds.writable.getWriter(); w.write(raw); w.close();
+  return new Response(ds.readable).arrayBuffer().then(function(b){return new Uint8Array(b);});
+}
+function fromCustom(files){
+  for(var name in files){ if(name.indexOf("customXml/")!==0) continue;
+    var doc=new DOMParser().parseFromString(files[name],"application/xml"), r=doc.documentElement;
+    if(r&&r.localName==="paperIdeaForm"){try{return JSON.parse(r.textContent);}catch(e){}}
+  }
+  return null;
+}
+function fromText(xml){
+  var doc=new DOMParser().parseFromString(xml,"application/xml"), W="http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+  var ps=[].map.call(doc.getElementsByTagNameNS(W,"p"),function(p){var t=""; [].forEach.call(p.getElementsByTagNameNS(W,"*"),function(n){if(n.localName==="t")t+=n.textContent; else if(n.localName==="br")t+="\n";}); return t;});
+  var out={}, labels={};
+  SECTIONS.forEach(function(s){(s.fields||[]).forEach(function(f){labels[f.label]=f;});});
+  for(var i=0;i<ps.length-1;i++){
+    var t=ps[i], next=ps[i+1], f=labels[t], m;
+    if(f){
+      if(f.type==="checks"){f.options.forEach(function(o,j){if(next.indexOf("☑ "+o)>=0) out[f.id+"_"+j]="yes";});}
+      else if(next!=="—") out[f.id]=next;
+      i++; continue;
+    }
+    if((m=t.match(/^\[(\d+)\] ([\s\S]+)/))&&+m[1]>=1&&+m[1]<=10){
+      var parts=next.split("\nChecked: "); out["src"+m[1]+"v"]=m[2];
+      if(parts[0]!=="(no annotation yet)") out["src"+m[1]+"w"]=parts[0];
+      var c=parts[1]||""; if(/peer-reviewed/.test(c))out["src"+m[1]+"p"]="yes"; if(/\bread\b/.test(c))out["src"+m[1]+"r"]="yes"; if(/methods/.test(c))out["src"+m[1]+"m"]="yes";
+      i++; continue;
+    }
+    if((m=t.match(/^Use (\d+): ([\s\S]*)/))){
+      var u=m[1]; if(m[2]!=="tool and date not given") out["ai"+u+"t"]=m[2];
+      var g=function(re){var x=next.match(re); return x&&x[1]!=="—"?x[1]:"";};
+      var a=g(/Asked: ([\s\S]*?)\nKept and checked:/), k=g(/Kept and checked: ([\s\S]*?)\nRejected or changed:/), r=g(/Rejected or changed: ([\s\S]*)$/);
+      if(a)out["ai"+u+"a"]=a; if(k)out["ai"+u+"k"]=k; if(r)out["ai"+u+"c"]=r;
+      i++;
+    }
+  }
+  return out;
+}
+function loadBuffer(buf){
+  return readZip(buf).then(function(files){
+    var fromDoc=files["word/document.xml"]?fromText(files["word/document.xml"]):{}, saved=fromCustom(files)||{};
+    var merged={}, k; for(k in saved) merged[k]=saved[k]; for(k in fromDoc) merged[k]=fromDoc[k];
+    return merged;
+  });
+}
+var loadBtn=document.getElementById("loadWord"), loadFile=document.getElementById("loadFile");
+loadBtn.addEventListener("click",function(){loadFile.value=""; loadFile.click();});
+loadFile.addEventListener("change",function(){
+  var file=loadFile.files&&loadFile.files[0]; if(!file) return;
+  file.arrayBuffer().then(loadBuffer).then(function(data){
+    var n=Object.keys(data).length;
+    if(!n){toast("That file has no Paper Idea Form answers in it."); return;}
+    try{localStorage.setItem(KEY+".before-load",JSON.stringify(state));}catch(e){}
+    state=data; save(); toast("Loaded "+n+" answers. Reloading…");
+    setTimeout(function(){location.reload();},900);
+  }).catch(function(){toast("That file could not be read. Choose a Word file downloaded from this form.");});
+});
+window.__paperForm={loadBuffer:loadBuffer};
+try{if(navigator.storage&&navigator.storage.persist) navigator.storage.persist();}catch(e){}
+
+/* ---------- a real .docx, built here with no library ---------- */
+function xe(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,"");}
+function para(text,o){o=o||{};
+  var rpr=(o.b?"<w:b/>":"")+(o.i?"<w:i/>":"")+(o.color?'<w:color w:val="'+o.color+'"/>':"")+'<w:sz w:val="'+(o.sz||22)+'"/>';
+  var ppr='<w:pPr><w:spacing w:before="'+(o.before||0)+'" w:after="'+(o.after==null?80:o.after)+'"/>'+(o.shade?'<w:shd w:val="clear" w:color="auto" w:fill="EDF4F8"/>':"")+(o.keep?"<w:keepNext/>":"")+"</w:pPr>";
+  var runs=text.split("\n").map(function(line,i){return (i?"<w:r><w:br/></w:r>":"")+'<w:r><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri"/>'+rpr+'</w:rPr><w:t xml:space="preserve">'+xe(line)+"</w:t></w:r>";}).join("");
+  return "<w:p>"+ppr+runs+"</w:p>";
+}
+function docxXml(){
+  var b="";
+  b+=para("The Paper Idea Form",{b:true,sz:36,after:60,color:"1B3A4B"});
+  b+=para(STAMP(),{i:true,sz:18,after:240,color:"5A6B75"});
+  outline().forEach(function(s){
+    b+=para(s.title,{b:true,sz:26,before:280,after:100,color:"1F7A8C",keep:true});
+    s.items.forEach(function(it){b+=para(it[0],{b:true,sz:21,before:80,after:40,keep:true}); b+=para(it[1],{sz:22,after:120,shade:true});});
+  });
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+b+'<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="864" w:right="864" w:bottom="864" w:left="864" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>';
+}
+var CRC=(function(){var t=[],c;for(var n=0;n<256;n++){c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u){var c=0xFFFFFFFF;for(var i=0;i<u.length;i++)c=CRC[(c^u[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function zip(files){
+  var enc=new TextEncoder(), parts=[], central=[], off=0;
+  function u16(n){return [n&255,(n>>>8)&255];} function u32(n){return [n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255];}
+  files.forEach(function(f){
+    var name=enc.encode(f.name), data=enc.encode(f.data), crc=crc32(data);
+    var head=[].concat(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0));
+    parts.push(new Uint8Array(head),name,data);
+    central.push([].concat(u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off)),name);
+    off+=head.length+name.length+data.length;
+  });
+  var csize=0; central.forEach(function(c,i){ if(i%2===0){parts.push(new Uint8Array(c));csize+=c.length;} else {parts.push(c);csize+=c.length;} });
+  parts.push(new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(csize),u32(off),u16(0))));
+  return new Blob(parts,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+}
+document.getElementById("dlWord").addEventListener("click",function(){
+  var blob=zip([
+    {name:"[Content_Types].xml",data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/customXml/itemProps1.xml" ContentType="application/vnd.openxmlformats-officedocument.customXmlProperties+xml"/></Types>'},
+    {name:"_rels/.rels",data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'},
+    {name:"word/document.xml",data:docxXml()},
+    {name:"word/_rels/document.xml.rels",data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml" Target="../customXml/item1.xml"/></Relationships>'},
+    {name:"customXml/item1.xml",data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><paperIdeaForm xmlns="urn:scienceonepagers:paper-idea-form" version="1">'+xe(JSON.stringify(dataOnly()))+'</paperIdeaForm>'},
+    {name:"customXml/itemProps1.xml",data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ds:datastoreItem ds:itemID="{6E1D3C2A-5B7F-4C1E-9A2D-20B1E0F0A520}" xmlns:ds="http://schemas.openxmlformats.org/officeDocument/2006/customXml"><ds:schemaRefs><ds:schemaRef ds:uri="urn:scienceonepagers:paper-idea-form"/></ds:schemaRefs></ds:datastoreItem>'},
+    {name:"customXml/_rels/item1.xml.rels",data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXmlProps" Target="itemProps1.xml"/></Relationships>'}
+  ]);
+  var a=el("a",{href:URL.createObjectURL(blob),download:"Paper-Idea-Form-"+new Date().toISOString().slice(0,10)+".docx"}); document.body.appendChild(a); a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},1500);
+  toast("Word file downloaded. Find it in Files → Downloads.");
+});
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82bc6616569842b9ab63b89bf80ed3c5"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
