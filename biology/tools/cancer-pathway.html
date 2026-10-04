@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en" data-dev="ipad">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A watch-only animation in eight stages: one skin cell stops listening to its neighbors, piles into a tumor, gets a blood supply, breaks through the layer under the tissue, rides the bloodstream and starts a second tumor in the lung. Biology I Unit 2 (SOL BIO.3). Nothing to answer, nothing submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/cancer-pathway.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Cancer Pathway: How One Cell Breaks Away">
+<meta property="og:description" content="Eight stages on a loop, from healthy skin tissue to a second tumor in the lung, told with what a 9th grader knows in Unit 2. Watch only; nothing submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/cancer-pathway.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>The Cancer Pathway | Science One-Pagers</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"The Cancer Pathway: How One Cell Breaks Away","description":"A watch-only animation in eight stages showing how one damaged skin cell becomes a tumor, gains a blood supply, invades, travels in the bloodstream and forms a second tumor in the lung. Pitched at Biology I Unit 2 (cells, tissues, organs, homeostasis).","url":"https://scienceonepagers.org/biology/tools/cancer-pathway.html","inLanguage":"en","learningResourceType":"Animation","educationalLevel":"High school","typicalAgeRange":"14-16","audience":[{"@type":"EducationalAudience","educationalRole":"teacher"},{"@type":"EducationalAudience","educationalRole":"student"}],"isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-nc/4.0/","author":{"@type":"Person","name":"J. R. Schwebach"},"publisher":{"@type":"Organization","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"isPartOf":{"@type":"CollectionPage","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"about":{"@type":"Thing","name":"Biology"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--gold:#C98A2E;--gold-soft:#FBF0DA;--gold-ink:#7A5212;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--gold:#E0A64A;--gold-soft:#2F2614;--gold-ink:#F2CF8C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--gold:#E0A64A;--gold-soft:#2F2614;--gold-ink:#F2CF8C;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+.wrap{max-width:100rem;margin:0 auto;padding:.9rem 1rem 4rem}
+html.proj .wrap{max-width:none}
+.narrow{max-width:46rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.45rem,4.6vw,2rem);line-height:1.12;letter-spacing:-0.015em;margin:0}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.2rem 0 .6rem}
+p{margin:0 0 1rem;max-width:38rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 .9rem .2rem 0;letter-spacing:0;text-transform:none;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .2rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;padding:0;margin:-1px}
+
+/* header: title on the left, the only controls on the right */
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:.6rem 1.4rem;padding:0 0 .7rem;border-bottom:1.5px solid var(--rule);margin:0 0 .8rem}
+.devrow{display:flex;justify-content:flex-end}
+.eb{display:inline-block}
+@media (min-width:900px) and (orientation:landscape){h1{font-size:clamp(1.4rem,2.3vw,1.9rem)}}
+.sw{display:flex;flex-direction:column;gap:.25rem}
+.swl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--card)}
+.seg button{font-family:var(--sans);font-weight:600;font-size:.9rem;background:none;border:none;color:var(--ink-soft);padding:.4rem .85rem;min-height:48px;min-width:48px;line-height:1.2}
+.seg button + button{border-left:1.5px solid var(--rule)}
+.seg button small{display:block;font-weight:500;font-size:.7rem;opacity:.85}
+.seg button[aria-pressed="true"]{background:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#12100D}
+html[data-dev="pc"] .seg button{min-height:38px}
+.ctl{display:flex;gap:.45rem;flex-wrap:wrap}
+.cbtn{font-family:var(--sans);font-weight:600;font-size:.95rem;min-height:48px;min-width:48px;padding:.45rem 1rem;border-radius:3px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;gap:.45rem}
+.cbtn svg{width:16px;height:16px;flex:none}
+.cbtn.main{background:var(--bond);border-color:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cbtn.main{color:#12100D}}
+:root[data-theme="dark"] .cbtn.main{color:#12100D}
+.cbtn[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--gold-ink)}
+html[data-dev="pc"] .cbtn{min-height:38px}
+
+/* the tool: path + stage */
+.tool{display:flex;flex-direction:column;gap:.8rem}
+.path{list-style:none;margin:0;padding:0}
+.bub{position:relative;color:var(--ink-soft)}
+.dot{position:relative;flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:2px solid var(--shell);font-family:var(--sans);font-weight:700;font-size:1.05rem;color:var(--ink-soft);z-index:1}
+.dot svg{position:absolute;inset:-5px;width:54px;height:54px;transform:rotate(-90deg);pointer-events:none}
+.dot svg circle{fill:none;stroke:var(--gold);stroke-width:3.5;stroke-linecap:round;opacity:0}
+.bub.lit .dot{background:var(--gold-soft);border-color:var(--gold);color:var(--gold-ink)}
+.bub.on .dot{background:var(--gold);border-color:var(--gold);color:#1D1A15;box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 28%,transparent),0 0 22px 4px color-mix(in srgb,var(--gold) 55%,transparent)}
+.bub.on .dot svg circle{opacity:1}
+.ttl{font-family:var(--sans);font-weight:600;font-size:18px;line-height:1.2}
+.bub.lit .ttl{color:var(--ink)}
+.bub.on .ttl{color:var(--ink);font-weight:700}
+.cap{font-size:18px;line-height:1.42;margin:.35rem 0 .5rem;color:var(--ink)}
+.chip{display:inline-block;font-family:var(--sans);font-size:18px;font-weight:600;line-height:1.3;padding:.2rem .6rem;border-radius:3px;background:var(--bond-soft);color:var(--bond);border:1.5px solid color-mix(in srgb,var(--bond) 40%,transparent)}
+.body{display:none}
+
+/* the stage */
+.stagecol{display:flex;flex-direction:column;gap:.7rem;min-width:0;min-height:0}
+.stagebox{min-height:0;display:flex;align-items:flex-start;justify-content:center}
+.stage{position:relative;width:100%;aspect-ratio:1000/640;border-radius:6px;overflow:hidden;border:1.5px solid var(--rule);background:#FBF7F1}
+.stage svg{display:block;width:100%;height:100%}
+.stage text{font-family:var(--sans)}
+.lab{font-size:clamp(21px,calc(12.5px / var(--k,1)),32px);font-weight:600;fill:#1D1A15;paint-order:stroke;stroke:#FFFDF8;stroke-width:6px;stroke-linejoin:round}
+html.proj .lab{font-size:clamp(26px,calc(15px / var(--k,1)),34px)}
+.lab.small{font-size:clamp(15px,calc(9.5px / var(--k,1)),24px);font-weight:500;fill:#5A544A}
+html.proj .lab.small{font-size:clamp(18px,calc(11px / var(--k,1)),26px)}
+.tag{font-size:clamp(17px,calc(10px / var(--k,1)),26px);font-weight:700;letter-spacing:.12em;fill:#5A544A}
+html.proj .tag{font-size:clamp(21px,calc(12px / var(--k,1)),28px)}
+.count{font-size:34px;font-weight:700;fill:#B8AFA3}
+.count .cur{fill:#B85042}
+html.proj .count{font-size:40px}
+.closing{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:4%;background:rgba(251,247,241,.97)}
+.closing.show{display:flex}
+.closing .in{max-width:40rem;color:#1D1A15}
+.closing .big{font-family:var(--sans);font-weight:700;font-size:clamp(20px,2.4vw,30px);line-height:1.15;margin:0 0 .5rem}
+.closing .txt{font-size:clamp(17px,1.7vw,22px);line-height:1.4;margin:0 0 .8rem;max-width:none}
+.closing .bars{margin:0 0 .7rem;font-family:var(--sans);font-size:15px;font-weight:600}
+.closing .bar{display:grid;grid-template-columns:1fr;gap:.2rem;margin:0 0 .5rem}
+.closing .track{height:14px;background:#E6DED2;border-radius:2px;overflow:hidden}
+.closing .fill{height:100%;background:#1F7A8C}
+.closing .fill.late{background:#B85042}
+.closing .src{font-family:var(--sans);font-size:13px;line-height:1.4;color:#5A544A;margin:0;max-width:none}
+html.proj .closing .big{font-size:34px}
+html.proj .closing .txt{font-size:28px}
+html.proj .closing .bars{font-size:20px}
+html.proj .closing .src{font-size:16px}
+
+/* stacked layout (portrait, phones): path is a row of numbered bubbles above the stage */
+.path{display:flex;align-items:center;justify-content:space-between}
+.path .bub{flex:1;display:flex;align-items:center}
+.path .bub:last-child{flex:0}
+.path .bub::after{content:"";flex:1;height:3px;background:var(--shell);margin:0 2px}
+.path .bub:last-child::after{display:none}
+.path .bub.lit::after{background:var(--gold)}
+.path .txt{display:none}
+.now{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--gold);border-radius:4px;padding:.7rem .9rem .8rem}
+.now .ttl{font-size:20px;color:var(--ink);font-weight:700;display:block}
+.now .ttl .n{color:var(--gold-ink)}
+.now .cap{margin:.3rem 0 .5rem}
+
+/* wide landscape: the path runs down the left as a column of bubbles; the current one opens */
+@media (min-width:900px) and (orientation:landscape){
+  .wrap{padding-top:.6rem}
+  .screen{height:calc(100vh - .6rem);height:calc(100dvh - .6rem);display:flex;flex-direction:column}
+  .tool{flex:1;min-height:0;display:grid;grid-template-columns:minmax(300px,35%) 1fr;gap:1.2rem;align-items:stretch;padding-bottom:.6rem}
+  html.proj .tool{grid-template-columns:minmax(320px,44%) 1fr}
+  .path{display:block;overflow:hidden;min-height:0}
+  .path .bub{display:flex;align-items:flex-start;gap:.75rem;padding:0 0 .4rem}
+  .path .bub::after{position:absolute;left:21px;top:44px;bottom:0;width:3px;height:auto;margin:0;flex:none}
+  .path .txt{display:block;padding-top:.6rem;min-width:0}
+  .path .bub.on .body{display:block}
+  .now{display:none}
+  .stagebox{flex:1;container-type:size}
+  .stage{width:min(100cqw,calc(100cqh * 1000 / 640))}
+  html.proj .path .bub{padding-bottom:.4rem}
+  html.proj .path .txt{padding-top:.25rem}
+}
+@media (min-width:900px) and (orientation:landscape) and (max-height:700px){
+  .screen{height:auto}
+}
+/* projector: bubble text 28 px or more */
+html.proj .ttl,html.proj .cap,html.proj .chip{font-size:max(28px,2.6vh)}
+html.proj .now .ttl{font-size:max(30px,2.8vh)}
+html.proj .cap{line-height:1.3}
+html.proj .chip{line-height:1.2}
+html.proj .dot{width:50px;height:50px;font-size:1.35rem}
+html.proj .dot svg{width:60px;height:60px}
+/* projector, landscape: numbered path across the top, big stage, the words beside it */
+@media (min-width:900px) and (orientation:landscape){
+  html.proj .head .sop-eyebrow{display:none}
+  html.proj .devrow{display:none}
+  html.proj .tool{grid-template-columns:1fr minmax(300px,31%);grid-template-rows:auto 1fr;gap:.8rem 1.4rem}
+  html.proj .path{grid-column:1 / -1;display:flex;align-items:center;overflow:visible}
+  html.proj .path .bub{flex:1;display:flex;align-items:center;gap:0;padding:0}
+  html.proj .path .bub:last-child{flex:0}
+  html.proj .path .bub::after{position:static;flex:1;height:4px;width:auto;margin:0 3px}
+  html.proj .path .txt{display:none}
+  html.proj .stagecol{display:contents}
+  html.proj .stagebox{grid-column:1;grid-row:2}
+  html.proj .now{display:block;grid-column:2;grid-row:2;align-self:start;max-height:100%;overflow:hidden}
+}
+
+@media (max-width:480px){.dot,html.proj .dot{width:34px;height:34px;font-size:.9rem}.dot svg,html.proj .dot svg{inset:-5px;width:44px;height:44px}}
+@media (prefers-reduced-motion:no-preference){
+  .bub.on .body,.now{animation:rise .45s ease-out}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+
+.below{margin-top:1.6rem}
+details.teach{margin:1.4rem 0 0;border:1.5px solid var(--rule);border-radius:4px;background:var(--card);padding:0 1rem}
+details.teach summary{font-family:var(--sans);font-weight:600;padding:.8rem 0;cursor:pointer;min-height:48px}
+details.teach h3{font-family:var(--sans);font-weight:600;font-size:1rem;margin:1rem 0 .4rem}
+details.teach ol,details.teach ul{margin:0 0 1rem;padding-left:1.3rem;max-width:38rem}
+details.teach li{margin:0 0 .3rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="screen">
+<header class="head">
+  <div class="headL">
+    <p class="sop-eyebrow"><a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a> <span class="eb">Bio Tool #19 &middot; Biology I Unit 2 &middot; SOL BIO.3 &middot; PWCS LT 2.3</span></p>
+    <h1>The Cancer Pathway: How One Cell Breaks Away</h1>
+  </div>
+  <div class="ctl" role="group" aria-label="Animation controls">
+      <button type="button" class="cbtn main" id="bPlay" aria-label="Pause"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" fill="currentColor"/><rect x="9.4" y="2" width="3.6" height="12" fill="currentColor"/></svg><span>Pause</span></button>
+      <button type="button" class="cbtn" id="bRestart"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8a4.8 4.8 0 1 0 1.5-3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 1.8v4.4h4.4z" fill="currentColor"/></svg><span>Restart</span></button>
+      <button type="button" class="cbtn" id="bProj" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="13" height="8.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11.5v2.5M5 14.5h6" stroke="currentColor" stroke-width="1.8"/></svg><span>Projector</span></button>
+  </div>
+</header>
+
+<main class="tool" id="tool">
+  <ol class="path" id="path" aria-hidden="true"></ol>
+  <div class="stagecol">
+    <div class="stagebox">
+      <div class="stage" id="stage" role="img" aria-label="Stage 1 of 8, Healthy tissue.">
+        <svg id="svg" viewBox="0 0 1000 640" aria-hidden="true" focusable="false"></svg>
+        <div class="closing" id="closing" aria-hidden="true">
+          <div class="in">
+            <p class="big">Catching cancer early matters.</p>
+            <p class="txt">For melanoma found before it spreads, more than 99 out of 100 people are alive five years later. Once it has spread to distant organs, about 36 out of 100 are.</p>
+            <div class="bars">
+              <div class="bar"><span>Found before it spreads: more than 99 of 100</span><div class="track"><div class="fill" style="width:99.5%"></div></div></div>
+              <div class="bar"><span>Spread to distant organs: about 36 of 100</span><div class="track"><div class="fill late" style="width:36%"></div></div></div>
+            </div>
+            <p class="src">American Cancer Society, survival rates for melanoma by stage (people diagnosed 2015&ndash;2021; page revised August 12, 2026).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="now" id="now" aria-hidden="true"></div>
+    <div class="devrow">
+  <div class="sw">
+      <span class="swl" id="devL">Running on</span>
+      <div class="seg" role="group" aria-labelledby="devL">
+        <button type="button" data-dev="ipad" aria-pressed="true" aria-label="Running on iPad">iPad<small>touch &middot; fewer moving pieces</small></button>
+        <button type="button" data-dev="pc" aria-pressed="false" aria-label="Running on a computer">Computer<small>mouse &middot; denser picture</small></button>
+      </div>
+    </div>
+</div>
+  </div>
+</main>
+</div>
+
+<ol class="vh" id="srlist" aria-label="The eight stages, in order">
+  <li>Healthy tissue. Healthy cells listen to their neighbors. They divide only when the tissue needs new cells, stop when it is full, and stay attached in their own tissue.</li>
+  <li>Damage to the instructions. Sunburns, tobacco smoke and other causes can damage the instructions stored in a cell's nucleus. Most damage is repaired, or the damaged cell dies.</li>
+  <li>One cell stops listening. Now and then a damaged cell keeps dividing when its neighbors signal stop. Every new cell inherits the same broken instructions.</li>
+  <li>A tumor forms. The extra cells pile into a lump called a tumor. It crowds healthy cells and takes their space and food, and the tissue can no longer do its job. Homeostasis slips.</li>
+  <li>A new blood supply. A growing tumor needs oxygen and sugar like every cell. It sends signals that make new blood vessels grow into it.</li>
+  <li>Breaking through. Some cells let go of the cells around them and push through the thin layer under the tissue. Now the tumor is invading. A tumor that does this is malignant.</li>
+  <li>Riding the bloodstream. A few cells slip into a blood vessel and ride the bloodstream. Most die on the trip. A few survive.</li>
+  <li>A new organ. One survivor leaves the blood in a new organ and starts dividing again. Spreading to a new place is called metastasis. Now more than one organ, and more than one organ system, is in trouble.</li>
+  <li>Catching cancer early matters. For melanoma found before it spreads, more than 99 out of 100 people are alive five years later. Once it has spread to distant organs, about 36 out of 100 are. Source: American Cancer Society.</li>
+</ol>
+
+<section class="narrow below">
+  <p class="lede">One skin cell stops listening to its neighbors. Follow its descendants from a lump in the skin, through the bloodstream, to a second tumor in the lung.</p>
+  <p class="fine">It plays by itself and loops, about a minute and a half each time round. There is nothing to answer. <b>Pause</b> holds any stage for talking; <b>Projector</b> makes the words bigger and holds each stage longer. The cells and vessels are drawings, not to scale.</p>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <h3>Where students are</h3>
+    <p>In Unit 2 students know the cell, the nucleus as the place the DNA is kept, the cell membrane, organelles, the levels of organization from cell to organism, and homeostasis. They have not met DNA structure, the cell cycle, mitosis or the immune system. The story uses only what they have, and each stage carries a chip naming the unit where the rest comes back.</p>
+    <h3>The eight stages</h3>
+    <ol>
+      <li>Healthy tissue</li>
+      <li>Damage to the instructions</li>
+      <li>One cell stops listening</li>
+      <li>A tumor forms</li>
+      <li>A new blood supply</li>
+      <li>Breaking through</li>
+      <li>Riding the bloodstream</li>
+      <li>A new organ</li>
+    </ol>
+    <h3>Where it comes back</h3>
+    <ul>
+      <li><b>Unit 3, Cell Energetics:</b> why a tumor needs its own blood supply of sugar and oxygen.</li>
+      <li><b>Unit 4, Nucleic Acids &amp; Protein Synthesis:</b> what &ldquo;damage to the instructions&rdquo; means, and how a change in the DNA changes the message.</li>
+      <li><b>Unit 5, Cell Growth, Division &amp; Specialization:</b> the controls on dividing that the rogue cell ignores.</li>
+    </ul>
+    <h3>Choices in the drawing</h3>
+    <ul>
+      <li>The cell that goes wrong carries dark pigment granules from the first frame. It is a pigment cell, because melanoma, the cancer in the closing numbers, starts in pigment cells; the second tumor is still melanoma, not lung cancer.</li>
+      <li>Most damage is repaired or the damaged cell dies, and stage 2 shows both before one cell keeps its damage, so students do not leave thinking every sunburn becomes cancer.</li>
+      <li>Benign and malignant are separated once, at stage 6: a tumor that crosses the thin layer under the tissue is malignant.</li>
+      <li>The rogue cells differ by shape as well as color (round, with a lumpy nucleus), so the difference holds in grayscale and for color-blind viewers.</li>
+      <li>Five cells enter the blood and one arrives; the counter at the top of stage 7 keeps score.</li>
+    </ul>
+    <h3>In class</h3>
+    <p>Project it with <b>Projector</b> on, or link to <code>cancer-pathway.html?projector=1</code> to open that way. Pause on a stage to ask what students already know about it. Students can rewatch from Canvas; nothing is collected, and the only things this device remembers are the Projector and Running on settings.</p>
+  </details>
+</section>
+
+<footer class="sop-foot">Bio Tool #19 &middot; Unit 2, Cell Structure &amp; Function &middot; Biology I, SOL BIO.3 &middot; PWCS LT 2.3 &middot; watch only, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Drawings are original. Sources: American Cancer Society, <a href="https://www.cancer.org/cancer/types/melanoma-skin-cancer/detection-diagnosis-staging/survival-rates-for-melanoma-skin-cancer-by-stage.html">survival rates for melanoma by stage</a> (2026); National Cancer Institute, <a href="https://www.cancer.gov/about-cancer/understanding/what-is-cancer">&ldquo;What Is Cancer?&rdquo;</a> and <a href="https://www.cancer.gov/types/metastatic-cancer">&ldquo;Metastatic Cancer,&rdquo;</a> for the sequence. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const STAGES=[
+ {t:"Healthy tissue",c:"Healthy cells listen to their neighbors. They divide only when the tissue needs new cells, stop when it is full, and stay attached in their own tissue.",k:"Comes back in Unit 5: when and why cells divide"},
+ {t:"Damage to the instructions",c:"Sunburns, tobacco smoke and other causes can damage the instructions stored in a cell’s nucleus. Most damage is repaired, or the damaged cell dies.",k:"Comes back in Unit 4: DNA and how its message changes"},
+ {t:"One cell stops listening",c:"Now and then a damaged cell keeps dividing when its neighbors signal stop. Every new cell inherits the same broken instructions.",k:"Comes back in Unit 5: the cell cycle and its checkpoints"},
+ {t:"A tumor forms",c:"The extra cells pile into a lump called a tumor. It crowds healthy cells and takes their space and food, and the tissue can no longer do its job. Homeostasis slips.",k:"Builds on Unit 2: levels of organization, homeostasis"},
+ {t:"A new blood supply",c:"A growing tumor needs oxygen and sugar like every cell. It sends signals that make new blood vessels grow into it.",k:"Comes back in Unit 3: how cells get energy from sugar and oxygen"},
+ {t:"Breaking through",c:"Some cells let go of the cells around them and push through the thin layer under the tissue. Now the tumor is invading. A tumor that does this is malignant.",k:"Builds on Unit 2: the cell membrane and its proteins"},
+ {t:"Riding the bloodstream",c:"A few cells slip into a blood vessel and ride the bloodstream. Most die on the trip. A few survive.",k:"Comes back in Unit 9 and beyond: how the body defends itself"},
+ {t:"A new organ",c:"One survivor leaves the blood in a new organ and starts dividing again. Spreading to a new place is called metastasis. Now more than one organ, and more than one organ system, is in trouble.",k:""}
+];
+const N=STAGES.length;
+const KEY="cancer-pathway";
+const html=document.documentElement;
+const reducedMQ=window.matchMedia?window.matchMedia("(prefers-reduced-motion: reduce)"):{matches:false,addEventListener(){}};
+let reduced=reducedMQ.matches;
+
+/* ---------- saved settings (this device only) ---------- */
+let prefs={proj:false,dev:"ipad"};
+try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);if(o&&typeof o==="object"){if(typeof o.proj==="boolean")prefs.proj=o.proj;if(o.dev==="pc"||o.dev==="ipad")prefs.dev=o.dev;}}}catch(e){}
+try{const q=new URLSearchParams(location.search);if(q.get("projector")==="1")prefs.proj=true;if(q.get("projector")==="0")prefs.proj=false;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(e){}}
+
+/* ---------- the path ---------- */
+const pathEl=document.getElementById("path"),nowEl=document.getElementById("now");
+const RING=2*Math.PI*24;
+STAGES.forEach((s,i)=>{
+  const li=document.createElement("li");li.className="bub";
+  li.innerHTML='<span class="dot"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="24" stroke-dasharray="'+RING.toFixed(1)+'" stroke-dashoffset="'+RING.toFixed(1)+'"/></svg><span class="n">'+(i+1)+'</span></span>'+
+   '<div class="txt"><span class="ttl">'+s.t+'</span><div class="body"><p class="cap">'+s.c+'</p>'+(s.k?'<span class="chip">'+s.k+'</span>':'')+'</div></div>';
+  pathEl.appendChild(li);
+});
+const bubs=[...pathEl.children];
+const rings=bubs.map(b=>b.querySelector(".dot svg circle"));
+
+/* ---------- svg helpers ---------- */
+const NS="http://www.w3.org/2000/svg";
+const svg=document.getElementById("svg");
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);if(attrs)for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e;}
+function A(e,attrs){for(const k in attrs)e.setAttribute(k,attrs[k]);}
+const clamp=(x,a,b)=>x<a?a:x>b?b:x;
+const lerp=(a,b,p)=>a+(b-a)*p;
+const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+const seg=(G,a,b)=>clamp((G-a)/(b-a),0,1);
+let seed=7;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+
+/* palette for the drawing (kept light in both themes so it reads on a projector) */
+const C={teal:"#1F7A8C",tealFill:"#E3F0F2",tealNuc:"#A8CFD6",rogue:"#B85042",rogueFill:"#D98471",rogueNuc:"#6E2419",
+ ochre:"#C98A2E",wall:"#7E1A26",lumen:"#B8414F",rbc:"#EE9AA2",dermis:"#F4E7DA",sky:"#FBF7F1",pig:"#5B3A22",dead:"#B9B2A9",gold:"#E0A33A",sig:"#2E95A8"};
+
+/* ---------- world geometry ---------- */
+const MEM_Y=376, LAYER_TOP=290, CH=82, CW=72, CY=LAYER_TOP+CH/2, VY=556;
+const slotX=i=>60+80*i;
+const PIG=5;
+
+const defs=el("defs");
+const grad=el("linearGradient",{id:"fadeR",x1:"0",x2:"1",y1:"0",y2:"0"},defs);
+el("stop",{offset:"0","stop-color":"#F4E7DA"},grad);el("stop",{offset:"1","stop-color":"#F2E4E0"},grad);
+
+const world=el("g",{id:"world"});
+// backgrounds
+el("rect",{x:1000,y:0,width:1000,height:640,fill:"url(#fadeR)"},world);
+el("rect",{x:-60,y:0,width:1190,height:MEM_Y,fill:C.sky},world);
+el("rect",{x:-60,y:MEM_Y,width:1190,height:280,fill:C.dermis},world);
+el("rect",{x:2000,y:0,width:1060,height:640,fill:"#F7ECEE"},world);
+const g3=el("linearGradient",{id:"lungF",x1:"0",x2:"1",y1:"0",y2:"0"},defs);
+el("stop",{offset:"0","stop-color":"#F7ECEE","stop-opacity":"0"},g3);el("stop",{offset:"1","stop-color":"#F7ECEE","stop-opacity":"1"},g3);
+el("rect",{x:1860,y:0,width:141,height:640,fill:"url(#lungF)"},world);
+// faint tissue texture along the journey
+seed=11;
+for(let i=0;i<26;i++){const x=1070+rnd()*900,y=30+rnd()*580;if(Math.abs(y-500)<70)continue;el("circle",{cx:x,cy:y,r:14+rnd()*16,fill:"none",stroke:"#E3D3C8","stroke-width":2},world);}
+// lung: tiny air sacs
+const ALV=[];
+seed=29;
+for(let gx=2050;gx<=3020;gx+=92){for(let gy=70;gy<=480;gy+=88){
+  const x=gx+(rnd()-.5)*30,y=gy+(rnd()-.5)*26,r=34+rnd()*10;
+  if(Math.hypot(x-2400,(y-420)*1.1)<175)continue;
+  if(y+r>512)continue;
+  ALV.push([x,y,r]);
+}}
+ALV.forEach(([x,y,r])=>el("circle",{cx:x,cy:y,r:r,fill:"#FDF3F5",stroke:"#D49AAD","stroke-width":2.5},world));
+for(let x=2040;x<3040;x+=70){el("circle",{cx:x+(x%140?10:-6),cy:615,r:22,fill:"#FDF3F5",stroke:"#D49AAD","stroke-width":2.5},world);}
+
+// the thin layer under the tissue (basement membrane), two pieces so a gap can open
+const memL=el("line",{x1:-60,y1:MEM_Y,x2:1000,y2:MEM_Y,stroke:C.ochre,"stroke-width":5,"stroke-linecap":"round"},world);
+const memR=el("line",{x1:1000,y1:MEM_Y,x2:1000,y2:MEM_Y,stroke:C.ochre,"stroke-width":5,"stroke-linecap":"round"},world);
+
+// soft edge where the skin drawing ends
+const g2=el("linearGradient",{id:"edgeF",x1:"0",x2:"1",y1:"0",y2:"0"},defs);
+el("stop",{offset:"0","stop-color":"#F4E7DA","stop-opacity":"0"},g2);el("stop",{offset:"1","stop-color":"#F4E7DA","stop-opacity":"1"},g2);
+el("rect",{x:1000,y:0,width:132,height:640,fill:"url(#edgeF)"},world);
+// new vessels toward the tumor
+const SPROUTS=["M400 532 C392 486 420 444 430 393","M470 532 C482 482 452 434 462 391","M540 532 C550 472 516 442 505 393"];
+const sproutG=el("g",{},world);
+const sprouts=SPROUTS.map(d=>{
+  const o=el("path",{d,fill:"none",stroke:C.wall,"stroke-width":14,"stroke-linecap":"round",pathLength:1,"stroke-dasharray":"1 1","stroke-dashoffset":1},sproutG);
+  const i=el("path",{d,fill:"none",stroke:C.lumen,"stroke-width":8,"stroke-linecap":"round",pathLength:1,"stroke-dasharray":"1 1","stroke-dashoffset":1},sproutG);
+  return {o,i,len:0};
+});
+
+// main vessel
+const VPATH="M-60 "+VY+" L1000 "+VY+" C1200 "+VY+" 1260 470 1500 470 C1740 470 1800 "+VY+" 2000 "+VY+" L3060 "+VY;
+el("path",{d:VPATH,fill:"none",stroke:C.wall,"stroke-width":62},world);
+const vLumen=el("path",{d:VPATH,fill:"none",stroke:C.lumen,"stroke-width":48},world);
+const VLEN=vLumen.getTotalLength();
+// y of the vessel at any x
+const VYX=new Float32Array(3200);
+(function(){let L=0;const step=2;let last=-60;VYX.fill(VY);
+  for(L=0;L<=VLEN;L+=step){const p=vLumen.getPointAtLength(L);const xi=Math.round(p.x)+80;if(xi>=0&&xi<3200)VYX[xi]=p.y;}
+  for(let i=1;i<3200;i++){if(VYX[i]===VY&&VYX[i-1]!==VY&&i>1060&&i<2080)VYX[i]=VYX[i-1];}
+})();
+const vy=x=>VYX[clamp(Math.round(x)+80,0,3199)];
+// red blood cells
+const rbcG=el("g",{},world);
+const RBC=[];for(let i=0;i<70;i++){RBC.push({e:el("ellipse",{rx:8,ry:4.6,fill:C.rbc},rbcG),s:(i/70)*VLEN+(i%3)*9,lane:((i*7)%5-2)*5});}
+const sDots=[];for(let i=0;i<9;i++)sDots.push(el("circle",{r:4,fill:C.rbc,opacity:0},sproutG));
+
+// healthy cells
+const healthy=[];
+const JAG="M-16 4 L-9 -9 L-1 -4 L6 -12 L15 -2 L10 7 L16 15 L3 13 L-5 19 L-12 10 Z";
+for(let i=0;i<12;i++){
+  const g=el("g",{},world);
+  const r=el("rect",{x:-CW/2,y:-CH/2,width:CW,height:CH,rx:14,fill:C.tealFill,stroke:C.teal,"stroke-width":2.5},g);
+  const n=el("ellipse",{cx:0,cy:6,rx:15,ry:13,fill:C.tealNuc,stroke:C.teal,"stroke-width":1.8},g);
+  const j=el("path",{d:JAG,fill:C.rogueNuc,stroke:"#3B130D","stroke-width":1.5,opacity:0},g);
+  const gr=[];
+  if(i===PIG){[[-22,-26],[-8,-30],[8,-25],[22,-29],[-20,26],[20,27],[0,-20]].forEach(([x,y])=>gr.push(el("circle",{cx:x,cy:y,r:3.4,fill:C.pig},g)));}
+  healthy.push({g,r,n,j,gr});
+}
+// signals between neighbors
+const sigG=el("g",{},world);
+const sigs=[];for(let i=0;i<10;i++)sigs.push(el("circle",{r:5.5,fill:C.sig,opacity:0},sigG));
+
+// rogue cells
+const BLOB="M-13 -6 C-10 -15 2 -14 7 -10 C14 -6 15 3 10 7 C13 13 4 16 -2 13 C-9 15 -15 9 -13 2 C-17 -1 -16 -4 -13 -6 Z";
+function mkRogue(parent,i){
+  const g=el("g",{opacity:0},parent);
+  el("circle",{r:25,fill:C.rogueFill,stroke:C.rogue,"stroke-width":3},g);
+  el("path",{d:BLOB,fill:C.rogueNuc,transform:"rotate("+((i*47)%360)+")"},g);
+  return g;
+}
+const rogueG=el("g",{},world);
+function lattice(cx,cy,rowsDown,rowsUp,ok,yw){
+  const pts=[];
+  for(let r=-rowsDown;r<=rowsUp;r++){const y=cy-r*40,off=(Math.abs(r)%2)*23;
+    for(let k=-8;k<=8;k++){const x=cx+k*46+off;if(ok(x,y,r))pts.push({x,y});}}
+  pts.sort((a,b)=>Math.hypot(a.x-cx,(a.y-cy)*yw)-Math.hypot(b.x-cx,(b.y-cy)*yw));
+  pts.forEach((p,i)=>{let best=0,bd=1e9;for(let j=0;j<i;j++){const d=Math.hypot(p.x-pts[j].x,p.y-pts[j].y);if(d<bd){bd=d;best=j;}}p.par=i?best:0;});
+  return pts;
+}
+const T1=lattice(slotX(PIG),CY,0,6,(x,y,r)=>r===0?Math.abs(x-slotX(PIG))<=46:Math.abs(x-slotX(PIG))<=250,1.4).slice(0,30);
+const T2=lattice(2400,420,2,2,(x,y)=>Math.abs(x-2400)<=150,1).slice(0,13);
+// when each cell appears, in stage units (stage index + fraction)
+const B1=[2.0,2.25,2.45,2.45,2.65,2.65,2.65,2.65];
+for(let i=8;i<26;i++)B1.push(3.05+(i-8)*(0.75/18));
+for(let i=26;i<30;i++)B1.push(4.2+(i-26)*0.15);
+const B2=[7.0,7.38,7.52,7.52,7.66,7.66,7.66,7.66,7.8,7.83,7.86,7.89,7.92];
+const t1=T1.map((p,i)=>({p,e:mkRogue(rogueG,i)}));
+// five that invade, then ride
+const INV_B=[5.15,5.25,5.35,5.45,5.55];
+const INV_T=[[440,434],[498,452],[414,480],[526,486],[468,504]];
+const RANK=[3,1,4,0,2];           // place in the convoy (0 = the survivor)
+const DIE=[0,6.55,6.8,6.42,6.68]; // stage time each rank dies (rank 0 survives)
+const inv=INV_B.map((b,i)=>({b,e:mkRogue(rogueG,40+i)}));
+const t2=T2.map((p,i)=>({p,e:mkRogue(rogueG,70+i)}));
+
+// sunlight
+const SUNX=190;
+const sunG=el("g",{opacity:0},world);
+el("circle",{cx:SUNX,cy:58,r:36,fill:"#F2C14E"},sunG);
+for(let a=0;a<12;a++){const r1=44,r2=58,an=a*Math.PI/6;el("line",{x1:SUNX+r1*Math.cos(an),y1:58+r1*Math.sin(an),x2:SUNX+r2*Math.cos(an),y2:58+r2*Math.sin(an),stroke:"#F2C14E","stroke-width":4,"stroke-linecap":"round"},sunG);}
+const RAY_T=[2,PIG,9];
+const rays=RAY_T.map(()=>el("line",{x1:SUNX+20,y1:86,x2:SUNX+20,y2:86,stroke:C.gold,"stroke-width":5,"stroke-dasharray":"16 10","stroke-linecap":"round",opacity:0},world));
+// oxygen and sugar
+const food=[];for(let i=0;i<9;i++)food.push(el("circle",{r:4.5,fill:C.gold,opacity:0},world));
+
+// labels in the world
+const labG=el("g",{},world);
+function label(o,parent){
+  const g=el("g",{opacity:0},parent||labG);
+  if(o.lx!=null){el("line",{x1:o.ax!=null?o.ax:o.x,y1:o.ay!=null?o.ay:o.y+8,x2:o.lx,y2:o.ly,stroke:"#1D1A15","stroke-width":1.6},g);el("circle",{cx:o.lx,cy:o.ly,r:3.5,fill:"#1D1A15"},g);}
+  const t=el("text",{x:o.x,y:o.y,"text-anchor":o.a||"start",class:"lab"+(o.small?" small":"")},g);
+  o.text.split("\n").forEach((line,k)=>{const s=el("tspan",{x:o.x,dy:k?"1.2em":"0"},t);s.textContent=line;});
+  o.g=g;return o;
+}
+const LABELS=[
+ {s:0,d:.05,x:40,y:236,text:"skin cells",ax:90,ay:244,lx:140,ly:292},
+ {s:0,d:.15,x:270,y:196,text:"signals pass between neighbors",ax:400,ay:204,lx:420,ly:304},
+ {s:0,d:.1,x:980,y:444,a:"end",text:"the thin layer under the tissue",ax:900,ay:422,lx:860,ly:380},
+ {s:0,d:.1,x:40,y:628,text:"blood vessel",ax:90,ay:610,lx:110,ly:588},
+ {s:0,d:.6,x:700,y:236,a:"middle",text:"layer full: dividing stops",lx:700,ly:290},
+ {s:1,d:.55,x:220,y:250,a:"middle",text:"repaired",lx:220,ly:292},
+ {s:1,d:.6,x:460,y:250,a:"middle",text:"damage stays",lx:460,ly:292},
+ {s:1,d:.6,x:780,y:250,a:"middle",text:"cell dies",lx:780,ly:292},
+ {s:2,d:.2,x:60,y:236,text:"stop signals ignored",ax:190,ay:244,lx:418,ly:316},
+ {s:3,d:.35,x:980,y:96,a:"end",text:"tumor: a lump of extra cells",ax:760,ay:106,lx:610,ly:180},
+ {s:3,d:.5,x:40,y:446,text:"crowded healthy cells",ax:150,ay:426,lx:330,ly:366},
+ {s:4,d:.25,x:980,y:476,a:"end",text:"new blood vessels grow in",ax:700,ay:466,lx:536,ly:468},
+ {s:4,d:.55,x:110,y:440,text:"oxygen and sugar",ax:240,ay:432,lx:420,ly:392},
+ {s:5,d:.15,x:110,y:436,text:"the thin layer breaks",ax:250,ay:428,lx:436,ly:378},
+ {s:5,d:.45,x:980,y:432,a:"end",text:"malignant: a tumor that\ninvades and can spread",ax:700,ay:442,lx:536,ly:480},
+ {s:7,d:.05,x:2500,y:56,a:"middle",text:"metastasis: spreading to a new organ"},
+ {s:7,d:.2,x:2980,y:618,a:"end",text:"lung: tiny air sacs",ax:2860,ay:598,lx:2830,ly:500},
+ {s:7,d:.78,x:2560,y:300,text:"second tumor:\nstill melanoma cells",ax:2560,ay:308,lx:2470,ly:372},
+ {s:7,d:.9,x:2500,y:94,a:"middle",text:"tumors now in two organs: skin and lung",small:true}
+].map(o=>label(o));
+// counter for stage 3
+const count=el("text",{x:460,y:70,"text-anchor":"middle",class:"count",opacity:0},world);
+const CNT=["1","2","4","8"].map((v,i)=>{const s=el("tspan",{},count);s.textContent=(i?"  →  ":"")+v;return s;});
+world.appendChild(rogueG);world.appendChild(sunG);rays.forEach(r=>world.appendChild(r));world.appendChild(sigG);food.forEach(f=>world.appendChild(f));world.appendChild(count);world.appendChild(labG);
+
+// fixed overlays (not in the world)
+const tag=el("text",{x:22,y:36,class:"tag"});
+const scaleNote=el("text",{x:978,y:34,"text-anchor":"end",class:"lab small"});scaleNote.textContent="drawn at cell level, not to scale";
+const tally=el("text",{x:500,y:64,"text-anchor":"middle",class:"lab",opacity:0});
+
+/* ---------- drawing a moment ---------- */
+function particles(){return html.getAttribute("data-dev")==="pc"?1:0.55;}
+function setCell(h,o){
+  A(h.g,{transform:"translate("+o.cx.toFixed(1)+" "+o.cy.toFixed(1)+") rotate("+(o.rot||0).toFixed(2)+") scale("+(o.sx||1).toFixed(3)+" "+(o.sy||1).toFixed(3)+")",opacity:(o.op==null?1:o.op).toFixed(3)});
+  const w=o.w||CW;A(h.r,{x:(o.rx0!=null?o.rx0:-w/2).toFixed(1),width:w.toFixed(1),opacity:o.rOp==null?1:o.rOp,fill:o.fill||C.tealFill});
+  A(h.n,{cx:(o.nx||0).toFixed(1),opacity:o.jag?0:1});
+  A(h.j,{transform:"translate("+(o.nx||0).toFixed(1)+" 0)",opacity:o.jag?1:0,fill:o.jagFill||C.rogueNuc});
+}
+function setRogue(e,x,y,sc,op,sx,fill){
+  A(e,{transform:"translate("+x.toFixed(1)+" "+y.toFixed(1)+") scale("+(sc*(sx||1)).toFixed(3)+" "+sc.toFixed(3)+")",opacity:op.toFixed(3)});
+  const c=e.firstChild;c.setAttribute("fill",fill||C.rogueFill);c.setAttribute("stroke",fill?"#8F877E":C.rogue);
+}
+function labelOp(o,G){const s=Math.floor(G),t=G-s;if(s!==o.s)return 0;return seg(t,o.d,o.d+.06)*clamp((1-t)/.04,0,1);}
+
+function draw(G,time){
+  if(G>=N)G=N-1e-6;
+  const s=Math.floor(G),t=G-s;
+  const pf=particles();
+  const flick=reduced?true:(Math.sin(time*26)>0);
+
+  /* camera */
+  let leadX=520;
+  if(s===6)leadX=lerp(520,2380,ease(seg(G,6.2,6.95)));
+  const camX=s<6?0:s===6?clamp(leadX-380,0,2000):2000;
+  A(world,{transform:"translate("+(-camX).toFixed(1)+" 0)"});
+  tag.textContent=camX<500?"SKIN":camX<1500?"BLOODSTREAM":"LUNG";
+
+  /* red blood cells flow all the time */
+  const n=Math.round(RBC.length*pf);
+  RBC.forEach((r,i)=>{
+    if(i>=n){r.e.setAttribute("opacity",0);return;}
+    const L=((r.s+time*70)%VLEN+VLEN)%VLEN,p=vLumen.getPointAtLength(L);
+    const p2=vLumen.getPointAtLength(Math.min(VLEN,L+2)),ang=Math.atan2(p2.y-p.y,p2.x-p.x)*180/Math.PI;
+    A(r.e,{transform:"translate("+p.x.toFixed(1)+" "+(p.y+r.lane).toFixed(1)+") rotate("+ang.toFixed(1)+")",opacity:1});
+  });
+
+  /* healthy cells */
+  const q=ease(seg(G,3.0,3.85));
+  healthy.forEach((h,i)=>{
+    const o={cx:slotX(i),cy:CY};
+    if(i===8&&G<.35){o.op=G<.12?0:1;o.rOp=0;o.cx=lerp(slotX(7),slotX(8),ease(seg(G,.12,.35)));}
+    if(i===7&&G>=.12&&G<.5){
+      if(G<.35){const p=ease(seg(G,.12,.35)),R=lerp(slotX(7)+CW/2,slotX(8)+CW/2,p),L=slotX(7)-CW/2;o.cx=(L+R)/2;o.w=R-L;o.nx=slotX(7)-o.cx;}
+      else{const p=seg(G,.35,.5);o.cx=slotX(7);o.rx0=-CW/2;o.w=CW+4-4*p;}
+    }
+    if(i===8&&G>=.35&&G<.5){const p=seg(G,.35,.5);o.cx=slotX(8);o.rx0=-CW/2+(-4+4*p);o.w=CW+4-4*p;}
+    // damage from sunlight
+    if((i===2||i===PIG||i===9)&&G>=1.3&&G<2){
+      if(G<1.55){o.jag=true;o.jagFill=flick?C.rogueNuc:"#F2C14E";}
+      else if(i===PIG){o.jag=true;}
+      else if(i===2){o.jag=G<1.62;}
+      else{ // dies, then a neighbor's new cell fills the place
+        if(G<1.78){const p=seg(G,1.55,1.75);o.jag=true;o.sx=o.sy=lerp(1,.35,p);o.op=1-p;o.fill="#D9D3CB";}
+        else{const p=ease(seg(G,1.8,1.98));o.sx=o.sy=lerp(.35,1,p);o.op=p;}
+      }
+    }
+    if(i===PIG){
+      if(G>=2&&G<2.6){o.jag=true;o.op=1-seg(G,2.02,2.16);}
+      else if(G>=2.6)o.op=0;
+    }
+    // crowding
+    if(q>0){
+      if(i===4){const w=CW*(1-.38*q),L=slotX(4)-CW/2;o.cx=L+w/2;o.w=w;o.rot=-13*q;o.cy=CY-14*q;o.sy=1-.08*q;}
+      if(i===6){const w=CW*(1-.38*q),R=slotX(6)+CW/2;o.cx=R-w/2;o.w=w;o.rot=13*q;o.cy=CY-14*q;o.sy=1-.08*q;}
+      if(i===3){o.rot=-5*q;o.cy=CY-4*q;}
+      if(i===7){o.rot=5*q;o.cy=CY-4*q;}
+    }
+    setCell(h,o);
+  });
+
+  /* signals */
+  sigs.forEach((d,k)=>{
+    const show=k<Math.round(sigs.length*pf);
+    if(s===0&&show){
+      const a=(k*2+1)%11, b=a+1;
+      let ph=reduced?.5:((time*.55+k*.37)%1);
+      const dir=k%2?-1:1; if(dir<0)ph=1-ph;
+      const x=lerp(slotX(a)+14,slotX(b)-14,ph);
+      A(d,{cx:x,cy:CY-14,opacity:Math.sin(Math.PI*(dir<0?1-ph:ph)).toFixed(2),fill:C.sig});
+    }else if(s===2&&t>.15&&k<6){
+      const left=k%2===0, ph=reduced?.85:((time*.7+k*.29)%1), tri=ph<.7?ph/.7:1-(ph-.7)/.3;
+      const x0=left?slotX(3):slotX(7), x1=left?slotX(PIG)-30:slotX(PIG)+30;
+      A(d,{cx:lerp(x0,x1,tri),cy:CY-14+(k>3?18:0),opacity:.95,fill:ph>.7?C.rogue:C.sig});
+    }else d.setAttribute("opacity",0);
+  });
+
+  /* sunlight */
+  A(sunG,{opacity:s===1?(seg(t,0,.08)*clamp((1-t)/.05,0,1)).toFixed(2):0});
+  rays.forEach((r,k)=>{
+    if(s!==1||G<1.05||G>1.45){r.setAttribute("opacity",0);return;}
+    const p=ease(seg(G,1.05,1.28)),tx=slotX(RAY_T[k]),ty=LAYER_TOP+10;
+    A(r,{x1:SUNX+(tx>SUNX?22:-22),y1:86,x2:lerp(SUNX+(tx>SUNX?22:-22),tx,p).toFixed(1),y2:lerp(86,ty,p).toFixed(1),opacity:(1-seg(G,1.36,1.45)).toFixed(2),"stroke-dashoffset":reduced?0:(-time*90).toFixed(1)});
+  });
+
+  /* tumor 1 */
+  t1.forEach((c,i)=>{
+    const b=B1[i];
+    if(G<b){c.e.setAttribute("opacity",0);return;}
+    if(i===0){const p=seg(G,2.02,2.16);setRogue(c.e,c.p.x,c.p.y,1,p);return;}
+    const p=ease(seg(G,b,b+.12)),par=T1[c.p.par];
+    setRogue(c.e,lerp(par.x,c.p.x,p),lerp(par.y,c.p.y,p),lerp(.55,1,p),Math.min(1,p*3));
+  });
+  // counter 1 -> 2 -> 4 -> 8
+  if(s===2){count.setAttribute("opacity",seg(t,.05,.12));const lv=G>=2.65?3:G>=2.45?2:G>=2.25?1:0;CNT.forEach((sp,i)=>sp.setAttribute("class",i===lv?"cur":""));}
+  else count.setAttribute("opacity",0);
+
+  /* new vessels */
+  const sp=seg(G,4.05,4.5);
+  sprouts.forEach(v=>{A(v.o,{"stroke-dashoffset":1-sp});A(v.i,{"stroke-dashoffset":1-sp});});
+  sDots.forEach((d,k)=>{
+    if(G<4.5||k>=Math.round(sDots.length*pf)){d.setAttribute("opacity",0);return;}
+    const v=sprouts[k%3].i,len=v.getTotalLength(),ph=reduced?.5:((time*.5+k*.31)%1),p=v.getPointAtLength(ph*len);
+    A(d,{cx:p.x,cy:p.y,opacity:Math.sin(Math.PI*ph).toFixed(2)});
+  });
+  // oxygen and sugar into the tumor
+  const tips=[[430,393],[462,391],[505,393]];
+  food.forEach((f,k)=>{
+    if(s!==4||t<.45||k>=Math.round(food.length*pf)){f.setAttribute("opacity",0);return;}
+    const ph=reduced?.5:((time*.45+k*.23)%1),tp=tips[k%3];
+    A(f,{cx:tp[0]+((k%5)-2)*8,cy:tp[1]-ph*120,opacity:Math.sin(Math.PI*ph).toFixed(2)});
+  });
+
+  /* the thin layer opens */
+  const gap=36*ease(seg(G,5.05,5.3)),gx=slotX(PIG)+6;
+  A(memL,{x2:(gap>0?gx-gap:1100).toFixed(1)});
+  A(memR,{x1:(gap>0?gx+gap:1100).toFixed(1),x2:1100});
+
+  /* invaders, then riders */
+  inv.forEach((c,k)=>{
+    if(G<c.b){c.e.setAttribute("opacity",0);return;}
+    const tx=INV_T[k][0],ty=INV_T[k][1];
+    if(G<6){
+      const p=seg(G,c.b,c.b+.3);let x,y,sx=1;
+      if(p<.5){const q2=ease(p/.5);x=lerp(slotX(PIG),gx,q2);y=lerp(CY+16,MEM_Y,q2);sx=lerp(1,.72,q2);}
+      else{const q2=ease((p-.5)/.5);x=lerp(gx,tx,q2);y=lerp(MEM_Y,ty,q2);sx=lerp(.72,1,q2);}
+      setRogue(c.e,x,y,.9,Math.min(1,p*4),sx);return;
+    }
+    if(G>=7){c.e.setAttribute("opacity",0);return;}
+    const rank=RANK[k],ex=520-rank*58;
+    let x,y,sc=.9,op=1,fill;
+    if(G<6.2){const p=ease(seg(G,6.0,6.2));x=lerp(tx,ex,p);y=lerp(ty,vy(ex),p);sc=lerp(.9,.78,p);}
+    else{x=leadX-rank*58;y=vy(x)+(reduced?0:Math.sin(time*3+k)*3);sc=.78;}
+    if(rank>0&&G>=DIE[rank]){const p=seg(G,DIE[rank],DIE[rank]+.07);sc*=lerp(1,.25,p);op=1-p;fill=C.dead;}
+    setRogue(c.e,x,y,sc,op,1,fill);
+  });
+  if(s===6){
+    let alive=1;for(let r=1;r<5;r++)if(G<DIE[r]+.035)alive++;
+    tally.textContent="entered the blood: 5   ·   still alive: "+alive;
+    tally.setAttribute("opacity",(seg(t,.18,.24)*clamp((1-t)/.04,0,1)).toFixed(2));
+  }else tally.setAttribute("opacity",0);
+
+  /* tumor 2 */
+  t2.forEach((c,i)=>{
+    const b=B2[i];
+    if(G<b){c.e.setAttribute("opacity",0);return;}
+    if(i===0){
+      const p=seg(G,7.02,7.27);let y,sx=1;
+      if(p<.5){y=lerp(vy(2380),VY-40,ease(p/.5));sx=lerp(1,.65,ease(p/.5));}
+      else{y=lerp(VY-40,c.p.y,ease((p-.5)/.5));sx=lerp(.65,1,ease((p-.5)/.5));}
+      setRogue(c.e,lerp(2380,c.p.x,ease(p)),y,lerp(.78,1,p),1,sx);return;
+    }
+    const p=ease(seg(G,b,b+.1)),par=T2[c.p.par];
+    setRogue(c.e,lerp(par.x,c.p.x,p),lerp(par.y,c.p.y,p),lerp(.55,1,p),Math.min(1,p*3));
+  });
+
+  LABELS.forEach(o=>o.g.setAttribute("opacity",labelOp(o,G).toFixed(2)));
+}
+
+/* ---------- timeline ---------- */
+const stageEl=document.getElementById("stage"),closing=document.getElementById("closing");
+const REP=[.85,.82,.9,.9,.9,.9,.62,.97]; // the still frame shown for each stage when motion is reduced
+let cur=0,el_ms=0,holding=false,playing=true,clock=0,lastTs=null,lastDrawnKey="";
+const stageMs=()=>html.classList.contains("proj")?14000:10000;
+const holdMs=()=>html.classList.contains("proj")?12000:8000;
+
+function setStage(i){
+  cur=i;
+  bubs.forEach((b,k)=>{b.classList.toggle("on",k===i&&!holding);b.classList.toggle("lit",holding||k<i);});
+  rings.forEach((r,k)=>r.setAttribute("stroke-dashoffset",(holding||k<i)?0:RING.toFixed(1)));
+  closing.classList.toggle("show",holding);
+  if(holding){
+    stageEl.setAttribute("aria-label","All eight stages done. Catching cancer early matters. For melanoma found before it spreads, more than 99 out of 100 people are alive five years later. Once it has spread to distant organs, about 36 out of 100 are.");
+    nowEl.innerHTML='<span class="ttl">Catching cancer early matters</span><p class="cap">All eight stages, start to finish. The loop starts again in a moment.</p>';
+  }else{
+    const s=STAGES[i];
+    stageEl.setAttribute("aria-label","Stage "+(i+1)+" of 8, "+s.t+". "+s.c);
+    nowEl.innerHTML='<span class="ttl"><span class="n">'+(i+1)+'.</span> '+s.t+'</span><p class="cap">'+s.c+'</p>'+(s.k?'<span class="chip">'+s.k+'</span>':'');
+  }
+}
+function frame(){
+  const t=holding?1:el_ms/stageMs();
+  if(!holding&&!reduced)rings[cur].setAttribute("stroke-dashoffset",(RING*(1-t)).toFixed(1));
+  if(reduced){
+    const key=cur+"|"+holding;
+    if(key!==lastDrawnKey){lastDrawnKey=key;draw(holding?N:cur+REP[cur],0);}
+  }else draw(holding?N:cur+t,clock/1000);
+}
+function tick(ts){
+  if(lastTs==null)lastTs=ts;
+  const dt=Math.min(100,ts-lastTs);lastTs=ts;
+  if(playing){
+    el_ms+=dt;
+    if(!reduced)clock+=dt;
+    if(holding){if(el_ms>=holdMs()){holding=false;el_ms=0;setStage(0);}}
+    else if(el_ms>=stageMs()){el_ms=0;if(cur<N-1)setStage(cur+1);else{holding=true;setStage(cur);}}
+  }
+  frame();
+  requestAnimationFrame(tick);
+}
+
+/* ---------- controls ---------- */
+const bPlay=document.getElementById("bPlay"),bRestart=document.getElementById("bRestart"),bProj=document.getElementById("bProj");
+const ICON_PAUSE='<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" fill="currentColor"/><rect x="9.4" y="2" width="3.6" height="12" fill="currentColor"/></svg>';
+const ICON_PLAY='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>';
+function setPlaying(v){playing=v;bPlay.innerHTML=(v?ICON_PAUSE:ICON_PLAY)+"<span>"+(v?"Pause":"Play")+"</span>";bPlay.setAttribute("aria-label",v?"Pause":"Play");}
+bPlay.addEventListener("click",()=>setPlaying(!playing));
+bRestart.addEventListener("click",()=>{holding=false;el_ms=0;clock=0;lastDrawnKey="";setStage(0);setPlaying(true);});
+function setProj(v){
+  const before=stageMs();html.classList.toggle("proj",v);bProj.setAttribute("aria-pressed",v?"true":"false");
+  el_ms=el_ms*stageMs()/before;prefs.proj=v;save();
+}
+bProj.addEventListener("click",()=>setProj(!html.classList.contains("proj")));
+document.querySelectorAll(".seg [data-dev]").forEach(b=>b.addEventListener("click",()=>{
+  html.setAttribute("data-dev",b.dataset.dev);prefs.dev=b.dataset.dev;save();
+  document.querySelectorAll(".seg [data-dev]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
+  lastDrawnKey="";
+}));
+document.addEventListener("keydown",e=>{
+  const tg=e.target&&e.target.tagName;
+  if(tg==="BUTTON"||tg==="INPUT"||tg==="TEXTAREA"||tg==="SUMMARY"||e.metaKey||e.ctrlKey||e.altKey)return;
+  if(e.key===" "||e.key==="k"||e.key==="K"){e.preventDefault();setPlaying(!playing);}
+});
+if(reducedMQ.addEventListener)reducedMQ.addEventListener("change",e=>{reduced=e.matches;lastDrawnKey="";});
+
+/* stage words stay readable when the stage is small */
+function sizeStage(){const w=stageEl.getBoundingClientRect().width||1000;stageEl.style.setProperty("--k",(w/1000).toFixed(3));}
+if(window.ResizeObserver)new ResizeObserver(sizeStage).observe(stageEl);else window.addEventListener("resize",sizeStage);
+sizeStage();
+/* ---------- start ---------- */
+html.setAttribute("data-dev",prefs.dev);
+document.querySelectorAll(".seg [data-dev]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.dev===prefs.dev?"true":"false"));
+if(prefs.proj){html.classList.add("proj");bProj.setAttribute("aria-pressed","true");}
+setStage(0);
+// test hook: jump to a moment (stage index + fraction)
+window.__cancerPathway={seek(G){holding=G>=N;cur=Math.min(N-1,Math.floor(G));el_ms=holding?0:(G-cur)*stageMs();lastDrawnKey="";setStage(cur);frame();},pause(){setPlaying(false);},state(){return {cur,holding,playing,el_ms,reduced};}};
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
