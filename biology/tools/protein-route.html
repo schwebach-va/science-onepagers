@@ -1869,7 +1869,7 @@ function legendGlyph(kind){const e=DARK?"#15130F":"#FFFFFF",ink=INK;
   }return "";}
 function setLevel(lv,byUser){st.level=lv==="de"?"de":"nine";if(byUser)delete OVR.level;save();
   document.documentElement.setAttribute("data-level",st.level);
-  document.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
+  document.querySelectorAll("button[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
   setTexts();
   if(SIM){SIM.level=st.level;SIM.s2.codons=(st.level==="de"||st.u4);}
   $("live").textContent="";
@@ -1879,12 +1879,12 @@ function setLevel(lv,byUser){st.level=lv==="de"?"de":"nine";if(byUser)delete OVR
   if(!$("record").classList.contains("hidden"))renderRecord();}
 function setU4(on,byUser){st.u4=!!on;if(byUser)delete OVR.u4;save();
   document.documentElement.setAttribute("data-u4",st.u4?"1":"0");
-  document.querySelectorAll("[data-u4]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.u4==="1")===st.u4)));
+  document.querySelectorAll("button[data-u4]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.u4==="1")===st.u4)));
   if(SIM)SIM.s2.codons=(st.level==="de"||st.u4);
   setTexts();staticKey="";buildCtl();renderCard();readout();
   if(!$("record").classList.contains("hidden"))renderRecord();}
 function setAdv(on,byUser){st.adv=!!on;if(byUser)delete OVR.adv;save();
-  document.querySelectorAll("[data-adv]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.adv==="1")===st.adv)));
+  document.querySelectorAll("button[data-adv]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.adv==="1")===st.adv)));
   renderCard();readout();
   if(!$("record").classList.contains("hidden"))renderRecord();}
 function setDev(d){st.dev=d==="pc"?"pc":"ipad";save();
@@ -1971,15 +1971,15 @@ function resize(){
 
 /* ================= boot ================= */
 document.querySelectorAll("button[data-dev]").forEach(b=>b.addEventListener("click",()=>setDev(b.dataset.dev)));
-document.querySelectorAll("[data-lv]").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv,true)));
-document.querySelectorAll("[data-u4]").forEach(b=>b.addEventListener("click",()=>setU4(b.dataset.u4==="1",true)));
-document.querySelectorAll("[data-adv]").forEach(b=>b.addEventListener("click",()=>setAdv(b.dataset.adv==="1",true)));
+document.querySelectorAll("button[data-lv]").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv,true)));
+document.querySelectorAll("button[data-u4]").forEach(b=>b.addEventListener("click",()=>setU4(b.dataset.u4==="1",true)));
+document.querySelectorAll("button[data-adv]").forEach(b=>b.addEventListener("click",()=>setAdv(b.dataset.adv==="1",true)));
 document.documentElement.setAttribute("data-dev",st.dev);
 document.querySelectorAll("button[data-dev]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.dev===st.dev)));
 document.documentElement.setAttribute("data-level",st.level);document.documentElement.setAttribute("data-u4",st.u4?"1":"0");
-document.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
-document.querySelectorAll("[data-u4]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.u4==="1")===st.u4)));
-document.querySelectorAll("[data-adv]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.adv==="1")===st.adv)));
+document.querySelectorAll("button[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
+document.querySelectorAll("button[data-u4]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.u4==="1")===st.u4)));
+document.querySelectorAll("button[data-adv]").forEach(b=>b.setAttribute("aria-pressed",String((b.dataset.adv==="1")===st.adv)));
 $("teach").setAttribute("aria-pressed",String(st.teach));document.documentElement.setAttribute("data-teach",st.teach?"1":"0");
 $("build").classList.toggle("nocard",st.cardHidden);$("hidecard").textContent=st.cardHidden?"Show card":"Hide card";$("hidecard").setAttribute("aria-pressed",String(st.cardHidden));
 document.documentElement.setAttribute("data-fill",st.fill?"1":"0");
