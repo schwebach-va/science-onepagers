@@ -161,6 +161,18 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;backgroun
   .ch-head,.idea-head{break-after:avoid}
 }
 </style>
+<style>
+.sop-watch{margin:.2rem 0 1.1rem;border:1px solid var(--rule);border-radius:10px;background:var(--card);max-width:46rem}
+.sop-watch summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.6rem;padding:.55rem .85rem;font-family:Archivo,"Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:.95rem;color:var(--ink)}
+.sop-watch summary::-webkit-details-marker{display:none}
+.sop-watch-play{display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--bond);color:#fff;font-size:.7rem;padding-left:.12rem;box-sizing:border-box}
+.sop-watch-len{font-weight:500;color:var(--ink-soft);font-size:.85rem}
+.sop-watch[open] summary{border-bottom:1px solid var(--rule)}
+.sop-watch-frame{position:relative;aspect-ratio:16/9;background:#000}
+.sop-watch-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.sop-watch-alt{margin:0;padding:.5rem .85rem;font-size:.82rem;color:var(--ink-soft)}
+.sop-watch-alt a{color:var(--bond)}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -168,6 +180,12 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;backgroun
 <p class="sop-eyebrow">Bio Tool #9 &middot; DE Biology 101 &middot; Chapter by chapter</p>
 <h1>Checkpoint Companion</h1>
 <p class="lede"><span id="count-lede">Forty-eight</span> original practice questions for DE Biology 101, one for every item on each chapter&rsquo;s NVCC Checkpoint, written in the Checkpoint&rsquo;s own shape. Tap an answer and you get the reasoning, a SAM question to write from the option you chose, the slides to open, and the lab that shows it. Nothing is submitted.</p>
+  <!-- Walk-through video: YouTube privacy-enhanced embed, loads only when opened -->
+  <details class="sop-watch" data-yt="_Nm4dwPhHgk" data-start="19" data-title="Walk-through video">
+    <summary><span class="sop-watch-play" aria-hidden="true">&#9654;</span>Watch me use it <span class="sop-watch-len">4&frac12; min, captions on</span></summary>
+    <div class="sop-watch-frame"></div>
+    <p class="sop-watch-alt">Or open it on YouTube: <a href="https://youtu.be/_Nm4dwPhHgk">youtu.be/_Nm4dwPhHgk</a></p>
+  </details>
 
 <p>Every question is original, written by me for my own students. Each chapter here has exactly as many questions as its Checkpoint on NOVA Canvas, grouped under the same ideas and weighted the same way, so working a chapter of these is a rehearsal for the Checkpoint rather than a substitute. The ideas come first; the details show up inside the choices, where they belong.</p>
 
@@ -466,5 +484,6 @@ const BANK = [
   window.addEventListener("hashchange", () => { if (/^#q\d+$/.test(location.hash)) flash(Number(location.hash.slice(2))); });
 })();
 </script>
+<script>document.querySelectorAll('details.sop-watch').forEach(function(d){d.addEventListener('toggle',function(){var f=d.querySelector('.sop-watch-frame');if(d.open&&!f.firstChild){var i=document.createElement('iframe');i.src='https://www.youtube-nocookie.com/embed/'+d.dataset.yt+'?rel=0&cc_load_policy=1&start='+d.dataset.start;i.title=d.dataset.title;i.allow='encrypted-media; picture-in-picture; fullscreen';i.allowFullscreen=true;f.appendChild(i)}})});</script>
 </body>
 </html>

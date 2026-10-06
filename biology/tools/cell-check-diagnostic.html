@@ -163,6 +163,18 @@ button{font:inherit;cursor:pointer}
 @media (max-width:28rem){.course{flex:1 1 100%}}
 </style>
 
+<style>
+.sop-watch{margin:.2rem 0 1.1rem;border:1px solid var(--rule);border-radius:10px;background:var(--card);max-width:46rem}
+.sop-watch summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.6rem;padding:.55rem .85rem;font-family:Archivo,"Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:.95rem;color:var(--ink)}
+.sop-watch summary::-webkit-details-marker{display:none}
+.sop-watch-play{display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--bond);color:#fff;font-size:.7rem;padding-left:.12rem;box-sizing:border-box}
+.sop-watch-len{font-weight:500;color:var(--ink-soft);font-size:.85rem}
+.sop-watch[open] summary{border-bottom:1px solid var(--rule)}
+.sop-watch-frame{position:relative;aspect-ratio:16/9;background:#000}
+.sop-watch-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.sop-watch-alt{margin:0;padding:.5rem .85rem;font-size:.82rem;color:var(--ink-soft)}
+.sop-watch-alt a{color:var(--bond)}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -183,6 +195,12 @@ button{font:inherit;cursor:pointer}
 <section id="intro">
   <h1>Cell Check</h1>
   <p class="lede" id="lede"></p>
+  <!-- Walk-through video: YouTube privacy-enhanced embed, loads only when opened -->
+  <details class="sop-watch" data-yt="rD5_JWUGtsQ" data-start="18" data-title="Walk-through video">
+    <summary><span class="sop-watch-play" aria-hidden="true">&#9654;</span>Watch me take it <span class="sop-watch-len">3&frac12; min, captions on</span></summary>
+    <div class="sop-watch-frame"></div>
+    <p class="sop-watch-alt">Or open it on YouTube: <a href="https://youtu.be/rD5_JWUGtsQ">youtu.be/rD5_JWUGtsQ</a></p>
+  </details>
   <p class="fine">Nothing is submitted. No score leaves this iPad and I never see it. Answer honestly and the result is worth something.</p>
 
   <div class="grid" id="introGrid"></div>
@@ -623,5 +641,6 @@ document.querySelectorAll(".course").forEach(b=>{
 const q=new URLSearchParams(location.search).get("course");
 loadCourse(q==="bio1"||q==="bio"||q==="sol"?"bio1":"de",false);
 </script>
+<script>document.querySelectorAll('details.sop-watch').forEach(function(d){d.addEventListener('toggle',function(){var f=d.querySelector('.sop-watch-frame');if(d.open&&!f.firstChild){var i=document.createElement('iframe');i.src='https://www.youtube-nocookie.com/embed/'+d.dataset.yt+'?rel=0&cc_load_policy=1&start='+d.dataset.start;i.title=d.dataset.title;i.allow='encrypted-media; picture-in-picture; fullscreen';i.allowFullscreen=true;f.appendChild(i)}})});</script>
 </body>
 </html>
