@@ -1,0 +1,1049 @@
+{
+ "meta": {
+  "bank": "OB-U02",
+  "title": "Unit 2 · Cell Structure and Function — original SOL practice bank (pilot)",
+  "version": "v2 2026-10-06 (card v2.1 re-check: src, set, §3 check)",
+  "status": "re-checked under card v2.1 (src on every item, eight-point originality check passed); first site version",
+  "statement": "These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education's Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test's wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE's released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. © J. R. Schwebach, CC BY-NC 4.0.",
+  "unit": 2,
+  "unit_name": "Cell Structure & Function",
+  "lts": {
+   "2.1": "Cell theory and how science knows",
+   "2.2": "Kinds of cells and their organelles",
+   "2.3": "One cell or many: organization and homeostasis",
+   "2.4": "The cell membrane",
+   "2.5": "Moving materials across the membrane"
+  },
+  "source_ig": "VDOE, Instructional Guide to Support the 2018 Biology Standards of Learning (doc 77084); page numbers are printed pages",
+  "footer": "Original practice questions written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education.",
+  "copyright": "© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org",
+  "count": 30
+ },
+ "items": [
+  {
+   "id": "OB-U02-01",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Technology and the evidence for cell theory",
+   "dok": 2,
+   "trouble_spot": "3a-history",
+   "stem": "For thousands of years people studied plants and animals closely, yet the idea that all living things are made of cells appeared only after the 1600s. Which explanation best accounts for the delay?",
+   "opts": [
+    "Earlier scientists saw cells but chose not to publish what they saw.",
+    "Plants and animals were not made of cells until about 400 years ago.",
+    "Cells are too small to see without lenses, and lenses were not good enough until then.",
+    "A theory can be proposed only after a law on the same topic has been proven."
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Cells are too small to see without magnification; the barrier was the tools, not a choice.",
+    "1": "Cells have made up living things for billions of years; only the ability to see them is recent.",
+    "3": "Theories and laws are different kinds of statements; a theory never waits on a law."
+   },
+   "why": "Cell theory rests on observations that needed microscopes, so it could form only once lens technology made cells visible.",
+   "src": "BIO.3a; IG p. 17 UtS 'Advances in science and technology have added to our understanding of the cell'; IG p. 19 SiP 'development of the modern cell theory depended on technological and experimental advances'"
+  },
+  {
+   "id": "OB-U02-02",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "order",
+   "topic": "Order of the discoveries behind cell theory",
+   "dok": 2,
+   "trouble_spot": "3a-history",
+   "stem": "Arrange these developments in the order they happened, earliest first.",
+   "opts": [
+    "After many plant and animal tissues are examined, scientists propose that all living things are made of cells.",
+    "Electron microscopes reveal structures inside cells, such as ribosomes, that light microscopes cannot show.",
+    "Improved lenses show tiny, empty compartments in thin slices of dead plant tissue.",
+    "Watching cells split in two leads to the idea that new cells come only from existing cells.",
+    "A stronger single-lens microscope reveals living, moving single-celled organisms in a drop of pond water."
+   ],
+   "key": [
+    2,
+    4,
+    0,
+    3,
+    1
+   ],
+   "miss": {
+    "general-first": "The claim that all living things are made of cells came after many separate observations, not before them.",
+    "electron-early": "Electron microscopes are a twentieth-century tool; ribosomes stayed invisible until long after cell theory was proposed.",
+    "origin-before-cells": "Explaining where cells come from required first agreeing that living things are made of cells."
+   },
+   "mc_twin": {
+    "stem": "Which development came first?",
+    "opts": [
+     "Scientists propose that all living things are made of cells.",
+     "Improved lenses show tiny, empty compartments in thin slices of dead plant tissue.",
+     "Watching cells divide leads to the idea that new cells come only from existing cells.",
+     "Electron microscopes reveal ribosomes inside cells."
+    ],
+    "key": 1,
+    "miss": {
+     "0": "That general claim came only after many tissues had been examined.",
+     "2": "Where cells come from was explained after cells were known to make up living things.",
+     "3": "Electron microscopes arrived centuries after the first lens observations."
+    }
+   },
+   "why": "Each step needed the tools and observations of the one before it: seeing compartments, then living cells, then generalizing, then explaining where cells come from, then seeing inside them.",
+   "src": "BIO.3a; IG p. 19 SiP 'development of the modern cell theory depended on technological and experimental advances'; IG p. 17 UtS cell theory tenets (no named scientists, per IG p. 17)"
+  },
+  {
+   "id": "OB-U02-03",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Where new cells come from: filtered lake water",
+   "dok": 3,
+   "stem": "A class collects water from Lake Anna and divides it between two sterile jars with the same added nutrients. Jar 1 is poured through a filter whose pores are too small for any cell to pass. Jar 2 is not filtered. Both jars are sealed and kept in the same warm, lit room for 7 days, and a drop from each is examined under a microscope.",
+   "table": [
+    [
+     "",
+     "Jar 1 (filtered)",
+     "Jar 2 (unfiltered)"
+    ],
+    [
+     "Cells per drop, day 0",
+     "0",
+     "14"
+    ],
+    [
+     "Cells per drop, day 7",
+     "0",
+     "310"
+    ]
+   ],
+   "stem2": "Which conclusion do these results support?",
+   "opts": [
+    "New cells appeared only where living cells were already present.",
+    "Nutrients and light are enough to produce new cells.",
+    "Filtering added a chemical that killed the cells in Jar 1.",
+    "The cells in Jar 2 grew larger rather than more numerous."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Jar 1 had the same nutrients and light and still produced no cells.",
+    "2": "Jar 1 had no cells to begin with; the filter removed them, so nothing needed killing.",
+    "3": "The count rose from 14 to 310, which means more cells, not bigger ones."
+   },
+   "why": "Only the jar that started with cells ended with more cells, which supports the tenet that cells come from existing cells.",
+   "src": "BIO.3a; IG p. 17 UtS tenet 'all cells arise from pre-existing cells'; BIO.1c, IG p. 7 (interpreting data from an investigation)"
+  },
+  {
+   "id": "OB-U02-04",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.1d",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Observation, hypothesis, theory or law",
+   "dok": 2,
+   "sol_also": "BIO.3a",
+   "stem": "Match each statement to the kind of scientific statement it is. Use each choice once.",
+   "rows": [
+    "Drops of pond water from behind the school contain hundreds of tiny, round green cells.",
+    "If more fertilizer washes into a pond, then the algae cells there will divide faster.",
+    "Living things are made of cells, and cells come from existing cells; evidence from thousands of studies supports this explanation.",
+    "In every chemical reaction ever measured, the total mass of the products equals the total mass of the reactants."
+   ],
+   "opts": [
+    "Observation",
+    "Hypothesis",
+    "Theory",
+    "Law"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "miss": {
+    "Theory": "A theory explains a wide body of evidence; it is not a guess, and it does not turn into a law.",
+    "Law": "A law describes a pattern that always occurs, without explaining why.",
+    "Hypothesis": "A hypothesis is a testable prediction, often written as if-then.",
+    "Observation": "An observation is what was seen or measured, with no prediction or explanation added."
+   },
+   "mc_twin": {
+    "stem": "Which statement is a scientific theory?",
+    "opts": [
+     "If more fertilizer washes into a pond, then the algae cells there will divide faster.",
+     "In every chemical reaction ever measured, the total mass of the products equals the total mass of the reactants.",
+     "Drops of pond water from behind the school contain hundreds of tiny, round green cells.",
+     "Living things are made of cells, and cells come from existing cells; evidence from thousands of studies supports this explanation."
+    ],
+    "key": 3,
+    "miss": {
+     "0": "An if-then prediction that can be tested is a hypothesis.",
+     "1": "A pattern that always occurs, stated without explaining why, is a law.",
+     "2": "A record of what was seen is an observation."
+    }
+   },
+   "why": "An observation records what was seen, a hypothesis predicts a testable result, a theory explains a broad body of evidence, and a law describes a pattern that always holds.",
+   "src": "BIO.1d; IG p. 7 'differentiate among a scientific hypothesis, theory, and law'; BIO.1a, IG p. 6 'careful observation of phenomena'; BIO.3a, IG p. 17 cell theory tenets"
+  },
+  {
+   "id": "OB-U02-05",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Testing whether a new find fits cell theory",
+   "dok": 3,
+   "trouble_spot": "3a-history",
+   "stem": "Researchers scrape a slimy film from rocks beside a deep-sea hot vent. They suspect the film is alive. Which observation would give the strongest evidence that the cell theory applies to it?",
+   "opts": [
+    "It changes color when the water around it gets warmer.",
+    "It contains carbon, hydrogen and oxygen, as living things do.",
+    "It grows thicker as minerals from the water settle on it.",
+    "It is made of tiny membrane-bound units that divide to form new units."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Nonliving substances can change color with temperature too; color says nothing about cells.",
+    "1": "Many nonliving materials, such as oil, contain these same elements.",
+    "2": "Material piling up from outside is not growth; cells grow and divide from within."
+   },
+   "why": "Cell theory says living things are made of cells and cells come from existing cells, so membrane-bound units that divide test both tenets at once.",
+   "src": "BIO.3a; IG p. 17 UtS tenets 'all living organisms are composed of cells … all cells arise from pre-existing cells'"
+  },
+  {
+   "id": "OB-U02-06",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A scraped knee heals",
+   "dok": 2,
+   "stem": "Two weeks after a fall on the track, a runner's scraped knee is covered with new skin. Where did the new skin cells come from?",
+   "opts": [
+    "Proteins in the scab assembled themselves into new cells.",
+    "Skin cells at the edge of the wound divided to make new cells.",
+    "The blood delivered finished skin cells from the bones to the knee.",
+    "The existing skin cells stretched to cover the gap."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Molecules do not assemble into cells on their own; every cell comes from a cell.",
+    "2": "Blood does not deliver ready-made skin cells; skin rebuilds from its own dividing cells.",
+    "3": "Stretching would not add cells; healing needs more cells, made by division."
+   },
+   "why": "Because all cells come from existing cells, healing happens when cells at the wound edge divide to replace the ones that were lost.",
+   "src": "BIO.3a; IG p. 17 UtS tenet 'all cells arise from pre-existing cells'"
+  },
+  {
+   "id": "OB-U02-07",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "What a light microscope can and cannot show",
+   "dok": 2,
+   "stem": "A student studies a leaf cell with a classroom light microscope, using a 10× eyepiece and a 40× objective lens. What total magnification is she using, and which structure is still too small for her to see?",
+   "opts": [
+    "400×; ribosomes",
+    "50×; the nucleus",
+    "400×; the cell wall",
+    "4,000×; chloroplasts"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Magnifications multiply (10 × 40), and a nucleus is visible with a light microscope.",
+    "2": "400× is right, but the cell wall is easy to see at that power.",
+    "3": "The lenses multiply to 400×, not 4,000×, and chloroplasts are visible with a light microscope."
+   },
+   "why": "Total magnification is eyepiece times objective (10 × 40 = 400), and ribosomes are far too small to see without an electron microscope.",
+   "src": "BIO.3a; IG p. 17 UtS 'Advances in science and technology'; IG p. 19 SiP 'technological and experimental advances'"
+  },
+  {
+   "id": "OB-U02-08",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Prokaryote or eukaryote, from a data table",
+   "dok": 2,
+   "stem": "Two organisms collected from the James River are compared.",
+   "table": [
+    [
+     "Feature",
+     "Organism P",
+     "Organism Q"
+    ],
+    [
+     "Where the DNA is",
+     "Loose in the cytoplasm",
+     "Inside a nucleus"
+    ],
+    [
+     "Ribosomes",
+     "Present",
+     "Present"
+    ],
+    [
+     "Mitochondria",
+     "Absent",
+     "Present"
+    ],
+    [
+     "Cell wall",
+     "Present",
+     "Present"
+    ],
+    [
+     "Cell width",
+     "about 2 µm",
+     "about 40 µm"
+    ]
+   ],
+   "stem2": "How should the two organisms be classified?",
+   "opts": [
+    "Both are prokaryotic, because both have ribosomes and a cell wall.",
+    "P is eukaryotic and Q is prokaryotic, because P is much smaller.",
+    "P is prokaryotic and Q is eukaryotic, because only Q has a nucleus.",
+    "Both are eukaryotic, because both cells contain DNA."
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Ribosomes and cell walls occur in both cell types; the nucleus is what separates them.",
+    "1": "Prokaryotic cells are usually the smaller ones, and P has no nucleus.",
+    "3": "Every cell has DNA; what matters is whether a nucleus encloses it."
+   },
+   "why": "A nucleus and membrane-bound organelles such as mitochondria mark a eukaryotic cell, and Q has them while P does not.",
+   "src": "BIO.3b; IG p. 18 UtS 'diversity … ranges from simple prokaryotic cells to complex multicellular organisms'; IG p. 17 UtS organelle list (BIO.3 b, e)"
+  },
+  {
+   "id": "OB-U02-09",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Structures every cell has",
+   "dok": 1,
+   "stem": "Which structures are found in both prokaryotic and eukaryotic cells? Select all that apply.",
+   "opts": [
+    "Cell membrane",
+    "Nucleus",
+    "Ribosomes",
+    "Mitochondria",
+    "DNA",
+    "Endoplasmic reticulum"
+   ],
+   "key": [
+    0,
+    2,
+    4
+   ],
+   "miss": {
+    "1": "Only eukaryotic cells keep their DNA inside a nucleus.",
+    "3": "Mitochondria are membrane-bound organelles, which prokaryotic cells lack.",
+    "5": "The endoplasmic reticulum is a membrane-bound organelle found only in eukaryotic cells."
+   },
+   "why": "Every cell needs a membrane boundary, DNA instructions and ribosomes to build proteins; membrane-bound organelles belong only to eukaryotes.",
+   "src": "BIO.3b; IG p. 18 UtS 'simple prokaryotic cells'; IG p. 17 UtS 'Different types of cells have different numbers and types of organelles'"
+  },
+  {
+   "id": "OB-U02-10",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Onion bulb cells with no chloroplasts",
+   "dok": 3,
+   "stem": "Cells peeled from inside an onion bulb have a rigid outer boundary, a large central vacuole and a nucleus, but no chloroplasts. A student says they cannot be plant cells, because plant cells have chloroplasts. What is the best response?",
+   "opts": [
+    "They are animal cells, because cells without chloroplasts cannot be plant cells.",
+    "They are prokaryotic cells, because a rigid wall is a sign of bacteria.",
+    "They are plant cells whose chloroplasts were dissolved by the stain.",
+    "They are plant cells; they have a wall and a large vacuole, and bulb tissue gets no light."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Animal cells have no cell wall, and these cells have a rigid one.",
+    "1": "These cells have a nucleus, so they are eukaryotic.",
+    "2": "Stain does not remove organelles; these cells never had chloroplasts."
+   },
+   "why": "A cell wall and a large central vacuole identify a plant cell, and only plant cells that capture light, such as leaf cells, carry chloroplasts.",
+   "src": "BIO.3b; IG p. 17 UtS 'Different types of cells have different numbers and types of organelles including the cell membrane, cell wall, chloroplasts … vacuoles'"
+  },
+  {
+   "id": "OB-U02-11",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "order",
+   "topic": "The route of a protein made for export",
+   "dok": 2,
+   "stem": "Cells in a salivary gland make amylase, an enzyme protein the gland sends into the mouth. Put the steps in order, from the DNA instructions to the moment amylase leaves the cell.",
+   "opts": [
+    "A vesicle carries the amylase to the cell membrane.",
+    "Instructions for amylase are copied from DNA in the nucleus.",
+    "The vesicle fuses with the membrane, and the amylase leaves the cell.",
+    "The Golgi apparatus modifies and packages the amylase.",
+    "Ribosomes on the rough endoplasmic reticulum link amino acids into amylase."
+   ],
+   "key": [
+    1,
+    4,
+    3,
+    0,
+    2
+   ],
+   "miss": {
+    "golgi-before-er": "The Golgi finishes and packages proteins; it cannot act until ribosomes on the rough ER have built them.",
+    "vesicle-first": "Vesicles carry finished proteins; they come after the protein is built and packaged.",
+    "nucleus-builds": "The nucleus stores and copies the instructions; ribosomes do the building."
+   },
+   "mc_twin": {
+    "stem": "Cells in a salivary gland make amylase, an enzyme protein the gland sends into the mouth. Which organelle receives amylase from the rough endoplasmic reticulum and packages it for release?",
+    "opts": [
+     "Lysosome",
+     "Nucleus",
+     "Golgi apparatus",
+     "Mitochondrion"
+    ],
+    "key": 2,
+    "miss": {
+     "0": "Lysosomes break materials down; they do not package proteins for export.",
+     "1": "The nucleus stores DNA instructions; finished proteins do not go back to it.",
+     "3": "Mitochondria release energy from food; they do not handle proteins for export."
+    }
+   },
+   "why": "Organelles work as an assembly line: the nucleus holds the instructions, ribosomes on the rough ER build the protein, the Golgi packages it and vesicles ship it out.",
+   "src": "BIO.3b; IG p. 19 SiP 'how organelles interact as a system to support cellular function'; IG p. 17 UtS organelle list (ER, Golgi, ribosomes, nucleus)"
+  },
+  {
+   "id": "OB-U02-12",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Mitochondria and energy demand",
+   "dok": 3,
+   "stem": "The share of cell volume taken up by mitochondria is compared in four kinds of human cells (representative values).",
+   "table": [
+    [
+     "Cell type",
+     "Mitochondria (% of cell volume)"
+    ],
+    [
+     "Heart muscle",
+     "35"
+    ],
+    [
+     "Liver",
+     "20"
+    ],
+    [
+     "Fat storage",
+     "5"
+    ],
+    [
+     "Mature red blood cell",
+     "0"
+    ]
+   ],
+   "stem2": "A toxin damages mitochondria. Which cell type would lose the most function, and why?",
+   "opts": [
+    "Mature red blood cells, because they have the fewest mitochondria to spare.",
+    "Heart muscle, because it relies most on mitochondria for energy.",
+    "Fat storage cells, because fat is made and stored inside mitochondria.",
+    "Liver cells, because the liver is the organ that removes toxins."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "With no mitochondria at all, these cells do not rely on them, so the toxin has nothing to damage.",
+    "2": "Mitochondria release energy from food; fat is stored elsewhere in the cell, and these cells have few mitochondria.",
+    "3": "Clearing toxins is a liver job, but the table shows heart muscle relies most on mitochondria."
+   },
+   "why": "Mitochondria supply most of a cell's usable energy, so the cell packed with the most mitochondria, heart muscle, depends on them most.",
+   "src": "BIO.3b; IG p. 17 UtS 'structures that perform specific functions that allow for the movement of matter and energy'; 'different numbers and types of organelles'"
+  },
+  {
+   "id": "OB-U02-13",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "When lysosomes fail",
+   "dok": 2,
+   "stem": "In a rare inherited disorder, the digestive enzymes inside lysosomes do not work. What would most likely build up inside the person's cells?",
+   "opts": [
+    "Unused amino acids, because ribosomes stop building proteins",
+    "Extra water, because the cell membrane stops controlling what enters",
+    "Extra sugar, because chloroplasts make too much of it",
+    "Worn-out cell parts and large molecules that would normally be broken down"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Building proteins is the ribosome's job; lysosomes break materials down.",
+    "1": "The membrane, not the lysosome, controls what enters the cell.",
+    "2": "Human cells have no chloroplasts, and lysosomes do not make sugar."
+   },
+   "why": "Lysosomes are the cell's recycling centers, so when their enzymes fail, the materials they would break down pile up.",
+   "src": "BIO.3b; IG p. 17 UtS 'Organelles perform specific functions in the cell' (lysosome); IG p. 19 SiP claim about how organelles function individually and interdependently"
+  },
+  {
+   "id": "OB-U02-14",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "hotspot",
+   "topic": "Which structure captures light energy",
+   "dok": 1,
+   "stem": "The diagram shows a cell from a fern leaf growing on the Blue Ridge. Select the structure that converts light energy into chemical energy stored in sugar.",
+   "figure": "ob-u02-14-fern-cell",
+   "regions": {
+    "A": "chloroplast",
+    "B": "mitochondrion",
+    "C": "nucleus",
+    "D": "central vacuole"
+   },
+   "key": "A",
+   "miss": {
+    "B": "Mitochondria release energy from sugar; they do not capture light.",
+    "C": "The nucleus stores the DNA instructions; it does not capture light.",
+    "D": "The central vacuole stores water and keeps the cell firm."
+   },
+   "mc_twin": {
+    "stem": "The diagram shows a cell from a fern leaf growing on the Blue Ridge. Which labeled structure converts light energy into chemical energy stored in sugar?",
+    "opts": [
+     "A",
+     "B",
+     "C",
+     "D"
+    ],
+    "key": 0,
+    "miss": {
+     "1": "Mitochondria release energy from sugar; they do not capture light.",
+     "2": "The nucleus stores the DNA instructions; it does not capture light.",
+     "3": "The central vacuole stores water and keeps the cell firm."
+    }
+   },
+   "why": "Chloroplasts hold chlorophyll, which captures light energy and stores it in the bonds of sugar during photosynthesis.",
+   "src": "BIO.3b; IG p. 17 UtS organelle list (chloroplasts) and 'movement of matter and energy'; spiral BIO.2e, IG p. 10"
+  },
+  {
+   "id": "OB-U02-15",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A contractile vacuole keeps a single cell in balance",
+   "dok": 3,
+   "stem": "A paramecium is a single-celled pond organism. Its contractile vacuole collects extra water and squeezes it out of the cell. Students counted how often the vacuole emptied after paramecia were placed in water with different amounts of salt.",
+   "figure": "ob-u02-15-paramecium",
+   "stem2": "Which explanation fits the pattern in the graph?",
+   "opts": [
+    "Salt gives the vacuole extra energy, so it empties faster as the salt increases.",
+    "In fresher water, water leaves the cell, so the vacuole empties to replace it.",
+    "Fresher water lets more water in by osmosis, so the vacuole must pump it out more often.",
+    "The vacuole empties at the same rate in any water, so salt has no effect."
+   ],
+   "key": 2,
+   "miss": {
+    "0": "The graph shows emptying slows as salt increases; it does not speed up.",
+    "1": "In fresher water, water moves into the cell, and the vacuole removes water rather than adding it.",
+    "3": "The rate falls from about 12 to about 2 per minute, so salt clearly matters."
+   },
+   "why": "A single cell keeps homeostasis with its own structures: in hypotonic water, water floods in and the contractile vacuole works harder to pump it out.",
+   "src": "BIO.3b; IG p. 17 UtS 'A single-celled organism has to conduct all life processes by itself'; IG p. 19 SiP 'evidence that mechanisms maintain homeostasis'; spiral BIO.3d, IG p. 18 osmosis"
+  },
+  {
+   "id": "OB-U02-16",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "order",
+   "topic": "Levels of organization in a brook trout",
+   "dok": 1,
+   "stem": "Brook trout in Blue Ridge streams take in oxygen through their gills. Arrange these from the smallest level of organization to the largest.",
+   "opts": [
+    "A gill",
+    "The whole trout",
+    "A single gill cell",
+    "The respiratory system",
+    "A layer of gill cells working together"
+   ],
+   "key": [
+    2,
+    4,
+    0,
+    3,
+    1
+   ],
+   "miss": {
+    "organ-tissue": "A tissue is a group of similar cells; an organ such as a gill is built from several tissues.",
+    "system-organism": "An organism contains many organ systems, so it is the largest level here."
+   },
+   "mc_twin": {
+    "stem": "Brook trout in Blue Ridge streams take in oxygen through their gills. At which level of organization is a gill?",
+    "opts": [
+     "Organ",
+     "Cell",
+     "Tissue",
+     "Organ system"
+    ],
+    "key": 0,
+    "miss": {
+     "1": "A gill is made of many cells of several kinds.",
+     "2": "A tissue is one group of similar cells; a gill combines several tissues.",
+     "3": "The gills are one part of the respiratory system, not the whole system."
+    }
+   },
+   "why": "Cells form tissues, tissues form organs, organs work together in organ systems, and organ systems make up the organism.",
+   "src": "BIO.3b; IG p. 17 UtS 'Organisms are complex, organized systems built on a hierarchical structure'"
+  },
+  {
+   "id": "OB-U02-17",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Cooling down during a race",
+   "dok": 2,
+   "stem": "During a 5K race on a hot afternoon, a runner's body temperature rises. Her sweat glands release sweat, and blood vessels near her skin widen. As the sweat evaporates, her temperature falls back toward normal. Which statement best describes these responses?",
+   "opts": [
+    "They are positive feedback, because the responses grow stronger the longer she runs.",
+    "They are negative feedback, reversing the change so body temperature stays stable.",
+    "They raise her body temperature so her muscles can work faster.",
+    "Each skin cell cools itself without help from other cells or organs."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Positive feedback pushes a change further; these responses push temperature back toward normal.",
+    "2": "Sweating and wider skin vessels release heat, so they lower temperature.",
+    "3": "Sweat glands, blood vessels and the brain work together; in a multicellular organism homeostasis depends on many specialized cells."
+   },
+   "why": "Homeostasis in a multicellular organism relies on specialized structures working together to undo a change, which is negative feedback.",
+   "src": "BIO.3b; IG p. 18 UtS 'Organisms maintain homeostasis through a variety of mechanisms'; IG p. 17 UtS 'A multicellular organism has groups of cells that specialize'"
+  },
+  {
+   "id": "OB-U02-18",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Root hair cells",
+   "dok": 2,
+   "stem": "Each root hair cell on a corn root grows a long, thin extension into the soil. How does this shape help the plant maintain homeostasis?",
+   "opts": [
+    "It adds surface area for absorbing water and minerals from the soil.",
+    "It anchors the plant by wrapping tightly around rocks in the soil.",
+    "It reaches toward light so the root can carry out photosynthesis.",
+    "It stores extra sugar for the plant to use over the winter."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Anchoring comes from the whole root system; a root hair's thin shape is built for absorbing.",
+    "2": "There is no light in the soil, and root cells lack chloroplasts.",
+    "3": "Storage happens in thick tissues such as tubers, not in thin root hairs."
+   },
+   "why": "A specialized cell's shape matches its job, and the long extension of a root hair cell multiplies the surface available for taking in water.",
+   "src": "BIO.3b; IG p. 17 UtS 'A multicellular organism has groups of cells that specialize to perform specific functions'; IG p. 18 UtS (BIO.3 e) 'Each specialized cell type has a specific structure'"
+  },
+  {
+   "id": "OB-U02-19",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why one damaged cell can kill an amoeba",
+   "dok": 2,
+   "stem": "A person sheds thousands of skin cells every hour and stays healthy, but a single-celled amoeba dies if its cell membrane is badly torn. What explains the difference?",
+   "opts": [
+    "Human skin cells are larger and tougher than the single cell of an amoeba.",
+    "An amoeba has no cell membrane, so any damage at all is fatal to it.",
+    "Human cells do not need membranes, because the skin protects all of them.",
+    "The amoeba's one cell does every life process; a person replaces lost cells."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Size and toughness are not the reason; the difference is whether one cell or many cells do the work.",
+    "1": "The amoeba does have a membrane; that is the part that was torn.",
+    "2": "Every human cell has a membrane; skin protects the body, not each cell's boundary."
+   },
+   "why": "In a unicellular organism one cell does everything, so harm to it is harm to the whole organism, while a multicellular organism replaces cells and spreads its work across many.",
+   "src": "BIO.3b; IG p. 17 UtS 'A single-celled organism has to conduct all life processes by itself. A multicellular organism has groups of cells that specialize'"
+  },
+  {
+   "id": "OB-U02-20",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why the phospholipid tails face inward",
+   "dok": 2,
+   "spiral": "BIO.2a",
+   "stem": "Watery fluid surrounds this section of cell membrane on both sides. Why do the phospholipid tails point toward each other in the middle of the membrane?",
+   "figure": "ob-u02-20-bilayer",
+   "opts": [
+    "The tails are hydrophilic, so they point inward to soak up water.",
+    "The tails are hydrophobic and avoid water, while the hydrophilic heads face it.",
+    "The tails carry electric charges that attract them to each other.",
+    "Membrane proteins pull the tails into the middle of the membrane."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "This reverses the two labels: the tails are hydrophobic and the heads are hydrophilic.",
+    "2": "The tails are nonpolar and uncharged; they cluster together because they avoid water.",
+    "3": "Phospholipids form a bilayer on their own in water, even with no proteins present."
+   },
+   "why": "Polar water attracts the polar heads and excludes the nonpolar tails, so phospholipids arrange themselves into a bilayer with the tails tucked inside.",
+   "src": "BIO.3d; IG p. 18 UtS 'The structure of the membrane supports its function in transport'; IG p. 19 SiP model of the cell membrane; spiral BIO.2a, IG p. 9 polarity"
+  },
+  {
+   "id": "OB-U02-21",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "What slips straight through the bilayer",
+   "dok": 2,
+   "stem": "Which substances can cross a cell membrane by passing directly between the phospholipids, with no channel or carrier protein? Select all that apply.",
+   "opts": [
+    "Oxygen (O₂)",
+    "Glucose",
+    "Sodium ions (Na⁺)",
+    "Carbon dioxide (CO₂)",
+    "Amylase, a protein",
+    "Potassium ions (K⁺)"
+   ],
+   "key": [
+    0,
+    3
+   ],
+   "miss": {
+    "1": "Glucose is too large and polar to cross the bilayer quickly; it uses a carrier protein.",
+    "2": "Charged ions are blocked by the hydrophobic tails and need channels or pumps.",
+    "4": "Proteins are far too large; cells move them in vesicles by endocytosis or exocytosis.",
+    "5": "Charged ions are blocked by the hydrophobic tails and need channels or pumps."
+   },
+   "why": "Small nonpolar molecules such as oxygen and carbon dioxide pass through the hydrophobic middle of the bilayer, while ions, sugars and large molecules need proteins or vesicles.",
+   "src": "BIO.3d; IG p. 18 UtS 'structure of the membrane supports its function in transport'; IG p. 19 SiP 'how the cell membrane functions to move substances in and out of the cell'"
+  },
+  {
+   "id": "OB-U02-22",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Receptor proteins decide which cells respond",
+   "dok": 2,
+   "stem": "The hormone glucagon travels in the blood to every tissue of the body. Liver cells respond to it by releasing stored sugar, but skeletal muscle cells do not respond at all. Why do only the liver cells respond?",
+   "opts": [
+    "Glucagon cannot travel through the blood vessels that supply muscles.",
+    "Skeletal muscle cells have no membrane, so glucagon passes straight through.",
+    "Only liver cells have membrane receptor proteins that fit glucagon.",
+    "Liver cells make their own glucagon, so only they can use it."
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Blood carries the hormone to muscle too; the difference lies at the cell surface.",
+    "1": "All cells have a membrane; what differs is which receptor proteins sit in it.",
+    "3": "Glucagon comes from the pancreas and reaches the liver in the blood; liver cells respond to it but do not make it."
+   },
+   "why": "A cell responds to a chemical signal only if its membrane carries a receptor protein shaped to bind that signal.",
+   "src": "BIO.3d; IG p. 18 UtS membrane regulates 'communication between cells, and recognition of cells'"
+  },
+  {
+   "id": "OB-U02-23",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Concentration difference and diffusion rate",
+   "dok": 3,
+   "stem": "Students measured how fast a dye crossed an artificial membrane when the concentration difference across the membrane was set to different values.",
+   "figure": "ob-u02-23-diffusion",
+   "stem2": "If the concentration difference were raised to 50 g/L, about how fast would the dye cross?",
+   "opts": [
+    "15 mg per minute",
+    "24 mg per minute",
+    "30 mg per minute",
+    "36 mg per minute"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "That is half the predicted value; the rate keeps rising as the difference grows.",
+    "1": "That rate was already measured at 40 g/L; a larger difference gives a faster rate.",
+    "3": "That value fits 60 g/L; at 50 g/L the line gives about 30."
+   },
+   "why": "The rate rises about 6 mg per minute for each 10 g/L of difference, so extending the line to 50 g/L gives about 30, because a steeper concentration gradient drives faster diffusion.",
+   "src": "BIO.3d; IG p. 19 SiP 'relationship between concentration and the rate of diffusion'; IG p. 18 UtS passive transport 'from high to low concentration'"
+  },
+  {
+   "id": "OB-U02-24",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Roots taking in nitrate",
+   "dok": 3,
+   "stem": "Soybean root cells hold about 40 times more nitrate, a mineral nutrient, than the soil water around them, yet they keep taking in more nitrate from the soil. Which type of transport must they be using?",
+   "opts": [
+    "Active transport, because nitrate moves against its gradient, which costs ATP.",
+    "Simple diffusion, because nitrate moves from the soil into the root.",
+    "Osmosis, because the root also absorbs water along with the nitrate.",
+    "Facilitated diffusion, because a carrier protein moves the nitrate."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Diffusion moves particles from high to low concentration; here nitrate moves from low to high.",
+    "2": "Osmosis is the movement of water, not of dissolved minerals such as nitrate.",
+    "3": "A protein is involved, but facilitated diffusion moves particles only down their gradient and uses no energy."
+   },
+   "why": "Moving a substance from lower to higher concentration takes energy, so uptake against the gradient is active transport.",
+   "src": "BIO.3d; IG p. 18 UtS active transport 'requires energy and moves substances against a concentration gradient'; IG p. 19 SiP 'Compare passive and active transport'"
+  },
+  {
+   "id": "OB-U02-25",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Name the transport",
+   "dok": 2,
+   "stem": "For each event, choose the type of transport at work. Every choice fits exactly one event.",
+   "rows": [
+    "Oxygen moves from the air in a lung into a lung-lining cell, which holds less oxygen.",
+    "Glucose moves into a muscle cell through a carrier protein, from higher to lower concentration.",
+    "A white blood cell wraps its membrane around a bacterium and pulls it inside.",
+    "A gland cell fuses vesicles with its membrane and releases mucus outside the cell.",
+    "A nerve cell uses ATP to push sodium ions out, where sodium is already more concentrated."
+   ],
+   "opts": [
+    "Simple diffusion",
+    "Facilitated diffusion",
+    "Endocytosis",
+    "Exocytosis",
+    "Active transport"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "miss": {
+    "Facilitated diffusion": "Facilitated diffusion uses a protein but no ATP, and it moves particles only down their gradient.",
+    "Active transport": "Active transport spends ATP to move particles against their gradient.",
+    "Endocytosis": "In endocytosis the membrane folds inward to bring material in.",
+    "Exocytosis": "In exocytosis vesicles fuse with the membrane to send material out.",
+    "Simple diffusion": "Simple diffusion needs no protein and no ATP; small particles slip through on their own."
+   },
+   "mc_twin": {
+    "stem": "A white blood cell wraps its membrane around a bacterium and pulls it inside. Which type of transport is this?",
+    "opts": [
+     "Exocytosis",
+     "Endocytosis",
+     "Facilitated diffusion",
+     "Osmosis"
+    ],
+    "key": 1,
+    "miss": {
+     "0": "Exocytosis sends material out of the cell; here the bacterium comes in.",
+     "2": "Facilitated diffusion moves small particles through proteins; a whole bacterium needs the membrane to fold around it.",
+     "3": "Osmosis is the movement of water across a membrane."
+    }
+   },
+   "why": "Passive transport runs down a gradient with or without a protein, active transport spends ATP to go against it, and vesicles move large materials in (endocytosis) or out (exocytosis).",
+   "src": "BIO.3d; IG p. 18 UtS passive transport (diffusion, facilitated diffusion) and active transport (endocytosis, exocytosis); IG p. 19 SiP 'Compare passive and active transport'"
+  },
+  {
+   "id": "OB-U02-26",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A poison that stops ATP",
+   "dok": 2,
+   "stem": "Cyanide stops a cell from making ATP. Which process in a nerve cell would stop first?",
+   "opts": [
+    "Oxygen diffusing into the cell",
+    "Water crossing the membrane by osmosis",
+    "Glucose entering through carrier proteins, down its gradient",
+    "Pumping sodium ions out against their concentration gradient"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Diffusion needs no ATP, so it continues without it.",
+    "1": "Osmosis is passive and depends on the concentration difference, not on ATP.",
+    "2": "Facilitated diffusion moves particles down a gradient and uses no ATP."
+   },
+   "why": "Only active transport spends ATP, so it is the first process to stop when ATP runs out.",
+   "src": "BIO.3d; IG p. 18 UtS 'Passive transport … does not require energy'; 'Active transport … requires energy'"
+  },
+  {
+   "id": "OB-U02-27",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Potato cores in sugar solutions",
+   "dok": 3,
+   "sol_also": "BIO.3d",
+   "trouble_spot": "2a-osmosis",
+   "stem": "Equal-sized potato cores were weighed, soaked in sugar (sucrose) solutions for 24 hours, and weighed again.",
+   "figure": "ob-u02-27-potato",
+   "stem2": "At about what concentration would a core's mass stay the same, and what does that tell you?",
+   "opts": [
+    "0.0 M; pure water has the same water concentration as the potato cells.",
+    "0.3 M; there the solution is isotonic, so water enters and leaves equally.",
+    "0.6 M; the cores lost mass, so the solution there must be isotonic.",
+    "0.8 M; the strongest solution balances the water inside the cells."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Cores in pure water gained the most mass, so water was moving in, not balanced.",
+    "2": "Losing mass means water left the cells; that solution was hypertonic.",
+    "3": "The strongest solution caused the greatest loss, the opposite of balance."
+   },
+   "why": "Where the line crosses zero no net water moves, which marks the concentration isotonic to the potato cells.",
+   "src": "BIO.2a; IG p. 9 UtS water's properties 'largely due to the polarity of its molecules'; BIO.3d, IG p. 18 osmosis; IG p. 19 SiP concentration investigation"
+  },
+  {
+   "id": "OB-U02-28",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A blue crab heads upriver",
+   "dok": 3,
+   "sol_also": "BIO.3d",
+   "trouble_spot": "2a-osmosis",
+   "stem": "Blue crabs hatch in the salty water near the mouth of the Chesapeake Bay, and many young crabs later move up the James River, where the water is nearly fresh. As a crab moves upriver, which way does water tend to move across the membranes of its gill cells?",
+   "opts": [
+    "Out of the cells, because water moves toward the side with less salt.",
+    "Into the cells, because salt from the river pulls the water in with it.",
+    "Into the cells, because the river water is hypotonic to the cells.",
+    "Neither way, because the crab's shell seals off its gill cells."
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Water moves toward the side with more dissolved solute, which here is inside the cells.",
+    "1": "Water moves on its own by osmosis; the river has less salt, so salt is not what draws it in.",
+    "3": "River water flows over the gills; the shell does not wall gill cells off from it."
+   },
+   "why": "Water crosses membranes toward the side with more dissolved solute, so in fresher river water it moves into the gill cells, which the crab must counter to keep its cells from swelling.",
+   "src": "BIO.2a; IG p. 9 UtS water supports life processes; BIO.3d, IG p. 18 UtS osmosis moves water 'from high to low concentration'; skill note 'predict water movement when an organism changes salinity'"
+  },
+  {
+   "id": "OB-U02-29",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Cucumbers in brine",
+   "dok": 2,
+   "sol_also": "BIO.3d",
+   "trouble_spot": "2a-osmosis",
+   "stem": "Crisp cucumber slices are soaked in a strong salt brine to make pickles. A day later the slices are smaller and limp. What happened to the cucumber cells?",
+   "opts": [
+    "Water left the cells by osmosis, because the brine had a higher solute concentration than the cells.",
+    "Salt entered the cells and pushed the water out.",
+    "Water entered the cells until they burst.",
+    "Water moved toward the side with less salt, out of the brine and into the cells."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "The cells shrank because water moved out toward the saltier brine; salt does not push water.",
+    "2": "Bursting happens in a hypotonic solution; a strong brine is hypertonic, so cells lose water.",
+    "3": "Water moves toward the side with more solute, which here is the brine."
+   },
+   "why": "In a hypertonic solution water moves out of cells by osmosis, so plant cells lose turgor pressure and go limp.",
+   "src": "BIO.2a; IG p. 11 SiP 'Explain how the unique properties of water support life processes'; BIO.3d, IG p. 18 osmosis"
+  },
+  {
+   "id": "OB-U02-30",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why water uses aquaporins",
+   "dok": 3,
+   "sol_also": "BIO.3d",
+   "trouble_spot": "2a-osmosis",
+   "stem": "A little water crosses a cell membrane slowly between the phospholipids, but most passes much faster through channel proteins called aquaporins. Which property of water best explains why aquaporins speed it up?",
+   "opts": [
+    "Water molecules are too large to fit between the phospholipids.",
+    "Water is polar, and the nonpolar middle of the bilayer slows it down.",
+    "Water molecules are nonpolar, so a protein has to carry them.",
+    "Aquaporins spend ATP to pump water against its gradient."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Water is a very small molecule; its polarity, not its size, is the problem.",
+    "2": "Water is polar: the oxygen end is partly negative and the hydrogen ends partly positive.",
+    "3": "Aquaporins are channels for passive transport; water still moves by osmosis down its gradient."
+   },
+   "why": "Because water is polar, the nonpolar core of the membrane slows it, and aquaporins give it a polar channel to pass through quickly.",
+   "src": "BIO.2a; IG p. 9 UtS 'polarity of its molecules'; BIO.3d, IG p. 18 UtS 'structure of the membrane supports its function in transport'"
+  }
+ ]
+}

@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Original multiple-choice practice questions for the Virginia Biology SOL, written for the concepts students find hardest. Each answer comes with the reasoning and where to study. Nothing is submitted.">
+<meta name="description" content="Original practice questions for the Virginia Biology SOL: Challenge questions on the concepts students find hardest, and Practice questions by unit and learning target. Each answer comes with the reasoning and where to study. Nothing is submitted.">
 <link rel="canonical" href="https://scienceonepagers.org/biology/tools/sol-challenge-questions.html">
 <meta name="author" content="J. R. Schwebach">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Science One-Pagers">
 <meta property="og:title" content="SOL Challenge Questions - Practice for the Virginia Biology SOL">
-<meta property="og:description" content="Original multiple-choice practice questions for the Virginia Biology SOL, written for the concepts students find hardest. Each answer comes with the reasoning and where to study. Nothing is submitted.">
+<meta property="og:description" content="Original practice questions for the Virginia Biology SOL: Challenge questions on the concepts students find hardest, and Practice questions by unit and learning target. Each answer comes with the reasoning and where to study. Nothing is submitted.">
 <meta property="og:url" content="https://scienceonepagers.org/biology/tools/sol-challenge-questions.html">
 <meta property="og:image" content="https://scienceonepagers.org/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -134,11 +134,75 @@ table.data td:first-child,table.data th:first-child{text-align:left}
 .forteachers p:last-child{margin:0}
 code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--bond-soft);padding:.05em .3em;border-radius:2px}
 
+/* collections (Challenge · Practice · Practice Tests) */
+.coll{display:inline-flex;border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;margin:0 0 1.1rem;font-family:var(--sans)}
+.coll button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--card);color:var(--ink);border:none;padding:.55rem .85rem;min-height:2.75rem;cursor:pointer}
+.coll button + button{border-left:1.5px solid var(--rule)}
+.coll button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.stmt{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--va);border-radius:3px;padding:.75rem 1rem;margin:0 0 1.2rem;font-family:var(--sans);font-size:.9rem;line-height:1.5}
+.stmt summary{font-weight:700;cursor:pointer;min-height:1.6rem}
+.stmt p{max-width:none;margin:.6rem 0 0}
+/* practice cards */
+.chip.tei{border-color:var(--bond);color:var(--bond)}
+.pfig{margin:0 0 1rem}
+.pfig img{display:block;width:100%;max-width:34rem;height:auto;background:#fff;border:1px solid var(--rule);border-radius:3px}
+.opt.picked{border-color:var(--bond);background:var(--bond-soft)}
+.opt.picked b{color:var(--bond)}
+.opt.missed{border-style:dashed;border-color:var(--solid)}
+.check{margin:0 .4rem .9rem 0}
+.check:disabled{opacity:.45;cursor:default}
+.how{margin:0 0 .5rem}
+ol.seq{margin:0 0 .8rem;padding-left:1.6rem;font-family:var(--serif)}
+ol.seq li{margin:0 0 .4rem}
+.seqbtn{width:100%;text-align:left;font:inherit;font-size:1rem;line-height:1.4;background:var(--bond-soft);color:var(--ink);border:1.5px solid var(--bond);border-radius:3px;padding:.6rem .8rem;min-height:2.75rem;cursor:pointer}
+ol.seq.done li.ok{color:var(--solid);font-weight:600}
+ol.seq.done li.no{color:var(--flag)}
+ol.seq.key{font-size:.95rem}
+.match{display:flex;flex-direction:column;gap:.7rem;margin:0 0 .9rem}
+.mrow{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.6rem .8rem}
+.mrow p{margin:0 0 .45rem;font-size:1rem;line-height:1.4;max-width:none}
+.mrow select{width:100%;max-width:20rem}
+.mk{font-family:var(--sans);font-size:.9rem;font-weight:600}
+.mk.ok{color:var(--solid)} .mk.no{color:var(--flag)}
+.why .watch{font-size:.92rem}
+.study .src{font-size:.8rem;color:var(--ink-soft);margin:.45rem 0 0;line-height:1.4}
+#p-controls select{max-width:100%;min-width:0}
+.forteachers code{overflow-wrap:anywhere}
+.pprogress{font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--ink-soft)}
+.test-head h2{margin-top:.5rem}
+.score .big{font-family:var(--sans);font-size:1.4rem;font-weight:700;margin:.4rem 0}
+.pj-btn{display:inline-block;font-family:var(--sans);font-size:1rem;font-weight:700;background:var(--bond);color:var(--paper);border:none;border-radius:3px;padding:.75rem 1.2rem;min-height:3rem;cursor:pointer;text-decoration:none}
+.pj-btn.ghosty{background:none;color:var(--ink);border:1.5px solid var(--rule)}
+/* warm-up projector */
+body.projecting .wrap{display:none}
+#proj{max-width:72rem;margin:0 auto;padding:1.2rem 1.6rem 3rem;font-size:clamp(20px,2.2vw,30px)}
+.pj-top{display:flex;gap:1rem;align-items:center;font-family:var(--sans);font-size:clamp(16px,1.5vw,22px);font-weight:700;color:var(--ink-soft);border-bottom:2px solid var(--rule);padding-bottom:.5rem;margin-bottom:1rem}
+.pj-top span:nth-child(2){margin-left:auto}
+.pj-x{font-family:var(--sans);color:var(--bond);font-size:clamp(16px,1.4vw,20px)}
+.pj-stem{font-size:clamp(28px,3vw,42px);line-height:1.3;max-width:none;margin:0 0 1rem}
+.pj-note{font-family:var(--sans);font-size:clamp(18px,1.6vw,24px);color:var(--ink-soft);max-width:none}
+.pj-opts{list-style:none;padding:0;margin:0 0 1rem;display:grid;gap:.6rem}
+.pj-opts li{border:2px solid var(--rule);border-radius:4px;padding:.6rem .9rem;background:var(--card);line-height:1.3}
+.pj-opts li b{font-family:var(--sans);margin-right:.5rem}
+.pj-opts li.on{border-color:var(--solid);background:var(--solid-soft);font-weight:600}
+.pj-opts li.off{opacity:.55}
+ol.pj-rows{list-style:decimal;padding-left:2.4rem}
+ol.pj-rows li{list-style:decimal}
+.pj-m{font-family:var(--sans);font-weight:700;color:var(--solid)}
+.pj-ans{font-family:var(--sans);font-weight:700;color:var(--solid);font-size:clamp(24px,2.4vw,34px)}
+.pj-why{border-left:6px solid var(--solid);background:var(--card);padding:.8rem 1rem;margin:.4rem 0 1rem;line-height:1.4}
+.pj-fig img{max-width:min(100%,46rem)}
+.pj-nav{display:flex;gap:.8rem;justify-content:flex-end;margin-top:1rem}
+.pj-nav .pj-btn{font-size:clamp(18px,1.6vw,24px)}
+
 @media (max-width:30rem){.controls{position:static}}
 @media print{
   body{background:#fff;color:#000;font-size:11pt}
   .wrap{max-width:none;padding:0}
-  .controls,.sop-back,.legend,.forteachers,.why,.study,.toggle-why,.intro-extra{display:none !important}
+  .controls,.sop-back,.legend,.forteachers,.why,.study,.toggle-why,.intro-extra,.coll,.stmt,.check,.how,#proj{display:none !important}
+  .pfig img{max-width:60%;border:none}
+  .mrow select{display:none}
+  .mrow{border:none;padding:.1rem 0}
   .card{break-inside:avoid;border:1px solid #999;box-shadow:none;margin-bottom:.6rem;padding:.6rem .8rem}
   .opt{border:none;padding:.15rem 0;min-height:0;font-size:10.5pt;background:none !important;font-weight:400 !important}
   .opt b{color:#000 !important}
@@ -155,7 +219,17 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;backgroun
 <a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
 <p class="sop-eyebrow">Bio Tool #8 &middot; SOL Biology &middot; All year</p>
 <h1>SOL Challenge Questions</h1>
-<p class="lede"><span id="count-lede">Seventy-two</span> original practice questions for the Virginia Biology SOL, written for the concepts students find hardest. Tap an answer and you get the reasoning and where to study. Nothing is submitted.</p>
+<p class="lede"><span id="count-lede">Seventy-two</span> Challenge questions on the concepts students find hardest, and <span id="count-practice">thirty</span> Practice questions sorted by unit and learning target, all original and all written for the Virginia Biology SOL. Tap an answer and you get the reasoning and where to study. Nothing is submitted.</p>
+
+<div class="coll" id="collections" role="group" aria-label="Choose a collection">
+  <button type="button" data-set="challenge" aria-pressed="true">Challenge</button>
+  <button type="button" data-set="practice" aria-pressed="false">Practice</button>
+  <button type="button" data-set="test" class="hidden" aria-pressed="false">Practice Tests</button>
+</div>
+
+<details class="stmt" id="how-built"><summary>How the Practice questions are built</summary><p>These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education&rsquo;s Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test&rsquo;s wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE&rsquo;s released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. &copy; J.&nbsp;R. Schwebach, CC&nbsp;BY-NC&nbsp;4.0.</p></details>
+
+<div id="challenge-intro">
 
 <p>Every question on this page is original, written by me and my colleagues for this page. They come from two kinds of experience. The first is ours: the concepts our students miss most often on our unit tests, in the wording that trips them up. The second is Virginia's: each year the Department of Education releases test items along with the share of students statewide who answered each one correctly, and some concepts come in under 40 percent across the whole state. Both go into this bank, and it grows as the year goes on.</p>
 
@@ -167,6 +241,27 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;backgroun
 </div>
 
 <p class="intro-extra">Questions keep their numbers for good, so <b>Q14</b> on a feedback slip or in a Canvas assignment always means the same question. The address <code>#q14</code> jumps to one question, and <code>?q=3,14,22</code> shows just those. Your answers stay on this device until you clear them.</p>
+</div>
+
+<div id="practice-intro" class="hidden">
+<p>Practice questions are filed by unit and learning target, so the set you open matches what you are learning now. Each one applies a skill to a new case: a graph, a table, a Virginia river or a lab you have not seen before. Some ask you to select every right answer, put steps in order, or match statements, the way the SOL does. A line under the controls keeps your count for the unit on this device.</p>
+<div class="controls" id="p-controls">
+  <div class="row">
+    <label class="fine" for="p-unit" style="font-family:var(--sans);font-weight:600">Unit</label>
+    <select id="p-unit" aria-label="Choose a unit"></select>
+    <select id="p-lt" aria-label="Choose a learning target"><option value="">All learning targets</option></select>
+  </div>
+  <div class="row">
+    <span class="pprogress" id="p-progress" aria-live="polite"></span>
+  </div>
+  <div class="row">
+    <button type="button" class="ghost hidden" id="p-show-all">Show the whole unit</button>
+    <button type="button" class="ghost" id="p-reset">Clear my answers</button>
+    <button type="button" class="ghost" id="p-print">Print this set</button>
+    <button type="button" class="ghost" id="p-warmup">Warm-up on the projector</button>
+  </div>
+</div>
+</div>
 
 <div class="controls" id="controls">
   <div class="row">
@@ -191,14 +286,16 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;backgroun
 </div>
 
 <div id="list"></div>
+<div id="plist"></div>
 
 <div class="forteachers">
   <h2>For teachers</h2>
   <p>Use any of these freely with a class. To assign a set, link to this page with the question numbers in the address, for example <code>sol-challenge-questions.html?q=6,10,23</code>, and students see only those. Print this set prints the questions showing, without answers. Every question names its SOL standard and the concept to study, so it works with any Virginia course, not only ours; the Canvas links are for Mr. Schwebach's own students and need a PWCS login.</p>
+  <p><b>Practice</b> addresses work the same way. <code>?set=practice&amp;unit=2</code> opens a unit, <code>?set=practice&amp;lt=2.4</code> one learning target, and <code>?set=practice&amp;q=OB-U02-03,OB-U02-11</code> chosen questions. For a warm-up, <code>?set=practice&amp;lt=2.4&amp;n=3&amp;projector=1&amp;seed=1006</code> shows three questions one at a time at projector size, with the answer hidden until you tap; the same seed draws the same three for every period that day. Practice question ids (OB-U02-07) are permanent, like the Challenge numbers.</p>
   <p>New questions are added at the end with the next number. A question is never renumbered or reused; if one is retired, its number stays retired. Corrections and suggested questions: use the address on the <a href="../../index.html">home page</a>.</p>
 </div>
 
-<footer class="sop-foot">Virginia Biology SOL, 2018 standards &middot; written for Biology I and Advanced Biology I at Battlefield High School, Prince William County, and for any Virginia biology student &middot; nothing submitted. Statewide results quoted are from the Virginia Department of Education's released test items. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+<footer class="sop-foot">Virginia Biology SOL, 2018 standards &middot; written for Biology I and Advanced Biology I at Battlefield High School, Prince William County, and for any Virginia biology student &middot; nothing submitted. Statewide results quoted are from the Virginia Department of Education's released test items. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>. Practice questions: original practice questions written to the Virginia 2018 Biology SOL, not produced or endorsed by the Virginia Department of Education.</footer>
 </div>
 
 <script>
@@ -1693,5 +1790,449 @@ const BANK = [
   window.addEventListener("hashchange", () => { if (/^#q\d+$/.test(location.hash)) flash(Number(location.hash.slice(2))); });
 })();
 </script>
+<script>
+// ───── Practice and Practice Tests collections (card v2.1 §4a) ─────
+// Challenge (the BANK above) is untouched. This block only runs when ?set=practice or ?set=test.
+// Data: data/practice-index.json lists the unit files (OB-UNN.json) and test forms (PT-X.json).
+// A new unit is a data drop: add data/OB-UNN.json and one line to data/practice-index.json.
+(function(){
+  const params = new URLSearchParams(location.search);
+  const SET = (params.get("set") || "challenge").toLowerCase();
+  const L = "ABCDEFGH";
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const WORDS = ["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"];
+  const TENS = {20:"twenty",30:"thirty",40:"forty",50:"fifty",60:"sixty",70:"seventy",80:"eighty",90:"ninety"};
+  function words(n){ if (n < 21) return WORDS[n]; if (n < 100){ const t = Math.floor(n/10)*10, u = n%10; return TENS[t] + (u ? "-" + WORDS[u] : ""); } return String(n); }
+
+  // collection switcher (secondary to the URL; it never changes what a deep link shows)
+  const segBtns = document.querySelectorAll("#collections button");
+  segBtns.forEach(b => {
+    b.setAttribute("aria-pressed", String(b.dataset.set === (SET === "test" ? "test" : SET === "practice" ? "practice" : "challenge")));
+    b.addEventListener("click", () => {
+      const s = b.dataset.set;
+      if (s === "challenge") location.href = location.pathname;
+      else if (s === "practice") location.href = location.pathname + "?set=practice";
+      else location.href = location.pathname + "?set=test";
+    });
+  });
+
+  fetch("data/practice-index.json", {cache:"no-cache"}).then(r => r.json()).then(idx => {
+    const units = idx.units || {}, tests = idx.tests || {};
+    const total = Object.values(units).reduce((a,u) => a + (u.count||0), 0);
+    if ($("count-practice")) $("count-practice").textContent = words(total);
+    if (Object.keys(tests).length) document.querySelectorAll("[data-set=test]").forEach(e => e.classList.remove("hidden"));
+    if (SET === "practice") practice(idx);
+    else if (SET === "test") testMode(idx);
+  }).catch(() => {
+    if (SET === "practice" || SET === "test") showMain("<p class=\"empty\">The practice questions could not load. Check the connection and reload the page.</p>");
+  });
+
+  if (SET !== "practice" && SET !== "test") return;
+  // hide the Challenge view
+  ["challenge-intro","controls","list"].forEach(id => { const e = $(id); if (e) e.classList.add("hidden"); });
+  $("practice-intro").classList.remove("hidden");
+  const stmt = $("how-built"); if (stmt) stmt.open = true;
+  function showMain(h){ $("plist").innerHTML = h; }
+
+  // ── storage, on this device only, namespaced per collection ──
+  function store(name){
+    const key = "sol8-" + name + "-v1"; let data = {};
+    try { data = JSON.parse(localStorage.getItem(key) || "{}") || {}; } catch(e){ data = {}; }
+    return { data, save(){ try { localStorage.setItem(key, JSON.stringify(data)); } catch(e){} }, clear(){ data = {}; this.data = data; try { localStorage.removeItem(key); } catch(e){} } };
+  }
+
+  function loadUnits(idx, list){
+    return Promise.all(list.map(u => fetch("data/" + idx.units[u].file, {cache:"no-cache"}).then(r => r.json()).then(d => ({u, d}))));
+  }
+
+  // ── scoring ──
+  function eq(a,b){ return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((x,i) => x === b[i]); }
+  function viewOf(q){ return q.type === "hotspot" ? Object.assign({}, q.mc_twin, {type:"mc", stemFull:q.stem}) : q; }
+  function isRight(q, a){
+    const v = viewOf(q);
+    if (a == null) return false;
+    if (v.type === "mc") return a === v.key;
+    if (v.type === "ms") return eq([...a].sort((x,y)=>x-y), [...v.key].sort((x,y)=>x-y));
+    if (v.type === "order" || v.type === "match") return eq(a, v.key);
+    return false;
+  }
+  function complete(q, a){
+    const v = viewOf(q);
+    if (a == null) return false;
+    if (v.type === "mc") return typeof a === "number";
+    if (v.type === "ms") return Array.isArray(a) && a.length > 0;
+    if (v.type === "order") return Array.isArray(a) && a.length === v.opts.length;
+    if (v.type === "match") return Array.isArray(a) && a.length === v.rows.length && a.every(x => typeof x === "number");
+    return false;
+  }
+
+  // ── rendering pieces shared by Practice, Tests and the projector ──
+  function table(t){
+    if (!t || !t.length) return "";
+    return '<table class="data"><thead><tr>' + t[0].map(x => '<th>' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' +
+      t.slice(1).map(r => '<tr>' + r.map(x => '<td>' + esc(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table>';
+  }
+  function figure(q, alt){
+    if (!q.figure) return "";
+    return '<figure class="pfig"><img src="data/fig/' + esc(q.figure) + '.svg" alt="' + esc(alt || q.topic) + '" loading="lazy"></figure>';
+  }
+  const TYPE_LABEL = {ms:"Select all that apply", order:"Put in order", match:"Match", hotspot:"Diagram"};
+  function stemBlock(q){
+    const v = viewOf(q);
+    let h = '<p class="stem">' + esc(q.type === "hotspot" ? v.stem : q.stem) + '</p>';
+    h += table(q.table) + figure(q);
+    if (q.stem2) h += '<p class="stem">' + esc(q.stem2) + '</p>';
+    return h;
+  }
+
+  // answer widget; mode "practice" (check gives feedback), "test" (no feedback), "review" (locked, marked)
+  function widget(q, a, mode){
+    const v = viewOf(q), show = mode === "review";   // marks show only once an answer is checked or a test is submitted
+    let h = "";
+    if (v.type === "mc"){
+      h += '<ul class="opts">' + v.opts.map((o,i) => {
+        let cls = "opt";
+        if (show){ if (i === v.key) cls += " right"; else if (i === a) cls += " wrong"; }
+        else if (mode === "test" && a === i) cls += " picked";
+        return '<li><button type="button" class="' + cls + '" data-act="mc" data-i="' + i + '"' + (show ? " disabled" : "") + '><b>' + L[i] + '</b><span>' + esc(o) + '</span></button></li>';
+      }).join('') + '</ul>';
+    } else if (v.type === "ms"){
+      const sel = new Set(Array.isArray(a) ? a : []);
+      h += '<ul class="opts">' + v.opts.map((o,i) => {
+        let cls = "opt ms";
+        if (show){ if (v.key.includes(i) && sel.has(i)) cls += " right"; else if (sel.has(i)) cls += " wrong"; else if (v.key.includes(i)) cls += " missed"; }
+        else if (sel.has(i)) cls += " picked";
+        return '<li><button type="button" class="' + cls + '" data-act="ms" data-i="' + i + '" aria-pressed="' + sel.has(i) + '"' + (show ? " disabled" : "") + '><b>' + (sel.has(i) ? "✓" : L[i]) + '</b><span>' + esc(o) + '</span></button></li>';
+      }).join('') + '</ul>';
+      if (!show && mode !== "test") h += '<button type="button" class="ghost check" data-act="check"' + (sel.size ? "" : " disabled") + '>Check my answer</button>';
+    } else if (v.type === "order"){
+      const seq = Array.isArray(a) ? a : [];
+      if (show){
+        h += '<ol class="seq done">' + seq.map((i,k) => '<li class="' + (v.key[k] === i ? "ok" : "no") + '">' + esc(v.opts[i]) + '</li>').join('') + '</ol>';
+      } else {
+        h += '<p class="fine how">Tap the steps in order. Tap a numbered step to take it back.</p>';
+        h += '<ol class="seq">' + seq.map(i => '<li><button type="button" class="seqbtn" data-act="unpick" data-i="' + i + '">' + esc(v.opts[i]) + '</button></li>').join('') + '</ol>';
+        h += '<ul class="opts">' + v.opts.map((o,i) => seq.includes(i) ? "" : '<li><button type="button" class="opt" data-act="pick" data-i="' + i + '"><b>' + L[i] + '</b><span>' + esc(o) + '</span></button></li>').join('') + '</ul>';
+        if (mode !== "test") h += '<button type="button" class="ghost check" data-act="check"' + (seq.length === v.opts.length ? "" : " disabled") + '>Check my order</button>';
+        if (seq.length) h += ' <button type="button" class="ghost" data-act="restart">Start over</button>';
+      }
+    } else if (v.type === "match"){
+      const pick = Array.isArray(a) ? a : [];
+      h += '<div class="match">' + v.rows.map((r,k) => {
+        const p = pick[k];
+        let mark = "";
+        if (show) mark = p === v.key[k] ? ' <span class="mk ok">✓ ' + esc(v.opts[p]) + '</span>' : ' <span class="mk no">✗ ' + (typeof p === "number" ? esc(v.opts[p]) + ' · answer: ' : 'answer: ') + esc(v.opts[v.key[k]]) + '</span>';
+        const sel = '<select data-act="match" data-k="' + k + '" aria-label="Choice for statement ' + (k+1) + '"' + (show ? " disabled" : "") + '><option value="">Choose…</option>' +
+          v.opts.map((o,i) => '<option value="' + i + '"' + (p === i ? " selected" : "") + '>' + esc(o) + '</option>').join('') + '</select>';
+        return '<div class="mrow"><p><b>' + (k+1) + '.</b> ' + esc(r) + '</p>' + (show ? mark : sel) + '</div>';
+      }).join('') + '</div>';
+      if (!show && mode !== "test") h += '<button type="button" class="ghost check" data-act="check"' + (complete(q, a) ? "" : " disabled") + '>Check my matches</button>';
+    }
+    return h;
+  }
+
+  function feedbackHTML(q, a){
+    const v = viewOf(q), right = isRight(q, a);
+    let h = '<div class="why ' + (right ? 'ok' : 'no') + '"><span class="tag">';
+    if (!complete(q, a)){
+      const ans = v.type === "mc" ? L[v.key] : v.type === "ms" ? v.key.map(i => L[i]).join(', ') : v.type === "order" ? v.key.map(i => L[i]).join(' → ') : v.key.map((c,k) => (k+1) + ' ' + v.opts[c]).join(' · ');
+      h += 'Left blank. The answer is ' + esc(ans) + '</span>';
+      if (v.type === "order") h += '<ol class="seq key">' + v.key.map(i => '<li>' + esc(v.opts[i]) + '</li>').join('') + '</ol>';
+      return h + '<p>' + esc(q.why) + '</p></div>';
+    }
+    if (v.type === "mc") h += right ? 'Right: ' + L[v.key] : 'Not ' + L[a] + '. The answer is ' + L[v.key];
+    else if (v.type === "ms") h += right ? 'Right: ' + v.key.map(i => L[i]).join(', ') : 'Not quite. The answer is ' + v.key.map(i => L[i]).join(', ');
+    else if (v.type === "order") h += right ? 'Right order' : 'Not quite. The right order is ' + v.key.map(i => L[i]).join(' → ');
+    else h += right ? 'All matched' : 'Not quite. Check the marked rows';
+    h += '</span>';
+    const miss = v.miss || {};
+    if (!right){
+      if (v.type === "mc" && miss[a] != null) h += '<p>' + esc(miss[a]) + '</p>';
+      if (v.type === "ms"){
+        a.filter(i => !v.key.includes(i)).forEach(i => { if (miss[i] != null) h += '<p><b>' + L[i] + ':</b> ' + esc(miss[i]) + '</p>'; });
+        const left = v.key.filter(i => !a.includes(i));
+        if (left.length){ const ls = left.map(i => L[i]); h += '<p>You left out ' + (ls.length > 1 ? ls.slice(0,-1).join(', ') + ' and ' + ls[ls.length-1] : ls[0]) + '.</p>'; }
+      }
+      if (v.type === "match"){
+        const seen = new Set();
+        a.forEach((p,k) => { if (p !== v.key[k]){ const nm = v.opts[p]; if (!seen.has(nm) && miss[nm]){ seen.add(nm); h += '<p><b>' + esc(nm) + ':</b> ' + esc(miss[nm]) + '</p>'; } } });
+      }
+      if (v.type === "order"){
+        h += '<ol class="seq key">' + v.key.map(i => '<li>' + esc(v.opts[i]) + '</li>').join('') + '</ol>';
+        const lines = Object.values(miss);
+        if (lines.length) h += '<p class="watch"><b>Watch for:</b> ' + lines.map(esc).join(' ') + '</p>';
+      }
+    }
+    h += '<p>' + esc(q.why) + '</p>';
+    h += '<div class="study"><span class="lbl">Where to study</span><p style="margin:0">' + esc(q.sol) + (q.sol_also ? ' and ' + esc(q.sol_also) : '') + ' · Learning target ' + esc(q.lt) + (LTNAME[q.lt] ? ': ' + esc(LTNAME[q.lt]) : '') + '.</p>';
+    if (q.src) h += '<p class="src">Written from: ' + esc(q.src.replace(/\bIG\b/g, "Instructional Guide").replace(/\bSiP\b/g, "Skills in Practice").replace(/\bUtS\b/g, "Understanding the Standard")) + '</p>';
+    h += '</div></div>';
+    return h;
+  }
+
+  const LTNAME = {};
+  let checkedSet = new Set();
+
+  // ── PRACTICE ──
+  function practice(idx){
+    const S = store("practice");
+    Object.keys(S.data).forEach(id => { if (S.data[id] && S.data[id].c) checkedSet.add(id); });
+    const ans = id => S.data[id] ? S.data[id].a : undefined;
+    const avail = Object.keys(idx.units).map(Number).sort((a,b) => a-b);
+    let unit = Number(params.get("unit") || 0) || 0;
+    let lt = params.get("lt") || "";
+    if (lt && !unit) unit = Number(lt.split(".")[0]) || 0;
+    let only = params.get("q") ? new Set(params.get("q").split(/[\s,]+/).filter(Boolean).map(s => s.toUpperCase())) : null;
+    if (only && !unit){ const m = [...only][0].match(/^OB-U(\d+)/); if (m) unit = Number(m[1]); }
+    const projector = params.get("projector") === "1";
+
+    const uSel = $("p-unit"), ltSel = $("p-lt");
+    Object.keys(UNITS).forEach(u => {
+      const o = document.createElement("option"); o.value = u;
+      o.textContent = "Unit " + u + " · " + UNITS[u] + (idx.units[u] ? " (" + idx.units[u].count + ")" : " · coming");
+      uSel.appendChild(o);
+    });
+
+    const want = unit ? (idx.units[unit] ? [unit] : []) : avail;
+    loadUnits(idx, want).then(res => {
+      let items = [];
+      res.forEach(({d}) => { Object.assign(LTNAME, d.meta.lts || {}); items = items.concat(d.items); });
+      if (projector){ runProjector(items, {unit, lt, only}); return; }
+      if (!unit && avail.length) unit = avail[0];
+      uSel.value = String(unit);
+      function fillLT(){
+        ltSel.innerHTML = '<option value="">All learning targets</option>';
+        [...new Set(items.filter(q => q.unit === unit).map(q => q.lt))].sort((a,b) => parseFloat(a.split(".")[1]) - parseFloat(b.split(".")[1])).forEach(x => {
+          const o = document.createElement("option"); o.value = x; o.textContent = "LT " + x + (LTNAME[x] ? " · " + LTNAME[x] : ""); ltSel.appendChild(o);
+        });
+        ltSel.value = lt;
+      }
+      fillLT();
+      function visible(q){
+        if (only) return only.has(q.id);
+        if (q.unit !== unit) return false;
+        if (lt && q.lt !== lt) return false;
+        return true;
+      }
+      function progress(){
+        const uItems = items.filter(q => q.unit === unit);
+        const done = uItems.filter(q => checkedSet.has(q.id));
+        const right = done.filter(q => isRight(q, ans(q.id)));
+        $("p-progress").textContent = uItems.length ? "Unit " + unit + ": " + done.length + " of " + uItems.length + " answered, " + right.length + " right" : "";
+      }
+      function card(q){
+        const a = ans(q.id), checked = checkedSet.has(q.id);
+        let h = '<article class="card pcard" id="' + q.id + '" data-id="' + q.id + '">';
+        h += '<div class="qhead"><span class="qnum"><a href="#' + q.id + '">' + q.id.replace(/^OB-U0?(\d+)-0?/, "U$1 · #") + '</a></span>';
+        h += '<span class="chip">LT ' + esc(q.lt) + '</span><span class="chip">' + esc(q.sol) + '</span>' + (TYPE_LABEL[q.type] ? '<span class="chip tei">' + TYPE_LABEL[q.type] + '</span>' : '') + '</div>';
+        h += stemBlock(q) + '<div class="w">' + widget(q, a, checked ? "review" : "practice") + '</div>';
+        h += '<div class="fb">' + (checked ? feedbackHTML(q, a) : '') + '</div>';
+        if (checked) h += '<button type="button" class="toggle-why" data-act="again">Try this one again</button>';
+        return h + '</article>';
+      }
+      function render(){
+        const shown = items.filter(visible);
+        let h = "";
+        if (!idx.units[unit] && !only){
+          h = '<p class="empty">The Unit ' + unit + ' practice set is still being written; it goes up before that unit\'s review day. Until then, try the <a href="?unit=' + unit + '">Unit ' + unit + ' Challenge questions</a>.</p>';
+        } else {
+          let lastLT = null;
+          shown.forEach(q => {
+            if (q.lt !== lastLT){ lastLT = q.lt; h += '<h2 class="unit-head">LT ' + esc(q.lt) + (LTNAME[q.lt] ? ' · ' + esc(LTNAME[q.lt]) : '') + '<span>Unit ' + q.unit + ' · ' + esc(UNITS[q.unit]) + '</span></h2>'; }
+            h += card(q);
+          });
+          if (!h) h = '<p class="empty">No questions match. Choose another learning target.</p>';
+        }
+        showMain(h);
+        $("p-show-all").classList.toggle("hidden", !only);
+        progress();
+      }
+      function rerenderCard(id){
+        const q = items.find(x => x.id === id), el = document.getElementById(id);
+        if (!q || !el) return;
+        const tmp = document.createElement("div"); tmp.innerHTML = card(q); el.replaceWith(tmp.firstChild);
+        progress();
+      }
+      $("plist").addEventListener("click", e => {
+        const b = e.target.closest("button"); if (!b || b.disabled) return;
+        const art = b.closest(".pcard"); if (!art) return;
+        const id = art.dataset.id, q = items.find(x => x.id === id), v = viewOf(q);
+        const cur = S.data[id] || {a: undefined, c: false};
+        const act = b.dataset.act, i = Number(b.dataset.i);
+        if (act === "again"){ delete S.data[id]; checkedSet.delete(id); S.save(); rerenderCard(id); return; }
+        if (act === "mc"){ cur.a = i; cur.c = true; }
+        else if (act === "ms"){ const s = new Set(cur.a || []); s.has(i) ? s.delete(i) : s.add(i); cur.a = [...s].sort((x,y)=>x-y); }
+        else if (act === "pick"){ cur.a = (cur.a || []).concat(i); }
+        else if (act === "unpick"){ cur.a = (cur.a || []).filter(x => x !== i); }
+        else if (act === "restart"){ cur.a = []; }
+        else if (act === "check"){ if (!complete(q, cur.a)) return; cur.c = true; }
+        else return;
+        S.data[id] = cur; if (cur.c) checkedSet.add(id); S.save(); rerenderCard(id);
+        if (cur.c){ const el = document.getElementById(id); const fb = el && el.querySelector(".fb"); if (fb && fb.getBoundingClientRect().top > innerHeight - 80) fb.scrollIntoView({block:"nearest"}); }
+      });
+      $("plist").addEventListener("change", e => {
+        const s = e.target.closest("select[data-act=match]"); if (!s) return;
+        const art = s.closest(".pcard"), id = art.dataset.id, q = items.find(x => x.id === id);
+        const cur = S.data[id] || {a: [], c: false}; const arr = (cur.a || []).slice();
+        while (arr.length < q.rows.length) arr.push(null);
+        arr[Number(s.dataset.k)] = s.value === "" ? null : Number(s.value);
+        cur.a = arr; S.data[id] = cur; S.save();
+        const btn = art.querySelector("[data-act=check]"); if (btn) btn.disabled = !complete(q, arr);
+      });
+      function setURL(){
+        const p = new URLSearchParams(); p.set("set","practice");
+        if (lt) p.set("lt", lt); else if (unit) p.set("unit", unit);
+        history.replaceState(null, "", location.pathname + "?" + p.toString());
+      }
+      uSel.addEventListener("change", () => {
+        const u = Number(uSel.value);
+        if (idx.units[u] && !items.some(q => q.unit === u)){ location.href = location.pathname + "?set=practice&unit=" + u; return; }
+        unit = u; lt = ""; only = null; fillLT(); setURL(); render();
+      });
+      ltSel.addEventListener("change", () => { lt = ltSel.value; only = null; setURL(); render(); });
+      $("p-show-all").addEventListener("click", () => { only = null; setURL(); render(); });
+      $("p-reset").addEventListener("click", () => {
+        if (confirm("Clear your Practice answers on this device? Challenge answers are not touched.")){ S.clear(); checkedSet = new Set(); render(); }
+      });
+      $("p-print").addEventListener("click", () => window.print());
+      $("p-warmup").addEventListener("click", () => {
+        const p = new URLSearchParams(); p.set("set","practice");
+        if (lt) p.set("lt", lt); else p.set("unit", unit);
+        p.set("n","3"); p.set("projector","1");
+        const d = new Date(); p.set("seed", String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0"));
+        location.href = location.pathname + "?" + p.toString();
+      });
+      render();
+      if (location.hash){ const el = document.getElementById(location.hash.slice(1)); if (el) setTimeout(() => { el.scrollIntoView({block:"start"}); el.classList.add("hit"); setTimeout(() => el.classList.remove("hit"), 2500); }, 60); }
+    });
+  }
+
+  // ── seeded draw ──
+  function rng(seed){
+    let h = 1779033703 ^ String(seed).length;
+    for (const ch of String(seed)){ h = Math.imul(h ^ ch.charCodeAt(0), 3432918353); h = h << 13 | h >>> 19; }
+    let a = h >>> 0;
+    return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+
+  // ── WARM-UP / PROJECTOR ──
+  function runProjector(items, f){
+    let pool = items.filter(q => f.only ? f.only.has(q.id) : ((!f.unit || q.unit === f.unit) && (!f.lt || q.lt === f.lt)));
+    const seed = params.get("seed");
+    const r = rng(seed || String(Date.now()));
+    pool = pool.slice().sort((a,b) => a.id < b.id ? -1 : 1);
+    for (let i = pool.length - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    const n = Math.max(1, Math.min(Number(params.get("n") || 3) || 3, pool.length));
+    if (!f.only) pool = pool.slice(0, n);
+    document.body.classList.add("projecting");
+    const P = $("proj"); P.classList.remove("hidden");
+    let k = 0, shown = false;
+    const label = f.lt ? "LT " + f.lt + (LTNAME[f.lt] ? " · " + LTNAME[f.lt] : "") : f.unit ? "Unit " + f.unit + " · " + UNITS[f.unit] : "Practice";
+    function draw(){
+      if (!pool.length){ P.innerHTML = '<div class="pj-top"><span>Warm-up</span><a class="pj-x" href="' + location.pathname + '?set=practice">Exit</a></div><p class="pj-stem">No questions for this learning target yet.</p>'; return; }
+      const q = pool[k], v = viewOf(q);
+      let h = '<div class="pj-top"><span>Warm-up · ' + esc(label) + '</span><span>' + (k+1) + ' of ' + pool.length + '</span><a class="pj-x" href="' + esc(location.pathname + "?set=practice&" + (f.lt ? "lt=" + f.lt : "unit=" + (f.unit || ""))) + '">Exit</a></div>';
+      h += '<div class="pj-body"><p class="pj-stem">' + esc(q.type === "hotspot" ? v.stem : q.stem) + '</p>' + table(q.table);
+      if (q.figure) h += '<figure class="pfig pj-fig"><img src="data/fig/' + esc(q.figure) + '.svg" alt="' + esc(q.topic) + '"></figure>';
+      if (q.stem2) h += '<p class="pj-stem">' + esc(q.stem2) + '</p>';
+      if (v.type === "mc" || v.type === "ms"){
+        const keys = v.type === "ms" ? v.key : [v.key];
+        if (v.type === "ms") h += '<p class="pj-note">Select all that apply.</p>';
+        h += '<ul class="pj-opts">' + v.opts.map((o,i) => '<li class="' + (shown && keys.includes(i) ? "on" : shown ? "off" : "") + '"><b>' + L[i] + '</b> ' + esc(o) + '</li>').join('') + '</ul>';
+      } else if (v.type === "order"){
+        h += '<p class="pj-note">Put these in order.</p><ul class="pj-opts">' + v.opts.map((o,i) => '<li><b>' + L[i] + '</b> ' + esc(o) + '</li>').join('') + '</ul>';
+        if (shown) h += '<p class="pj-ans">Order: ' + v.key.map(i => L[i]).join(' → ') + '</p>';
+      } else if (v.type === "match"){
+        h += '<p class="pj-note">Match each statement: ' + v.opts.map(esc).join(' · ') + '</p><ol class="pj-opts pj-rows">' + v.rows.map((rw,i) => '<li>' + esc(rw) + (shown ? ' <span class="pj-m">→ ' + esc(v.opts[v.key[i]]) + '</span>' : '') + '</li>').join('') + '</ol>';
+      }
+      if (shown) h += '<div class="pj-why">' + esc(q.why) + '</div>';
+      h += '</div><div class="pj-nav">';
+      if (k > 0) h += '<button type="button" class="pj-btn ghosty" data-pj="prev">Back</button>';
+      h += shown ? (k < pool.length - 1 ? '<button type="button" class="pj-btn" data-pj="next">Next question</button>' : '<a class="pj-btn" href="' + esc(location.pathname + "?set=practice&" + (f.lt ? "lt=" + f.lt : "unit=" + (f.unit || ""))) + '">Done</a>')
+                 : '<button type="button" class="pj-btn" data-pj="show">Show the answer</button>';
+      h += '</div>';
+      P.innerHTML = h;
+    }
+    P.addEventListener("click", e => {
+      const b = e.target.closest("[data-pj]"); if (!b) return;
+      const act = b.dataset.pj;
+      if (act === "show") shown = true;
+      else if (act === "next"){ k++; shown = false; }
+      else if (act === "prev"){ k--; shown = false; }
+      draw(); scrollTo(0,0);
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === " " || e.key === "ArrowRight" || e.key === "Enter"){ e.preventDefault(); if (!shown) shown = true; else if (k < pool.length - 1){ k++; shown = false; } draw(); }
+      if (e.key === "ArrowLeft" && k > 0){ k--; shown = false; draw(); }
+    });
+    draw();
+  }
+
+  // ── PRACTICE TESTS (wired; forms arrive as data/PT-X.json) ──
+  function testMode(idx){
+    const forms = Object.keys(idx.tests || {});
+    const form = (params.get("form") || forms[0] || "").toUpperCase();
+    $("p-controls").classList.add("hidden");
+    if (!idx.tests || !idx.tests[form]){
+      showMain('<p class="empty">The full-length Practice Tests arrive for the spring SOL review. Until then, use <a href="?set=practice">Practice</a> by unit and learning target, or the <a href="' + location.pathname + '">Challenge questions</a>.</p>');
+      return;
+    }
+    fetch("data/" + idx.tests[form].file, {cache:"no-cache"}).then(r => r.json()).then(d => {
+      Object.assign(LTNAME, d.meta.lts || {});
+      const items = d.items, S = store("test-" + form);
+      if (!S.data.a) S.data.a = {};
+      function render(){
+        const submitted = !!S.data.submitted;
+        let h = '<div class="test-head"><h2>Practice Test ' + esc(form) + '</h2><p class="fine">' + items.length + ' questions. Answer every one, then submit. Nothing is scored until you submit, and nothing leaves this device.</p>';
+        if (submitted){
+          const cats = {};
+          items.forEach(q => { const c = q.category || "Other"; cats[c] = cats[c] || {n:0, r:0}; cats[c].n++; if (isRight(q, S.data.a[q.id])) cats[c].r++; });
+          const tot = items.filter(q => isRight(q, S.data.a[q.id])).length;
+          h += '<div class="score"><p class="big">' + tot + ' of ' + items.length + ' right</p><table class="data"><thead><tr><th>Reporting category</th><th>Right</th></tr></thead><tbody>' +
+            Object.entries(cats).map(([c,x]) => '<tr><td>' + esc(c) + '</td><td>' + x.r + ' of ' + x.n + '</td></tr>').join('') + '</tbody></table>' +
+            '<button type="button" class="ghost" data-t="retake">Retake this test</button></div>';
+        }
+        h += '</div>';
+        items.forEach((q,i) => {
+          const a = S.data.a[q.id];
+          h += '<article class="card pcard tcard" id="' + q.id + '" data-id="' + q.id + '"><div class="qhead"><span class="qnum">' + (i+1) + '</span>' + (TYPE_LABEL[q.type] ? '<span class="chip tei">' + TYPE_LABEL[q.type] + '</span>' : '') + '</div>' + stemBlock(q) +
+            '<div class="w">' + widget(q, a, submitted ? "review" : "test") + '</div>' + (submitted ? '<div class="fb">' + feedbackHTML(q, a) + '</div>' : '') + '</article>';
+        });
+        if (!submitted){
+          const done = items.filter(q => complete(q, S.data.a[q.id])).length;
+          h += '<p class="fine" id="t-count">' + done + ' of ' + items.length + ' answered.</p><button type="button" class="pj-btn" data-t="submit">Submit and see my score</button>';
+        }
+        showMain(h);
+      }
+      $("plist").addEventListener("click", e => {
+        const t = e.target.closest("[data-t]");
+        if (t){ if (t.dataset.t === "submit"){ const left = items.filter(q => !complete(q, S.data.a[q.id])).length; if (left && !confirm(left + " questions are blank. Submit anyway?")) return; S.data.submitted = true; }
+                else { S.data = {a:{}}; } S.save(); render(); scrollTo(0,0); return; }
+        const b = e.target.closest("button"); if (!b || b.disabled || S.data.submitted) return;
+        const art = b.closest(".pcard"); if (!art) return;
+        const id = art.dataset.id, act = b.dataset.act, i = Number(b.dataset.i); let a = S.data.a[id];
+        if (act === "mc") a = i;
+        else if (act === "ms"){ const s = new Set(a || []); s.has(i) ? s.delete(i) : s.add(i); a = [...s].sort((x,y)=>x-y); }
+        else if (act === "pick") a = (a || []).concat(i);
+        else if (act === "unpick") a = (a || []).filter(x => x !== i);
+        else if (act === "restart") a = [];
+        else return;
+        S.data.a[id] = a; S.save();
+        const q = items.find(x => x.id === id); art.querySelector(".w").innerHTML = widget(q, a, "test"); count();
+      });
+      $("plist").addEventListener("change", e => {
+        const s = e.target.closest("select[data-act=match]"); if (!s || S.data.submitted) return;
+        const id = s.closest(".pcard").dataset.id, q = items.find(x => x.id === id);
+        const arr = (S.data.a[id] || []).slice(); while (arr.length < q.rows.length) arr.push(null);
+        arr[Number(s.dataset.k)] = s.value === "" ? null : Number(s.value); S.data.a[id] = arr; S.save(); count();
+      });
+      function count(){ const c = $("t-count"); if (c) c.textContent = items.filter(q => complete(q, S.data.a[q.id])).length + " of " + items.length + " answered."; }
+      render();
+    });
+  }
+})();
+</script>
+<div id="proj" class="hidden" aria-live="polite"></div>
 </body>
 </html>
