@@ -67,7 +67,7 @@ SANS = "Archivo, 'Helvetica Neue', Inter, Arial, sans-serif"
 T_TITLE  = 46
 T_KEY    = 36   # 21.6 pt
 T_LABEL  = 30   # 18.0 pt
-T_MIN    = 28   # 16.8 pt  <- nothing smaller than this, anywhere
+T_MIN    = 29   # 15.7 pt on a slide, 18.1 px on a 1000 px stage  <- nothing smaller than this, anywhere. Was 28 until 2026-10-10; check.py and the on-screen floor both say 29.
 T_BADGE  = 32
 
 STEP_R = 25

@@ -6,6 +6,14 @@ Six still diagrams, already drawn and verified, turned into six step-through ani
 - **Who reads this:** the cloud session that builds the page. This file plus the artwork in `_briefs/figures/` is the whole spec.
 - **Where it lives:** `_briefs/figure-animations.md` in `schwebach-va/science-onepagers`. The repo has no `.nojekyll`, so GitHub Pages skips folders starting with `_` and nothing in here is ever served. Do not add a `.nojekyll`.
 
+> **Amended 2026-10-10, after Reid's review of Phase 1.**
+> - **Type floor fixed at the source.** `style.py` had `T_MIN = 28` while its own docstring, `check.py` and §2 all say 29. The constant is now 29 and all six stills were re-rendered (SVG and PNG), so the PNGs match the screen and the next five animations inherit 29 from the start. The on-screen `.min` class is 29 units: 18.1 px on a 1000 px stage.
+> - **Travel beats pixel-equivalence.** Where a traveller has moved, the final step differs from the still (on `gpcr`: the α subunit ends at phospholipase C, IP₃ ends seated in the ER channel, and the membrane PIP₂ shows the inositol hexagon that detaches as IP₃). Everything else is pixel-identical. T3 reports the percentage; it is not expected to be zero.
+> - **Every step has its own link:** `?anim=<key>&step=<n>` (`?fig=` still accepted). `&runon=paused` opens the last step with the amplification run-on waiting on Play, for recording. The page keeps the URL current as the student moves.
+> - **The run-on.** Pause stops it; Back or any step number clears it; a readout under the controls says so on screen.
+> - **§8:** the six stills are served publicly as the sister images for lesson plans (copies under `biology/figures/`). Hub listings, sitemap, search index and Canvas links stay with Reid, in Cowork. The co-transcriptional splicing variant of `dogma` is held for later.
+> - **Phase 2 is held** until Reid has watched `gpcr` on his iPad and computer and says it looks right.
+
 ---
 
 ## 0. The job, in one screen

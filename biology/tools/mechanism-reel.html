@@ -123,6 +123,8 @@ button{font:inherit;cursor:pointer}
 
 /* controls under the stage */
 .ctl{display:flex;flex-wrap:wrap;gap:.45rem .6rem;align-items:center;justify-content:center;margin:.5rem 0 0}
+.readout{font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft);text-align:center;margin:.4rem 0 0;min-height:1.3em}
+@media (min-width:900px){.readout{text-align:left}}
 .steprow{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center;justify-content:center;margin:.45rem 0 0}
 .dots{display:flex;flex-wrap:wrap;gap:.25rem;justify-content:center}
 @media (min-width:900px){.ctl,.steprow,.dots{justify-content:flex-start}}
@@ -194,7 +196,7 @@ html[data-fill="1"] .stagecol{position:static}
 
 <section id="intro" class="narrow">
   <h1>The Mechanism Reel</h1>
-  <p class="lede">Six mechanisms, each drawn as a short series of states you step through. Predict before every step, then press <b>Next</b> and watch one thing move. Start with a signal that never gets in; end with what we do with all of it.</p>
+  <p class="lede">Six mechanisms, each drawn as a short series of states you step through. Predict before every step, then press <b>Next</b> and watch one thing move. Start with a signal that never gets in; end with what we do with all of it. Every step has its own link, so a step can be opened straight from a lesson page.</p>
   <ul class="lines" aria-label="The three ideas every animation is about">
     <li><span class="tag amp">Amplification</span><span>One input, an enormous output.</span></li>
     <li><span class="tag mov">Movement</span><span>Nothing is delivered. Everything arrives by moving.</span></li>
@@ -227,6 +229,7 @@ html[data-fill="1"] .stagecol{position:static}
       <button type="button" class="ghost" id="play" title="Play the steps through, or pause">&#9654; Play</button>
       <button type="button" class="ghost" id="fill" title="Fill the screen with the reel, or restore the page">Fill screen</button>
     </div>
+    <p class="readout" id="readout" aria-live="polite"></p>
     <div class="steprow">
       <div class="dots" id="dots" role="group" aria-label="Steps: tap any number to open that step"></div>
       <button type="button" class="ghost" id="teach" aria-pressed="false" title="Shows every caption at once and no prediction prompts, for projecting.">Teaching view</button>
@@ -328,7 +331,7 @@ let FIGS=[],FIGMAP={};
 let F=null,EL={},cur=0;
 let busy=false,busyT=null;
 let playing=false,playT=null,loopOn=false;
-let fillOn=false;
+let fillOn=false,runonHold=false;
 const HOLD=1500;
 const T={list:[],after(fn,ms){const id=setTimeout(()=>{T.list=T.list.filter(x=>x!==id);fn();},ms);T.list.push(id);return id;},clear(){T.list.forEach(clearTimeout);T.list=[];}};
 
@@ -350,7 +353,7 @@ function goStep(k,opts){opts=opts||{};k=clamp(k,0,F.n);
   stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}
   const jump=!!opts.jump||Math.abs(k-cur)!==1;
   const end=apply(k,{jump});busy=end>0;
-  perFig(F.key).step=k;save();renderDots();renderCard();syncNext();syncCtl();
+  perFig(F.key).step=k;save();syncUrl();renderDots();renderCard();syncNext();syncCtl();
   const fin=()=>{busy=false;busyT=null;
     if(opts.markDone&&k>0){perFig(F.key).done[k]=true;save();renderDots();}
     if(cur===F.n&&F.loop){startLoop();}
@@ -412,7 +415,9 @@ function syncCtl(){$("back").disabled=cur<=0;$("next").disabled=cur>=F.n;
   const on=cur>=F.n?loopOn:playing;$("play").innerHTML=on?"&#10074;&#10074; Pause":"&#9654; Play";$("play").setAttribute("aria-pressed",String(on));
   if(cur>=F.n&&!F.loop)$("play").disabled=true;else $("play").disabled=false;
   $("teach").setAttribute("aria-pressed",String(!!st.teach));
-  $("fill").textContent=fillOn?"Restore page":"Fill screen";$("fill").setAttribute("aria-pressed",String(fillOn));}
+  $("fill").textContent=fillOn?"Restore page":"Fill screen";$("fill").setAttribute("aria-pressed",String(fillOn));
+  const ro=$("readout");if(cur>=F.n&&F.loop)ro.textContent=loopOn?"Run-on playing: the enzyme keeps cutting. Pause stops it. Back, or any step number, clears it.":"Run-on paused. Play starts it again. Back, or any step number, clears it.";
+  else ro.textContent="";}
 function scrollToCard(){if(fillOn)return;const card=$("card");
   const sticky=getComputedStyle($("stagecol")).position==="sticky",stacked=window.innerWidth<900;
   const off=(sticky&&stacked?$("stagecol").offsetHeight:0)+10;
@@ -427,9 +432,11 @@ function setFig(k){const f=FIGMAP[k];if(!f||!f.enabled)return false;
   buildStage();apply(cur,{jump:true});
   renderSel();renderLevelRow();renderDots();renderCard();syncNext();syncCtl();
   $("eyebrow").innerHTML="Bio Tool #22 &middot; "+esc(F.eyebrow);
-  try{const u=new URL(location.href);u.searchParams.set("fig",k);history.replaceState(null,"",u);}catch(e){}
-  if(cur===F.n&&F.loop)startLoop();
+  syncUrl();
+  if(cur===F.n&&F.loop&&!runonHold)startLoop();runonHold=false;syncCtl();
   return true;}
+/* every step has its own link: ?anim=<key>&step=<n>, and &runon=paused opens the last step with the run-on waiting on Play */
+function syncUrl(){try{const u=new URL(location.href);u.searchParams.delete("fig");u.searchParams.delete("runon");u.searchParams.set("anim",F.key);u.searchParams.set("step",String(cur));history.replaceState(null,"",u);}catch(e){}}
 function setLevel(l){l=l==="de"?"de":"sol";if(l===st.level)return;st.level=l;save();renderLevelRow();
   if(F.levels){const k=cur;buildStage();cur=-1;apply(k,{jump:true});renderDots();renderCard();}}
 function setTeach(on){st.teach=!!on;save();syncCtl();renderCard();}
@@ -455,14 +462,15 @@ window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title
   level:()=>st.level,setLevel,labels,colours,state,reduced:()=>REDUCE,
   busy:()=>busy,playing:()=>(cur>=F.n?loopOn:playing),setPlaying,next:revealNext,back,
   prompt:()=>{const p=$("card").querySelector(".predict");return p?+p.dataset.for:null;},
-  teach:()=>!!st.teach,setTeach,fill:()=>fillOn,setFill,reset,stopLoop:()=>{stopLoop();playing=false;syncCtl();},
+  teach:()=>!!st.teach,setTeach,fill:()=>fillOn,setFill,reset,stopLoop:()=>{stopLoop();playing=false;syncCtl();},readout:()=>$("readout").textContent,
   timing:()=>({dur:F.dur.slice(),seq:F.seq,beats:F.beats,hold:HOLD}),captions:()=>F.caps.slice(),closing:()=>F.closing,
   el:elInfo,watchIds:()=>Object.assign({},F.watchIds||{}),loopCount:()=>F.loop&&F.loop.count?F.loop.count():null,
   text:()=>$("stage").textContent+"\n"+$("card").textContent};
 
 /* ================= wiring ================= */
 function init(){load();FIGMAP={};FIGS.forEach(f=>{FIGMAP[f.key]=f;});
-  let want=st.fig;try{const q=new URL(location.href).searchParams.get("fig");if(q)want=q;}catch(e){}
+  let want=st.fig,stepQ=null;try{const q=new URL(location.href).searchParams;const a=q.get("anim")||q.get("fig");if(a)want=a;
+    if(q.get("step")!=null){const n=parseInt(q.get("step"),10);if(!isNaN(n))stepQ=n;}runonHold=q.get("runon")==="paused";}catch(e){}
   if(!FIGMAP[want]||!FIGMAP[want].enabled){if(FIGMAP[want]){const n=$("notice");n.textContent=FIGMAP[want].title+" is coming next. Showing the first figure for now.";n.classList.remove("hidden");}
     want=FIGS.find(f=>f.enabled).key;}
   $("next").addEventListener("click",revealNext);$("back").addEventListener("click",back);
@@ -473,6 +481,7 @@ function init(){load();FIGMAP={};FIGS.forEach(f=>{FIGMAP[f.key]=f;});
   document.addEventListener("keydown",e=>{if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
     if(e.key==="ArrowRight"||e.key==="PageDown"){e.preventDefault();revealNext();}else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();back();}});
   document.documentElement.setAttribute("data-fill","0");
+  if(stepQ!=null&&FIGMAP[want]&&FIGMAP[want].enabled)perFig(want).step=stepQ;
   setFig(want);}
 
 /* ================= Figure 1: the G-protein-coupled receptor route =================
