@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Six cell mechanisms, each drawn as a short series of states you step through: a G-protein-coupled receptor, a receptor tyrosine kinase, a channel beside a pump, the electron transport chain, the central dogma and cloning a gene. Predict before every step, then press Next and watch one thing move. DE Bio 101. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/mechanism-reel.html">
+<meta name="author" content="J. R. Schwebach">
+<meta name="copyright" content="Copyright 2026 J. R. Schwebach. All rights reserved. Licensed CC BY-NC 4.0. The six figures are independently created: drawn from the published mechanism in code, from scratch, on 2026-10-10. No published figure was traced, scanned, copied or adapted.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Mechanism Reel - Six Cell Mechanisms, Signal to Cell Effect">
+<meta property="og:description" content="Six cell mechanisms, each drawn as a short series of states you step through. Predict before every step, then press Next and watch one thing move. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/mechanism-reel.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>The Mechanism Reel | Science One-Pagers</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"The Mechanism Reel","description":"Six cell mechanisms, each drawn as a short series of states a student steps through: a G-protein-coupled receptor, a receptor tyrosine kinase, a channel beside a pump, the electron transport chain, the central dogma and cloning a gene. Predict before every step, then watch one thing move. Introductory college biology (DE Bio 101).","url":"https://scienceonepagers.org/biology/tools/mechanism-reel.html","inLanguage":"en","learningResourceType":"Interactive tool","educationalLevel":"Introductory college","typicalAgeRange":"16-19","audience":[{"@type":"EducationalAudience","educationalRole":"teacher"},{"@type":"EducationalAudience","educationalRole":"student"}],"isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-nc/4.0/","author":{"@type":"Person","name":"J. R. Schwebach"},"copyrightHolder":{"@type":"Person","name":"J. R. Schwebach"},"copyrightYear":2026,"creditText":"Figures drawn from the mechanism by J. R. Schwebach, 2026. Independently created; no published figure was traced, scanned, copied or adapted.","publisher":{"@type":"Organization","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"isPartOf":{"@type":"CollectionPage","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"about":{"@type":"Thing","name":"Biology"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--solid:#3F7A55;--solid-soft:#E2EDE6;
+  --carb:#C98A2E;--pro:#1F7A8C;--lip:#B85042;--nuc:#6B4E8C;
+  --next:#B8E600;--next-soft:rgba(184,230,0,.45);
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+    --next:#C8F520;--next-soft:rgba(200,245,32,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+  --next:#C8F520;--next-soft:rgba(200,245,32,.45);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:74rem;margin:0 auto;padding:1.4rem 1.15rem 5rem}
+.narrow{max-width:46rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:0 0 .6rem}
+p{margin:0 0 1rem;max-width:38rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+button{font:inherit;cursor:pointer}
+.hidden{display:none!important}
+
+/* the three through-lines, named once up top and again beside each title */
+.lines{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin:0 0 1.2rem;padding:0;list-style:none;font-family:var(--sans);font-size:.88rem;color:var(--ink-soft)}
+.lines li{display:flex;align-items:baseline;gap:.45rem;max-width:22rem}
+.tag{display:inline-block;font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.15rem .5rem;border-radius:3px;white-space:nowrap;background:var(--bond-soft);color:var(--bond)}
+.tag.amp{background:var(--flag-soft);color:var(--flag)}
+.tag.mov{background:var(--bond-soft);color:var(--bond)}
+.tag.nrg{background:var(--solid-soft);color:var(--solid)}
+
+/* the selector: six figures in one deliberate order, with one bridge line between each pair */
+.sel{list-style:none;margin:0 0 1.1rem;padding:0;border:1.5px solid var(--rule);border-radius:3px;background:var(--card)}
+.sel li.fig{margin:0}
+.sel li.fig + li.fig{border-top:1px solid var(--rule)}
+.selbtn{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem;width:100%;text-align:left;background:none;border:none;border-left:5px solid transparent;color:var(--ink);padding:.6rem .8rem .6rem .7rem;min-height:48px;font-family:var(--sans);font-size:.98rem;font-weight:600;line-height:1.25}
+.selbtn .n{flex:0 0 1.7rem;height:1.7rem;border-radius:50%;background:var(--rule);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700}
+.selbtn .t{flex:1 1 12rem;min-width:0}
+.selbtn .soon{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.selbtn:disabled{cursor:default;color:var(--ink-soft)}
+.selbtn:disabled .t{font-weight:500}
+.selbtn[aria-pressed="true"]{border-left-color:var(--bond);background:var(--bond-soft)}
+.selbtn[aria-pressed="true"] .n{background:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .selbtn[aria-pressed="true"] .n{color:#12100D}}
+:root[data-theme="dark"] .selbtn[aria-pressed="true"] .n{color:#12100D}
+.sel li.bridge{margin:0;padding:.3rem .8rem .35rem 3.2rem;font-size:.9rem;font-style:italic;color:var(--ink-soft);background:var(--paper);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.sel li.bridge::before{content:"\2193\00a0";font-style:normal}
+.notice{font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--ink-soft);background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--carb);border-radius:3px;padding:.55rem .8rem;margin:0 0 1rem}
+
+/* level switch: present only on the figures that have two levels */
+.seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--card)}
+.seg button{font-family:var(--sans);font-weight:600;font-size:.92rem;background:none;border:none;color:var(--ink-soft);padding:.55rem 1rem;min-height:44px;min-width:44px;line-height:1.2}
+.seg button + button{border-left:1.5px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#12100D}
+.levelrow{margin:.2rem 0 1rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.levelrow .swl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* stage + card: pinned above the card on narrow screens, beside it on wide ones */
+.build{display:block;margin-top:.6rem}
+.stagecol{position:sticky;top:0;z-index:5;min-width:0;background:var(--paper);padding:.35rem 0 .45rem;box-shadow:0 1px 0 var(--rule)}
+.stagerow{margin:0 auto;max-width:calc(44vh * 1.6);max-width:calc(44svh * 1.6)}
+.stage{position:relative;background:#F5F3EE;border:1.5px solid var(--rule);border-radius:3px;overflow:hidden}
+.stage svg{display:block;width:100%;height:auto}
+.stage svg text{font-family:var(--sans);fill:#1D1A15}
+.stage svg .key{font-size:36px;font-weight:700}
+.stage svg .lab{font-size:30px;font-weight:600}
+.stage svg .min{font-size:29px;font-weight:600}
+.stage svg .ttl{font-size:46px;font-weight:700}
+.stage svg .eyebrow{font-size:29px;font-weight:700;letter-spacing:.09em;fill:#5A544A}
+.stage svg .mv{transform-box:fill-box;transform-origin:center;will-change:transform,opacity}
+.cardcol{margin-top:.9rem;min-width:0}
+@media (min-width:900px){
+  .build{display:grid;grid-template-columns:60fr 40fr;gap:1.2rem;align-items:start}
+  .stagecol{top:.6rem;padding:0;background:none;box-shadow:none}
+  .stagerow{margin:0;max-width:none}
+  .cardcol{margin-top:0}
+}
+@media (max-height:560px){.stagecol{position:static}}
+
+/* controls under the stage */
+.ctl{display:flex;flex-wrap:wrap;gap:.45rem .6rem;align-items:center;justify-content:center;margin:.5rem 0 0}
+.steprow{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center;justify-content:center;margin:.45rem 0 0}
+.dots{display:flex;flex-wrap:wrap;gap:.25rem;justify-content:center}
+@media (min-width:900px){.ctl,.steprow,.dots{justify-content:flex-start}}
+.dots button{font-family:var(--sans);font-weight:700;font-size:.85rem;min-width:46px;min-height:46px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink-soft);border-radius:3px;padding:0}
+.dots button.done{border-color:var(--solid);color:var(--solid);background:var(--solid-soft)}
+.dots button.cur{background:var(--bond);border-color:var(--bond);color:var(--paper)}
+.dots button.cur.done{box-shadow:inset 0 0 0 2px var(--solid-soft)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dots button.cur{color:#12100D}}
+:root[data-theme="dark"] .dots button.cur{color:#12100D}
+.go{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--bond);color:var(--paper);border:none;border-radius:3px;padding:.6rem 1.1rem;min-height:48px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:disabled{opacity:.4;cursor:default}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.6rem 1rem;min-height:48px}
+.ghost:disabled{opacity:.4;cursor:default}
+.ghost[aria-pressed="true"]{background:var(--solid);border-color:var(--solid);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ghost[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .ghost[aria-pressed="true"]{color:#12100D}
+.go:focus-visible,.ghost:focus-visible,.seg button:focus-visible,.dots button:focus-visible,.selbtn:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+
+/* the next-step ring: one control at a time, the one the student is meant to press next
+   (lime / chartreuse, Reid's standing pattern). The throb is a pseudo-element scaling and
+   fading, so the only properties ever animated on this page are transform and opacity. */
+.next{position:relative;z-index:1;box-shadow:0 0 0 3px var(--next)}
+.next::after{content:"";position:absolute;inset:-9px;border:4px solid var(--next-soft);border-radius:6px;pointer-events:none;animation:ringpulse 1.3s ease-in-out infinite}
+@keyframes ringpulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(1.09);opacity:0}}
+@media (prefers-reduced-motion:reduce){.next::after{animation:none}}
+
+/* the card */
+.card{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:1rem 1.1rem 1.1rem}
+.card p{max-width:none}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);border-bottom:1.5px solid var(--rule);padding-bottom:.45rem;margin-bottom:.9rem}
+.card h2{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .7rem}
+.caps{list-style:none;margin:0 0 1rem;padding:0}
+.cap{display:flex;gap:.6rem;align-items:flex-start;padding:.45rem 0;border-bottom:1px solid var(--rule);font-size:1.02rem;line-height:1.45}
+.cap:last-child{border-bottom:none}
+.cap .b{flex:0 0 1.6rem;height:1.6rem;border-radius:50%;color:#F5F3EE;font-family:var(--sans);font-size:.85rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:.1rem}
+.cap.cur{font-weight:600}
+.cap.dim{color:var(--ink-soft)}
+.closing{font-family:var(--sans);font-weight:700;font-size:1.05rem;line-height:1.4;border-top:1.5px solid var(--rule);padding-top:.8rem;margin:0 0 .6rem}
+.predict{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--bond-soft);border-radius:3px;padding:.7rem .9rem;margin:0 0 .9rem}
+.predict .tagline{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.25rem}
+.watch{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--solid-soft);border-radius:3px;padding:.7rem .9rem;margin:0 0 .9rem}
+.teachnote{background:var(--solid-soft);border-radius:3px;padding:.5rem .7rem;margin:0 0 .9rem}
+
+/* Fill screen: only the reel shows */
+html[data-fill="1"] .wrap{padding:0 .3rem;max-width:none}
+html[data-fill="1"] .wrap > :not(#build){display:none!important}
+html[data-fill="1"] #build{margin:0;min-height:100vh;min-height:100svh;background:var(--paper)}
+#build:fullscreen{background:var(--paper);padding:0 .3rem}
+html[data-fill="1"] body{overflow:hidden}
+html[data-fill="1"] .stagecol{position:static}
+
+@media (max-width:600px){
+  .stagerow{max-width:calc(30vh * 1.6);max-width:calc(30svh * 1.6)}
+  .dots button{min-width:38px;min-height:40px;font-size:.8rem}.dots{gap:.2rem}
+  .go,.ghost{min-height:42px;padding:.45rem .75rem;font-size:.9rem}
+  .selbtn{font-size:.92rem}
+  .sel li.bridge{padding-left:.8rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+
+<p class="sop-eyebrow" id="eyebrow">Bio Tool #22 &middot; DE Bio 101 &middot; six mechanisms, signal to cell effect</p>
+
+<section id="intro" class="narrow">
+  <h1>The Mechanism Reel</h1>
+  <p class="lede">Six mechanisms, each drawn as a short series of states you step through. Predict before every step, then press <b>Next</b> and watch one thing move. Start with a signal that never gets in; end with what we do with all of it.</p>
+  <ul class="lines" aria-label="The three ideas every animation is about">
+    <li><span class="tag amp">Amplification</span><span>One input, an enormous output.</span></li>
+    <li><span class="tag mov">Movement</span><span>Nothing is delivered. Everything arrives by moving.</span></li>
+    <li><span class="tag nrg">Energy transfer</span><span>Where ATP is spent: payment first, then the result.</span></li>
+  </ul>
+  <p class="fine">Nothing is submitted. Progress saves on this device, so a second sitting picks up where the first stopped. Tap any step number to open that step; a number lights up only for a step you have finished. The button with the <b>green ring</b> is the one to press next. <b>Teaching view</b> shows every caption at once, for projecting. <b>Fill screen</b> hides everything but the reel.</p>
+</section>
+
+<nav class="narrow" aria-label="The six figures, in order from signal to cell effect">
+  <ol class="sel" id="sel"></ol>
+  <p class="notice hidden" id="notice"></p>
+</nav>
+
+<div class="levelrow hidden" id="levelrow">
+  <span class="swl" id="lvL">Level</span>
+  <div class="seg" role="group" aria-labelledby="lvL">
+    <button type="button" data-lv="sol" aria-pressed="true">SOL Bio</button>
+    <button type="button" data-lv="de" aria-pressed="false">DE Bio</button>
+  </div>
+</div>
+
+<div class="build" id="build">
+  <div class="stagecol" id="stagecol">
+    <div class="stagerow" id="stagerow">
+      <div class="stage" id="stage" role="img" aria-live="off"></div>
+    </div>
+    <div class="ctl" id="ctl">
+      <button type="button" class="ghost" id="back" title="Back one step">&#9666; Back</button>
+      <button type="button" class="go" id="next" title="Play the next step">Next &#9656;</button>
+      <button type="button" class="ghost" id="play" title="Play the steps through, or pause">&#9654; Play</button>
+      <button type="button" class="ghost" id="fill" title="Fill the screen with the reel, or restore the page">Fill screen</button>
+    </div>
+    <div class="steprow">
+      <div class="dots" id="dots" role="group" aria-label="Steps: tap any number to open that step"></div>
+      <button type="button" class="ghost" id="teach" aria-pressed="false" title="Shows every caption at once and no prediction prompts, for projecting.">Teaching view</button>
+    </div>
+  </div>
+  <div class="cardcol">
+    <div class="card" id="card" aria-live="polite"></div>
+  </div>
+</div>
+
+<section class="narrow" style="margin-top:2rem">
+  <p class="fine">What the pictures simplify: molecules are drawn at the level of their parts, never their atoms. A hexagon is a sugar, a circle an amino acid or a phosphate, a pentagon a five-carbon sugar or a nucleotide, a rounded rectangle a base or a protein, a capsule a fatty-acid tail. The four classes keep their colours all year: <span style="color:var(--carb);font-weight:600">carbohydrate</span>, <span style="color:var(--pro);font-weight:600">protein</span>, <span style="color:var(--lip);font-weight:600">lipid</span>, <span style="color:var(--nuc);font-weight:600">nucleic acid</span>. Each animation ends on the same picture as the printed figure it was drawn from.</p>
+  <p class="fine">The six figures are the author's own work, drawn from the mechanism in code on 2026-10-10. No published figure was traced, scanned, copied or adapted. The sources under each figure are the papers the mechanism is checked against, not pictures that were copied.</p>
+</section>
+
+<footer class="sop-foot"><span id="footlv">DE Bio 101 &middot; Units 4 to 6 &middot; NVCC BIO 101</span> &middot; six animations, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ================= helpers ================= */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const mq=window.matchMedia?window.matchMedia("(prefers-reduced-motion: reduce)"):null;
+let REDUCE=!!(mq&&mq.matches);
+if(mq&&mq.addEventListener)mq.addEventListener("change",e=>{REDUCE=!!e.matches;});
+const KEY="mechreel";
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+/* ================= the house style, as style.py states it =================
+   Every figure is 1600 user units wide. The type floor is 29 units: on a 1000 px-wide stage that
+   is 18 px. Colours are the four macromolecule classes and the Membrane Patch shading. */
+const W=1600;
+const P={PAPER:"#F5F3EE",CARD:"#FFFFFF",INK:"#1D1A15",INKSOFT:"#5A544A",RULE:"#DDD8CE",SHELL:"#D2CCC0",
+  CARB:"#C98A2E",PRO:"#1F7A8C",LIP:"#B85042",NUC:"#6B4E8C",
+  PRO_TOP:"#5CA9B8",PRO_SIDE:"#18606E",PORE:"#0A2F37",HEAD:"#A33A2B",HEADEDGE:"#5E1F16",TAIL:"#E0A070",
+  NUC_SOFT:"#E7E0EE",PRO_SOFT:"#DEEBEE",CARB_SOFT:"#F6EBD6",LIP_SOFT:"#F7E9E6",
+  GO:"#3F7A55",GO_SOFT:"#E2EDE6",FLAG:"#B85042",FLAG_SOFT:"#F7E9E6",WATER:"#8FB8D8",
+  NA:"#BFA58A",K:"#8595AB",CA:"#7A6E97",CHOL:"#2FA84F"};
+const f1=v=>(Math.round(v*10)/10).toFixed(1);
+function at(o){let s="";if(!o)return s;if(o.id)s+=` id="${o.id}"`;if(o.cls)s+=` class="${o.cls}"`;if(o.extra)s+=" "+o.extra;return s;}
+function rrect(x,y,w,h,r,fill,stroke,sw,o){const s=stroke?` stroke="${stroke}" stroke-width="${sw||3}"`:"";return `<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="${r}" fill="${fill}"${s}${at(o)}/>\n`;}
+function circ(cx,cy,r,fill,stroke,sw,o){const s=stroke?` stroke="${stroke}" stroke-width="${sw||3}"`:"";return `<circle cx="${f1(cx)}" cy="${f1(cy)}" r="${f1(r)}" fill="${fill}"${s}${at(o)}/>\n`;}
+function poly(n,a0,cx,cy,r,fill,stroke,sw,o){const pts=[];for(let i=0;i<n;i++){const a=(360/n*i+a0)*Math.PI/180;pts.push(`${f1(cx+r*Math.cos(a))},${f1(cy+r*Math.sin(a))}`);}
+  const s=stroke?` stroke="${stroke}" stroke-width="${sw||3}"`:"";return `<polygon points="${pts.join(" ")}" fill="${fill}"${s}${at(o)}/>\n`;}
+const hexagon=(cx,cy,r,fill,stroke,sw,o)=>poly(6,-30,cx,cy,r,fill,stroke,sw,o);
+const pentagon=(cx,cy,r,fill,stroke,sw,o)=>poly(5,-90,cx,cy,r,fill,stroke,sw,o);
+function text(x,y,s,cls,anchor,fill,o){const f=fill?` fill="${fill}"`:"";return `<text class="${cls||"lab"}" x="${f1(x)}" y="${f1(y)}" text-anchor="${anchor||"start"}"${f}${at(o)}>${esc(s)}</text>\n`;}
+/* chemistry set properly: _ starts a subscript, ^ a superscript, as tspans, so it is real text */
+function chem(x,y,formula,cls,anchor,fill,o){const f=fill?` fill="${fill}"`:"";let plain="",out="",i=0;
+  while(i<formula.length){const c=formula[i];if(c==="_"||c==="^"){let j=i+1,run="";const ok="0123456789"+(c==="^"?"+-":"");while(j<formula.length&&ok.indexOf(formula[j])>=0){run+=formula[j];j++;}
+    const dy=c==="_"?"0.22em":"-0.42em",back=c==="_"?"-0.22em":"0.42em";out+=`<tspan baseline-shift="0" dy="${dy}" font-size="0.68em">${esc(run)}</tspan><tspan dy="${back}"></tspan>`;plain+=run;i=j;}
+    else{out+=esc(c);plain+=c;i++;}}
+  return `<text class="${cls||"lab"}" x="${f1(x)}" y="${f1(y)}" text-anchor="${anchor||"start"}"${f} data-plain="${esc(plain)}"${at(o)}>${out}</text>\n`;}
+const MARKS={ar:P.INK,arg:P.GO,art:P.PRO,arf:P.FLAG,arc:P.CA,arb:P.CARB,arn:P.NUC,arl:P.LIP,ars:P.INKSOFT,arw:P.WATER,arna:P.NA,ark:P.K,are:"#2F6E3F",arp:"#C98A2E"};
+const ARROWDEFS="<defs>"+Object.keys(MARKS).map(k=>`<marker id="${k}" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1,1 L11,6 L1,11 z" fill="${MARKS[k]}"/></marker>`).join("")+"</defs>\n";
+function arrow(x1,y1,x2,y2,color,sw,marker,dash,o){const d=dash?` stroke-dasharray="${dash}"`:"";return `<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(x2)}" y2="${f1(y2)}" stroke="${color||P.INK}" stroke-width="${sw||5}"${d} marker-end="url(#${marker||"ar"})"${at(o)}/>\n`;}
+function curve(d,color,sw,marker,dash,o){const da=dash?` stroke-dasharray="${dash}"`:"";const m=marker?` marker-end="url(#${marker})"`:"";return `<path d="${d}" fill="none" stroke="${color||P.INK}" stroke-width="${sw||5}"${da}${m}${at(o)}/>\n`;}
+/* a numbered badge: the order to read the figure in */
+function badge(n,cx,cy,color,r,o){r=r||25;return `<g${at(o)}>`+circ(cx,cy,r,color||P.PRO)+`<text class="min" x="${f1(cx)}" y="${f1(cy+10)}" text-anchor="middle" fill="${P.PAPER}" font-weight="700">${n}</text>\n</g>\n`;}
+function grp(o,inner){return `<g${at(o)}>\n${inner}</g>\n`;}
+/* a phospholipid bilayer, component level: circle head, two capsule tails. y is the top of the outer leaflet. */
+function bilayer(x,y,w,nheads,head_r,tail_len,gap){head_r=head_r||13;tail_len=tail_len||40;gap=gap||34;let svg="";const n=nheads||Math.floor(w/gap);const inner_y=y+2*head_r+2*tail_len+18;
+  for(let i=0;i<n;i++){const cx=x+gap/2+i*gap;svg+=circ(cx,y+head_r,head_r,P.HEAD,P.HEADEDGE,2);
+    for(const off of[-5.5,5.5])svg+=rrect(cx+off-4.5,y+2*head_r-2,9,tail_len,4.5,P.TAIL);
+    for(const off of[-5.5,5.5])svg+=rrect(cx+off-4.5,inner_y+2,9,tail_len,4.5,P.TAIL);
+    svg+=circ(cx,inner_y+tail_len+head_r+4,head_r,P.HEAD,P.HEADEDGE,2);}
+  return {svg,total:(inner_y+tail_len+2*head_r+4)-y};}
+function head(h,title,eyebrow){return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${W} ${h}" role="img" aria-labelledby="mr-ttl">
+<title id="mr-ttl">${esc(title)}</title>
+<rect x="0" y="0" width="${W}" height="${h}" fill="${P.PAPER}"/>
+<rect x="3" y="3" width="${W-6}" height="${h-6}" fill="none" stroke="${P.RULE}" stroke-width="3" rx="6"/>
+<text class="eyebrow" x="52" y="62">${esc(eyebrow.toUpperCase())}</text>
+<text class="ttl" x="52" y="118">${esc(title)}</text>
+<g stroke-linecap="round" stroke-linejoin="round">
+`+ARROWDEFS;}
+/* the footer carries the closing caption, the sources (each a real link) and the rights line */
+function foot(h,caption,sources,o){let out=`</g>
+<line x1="52" y1="${h-112}" x2="${W-52}" y2="${h-112}" stroke="${P.RULE}" stroke-width="3"/>
+`+text(52,h-62,caption,"key","start",null,o);
+  let runs=[],plain=sources.length>1?"Sources: ":"Source: ";runs.push(esc(plain));
+  sources.forEach(([label,doi],i)=>{if(i){runs.push(` <tspan fill="${P.INKSOFT}">·</tspan> `);plain+=" · ";}
+    runs.push(`<a href="${esc(doi)}" xlink:href="${esc(doi)}" target="_blank" rel="noopener"><tspan fill="${P.PRO}" text-decoration="underline">${esc(label)}</tspan></a>`);plain+=label;});
+  out+=`<text class="min" x="52" y="${h-22}" text-anchor="start" fill="${P.INKSOFT}" data-plain="${esc(plain)}">${runs.join("")}</text>\n`;
+  out+=text(W-52,h-22,"© 2026 J. R. Schwebach · CC BY-NC 4.0","min","end",P.INKSOFT);
+  return out+"</svg>\n";}
+
+/* ================= state ================= */
+let st={fig:"gpcr",level:"sol",teach:false,per:{}};
+function perFig(k){if(!st.per[k])st.per[k]={step:0,done:{}};return st.per[k];}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+function load(){try{const raw=localStorage.getItem(KEY);if(!raw)return;const s=JSON.parse(raw);if(!s||typeof s!=="object")return;
+  if(typeof s.fig==="string")st.fig=s.fig;if(s.level==="de"||s.level==="sol")st.level=s.level;st.teach=!!s.teach;
+  if(s.per&&typeof s.per==="object")for(const k in s.per){const p=s.per[k];if(p&&typeof p==="object")st.per[k]={step:+p.step||0,done:Object.assign({},p.done||{})};}}catch(e){}}
+
+let FIGS=[],FIGMAP={};
+let F=null,EL={},cur=0;
+let busy=false,busyT=null;
+let playing=false,playT=null,loopOn=false;
+let fillOn=false;
+const HOLD=1500;
+const T={list:[],after(fn,ms){const id=setTimeout(()=>{T.list=T.list.filter(x=>x!==id);fn();},ms);T.list.push(id);return id;},clear(){T.list.forEach(clearTimeout);T.list=[];}};
+
+/* ================= the step engine =================
+   A step is a state, not a movie. apply(k) sets every moving element to its absolute position for
+   state k; the browser tweens transform and opacity between states, and nothing else. */
+function buildStage(){const stage=$("stage");stage.innerHTML=F.svg(st.level);stage.setAttribute("aria-label",F.title);
+  EL={};F.anim.forEach(id=>{const e=stage.querySelector("#"+id);if(e){e.classList.add("mv");EL[id]=e;}});}
+function apply(k,opts){opts=opts||{};const S=F.state(k,st.level);const fwd=k===cur+1;const base=F.dur[k]||700;
+  const tween=!REDUCE&&!opts.jump&&k!==cur;let end=0;
+  for(const id of F.anim){const e=EL[id];if(!e)continue;const v=S[id]||{};const x=v.x||0,y=v.y||0,r=v.r||0,o=v.o==null?1:v.o;
+    let d=0,du=0;
+    if(tween){if(fwd){const q=F.seq[k]&&F.seq[k][id];d=q&&q.d||0;du=q&&q.dur||base;}else du=600;}
+    e.style.transition=du?`transform ${du}ms ease-in-out ${d}ms, opacity ${du}ms ease-in-out ${d}ms`:"none";
+    e.style.transform=`translate(${x}px, ${y}px)`+(r?` rotate(${r}deg)`:"");
+    e.style.opacity=String(o);end=Math.max(end,d+du);}
+  cur=k;return end;}
+function goStep(k,opts){opts=opts||{};k=clamp(k,0,F.n);
+  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}
+  const jump=!!opts.jump||Math.abs(k-cur)!==1;
+  const end=apply(k,{jump});busy=end>0;
+  perFig(F.key).step=k;save();renderDots();renderCard();syncNext();syncCtl();
+  const fin=()=>{busy=false;busyT=null;
+    if(opts.markDone&&k>0){perFig(F.key).done[k]=true;save();renderDots();}
+    if(cur===F.n&&F.loop){startLoop();}
+    renderCard();syncNext();syncCtl();
+    if(playing&&cur<F.n)playT=setTimeout(()=>{playT=null;if(playing&&!busy&&cur<F.n)goStep(cur+1,{scroll:false});},HOLD);};
+  if(busy)busyT=setTimeout(fin,end+40);else fin();
+  if(opts.scroll!==false)scrollToCard();}
+function revealNext(){if(busy||cur>=F.n)return false;goStep(cur+1,{markDone:true});return true;}
+function back(){if(cur<=0)return false;goStep(cur-1);return true;}
+
+/* the amplification run-on after the last step: the figure owns it, the engine owns its timers */
+function startLoop(){if(!F||!F.loop||cur!==F.n||loopOn)return;loopOn=true;playing=true;F.loop.start({after:T.after,reduce:()=>REDUCE,on:()=>loopOn});syncCtl();}
+function pauseLoop(){loopOn=false;T.clear();}
+function stopLoop(){loopOn=false;T.clear();if(F&&F.loop)F.loop.clear();}
+function setPlaying(on){on=!!on;
+  if(on){playing=true;if(cur>=F.n){startLoop();}else if(!busy){goStep(cur+1,{scroll:false});}}
+  else{playing=false;if(playT){clearTimeout(playT);playT=null;}pauseLoop();}
+  syncCtl();}
+
+/* ================= rendering ================= */
+function tagHtml(f){return (f.tag||[]).map(([c,n])=>`<span class="tag ${c}">${esc(n)}</span>`).join("");}
+function renderSel(){const ol=$("sel");ol.innerHTML="";
+  FIGS.forEach((f,i)=>{const li=el("li","fig");const b=el("button","selbtn");b.type="button";b.dataset.fig=f.key;
+    b.innerHTML=`<span class="n">${i+1}</span><span class="t">${esc(f.title)}</span>${tagHtml(f)}`+(f.enabled?"":`<span class="soon">coming next</span>`);
+    if(!f.enabled){b.disabled=true;b.setAttribute("aria-disabled","true");}
+    b.setAttribute("aria-pressed",String(F&&F.key===f.key));
+    b.addEventListener("click",()=>setFig(f.key));li.appendChild(b);ol.appendChild(li);
+    if(f.bridge){ol.appendChild(el("li","bridge",esc(f.bridge)));}});}
+/* the level switch exists in the DOM only on a figure that has two levels; elsewhere it is absent, not dead */
+let LEVELROW=null;
+function renderLevelRow(){if(!LEVELROW){LEVELROW=$("levelrow");LEVELROW.classList.remove("hidden");}
+  if(F.levels){if(!LEVELROW.isConnected)$("build").parentNode.insertBefore(LEVELROW,$("build"));LEVELROW.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));}
+  else if(LEVELROW.isConnected)LEVELROW.remove();}
+function renderDots(){const d=$("dots");d.innerHTML="";const per=perFig(F.key);
+  for(let i=1;i<=F.n;i++){const b=el("button","");b.type="button";b.textContent=i;const done=!!per.done[i];
+    b.setAttribute("aria-label","Step "+i+": "+F.caps[i-1]+(done?" (done)":""));
+    if(i===cur){b.classList.add("cur");b.setAttribute("aria-current","step");}
+    if(done)b.classList.add("done");
+    b.addEventListener("click",()=>goStep(i));d.appendChild(b);}}
+function capItem(i,cls){const li=el("li","cap"+(cls?" "+cls:""));li.dataset.step=i;
+  li.innerHTML=`<span class="b" style="background:${F.capColor[i-1]}">${i}</span><span>${esc(F.caps[i-1])}</span>`;return li;}
+function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach;
+  card.appendChild(el("div","meta",`<span>${cur===0?"Start":"Step "+cur+" of "+F.n}</span><span>${esc(F.short)}</span>`));
+  card.appendChild(el("h2","",esc(F.title)+" "+tagHtml(F)));
+  if(Tv){card.appendChild(el("p","fine teachnote","Teaching view: every caption at once, no prompts. Press Next, or tap a step number, and talk."));
+    if(F.start)card.appendChild(el("p","",esc(F.start)));
+    const ul=el("ul","caps");for(let i=1;i<=F.n;i++)ul.appendChild(capItem(i,i===cur?"cur":""));card.appendChild(ul);
+    card.appendChild(el("p","closing",esc(F.closing)));
+    if(cur===F.n&&F.watch)card.appendChild(el("p","watch",esc(F.watch)));
+    return;}
+  if(cur===0){if(F.start)card.appendChild(el("p","",esc(F.start)));}
+  else{const ul=el("ul","caps");for(let i=1;i<=cur;i++)ul.appendChild(capItem(i,i===cur?"cur":"dim"));card.appendChild(ul);}
+  if(cur<F.n&&!busy){const k=cur+1;const p=el("p","predict",`<span class="tagline">Predict before you press</span>${esc(F.prompts[k-1])} Then press <b>Next</b>.`);p.dataset.for=k;p.id="predict";card.appendChild(p);}
+  if(cur===F.n&&!busy){card.appendChild(el("p","closing",esc(F.closing)));if(F.watch)card.appendChild(el("p","watch",esc(F.watch)));}}
+let nextEl=null;
+function syncNext(){const t=cur<F.n?$("next"):$("play");if(t===nextEl&&t.classList.contains("next"))return;
+  document.querySelectorAll(".next").forEach(e=>e.classList.remove("next"));nextEl=t;t.classList.add("next");}
+function syncCtl(){$("back").disabled=cur<=0;$("next").disabled=cur>=F.n;
+  const on=cur>=F.n?loopOn:playing;$("play").innerHTML=on?"&#10074;&#10074; Pause":"&#9654; Play";$("play").setAttribute("aria-pressed",String(on));
+  if(cur>=F.n&&!F.loop)$("play").disabled=true;else $("play").disabled=false;
+  $("teach").setAttribute("aria-pressed",String(!!st.teach));
+  $("fill").textContent=fillOn?"Restore page":"Fill screen";$("fill").setAttribute("aria-pressed",String(fillOn));}
+function scrollToCard(){if(fillOn)return;const card=$("card");
+  const sticky=getComputedStyle($("stagecol")).position==="sticky",stacked=window.innerWidth<900;
+  const off=(sticky&&stacked?$("stagecol").offsetHeight:0)+10;
+  const r=(stacked?card:$("build")).getBoundingClientRect();
+  if(r.top>=off-2&&r.top<window.innerHeight-160)return;
+  try{window.scrollTo({top:Math.max(0,r.top+window.scrollY-off),behavior:REDUCE?"auto":"smooth"});}catch(e){}}
+
+/* ================= switches ================= */
+function setFig(k){const f=FIGMAP[k];if(!f||!f.enabled)return false;
+  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}playing=false;busy=false;
+  st.fig=k;F=f;cur=clamp(perFig(k).step,0,F.n);save();
+  buildStage();apply(cur,{jump:true});
+  renderSel();renderLevelRow();renderDots();renderCard();syncNext();syncCtl();
+  $("eyebrow").innerHTML="Bio Tool #22 &middot; "+esc(F.eyebrow);
+  try{const u=new URL(location.href);u.searchParams.set("fig",k);history.replaceState(null,"",u);}catch(e){}
+  if(cur===F.n&&F.loop)startLoop();
+  return true;}
+function setLevel(l){l=l==="de"?"de":"sol";if(l===st.level)return;st.level=l;save();renderLevelRow();
+  if(F.levels){const k=cur;buildStage();cur=-1;apply(k,{jump:true});renderDots();renderCard();}}
+function setTeach(on){st.teach=!!on;save();syncCtl();renderCard();}
+function setFill(on){fillOn=!!on;document.documentElement.setAttribute("data-fill",fillOn?"1":"0");syncCtl();
+  try{const b=$("build");if(fillOn&&!document.fullscreenElement){if(b.requestFullscreen)b.requestFullscreen().catch(()=>{});else if(b.webkitRequestFullscreen)b.webkitRequestFullscreen();}
+    else if(!fillOn&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}}
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&fillOn)setFill(false);});
+function reset(){st.per[F.key]={step:0,done:{}};save();goStep(0,{jump:true});}
+
+/* ================= the test hook ================= */
+function opacityOf(e){let o=1;while(e&&e.nodeType===1&&e.tagName.toLowerCase()!=="svg"){o*=parseFloat(getComputedStyle(e).opacity);e=e.parentNode;}return o;}
+function labels(){const svg=$("stage").querySelector("svg");if(!svg)return[];const vb=svg.viewBox.baseVal;const sw=svg.getBoundingClientRect().width;const k=1000/vb.width;
+  return Array.from(svg.querySelectorAll("text")).map(t=>{const units=parseFloat(getComputedStyle(t).fontSize);let minRun=units;
+    t.querySelectorAll("tspan").forEach(ts=>{const u=parseFloat(getComputedStyle(ts).fontSize);if(u<minRun)minRun=u;});
+    const r=t.getBoundingClientRect();
+    return {text:t.textContent.trim(),units,px:+(units*k).toFixed(2),minRunPx:+(minRun*k).toFixed(2),screenPx:+(units*sw/vb.width).toFixed(2),x:r.x,y:r.y,w:r.width,h:r.height,visible:opacityOf(t)>0.01};});}
+function colours(){const out=new Set();$("stage").querySelectorAll("*").forEach(e=>{for(const a of["fill","stroke"]){const v=e.getAttribute(a);if(v&&v!=="none"&&v[0]==="#")out.add(v.toUpperCase());}});return Array.from(out).sort();}
+function state(){const els={};F.anim.forEach(id=>{const e=EL[id];if(e)els[id]={t:e.style.transform,o:e.style.opacity};});
+  return {fig:F.key,step:cur,level:st.level,teach:!!st.teach,fill:fillOn,playing,loop:loopOn,busy,done:Object.assign({},perFig(F.key).done),els};}
+function elInfo(id){const e=$("stage").querySelector("#"+id);if(!e)return null;const r=e.getBoundingClientRect();return {transform:e.style.transform,opacity:opacityOf(e),x:r.x,y:r.y,w:r.width,h:r.height};}
+window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title,enabled:!!f.enabled,steps:f.n,levels:!!f.levels})),
+  step:()=>cur,goStep:i=>goStep(i,{scroll:false}),steps:()=>F.n,done:i=>!!perFig(F.key).done[i],
+  level:()=>st.level,setLevel,labels,colours,state,reduced:()=>REDUCE,
+  busy:()=>busy,playing:()=>(cur>=F.n?loopOn:playing),setPlaying,next:revealNext,back,
+  prompt:()=>{const p=$("card").querySelector(".predict");return p?+p.dataset.for:null;},
+  teach:()=>!!st.teach,setTeach,fill:()=>fillOn,setFill,reset,stopLoop:()=>{stopLoop();playing=false;syncCtl();},
+  timing:()=>({dur:F.dur.slice(),seq:F.seq,beats:F.beats,hold:HOLD}),captions:()=>F.caps.slice(),closing:()=>F.closing,
+  el:elInfo,watchIds:()=>Object.assign({},F.watchIds||{}),loopCount:()=>F.loop&&F.loop.count?F.loop.count():null,
+  text:()=>$("stage").textContent+"\n"+$("card").textContent};
+
+/* ================= wiring ================= */
+function init(){load();FIGMAP={};FIGS.forEach(f=>{FIGMAP[f.key]=f;});
+  let want=st.fig;try{const q=new URL(location.href).searchParams.get("fig");if(q)want=q;}catch(e){}
+  if(!FIGMAP[want]||!FIGMAP[want].enabled){if(FIGMAP[want]){const n=$("notice");n.textContent=FIGMAP[want].title+" is coming next. Showing the first figure for now.";n.classList.remove("hidden");}
+    want=FIGS.find(f=>f.enabled).key;}
+  $("next").addEventListener("click",revealNext);$("back").addEventListener("click",back);
+  $("play").addEventListener("click",()=>setPlaying(!(cur>=F.n?loopOn:playing)));
+  $("teach").addEventListener("click",()=>setTeach(!st.teach));
+  $("fill").addEventListener("click",()=>setFill(!fillOn));
+  document.querySelectorAll("#levelrow [data-lv]").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv)));
+  document.addEventListener("keydown",e=>{if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key==="ArrowRight"||e.key==="PageDown"){e.preventDefault();revealNext();}else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();back();}});
+  document.documentElement.setAttribute("data-fill","0");
+  setFig(want);}
+
+/* ================= Figure 1: the G-protein-coupled receptor route =================
+   One idea: the signal molecule never gets in, yet the inside of the cell changes, because the
+   cell rebuilds the message out of its own parts. Geometry is the still's own (fig1_gpcr.py),
+   with ids and groups on the things that move. The last step is the still. */
+const GPCR=(function(){
+  const H=1000,MY=232,MB=382,BLH=150,PX=740,DX=900,IX=900,IY=596,EY=566,EBLH=118,CXX=1320;
+  /* the still's faint water, as drawn */
+  const WATERPTS=[[539.3,162.3],[1023.4,156.9],[853.1,176.9],[145.8,186.5],[115.5,181.5],[163.4,158.2],[688.3,208.2],[243.2,167.2],[988.6,216.4],[914.1,179.0],[1504.9,155.2],[1330.5,171.7],[273.5,160.0],[516.6,207.5],[327.5,191.5],[1005.6,177.3],[870.7,156.3],[148.2,166.0],[1067.0,181.1],[524.9,191.8],[730.7,172.4],[1235.7,199.5],[421.3,191.1],[837.3,211.5],[1139.6,171.6],[1510.7,160.0]];
+  const CAPS=["The signal binds outside. It never enters.","The receptor twists. A G protein turns on.","Its alpha part reaches phospholipase C.",
+    "PIP₂ is cut: DAG stays, IP₃ leaves.","IP₃ opens a calcium channel in the ER.","Calcium switches the working enzymes on."];
+  const LEGEND=[["The signal binds outside. It","never enters."],["The receptor twists. A G","protein turns on."],["Its alpha part reaches","phospholipase C."],
+    ["PIP₂ is cut: DAG stays, IP₃","leaves."],["IP₃ opens a calcium channel","in the ER."],["Calcium switches the working","enzymes on."]];
+  const CAPCOL=[P.FLAG,P.PRO,P.PRO,P.GO,P.CARB,P.CA];
+  /* the IP3 traveller: hexagon plus three phosphates, drawn at the still's IP3 spot; at the membrane
+     it is translated so its phosphates sit exactly where the still draws PIP2's */
+  const PHOS=[[-27,-15],[0,-32],[27,-15]];
+  const MEM={x:PX-IX,y:(MY)-IY};            /* (-160,-364): the membrane position of the traveller */
+  const DOCK={x:338,y:44};                  /* seated against the ER channel */
+  const CA_STILL=[[1276,486],[1344,470],[1406,488],[1470,474]];
+  const CA_START=[[1233,700],[1296,700],[1361,698],[1418,700]];
+  function ip3Group(cx,cy,oOuter,oInner){let s=hexagon(cx,cy,25,P.CARB,"#8A5E16",3);PHOS.forEach(([dx,dy])=>{s+=circ(cx+dx,cy+dy,12,P.CARB,"#8A5E16",3);});return grp(oOuter,grp(oInner,s));}
+  function caGroup(px,py,ids){return grp({id:ids[0]},grp({id:ids[1]},grp({id:ids[2]},circ(px,py,13,P.CA,"#4C4170",2))));}
+  function svg(){let s=head(H,"A receptor that never lets the signal in","DE Bio 101 . Unit 5 . G-protein-coupled receptors");
+    WATERPTS.forEach(([x,y])=>{s+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="9.0" fill="${P.WATER}" opacity="0.5"/>\n`;});
+    s+=bilayer(52,MY,1496,46,11,28,32).svg;
+    s+=text(1548,196,"Outside the cell","min","end",P.INKSOFT);
+    s+=text(60,430,"Cytosol","min","start",P.INKSOFT);
+    s+=text(300,196,"Signal molecule","lab","start",P.FLAG);
+    s+=chem(686,196,"PIP_2","key","start",P.CARB);
+    s+=text(916,196,"DAG","key","start",P.LIP);
+    /* 1. the ligand, which is as far as the signal itself ever gets */
+    s+=circ(267,170,20,P.FLAG,P.HEADEDGE,3,{id:"lig"});
+    s+=arrow(267,192,267,MY-8,P.FLAG,6,"arf",null,{id:"ligArrow"});
+    s+=badge(1,196,170,P.FLAG,25,{id:"b1"});
+    /* the receptor: seven passes through the membrane */
+    s+=rrect(200,MY-14,134,BLH+28,14,P.PRO,P.PRO_SIDE,4);
+    for(let i=0;i<7;i++)s+=rrect(212+i*16,MY-2,9,BLH+4,4.5,P.PRO_TOP,null,null,{id:"rib"+i});
+    s+=text(60,536,"Receptor (GPCR)","key","start",P.PRO);
+    /* PIP2: one lipid, three phosphates on its head (the phosphates travel, so they are drawn with the IP3 group below) */
+    s+=rrect(PX-44,MY-12,88,BLH-44,10,P.PAPER);
+    for(const off of[-11,11])s+=rrect(PX+off-5.5,MY+30,11,48,5.5,P.TAIL);
+    s+=arrow(712,208,PX-24,MY-32,P.CARB,4,"arb");
+    /* DAG: the lipid half, left behind */
+    s+=rrect(DX-32,MY-12,64,BLH-44,10,P.PAPER);
+    for(const off of[-11,11])s+=rrect(DX+off-5.5,MY+34,11,48,5.5,P.TAIL);
+    s+=circ(DX,MY+22,15,P.HEAD,P.HEADEDGE,3);
+    s+=arrow(930,208,DX+14,MY+2,P.LIP,4,"arl");
+    /* 2. the G protein */
+    s+=grp({id:"gaO"},grp({id:"gaI"},circ(400,432,32,P.PRO,P.PRO_SIDE,3)+text(400,445,"α","key","middle",P.PAPER)));
+    s+=circ(458,442,25,P.PRO_TOP,P.PRO_SIDE,3)+text(458,454,"β","key","middle",P.PRO_SIDE);
+    s+=circ(494,412,21,P.PRO_TOP,P.PRO_SIDE,3)+text(494,423,"γ","lab","middle",P.PRO_SIDE);
+    s+=pentagon(366,388,15,P.NUC,"#46345E",2,{id:"gdp"});
+    s+=arrow(267,MB+4,370,414,P.PRO,5,"art",null,{id:"arrRG"});
+    s+=badge(2,330,466,P.PRO,25,{id:"b2"});
+    s+=text(372,536,"G protein","key","start",P.PRO);
+    /* 3. the enzyme it switches on */
+    s+=rrect(610,408,252,86,12,P.PRO,P.PRO_SIDE,4);
+    s+=text(736,460,"Phospholipase C","min","middle",P.PAPER);
+    s+=curve("M 436 468 C 510 522, 566 516, 606 484",P.PRO,6,"art",null,{id:"arrAP"});
+    s+=badge(3,592,402,P.PRO,25,{id:"b3"});
+    /* 4. the cut */
+    s+=arrow(740,404,740,MY+BLH-46,P.GO,7,"arg",null,{id:"arrCut"});
+    s+=badge(4,886,408,P.GO,25,{id:"b4"});
+    /* 5. IP3: the traveller, the next PIP2 waiting at the membrane, the run-on layer, and the PIP2 head drawn over them */
+    s+=ip3Group(IX,IY,{id:"ip3O"},{id:"ip3I"});
+    s+=ip3Group(PX,MY,{id:"ip3b"},{});
+    s+=grp({id:"ip3Layer"},"");
+    s+=circ(PX,MY+18,15,P.HEAD,P.HEADEDGE,3,{id:"pipHead"});
+    s+=chem(IX-76,IY+12,"IP_3","key","end",P.CARB,{id:"ip3Label"});
+    s+=curve(`M 862 456 C 898 506, 908 532, ${IX-18} ${IY-34}`,P.CARB,6,"arb","14 10",{id:"path1"});
+    s+=badge(5,992,650,P.CARB,25,{id:"b5"});
+    /* the ER, holding the calcium */
+    s+=bilayer(1150,EY,398,12,9,20,33).svg;
+    s+=text(1262,540,"Endoplasmic reticulum - the calcium store","min","end",P.INKSOFT);
+    s+=rrect(CXX-50,EY-12,44,EBLH+24,10,P.PRO,P.PRO_SIDE,4,{id:"chL"});
+    s+=rrect(CXX+14,EY-12,44,EBLH+24,10,P.PRO,P.PRO_SIDE,4,{id:"chR"});
+    s+=curve(`M ${IX+38} ${IY-10} C 1090 ${IY-24}, 1210 ${EY+120}, ${CXX-58} ${EY+74}`,P.CARB,6,"arb","14 10",{id:"path2"});
+    for(const[dx,dy]of[[-116,26],[-58,38],[10,32],[72,24],[124,38]])s+=circ(CXX+dx,EY+EBLH+dy,13,P.CA,"#4C4170",2);
+    s+=arrow(CXX-18,EY+EBLH-4,CXX-18,470,P.CA,8,"arc",null,{id:"arrCa"});
+    s+=grp({id:"caLayer"},"");
+    CA_STILL.forEach(([px,py],i)=>{s+=caGroup(px,py,["caA"+i,"caB"+i,"caC"+i]);});
+    s+=chem(1120,500,"Ca^2+","key","start",P.CA);
+    /* 6. the response */
+    s+=grp({id:"resp"},rrect(1120,368,428,84,10,P.GO_SOFT,P.GO,4)+text(1152,420,"The cell does the job","key","start",P.GO));
+    s+=badge(6,1120,368,P.GO,25,{id:"b6"});
+    /* one line, because there is more than one second messenger */
+    s+=text(60,664,"A different enzyme inside makes cAMP instead.","min","start",P.INKSOFT);
+    /* the sentences, in reading order, exactly as the still sets them */
+    LEGEND.forEach((lines,i)=>{const c=i%3,r=Math.floor(i/3),x=52+c*499,ty=742+r*78;let g=badge(i+1,x+19,ty,CAPCOL[i],19);
+      lines.forEach((ln,j)=>{g+=text(x+50,ty+10+j*34,ln,"min","start");});s+=grp({id:"lg"+(i+1)},g);});
+    s+=foot(H,"The message stops at the membrane. The cell rebuilds it inside, out of its own parts.",
+      [["Streb 1983","https://doi.org/10.1038/306067a0"],["Berridge & Irvine 1984","https://doi.org/10.1038/312315a0"],["Rasmussen 2011","https://doi.org/10.1038/nature10361"]],{id:"closing"});
+    return s;}
+  const ANIM=["lig","ligArrow","b1","b2","b3","b4","b5","b6","lg1","lg2","lg3","lg4","lg5","lg6","rib0","rib1","rib2","rib3","rib4","rib5","rib6",
+    "gaO","gaI","gdp","arrRG","arrAP","arrCut","path1","ip3Label","path2","arrCa","resp","closing","ip3O","ip3I","ip3b","chL","chR"];
+  for(let i=0;i<4;i++)ANIM.push("caA"+i,"caB"+i,"caC"+i);
+  /* every state as absolute positions, so step 4 looks the same whether you arrived from 3 or from 5 */
+  function state(k){const S={};const on=(id,from)=>{S[id]={o:k>=from?1:0};};
+    S.lig=k===0?{x:153,y:-12}:{};on("ligArrow",1);
+    for(let i=1;i<=6;i++){on("b"+i,i);on("lg"+i,i);}
+    for(let i=0;i<7;i++)S["rib"+i]=k<=1?{y:i%2?6:-6}:{};
+    S.gaO=k<=1?{x:22}:k===2?{}:{x:170};S.gaI=k>=3?{y:34}:{};
+    S.gdp=k<=1?{r:180}:{};
+    on("arrRG",2);on("arrAP",3);on("arrCut",4);on("path1",4);on("ip3Label",4);on("path2",5);on("arrCa",6);on("resp",6);on("closing",6);
+    if(k<=3){S.ip3O={y:MEM.y};S.ip3I={x:MEM.x};}else if(k===4){S.ip3O={};S.ip3I={};}else{S.ip3O={y:DOCK.y};S.ip3I={x:DOCK.x};}
+    on("ip3b",5);
+    S.chL=k<=4?{x:6}:{};S.chR=k<=4?{x:-6}:{};
+    CA_START.forEach(([sx,sy],i)=>{const[px,py]=CA_STILL[i];
+      if(k<=5){S["caA"+i]={x:sx-1302};S["caB"+i]={y:sy-py};S["caC"+i]={x:1302-px};}else{S["caA"+i]={};S["caB"+i]={};S["caC"+i]={};}});
+    return S;}
+  /* forward timing. Steps 4 and 6 are the memorable beats: slower, and nothing else moves inside them. */
+  const A=(d,dur)=>({d,dur});
+  const SEQ={
+    1:{lig:A(0,700),ligArrow:A(500,250),b1:A(500,250),lg1:A(500,250)},
+    2:{rib0:A(0,400),rib1:A(0,400),rib2:A(0,400),rib3:A(0,400),rib4:A(0,400),rib5:A(0,400),rib6:A(0,400),gaO:A(250,400),gdp:A(250,400),arrRG:A(0,300),b2:A(450,300),lg2:A(450,300)},
+    3:{gaO:A(0,750),gaI:A(300,450),arrAP:A(350,400),b3:A(500,300),lg3:A(500,300)},
+    4:{arrCut:A(0,300),b4:A(0,300),lg4:A(0,300),ip3Label:A(0,300),path1:A(0,300),ip3O:A(300,900),ip3I:A(900,700)},
+    5:{ip3I:A(0,800),ip3O:A(350,450),chL:A(600,200),chR:A(600,200),path2:A(0,300),ip3b:A(300,400),b5:A(500,300),lg5:A(500,300)},
+    6:{arrCa:A(0,300),resp:A(0,300),b6:A(0,300),lg6:A(0,300),closing:A(0,300)}};
+  for(let i=0;i<4;i++){SEQ[6]["caA"+i]=A(300,300);SEQ[6]["caB"+i]=A(600,700);SEQ[6]["caC"+i]=A(1100,600);}
+  const DUR=[0,750,750,800,1600,800,1700];
+  const BEATS={4:{name:"PIP2 splits in two",from:300,to:1600,ids:["ip3O","ip3I"]},6:{name:"calcium floods out of the ER",from:300,to:1700,ids:[]}};
+  for(let i=0;i<4;i++)BEATS[6].ids.push("caA"+i,"caB"+i,"caC"+i);
+  /* the run-on: phospholipase C keeps cutting, IP3 keeps appearing, calcium keeps coming, and the
+     one signal molecule sits on the receptor the whole time. Numbers never appear; the crowd does. */
+  let seed=7;const rnd=()=>{seed=(seed+0x6D2B79F5)|0;let t=seed;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};
+  const pick=(a,b)=>a+rnd()*(b-a);
+  const IP3_ZONES=[[1047,1115,610,690],[962,1115,585,600],[990,1090,455,490]];
+  const IP3_CAP=14,CA_CAP=28;
+  const loop={n3:0,nCa:0,
+    start(api){const svg=$("stage").querySelector("svg");if(!svg)return;const ipL=svg.querySelector("#ip3Layer"),caL=svg.querySelector("#caLayer");
+      const place=(g,tr)=>{g.style.transition="none";g.style.transform=tr;};
+      const tween=(g,tr,dur,d)=>{g.style.transition=`transform ${dur}ms ease-in-out ${d||0}ms, opacity ${dur}ms ease-in-out ${d||0}ms`;g.style.transform=tr;};
+      const tickIp3=()=>{if(!api.on()||loop.n3>=IP3_CAP)return;loop.n3++;
+        const z=IP3_ZONES[loop.n3%IP3_ZONES.length];const dx=pick(z[0],z[1])-PX,dy=pick(z[2],z[3])-MY;
+        const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML=ip3Group(PX,MY,{cls:"mv"},{cls:"mv"});
+        const O=tmp.firstElementChild,I=O.firstElementChild;ipL.appendChild(O);
+        if(api.reduce()){place(O,`translate(0px, ${dy}px)`);place(I,`translate(${dx}px, 0px)`);O.style.opacity="1";}
+        else{O.style.transition="none";O.style.opacity="0";place(O,"translate(0px, 0px)");place(I,"translate(0px, 0px)");O.getBoundingClientRect();
+          O.style.transition="opacity 300ms ease-in-out";O.style.opacity="1";
+          api.after(()=>{tween(O,`translate(0px, 364px)`,900,0);tween(I,`translate(160px, 0px)`,700,500);},350);
+          api.after(()=>{tween(O,`translate(0px, ${dy}px)`,900,0);tween(I,`translate(${dx}px, 0px)`,900,200);},1700);}
+        api.after(tickIp3,900);};
+      const tickCa=()=>{if(!api.on()||loop.nCa>=CA_CAP)return;loop.nCa++;
+        const px=pick(1215,1540),py=pick(468,506),sx=pick(1240,1380),sy=700;
+        const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML=caGroup(px,py,[]).replace(/<g>/g,'<g class="mv">');
+        const Ag=tmp.firstElementChild,Bg=Ag.firstElementChild,Cg=Bg.firstElementChild;caL.appendChild(Ag);
+        if(api.reduce()){Ag.style.opacity="1";}
+        else{Ag.style.transition="none";Ag.style.opacity="0";place(Ag,`translate(${sx-1302}px, 0px)`);place(Bg,`translate(0px, ${sy-py}px)`);place(Cg,`translate(${1302-px}px, 0px)`);Ag.getBoundingClientRect();
+          Ag.style.transition="opacity 200ms ease-in-out";Ag.style.opacity="1";
+          api.after(()=>{tween(Ag,"translate(0px, 0px)",300,0);tween(Bg,"translate(0px, 0px)",600,300);tween(Cg,"translate(0px, 0px)",500,750);},250);}
+        api.after(tickCa,350);};
+      api.after(tickIp3,400);api.after(tickCa,900);},
+    clear(){loop.n3=0;loop.nCa=0;seed=7;const svg=$("stage").querySelector("svg");if(!svg)return;["#ip3Layer","#caLayer"].forEach(q=>{const L=svg.querySelector(q);if(L)L.innerHTML="";});},
+    count(){return {ip3:loop.n3,ca:loop.nCa};}};
+  return {key:"gpcr",enabled:true,n:6,levels:null,
+    title:"A receptor that never lets the signal in",short:"G-protein-coupled receptor",eyebrow:"DE Bio 101 Unit 5 · G-protein-coupled receptors",
+    tag:[["amp","Amplification"]],bridge:"A different kind of receptor answers in more than one way at once.",
+    caps:CAPS,capColor:CAPCOL,closing:"The message stops at the membrane. The cell rebuilds it inside, out of its own parts.",
+    start:"A signal molecule is outside the cell. It is about to meet a receptor it will never pass through.",
+    prompts:["Where does the signal molecule stop: outside, inside the membrane, or in the cytosol?",
+      "What changes first when the signal lands: the receptor, the G protein, or the enzyme?",
+      "Which part of the G protein travels, and where does it go?",
+      "PIP₂ is about to be cut in two. Which half stays in the membrane, and which half leaves?",
+      "Where is IP₃ heading, and what will it open when it gets there?",
+      "What comes out of the ER, and which way does it go?"],
+    watch:"Keep watching the inside. The one signal molecule is still outside, unchanged, while the cytosol fills.",
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,loop,watchIds:{ligand:"lig",travellers:["ip3O","ip3I","gaO","gaI","caA0","caB0","caC0"]}};
+})();
+
+/* the other five appear in the selector, in the arc's order, disabled until Phase 2 */
+const SOON=(key,title,tag,bridge,n,levels)=>({key,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",caps:[],capColor:[],prompts:[],closing:"",anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
+FIGS=[GPCR,
+  SOON("rtk","Two halves, then several answers at once",[["amp","Amplification"]],"Both of those end in things moving across a membrane.",4),
+  SOON("transport","Downhill is free. Uphill is paid for.",[["mov","Movement"],["nrg","Energy transfer"]],"Moving things uphill runs on ATP. Here is where the ATP comes from.",2,true),
+  SOON("etc","Electrons buy a gradient. The gradient buys the ATP.",[["nrg","Energy transfer"]],"A signal can also reach all the way to the genes.",6),
+  SOON("dogma","One message, written out and then read aloud",[["amp","Amplification"],["mov","Movement"]],"And here is how we borrow that machinery ourselves.",6,true),
+  SOON("cloning","Cut both with one enzyme and the ends fit",[["mov","Movement"]],null,5)];
+
+init();
+})();
+</script>
+</body>
+</html>
