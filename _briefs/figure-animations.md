@@ -10,6 +10,23 @@ Six still diagrams, already drawn and verified, turned into six step-through ani
 
 ## 0. The job, in one screen
 
+> ## BUILD THIS IN TWO PHASES. STOP AFTER PHASE 1.
+>
+> **Phase 1 — the pilot.** Build the page skeleton, the selector, the control bar, the step engine,
+> the level switch, the storage layer, the test hook — and **exactly one animation: `gpcr`.** The
+> other five figures appear in the selector, disabled, labelled "coming next". Run the §7 tests
+> against `gpcr` only. Commit, push the branch, report, and **STOP**.
+>
+> **Phase 2 — the other five.** Only after Reid has reviewed Phase 1 and said to continue. By then
+> the engine exists and each remaining figure is a repetition against it.
+>
+> **Why.** `gpcr` is the hardest and the most important of the six — six steps, the amplification
+> beat, a membrane, an organelle and mobile molecules — so a page that does `gpcr` well can do the
+> rest. It is also the first one Reid needs in class, on 9 and 10 November. Splitting here means he
+> finds out early and cheaply whether the approach is right, instead of after six figures of drift.
+> Do not get ahead of this and build more than one animation in Phase 1, however easy the others
+> look once the engine runs.
+
 1. Build **one new file**: `biology/tools/mechanism-reel.html`. Permanent URL
    `https://scienceonepagers.org/biology/tools/mechanism-reel.html`. Working title **"The Mechanism Reel"**,
    eyebrow **Bio Tool #22**. (Highest live Bio Tool on 2026-10-10 was #21. Confirm against the live
@@ -29,7 +46,9 @@ Six still diagrams, already drawn and verified, turned into six step-through ani
    and say which you used.
 6. Test with Playwright and Chromium at **1180 x 820** (iPad landscape, the primary target) and
    **390 x 844** (phone). Report every acceptance test in §7 as PASS or FAIL with a one-line reason
-   for each FAIL. Attach screenshots of every figure at its final step.
+   for each FAIL. **Assert programmatically wherever §7 says so, and take screenshots only where it
+   asks for one** — see the note at the head of §7. Screenshots are the most expensive thing you can
+   do; do not take one to check something the DOM can answer.
 7. Nothing publishes without Reid.
 
 **If `git push` is refused** ("not in this session's authorized repository set"), do not hunt for a
@@ -186,6 +205,8 @@ footer line is the closing caption.
 
 ## 4. What moves, figure by figure
 
+**In Phase 1 you build only `gpcr`.** Read the rest so the engine you write can carry them, but do not build them yet.
+
 Only the listed things move. Everything else holds still; a figure where everything drifts is unreadable.
 
 **`gpcr` — 6 steps.** 1 The signal molecule descends and seats on the receptor. 2 The receptor's ribs
@@ -269,35 +290,65 @@ DE-level variant where the first intron loops out while the polymerase is still 
 
 ## 7. Acceptance tests
 
-Report each as PASS or FAIL.
+**How to test, and what it costs.** Screenshots are by far the most expensive thing a test run does,
+and almost nothing here needs one. The DOM already knows every answer: `getComputedStyle` knows the
+font sizes and colours, `getBoundingClientRect` knows the positions and the overflow,
+`getAnimations()` knows what is animating and which properties, and a test hook knows the state.
+**Default to a programmatic assertion. Take a screenshot only where the table below says SHOT, and
+for any FAIL** — a failing test earns one image so Reid can see what went wrong.
 
-1. Six figures reachable from the selector and from their six `?fig=` deep links.
-2. For each figure: every step reachable forward, backward, and by tapping its dot.
-3. For each figure: the **final step matches the reference PNG** in `_briefs/figures/` — same elements,
-   same positions, same colours, same label text. Attach a side-by-side.
-4. No label renders below 18 CSS px at a 1000 px-wide stage, on any figure, at any step, at either level.
-5. A dot lights only after its step has been finished, never before.
-6. The next-step control carries the chartreuse throbbing ring, and only one control has it at a time.
-7. Predict-before-press appears before every transition and can be dismissed by tapping.
-8. `prefers-reduced-motion: reduce` → no tweens, all captions and controls intact, every step reachable.
-9. Level switch changes wording on `transport` and `dogma` and is absent on the other four.
-10. No horizontal overflow at 390 px on any figure at any step.
-11. Works with `localStorage` disabled or throwing.
-12. No console errors beyond the sandbox's blocked Google Fonts fetch.
-13. Teaching view and Fill screen both work on all six.
-14. Runs at a steady frame rate on the 1180 x 820 target — no transition animating anything but
-    `transform` and `opacity`.
-15. The selector presents the six in the signal-to-effect order of §3, with its bridge lines.
-16. Amplification reads without numbers on `gpcr`, `rtk` and `dogma`: no counter, tally or order of
-    magnitude appears anywhere on screen. On `gpcr` the original ligand stays visible and unchanged
-    while the cytosol fills.
-17. Each of the six memorable events in §3 gets its own beat, slower than its neighbours, with
-    nothing else moving during it.
-18. Nothing fades out at one place and in at another: every traveller stays visible along its route.
-19. Where ATP is spent, the split happens *before* the thing it pays for, never at the same time.
-20. The `rtk` already-paired note appears on the still and as the DE-level closing state.
+**Build the test hook first**, following the house pattern (`window.__WP` in the Water Patch,
+`window.__SP` in the Signal Patch). Expose `window.__MR` with at least:
+
+```
+__MR.fig()            current figure key
+__MR.setFig(k)        switch figure
+__MR.step()           current step index
+__MR.goStep(i)        jump to a step
+__MR.steps()          number of steps in this figure
+__MR.done(i)          has step i been finished
+__MR.level()          "sol" | "de"
+__MR.setLevel(l)      switch level
+__MR.labels()         every rendered label: {text, px, x, y, w, h}
+__MR.colours()        every fill and stroke in use, as hex
+__MR.state()          the serialisable animation state, for the reference comparison
+__MR.reduced()        is reduced-motion honoured
+```
+
+Everything in the table below except T3 is then a few lines of assertion with no image at all.
+
+| # | Test | How to check | Shot? |
+|---|---|---|---|
+| T1 | Six figures reachable from the selector and from their six `?fig=` deep links | Load each deep link, assert `__MR.fig()`. In Phase 1 the five disabled entries assert as disabled, not missing | no |
+| T2 | Every step reachable forward, backward, and by tapping its dot | Walk `goStep` 0→n→0, then click each dot; assert `__MR.step()` each time | no |
+| T3 | **The final step matches the reference PNG** | The one real visual test. Screenshot the stage at the final step, compare against `_briefs/figures/<stem>.png`. Report the pixel-difference percentage and attach the side-by-side | **SHOT** |
+| T4 | No label below 18 CSS px at a 1000 px stage | `__MR.labels()`, assert `min(px) >= 18`, every figure, every step, both levels. Report the minimum found | no |
+| T5 | A dot lights only after its step is finished | Assert `__MR.done(i)` against the dot's class at each step | no |
+| T6 | The chartreuse ring is on the next control, and on only one control | Count elements carrying the ring class; assert exactly 1 and that it is the next control | no |
+| T7 | Predict-before-press appears before every transition and dismisses on tap | Assert the prompt element exists before each transition and is gone after a tap | no |
+| T8 | `prefers-reduced-motion: reduce` → no tweens, captions intact, every step reachable | Emulate the media feature; assert `getAnimations()` is empty during a transition, caption text unchanged, T2 still passes | no |
+| T9 | Level switch changes wording on `transport` and `dogma`, absent on the other four | Diff the caption text across `setLevel`; assert the control is absent elsewhere | no |
+| T10 | No horizontal overflow at 390 px | `document.scrollWidth <= innerWidth`, every figure, every step | no |
+| T11 | Works with `localStorage` disabled or throwing | Stub it to throw; assert the page renders and T2 passes | no |
+| T12 | No console errors beyond the blocked Google Fonts fetch | Collect console events; assert the filtered list is empty | no |
+| T13 | Teaching view and Fill screen work on all six | Toggle each; assert the expected class and that captions are all visible in Teaching view | no |
+| T14 | Only `transform` and `opacity` animate | During each transition, read `getAnimations()` and assert every animated property name is in `{transform, opacity}`. **This replaces eyeballing the frame rate** | no |
+| T15 | The selector shows the six in §3's order, with the bridge lines | Read the selector's text content in DOM order; assert the sequence and that each bridge string is present | no |
+| T16 | Amplification reads without numbers on `gpcr`, `rtk`, `dogma` | Regex the full rendered text of those figures at every step for a digit used as a count or an order of magnitude; assert none. Separately assert the `gpcr` ligand element is present and its transform is unchanged from step 1 to the last step | no |
+| T17 | Each of the six memorable events gets its own slower beat | Assert the duration of those named transitions exceeds their neighbours', and that no other element has a running animation during them | no |
+| T18 | Nothing fades out at one place and in at another | For each traveller, assert opacity never reaches 0 between its start and end states | no |
+| T19 | Where ATP is spent, the split happens before what it pays for | Assert the ATP transition's end time is at or before the start time of the transition it funds | no |
+| T20 | The `rtk` already-paired note is on the still and as the DE closing state | Phase 2. Assert the note text is present in the DE closing state | no |
+
+**So a clean run produces one screenshot per figure** — the T3 comparison — **plus one per FAIL.**
+In Phase 1 that is a single screenshot if everything passes.
+
+Report the table verbatim with PASS or FAIL in a column, a one-line reason for each FAIL, and the
+measured minimum label size from T4 and the pixel-difference percentage from T3 even when they pass.
 
 ## 8. After the build, for Reid
+
+**First, the Phase 1 review gate.** When Phase 1 reports, Reid looks at the `gpcr` animation and the T3 comparison and decides three things: does the engine feel right on an iPad; is the amplification beat doing what §3 asks; and should Phase 2 run as one job or in batches. Nothing below happens until Phase 2 is finished.
 
 These are **not** part of this job. List them in the report:
 
