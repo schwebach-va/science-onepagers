@@ -7,18 +7,18 @@
 (function(){
 var BIO='Biology I and Advanced Biology I', DE='DE Bio 101';
 var V=[
- {id:'cell-check',tool:'Bio Tool #13',name:'Cell Check',page:'cell-check-diagnostic.html',yt:'rD5_JWUGtsQ',len:'3½ min',
+ {id:'cell-check',tool:'Bio Tool #13',name:'Cell Check',page:'cell-check-diagnostic.html',yt:'LNICQrp2ryI',len:'3½ min',
   title:'Watch me take Cell Check, missing some on purpose',
   canvas:{bio:'Module 2 → Lesson 7 → Cell Check — the two targets to study before the Module 2 test',
           de:'Unit 4 → Q1 Review · Chapter 4 → Cell Check — find which of the six ideas is costing you the others'}},
- {id:'checkpoint-companion',tool:'Bio Tool #9',name:'Checkpoint Companion',page:'checkpoint-companion.html',yt:'_Nm4dwPhHgk',len:'4½ min',
+ {id:'checkpoint-companion',tool:'Bio Tool #9',name:'Checkpoint Companion',page:'checkpoint-companion.html',yt:'kVYoPhHm95I',len:'4½ min',
   title:'A wrong answer is a SAM: watch me turn a miss into a finished SAM',
   canvas:{de:'Module 0A → Checkpoint Companion — watch a wrong answer become a SAM'}},
- {id:'membrane-patch',tool:'Bio Tool #5',name:'The Membrane Patch',page:'membrane-patch.html',yt:'cCRfwicuFIU',len:'4 min',
+ {id:'membrane-patch',tool:'Bio Tool #5',name:'The Membrane Patch',page:'membrane-patch.html',yt:'1z_1-M22a5o',len:'4 min',
   title:'Watch me build the membrane, predicting before every step',
   canvas:{bio:'Module 2 → Lesson 5 → The Membrane Patch — build it, turn it, run it',
           de:'Unit 5 → The Membrane Patch — build it, turn it, run it (posted when Unit 5 opens)'}},
- {id:'protein-route',tool:'Bio Tool #18',name:'The Protein Route',page:'protein-route.html',yt:'kSFTNMwHOEQ',len:'3½ min',
+ {id:'protein-route',tool:'Bio Tool #18',name:'The Protein Route',page:'protein-route.html',yt:'RPtCrglEBcQ',len:'3½ min',
   title:'Watch me run the Protein Route at the SOL Bio level',
   canvas:{bio:'Module 2 → Lesson 6 → The Protein Route — insulin out of the cell'}}
 ];
