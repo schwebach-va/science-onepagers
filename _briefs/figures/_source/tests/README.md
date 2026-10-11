@@ -9,6 +9,8 @@ cd _briefs/figures/_source/tests
 node mechanism-reel-tests.js                  # T1-T27 at 1180x820 and 390x844, ~9 minutes; prints the table
 node t3-shot.js && python3 t3-compare.py      # T3: the one screenshot, compared with ../../01-gpcr-pathway.png
 node smoke-svg-diff.js                        # the page's SVG against the still, line by line
+node mechanism-reel-tests-dogma.js            # Phase 2, dogma: the same table, ~10 minutes
+python3 t3-compare-dogma.py                   # T3 for dogma, from the suite's own screenshots, against ../../05-central-dogma.png
 ```
 
 `mechanism-reel-tests.js` requires Playwright at `/opt/node22/lib/node_modules/playwright`; change the
