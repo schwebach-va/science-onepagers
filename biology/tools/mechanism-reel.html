@@ -77,10 +77,16 @@ button{font:inherit;cursor:pointer}
 .sel li.fig + li.fig{border-top:1px solid var(--rule)}
 .selbtn{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem;width:100%;text-align:left;background:none;border:none;border-left:5px solid transparent;color:var(--ink);padding:.6rem .8rem .6rem .7rem;min-height:48px;font-family:var(--sans);font-size:.98rem;font-weight:600;line-height:1.25}
 .selbtn .n{flex:0 0 1.7rem;height:1.7rem;border-radius:50%;background:var(--rule);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700}
-.selbtn .t{flex:1 1 12rem;min-width:0}
+.selbtn .t{flex:1 1 12rem;min-width:0;font-weight:500}
+.selbtn .t b{font-weight:700}
+/* the permanent tool number, in the site's .idnum style at the numbered one-pager size (style.css is not loaded here) */
+.idnum{display:inline-block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2a7f7e;background:rgba(42,127,126,.09);border-radius:3px;padding:.12rem .4rem;white-space:nowrap}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .idnum{color:#7fc9c8;background:rgba(127,201,200,.12)}}
+:root[data-theme="dark"] .idnum{color:#7fc9c8;background:rgba(127,201,200,.12)}
 .selbtn .soon{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
 .selbtn:disabled{cursor:default;color:var(--ink-soft)}
 .selbtn:disabled .t{font-weight:500}
+.selbtn:disabled .t b{font-weight:600}
 .selbtn[aria-pressed="true"]{border-left-color:var(--bond);background:var(--bond-soft)}
 .selbtn[aria-pressed="true"] .n{background:var(--bond);color:var(--paper)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .selbtn[aria-pressed="true"] .n{color:#12100D}}
@@ -226,11 +232,11 @@ html[data-fill="1"] .stagecol{position:static}
 
 <a class="sop-back" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
 
-<p class="sop-eyebrow" id="eyebrow">Bio Tool #22 &middot; DE Bio 101 &middot; six mechanisms, signal to cell effect</p>
+<p class="sop-eyebrow" id="eyebrow">Bio Tools #22 and #24 to #28 &middot; DE Bio 101 &middot; six mechanisms, signal to cell effect</p>
 
 <section id="intro" class="narrow">
   <h1>The Mechanism Reel</h1>
-  <p class="lede">Six mechanisms, each drawn as a short series of states you step through. Predict before every step, then press <b>Next</b> and watch one thing move. Start with a signal that never gets in; end with what we do with all of it. Every step has its own link, so a step can be opened straight from a lesson page.</p>
+  <p class="lede">Six cell mechanisms, each one its own numbered Bio Tool. Each is a short series of states to step through: predict before every step, then press <b>Next</b> and watch one thing move. Any one of the six can be assigned on its own, by its number or by a link to a single step. Taken in order, they are also one sequence, from a signal arriving at the cell to the cell responding.</p>
   <ul class="lines" aria-label="The three ideas every animation is about">
     <li><span class="tag amp">Amplification</span><span>One input, an enormous output.</span></li>
     <li><span class="tag mov">Movement</span><span>Nothing is delivered. Everything arrives by moving.</span></li>
@@ -445,7 +451,7 @@ function syncCounter(){const c=$("counter");if(!c)return;if(F&&F.loop&&F.loop.co
 function tagHtml(f){return (f.tag||[]).map(([c,n])=>`<span class="tag ${c}">${esc(n)}</span>`).join("");}
 function renderSel(){const ol=$("sel");ol.innerHTML="";
   FIGS.forEach((f,i)=>{const li=el("li","fig");const b=el("button","selbtn");b.type="button";b.dataset.fig=f.key;
-    b.innerHTML=`<span class="n">${i+1}</span><span class="t">${esc(f.title)}</span>${tagHtml(f)}`+(f.enabled?"":`<span class="soon">coming next</span>`);
+    b.innerHTML=`<span class="n">${i+1}</span><span class="idnum">Bio Tool #${f.num}</span><span class="t"><b>${esc(f.subject)}</b> &middot; ${esc(f.title)}</span>${tagHtml(f)}`+(f.enabled?"":`<span class="soon">coming</span>`);
     if(!f.enabled){b.disabled=true;b.setAttribute("aria-disabled","true");}
     b.setAttribute("aria-pressed",String(F&&F.key===f.key));
     b.addEventListener("click",()=>setFig(f.key));li.appendChild(b);ol.appendChild(li);
@@ -525,7 +531,7 @@ function setFig(k){const f=FIGMAP[k];if(!f||!f.enabled)return false;
   st.fig=k;F=f;cur=clamp(perFig(k).step,0,F.n);save();
   buildStage();apply(cur,{jump:true});
   renderSel();renderLevelRow();renderDots();renderCard();syncNext();syncCtl();
-  $("eyebrow").innerHTML="Bio Tool #22 &middot; "+esc(F.eyebrow);
+  $("eyebrow").innerHTML="Bio Tool #"+F.num+" &middot; "+esc(F.eyebrow);
   syncUrl();
   if(cur===F.n&&F.loop&&!runonHold&&!blankOn)startLoop();runonHold=false;syncCtl();
   return true;}
@@ -797,7 +803,7 @@ const GPCR=(function(){
       api.after(tickIp3,400);api.after(tickCa,900);},
     clear(){loop.n3=0;loop.nCa=0;seed=7;const svg=$("stage").querySelector("svg");if(!svg)return;["#ip3Layer","#caLayer"].forEach(q=>{const L=svg.querySelector(q);if(L)L.innerHTML="";});},
     count(){return {ip3:loop.n3+1,ca:loop.nCa+4};}};
-  return {key:"gpcr",enabled:true,n:6,levels:true,
+  return {key:"gpcr",num:22,subject:"G protein-coupled receptor",enabled:true,n:6,levels:true,
     title:"A receptor that never lets the signal in",short:"G-protein-coupled receptor",eyebrow:"DE Bio 101 Unit 5 · G-protein-coupled receptors",
     tag:[["amp","Amplification"]],bridge:"A different kind of receptor answers in more than one way at once.",
     txt,capColor:CAPCOL,
@@ -964,7 +970,7 @@ const DOGMA=(function(){
   const DUR=[0,1300,750,2100,1200,1900,1300];
   const BEATS={3:{name:"the copy leaves the nucleus",from:1200,to:2100,ids:["msgO","msgI"]},5:{name:"the anticodon seats on its codon",from:400,to:1300,ids:["tB"]}};
   const FOCUS={1:["pol","pre1","pre2","pre3","pre4","pre5","b1","lg1"],2:["pre2","pre4","b2","lg2"],3:["msgI","b3","lg3"],4:["rL","rS","tA","b4","lg4"],5:["tB","lg5"],6:["bead0","bead1","bead2","bead3","bead4","bead5","b5","lg6"]};
-  return {key:"dogma",enabled:true,n:6,levels:true,
+  return {key:"dogma",num:27,subject:"central dogma of molecular genetics",enabled:true,n:6,levels:true,
     title:"One message, written out and then read aloud",short:"central dogma",eyebrow:"SOL Bio Module 4 · DE Bio 101 · gene expression",
     tag:[["amp","Amplification"],["mov","Movement"]],bridge:"And here is how we borrow that machinery ourselves.",
     txt,capColor:CAPCOL,
@@ -974,13 +980,14 @@ const DOGMA=(function(){
 })();
 
 /* the other four appear in the selector, in the arc's order, disabled until their Phase 2 build */
-const SOON=(key,title,tag,bridge,n,levels)=>({key,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",txt:()=>({caps:[],prompts:[],closing:"",counter:()=>""}),capColor:[],anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
+/* each carries its permanent Bio Tool number now, so an unbuilt entry reads as numbered and coming */
+const SOON=(key,num,subject,title,tag,bridge,n,levels)=>({key,num,subject,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",txt:()=>({caps:[],prompts:[],closing:"",counter:()=>""}),capColor:[],anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
 FIGS=[GPCR,
-  SOON("rtk","Two halves, then several answers at once",[["amp","Amplification"]],"Both of those end in things moving across a membrane.",4),
-  SOON("transport","Downhill is free. Uphill is paid for.",[["mov","Movement"],["nrg","Energy transfer"]],"Moving things uphill runs on ATP. Here is where the ATP comes from.",2,true),
-  SOON("etc","Electrons buy a gradient. The gradient buys the ATP.",[["nrg","Energy transfer"]],"A signal can also reach all the way to the genes.",6),
+  SOON("rtk",24,"receptor tyrosine kinase","Two halves, then several answers at once",[["amp","Amplification"]],"Both of those end in things moving across a membrane.",4),
+  SOON("transport",25,"channel and pump","Downhill is free. Uphill is paid for.",[["mov","Movement"],["nrg","Energy transfer"]],"Moving things uphill runs on ATP. Here is where the ATP comes from.",2,true),
+  SOON("etc",26,"electron transport chain","Electrons buy a gradient. The gradient buys the ATP.",[["nrg","Energy transfer"]],"A signal can also reach all the way to the genes.",6),
   DOGMA,
-  SOON("cloning","Cut both with one enzyme and the ends fit",[["mov","Movement"]],null,5)];
+  SOON("cloning",28,"cloning a gene","Cut both with one enzyme and the ends fit",[["mov","Movement"]],null,5)];
 
 init();
 })();
