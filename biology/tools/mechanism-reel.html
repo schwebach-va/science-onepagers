@@ -169,6 +169,31 @@ button{font:inherit;cursor:pointer}
 .predict .tagline{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.25rem}
 .watch{font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--solid-soft);border-radius:3px;padding:.7rem .9rem;margin:0 0 .9rem}
 .teachnote{background:var(--solid-soft);border-radius:3px;padding:.5rem .7rem;margin:0 0 .9rem}
+.cap{transition:transform .3s ease-in-out;transform-origin:left center}
+.cap.live{transform:scale(1.08)}
+@media (prefers-reduced-motion:reduce){.cap{transition:none}.cap.live{transform:none;background:var(--bond-soft)}}
+.predict .q{font-size:1.02rem;margin:0 0 .6rem}
+.choices{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 .6rem}
+.opt{text-align:left;background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.6rem .9rem;min-height:44px;color:var(--ink);font-family:var(--sans);font-weight:600;font-size:.95rem;line-height:1.3}
+.opt:hover{border-color:var(--bond)}
+.opt[aria-pressed="true"]{border-color:var(--bond);background:var(--bond-soft)}
+.predict .then{margin:0;font-size:.82rem}
+.predline{font-family:var(--sans);font-size:.95rem;line-height:1.45;background:var(--paper);border-radius:3px;padding:.6rem .8rem;margin:0 0 .9rem}
+.counter{font-family:var(--sans);font-size:.85rem;font-weight:700;color:var(--ink);text-align:center;margin:.25rem 0 0;min-height:1.3em;font-variant-numeric:tabular-nums}
+@media (min-width:900px){.counter{text-align:left}}
+.endscreen{border-top:1.5px solid var(--rule);padding-top:.9rem;margin-top:.4rem}
+.endscreen .q{font-family:var(--sans);font-weight:600;font-size:1rem;display:block;margin:0 0 .45rem}
+.endscreen textarea{display:block;width:100%;font:inherit;font-size:1rem;line-height:1.4;padding:.55rem .7rem;border:1.5px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink);margin:0 0 .9rem;resize:vertical}
+.endscreen .answer{font-family:var(--sans);font-weight:600;font-size:.95rem;border-left:4px solid var(--solid);padding:.3rem 0 .3rem .7rem;margin:0 0 .9rem}
+.endscreen .answer.no{border-left-color:var(--flag)}
+.acts{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem}
+.blanks{list-style:none;margin:0 0 1rem;padding:0}
+.blanks li{display:flex;align-items:center;gap:.6rem;padding:.4rem 0;border-bottom:1px solid var(--rule)}
+.blanks .bn{flex:0 0 1.6rem;height:1.6rem;border-radius:50%;background:var(--bond);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.85rem;display:inline-flex;align-items:center;justify-content:center}
+.blanks .line{flex:1 1 auto;height:1.6rem;border-bottom:2px solid var(--ink-soft)}
+.revealed{background:var(--solid-soft);border-radius:3px;padding:.6rem .8rem;margin:0 0 1rem}
+.revealed ol{margin:.3rem 0 .6rem 1.2rem;padding:0;font-family:var(--sans);font-size:.95rem}
+.sub{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .3rem}
 
 /* Fill screen: only the reel shows */
 html[data-fill="1"] .wrap{padding:0 .3rem;max-width:none}
@@ -177,6 +202,15 @@ html[data-fill="1"] #build{margin:0;min-height:100vh;min-height:100svh;backgroun
 #build:fullscreen{background:var(--paper);padding:0 .3rem}
 html[data-fill="1"] body{overflow:hidden}
 html[data-fill="1"] .stagecol{position:static}
+/* Fill screen on a wide frame (16:9 and wider): the stage takes the full height and the panel the rest */
+@media (min-width:900px) and (min-aspect-ratio:3/2){
+  html[data-fill="1"] #build{display:grid;grid-template-columns:minmax(0,1fr) minmax(20rem,34rem);gap:.8rem;height:100vh;height:100svh;min-height:0}
+  html[data-fill="1"] .stagecol{display:flex;flex-direction:column;height:100%;min-height:0;padding:.3rem 0}
+  html[data-fill="1"] .stagerow{flex:1 1 auto;min-height:0;display:flex;justify-content:center;max-width:none;margin:0}
+  html[data-fill="1"] .stage{height:100%;aspect-ratio:1.6;max-width:100%}
+  html[data-fill="1"] .stage svg{width:100%;height:100%}
+  html[data-fill="1"] .cardcol{height:100%;min-height:0;overflow:auto;margin:0;padding:.3rem .3rem .3rem 0}
+}
 
 @media (max-width:600px){
   .stagerow{max-width:calc(30vh * 1.6);max-width:calc(30svh * 1.6)}
@@ -202,7 +236,7 @@ html[data-fill="1"] .stagecol{position:static}
     <li><span class="tag mov">Movement</span><span>Nothing is delivered. Everything arrives by moving.</span></li>
     <li><span class="tag nrg">Energy transfer</span><span>Where ATP is spent: payment first, then the result.</span></li>
   </ul>
-  <p class="fine">Nothing is submitted. Progress saves on this device, so a second sitting picks up where the first stopped. Tap any step number to open that step; a number lights up only for a step you have finished. The button with the <b>green ring</b> is the one to press next. <b>Teaching view</b> shows every caption at once, for projecting. <b>Fill screen</b> hides everything but the reel.</p>
+  <p class="fine">Nothing is submitted. Progress saves on this device, so a second sitting picks up where the first stopped. Tap any step number to open that step; a number lights up only for a step you have finished. The button with the <b>green ring</b> is the one to press next. <b>Teaching view</b> shows every caption at once, for projecting. <b>Slow</b> runs every step at half speed. <b>Fill screen</b> hides everything but the reel. Your predictions and your one-sentence explanation stay on this device; nothing is sent anywhere and nothing is scored.</p>
 </section>
 
 <nav class="narrow" aria-label="The six figures, in order from signal to cell effect">
@@ -227,9 +261,11 @@ html[data-fill="1"] .stagecol{position:static}
       <button type="button" class="ghost" id="back" title="Back one step">&#9666; Back</button>
       <button type="button" class="go" id="next" title="Play the next step">Next &#9656;</button>
       <button type="button" class="ghost" id="play" title="Play the steps through, or pause">&#9654; Play</button>
+      <button type="button" class="ghost" id="slow" aria-pressed="false" title="Half speed, for recording and for talking over a step">Slow</button>
       <button type="button" class="ghost" id="fill" title="Fill the screen with the reel, or restore the page">Fill screen</button>
     </div>
     <p class="readout" id="readout" aria-live="polite"></p>
+    <p class="counter" id="counter" aria-live="polite"></p>
     <div class="steprow">
       <div class="dots" id="dots" role="group" aria-label="Steps: tap any number to open that step"></div>
       <button type="button" class="ghost" id="teach" aria-pressed="false" title="Shows every caption at once and no prediction prompts, for projecting.">Teaching view</button>
@@ -241,6 +277,7 @@ html[data-fill="1"] .stagecol{position:static}
 </div>
 
 <section class="narrow" style="margin-top:2rem">
+  <p class="fine" id="motionnote">Molecules move by random collisions; the arrows show where they end up, not that they aim.</p>
   <p class="fine">What the pictures simplify: molecules are drawn at the level of their parts, never their atoms. A hexagon is a sugar, a circle an amino acid or a phosphate, a pentagon a five-carbon sugar or a nucleotide, a rounded rectangle a base or a protein, a capsule a fatty-acid tail. The four classes keep their colours all year: <span style="color:var(--carb);font-weight:600">carbohydrate</span>, <span style="color:var(--pro);font-weight:600">protein</span>, <span style="color:var(--lip);font-weight:600">lipid</span>, <span style="color:var(--nuc);font-weight:600">nucleic acid</span>. Each animation ends on the same picture as the printed figure it was drawn from.</p>
   <p class="fine">The six figures are the author's own work, drawn from the mechanism in code on 2026-10-10. No published figure was traced, scanned, copied or adapted. The sources under each figure are the papers the mechanism is checked against, not pictures that were copied.</p>
 </section>
@@ -260,10 +297,13 @@ let REDUCE=!!(mq&&mq.matches);
 if(mq&&mq.addEventListener)mq.addEventListener("change",e=>{REDUCE=!!e.matches;});
 const KEY="mechreel";
 function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+/* greedy word wrap, the same result as Python's textwrap for these sentences */
+function wrap(s,n){const out=[];let line="";s.split(" ").forEach(w=>{if(!line)line=w;else if((line+" "+w).length<=n)line+=" "+w;else{out.push(line);line=w;}});if(line)out.push(line);return out;}
+/* a small seeded generator, so the jitter is the same on every visit and in every test */
+function rng(seed){let s=seed|0;return()=>{s=(s+0x6D2B79F5)|0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};}
 
 /* ================= the house style, as style.py states it =================
-   Every figure is 1600 user units wide. The type floor is 29 units: on a 1000 px-wide stage that
-   is 18 px. Colours are the four macromolecule classes and the Membrane Patch shading. */
+   Every figure is 1600 user units wide. The type floor is 29 units: 18 px on a 1000 px-wide stage. */
 const W=1600;
 const P={PAPER:"#F5F3EE",CARD:"#FFFFFF",INK:"#1D1A15",INKSOFT:"#5A544A",RULE:"#DDD8CE",SHELL:"#D2CCC0",
   CARB:"#C98A2E",PRO:"#1F7A8C",LIP:"#B85042",NUC:"#6B4E8C",
@@ -290,10 +330,8 @@ const MARKS={ar:P.INK,arg:P.GO,art:P.PRO,arf:P.FLAG,arc:P.CA,arb:P.CARB,arn:P.NU
 const ARROWDEFS="<defs>"+Object.keys(MARKS).map(k=>`<marker id="${k}" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1,1 L11,6 L1,11 z" fill="${MARKS[k]}"/></marker>`).join("")+"</defs>\n";
 function arrow(x1,y1,x2,y2,color,sw,marker,dash,o){const d=dash?` stroke-dasharray="${dash}"`:"";return `<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(x2)}" y2="${f1(y2)}" stroke="${color||P.INK}" stroke-width="${sw||5}"${d} marker-end="url(#${marker||"ar"})"${at(o)}/>\n`;}
 function curve(d,color,sw,marker,dash,o){const da=dash?` stroke-dasharray="${dash}"`:"";const m=marker?` marker-end="url(#${marker})"`:"";return `<path d="${d}" fill="none" stroke="${color||P.INK}" stroke-width="${sw||5}"${da}${m}${at(o)}/>\n`;}
-/* a numbered badge: the order to read the figure in */
 function badge(n,cx,cy,color,r,o){r=r||25;return `<g${at(o)}>`+circ(cx,cy,r,color||P.PRO)+`<text class="min" x="${f1(cx)}" y="${f1(cy+10)}" text-anchor="middle" fill="${P.PAPER}" font-weight="700">${n}</text>\n</g>\n`;}
 function grp(o,inner){return `<g${at(o)}>\n${inner}</g>\n`;}
-/* a phospholipid bilayer, component level: circle head, two capsule tails. y is the top of the outer leaflet. */
 function bilayer(x,y,w,nheads,head_r,tail_len,gap){head_r=head_r||13;tail_len=tail_len||40;gap=gap||34;let svg="";const n=nheads||Math.floor(w/gap);const inner_y=y+2*head_r+2*tail_len+18;
   for(let i=0;i<n;i++){const cx=x+gap/2+i*gap;svg+=circ(cx,y+head_r,head_r,P.HEAD,P.HEADEDGE,2);
     for(const off of[-5.5,5.5])svg+=rrect(cx+off-4.5,y+2*head_r-2,9,tail_len,4.5,P.TAIL);
@@ -306,9 +344,8 @@ function head(h,title,eyebrow){return `<svg xmlns="http://www.w3.org/2000/svg" x
 <rect x="3" y="3" width="${W-6}" height="${h-6}" fill="none" stroke="${P.RULE}" stroke-width="3" rx="6"/>
 <text class="eyebrow" x="52" y="62">${esc(eyebrow.toUpperCase())}</text>
 <text class="ttl" x="52" y="118">${esc(title)}</text>
-<g stroke-linecap="round" stroke-linejoin="round">
+<g id="mr-main" stroke-linecap="round" stroke-linejoin="round">
 `+ARROWDEFS;}
-/* the footer carries the closing caption, the sources (each a real link) and the rights line */
 function foot(h,caption,sources,o){let out=`</g>
 <line x1="52" y1="${h-112}" x2="${W-52}" y2="${h-112}" stroke="${P.RULE}" stroke-width="3"/>
 `+text(52,h-62,caption,"key","start",null,o);
@@ -319,59 +356,89 @@ function foot(h,caption,sources,o){let out=`</g>
   out+=text(W-52,h-22,"© 2026 J. R. Schwebach · CC BY-NC 4.0","min","end",P.INKSOFT);
   return out+"</svg>\n";}
 
-/* ================= state ================= */
-let st={fig:"gpcr",level:"sol",teach:false,per:{}};
-function perFig(k){if(!st.per[k])st.per[k]={step:0,done:{}};return st.per[k];}
+/* ================= state, on this device only ================= */
+let st={fig:"gpcr",level:"sol",teach:false,slow:false,per:{}};
+function perFig(k){if(!st.per[k])st.per[k]={step:0,done:{},pred:{},explain:"",enter:null};const p=st.per[k];if(!p.pred)p.pred={};if(p.explain==null)p.explain="";if(p.enter===undefined)p.enter=null;return p;}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 function load(){try{const raw=localStorage.getItem(KEY);if(!raw)return;const s=JSON.parse(raw);if(!s||typeof s!=="object")return;
-  if(typeof s.fig==="string")st.fig=s.fig;if(s.level==="de"||s.level==="sol")st.level=s.level;st.teach=!!s.teach;
-  if(s.per&&typeof s.per==="object")for(const k in s.per){const p=s.per[k];if(p&&typeof p==="object")st.per[k]={step:+p.step||0,done:Object.assign({},p.done||{})};}}catch(e){}}
+  if(typeof s.fig==="string")st.fig=s.fig;if(s.level==="de"||s.level==="sol")st.level=s.level;st.teach=!!s.teach;st.slow=!!s.slow;
+  if(s.per&&typeof s.per==="object")for(const k in s.per){const p=s.per[k];if(p&&typeof p==="object")st.per[k]={step:+p.step||0,done:Object.assign({},p.done||{}),pred:Object.assign({},p.pred||{}),explain:typeof p.explain==="string"?p.explain.slice(0,400):"",enter:p.enter==="yes"||p.enter==="no"?p.enter:null};}}catch(e){}}
 
 let FIGS=[],FIGMAP={};
-let F=null,EL={},cur=0;
-let busy=false,busyT=null;
+let F=null,EL={},TOP=[],cur=0;
+let busy=false,busyT=null,focusLive=false;
 let playing=false,playT=null,loopOn=false;
-let fillOn=false,runonHold=false;
-const HOLD=1500;
-const T={list:[],after(fn,ms){const id=setTimeout(()=>{T.list=T.list.filter(x=>x!==id);fn();},ms);T.list.push(id);return id;},clear(){T.list.forEach(clearTimeout);T.list=[];}};
+let fillOn=false,runonHold=false,blankOn=false,revealList=false;
+const HOLD=1500,FOCUS_HOLD=1500;
+const SP=()=>st.slow?2:1;
+function timers(){const o={list:[],after(fn,ms){const id=setTimeout(()=>{o.list=o.list.filter(x=>x!==id);fn();},ms);o.list.push(id);return id;},clear(){o.list.forEach(clearTimeout);o.list=[];}};return o;}
+const T=timers();   /* the run-on's timers */
+const ST=timers();  /* a step's own timers: waypoints and the focus hold */
+const TXT=()=>F.txt(st.level);
 
 /* ================= the step engine =================
    A step is a state, not a movie. apply(k) sets every moving element to its absolute position for
-   state k; the browser tweens transform and opacity between states, and nothing else. */
+   state k; the browser tweens transform and opacity between states, and nothing else. A mover may
+   carry waypoints, so it wanders instead of flying straight. While a step plays, its own parts are
+   in focus: they scale up a little, everything else dims to half, and it all settles when the
+   step finishes. */
+function setTr(e,du,d){e.style.transition=du?`transform ${du}ms ease-in-out ${d||0}ms, opacity ${du}ms ease-in-out ${d||0}ms`:"none";}
+function blankHidden(id){return blankOn&&F.blankHide&&F.blankHide.indexOf(id)>=0;}
+function focusSet(k){return new Set((F.focus&&F.focus[k])||[]);}
 function buildStage(){const stage=$("stage");stage.innerHTML=F.svg(st.level);stage.setAttribute("aria-label",F.title);
-  EL={};F.anim.forEach(id=>{const e=stage.querySelector("#"+id);if(e){e.classList.add("mv");EL[id]=e;}});}
-function apply(k,opts){opts=opts||{};const S=F.state(k,st.level);const fwd=k===cur+1;const base=F.dur[k]||700;
-  const tween=!REDUCE&&!opts.jump&&k!==cur;let end=0;
-  for(const id of F.anim){const e=EL[id];if(!e)continue;const v=S[id]||{};const x=v.x||0,y=v.y||0,r=v.r||0,o=v.o==null?1:v.o;
-    let d=0,du=0;
-    if(tween){if(fwd){const q=F.seq[k]&&F.seq[k][id];d=q&&q.d||0;du=q&&q.dur||base;}else du=600;}
-    e.style.transition=du?`transform ${du}ms ease-in-out ${d}ms, opacity ${du}ms ease-in-out ${d}ms`:"none";
-    e.style.transform=`translate(${x}px, ${y}px)`+(r?` rotate(${r}deg)`:"");
-    e.style.opacity=String(o);end=Math.max(end,d+du);}
+  EL={};F.anim.forEach(id=>{const e=stage.querySelector("#"+id);if(e){e.classList.add("mv");EL[id]=e;}});
+  const main=stage.querySelector("#mr-main");TOP=main?Array.from(main.children):[];
+  if(blankOn){const names=F.blanks(st.level);names.forEach((b,i)=>{const t=stage.querySelector("#"+b.id);if(t){t.dataset.full=t.textContent;t.textContent="( "+(i+1)+" )";}});
+    (F.blankClear||[]).forEach(id=>{const t=stage.querySelector("#"+id);if(t)t.textContent="";});}}
+function apply(k,opts){opts=opts||{};const S=F.state(k,st.level);const fwd=k===cur+1;const base=(F.dur[k]||700)*SP();
+  const tween=!REDUCE&&!opts.jump&&k!==cur;const fs=opts.focus&&!REDUCE?focusSet(k):null;ST.clear();let end=0;
+  for(const id of F.anim){const e=EL[id];if(!e)continue;const v=S[id]||{};const x=v.x||0,y=v.y||0,r=v.r||0;let o=v.o==null?1:v.o;if(blankHidden(id))o=0;
+    let d=0,du=0,way=null;
+    if(tween){if(fwd){const q=F.seq[k]&&F.seq[k][id];d=(q&&q.d||0)*SP();du=(q&&q.dur||F.dur[k]||700)*SP();way=q&&q.way||null;}else du=600*SP();}
+    const sc=fs&&fs.has(id)?" scale(1.3)":"";
+    const tf=(px,py)=>`translate(${px}px, ${py}px)`+(r?` rotate(${r}deg)`:"")+sc;
+    if(way&&way.length){const seg=du/(way.length+1);setTr(e,seg,d);e.style.transform=tf(way[0][0],way[0][1]);e.style.opacity=String(o);
+      way.slice(1).concat([[x,y]]).forEach((w,i)=>ST.after(()=>{setTr(e,seg,0);e.style.transform=tf(w[0],w[1]);},d+seg*(i+1)));}
+    else{setTr(e,du,d);e.style.transform=tf(x,y);e.style.opacity=String(o);}
+    end=Math.max(end,d+du);}
   cur=k;return end;}
+/* focus: dim every top-level part of the drawing that is not part of this step */
+function dimAll(k){const fs=focusSet(k);const S=F.state(k,st.level);const dur=REDUCE?0:300*SP();
+  TOP.forEach(c=>{const keep=(c.id&&fs.has(c.id))||Array.from(fs).some(id=>c.querySelector("#"+id));if(keep)return;
+    const base=(c.id&&EL[c.id])?((S[c.id]||{}).o==null?1:(S[c.id]||{}).o):parseFloat(c.getAttribute("opacity")||"1");
+    c.style.transition=dur?`opacity ${dur}ms ease-in-out`:"none";c.style.opacity=String(blankHidden(c.id)?0:base*0.5);c.dataset.dim="1";});
+  focusLive=true;}
+function undimAll(){if(!focusLive)return;const S=F.state(cur,st.level);const dur=REDUCE?0:300*SP();
+  TOP.forEach(c=>{if(!c.dataset.dim)return;delete c.dataset.dim;c.style.transition=dur?`opacity ${dur}ms ease-in-out`:"none";
+    if(c.id&&EL[c.id]){const o=(S[c.id]||{}).o==null?1:(S[c.id]||{}).o;c.style.opacity=String(blankHidden(c.id)?0:o);}else c.style.opacity="";});
+  focusSet(cur).forEach(id=>{const e=EL[id];if(!e)return;const v=S[id]||{};setTr(e,dur,0);e.style.transform=`translate(${v.x||0}px, ${v.y||0}px)`+(v.r?` rotate(${v.r}deg)`:"");});
+  focusLive=false;}
 function goStep(k,opts){opts=opts||{};k=clamp(k,0,F.n);
-  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}
+  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();undimAll();
   const jump=!!opts.jump||Math.abs(k-cur)!==1;
-  const end=apply(k,{jump});busy=end>0;
+  const end=apply(k,{jump,focus:!jump});if(!jump)dimAll(k);busy=end>0;
   perFig(F.key).step=k;save();syncUrl();renderDots();renderCard();syncNext();syncCtl();
   const fin=()=>{busy=false;busyT=null;
+    if(!jump){if(REDUCE)ST.after(undimAll,FOCUS_HOLD*SP());else undimAll();}
     if(opts.markDone&&k>0){perFig(F.key).done[k]=true;save();renderDots();}
-    if(cur===F.n&&F.loop){startLoop();}
+    if(cur===F.n&&F.loop&&!blankOn&&!runonHold)startLoop();runonHold=false;
     renderCard();syncNext();syncCtl();
-    if(playing&&cur<F.n)playT=setTimeout(()=>{playT=null;if(playing&&!busy&&cur<F.n)goStep(cur+1,{scroll:false});},HOLD);};
+    if(playing&&cur<F.n)playT=setTimeout(()=>{playT=null;if(playing&&!busy&&cur<F.n)goStep(cur+1,{scroll:false});},HOLD*SP());};
   if(busy)busyT=setTimeout(fin,end+40);else fin();
   if(opts.scroll!==false)scrollToCard();}
 function revealNext(){if(busy||cur>=F.n)return false;goStep(cur+1,{markDone:true});return true;}
 function back(){if(cur<=0)return false;goStep(cur-1);return true;}
 
-/* the amplification run-on after the last step: the figure owns it, the engine owns its timers */
-function startLoop(){if(!F||!F.loop||cur!==F.n||loopOn)return;loopOn=true;playing=true;F.loop.start({after:T.after,reduce:()=>REDUCE,on:()=>loopOn});syncCtl();}
+/* the run-on after the last step: the figure owns it, the engine owns its timers and the counter */
+function startLoop(){if(!F||!F.loop||cur!==F.n||loopOn||blankOn)return;loopOn=true;playing=true;
+  F.loop.start({after:(fn,ms)=>T.after(fn,ms*SP()),sp:SP,reduce:()=>REDUCE,on:()=>loopOn,count:syncCounter});syncCtl();}
 function pauseLoop(){loopOn=false;T.clear();}
-function stopLoop(){loopOn=false;T.clear();if(F&&F.loop)F.loop.clear();}
+function stopLoop(){loopOn=false;T.clear();if(F&&F.loop)F.loop.clear();syncCounter();}
 function setPlaying(on){on=!!on;
   if(on){playing=true;if(cur>=F.n){startLoop();}else if(!busy){goStep(cur+1,{scroll:false});}}
   else{playing=false;if(playT){clearTimeout(playT);playT=null;}pauseLoop();}
   syncCtl();}
+function syncCounter(){const c=$("counter");if(!c)return;if(F&&F.loop&&F.loop.count&&cur===F.n&&!blankOn){const n=F.loop.count();c.textContent=TXT().counter(n.ip3,n.ca);}else c.textContent="";}
 
 /* ================= rendering ================= */
 function tagHtml(f){return (f.tag||[]).map(([c,n])=>`<span class="tag ${c}">${esc(n)}</span>`).join("");}
@@ -387,37 +454,62 @@ let LEVELROW=null;
 function renderLevelRow(){if(!LEVELROW){LEVELROW=$("levelrow");LEVELROW.classList.remove("hidden");}
   if(F.levels){if(!LEVELROW.isConnected)$("build").parentNode.insertBefore(LEVELROW,$("build"));LEVELROW.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));}
   else if(LEVELROW.isConnected)LEVELROW.remove();}
-function renderDots(){const d=$("dots");d.innerHTML="";const per=perFig(F.key);
+function renderDots(){const d=$("dots");d.innerHTML="";const per=perFig(F.key),caps=TXT().caps;
   for(let i=1;i<=F.n;i++){const b=el("button","");b.type="button";b.textContent=i;const done=!!per.done[i];
-    b.setAttribute("aria-label","Step "+i+": "+F.caps[i-1]+(done?" (done)":""));
+    b.setAttribute("aria-label","Step "+i+": "+caps[i-1]+(done?" (done)":""));
     if(i===cur){b.classList.add("cur");b.setAttribute("aria-current","step");}
     if(done)b.classList.add("done");
     b.addEventListener("click",()=>goStep(i));d.appendChild(b);}}
 function capItem(i,cls){const li=el("li","cap"+(cls?" "+cls:""));li.dataset.step=i;
-  li.innerHTML=`<span class="b" style="background:${F.capColor[i-1]}">${i}</span><span>${esc(F.caps[i-1])}</span>`;return li;}
-function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach;
+  li.innerHTML=`<span class="b" style="background:${F.capColor[i-1]}">${i}</span><span>${esc(TXT().caps[i-1])}</span>`;return li;}
+function optBtn(label,pressed,fn){const b=el("button","opt");b.type="button";b.textContent=label;b.setAttribute("aria-pressed",String(!!pressed));b.addEventListener("click",fn);return b;}
+function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X=TXT(),per=perFig(F.key);
+  if(blankOn){card.appendChild(el("div","meta",`<span>Label it from memory</span><span>${esc(F.short)}</span>`));
+    card.appendChild(el("h2","",esc(F.title)+" "+tagHtml(F)));
+    card.appendChild(el("p","","Every label on the picture is now a numbered blank. Say or write what each one is, then reveal."));
+    const ol=el("ol","blanks");F.blanks(st.level).forEach((b,i)=>{ol.appendChild(el("li","",`<span class="bn">${i+1}</span><span class="line"></span>`));});card.appendChild(ol);
+    const row=el("div","acts");const r=el("button","go");r.type="button";r.id="reveal";r.textContent="Reveal the labels";r.addEventListener("click",()=>setBlank(false,true));row.appendChild(r);
+    const q=el("button","ghost");q.type="button";q.textContent="Back to the reel";q.addEventListener("click",()=>setBlank(false,false));row.appendChild(q);card.appendChild(row);return;}
   card.appendChild(el("div","meta",`<span>${cur===0?"Start":"Step "+cur+" of "+F.n}</span><span>${esc(F.short)}</span>`));
   card.appendChild(el("h2","",esc(F.title)+" "+tagHtml(F)));
+  if(revealList){const names=F.blanks(st.level);const box=el("div","revealed");box.id="revealed";box.appendChild(el("p","sub","The labels"));
+    const ol=el("ol","");names.forEach(b=>ol.appendChild(el("li","",esc(b.name))));box.appendChild(ol);
+    const d=el("button","ghost");d.type="button";d.textContent="Done";d.addEventListener("click",()=>{revealList=false;renderCard();});box.appendChild(d);card.appendChild(box);}
   if(Tv){card.appendChild(el("p","fine teachnote","Teaching view: every caption at once, no prompts. Press Next, or tap a step number, and talk."));
-    if(F.start)card.appendChild(el("p","",esc(F.start)));
-    const ul=el("ul","caps");for(let i=1;i<=F.n;i++)ul.appendChild(capItem(i,i===cur?"cur":""));card.appendChild(ul);
-    card.appendChild(el("p","closing",esc(F.closing)));
-    if(cur===F.n&&F.watch)card.appendChild(el("p","watch",esc(F.watch)));
+    if(X.start)card.appendChild(el("p","",esc(X.start)));
+    const ul=el("ul","caps");for(let i=1;i<=F.n;i++)ul.appendChild(capItem(i,i===cur?(busy?"cur live":"cur"):""));card.appendChild(ul);
+    card.appendChild(el("p","closing",esc(X.closing)));
+    if(cur===F.n&&!busy){if(X.watch)card.appendChild(el("p","watch",esc(X.watch)));if(F.blanks){const b=el("button","ghost");b.type="button";b.id="blankBtn";b.textContent="Label it from memory";b.addEventListener("click",()=>setBlank(true));card.appendChild(b);}}
     return;}
-  if(cur===0){if(F.start)card.appendChild(el("p","",esc(F.start)));}
-  else{const ul=el("ul","caps");for(let i=1;i<=cur;i++)ul.appendChild(capItem(i,i===cur?"cur":"dim"));card.appendChild(ul);}
-  if(cur<F.n&&!busy){const k=cur+1;const p=el("p","predict",`<span class="tagline">Predict before you press</span>${esc(F.prompts[k-1])} Then press <b>Next</b>.`);p.dataset.for=k;p.id="predict";card.appendChild(p);}
-  if(cur===F.n&&!busy){card.appendChild(el("p","closing",esc(F.closing)));if(F.watch)card.appendChild(el("p","watch",esc(F.watch)));}}
+  if(cur===0){if(X.start)card.appendChild(el("p","",esc(X.start)));}
+  else{const ul=el("ul","caps");for(let i=1;i<=cur;i++)ul.appendChild(capItem(i,i===cur?(busy?"cur live":"cur"):"dim"));card.appendChild(ul);
+    if(!busy){const P=X.prompts[cur-1];const pr=el("p","predline");pr.id="predline";
+      const chosen=per.pred[cur];pr.innerHTML=(chosen!=null&&P.choices[chosen]!=null?`<b>You predicted:</b> ${esc(P.choices[chosen])}<br>`:"")+`<b>What happened:</b> ${esc(P.happened)}`;card.appendChild(pr);}}
+  if(cur<F.n&&!busy){const k=cur+1,P=X.prompts[k-1];const p=el("div","predict");p.id="predict";p.dataset.for=k;
+    p.innerHTML=`<span class="tagline">Predict before you press</span><p class="q">${esc(P.q)}</p>`;
+    const row=el("div","choices");P.choices.forEach((c,i)=>row.appendChild(optBtn(c,per.pred[k]===i,()=>{per.pred[k]=i;save();renderCard();})));p.appendChild(row);
+    p.appendChild(el("p","fine then","Then press Next. Next works whether or not you chose; a choice is only kept on this device."));card.appendChild(p);}
+  if(cur===F.n&&!busy){card.appendChild(el("p","closing",esc(X.closing)));if(X.watch)card.appendChild(el("p","watch",esc(X.watch)));
+    if(X.end){const E=X.end,box=el("div","endscreen");box.id="endscreen";
+      const lab=el("label","",`<span class="q">${esc(E.explain)}</span>`);const ta=document.createElement("textarea");ta.id="explain";ta.rows=2;ta.maxLength=400;ta.value=per.explain||"";ta.placeholder="One sentence, in your own words. It stays on this device.";
+      ta.addEventListener("input",()=>{per.explain=ta.value.slice(0,400);save();});lab.appendChild(ta);box.appendChild(lab);
+      box.appendChild(el("p","q",esc(E.check.q)));const row=el("div","choices");row.id="enterRow";
+      E.check.choices.forEach((c,i)=>row.appendChild(optBtn(c,per.enter===(i===0?"yes":"no"),()=>{per.enter=i===0?"yes":"no";save();renderCard();})));box.appendChild(row);
+      if(per.enter){const a=el("p","answer "+(per.enter===E.check.correct?"ok":"no"));a.id="enterAnswer";a.textContent=E.check.answer;box.appendChild(a);}
+      if(F.blanks){const b=el("button","ghost");b.type="button";b.id="blankBtn";b.textContent="Label it from memory";b.addEventListener("click",()=>setBlank(true));box.appendChild(b);}
+      card.appendChild(box);}}}
 let nextEl=null;
-function syncNext(){const t=cur<F.n?$("next"):$("play");if(t===nextEl&&t.classList.contains("next"))return;
-  document.querySelectorAll(".next").forEach(e=>e.classList.remove("next"));nextEl=t;t.classList.add("next");}
-function syncCtl(){$("back").disabled=cur<=0;$("next").disabled=cur>=F.n;
-  const on=cur>=F.n?loopOn:playing;$("play").innerHTML=on?"&#10074;&#10074; Pause":"&#9654; Play";$("play").setAttribute("aria-pressed",String(on));
-  if(cur>=F.n&&!F.loop)$("play").disabled=true;else $("play").disabled=false;
-  $("teach").setAttribute("aria-pressed",String(!!st.teach));
+function syncNext(){const t=blankOn?$("card").querySelector("#reveal")||$("play"):cur<F.n?$("next"):$("play");if(t===nextEl&&t.classList.contains("next"))return;
+  document.querySelectorAll(".next").forEach(e=>e.classList.remove("next"));nextEl=t;if(t)t.classList.add("next");}
+function syncCtl(){$("back").disabled=cur<=0||blankOn;$("next").disabled=cur>=F.n||blankOn;
+  const on=cur>=F.n?loopOn:playing;$("play").innerHTML=on?"&#10074;&#10074; Pause":"&#9654; Play";$("play").setAttribute("aria-pressed",String(on));$("play").disabled=blankOn||(cur>=F.n&&!F.loop);
+  $("teach").setAttribute("aria-pressed",String(!!st.teach));$("slow").setAttribute("aria-pressed",String(!!st.slow));
   $("fill").textContent=fillOn?"Restore page":"Fill screen";$("fill").setAttribute("aria-pressed",String(fillOn));
-  const ro=$("readout");if(cur>=F.n&&F.loop)ro.textContent=loopOn?"Run-on playing: the enzyme keeps cutting. Pause stops it. Back, or any step number, clears it.":"Run-on paused. Play starts it again. Back, or any step number, clears it.";
-  else ro.textContent="";}
+  const ro=$("readout");
+  if(blankOn)ro.textContent="Labels blanked. Reveal when you are ready; Back to the reel keeps them blank.";
+  else if(cur>=F.n&&F.loop)ro.textContent=loopOn?"Run-on playing: the enzyme keeps cutting. Pause stops it. Back, or any step number, clears it.":"Run-on paused. Play starts it again. Back, or any step number, clears it.";
+  else ro.textContent="";
+  syncCounter();}
 function scrollToCard(){if(fillOn)return;const card=$("card");
   const sticky=getComputedStyle($("stagecol")).position==="sticky",stacked=window.innerWidth<900;
   const off=(sticky&&stacked?$("stagecol").offsetHeight:0)+10;
@@ -427,24 +519,30 @@ function scrollToCard(){if(fillOn)return;const card=$("card");
 
 /* ================= switches ================= */
 function setFig(k){const f=FIGMAP[k];if(!f||!f.enabled)return false;
-  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}playing=false;busy=false;
+  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();playing=false;busy=false;focusLive=false;
   st.fig=k;F=f;cur=clamp(perFig(k).step,0,F.n);save();
   buildStage();apply(cur,{jump:true});
   renderSel();renderLevelRow();renderDots();renderCard();syncNext();syncCtl();
   $("eyebrow").innerHTML="Bio Tool #22 &middot; "+esc(F.eyebrow);
   syncUrl();
-  if(cur===F.n&&F.loop&&!runonHold)startLoop();runonHold=false;syncCtl();
+  if(cur===F.n&&F.loop&&!runonHold&&!blankOn)startLoop();runonHold=false;syncCtl();
   return true;}
-/* every step has its own link: ?anim=<key>&step=<n>, and &runon=paused opens the last step with the run-on waiting on Play */
-function syncUrl(){try{const u=new URL(location.href);u.searchParams.delete("fig");u.searchParams.delete("runon");u.searchParams.set("anim",F.key);u.searchParams.set("step",String(cur));history.replaceState(null,"",u);}catch(e){}}
-function setLevel(l){l=l==="de"?"de":"sol";if(l===st.level)return;st.level=l;save();renderLevelRow();
-  if(F.levels){const k=cur;buildStage();cur=-1;apply(k,{jump:true});renderDots();renderCard();}}
-function setTeach(on){st.teach=!!on;save();syncCtl();renderCard();}
+/* every step has its own link: ?anim=<key>&step=<n>&level=<sol|de>; &runon=paused opens the last step with
+   the run-on waiting on Play; &labels=blank opens the blank-label still */
+function syncUrl(){try{const u=new URL(location.href);["fig","runon","labels"].forEach(p=>u.searchParams.delete(p));u.searchParams.set("anim",F.key);u.searchParams.set("step",String(cur));if(F.levels)u.searchParams.set("level",st.level);else u.searchParams.delete("level");if(blankOn)u.searchParams.set("labels","blank");history.replaceState(null,"",u);}catch(e){}}
+function rebuild(){const k=cur;buildStage();cur=-1;apply(k,{jump:true});focusLive=false;renderDots();renderCard();syncNext();syncCtl();syncUrl();}
+function setLevel(l){l=l==="de"?"de":"sol";if(l===st.level)return;st.level=l;save();renderLevelRow();if(F.levels){stopLoop();rebuild();if(cur===F.n&&F.loop&&!blankOn)startLoop();}}
+function setTeach(on){st.teach=!!on;save();syncCtl();renderCard();syncNext();}
+function setSlow(on){st.slow=!!on;save();syncCtl();}
+function setBlank(on,reveal){on=!!on;if(on===blankOn){if(!on&&reveal){revealList=true;renderCard();}return;}
+  blankOn=on;stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}ST.clear();busy=false;playing=false;
+  if(on){revealList=false;cur=F.n;perFig(F.key).step=cur;save();}else revealList=!!reveal;
+  rebuild();if(!on)scrollToCard();}
 function setFill(on){fillOn=!!on;document.documentElement.setAttribute("data-fill",fillOn?"1":"0");syncCtl();
   try{const b=$("build");if(fillOn&&!document.fullscreenElement){if(b.requestFullscreen)b.requestFullscreen().catch(()=>{});else if(b.webkitRequestFullscreen)b.webkitRequestFullscreen();}
     else if(!fillOn&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}}
 document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&fillOn)setFill(false);});
-function reset(){st.per[F.key]={step:0,done:{}};save();goStep(0,{jump:true});}
+function reset(){st.per[F.key]={step:0,done:{},pred:{},explain:"",enter:null};save();if(blankOn){blankOn=false;revealList=false;}goStep(0,{jump:true});}
 
 /* ================= the test hook ================= */
 function opacityOf(e){let o=1;while(e&&e.nodeType===1&&e.tagName.toLowerCase()!=="svg"){o*=parseFloat(getComputedStyle(e).opacity);e=e.parentNode;}return o;}
@@ -452,85 +550,129 @@ function labels(){const svg=$("stage").querySelector("svg");if(!svg)return[];con
   return Array.from(svg.querySelectorAll("text")).map(t=>{const units=parseFloat(getComputedStyle(t).fontSize);let minRun=units;
     t.querySelectorAll("tspan").forEach(ts=>{const u=parseFloat(getComputedStyle(ts).fontSize);if(u<minRun)minRun=u;});
     const r=t.getBoundingClientRect();
-    return {text:t.textContent.trim(),units,px:+(units*k).toFixed(2),minRunPx:+(minRun*k).toFixed(2),screenPx:+(units*sw/vb.width).toFixed(2),x:r.x,y:r.y,w:r.width,h:r.height,visible:opacityOf(t)>0.01};});}
+    return {text:t.textContent.trim(),id:t.id||null,units,px:+(units*k).toFixed(2),minRunPx:+(minRun*k).toFixed(2),screenPx:+(units*sw/vb.width).toFixed(2),x:r.x,y:r.y,w:r.width,h:r.height,visible:opacityOf(t)>0.01};});}
 function colours(){const out=new Set();$("stage").querySelectorAll("*").forEach(e=>{for(const a of["fill","stroke"]){const v=e.getAttribute(a);if(v&&v!=="none"&&v[0]==="#")out.add(v.toUpperCase());}});return Array.from(out).sort();}
 function state(){const els={};F.anim.forEach(id=>{const e=EL[id];if(e)els[id]={t:e.style.transform,o:e.style.opacity};});
-  return {fig:F.key,step:cur,level:st.level,teach:!!st.teach,fill:fillOn,playing,loop:loopOn,busy,done:Object.assign({},perFig(F.key).done),els};}
-function elInfo(id){const e=$("stage").querySelector("#"+id);if(!e)return null;const r=e.getBoundingClientRect();return {transform:e.style.transform,opacity:opacityOf(e),x:r.x,y:r.y,w:r.width,h:r.height};}
+  return {fig:F.key,step:cur,level:st.level,teach:!!st.teach,slow:!!st.slow,fill:fillOn,blank:blankOn,playing,loop:loopOn,busy,done:Object.assign({},perFig(F.key).done),pred:Object.assign({},perFig(F.key).pred),els};}
+function elInfo(id){const e=$("stage").querySelector("#"+id);if(!e)return null;const r=e.getBoundingClientRect();return {transform:e.style.transform,opacity:opacityOf(e),styleOpacity:e.style.opacity,x:r.x,y:r.y,w:r.width,h:r.height};}
+function focusInfo(){const scaled=F.anim.filter(id=>EL[id]&&/scale\(/.test(EL[id].style.transform));const dimmed=TOP.filter(c=>c.dataset.dim).map(c=>c.id||c.tagName.toLowerCase());return {live:focusLive,scaled,dimmed,dimmedCount:dimmed.length,topCount:TOP.length};}
 window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title,enabled:!!f.enabled,steps:f.n,levels:!!f.levels})),
-  step:()=>cur,goStep:i=>goStep(i,{scroll:false}),steps:()=>F.n,done:i=>!!perFig(F.key).done[i],
+  step:()=>cur,goStep:(i,o)=>goStep(i,Object.assign({scroll:false},o||{})),steps:()=>F.n,done:i=>!!perFig(F.key).done[i],
   level:()=>st.level,setLevel,labels,colours,state,reduced:()=>REDUCE,
   busy:()=>busy,playing:()=>(cur>=F.n?loopOn:playing),setPlaying,next:revealNext,back,
-  prompt:()=>{const p=$("card").querySelector(".predict");return p?+p.dataset.for:null;},
-  teach:()=>!!st.teach,setTeach,fill:()=>fillOn,setFill,reset,stopLoop:()=>{stopLoop();playing=false;syncCtl();},readout:()=>$("readout").textContent,
-  timing:()=>({dur:F.dur.slice(),seq:F.seq,beats:F.beats,hold:HOLD}),captions:()=>F.caps.slice(),closing:()=>F.closing,
+  prompt:()=>{const p=$("card").querySelector("#predict");return p?+p.dataset.for:null;},
+  choices:k=>TXT().prompts[k-1]?TXT().prompts[k-1].choices.slice():[],predict:(k,c)=>{perFig(F.key).pred[k]=c;save();renderCard();},pred:k=>{const v=perFig(F.key).pred[k];return v==null?null:v;},
+  happened:k=>TXT().prompts[k-1]?TXT().prompts[k-1].happened:null,
+  teach:()=>!!st.teach,setTeach,slow:()=>!!st.slow,setSlow,fill:()=>fillOn,setFill,reset,stopLoop:()=>{stopLoop();playing=false;syncCtl();},readout:()=>$("readout").textContent,counter:()=>$("counter").textContent,
+  blank:()=>blankOn,setBlank,blanks:()=>F.blanks?F.blanks(st.level).map(b=>Object.assign({},b,{shown:(()=>{const t=$("stage").querySelector("#"+b.id);return t?t.textContent.trim():null;})()})):[],
+  explain:()=>perFig(F.key).explain,setExplain:s=>{perFig(F.key).explain=String(s).slice(0,400);save();renderCard();},enter:()=>perFig(F.key).enter,setEnter:v=>{perFig(F.key).enter=v==="yes"?"yes":"no";save();renderCard();},
+  focus:focusInfo,
+  timing:()=>({dur:F.dur.map(d=>d*SP()),seq:F.seq,beats:Object.fromEntries(Object.entries(F.beats).map(([k,b])=>[k,Object.assign({},b,{from:b.from*SP(),to:b.to*SP()})])),hold:HOLD*SP(),speed:SP()}),
+  captions:()=>TXT().caps.slice(),closing:()=>TXT().closing,
   el:elInfo,watchIds:()=>Object.assign({},F.watchIds||{}),loopCount:()=>F.loop&&F.loop.count?F.loop.count():null,
   text:()=>$("stage").textContent+"\n"+$("card").textContent};
 
 /* ================= wiring ================= */
 function init(){load();FIGMAP={};FIGS.forEach(f=>{FIGMAP[f.key]=f;});
   let want=st.fig,stepQ=null;try{const q=new URL(location.href).searchParams;const a=q.get("anim")||q.get("fig");if(a)want=a;
-    if(q.get("step")!=null){const n=parseInt(q.get("step"),10);if(!isNaN(n))stepQ=n;}runonHold=q.get("runon")==="paused";}catch(e){}
+    if(q.get("step")!=null){const n=parseInt(q.get("step"),10);if(!isNaN(n))stepQ=n;}runonHold=q.get("runon")==="paused";
+    if(q.get("level")==="de"||q.get("level")==="sol")st.level=q.get("level");blankOn=q.get("labels")==="blank";}catch(e){}
   if(!FIGMAP[want]||!FIGMAP[want].enabled){if(FIGMAP[want]){const n=$("notice");n.textContent=FIGMAP[want].title+" is coming next. Showing the first figure for now.";n.classList.remove("hidden");}
     want=FIGS.find(f=>f.enabled).key;}
   $("next").addEventListener("click",revealNext);$("back").addEventListener("click",back);
   $("play").addEventListener("click",()=>setPlaying(!(cur>=F.n?loopOn:playing)));
   $("teach").addEventListener("click",()=>setTeach(!st.teach));
+  $("slow").addEventListener("click",()=>setSlow(!st.slow));
   $("fill").addEventListener("click",()=>setFill(!fillOn));
   document.querySelectorAll("#levelrow [data-lv]").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv)));
   document.addEventListener("keydown",e=>{if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
     if(e.key==="ArrowRight"||e.key==="PageDown"){e.preventDefault();revealNext();}else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();back();}});
   document.documentElement.setAttribute("data-fill","0");
   if(stepQ!=null&&FIGMAP[want]&&FIGMAP[want].enabled)perFig(want).step=stepQ;
+  if(blankOn&&FIGMAP[want]&&FIGMAP[want].enabled){if(!FIGMAP[want].blanks)blankOn=false;else perFig(want).step=FIGMAP[want].n;}
   setFig(want);}
 
 /* ================= Figure 1: the G-protein-coupled receptor route =================
    One idea: the signal molecule never gets in, yet the inside of the cell changes, because the
    cell rebuilds the message out of its own parts. Geometry is the still's own (fig1_gpcr.py),
-   with ids and groups on the things that move. The last step is the still. */
+   with ids and groups on the things that move. The last step is the still, except where a
+   traveller has moved. Two levels share the geometry and differ only in words. */
 const GPCR=(function(){
   const H=1000,MY=232,MB=382,BLH=150,PX=740,DX=900,IX=900,IY=596,EY=566,EBLH=118,CXX=1320;
-  /* the still's faint water, as drawn */
   const WATERPTS=[[539.3,162.3],[1023.4,156.9],[853.1,176.9],[145.8,186.5],[115.5,181.5],[163.4,158.2],[688.3,208.2],[243.2,167.2],[988.6,216.4],[914.1,179.0],[1504.9,155.2],[1330.5,171.7],[273.5,160.0],[516.6,207.5],[327.5,191.5],[1005.6,177.3],[870.7,156.3],[148.2,166.0],[1067.0,181.1],[524.9,191.8],[730.7,172.4],[1235.7,199.5],[421.3,191.1],[837.3,211.5],[1139.6,171.6],[1510.7,160.0]];
-  const CAPS=["The signal binds outside. It never enters.","The receptor twists. A G protein turns on.","Its alpha part reaches phospholipase C.",
-    "PIP₂ is cut: DAG stays, IP₃ leaves.","IP₃ opens a calcium channel in the ER.","Calcium switches the working enzymes on."];
-  const LEGEND=[["The signal binds outside. It","never enters."],["The receptor twists. A G","protein turns on."],["Its alpha part reaches","phospholipase C."],
-    ["PIP₂ is cut: DAG stays, IP₃","leaves."],["IP₃ opens a calcium channel","in the ER."],["Calcium switches the working","enzymes on."]];
   const CAPCOL=[P.FLAG,P.PRO,P.PRO,P.GO,P.CARB,P.CA];
+  /* words, by level. The DE words are the still's; the SOL words keep the same geometry. */
+  const DE={
+    caps:["The signal binds outside. It never enters.","The receptor twists. A G protein turns on.","The alpha subunit, carrying GTP, binds phospholipase C.",
+      "PIP₂ is cut: DAG stays, IP₃ leaves.","IP₃ opens a calcium channel in the ER.","Calcium and DAG switch on PKC, and the cell responds."],
+    prompts:[
+      {q:"Where does the signal molecule stop?",choices:["Outside, on the receptor","Inside the membrane","In the cytosol"],happened:"It stayed outside, bound to the receptor. It never entered."},
+      {q:"What changes first when the signal lands: the receptor, the G protein, or the enzyme?",choices:["The receptor","The G protein","The enzyme"],happened:"The receptor changed shape first; then the G protein switched on and traded GDP for GTP."},
+      {q:"Which part of the G protein travels, and where does it go?",choices:["The alpha subunit, with GTP","Beta and gamma","The whole G protein"],happened:"The alpha subunit, carrying GTP, moved along the inner face and bound phospholipase C."},
+      {q:"PIP₂ is about to be cut in two. Which half stays in the membrane?",choices:["The lipid half, DAG","The sugar-phosphate half, IP₃","Both halves leave"],happened:"DAG stayed in the membrane. IP₃ left into the cytosol."},
+      {q:"Where can IP₃ end up, and what opens when it gets there?",choices:["At the ER; a calcium channel opens","At the nucleus; a gene switches on","Back at the receptor; it resets"],happened:"It reached the ER by random collisions, and the calcium channel opened."},
+      {q:"What comes out of the ER, and which way does it go?",choices:["Calcium, into the cytosol","Calcium, out of the cell","IP₃, back to the membrane"],happened:"Calcium flooded from the ER into the cytosol, and with DAG it switched on protein kinase C."}],
+    labels:{sig:"Signal molecule",pip:["PIP_2",true],dag:"DAG",rec:"Receptor (GPCR)",g:"G protein",plc:"Phospholipase C",ip3:["IP_3",true],er:"Endoplasmic reticulum - the calcium store",ca:["Ca^2+",true],resp:["DAG and calcium switch on protein","kinase C (the cell responds)"],pkc:"PKC"},
+    closing:"The message stops at the membrane. The cell rebuilds it inside, out of its own parts.",
+    start:"A signal molecule is outside the cell. It is about to meet a receptor it will never pass through.",
+    watch:"Keep watching the inside. The one signal molecule is still outside, unchanged, while the cytosol fills.",
+    counter:(a,b)=>`Outside: 1 signal molecule. Inside: ${a} IP₃, ${b} calcium ions`,
+    end:{explain:"Explain in one sentence how one signal molecule outside changes so much inside.",
+      check:{q:"Did the signal molecule enter the cell?",choices:["Yes","No"],correct:"no",answer:"No. It bound outside and stayed outside. The cell rebuilt the message inside, from its own parts."}},
+    blanks:[["lblSig","Signal molecule"],["lblPip","PIP₂"],["lblDag","DAG"],["lblRec","Receptor (GPCR)"],["lblG","G protein"],["lblPlc","Phospholipase C"],["ip3Label","IP₃"],["lblEr","Endoplasmic reticulum, the calcium store"],["lblCa","Ca²⁺"],["lblPkc","PKC, protein kinase C"],["lblResp","DAG and calcium switch on protein kinase C (the cell responds)"]]};
+  const SOL={
+    caps:["The signal binds outside. It never enters.","The receptor twists. A G protein turns on.","The alpha part, switched on, binds the cutting enzyme.",
+      "A lipid is cut: one half stays, a messenger leaves.","The messenger opens a calcium channel in the ER.","Calcium switches on enzymes, and the cell responds."],
+    prompts:[
+      {q:"Where does the signal molecule stop?",choices:["Outside, on the receptor","Inside the membrane","In the cytosol"],happened:"It stayed outside, bound to the receptor. It never entered."},
+      {q:"What changes first when the signal lands: the receptor, the G protein, or the cutting enzyme?",choices:["The receptor","The G protein","The cutting enzyme"],happened:"The receptor changed shape first; then the G protein switched on."},
+      {q:"Which part of the G protein travels, and where does it go?",choices:["The alpha part, switched on","The other two parts","The whole G protein"],happened:"The alpha part, switched on, moved along the inner face and bound the cutting enzyme."},
+      {q:"A membrane lipid is about to be cut in two. Which half stays in the membrane?",choices:["The lipid half","The messenger half","Both halves leave"],happened:"The lipid half stayed in the membrane. The messenger left into the cytosol."},
+      {q:"Where can the messenger end up, and what opens when it gets there?",choices:["At the ER; a calcium channel opens","At the nucleus; a gene switches on","Back at the receptor; it resets"],happened:"It reached the ER by random collisions, and the calcium channel opened."},
+      {q:"What comes out of the ER, and which way does it go?",choices:["Calcium, into the cytosol","Calcium, out of the cell","The messenger, back to the membrane"],happened:"Calcium flooded from the ER into the cytosol and switched on the cell's enzymes."}],
+    labels:{sig:"Signal molecule",pip:["Lipid",false],dag:"Lipid half",rec:"Receptor",g:"G protein",plc:"Cutting enzyme",ip3:["Messenger",false],er:"Endoplasmic reticulum - the calcium store",ca:["Calcium",false],resp:["The cell responds"],pkc:null},
+    closing:"The message stops at the membrane. The cell rebuilds it inside, out of its own parts.",
+    start:"A signal molecule is outside the cell. It is about to meet a receptor it will never pass through.",
+    watch:"Keep watching the inside. The one signal molecule is still outside, unchanged, while the cytosol fills.",
+    counter:(a,b)=>`Outside: 1 signal molecule. Inside: ${a} messengers, ${b} calcium ions`,
+    end:{explain:"Explain in one sentence how one signal molecule outside changes so much inside.",
+      check:{q:"Did the signal molecule enter the cell?",choices:["Yes","No"],correct:"no",answer:"No. It bound outside and stayed outside. The cell rebuilt the message inside, from its own parts."}},
+    blanks:[["lblSig","Signal molecule"],["lblPip","Lipid"],["lblDag","Lipid half"],["lblRec","Receptor"],["lblG","G protein"],["lblPlc","Cutting enzyme"],["ip3Label","Messenger"],["lblEr","Endoplasmic reticulum, the calcium store"],["lblCa","Calcium"],["lblResp","The cell responds"]]};
+  const txt=l=>l==="de"?DE:SOL;
   /* the IP3 traveller: hexagon plus three phosphates, drawn at the still's IP3 spot; at the membrane
      it is translated so its phosphates sit exactly where the still draws PIP2's */
   const PHOS=[[-27,-15],[0,-32],[27,-15]];
-  const MEM={x:PX-IX,y:(MY)-IY};            /* (-160,-364): the membrane position of the traveller */
+  const MEM={x:PX-IX,y:MY-IY};              /* (-160,-364): the membrane position of the traveller */
   const DOCK={x:338,y:44};                  /* seated against the ER channel */
   const CA_STILL=[[1276,486],[1344,470],[1406,488],[1470,474]];
   const CA_START=[[1233,700],[1296,700],[1361,698],[1418,700]];
   function ip3Group(cx,cy,oOuter,oInner){let s=hexagon(cx,cy,25,P.CARB,"#8A5E16",3);PHOS.forEach(([dx,dy])=>{s+=circ(cx+dx,cy+dy,12,P.CARB,"#8A5E16",3);});return grp(oOuter,grp(oInner,s));}
-  function caGroup(px,py,ids){return grp({id:ids[0]},grp({id:ids[1]},grp({id:ids[2]},circ(px,py,13,P.CA,"#4C4170",2))));}
-  function svg(){let s=head(H,"A receptor that never lets the signal in","DE Bio 101 . Unit 5 . G-protein-coupled receptors");
+  function caGroup(px,py,ids){return grp({id:ids[0],cls:ids[0]?"":"mv"},grp({id:ids[1],cls:ids[1]?"":"mv"},grp({id:ids[2],cls:ids[2]?"":"mv"},circ(px,py,13,P.CA,"#4C4170",2))));}
+  function lbl(x,y,spec,cls,anchor,fill,o){return Array.isArray(spec)?(spec[1]?chem(x,y,spec[0],cls,anchor,fill,o):text(x,y,spec[0],cls,anchor,fill,o)):text(x,y,spec,cls,anchor,fill,o);}
+  function svg(level){const L=txt(level).labels,caps=txt(level).caps;
+    let s=head(H,"A receptor that never lets the signal in","DE Bio 101 . Unit 5 . G-protein-coupled receptors");
     WATERPTS.forEach(([x,y])=>{s+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="9.0" fill="${P.WATER}" opacity="0.5"/>\n`;});
     s+=bilayer(52,MY,1496,46,11,28,32).svg;
     s+=text(1548,196,"Outside the cell","min","end",P.INKSOFT);
     s+=text(60,430,"Cytosol","min","start",P.INKSOFT);
-    s+=text(300,196,"Signal molecule","lab","start",P.FLAG);
-    s+=chem(686,196,"PIP_2","key","start",P.CARB);
-    s+=text(916,196,"DAG","key","start",P.LIP);
+    s+=text(300,196,L.sig,"lab","start",P.FLAG,{id:"lblSig"});
+    s+=lbl(686,196,L.pip,"key","start",P.CARB,{id:"lblPip"});
     /* 1. the ligand, which is as far as the signal itself ever gets */
     s+=circ(267,170,20,P.FLAG,P.HEADEDGE,3,{id:"lig"});
     s+=arrow(267,192,267,MY-8,P.FLAG,6,"arf",null,{id:"ligArrow"});
     s+=badge(1,196,170,P.FLAG,25,{id:"b1"});
     /* the receptor: seven passes through the membrane */
-    s+=rrect(200,MY-14,134,BLH+28,14,P.PRO,P.PRO_SIDE,4);
-    for(let i=0;i<7;i++)s+=rrect(212+i*16,MY-2,9,BLH+4,4.5,P.PRO_TOP,null,null,{id:"rib"+i});
-    s+=text(60,536,"Receptor (GPCR)","key","start",P.PRO);
+    let rec=rrect(200,MY-14,134,BLH+28,14,P.PRO,P.PRO_SIDE,4);for(let i=0;i<7;i++)rec+=rrect(212+i*16,MY-2,9,BLH+4,4.5,P.PRO_TOP,null,null,{id:"rib"+i});
+    s+=grp({id:"rec"},rec);
+    s+=text(60,536,L.rec,"key","start",P.PRO,{id:"lblRec"});
     /* PIP2: one lipid, three phosphates on its head (the phosphates travel, so they are drawn with the IP3 group below) */
     s+=rrect(PX-44,MY-12,88,BLH-44,10,P.PAPER);
     for(const off of[-11,11])s+=rrect(PX+off-5.5,MY+30,11,48,5.5,P.TAIL);
     s+=arrow(712,208,PX-24,MY-32,P.CARB,4,"arb");
-    /* DAG: the lipid half, left behind */
-    s+=rrect(DX-32,MY-12,64,BLH-44,10,P.PAPER);
-    for(const off of[-11,11])s+=rrect(DX+off-5.5,MY+34,11,48,5.5,P.TAIL);
-    s+=circ(DX,MY+22,15,P.HEAD,P.HEADEDGE,3);
-    s+=arrow(930,208,DX+14,MY+2,P.LIP,4,"arl");
+    /* DAG: the lipid half, left behind. A product: it appears with its label when it is made. */
+    let dag=rrect(DX-32,MY-12,64,BLH-44,10,P.PAPER);for(const off of[-11,11])dag+=rrect(DX+off-5.5,MY+34,11,48,5.5,P.TAIL);
+    dag+=circ(DX,MY+22,15,P.HEAD,P.HEADEDGE,3)+arrow(930,208,DX+14,MY+2,P.LIP,4,"arl")+text(916,196,L.dag,"key","start",P.LIP,{id:"lblDag"});
+    s+=grp({id:"dag"},dag);
     /* 2. the G protein */
     s+=grp({id:"gaO"},grp({id:"gaI"},circ(400,432,32,P.PRO,P.PRO_SIDE,3)+text(400,445,"α","key","middle",P.PAPER)));
     s+=circ(458,442,25,P.PRO_TOP,P.PRO_SIDE,3)+text(458,454,"β","key","middle",P.PRO_SIDE);
@@ -538,10 +680,10 @@ const GPCR=(function(){
     s+=pentagon(366,388,15,P.NUC,"#46345E",2,{id:"gdp"});
     s+=arrow(267,MB+4,370,414,P.PRO,5,"art",null,{id:"arrRG"});
     s+=badge(2,330,466,P.PRO,25,{id:"b2"});
-    s+=text(372,536,"G protein","key","start",P.PRO);
+    s+=text(372,536,L.g,"key","start",P.PRO,{id:"lblG"});
     /* 3. the enzyme it switches on */
     s+=rrect(610,408,252,86,12,P.PRO,P.PRO_SIDE,4);
-    s+=text(736,460,"Phospholipase C","min","middle",P.PAPER);
+    s+=text(736,460,L.plc,"min","middle",P.PAPER,{id:"lblPlc"});
     s+=curve("M 436 468 C 510 522, 566 516, 606 484",P.PRO,6,"art",null,{id:"arrAP"});
     s+=badge(3,592,402,P.PRO,25,{id:"b3"});
     /* 4. the cut */
@@ -552,110 +694,118 @@ const GPCR=(function(){
     s+=ip3Group(PX,MY,{id:"ip3b"},{});
     s+=grp({id:"ip3Layer"},"");
     s+=circ(PX,MY+18,15,P.HEAD,P.HEADEDGE,3,{id:"pipHead"});
-    s+=chem(IX-76,IY+12,"IP_3","key","end",P.CARB,{id:"ip3Label"});
+    s+=lbl(IX-76,IY+12,L.ip3,"key","end",P.CARB,{id:"ip3Label"});
     s+=curve(`M 862 456 C 898 506, 908 532, ${IX-18} ${IY-34}`,P.CARB,6,"arb","14 10",{id:"path1"});
     s+=badge(5,992,650,P.CARB,25,{id:"b5"});
     /* the ER, holding the calcium */
     s+=bilayer(1150,EY,398,12,9,20,33).svg;
-    s+=text(1262,540,"Endoplasmic reticulum - the calcium store","min","end",P.INKSOFT);
+    s+=text(1262,540,L.er,"min","end",P.INKSOFT,{id:"lblEr"});
     s+=rrect(CXX-50,EY-12,44,EBLH+24,10,P.PRO,P.PRO_SIDE,4,{id:"chL"});
     s+=rrect(CXX+14,EY-12,44,EBLH+24,10,P.PRO,P.PRO_SIDE,4,{id:"chR"});
     s+=curve(`M ${IX+38} ${IY-10} C 1090 ${IY-24}, 1210 ${EY+120}, ${CXX-58} ${EY+74}`,P.CARB,6,"arb","14 10",{id:"path2"});
-    for(const[dx,dy]of[[-116,26],[-58,38],[10,32],[72,24],[124,38]])s+=circ(CXX+dx,EY+EBLH+dy,13,P.CA,"#4C4170",2);
+    for(const[dx,dy]of[[-116,16],[-58,22],[10,18],[72,14],[124,22]])s+=circ(CXX+dx,EY+EBLH+dy,13,P.CA,"#4C4170",2);
     s+=arrow(CXX-18,EY+EBLH-4,CXX-18,470,P.CA,8,"arc",null,{id:"arrCa"});
     s+=grp({id:"caLayer"},"");
     CA_STILL.forEach(([px,py],i)=>{s+=caGroup(px,py,["caA"+i,"caB"+i,"caC"+i]);});
-    s+=chem(1120,500,"Ca^2+","key","start",P.CA);
+    s+=lbl(1120,500,L.ca,"key","start",P.CA,{id:"lblCa"});
+    /* protein kinase C: the enzyme DAG and calcium switch on, at the inner face under DAG (DE level) */
+    if(L.pkc)s+=grp({id:"pkc"},rrect(862,340,76,40,8,P.PRO,P.PRO_SIDE,3)+text(900,370,L.pkc,"min","middle",P.PAPER,{id:"lblPkc"}));
     /* 6. the response */
-    s+=grp({id:"resp"},rrect(1120,368,428,84,10,P.GO_SOFT,P.GO,4)+text(1152,420,"The cell does the job","key","start",P.GO));
-    s+=badge(6,1120,368,P.GO,25,{id:"b6"});
+    let resp=rrect(960,356,588,96,10,P.GO_SOFT,P.GO,4);
+    if(L.resp.length===1)resp+=text(992,418,L.resp[0],"key","start",P.GO,{id:"lblResp"});
+    else resp+=text(992,394,L.resp[0],"min","start",P.GO,{id:"lblResp"})+text(992,428,L.resp[1],"min","start",P.GO,{id:"lblResp2"});
+    s+=grp({id:"resp"},resp);
+    s+=badge(6,960,356,P.GO,25,{id:"b6"});
     /* one line, because there is more than one second messenger */
     s+=text(60,664,"A different enzyme inside makes cAMP instead.","min","start",P.INKSOFT);
-    /* the sentences, in reading order, exactly as the still sets them */
-    LEGEND.forEach((lines,i)=>{const c=i%3,r=Math.floor(i/3),x=52+c*499,ty=742+r*78;let g=badge(i+1,x+19,ty,CAPCOL[i],19);
-      lines.forEach((ln,j)=>{g+=text(x+50,ty+10+j*34,ln,"min","start");});s+=grp({id:"lg"+(i+1)},g);});
-    s+=foot(H,"The message stops at the membrane. The cell rebuilds it inside, out of its own parts.",
+    /* the sentences, in reading order, wrapped exactly as the still wraps them */
+    caps.forEach((cap,i)=>{const c=i%3,r=Math.floor(i/3),x=52+c*499,ty=742+r*78;let g=badge(i+1,x+19,ty,CAPCOL[i],19);
+      wrap(cap,28).forEach((ln,j)=>{g+=text(x+50,ty+10+j*34,ln,"min","start");});s+=grp({id:"lg"+(i+1)},g);});
+    s+=foot(H,txt(level).closing,
       [["Streb 1983","https://doi.org/10.1038/306067a0"],["Berridge & Irvine 1984","https://doi.org/10.1038/312315a0"],["Rasmussen 2011","https://doi.org/10.1038/nature10361"]],{id:"closing"});
     return s;}
-  const ANIM=["lig","ligArrow","b1","b2","b3","b4","b5","b6","lg1","lg2","lg3","lg4","lg5","lg6","rib0","rib1","rib2","rib3","rib4","rib5","rib6",
-    "gaO","gaI","gdp","arrRG","arrAP","arrCut","path1","ip3Label","path2","arrCa","resp","closing","ip3O","ip3I","ip3b","chL","chR"];
+  const ANIM=["lig","ligArrow","b1","b2","b3","b4","b5","b6","lg1","lg2","lg3","lg4","lg5","lg6","rec","rib0","rib1","rib2","rib3","rib4","rib5","rib6",
+    "gaO","gaI","gdp","arrRG","arrAP","arrCut","path1","ip3Label","dag","path2","arrCa","resp","closing","ip3O","ip3I","ip3b","chL","chR"];
   for(let i=0;i<4;i++)ANIM.push("caA"+i,"caB"+i,"caC"+i);
   /* every state as absolute positions, so step 4 looks the same whether you arrived from 3 or from 5 */
   function state(k){const S={};const on=(id,from)=>{S[id]={o:k>=from?1:0};};
     S.lig=k===0?{x:153,y:-12}:{};on("ligArrow",1);
     for(let i=1;i<=6;i++){on("b"+i,i);on("lg"+i,i);}
-    for(let i=0;i<7;i++)S["rib"+i]=k<=1?{y:i%2?6:-6}:{};
+    S.rec={};for(let i=0;i<7;i++)S["rib"+i]=k<=1?{y:i%2?6:-6}:{};
     S.gaO=k<=1?{x:22}:k===2?{}:{x:170};S.gaI=k>=3?{y:34}:{};
     S.gdp=k<=1?{r:180}:{};
-    on("arrRG",2);on("arrAP",3);on("arrCut",4);on("path1",4);on("ip3Label",4);on("path2",5);on("arrCa",6);on("resp",6);on("closing",6);
+    on("arrRG",2);on("arrAP",3);on("arrCut",4);on("path1",4);on("ip3Label",4);on("dag",4);on("path2",5);on("arrCa",6);on("resp",6);on("closing",6);
     if(k<=3){S.ip3O={y:MEM.y};S.ip3I={x:MEM.x};}else if(k===4){S.ip3O={};S.ip3I={};}else{S.ip3O={y:DOCK.y};S.ip3I={x:DOCK.x};}
     on("ip3b",5);
     S.chL=k<=4?{x:6}:{};S.chR=k<=4?{x:-6}:{};
     CA_START.forEach(([sx,sy],i)=>{const[px,py]=CA_STILL[i];
       if(k<=5){S["caA"+i]={x:sx-1302};S["caB"+i]={y:sy-py};S["caC"+i]={x:1302-px};}else{S["caA"+i]={};S["caB"+i]={};S["caC"+i]={};}});
     return S;}
-  /* forward timing. Steps 4 and 6 are the memorable beats: slower, and nothing else moves inside them. */
-  const A=(d,dur)=>({d,dur});
+  /* forward timing. Steps 4 and 6 are the memorable beats: slower, and nothing else moves inside them.
+     Travellers carry waypoints, jittered once with a fixed seed, so they wander rather than aim. */
+  const R=rng(11);const J=(a,b)=>[a+(R()-.5)*28,b+(R()-.5)*22];
+  const A=(d,dur,way)=>way?{d,dur,way}:{d,dur};
   const SEQ={
-    1:{lig:A(0,700),ligArrow:A(500,250),b1:A(500,250),lg1:A(500,250)},
-    2:{rib0:A(0,400),rib1:A(0,400),rib2:A(0,400),rib3:A(0,400),rib4:A(0,400),rib5:A(0,400),rib6:A(0,400),gaO:A(250,400),gdp:A(250,400),arrRG:A(0,300),b2:A(450,300),lg2:A(450,300)},
-    3:{gaO:A(0,750),gaI:A(300,450),arrAP:A(350,400),b3:A(500,300),lg3:A(500,300)},
-    4:{arrCut:A(0,300),b4:A(0,300),lg4:A(0,300),ip3Label:A(0,300),path1:A(0,300),ip3O:A(300,900),ip3I:A(900,700)},
-    5:{ip3I:A(0,800),ip3O:A(350,450),chL:A(600,200),chR:A(600,200),path2:A(0,300),ip3b:A(300,400),b5:A(500,300),lg5:A(500,300)},
+    1:{lig:A(0,1300,[J(126,-30),J(92,4),[62,42],J(44,8),J(16,-10)]),ligArrow:A(1100,250),b1:A(1100,250),lg1:A(1100,250)},
+    2:{rec:A(0,400),rib0:A(0,400),rib1:A(0,400),rib2:A(0,400),rib3:A(0,400),rib4:A(0,400),rib5:A(0,400),rib6:A(0,400),gaO:A(250,400),gdp:A(250,400),arrRG:A(0,300),b2:A(450,300),lg2:A(450,300)},
+    3:{gaO:A(0,900,[J(44,0),J(98,0),J(142,0)]),gaI:A(0,900,[J(0,-10),J(0,20),J(0,38)]),arrAP:A(500,400),b3:A(600,300),lg3:A(600,300)},
+    4:{arrCut:A(0,300),b4:A(0,300),lg4:A(0,300),ip3Label:A(0,300),dag:A(0,300),path1:A(0,300),ip3O:A(400,1300,[J(0,-296),J(0,-200),J(0,-96)]),ip3I:A(400,1300,[J(-150,0),J(-118,0),J(-58,0)])},
+    5:{ip3I:A(0,800,[J(96,0),J(214,0),J(296,0)]),ip3O:A(0,800,[J(0,-22),J(0,12),J(0,34)]),chL:A(600,200),chR:A(600,200),path2:A(0,300),ip3b:A(300,400),b5:A(500,300),lg5:A(500,300)},
     6:{arrCa:A(0,300),resp:A(0,300),b6:A(0,300),lg6:A(0,300),closing:A(0,300)}};
-  for(let i=0;i<4;i++){SEQ[6]["caA"+i]=A(300,300);SEQ[6]["caB"+i]=A(600,700);SEQ[6]["caC"+i]=A(1100,600);}
-  const DUR=[0,750,750,800,1600,800,1700];
-  const BEATS={4:{name:"PIP2 splits in two",from:300,to:1600,ids:["ip3O","ip3I"]},6:{name:"calcium floods out of the ER",from:300,to:1700,ids:[]}};
+  for(let i=0;i<4;i++){const[px,py]=CA_STILL[i];const dx=1302-px;SEQ[6]["caA"+i]=A(400,300);SEQ[6]["caB"+i]=A(700,700);SEQ[6]["caC"+i]=A(1200,600,[J(dx*.66,0),J(dx*.3,0)]);}
+  const DUR=[0,1300,750,900,1700,800,1800];
+  const BEATS={4:{name:"PIP2 splits in two",from:400,to:1700,ids:["ip3O","ip3I"]},6:{name:"calcium floods out of the ER",from:400,to:1800,ids:[]}};
   for(let i=0;i<4;i++)BEATS[6].ids.push("caA"+i,"caB"+i,"caC"+i);
-  /* the run-on: phospholipase C keeps cutting, IP3 keeps appearing, calcium keeps coming, and the
-     one signal molecule sits on the receptor the whole time. Numbers never appear; the crowd does. */
+  const FOCUS={1:["lig","b1","lg1"],2:["rec","gaI","gdp","b2","lg2"],3:["gaI","b3","lg3"],4:["ip3I","dag","b4","lg4"],5:["ip3I","chL","chR","b5","lg5"],6:["caC0","caC1","caC2","caC3","resp","b6","lg6"]};
+  /* the run-on: phospholipase C keeps cutting, IP3 keeps appearing, calcium keeps coming, and the one
+     signal molecule sits on the receptor the whole time. The crowd spreads by jitter, not in lines. */
   let seed=7;const rnd=()=>{seed=(seed+0x6D2B79F5)|0;let t=seed;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};
   const pick=(a,b)=>a+rnd()*(b-a);
   const IP3_ZONES=[[1047,1115,610,690],[962,1115,585,600],[990,1090,455,490]];
-  const IP3_CAP=14,CA_CAP=28;
+  const IP3_CAP=13,CA_CAP=24;   /* plus the one IP3 and four calcium already there: the counter holds at 14 and 28 */
   const loop={n3:0,nCa:0,
     start(api){const svg=$("stage").querySelector("svg");if(!svg)return;const ipL=svg.querySelector("#ip3Layer"),caL=svg.querySelector("#caLayer");
+      const sp=api.sp;
       const place=(g,tr)=>{g.style.transition="none";g.style.transform=tr;};
-      const tween=(g,tr,dur,d)=>{g.style.transition=`transform ${dur}ms ease-in-out ${d||0}ms, opacity ${dur}ms ease-in-out ${d||0}ms`;g.style.transform=tr;};
-      const tickIp3=()=>{if(!api.on()||loop.n3>=IP3_CAP)return;loop.n3++;
+      const tween=(g,tr,dur,d)=>{g.style.transition=`transform ${dur*sp()}ms ease-in-out ${(d||0)*sp()}ms, opacity ${dur*sp()}ms ease-in-out ${(d||0)*sp()}ms`;g.style.transform=tr;};
+      /* a wander: n legs from (x0,y0) to (x1,y1), each leg jittered sideways, on an outer (y) and inner (x) pair */
+      const wander=(O,I,x0,y0,x1,y1,n,ms,jit,t0)=>{for(let i=1;i<=n;i++){const f=i/n;const jx=i<n?(rnd()-.5)*jit:0,jy=i<n?(rnd()-.5)*jit:0;
+        const x=x0+(x1-x0)*f+jx,y=y0+(y1-y0)*f+jy;api.after(()=>{tween(O,`translate(0px, ${y}px)`,ms/n,0);tween(I,`translate(${x}px, 0px)`,ms/n,0);},t0+(i-1)*ms/n);}};
+      const tickIp3=()=>{if(!api.on()||loop.n3>=IP3_CAP)return;loop.n3++;api.count&&api.count();
         const z=IP3_ZONES[loop.n3%IP3_ZONES.length];const dx=pick(z[0],z[1])-PX,dy=pick(z[2],z[3])-MY;
         const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML=ip3Group(PX,MY,{cls:"mv"},{cls:"mv"});
         const O=tmp.firstElementChild,I=O.firstElementChild;ipL.appendChild(O);
         if(api.reduce()){place(O,`translate(0px, ${dy}px)`);place(I,`translate(${dx}px, 0px)`);O.style.opacity="1";}
         else{O.style.transition="none";O.style.opacity="0";place(O,"translate(0px, 0px)");place(I,"translate(0px, 0px)");O.getBoundingClientRect();
-          O.style.transition="opacity 300ms ease-in-out";O.style.opacity="1";
-          api.after(()=>{tween(O,`translate(0px, 364px)`,900,0);tween(I,`translate(160px, 0px)`,700,500);},350);
-          api.after(()=>{tween(O,`translate(0px, ${dy}px)`,900,0);tween(I,`translate(${dx}px, 0px)`,900,200);},1700);}
+          O.style.transition=`opacity ${300*sp()}ms ease-in-out`;O.style.opacity="1";
+          wander(O,I,0,0,160,364,3,1200,40,350);          /* off the membrane, past the enzyme */
+          wander(O,I,160,364,dx,dy,3,1300,60,1650);}      /* out into the cytosol, by collisions */
         api.after(tickIp3,900);};
-      const tickCa=()=>{if(!api.on()||loop.nCa>=CA_CAP)return;loop.nCa++;
+      const tickCa=()=>{if(!api.on()||loop.nCa>=CA_CAP)return;loop.nCa++;api.count&&api.count();
         const px=pick(1215,1540),py=pick(468,506),sx=pick(1240,1380),sy=700;
-        const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML=caGroup(px,py,[]).replace(/<g>/g,'<g class="mv">');
+        const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML=caGroup(px,py,["","",""]);
         const Ag=tmp.firstElementChild,Bg=Ag.firstElementChild,Cg=Bg.firstElementChild;caL.appendChild(Ag);
         if(api.reduce()){Ag.style.opacity="1";}
         else{Ag.style.transition="none";Ag.style.opacity="0";place(Ag,`translate(${sx-1302}px, 0px)`);place(Bg,`translate(0px, ${sy-py}px)`);place(Cg,`translate(${1302-px}px, 0px)`);Ag.getBoundingClientRect();
-          Ag.style.transition="opacity 200ms ease-in-out";Ag.style.opacity="1";
-          api.after(()=>{tween(Ag,"translate(0px, 0px)",300,0);tween(Bg,"translate(0px, 0px)",600,300);tween(Cg,"translate(0px, 0px)",500,750);},250);}
+          Ag.style.transition=`opacity ${200*sp()}ms ease-in-out`;Ag.style.opacity="1";
+          api.after(()=>{tween(Ag,"translate(0px, 0px)",300,0);tween(Bg,"translate(0px, 0px)",600,300);},250);
+          /* then spread sideways in jittered legs rather than a straight march */
+          const x0=1302-px;for(let i=1;i<=3;i++){const f=i/3;const x=x0*(1-f)+(i<3?(rnd()-.5)*50:0);api.after(()=>tween(Cg,`translate(${x}px, 0px)`,220,0),1150+(i-1)*220);}}
         api.after(tickCa,350);};
       api.after(tickIp3,400);api.after(tickCa,900);},
     clear(){loop.n3=0;loop.nCa=0;seed=7;const svg=$("stage").querySelector("svg");if(!svg)return;["#ip3Layer","#caLayer"].forEach(q=>{const L=svg.querySelector(q);if(L)L.innerHTML="";});},
-    count(){return {ip3:loop.n3,ca:loop.nCa};}};
-  return {key:"gpcr",enabled:true,n:6,levels:null,
+    count(){return {ip3:loop.n3+1,ca:loop.nCa+4};}};
+  return {key:"gpcr",enabled:true,n:6,levels:true,
     title:"A receptor that never lets the signal in",short:"G-protein-coupled receptor",eyebrow:"DE Bio 101 Unit 5 · G-protein-coupled receptors",
     tag:[["amp","Amplification"]],bridge:"A different kind of receptor answers in more than one way at once.",
-    caps:CAPS,capColor:CAPCOL,closing:"The message stops at the membrane. The cell rebuilds it inside, out of its own parts.",
-    start:"A signal molecule is outside the cell. It is about to meet a receptor it will never pass through.",
-    prompts:["Where does the signal molecule stop: outside, inside the membrane, or in the cytosol?",
-      "What changes first when the signal lands: the receptor, the G protein, or the enzyme?",
-      "Which part of the G protein travels, and where does it go?",
-      "PIP₂ is about to be cut in two. Which half stays in the membrane, and which half leaves?",
-      "Where is IP₃ heading, and what will it open when it gets there?",
-      "What comes out of the ER, and which way does it go?"],
-    watch:"Keep watching the inside. The one signal molecule is still outside, unchanged, while the cytosol fills.",
-    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,loop,watchIds:{ligand:"lig",travellers:["ip3O","ip3I","gaO","gaI","caA0","caB0","caC0"]}};
+    txt,capColor:CAPCOL,
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,loop,
+    blanks:level=>txt(level).blanks.map(([id,name])=>({id,name})),blankClear:["lblResp2"],blankHide:["lg1","lg2","lg3","lg4","lg5","lg6","closing"],
+    watchIds:{ligand:"lig",travellers:["ip3O","ip3I","gaO","gaI","caA0","caB0","caC0"]}};
 })();
 
 /* the other five appear in the selector, in the arc's order, disabled until Phase 2 */
-const SOON=(key,title,tag,bridge,n,levels)=>({key,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",caps:[],capColor:[],prompts:[],closing:"",anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
+const SOON=(key,title,tag,bridge,n,levels)=>({key,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",txt:()=>({caps:[],prompts:[],closing:"",counter:()=>""}),capColor:[],anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
 FIGS=[GPCR,
   SOON("rtk","Two halves, then several answers at once",[["amp","Amplification"]],"Both of those end in things moving across a membrane.",4),
   SOON("transport","Downhill is free. Uphill is paid for.",[["mov","Movement"],["nrg","Energy transfer"]],"Moving things uphill runs on ATP. Here is where the ATP comes from.",2,true),

@@ -18,8 +18,8 @@ s = head(H, "A receptor that never lets the signal in",
          "membrane. The receptor changes shape and switches on a G protein, whose alpha subunit "
          "trades GDP for GTP and travels to phospholipase C. That enzyme cuts the membrane lipid "
          "PIP2 into DAG, which stays in the membrane, and IP3, which crosses the cytosol and opens "
-         "a calcium channel in the endoplasmic reticulum. Stored calcium floods the cytosol and "
-         "switches on the cell's enzymes.")
+         "a calcium channel in the endoplasmic reticulum. Stored calcium floods the cytosol and, with "
+         "DAG, switches on protein kinase C: the cell responds.")
 s += ARROWDEFS
 
 MY = 232
@@ -105,17 +105,22 @@ CXX = 1320
 s += rrect(CXX - 50, EY - 12, 44, eblh + 24, 10, PRO, PRO_SIDE, 4)
 s += rrect(CXX + 14, EY - 12, 44, eblh + 24, 10, PRO, PRO_SIDE, 4)
 s += curve(f"M {IX+38} {IY-10} C 1090 {IY-24}, 1210 {EY+120}, {CXX-58} {EY+74}", CARB, 6, "arb", "14 10")
-for dx, dy in ((-116, 26), (-58, 38), (10, 32), (72, 24), (124, 38)):
+for dx, dy in ((-116, 16), (-58, 22), (10, 18), (72, 14), (124, 22)):
     s += circ(CXX + dx, EY + eblh + dy, 13, CA, "#4C4170", 2)
 s += arrow(CXX - 18, EY + eblh - 4, CXX - 18, 470, CA, 8, "arc")
 for dx, dy in ((-44, -46), (24, -62), (86, -44), (150, -58)):
     s += circ(CXX + dx, EY - 34 + dy, 13, CA, "#4C4170", 2)
 s += chem(1120, 500, "Ca^2+", "key", "start", CA)
 
+# --- protein kinase C: the enzyme DAG and calcium switch on, at the inner face under DAG ---
+s += rrect(862, 340, 76, 40, 8, PRO, PRO_SIDE, 3)
+s += text(900, 370, "PKC", "min", "middle", PAPER)
+
 # --- 6. the response ---------------------------------------------------------
-s += rrect(1120, 368, 428, 84, 10, GO_SOFT, GO, 4)
-s += text(1152, 420, "The cell does the job", "key", fill=GO)
-s += step(6, 1120, 368, GO)
+s += rrect(960, 356, 588, 96, 10, GO_SOFT, GO, 4)
+s += text(992, 394, "DAG and calcium switch on protein", "min", fill=GO)
+s += text(992, 428, "kinase C (the cell responds)", "min", fill=GO)
+s += step(6, 960, 356, GO)
 
 # --- one line, because there is more than one second messenger --------------
 s += text(60, 664, "A different enzyme inside makes cAMP instead.", "min", fill=INKSOFT)
@@ -124,10 +129,10 @@ s += text(60, 664, "A different enzyme inside makes cAMP instead.", "min", fill=
 s += legend([
     (1, "The signal binds outside. It never enters.", FLAG),
     (2, "The receptor twists. A G protein turns on.", PRO),
-    (3, "Its alpha part reaches phospholipase C.", PRO),
+    (3, "The alpha subunit, carrying GTP, binds phospholipase C.", PRO),
     (4, "PIP₂ is cut: DAG stays, IP₃ leaves.", GO),
     (5, "IP₃ opens a calcium channel in the ER.", CARB),
-    (6, "Calcium switches the working enzymes on.", CA),
+    (6, "Calcium and DAG switch on PKC, and the cell responds.", CA),
 ], 742, colw=499)
 
 s += foot(H, "The message stops at the membrane. The cell rebuilds it inside, out of its own parts.",
