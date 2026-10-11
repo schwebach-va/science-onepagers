@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predict, Then Press, Sometimes | Science One-Pagers</title>
+<meta name="description" content="How I build the step-through animations on this site, what the research on learning from animations says, what our first animation does well, and what is changing.">
+<link rel="canonical" href="https://scienceonepagers.org/teaching/predict-then-press-sometimes.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Predict, Then Press, Sometimes">
+<meta property="og:description" content="How I build the step-through animations on this site, what the research on learning from animations says, what our first animation does well, and what is changing.">
+<meta property="og:url" content="https://scienceonepagers.org/teaching/predict-then-press-sometimes.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Predict, Then Press, Sometimes","description":"How I build the step-through animations on this site, what the research on learning from animations says, what our first animation does well, and what is changing.","url":"https://scienceonepagers.org/teaching/predict-then-press-sometimes.html","inLanguage":"en","learningResourceType":"Reading","educationalLevel":"High school and introductory college biology","audience":[{"@type":"EducationalAudience","educationalRole":"student"},{"@type":"EducationalAudience","educationalRole":"teacher"}],"isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-nc/4.0/","author":{"@type":"Person","name":"J. R. Schwebach"},"publisher":{"@type":"Organization","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"isPartOf":{"@type":"CollectionPage","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"about":{"@type":"Thing","name":"Learning from animations"}}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="site-header">
+<h1><a href="../index.html">Science One-Pagers</a></h1>
+<p>A working folder for teachers, students, parents, and anyone putting evidence to use.</p>
+</header>
+
+<nav class="site-nav">
+<a href="../book.html">The Book</a>
+<a href="../index.html#evidence">Evidence</a>
+<a href="../index.html#biology">Biology</a>
+<a href="../index.html#chemistry">Chemistry</a>
+<a href="../index.html#teaching">Teaching</a>
+<a href="../index.html#careers">Careers</a>
+<a class="nav-search" href="../search.html" aria-label="Search the site" title="Search the site"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><line x1="15.4" y1="15.4" x2="21" y2="21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span class="nav-search-label">Search</span></a>
+</nav>
+
+<article class="onepager">
+  <a class="back-link" href="index.html">&larr; More in Teaching</a>
+  <div class="eyebrow">Teaching #21 &middot; How the animations are built &middot; For students first, then teachers and parents</div>
+  <h1>Predict, Then Press, Sometimes</h1>
+
+<!-- Published 2026-10-10 from the Claude Doc draft "Predict, Then Press, Sometimes". The sentences
+     began as Claude's, built from Reid's dictated answers; they are Reid's to mark up after publishing.
+     Research record: Science OnePagers project doc 2026-10-10-DESIGN-learning-research-for-animations-and-tools. -->
+
+  <h2>Why I build these</h2>
+
+  <p class="lede">
+    Most of what my students need to understand in biology happens where no one can see it. A signal
+    molecule lands on a cell, and a few seconds later the cell is doing something new. The textbook gives
+    them a crowded diagram with eleven arrows and asks them to hold the whole sequence in their heads.
+  </p>
+
+  <p>
+    So I build tools that take the process apart one step at a time. Each one lives on this site, under my
+    name, and each one gets used live in my classroom before I decide it is finished. I watch where students
+    stall, where they skip ahead and where they get it wrong with confidence. Then I rebuild.
+  </p>
+
+  <p>
+    I build them because the tools I have do not fit how I teach. A Gizmo can take a long time to load,
+    sends students down multiple paths, and does not sit directly inside Canvas or let me pause it and
+    explain a concept to the room. I am reaching for something that is both static and dynamic, so I can use
+    it in a way that is both teachable and interactive.
+  </p>
+
+  <p>
+    PhET simulations are my favorite. I worked with Carl Wieman on them and directed the National Academies
+    study on games and simulations,
+    <a href="https://www.nap.edu/catalog/13078"><em>Learning Science Through Computer Games and Simulations</em></a>
+    (2011). PhET tools are very teachable, but they do not cover the content I need. HHMI&rsquo;s BioInteractive
+    tools are wonderful interactives, but they depend on a lesson build that is not mine, and not built for
+    the Virginia Biology SOL or for teaching undergraduate cell structure and function, a subject I wrote a
+    book on, <a href="publications.html"><em>Cell Structure and Function: Mastering the Big Ideas</em></a> (2017).
+  </p>
+
+  <p>
+    I build for students first, then for teachers, then for parents. I do not really rank them, but
+    students come first.
+  </p>
+
+  <p>
+    This fall I reached the point where the tools are good enough that the next improvement has to come from
+    the research on how people learn from pictures that move. The research confirmed some of my instincts,
+    caught a few habits I had not noticed, and gave me a short list of changes for every build from here on.
+  </p>
+
+  <h2>How one gets made</h2>
+
+  <p>Every animation starts as a still figure, and the still decides almost everything that follows.</p>
+
+  <ol>
+    <li><b>I redraw the figure.</b> Molecules are drawn at the level of their parts, never their atoms: a
+      hexagon for a sugar, a circle for an amino acid or a phosphate, a capsule for a fatty-acid tail. Each
+      class of molecule keeps its colour all year, so a student who learned the lipid colour in September
+      still reads it in March.</li>
+    <li><b>I write a build brief with Claude.</b> The brief names each step, the sentence that goes with it,
+      the question students answer before they see it, and the rules the drawing has to keep.</li>
+    <li><b>Claude builds it.</b> A coding session of Claude turns the still into a step-through page on this
+      site, using the same geometry as the still, so the picture students see in the animation is the picture
+      on their worksheet.</li>
+    <li><b>I test it on an iPad and a computer.</b> My students work on iPads, and I teach from a projector.
+      Both have to work before anything goes live.</li>
+    <li><b>It goes into Canvas and onto video.</b> The original stays here under my copyright. Canvas gets a
+      copy with a link back, and I record myself talking through it so students can watch at home and come
+      back to it later.</li>
+  </ol>
+
+  <p>
+    My work with Claude is co-work in the full sense. I need to bounce ideas off someone, or something, and
+    Claude is very smart. I think out loud with it, and it challenges me. I am training it, with memory that
+    carries across tasks and projects, to push back on my ideas, and that pushing back is part of how these
+    tools get made. The decisions about what students need to see, in what order, and what they get wrong
+    stay mine, and they come from my classroom.
+  </p>
+
+  <h2>What the research says about learning from animations</h2>
+
+  <p>
+    An animation is not automatically better than a good drawing. Across 26 studies, animations beat static
+    pictures by a modest margin, and the margin was larger when the motion showed the content itself rather
+    than decorating it (H&ouml;ffler and Leutner, 2007). A later and larger review found a smaller advantage,
+    still on the side of animation (Berney and B&eacute;trancourt, 2016). How an animation is built matters
+    more than the fact that it moves, and eight findings shaped my next builds.
+  </p>
+
+  <ul>
+    <li><b>Watching is not enough.</b> In a study of physics demonstrations, students who only watched did
+      barely better on explanations than students who saw nothing. Students who first wrote down a prediction
+      gained about four times as much on explanations, for about two extra minutes of class (Crouch, Fagen,
+      Callan and Mazur, 2004).</li>
+    <li><b>A prediction works through surprise.</b> Being confidently wrong makes the right answer stick, so
+      the prediction has to be a real commitment, not a passing thought (Brod, 2021).</li>
+    <li><b>Motion disappears.</b> A picture stays on the page; an animation shows something and then it is
+      gone, and the learner has to hold it in memory. Researchers call this the transient information effect
+      (Ayres and Paas, 2007). Letting students control the pace, one segment at a time, lowers that load
+      (Spanjers, van Gog and van Merri&euml;nboer, 2010).</li>
+    <li><b>Pointing helps.</b> Highlighting what matters at each moment, and quieting everything else,
+      improves both recall and the ability to use the idea later (Richter, Scheiter and Eitel, 2016;
+      Schneider, Beege, Nebel and Rey, 2018).</li>
+    <li><b>Doing beats watching, and making beats doing.</b> Clicking through a sequence is active. Explaining
+      it in your own words or drawing it from memory is constructive, and explaining it to a classmate is
+      interactive. Students learn more at each step up (Chi and Wylie, 2014).</li>
+    <li><b>Molecules do not aim.</b> Students already believe that molecules head toward their targets on
+      purpose, and that belief grows more confident through college (Gauthier and colleagues, 2019).
+      Animations that send molecules in straight lines to their destinations feed it. Molecules arrive by
+      random collisions (Jantzen, McGill and Jenkinson, 2024).</li>
+    <li><b>Name the wrong idea out loud.</b> Physics students who watched a video that stated a common
+      misconception and then took it apart learned more than students who watched a clear, correct
+      explanation alone. The clear version felt easier and taught less (Muller, Sharma and Reimann, 2008).</li>
+    <li><b>Short videos get watched.</b> Students watch about six minutes of a video before attention falls
+      off, and an instructor&rsquo;s face at the right moments holds them better than slides alone (Guo, Kim
+      and Rubin, 2014).</li>
+  </ul>
+
+  <h2>What predict, then press looks like in my room</h2>
+
+  <p>
+    Frankly, it is something I am still learning to do. Read, talk, write is not a simple process. I worked
+    out a version of it with college students through
+    <a href="student-authored-modules.html">student-authored modules</a>, but with younger students it is
+    hard to get them talking about claim, evidence and reasoning in a way that is constructive. That only
+    happens when the reading is very good, often done as homework, and then we work with a tool and predict
+    from good prior understanding.
+  </p>
+
+  <p>
+    What these tools show is so new to ninth graders that they do not yet have a concept of the cell. In many
+    ways this is their first experience of these ideas, and you cannot predict much about something you have
+    never met. So the first meeting is a video. Predict, then press comes on the second pass: when we revisit
+    a process, when a student needs remediation, or as self-study. In the room it is usually a single, pointed
+    question that I ask, and then students turn and talk about it.
+  </p>
+
+  <h2>What the first animation already does well</h2>
+
+  <p>
+    The first piece built this way is a G-protein-coupled receptor, the kind of receptor that answers
+    adrenaline and many hormones. A signal molecule lands outside the cell and never enters, and six steps
+    later calcium has switched on enzymes inside. Measured against the research, it already gets several
+    things right.
+  </p>
+
+  <ul>
+    <li><b>A prediction before every step.</b> Each one is written as a real choice: where does the signal
+      molecule stop, outside, inside the membrane or in the cytosol?</li>
+    <li><b>Students set the pace.</b> Nothing moves until they press Next, and Back replays any step.</li>
+    <li><b>The record stays on the screen.</b> Each finished step leaves a numbered marker and a one-line
+      caption, so the sequence builds instead of vanishing.</li>
+    <li><b>It shows what a still cannot.</b> After the last step, the cell keeps making messengers while the
+      one signal molecule sits unchanged outside. That is amplification, and it only shows up over time.</li>
+    <li><b>One picture, many uses.</b> The still, the animation, the projected Teaching view and my narrated
+      video all share the same drawing, so students carry one image from the screen to the worksheet to the
+      test.</li>
+  </ul>
+
+  <h2>What it does not do yet, and what changes</h2>
+
+  <p>
+    The research also showed me where the first version falls short. Each of these changes goes into the
+    shared engine, so every animation after this one inherits it.
+  </p>
+
+  <div class="table-wrap">
+  <table class="modular-index">
+    <thead>
+      <tr><th>What the research asks for</th><th>Where the first version falls short</th><th>The change</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Point at what matters</td><td>Every step looks equally important while it plays</td><td>The active step&rsquo;s marker, caption and moving parts grow and brighten; everything else dims, then settles back</td></tr>
+      <tr><td>A committed prediction</td><td>Students answer in their heads, so being wrong costs nothing</td><td>Students tap one of the choices before pressing Next, and the screen shows their guess beside what happened</td></tr>
+      <tr><td>Honest motion</td><td>The signal, the G protein and the messenger IP<sub>3</sub> travel straight to their targets, and the captions say they &ldquo;reach&rdquo; and &ldquo;head&rdquo; there</td><td>Small molecules drift and bump before they bind, the dashed path marks where they end up rather than how they travel, and the verbs lose their sense of purpose</td></tr>
+      <tr><td>Label things when they exist</td><td>DAG is labelled at the start, though it is only made when PIP<sub>2</sub> is cut at step 4</td><td>Products get their names at the moment they are made</td></tr>
+      <tr><td>Something students make</td><td>The closing idea is handed to them</td><td>The last screen asks for one sentence of explanation and offers a blank-label copy of the figure to fill in from memory</td></tr>
+      <tr><td>A check</td><td>Nothing asks whether the idea took</td><td>One question at the end offers the common wrong idea as a choice: did the signal molecule enter the cell?</td></tr>
+      <tr><td>Make the numbers visible</td><td>Amplification is shown but never counted</td><td>A running count during the run-on: one signal molecule outside, 14 IP<sub>3</sub> and 28 calcium ions inside</td></tr>
+      <tr><td>Short, interrupted video</td><td>A narrated walk-through could slide into passive watching</td><td>Videos stay under six minutes, one chapter per step, and stop at each prediction; the Canvas copy asks the question in the video</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    Two content fixes ride along. The last step&rsquo;s box read &ldquo;The cell does the job,&rdquo; which
+    names no job. At the college level it will name protein kinase C, with &ldquo;the cell responds&rdquo;
+    beside it. And the switch between the high school and college versions will show real differences instead
+    of the same picture twice.
+  </p>
+
+  <h2>The &ldquo;so what&rdquo; I have not solved</h2>
+
+  <p>
+    That last box exposed a problem I do not have an answer for yet. In ninth grade, the end of this pathway is
+    not protein kinase C; it is simply that the cell responds. By eleventh grade, protein kinase C gets named,
+    and the honest student reaction is: so what?
+  </p>
+
+  <p>
+    At the college level the same thing happens all the time. Students learn the information without the
+    context around it, because the context keeps going and keeps extending, and what a lower-level course was
+    preparing them for is often not clear to them until much later. When I find a spot like this one, there is
+    a hum that is clear to me, and I think: I need to help that kid with that. What do I really need to show
+    there? I do not know yet. I need to talk to students, and hear their own questions, before I rebuild this
+    part.
+  </p>
+
+  <h2>Going back over the older tools</h2>
+
+  <p>
+    The receptor animation, built in October 2026, is the first model built and then checked against this
+    research. I keep a log of where each improvement starts, so it is clear which tools on this site follow
+    the newer pattern and which came before it.
+  </p>
+
+  <p>
+    The five animations that follow it are built on the improved engine from the start. The earlier
+    <a href="../biology/classroom-tools.html">classroom tools</a>, the Membrane Patch, the Water Patch and the
+    Energy Patch among them, stay up and stay in use. Next year I plan to go back through them one at a time
+    and bring each up to the newer pattern. Their web addresses will not change, so links from Canvas and from
+    past students keep working.
+  </p>
+
+  <h2>Using these in class</h2>
+
+  <p>If you teach and want to use these tools, the research and my own classroom point to a simple routine.</p>
+
+  <ol>
+    <li><b>Make the first meeting a video.</b> When an idea is brand new, students need to see it once before
+      they can predict anything about it.</li>
+    <li><b>Save the predictions for the second pass.</b> On a revisit, in remediation or in self-study, have
+      students commit before every step: out loud, on a whiteboard or by tapping a choice.</li>
+    <li><b>Ask one pointed question in the room.</b> Project the Teaching view, stop at a single step, and have
+      students turn and talk.</li>
+    <li><b>End with something they make.</b> One sentence explaining the whole process, or the blank figure
+      labelled from memory.</li>
+    <li><b>Talk about how molecules really move.</b> Ask whether the messenger knew where it was going. It did
+      not; it got there by bumping into things.</li>
+  </ol>
+
+  <p>
+    Not every teacher wants this, and I understand why. Many of us grew used to printed, cut-and-paste
+    activities, the kind sold on Teachers Pay Teachers, and they have their place. But our students now work
+    on iPads, and how we teach has to evolve with the technology that is part of their learning. I am still in
+    the middle of that conversation.
+  </p>
+
+  <p class="sources">
+    Sources: Ayres &amp; Paas (2007), <em>Applied Cognitive Psychology</em> 21, 695&ndash;700 &middot;
+    Berney &amp; B&eacute;trancourt (2016), <em>Computers &amp; Education</em> 101, 150&ndash;167,
+    <a href="https://archive-ouverte.unige.ch/unige:92234">open copy</a> &middot;
+    Brod (2021), <em>Psychonomic Bulletin &amp; Review</em> 28, 1839&ndash;1847,
+    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8642250">free text</a> &middot;
+    Chi &amp; Wylie (2014), <em>Educational Psychologist</em> 49, 219&ndash;243,
+    <a href="https://chilab.asu.edu/sites/default/files/lcl/chiwylie2014icap_2.pdf">pdf</a> &middot;
+    Crouch, Fagen, Callan &amp; Mazur (2004), <em>American Journal of Physics</em> 72, 835&ndash;838 &middot;
+    Gauthier and colleagues (2019), <em>CBE&mdash;Life Sciences Education</em>,
+    <a href="https://lifescied.org/doi/10.1187/cbe.17-12-0267">doi</a> &middot;
+    Guo, Kim &amp; Rubin (2014), <em>Proceedings of Learning at Scale</em>,
+    <a href="https://www.cs.rochester.edu/hci/pubs/pdfs/edX-MOOC-video-production-and-engagement_LAS-2014.pdf">pdf</a> &middot;
+    H&ouml;ffler &amp; Leutner (2007), <em>Learning and Instruction</em> 17, 722&ndash;738 &middot;
+    Jantzen, McGill &amp; Jenkinson (2024), <em>Frontiers in Bioinformatics</em>,
+    <a href="https://www.frontiersin.org/articles/10.3389/fbinf.2024.1353807/full">free text</a> &middot;
+    Muller, Sharma &amp; Reimann (2008), <em>Science Education</em> 92, 278&ndash;296 &middot;
+    National Research Council (2011), <em>Learning Science Through Computer Games and Simulations</em>,
+    <a href="https://www.nap.edu/catalog/13078">free text</a> &middot;
+    Richter, Scheiter &amp; Eitel (2016), <em>Educational Research Review</em> 17, 19&ndash;36 &middot;
+    Schneider, Beege, Nebel &amp; Rey (2018), <em>Educational Research Review</em> 23, 1&ndash;24 &middot;
+    Spanjers, van Gog &amp; van Merri&euml;nboer (2010), <em>Educational Psychology Review</em> 22, 411&ndash;423,
+    <a href="https://doi.org/10.1007/s10648-010-9135-6">doi</a>.
+  </p>
+</article>
+
+
+<footer class="site-footer">
+Written and maintained by Mr. Schwebach &middot; last updated see page history on GitHub
+  <span class="license">All one-pagers &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a> &mdash; free to use, adapt, and hand to a class; not for resale.</span>
+</footer>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82bc6616569842b9ab63b89bf80ed3c5"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
