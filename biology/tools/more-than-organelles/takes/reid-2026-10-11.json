@@ -1,0 +1,885 @@
+{
+ "song": "More Than Organelles",
+ "take": "Reid, Sun 10/11 ~10:50 am, Voice Memos at 84 bpm; time-corrected 0.26% and aligned to the bar",
+ "bpm": 84,
+ "bar_s": 2.8571,
+ "first_downbeat_s": 5.8143,
+ "count_in_bar_start_s": 2.9572,
+ "lines": [
+  {
+   "i": 0,
+   "bar": 0,
+   "start_s": 5.814,
+   "end_s": 8.671,
+   "text": "Cells, cells — more than organelles,"
+  },
+  {
+   "i": 1,
+   "bar": 1,
+   "start_s": 8.671,
+   "end_s": 11.529,
+   "text": "it's what they do that the SOL tells."
+  },
+  {
+   "i": 2,
+   "bar": 2,
+   "start_s": 11.529,
+   "end_s": 14.386,
+   "text": "Membrane picks, ribosome builds,"
+  },
+  {
+   "i": 3,
+   "bar": 3,
+   "start_s": 14.386,
+   "end_s": 17.243,
+   "text": "mitochondria pay the bills."
+  },
+  {
+   "i": 4,
+   "bar": 4,
+   "start_s": 17.243,
+   "end_s": 20.1,
+   "text": "Every part's got a job to do;"
+  },
+  {
+   "i": 5,
+   "bar": 5,
+   "start_s": 20.1,
+   "end_s": 22.957,
+   "text": "break a part, and the job breaks too."
+  },
+  {
+   "i": 6,
+   "bar": 6,
+   "start_s": 22.957,
+   "end_s": 25.814,
+   "text": "Observe it first, then make a guess,"
+  },
+  {
+   "i": 7,
+   "bar": 7,
+   "start_s": 25.814,
+   "end_s": 28.671,
+   "text": "a hypothesis you can test."
+  },
+  {
+   "i": 8,
+   "bar": 8,
+   "start_s": 28.671,
+   "end_s": 31.529,
+   "text": "Predict it: \"if this, then that will show,\""
+  },
+  {
+   "i": 9,
+   "bar": 9,
+   "start_s": 31.529,
+   "end_s": 34.386,
+   "text": "then run it, and the data lets you know."
+  },
+  {
+   "i": 10,
+   "bar": 10,
+   "start_s": 34.386,
+   "end_s": 37.243,
+   "text": "A law says what, it won't say why;"
+  },
+  {
+   "i": 11,
+   "bar": 11,
+   "start_s": 37.243,
+   "end_s": 40.1,
+   "text": "a theory explains, with proof piled high."
+  },
+  {
+   "i": 12,
+   "bar": 12,
+   "start_s": 40.1,
+   "end_s": 42.957,
+   "text": "All living things are made of cells,"
+  },
+  {
+   "i": 13,
+   "bar": 13,
+   "start_s": 42.957,
+   "end_s": 45.814,
+   "text": "the smallest unit where life dwells,"
+  },
+  {
+   "i": 14,
+   "bar": 14,
+   "start_s": 45.814,
+   "end_s": 48.671,
+   "text": "and every cell comes from a cell."
+  },
+  {
+   "i": 15,
+   "bar": 15,
+   "start_s": 48.671,
+   "end_s": 51.529,
+   "text": "Evidence? Yeast in a flask will tell:"
+  },
+  {
+   "i": 16,
+   "bar": 16,
+   "start_s": 51.529,
+   "end_s": 54.386,
+   "text": "it buds and clouds; the sealed flask stays clear —"
+  },
+  {
+   "i": 17,
+   "bar": 17,
+   "start_s": 54.386,
+   "end_s": 57.243,
+   "text": "no cell from nothing showed up here."
+  },
+  {
+   "i": 18,
+   "bar": 18,
+   "start_s": 57.243,
+   "end_s": 60.1,
+   "text": "Then better lenses added more:"
+  },
+  {
+   "i": 19,
+   "bar": 19,
+   "start_s": 60.1,
+   "end_s": 62.957,
+   "text": "cells run metabolism at the core;"
+  },
+  {
+   "i": 20,
+   "bar": 20,
+   "start_s": 62.957,
+   "end_s": 65.814,
+   "text": "DNA gets passed from cell to cell,"
+  },
+  {
+   "i": 21,
+   "bar": 21,
+   "start_s": 65.814,
+   "end_s": 68.671,
+   "text": "and every cell's built the same as well."
+  },
+  {
+   "i": 22,
+   "bar": 22,
+   "start_s": 68.671,
+   "end_s": 71.529,
+   "text": "Take the proof away, it's just a claim:"
+  },
+  {
+   "i": 23,
+   "bar": 23,
+   "start_s": 71.529,
+   "end_s": 74.386,
+   "text": "a hypothesis with a name."
+  },
+  {
+   "i": 24,
+   "bar": 24,
+   "start_s": 74.386,
+   "end_s": 77.243,
+   "text": "Prokaryote: DNA loose inside,"
+  },
+  {
+   "i": 25,
+   "bar": 25,
+   "start_s": 77.243,
+   "end_s": 80.1,
+   "text": "no nucleus; flagella spin the ride."
+  },
+  {
+   "i": 26,
+   "bar": 26,
+   "start_s": 80.1,
+   "end_s": 82.957,
+   "text": "Eukaryote: nucleus, organelles;"
+  },
+  {
+   "i": 27,
+   "bar": 27,
+   "start_s": 82.957,
+   "end_s": 85.814,
+   "text": "plants and animals, bigger cells."
+  },
+  {
+   "i": 28,
+   "bar": 28,
+   "start_s": 85.814,
+   "end_s": 88.671,
+   "text": "Every cell has a membrane, DNA,"
+  },
+  {
+   "i": 29,
+   "bar": 29,
+   "start_s": 88.671,
+   "end_s": 91.529,
+   "text": "ribosomes, cytoplasm — four that stay."
+  },
+  {
+   "i": 30,
+   "bar": 30,
+   "start_s": 91.529,
+   "end_s": 94.386,
+   "text": "Plants add a wall and chloroplasts for light;"
+  },
+  {
+   "i": 31,
+   "bar": 31,
+   "start_s": 94.386,
+   "end_s": 97.243,
+   "text": "one big vacuole keeps the stem upright."
+  },
+  {
+   "i": 32,
+   "bar": 32,
+   "start_s": 97.243,
+   "end_s": 100.1,
+   "text": "Animals: no wall, small vacuoles,"
+  },
+  {
+   "i": 33,
+   "bar": 33,
+   "start_s": 100.1,
+   "end_s": 102.957,
+   "text": "and centrioles to help divide the whole."
+  },
+  {
+   "i": 34,
+   "bar": 34,
+   "start_s": 102.957,
+   "end_s": 105.814,
+   "text": "Nucleus? No brain. It holds the plan,"
+  },
+  {
+   "i": 35,
+   "bar": 35,
+   "start_s": 105.814,
+   "end_s": 108.671,
+   "text": "the DNA — read it, build what you can."
+  },
+  {
+   "i": 36,
+   "bar": 36,
+   "start_s": 108.671,
+   "end_s": 111.529,
+   "text": "Ribosomes build the protein chain;"
+  },
+  {
+   "i": 37,
+   "bar": 37,
+   "start_s": 111.529,
+   "end_s": 114.386,
+   "text": "rough ER folds it, sends it down the lane."
+  },
+  {
+   "i": 38,
+   "bar": 38,
+   "start_s": 114.386,
+   "end_s": 117.243,
+   "text": "Golgi tags it, ships it from the cell —"
+  },
+  {
+   "i": 39,
+   "bar": 39,
+   "start_s": 117.243,
+   "end_s": 120.1,
+   "text": "production is something we can tell."
+  },
+  {
+   "i": 40,
+   "bar": 40,
+   "start_s": 120.1,
+   "end_s": 122.957,
+   "text": "Mitochondria make the ATP;"
+  },
+  {
+   "i": 41,
+   "bar": 41,
+   "start_s": 122.957,
+   "end_s": 125.814,
+   "text": "lysosomes recycle the debris."
+  },
+  {
+   "i": 42,
+   "bar": 42,
+   "start_s": 125.814,
+   "end_s": 128.671,
+   "text": "Block the Golgi: insulin can't leave;"
+  },
+  {
+   "i": 43,
+   "bar": 43,
+   "start_s": 128.671,
+   "end_s": 131.529,
+   "text": "it piles up; the blood has none to receive."
+  },
+  {
+   "i": 44,
+   "bar": 44,
+   "start_s": 131.529,
+   "end_s": 134.386,
+   "text": "Unicellular: one cell, alone,"
+  },
+  {
+   "i": 45,
+   "bar": 45,
+   "start_s": 134.386,
+   "end_s": 137.243,
+   "text": "eats, moves, divides, all on its own."
+  },
+  {
+   "i": 46,
+   "bar": 46,
+   "start_s": 137.243,
+   "end_s": 140.1,
+   "text": "Multicellular: they specialize;"
+  },
+  {
+   "i": 47,
+   "bar": 47,
+   "start_s": 140.1,
+   "end_s": 142.957,
+   "text": "cell, tissue, organ, system — watch them rise."
+  },
+  {
+   "i": 48,
+   "bar": 48,
+   "start_s": 142.957,
+   "end_s": 145.814,
+   "text": "The organism's the top of the stack;"
+  },
+  {
+   "i": 49,
+   "bar": 49,
+   "start_s": 145.814,
+   "end_s": 148.671,
+   "text": "division of labor keeps each on track."
+  },
+  {
+   "i": 50,
+   "bar": 50,
+   "start_s": 148.671,
+   "end_s": 151.529,
+   "text": "Interdependent: one part needs the rest;"
+  },
+  {
+   "i": 51,
+   "bar": 51,
+   "start_s": 151.529,
+   "end_s": 154.386,
+   "text": "the heart needs lungs; subsystems, that's the test."
+  },
+  {
+   "i": 52,
+   "bar": 52,
+   "start_s": 154.386,
+   "end_s": 157.243,
+   "text": "Homeostasis: steady inside"
+  },
+  {
+   "i": 53,
+   "bar": 53,
+   "start_s": 157.243,
+   "end_s": 160.1,
+   "text": "while the outside world swings wide."
+  },
+  {
+   "i": 54,
+   "bar": 54,
+   "start_s": 160.1,
+   "end_s": 162.957,
+   "text": "Heart rate: seventy, then you run —"
+  },
+  {
+   "i": 55,
+   "bar": 55,
+   "start_s": 162.957,
+   "end_s": 165.814,
+   "text": "one-fifty, pumping oxygen."
+  },
+  {
+   "i": 56,
+   "bar": 56,
+   "start_s": 165.814,
+   "end_s": 168.671,
+   "text": "You rest; it settles back to seventy —"
+  },
+  {
+   "i": 57,
+   "bar": 57,
+   "start_s": 168.671,
+   "end_s": 171.529,
+   "text": "that's the balance, there for you to see."
+  },
+  {
+   "i": 58,
+   "bar": 58,
+   "start_s": 171.529,
+   "end_s": 174.386,
+   "text": "Stomata open moist and cool,"
+  },
+  {
+   "i": 59,
+   "bar": 59,
+   "start_s": 174.386,
+   "end_s": 177.243,
+   "text": "close up hot and dry; that's the rule."
+  },
+  {
+   "i": 60,
+   "bar": 60,
+   "start_s": 177.243,
+   "end_s": 180.1,
+   "text": "Roots dig deeper when the water's low;"
+  },
+  {
+   "i": 61,
+   "bar": 61,
+   "start_s": 180.1,
+   "end_s": 182.957,
+   "text": "the data on the graph is how you know."
+  },
+  {
+   "i": 62,
+   "bar": 62,
+   "start_s": 182.957,
+   "end_s": 185.814,
+   "text": "Paramecium squeezes water out,"
+  },
+  {
+   "i": 63,
+   "bar": 63,
+   "start_s": 185.814,
+   "end_s": 188.671,
+   "text": "contractile vacuole: one cell, no doubt."
+  },
+  {
+   "i": 64,
+   "bar": 64,
+   "start_s": 188.671,
+   "end_s": 191.529,
+   "text": "Lose the balance: swell, shrink, or shut down;"
+  },
+  {
+   "i": 65,
+   "bar": 65,
+   "start_s": 191.529,
+   "end_s": 194.386,
+   "text": "homeostasis broke — that's the breakdown."
+  },
+  {
+   "i": 66,
+   "bar": 66,
+   "start_s": 194.386,
+   "end_s": 197.243,
+   "text": "Phospho-lipid: a phosphate head,"
+  },
+  {
+   "i": 67,
+   "bar": 67,
+   "start_s": 197.243,
+   "end_s": 200.1,
+   "text": "two lipid tails hang down instead."
+  },
+  {
+   "i": 68,
+   "bar": 68,
+   "start_s": 200.1,
+   "end_s": 202.957,
+   "text": "Head's hydrophilic, loves the wet;"
+  },
+  {
+   "i": 69,
+   "bar": 69,
+   "start_s": 202.957,
+   "end_s": 205.814,
+   "text": "tails are hydrophobic — water's a threat."
+  },
+  {
+   "i": 70,
+   "bar": 70,
+   "start_s": 205.814,
+   "end_s": 208.671,
+   "text": "Water's polar — oxygen pulls more;"
+  },
+  {
+   "i": 71,
+   "bar": 71,
+   "start_s": 208.671,
+   "end_s": 211.529,
+   "text": "heads face the water, tails hide in the core."
+  },
+  {
+   "i": 72,
+   "bar": 72,
+   "start_s": 211.529,
+   "end_s": 214.386,
+   "text": "Draw it: two layers, heads out, tails in,"
+  },
+  {
+   "i": 73,
+   "bar": 73,
+   "start_s": 214.386,
+   "end_s": 217.243,
+   "text": "a bilayer, proteins floating within."
+  },
+  {
+   "i": 74,
+   "bar": 74,
+   "start_s": 217.243,
+   "end_s": 220.1,
+   "text": "Integral proteins cross the wall —"
+  },
+  {
+   "i": 75,
+   "bar": 75,
+   "start_s": 220.1,
+   "end_s": 222.957,
+   "text": "a channel's a door straight through it all."
+  },
+  {
+   "i": 76,
+   "bar": 76,
+   "start_s": 222.957,
+   "end_s": 225.814,
+   "text": "Peripheral sits on one side;"
+  },
+  {
+   "i": 77,
+   "bar": 77,
+   "start_s": 225.814,
+   "end_s": 228.671,
+   "text": "carbohydrate chains: ID tags outside."
+  },
+  {
+   "i": 78,
+   "bar": 78,
+   "start_s": 228.671,
+   "end_s": 231.529,
+   "text": "Cholesterol wedged between the tails"
+  },
+  {
+   "i": 79,
+   "bar": 79,
+   "start_s": 231.529,
+   "end_s": 234.386,
+   "text": "keeps it fluid, so the wall never fails."
+  },
+  {
+   "i": 80,
+   "bar": 80,
+   "start_s": 234.386,
+   "end_s": 237.243,
+   "text": "Selectively permeable — it picks,"
+  },
+  {
+   "i": 81,
+   "bar": 81,
+   "start_s": 237.243,
+   "end_s": 240.1,
+   "text": "so homeostasis holds and sticks."
+  },
+  {
+   "i": 82,
+   "bar": 82,
+   "start_s": 240.1,
+   "end_s": 242.957,
+   "text": "If you're hydrophobic,"
+  },
+  {
+   "i": 83,
+   "bar": 83,
+   "start_s": 242.957,
+   "end_s": 245.814,
+   "text": "you've got vocabulary —"
+  },
+  {
+   "i": 84,
+   "bar": 84,
+   "start_s": 245.814,
+   "end_s": 248.671,
+   "text": "hydro's water, phobic's fear;"
+  },
+  {
+   "i": 85,
+   "bar": 85,
+   "start_s": 248.671,
+   "end_s": 251.529,
+   "text": "say the parts, and the word is clear."
+  },
+  {
+   "i": 86,
+   "bar": 86,
+   "start_s": 251.529,
+   "end_s": 254.386,
+   "text": "Strip the proteins, and there's no door;"
+  },
+  {
+   "i": 87,
+   "bar": 87,
+   "start_s": 254.386,
+   "end_s": 257.243,
+   "text": "can't pick, can't pump — it's a bag, no more."
+  },
+  {
+   "i": 88,
+   "bar": 88,
+   "start_s": 257.243,
+   "end_s": 260.1,
+   "text": "Semi-permeable: some get through."
+  },
+  {
+   "i": 89,
+   "bar": 89,
+   "start_s": 260.1,
+   "end_s": 262.957,
+   "text": "Equilibrium: both sides even, too."
+  },
+  {
+   "i": 90,
+   "bar": 90,
+   "start_s": 262.957,
+   "end_s": 265.814,
+   "text": "Passive transport: high to low,"
+  },
+  {
+   "i": 91,
+   "bar": 91,
+   "start_s": 265.814,
+   "end_s": 268.671,
+   "text": "no energy spent, just let it go."
+  },
+  {
+   "i": 92,
+   "bar": 92,
+   "start_s": 268.671,
+   "end_s": 271.529,
+   "text": "Diffusion: down the gradient it goes;"
+  },
+  {
+   "i": 93,
+   "bar": 93,
+   "start_s": 271.529,
+   "end_s": 274.386,
+   "text": "bigger gap, faster — the table shows."
+  },
+  {
+   "i": 94,
+   "bar": 94,
+   "start_s": 274.386,
+   "end_s": 277.243,
+   "text": "Facilitated: downhill, still free;"
+  },
+  {
+   "i": 95,
+   "bar": 95,
+   "start_s": 277.243,
+   "end_s": 280.1,
+   "text": "a protein carries it through, you see."
+  },
+  {
+   "i": 96,
+   "bar": 96,
+   "start_s": 280.1,
+   "end_s": 282.957,
+   "text": "Osmosis: water crossing the wall;"
+  },
+  {
+   "i": 97,
+   "bar": 97,
+   "start_s": 282.957,
+   "end_s": 285.814,
+   "text": "water heads where the salt is, that's all."
+  },
+  {
+   "i": 98,
+   "bar": 98,
+   "start_s": 285.814,
+   "end_s": 288.671,
+   "text": "Hypo- means under: less salt outside;"
+  },
+  {
+   "i": 99,
+   "bar": 99,
+   "start_s": 288.671,
+   "end_s": 291.529,
+   "text": "water rushes in, the cell swells wide."
+  },
+  {
+   "i": 100,
+   "bar": 100,
+   "start_s": 291.529,
+   "end_s": 294.386,
+   "text": "Hyper- means over: more salt out there;"
+  },
+  {
+   "i": 101,
+   "bar": 101,
+   "start_s": 294.386,
+   "end_s": 297.243,
+   "text": "water leaves, the cell shrinks — beware."
+  },
+  {
+   "i": 102,
+   "bar": 102,
+   "start_s": 297.243,
+   "end_s": 300.1,
+   "text": "Iso- means equal: in matches out;"
+  },
+  {
+   "i": 103,
+   "bar": 103,
+   "start_s": 300.1,
+   "end_s": 302.957,
+   "text": "the cell holds shape — that's what IV's about."
+  },
+  {
+   "i": 104,
+   "bar": 104,
+   "start_s": 302.957,
+   "end_s": 305.814,
+   "text": "Salt a cucumber, it weeps on the plate;"
+  },
+  {
+   "i": 105,
+   "bar": 105,
+   "start_s": 305.814,
+   "end_s": 308.671,
+   "text": "seaweed in fresh water swells too great."
+  },
+  {
+   "i": 106,
+   "bar": 106,
+   "start_s": 308.671,
+   "end_s": 311.529,
+   "text": "Active transport pumps it up the hill,"
+  },
+  {
+   "i": 107,
+   "bar": 107,
+   "start_s": 311.529,
+   "end_s": 314.386,
+   "text": "low to high, and ATP pays the bill."
+  },
+  {
+   "i": 108,
+   "bar": 108,
+   "start_s": 314.386,
+   "end_s": 317.243,
+   "text": "Endo- means in: the membrane wraps it tight;"
+  },
+  {
+   "i": 109,
+   "bar": 109,
+   "start_s": 317.243,
+   "end_s": 320.1,
+   "text": "phagocytosis eats a bite,"
+  },
+  {
+   "i": 110,
+   "bar": 110,
+   "start_s": 320.1,
+   "end_s": 322.957,
+   "text": "pinocytosis drinks the tide;"
+  },
+  {
+   "i": 111,
+   "bar": 111,
+   "start_s": 322.957,
+   "end_s": 325.814,
+   "text": "exo- is out: a vesicle dumps outside."
+  },
+  {
+   "i": 112,
+   "bar": 112,
+   "start_s": 325.814,
+   "end_s": 328.671,
+   "text": "That's how insulin leaves the cell;"
+  },
+  {
+   "i": 113,
+   "bar": 113,
+   "start_s": 328.671,
+   "end_s": 331.529,
+   "text": "the protein route ends there as well."
+  },
+  {
+   "i": 114,
+   "bar": 114,
+   "start_s": 331.529,
+   "end_s": 334.386,
+   "text": "Cut the ATP: the pump stands still;"
+  },
+  {
+   "i": 115,
+   "bar": 115,
+   "start_s": 334.386,
+   "end_s": 337.243,
+   "text": "downhill keeps going; nothing climbs the hill."
+  },
+  {
+   "i": 116,
+   "bar": 116,
+   "start_s": 337.243,
+   "end_s": 340.1,
+   "text": "Nucleus, ribosomes, rough ER, Golgi, lysosome, mitochondria, chloroplast, centrioles;"
+  },
+  {
+   "i": 117,
+   "bar": 117,
+   "start_s": 340.1,
+   "end_s": 342.957,
+   "text": "cell wall, cell membrane, cytoplasm, flagella, organelles, prokaryotes, eukaryotes, homeostasis;"
+  },
+  {
+   "i": 118,
+   "bar": 118,
+   "start_s": 342.957,
+   "end_s": 345.814,
+   "text": "phospholipid bilayer, hydrophilic, hydrophobic, cholesterol, integral protein, peripheral protein, selectively permeable, diffusion;"
+  },
+  {
+   "i": 119,
+   "bar": 119,
+   "start_s": 345.814,
+   "end_s": 348.671,
+   "text": "passive transport, facilitated diffusion, osmosis, active transport, endocytosis, exocytosis, phagocytosis, pinocytosis."
+  },
+  {
+   "i": 120,
+   "bar": 120,
+   "start_s": 348.671,
+   "end_s": 351.529,
+   "text": "Cells, cells — more than organelles."
+  },
+  {
+   "i": 121,
+   "bar": 121,
+   "start_s": 351.529,
+   "end_s": 354.386,
+   "text": "You knew the parts; now know the job as well."
+  },
+  {
+   "i": 122,
+   "bar": 122,
+   "start_s": 354.386,
+   "end_s": 357.243,
+   "text": "The fuel that drives more than a Humvee"
+  },
+  {
+   "i": 123,
+   "bar": 123,
+   "start_s": 357.243,
+   "end_s": 360.1,
+   "text": "and the enzyme that makes this rhyme —"
+  },
+  {
+   "i": 124,
+   "bar": 124,
+   "start_s": 360.1,
+   "end_s": 362.957,
+   "text": "that's Part 2, when Unit 3 comes."
+  }
+ ]
+}

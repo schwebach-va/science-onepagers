@@ -1,0 +1,2429 @@
+<!DOCTYPE html>
+<html lang="en" data-dev="ipad">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A looping animation set to an original synthesized beat: eight scenes, one per section of the cell song, from what each organelle does to how the membrane picks what crosses. One lyric line per bar, tempo you can set. Biology I Unit 2 (SOL BIO.3). Nothing to answer, nothing submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/more-than-organelles.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="More Than Organelles: The Cell Song">
+<meta property="og:description" content="Eight looping scenes on the beat, one lyric line per bar: cell theory, cell types, organization and homeostasis, the membrane, and transport. Instrumental with the words on screen; set the tempo and rap it yourself.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/more-than-organelles.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>More Than Organelles: The Cell Song | Science One-Pagers</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"More Than Organelles: The Cell Song","description":"A looping, beat-locked animation of a review song for Biology I Unit 2: the jobs of cell parts, cell theory, prokaryotes and eukaryotes, levels of organization and homeostasis, membrane structure, and transport across the membrane. Lyrics on screen one line per bar; adjustable tempo; original synthesized music.","url":"https://scienceonepagers.org/biology/tools/more-than-organelles.html","inLanguage":"en","learningResourceType":"Animation","educationalLevel":"High school","typicalAgeRange":"14-16","audience":[{"@type":"EducationalAudience","educationalRole":"teacher"},{"@type":"EducationalAudience","educationalRole":"student"}],"isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-nc/4.0/","author":{"@type":"Person","name":"J. R. Schwebach"},"publisher":{"@type":"Organization","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"isPartOf":{"@type":"CollectionPage","name":"Science One-Pagers","url":"https://scienceonepagers.org/"},"about":{"@type":"Thing","name":"Biology"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* Layout: the Cancer Pathway shell. Numbered path of eight scenes (column on the left in landscape, row above the stage in portrait, row across the top on a projector), one SVG stage drawn at cell level, and under it the lyric strip and the sound controls. */
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--gold:#C98A2E;--gold-soft:#FBF0DA;--gold-ink:#7A5212;
+  --pre:#B85042;--root:#1F4E5F;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--gold:#E0A64A;--gold-soft:#2F2614;--gold-ink:#F2CF8C;
+    --pre:#EE9A8B;--root:#8FCADA;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--gold:#E0A64A;--gold-soft:#2F2614;--gold-ink:#F2CF8C;
+  --pre:#EE9A8B;--root:#8FCADA;color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+.wrap{max-width:100rem;margin:0 auto;padding:.9rem 1rem 4rem}
+html.proj .wrap{max-width:none}
+.narrow{max-width:46rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.45rem,4.6vw,2rem);line-height:1.12;letter-spacing:-0.015em;margin:0;text-wrap:balance}
+p{margin:0 0 1rem;max-width:38rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 .9rem .2rem 0;letter-spacing:0;text-transform:none;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .2rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+[hidden]:not([hidden=until-found i]){display:none!important}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;padding:0;margin:-1px}
+
+/* header */
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:.6rem 1.4rem;padding:0 0 .7rem;border-bottom:1.5px solid var(--rule);margin:0 0 .8rem}
+.headL{min-width:0}
+.eb{display:inline-block}
+@media (min-width:900px) and (orientation:landscape){h1{font-size:clamp(1.4rem,2.3vw,1.9rem)}}
+.ctl{display:flex;gap:.45rem;flex-wrap:wrap}
+.cbtn{font-family:var(--sans);font-weight:600;font-size:.95rem;min-height:48px;min-width:48px;padding:.45rem 1rem;border-radius:3px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;gap:.45rem}
+.cbtn svg{width:16px;height:16px;flex:none}
+.cbtn.main{background:var(--bond);border-color:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cbtn.main{color:#12100D}}
+:root[data-theme="dark"] .cbtn.main{color:#12100D}
+.cbtn[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--gold-ink)}
+html[data-dev="pc"] .cbtn{min-height:38px}
+.sw{display:flex;flex-direction:column;gap:.25rem}
+.swl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--card)}
+.seg button{font-family:var(--sans);font-weight:600;font-size:.9rem;background:none;border:none;color:var(--ink-soft);padding:.4rem .8rem;min-height:48px;min-width:48px;line-height:1.2}
+.seg button + button{border-left:1.5px solid var(--rule)}
+.seg button small{display:block;font-weight:500;font-size:.7rem;opacity:.85}
+.seg button[aria-pressed="true"]{background:var(--bond);color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#12100D}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#12100D}
+html[data-dev="pc"] .seg button{min-height:38px}
+
+/* the tool: path + stage */
+.tool{display:flex;flex-direction:column;gap:.8rem}
+.path{list-style:none;margin:0;padding:0}
+.bub{position:relative;color:var(--ink-soft)}
+.bb{display:flex;align-items:center;gap:.75rem;background:none;border:0;padding:0;margin:0;text-align:left;width:100%;color:inherit;border-radius:4px}
+.dot{position:relative;flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:2px solid var(--shell);font-family:var(--sans);font-weight:700;font-size:1.05rem;color:var(--ink-soft);z-index:1}
+.dot svg{position:absolute;inset:-5px;width:54px;height:54px;transform:rotate(-90deg);pointer-events:none}
+.dot svg circle{fill:none;stroke:var(--gold);stroke-width:3.5;stroke-linecap:round;opacity:0}
+.bb:hover .dot{border-color:var(--gold)}
+.bub.lit .dot{background:var(--gold-soft);border-color:var(--gold);color:var(--gold-ink)}
+.bub.on .dot{background:var(--gold);border-color:var(--gold);color:#1D1A15;box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 28%,transparent),0 0 22px 4px color-mix(in srgb,var(--gold) 55%,transparent)}
+.bub.on .dot svg circle{opacity:1}
+.bub.looping .dot::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px dashed var(--gold);opacity:.9}
+.ttl{font-family:var(--sans);font-weight:600;font-size:18px;line-height:1.2;display:block}
+.bub.lit .ttl{color:var(--ink)}
+.bub.on .ttl{color:var(--ink);font-weight:700}
+.cap{font-size:18px;line-height:1.42;margin:.35rem 0 .5rem;color:var(--ink);display:block}
+.chip{display:inline-block;font-family:var(--sans);font-size:16px;font-weight:600;line-height:1.3;padding:.2rem .6rem;border-radius:3px;background:var(--bond-soft);color:var(--bond);border:1.5px solid color-mix(in srgb,var(--bond) 40%,transparent)}
+.body{display:none}
+
+.stagecol{display:flex;flex-direction:column;gap:.7rem;min-width:0;min-height:0}
+.stagebox{min-height:0;display:flex;align-items:flex-start;justify-content:center}
+.stage{position:relative;width:100%;max-width:100%;aspect-ratio:1000/640;border-radius:6px;overflow:hidden;border:1.5px solid var(--rule);background:#FBF7F1}
+.stage svg{display:block;width:100%;height:100%}
+.stage text{font-family:var(--sans)}
+.lab{font-size:clamp(21px,calc(12.5px / var(--k,1)),32px);font-weight:600;fill:#1D1A15;paint-order:stroke;stroke:#FFFDF8;stroke-width:6px;stroke-linejoin:round}
+html.proj .lab{font-size:clamp(25px,calc(15px / var(--k,1)),34px)}
+.lab.small{font-size:clamp(15px,calc(9.5px / var(--k,1)),24px);font-weight:500;fill:#5A544A}
+html.proj .lab.small{font-size:clamp(18px,calc(11px / var(--k,1)),26px)}
+.lab.mid{font-size:clamp(17px,calc(10.5px / var(--k,1)),26px);font-weight:600}
+html.proj .lab.mid{font-size:clamp(20px,calc(12.5px / var(--k,1)),28px)}
+.lab.big{font-size:clamp(28px,calc(16px / var(--k,1)),40px);font-weight:700}
+.lab.brk{fill:#9E3A2E}
+.tag{font-size:clamp(17px,calc(10px / var(--k,1)),26px);font-weight:700;letter-spacing:.12em;fill:#5A544A}
+html.proj .tag{font-size:clamp(21px,calc(12px / var(--k,1)),28px)}
+.tile{font-size:clamp(13px,calc(8.4px / var(--k,1)),19px);font-weight:600;fill:#1D1A15}
+html.proj .tile{font-size:clamp(15px,calc(9.5px / var(--k,1)),20px)}
+.chiptx{font-size:clamp(15px,calc(9px / var(--k,1)),22px);font-weight:700;letter-spacing:.06em}
+
+/* lyric strip: the current line large, the next line faint under it */
+.lyr{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);border-radius:4px;padding:.55rem .9rem .65rem;display:grid;gap:.15rem;min-width:0}
+.lyr-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lyr-top .where{min-width:0;font-variant-numeric:tabular-nums}
+.lyr-top .where b{color:var(--ink)}
+.pips{display:flex;gap:6px;flex:none}
+.pip{width:14px;height:14px;border-radius:50%;background:var(--shell)}
+.pip.on{background:var(--flag)}
+.pip.one.on{background:var(--bond)}
+.lyr-cur{font-family:var(--sans);font-weight:700;font-size:clamp(20px,2.2vw,28px);line-height:1.2;color:var(--ink);min-height:1.2em;text-wrap:balance;overflow-wrap:anywhere}
+.lyr-next{font-family:var(--sans);font-weight:500;font-size:clamp(15px,1.5vw,18px);line-height:1.3;color:var(--ink-soft);opacity:.85;min-height:1.3em;overflow-wrap:anywhere}
+.lyr-next::before{content:"next  ";font-size:.72em;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.lyr.count .lyr-cur{color:var(--bond)}
+.lyr.brk{border-left-color:var(--flag)}
+.wp-pre{color:var(--pre)}
+.wp-root{color:var(--root)}
+.lyr-back{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:none;border:1.5px solid var(--gold);background:var(--gold-soft);color:var(--gold-ink);border-radius:3px;padding:.15rem .55rem;min-height:30px}
+
+/* the card with the scene's words (portrait and projector) */
+.now{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--gold);border-radius:4px;padding:.7rem .9rem .8rem}
+.now .ttl{font-size:20px;color:var(--ink);font-weight:700;display:block}
+.now .ttl .n{color:var(--gold-ink)}
+.now .cap{margin:.3rem 0 .5rem}
+
+/* sound row */
+.snd{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;font-family:var(--sans);font-size:.88rem;color:var(--ink-soft)}
+.grp{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.grpl{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.tempo{display:flex;align-items:center;gap:.5rem}
+.tempo input{width:7rem;accent-color:var(--bond)}
+.tempo output{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;min-width:4.4em}
+.tog{font-family:var(--sans);font-weight:600;font-size:.85rem;min-height:40px;padding:.3rem .7rem;border-radius:3px;border:1.5px solid var(--rule);background:var(--card);color:var(--ink-soft)}
+.tog[aria-pressed="true"]{border-color:var(--bond);color:var(--bond);background:var(--bond-soft)}
+.tog[disabled]{opacity:.45;cursor:default}
+html[data-dev="pc"] .tog{min-height:34px}
+.snd .seg button{min-height:40px;font-size:.85rem;padding:.3rem .7rem}
+html[data-dev="pc"] .snd .seg button{min-height:34px}
+.recbtn{color:var(--flag);border-color:color-mix(in srgb,var(--flag) 45%,var(--rule))}
+.recbtn .rd{width:10px;height:10px;border-radius:50%;background:var(--flag);display:inline-block}
+.recp{background:var(--flag-soft);border:1.5px solid color-mix(in srgb,var(--flag) 40%,transparent);border-radius:4px;padding:.6rem .8rem;font-family:var(--sans);font-size:.92rem;display:flex;flex-wrap:wrap;gap:.5rem .8rem;align-items:center;color:var(--ink)}
+.recp p{margin:0;max-width:44rem}
+.recp .tog{color:var(--ink)}
+
+/* stacked layout (portrait, phones): path is a row of numbered bubbles above the stage */
+.path{display:flex;align-items:center;justify-content:space-between}
+.path .bub{flex:1;display:flex;align-items:center}
+.path .bub:last-child{flex:0}
+.path .bub::after{content:"";flex:1;height:3px;background:var(--shell);margin:0 2px}
+.path .bub:last-child::after{display:none}
+.path .bub.lit::after{background:var(--gold)}
+.path .bb{width:auto}
+.path .txt{display:none}
+
+/* wide landscape: the path runs down the left; the current one opens */
+@media (min-width:900px) and (orientation:landscape){
+  .wrap{padding-top:.6rem}
+  .screen{height:calc(100vh - .6rem);height:calc(100dvh - .6rem);display:flex;flex-direction:column}
+  .tool{flex:1;min-height:0;display:grid;grid-template-columns:minmax(280px,30%) 1fr;grid-template-rows:1fr auto;gap:.6rem 1.2rem;align-items:stretch;padding-bottom:.6rem}
+  .path{display:block;overflow:hidden;min-height:0;grid-column:1;grid-row:1}
+  .stagecol{grid-column:2;grid-row:1 / span 2}
+  .devrow{grid-column:1;grid-row:2;justify-content:flex-start}
+  .path .bub{display:block;padding:0 0 .35rem}
+  .path .bb{width:100%;align-items:flex-start}
+  .path .bub::after{position:absolute;left:21px;top:44px;bottom:0;width:3px;height:auto;margin:0;flex:none}
+  .path .txt{display:block;padding-top:.6rem;min-width:0}
+  .path .bub.on .body{display:block}
+  .now{display:none}
+  .lyr-cur{height:1.25em;overflow:hidden}
+  .lyr-cur.long{font-size:clamp(14px,1.45vw,18px);line-height:1.05;height:calc(2.1em + 2px);display:flex;align-items:center}
+  .lyr-next{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  html.proj .lyr-next{white-space:normal}
+  html.proj .lyr-cur{height:auto;overflow:visible}
+  html.proj .lyr-cur.long{font-size:max(22px,2.3vh);height:auto}
+  .stagebox{flex:1;container-type:size}
+  .stage{width:min(100cqw,calc(100cqh * 1000 / 640))}
+}
+@media (min-width:900px) and (orientation:landscape) and (max-height:640px){
+  .screen{height:auto}
+  .stagebox{flex:none;container-type:normal}
+  .stage{width:100%}
+}
+/* projector: words 28 px or more */
+html.proj .ttl,html.proj .cap,html.proj .chip{font-size:max(26px,2.4vh)}
+html.proj .now .ttl{font-size:max(28px,2.6vh)}
+html.proj .cap{line-height:1.3}
+html.proj .chip{line-height:1.2}
+html.proj .dot{width:50px;height:50px;font-size:1.35rem}
+html.proj .dot svg{width:60px;height:60px}
+html.proj .lyr-cur{font-size:max(30px,3.2vh)}
+html.proj .lyr-next{font-size:max(22px,2.2vh)}
+/* projector, landscape: path across the top, big stage, the words beside it */
+@media (min-width:900px) and (orientation:landscape){
+  html.proj .head .sop-eyebrow{display:none}
+  html.proj .tool{grid-template-columns:1fr minmax(300px,30%);grid-template-rows:auto 1fr;gap:.8rem 1.4rem}
+  html.proj .devrow{display:none}
+  html.proj .path{grid-column:1 / -1;display:flex;align-items:center;overflow:visible}
+  html.proj .path .bub{flex:1;display:flex;align-items:center;gap:0;padding:0}
+  html.proj .path .bub:last-child{flex:0}
+  html.proj .path .bub::after{position:static;flex:1;height:4px;width:auto;margin:0 3px}
+  html.proj .path .bb{width:auto}
+  html.proj .path .txt{display:none}
+  html.proj .stagecol{display:contents}
+  html.proj .stagebox{grid-column:1;grid-row:2}
+  html.proj .snd{margin-top:auto}
+  html.proj .side{grid-column:2;grid-row:2;align-self:stretch;display:flex;flex-direction:column;gap:.7rem;min-height:0;overflow:hidden}
+  html.proj .now{display:block}
+  html.proj .snd .grp.mixg,html.proj .devrow{display:none}
+}
+.side{display:flex;flex-direction:column;gap:.6rem;min-width:0}
+.parts{position:relative}
+.parts summary{list-style:none;display:inline-flex;align-items:center;gap:.35rem;cursor:pointer}
+.parts summary::-webkit-details-marker{display:none}
+.parts summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-2px,-2px)}
+.parts[open] summary{border-color:var(--bond);color:var(--bond)}
+.parts .pop{position:absolute;bottom:calc(100% + 6px);left:0;z-index:5;display:flex;flex-wrap:wrap;gap:.4rem;width:max-content;max-width:min(22rem,80vw);background:var(--card);border:1.5px solid var(--rule);border-radius:4px;padding:.5rem;box-shadow:0 6px 20px rgba(0,0,0,.14)}
+.devrow{display:flex;justify-content:flex-end}
+
+@media (max-width:480px){.dot,html.proj .dot{width:34px;height:34px;font-size:.9rem}.dot svg,html.proj .dot svg{inset:-5px;width:44px;height:44px}.tempo input{width:7rem}}
+@media (prefers-reduced-motion:no-preference){
+  .bub.on .body,.now{animation:rise .45s ease-out}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+
+.below{margin-top:1.6rem}
+details.teach{margin:1.4rem 0 0;border:1.5px solid var(--rule);border-radius:4px;background:var(--card);padding:0 1rem}
+details.teach summary{font-family:var(--sans);font-weight:600;padding:.8rem 0;cursor:pointer;min-height:48px}
+details.teach h3{font-family:var(--sans);font-weight:600;font-size:1rem;margin:1rem 0 .4rem}
+details.teach ol,details.teach ul{margin:0 0 1rem;padding-left:1.3rem;max-width:38rem}
+details.teach li{margin:0 0 .3rem}
+details.teach code{font-size:.85em;background:var(--bond-soft);padding:0 .25em;border-radius:2px}
+.lyrsheet{columns:2 18rem;column-gap:2rem;font-size:.95rem;line-height:1.45;margin:0 0 1rem}
+.lyrsheet h4{font-family:var(--sans);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--bond);margin:.8rem 0 .2rem;break-after:avoid}
+.lyrsheet p{margin:0;max-width:none}
+
+/* video: the projector layout, no controls, a small site mark, title and end cards */
+.vidbrand,.vcard{display:none}
+html.video .ctl,html.video .sop-eyebrow,html.video .snd,html.video .devrow,html.video .recp,html.video .below,html.video .sop-foot,html.video #srlist{display:none!important}
+html.video .vidbrand{display:block;font-family:var(--sans);font-weight:700;font-size:28px;letter-spacing:.01em;color:var(--bond)}
+html.video .vidbrand small{display:block;font-weight:500;font-size:16px;color:var(--ink-soft);text-align:right}
+html.video *{animation:none!important;transition:none!important;cursor:none}
+html.video .vcard{display:flex;position:fixed;inset:0;z-index:50;background:var(--paper);align-items:center;justify-content:center;padding:6vh 8vw;opacity:0}
+.vcard .in{max-width:60rem;display:grid;gap:1.6rem;justify-items:start}
+.vcard .k{font-family:var(--sans);font-weight:700;font-size:22px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.vcard h2{font-family:var(--sans);font-weight:700;font-size:84px;line-height:1.02;letter-spacing:-.02em;margin:0;color:var(--ink)}
+.vcard .site{font-family:var(--sans);font-weight:700;font-size:54px;color:var(--bond);border-top:4px solid var(--gold);padding-top:1.2rem}
+.vcard .t{font-family:var(--serif);font-size:30px;line-height:1.4;color:var(--ink);margin:0;max-width:52rem}
+.vcard .f{font-family:var(--sans);font-size:20px;color:var(--ink-soft);margin:0}
+html.video .lyr-cur{font-size:44px;line-height:1.12}
+html.video .lyr-cur.long{font-size:30px}
+html.video .lyr-next{font-size:26px}
+html.video .lyr{padding:.9rem 1.1rem 1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="screen">
+<header class="head">
+  <div class="headL">
+    <p class="sop-eyebrow"><a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a> <span class="eb">Bio Tool #23 &middot; Biology I Unit 2 &middot; SOL BIO.3 &middot; PWCS LT 2.0&ndash;2.5</span></p>
+    <h1>More Than Organelles: The Cell Song</h1>
+  </div>
+  <div class="vidbrand" aria-hidden="true">scienceonepagers.org<small>Biology I &middot; Unit 2 review</small></div>
+  <div class="ctl" role="group" aria-label="Animation and sound controls">
+    <button type="button" class="cbtn main" id="bPlay" aria-label="Pause"></button>
+    <button type="button" class="cbtn" id="bSound" aria-pressed="false"></button>
+    <button type="button" class="cbtn" id="bRestart"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8a4.8 4.8 0 1 0 1.5-3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 1.8v4.4h4.4z" fill="currentColor"/></svg><span>Restart</span></button>
+    <button type="button" class="cbtn" id="bProj" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="13" height="8.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11.5v2.5M5 14.5h6" stroke="currentColor" stroke-width="1.8"/></svg><span>Projector</span></button>
+  </div>
+</header>
+
+<main class="tool" id="tool">
+  <ol class="path" id="path" aria-label="The eight scenes. Choose one to loop it."></ol>
+  <div class="stagecol">
+    <div class="stagebox">
+      <div class="stage" id="stage" role="img" aria-label="Scene 1 of 8, Every part has a job.">
+        <svg id="svg" viewBox="0 0 1000 640" aria-hidden="true" focusable="false"></svg>
+      </div>
+    </div>
+    <div class="side" id="side">
+      <div class="lyr" id="lyr" aria-live="off">
+        <div class="lyr-top"><span class="where" id="where">Whole song</span><span class="pips" aria-hidden="true"><span class="pip one"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+        <div class="lyr-cur" id="lyrCur"></div>
+        <div class="lyr-next" id="lyrNext"></div>
+      </div>
+      <div class="now" id="now" aria-hidden="true"></div>
+      <div class="snd" id="snd">
+        <div class="grp tempo"><label class="grpl" for="tempo">Tempo</label><input type="range" id="tempo" min="70" max="100" step="1" value="84"><output id="tempoOut" for="tempo">84 bpm</output></div>
+        <div class="grp mixg"><span class="grpl" id="mixL">Music</span>
+          <div class="seg" role="group" aria-labelledby="mixL">
+            <button type="button" data-preset="full" aria-pressed="true">Full band</button>
+            <button type="button" data-preset="beat" aria-pressed="false">Beat only</button>
+            <button type="button" data-preset="practice" aria-pressed="false">Practice beat</button>
+          </div>
+        </div>
+        <details class="parts grp mixg" id="parts"><summary class="tog">Parts</summary><div class="pop" role="group" aria-label="Parts">
+          <button type="button" class="tog" data-part="drums" aria-pressed="true">Drums</button>
+          <button type="button" class="tog" data-part="bass" aria-pressed="true">Bass</button>
+          <button type="button" class="tog" data-part="keys" aria-pressed="true">Keys</button>
+          <button type="button" class="tog" data-part="hook" aria-pressed="true">Hook/horns</button>
+          <button type="button" class="tog" data-part="voice" aria-pressed="false" id="tVoice" hidden>Voice</button>
+        </div></details>
+        <button type="button" class="tog recbtn" id="bRec"><span class="rd" aria-hidden="true"></span> Record your own</button>
+      </div>
+      <div class="recp" id="recp" hidden></div>
+    </div>
+  </div>
+  <div class="devrow">
+        <div class="sw">
+          <span class="swl" id="devL">Running on</span>
+          <div class="seg" role="group" aria-labelledby="devL">
+            <button type="button" data-dev="ipad" aria-pressed="true" aria-label="Running on iPad">iPad<small>touch &middot; fewer moving pieces</small></button>
+            <button type="button" data-dev="pc" aria-pressed="false" aria-label="Running on a computer">Computer<small>mouse &middot; denser picture</small></button>
+          </div>
+        </div>
+      </div>
+</main>
+</div>
+
+<div class="vcard" id="vFront" aria-hidden="true"><div class="in"><span class="k">Biology I &middot; Unit 2 review &middot; SOL BIO.3</span><h2>More Than Organelles:<br>The Cell Song</h2><p class="t">Every part has a job, and you can tell the job by what fails when it breaks.</p><span class="site">scienceonepagers.org</span></div></div>
+<div class="vcard" id="vBack" aria-hidden="true"><div class="in"><span class="k">Rap along, or record your own</span><span class="site">scienceonepagers.org</span><p class="t">More Than Organelles: The Cell Song is in Biology Classroom Tools, with the beat, the words on screen and a tempo you can set.</p><p class="f">Words, music and vocals by J.&nbsp;R. Schwebach &middot; drawings and music made for the page &middot; &copy; J.&nbsp;R. Schwebach, CC BY-NC 4.0</p></div></div>
+<ol class="vh" id="srlist" aria-label="The eight scenes, in order"></ol>
+
+<section class="narrow below">
+  <p class="lede">A review song for Unit 2, one lyric line to a bar. Each section of the song has its own scene, and each scene shows the job, then breaks the part and shows what stops.</p>
+  <p class="fine">It plays by itself and loops. The words run along under the picture; the music starts when you press <b>Sound</b>. Choose any numbered scene to loop that one section on the beat. <b>Tempo</b> runs from 70 to 100 beats a minute, so a faster rapper can turn it up and everything, words and pictures, keeps time. The cells, molecules and organs are drawings, not to scale.</p>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <h3>Where students are</h3>
+    <p>The song reviews LT 2.0 to 2.5: the 32 Unit 2 words, cell theory and how science builds a theory, prokaryotes and eukaryotes and the protein route, organization and homeostasis, membrane structure, and transport across the membrane. Energy (photosynthesis and respiration) is held for Part 2 with Unit 3.</p>
+    <h3>The eight scenes</h3>
+    <ol id="teachList"></ol>
+    <h3>Three ways to run it</h3>
+    <ul>
+      <li><b>Loop a scene while you teach a target.</b> Choose its number. The scene repeats on the beat with the sound off, so it can run on the projector while you talk; press <b>Sound</b> if you want the music under it. Link straight to one with <code>?scene=4</code> (add <code>&amp;projector=1</code> to open it projector-ready).</li>
+      <li><b>Whole song as a warm-up or review.</b> Press <b>Sound</b> and let it run. The words show one line per bar with the next line under it, so the room can read along.</li>
+      <li><b>Practice and record.</b> Students who want to perform it choose a tempo, pick <b>Beat only</b> or <b>Practice beat</b>, and rap the lines as they come. <b>Record your own</b> records a voice over the beat on the student's own device, plays it back, and saves it there. Nothing uploads.</li>
+    </ul>
+    <h3>Choices in the drawing</h3>
+    <ul>
+      <li>Every verse ends on a break couplet. The part that verse is about stops working, the music drops to a kick drum, and the picture shows what fails: the Golgi blocked, the pump without ATP, a membrane with no proteins.</li>
+      <li>The nucleus holds the plan (the DNA); it is never called the brain.</li>
+      <li>Water moves toward the side with more dissolved salt. In an isotonic solution water still crosses both ways; there is no net movement.</li>
+      <li>Cholesterol sits between the lipid tails, not on the surface.</li>
+      <li>Word parts are coloured in the lyrics: prefixes and suffixes in red, roots in blue (hypo-, hyper-, iso-; endo-, exo-; phago-, pino-; phospho-lipid; hydro-, -philic, -phobic; uni-, multi-cellular).</li>
+    </ul>
+    <h3>The words</h3>
+    <div class="lyrsheet" id="lyrsheet"></div>
+    <p class="fine">Students can rewatch from Canvas. Nothing is collected; the only things this device remembers are the Projector, Running on, tempo and music settings.</p>
+  </details>
+</section>
+
+<footer class="sop-foot">Bio Tool #23 &middot; Unit 2, Cell Structure &amp; Function &middot; Biology I, SOL BIO.3 &middot; PWCS LT 2.0&ndash;2.5 &middot; watch, listen, rap along; nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Words and music by J.&nbsp;R. Schwebach; the music is synthesized in the page, nothing sampled. Drawings are original. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+<script>
+(function(){
+"use strict";
+/* ===================== THE WORDS (draft v2, Oct 11) =====================
+   One line = one bar. Replace this array to change the lyrics; nothing else needs editing
+   as long as each section keeps its line count close (scenes key their moments to line numbers).
+   intro: bars of music before the first line. brk: how many final lines are the break. */
+const SONG=[
+ {key:"hook",name:"Hook",intro:2,brk:1,lines:[
+"Cells, cells — more than organelles,",
+"it's what they do that the SOL tells.",
+"Membrane picks, ribosome builds,",
+"mitochondria pay the bills.",
+"Every part's got a job to do;",
+"break a part, and the job breaks too."]},
+ {key:"v1",name:"Verse 1 · LT 2.1",intro:0,brk:2,lines:[
+"Observe it first, then make a guess,",
+"a hypothesis you can test.",
+"Predict it: \"if this, then that will show,\"",
+"then run it, and the data lets you know.",
+"A law says what, it won't say why;",
+"a theory explains, with proof piled high.",
+"All living things are made of cells,",
+"the smallest unit where life dwells,",
+"and every cell comes from a cell.",
+"Evidence? Yeast in a flask will tell:",
+"it buds and clouds; the sealed flask stays clear —",
+"no cell from nothing showed up here.",
+"Then better lenses added more:",
+"cells run metabolism at the core;",
+"DNA gets passed from cell to cell,",
+"and every cell's built the same as well.",
+"Take the proof away, it's just a claim:",
+"a hypothesis with a name."]},
+ {key:"v2",name:"Verse 2 · LT 2.2",intro:0,brk:2,lines:[
+"Prokaryote: DNA loose inside,",
+"no nucleus; flagella spin the ride.",
+"Eukaryote: nucleus, organelles;",
+"plants and animals, bigger cells.",
+"Every cell has a membrane, DNA,",
+"ribosomes, cytoplasm — four that stay.",
+"Plants add a wall and chloroplasts for light;",
+"one big vacuole keeps the stem upright.",
+"Animals: no wall, small vacuoles,",
+"and centrioles to help divide the whole.",
+"Nucleus? No brain. It holds the plan,",
+"the DNA — read it, build what you can.",
+"Ribosomes build the protein chain;",
+"rough ER folds it, sends it down the lane.",
+"Golgi tags it, ships it from the cell —",
+"production is something we can tell.",
+"Mitochondria make the ATP;",
+"lysosomes recycle the debris.",
+"Block the Golgi: insulin can't leave;",
+"it piles up; the blood has none to receive."]},
+ {key:"v3",name:"Verse 3 · LT 2.3",intro:0,brk:2,lines:[
+"Unicellular: one cell, alone,",
+"eats, moves, divides, all on its own.",
+"Multicellular: they specialize;",
+"cell, tissue, organ, system — watch them rise.",
+"The organism's the top of the stack;",
+"division of labor keeps each on track.",
+"Interdependent: one part needs the rest;",
+"the heart needs lungs; subsystems, that's the test.",
+"Homeostasis: steady inside",
+"while the outside world swings wide.",
+"Heart rate: seventy, then you run —",
+"one-fifty, pumping oxygen.",
+"You rest; it settles back to seventy —",
+"that's the balance, there for you to see.",
+"Stomata open moist and cool,",
+"close up hot and dry; that's the rule.",
+"Roots dig deeper when the water's low;",
+"the data on the graph is how you know.",
+"Paramecium squeezes water out,",
+"contractile vacuole: one cell, no doubt.",
+"Lose the balance: swell, shrink, or shut down;",
+"homeostasis broke — that's the breakdown."]},
+ {key:"v4",name:"Verse 4 · LT 2.4",intro:0,brk:2,lines:[
+"Phospho-lipid: a phosphate head,",
+"two lipid tails hang down instead.",
+"Head's hydrophilic, loves the wet;",
+"tails are hydrophobic — water's a threat.",
+"Water's polar — oxygen pulls more;",
+"heads face the water, tails hide in the core.",
+"Draw it: two layers, heads out, tails in,",
+"a bilayer, proteins floating within.",
+"Integral proteins cross the wall —",
+"a channel's a door straight through it all.",
+"Peripheral sits on one side;",
+"carbohydrate chains: ID tags outside.",
+"Cholesterol wedged between the tails",
+"keeps it fluid, so the wall never fails.",
+"Selectively permeable — it picks,",
+"so homeostasis holds and sticks.",
+"If you're hydrophobic,",
+"you've got vocabulary —",
+"hydro's water, phobic's fear;",
+"say the parts, and the word is clear.",
+"Strip the proteins, and there's no door;",
+"can't pick, can't pump — it's a bag, no more."]},
+ {key:"v5",name:"Verse 5 · LT 2.5",intro:0,brk:2,lines:[
+"Semi-permeable: some get through.",
+"Equilibrium: both sides even, too.",
+"Passive transport: high to low,",
+"no energy spent, just let it go.",
+"Diffusion: down the gradient it goes;",
+"bigger gap, faster — the table shows.",
+"Facilitated: downhill, still free;",
+"a protein carries it through, you see.",
+"Osmosis: water crossing the wall;",
+"water heads where the salt is, that's all.",
+"Hypo- means under: less salt outside;",
+"water rushes in, the cell swells wide.",
+"Hyper- means over: more salt out there;",
+"water leaves, the cell shrinks — beware.",
+"Iso- means equal: in matches out;",
+"the cell holds shape — that's what IV's about.",
+"Salt a cucumber, it weeps on the plate;",
+"seaweed in fresh water swells too great.",
+"Active transport pumps it up the hill,",
+"low to high, and ATP pays the bill.",
+"Endo- means in: the membrane wraps it tight;",
+"phagocytosis eats a bite,",
+"pinocytosis drinks the tide;",
+"exo- is out: a vesicle dumps outside.",
+"That's how insulin leaves the cell;",
+"the protein route ends there as well.",
+"Cut the ATP: the pump stands still;",
+"downhill keeps going; nothing climbs the hill."]},
+ {key:"roll",name:"Roll call · LT 2.0",intro:0,brk:0,lines:[
+"Nucleus, ribosomes, rough ER, Golgi, lysosome, mitochondria, chloroplast, centrioles;",
+"cell wall, cell membrane, cytoplasm, flagella, organelles, prokaryotes, eukaryotes, homeostasis;",
+"phospholipid bilayer, hydrophilic, hydrophobic, cholesterol, integral protein, peripheral protein, selectively permeable, diffusion;",
+"passive transport, facilitated diffusion, osmosis, active transport, endocytosis, exocytosis, phagocytosis, pinocytosis."]},
+ {key:"outro",name:"Outro",intro:0,brk:0,lines:[
+"Cells, cells — more than organelles.",
+"You knew the parts; now know the job as well.",
+"The fuel that drives more than a Humvee",
+"and the enzyme that makes this rhyme —",
+"that's Part 2, when Unit 3 comes."]}
+];
+
+/* the words in each numbered bubble */
+const BUBBLES=[
+ {t:"Every part has a job",c:"A cell is more than a list of parts. Each part does a job, and you can tell the job by what fails when it breaks.",k:"LT 2.0 · the 32 words"},
+ {t:"Cells come from cells",c:"A hypothesis is a testable guess; a law says what happens; a theory explains it with evidence. The evidence for cell theory: cells only come from cells.",k:"LT 2.1 · cell theory"},
+ {t:"Two kinds of cells, one protein's trip",c:"Every cell has a membrane, DNA, ribosomes and cytoplasm. Eukaryotes add rooms. One protein shows how the rooms work together.",k:"LT 2.2 · prokaryote, eukaryote, plant, animal"},
+ {t:"One cell or many, held steady",c:"One cell does every job alone. Many cells specialize: cell, tissue, organ, system, organism. Homeostasis keeps the inside steady.",k:"LT 2.3 · organization and homeostasis"},
+ {t:"The membrane, built and labeled",c:"Phosphate heads love water and face out; lipid tails fear water and hide inside. Proteins, sugars and cholesterol sit in the bilayer.",k:"LT 2.4 · membrane structure"},
+ {t:"Moving across",c:"Passive transport runs high to low for free. Water moves by osmosis toward more salt. Active transport pumps uphill and pays with ATP.",k:"LT 2.5 · transport and tonicity"},
+ {t:"Roll call",c:"All 32 words, two to a beat. You call the first, the room answers the second.",k:"LT 2.0 · vocabulary"},
+ {t:"More than organelles",c:"You knew the parts. Now you know the jobs. Part 2, the energy track, comes with Unit 3.",k:"Part 2 · Unit 3"}
+];
+
+/* word parts coloured in the lyric line: prefix or suffix red, root blue */
+const WORDPARTS=[
+ [/\b(hypo|hyper|iso)(-|tonic)/gi, ["pre","root"]],
+ [/\b(endo|exo|phago|pino)(-|cytosis)/gi, ["pre","root"]],
+ [/\b(phospho)(-?)(lipid)/gi, ["pre","","root"]],
+ [/\b(hydro)(philic|phobic)/gi, ["root","pre"]],
+ [/\b(hydro)('s)/gi, ["root",""]],
+ [/\b(phobic)('s)/gi, ["pre",""]],
+ [/\b(uni|multi)(cellular)/gi, ["pre","root"]]
+];
+
+/* the roll call: two terms a beat, in order */
+const ROLL=[
+ "nucleus","ribosomes","rough ER","Golgi","lysosome","mitochondria","chloroplast","centrioles",
+ "cell wall","cell membrane","cytoplasm","flagella","organelles","prokaryotes","eukaryotes","homeostasis",
+ "phospholipid bilayer","hydrophilic","hydrophobic","cholesterol","integral protein","peripheral protein","selectively permeable","diffusion",
+ "passive transport","facilitated diffusion","osmosis","active transport","endocytosis","exocytosis","phagocytosis","pinocytosis"];
+
+/* ===================== timeline: everything is counted in bars ===================== */
+const SECS=SONG.map((s,i)=>Object.assign({},s,{i,len:s.intro+s.lines.length}));
+let ACC=0;SECS.forEach(s=>{s.start=ACC;ACC+=s.len;});
+const TOTAL=ACC;               /* bars in the whole song */
+const NS_=SECS.length;
+const mod=(a,n)=>((a%n)+n)%n;
+const clamp=(x,a,b)=>x<a?a:x>b?b:x;
+const lerp=(a,b,p)=>a+(b-a)*p;
+const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+const seg=(x,a,b)=>clamp((x-a)/(b-a),0,1);
+const html=document.documentElement;
+
+let MODE="song",LOOP=0;        /* song: sections in order; loop: one section forever */
+let VOICE=null;                /* a loaded take, when Voice is on */
+
+/* where a beat count B lands in the music */
+function mapBeat(B){
+  let sec,lbar,count=false,cyc=0;
+  if(MODE==="song"){
+    const bar=mod(B/4,TOTAL);cyc=Math.floor(B/4/TOTAL);
+    sec=SECS[NS_-1];for(let i=0;i<NS_;i++){if(bar<SECS[i].start+SECS[i].len){sec=SECS[i];break;}}
+    lbar=bar-sec.start;
+  }else{
+    sec=SECS[LOOP];
+    if(B<0){count=true;lbar=0;}
+    else{lbar=mod(B/4,sec.len);cyc=Math.floor(B/4/sec.len);}
+  }
+  const lineF=lbar-sec.intro,li=Math.floor(lineF);
+  const brk=!count&&sec.brk>0&&li>=sec.lines.length-sec.brk;
+  return {sec,lbar,lineF,li,count,brk,beat:mod(B,4),cyc,B};
+}
+
+/* ===================== the clock ===================== */
+/* position is in beats. The clock is the audio clock when sound is on, the frame clock when it is off. */
+const clock={pos0:0,t0:0,src:"perf",playing:true,bpm:84};
+let ac=null;
+function lat(){return ac?(ac.outputLatency||ac.baseLatency||0):0;}
+function srcNow(){return clock.src==="audio"&&ac?ac.currentTime-lat():performance.now()/1000;}
+function curPos(){return clock.playing?clock.pos0+(srcNow()-clock.t0)*clock.bpm/60:clock.pos0;}
+function rebase(src,lead){const p=curPos();if(src)clock.src=src;clock.t0=srcNow()+(lead||0);clock.pos0=p;return p;}
+function seekBeat(B){clock.pos0=B;clock.t0=srcNow();if(typeof resyncAudio==="function")resyncAudio();}
+function setBpm(b){rebase();clock.bpm=b;if(typeof resyncAudio==="function")resyncAudio(true);}
+
+/* ===================== the music: synthesized in the page, nothing sampled ===================== */
+/* Key A minor, i–VI–III–VII (Am9–Fmaj9–Cmaj9–G6/9), one chord per bar, played with a little swing.
+   Practice beat = the original single beat, kept exactly. Everything else is the band. */
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+const CH=[
+ {bass:33,keys:[60,64,67,71],pad:[57,64,69,72],ooh:[69,72],gtr:[57,64],riff:{0:69,2:72,3:76,5:74,6:72,7:69},stab:[64,67,72]},   /* Am9   */
+ {bass:29,keys:[57,60,64,67],pad:[53,60,65,69],ooh:[69,72],gtr:[57,65],riff:{0:69,2:72,3:77,5:76,6:72,7:69},stab:[65,69,72]},   /* Fmaj9 */
+ {bass:36,keys:[55,59,62,64],pad:[55,60,64,67],ooh:[67,71],gtr:[55,64],riff:{0:67,2:72,3:76,5:74,6:72,7:67},stab:[64,67,71]},   /* Cmaj9 */
+ {bass:31,keys:[59,62,64,69],pad:[55,59,62,67],ooh:[67,71],gtr:[55,62],riff:{0:71,2:74,3:79,5:77,6:74,7:71},stab:[62,67,71]}    /* G6/9  */
+];
+const PARTS={drums:true,bass:true,keys:true,hook:true,voice:false};
+let PRESET="full";
+let bus=null,NB=null,schedTimer=null,nextS=0,soundOn=false;
+let KS={};                       /* plucked-string buffers, made once per pitch */
+
+function audioInit(){
+  if(ac&&bus)return;
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!ac)ac=new AC();
+  buildBus();
+}
+function pan(node,p){if(!ac.createStereoPanner)return node;const s=ac.createStereoPanner();s.pan.value=p;node.connect(s);return s;}
+function satCurve(k){const n=1024,c=new Float32Array(n);for(let i=0;i<n;i++){const x=i/(n-1)*2-1;c[i]=Math.tanh(k*x)/Math.tanh(k);}return c;}
+/* a room: stereo noise that dies away, darker as it fades */
+function makeIR(sec,decay){
+  const sr=ac.sampleRate,n=Math.floor(sr*sec),b=ac.createBuffer(2,n,sr);
+  for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);let lp=0;const pre=Math.floor(sr*.012);
+    for(let i=0;i<n;i++){if(i<pre){d[i]=0;continue;}const t=(i-pre)/sr;const a=.22+.7*(t/sec);lp=lp+(Math.random()*2-1-lp)*(1-a);d[i]=lp*Math.pow(1-t/sec,decay)*.9;}}
+  return b;
+}
+function buildBus(){
+  const master=ac.createGain();master.gain.value=.8;
+  const shelf=ac.createBiquadFilter();shelf.type="highshelf";shelf.frequency.value=9000;shelf.gain.value=-2.5;
+  const warm=ac.createWaveShaper();warm.curve=satCurve(1.25);warm.oversample="2x";
+  const comp=ac.createDynamicsCompressor();comp.threshold.value=-16;comp.knee.value=12;comp.ratio.value=3;comp.attack.value=.006;comp.release.value=.18;
+  const music=ac.createGain();music.gain.value=1;
+  const sub=ac.createBiquadFilter();sub.type="highpass";sub.frequency.value=32;sub.Q.value=.7;
+  music.connect(sub);sub.connect(comp);comp.connect(warm);warm.connect(shelf);shelf.connect(master);master.connect(ac.destination);
+  bus={master,music,comp};
+  /* the room every instrument shares */
+  const rev=ac.createConvolver();rev.buffer=makeIR(2.3,2.6);
+  const revRet=ac.createGain();revRet.gain.value=.55;const revHP=ac.createBiquadFilter();revHP.type="highpass";revHP.frequency.value=220;
+  rev.connect(revHP).connect(revRet).connect(music);bus.rev=rev;
+  const lv={drums:.8,bass:.42,keys:1.05,hook:1.1},send={drums:.1,bass:0,keys:.3,hook:.26};
+  for(const k in lv){bus[k]=ac.createGain();bus[k].connect(music);const s=ac.createGain();s.gain.value=send[k];bus[k].connect(s).connect(rev);}
+  /* keys and pad breathe with the kick */
+  bus.duck=ac.createGain();bus.duck.connect(bus.keys);
+  /* the electric piano's tremolo */
+  if(ac.createStereoPanner){bus.trem=ac.createStereoPanner();const lfo=ac.createOscillator(),lg=ac.createGain();lfo.frequency.value=4.2;lg.gain.value=.32;lfo.connect(lg).connect(bus.trem.pan);lfo.start();bus.trem.connect(bus.duck);}
+  else bus.trem=bus.duck;
+  bus.voice=ac.createGain();bus.voice.connect(master);
+  bus.lv=lv;
+  NB=ac.createBuffer(1,ac.sampleRate,ac.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  bus.kcurve=satCurve(2.2);
+  KS={};
+  applyParts();
+}
+function applyParts(){
+  if(!bus)return;
+  const t=ac.currentTime;
+  for(const k in bus.lv)bus[k].gain.setTargetAtTime(PARTS[k]?bus.lv[k]:0,t,.02);
+  bus.voice.gain.setTargetAtTime(PARTS.voice&&VOICE?1:0,t,.02);
+  bus.music.gain.setTargetAtTime(PARTS.voice&&VOICE?.4:1,t,.05); /* about 8 dB under a voice */
+}
+
+/* ---------- small helpers ---------- */
+function gEnv(t,peak,a,d){const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(peak,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+d);return g;}
+function osc(type,f,t,stop){const o=ac.createOscillator();o.type=type;o.frequency.setValueAtTime(f,t);o.start(t);o.stop(stop);return o;}
+function noiseSrc(t,dur){const n=ac.createBufferSource();n.buffer=NB;n.start(t,Math.random()*.4);n.stop(t+dur+.02);return n;}
+function filt(type,f,q){const b=ac.createBiquadFilter();b.type=type;b.frequency.value=f;if(q!=null)b.Q.value=q;return b;}
+/* steady "humanity": the same small push and pull every time a bar comes round */
+function hum(S,salt){const x=Math.sin(S*12.9898+salt*78.233)*43758.5453;return (x-Math.floor(x))*2-1;}
+
+/* ---------- the original practice beat (kept exactly) ---------- */
+function kick(t,v,out){const o=osc("sine",150,t,t+.4);o.frequency.exponentialRampToValueAtTime(42,t+.12);const g=gEnv(t,v,.002,.34);o.connect(g).connect(out);}
+function snare(t,v,out){const n=noiseSrc(t,.2);const f=filt("bandpass",3750,.7);const g=gEnv(t,.75*v,.001,.18);n.connect(f).connect(g).connect(out);
+  const o=osc("triangle",190,t,t+.14);const g2=gEnv(t,.5*v,.001,.12);o.connect(g2).connect(out);}
+function hat(t,open,v,out){const n=noiseSrc(t,open?.3:.06);const f=filt("highpass",7200);const g=gEnv(t,(open?.32:.22)*v,.001,open?.24:.045);n.connect(f).connect(g).connect(out);}
+function bassN(t,m,dur,v,out){const f=mtof(m);const lp=filt("lowpass",950,1.2);
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.5*v,t+.006);g.gain.setValueAtTime(.5*v,t+Math.max(.02,dur-.05));g.gain.exponentialRampToValueAtTime(.0001,t+dur+.03);
+  const o1=osc("triangle",f,t,t+dur+.05),o2=osc("square",f,t,t+dur+.05),m2=ac.createGain();m2.gain.value=.16;
+  o1.connect(lp);o2.connect(m2).connect(lp);lp.connect(g).connect(out);}
+
+/* ---------- the band's kit ---------- */
+function bKick(t,v,out){
+  const o=osc("sine",118,t,t+.6);o.frequency.exponentialRampToValueAtTime(52,t+.07);o.frequency.exponentialRampToValueAtTime(44,t+.4);
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(1.05*v,t+.003);g.gain.setTargetAtTime(.0001,t+.05,.085);
+  const sh=ac.createWaveShaper();sh.curve=bus.kcurve;
+  o.connect(g).connect(sh).connect(out);
+  const n=noiseSrc(t,.02),hp=filt("highpass",2600),ng=gEnv(t,.22*v,.0008,.014);n.connect(hp).connect(ng).connect(out);
+  /* the keys and pad dip a little under each kick */
+  if(bus.duck){bus.duck.gain.cancelScheduledValues(t);bus.duck.gain.setValueAtTime(bus.duck.gain.value||1,t);bus.duck.gain.linearRampToValueAtTime(.62,t+.012);bus.duck.gain.setTargetAtTime(1,t+.05,.09);}
+}
+function bSnare(t,v,out,tight){
+  const a=osc("triangle",198,t,t+.2);a.frequency.exponentialRampToValueAtTime(172,t+.06);const ag=gEnv(t,.5*v,.001,.13);a.connect(ag).connect(out);
+  const b=osc("sine",334,t,t+.12);const bg=gEnv(t,.22*v,.001,.07);b.connect(bg).connect(out);
+  const n=noiseSrc(t,.32),bp=filt("bandpass",2100,.7),ng=gEnv(t,.62*v,.001,tight?.12:.24);n.connect(bp).connect(ng).connect(out);
+  const n2=noiseSrc(t,.2),hp=filt("highpass",6500),n2g=gEnv(t,.3*v,.001,.15);n2.connect(hp).connect(n2g).connect(out);
+}
+function bGhost(t,v,out){const n=noiseSrc(t,.1),bp=filt("bandpass",2600,.9),g=gEnv(t,.22*v,.001,.07);n.connect(bp).connect(g).connect(out);}
+function bClap(t,v,out){[0,.009,.019,.031].forEach((dt,k)=>{const n=noiseSrc(t+dt,k===3?.24:.03),f=filt("bandpass",1250,1.3),g=gEnv(t+dt,.42*v,.001,k===3?.22:.026);n.connect(f).connect(g).connect(out);});}
+/* metal for hats and cymbals: six square waves at the classic odd ratios */
+function metal(t,dur){const g=ac.createGain();g.gain.value=.16;[2,3,4.16,5.43,6.79,8.21].forEach(r=>{const o=osc("square",40*r*1.02,t,t+dur);o.connect(g);});return g;}
+function bHat(t,open,v,out,p){
+  const dur=open?.36:.07,g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime((open?.7:.6)*v,t+.0015);g.gain.exponentialRampToValueAtTime(.0001,t+dur-.01);
+  const bp=filt("bandpass",10200,.7),hp=filt("highpass",7600);
+  metal(t,dur).connect(bp);bp.connect(hp).connect(g);pan(g,p==null?.22:p).connect(out);
+}
+function bShaker(t,v,out){const n=noiseSrc(t,.09),bp=filt("bandpass",6400,1.6),g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.2*v,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+.07);n.connect(bp).connect(g);pan(g,-.35).connect(out);}
+function bCrash(t,v,out){
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.55*v,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+2.4);
+  const hp=filt("highpass",4300);metal(t,2.45).connect(hp);hp.connect(g);
+  const n=noiseSrc(t,2.4),nh=filt("highpass",6000),ng=gEnv(t,.22*v,.003,2.2);n.connect(nh).connect(ng);
+  pan(g,-.25).connect(out);pan(ng,-.25).connect(out);
+}
+function bTom(t,f0,v,out){const o=osc("sine",f0*1.6,t,t+.45);o.frequency.exponentialRampToValueAtTime(f0,t+.09);const g=gEnv(t,.7*v,.002,.38);o.connect(g);pan(g,f0>130?.2:-.2).connect(out);
+  const n=noiseSrc(t,.05),bp=filt("bandpass",f0*4,1),ng=gEnv(t,.15*v,.001,.04);n.connect(bp).connect(ng).connect(out);}
+function bRiser(t,dur,v,out){const n=noiseSrc(t,dur),bp=filt("bandpass",900,2.5);bp.frequency.setValueAtTime(500,t);bp.frequency.exponentialRampToValueAtTime(6000,t+dur);
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16*v,t+dur*.95);g.gain.linearRampToValueAtTime(.0001,t+dur+.02);n.connect(bp).connect(g).connect(out);}
+
+/* ---------- the band's tuned instruments ---------- */
+/* electric bass: a round sine body plus a filtered saw for the finger noise */
+function bBass(t,m,dur,v,out,slide){
+  const f=mtof(m);
+  const s=osc("sine",slide?f*.94:f,t,t+dur+.15);if(slide)s.frequency.exponentialRampToValueAtTime(f,t+.05);
+  const w=osc("sawtooth",slide?f*.94:f,t,t+dur+.15);if(slide)w.frequency.exponentialRampToValueAtTime(f,t+.05);
+  const lp=filt("lowpass",1100,3.2);lp.frequency.setValueAtTime(260+800*v,t);lp.frequency.exponentialRampToValueAtTime(240,t+.22);
+  const wg=ac.createGain();wg.gain.value=.34;
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.62*v,t+.007);g.gain.setTargetAtTime(.42*v,t+.03,.12);g.gain.setValueAtTime(.42*v,t+Math.max(.03,dur-.04));g.gain.exponentialRampToValueAtTime(.0001,t+dur+.09);
+  s.connect(g);w.connect(wg).connect(lp).connect(g);g.connect(out);
+}
+/* electric piano: two-operator FM, with a bright tine at the attack */
+function bRhodes(t,ms,dur,v,out){
+  ms.forEach((m,k)=>{
+    const f=mtof(m),tt=t+k*.006;
+    const car=osc("sine",f,tt,tt+dur+1.2);
+    const mod=osc("sine",f,tt,tt+dur+1.2),mg=ac.createGain();mg.gain.setValueAtTime(f*(1.4+.8*v),tt);mg.gain.exponentialRampToValueAtTime(f*.18,tt+.9);mod.connect(mg).connect(car.frequency);
+    const tine=osc("sine",f*14.02,tt,tt+.2),tg=ac.createGain();tg.gain.setValueAtTime(f*1.1*v,tt);tg.gain.exponentialRampToValueAtTime(1,tt+.05);tine.connect(tg).connect(car.frequency);
+    const g=ac.createGain();g.gain.setValueAtTime(.0001,tt);g.gain.linearRampToValueAtTime(.075*v,tt+.004);g.gain.exponentialRampToValueAtTime(.03*v,tt+.55);g.gain.setValueAtTime(.03*v,tt+dur);g.gain.exponentialRampToValueAtTime(.0001,tt+dur+.9);
+    const hp=filt("highpass",110,.7);car.connect(hp).connect(g).connect(out);
+  });
+}
+/* strings: detuned saws, slow bow, dark */
+function bStrings(t,ms,dur,v,out,cut){
+  const lp=filt("lowpass",cut||1500,.6);
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.05*v,t+Math.min(.45,dur*.35));g.gain.setValueAtTime(.05*v,t+dur*.88);g.gain.exponentialRampToValueAtTime(.0001,t+dur+.5);
+  ms.forEach((m,i)=>{const f=mtof(m);[-11,0,11].forEach((c,j)=>{const o=osc("sawtooth",f,t,t+dur+.6);o.detune.value=c+((i+j)%2?3:-3);o.connect(lp);});});
+  lp.connect(g);
+  const l=pan(g,-.3),r=pan(g,.3);if(l!==g){l.connect(out);r.connect(out);}else g.connect(out);
+}
+/* "ooh" voices: a saw shaped by the formants of oo, with a slow vibrato */
+function bOoh(t,ms,dur,v,out){
+  ms.forEach((m,i)=>{const f=mtof(m);
+    const o=osc("sawtooth",f,t,t+dur+.6);const vib=osc("sine",5.1+i*.3,t,t+dur+.6),vg=ac.createGain();vg.gain.setValueAtTime(0,t);vg.gain.linearRampToValueAtTime(f*.006,t+.6);vib.connect(vg).connect(o.frequency);
+    const f1=filt("bandpass",330,6),f2=filt("bandpass",860,9),f3=filt("bandpass",2400,10),m1=ac.createGain(),m2=ac.createGain(),m3=ac.createGain();m1.gain.value=1;m2.gain.value=.5;m3.gain.value=.12;
+    o.connect(f1).connect(m1);o.connect(f2).connect(m2);o.connect(f3).connect(m3);
+    const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.11*v,t+.35);g.gain.setValueAtTime(.11*v,t+dur*.85);g.gain.exponentialRampToValueAtTime(.0001,t+dur+.5);
+    m1.connect(g);m2.connect(g);m3.connect(g);pan(g,i?.4:-.4).connect(out);});
+}
+/* a plucked guitar string, made once per pitch (Karplus-Strong) */
+function ksBuf(m,mute){
+  const key=m+(mute?"m":"");if(KS[key])return KS[key];
+  const sr=ac.sampleRate,f=mtof(m),N=Math.max(2,Math.round(sr/f)),len=Math.floor(sr*(mute?.35:1.1)),b=ac.createBuffer(1,len,sr),d=b.getChannelData(0);
+  const ring=new Float32Array(N);for(let i=0;i<N;i++)ring[i]=(Math.random()*2-1)*(.6+.4*Math.sin(i/N*Math.PI));
+  const damp=mute?.982:.996;let p=0,prev=0;
+  for(let i=0;i<len;i++){const nx=(p+1)%N;const v=damp*.5*(ring[p]+ring[nx]);const out=v*.6+prev*.4;prev=v;ring[p]=out;d[i]=out;p=nx;}
+  KS[key]=b;return b;
+}
+function bGuitar(t,ms,v,out,mute){ms.forEach((m,i)=>{const s=ac.createBufferSource();s.buffer=ksBuf(m,mute);const g=ac.createGain();g.gain.value=.34*v;const hp=filt("highpass",180);
+  s.connect(hp).connect(g);pan(g,.42).connect(out);s.start(t+i*.012);});}
+/* horns: a trumpet and a tenor an octave down, scooping into the note, with breath and late vibrato */
+function bHorn(t,m,dur,v,out,voice,fall){
+  const f=mtof(m),tenor=voice==="tenor";
+  const o1=osc("sawtooth",f*.976,t,t+dur+.3),o2=osc(tenor?"square":"sawtooth",f*.976,t,t+dur+.3);o2.detune.value=tenor?-6:7;
+  [o1,o2].forEach(o=>{o.frequency.exponentialRampToValueAtTime(f,t+.055);if(fall)o.frequency.exponentialRampToValueAtTime(f*.89,t+dur+.12);});
+  const vib=osc("sine",5.6,t,t+dur+.3),vg=ac.createGain();vg.gain.setValueAtTime(0,t);vg.gain.linearRampToValueAtTime(0,t+.18);vg.gain.linearRampToValueAtTime(f*.007,t+.45);vib.connect(vg);vg.connect(o1.frequency);vg.connect(o2.frequency);
+  const lp=filt("lowpass",900,1.4);lp.frequency.setValueAtTime(tenor?500:700,t);lp.frequency.linearRampToValueAtTime((tenor?1700:2900)*(.75+.35*v),t+.045);lp.frequency.exponentialRampToValueAtTime(tenor?1100:1700,t+.3);
+  const body=filt("peaking",tenor?600:1250,1.2);body.gain.value=5;
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime((tenor?.13:.15)*v,t+.03);g.gain.setValueAtTime((tenor?.12:.14)*v,t+Math.max(.04,dur-.03));g.gain.exponentialRampToValueAtTime(.0001,t+dur+(fall?.16:.09));
+  o1.connect(lp);o2.connect(lp);lp.connect(body).connect(g);pan(g,tenor?.28:-.24).connect(out);
+  const n=noiseSrc(t,.05),nb=filt("bandpass",tenor?1100:1800,1.5),ng=gEnv(t,.05*v,.004,.045);n.connect(nb).connect(ng);pan(ng,tenor?.28:-.24).connect(out);
+}
+function bRiff(t,m,dur,v,out){bHorn(t,m,dur,v,out,"trumpet");bHorn(t+.008,m-12,dur,.8*v,out,"tenor");}
+function bStab(t,ms,v,out,fall){ms.forEach((m,i)=>bHorn(t+i*.004,m,.12,.62*v,out,i===0?"tenor":"trumpet",fall));}
+function bPadHit(t,v,out){bStrings(t,[33,40,45],1.0,1.1*v,out,480);}
+
+/* ---------- the arrangement: one sixteenth at a time ---------- */
+function partOf(info){const k=info.sec.key;if(k==="hook")return info.li<0?"intro":"hook";if(k==="roll")return"roll";if(k==="outro")return"outro";return"verse";}
+function playStep(S,t){
+  const B=S/4,info=mapBeat(B),s=mod(S,16),e=s/2,isE=s%2===0;
+  const D=bus.drums,BA=bus.bass,K=bus.duck||bus.keys,KT=bus.trem||K,H=bus.hook;
+  if(info.count){if(s%4===0){hat(t,false,1.2,D);if(s===0)kick(t,.6,D);}return;}
+  const part=partOf(info);
+  const barIdx=Math.floor(info.lbar);
+  const c=CH[info.li<0?mod(barIdx,4):mod(info.li,4)];
+  const spb=60/clock.bpm,sx=spb/4;
+  let fade=1;
+  if(part==="outro"&&MODE==="song")fade=1-.8*(info.lbar/info.sec.len);
+  const firstBar=info.li===0&&s===0;
+  const fillBar=(barIdx%4===3)&&!info.brk&&part!=="intro"&&part!=="outro";
+  const lastBeforeBreak=info.sec.brk>0&&info.li===info.sec.lines.length-info.sec.brk-1;
+
+  if(PRESET==="practice"){
+    if(part==="intro"){if(s%4===0){hat(t,false,1,D);if(s===0)kick(t,.8,D);}return;}
+    if(info.brk){if(isE&&[0,3,4].includes(e))kick(t,1,D);return;}
+    if(!isE)return;
+    hat(t,e===7,fade,D);
+    if([0,3,4].includes(e))kick(t,fade,D);
+    if(e===2||e===6)snare(t,fade,D);
+    const BL={0:[33,2],3:[36,1],4:[33,2],6:[38,1],7:[40,1]};
+    if(BL[e])bassN(t,BL[e][0],BL[e][1]*2*sx*.92,.9*fade,BA);
+    return;
+  }
+
+  /* swing and a little human push and pull: late sixteenths, tiny drift on the hats */
+  const sw=(s%2===1?.16*sx:0)+(s%4===2?.04*sx:0);
+  const T=t+sw, TH=T+hum(S,1)*.004;
+  const vel=a=>clamp(a*(1+hum(S,2)*.1),0,1.3);
+
+  /* ----- intro: Rhodes, oohs, the riff on muted horn, a swell into the hook ----- */
+  if(part==="intro"){
+    if(s===0){bRhodes(T,c.keys,spb*3.6,.85,KT);bOoh(T,c.ooh,spb*4,.75,K);}
+    if(isE&&c.riff[e]!=null)bHorn(T,c.riff[e],sx*(e===3?2.6:1.6),.8,H,"trumpet");
+    if(barIdx===1&&s%4===0)bHat(TH,false,.9,D,.1);
+    if(barIdx===1&&s===8)bRiser(T,spb*2,1,D);
+    return;
+  }
+  /* ----- outro: the riff alone, a held chord, fading into the room ----- */
+  if(part==="outro"){
+    if(firstBar){bCrash(T,.8,D);bKick(T,.8,D);}
+    if(s===0)bRhodes(T,c.keys,spb*3.8,.6*fade,KT);
+    if(s===0&&info.li===info.sec.lines.length-1)bStrings(T,c.pad,spb*4,.6,K,900);
+    if(isE&&c.riff[e]!=null)bRiff(T,c.riff[e],sx*(e===3?2.6:1.6),fade,H);
+    return;
+  }
+  /* ----- break: kick, a low string hit, and a swell back in ----- */
+  if(info.brk){
+    if(s===0){bKick(T,1,D);bPadHit(T,1,K);}
+    if(s===8)bKick(T,.85,D);
+    const lastBrk=info.li===info.sec.lines.length-1;
+    if(lastBrk&&s===8)bRiser(T,spb*2,.9,D);
+    return;
+  }
+  /* ----- drums ----- */
+  if(firstBar)bCrash(T,1,D);
+  const varB=part==="verse"&&info.li>=Math.floor(info.sec.lines.length/2);
+  const inFill=(fillBar||lastBeforeBreak&&part!=="roll"||(part==="roll"&&info.li===3))&&s>=12;
+  if(isE&&[0,3,4].includes(e))bKick(T,vel(e===0?1:.88),D);
+  if(varB&&s===10)bKick(T,vel(.62),D);
+  if(part==="roll"&&isE&&e===6)bKick(T,.75,D);
+  if(inFill){
+    bSnare(T,.32+.16*(s-12),D,true);
+    if(s===12)bTom(T,165,.8,D);if(s===13)bTom(T,130,.75,D);if(s===14)bTom(T,98,.8,D);
+  }else{
+    if(s===4||s===12)bSnare(T,vel(1),D);
+    if(s===7||s===15)bGhost(T,vel(s===7?.9:.6),D);
+    if(varB&&s===9)bGhost(T,vel(.5),D);
+    if(part==="roll"){bHat(TH,s===14,vel(isE?.95:.55),D);}
+    else{
+      if(isE)bHat(TH,e===7&&!varB||varB&&e===3,vel(e%2===0?.9:.65),D);
+      else if(s===11||s===3&&varB)bHat(TH,false,vel(.38),D);
+    }
+    if(part==="hook"&&s%2===0)bShaker(TH,vel(s%4===2?1:.6),D);
+    if(part==="hook"&&(s===4||s===12))bClap(T+.004,1,D);
+    if(part==="roll"&&(s===4||s===12))bClap(T+.004,.5+.2*info.li,D);
+  }
+  /* ----- bass: bouncing eighths on the root, octave pop on the and of 4 ----- */
+  const BP={0:[0,1.6,1],2:[0,.8,.82],3:[0,.8,.9],4:[0,1,.95],5:[7,.8,.78],6:[0,.8,.85],7:[12,.55,.9]};
+  if(isE&&BP[e])bBass(T,c.bass+BP[e][0],BP[e][1]*2*sx,BP[e][2],BA,e===7);
+  /* ----- Rhodes: beat 1 and the and of 2, a push into the next bar now and then ----- */
+  if(part!=="roll"){
+    if(s===0)bRhodes(T,c.keys,spb*1.4,vel(.95),KT);
+    if(s===6)bRhodes(T,c.keys,spb*.9,vel(.7),KT);
+    if(s===14&&barIdx%2===1)bRhodes(T,CH[mod((info.li<0?barIdx:info.li)+1,4)].keys,spb*.4,.5,KT);
+  }
+  /* ----- guitar: muted plucks on the offbeats once each verse is moving ----- */
+  if(part==="verse"&&info.li>=2&&(s===10||s===14))bGuitar(T,c.gtr,vel(s===10?.85:.6),K,true);
+  if(part==="hook"&&s===10)bGuitar(T,c.gtr.concat([c.gtr[1]+5]),.7,K,false);
+  /* ----- strings and oohs under the hook and the roll call ----- */
+  if((part==="hook"||part==="roll")&&s===0){
+    bStrings(T,c.pad,spb*4,part==="roll"?.75+.18*info.li:1,K,part==="roll"?1100+500*info.li:1500);
+    if(part==="hook")bOoh(T,c.ooh,spb*4,.9,K);
+  }
+  /* ----- hook riff answers each line on beat 4 ----- */
+  if(part==="hook"&&isE&&e>=5&&c.riff[e]!=null)bRiff(T,c.riff[e],sx*1.7,1,H);
+  /* ----- horn stabs close each verse couplet ----- */
+  if(part==="verse"&&info.li%2===1&&(s===12||s===14))bStab(T,c.stab,s===12?1:.85,H,s===14&&info.li%4===3);
+}
+
+/* ---------- scheduler ---------- */
+function audioTimeOfBeat(B){return clock.t0+(B-clock.pos0)*60/clock.bpm+lat();}
+function schedule(){
+  if(!soundOn||!clock.playing){schedTimer=setTimeout(schedule,40);return;}
+  const horizon=ac.currentTime+.14;
+  let guard=0;
+  while(guard++<64){
+    const t=audioTimeOfBeat(nextS/4);
+    if(t>horizon)break;
+    if(t>=ac.currentTime-.03)playStep(nextS,Math.max(t,ac.currentTime));
+    nextS++;
+  }
+  voiceTick();
+  schedTimer=setTimeout(schedule,25);
+}
+function resyncAudio(keepNext){
+  if(!soundOn)return;
+  const p=curPos();
+  if(!keepNext)nextS=Math.ceil(p*4-1e-6);
+  voiceSync(true);
+}
+function soundStart(){
+  audioInit();
+  if(ac.state!=="running")ac.resume();
+  rebase("audio",.06);
+  soundOn=true;nextS=Math.ceil(clock.pos0*4-1e-6);
+  applyParts();
+  if(!schedTimer)schedule();
+  voiceSync(true);
+}
+function soundStop(){
+  if(!soundOn)return;
+  rebase("perf");soundOn=false;
+  if(bus){const t=ac.currentTime;bus.master.gain.setTargetAtTime(0,t,.02);setTimeout(()=>{if(!soundOn&&bus)bus.master.gain.value=.9;},250);}
+  voiceSync(true);
+}
+
+/* ---------- a take (an optional recorded voice, listed in takes/index.json) ---------- */
+let TAKES=[],voiceEl=null,voiceNode=null;
+function takeTime(B){return VOICE?VOICE.first_downbeat_s+(B-SECS[0].intro*4)*60/VOICE.bpm:0;}
+function voiceSync(force){
+  if(!voiceEl)return;
+  const want=soundOn&&clock.playing&&PARTS.voice&&VOICE&&MODE==="song";
+  if(!want){if(!voiceEl.paused)voiceEl.pause();return;}
+  const B=curPos(),bar=mod(B/4,TOTAL),tt=takeTime(bar*4);
+  if(tt<0||tt>voiceEl.duration){if(!voiceEl.paused)voiceEl.pause();return;}
+  if(force||voiceEl.paused||Math.abs(voiceEl.currentTime-tt)>.08){try{voiceEl.currentTime=tt;}catch(e){} voiceEl.play().catch(()=>{});}
+}
+function voiceTick(){if(voiceEl&&PARTS.voice&&VOICE)voiceSync(false);}
+async function loadTakes(base){
+  try{
+    const r=await fetch(base+"takes/index.json",{cache:"no-cache"});if(!r.ok)return;
+    const list=await r.json();TAKES=(Array.isArray(list)?list:[]).filter(x=>x&&x.published);
+    if(!TAKES.length)return;
+    const tk=TAKES[TAKES.length-1];
+    const tr=await fetch(base+tk.timings);if(!tr.ok)return;
+    VOICE=await tr.json();VOICE.label=tk.label;VOICE.audio=base+tk.audio;
+    voiceEl=new Audio(VOICE.audio);voiceEl.preload="auto";voiceEl.crossOrigin="anonymous";
+    document.getElementById("tVoice").hidden=false;
+  }catch(e){}
+}
+function attachVoice(){ if(voiceEl&&ac&&!voiceNode){try{voiceNode=ac.createMediaElementSource(voiceEl);voiceNode.connect(bus.voice);}catch(e){}} }
+
+/* ===================== drawing helpers ===================== */
+const SVGNS="http://www.w3.org/2000/svg";
+const svg=document.getElementById("svg");
+function el(tag,attrs,parent){const e=document.createElementNS(SVGNS,tag);if(attrs)for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e;}
+function A(e,attrs){for(const k in attrs)e.setAttribute(k,attrs[k]);}
+function op(e,v){e.setAttribute("opacity",clamp(v,0,1).toFixed(3));}
+function f1(v){return (+v).toFixed(1);}
+function tr(e,x,y,s,r){e.setAttribute("transform","translate("+f1(x)+" "+f1(y)+")"+(r?" rotate("+f1(r)+")":"")+(s!=null&&s!==1?" scale("+(+s).toFixed(3)+")":""));}
+let seedV=7;function rnd(){seedV=(seedV*16807)%2147483647;return (seedV-1)/2147483646;}
+function reseed(n){seedV=n;}
+
+/* text: "\n" breaks lines; ^root^ and ~prefix~ colour word parts */
+const PARTFILL={root:"#1F4E5F",pre:"#B85042"};
+function fillLine(t,line){
+  line.split(/(\^[^\^]+\^|~[^~]+~)/).forEach(seg=>{if(!seg)return;
+    const sp=el("tspan",{},t);
+    if(seg[0]==="^"){sp.setAttribute("fill",PARTFILL.root);sp.textContent=seg.slice(1,-1);}
+    else if(seg[0]==="~"){sp.setAttribute("fill",PARTFILL.pre);sp.textContent=seg.slice(1,-1);}
+    else sp.textContent=seg;});
+}
+function setText(t,s){t.textContent="";const x=t.getAttribute("x");s.split("\n").forEach((line,k)=>{const sp=el("tspan",{x:x,dy:k?"1.18em":"0"},t);fillLine(sp,line);});}
+function txt(parent,x,y,s,cls,anchor){
+  /* coloured word parts: draw the white halo as its own text underneath, so one part's halo never covers the next part's letters */
+  if(/[\^~]/.test(s)){const h=el("text",{x:x,y:y,class:cls||"lab","text-anchor":anchor||"start",fill:"none"},parent);setText(h,s.replace(/[\^~]/g,""));h.setAttribute("style","fill:none");}
+  const t=el("text",{x:x,y:y,class:cls||"lab","text-anchor":anchor||"start"},parent);setText(t,s);
+  if(/[\^~]/.test(s))t.setAttribute("style","stroke:none");
+  return t;}
+/* a label with an optional leader line (ax,ay) -> (lx,ly) ending in a dot */
+function label(parent,o){
+  const g=el("g",{opacity:0},parent);
+  if(o.lx!=null){el("line",{x1:o.ax!=null?o.ax:o.x,y1:o.ay!=null?o.ay:o.y+8,x2:o.lx,y2:o.ly,stroke:"#1D1A15","stroke-width":1.6},g);el("circle",{cx:o.lx,cy:o.ly,r:3.5,fill:"#1D1A15"},g);}
+  txt(g,o.x,o.y,o.t,"lab"+(o.cls?" "+o.cls:""),o.a||"start");
+  return g;
+}
+function glowEl(parent,x,y,rx,ry){return el("ellipse",{cx:x,cy:y,rx:rx,ry:ry,fill:"url(#gl)",opacity:0},parent);}
+
+/* beat pulses: kick on beats 1 and 3, snare on 2 and 4 */
+function kickP(b){return mod(Math.floor(b),2)===0?Math.exp(-mod(b,1)*7):0;}
+function snP(b){return mod(Math.floor(b),2)===1?Math.exp(-mod(b,1)*7):0;}
+function beatP(b){return Math.exp(-mod(b,1)*6);}
+
+/* closed smooth outline through points */
+function crPath(P){const n=P.length;let d="M"+f1(P[0][0])+" "+f1(P[0][1]);
+  for(let i=0;i<n;i++){const p0=P[(i-1+n)%n],p1=P[i],p2=P[(i+1)%n],p3=P[(i+2)%n];
+    d+=" C"+f1(p1[0]+(p2[0]-p0[0])/6)+" "+f1(p1[1]+(p2[1]-p0[1])/6)+" "+f1(p2[0]-(p3[0]-p1[0])/6)+" "+f1(p2[1]-(p3[1]-p1[1])/6)+" "+f1(p2[0])+" "+f1(p2[1]);}
+  return d+"Z";}
+function blobR(rx,ry,wob,ph,th){const r=1+wob*(.6*Math.sin(3*th+ph)+.4*Math.cos(5*th+2*ph));return [rx*r*Math.cos(th),ry*r*Math.sin(th)];}
+function blobPath(rx,ry,wob,ph,n){const P=[];n=n||30;for(let k=0;k<n;k++)P.push(blobR(rx,ry,wob,ph,k/n*2*Math.PI));return crPath(P);}
+function arcPath(cx,cy,r,a0,a1){const p0=[cx+r*Math.cos(a0),cy+r*Math.sin(a0)],p1=[cx+r*Math.cos(a1),cy+r*Math.sin(a1)];return "M"+f1(p0[0])+" "+f1(p0[1])+" A"+r+" "+r+" 0 "+(Math.abs(a1-a0)>Math.PI?1:0)+" 1 "+f1(p1[0])+" "+f1(p1[1]);}
+const D2R=Math.PI/180;
+
+/* palette for the stage (light in both themes, reads on a projector) */
+const C={teal:"#1F7A8C",deep:"#1F4E5F",cyto:"#EEF6F1",nucF:"#D9E8EE",nucS:"#1F4E5F",erS:"#8E6BB0",erF:"#E6DAF2",rib:"#3E3A52",
+ golS:"#D9822B",golF:"#F6C894",mitF:"#F7C6B1",mitS:"#B85042",chlF:"#B7DB9A",chlS:"#4E8A3A",gran:"#5E9C45",lysF:"#F2B7C9",lysS:"#A84D6F",
+ vacF:"#DDEFF7",vacS:"#6FA3BD",wallF:"#D3E6BE",wallS:"#5F8F44",ves:"#F6DE8E",vesS:"#C98A2E",gold:"#E0A33A",spark:"#F2C14E",ink:"#1D1A15",soft:"#5A544A",
+ rogue:"#B85042",water:"#4A90C2",waterF:"#DCEEF6",prot:"#9C8AC9",protS:"#5E4A8C",head:"#E8875F",headS:"#9E4A2E",tail:"#C7A24A",chol:"#F2C14E",cholS:"#A87A1E",
+ dna:"#6A4C93",blood:"#B8414F",rbc:"#EE9AA2",paper:"#FFFDF8",rule:"#D2CCC0"};
+
+/* ---------- cells ---------- */
+function mkPart(C_,name,x,y,rx,ry,glowParent,parent){const g=el("g",{},parent);const glow=glowEl(glowParent,x,y,rx,ry);const p={g,glow,x,y,name};return p;}
+function drawMito(parent,x,y,rx,ry,rot){
+  const g=el("g",{transform:"translate("+x+" "+y+") rotate("+rot+")"},parent);
+  el("ellipse",{rx:rx,ry:ry,fill:C.mitF,stroke:C.mitS,"stroke-width":3},g);
+  el("ellipse",{rx:rx*.84,ry:ry*.62,fill:"#FBDCCF"},g);
+  let d="M"+f1(-rx*.72)+" 0";const n=6;for(let k=0;k<=n;k++){const xx=-rx*.72+k*(rx*1.44/n);d+=" L"+f1(xx)+" "+f1((k%2?1:-1)*ry*.5);}
+  el("path",{d:d,fill:"none",stroke:C.mitS,"stroke-width":2,"stroke-linejoin":"round"},g);
+  return g;
+}
+function drawChloro(parent,x,y,rx,ry,rot){
+  const g=el("g",{transform:"translate("+x+" "+y+") rotate("+rot+")"},parent);
+  el("ellipse",{rx:rx,ry:ry,fill:C.chlF,stroke:C.chlS,"stroke-width":3},g);
+  [-rx*.45,0,rx*.45].forEach(xx=>{for(let k=0;k<3;k++)el("rect",{x:f1(xx-7),y:f1(-ry*.45+k*ry*.32),width:14,height:f1(ry*.22),rx:2,fill:C.gran},g);});
+  el("line",{x1:-rx*.6,y1:0,x2:rx*.6,y2:0,stroke:C.gran,"stroke-width":1.5},g);
+  return g;
+}
+function drawGolgi(parent,x,y,rot,sc){
+  const g=el("g",{transform:"translate("+x+" "+y+") rotate("+rot+") scale("+(sc||1)+")"},parent);
+  for(let k=0;k<5;k++){const yy=-28+k*14,w=58-k*3;const d="M"+(-w)+" "+yy+" Q0 "+(yy-30)+" "+w+" "+yy;
+    el("path",{d:d,fill:"none",stroke:C.golS,"stroke-width":10,"stroke-linecap":"round"},g);
+    el("path",{d:d,fill:"none",stroke:C.golF,"stroke-width":5,"stroke-linecap":"round"},g);}
+  return g;
+}
+function drawNucleus(parent,x,y,r){
+  const g=el("g",{transform:"translate("+x+" "+y+")"},parent);
+  el("circle",{r:r,fill:C.nucF,stroke:C.nucS,"stroke-width":4},g);
+  el("circle",{r:r*.92,fill:"none",stroke:"#8FB3C2","stroke-width":1.5},g);
+  for(let k=0;k<8;k++){const a=k/8*2*Math.PI+.3;el("circle",{cx:f1(r*.96*Math.cos(a)),cy:f1(r*.96*Math.sin(a)),r:3.4,fill:C.cyto},g);}
+  el("circle",{cx:f1(r*.2),cy:f1(r*.16),r:f1(r*.27),fill:"#93B6C4"},g);
+  const dg=el("g",{},g);
+  [["M",-.6,-.2,-.35,-.5,-.1,-.25,.1,-.55,.35,-.35],["M",-.55,.3,-.3,.05,-.15,.45,.05,.3,-.1,.62],["M",.1,-.1,.3,.1,.45,-.1,.6,.15,.5,.42]].forEach(a=>{
+    let d="M"+f1(a[1]*r)+" "+f1(a[2]*r);for(let i=3;i<a.length;i+=2)d+=" Q"+f1((a[i]+a[i-2])/2*r+6)+" "+f1((a[i+1]+a[i-1])/2*r-6)+" "+f1(a[i]*r)+" "+f1(a[i+1]*r);
+    el("path",{d:d,fill:"none",stroke:C.dna,"stroke-width":2.6,"stroke-linecap":"round",opacity:.85},dg);});
+  return {g,dna:dg};
+}
+const ANIMAL_RIBO=[[-300,-40],[-260,30],[-200,140],[-150,190],[-60,150],[20,185],[90,175],[200,-30],[300,20],[330,-60],[160,-180],[100,-120],[-20,-200],[-180,-190],[-320,-100],[-90,110],[230,40],[-250,190],[310,-120],[40,120],[-330,60],[260,-200]];
+function drawCell(parent,kind,cx,cy,s){
+  const g=el("g",{transform:"translate("+cx+" "+cy+") scale("+s+")"},parent);
+  const base=el("g",{},g),glowL=el("g",{},g),org=el("g",{},g),top=el("g",{},g);
+  const P={};const Cc={g,cx,cy,s,kind,P,glowL,top,org,
+    pt:(x,y)=>[cx+s*x,cy+s*y]};
+  const part=(name,x,y,rx,ry)=>{const p={g:el("g",{},org),glow:glowEl(glowL,x,y,rx,ry),x,y,name};P[name]=p;return p;};
+  if(kind==="prok"){
+    const cap="M-130 0 C-130 -38 -105 -55 -75 -55 L75 -55 C105 -55 130 -38 130 0 C130 38 105 55 75 55 L-75 55 C-105 55 -130 38 -130 0Z";
+    const wall={g:el("g",{},base),glow:el("path",{d:cap,fill:"none",stroke:C.spark,"stroke-width":20,opacity:0},glowL),x:0,y:0};
+    el("path",{d:cap,fill:"#F4F1E4",stroke:"#7A6A4A","stroke-width":6},wall.g);
+    P.wall=wall;
+    const mem="M-120 0 C-120 -32 -98 -46 -72 -46 L72 -46 C98 -46 120 -32 120 0 C120 32 98 46 72 46 L-72 46 C-98 46 -120 32 -120 0Z";
+    P.membrane={g:el("path",{d:mem,fill:C.cyto,stroke:C.teal,"stroke-width":3.5},base),glow:el("path",{d:mem,fill:"none",stroke:C.spark,"stroke-width":16,opacity:0},glowL),x:0,y:-46};
+    P.cyto={g:base,glow:el("path",{d:mem,fill:"#F6E3A8",opacity:0},glowL),x:-60,y:20};
+    P.dna=part("dna",-10,0,80,36);
+    let d="";for(let k=0;k<=40;k++){const a=k/40*2*Math.PI,r=1+.18*Math.sin(a*7);d+=(k?" L":"M")+f1(-10+62*r*Math.cos(a))+" "+f1(26*r*Math.sin(a));}
+    el("path",{d:d+"Z",fill:"none",stroke:C.dna,"stroke-width":3,"stroke-linejoin":"round"},P.dna.g);
+    P.ribos=part("ribos",0,0,120,50);
+    [[-95,-20],[-90,22],[-60,-32],[60,-30],[85,15],[95,-18],[40,32],[-40,34],[70,36],[-75,4],[100,30],[-100,-5]].forEach(q=>el("circle",{cx:q[0],cy:q[1],r:4,fill:C.rib},P.ribos.g));
+    P.flag={g:el("g",{},org),glow:glowEl(glowL,170,0,60,26),x:170,y:0};
+    Cc.flag=el("path",{d:"M128 0",fill:"none",stroke:"#7A6A4A","stroke-width":4,"stroke-linecap":"round"},P.flag.g);
+    for(let k=0;k<7;k++){const a=(k/7)*2*Math.PI+.4;const x0=Math.cos(a)*126,y0=Math.sin(a)*54;el("line",{x1:f1(x0),y1:f1(y0),x2:f1(x0*1.1),y2:f1(y0*1.25),stroke:"#7A6A4A","stroke-width":2},base);}
+    Cc.edge=th=>[130*Math.cos(th),55*Math.sin(th)];
+    Cc.flagellum=(ph,amp,len)=>{let d="M126 0";for(let x=0;x<=(len||110);x+=5){const env=Math.min(1,x/25);d+=" L"+f1(126+x)+" "+f1(env*amp*Math.sin(x*.11-ph));}Cc.flag.setAttribute("d",d);};
+    Cc.flagellum(0,9);
+    return Cc;
+  }
+  if(kind==="animal"){
+    const W=.035,PH=.7;
+    const mem=blobPath(380,240,W,PH,34);
+    P.cyto={g:base,glow:el("path",{d:mem,fill:"#F6E3A8",opacity:0},glowL),x:0,y:0};
+    P.membrane={g:el("path",{d:mem,fill:C.cyto,stroke:C.teal,"stroke-width":7},base),glow:el("path",{d:mem,fill:"none",stroke:C.spark,"stroke-width":26,opacity:0},glowL),x:0,y:-240};
+    el("path",{d:mem,fill:"none",stroke:"#A9D3DA","stroke-width":2,transform:"scale(.972)"},base);
+    Cc.edge=th=>blobR(380,240,W,PH,th);
+    /* small vacuoles */
+    P.vac=part("vac",-250,-40,40,40);
+    [[-250,-40,17],[-20,190,14],[300,-10,12]].forEach(q=>el("circle",{cx:q[0],cy:q[1],r:q[2],fill:C.vacF,stroke:C.vacS,"stroke-width":2},P.vac.g));
+    /* rough ER around the nucleus */
+    P.er=part("er",-40,-30,190,190);
+    Cc.erRibo=[];
+    [118,140,162].forEach((r,i)=>{const d=arcPath(-110,-5,r,-95*D2R,70*D2R);
+      el("path",{d:d,fill:"none",stroke:C.erS,"stroke-width":13,"stroke-linecap":"round"},P.er.g);
+      el("path",{d:d,fill:"none",stroke:C.erF,"stroke-width":8,"stroke-linecap":"round"},P.er.g);
+      for(let a=-92;a<=68;a+=11){const x=-110+(r+8)*Math.cos(a*D2R),y=-5+(r+8)*Math.sin(a*D2R);el("circle",{cx:f1(x),cy:f1(y),r:3.3,fill:C.rib},P.er.g);if(i===2)Cc.erRibo.push([x,y,a]);}
+    });
+    const nu=drawNucleus(org,-110,-5,90);P.nucleus={g:nu.g,glow:glowEl(glowL,-110,-5,130,130),x:-110,y:-5};P.dna={g:nu.dna,glow:P.nucleus.glow,x:-110,y:-5};
+    P.golgi=part("golgi",150,70,95,70);drawGolgi(P.golgi.g,150,70,-25);
+    P.ves=part("ves",205,80,50,50);[[220,40,9],[214,118,8],[96,24,7]].forEach(q=>el("circle",{cx:q[0],cy:q[1],r:q[2],fill:C.ves,stroke:C.vesS,"stroke-width":2},P.ves.g));
+    P.mito=[[225,-118,56,27,-18],[-282,112,52,25,28],[262,150,50,24,35]].map((q,i)=>{const p=part("mito"+i,q[0],q[1],q[2]*1.6,q[3]*2.6);drawMito(p.g,q[0],q[1],q[2],q[3],q[4]);return p;});
+    P.lyso=part("lyso",-212,-138,50,50);el("circle",{cx:-212,cy:-138,r:22,fill:C.lysF,stroke:C.lysS,"stroke-width":3},P.lyso.g);
+    [[-218,-144],[-205,-132],[-210,-146],[-220,-130]].forEach(q=>el("circle",{cx:q[0],cy:q[1],r:2.4,fill:C.lysS},P.lyso.g));
+    P.centri=part("centri",62,-186,46,40);
+    [[0,0],[1,1]].forEach(q=>{const gg=el("g",{transform:"translate("+(62+q[0]*12)+" "+(-188+q[1]*10)+") rotate("+(q[0]?90:0)+")"},P.centri.g);
+      el("rect",{x:-15,y:-6,width:30,height:12,rx:3,fill:"#D8CBB4",stroke:"#7E6A55","stroke-width":2},gg);
+      for(let k=-9;k<=9;k+=6)el("line",{x1:k,y1:-5,x2:k,y2:5,stroke:"#7E6A55","stroke-width":1.4},gg);});
+    P.ribos=part("ribos",0,0,330,210);P.ribos.glow.setAttribute("opacity",0);
+    ANIMAL_RIBO.forEach(q=>el("circle",{cx:q[0],cy:q[1],r:3.8,fill:C.rib},P.ribos.g));
+    return Cc;
+  }
+  /* plant */
+  P.wall={g:el("g",{},base),glow:el("rect",{x:-392,y:-252,width:784,height:504,rx:36,fill:"none",stroke:C.spark,"stroke-width":26,opacity:0},glowL),x:0,y:-240};
+  el("rect",{x:-380,y:-240,width:760,height:480,rx:30,fill:C.wallF,stroke:C.wallS,"stroke-width":4},P.wall.g);
+  for(let k=0;k<14;k++){const x=-340+k*52;el("line",{x1:x,y1:-238,x2:x+14,y2:-226,stroke:"#9DBF7E","stroke-width":2},P.wall.g);el("line",{x1:x+8,y1:238,x2:x+22,y2:226,stroke:"#9DBF7E","stroke-width":2},P.wall.g);}
+  const memR={x:-362,y:-222,width:724,height:444,rx:20};
+  P.cyto={g:base,glow:el("rect",Object.assign({fill:"#F6E3A8",opacity:0},memR),glowL),x:0,y:0};
+  P.membrane={g:el("rect",Object.assign({fill:"#F0F7EC",stroke:C.teal,"stroke-width":5},memR),base),glow:el("rect",Object.assign({fill:"none",stroke:C.spark,"stroke-width":20,opacity:0},memR),glowL),x:0,y:-222};
+  Cc.edge=th=>{const c=Math.cos(th),sn=Math.sin(th);const k=Math.min(362/Math.abs(c||1e-6),222/Math.abs(sn||1e-6));return [k*c,k*sn];};
+  P.vac=part("vac",70,15,240,170);el("path",{d:blobPath(205,135,.04,1.9,26),transform:"translate(70 15)",fill:C.vacF,stroke:C.vacS,"stroke-width":3},P.vac.g);
+  P.er=part("er",-200,-60,120,120);
+  [84,102].forEach(r=>{const d=arcPath(-245,-85,r,-50*D2R,95*D2R);el("path",{d:d,fill:"none",stroke:C.erS,"stroke-width":11,"stroke-linecap":"round"},P.er.g);el("path",{d:d,fill:"none",stroke:C.erF,"stroke-width":6,"stroke-linecap":"round"},P.er.g);
+    for(let a=-46;a<=92;a+=13)el("circle",{cx:f1(-245+(r+7)*Math.cos(a*D2R)),cy:f1(-85+(r+7)*Math.sin(a*D2R)),r:3,fill:C.rib},P.er.g);});
+  const nu=drawNucleus(org,-245,-85,64);P.nucleus={g:nu.g,glow:glowEl(glowL,-245,-85,96,96),x:-245,y:-85};P.dna={g:nu.dna,glow:P.nucleus.glow,x:-245,y:-85};
+  P.golgi=part("golgi",-238,150,70,50);drawGolgi(P.golgi.g,-238,150,12,.72);
+  P.chloro=[[-30,-186,0],[178,-186,-4],[318,-28,88],[296,160,32],[66,190,2],[-318,56,90]].map((q,i)=>{const p=part("chl"+i,q[0],q[1],80,46);drawChloro(p.g,q[0],q[1],48,24,q[2]);return p;});
+  P.mito=[[-150,-186,8],[-108,188,-10],[318,-178,-15]].map((q,i)=>{const p=part("mito"+i,q[0],q[1],70,44);drawMito(p.g,q[0],q[1],42,21,q[2]);return p;});
+  P.ribos=part("ribos",0,0,300,200);P.ribos.glow.setAttribute("opacity",0);
+  [[-320,-180],[-300,140],[-160,90],[-150,-20],[-40,120],[-80,-130],[60,-160],[260,-120],[340,90],[200,200],[-20,200],[-330,-30],[120,-205],[250,30],[330,190],[-200,200]].forEach(q=>el("circle",{cx:q[0],cy:q[1],r:3.6,fill:C.rib},P.ribos.g));
+  return Cc;
+}
+function hl(p,v){if(!p)return;if(Array.isArray(p)){p.forEach(q=>hl(q,v));return;}if(p.glow)op(p.glow,v);}
+function grey(p,on){if(!p)return;if(Array.isArray(p)){p.forEach(q=>grey(q,on));return;}const t=p.g;if(on){t.setAttribute("filter","url(#grey)");t.setAttribute("opacity",".65");}else{t.removeAttribute("filter");t.removeAttribute("opacity");}}
+function allParts(Cc){const o=[];for(const k in Cc.P){const p=Cc.P[k];if(Array.isArray(p))o.push(...p);else o.push(p);}return o;}
+
+/* small things */
+function spark(parent){const g=el("g",{opacity:0},parent);el("path",{d:"M0 -11 L3 -3 L11 0 L3 3 L0 11 L-3 3 L-11 0 L-3 -3Z",fill:C.spark,stroke:"#B07A12","stroke-width":1.2},g);return g;}
+function waterMol(parent,s){const g=el("g",{},parent);el("circle",{r:7*s,fill:"#E46B5E"},g);el("circle",{cx:-7*s,cy:6*s,r:4.6*s,fill:"#F7F7F2",stroke:"#8F877E","stroke-width":1},g);el("circle",{cx:7*s,cy:6*s,r:4.6*s,fill:"#F7F7F2",stroke:"#8F877E","stroke-width":1},g);return g;}
+function arrow(parent,x1,y1,x2,y2,color,w){const g=el("g",{},parent);const a=Math.atan2(y2-y1,x2-x1);
+  el("line",{x1:x1,y1:y1,x2:f1(x2-Math.cos(a)*10),y2:f1(y2-Math.sin(a)*10),stroke:color,"stroke-width":w||4,"stroke-linecap":"round"},g);
+  el("path",{d:"M"+f1(x2)+" "+f1(y2)+" L"+f1(x2-14*Math.cos(a-.45))+" "+f1(y2-14*Math.sin(a-.45))+" L"+f1(x2-14*Math.cos(a+.45))+" "+f1(y2-14*Math.sin(a+.45))+"Z",fill:color},g);return g;}
+function card(parent,x,y,w,h,fill,stroke){return el("rect",{x:x,y:y,width:w,height:h,rx:6,fill:fill||C.paper,stroke:stroke||C.rule,"stroke-width":2},parent);}
+/* a phospholipid with its head at (0,0), tails pointing down (dir 1) or up (dir -1) */
+function lipid(parent,dir,s){const g=el("g",{},parent);s=s||1;
+  const L=44*s;
+  el("path",{d:"M-5 "+f1(dir*10*s)+" q-4 "+f1(dir*L*.25)+" 0 "+f1(dir*L*.5)+" t0 "+f1(dir*L*.5),fill:"none",stroke:C.tail,"stroke-width":4.5*s,"stroke-linecap":"round"},g);
+  el("path",{d:"M5 "+f1(dir*10*s)+" q4 "+f1(dir*L*.25)+" 0 "+f1(dir*L*.5)+" l6 "+f1(dir*L*.3),fill:"none",stroke:C.tail,"stroke-width":4.5*s,"stroke-linecap":"round"},g);
+  el("circle",{r:11*s,fill:C.head,stroke:C.headS,"stroke-width":2},g);return g;}
+
+/* ===================== stage setup ===================== */
+const defs=el("defs");
+(function(){
+  const gl=el("radialGradient",{id:"gl"},defs);
+  el("stop",{offset:"0","stop-color":"#F7C948","stop-opacity":".95"},gl);el("stop",{offset:".55","stop-color":"#F2C14E","stop-opacity":".55"},gl);el("stop",{offset:"1","stop-color":"#F2C14E","stop-opacity":"0"},gl);
+  const gf=el("filter",{id:"grey",x:"-10%",y:"-10%",width:"120%",height:"120%"},defs);
+  el("feColorMatrix",{type:"saturate",values:".08"},gf);
+  const bf=el("filter",{id:"lensBlur",x:"-20%",y:"-20%",width:"140%",height:"140%"},defs);
+  window.__blur=el("feGaussianBlur",{stdDeviation:"0"},bf);
+})();
+const world=el("g",{id:"world"});
+const SCN=[];                       /* the scene groups */
+const SLOT=1100;                    /* scenes sit side by side in the world */
+/* fixed overlays */
+const tagT=el("text",{x:22,y:36,class:"tag"});
+const noteT=el("text",{x:978,y:34,"text-anchor":"end",class:"lab small"});
+const banner=el("g",{opacity:0});
+const banRect=el("rect",{x:0,y:48,width:10,height:44,rx:6,fill:"#F7E9E6",stroke:"#B85042","stroke-width":2.5},banner);
+const banText=el("text",{x:500,y:79,"text-anchor":"middle",class:"lab mid brk"},banner);
+let banCur="";
+function setBanner(s,v){
+  if(s!==banCur){banCur=s;setText(banText,s);
+    try{const bb=banText.getBBox();A(banRect,{x:f1(bb.x-16),y:f1(bb.y-8),width:f1(bb.width+32),height:f1(bb.height+16)});}catch(e){}}
+  op(banner,v);
+}
+
+const SC=[];
+/* ---------- scene 1: every part has a job ---------- */
+SC.push({tag:"THE CELL",note:"drawn at cell level, not to scale",brk:"Break a part: no ATP, so the jobs stop",rep:6.6,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#F2ECE2"},g);
+  this.z=el("g",{},g);
+  reseed(5);
+  for(let dy=-2;dy<=2;dy++)for(let dx=-3;dx<=3;dx++){
+    if(!dx&&!dy)continue;
+    const ox=500+dx*900+(mod(dy,2)?450:0),oy=335+dy*600;
+    const ng=el("g",{transform:"translate("+ox+" "+oy+") scale(.9)"},this.z);
+    el("path",{d:blobPath(380,240,.05,rnd()*6,26),fill:"#E6EFE8",stroke:C.teal,"stroke-width":7},ng);
+    el("circle",{cx:f1(-140+rnd()*80),cy:f1(-30+rnd()*50),r:84,fill:C.nucF,stroke:C.nucS,"stroke-width":4},ng);
+    for(let k=0;k<3;k++)drawMito(ng,f1(80+rnd()*200),f1(-160+k*120+rnd()*30),48,22,f1(rnd()*80-40));
+    drawGolgi(ng,f1(60+rnd()*60),f1(60+rnd()*50),-20,.9);
+  }
+  const cell=this.cell=drawCell(this.z,"animal",500,335,.9);
+  /* cargo crossing the membrane, one that bounces off */
+  this.thIn=Math.PI+.2;this.thOut=Math.PI-.22;
+  this.cargo=el("circle",{r:9,fill:C.spark,stroke:"#9A6A10","stroke-width":2,opacity:0},this.z);
+  this.big=el("g",{opacity:0},this.z);el("circle",{r:17,fill:"#7FB1C9",stroke:"#3E6E86","stroke-width":2.5},this.big);
+  /* a protein chain off a ribosome */
+  this.rib=cell.erRibo[6];
+  const BC=["#E07A5F","#81B29A","#F2CC8F","#6C8EBF"];
+  this.beads=[];for(let j=0;j<9;j++)this.beads.push(el("circle",{r:6.5,fill:BC[j%4],stroke:"#5A544A","stroke-width":1.2,opacity:0},this.z));
+  this.sparks=[];for(let k=0;k<6;k++)this.sparks.push(spark(this.z));
+  const mem=cell.pt(...cell.edge(this.thIn)),rib=cell.pt(this.rib[0],this.rib[1]),mit=cell.pt(225,-118);
+  this.L={
+    tissue:label(g,{x:500,y:612,t:"a tissue: many cells side by side",a:"middle"}),
+    up:label(g,{x:500,y:612,t:"one animal cell, up close",a:"middle"}),
+    job:label(g,{x:500,y:612,t:"every part has a job",a:"middle"}),
+    mem:label(g,{x:26,y:146,t:"membrane: picks\nwhat crosses",ax:96,ay:180,lx:mem[0]-4,ly:mem[1]-8}),
+    rib:label(g,{x:976,y:104,t:"ribosome: builds proteins",a:"end",ax:760,ay:112,lx:rib[0]+6,ly:rib[1]-6}),
+    mit:label(g,{x:976,y:176,t:"mitochondria: make ATP",a:"end",ax:858,ay:184,lx:mit[0]+40,ly:mit[1]-8})
+  };
+},
+draw(L){
+  const cell=this.cell,P=cell.P,lf=L.lineF,b=L.b,still=L.still;
+  /* push in from the tissue to one cell over the two intro bars */
+  const z=lerp(.3,1,ease(seg(L.lbar,.2,1.85)));
+  A(this.z,{transform:"translate(500 335) scale("+z.toFixed(4)+") translate(-500 -335)"});
+  const parts=allParts(cell);
+  parts.forEach(p=>hl(p,0));
+  grey(P.mito,false);
+  const brk=L.brk;
+  if(lf>=0&&lf<1){const k=Math.floor(L.lt*4);const seq=[P.membrane,P.nucleus,P.mito,P.golgi];hl(seq[k],.9*beatP(b)+.15);}
+  if(lf>=1&&lf<2){parts.forEach(p=>{if(p!==P.cyto&&p!==P.ribos)hl(p,.18+.35*kickP(b));});}
+  if(lf>=2&&lf<3){if(L.lt<.5)hl(P.membrane,.85);else hl(P.er,.85);}
+  if(lf>=3&&lf<4)hl(P.mito,.95);
+  if(lf>=4&&lf<5){hl(P.membrane,.35+.4*snP(b));hl(P.er,.35+.4*kickP(b));hl(P.mito,.5+.3*beatP(b));}
+  if(brk){grey(P.mito,true);}
+  /* cargo through the membrane: one every two beats */
+  const working=lf>=2&&!brk;
+  if(lf>=2){
+    const q=brk?.42:mod(b,2)/2;
+    const e=cell.edge(this.thIn),o=cell.pt(e[0]*1.22,e[1]*1.22),i=cell.pt(e[0]*.8,e[1]*.8);
+    const p=ease(seg(q,.05,.7));
+    A(this.cargo,{cx:f1(lerp(o[0],i[0],p)),cy:f1(lerp(o[1],i[1],p))});op(this.cargo,brk?.55:Math.min(1,seg(q,0,.1)*(1-seg(q,.85,1))*1.2));
+    const e2=cell.edge(this.thOut),q2=brk?.3:mod(b+1,2)/2,dd=1.32-.27*Math.sin(Math.PI*q2);
+    const bp=cell.pt(e2[0]*dd,e2[1]*dd);tr(this.big,bp[0],bp[1]);op(this.big,(brk?.5:1)*Math.sin(Math.PI*q2));
+  }else{op(this.cargo,0);op(this.big,0);}
+  /* the chain grows bead by bead */
+  let n=0;
+  if(lf>=2.5&&lf<3)n=Math.floor(seg(lf,2.5,3)*9)+1;
+  else if(lf>=3&&lf<4)n=9;
+  else if(lf>=4&&lf<5)n=Math.floor(L.lt*9)+1;
+  else if(brk)n=5;
+  if(still&&lf>=2)n=Math.max(n,7);
+  const a0=this.rib[2]*D2R;
+  this.beads.forEach((bd,j)=>{
+    if(j>=n){op(bd,0);return;}
+    const a=a0+(j*3.6)*D2R,r=170+12+Math.sin(j*.9)*6+j*1.2;
+    const p=cell.pt(-110+r*Math.cos(a),-5+r*Math.sin(a));
+    A(bd,{cx:f1(p[0]),cy:f1(p[1])});op(bd,brk?.45:1);
+  });
+  /* ATP sparks out of the mitochondrion, one burst per beat */
+  const sparking=lf>=3&&!brk&&(lf<5);
+  const m=cell.pt(225,-118),ph=mod(b,1);
+  this.sparks.forEach((s,k)=>{
+    if(!sparking&&!(still&&lf>=3&&!brk)){op(s,0);return;}
+    const a=(-150+k*52)*D2R,r=34+ (still?40:ph*95);
+    tr(s,m[0]+Math.cos(a)*r*1.3,m[1]+Math.sin(a)*r,(still?1:1.1-ph*.5),ph*90);op(s,still?.9:1-ph);
+  });
+  /* labels */
+  const Lb=this.L;
+  op(Lb.tissue,seg(L.lbar,.05,.2)*(1-seg(L.lbar,1.0,1.15)));
+  op(Lb.up,seg(L.lbar,1.15,1.35)*(1-seg(lf,.9,1)));
+  op(Lb.job,seg(lf,1,1.1)*(1-seg(lf,1.9,2)) + (lf>=4&&lf<5?seg(lf,4,4.1)*(1-seg(lf,4.9,5)):0));
+  op(Lb.mem,seg(lf,2,2.08)*(brk?.4:1));
+  op(Lb.rib,seg(lf,2.5,2.58)*(brk?.4:1));
+  op(Lb.mit,seg(lf,3,3.08));
+}});
+
+/* ---------- scene 2: cells come from cells ---------- */
+SC.push({tag:"LAB BENCH",note:"drawings, not to scale",brk:"Take the evidence away: it's only a hypothesis",rep:11.6,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#F7F2E8"},g);
+  el("rect",{x:-50,y:604,width:1100,height:40,fill:"#E4D6C0"},g);
+  /* the steps of the method */
+  this.chips=["OBSERVE","HYPOTHESIS","PREDICT","TEST","DATA"].map((s,i)=>{
+    const cx=110+i*195,cg=el("g",{},g);
+    const r=el("rect",{x:cx-86,y:62,width:172,height:42,rx:21,fill:C.paper,stroke:C.rule,"stroke-width":2.5},cg);
+    const t=el("text",{x:cx,y:90,"text-anchor":"middle",class:"chiptx",fill:"#8F877E"},cg);t.textContent=s;
+    if(i<4){el("path",{d:"M"+(cx+93)+" 76 l9 7 l-9 7",fill:"none",stroke:"#B8AFA3","stroke-width":3,"stroke-linecap":"round"},g);}
+    return {r,t};});
+  /* the lens */
+  const LX=205,LY=330,LR=132;this.LX=LX;this.LY=LY;
+  const cp=el("clipPath",{id:"lensClip"},defs);el("circle",{cx:LX,cy:LY,r:LR},cp);
+  el("circle",{cx:LX,cy:LY,r:LR,fill:"#F6F0DD"},g);
+  const inner=el("g",{"clip-path":"url(#lensClip)"},g);
+  this.lensIn=el("g",{filter:"url(#lensBlur)"},inner);
+  for(let r=0;r<8;r++)for(let k=-1;k<6;k++){const x=50+k*82+(r%2?41:0),y=190+r*40;
+    el("rect",{x:x,y:y,width:80,height:38,rx:5,fill:"#EFE4C2",stroke:"#A08B55","stroke-width":2.4},this.lensIn);
+    el("ellipse",{cx:x+28+(k%2)*14,cy:y+19,rx:8,ry:6,fill:"#B59A5C"},this.lensIn);}
+  this.ring=el("circle",{cx:LX,cy:LY,r:LR,fill:"none",stroke:"#3B3833","stroke-width":14},g);
+  this.lensLab=label(g,{x:LX,y:LY+LR+40,t:"cells under a lens",a:"middle",cls:"mid"});
+  /* notebook, then law and theory cards */
+  const NX=372,NW=296;
+  this.nb=el("g",{opacity:0},g);card(this.nb,NX,150,NW,240);
+  txt(this.nb,NX+18,182,"NOTEBOOK","tag");
+  this.noteL=[["guess: cells come\nonly from cells",216],["predict: a sealed,\nsterile flask stays clear",274],["test: run both flasks",334]].map(q=>{const t=txt(this.nb,NX+18,q[1],q[0],"lab small");op(t,0);return t;});
+  this.law=el("g",{opacity:0},g);card(this.law,NX,150,NW,96);txt(this.law,NX+18,188,"LAW","lab");txt(this.law,NX+18,224,"says what happens","lab small");
+  this.th=el("g",{opacity:0},g);card(this.th,NX,262,NW,132);
+  this.thWord=txt(this.th,NX+18,300,"THEORY","lab");this.hyWord=txt(this.th,NX+18,300,"HYPOTHESIS","lab brk");op(this.hyWord,0);
+  txt(this.th,NX+18,334,"explains why,\nwith evidence","lab small");
+  this.sheets=[];for(let k=0;k<8;k++)this.sheets.push(el("rect",{x:NX+NW-92+(k%2)*5,y:378-k*10,width:68,height:8,rx:1.5,fill:"#FFFFFF",stroke:"#8F877E","stroke-width":1.5,opacity:0},this.th));
+  this.more=[["better lenses added:",428],["+ cells run metabolism",454],["+ DNA passes cell to cell",480],["+ same chemistry in all",506]].map(q=>{const t=txt(g,NX+6,q[1],q[0],"lab small");op(t,0);return t;});
+  /* two flasks */
+  const fl=(cx)=>"M"+(cx-15)+" 196 L"+(cx-15)+" 268 L"+(cx-70)+" 438 Q"+(cx-74)+" 460 "+(cx-50)+" 460 L"+(cx+50)+" 460 Q"+(cx+74)+" 460 "+(cx+70)+" 438 L"+(cx+15)+" 268 L"+(cx+15)+" 196";
+  this.flG=el("g",{},g);
+  this.flGlow=glowEl(this.flG,815,360,220,180);
+  [[740,"fa"],[895,"fb"]].forEach(q=>{const cp2=el("clipPath",{id:q[1]},defs);el("path",{d:fl(q[0])+"Z"},cp2);});
+  const ga=el("g",{"clip-path":"url(#fa)"},this.flG);
+  this.liqA=el("rect",{x:660,y:340,width:160,height:130,fill:"#F4E3B0"},ga);
+  this.cloud=el("rect",{x:660,y:340,width:160,height:130,fill:"#D3B66A",opacity:0},ga);
+  this.yeast=[];reseed(21);
+  for(let k=0;k<12;k++){const yg=el("g",{opacity:0},ga);const x=690+rnd()*100,y=362+rnd()*86;
+    el("ellipse",{cx:x,cy:y,rx:9,ry:7,fill:"#FBF5E2",stroke:"#8C7440","stroke-width":1.6},yg);
+    const bud=el("circle",{cx:x+9,cy:y-5,r:4.5,fill:"#FBF5E2",stroke:"#8C7440","stroke-width":1.4},yg);
+    this.yeast.push({g:yg,bud,x,y});}
+  const gb=el("g",{"clip-path":"url(#fb)"},this.flG);
+  el("rect",{x:815,y:340,width:160,height:130,fill:"#FBF4DD"},gb);
+  [740,895].forEach(cx=>el("path",{d:fl(cx),fill:"none",stroke:"#6E6A62","stroke-width":4,"stroke-linejoin":"round"},this.flG));
+  el("rect",{x:875,y:182,width:40,height:24,rx:4,fill:"#8A6A4A"},this.flG);
+  this.flLabA=label(g,{x:735,y:494,t:"yeast:\nbuds, clouds",a:"middle",cls:"small"});
+  this.flLabB=label(g,{x:902,y:494,t:"sealed:\nstays clear",a:"middle",cls:"small"});
+  /* the three ideas of cell theory, stamped */
+  this.stamps=[["All living things\nare made of cells",175],["The cell is the\nsmallest unit of life",500],["Every cell comes\nfrom a cell",825]].map((q,i)=>{
+    const sg=el("g",{opacity:0},g);const inner=el("g",{},sg);
+    el("rect",{x:-150,y:-38,width:300,height:76,rx:6,fill:"#FFF8F5",stroke:"#B85042","stroke-width":3},inner);
+    el("rect",{x:-143,y:-31,width:286,height:62,rx:4,fill:"none",stroke:"#B85042","stroke-width":1.2},inner);
+    txt(inner,0,-6,q[0],"lab mid brk","middle");
+    return {g:sg,inner,x:q[1],y:566,rot:[-2.5,1.5,-1][i]};});
+},
+draw(L){
+  const lf=L.lineF,b=L.b,brk=L.brk,still=L.still;
+  /* method chips */
+  const at=[0,1,2,3,3.5,99];
+  this.chips.forEach((c,i)=>{
+    const on=lf>=at[i]&&lf<at[i+1]&&lf<5,done=lf>=at[i+1]||(i===4&&lf>=5);
+    A(c.r,{fill:on?"#F2C14E":done?"#DEEBEE":C.paper,stroke:on?"#B07A12":done?C.teal:C.rule});
+    c.t.setAttribute("fill",on?C.ink:done?C.deep:"#8F877E");
+    op(c.r.parentNode,brk?.18:1);
+  });
+  /* lens sharpens: observe */
+  const sharp=still?1:seg(lf,0,.85);
+  window.__blur.setAttribute("stdDeviation",(lerp(7,0,sharp)).toFixed(2));
+  const mag=lerp(1,1.55,ease(seg(lf,12,12.6)));
+  A(this.lensIn,{transform:"translate("+this.LX+" "+this.LY+") scale("+mag.toFixed(3)+") translate("+(-this.LX)+" "+(-this.LY)+")"});
+  this.ring.setAttribute("stroke",lf>=12&&lf<16?"#B07A12":"#3B3833");
+  op(this.lensLab,seg(lf,.6,.8));
+  /* notebook (lines 1-3), then law and theory (4 on) */
+  op(this.nb,seg(lf,1,1.1)*(1-seg(lf,3.85,4)));
+  this.noteL.forEach((t,k)=>op(t,seg(lf,k+1,k+1.1)));
+  op(this.law,seg(lf,4,4.1));
+  op(this.th,seg(lf,5,5.1));
+  const nS=lf<5?0:lf<6?Math.floor(L.lt*8)+1:8;
+  const gone=seg(lf,16,16.5);
+  this.sheets.forEach((s,k)=>op(s,k<nS?1-gone:0));
+  op(this.thWord,1-gone);op(this.hyWord,gone);
+  this.more.forEach((t,k)=>op(t,seg(lf,12+k,12.1+k)*(brk?.4:1)));
+  /* flasks: yeast buds one more each bar from the test on */
+  op(this.flG,lf<2?.35:1);
+  op(this.flGlow,lf>=9&&lf<12?.6+.25*kickP(b):0);
+  const nY=clamp(Math.floor(lf-2)+(lf>=3?1:0),0,12)*(1-gone);
+  this.yeast.forEach((y,k)=>{
+    if(k>=Math.round(nY)){op(y.g,0);return;}
+    op(y.g,1);const age=still?1:clamp(lf-(k+2),0,1);
+    A(y.bud,{r:f1(lerp(1.5,4.8,age))});
+  });
+  op(this.cloud,.7*clamp(nY/12,0,1));
+  A(this.liqA,{y:f1(lerp(340,462,gone)),height:f1(lerp(130,10,gone))});
+  A(this.cloud,{y:f1(lerp(340,462,gone))});
+  op(this.flLabA,seg(lf,9,9.1)*(brk?.5:1));op(this.flLabB,seg(lf,10.5,10.6));
+  /* stamps land on beat 1 of lines 7, 8 and 9 */
+  this.stamps.forEach((s,i)=>{
+    const t0=6+i,p=seg(lf,t0,t0+.1);
+    op(s.g,lf<t0?0:Math.min(1,p*2));
+    const sc=lf<t0?1:lerp(1.35,1,ease(p));
+    A(s.inner,{transform:"translate("+s.x+" "+s.y+") rotate("+s.rot+") scale("+sc.toFixed(3)+")"});
+  });
+}});
+
+/* ---------- scene 3: two kinds of cells, one protein's trip ---------- */
+SC.push({tag:"CELL TYPES",note:"drawn at cell level, not to scale",brk:"Golgi blocked: insulin can't leave the cell",rep:13.55,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#F5F1EA"},g);
+  /* phase A: three cells side by side */
+  const gA=this.gA=el("g",{},g);
+  this.pk=drawCell(gA,"prok",132,290,.86);
+  this.an=drawCell(gA,"animal",486,290,.43);
+  this.pl=drawCell(gA,"plant",822,290,.43);
+  this.names=[["prokaryote",132],["animal cell",486],["plant cell",822]].map(q=>{const t=txt(gA,q[1],172,q[0],"lab mid","middle");return t;});
+  this.euk=el("g",{opacity:0},gA);
+  el("path",{d:"M322 132 L322 120 L986 120 L986 132",fill:"none",stroke:C.soft,"stroke-width":2.5},this.euk);
+  txt(this.euk,654,108,"eukaryotes: a nucleus and organelles","lab small","middle");
+  const fl=this.pk.pt(190,0);
+  this.LA={
+    dna:label(gA,{x:132,y:440,t:"DNA loose inside",a:"middle",cls:"mid"}),
+    nonuc:label(gA,{x:132,y:476,t:"no nucleus",a:"middle",cls:"mid"}),
+    flag:label(gA,{x:262,y:212,t:"flagellum",a:"middle",cls:"mid",ax:262,ay:220,lx:fl[0]-30,ly:fl[1]-10}),
+    big:label(gA,{x:654,y:448,t:"bigger cells, with rooms inside",a:"middle",cls:"mid"}),
+    four:label(gA,{x:500,y:560,t:"every cell: membrane, DNA, ribosomes, cytoplasm",a:"middle",cls:"mid"}),
+    wall:label(gA,{x:822,y:440,t:"cell wall",a:"middle",cls:"mid"}),
+    chl:label(gA,{x:822,y:476,t:"chloroplasts for light",a:"middle",cls:"mid"}),
+    vac:label(gA,{x:822,y:512,t:"one big vacuole",a:"middle",cls:"mid"}),
+    nowall:label(gA,{x:486,y:440,t:"no wall",a:"middle",cls:"mid"}),
+    smv:label(gA,{x:486,y:476,t:"small vacuoles",a:"middle",cls:"mid"}),
+    cen:label(gA,{x:486,y:512,t:"centrioles",a:"middle",cls:"mid"})
+  };
+  /* phase B: the protein route inside one big cell */
+  const gB=this.gB=el("g",{opacity:0},g);
+  el("rect",{x:902,y:-10,width:160,height:660,fill:"#F4D9DC"},gB);
+  el("line",{x1:902,y1:-10,x2:902,y2:650,stroke:C.blood,"stroke-width":7},gB);
+  this.rbc=[];for(let k=0;k<7;k++)this.rbc.push(el("ellipse",{rx:16,ry:9,fill:C.rbc,stroke:"#C4606C","stroke-width":1.5},gB));
+  txt(gB,952,600,"blood","lab small","middle");
+  const cell=this.bc=drawCell(gB,"animal",440,330,.86);
+  this.route=el("g",{},gB);
+  this.mrna=el("path",{d:"M-14 0 q4 -6 8 0 t8 0 t8 0",fill:"none",stroke:C.dna,"stroke-width":4,"stroke-linecap":"round",opacity:0},this.route);
+  const BC=["#E07A5F","#81B29A","#F2CC8F","#6C8EBF"];
+  this.beads=[];for(let j=0;j<8;j++)this.beads.push(el("circle",{r:5.5,fill:BC[j%4],stroke:"#5A544A","stroke-width":1.1,opacity:0},this.route));
+  this.ves=el("g",{opacity:0},this.route);el("circle",{r:15,fill:C.ves,stroke:C.vesS,"stroke-width":2.5},this.ves);
+  [[-4,-3],[4,-2],[0,5],[-5,4],[5,5]].forEach(q=>el("circle",{cx:q[0],cy:q[1],r:3.2,fill:"#E07A5F"},this.ves));
+  this.flag=el("path",{d:"M10 -12 L10 -26 L22 -21 L10 -17",fill:"#B85042",stroke:"#7A2B20","stroke-width":1.4,opacity:0},this.ves);
+  this.pile=[];for(let k=0;k<9;k++){const v=el("g",{opacity:0},this.route);el("circle",{r:12,fill:C.ves,stroke:C.vesS,"stroke-width":2},v);el("circle",{r:4,fill:"#E07A5F"},v);this.pile.push(v);}
+  this.ins=[];for(let k=0;k<10;k++)this.ins.push(el("path",{d:"M0 -6 L5.2 -3 L5.2 3 L0 6 L-5.2 3 L-5.2 -3Z",fill:"#E0A33A",stroke:"#8A5A10","stroke-width":1.2,opacity:0},gB));
+  this.block=el("g",{opacity:0},gB);
+  const gt=cell.pt(205,30);
+  el("line",{x1:gt[0]-26,y1:gt[1]-26,x2:gt[0]+26,y2:gt[1]+26,stroke:"#B3261E","stroke-width":8,"stroke-linecap":"round"},this.block);
+  el("line",{x1:gt[0]+26,y1:gt[1]-26,x2:gt[0]-26,y2:gt[1]+26,stroke:"#B3261E","stroke-width":8,"stroke-linecap":"round"},this.block);
+  this.debris=el("path",{d:"M-8 -4 L-2 -9 L7 -6 L9 3 L1 8 L-7 5Z",fill:"#A8A198",stroke:"#5A544A","stroke-width":1.5,opacity:0},gB);
+  this.sparks=[];for(let k=0;k<5;k++)this.sparks.push(spark(gB));
+  this.count=txt(gB,440,624,"insulin reaching the blood: 0","lab mid brk","middle");op(this.count,0);
+  const nu=cell.pt(-110,-95),pore=cell.pt(-32,-50),rib=cell.pt(26,-107),er=cell.pt(32,47),go=cell.pt(150,70),ex=cell.pt(...cell.edge(-.12)),mi=cell.pt(225,-118),ly=cell.pt(-212,-138);
+  this.LB=[
+    label(gB,{x:24,y:110,t:"nucleus: holds the plan (DNA)",ax:200,ay:118,lx:nu[0],ly:nu[1]+6}),
+    label(gB,{x:24,y:604,t:"a copy of the plan goes out",ax:150,ay:584,lx:pore[0],ly:pore[1]+10}),
+    label(gB,{x:610,y:96,t:"ribosome builds the chain",ax:640,ay:104,lx:rib[0]+8,ly:rib[1]-4}),
+    label(gB,{x:24,y:604,t:"rough ER folds it",ax:120,ay:584,lx:er[0]-10,ly:er[1]+8}),
+    label(gB,{x:560,y:604,t:"Golgi tags and ships it",ax:640,ay:584,lx:go[0]+6,ly:go[1]+30}),
+    label(gB,{x:880,y:96,t:"out of the cell, into the blood",a:"end",ax:800,ay:104,lx:ex[0]+4,ly:ex[1]-10}),
+    label(gB,{x:880,y:96,t:"mitochondria make the ATP",a:"end",ax:760,ay:104,lx:mi[0]+16,ly:mi[1]-18}),
+    label(gB,{x:24,y:110,t:"lysosomes recycle the debris",ax:200,ay:118,lx:ly[0],ly:ly[1]-16})
+  ];
+  /* route points in the big cell's own coordinates */
+  this.R={pore:[-32,-50],rib:[26,-107],erA:-37*D2R,erB:40*D2R,cis:[96,112],trans:[205,30],exit:cell.edge(-.12)};
+},
+routeAt(k,p,brk){
+  /* k = stop 0..5, p = 0..1 through it; returns what to show */
+  const cell=this.bc,R=this.R;
+  const erPt=a=>[-110+151*Math.cos(a),-5+151*Math.sin(a)];
+  const st={mrna:null,beads:0,chain:null,ves:null,tag:false,golgi:false,ins:0,fold:0};
+  if(k===1){const q=ease(p);st.mrna=[lerp(R.pore[0],R.rib[0],q),lerp(R.pore[1],R.rib[1],q)];}
+  if(k===2){st.beads=Math.floor(p*8)+1;st.chain=0;}
+  if(k===3){st.beads=8;st.chain=ease(seg(p,0,.75));st.fold=seg(p,.4,.85);if(p>.8){st.ves=erPt(R.erB);st.beads=0;}}
+  if(k===4){
+    const ex=erPt(R.erB);
+    if(p<.35){const q=ease(p/.35);st.ves=[lerp(ex[0],R.cis[0],q),lerp(ex[1],R.cis[1],q)];}
+    else if(p<.65){st.golgi=true;}
+    else{const q=ease((p-.65)/.35);st.ves=[lerp(R.trans[0],R.trans[0]+40,q),lerp(R.trans[1],R.trans[1]-18,q)];st.tag=true;st.golgi=p<.75;}
+  }
+  if(k===5){
+    const s0=[R.trans[0]+40,R.trans[1]-18];
+    if(p<.55){const q=ease(p/.55);st.ves=[lerp(s0[0],R.exit[0]-18,q),lerp(s0[1],R.exit[1],q)];st.tag=true;}
+    st.ins=seg(p,.55,1);
+  }
+  return st;
+},
+draw(L){
+  const lf=L.lineF,b=L.b,brk=L.brk,still=L.still;
+  const opA=1-seg(lf,9.85,10.1),opB=seg(lf,9.95,10.25);
+  op(this.gA,opA);op(this.gB,opB);
+  if(opA>0){
+    const sc=lerp(1,2.4,ease(seg(lf,9.85,10.15)));
+    A(this.gA,{transform:"translate(486 290) scale("+sc.toFixed(3)+") translate(-486 -290)"});
+    const pk=this.pk,an=this.an,pl=this.pl,cells=[pk,an,pl];
+    cells.forEach(c=>allParts(c).forEach(p=>hl(p,0)));
+    pk.flagellum(still?1:b*Math.PI*2,9+3*snP(b),78);
+    const focus=lf<2?0:lf<4?1:lf<6?2:lf<8?3:4;
+    op(pk.g,focus===1||focus===3?.45:1);
+    op(an.g,focus===0||focus===3?.45:1);
+    op(pl.g,focus===0||focus===4?.45:1);
+    op(this.euk,seg(lf,2,2.1));
+    if(focus===0){hl(pk.P.dna,lf<1?.9:.3);if(lf>=1)hl(pk.P.flag,.5+.4*beatP(b));}
+    if(focus===1){hl(an.P.nucleus,.7);hl(pl.P.nucleus,.7);}
+    if(focus===2){
+      const k=lf<5?Math.floor(L.lt*4):-1;
+      const nm=["membrane","dna","ribos","cyto"];
+      cells.forEach(c=>{nm.forEach((n,i)=>{if(k===-1||k===i)hl(c.P[n],n==="ribos"?0:.85);});
+        if(k===2||k===-1){/* ribosomes: brighten the dots */}});
+    }
+    if(focus===3){hl(pl.P.wall,L.lt<.5||lf>=7?.8:.2);if(lf>=6.5)hl(pl.P.chloro,.85);if(lf>=7)hl(pl.P.vac,.75);}
+    if(focus===4){hl(an.P.membrane,.7);if(lf>=8.5)hl(an.P.vac,.8);if(lf>=9)hl(an.P.centri,.95);}
+    const LA=this.LA;
+    op(LA.dna,seg(lf,0,.1)*(lf<2?1:0));op(LA.nonuc,seg(lf,1,1.1)*(lf<2?1:0));op(LA.flag,seg(lf,1.5,1.6)*(lf<2?1:0));
+    op(LA.big,seg(lf,2,2.1)*(1-seg(lf,3.9,4)));
+    op(LA.four,seg(lf,4,4.1)*(1-seg(lf,5.9,6)));
+    op(LA.wall,lf>=6&&lf<8?1:0);op(LA.chl,lf>=6.5&&lf<8?1:0);op(LA.vac,lf>=7&&lf<8?1:0);
+    op(LA.nowall,lf>=8&&lf<10?1:0);op(LA.smv,lf>=8.5&&lf<10?1:0);op(LA.cen,lf>=9&&lf<10?1:0);
+  }
+  if(opB>0){
+    const cell=this.bc,P=cell.P;
+    allParts(cell).forEach(p=>hl(p,0));grey(P.golgi,false);
+    /* blood flows down the vessel on the beat */
+    this.rbc.forEach((r,k)=>{const y=mod(k*100+b*22,700)-30;A(r,{cx:f1(935+(k%3)*30),cy:f1(y),transform:"rotate("+(k*23)+" "+f1(935+(k%3)*30)+" "+f1(y)+")"});});
+    let k=-1,p=0;
+    if(lf>=10&&lf<16){k=Math.floor(lf-10);p=still?.6:L.lt;}
+    else if(lf>=16&&lf<18){const q=(lf-16)*3;k=Math.floor(q);p=q-k;}
+    const hi=[P.nucleus,null,P.er,P.er,P.golgi,P.membrane];
+    if(lf>=10&&lf<16&&hi[k])hl(hi[k],.8);
+    if(lf>=10&&lf<11)hl(P.dna,.6+.3*beatP(b));
+    let st=k>=0?this.routeAt(k,p):{beads:0};
+    if(brk){st={beads:0};}
+    /* mRNA */
+    if(st.mrna){const q=cell.pt(...st.mrna);tr(this.mrna,q[0],q[1]);op(this.mrna,1);}else op(this.mrna,0);
+    /* the chain: on the ribosome, then along the ER, folding */
+    const erA=this.R.erA,erB=this.R.erB;
+    this.beads.forEach((bd,j)=>{
+      if(j>=st.beads){op(bd,0);return;}
+      let a,r;
+      if(st.chain==null){a=erA+j*3.4*D2R;r=170+6+Math.sin(j*1.1)*4;}
+      else{const head=lerp(erA,erB,st.chain);const spread=lerp(3.4,.9,st.fold);a=head-j*spread*D2R;r=151+lerp(Math.sin(j*1.3)*6,Math.sin(j*2.1)*5,st.fold);}
+      const q=cell.pt(-110+r*Math.cos(a),-5+r*Math.sin(a));A(bd,{cx:f1(q[0]),cy:f1(q[1])});op(bd,1);});
+    if(st.ves){const q=cell.pt(...st.ves);tr(this.ves,q[0],q[1]);op(this.ves,1);op(this.flag,st.tag?1:0);}else op(this.ves,0);
+    if(st.golgi)hl(P.golgi,.95);
+    /* insulin in the blood */
+    const shown=brk?0:lf>=15?10:0;
+    const fresh=k===5?st.ins:0;
+    const ex=cell.pt(...this.R.exit);
+    this.ins.forEach((d,j)=>{
+      if(brk){op(d,1-seg(lf,18,18.4));const y=mod(j*64+b*14,640);tr(d,940+(j%3)*26,y);return;}
+      if(j<3&&k===5&&lf<16){const q=ease(fresh);tr(d,lerp(ex[0]+8,935+j*22,q),lerp(ex[1]+j*10,ex[1]+40+j*18,q));op(d,fresh>0?1:0);return;}
+      if(lf>=16||shown){const y=mod(j*64+b*14,640);tr(d,940+(j%3)*26,y);op(d,1);return;}
+      op(d,0);});
+    /* mitochondria and lysosome */
+    const m=cell.pt(225,-118),ph=mod(b,1);
+    this.sparks.forEach((s,j)=>{if(!(lf>=16&&lf<17)){op(s,0);return;}const a=(-160+j*45)*D2R,r=30+(still?40:ph*80);tr(s,m[0]+Math.cos(a)*r*1.3,m[1]+Math.sin(a)*r,1,ph*90);op(s,still?.9:1-ph);});
+    if(lf>=16&&lf<17)hl(P.mito,.85);
+    if(lf>=17&&lf<18){hl(P.lyso,.95);const l=cell.pt(-212,-138),q=ease(seg(L.lt,0,.6));tr(this.debris,lerp(l[0]+90,l[0],q),lerp(l[1]+60,l[1],q),lerp(1,.3,seg(L.lt,.55,.9)));op(this.debris,1-seg(L.lt,.8,.95));}else op(this.debris,0);
+    /* break: Golgi exit closed, vesicles pile up */
+    op(this.block,brk?1:0);
+    if(brk)grey(P.golgi,false),hl(P.golgi,.25);
+    const nP=brk?(still?7:Math.min(9,Math.floor((lf-18)*4.5)+1)):0;
+    this.pile.forEach((v,j)=>{if(j>=nP){op(v,0);return;}const q=cell.pt(70+(j%3)*26-(Math.floor(j/3))*10,150+Math.floor(j/3)*24-(j%3)*6);tr(v,q[0],q[1]);op(v,1);});
+    op(this.count,brk?1:0);
+    this.LB.forEach((lb,i)=>{const t0=10+i;op(lb,seg(lf,t0,t0+.08)*(1-seg(lf,t0+.92,t0+1)));});
+  }
+}});
+
+/* ---------- scene 4: one cell or many, held steady ---------- */
+function drawParamecium(parent){
+  const g=el("g",{},parent),o={g};
+  const W=.07,PH=2.3;
+  o.body=el("path",{d:blobPath(260,98,W,PH,34),fill:"#EAF3EE",stroke:C.teal,"stroke-width":5},g);
+  el("path",{d:"M-30 -96 Q20 -40 -16 20",fill:"none",stroke:C.teal,"stroke-width":3},g);
+  [[-70,30,15],[60,40,12],[110,-30,10],[-120,40,11]].forEach(q=>el("circle",{cx:q[0],cy:q[1],r:q[2],fill:"#EED3AE",stroke:"#B08A5A","stroke-width":2},g));
+  el("ellipse",{cx:20,cy:10,rx:56,ry:34,fill:C.nucF,stroke:C.nucS,"stroke-width":3},g);
+  el("circle",{cx:82,cy:-8,r:11,fill:"#93B6C4",stroke:C.nucS,"stroke-width":2},g);
+  o.cil=[];
+  for(let k=0;k<64;k++){const th=k/64*2*Math.PI;const p=blobR(260,98,W,PH,th),q=blobR(260,98,W,PH,th+.01);
+    const nx=(q[1]-p[1]),ny=-(q[0]-p[0]),nl=Math.hypot(nx,ny);const ang=Math.atan2(ny/nl,nx/nl)*180/Math.PI+180;
+    const l=el("line",{x1:0,y1:0,x2:16,y2:0,stroke:"#4F8F9B","stroke-width":2,"stroke-linecap":"round"},g);o.cil.push({l,x:p[0],y:p[1],ang});}
+  o.cv=[[-170,-14],[170,-8]].map(q=>{const vg=el("g",{transform:"translate("+q[0]+" "+q[1]+")"},g);
+    const canals=[];for(let k=0;k<7;k++){const a=k/7*2*Math.PI;canals.push(el("line",{x1:0,y1:0,x2:f1(34*Math.cos(a)),y2:f1(34*Math.sin(a)),stroke:"#4A90C2","stroke-width":3,"stroke-linecap":"round"},vg));}
+    const c=el("circle",{r:14,fill:"#CFE8F7",stroke:"#4A90C2","stroke-width":2.5},vg);
+    const drops=[];for(let k=0;k<3;k++)drops.push(el("circle",{r:4.5,fill:"#4A90C2",opacity:0},vg));
+    return {vg,c,drops,canals,x:q[0],y:q[1]};});
+  o.update=(b,still,stuck)=>{
+    o.cil.forEach((c,k)=>{const a=c.ang+(still?0:28*Math.sin(Math.PI*b-k*.42));c.l.setAttribute("transform","translate("+f1(c.x)+" "+f1(c.y)+") rotate("+f1(a)+")");});
+    o.cv.forEach((v,i)=>{
+      const q=still?.7:mod(b+i*4,8)/8;
+      let r=q<.06?lerp(24,7,q/.06):lerp(7,24,(q-.06)/.94);
+      if(stuck)r=27;
+      A(v.c,{r:f1(r)});
+      v.drops.forEach((d,k)=>{const dq=seg(q,0,.3);const a=(-90+(k-1)*40+(i?0:180))*D2R;const rr=r+dq*70;
+        A(d,{cx:f1(Math.cos(a)*rr),cy:f1(Math.sin(a)*rr*.6)});op(d,stuck||still?0:(q<.3?1-dq:0));});
+      v.canals.forEach(cn=>op(cn,stuck?.35:1));
+    });
+  };
+  return o;
+}
+function heartPath(){return "M0 34 C-44 4 -66 -28 -40 -52 C-20 -68 -3 -56 0 -40 C3 -56 20 -68 40 -52 C66 -28 44 4 0 34Z";}
+function drawHeart(parent,x,y,s){const g=el("g",{transform:"translate("+x+" "+y+") scale("+s+")"},parent);
+  el("path",{d:"M-8 -46 C-10 -70 10 -78 22 -66",fill:"none",stroke:"#9E3A2E","stroke-width":7,"stroke-linecap":"round"},g);
+  el("path",{d:heartPath(),fill:"#E07A6E",stroke:"#9E3A2E","stroke-width":3.5},g);
+  el("path",{d:"M-6 -30 C-14 -10 -4 8 6 18",fill:"none",stroke:"#B95548","stroke-width":2.5},g);return g;}
+function drawPerson(parent,x,y,s){const g=el("g",{transform:"translate("+x+" "+y+") scale("+s+")"},parent);
+  el("circle",{cx:0,cy:-92,r:24,fill:"#EFE6DA",stroke:"#5A544A","stroke-width":3},g);
+  el("path",{d:"M-34 -62 Q0 -72 34 -62 L44 22 L26 24 L22 116 L5 116 L0 40 L-5 116 L-22 116 L-26 24 L-44 22Z",fill:"#EFE6DA",stroke:"#5A544A","stroke-width":3,"stroke-linejoin":"round"},g);
+  const lungs=el("g",{},g);el("ellipse",{cx:-14,cy:-28,rx:11,ry:22,fill:"#F2B8C6",stroke:"#A84D6F","stroke-width":2},lungs);el("ellipse",{cx:15,cy:-28,rx:11,ry:22,fill:"#F2B8C6",stroke:"#A84D6F","stroke-width":2},lungs);
+  const heart=el("path",{d:heartPath(),fill:"#E07A6E",stroke:"#9E3A2E","stroke-width":5,transform:"translate(4 -18) scale(.22)"},g);
+  return {g,lungs,heart};}
+function drawMuscleCell(parent,x,y,w,h){const g=el("g",{transform:"translate("+x+" "+y+")"},parent);
+  el("rect",{x:-w/2,y:-h/2,width:w,height:h,rx:h*.35,fill:"#F4C9C1",stroke:"#9E3A2E","stroke-width":2.5},g);
+  for(let k=-w/2+10;k<w/2-6;k+=9)el("line",{x1:k,y1:-h/2+5,x2:k,y2:h/2-5,stroke:"#D98C80","stroke-width":2},g);
+  el("ellipse",{cx:0,cy:0,rx:w*.12,ry:h*.18,fill:"#C9DDE6",stroke:C.nucS,"stroke-width":1.6},g);return g;}
+function drawRunner(parent,x,y){const g=el("g",{transform:"translate("+x+" "+y+")"},parent),o={g};
+  const st={stroke:"#3B3833","stroke-width":9,"stroke-linecap":"round",fill:"none"};
+  el("circle",{cx:0,cy:-118,r:18,fill:"#3B3833"},g);
+  o.torso=el("line",Object.assign({x1:0,y1:-96,x2:0,y2:-30},st),g);
+  o.parts=[["armL",0,-86,34],["armR",0,-86,34],["legL",0,-30,52],["legR",0,-30,52]].map(q=>{const l=el("line",Object.assign({x1:0,y1:0,x2:0,y2:q[3]},st),g);return {l,x:q[1],y:q[2]};});
+  o.set=(run,ph)=>{const sw=run?Math.sin(ph)*40:0;const ang=run?[sw-25,-sw-25,-sw*1.1,sw*1.1]:[14,-14,9,-9];
+    o.parts.forEach((p,i)=>p.l.setAttribute("transform","translate("+p.x+" "+p.y+") rotate("+f1(ang[i])+")"));
+    g.setAttribute("transform","translate("+x+" "+f1(y-(run?Math.abs(Math.cos(ph))*10:0))+") rotate("+(run?8:0)+")");};
+  return o;}
+SC.push({tag:"ONE CELL OR MANY",note:"drawings, not to scale",brk:"Balance lost: the cell swells, the heart can't settle",rep:11.6,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#F2F5EF"},g);
+  /* A: one cell does it all */
+  const gA=this.gA=el("g",{},g);
+  this.parA=drawParamecium(gA);tr(this.parA.g,500,320,1.15);
+  this.LA={
+    one:label(gA,{x:500,y:590,t:"one cell does every job",a:"middle"}),
+    eat:label(gA,{x:300,y:130,t:"eats",a:"middle",cls:"mid",ax:310,ay:138,lx:466,ly:220}),
+    move:label(gA,{x:120,y:470,t:"moves",a:"middle",cls:"mid",ax:150,ay:452,lx:225,ly:390}),
+    div:label(gA,{x:700,y:130,t:"divides",a:"middle",cls:"mid",ax:680,ay:138,lx:540,ly:300}),
+    cv:label(gA,{x:976,y:470,t:"contractile vacuole:\npumps water out",a:"end",cls:"mid",ax:860,ay:440,lx:706,ly:316})
+  };
+  /* B: levels of organization */
+  const gB=this.gB=el("g",{opacity:0},g);
+  this.panels=["cell","tissue","organ","system","organism"].map((s,i)=>{
+    const cx=110+i*195,pg=el("g",{opacity:0},gB);
+    const bg=el("rect",{x:cx-84,y:186,width:168,height:212,rx:8,fill:C.paper,stroke:C.rule,"stroke-width":2.5},pg);
+    txt(pg,cx,436,s,"lab mid","middle");
+    if(i<4)arrow(gB,cx+88,292,cx+108,292,"#8F877E",3.5);
+    return {g:pg,bg,cx};});
+  const P=this.panels;
+  drawMuscleCell(P[0].g,P[0].cx,292,112,46);
+  for(let r=0;r<4;r++)for(let c=0;c<3;c++)drawMuscleCell(P[1].g,P[1].cx-48+c*48+(r%2?12:0),236+r*36,46,28);
+  drawHeart(P[2].g,P[2].cx,300,1.25);
+  const sg=el("g",{},P[3].g);
+  el("path",{d:"M"+(P[3].cx-60)+" 290 C"+(P[3].cx-60)+" 200 "+(P[3].cx+60)+" 200 "+(P[3].cx+60)+" 290",fill:"none",stroke:"#C9474F","stroke-width":7},sg);
+  el("path",{d:"M"+(P[3].cx-60)+" 290 C"+(P[3].cx-60)+" 380 "+(P[3].cx+60)+" 380 "+(P[3].cx+60)+" 290",fill:"none",stroke:"#5B7FB8","stroke-width":7},sg);
+  drawHeart(sg,P[3].cx,300,.75);
+  this.person=drawPerson(P[4].g,P[4].cx,296,.88);
+  this.LBl={
+    spec:label(gB,{x:500,y:132,t:"many cells, each specialized",a:"middle"}),
+    labor:label(gB,{x:500,y:520,t:"division of labor: every level has a job",a:"middle",cls:"mid"}),
+    inter:label(gB,{x:500,y:520,t:"interdependent: the heart needs the lungs",a:"middle",cls:"mid"})
+  };
+  this.ilink=el("g",{opacity:0},gB);
+  /* C: heart rate, steady inside */
+  const gC=this.gC=el("g",{opacity:0},g);
+  this.run=drawRunner(gC,190,450);
+  this.bigHeart=drawHeart(gC,190,180,.9);
+  this.hrT=txt(gC,190,520,"70 beats a minute","lab mid","middle");
+  const GX0=390,GX1=960,GY0=470,GY1=150;this.G={GX0,GX1,GY0,GY1};
+  const yv=v=>lerp(GY0,GY1,(v-40)/(180-40));this.yv=yv;
+  card(gC,GX0-14,GY1-36,GX1-GX0+28,GY0-GY1+60,"#FFFFFF");
+  [70,150].forEach(v=>{el("line",{x1:GX0,y1:yv(v),x2:GX1,y2:yv(v),stroke:"#E3DDD2","stroke-width":2,"stroke-dasharray":"6 6"},gC);txt(gC,GX0+6,yv(v)-8,String(v),"lab small");});
+  el("line",{x1:GX0,y1:GY0,x2:GX1,y2:GY0,stroke:C.soft,"stroke-width":2.5},gC);el("line",{x1:GX0,y1:GY0,x2:GX0,y2:GY1-20,stroke:C.soft,"stroke-width":2.5},gC);
+  txt(gC,GX0,GY1-42,"heart rate, beats per minute","lab small");
+  txt(gC,GX1,GY0+32,"time","lab small","end");
+  this.hrLine=el("path",{d:"M0 0",fill:"none",stroke:"#C9474F","stroke-width":5,"stroke-linejoin":"round","stroke-linecap":"round"},gC);
+  this.hrDot=el("circle",{r:8,fill:"#C9474F",stroke:"#FFF","stroke-width":2},gC);
+  this.LC={
+    steady:label(gC,{x:675,y:66,t:"homeostasis: steady inside",a:"middle",cls:"mid"}),
+    run:label(gC,{x:675,y:66,t:"running: the heart speeds up",a:"middle",cls:"mid"}),
+    rest:label(gC,{x:675,y:66,t:"rest: it settles back",a:"middle",cls:"mid"})
+  };
+  /* D: stomata and roots */
+  const gD=this.gD=el("g",{opacity:0},g);
+  card(gD,40,120,420,440,"#FFFFFF");
+  txt(gD,250,160,"a stoma on a leaf","lab mid","middle");
+  this.cloudI=el("g",{},gD);el("path",{d:"M90 230 a24 24 0 0 1 44 -14 a30 30 0 0 1 56 8 a20 20 0 0 1 -4 40 h-90 a18 18 0 0 1 -6 -34Z",fill:"#E3EEF5",stroke:"#7FA9C2","stroke-width":2.5},this.cloudI);
+  for(let k=0;k<3;k++)el("path",{d:"M"+(110+k*28)+" 280 q-4 10 0 14 q4 -4 0 -14Z",fill:"#4A90C2"},this.cloudI);
+  this.sunI=el("g",{},gD);el("circle",{cx:380,cy:232,r:26,fill:"#F2C14E"},this.sunI);
+  for(let a=0;a<10;a++){const an=a*36*D2R;el("line",{x1:f1(380+34*Math.cos(an)),y1:f1(232+34*Math.sin(an)),x2:f1(380+46*Math.cos(an)),y2:f1(232+46*Math.sin(an)),stroke:"#E0A33A","stroke-width":4,"stroke-linecap":"round"},this.sunI);}
+  this.pore=el("ellipse",{cx:250,cy:410,rx:8,ry:70,fill:"#5D6B4E"},gD);
+  this.gcL=el("path",{d:"M0 0",fill:C.chlF,stroke:C.chlS,"stroke-width":3.5},gD);
+  this.gcR=el("path",{d:"M0 0",fill:C.chlF,stroke:C.chlS,"stroke-width":3.5},gD);
+  this.stomaT=txt(gD,250,536,"open: moist and cool","lab mid","middle");
+  card(gD,500,120,460,440,"#FFFFFF");
+  el("rect",{x:502,y:240,width:456,height:318,fill:"#E9D8BC"},gD);
+  this.water=el("rect",{x:502,y:400,width:456,height:158,fill:"#BFD9EA",opacity:.85},gD);
+  this.wline=el("line",{x1:502,y1:400,x2:958,y2:400,stroke:"#4A90C2","stroke-width":3,"stroke-dasharray":"10 6"},gD);
+  this.wT=txt(gD,946,394,"water","lab small","end");
+  el("path",{d:"M730 240 L730 170",stroke:"#4E8A3A","stroke-width":6},gD);
+  el("path",{d:"M730 200 q-40 -30 -64 -6 q30 18 64 6Z",fill:C.chlF,stroke:C.chlS,"stroke-width":2.5},gD);
+  el("path",{d:"M730 186 q40 -32 66 -8 q-30 20 -66 8Z",fill:C.chlF,stroke:C.chlS,"stroke-width":2.5},gD);
+  this.root=el("path",{d:"M730 240",fill:"none",stroke:"#8A6A4A","stroke-width":6,"stroke-linecap":"round"},gD);
+  this.side=[];for(let k=0;k<6;k++)this.side.push(el("path",{d:"M0 0",fill:"none",stroke:"#8A6A4A","stroke-width":3,"stroke-linecap":"round"},gD));
+  txt(gD,730,160,"roots follow the water","lab mid","middle");
+  /* E: back to one cell, then the break */
+  const gE=this.gE=el("g",{opacity:0},g);
+  this.parE=drawParamecium(gE);
+  this.LE={sq:label(gE,{x:310,y:560,t:"paramecium: squeezes water out",a:"middle",cls:"mid"})};
+  card(gE,640,170,330,300,"#FFFFFF");
+  txt(gE,656,204,"heart rate","lab small");
+  this.eLine=el("path",{d:"M0 0",fill:"none",stroke:"#C9474F","stroke-width":5,"stroke-linejoin":"round"},gE);
+  [70,150].forEach(v=>{const y=lerp(440,220,(v-40)/140);el("line",{x1:656,y1:y,x2:954,y2:y,stroke:"#E3DDD2","stroke-width":2,"stroke-dasharray":"6 6"},gE);txt(gE,660,y-8,String(v),"lab small");});
+},
+draw(L){
+  const lf=L.lineF,b=L.b,brk=L.brk,still=L.still;
+  const ph=(a,z)=>(a===0?1:seg(lf,a-.1,a+.08))*(z===22?1:1-seg(lf,z-.1,z+.08));
+  const oA=ph(0,2),oB=ph(2,8),oC=ph(8,14),oD=ph(14,18),oE=ph(18,22);
+  op(this.gA,oA);op(this.gB,oB);op(this.gC,oC);op(this.gD,oD);op(this.gE,oE);
+  if(oA>0){
+    this.parA.update(b,still,false);
+    op(this.LA.one,seg(lf,0,.1));
+    op(this.LA.eat,seg(lf,1,1.05));op(this.LA.move,seg(lf,1.25,1.3));op(this.LA.div,seg(lf,1.5,1.55));
+    op(this.LA.cv,seg(lf,.3,.4)*(1-seg(lf,.95,1))+seg(lf,1.75,1.8));
+  }
+  if(oB>0){
+    const at=[2,3.25,3.5,3.75,4];
+    this.panels.forEach((p,i)=>{const t0=i===0?2:at[i];op(p.g,seg(lf,t0,t0+.06));
+      const on=(lf>=3&&lf<4&&Math.floor((lf-3)*4)===i)||(i===4&&lf>=4&&lf<5)||(i===0&&lf>=2&&lf<3);
+      A(p.bg,{stroke:on?"#B07A12":C.rule,fill:on?"#FBF0DA":C.paper});});
+    op(this.LBl.spec,seg(lf,2,2.1)*(1-seg(lf,4.9,5)));
+    op(this.LBl.labor,seg(lf,5,5.1)*(1-seg(lf,5.9,6)));
+    op(this.LBl.inter,seg(lf,6,6.1));
+    const inter=lf>=6;
+    const pul=1+(inter?.18*beatP(b):0);
+    this.person.heart.setAttribute("transform","translate(4 -18) scale("+(.22*pul).toFixed(3)+")");
+    this.person.lungs.setAttribute("transform",inter?"translate(0 -28) scale(1 "+(1+.12*Math.sin(b*Math.PI/2)).toFixed(3)+") translate(0 28)":"");
+    A(this.panels[4].bg,{stroke:inter?"#B07A12":C.rule});
+  }
+  if(oC>0){
+    const v=x=>x<10?70:x<10.6?lerp(70,150,ease(seg(x,10,10.6))):x<12?150:x<12.8?lerp(150,70,ease(seg(x,12,12.8))):70;
+    const G=this.G,xv=x=>lerp(G.GX0,G.GX1,(x-8)/6);
+    const end=still?13.2:clamp(lf,8,14);
+    let d="";for(let x=8;x<=end+1e-6;x+=.05)d+=(d?" L":"M")+f1(xv(x))+" "+f1(this.yv(v(x)));
+    this.hrLine.setAttribute("d",d||"M0 0");
+    A(this.hrDot,{cx:f1(xv(end)),cy:f1(this.yv(v(end)))});
+    const hr=v(end),running=end>=10&&end<12.4;
+    this.run.set(running,(b+.5)*Math.PI);
+    const hp=running?beatP(b*2):beatP(b);
+    this.bigHeart.setAttribute("transform","translate(190 180) scale("+(0.9*(1+.14*hp)).toFixed(3)+")");
+    setText(this.hrT,Math.round(hr)+" beats a minute");
+    op(this.LC.steady,(lf<10||lf>=13)?seg(lf,8,8.1):0);op(this.LC.run,lf>=10&&lf<12?1:0);op(this.LC.rest,lf>=12&&lf<13?1:0);
+  }
+  if(oD>0){
+    const open=still?1:1-ease(seg(lf,14.9,15.15));
+    const gap=lerp(4,26,open);
+    const gc=(sx)=>{const x0=250+sx*(gap/2),w=46;return "M"+f1(x0)+" 330 C"+f1(x0+sx*w*1.4)+" 330 "+f1(x0+sx*w*1.4)+" 490 "+f1(x0)+" 490 C"+f1(x0+sx*w*.3)+" 450 "+f1(x0+sx*w*.3)+" 370 "+f1(x0)+" 330Z";};
+    this.gcL.setAttribute("d",gc(-1));this.gcR.setAttribute("d",gc(1));
+    A(this.pore,{rx:f1(gap/2)});
+    op(this.cloudI,open);op(this.sunI,1-open);
+    setText(this.stomaT,open>.5?"open: moist and cool":"closed: hot and dry");
+    const dq=still?.6:seg(lf,16,18);
+    const wy=lerp(330,500,dq),ry=lerp(360,540,still?.7:seg(lf,16,18)+.05);
+    A(this.water,{y:f1(wy),height:f1(558-wy)});A(this.wline,{y1:f1(wy),y2:f1(wy)});A(this.wT,{y:f1(wy-8)});
+    this.wT.firstChild&&this.wT.firstChild.setAttribute("y",f1(wy-8));
+    this.root.setAttribute("d","M730 240 C726 "+f1(lerp(240,ry,.4))+" 736 "+f1(lerp(240,ry,.7))+" 730 "+f1(ry));
+    this.side.forEach((s,k)=>{const y0=270+k*38;if(y0>ry-20){s.setAttribute("d","M0 0");return;}const dx=(k%2?1:-1)*(40+k*6);s.setAttribute("d","M730 "+y0+" q"+f1(dx*.5)+" 10 "+f1(dx)+" 34");});
+  }
+  if(oE>0){
+    const sw=brk?lerp(1,1.22,still?1:ease(seg(lf,20,21.2))):1;
+    tr(this.parE.g,320,320,.66*sw);
+    this.parE.update(b,still,brk);
+    this.parE.body.setAttribute("fill",brk?"#F3E1DD":"#EAF3EE");
+    op(this.LE.sq,seg(lf,18,18.1)*(brk?0:1));
+    const xv=x=>lerp(660,950,(x-18)/4),yv=v=>lerp(440,220,(v-40)/140);
+    const end=still?21.5:clamp(lf,18,22);
+    const v=x=>x<20?70:lerp(70,150,ease(seg(x,20,20.5)));
+    let d="";for(let x=18;x<=end+1e-6;x+=.05)d+=(d?" L":"M")+f1(xv(x))+" "+f1(yv(v(x))+(x>20.5?Math.sin(x*25)*3:0));
+    this.eLine.setAttribute("d",d||"M0 0");
+  }
+}});
+
+/* ---------- scene 5: the membrane, built and labeled ---------- */
+function protBlob(parent,x,y,rx,ry,fill,ph){return el("path",{d:blobPath(rx,ry,.07,ph||1,22),transform:"translate("+x+" "+y+")",fill:fill||C.prot,stroke:C.protS,"stroke-width":3},parent);}
+function chol(parent,x,y,rot){const g=el("g",{transform:"translate("+x+" "+y+") rotate("+(rot||0)+")"},parent);
+  el("rect",{x:-6,y:-18,width:12,height:30,rx:4,fill:C.chol,stroke:C.cholS,"stroke-width":2},g);
+  el("circle",{cx:0,cy:-22,r:5,fill:"#F7D98B",stroke:C.cholS,"stroke-width":2},g);return g;}
+SC.push({tag:"THE MEMBRANE",note:"drawn at molecule level, not to scale",brk:"No proteins: no doors, no pumps, no ID tags",rep:13.6,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#EAF3F8"},g);
+  /* A: one phospholipid, one water molecule */
+  const gA=this.gA=el("g",{},g);
+  reseed(41);
+  this.wA=[];for(let k=0;k<12;k++){const w=waterMol(gA,1.3);const hx=70+rnd()*380,hy=90+rnd()*470;
+    const a=k/12*2*Math.PI;this.wA.push({w,hx,hy,ax:250+Math.cos(a)*(72+(k%2)*16),ay:190+Math.sin(a)*(64+(k%2)*14),r:rnd()*360});}
+  const big=el("g",{},gA);
+  el("path",{d:"M236 236 q-12 60 0 118 t0 118",fill:"none",stroke:C.tail,"stroke-width":14,"stroke-linecap":"round"},big);
+  el("path",{d:"M266 236 q12 60 0 118 l26 90",fill:"none",stroke:C.tail,"stroke-width":14,"stroke-linecap":"round"},big);
+  el("rect",{x:224,y:222,width:54,height:18,rx:5,fill:"#D9B26A",stroke:"#8A6A20","stroke-width":2},big);
+  this.head=el("circle",{cx:251,cy:184,r:44,fill:C.head,stroke:C.headS,"stroke-width":3.5},big);
+  txt(big,251,196,"P","lab","middle");
+  this.headGlow=glowEl(gA,251,184,90,80);gA.insertBefore(this.headGlow,big);
+  this.tailGlow=glowEl(gA,258,370,80,150);gA.insertBefore(this.tailGlow,big);
+  this.LA={
+    head:label(gA,{x:330,y:150,t:"phosphate head",ax:330,ay:158,lx:296,ly:176}),
+    phil:label(gA,{x:330,y:190,t:"^hydro^~philic~: water-loving",cls:"mid"}),
+    tails:label(gA,{x:330,y:420,t:"two lipid tails",ax:330,ay:428,lx:282,ly:406}),
+    phob:label(gA,{x:330,y:460,t:"^hydro^~phobic~: water-fearing",cls:"mid"})
+  };
+  const wm=this.wm=el("g",{},gA);
+  this.cloudE=el("ellipse",{cx:740,cy:252,rx:128,ry:96,fill:"#7FB1C9",opacity:.22},wm);
+  el("circle",{cx:740,cy:224,r:52,fill:"#E46B5E",stroke:"#9E3A2E","stroke-width":3},wm);
+  txt(wm,740,236,"O","lab","middle");
+  [[684,272],[796,272]].forEach(q=>{el("circle",{cx:q[0],cy:q[1],r:31,fill:"#F7F7F2",stroke:"#8F877E","stroke-width":3},wm);txt(wm,q[0],q[1]+10,"H","lab","middle");});
+  this.dm=txt(wm,740,148,"δ−","lab","middle");this.dp1=txt(wm,640,334,"δ+","lab","middle");this.dp2=txt(wm,840,334,"δ+","lab","middle");
+  this.LA.polar=label(wm,{x:740,y:404,t:"oxygen pulls the electrons:\nwater is polar",a:"middle",cls:"mid"});
+  /* B: the bilayer */
+  const gB=this.gB=el("g",{opacity:0},g);
+  this.wB=[];reseed(77);for(let k=0;k<16;k++){const w=waterMol(gB,1.1);const top=k<9;this.wB.push({w,x:40+rnd()*920,y:top?110+rnd()*150:480+rnd()*120,r:rnd()*360});}
+  this.pairs=[];
+  for(let k=0;k<33;k++){const x=15+k*30;const pg=el("g",{opacity:0},gB);
+    const u=lipid(pg,1,1.1);u.setAttribute("transform","translate("+x+" 300)");
+    const d=lipid(pg,-1,1.1);d.setAttribute("transform","translate("+x+" 440)");
+    this.pairs.push({g:pg,x});}
+  this.cholG=el("g",{opacity:0},gB);[[575,345,0],[725,395,180],[885,345,0],[145,395,180]].forEach(q=>chol(this.cholG,q[0],q[1],q[2]));
+  this.prot=el("g",{opacity:0},gB);
+  this.integ=el("g",{},this.prot);protBlob(this.integ,270,370,42,104,C.prot,1.3);
+  for(let k=0;k<4;k++)el("path",{d:"M"+(252+k*12)+" 300 q6 70 0 140",fill:"none",stroke:"#7E6BB0","stroke-width":2},this.integ);
+  this.chan=el("g",{},this.prot);protBlob(this.chan,428,370,24,102,"#B3A6DA",2.2);protBlob(this.chan,472,370,24,102,"#B3A6DA",3.1);
+  this.peri=el("g",{opacity:0},gB);protBlob(this.peri,640,470,48,24,"#CFC5EA",4);
+  this.carb=el("g",{opacity:0},gB);
+  [[[270,262],[284,244],[272,226],[290,210],[262,206]],[[795,284],[807,266],[797,248],[813,232]]].forEach(ch=>{
+    let d="";ch.forEach((q,i)=>d+=(i?" L":"M")+q[0]+" "+q[1]);el("path",{d:d,fill:"none",stroke:"#4E8A3A","stroke-width":2.5},this.carb);
+    ch.forEach(q=>el("path",{d:"M"+q[0]+" "+(q[1]-9)+" l8 4.5 v9 l-8 4.5 l-8 -4.5 v-9z",fill:"#9ACD7F",stroke:"#4E8A3A","stroke-width":2},this.carb));});
+  /* things that cross, or don't */
+  this.o2=[];for(let k=0;k<3;k++){const m=el("g",{opacity:0},gB);el("circle",{cx:-6,r:7,fill:"#E46B5E"},m);el("circle",{cx:6,r:7,fill:"#E46B5E"},m);this.o2.push(m);}
+  this.ion=[];for(let k=0;k<2;k++){const m=el("g",{opacity:0},gB);el("circle",{r:9,fill:"#6C8EBF",stroke:"#2F4F7F","stroke-width":2},m);txt(m,0,6,"+","lab small","middle");this.ion.push(m);}
+  this.glu=el("path",{d:"M0 -22 L19 -11 L19 11 L0 22 L-19 11 L-19 -11Z",fill:"#F2CC8F",stroke:"#A87A1E","stroke-width":2.5,opacity:0},gB);
+  this.LB={
+    out:label(gB,{x:24,y:100,t:"outside the cell: water",cls:"small"}),
+    inn:label(gB,{x:24,y:628,t:"inside the cell: water",cls:"small"}),
+    bil:label(gB,{x:976,y:552,t:"phospholipid bilayer:\nheads out, tails in",a:"end",cls:"mid",ax:900,ay:520,lx:880,ly:448}),
+    integ:label(gB,{x:24,y:212,t:"integral protein",ax:150,ay:220,lx:244,ly:300}),
+    chan:label(gB,{x:350,y:142,t:"channel: a door straight through",ax:450,ay:150,lx:450,ly:282}),
+    peri:label(gB,{x:640,y:556,t:"peripheral protein",a:"middle",cls:"mid",ax:640,ay:534,lx:640,ly:496}),
+    carb:label(gB,{x:976,y:200,t:"carbohydrate chains:\nID tags",a:"end",cls:"mid",ax:880,ay:214,lx:818,ly:226}),
+    chol:label(gB,{x:976,y:552,t:"cholesterol between\nthe tails: stays fluid",a:"end",cls:"mid",ax:905,ay:520,lx:886,ly:360}),
+    sel:label(gB,{x:500,y:104,t:"selectively permeable: it picks what crosses",a:"middle",cls:"mid"})
+  };
+  /* word parts card */
+  this.wc=el("g",{opacity:0},gB);card(this.wc,210,84,580,176,"#FFFFFF","#1F4E5F");
+  this.w1=txt(this.wc,500,148,"^hydro^~phobic~","lab big","middle");
+  this.w2=txt(this.wc,500,148,"^hydro^ + ~phobic~","lab big","middle");op(this.w2,0);
+  this.w3=txt(this.wc,500,190,"water + fear","lab mid","middle");op(this.w3,0);
+  this.w4=txt(this.wc,500,232,"^hydro^~philic~ = water-loving","lab mid","middle");op(this.w4,0);
+},
+draw(L){
+  const lf=L.lineF,b=L.b,brk=L.brk,still=L.still;
+  const oA=1-seg(lf,5,5.3),oB=seg(lf,4.9,5.2);
+  op(this.gA,oA);op(this.gB,oB);
+  if(oA>0){
+    const att=still?1:ease(seg(lf,2,2.7));
+    this.wA.forEach((w,k)=>{const bob=still?0:Math.sin(b*Math.PI/2+k)*5;tr(w.w,lerp(w.hx,w.ax,att)+bob,lerp(w.hy,w.ay,att)-bob,1,w.r+(still?0:b*12));});
+    op(this.headGlow,lf>=0&&lf<1||lf>=2&&lf<3?.7+.25*beatP(b):0);
+    op(this.tailGlow,lf>=1&&lf<2||lf>=3&&lf<4?.6+.25*beatP(b):0);
+    op(this.LA.head,seg(lf,0,.08));op(this.LA.tails,seg(lf,1,1.08));op(this.LA.phil,seg(lf,2,2.08));op(this.LA.phob,seg(lf,3,3.08));
+    const pol=still?1:seg(lf,4,4.6);
+    op(this.wm,lf<4?.35:1);
+    A(this.cloudE,{cy:f1(lerp(252,222,pol)),rx:f1(lerp(128,112,pol))});
+    [this.dm,this.dp1,this.dp2].forEach(t=>op(t,pol));
+    op(this.LA.polar,seg(lf,4.3,4.4));
+  }
+  if(oB>0){
+    const zipped=k=>still?1:seg(lf,5+k/33*2.4,5+k/33*2.4+.08);
+    const pOn=seg(lf,8,8.1),lift=brk?ease(seg(lf,20,20.8)):0;
+    this.pairs.forEach((p,k)=>{const covered=(Math.abs(p.x-270)<48||Math.abs(p.x-450)<52)&&pOn>0&&lift<.6;op(p.g,covered?0:zipped(k));});
+    this.wB.forEach((w,k)=>{const bob=still?0:Math.sin(b*Math.PI/2+k*1.7)*6;tr(w.w,w.x+bob,w.y+(still?0:Math.cos(b*Math.PI/2+k)*4),1,w.r+(still?0:b*9));});
+    op(this.prot,pOn*(1-lift));this.prot.setAttribute("transform","translate(0 "+f1(-150*lift)+")");
+    op(this.peri,seg(lf,10,10.1)*(1-lift));this.peri.setAttribute("transform","translate(0 "+f1(120*lift)+")");
+    op(this.carb,seg(lf,11,11.1)*(1-lift));this.carb.setAttribute("transform","translate(0 "+f1(-150*lift)+")");
+    op(this.cholG,seg(lf,12,12.1));
+    const tag=lf>=16&&lf<20?.0:1;
+    const LB=this.LB;
+    op(LB.out,seg(lf,6,6.1)*tag*(lf>=14&&lf<16?0:1));op(LB.inn,seg(lf,6,6.1)*tag);
+    op(LB.bil,seg(lf,6.5,6.6)*(1-seg(lf,9.9,10)));
+    op(LB.integ,seg(lf,8,8.08)*tag*(1-lift));op(LB.chan,seg(lf,9,9.08)*tag*(1-lift)*(lf<14||lf>=16?1:0));
+    op(LB.peri,seg(lf,10,10.08)*tag*(1-lift)*(lf<12?1:0));op(LB.carb,seg(lf,11,11.08)*tag*(1-lift));
+    op(LB.chol,seg(lf,12,12.08)*(1-seg(lf,13.9,14)));
+    op(LB.sel,seg(lf,14,14.08)*(1-seg(lf,15.9,16)));
+    /* crossing: small molecules slip through, ions use the channel, big ones bounce */
+    const moving=lf>=14&&lf<16||brk;
+    const q=mod(b,2)/2;
+    this.o2.forEach((m,k)=>{if(!moving){op(m,0);return;}const qq=mod(q+k/3,1);const x=[360,620,860][k];
+      const y=brk?lerp(180,268,Math.sin(Math.PI*qq)):lerp(180,560,qq);tr(m,x,y);op(m,Math.sin(Math.PI*qq));});
+    this.ion.forEach((m,k)=>{if(!moving){op(m,0);return;}const qq=mod(q+k/2,1);const y=brk?lerp(190,268,Math.sin(Math.PI*qq)):lerp(190,560,qq);tr(m,450,y);op(m,Math.sin(Math.PI*qq));});
+    if(moving){const qq=mod(b+1,2)/2;tr(this.glu,170,lerp(150,262,Math.sin(Math.PI*qq)));op(this.glu,Math.sin(Math.PI*qq));}else op(this.glu,0);
+    /* word parts */
+    op(this.wc,seg(lf,16,16.08)*(1-seg(lf,19.9,20)));
+    op(this.w1,lf<18?1:0);op(this.w2,lf>=18?1:0);op(this.w3,lf>=18?1:0);op(this.w4,lf>=19?1:0);
+  }
+}});
+
+/* ---------- scene 6: moving across ---------- */
+function vLipid(parent,x,y,side){const g=lipid(parent,1,1);g.setAttribute("transform","translate("+x+" "+y+") rotate("+(side<0?-90:90)+")");return g;}
+function hBilayer(parent,y0,x0,x1,skip){const g=el("g",{},parent);for(let x=x0;x<=x1;x+=28){if(skip&&skip(x))continue;const u=lipid(g,1,1);u.setAttribute("transform","translate("+x+" "+(y0-34)+")");const d=lipid(g,-1,1);d.setAttribute("transform","translate("+x+" "+(y0+34)+")");}return g;}
+function roundCell(parent,x,y,r,dots){const g=el("g",{transform:"translate("+x+" "+y+")"},parent);const o={g};
+  o.body=el("path",{d:blobPath(r,r,.03,1,24),fill:"#F7E3E1",stroke:"#B8414F","stroke-width":4},g);
+  o.salt=[];reseed(Math.round(x+y));for(let k=0;k<dots;k++){const a=rnd()*6.28,rr=rnd()*r*.6;o.salt.push(el("rect",{x:f1(Math.cos(a)*rr-3),y:f1(Math.sin(a)*rr-3),width:6,height:6,fill:"#6B6560"},g));}
+  o.r=r;return o;}
+SC.push({tag:"ACROSS THE MEMBRANE",note:"drawings, not to scale",brk:"No ATP: the pump stops; downhill keeps going",rep:11.6,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#F1F6F7"},g);
+  /* A: diffusion and facilitated diffusion */
+  const gA=this.gA=el("g",{},g);
+  this.gapL=el("g",{},gA);for(let y=128;y<=604;y+=26){const gp=Math.abs(y-362)<42;vLipid(gp?this.gapL:gA,470,y,-1);vLipid(gp?this.gapL:gA,530,y,1);}
+  this.fchan=el("g",{opacity:0},gA);protBlob(this.fchan,500,334,62,24,C.prot,1.6);protBlob(this.fchan,500,390,62,24,C.prot,2.4);
+  txt(gA,235,150,"high","lab mid","middle");txt(gA,765,150,"low","lab mid","middle");
+  arrow(gA,300,142,700,142,"#8F877E",4);
+  reseed(13);this.dots=[];
+  for(let k=0;k<24;k++){const left=k<20;this.dots.push({e:el("circle",{r:9,fill:"#8B5FBF",stroke:"#4F2F7A","stroke-width":1.6},gA),
+    x:left?60+rnd()*360:580+rnd()*360,y:180+rnd()*400,tx:580+rnd()*360,ty:180+rnd()*400,k});}
+  this.cross=[1,2,3,4.5,6,8,10.5,13.5];
+  this.glu=[];for(let k=0;k<6;k++)this.glu.push(el("path",{d:"M0 -11 L9.5 -5.5 L9.5 5.5 L0 11 L-9.5 5.5 L-9.5 -5.5Z",fill:"#F2CC8F",stroke:"#A87A1E","stroke-width":2,opacity:0},gA));
+  this.cL=txt(gA,235,622,"left: 20","lab mid","middle");this.cR=txt(gA,765,622,"right: 4","lab mid","middle");
+  this.capA=["semi-permeable: some molecules get through","equilibrium: even on both sides","passive transport: high to low, no energy spent","passive transport: high to low, no energy spent","diffusion: down the gradient","diffusion: down the gradient","facilitated diffusion: a protein carries it, still free","facilitated diffusion: a protein carries it, still free"]
+    .map(s=>label(gA,{x:500,y:96,t:s,a:"middle",cls:"mid"}));
+  this.table=el("g",{opacity:0},gA);card(this.table,300,456,400,140,"#FFFFFF");
+  [["difference across","how fast",488,true],["big","fast",522],["small","slow",554],["none","no net change",586]].forEach(r=>{txt(this.table,318,r[2],r[0],r[3]?"lab small":"lab mid");txt(this.table,560,r[2],r[1],r[3]?"lab small":"lab mid");});
+  /* B: osmosis in three beakers */
+  const gB=this.gB=el("g",{opacity:0},g);
+  this.bk=[["~hypo~^tonic^","less salt outside","water in: swells",4],["~hyper~^tonic^","more salt outside","water out: shrinks",26],["~iso~^tonic^","equal salt","no net movement",12]].map((q,i)=>{
+    const cx=180+i*320,bg=el("g",{},gB);
+    const glow=glowEl(bg,cx,330,170,170);
+    el("rect",{x:cx-118,y:210,width:236,height:250,fill:C.waterF},bg);
+    el("path",{d:"M"+(cx-120)+" 170 L"+(cx-120)+" 450 Q"+(cx-120)+" 462 "+(cx-108)+" 462 L"+(cx+108)+" 462 Q"+(cx+120)+" 462 "+(cx+120)+" 450 L"+(cx+120)+" 170",fill:"none",stroke:"#8F877E","stroke-width":5},bg);
+    reseed(50+i);for(let k=0;k<q[3];k++){let x,y;do{x=cx-105+rnd()*210;y=225+rnd()*225;}while(Math.hypot(x-cx,y-335)<78);el("rect",{x:f1(x-3),y:f1(y-3),width:6,height:6,fill:"#6B6560"},bg);}
+    const cell=roundCell(bg,cx,335,52,12);
+    const arr=el("g",{opacity:0},bg);
+    for(let k=0;k<4;k++){const a=(45+k*90)*D2R;const r0=96,r1=70;
+      if(i===0)arrow(arr,cx+r0*Math.cos(a),335+r0*Math.sin(a),cx+r1*Math.cos(a),335+r1*Math.sin(a),C.water,4);
+      else if(i===1)arrow(arr,cx+r1*.62*Math.cos(a),335+r1*.62*Math.sin(a),cx+(r0-8)*Math.cos(a),335+(r0-8)*Math.sin(a),C.water,4);
+      else{arrow(arr,cx+r0*Math.cos(a),335+r0*Math.sin(a),cx+(r1+2)*Math.cos(a),335+(r1+2)*Math.sin(a),C.water,3.5);arrow(arr,cx+(r1-4)*Math.cos(a+.35),335+(r1-4)*Math.sin(a+.35),cx+(r0-4)*Math.cos(a+.35),335+(r0-4)*Math.sin(a+.35),C.water,3.5);}}
+    txt(bg,cx,502,q[0],"lab","middle");
+    txt(bg,cx,536,q[1],"lab small","middle");
+    const res=txt(bg,cx,566,q[2],"lab mid","middle");
+    return {g:bg,glow,cell,arr,res,cx};});
+  this.osm=label(gB,{x:500,y:110,t:"osmosis: water moves toward more salt",a:"middle",cls:"mid"});
+  this.iv=label(gB,{x:820,y:604,t:"IV fluids are isotonic",a:"middle",cls:"small"});
+  /* C: cucumber and seaweed */
+  const gC=this.gC=el("g",{opacity:0},g);
+  el("ellipse",{cx:280,cy:470,rx:210,ry:40,fill:"#FFFFFF",stroke:"#C8C0B4","stroke-width":3},gC);
+  el("circle",{cx:280,cy:340,r:128,fill:"#3F7A35"},gC);el("circle",{cx:280,cy:340,r:116,fill:"#E3F1C9"},gC);
+  for(let k=0;k<10;k++){const a=k/10*6.28;el("ellipse",{cx:f1(280+50*Math.cos(a)),cy:f1(340+50*Math.sin(a)),rx:9,ry:5,transform:"rotate("+f1(a*57.3)+" "+f1(280+50*Math.cos(a))+" "+f1(340+50*Math.sin(a))+")",fill:"#F7F2D8",stroke:"#B7C78E","stroke-width":1.5},gC);}
+  reseed(9);for(let k=0;k<26;k++){const a=rnd()*6.28,r=rnd()*100;el("rect",{x:f1(280+Math.cos(a)*r-4),y:f1(340+Math.sin(a)*r-4),width:8,height:8,fill:"#FFFFFF",stroke:"#9C968C","stroke-width":1.2,transform:"rotate(30 "+f1(280+Math.cos(a)*r)+" "+f1(340+Math.sin(a)*r)+")"},gC);}
+  this.drops=[];for(let k=0;k<10;k++)this.drops.push(el("path",{d:"M0 -10 q8 10 0 16 q-8 -6 0 -16Z",fill:C.water,opacity:0},gC));
+  txt(gC,280,160,"salt a cucumber","lab mid","middle");
+  this.cucL=label(gC,{x:280,y:560,t:"salt outside pulls water out",a:"middle",cls:"mid"});
+  card(gC,560,170,400,340,C.waterF,"#8F877E");
+  el("path",{d:"M600 470 C640 380 700 330 760 300 C820 270 880 230 930 200",fill:"none",stroke:"#6F9E50","stroke-width":5},gC);
+  this.weed=[];for(let k=0;k<6;k++)this.weed.push(el("rect",{x:0,y:0,width:50,height:34,rx:12,fill:"#9CC27D",stroke:"#4E8A3A","stroke-width":2.5},gC));
+  txt(gC,760,160,"seaweed in fresh water","lab mid","middle");
+  this.weedL=label(gC,{x:760,y:560,t:"water rushes in: cells swell",a:"middle",cls:"mid"});
+  /* D: the pump (and the break) */
+  const gD=this.gD=el("g",{opacity:0},g);
+  el("rect",{x:-50,y:0,width:1100,height:330,fill:"#F6EEF4"},gD);
+  hBilayer(gD,330,14,990,x=>Math.abs(x-470)<56||Math.abs(x-760)<40);
+  this.pump=el("g",{},gD);protBlob(this.pump,470,330,58,82,C.prot,2.7);txt(this.pump,470,338,"pump","lab small","middle");
+  this.leak=el("g",{},gD);protBlob(this.leak,740,330,20,74,"#B3A6DA",1.1);protBlob(this.leak,780,330,20,74,"#B3A6DA",3.7);
+  txt(gD,24,60,"high: the uphill side","lab mid");txt(gD,24,628,"low","lab mid");
+  reseed(31);this.hiI=[];for(let k=0;k<18;k++)this.hiI.push({e:el("circle",{r:9,fill:"#6C8EBF",stroke:"#2F4F7F","stroke-width":1.6},gD),x:60+rnd()*900,y:90+rnd()*170});
+  this.loI=[];for(let k=0;k<6;k++)this.loI.push({e:el("circle",{r:9,fill:"#6C8EBF",stroke:"#2F4F7F","stroke-width":1.6},gD),x:60+rnd()*900,y:420+rnd()*170});
+  this.mover=el("circle",{r:9,fill:"#6C8EBF",stroke:"#2F4F7F","stroke-width":1.6,opacity:0},gD);
+  this.leaker=el("circle",{r:9,fill:"#6C8EBF",stroke:"#2F4F7F","stroke-width":1.6,opacity:0},gD);
+  this.atpG=el("g",{opacity:0},gD);el("circle",{r:20,fill:C.spark,stroke:"#9A6A10","stroke-width":2.5},this.atpG);txt(this.atpG,0,6,"ATP","lab small","middle");
+  this.atpX=el("g",{opacity:0},gD);el("line",{x1:-22,y1:-22,x2:22,y2:22,stroke:"#B3261E","stroke-width":6},this.atpX);el("line",{x1:22,y1:-22,x2:-22,y2:22,stroke:"#B3261E","stroke-width":6},this.atpX);
+  this.pspark=[];for(let k=0;k<4;k++)this.pspark.push(spark(gD));
+  this.LD={
+    act:label(gD,{x:976,y:60,t:"active transport: low to high",a:"end",cls:"mid"}),
+    pay:label(gD,{x:300,y:560,t:"ATP pays for each trip",a:"middle",cls:"mid",ax:360,ay:540,lx:452,ly:450}),
+    leak:label(gD,{x:976,y:560,t:"channel: downhill, free",a:"end",cls:"mid",ax:880,ay:540,lx:780,ly:400})
+  };
+  /* E: in and out in bulk */
+  const gE=this.gE=el("g",{opacity:0},g);
+  [0,1,2].forEach(i=>card(gE,24+i*322,150,308,380,"#FFFFFF"));
+  /* phagocytosis */
+  this.wbc=el("path",{d:"M0 0",fill:"#EEE9F6",stroke:"#6E5AA8","stroke-width":4},gE);
+  this.vac2=el("circle",{r:0,fill:"#F4F0FA",stroke:"#6E5AA8","stroke-width":2.5,opacity:0},gE);this.bact=el("g",{},gE);el("rect",{x:-26,y:-12,width:52,height:24,rx:12,fill:"#9CC27D",stroke:"#4E8A3A","stroke-width":2.5},this.bact);
+  txt(gE,178,186,"~phago~^cytosis^","lab mid","middle");txt(gE,178,500,"cell eating","lab small","middle");
+  /* pinocytosis */
+  this.pino=el("path",{d:"M0 0",fill:"none",stroke:C.teal,"stroke-width":6},gE);
+  this.pinoV=el("circle",{r:16,fill:C.waterF,stroke:C.teal,"stroke-width":4,opacity:0},gE);
+  this.pdrops=[];for(let k=0;k<6;k++)this.pdrops.push(el("circle",{r:4.5,fill:C.water},gE));
+  txt(gE,500,186,"~pino~^cytosis^","lab mid","middle");txt(gE,500,500,"cell drinking","lab small","middle");
+  /* exocytosis */
+  this.exo=el("path",{d:"M0 0",fill:"none",stroke:C.teal,"stroke-width":6},gE);
+  this.exoV=el("circle",{r:20,fill:C.ves,stroke:C.vesS,"stroke-width":3,opacity:0},gE);
+  this.exoIns=[];for(let k=0;k<5;k++)this.exoIns.push(el("path",{d:"M0 -6 L5.2 -3 L5.2 3 L0 6 L-5.2 3 L-5.2 -3Z",fill:"#E0A33A",stroke:"#8A5A10","stroke-width":1.2},gE));
+  txt(gE,822,186,"~exo~^cytosis^","lab mid","middle");txt(gE,822,500,"a vesicle empties outside","lab small","middle");
+  this.LE={
+    endo:label(gE,{x:500,y:100,t:"~endo~^cytosis^: the membrane wraps it in",a:"middle",cls:"mid"}),
+    ins:label(gE,{x:822,y:236,t:"insulin leaves this way",a:"middle",cls:"small"})
+  };
+  this.panG=[0,1,2].map(i=>glowEl(gE,178+i*322,340,180,200));
+  gE.insertBefore(this.panG[0],gE.firstChild);gE.insertBefore(this.panG[1],gE.firstChild);gE.insertBefore(this.panG[2],gE.firstChild);
+},
+draw(L){
+  const lf=L.lineF,b=L.b,brk=L.brk,still=L.still;
+  const ph=(a,z)=>(a===0?1:seg(lf,a-.1,a+.08))*(z===28?1:1-seg(lf,z-.1,z+.08));
+  const oA=ph(0,8),oB=ph(8,16),oC=ph(16,18),oD=Math.max(ph(18,20),ph(26,28)),oE=ph(20,26);
+  op(this.gA,oA);op(this.gB,oB);op(this.gC,oC);op(this.gD,oD);op(this.gE,oE);
+  if(oA>0){
+    const B=still?16:clamp(lf,0,8)*4;
+    let left=20;
+    this.dots.forEach(d=>{
+      let x=d.x,y=d.y;const k=d.k;
+      if(k<8){const t0=this.cross[k];const p=ease(seg(B,t0,t0+1));
+        if(p>0){left--;}
+        const midY=k<4?362:lerp(d.y,d.ty,.5);
+        if(p>0&&p<1){x=lerp(d.x,d.tx,p);y=lerp(d.y,d.ty,p);if(Math.abs(x-500)<40)y=y;}
+        else if(p>=1){x=d.tx;y=d.ty;}
+      }
+      /* after it evens out, molecules still cross both ways */
+      if(B>=20&&(k===12||k===9)){const q=mod(B,4)/4;const go=k===12?q<.5:q>=.5;const pp=ease(seg(q,go?0:.5,go?.4:.9));
+        if(k===12){x=lerp(d.x,d.tx,go?pp:1-pp);y=lerp(d.y,d.ty,go?pp:1-pp);}
+        else{x=lerp(d.tx,d.x,go?pp:1-pp);y=lerp(d.ty,d.y,go?pp:1-pp);}}
+      const j=still?0:Math.sin(b*Math.PI/2+k*1.3)*5;
+      A(d.e,{cx:f1(x+j),cy:f1(y+(still?0:Math.cos(b*Math.PI/2+k)*5))});
+    });
+    setText(this.cL,"left: "+left);setText(this.cR,"right: "+(24-left));
+    this.capA.forEach((c,i)=>op(c,Math.floor(lf)===i&&lf<8&&(i!==5)?1:0));
+    op(this.table,seg(lf,5,5.1)*(1-seg(lf,5.9,6)));
+    op(this.fchan,seg(lf,6,6.1));op(this.gapL,1-seg(lf,6,6.1));
+    this.glu.forEach((g2,k)=>{if(lf<6){op(g2,0);return;}const q=still?.5:mod(b-k*.666,4)/4;const x=lerp(370,640,q),y=362+Math.sin(k)*14*(Math.abs(x-500)>70?1:0);tr(g2,x,y);op(g2,Math.sin(Math.PI*q));});
+  }
+  if(oB>0){
+    const act=[[10,12],[12,14],[14,16]];
+    this.bk.forEach((k,i)=>{
+      const a=act[i],on=lf>=a[0]&&lf<a[1],p=still?(i===0?1:0):seg(lf,a[0],a[0]+.9);
+      const done=lf>=a[0];
+      let s=1;if(i===0)s=lerp(1,1.28,ease(done?p:0));if(i===1)s=lerp(1,.7,ease(done?p:0));
+      k.cell.g.setAttribute("transform","translate("+k.cx+" 335) scale("+s.toFixed(3)+")");
+      if(i===1)k.cell.body.setAttribute("d",blobPath(52,52,.03+.1*(done?p:0),1,24));
+      op(k.glow,on?.55+.25*kickP(b):0);
+      op(k.arr,on?.5+.5*beatP(b):(lf>=8&&lf<10?.35:0));
+      op(k.res,done?1:.0);
+    });
+    op(this.osm,seg(lf,8,8.1));op(this.iv,seg(lf,15,15.1));
+  }
+  if(oC>0){
+    const q=still?.7:seg(lf,16,17);
+    this.drops.forEach((d,k)=>{const a=k/10*6.28+.3,ph2=mod(b/2+k*.37,1),r=132+ph2*40*q;tr(d,280+Math.cos(a)*r,340+Math.sin(a)*r,1,a*57.3+90);op(d,q*(1-ph2));});
+    const sw=still?1:ease(seg(lf,17,17.8));
+    this.weed.forEach((w,k)=>{const t=k/5,cx=lerp(620,920,t),cy=lerp(445,212,t)+Math.sin(t*5)*10,s=1+.32*sw;A(w,{x:f1(cx-25*s),y:f1(cy-17*s),width:f1(50*s),height:f1(34*s)});});
+    op(this.cucL,seg(lf,16,16.1));op(this.weedL,seg(lf,17,17.1));
+  }
+  if(oD>0){
+    const broken=lf>=26;
+    const Bq=mod(b,1);
+    /* each beat: ATP arrives, one ion climbs from low to high */
+    if(!broken&&!still){
+      const p=ease(seg(Bq,.1,.85));tr(this.mover,470,lerp(500,200,p));op(this.mover,1);
+      tr(this.atpG,lerp(380,452,ease(seg(Bq,0,.25))),lerp(560,410,ease(seg(Bq,0,.25))),1);op(this.atpG,1-seg(Bq,.3,.42));
+      this.pspark.forEach((s,k)=>{const a=(k*90+45)*D2R,r=40+Bq*60;tr(s,470+Math.cos(a)*r,410+Math.sin(a)*r*.5,1,Bq*90);op(s,seg(Bq,.25,.35)*(1-seg(Bq,.5,.8)));});
+      op(this.atpX,0);
+    }else{op(this.mover,still&&!broken?1:0);tr(this.mover,470,330);op(this.atpG,broken?.6:still?1:0);tr(this.atpG,390,540);this.pspark.forEach(s=>op(s,0));op(this.atpX,broken?1:0);tr(this.atpX,390,540);}
+    grey({g:this.pump},broken);
+    /* the leak channel runs downhill every two beats, pump or no pump */
+    const lq=mod(b,2)/2;tr(this.leaker,760,lerp(200,520,ease(lq)));op(this.leaker,still?0:Math.sin(Math.PI*lq));
+    const drained=broken?Math.floor(still?6:(lf-26)*4):0;
+    this.hiI.forEach((d,k)=>{const gone=k<drained;const j=still?0:Math.sin(b*Math.PI/2+k)*5;A(d.e,{cx:f1(d.x+j),cy:f1(d.y+(still?0:Math.cos(b*Math.PI/2+k)*4))});op(d.e,gone?0:1);});
+    this.loI.forEach((d,k)=>{const j=still?0:Math.sin(b*Math.PI/2+k)*5;A(d.e,{cx:f1(d.x+j),cy:f1(d.y)});});
+    op(this.LD.act,broken?.3:1);op(this.LD.pay,broken?0:1);op(this.LD.leak,seg(lf,19,19.1)+(broken?1:0));
+  }
+  if(oE>0){
+    const pan=lf<22?0:lf<23?1:2;
+    this.panG.forEach((gg,i)=>op(gg,i===pan?.45+.2*kickP(b):0));
+    /* phagocytosis: arms reach around the bacterium */
+    const q=still?.6:seg(lf,20,22);
+    const wrap=ease(seg(q,.15,.8));
+    const cx=178,cy=360;
+    const cy2=390,inside=ease(seg(q,.7,.95));
+    const pts=[];for(let k=0;k<36;k++){const a=k/36*6.28-Math.PI/2;const da=Math.abs(Math.atan2(Math.sin(a+Math.PI/2),Math.cos(a+Math.PI/2)));
+      let r=82;if(da<1.25){const arm=Math.sin(Math.PI*clamp((da-.18)/1.07,0,1));r=82+(wrap*(1-inside))*58*arm-(da<.18?(wrap*(1-inside))*18:0);}
+      r+=inside*14;pts.push([cx+r*Math.cos(a),cy2+r*Math.sin(a)]);}
+    this.wbc.setAttribute("d",crPath(pts));
+    tr(this.bact,cx,lerp(250,lerp(300,cy2-8,inside),ease(seg(q,0,.6))),1);
+    A(this.vac2,{cx:cx,cy:f1(cy2-8),r:f1(34*inside)});op(this.vac2,inside);
+    /* pinocytosis: the membrane dips and pinches off a droplet */
+    const pq=still?.6:seg(lf,22,23);
+    const dip=Math.sin(Math.PI*Math.min(pq,.7)/.7)*(pq<.7?1:0);
+    this.pino.setAttribute("d","M360 300 L"+f1(470)+" 300 C"+f1(482)+" "+f1(300+dip*70)+" "+f1(518)+" "+f1(300+dip*70)+" 530 300 L640 300");
+    op(this.pinoV,pq>=.68?1:0);tr(this.pinoV,500,lerp(352,420,seg(pq,.7,1)));
+    const PD=[[-14,-30],[10,-46],[-4,-62],[18,-20],[-22,-52],[4,-14]];
+    this.pdrops.forEach((d,k)=>{const fall=ease(seg(pq,0,.62));let x=500+PD[k][0]*(1-fall*.55),y=lerp(300+PD[k][1]*1.6,330+dip*30+PD[k][1]*.25,fall);
+      if(pq>=.68){x=500+PD[k][0]*.35;y=lerp(352,420,seg(pq,.7,1))+PD[k][1]*.12;}A(d,{cx:f1(x),cy:f1(y)});});
+    /* exocytosis: a vesicle fuses and empties outside */
+    const eq=still?.6:mod(lf-23,1);const on=lf>=23;
+    const fuse=seg(eq,.45,.7);
+    this.exo.setAttribute("d","M682 300 L"+f1(800)+" 300 C"+f1(810)+" "+f1(300+fuse*16)+" "+f1(834)+" "+f1(300+fuse*16)+" 844 300 L962 300");
+    op(this.exoV,on?1-fuse:0);tr(this.exoV,822,lerp(440,322,ease(seg(eq,0,.45))));
+    this.exoIns.forEach((d,k)=>{const r=seg(eq,.55,1);tr(d,822+(k-2)*16*r,lerp(320,250-k%2*16,r));op(d,on?(eq<.45?0:1):0);});
+    op(this.LE.endo,seg(lf,20,20.1)*(1-seg(lf,21.9,22)));op(this.LE.ins,seg(lf,24,24.1));
+  }
+}});
+
+/* ---------- scene 7: roll call ---------- */
+const ROLLMAP=[["an.nucleus","pl.nucleus"],["an.ribos","pl.ribos","pk.ribos"],["an.er","pl.er"],["an.golgi","pl.golgi"],["an.lyso"],["an.mito","pl.mito"],["pl.chloro"],["an.centri"],
+ ["pl.wall","pk.wall"],["an.membrane","pl.membrane","pk.membrane"],["an.cyto","pl.cyto","pk.cyto"],["pk.flag"],["an.nucleus","an.er","an.golgi","an.mito","pl.chloro","pl.vac"],["pk"],["an","pl"],["pk","an","pl"],
+ ["an.membrane","pl.membrane","pk.membrane"],["an.membrane","pl.membrane","pk.membrane"],["an.membrane","pl.membrane","pk.membrane"],["an.membrane","pl.membrane"],["an.membrane","pl.membrane","pk.membrane"],["an.membrane","pl.membrane","pk.membrane"],["an.membrane","pl.membrane","pk.membrane"],["an.membrane","pl.membrane","pk.membrane"],
+ ["an.membrane"],["an.membrane"],["pl.vac"],["an.membrane"],["an.membrane"],["an.ves"],["an.membrane"],["an.membrane"]];
+SC.push({tag:"ROLL CALL",note:"drawn at cell level, not to scale",brk:"",rep:2.3,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#F5F1EA"},g);
+  this.pk=drawCell(g,"prok",170,214,.8);
+  this.an=drawCell(g,"animal",500,214,.38);
+  this.pl=drawCell(g,"plant",830,214,.38);
+  [["prokaryote",170],["animal cell",500],["plant cell",830]].forEach(q=>txt(g,q[1],336,q[0],"lab small","middle"));
+  this.call=label(g,{x:500,y:72,t:"you call the first word, the room answers the second",a:"middle",cls:"mid"});
+  this.tiles=ROLL.map((w,i)=>{
+    const r=Math.floor(i/8),c=i%8,x=22+c*120,y=366+r*66;
+    const tg=el("g",{},g);
+    const rect=el("rect",{x:x,y:y,width:114,height:58,rx:5,fill:C.paper,stroke:C.rule,"stroke-width":2},tg);
+    const words=w.split(" ");let lines=[w];
+    if(w.length>11&&words.length>1){const h=Math.ceil(words.length/2);lines=[words.slice(0,h).join(" "),words.slice(h).join(" ")];}
+    const t=el("text",{x:x+57,y:y+(lines.length>1?24:35),"text-anchor":"middle",class:"tile"},tg);
+    lines.forEach((ln,k)=>{const s=el("tspan",{x:x+57,dy:k?"1.15em":"0"},t);s.textContent=ln;});
+    return {rect,t};});
+},
+draw(L){
+  const b=L.still?L.lbar*4:L.b,idx=Math.floor(b*2);
+  const cells={pk:this.pk,an:this.an,pl:this.pl};
+  Object.values(cells).forEach(c=>allParts(c).forEach(p=>hl(p,0)));
+  this.tiles.forEach((tl,i)=>{
+    const on=i===idx,done=i<idx;
+    A(tl.rect,{fill:on?(i%2?"#E8DCF5":"#F2C14E"):done?"#DEEBEE":C.paper,stroke:on?(i%2?"#6E5AA8":"#B07A12"):done?C.teal:C.rule});
+  });
+  const m=ROLLMAP[idx]||[];
+  m.forEach(key=>{const [c,p]=key.split(".");const cell=cells[c];if(!cell)return;
+    if(!p){allParts(cell).forEach(q=>hl(q,.45));return;}
+    hl(cell.P[p],.95);});
+  op(this.call,1);
+  if(this.pk.flagellum)this.pk.flagellum(L.still?1:L.B*Math.PI*2,8);
+}});
+
+/* ---------- scene 8: more than organelles ---------- */
+SC.push({tag:"THE WHOLE CELL",note:"drawn at cell level, not to scale",brk:"",rep:4.5,
+build(g){
+  el("rect",{x:-50,y:0,width:1100,height:640,fill:"#F2F0E6"},g);
+  this.c=drawCell(g,"plant",500,318,.8);
+  const m=this.c.pt(-150,-186),ch=this.c.pt(318,-28);
+  this.L={
+    knew:label(g,{x:500,y:616,t:"you knew the parts; now you know the jobs",a:"middle",cls:"mid"}),
+    mit:label(g,{x:24,y:72,t:"mitochondria",ax:110,ay:80,lx:m[0]-6,ly:m[1]-8}),
+    chl:label(g,{x:976,y:72,t:"chloroplasts",a:"end",ax:900,ay:80,lx:ch[0]+4,ly:ch[1]-30}),
+    p2:label(g,{x:500,y:616,t:"Part 2, the energy track: Unit 3",a:"middle"})
+  };
+  this.sp=[];for(let k=0;k<6;k++)this.sp.push(spark(g));
+  this.rays=this.c.P.chloro.map((p,k)=>{const q=this.c.pt(p.x,p.y);const sx=q[0]+(q[0]>500?1:-1)*70,sy=q[1]-(q[1]<318?60:-60);
+    return el("line",{x1:f1(sx),y1:f1(sy),x2:f1(lerp(sx,q[0],.72)),y2:f1(lerp(sy,q[1],.72)),stroke:"#E0A33A","stroke-width":4,"stroke-dasharray":"10 7","stroke-linecap":"round",opacity:0},g);});
+},
+draw(L){
+  const lf=L.lineF,b=L.b,P=this.c.P;
+  allParts(this.c).forEach(p=>{if(p!==P.cyto&&p!==P.wall&&p!==P.membrane&&p!==P.ribos)hl(p,.1+.2*kickP(b));});
+  const ph=L.still?.4:mod(b,1);
+  this.sp.forEach((s,k)=>{const mm=this.c.P.mito[k%3],q=this.c.pt(mm.x,mm.y),a=(k*75+20)*D2R,r=26+ph*60;tr(s,q[0]+Math.cos(a)*r*1.2,q[1]+Math.sin(a)*r*.8,.9,ph*90);op(s,lf>=2?(L.still?.9:1-ph):0);});
+  this.rays.forEach((r,k)=>{op(r,lf>=2?.5+.5*beatP(b+k*.25):0);A(r,{"stroke-dashoffset":f1(L.still?0:-b*20)});});
+  const e=.55+.35*(L.still?.6:Math.sin(b*Math.PI/2)*.5+.5);
+  hl(P.mito,e);hl(P.chloro,e);
+  op(this.L.knew,seg(lf,0,.1)*(1-seg(lf,2.9,3)));
+  op(this.L.mit,seg(lf,2,2.1));op(this.L.chl,seg(lf,2,2.1));
+  op(this.L.p2,seg(lf,3,3.1));
+}});
+
+/* ===================== build the stage ===================== */
+SC.forEach((sc,i)=>{const g=el("g",{transform:"translate("+(i*SLOT)+" 0)"},world);sc.g=g;sc.build(g);SCN.push(g);});
+svg.appendChild(tagT);svg.appendChild(noteT);svg.appendChild(banner);
+
+const KEY="more-than-organelles";
+const reducedMQ=window.matchMedia?window.matchMedia("(prefers-reduced-motion: reduce)"):{matches:false,addEventListener(){}};
+let reduced=reducedMQ.matches;
+
+/* ---------- settings this device remembers ---------- */
+let prefs={proj:false,dev:"ipad",bpm:84,preset:"full",parts:null};
+try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);if(o&&typeof o==="object"){
+  if(typeof o.proj==="boolean")prefs.proj=o.proj;if(o.dev==="pc"||o.dev==="ipad")prefs.dev=o.dev;
+  if(o.bpm>=70&&o.bpm<=100)prefs.bpm=Math.round(o.bpm);if(["full","beat","practice","custom"].includes(o.preset))prefs.preset=o.preset;
+  if(o.parts&&typeof o.parts==="object")prefs.parts=o.parts;}}}catch(e){}
+let startScene=-1,VIDEO=false;
+try{const q=new URLSearchParams(location.search);if(q.get("projector")==="1")prefs.proj=true;if(q.get("projector")==="0")prefs.proj=false;
+  const sn=parseInt(q.get("scene"),10);if(sn>=1&&sn<=NS_)startScene=sn-1;
+  if(q.get("video")==="1"){VIDEO=true;prefs.proj=true;}
+  const tp=parseInt(q.get("tempo"),10);if(tp>=70&&tp<=100)prefs.bpm=tp;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({proj:prefs.proj,dev:prefs.dev,bpm:clock.bpm,preset:PRESET,parts:{drums:PARTS.drums,bass:PARTS.bass,keys:PARTS.keys,hook:PARTS.hook}}));}catch(e){}}
+
+/* ---------- the path of numbered bubbles ---------- */
+const pathEl=document.getElementById("path"),nowEl=document.getElementById("now");
+const RING=2*Math.PI*24;
+BUBBLES.forEach((s,i)=>{
+  const li=document.createElement("li");li.className="bub";
+  li.innerHTML='<button type="button" class="bb" aria-label="Loop scene '+(i+1)+': '+s.t+'"><span class="dot"><svg viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="24" stroke-dasharray="'+RING.toFixed(1)+'" stroke-dashoffset="'+RING.toFixed(1)+'"/></svg><span class="n">'+(i+1)+'</span></span>'+
+   '<span class="txt"><span class="ttl">'+s.t+'</span><span class="body"><span class="cap">'+s.c+'</span><span class="chip">'+s.k+'</span></span></span></button>';
+  li.querySelector(".bb").addEventListener("click",()=>enterLoop(i));
+  pathEl.appendChild(li);
+});
+const bubs=[...pathEl.children],rings=bubs.map(b=>b.querySelector(".dot svg circle"));
+document.getElementById("srlist").innerHTML=BUBBLES.map(s=>"<li>"+s.t+". "+s.c+"</li>").join("");
+document.getElementById("teachList").innerHTML=BUBBLES.map((s,i)=>"<li><b>"+s.t+"</b> ("+s.k+")</li>").join("");
+document.getElementById("lyrsheet").innerHTML=SONG.map(s=>"<h4>"+s.name+"</h4>"+s.lines.map(l=>"<p>"+esc(l)+"</p>").join("")).join("");
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function wordParts(s){
+  let h=esc(s);
+  WORDPARTS.forEach(([re,roles])=>{h=h.replace(re,(...m)=>{const groups=m.slice(1,1+roles.length);return groups.map((gp,k)=>roles[k]?'<span class="wp-'+roles[k]+'">'+gp+"</span>":gp).join("");});});
+  return h;
+}
+
+/* ---------- lyric strip ---------- */
+const lyrEl=document.getElementById("lyr"),whereEl=document.getElementById("where"),curEl=document.getElementById("lyrCur"),nextEl=document.getElementById("lyrNext");
+const pips=[...document.querySelectorAll(".pip")];
+let lastLyr="",lastWhere="",lastSec=-1,lastMode="";
+function lineAfter(sec,li){
+  if(li+1<sec.lines.length)return sec.lines[li+1];
+  if(MODE==="loop")return sec.intro?"(intro)":sec.lines[0];
+  const nx=SECS[(sec.i+1)%NS_];return nx.intro?"(intro)":nx.lines[0];
+}
+function takeLine(P){
+  /* with a take playing, the take's own timings pick the line */
+  if(!(VOICE&&PARTS.voice&&soundOn&&MODE==="song"))return null;
+  const tt=takeTime(mod(P/4,TOTAL)*4);let gi=-1;
+  for(let i=0;i<VOICE.lines.length;i++){if(VOICE.lines[i].start_s<=tt)gi=i;else break;}
+  if(gi<0)return null;
+  let n=gi;for(const s of SECS){if(n<s.lines.length)return {sec:s,li:n};n-=s.lines.length;}
+  return null;
+}
+function updateLyric(info,P){
+  const sec=info.sec;let cur,next,cls="";
+  const tl=takeLine(P);
+  if(info.count){const k=Math.floor(info.beat)+1;cur=["1","2","3","4"].slice(0,k).join(" · ");next=sec.intro?"(intro)":sec.lines[0];cls="count";}
+  else if(tl){cur=wordParts(tl.sec.lines[tl.li]);next=lineAfter(tl.sec,tl.li);}
+  else if(info.li<0){
+    if(Math.floor(info.lbar)===sec.intro-1){const k=Math.floor(info.beat)+1;cur=["1","2","3","4"].slice(0,k).join(" · ");cls="count";}
+    else cur="Intro";
+    next=sec.lines[0];
+  }else{cur=wordParts(sec.lines[info.li]);next=lineAfter(sec,info.li);if(info.brk)cls="brk";}
+  const key=cur+"|"+next+"|"+cls;
+  if(key!==lastLyr){lastLyr=key;curEl.innerHTML=cur;curEl.className="lyr-cur"+(curEl.textContent.length>58?" long":"");nextEl.textContent=next;lyrEl.className="lyr"+(cls?" "+cls:"");}
+  const ln=info.li>=0&&!info.count?"line "+(info.li+1)+" of "+sec.lines.length:info.count?"count-in":"intro";
+  const w=MODE==="song"?'<b>Whole song</b> · '+sec.name+" · "+ln:'<b>Looping scene '+(sec.i+1)+"</b> · "+ln;
+  if(w!==lastWhere||MODE!==lastMode){lastWhere=w;lastMode=MODE;whereEl.innerHTML=w+(MODE==="loop"?' <button type="button" class="lyr-back" id="bSong">Back to the whole song</button>':"");
+    const bs=document.getElementById("bSong");if(bs)bs.addEventListener("click",enterSong);}
+  const bt=info.count||clock.playing?Math.floor(info.beat):-1;
+  pips.forEach((p,k)=>p.classList.toggle("on",k===bt));
+}
+
+/* ---------- bubbles and the words card ---------- */
+const stageEl=document.getElementById("stage");
+function updateBubbles(i){
+  bubs.forEach((b,k)=>{b.classList.toggle("on",k===i);b.classList.toggle("lit",MODE==="song"&&k<i);b.classList.toggle("looping",MODE==="loop"&&k===i);});
+  rings.forEach((r,k)=>{if(k!==i)r.setAttribute("stroke-dashoffset",MODE==="song"&&k<i?0:RING.toFixed(1));});
+  const s=BUBBLES[i];
+  nowEl.innerHTML='<span class="ttl"><span class="n">'+(i+1)+'.</span> '+s.t+'</span><p class="cap">'+s.c+'</p><span class="chip">'+s.k+'</span>';
+  stageEl.setAttribute("aria-label","Scene "+(i+1)+" of 8, "+s.t+". "+s.c);
+  tagT.textContent=SC[i].tag;noteT.textContent=SC[i].note;
+}
+
+/* ---------- modes ---------- */
+function enterLoop(i){
+  MODE="loop";LOOP=i;lastSec=-1;
+  seekBeat(soundOn?-4:0);
+  if(!clock.playing)setPlaying(true);
+  voiceSync(true);
+}
+function enterSong(){
+  const i=LOOP;MODE="song";lastSec=-1;
+  seekBeat(SECS[i].start*4);
+  voiceSync(true);
+}
+
+/* ---------- one frame ---------- */
+let camLast="";
+function frame(){
+  const P=curPos(),info=mapBeat(P),sec=info.sec,i=sec.i,sc=SC[i];
+  if(i!==lastSec){lastSec=i;updateBubbles(i);}
+  rings[i].setAttribute("stroke-dashoffset",(RING*(1-clamp(info.lbar/sec.len,0,1))).toFixed(1));
+  updateLyric(info,P);
+  /* the camera: slides to the next scene over the last half beat of a section */
+  let camX=i*SLOT,next=-1,q=0;
+  if(MODE==="song"&&!reduced&&!info.count&&info.lbar>sec.len-.125&&i<NS_-1){q=ease(seg(info.lbar,sec.len-.125,sec.len));camX+=q*SLOT;next=i+1;}
+  const ck=f1(camX);if(ck!==camLast){camLast=ck;world.setAttribute("transform","translate("+(-camX).toFixed(1)+" 0)");}
+  SCN.forEach((g,k)=>{const vis=k===i||k===next;if(g.__v!==vis){g.__v=vis;g.setAttribute("visibility",vis?"visible":"hidden");}});
+  const mk=(s,lb,cnt)=>{
+    if(reduced){const r=s.rep,lf=r-s.intro;return {lbar:r,lineF:lf,li:Math.floor(lf),lt:lf-Math.floor(lf),b:r*4,brk:s.brk>0&&Math.floor(lf)>=s.lines.length-s.brk,B:r*4,still:true};}
+    const lf=lb-s.intro,li=Math.floor(lf);
+    return {lbar:lb,lineF:lf,li,lt:lf-li,b:lb*4,brk:!cnt&&s.brk>0&&li>=s.lines.length-s.brk,B:P,still:false};
+  };
+  const Li=mk(sec,info.lbar,info.count);
+  sc.draw(Li);
+  if(next>=0)SC[next].draw(mk(SECS[next],0,false));
+  setBanner(sc.brk||"",Li.brk&&sc.brk?(reduced?1:seg(Li.lineF,sec.lines.length-sec.brk,sec.lines.length-sec.brk+.06)):0);
+}
+function tick(){frame();requestAnimationFrame(tick);}
+
+/* ---------- controls ---------- */
+const bPlay=document.getElementById("bPlay"),bSound=document.getElementById("bSound"),bRestart=document.getElementById("bRestart"),bProj=document.getElementById("bProj");
+const ICON_PAUSE='<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" fill="currentColor"/><rect x="9.4" y="2" width="3.6" height="12" fill="currentColor"/></svg>';
+const ICON_PLAY='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>';
+const ICON_SND='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3.2v10.4L5 10H2z" fill="currentColor"/><path d="M11 5.2a3.8 3.8 0 0 1 0 5.6M12.8 3.3a6.3 6.3 0 0 1 0 9.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+const ICON_MUTE='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3.2v10.4L5 10H2z" fill="currentColor"/><path d="M11 5.5l4 5M15 5.5l-4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+function setPlaying(v){
+  if(v===clock.playing){}
+  else if(!v){clock.pos0=curPos();clock.playing=false;}
+  else{clock.t0=srcNow();clock.playing=true;resyncAudio();}
+  bPlay.innerHTML=(v?ICON_PAUSE:ICON_PLAY)+"<span>"+(v?"Pause":"Play")+"</span>";bPlay.setAttribute("aria-label",v?"Pause":"Play");
+  voiceSync(true);
+}
+function setSoundUI(){bSound.innerHTML=(soundOn?ICON_SND:ICON_MUTE)+"<span>"+(soundOn?"Sound on":"Sound off")+"</span>";bSound.setAttribute("aria-pressed",soundOn?"true":"false");bSound.setAttribute("aria-label",soundOn?"Sound is on. Turn it off":"Sound is off. Turn it on");}
+bPlay.addEventListener("click",()=>setPlaying(!clock.playing));
+bSound.addEventListener("click",()=>{if(soundOn)soundStop();else{soundStart();attachVoice();}setSoundUI();});
+bRestart.addEventListener("click",()=>{seekBeat(MODE==="loop"&&soundOn?-4:0);setPlaying(true);});
+function setProj(v){html.classList.toggle("proj",v);bProj.setAttribute("aria-pressed",v?"true":"false");prefs.proj=v;save();sizeStage();}
+bProj.addEventListener("click",()=>setProj(!html.classList.contains("proj")));
+document.querySelectorAll(".devrow [data-dev]").forEach(b=>b.addEventListener("click",()=>{
+  html.setAttribute("data-dev",b.dataset.dev);prefs.dev=b.dataset.dev;save();
+  document.querySelectorAll(".devrow [data-dev]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));}));
+/* tempo */
+const tempoEl=document.getElementById("tempo"),tempoOut=document.getElementById("tempoOut");
+function showTempo(){tempoEl.value=clock.bpm;tempoOut.textContent=clock.bpm+" bpm";}
+tempoEl.addEventListener("input",()=>{setBpm(+tempoEl.value);showTempo();save();});
+/* music presets and parts */
+const presetBtns=[...document.querySelectorAll("[data-preset]")],partBtns=[...document.querySelectorAll("[data-part]")];
+function showMix(){
+  presetBtns.forEach(b=>b.setAttribute("aria-pressed",b.dataset.preset===PRESET?"true":"false"));
+  partBtns.forEach(b=>{const k=b.dataset.part;b.setAttribute("aria-pressed",PARTS[k]?"true":"false");
+    b.disabled=PRESET==="practice"&&(k==="keys"||k==="hook");});
+  applyParts();
+}
+function setPreset(p){PRESET=p;
+  if(p==="full"){PARTS.drums=PARTS.bass=PARTS.keys=PARTS.hook=true;}
+  if(p==="beat"||p==="practice"){PARTS.drums=PARTS.bass=true;PARTS.keys=PARTS.hook=false;}
+  showMix();save();}
+presetBtns.forEach(b=>b.addEventListener("click",()=>setPreset(b.dataset.preset)));
+partBtns.forEach(b=>b.addEventListener("click",()=>{const k=b.dataset.part;PARTS[k]=!PARTS[k];
+  if(k==="voice"){if(PARTS.voice&&VOICE){tempoEl.disabled=true;setBpm(VOICE.bpm);showTempo();attachVoice();}else tempoEl.disabled=false;voiceSync(true);}
+  else if(PRESET!=="practice"){const full=PARTS.drums&&PARTS.bass&&PARTS.keys&&PARTS.hook,beat=PARTS.drums&&PARTS.bass&&!PARTS.keys&&!PARTS.hook;PRESET=full?"full":beat?"beat":"custom";}
+  showMix();save();}));
+document.addEventListener("keydown",e=>{
+  const tg=e.target&&e.target.tagName;
+  if(tg==="BUTTON"||tg==="INPUT"||tg==="TEXTAREA"||tg==="SUMMARY"||tg==="SELECT"||e.metaKey||e.ctrlKey||e.altKey)return;
+  if(e.key===" "||e.key==="k"||e.key==="K"){e.preventDefault();setPlaying(!clock.playing);}
+});
+if(reducedMQ.addEventListener)reducedMQ.addEventListener("change",e=>{reduced=e.matches;});
+
+/* ---------- record your own (stays on this device) ---------- */
+const recp=document.getElementById("recp"),bRec=document.getElementById("bRec");
+let rec=null,recChunks=[],recBlob=null,recUrl=null,recStart=0,recTimer=null,playEl=null;
+function recPanel(h){recp.innerHTML=h;recp.hidden=!h;}
+function recIntro(){
+  recPanel('<p><b>Use headphones so the beat doesn\'t record.</b> The music plays from the top of '+(MODE==="loop"?"this scene, after a count-in":"the song")+' while you rap. Your voice stays on this device; nothing uploads.</p><button type="button" class="tog" id="rGo">Start recording</button><button type="button" class="tog" id="rX">Cancel</button>');
+  document.getElementById("rGo").onclick=recGo;document.getElementById("rX").onclick=()=>recPanel("");
+}
+function recErr(){recPanel('<p>The microphone isn\'t available here, so recording can\'t start. Check that this browser is allowed to use the microphone, or try another browser. The music and pictures still work.</p><button type="button" class="tog" id="rX">Close</button>');document.getElementById("rX").onclick=()=>recPanel("");}
+async function recGo(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){recErr();return;}
+  let stream;
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:true}});}catch(e){recErr();return;}
+  try{rec=new MediaRecorder(stream);}catch(e){stream.getTracks().forEach(t=>t.stop());recErr();return;}
+  recChunks=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)recChunks.push(e.data);};
+  rec.onstop=()=>{stream.getTracks().forEach(t=>t.stop());recBlob=new Blob(recChunks,{type:rec.mimeType||"audio/webm"});if(recUrl)URL.revokeObjectURL(recUrl);recUrl=URL.createObjectURL(recBlob);recDone();};
+  if(!soundOn){soundStart();setSoundUI();}
+  recStart=MODE==="loop"?-4:0;seekBeat(recStart);setPlaying(true);
+  rec.start();
+  const t0=Date.now();
+  recPanel('<p><b>Recording.</b> <span id="rT">0:00</span></p><button type="button" class="tog" id="rStop">Stop</button>');
+  document.getElementById("rStop").onclick=()=>{try{rec.stop();}catch(e){}};
+  recTimer=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000),t=document.getElementById("rT");if(t)t.textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0");},500);
+}
+function recDone(){
+  clearInterval(recTimer);
+  recPanel('<p>Done. Play it back over the beat, or save it to this device.</p><button type="button" class="tog" id="rPlay">Play it back over the beat</button><button type="button" class="tog" id="rSave">Save to this device</button><button type="button" class="tog" id="rDel">Discard</button><span id="rMsg"></span>');
+  document.getElementById("rPlay").onclick=()=>{
+    if(playEl){playEl.pause();}
+    playEl=new Audio(recUrl);
+    if(!soundOn){soundStart();setSoundUI();}
+    seekBeat(recStart);setPlaying(true);
+    playEl.play().catch(()=>{});
+  };
+  document.getElementById("rSave").onclick=()=>{
+    const ext=/mp4|m4a|aac/.test(recBlob.type)?"m4a":/ogg/.test(recBlob.type)?"ogg":"webm";
+    const d=new Date(),stamp=d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"-"+String(d.getHours()).padStart(2,"0")+String(d.getMinutes()).padStart(2,"0");
+    const a=document.createElement("a");a.href=recUrl;a.download="more-than-organelles-my-take-"+stamp+"-"+clock.bpm+"bpm."+ext;document.body.appendChild(a);a.click();a.remove();
+    const m=document.getElementById("rMsg");if(m)m.textContent="Saved to this device's downloads, if the browser allows it.";
+  };
+  document.getElementById("rDel").onclick=()=>{if(playEl)playEl.pause();if(recUrl)URL.revokeObjectURL(recUrl);recUrl=null;recBlob=null;recPanel("");};
+}
+bRec.addEventListener("click",()=>{if(rec&&rec.state==="recording")return;recIntro();});
+
+/* ---------- stage words stay readable when the stage is small ---------- */
+function sizeStage(){const w=stageEl.getBoundingClientRect().width||1000;stageEl.style.setProperty("--k",(w/1000).toFixed(3));banCur="";}
+if(window.ResizeObserver)new ResizeObserver(sizeStage).observe(stageEl);else window.addEventListener("resize",sizeStage);
+
+/* ---------- start ---------- */
+html.setAttribute("data-dev",prefs.dev);
+document.querySelectorAll(".devrow [data-dev]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.dev===prefs.dev?"true":"false"));
+if(VIDEO)html.classList.add("video");
+if(prefs.proj){html.classList.add("proj");bProj.setAttribute("aria-pressed","true");}
+clock.bpm=prefs.bpm;showTempo();
+if(prefs.preset==="custom"&&prefs.parts){PRESET="custom";["drums","bass","keys","hook"].forEach(k=>{if(typeof prefs.parts[k]==="boolean")PARTS[k]=prefs.parts[k];});showMix();}
+else setPreset(prefs.preset==="custom"?"full":prefs.preset);
+setPlaying(true);setSoundUI();sizeStage();
+clock.t0=srcNow();clock.pos0=0;
+if(startScene>=0){MODE="loop";LOOP=startScene;clock.pos0=0;}
+loadTakes("more-than-organelles/");
+window.__cellStage={
+  seek(G){const s=clamp(Math.floor(G),0,NS_-1),f=clamp(G-s,0,.9999);const sec=SECS[s];
+    if(MODE==="loop"){LOOP=s;seekBeat(f*sec.len*4);}else seekBeat((sec.start+f*sec.len)*4);lastSec=-1;frame();},
+  seekBar(s,bar){const sec=SECS[s];if(MODE==="loop"){LOOP=s;seekBeat(bar*4);}else seekBeat((sec.start+bar)*4);lastSec=-1;frame();},
+  pause(){setPlaying(false);},play(){setPlaying(true);},
+  loop(i){enterLoop(i);},song(){if(MODE==="loop")enterSong();},
+  setReduced(v){reduced=!!v;frame();},
+  /* video rendering: put the song at beat P and draw; show a title or end card at some opacity */
+  at(P){MODE="song";clock.playing=false;clock.pos0=P;frame();},
+  card(front,back){const f=document.getElementById("vFront"),b=document.getElementById("vBack");if(f)f.style.opacity=front;if(b)b.style.opacity=back;},
+  /* render the instrumental to a WAV file (sec -1 = the whole song); used to make the audio for the video */
+  async renderWav(sec,bars,bpm,name){
+    const keep={ac,bus,NB,MODE,LOOP,bpm:clock.bpm,KS};
+    if(bpm)clock.bpm=bpm;
+    const sr=44100,spb=60/clock.bpm;if(sec<0){MODE="song";bars=TOTAL;}else{MODE="loop";LOOP=sec;}
+    const dur=bars*4*spb+3;
+    ac=new OfflineAudioContext(2,Math.ceil(sr*dur),sr);bus=null;NB=null;buildBus();applyParts();
+    /* schedule a couple of seconds ahead at a time, so the render never holds the whole song's nodes at once */
+    let nS=0;const total=bars*16;
+    const feed=upTo=>{while(nS<total&&.1+nS/4*spb<upTo){playStep(nS,.1+nS/4*spb);nS++;}};
+    feed(3);
+    for(let tt=1;tt<dur-.5;tt+=1){const at=tt;ac.suspend(at).then(()=>{feed(at+3);ac.resume();});}
+    const buf=await ac.startRendering();
+    const L=buf.getChannelData(0),R=buf.getChannelData(1),n=L.length,ab=new ArrayBuffer(44+n*4),dv=new DataView(ab);
+    const ws=(o,str)=>{for(let i=0;i<str.length;i++)dv.setUint8(o+i,str.charCodeAt(i));};
+    ws(0,"RIFF");dv.setUint32(4,36+n*4,true);ws(8,"WAVE");ws(12,"fmt ");dv.setUint32(16,16,true);dv.setUint16(20,1,true);dv.setUint16(22,2,true);dv.setUint32(24,sr,true);dv.setUint32(28,sr*4,true);dv.setUint16(32,4,true);dv.setUint16(34,16,true);ws(36,"data");dv.setUint32(40,n*4,true);
+    let o=44,pk=0;for(let i=0;i<n;i++){const a=Math.max(-1,Math.min(1,L[i])),b=Math.max(-1,Math.min(1,R[i]));pk=Math.max(pk,Math.abs(a),Math.abs(b));dv.setInt16(o,a*32767,true);dv.setInt16(o+2,b*32767,true);o+=4;}
+    ac=keep.ac;bus=keep.bus;NB=keep.NB;MODE=keep.MODE;LOOP=keep.LOOP;clock.bpm=keep.bpm;KS=keep.KS;
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([ab],{type:"audio/wav"}));a.download=name||"render.wav";document.body.appendChild(a);a.click();a.remove();
+    return {seconds:+(n/sr).toFixed(2),peak:+pk.toFixed(3),startOffset:.1};},
+  /* test only: render a section's music offline and report its level, bar by bar */
+  async offline(secIdx,bars,preset,parts){
+    const keep={ac,bus,NB,MODE,LOOP,PRESET,parts:Object.assign({},PARTS)};
+    const sr=22050,spb=60/clock.bpm,dur=bars*4*spb+1.5;
+    ac=new OfflineAudioContext(1,Math.ceil(sr*dur),sr);bus=null;NB=null;buildBus();
+    MODE="loop";LOOP=secIdx;if(preset)PRESET=preset;if(parts)Object.assign(PARTS,parts);applyParts();
+    for(let S=0;S<bars*16;S++)playStep(S,.05+S/4*spb);
+    const buf=await ac.startRendering(),d=buf.getChannelData(0);
+    const out=[];const per=Math.floor(4*spb*sr);
+    for(let b=0;b<bars;b++){let pk=0,ss=0;for(let i=b*per;i<(b+1)*per&&i<d.length;i++){const v=Math.abs(d[i]);if(v>pk)pk=v;ss+=v*v;}out.push({bar:b,peak:+pk.toFixed(3),rms:+Math.sqrt(ss/per).toFixed(3)});}
+    ac=keep.ac;bus=keep.bus;NB=keep.NB;MODE=keep.MODE;LOOP=keep.LOOP;PRESET=keep.PRESET;Object.assign(PARTS,keep.parts);
+    return out;},
+  state(){const P=curPos(),m=mapBeat(P);return {mode:MODE,scene:m.sec.i,bar:m.lbar,line:m.li,beat:m.beat,brk:m.brk,count:m.count,bpm:clock.bpm,playing:clock.playing,sound:soundOn,reduced,pos:P,preset:PRESET,parts:Object.assign({},PARTS),totalBars:TOTAL};}
+};
+requestAnimationFrame(tick);
+
+})();
+</script>
+</body>
+</html>
