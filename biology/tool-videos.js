@@ -20,7 +20,10 @@ var V=[
           de:'Unit 5 → The Membrane Patch — build it, turn it, run it (posted when Unit 5 opens)'}},
  {id:'protein-route',tool:'Bio Tool #18',name:'The Protein Route',page:'protein-route.html',yt:'RPtCrglEBcQ',len:'3½ min',
   title:'Watch me run the Protein Route at the SOL Bio level',
-  canvas:{bio:'Module 2 → Lesson 6 → The Protein Route — insulin out of the cell'}}
+  canvas:{bio:'Module 2 → Lesson 6 → The Protein Route — insulin out of the cell'}},
+ {id:'more-than-organelles',tool:'Bio Tool #23',name:'More Than Organelles: The Cell Song',page:'more-than-organelles.html',yt:'dtlqN7yJs3E',len:'6 min',cap:'words on screen',
+  title:'Watch me rap the whole Cell Song over the full band (take 1)',
+  canvas:{bio:'Module 2 → Lesson 7 → For fun: The Cell Song — More Than Organelles (take 1)'}}
 ];
 window.SOP_VIDEOS=V;
 var WARN='<b>At Battlefield, or on any Prince William County iPad or network,</b> watch it in Mr. Schwebach’s Canvas, where it plays from Canvas Studio.';
@@ -37,7 +40,7 @@ function where(v,only){var o=[];if(v.canvas.bio&&(!only||only==='bio'))o.push('<
 function render(){
  addCss();
  document.querySelectorAll('[data-sop-video]').forEach(function(el){var v=V.filter(function(x){return x.id===el.getAttribute('data-sop-video')})[0];if(!v)return;
-  el.className='sop-vid';el.innerHTML='<p class="h">▶ '+v.title+' <span>· '+v.len+', captions on</span></p><p>'+WARN+'</p>'+where(v)+'<p>'+HOME+' '+yt(v)+'</p>'});
+  el.className='sop-vid';el.innerHTML='<p class="h">▶ '+v.title+' <span>· '+v.len+', '+(v.cap||'captions on')+'</span></p><p>'+WARN+'</p>'+where(v)+'<p>'+HOME+' '+yt(v)+'</p>'});
  document.querySelectorAll('[data-sop-videos]').forEach(function(el){var c=el.getAttribute('data-sop-videos');
   var list=V.filter(function(v){return v.canvas[c]});
   el.className='sop-vid';el.id=el.id||'videos';
