@@ -21,7 +21,7 @@ var V=[
  {id:'protein-route',tool:'Bio Tool #18',name:'The Protein Route',page:'protein-route.html',yt:'RPtCrglEBcQ',len:'3½ min',
   title:'Watch me run the Protein Route at the SOL Bio level',
   canvas:{bio:'Module 2 → Lesson 6 → The Protein Route — insulin out of the cell'}},
- {id:'more-than-organelles',tool:'Bio Tool #23',name:'More Than Organelles: The Cell Song',page:'more-than-organelles.html',yt:'dtlqN7yJs3E',len:'6 min',cap:'words on screen',
+ {id:'more-than-organelles',tool:'Bio Tool #23',name:'More Than Organelles: The Cell Song',page:'more-than-organelles.html',yt:'dtlqN7yJs3E',len:'6 min',
   title:'Watch me rap the whole Cell Song over the full band (take 1)',
   canvas:{bio:'Module 2 → Lesson 7 → For fun: The Cell Song — More Than Organelles (take 1)'}}
 ];
