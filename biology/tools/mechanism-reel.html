@@ -1158,7 +1158,7 @@ const TRANSPORT=(function(){
   const loop={nCh:0,nCy:0,
     start(api){const svg=$("stage").querySelector("svg");if(!svg)return;const layer=svg.querySelector("#runLayer");if(!layer)return;
       const sp=api.sp;
-      const make=(html)=>{const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML=html;const g=tmp.firstElementChild;g.classList.add("mv");g.style.opacity="0";layer.appendChild(g);return g;};
+      const make=(html)=>{const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML="<g>"+html+"</g>";const g=tmp.firstElementChild;g.classList.add("mv");g.style.opacity="0";layer.appendChild(g);return g;};
       const place=(g,x,y)=>{g.style.transition="none";g.style.transform=`translate(${x}px, ${y}px)`;};
       const fade=(g,ms)=>{g.style.transition="none";g.style.opacity="0";g.getBoundingClientRect();g.style.transition=`opacity ${ms*sp()}ms ease-in-out`;g.style.opacity="1";};
       /* a clone is drawn at its resting place (`rest`) and translated back to where it starts; `pts` are

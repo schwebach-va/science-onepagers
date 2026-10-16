@@ -177,8 +177,8 @@ const rectOf=id=>{const e=document.querySelector('#stage #'+id);const r=e.getBou
     res('T10',ovf,ovfWhy);
     if(R.T10===false)await shot(pg,`FAIL-T10-transport-${tag}`);
     /* T21: focus on the active step: scaled movers, dimmed rest, settled after; and D1's held dims: the pump at half in state 1, the channel at half in state 2, both full in state 3 */
-    {await pg.evaluate(()=>__MR.setLevel('de'));await go(pg,0);const s0=await pg.evaluate(()=>({chan:__MR.el('chanG').opacity,pump:__MR.el('pumpG').opacity}));
-      await go(pg,1);const s1=await pg.evaluate(()=>({chan:__MR.el('chanG').opacity,pump:__MR.el('pumpG').opacity}));
+    {await pg.evaluate(()=>__MR.setLevel('de'));await go(pg,0);await sleep(450);const s0=await pg.evaluate(()=>({chan:__MR.el('chanG').opacity,pump:__MR.el('pumpG').opacity}));
+      await go(pg,1);await sleep(450);const s1=await pg.evaluate(()=>({chan:__MR.el('chanG').opacity,pump:__MR.el('pumpG').opacity}));
       await pg.evaluate(()=>__MR.goStep(2));await sleep(2200);
       const mid=await pg.evaluate(()=>({f:__MR.focus(),live:!!document.querySelector('#card .cap.live'),sig:__MR.el('sig').opacity,chan:__MR.el('chanG').opacity,pump:__MR.el('pumpG').opacity}));
       await settle(pg);await sleep(450);const after=await pg.evaluate(()=>({f:__MR.focus(),live:!!document.querySelector('#card .cap.live'),sig:__MR.el('sig').opacity,chan:__MR.el('chanG').opacity,pump:__MR.el('pumpG').opacity}));
