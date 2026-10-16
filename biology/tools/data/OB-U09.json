@@ -87,7 +87,7 @@
    "type": "mc",
    "topic": "A delayed infection: the lysogenic cycle",
    "dok": 2,
-   "stem": "A virus infects a culture of bacteria. For many generations the bacteria look healthy and divide normally. Weeks later, after the culture is exposed to ultraviolet light, many cells burst and release new viruses. What best explains the delay?",
+   "stem": "A virus infects a dish of growing bacteria. For many generations the bacteria look healthy and divide normally. Weeks later, after the dish is exposed to ultraviolet light, many cells burst and release new viruses. What best explains the delay?",
    "opts": [
     "The viruses were sleeping outside the cells until the light woke them",
     "The bacteria were immune at first and then lost their immunity",
@@ -149,17 +149,17 @@
    "type": "mc",
    "topic": "Why a virus infects only certain cells",
    "dok": 2,
-   "stem": "A virus that infects tobacco leaves cannot infect a person who handles the plants. What best explains this?",
+   "stem": "Canine parvovirus makes dogs very sick, but it cannot infect the people who care for them. What best explains this?",
    "opts": [
-    "Human skin produces antibiotics that kill plant viruses",
+    "Human skin produces antibiotics that kill dog viruses",
     "A virus can attach only to cells with surface molecules that fit its own attachment proteins",
-    "Plant viruses are made of cellulose, which humans cannot digest",
-    "Plant viruses are alive only inside plants"
+    "Dog viruses are too large to fit inside human cells",
+    "Dog viruses are alive only inside dogs"
    ],
    "key": 1,
    "miss": {
     "0": "Antibiotics act on bacteria, not viruses, and skin does not make them.",
-    "2": "Viruses are genetic material in a protein coat; they are not made of cellulose.",
+    "2": "Dog cells and human cells are about the same size; the difference is in the molecules on their surfaces.",
     "3": "Viruses are not alive in any host; they simply cannot enter cells they do not fit."
    },
    "why": "A virus's coat or envelope carries proteins that lock onto specific molecules on a host cell. If a cell lacks the right molecules, the virus cannot attach, and its genetic material never gets in. That is why most viruses infect only certain species, and often only certain cells in them.",
@@ -193,7 +193,7 @@
      "Increased a thousandfold"
     ]
    ],
-   "stem2": "Which conclusion fits the results?",
+   "stem2": "Which conclusion is most likely?",
    "sol_also": "BIO.4c",
    "opts": [
     "X is a bacterium and Y is a virus",
@@ -231,7 +231,7 @@
    "miss": {
     "0": "6 is the number of divisions in 2 hours, not the number of cells.",
     "1": "The population doubles each time; it does not add 2 cells per division.",
-    "3": "Doubling 1 cell six times gives 64, not 120."
+    "3": "120 is the number of minutes in 2 hours, not the number of cells."
    },
    "why": "Two hours holds six 20-minute periods. Each division doubles the count: 1 → 2 → 4 → 8 → 16 → 32 → 64. Doubling is why a few bacteria can become millions in a day and why food left out spoils.",
    "src": "BIO.4b; IG p. 26 UtS 'Most bacteria reproduce asexually (budding and binary fission)'"
@@ -276,7 +276,7 @@
    "type": "mc",
    "topic": "Bacteria as decomposers",
    "dok": 3,
-   "stem": "A class puts equal masses of oak leaves into two sealed jars of damp soil. Jar 1's soil was heat-sterilized first; Jar 2's was not. After 8 weeks the leaves are dried and weighed.",
+   "stem": "A class puts equal dry masses of oak leaves into two loosely covered jars of damp soil. Jar 1's soil was heat-sterilized first; Jar 2's was not. After 8 weeks the leaves are dried and weighed.",
    "table": [
     [
      "",
@@ -284,12 +284,12 @@
      "Jar 2 (untreated soil)"
     ],
     [
-     "Leaf mass at start (g)",
+     "Dry leaf mass at start (g)",
      "20",
      "20"
     ],
     [
-     "Leaf mass after 8 weeks (g)",
+     "Dry leaf mass after 8 weeks (g)",
      "19",
      "7"
     ]
@@ -352,17 +352,17 @@
    "type": "mc",
    "topic": "When antibiotics hit the helpful bacteria",
    "dok": 2,
-   "stem": "After a long course of a strong antibiotic for a bacterial infection, a patient has stomach and digestion problems. What is the most likely reason?",
+   "stem": "After a long course of a strong antibiotic for a bacterial infection, a patient has digestive problems such as diarrhea. What is the most likely reason?",
    "opts": [
     "The antibiotic also killed many of the helpful bacteria living in the gut",
-    "The antibiotic turned into a virus in the stomach",
-    "The infection spread from the lungs to the stomach",
+    "The antibiotic turned into a virus in the gut",
+    "The original infection moved into the intestines",
     "The patient's stomach stopped producing acid because of the antibiotic"
    ],
    "key": 0,
    "miss": {
     "1": "Medicines do not turn into viruses.",
-    "2": "The timing points to the treatment, which affects bacteria all over the body.",
+    "2": "The problems began with the treatment, and an antibiotic acts on bacteria all over the body, including the helpful ones in the gut.",
     "3": "The antibiotic's target is bacteria, so its side effects come from killing bacteria."
    },
    "why": "Antibiotics do not pick out only the bacteria causing disease. The gut holds trillions of helpful bacteria that aid digestion, and a strong antibiotic kills many of them too, so digestion can suffer until they recover.",
@@ -378,7 +378,7 @@
    "type": "mc",
    "topic": "Handwashing data and germ theory",
    "dok": 3,
-   "stem": "In 1847 a doctor at a large hospital in Vienna noticed that mothers on one maternity ward died of fever far more often than on a second ward. Doctors on the first ward came straight from examining bodies in the autopsy room. In late May he required them to wash their hands in a chlorine solution before seeing patients.",
+   "stem": "In 1847 a doctor at a large hospital in Vienna noticed that mothers on one maternity ward died of fever far more often than on a second ward. Doctors on the first ward came straight from examining bodies in the autopsy room. In May he required them to wash their hands in a chlorine solution before seeing patients.",
    "table": [
     [
      "Month in 1847 (first ward)",
@@ -389,7 +389,7 @@
      "18.3"
     ],
     [
-     "May (handwashing begins late in the month)",
+     "May (handwashing begins partway through the month)",
      "12.2"
     ],
     [
@@ -407,8 +407,8 @@
    "key": 1,
    "miss": {
     "0": "The change followed handwashing, not anything done to the air of the ward.",
-    "2": "The drop came right after handwashing began, and it was large: from about 1 death in 8 to about 1 in 45.",
-    "3": "The steepest drop came after the late-May rule; June's rate was a fraction of May's."
+    "2": "The steep drop lined up with the start of handwashing, not with a change of season, and the second ward, whose doctors did not come from autopsies, had far fewer deaths all along.",
+    "3": "Deaths had begun to fall only after handwashing started partway through May; June's rate was a small fraction of April's and May's."
    },
    "why": "Deaths fell sharply once hands were washed, which points to an invisible agent carried from the autopsy room to the patients. This kind of evidence helped build germ theory, the idea that many diseases are caused by microorganisms, and it led to modern practices such as handwashing and sterile technique.",
    "src": "BIO.4e; IG p. 26 UtS 'The introduction of the germ theory led to the understanding that many diseases are caused by microbes. Changes in health practices have resulted'; IG p. 27 SiP 'relationship between germ theory and our current understanding of disease transmission'"
@@ -498,9 +498,9 @@
    "miss": {
     "0": "The vaccine itself is cleared from the body; what lasts is the immune system's memory.",
     "1": "Vaccines and antibiotics are different tools, and antibiotics do not act on viruses.",
-    "3": "Vaccines train the immune system; they do not change the student's cells."
+    "3": "Vaccines train the immune system; they do not change body cells to block the virus."
    },
-   "why": "A vaccine shows the immune system a harmless form or piece of a pathogen, such as a weakened virus, an inactivated toxin or mRNA for one viral protein. The body builds an immune response and keeps memory of it, so a later exposure is met fast and hard.",
+   "why": "A vaccine shows the immune system a harmless form or piece of a pathogen, such as a killed or weakened germ, a piece of one, or mRNA instructions for one of its proteins. The body builds an immune response and keeps memory of it, so a later exposure is met fast and hard.",
    "src": "BIO.4e; IG p. 26 UtS 'Vaccines can be used to prevent viral or bacterial diseases by preparing the immune system to recognize pathogens'; 'The body's immune system builds an immune response that will be employed with future exposure'"
   },
   {
@@ -537,21 +537,21 @@
      "—"
     ]
    ],
-   "stem2": "Based on the data, why do doctors tell patients to finish the full course?",
+   "stem2": "Based on the data, why do doctors tell patients not to stop an antibiotic early on their own?",
    "sol_also": "BIO.7c",
    "opts": [
-    "Stopping on day 3 leaves the most resistant bacteria alive to multiply and spread",
+    "Stopping on day 3 leaves survivors that are far more likely to be resistant, free to multiply and spread",
     "Stopping on day 3 is safe, because the number of bacteria has already dropped",
     "The antibiotic creates resistant bacteria, so it is better to take less of it",
     "Bacteria become weaker the longer a patient takes an antibiotic, so resistance does not matter"
    ],
    "key": 0,
    "miss": {
-    "1": "The count fell, but the survivors are mostly the resistant ones, and they can rebuild the infection.",
+    "1": "The count fell, but resistant cells now make up 30% of the survivors instead of 1%, and they can rebuild the infection.",
     "2": "Resistance was already present in a few cells; the drug selects for it rather than creating it.",
     "3": "The share of resistant cells rises as susceptible cells die, so resistance matters more over time."
    },
-   "why": "The drug kills the easy targets first, so the survivors on day 3 are mostly the resistant cells. A full course keeps the pressure on until they are gone too. Stopping early hands the infection to the toughest bacteria, which is natural selection at work in one patient.",
+   "why": "The drug kills the easy targets first, so resistant cells make up a growing share of the survivors: 1% at the start, 30% by day 3, 60% by day 6. Taking the drug exactly as prescribed keeps the pressure on until they are gone too. Stopping early hands the infection to the toughest bacteria, which is natural selection at work in one patient.",
    "src": "BIO.4e; IG p. 27 UtS 'Antibiotics are used to cure a bacterial disease by killing the bacterium'; BIO.7c IG p. 51 'antibiotic resistance in bacteria'"
   },
   {
@@ -566,7 +566,7 @@
    "dok": 2,
    "stem": "A patient has an infection caused by bacteria that no antibiotic can kill. Doctors treat it with bacteriophages, viruses that infect bacteria. Why can the phages destroy the infection without harming the patient's own cells?",
    "opts": [
-    "Phages attach only to bacterial cells whose surface fits them, so they cannot enter human cells",
+    "Phages attach only to bacterial cells whose surface fits them, so they cannot infect human cells",
     "Phages are antibiotics in a different form",
     "Phages make the patient's immune system stronger",
     "Phages starve the bacteria by eating their food"
@@ -577,7 +577,7 @@
     "2": "Phages act on the bacteria directly, not by changing the patient.",
     "3": "Phages do not eat; they hijack bacterial cells to make more phages."
    },
-   "why": "A phage can attach only to bacteria with the right surface molecules, so human cells are safe. Inside the bacterium it runs the lytic cycle, makes new phages and bursts the cell. Viruses are not only harmful: phages also help control bacterial populations in water and soil.",
+   "why": "A phage can attach only to bacteria with the right surface molecules, so it cannot infect human cells. Inside the bacterium it runs the lytic cycle, makes new phages and bursts the cell. Viruses are not only harmful: phages also help control bacterial populations in water and soil.",
    "src": "BIO.4d; IG p. 26 UtS 'Both viruses and bacteria can influence biodiversity and ecosystem dynamics'; IG p. 25 UtS 'There are viruses that can infect bacteria'; BIO.4c IG p. 27 SiP structure and function"
   }
  ]

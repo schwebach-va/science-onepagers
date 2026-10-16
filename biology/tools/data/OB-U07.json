@@ -38,7 +38,7 @@
    "key": 3,
    "miss": {
     "0": "Traits gained during a lifetime are not written into DNA, so they cannot be inherited.",
-    "1": "Crossing over shuffles alleles that already exist; it does not invent a new one.",
+    "1": "Crossing over shuffles alleles that already exist into new combinations; it is not the usual source of a brand-new allele.",
     "2": "Gene flow brings in alleles from another population, but this allele had never existed in the species at all."
    },
    "why": "Mutation, a change in the sequence of DNA bases, is the only source of an allele that has never existed before. Sexual reproduction and gene flow shuffle and spread alleles that are already present. A mutation is inherited only if it is in a sex cell.",
@@ -88,7 +88,7 @@
      "3": "A new species can be the end result, not the starting point."
     }
    },
-   "why": "Variation comes first, then a pressure that favors one version, then unequal survival and reproduction, then inheritance, and over generations the population shifts. Remove any step and natural selection stops.",
+   "why": "Variation comes first, then a pressure that favors one version, then unequal survival and reproduction, then inheritance, and over generations the population shifts. Without variation, inheritance or unequal survival, natural selection stops.",
    "src": "BIO.7c; IG p. 51 UtS 'Natural selection occurs only if there is both variation in the genetic information among organisms in a population and variation in the expression'; 'Traits that positively affect survival are more likely to be reproduced'"
   },
   {
@@ -129,7 +129,7 @@
    "miss": {
     "1": "A coating picked up during a lifetime does not change the DNA passed to offspring.",
     "2": "Mutations are random and do not aim at what the environment needs; the dark form was already in the population.",
-    "3": "The data show a change within the same population over generations, the pattern selection by predators produces."
+    "3": "Beetles do not choose their color or leave as a group; birds hunting by sight removed more tan beetles, so dark ones made up more of each new generation."
    },
    "why": "Both colors were present before the fire. Against black ash, tan beetles stood out, so birds ate more of them. Dark beetles survived, reproduced and passed on the dark allele, and its share rose each generation. That is natural selection changing gene frequency in a population.",
    "src": "BIO.7c; IG p. 51 UtS 'may lead to the durable change in the frequency of a gene in a given population'; IG p. 52 SiP 'Make, support, and evaluate a claim about how natural selection can change gene frequency within a population over time'"
@@ -154,7 +154,7 @@
    ],
    "key": 1,
    "miss": {
-    "0": "Bacteria cannot learn or decide to change. Resistance was already present in a few cells before the drug arrived.",
+    "0": "Bacteria cannot learn or decide to change. Resistance comes from random mutations that some cells happen to carry.",
     "2": "Resistance belongs to the bacteria, not the patients; the drug is aimed at the bacteria.",
     "3": "Fresh doses behave the same way; what changed is the bacterial population."
    },
@@ -214,7 +214,7 @@
    "miss": {
     "1": "Neither species is more advanced; each strategy fits how the species lives.",
     "2": "Both strategies have lasted for millions of years because each works for its species.",
-    "3": "Clutch size and parental care are inherited traits shaped by selection, not personal choices."
+    "3": "The number of eggs and the amount of parental care are inherited traits shaped by selection, not personal choices."
    },
    "why": "Most turtle hatchlings are eaten, but laying many eggs means a few reach adulthood. An elephant invests heavily in each calf, so most calves survive. Both strategies keep the population going.",
    "src": "BIO.7b; IG p. 50 UtS 'Organisms possess reproductive strategies and rates that maximize the probability that their offspring, and thus the population, can survive'"
@@ -229,7 +229,7 @@
    "type": "mc",
    "topic": "Relative age from rock layers",
    "dok": 2,
-   "stem": "A road cut in the Valley of Virginia exposes four undisturbed layers of sedimentary rock. A geology class records which fossils appear in each layer.",
+   "stem": "In a model road cut, four undisturbed layers of sedimentary rock are exposed. A geology class records which fossils appear in each layer.",
    "table": [
     [
      "Layer (top to bottom)",
@@ -254,7 +254,7 @@
    ],
    "stem2": "Which conclusion do these layers support?",
    "opts": [
-    "The fish-like animals lived before the land plants, because their fossils are in deeper, older layers",
+    "The fish-like animals in Layer 3 are older than the leaves and seeds in Layer 2, because deeper layers are older",
     "All four kinds of organisms lived at the same time, because they are in the same road cut",
     "The mammals are the oldest, because the top layer formed first",
     "Nothing about relative age can be said without radioactive dating"
@@ -351,7 +351,7 @@
     "Vestigial structures": "A vestigial structure is a reduced leftover of a part that was useful in an ancestor.",
     "Embryology": "Embryology compares how organisms develop; shared early stages point to shared ancestry."
    },
-   "why": "Same bones, different job: homologous. Same job, different build: analogous. A leftover with little or no use: vestigial. Shared early development: embryology. Homologous, vestigial and embryological evidence all point to common ancestors; analogous structures show that similar environments can shape unrelated organisms alike.",
+   "why": "Same bones, different job: homologous. Same job, different build: analogous. A leftover that no longer does its original job: vestigial. Shared early development: embryology. Homologous, vestigial and embryological evidence all point to common ancestors; analogous structures show that similar environments can shape unrelated organisms alike.",
    "src": "BIO.7d; IG p. 51 UtS 'The theory of evolution is supported by scientific evidence from many disciplines such as ... embryology, anatomy'"
   },
   {
@@ -444,7 +444,7 @@
    "dok": 2,
    "stem": "Put these events in order to show how one species can become two.",
    "opts": [
-    "Each group meets different conditions, and different mutations build up in each.",
+    "Each group faces different conditions, such as climate, food and predators.",
     "One population of a species lives in a single valley.",
     "The two groups can no longer interbreed and produce fertile offspring.",
     "A river changes course and splits the population into two groups that cannot reach each other.",
@@ -489,7 +489,7 @@
    "type": "mc",
    "topic": "Gradualism or punctuated equilibrium",
    "dok": 2,
-   "stem": "Two fossil lineages are traced through the same 10 million years of rock. Lineage 1 changes a little in every layer, so its shell grows thicker step by step. Lineage 2 stays almost unchanged for millions of years, changes to a new form within a few thousand years, then stays unchanged again. Which pair of labels is correct?",
+   "stem": "Two lines of fossil snails (lineages) are traced through the same 10 million years of rock. Lineage 1 changes a little in every layer, so its shell grows thicker step by step. Lineage 2 stays almost unchanged for millions of years, changes to a new form within a few thousand years, then stays unchanged again. Which pair of labels is correct?",
    "opts": [
     "Lineage 1: punctuated equilibrium · Lineage 2: gradualism",
     "Both lineages: gradualism",
@@ -515,7 +515,7 @@
    "type": "mc",
    "topic": "Variation and the risk of extinction",
    "dok": 3,
-   "stem": "A deadly fungal disease reaches two populations of the same frog species. Population A has many different alleles for skin-defense proteins. Population B descends from a few founders, and nearly every frog has the same alleles. Which population is more likely to survive the disease, and why?",
+   "stem": "A deadly fungal disease reaches two populations of the same frog species. Population A has many different alleles for skin-defense proteins. Population B started from just a few frogs, and nearly every frog has the same alleles. Which population is more likely to survive the disease, and why?",
    "opts": [
     "Population B, because frogs that are alike can cooperate better",
     "Population A, because with more variation, some frogs are more likely to carry a trait that resists the fungus",
@@ -545,7 +545,7 @@
    "opts": [
     "An individual organism evolves during its lifetime to fit its environment",
     "Evolution happens only through gradual change, never quickly",
-    "A population evolves as the frequency of its alleles changes over generations",
+    "A population evolves as how common each of its alleles is changes over generations",
     "Evolution means organisms always become larger and more complex"
    ],
    "key": 2,
