@@ -35,7 +35,7 @@ const animProps=()=>document.getAnimations().map(a=>{const props=new Set();try{a
     const {ctx,pg}=await fresh(br,vp);
     /* T1: six deep links; every figure not yet built asserts as disabled, not missing.
        Add a key to BUILT as each Phase 2 figure lands. */
-    const BUILT=['gpcr','dogma'];
+    const BUILT=['gpcr','dogma','transport'];
     for(const k of KEYS){await open(pg,`${URL}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(BUILT.includes(k)){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
