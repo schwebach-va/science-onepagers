@@ -1,0 +1,584 @@
+{
+ "meta": {
+  "bank": "OB-U09",
+  "title": "Unit 9 · Bacteria and Viruses — original SOL practice bank",
+  "version": "v1 2026-10-16",
+  "status": "first site version; built for the fall SOL review sessions",
+  "statement": "These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education's Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test's wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE's released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. © J. R. Schwebach, CC BY-NC 4.0.",
+  "unit": 9,
+  "unit_name": "Bacteria & Viruses",
+  "lts": {
+   "9.1": "Viruses: structure, cycles and hosts",
+   "9.2": "Bacteria: life functions and roles",
+   "9.3": "Germ theory, vaccines and antibiotics"
+  },
+  "lt_note": "Learning-target groupings for Unit 9 are this bank's own until the 2026-27 county unit guide is released.",
+  "source_ig": "VDOE, Instructional Guide to Support the 2018 Biology Standards of Learning (doc 77084); page numbers are printed pages",
+  "footer": "Original practice questions written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education.",
+  "copyright": "© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org",
+  "count": 17
+ },
+ "items": [
+  {
+   "id": "OB-U09-01",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.1",
+   "sol": "BIO.4a",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Why a virus is called nonliving",
+   "dok": 1,
+   "stem": "Biologists usually describe viruses as nonliving, even though viruses cause many diseases. Which reason best supports that description?",
+   "opts": [
+    "Viruses are too small to see with a light microscope",
+    "Viruses contain no genetic material of any kind",
+    "Viruses are not made of cells and cannot carry out metabolism or copy themselves without a host cell",
+    "Viruses only infect bacteria, never larger organisms"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Size does not decide whether something is alive; many bacteria are tiny and are alive.",
+    "1": "Every virus carries genetic material, either DNA or RNA.",
+    "3": "Viruses infect bacteria, plants, animals, fungi and protists."
+   },
+   "why": "Living things are made of cells and carry out their own life processes. A virus has no cell and no metabolism, and it can make copies of itself only inside a host cell, using that cell's machinery.",
+   "src": "BIO.4a; IG p. 25 UtS 'Viruses are not made of cells and do not carry out metabolic processes on their own'; IG p. 27 SiP 'claim for the classification of bacteria and viruses as living or nonliving'"
+  },
+  {
+   "id": "OB-U09-02",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.1",
+   "sol": "BIO.4c",
+   "category": "Systems and Organisms",
+   "type": "ms",
+   "topic": "What a virus is built from",
+   "dok": 1,
+   "stem": "Which parts does every virus have? Select all that apply.",
+   "opts": [
+    "Genetic material, either DNA or RNA",
+    "A protein coat (capsid)",
+    "Ribosomes",
+    "A nucleus",
+    "Cytoplasm with enzymes for metabolism",
+    "A cell wall"
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "miss": {
+    "2": "Viruses have no ribosomes, which is why they must use the host cell's ribosomes.",
+    "3": "A virus is not a cell, so it has no nucleus.",
+    "4": "Viruses carry out no metabolism of their own.",
+    "5": "Cell walls belong to bacteria, plants and fungi, not viruses."
+   },
+   "why": "A virus is genetic material wrapped in a protein coat. Some also have a lipid envelope taken from a host cell. Everything else a cell has, a virus borrows from its host.",
+   "src": "BIO.4c; IG p. 25 UtS 'Viruses consist of genetic material (DNA or RNA) enclosed in a protein coat (capsid); some viruses also have a lipid envelope'"
+  },
+  {
+   "id": "OB-U09-03",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.1",
+   "sol": "BIO.4b",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "A delayed infection: the lysogenic cycle",
+   "dok": 2,
+   "stem": "A virus infects a culture of bacteria. For many generations the bacteria look healthy and divide normally. Weeks later, after the culture is exposed to ultraviolet light, many cells burst and release new viruses. What best explains the delay?",
+   "opts": [
+    "The viruses were sleeping outside the cells until the light woke them",
+    "The bacteria were immune at first and then lost their immunity",
+    "The viral DNA was destroyed and then rebuilt itself",
+    "The viral DNA joined the bacterial chromosome and was copied each time a cell divided, then later switched to making new viruses"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Viruses do nothing outside a host; this change happened inside the cells.",
+    "1": "Bacteria do not have an immune system that comes and goes like this.",
+    "2": "The viral DNA was not destroyed; it was being copied along with the host's DNA."
+   },
+   "why": "That is the lysogenic cycle. The viral DNA becomes part of the host's DNA and rides along through every cell division, so each new cell carries it. A stress can switch it into the lytic cycle, when the cell makes new viruses and bursts.",
+   "src": "BIO.4b; IG p. 25 UtS 'The lysogenic cycle typically results in delayed viral reproduction because the genetic material from the virus is incorporated into the genome of the host cell'"
+  },
+  {
+   "id": "OB-U09-04",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.1",
+   "sol": "BIO.4b",
+   "category": "Systems and Organisms",
+   "type": "match",
+   "topic": "Lytic or lysogenic",
+   "dok": 2,
+   "stem": "For each statement, choose which viral cycle it describes. A choice may be used more than once.",
+   "rows": [
+    "The host cell bursts soon after infection, releasing many new viruses.",
+    "Viral DNA becomes part of the host cell's chromosome.",
+    "The virus must first attach to a host cell.",
+    "The infected cell can divide many times before any new viruses are made."
+   ],
+   "opts": [
+    "Lytic cycle",
+    "Lysogenic cycle",
+    "Both cycles"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    1
+   ],
+   "miss": {
+    "Lytic cycle": "The lytic cycle is the fast one: copy, assemble and burst out.",
+    "Lysogenic cycle": "In the lysogenic cycle the viral DNA hides inside the host's DNA and is copied with it.",
+    "Both cycles": "Both cycles begin the same way, with the virus attaching and its genetic material entering."
+   },
+   "why": "Both cycles start with attachment and entry. In the lytic cycle the cell immediately makes and releases viruses and usually dies. In the lysogenic cycle the viral DNA joins the host chromosome and is passed to every daughter cell until something triggers the lytic cycle.",
+   "src": "BIO.4b; IG p. 25 UtS 'During the lytic cycle, infected host cells produce, assemble, and release copies of the virus'; 'The lysogenic cycle typically results in delayed viral reproduction'"
+  },
+  {
+   "id": "OB-U09-05",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.1",
+   "sol": "BIO.4c",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Why a virus infects only certain cells",
+   "dok": 2,
+   "stem": "A virus that infects tobacco leaves cannot infect a person who handles the plants. What best explains this?",
+   "opts": [
+    "Human skin produces antibiotics that kill plant viruses",
+    "A virus can attach only to cells with surface molecules that fit its own attachment proteins",
+    "Plant viruses are made of cellulose, which humans cannot digest",
+    "Plant viruses are alive only inside plants"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Antibiotics act on bacteria, not viruses, and skin does not make them.",
+    "2": "Viruses are genetic material in a protein coat; they are not made of cellulose.",
+    "3": "Viruses are not alive in any host; they simply cannot enter cells they do not fit."
+   },
+   "why": "A virus's coat or envelope carries proteins that lock onto specific molecules on a host cell. If a cell lacks the right molecules, the virus cannot attach, and its genetic material never gets in. That is why most viruses infect only certain species, and often only certain cells in them.",
+   "src": "BIO.4c; IG p. 27 SiP 'Compare the structural components of viruses and bacteria and explain how these structures relate to their function'; IG p. 25 UtS 'There are viruses that can infect bacteria, animals, plants, fungi, and protists'"
+  },
+  {
+   "id": "OB-U09-06",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.2",
+   "sol": "BIO.4a",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Telling a bacterium from a virus by how it grows",
+   "dok": 3,
+   "stem": "Two unknown samples are each added to two dishes: a dish of sterile nutrient broth, and a dish of the same broth containing living animal cells. After two days the samples are measured again.",
+   "table": [
+    [
+     "Sample",
+     "Broth only",
+     "Broth + living cells"
+    ],
+    [
+     "X",
+     "Increased a thousandfold",
+     "Increased a thousandfold"
+    ],
+    [
+     "Y",
+     "No increase",
+     "Increased a thousandfold"
+    ]
+   ],
+   "stem2": "Which conclusion fits the results?",
+   "sol_also": "BIO.4c",
+   "opts": [
+    "X is a bacterium and Y is a virus",
+    "X is a virus and Y is a bacterium",
+    "Both are viruses",
+    "Both are bacteria"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "A virus cannot increase in plain broth; X grew without host cells, so X is not the virus.",
+    "2": "X multiplied in broth with no cells, which a virus cannot do.",
+    "3": "Y increased only when living cells were present, the sign of a virus."
+   },
+   "why": "Bacteria carry out all life processes on their own, so they grow in nutrients alone. A virus can be copied only inside a living host cell, so it increases only where cells are present.",
+   "src": "BIO.4a; IG p. 26 UtS 'Bacteria carry out all life processes independently'; IG p. 25 UtS 'Viruses are nonliving infectious agents that require a host cell to replicate'"
+  },
+  {
+   "id": "OB-U09-07",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.2",
+   "sol": "BIO.4b",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Binary fission adds up fast",
+   "dok": 2,
+   "stem": "One bacterium lands in warm milk. Under these conditions each cell divides by binary fission every 20 minutes. If none die, how many bacteria will there be after 2 hours?",
+   "opts": [
+    "6",
+    "12",
+    "64",
+    "120"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "6 is the number of divisions in 2 hours, not the number of cells.",
+    "1": "The population doubles each time; it does not add 2 cells per division.",
+    "3": "Doubling 1 cell six times gives 64, not 120."
+   },
+   "why": "Two hours holds six 20-minute periods. Each division doubles the count: 1 → 2 → 4 → 8 → 16 → 32 → 64. Doubling is why a few bacteria can become millions in a day and why food left out spoils.",
+   "src": "BIO.4b; IG p. 26 UtS 'Most bacteria reproduce asexually (budding and binary fission)'"
+  },
+  {
+   "id": "OB-U09-08",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.2",
+   "sol": "BIO.4c",
+   "category": "Systems and Organisms",
+   "type": "ms",
+   "topic": "How bacteria get energy",
+   "dok": 2,
+   "stem": "Which statements about how bacteria obtain energy are correct? Select all that apply.",
+   "opts": [
+    "Some bacteria capture light energy and make their own food",
+    "Some bacteria get energy from chemicals such as hydrogen sulfide",
+    "Some bacteria feed on dead or living organic matter",
+    "Every bacterium must live inside a host to get energy",
+    "Bacteria get energy by injecting their DNA into other cells"
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "miss": {
+    "3": "Most bacteria live freely in soil, water and other places; only some live in or on hosts.",
+    "4": "Injecting genetic material into a host is how viruses work, not how bacteria get energy."
+   },
+   "why": "Bacteria are classified partly by how they get energy: photoautotrophs use light, chemoautotrophs use energy from chemicals, and heterotrophs take in organic matter.",
+   "src": "BIO.4c; IG p. 26 UtS 'Bacteria can be classified by how they obtain energy—some are heterotrophs, others are photoautotrophs or chemoautotrophs'"
+  },
+  {
+   "id": "OB-U09-09",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.2",
+   "sol": "BIO.4d",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Bacteria as decomposers",
+   "dok": 3,
+   "stem": "A class puts equal masses of oak leaves into two sealed jars of damp soil. Jar 1's soil was heat-sterilized first; Jar 2's was not. After 8 weeks the leaves are dried and weighed.",
+   "table": [
+    [
+     "",
+     "Jar 1 (sterilized soil)",
+     "Jar 2 (untreated soil)"
+    ],
+    [
+     "Leaf mass at start (g)",
+     "20",
+     "20"
+    ],
+    [
+     "Leaf mass after 8 weeks (g)",
+     "19",
+     "7"
+    ]
+   ],
+   "stem2": "Which conclusion is best supported?",
+   "opts": [
+    "Heat sterilization made the leaves in Jar 1 heavier",
+    "The leaves in Jar 2 were eaten by insects that hatched from the leaves",
+    "Damp soil alone breaks down leaves, whether or not anything lives in it",
+    "Living microbes in Jar 2, such as bacteria, broke down the leaves and released their materials into the soil"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Both jars started with the same leaf mass; Jar 1's leaves stayed about the same.",
+    "1": "The leaves were the same in both jars; the only difference was whether the soil held living things.",
+    "2": "Jar 1 had damp soil too, and its leaves barely changed."
+   },
+   "why": "The only difference between the jars was living microbes in the soil. Where they were present, most of the leaf mass disappeared. Decomposers such as bacteria break dead matter down and return nutrients to the soil, which keeps matter cycling in an ecosystem.",
+   "src": "BIO.4d; IG p. 26 UtS 'Bacteria play key roles in decomposition, nitrogen fixation, and digestion'"
+  },
+  {
+   "id": "OB-U09-10",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.2",
+   "sol": "BIO.4d",
+   "category": "Systems and Organisms",
+   "type": "ms",
+   "topic": "Helpful bacteria",
+   "dok": 1,
+   "stem": "Which are roles that helpful bacteria play? Select all that apply.",
+   "opts": [
+    "Breaking down food in the human gut and making some vitamins",
+    "Turning nitrogen from the air into a form plants can use",
+    "Turning milk into yogurt",
+    "Breaking down dead plants and animals",
+    "Making every food they touch unsafe to eat",
+    "Causing every disease that humans get"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "miss": {
+    "4": "Some bacteria spoil food or cause food poisoning, but many are used to make foods such as yogurt and cheese.",
+    "5": "Many diseases come from viruses, fungi or protists, and most bacteria cause no disease at all."
+   },
+   "why": "Most bacteria are harmless or helpful. They digest food, fix nitrogen, make foods and recycle dead matter. Disease-causing bacteria are a small minority.",
+   "src": "BIO.4d; IG p. 26 UtS 'While some bacteria cause disease, many are beneficial and essential for nutrient cycling and ecosystem stability'; 'decomposition, nitrogen fixation, and digestion'"
+  },
+  {
+   "id": "OB-U09-11",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.2",
+   "sol": "BIO.4d",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "When antibiotics hit the helpful bacteria",
+   "dok": 2,
+   "stem": "After a long course of a strong antibiotic for a bacterial infection, a patient has stomach and digestion problems. What is the most likely reason?",
+   "opts": [
+    "The antibiotic also killed many of the helpful bacteria living in the gut",
+    "The antibiotic turned into a virus in the stomach",
+    "The infection spread from the lungs to the stomach",
+    "The patient's stomach stopped producing acid because of the antibiotic"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Medicines do not turn into viruses.",
+    "2": "The timing points to the treatment, which affects bacteria all over the body.",
+    "3": "The antibiotic's target is bacteria, so its side effects come from killing bacteria."
+   },
+   "why": "Antibiotics do not pick out only the bacteria causing disease. The gut holds trillions of helpful bacteria that aid digestion, and a strong antibiotic kills many of them too, so digestion can suffer until they recover.",
+   "src": "BIO.4d; IG p. 27 SiP 'Analyze the advantages and disadvantages of bacteria and viruses on the health of organisms'; IG p. 26 UtS 'digestion'"
+  },
+  {
+   "id": "OB-U09-12",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.3",
+   "sol": "BIO.4e",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Handwashing data and germ theory",
+   "dok": 3,
+   "stem": "In 1847 a doctor at a large hospital in Vienna noticed that mothers on one maternity ward died of fever far more often than on a second ward. Doctors on the first ward came straight from examining bodies in the autopsy room. In late May he required them to wash their hands in a chlorine solution before seeing patients.",
+   "table": [
+    [
+     "Month in 1847 (first ward)",
+     "Deaths per 100 mothers"
+    ],
+    [
+     "April",
+     "18.3"
+    ],
+    [
+     "May (handwashing begins late in the month)",
+     "12.2"
+    ],
+    [
+     "June",
+     "2.2"
+    ]
+   ],
+   "stem2": "Which conclusion do these data best support?",
+   "opts": [
+    "Fever is caused by bad air, which chlorine cleared from the ward",
+    "Something carried on the doctors' hands from the autopsy room caused the fevers, and washing removed it",
+    "Mothers became stronger as the weather warmed in summer",
+    "Handwashing makes no difference, because deaths had already started to fall in May"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "The change followed handwashing, not anything done to the air of the ward.",
+    "2": "The drop came right after handwashing began, and it was large: from about 1 death in 8 to about 1 in 45.",
+    "3": "The steepest drop came after the late-May rule; June's rate was a fraction of May's."
+   },
+   "why": "Deaths fell sharply once hands were washed, which points to an invisible agent carried from the autopsy room to the patients. This kind of evidence helped build germ theory, the idea that many diseases are caused by microorganisms, and it led to modern practices such as handwashing and sterile technique.",
+   "src": "BIO.4e; IG p. 26 UtS 'The introduction of the germ theory led to the understanding that many diseases are caused by microbes. Changes in health practices have resulted'; IG p. 27 SiP 'relationship between germ theory and our current understanding of disease transmission'"
+  },
+  {
+   "id": "OB-U09-13",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.3",
+   "sol": "BIO.4e",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Showing that a microbe causes a disease",
+   "dok": 3,
+   "stem": "Cattle on several Virginia farms develop the same illness. Scientists find one kind of bacterium in every sick animal and in none of the healthy ones. They grow the bacterium alone in a dish, give it to healthy lab animals, which then develop the same illness, and find the same bacterium in those animals. What do these steps show?",
+   "opts": [
+    "The illness is inherited from the cattle's parents",
+    "The bacterium appears only after the animals are already sick",
+    "The illness is caused by something in the cattle feed",
+    "The bacterium causes the illness"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "The illness spread to unrelated lab animals given the bacterium, so it was not inherited.",
+    "1": "Healthy animals got sick only after they were given the bacterium, so it came first.",
+    "2": "The lab animals got the bacterium grown alone in a dish, with no cattle feed involved."
+   },
+   "why": "Finding a microbe in every sick animal, growing it alone, causing the same disease with it, and recovering it again is strong evidence that the microbe causes the disease. This chain of steps is how germ theory moved from an idea to a tested explanation.",
+   "src": "BIO.4e; IG p. 26 UtS 'The introduction of the germ theory led to the understanding that many diseases are caused by microbes'"
+  },
+  {
+   "id": "OB-U09-14",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.3",
+   "sol": "BIO.4e",
+   "category": "Systems and Organisms",
+   "type": "match",
+   "topic": "Tools against disease",
+   "dok": 2,
+   "stem": "Match each description to the tool it describes. Use each choice once.",
+   "rows": [
+    "Prepares the immune system before exposure, so the body responds fast if the real pathogen arrives.",
+    "Kills bacteria that are already causing an infection.",
+    "Blocks a step that a virus needs inside a host cell.",
+    "Adding chlorine to a town's drinking water supply."
+   ],
+   "opts": [
+    "Vaccine",
+    "Antibiotic",
+    "Antiviral medicine",
+    "Sanitation"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "miss": {
+    "Vaccine": "A vaccine prevents disease ahead of time; it does not cure an infection already underway.",
+    "Antibiotic": "Antibiotics kill bacteria or stop their growth; they do nothing to viruses.",
+    "Antiviral medicine": "Antivirals interfere with a virus's copying inside cells; they are different from antibiotics.",
+    "Sanitation": "Sanitation keeps microbes from reaching people in the first place, through clean water, food handling and waste removal."
+   },
+   "why": "Germ theory led to all four: sanitation keeps microbes away, vaccines prepare the body in advance, antibiotics cure bacterial infections, and antivirals slow viral ones. Antibiotics do not work on viruses.",
+   "src": "BIO.4e; IG p. 26 UtS 'sanitation, the safe handling of food and water, aseptic techniques ... and the development of vaccinations'; 'Vaccines are used to prevent diseases while antibiotics are used to cure diseases'; IG p. 25 'antiviral medicines'"
+  },
+  {
+   "id": "OB-U09-15",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.3",
+   "sol": "BIO.4e",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "How a vaccine protects later",
+   "dok": 2,
+   "stem": "A student receives a vaccine against a virus. A year later the student is exposed to that virus and does not become sick. What best explains this?",
+   "opts": [
+    "The vaccine stayed in the blood for a year and killed the virus on contact",
+    "The vaccine was an antibiotic that kept working",
+    "The immune system had already learned to recognize the virus and responded quickly enough to stop it",
+    "The vaccine changed the student's cells so the virus could not enter them"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "The vaccine itself is cleared from the body; what lasts is the immune system's memory.",
+    "1": "Vaccines and antibiotics are different tools, and antibiotics do not act on viruses.",
+    "3": "Vaccines train the immune system; they do not change the student's cells."
+   },
+   "why": "A vaccine shows the immune system a harmless form or piece of a pathogen, such as a weakened virus, an inactivated toxin or mRNA for one viral protein. The body builds an immune response and keeps memory of it, so a later exposure is met fast and hard.",
+   "src": "BIO.4e; IG p. 26 UtS 'Vaccines can be used to prevent viral or bacterial diseases by preparing the immune system to recognize pathogens'; 'The body's immune system builds an immune response that will be employed with future exposure'"
+  },
+  {
+   "id": "OB-U09-16",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.3",
+   "sol": "BIO.4e",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "Why to finish the antibiotic",
+   "dok": 3,
+   "stem": "In a model of a bacterial infection, a patient takes an antibiotic for 10 days. The table shows the estimated number of bacteria and the share of them that are partly resistant to the drug.",
+   "table": [
+    [
+     "Day of treatment",
+     "0",
+     "3",
+     "6",
+     "10"
+    ],
+    [
+     "Bacteria (millions)",
+     "1,000",
+     "40",
+     "2",
+     "0"
+    ],
+    [
+     "Partly resistant (% of those left)",
+     "1",
+     "30",
+     "60",
+     "—"
+    ]
+   ],
+   "stem2": "Based on the data, why do doctors tell patients to finish the full course?",
+   "sol_also": "BIO.7c",
+   "opts": [
+    "Stopping on day 3 leaves the most resistant bacteria alive to multiply and spread",
+    "Stopping on day 3 is safe, because the number of bacteria has already dropped",
+    "The antibiotic creates resistant bacteria, so it is better to take less of it",
+    "Bacteria become weaker the longer a patient takes an antibiotic, so resistance does not matter"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "The count fell, but the survivors are mostly the resistant ones, and they can rebuild the infection.",
+    "2": "Resistance was already present in a few cells; the drug selects for it rather than creating it.",
+    "3": "The share of resistant cells rises as susceptible cells die, so resistance matters more over time."
+   },
+   "why": "The drug kills the easy targets first, so the survivors on day 3 are mostly the resistant cells. A full course keeps the pressure on until they are gone too. Stopping early hands the infection to the toughest bacteria, which is natural selection at work in one patient.",
+   "src": "BIO.4e; IG p. 27 UtS 'Antibiotics are used to cure a bacterial disease by killing the bacterium'; BIO.7c IG p. 51 'antibiotic resistance in bacteria'"
+  },
+  {
+   "id": "OB-U09-17",
+   "set": "practice",
+   "unit": 9,
+   "lt": "9.1",
+   "sol": "BIO.4d",
+   "category": "Systems and Organisms",
+   "type": "mc",
+   "topic": "A virus used as medicine",
+   "dok": 2,
+   "stem": "A patient has an infection caused by bacteria that no antibiotic can kill. Doctors treat it with bacteriophages, viruses that infect bacteria. Why can the phages destroy the infection without harming the patient's own cells?",
+   "opts": [
+    "Phages attach only to bacterial cells whose surface fits them, so they cannot enter human cells",
+    "Phages are antibiotics in a different form",
+    "Phages make the patient's immune system stronger",
+    "Phages starve the bacteria by eating their food"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Phages are viruses, not drugs; they kill bacteria by infecting them and bursting them in the lytic cycle.",
+    "2": "Phages act on the bacteria directly, not by changing the patient.",
+    "3": "Phages do not eat; they hijack bacterial cells to make more phages."
+   },
+   "why": "A phage can attach only to bacteria with the right surface molecules, so human cells are safe. Inside the bacterium it runs the lytic cycle, makes new phages and bursts the cell. Viruses are not only harmful: phages also help control bacterial populations in water and soil.",
+   "src": "BIO.4d; IG p. 26 UtS 'Both viruses and bacteria can influence biodiversity and ecosystem dynamics'; IG p. 25 UtS 'There are viruses that can infect bacteria'; BIO.4c IG p. 27 SiP structure and function"
+  }
+ ]
+}

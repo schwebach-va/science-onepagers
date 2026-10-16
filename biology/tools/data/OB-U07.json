@@ -1,0 +1,561 @@
+{
+ "meta": {
+  "bank": "OB-U07",
+  "title": "Unit 7 · Evolution — original SOL practice bank",
+  "version": "v1 2026-10-16",
+  "status": "first site version; built for the fall SOL review sessions",
+  "statement": "These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education's Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test's wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE's released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. © J. R. Schwebach, CC BY-NC 4.0.",
+  "unit": 7,
+  "unit_name": "Evolution",
+  "lts": {
+   "7.1": "Variation and natural selection",
+   "7.2": "Evidence for evolution",
+   "7.3": "Speciation and patterns of change"
+  },
+  "source_ig": "VDOE, Instructional Guide to Support the 2018 Biology Standards of Learning (doc 77084); page numbers are printed pages",
+  "footer": "Original practice questions written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education.",
+  "copyright": "© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org",
+  "count": 16
+ },
+ "items": [
+  {
+   "id": "OB-U07-01",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.1",
+   "sol": "BIO.7b",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Where a brand-new allele comes from",
+   "dok": 1,
+   "stem": "A population of deer mice carries two alleles for coat color. A third coat-color allele, one that no member of the species has ever carried, appears in a newborn mouse. What most likely produced it?",
+   "opts": [
+    "A mouse that lived in a darker forest passed on the dark coat it developed there",
+    "Crossing over during meiosis mixed the two existing alleles into new combinations",
+    "A mouse moved in from a neighboring population and mated with local mice",
+    "A mutation changed the DNA sequence of the coat-color gene in a parent's egg or sperm cell"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Traits gained during a lifetime are not written into DNA, so they cannot be inherited.",
+    "1": "Crossing over shuffles alleles that already exist; it does not invent a new one.",
+    "2": "Gene flow brings in alleles from another population, but this allele had never existed in the species at all."
+   },
+   "why": "Mutation, a change in the sequence of DNA bases, is the only source of an allele that has never existed before. Sexual reproduction and gene flow shuffle and spread alleles that are already present. A mutation is inherited only if it is in a sex cell.",
+   "src": "BIO.7b; IG p. 50 UtS 'Mutations, gene flow, and sexual reproduction cause variations within a population'; 'Mutations are changes in the sequence of DNA nitrogenous bases'"
+  },
+  {
+   "id": "OB-U07-02",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.1",
+   "sol": "BIO.7c",
+   "category": "Interactions",
+   "type": "order",
+   "topic": "The steps of natural selection",
+   "dok": 2,
+   "stem": "Put the steps of natural selection in order, starting with the population as it was before anything changed.",
+   "opts": [
+    "Individuals carrying the helpful trait survive and have more offspring than the others.",
+    "Individuals in the population differ in an inherited trait.",
+    "Over many generations, the helpful trait becomes common in the population.",
+    "The environment changes, so one version of the trait now helps survival.",
+    "Offspring inherit the trait from their parents."
+   ],
+   "key": [
+    1,
+    3,
+    0,
+    4,
+    2
+   ],
+   "miss": {
+    "change-first": "The variation has to be there before the environment changes; selection only works on traits individuals already have.",
+    "inherit": "Surviving matters to evolution only because the trait is passed to offspring."
+   },
+   "mc_twin": {
+    "stem": "In natural selection, which must already exist in a population before the environment changes?",
+    "opts": [
+     "Inherited differences among individuals",
+     "Individuals that decide to change",
+     "Traits gained by using a body part more",
+     "A new species"
+    ],
+    "key": 0,
+    "miss": {
+     "1": "Organisms cannot choose their inherited traits.",
+     "2": "Traits gained during a lifetime are not inherited.",
+     "3": "A new species can be the end result, not the starting point."
+    }
+   },
+   "why": "Variation comes first, then a pressure that favors one version, then unequal survival and reproduction, then inheritance, and over generations the population shifts. Remove any step and natural selection stops.",
+   "src": "BIO.7c; IG p. 51 UtS 'Natural selection occurs only if there is both variation in the genetic information among organisms in a population and variation in the expression'; 'Traits that positively affect survival are more likely to be reproduced'"
+  },
+  {
+   "id": "OB-U07-03",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.1",
+   "sol": "BIO.7c",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Reading a shift in a population after a fire",
+   "dok": 3,
+   "stem": "In a model study, a meadow is home to a ground beetle that comes in a tan form and a dark form; the color is inherited. A wildfire leaves the ground covered in black ash for years, and birds hunt the beetles by sight.",
+   "table": [
+    [
+     "Generations after the fire",
+     "0",
+     "5",
+     "10",
+     "15"
+    ],
+    [
+     "Dark beetles (% of population)",
+     "10",
+     "25",
+     "55",
+     "80"
+    ]
+   ],
+   "stem2": "Which explanation best fits the data?",
+   "opts": [
+    "The dark form became more common because birds found tan beetles more easily, so dark beetles survived to reproduce and passed on the dark color",
+    "Ash coated the beetles, and their offspring were born with the darker color their parents had acquired",
+    "The heat of the fire caused mutations that turned tan beetles dark",
+    "Tan beetles chose to leave the meadow, so dark beetles moved in to fill the space"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "A coating picked up during a lifetime does not change the DNA passed to offspring.",
+    "2": "Mutations are random and do not aim at what the environment needs; the dark form was already in the population.",
+    "3": "The data show a change within the same population over generations, the pattern selection by predators produces."
+   },
+   "why": "Both colors were present before the fire. Against black ash, tan beetles stood out, so birds ate more of them. Dark beetles survived, reproduced and passed on the dark allele, and its share rose each generation. That is natural selection changing gene frequency in a population.",
+   "src": "BIO.7c; IG p. 51 UtS 'may lead to the durable change in the frequency of a gene in a given population'; IG p. 52 SiP 'Make, support, and evaluate a claim about how natural selection can change gene frequency within a population over time'"
+  },
+  {
+   "id": "OB-U07-04",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.1",
+   "sol": "BIO.7c",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Antibiotic resistance as rapid evolution",
+   "dok": 2,
+   "stem": "A hospital uses one antibiotic heavily for several years. Each year a larger share of the bacteria in patient samples survive that antibiotic. Which explanation is most accurate?",
+   "sol_also": "BIO.4e",
+   "opts": [
+    "The antibiotic taught the bacteria how to defend themselves",
+    "A few bacteria already carried resistance; the drug killed the others, and the survivors multiplied",
+    "Patients' bodies became immune to the antibiotic",
+    "The antibiotic grew weaker the longer it sat on hospital shelves"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Bacteria cannot learn or decide to change. Resistance was already present in a few cells before the drug arrived.",
+    "2": "Resistance belongs to the bacteria, not the patients; the drug is aimed at the bacteria.",
+    "3": "Fresh doses behave the same way; what changed is the bacterial population."
+   },
+   "why": "This is natural selection working fast. Bacteria vary, and a few happen to carry resistance. The antibiotic removes the rest, so the resistant cells reproduce with little competition, and every new generation has a larger share of resistant cells. Bacteria divide so quickly that the change is visible within a few years.",
+   "src": "BIO.7c; IG p. 51 UtS 'these changes can be rapid over few generations (e.g., antibiotic resistance in bacteria'"
+  },
+  {
+   "id": "OB-U07-05",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.1",
+   "sol": "BIO.7b",
+   "category": "Interactions",
+   "type": "ms",
+   "topic": "What natural selection needs",
+   "dok": 2,
+   "stem": "Which conditions must be present for natural selection to change a population? Select all that apply.",
+   "opts": [
+    "Individuals differ in a trait",
+    "The differences can be inherited",
+    "Individuals change their traits on purpose when they need to",
+    "More offspring are born than the environment can support",
+    "The environment stays exactly the same forever",
+    "Some versions of the trait help individuals survive and reproduce more than others"
+   ],
+   "key": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "miss": {
+    "2": "Organisms do not choose their inherited traits; selection acts on differences that already exist.",
+    "4": "A changing environment is often what makes one version of a trait more useful than another."
+   },
+   "why": "Natural selection needs inherited variation, more offspring than can survive, and differences in survival and reproduction tied to that variation. Wanting or needing a trait plays no part.",
+   "src": "BIO.7b; IG p. 51 UtS 'Populations produce more offspring than the environment can support. Organisms with certain genetic variations will be favored'; BIO.7c IG p. 51 'variation in the genetic information'"
+  },
+  {
+   "id": "OB-U07-06",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.1",
+   "sol": "BIO.7b",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Reproductive strategies",
+   "dok": 2,
+   "stem": "A loggerhead sea turtle buries about 100 eggs in a beach nest and never returns to care for the young. An African elephant has a single calf about every four years and cares for it for years. Which statement best explains these two strategies?",
+   "opts": [
+    "Both strategies raise the chance that some offspring survive: many offspring with no care, or few offspring with a lot of care",
+    "Sea turtles lay more eggs because they are a more advanced species than elephants",
+    "The elephant strategy is a mistake that natural selection has not yet removed",
+    "Each mother decides how many young to have based on what she learned from her own mother"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Neither species is more advanced; each strategy fits how the species lives.",
+    "2": "Both strategies have lasted for millions of years because each works for its species.",
+    "3": "Clutch size and parental care are inherited traits shaped by selection, not personal choices."
+   },
+   "why": "Most turtle hatchlings are eaten, but laying many eggs means a few reach adulthood. An elephant invests heavily in each calf, so most calves survive. Both strategies keep the population going.",
+   "src": "BIO.7b; IG p. 50 UtS 'Organisms possess reproductive strategies and rates that maximize the probability that their offspring, and thus the population, can survive'"
+  },
+  {
+   "id": "OB-U07-07",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.2",
+   "sol": "BIO.7a",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Relative age from rock layers",
+   "dok": 2,
+   "stem": "A road cut in the Valley of Virginia exposes four undisturbed layers of sedimentary rock. A geology class records which fossils appear in each layer.",
+   "table": [
+    [
+     "Layer (top to bottom)",
+     "Fossils found"
+    ],
+    [
+     "Layer 1 (top)",
+     "Small mammal teeth"
+    ],
+    [
+     "Layer 2",
+     "Land plant leaves and seeds"
+    ],
+    [
+     "Layer 3",
+     "Fish-like animals with jaws"
+    ],
+    [
+     "Layer 4 (bottom)",
+     "Shelled sea animals only"
+    ]
+   ],
+   "stem2": "Which conclusion do these layers support?",
+   "opts": [
+    "The fish-like animals lived before the land plants, because their fossils are in deeper, older layers",
+    "All four kinds of organisms lived at the same time, because they are in the same road cut",
+    "The mammals are the oldest, because the top layer formed first",
+    "Nothing about relative age can be said without radioactive dating"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Each layer formed at a different time, so fossils in different layers are from different times.",
+    "2": "In undisturbed layers the bottom layer formed first; the top layer is the youngest.",
+    "3": "Radioactive dating gives an age in years; the order of the layers alone gives relative age."
+   },
+   "why": "In undisturbed rock the deepest layers formed first, so their fossils are the oldest. Reading upward is reading forward in time. Radioactive dating adds numbers of years, but the sequence comes from the layers themselves.",
+   "src": "BIO.7a; IG p. 50 UtS 'Fossils found in different layers of rock can be used to determine the relative age of organisms, while radioactive dating provides a more specific estimate'"
+  },
+  {
+   "id": "OB-U07-08",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.2",
+   "sol": "BIO.7a",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Grouping species from DNA differences",
+   "dok": 3,
+   "stem": "Scientists sequence the same gene in four crayfish species, J, K, L and M, from Virginia streams and count the base differences between each pair.",
+   "table": [
+    [
+     "Pair",
+     "J–K",
+     "J–L",
+     "J–M",
+     "K–L",
+     "K–M",
+     "L–M"
+    ],
+    [
+     "Base differences",
+     "4",
+     "22",
+     "23",
+     "21",
+     "24",
+     "6"
+    ]
+   ],
+   "stem2": "Which conclusion is best supported?",
+   "opts": [
+    "J and L are each other's closest relatives",
+    "All four species are equally related",
+    "J and K share a recent common ancestor, and L and M share a different one",
+    "M is most closely related to J"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "J and L differ at 22 positions, one of the largest gaps in the table.",
+    "1": "The counts are not equal: two pairs differ at only 4 and 6 positions, the rest at 21 to 24.",
+    "3": "M differs from J at 23 positions; M's smallest difference is with L."
+   },
+   "why": "Fewer differences mean less time since two species split from a common ancestor. J and K differ at only 4 positions and L and M at only 6, while every cross pair differs at more than 20. That pattern points to two pairs of close relatives, the same grouping a cladogram would show.",
+   "src": "BIO.7a; IG p. 50 UtS 'Having similar DNA is a strong indicator that organisms share a common ancestor'; IG p. 52 SiP 'Analyze and interpret evidence to make inferences about evolutionary relationships'"
+  },
+  {
+   "id": "OB-U07-09",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.2",
+   "sol": "BIO.7a",
+   "sol_also": "BIO.7d",
+   "category": "Interactions",
+   "type": "match",
+   "topic": "Kinds of evidence for evolution",
+   "dok": 2,
+   "stem": "Match each observation to the kind of evidence it is. Use each choice once.",
+   "rows": [
+    "A whale's flipper and a human arm contain the same set of bones in the same order.",
+    "An octopus eye and a human eye both focus light with a lens, but they develop from different tissues in unrelated animals.",
+    "Pythons carry tiny hip bones and leg spurs, though they have no legs to walk on.",
+    "Early embryos of fish, chickens and humans all have the same folds in the neck region."
+   ],
+   "opts": [
+    "Homologous structures",
+    "Analogous structures",
+    "Vestigial structures",
+    "Embryology"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "miss": {
+    "Homologous structures": "Homologous structures share the same underlying parts because they were inherited from a common ancestor, even when the jobs differ.",
+    "Analogous structures": "Analogous structures do the same job but arose separately, so they do not show a shared ancestor.",
+    "Vestigial structures": "A vestigial structure is a reduced leftover of a part that was useful in an ancestor.",
+    "Embryology": "Embryology compares how organisms develop; shared early stages point to shared ancestry."
+   },
+   "why": "Same bones, different job: homologous. Same job, different build: analogous. A leftover with little or no use: vestigial. Shared early development: embryology. Homologous, vestigial and embryological evidence all point to common ancestors; analogous structures show that similar environments can shape unrelated organisms alike.",
+   "src": "BIO.7d; IG p. 51 UtS 'The theory of evolution is supported by scientific evidence from many disciplines such as ... embryology, anatomy'"
+  },
+  {
+   "id": "OB-U07-10",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.2",
+   "sol": "BIO.7a",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "A transitional fossil",
+   "dok": 2,
+   "stem": "A fossil about 375 million years old has gills, scales and fins like a fish. It also has a flexible neck, and the bones inside its front fins match the upper arm, forearm and wrist bones of four-legged land animals. How does this fossil support the theory of evolution?",
+   "opts": [
+    "It proves that fish today are turning into land animals",
+    "It shows a mix of fish and land-animal features, the kind of intermediate form expected if land animals descended from fish",
+    "It shows that land animals lived before fish did",
+    "It is evidence against evolution, because an animal cannot be both a fish and a land animal"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Today's fish are not ancestors of today's land animals; both descend from ancient ancestors.",
+    "2": "Fossils of fish are found in older rock than fossils of four-legged land animals.",
+    "3": "A transitional form is exactly what evolution predicts: a lineage that has some new features and keeps some old ones."
+   },
+   "why": "If four-legged animals descended from fish, rocks from the right time should hold animals with features of both. Fossils like this one, found by searching rocks of the predicted age, fill in that transition.",
+   "src": "BIO.7a; IG p. 50 UtS 'Scientists have used the fossil record to construct a history of life on Earth'; IG p. 52 SiP 'Analyze and interpret evidence to make inferences about evolutionary relationships'"
+  },
+  {
+   "id": "OB-U07-11",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.2",
+   "sol": "BIO.7d",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Why the theory of evolution is strong",
+   "dok": 2,
+   "stem": "Which statement best describes why biologists consider the theory of evolution well supported?",
+   "opts": [
+    "It was proven once by Darwin and can no longer change",
+    "It has been tested so many times that it has become a law",
+    "It is accepted mainly because most scientists agree with it",
+    "Independent evidence from fossils, anatomy, embryology and DNA points to the same pattern of relationships"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Every scientific theory stays open to new evidence; evolution has been refined since Darwin as genetics and DNA were added.",
+    "1": "Theories do not turn into laws. A theory explains; a law describes a pattern.",
+    "2": "Agreement follows the evidence; the evidence is the reason, not the vote."
+   },
+   "why": "A theory is strong when separate lines of evidence, gathered by different methods, agree. Fossil order, shared bone structures, shared embryo stages and DNA comparisons all give the same family tree. That agreement is what makes evolution one of the best-supported explanations in science.",
+   "src": "BIO.7d; IG p. 51 UtS 'supported by scientific evidence from many disciplines such as ... paleontology, geology, embryology, anatomy, biology, genetics, and biochemistry'"
+  },
+  {
+   "id": "OB-U07-12",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.3",
+   "sol": "BIO.7c",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Testing whether two groups are separate species",
+   "dok": 2,
+   "stem": "Two groups of a salamander have lived on separate Blue Ridge peaks for a very long time, cut off from each other by warm, dry valleys. Which finding would show that they have become two separate species?",
+   "opts": [
+    "The two groups now differ slightly in color",
+    "The two groups eat different insects",
+    "When brought together, they cannot interbreed and produce fertile offspring",
+    "One group is larger than the other"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Color can vary within a single species; it does not decide whether groups are separate species.",
+    "1": "Members of one species can eat different foods in different places.",
+    "3": "Size differences exist inside one species too."
+   },
+   "why": "Speciation is complete when two groups can no longer naturally interbreed and produce fertile offspring. Differences in color, food or size may build up along the way, but the breeding test is the one that decides.",
+   "src": "BIO.7c; IG p. 51 UtS 'The emergence of new species (speciation) occurs when a lineage has split into groups that can no longer naturally interbreed and produce fertile offspring'"
+  },
+  {
+   "id": "OB-U07-13",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.3",
+   "sol": "BIO.7c",
+   "category": "Interactions",
+   "type": "order",
+   "topic": "How one species becomes two",
+   "dok": 2,
+   "stem": "Put these events in order to show how one species can become two.",
+   "opts": [
+    "Each group meets different conditions, and different mutations build up in each.",
+    "One population of a species lives in a single valley.",
+    "The two groups can no longer interbreed and produce fertile offspring.",
+    "A river changes course and splits the population into two groups that cannot reach each other.",
+    "Natural selection makes the two groups more and more different over many generations."
+   ],
+   "key": [
+    1,
+    3,
+    0,
+    4,
+    2
+   ],
+   "miss": {
+    "barrier": "Isolation comes before the differences: the barrier stops gene flow, so changes in one group are not shared with the other.",
+    "end": "Being unable to interbreed is the end point that marks two species, not the start."
+   },
+   "mc_twin": {
+    "stem": "Why does a barrier that splits a population often lead to new species?",
+    "opts": [
+     "It stops gene flow, so the two groups change separately",
+     "It causes mutations directly",
+     "It makes the animals decide to stop mating",
+     "It instantly creates two species"
+    ],
+    "key": 0,
+    "miss": {
+     "1": "Mutations happen on both sides of a barrier; the barrier just keeps them from being shared.",
+     "2": "Breeding barriers evolve over generations; they are not decisions.",
+     "3": "Speciation takes many generations after the split."
+    }
+   },
+   "why": "A barrier stops gene flow. Each group then collects its own mutations and faces its own selection, and the differences pile up until the groups can no longer interbreed. That is speciation by isolation.",
+   "src": "BIO.7c; IG p. 51 UtS speciation 'lineage has split into groups that can no longer naturally interbreed'; IG p. 50 UtS 'The movement of genes from one population to another also provides greater genetic variation'"
+  },
+  {
+   "id": "OB-U07-14",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.3",
+   "sol": "BIO.7d",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Gradualism or punctuated equilibrium",
+   "dok": 2,
+   "stem": "Two fossil lineages are traced through the same 10 million years of rock. Lineage 1 changes a little in every layer, so its shell grows thicker step by step. Lineage 2 stays almost unchanged for millions of years, changes to a new form within a few thousand years, then stays unchanged again. Which pair of labels is correct?",
+   "opts": [
+    "Lineage 1: punctuated equilibrium · Lineage 2: gradualism",
+    "Both lineages: gradualism",
+    "Both lineages: punctuated equilibrium",
+    "Lineage 1: gradualism · Lineage 2: punctuated equilibrium"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Swapped: steady, small changes in every layer are gradualism.",
+    "1": "Lineage 2 shows long periods of no change broken by a quick burst; that is not gradual.",
+    "2": "Lineage 1 changes in every layer with no long still periods."
+   },
+   "why": "Gradualism is slow, steady change over many generations. Punctuated equilibrium is long periods of stability interrupted by short bursts of rapid change, often when strong environmental pressure arrives. Both patterns appear in the fossil record, sometimes in the same group of organisms.",
+   "src": "BIO.7d; IG p. 52 SiP 'Compare punctuated equilibrium and gradual change over time'; IG p. 51 UtS 'Punctuated equilibrium and gradualism can occur as isolated events or in tandem'"
+  },
+  {
+   "id": "OB-U07-15",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.3",
+   "sol": "BIO.7c",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Variation and the risk of extinction",
+   "dok": 3,
+   "stem": "A deadly fungal disease reaches two populations of the same frog species. Population A has many different alleles for skin-defense proteins. Population B descends from a few founders, and nearly every frog has the same alleles. Which population is more likely to survive the disease, and why?",
+   "opts": [
+    "Population B, because frogs that are alike can cooperate better",
+    "Population A, because with more variation, some frogs are more likely to carry a trait that resists the fungus",
+    "Both equally, because they are the same species",
+    "Neither, because a species cannot change in response to disease"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Cooperation is not the issue; if one frog lacks resistance, frogs with the same alleles lack it too.",
+    "2": "Belonging to the same species does not give two populations the same alleles.",
+    "3": "Populations do change when a disease kills some individuals and spares others; that is selection."
+   },
+   "why": "Genetic variation is a population's insurance. When a new pressure arrives, a varied population is more likely to contain a few individuals that survive and rebuild it. A population with little variation can be wiped out, and a species that cannot respond to a pressure may go extinct.",
+   "src": "BIO.7c; IG p. 51 UtS 'If a species is not able to evolve in response to environmental pressures, it may become extinct'; BIO.7b IG p. 50 'genetic variation'"
+  },
+  {
+   "id": "OB-U07-16",
+   "set": "practice",
+   "unit": 7,
+   "lt": "7.1",
+   "sol": "BIO.7b",
+   "category": "Interactions",
+   "type": "mc",
+   "topic": "Who evolves: individuals or populations",
+   "dok": 1,
+   "stem": "Which statement about evolution is accurate?",
+   "opts": [
+    "An individual organism evolves during its lifetime to fit its environment",
+    "Evolution happens only through gradual change, never quickly",
+    "A population evolves as the frequency of its alleles changes over generations",
+    "Evolution means organisms always become larger and more complex"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "An individual's genes do not change to fit its surroundings; populations change across generations.",
+    "1": "Change can be rapid, as in antibiotic resistance, or slow over millions of years.",
+    "3": "Evolution produces whatever fits the environment, which can mean smaller or simpler."
+   },
+   "why": "Evolution is a change in the gene pool of a population over generations. Individuals live and die with the alleles they were born with; what changes is how common each allele is in the next generation.",
+   "src": "BIO.7b; IG p. 50 UtS 'The accumulation of mutations within a population over time can result in changes to the gene pool'; IG p. 51 UtS 'gradual change in a population (gradualism) over many generations'"
+  }
+ ]
+}

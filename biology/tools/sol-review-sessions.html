@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Short review sessions for students retaking the Virginia Biology SOL, one unit at a time: the core ideas to draw and explain, original practice questions with every answer explained, and what to practice next.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/sol-review-sessions.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="SOL Review Sessions: Biology, One Unit at a Time">
+<meta property="og:description" content="Short review sessions for students retaking the Virginia Biology SOL, one unit at a time: the core ideas to draw and explain, original practice questions with every answer explained, and what to practice next.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/sol-review-sessions.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>SOL Review Sessions | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--gold:#C98A2E;--gold-soft:#FBF0DA;--gold-ink:#7A5212;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--gold:#E0A64A;--gold-soft:#2F2614;--gold-ink:#F2CF8C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--gold:#E0A64A;--gold-soft:#2F2614;--gold-ink:#F2CF8C;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:52rem;margin:0 auto;padding:.9rem 1rem 4rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.5rem,4.6vw,2.1rem);line-height:1.12;letter-spacing:-0.015em;margin:.2rem 0 .7rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.25rem;letter-spacing:-0.01em;margin:2.4rem 0 .7rem}
+h3{font-family:var(--sans);font-weight:600;font-size:1.08rem;margin:0 0 .5rem;line-height:1.25}
+p{margin:0 0 1rem}
+a{color:var(--bond)}
+.lede{font-size:1.08rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 .9rem .3rem 0;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-eyebrow{font-family:var(--sans);font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:.6rem 0 .2rem}
+.sop-foot{margin-top:2.8rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+.box{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1rem 1.1rem;margin:0 0 1rem}
+.box.start{border-left:5px solid var(--gold);background:var(--gold-soft)}
+.box.start h2{margin-top:0}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem;margin:.6rem 0 0}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:.55rem 1rem;border-radius:10px;font-family:var(--sans);font-weight:600;font-size:.98rem;text-decoration:none;border:2px solid var(--bond);color:var(--bond);background:var(--card);cursor:pointer}
+.btn.primary{background:var(--bond);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0d1a1d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0d1a1d}}
+.idea{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1rem 1.1rem 1.1rem;margin:0 0 1.1rem;position:relative}
+.idea .num{font-family:var(--sans);font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--bond)}
+.idea .sol{font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);margin-left:.4rem}
+.lane{display:grid;grid-template-columns:7.2rem 1fr;gap:.2rem .8rem;margin:.55rem 0 0;font-size:.97rem}
+.lane dt{font-family:var(--sans);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);padding-top:.2rem}
+.lane dd{margin:0 0 .5rem}
+.lane dd.draw{background:var(--bond-soft);border-radius:8px;padding:.45rem .65rem}
+@media (max-width:560px){.lane{grid-template-columns:1fr}.lane dt{padding-top:.4rem}}
+ol.steps{padding-left:1.3rem}ol.steps li{margin:0 0 .5rem}
+.next{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.next .box{margin:0}
+.next h3{margin-bottom:.3rem}
+.next ul{list-style:none;padding:0;margin:.4rem 0 0}
+.next li{margin:.25rem 0;font-family:var(--sans);font-size:.92rem}
+details.teach{margin-top:1rem}
+details.teach summary{font-family:var(--sans);font-weight:600;cursor:pointer;min-height:44px;display:flex;align-items:center}
+.trap{font-family:var(--sans);font-size:.92rem;background:var(--flag-soft);border-radius:8px;padding:.5rem .7rem;margin:.6rem 0 0}
+.flexpage{display:none}
+@media print{
+  @page{size:letter;margin:.45in .5in}
+  body{background:#fff;color:#000;font-size:10.5pt;line-height:1.32}
+  .wrap{display:none}
+  .flexpage{display:block;font-family:Georgia,serif;color:#000}
+  .fp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:2px solid #000;padding-bottom:5px;margin-bottom:6px}
+  .fp-head h1{font-family:Arial,Helvetica,sans-serif;font-size:15pt;margin:0 0 2px}
+  .fp-head .who{font-family:Arial,Helvetica,sans-serif;font-size:9.5pt}
+  .fp-head svg{width:.85in;height:.85in;flex:none}
+  .fp-ideas{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .fp-idea{border:1px solid #000;border-radius:5px;padding:4px 6px;break-inside:avoid;min-height:2.65in}
+  .fp-idea b{font-family:Arial,Helvetica,sans-serif;font-size:9.5pt}
+  .fp-idea p{margin:2px 0 0;font-size:9pt}
+  .fp-idea.wide{grid-column:1/-1;min-height:2.3in}
+  .fp-qs{columns:2;column-gap:16px;margin-top:4px}
+  .fp-q{break-inside:avoid;margin:0 0 7px;font-size:9.5pt}
+  .fp-q ol{margin:2px 0 0;padding-left:18px;list-style:upper-alpha}
+  .fp-q table{border-collapse:collapse;margin:3px 0;font-size:8.5pt}
+  .fp-q td,.fp-q th{border:1px solid #000;padding:1px 4px}
+  .fp-sec{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:10.5pt;margin:8px 0 3px;text-transform:uppercase;letter-spacing:.04em}
+  .fp-plan li{margin:2px 0}
+  .fp-break{break-before:page}
+  .fp-foot{font-family:Arial,Helvetica,sans-serif;font-size:7.5pt;margin-top:8px;border-top:1px solid #000;padding-top:3px}
+}
+
+.units{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.units .box{margin:0}
+.units ul{list-style:none;padding:0;margin:.5rem 0 0;font-family:var(--sans);font-size:.92rem}
+.units li{margin:.25rem 0}
+.ready,.soon{display:inline-block;font-family:var(--sans);font-size:.75rem;font-weight:700;border-radius:999px;padding:.15rem .55rem}
+.ready{background:var(--bond);color:#fff}
+.soon{background:var(--bond-soft);color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+<p class="sop-eyebrow">Bio Tool #29 &middot; Biology SOL &middot; for students retaking the test</p>
+<h1>SOL Review Sessions: Biology, One Unit at a Time</h1>
+<p class="lede">The Biology SOL has 45 scored questions, and every unit of the course contributes some. Pick a unit, learn the few ideas its questions keep returning to, then practice on questions that explain every answer.</p>
+
+<div class="box start">
+<h2>How each session works</h2>
+<ol class="steps">
+<li>Answer three questions cold and keep your score.</li>
+<li>Learn the five ideas, drawing each one.</li>
+<li>Practice at your own pace; every answer tells you why.</li>
+<li>Retry the first three, then choose the next unit to practice.</li>
+</ol>
+</div>
+
+<h2>Choose a unit</h2>
+<p>Question counts are estimates from the state test blueprint, which sets 17 questions on molecules and cells, 11 on systems and organisms, and 17 on interactions.</p>
+<div class="units">
+<div class="box unit" id="unit-1"><p class="sop-eyebrow" style="margin-top:0">Unit 1 · SOL BIO.2a–c · about 4 of 45 questions</p><h3>Biochemistry</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?unit=1" target="_blank" rel="noopener">Challenge questions 1–18</a></li></ul></div><div class="box unit" id="unit-2"><p class="sop-eyebrow" style="margin-top:0">Unit 2 · SOL BIO.3a, 3b, 3d · about 4 of 45 questions</p><h3>Cell Structure &amp; Function</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?set=practice&amp;unit=2" target="_blank" rel="noopener">30 practice questions</a></li><li><a href="sol-challenge-questions.html?unit=2" target="_blank" rel="noopener">Challenge questions</a></li></ul></div><div class="box unit" id="unit-3"><p class="sop-eyebrow" style="margin-top:0">Unit 3 · SOL BIO.2e · about 1 of 45 questions</p><h3>Cell Energetics</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?unit=3" target="_blank" rel="noopener">Challenge questions</a></li></ul></div><div class="box unit" id="unit-4"><p class="sop-eyebrow" style="margin-top:0">Unit 4 · SOL BIO.2d, 3c, 5a, 5b, 5e · about 7 of 45 questions</p><h3>Nucleic Acids &amp; Protein Synthesis</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?unit=4" target="_blank" rel="noopener">Challenge questions</a></li></ul></div><div class="box unit" id="unit-5"><p class="sop-eyebrow" style="margin-top:0">Unit 5 · SOL BIO.3c, 3e, 5d · about 4 of 45 questions</p><h3>Cell Growth, Division &amp; Specialization</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?unit=5" target="_blank" rel="noopener">Challenge questions</a></li></ul></div><div class="box unit" id="unit-6"><p class="sop-eyebrow" style="margin-top:0">Unit 6 · SOL BIO.5c · about 2 to 4 of 45 questions</p><h3>Genetics &amp; Heredity</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?unit=6" target="_blank" rel="noopener">Challenge questions</a></li></ul></div><div class="box unit" id="unit-7"><p class="sop-eyebrow" style="margin-top:0">Unit 7 · SOL BIO.7a–d · about 6 of 45 questions</p><h3><a href="sol-review/evolution.html">Evolution</a></h3><span class="ready">Full session</span><ul><li><a href="sol-challenge-questions.html?set=practice&amp;unit=7" target="_blank" rel="noopener">16 practice questions</a></li><li><a href="sol-challenge-questions.html?unit=7" target="_blank" rel="noopener">Challenge questions 43–45</a></li></ul></div><div class="box unit" id="unit-8"><p class="sop-eyebrow" style="margin-top:0">Unit 8 · SOL BIO.6a–f · about 6 of 45 questions</p><h3>Classification &amp; Biodiversity</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?q=46,47,48,49" target="_blank" rel="noopener">Challenge questions 46–49</a></li><li><a href="../tree-of-life.html" target="_blank" rel="noopener">The Tree of Life</a></li></ul></div><div class="box unit" id="unit-9"><p class="sop-eyebrow" style="margin-top:0">Unit 9 · SOL BIO.4a–e · about 5 of 45 questions</p><h3><a href="sol-review/bacteria-viruses.html">Bacteria &amp; Viruses</a></h3><span class="ready">Full session</span><ul><li><a href="sol-challenge-questions.html?set=practice&amp;unit=9" target="_blank" rel="noopener">17 practice questions</a></li><li><a href="sol-challenge-questions.html?q=50,51,52" target="_blank" rel="noopener">Challenge questions 50–52</a></li></ul></div><div class="box unit" id="unit-10"><p class="sop-eyebrow" style="margin-top:0">Unit 10 · SOL BIO.8a–d · about 6 of 45 questions</p><h3>Ecology</h3><span class="soon">Practice now · session page to come</span><ul><li><a href="sol-challenge-questions.html?unit=10" target="_blank" rel="noopener">Challenge questions 53–57</a></li></ul></div>
+</div>
+
+<h2>The last two days before the test</h2>
+<ul>
+<li>Spend your time on the units with the most questions where you feel weakest. One focused practice set beats rereading notes.</li>
+<li>When you miss a question, read the explanation and say the reason out loud. Then try the question again tomorrow.</li>
+<li>Practice in TestNav at least once so the tools feel familiar: Virginia posts its released Biology test on the <a href="https://www.doe.virginia.gov/teaching-learning-assessment/student-assessment/sol-practice-items-all-subjects" target="_blank" rel="noopener">SOL practice items page</a>.</li>
+<li>Sleep. Recall works better rested than crammed.</li>
+</ul>
+
+<details class="teach"><summary>For teachers</summary>
+<p>Each full session page runs in a 45-minute period: a three-question warm-up, five core ideas with a draw-along for each, independent practice on iPads, and a retry of the warm-up. Every session page prints a two-page paper version with drawing boxes, six questions and a study plan. All practice questions are original, written from the Virginia 2018 Biology Standards of Learning and the VDOE Instructional Guide, and the explanations work without a teacher, so students can keep practicing after the session. Link a unit directly, for example <code>sol-review/evolution.html</code>, or a practice set, <code>sol-challenge-questions.html?set=practice&amp;unit=7</code>.</p>
+</details>
+
+<footer class="sop-foot">Bio Tool #29 &middot; Original review written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education. &copy; J. R. Schwebach, <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> &middot; <a href="../../index.html">scienceonepagers.org</a></footer>
+</div>
+</body>
+</html>

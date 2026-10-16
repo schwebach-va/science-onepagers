@@ -1,7 +1,21 @@
 {
  "note": "Bio Tool #8 data index. A unit goes live by adding its OB-UNN.json here; a Practice Test form by adding PT-X.json under tests.",
  "units": {
-  "2": {"file": "OB-U02.json", "count": 30, "title": "Cell Structure & Function"}
+  "2": {
+   "file": "OB-U02.json",
+   "count": 30,
+   "title": "Cell Structure & Function"
+  },
+  "7": {
+   "file": "OB-U07.json",
+   "count": 16,
+   "title": "Evolution"
+  },
+  "9": {
+   "file": "OB-U09.json",
+   "count": 17,
+   "title": "Bacteria & Viruses"
+  }
  },
  "tests": {}
 }
