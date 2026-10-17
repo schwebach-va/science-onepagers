@@ -225,7 +225,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
     res('T27',m.svgH>=0.72*m.ih&&m.buildH>=0.95*m.ih&&m.cardW>=300&&m.cardRight<=m.iw&&m.sw<=m.iw,`1920x1080 fill: ${JSON.stringify(m)}`);note('T27',`1920x1080 fill: stage ${m.svgW}x${m.svgH} of ${m.iw}x${m.ih}, panel ${m.cardW} px wide`);await ctx.close();}
   /* T3: the one real visual test, at 1600 px wide so it lines up with the 1600 px reference */
   {const {ctx,pg}=await fresh(br,{width:1700,height:1200});await open(pg);await pg.evaluate(()=>__MR.setLevel('de'));
-    await pg.addStyleTag({content:'.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
+    await pg.addStyleTag({content:'.next::after{display:none!important}.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
     await go(pg,5);await go(pg,6);await pg.evaluate(()=>__MR.stopLoop());await pg.evaluate(()=>document.fonts.ready);await sleep(300);
     const svg=await pg.$('#stage svg');await svg.screenshot({path:`${OUT}/T3-final-step.png`});
     await pg.addStyleTag({content:'.stage svg .min,.stage svg .eyebrow{font-size:28px!important}'});await sleep(200);

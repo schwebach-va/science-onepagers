@@ -1,7 +1,7 @@
 const {chromium}=require('/opt/node22/lib/node_modules/playwright');
 (async()=>{const br=await chromium.launch();const pg=await br.newPage({viewport:{width:1700,height:1200}});
 await pg.goto('http://127.0.0.1:8765/biology/tools/mechanism-reel.html');await pg.waitForFunction(()=>window.__MR);await pg.evaluate(()=>__MR.setLevel('de'));
-await pg.addStyleTag({content:'.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
+await pg.addStyleTag({content:'.next::after{display:none!important}.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
 await pg.evaluate(()=>__MR.goStep(5));await pg.waitForFunction(()=>!__MR.busy());await pg.evaluate(()=>__MR.goStep(6));await pg.waitForFunction(()=>!__MR.busy());await pg.evaluate(()=>__MR.stopLoop());
 await pg.evaluate(()=>document.fonts.ready);await new Promise(r=>setTimeout(r,400));
 const r=await pg.evaluate(()=>{const b=document.querySelector('#stage svg').getBoundingClientRect();return {x:b.x,y:b.y,w:b.width,h:b.height,sx:window.scrollX,sy:window.scrollY};});
