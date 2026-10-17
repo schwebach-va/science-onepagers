@@ -1,6 +1,8 @@
 /* Acceptance tests for the Mechanism Reel, Phase 2 figure 2: transport, per §7 of the brief plus T21-T27.
    A copy of mechanism-reel-tests-dogma.js with transport's own travellers, beat, labels, run-on and end
-   screen, and the first real T19 (ATP is spent before what it pays for moves).
+   screen, and the first real T19 (ATP is spent before what it pays for moves). Revision 1 adds T28:
+   opposite-direction movers through the pump never have intersecting active intervals (alternating
+   access, R1), and the sources line under the reel (R6).
    Programmatic assertions throughout; the only screenshot is T3 (plus one per FAIL).
    T3's comparison: python3 t3-compare-transport.py after this run (writes the two-up image). */
 const {chromium}=require('/opt/node22/lib/node_modules/playwright');
@@ -37,6 +39,12 @@ const animProps=()=>document.getAnimations().map(a=>{const props=new Set();try{a
   return {props:[...props],id,active,inStage:!!(a.effect&&a.effect.target&&a.effect.target.closest&&a.effect.target.closest('#stage')),pseudo:a.effect&&a.effect.pseudoElement||null};});
 const STRIP=/©\s*2026|Skou 1957|Bio Tool #25|DE BIO 101|SOL BIO MODULE 2/gi;
 const rectOf=id=>{const e=document.querySelector('#stage #'+id);const r=e.getBoundingClientRect();return [Math.round(r.x),Math.round(r.y)];};
+const rectsOf=ids=>Object.fromEntries(ids.map(id=>[id,(e=>{const r=e.getBoundingClientRect();return [Math.round(r.x),Math.round(r.y)];})(document.querySelector('#stage #'+id))]));
+/* the run-on's clones, in user units: fill tells sodium from potassium from phosphate; x past the divider (806) is the pump's side */
+const clonesNow=()=>{const svg=document.querySelector('#stage svg');const sb=svg.getBoundingClientRect();const k=1600/sb.width;return [...document.querySelectorAll('#runLayer > g')].map((g,i)=>{const c=g.querySelector('circle');const r=c.getBoundingClientRect();return {i,fill:c.getAttribute('fill'),x:(r.x-sb.x)*k,y:(r.y-sb.y)*k};});};
+const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return {present:false};const r=p.getBoundingClientRect();const links=[...p.querySelectorAll('a')].map(a=>({t:a.textContent,h:a.getAttribute('href')}));
+  return {present:true,visible:r.height>0&&getComputedStyle(p).display!=='none'&&getComputedStyle(p).visibility!=='hidden',disclosed:!!p.closest('details,[hidden]'),text:p.textContent,links,inBuild:!!p.closest('#build'),
+    matches:want.length===links.length&&want.every(([t,h],i)=>links[i].t===t&&links[i].h===h)&&__MR.sources().length===want.length};};
 
 (async()=>{
   const br=await chromium.launch();
@@ -64,7 +72,12 @@ const rectOf=id=>{const e=document.querySelector('#stage #'+id);const r=e.getBou
     res('T1',!paused.playing&&/^Paused/.test(paused.readout)&&/Play/.test(paused.play),`${tag}: Pause gave ${JSON.stringify(paused)}`);
     await pg.click('#back');await settle(pg);const cleared=await pg.evaluate(()=>({step:__MR.step(),clones:document.querySelectorAll('#runLayer > g').length,readout:__MR.readout(),ji1:__MR.el('ji1').transform}));
     res('T1',cleared.step===2&&cleared.clones===0&&cleared.readout===''&&/translate\(0px, 0px\)/.test(cleared.ji1),`${tag}: Back from the run-on gave ${JSON.stringify(cleared)}`);
-    note('T1',`${tag}: ?anim=transport&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout; Pause stops it; Back clears the clones and the wandering ion`);
+    /* R6: the figure's sources are a visible line under the reel, and they follow the selected figure */
+    const srcT=await pg.evaluate(sourcesLine,[['Skou 1957','https://doi.org/10.1016/0006-3002(57)90343-8']]);
+    await pg.evaluate(()=>__MR.setFig('dogma'));const srcD=await pg.evaluate(sourcesLine,[['Nirenberg 1961','https://doi.org/10.1073/pnas.47.10.1588'],['Crick 1970','https://doi.org/10.1038/227561a0'],['Berget & Sharp 1977','https://doi.org/10.1073/pnas.74.8.3171']]);
+    await pg.evaluate(()=>__MR.setFig('transport'));
+    res('T1',srcT.present&&srcT.visible&&!srcT.disclosed&&srcT.inBuild&&srcT.matches&&/^Source: Skou 1957$/.test(srcT.text.trim())&&srcD.visible&&srcD.matches&&/^Sources: Nirenberg 1961/.test(srcD.text.trim()),`${tag}: sources line transport=${JSON.stringify(srcT)} dogma=${JSON.stringify(srcD)}`);
+    note('T1',`${tag}: ?anim=transport&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout; Pause stops it; Back clears the clones and the wandering ion; the sources line under the reel reads "${srcT.text.trim()}" and follows the figure (R6)`);
     /* T15: order and bridges; the three placeholders */
     await open(pg);
     const selText=await pg.evaluate(()=>[...document.querySelectorAll('#sel > li')].map(l=>l.textContent.trim()));
@@ -153,6 +166,31 @@ const rectOf=id=>{const e=document.querySelector('#stage #'+id);const r=e.getBou
     res('T18',t18ok,t18why);
     res('T19',t19ok,t19why);
     note('T19',`${tag}: the phosphate lands on the pump at ${pays.paidAt} ms; ${funded.map(([id,d])=>`${id} starts at ${d}`).join(', ')}; sampled: nothing funded moved before ${pays.paidAt} ms`);
+    /* T28: alternating access (R1). For every pair of movers crossing the membrane in opposite directions through the pump,
+       their active intervals do not intersect: in step 2's timing table, in the run-on's declared schedule, and as sampled
+       on the stage during both (no sample ever sees a sodium and a potassium both displaced since the sample before) */
+    {let ok=true,why='';const cr=timing.crossings,seqS=timing.seq[cr.step],run=timing.runCrossings;
+      const iv=id=>{const q=seqS[id];return q?[q.d,q.d+q.dur]:null;};const meet=(a,b)=>a[0]<b[1]&&b[0]<a[1];
+      const outs=cr.out.map(id=>[id,iv(id)]),ins=cr.in.map(id=>[id,iv(id)]);
+      outs.forEach(([o,a])=>ins.forEach(([i,b])=>{if(!a||!b){ok=false;why+=` ${tag}: ${o} or ${i} has no entry in step ${cr.step}`;}else if(meet(a,b)){ok=false;why+=` ${tag}: ${o} ${a[0]}-${a[1]} overlaps ${i} ${b[0]}-${b[1]}`;}}));
+      const lastOut=Math.max(...outs.map(([,a])=>a?a[1]:0)),firstIn=Math.min(...ins.map(([,b])=>b?b[0]:Infinity));
+      if(!run||!run.out.length||!run.in.length){ok=false;why+=` ${tag}: no run-on schedule`;}
+      else run.out.forEach(a=>run.in.forEach(b=>{if(meet(a,b)){ok=false;why+=` ${tag}: run-on sodium ${a.join('-')} overlaps potassium ${b.join('-')}`;}}));
+      /* sampled, step 2 */
+      await go(pg,1);const ids=cr.out.concat(cr.in);let prev=await pg.evaluate(rectsOf,ids);await pg.evaluate(k=>__MR.goStep(k),cr.step);const t0=Date.now();let both=null,sawOut=0,sawIn=0;
+      while(Date.now()-t0<timing.dur[cr.step]+150){const now=await pg.evaluate(rectsOf,ids);const mv=id=>Math.abs(now[id][0]-prev[id][0])>1||Math.abs(now[id][1]-prev[id][1])>1;
+        const o=cr.out.filter(mv),i=cr.in.filter(mv);if(o.length)sawOut++;if(i.length)sawIn++;if(o.length&&i.length&&!both)both=`${o.join(',')} and ${i.join(',')} both moving at ${Date.now()-t0} ms of step ${cr.step}`;prev=now;await sleep(40);}
+      await settle(pg);if(both){ok=false;why+=` ${tag}: ${both}`;}if(!sawOut||!sawIn){ok=false;why+=` ${tag}: step ${cr.step} sampling saw sodium moving in ${sawOut} samples and potassium in ${sawIn}`;}
+      /* sampled, the run-on: one full cycle and a little more */
+      await go(pg,3);const t1=Date.now();let bothRun=null,runOut=0,runIn=0,prevC=new Map();
+      while(Date.now()-t1<(run?run.period:3600)+900){const cl=await pg.evaluate(clonesNow);const naM=[],kM=[];
+        cl.forEach(c=>{const p=prevC.get(c.i);if(p&&(Math.abs(p.x-c.x)>1||Math.abs(p.y-c.y)>1)){if(c.fill==='#BFA58A'&&c.x>806)naM.push(c.i);if(c.fill==='#8595AB')kM.push(c.i);}});
+        if(naM.length)runOut++;if(kM.length)runIn++;if(naM.length&&kM.length&&!bothRun)bothRun=`sodium clones ${naM.join(',')} and potassium clones ${kM.join(',')} both moving at ${Date.now()-t1} ms of the run-on`;
+        prevC=new Map(cl.map(c=>[c.i,c]));await sleep(40);}
+      await pg.evaluate(()=>__MR.stopLoop());
+      if(bothRun){ok=false;why+=` ${tag}: ${bothRun}`;}if(!runOut||!runIn){ok=false;why+=` ${tag}: run-on sampling saw sodium moving in ${runOut} samples and potassium in ${runIn}`;}
+      res('T28',ok,why);
+      note('T28',`${tag}: step 2 sodium out ${outs.map(([o,a])=>`${o} ${a?a.join('-'):'?'}`).join(', ')}; potassium in ${ins.map(([i,b])=>`${i} ${b?b.join('-'):'?'}`).join(', ')}, the first ${firstIn-lastOut} ms after the last sodium arrived; run-on sodium ${run?run.out.map(a=>a.join('-')).join(', '):'?'}, potassium ${run?run.in.map(b=>b.join('-')).join(', '):'?'}; sampled: never both directions at once`);}
     /* T16: no counts or orders of magnitude at any step, either level; no counter and no numbers in the run-on (D4). The still's own "3 Na⁺ out / 2 K⁺ in" is its stoichiometry, not a tally */
     const numRe=/\b\d+\s*(x|×|fold|times|molecules?|ions?|copies|thousand|million|billion|per)\b|10\^|10[⁰¹²³⁴⁵⁶⁷⁸⁹]|\d+,\d{3}|\d+e\d|\b\d{4,}\b(?!\s*(J\.|·|,))|\b\d{2,3}\b(?!\s*(of|%|J\.))/i;
     let t16ok=true,t16why='';
@@ -285,5 +323,5 @@ const rectOf=id=>{const e=document.querySelector('#stage #'+id);const r=e.getBou
   res('T12',errs.length===0,`console: ${errs.slice(0,3).join(' || ')}`);
   R.T20='N/A';NOTE.T20='rtk only';
   fs.writeFileSync(`${OUT}/results-transport.json`,JSON.stringify({R,NOTE},null,1));
-  for(let i=1;i<=27;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
+  for(let i=1;i<=28;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
 })().catch(e=>{console.error(e);process.exit(1);});
