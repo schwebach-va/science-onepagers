@@ -10,7 +10,7 @@ const OUT=__dirname;  /* screenshots and results-dogma.json land here */
 const BASE='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
 const URL=BASE+'?anim=dogma';
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
-const ENABLED={gpcr:true,dogma:true};
+const ENABLED={gpcr:true,dogma:true,transport:true};   /* add a key as each Phase 2 figure lands */
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
 const R={};const NOTE={};const consoleErrs=[];
@@ -45,7 +45,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
   for(const vp of [{width:1180,height:820},{width:390,height:844}]){
     const tag=`${vp.width}x${vp.height}`;
     const {ctx,pg}=await fresh(br,vp);
-    /* T1: six deep links; gpcr and dogma open, the four placeholders assert as disabled, not missing */
+    /* T1: six deep links; the built figures open, the placeholders assert as disabled, not missing */
     for(const k of KEYS){await open(pg,`${BASE}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(ENABLED[k]){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
@@ -72,7 +72,8 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
     const ordered=titleIdx.every((v,i)=>v>=0&&(i===0||v>titleIdx[i-1]));
     const bridgesOk=BRIDGES.every((b,i)=>{const j=selText.findIndex(s=>s===b);return j===titleIdx[i]+1;});
     const soon=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
-    res('T15',ordered&&bridgesOk&&soon.join(',')==='rtk,transport,etc,cloning',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon}`);
+    const SOON=KEYS.filter(k=>!ENABLED[k]).join(',');
+    res('T15',ordered&&bridgesOk&&soon.join(',')===SOON,`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} wanted ${SOON}`);
     /* T2 */
     const w=await walkT2(pg,tag);res('T2',w.ok,w.why);
     /* T4: every step, both levels */
