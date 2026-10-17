@@ -107,3 +107,76 @@ which branch you used.
 
 Commit and push the branch. Do not merge, do not open a pull request. Nothing publishes without
 Reid.
+
+---
+
+# Added 2026-10-17 after Reid asked whether the published figures needed the same audit
+
+They did. The transport overlap was caught by a biologist's eye, not by the suite, and the suite
+cannot see this class of problem on any figure. An audit of the two live figures found one more
+error and one acceptable compression. Both of the items below ride in the same run as R1–R4, so all
+three suites rerun together and Reid reviews once.
+
+## R5. `dogma` caps after it splices, and the cap goes on first
+
+**This figure is live.** In step 3 the introns come out at 100–1000 ms and the cap and tail arrive
+at 900–1200 ms:
+
+```
+ex1,ex2,ex3  A(100,900)   -> 100-1000   introns out
+cap,tail     A(900,300)   -> 900-1200   cap and tail on
+```
+
+The 5′ cap is added co-transcriptionally, when the transcript is only about 25 to 30 nucleotides
+long — long before splicing finishes. Polyadenylation comes at the end. So the order as animated is
+wrong for the cap, and the figure's own legend line already says **"Capped, tailed, spliced, and out
+it goes,"** which puts the cap first. The picture and the caption disagree, and the picture is the
+one that is wrong.
+
+This is **not** the co-transcriptional splicing variant that was deliberately held at Phase 1. That
+decision was about whether splicing overlaps transcription, and it stands. This is the order of two
+events the figure already draws separately.
+
+→ **Put the cap on before the introns come out.** Minimum change: `cap` early in the step, then the
+excisions, then `tail` at the end, so the sequence reads cap → splice → tail → out. If that makes
+the step too busy, cap first and keep tail with the departure. The legend line can stay as it is
+once the animation matches it, or become "Capped, spliced, tailed, and out it goes" if you prefer
+the animation's order spelled out — Reid's call, so put the question in your report rather than
+rewording it silently.
+
+The SOL line reads "Capped, tailed, trimmed, and out it goes" and needs the same treatment.
+
+## R6. Per-figure references, shown with the figure
+
+`SOURCES` currently holds three entries and they are all dogma's:
+
+```
+Nirenberg 1961     https://doi.org/10.1073/pnas.47.10.1588
+Crick 1970         https://doi.org/10.1038/227561a0
+Berget & Sharp 1977 https://doi.org/10.1073/pnas.74.8.3171
+```
+
+gpcr has none. transport's Skou 1957 is drawn on the still but is not in the list, so it does not
+appear on the page as a citation.
+
+→ **Make `SOURCES` per figure**, keyed the way `txt` and `svg` already are, and show the selected
+figure's sources as a visible line under the reel — not behind a disclosure. Reid wants them seen.
+Carry dogma's three across unchanged. transport takes Skou 1957
+(`https://doi.org/10.1016/0006-3002(57)90343-8`), already on its still. For gpcr, pick two or three
+primary papers that match what the figure actually draws — the G-protein and second-messenger work
+is the obvious ground — and say in your report which you chose and why, so Reid can swap them. Do
+not invent a citation; if you are not certain a DOI resolves to what you think it does, leave it out
+and say so.
+
+The four unbuilt figures get no sources until they are built.
+
+## Scope and tests for this combined run
+
+Still `mechanism-reel.html` and the suites only. The hubs, `sitemap.xml`, `search-index.js`,
+`search.html` and `style.css` are Reid's and were done by hand on 10/16. The stills do not change
+for any figure.
+
+Rerun **all three** suites — gpcr, dogma and transport — plus the new T28 on transport. R5 changes
+dogma's step-3 timing, so dogma's T3 and T17 are the ones to watch there; transport's T3 must stay
+at about 0.096 % and gpcr's at about 0.89 %. A T3 that moves means a final position was disturbed,
+and the final state is the still, so treat it as a failure rather than a new baseline.
