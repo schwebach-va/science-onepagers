@@ -11,6 +11,8 @@ node t3-shot.js && python3 t3-compare.py      # T3: the one screenshot, compared
 node smoke-svg-diff.js                        # the page's SVG against the still, line by line
 node mechanism-reel-tests-dogma.js            # Phase 2, dogma: the same table, ~10 minutes
 python3 t3-compare-dogma.py                   # T3 for dogma, from the suite's own screenshots, against ../../05-central-dogma.png
+node mechanism-reel-tests-transport.js        # Phase 2, transport: the same table with a real T19 and T28 (alternating access), ~11 minutes
+python3 t3-compare-transport.py               # T3 for transport, from the suite's own screenshots, against ../../03-channel-and-pump.png
 ```
 
 `mechanism-reel-tests.js` requires Playwright at `/opt/node22/lib/node_modules/playwright`; change the

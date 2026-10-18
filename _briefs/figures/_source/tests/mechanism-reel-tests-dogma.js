@@ -1,5 +1,7 @@
 /* Acceptance tests for the Mechanism Reel, Phase 2 figure 1: dogma, per §7 of the brief plus T21-T27.
    A copy of mechanism-reel-tests.js with dogma's own travellers, beats, labels and end screen.
+   Revision 1: step 3 runs cap, splice, tail, out (R5), so the beat moves to 1500-2400 ms; the sources
+   line under the reel is checked in T1 (R6).
    Programmatic assertions throughout; the only screenshot is T3 (plus one per FAIL).
    T3's comparison: python3 t3-compare-dogma.py after this run (writes the two-up image). */
 const {chromium}=require('/opt/node22/lib/node_modules/playwright');
@@ -8,7 +10,7 @@ const OUT=__dirname;  /* screenshots and results-dogma.json land here */
 const BASE='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
 const URL=BASE+'?anim=dogma';
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
-const ENABLED={gpcr:true,dogma:true};
+const ENABLED={gpcr:true,dogma:true,transport:true};   /* add a key as each Phase 2 figure lands */
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
 const R={};const NOTE={};const consoleErrs=[];
@@ -34,13 +36,16 @@ const animProps=()=>document.getAnimations().map(a=>{const props=new Set();try{a
   let active=true;try{const ct=a.effect.getComputedTiming();active=a.currentTime!=null&&a.currentTime>=(ct.delay||0);}catch(e){}
   return {props:[...props],id,active,inStage:!!(a.effect&&a.effect.target&&a.effect.target.closest&&a.effect.target.closest('#stage')),pseudo:a.effect&&a.effect.pseudoElement||null};});
 const STRIP=/©\s*2026|Nirenberg 1961|Crick 1970|Berget & Sharp 1977|Bio Tool #22|DE BIO 101/gi;
+const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return {present:false};const r=p.getBoundingClientRect();const links=[...p.querySelectorAll('a')].map(a=>({t:a.textContent,h:a.getAttribute('href')}));
+  return {present:true,visible:r.height>0&&getComputedStyle(p).display!=='none'&&getComputedStyle(p).visibility!=='hidden',disclosed:!!p.closest('details,[hidden]'),text:p.textContent,links,inBuild:!!p.closest('#build'),
+    matches:want.length===links.length&&want.every(([t,h],i)=>links[i].t===t&&links[i].h===h)&&__MR.sources().length===want.length};};
 
 (async()=>{
   const br=await chromium.launch();
   for(const vp of [{width:1180,height:820},{width:390,height:844}]){
     const tag=`${vp.width}x${vp.height}`;
     const {ctx,pg}=await fresh(br,vp);
-    /* T1: six deep links; gpcr and dogma open, the four placeholders assert as disabled, not missing */
+    /* T1: six deep links; the built figures open, the placeholders assert as disabled, not missing */
     for(const k of KEYS){await open(pg,`${BASE}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(ENABLED[k]){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
@@ -54,7 +59,12 @@ const STRIP=/©\s*2026|Nirenberg 1961|Crick 1970|Berget & Sharp 1977|Bio Tool #2
     await open(pg,`${BASE}?anim=dogma&step=6&runon=paused`);await sleep(600);
     const last=await pg.evaluate(()=>({step:__MR.step(),playing:__MR.playing(),count:__MR.loopCount(),ring:[...document.querySelectorAll('.next')].map(e=>e.id),readout:__MR.readout(),counter:__MR.counter(),playDisabled:document.getElementById('play').disabled,end:!!document.getElementById('endscreen')}));
     res('T1',last.step===6&&!last.playing&&last.count===null&&last.ring.length===1&&last.ring[0]==='blankBtn'&&last.readout===''&&last.counter===''&&last.playDisabled&&last.end,`${tag}: last step gave ${JSON.stringify(last)}`);
-    note('T1',`${tag}: ?anim=dogma&step=n opens state n unlit; &level=de holds; no run-on, so at step 6 Play is disabled, the counter and readout are empty and the ring is on Label it from memory`);
+    /* R6: the figure's sources are a visible line under the reel, and they follow the selected figure */
+    const srcD=await pg.evaluate(sourcesLine,[['Nirenberg 1961','https://doi.org/10.1073/pnas.47.10.1588'],['Crick 1970','https://doi.org/10.1038/227561a0'],['Berget & Sharp 1977','https://doi.org/10.1073/pnas.74.8.3171']]);
+    await pg.evaluate(()=>__MR.setFig('gpcr'));const srcG=await pg.evaluate(sourcesLine,[['Streb 1983','https://doi.org/10.1038/306067a0'],['Berridge & Irvine 1984','https://doi.org/10.1038/312315a0'],['Rasmussen 2011','https://doi.org/10.1038/nature10361']]);
+    await pg.evaluate(()=>__MR.setFig('dogma'));
+    res('T1',srcD.present&&srcD.visible&&!srcD.disclosed&&srcD.inBuild&&srcD.matches&&/^Sources: Nirenberg 1961 · Crick 1970 · Berget & Sharp 1977$/.test(srcD.text.trim())&&srcG.visible&&srcG.matches,`${tag}: sources line dogma=${JSON.stringify(srcD)} gpcr=${JSON.stringify(srcG)}`);
+    note('T1',`${tag}: ?anim=dogma&step=n opens state n unlit; &level=de holds; no run-on, so at step 6 Play is disabled, the counter and readout are empty and the ring is on Label it from memory; the sources line under the reel reads "${srcD.text.trim()}" and follows the figure (R6)`);
     /* T15: order and bridges */
     await open(pg);
     const selText=await pg.evaluate(()=>[...document.querySelectorAll('#sel > li')].map(l=>l.textContent.trim()));
@@ -62,7 +72,8 @@ const STRIP=/©\s*2026|Nirenberg 1961|Crick 1970|Berget & Sharp 1977|Bio Tool #2
     const ordered=titleIdx.every((v,i)=>v>=0&&(i===0||v>titleIdx[i-1]));
     const bridgesOk=BRIDGES.every((b,i)=>{const j=selText.findIndex(s=>s===b);return j===titleIdx[i]+1;});
     const soon=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
-    res('T15',ordered&&bridgesOk&&soon.join(',')==='rtk,transport,etc,cloning',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon}`);
+    const SOON=KEYS.filter(k=>!ENABLED[k]).join(',');
+    res('T15',ordered&&bridgesOk&&soon.join(',')===SOON,`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} wanted ${SOON}`);
     /* T2 */
     const w=await walkT2(pg,tag);res('T2',w.ok,w.why);
     /* T4: every step, both levels */
@@ -107,7 +118,8 @@ const STRIP=/©\s*2026|Nirenberg 1961|Crick 1970|Berget & Sharp 1977|Bio Tool #2
     await go(pg,0);const timing=await pg.evaluate(()=>__MR.timing());
     const badProps=new Set();let t17ok=true,t17why='',t18ok=true,t18why='';
     /* travellers, and the moment from which each must be visible (the message's exons appear in the nucleus first; the first bead appears at the ribosome end) */
-    const travellers={1:[['pol',0]],3:[['ex2',700],['cap',1300],['tail',1300]],4:[['rL',0],['rS',0],['tA',0]],5:[['tB',0],['tC',1400]],6:[['bead0',400],['bead3',1000]]};
+    /* step 3 (R5): the cap is on by 300 ms, the exons close up from 300, the tail is on by 1500, then the copy leaves */
+    const travellers={1:[['pol',0]],3:[['cap',400],['ex2',900],['tail',1600]],4:[['rL',0],['rS',0],['tA',0]],5:[['tB',0],['tC',1400]],6:[['bead0',400],['bead3',1000]]};
     for(let k=1;k<=6;k++){await pg.evaluate(k=>__MR.goStep(k),k);const t0=Date.now();const dur=timing.dur[k];
       const beat=timing.beats[k];const samples=[];
       while(Date.now()-t0<dur+150){const el=Date.now()-t0;const A=await pg.evaluate(animProps);
@@ -119,7 +131,11 @@ const STRIP=/©\s*2026|Nirenberg 1961|Crick 1970|Berget & Sharp 1977|Bio Tool #2
       if(k===1||k===3||k===5){const moved=samples.some(n=>n>0);if(!moved)note('T14',`${tag}: no running animations were sampled in step ${k} (sampling too coarse?)`);}}
     res('T14',badProps.size===0,`${tag}: animated properties beyond transform/opacity: ${[...badProps].join(', ')}`);
     const d=timing.dur;res('T17',d[3]>d[2]&&d[3]>d[4]&&d[5]>d[4]&&d[5]>d[6]&&t17ok,`${tag}: dur=${JSON.stringify(d)} ${t17why}`);
-    note('T17',`${tag}: step durations ms ${JSON.stringify(d.slice(1))}; beats at steps 3 (the copy leaves the nucleus) and 5 (the anticodon seats)`);
+    note('T17',`${tag}: step durations ms ${JSON.stringify(d.slice(1))}; beats at steps 3 (the copy leaves the nucleus, ${timing.beats[3].from}-${timing.beats[3].to} ms, after cap, splice and tail) and 5 (the anticodon seats)`);
+    /* R5: in step 3 the cap goes on before the introns come out, and the tail after; the legend line "Capped, tailed, spliced" names the cap first */
+    {const s3=timing.seq[3];const end=q=>q.d+q.dur;const order=s3.cap&&s3.ex1&&s3.ex2&&s3.ex3&&s3.tail&&end(s3.cap)<=Math.min(s3.ex1.d,s3.ex2.d,s3.ex3.d)&&Math.max(end(s3.ex1),end(s3.ex2),end(s3.ex3))<=s3.tail.d&&end(s3.tail)<=timing.beats[3].from;
+      res('T17',!!order,`${tag}: step 3 order cap=${JSON.stringify(s3.cap)} exons=${JSON.stringify([s3.ex1,s3.ex2,s3.ex3].map(q=>q&&[q.d,q.d+q.dur]))} tail=${JSON.stringify(s3.tail)} beat=${JSON.stringify(timing.beats[3])}`);
+      note('T17',`${tag}: step 3 runs cap ${s3.cap.d}-${end(s3.cap)}, introns out ${s3.ex1.d}-${end(s3.ex1)}, tail ${s3.tail.d}-${end(s3.tail)}, then out (R5)`);}
     res('T18',t18ok,t18why);
     /* T16: no counts or orders of magnitude; the gene unchanged from step 1 to the last state; no run-on and no counter (D8) */
     const numRe=/\b\d+\s*(x|×|fold|times|molecules?|ions?|copies|thousand|million|billion|per)\b|10\^|10[⁰¹²³⁴⁵⁶⁷⁸⁹]|\d+,\d{3}|\d+e\d|\b\d{4,}\b(?!\s*(J\.|·|,))|\b\d{2,3}\b(?!\s*(of|%|J\.))/i;
@@ -199,7 +215,7 @@ const STRIP=/©\s*2026|Nirenberg 1961|Crick 1970|Berget & Sharp 1977|Bio Tool #2
       await go(pg,1);const t0=Date.now();await pg.evaluate(()=>__MR.goStep(2));await settle(pg);const took=Date.now()-t0;
       await pg.reload({waitUntil:'load'});await pg.waitForFunction(()=>window.__MR&&window.__MR.fig());const kept=await pg.evaluate(()=>({slow:__MR.slow(),p:document.getElementById('slow').getAttribute('aria-pressed'),fig:__MR.fig()}));
       await pg.click('#slow');const off=await pg.evaluate(()=>__MR.slow());
-      const ok=t2.d===t1*2&&t2.p==='true'&&t2.beat.from===2400&&t2.beat.to===4200&&took>=1400&&kept.slow&&kept.p==='true'&&kept.fig==='dogma'&&!off;
+      const ok=t2.d===t1*2&&t2.p==='true'&&t2.beat.from===3000&&t2.beat.to===4800&&took>=1400&&kept.slow&&kept.p==='true'&&kept.fig==='dogma'&&!off;
       res('T26',ok,`${tag}: dur2 ${t1}->${t2.d} pressed=${t2.p} beat3=${JSON.stringify(t2.beat)} step2 took ${took}ms kept=${JSON.stringify(kept)} off=${off}`);note('T26',`${tag}: step 2 took ${took} ms at half speed (750 ms at full)`);}
     /* T8: reduced motion */
     await ctx.close();
@@ -224,9 +240,10 @@ const STRIP=/©\s*2026|Nirenberg 1961|Crick 1970|Berget & Sharp 1977|Bio Tool #2
       return {svgH:Math.round(s.height),svgW:Math.round(s.width),buildH:Math.round(b.height),cardW:Math.round(c.width),cardRight:Math.round(c.right),sw:document.documentElement.scrollWidth,iw:window.innerWidth,ih:window.innerHeight};});
     await pg.click('#fill');
     res('T27',m.svgH>=0.72*m.ih&&m.buildH>=0.95*m.ih&&m.cardW>=300&&m.cardRight<=m.iw&&m.sw<=m.iw,`1920x1080 fill: ${JSON.stringify(m)}`);note('T27',`1920x1080 fill: stage ${m.svgW}x${m.svgH} of ${m.iw}x${m.ih}, panel ${m.cardW} px wide`);await ctx.close();}
-  /* T3: the one real visual test, at 1600 px wide so it lines up with the 1600 px reference. DE is the still's wording; SOL is shot too, for the record */
+  /* T3: the one real visual test, at 1600 px wide so it lines up with the 1600 px reference. DE is the still's wording; SOL is shot too, for the record.
+     The throbbing ring on the next control sits just under the stage and its halo can reach the clip's last row at some phases, so it is stilled for the shot */
   {const {ctx,pg}=await fresh(br,{width:1700,height:1200});await open(pg);await pg.evaluate(()=>__MR.setLevel('de'));
-    await pg.addStyleTag({content:'.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
+    await pg.addStyleTag({content:'.next::after{display:none!important}.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
     await go(pg,5);await go(pg,6);await pg.evaluate(()=>document.fonts.ready);await sleep(400);
     const r=await pg.evaluate(()=>{const b=document.querySelector('#stage svg').getBoundingClientRect();return {x:b.x+window.scrollX,y:b.y+window.scrollY};});
     const clip={x:Math.round(r.x),y:Math.round(r.y),width:1600,height:1000};

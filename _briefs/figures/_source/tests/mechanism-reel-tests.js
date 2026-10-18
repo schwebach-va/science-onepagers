@@ -1,5 +1,6 @@
 /* Acceptance tests for the Mechanism Reel, Phase 1 (gpcr only), per §7 of the brief.
-   Programmatic assertions throughout; the only screenshot is T3 (plus one per FAIL). */
+   Programmatic assertions throughout; the only screenshot is T3 (plus one per FAIL).
+   Revision 1 (2026-10-17): T1 also checks the sources line under the reel (R6). */
 const {chromium}=require('/opt/node22/lib/node_modules/playwright');
 const fs=require('fs');
 const OUT=__dirname;  /* screenshots and results.json land here */
@@ -27,6 +28,9 @@ async function walkT2(pg,tag){let ok=true,why='';
 const animProps=()=>document.getAnimations().map(a=>{const props=new Set();try{a.effect.getKeyframes().forEach(k=>Object.keys(k).forEach(p=>{if(!/^(offset|computedOffset|easing|composite)$/.test(p))props.add(p);}));}catch(e){}
   if(a.transitionProperty)props.add(a.transitionProperty);let t=a.effect&&a.effect.target;let id=null;while(t&&t.nodeType===1){if(t.id){id=t.id;break;}t=t.parentNode;}
   return {props:[...props],id,inStage:!!(a.effect&&a.effect.target&&a.effect.target.closest&&a.effect.target.closest('#stage')),pseudo:a.effect&&a.effect.pseudoElement||null};});
+const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return {present:false};const r=p.getBoundingClientRect();const links=[...p.querySelectorAll('a')].map(a=>({t:a.textContent,h:a.getAttribute('href')}));
+  return {present:true,visible:r.height>0&&getComputedStyle(p).display!=='none'&&getComputedStyle(p).visibility!=='hidden',disclosed:!!p.closest('details,[hidden]'),text:p.textContent,links,inBuild:!!p.closest('#build'),
+    matches:want.length===links.length&&want.every(([t,h],i)=>links[i].t===t&&links[i].h===h)&&__MR.sources().length===want.length};};
 
 (async()=>{
   const br=await chromium.launch();
@@ -35,7 +39,7 @@ const animProps=()=>document.getAnimations().map(a=>{const props=new Set();try{a
     const {ctx,pg}=await fresh(br,vp);
     /* T1: six deep links; every figure not yet built asserts as disabled, not missing.
        Add a key to BUILT as each Phase 2 figure lands. */
-    const BUILT=['gpcr','dogma'];
+    const BUILT=['gpcr','dogma','transport'];
     for(const k of KEYS){await open(pg,`${URL}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(BUILT.includes(k)){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
@@ -54,7 +58,12 @@ const animProps=()=>document.getAnimations().map(a=>{const props=new Set();try{a
     res('T1',!paused.playing&&/paused/i.test(paused.readout)&&/Play/.test(paused.play),`${tag}: Pause gave ${JSON.stringify(paused)}`);
     await pg.click('#back');await settle(pg);const cleared=await pg.evaluate(()=>({step:__MR.step(),count:__MR.loopCount(),clones:document.querySelectorAll('#ip3Layer > g, #caLayer > g').length,readout:__MR.readout()}));
     res('T1',cleared.step===5&&cleared.clones===0&&cleared.count.ip3===1&&cleared.count.ca===4&&cleared.readout==='',`${tag}: Back from the run-on gave ${JSON.stringify(cleared)}`);
-    note('T1',`${tag}: ?anim=gpcr&step=n opens state n unlit; &runon=paused holds the run-on on Play; Pause stops it; Back clears it`);
+    /* R6: the figure's sources are a visible line under the reel, and they follow the selected figure */
+    const srcG=await pg.evaluate(sourcesLine,[['Streb 1983','https://doi.org/10.1038/306067a0'],['Berridge & Irvine 1984','https://doi.org/10.1038/312315a0'],['Rasmussen 2011','https://doi.org/10.1038/nature10361']]);
+    await pg.evaluate(()=>__MR.setFig('transport'));const srcT=await pg.evaluate(sourcesLine,[['Skou 1957','https://doi.org/10.1016/0006-3002(57)90343-8']]);
+    await pg.evaluate(()=>__MR.setFig('gpcr'));
+    res('T1',srcG.present&&srcG.visible&&!srcG.disclosed&&srcG.inBuild&&srcG.matches&&/^Sources: Streb 1983 · Berridge & Irvine 1984 · Rasmussen 2011$/.test(srcG.text.trim())&&srcT.visible&&srcT.matches,`${tag}: sources line gpcr=${JSON.stringify(srcG)} transport=${JSON.stringify(srcT)}`);
+    note('T1',`${tag}: ?anim=gpcr&step=n opens state n unlit; &runon=paused holds the run-on on Play; Pause stops it; Back clears it; the sources line under the reel reads "${srcG.text.trim()}" and follows the figure (R6)`);
     /* T15: order and bridges */
     const selText=await pg.evaluate(()=>[...document.querySelectorAll('#sel > li')].map(l=>l.textContent.trim()));
     const titleIdx=TITLES.map(t=>selText.findIndex(s=>s.includes(t)));
@@ -216,7 +225,7 @@ const animProps=()=>document.getAnimations().map(a=>{const props=new Set();try{a
     res('T27',m.svgH>=0.72*m.ih&&m.buildH>=0.95*m.ih&&m.cardW>=300&&m.cardRight<=m.iw&&m.sw<=m.iw,`1920x1080 fill: ${JSON.stringify(m)}`);note('T27',`1920x1080 fill: stage ${m.svgW}x${m.svgH} of ${m.iw}x${m.ih}, panel ${m.cardW} px wide`);await ctx.close();}
   /* T3: the one real visual test, at 1600 px wide so it lines up with the 1600 px reference */
   {const {ctx,pg}=await fresh(br,{width:1700,height:1200});await open(pg);await pg.evaluate(()=>__MR.setLevel('de'));
-    await pg.addStyleTag({content:'.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
+    await pg.addStyleTag({content:'.next::after{display:none!important}.build{display:block!important}.stagerow{max-width:none!important;margin:0!important}.stage{width:1600px!important;height:1000px!important;border:none!important;border-radius:0!important}.stage svg{width:1600px!important;height:1000px!important}.wrap{max-width:none!important;padding:0!important}'});
     await go(pg,5);await go(pg,6);await pg.evaluate(()=>__MR.stopLoop());await pg.evaluate(()=>document.fonts.ready);await sleep(300);
     const svg=await pg.$('#stage svg');await svg.screenshot({path:`${OUT}/T3-final-step.png`});
     await pg.addStyleTag({content:'.stage svg .min,.stage svg .eyebrow{font-size:28px!important}'});await sleep(200);

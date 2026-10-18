@@ -187,6 +187,12 @@ button{font:inherit;cursor:pointer}
 .predline{font-family:var(--sans);font-size:.95rem;line-height:1.45;background:var(--paper);border-radius:3px;padding:.6rem .8rem;margin:0 0 .9rem}
 .counter{font-family:var(--sans);font-size:.85rem;font-weight:700;color:var(--ink);text-align:center;margin:.25rem 0 0;min-height:1.3em;font-variant-numeric:tabular-nums}
 @media (min-width:900px){.counter{text-align:left}}
+/* the selected figure's sources: a visible line under the reel, never behind a disclosure (R6) */
+.sources{font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft);text-align:center;margin:.55rem 0 0}
+.sources a{color:var(--bond)}
+@media (min-width:900px){.sources{text-align:left}}
+/* a figure may add one line under its closing caption (transport, R2) */
+.afterline{font-family:var(--sans);font-size:.98rem;line-height:1.45;margin:0 0 .9rem}
 .endscreen{border-top:1.5px solid var(--rule);padding-top:.9rem;margin-top:.4rem}
 .endscreen .q{font-family:var(--sans);font-weight:600;font-size:1rem;display:block;margin:0 0 .45rem}
 .endscreen textarea{display:block;width:100%;font:inherit;font-size:1rem;line-height:1.4;padding:.55rem .7rem;border:1.5px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink);margin:0 0 .9rem;resize:vertical}
@@ -276,6 +282,7 @@ html[data-fill="1"] .stagecol{position:static}
       <div class="dots" id="dots" role="group" aria-label="Steps: tap any number to open that step"></div>
       <button type="button" class="ghost" id="teach" aria-pressed="false" title="Shows every caption at once and no prediction prompts, for projecting.">Teaching view</button>
     </div>
+    <p class="sources" id="sources"></p>
   </div>
   <div class="cardcol">
     <div class="card" id="card" aria-live="polite"></div>
@@ -375,6 +382,7 @@ let F=null,EL={},TOP=[],cur=0;
 let busy=false,busyT=null,focusLive=false;
 let playing=false,playT=null,loopOn=false;
 let fillOn=false,runonHold=false,blankOn=false,revealList=false;
+let MOTION_BASE=null;   /* the shared sentence under the reel; a figure may add one of its own (transport, D3) */
 const HOLD=1500,FOCUS_HOLD=1500;
 const SP=()=>st.slow?2:1;
 function timers(){const o={list:[],after(fn,ms){const id=setTimeout(()=>{o.list=o.list.filter(x=>x!==id);fn();},ms);o.list.push(id);return id;},clear(){o.list.forEach(clearTimeout);o.list=[];}};return o;}
@@ -449,6 +457,8 @@ function syncCounter(){const c=$("counter");if(!c)return;if(F&&F.loop&&F.loop.co
 
 /* ================= rendering ================= */
 function tagHtml(f){return (f.tag||[]).map(([c,n])=>`<span class="tag ${c}">${esc(n)}</span>`).join("");}
+/* the selected figure's sources, keyed per figure like txt and svg, shown under the reel (R6) */
+function renderSources(){const p=$("sources");if(!p)return;const S=F.sources||[];p.innerHTML=S.length?(S.length>1?"Sources: ":"Source: ")+S.map(([label,doi])=>`<a href="${esc(doi)}" target="_blank" rel="noopener">${esc(label)}</a>`).join(" &middot; "):"";p.classList.toggle("hidden",!S.length);}
 function renderSel(){const ol=$("sel");ol.innerHTML="";
   FIGS.forEach((f,i)=>{const li=el("li","fig");const b=el("button","selbtn");b.type="button";b.dataset.fig=f.key;
     b.innerHTML=`<span class="n">${i+1}</span><span class="idnum">Bio Tool #${f.num}</span><span class="t"><b>${esc(f.subject)}</b> &middot; ${esc(f.title)}</span>${tagHtml(f)}`+(f.enabled?"":`<span class="soon">coming</span>`);
@@ -469,6 +479,8 @@ function renderDots(){const d=$("dots");d.innerHTML="";const per=perFig(F.key),c
     b.addEventListener("click",()=>goStep(i));d.appendChild(b);}}
 function capItem(i,cls){const li=el("li","cap"+(cls?" "+cls:""));li.dataset.step=i;
   li.innerHTML=`<span class="b" style="background:${F.capColor[i-1]}">${i}</span><span>${esc(TXT().caps[i-1])}</span>`;return li;}
+/* the closing caption, and the one line a figure may hang under it (R2) */
+function addClosing(card,X){card.appendChild(el("p","closing",esc(X.closing)));if(X.after)card.appendChild(el("p","afterline",esc(X.after)));}
 function optBtn(label,pressed,fn){const b=el("button","opt");b.type="button";b.textContent=label;b.setAttribute("aria-pressed",String(!!pressed));b.addEventListener("click",fn);return b;}
 function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X=TXT(),per=perFig(F.key);
   if(blankOn){card.appendChild(el("div","meta",`<span>Label it from memory</span><span>${esc(F.short)}</span>`));
@@ -485,7 +497,7 @@ function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X
   if(Tv){card.appendChild(el("p","fine teachnote","Teaching view: every caption at once, no prompts. Press Next, or tap a step number, and talk."));
     if(X.start)card.appendChild(el("p","",esc(X.start)));
     const ul=el("ul","caps");for(let i=1;i<=F.n;i++)ul.appendChild(capItem(i,i===cur?(busy?"cur live":"cur"):""));card.appendChild(ul);
-    card.appendChild(el("p","closing",esc(X.closing)));
+    addClosing(card,X);
     if(cur===F.n&&!busy){if(X.watch)card.appendChild(el("p","watch",esc(X.watch)));if(F.blanks){const b=el("button","ghost");b.type="button";b.id="blankBtn";b.textContent="Label it from memory";b.addEventListener("click",()=>setBlank(true));card.appendChild(b);}}
     return;}
   if(cur===0){if(X.start)card.appendChild(el("p","",esc(X.start)));}
@@ -496,7 +508,7 @@ function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X
     p.innerHTML=`<span class="tagline">Predict before you press</span><p class="q">${esc(P.q)}</p>`;
     const row=el("div","choices");P.choices.forEach((c,i)=>row.appendChild(optBtn(c,per.pred[k]===i,()=>{per.pred[k]=i;save();renderCard();})));p.appendChild(row);
     p.appendChild(el("p","fine then","Then press Next. Next works whether or not you chose; a choice is only kept on this device."));card.appendChild(p);}
-  if(cur===F.n&&!busy){card.appendChild(el("p","closing",esc(X.closing)));if(X.watch)card.appendChild(el("p","watch",esc(X.watch)));
+  if(cur===F.n&&!busy){addClosing(card,X);if(X.watch)card.appendChild(el("p","watch",esc(X.watch)));
     if(X.end){const E=X.end,box=el("div","endscreen");box.id="endscreen";
       const lab=el("label","",`<span class="q">${esc(E.explain)}</span>`);const ta=document.createElement("textarea");ta.id="explain";ta.rows=2;ta.maxLength=400;ta.value=per.explain||"";ta.placeholder="One sentence, in your own words. It stays on this device.";
       ta.addEventListener("input",()=>{per.explain=ta.value.slice(0,400);save();});lab.appendChild(ta);box.appendChild(lab);
@@ -515,7 +527,7 @@ function syncCtl(){$("back").disabled=cur<=0||blankOn;$("next").disabled=cur>=F.
   $("fill").textContent=fillOn?"Restore page":"Fill screen";$("fill").setAttribute("aria-pressed",String(fillOn));
   const ro=$("readout");
   if(blankOn)ro.textContent="Labels blanked. Reveal when you are ready; Back to the reel keeps them blank.";
-  else if(cur>=F.n&&F.loop)ro.textContent=loopOn?"Run-on playing: the enzyme keeps cutting. Pause stops it. Back, or any step number, clears it.":"Run-on paused. Play starts it again. Back, or any step number, clears it.";
+  else if(cur>=F.n&&F.loop){const RO=TXT().runon||{};ro.textContent=loopOn?(RO.playing||"Run-on playing: the enzyme keeps cutting. Pause stops it. Back, or any step number, clears it."):(RO.paused||"Run-on paused. Play starts it again. Back, or any step number, clears it.");}
   else ro.textContent="";
   syncCounter();}
 function scrollToCard(){if(fillOn)return;const card=$("card");
@@ -531,7 +543,8 @@ function setFig(k){const f=FIGMAP[k];if(!f||!f.enabled)return false;
   st.fig=k;F=f;cur=clamp(perFig(k).step,0,F.n);save();
   buildStage();apply(cur,{jump:true});
   renderSel();renderLevelRow();renderDots();renderCard();syncNext();syncCtl();
-  $("eyebrow").innerHTML="Bio Tool #"+F.num+" &middot; "+esc(F.eyebrow);
+  $("eyebrow").innerHTML="Bio Tool #"+F.num+" &middot; "+esc(F.eyebrow);renderSources();
+  const mn=$("motionnote");if(mn){if(MOTION_BASE==null)MOTION_BASE=mn.textContent;mn.textContent=MOTION_BASE+(F.note?" "+F.note:"");}
   syncUrl();
   if(cur===F.n&&F.loop&&!runonHold&&!blankOn)startLoop();runonHold=false;syncCtl();
   return true;}
@@ -575,8 +588,10 @@ window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title
   blank:()=>blankOn,setBlank,blanks:()=>F.blanks?F.blanks(st.level).map(b=>Object.assign({},b,{shown:(()=>{const t=$("stage").querySelector("#"+b.id);return t?t.textContent.trim():null;})()})):[],
   explain:()=>perFig(F.key).explain,setExplain:s=>{perFig(F.key).explain=String(s).slice(0,400);save();renderCard();},enter:()=>perFig(F.key).enter,setEnter:v=>{perFig(F.key).enter=v==="yes"?"yes":"no";save();renderCard();},
   focus:focusInfo,
-  timing:()=>({dur:F.dur.map(d=>d*SP()),seq:F.seq,beats:Object.fromEntries(Object.entries(F.beats).map(([k,b])=>[k,Object.assign({},b,{from:b.from*SP(),to:b.to*SP()})])),hold:HOLD*SP(),speed:SP()}),
-  captions:()=>TXT().caps.slice(),closing:()=>TXT().closing,
+  timing:()=>({dur:F.dur.map(d=>d*SP()),seq:F.seq,beats:Object.fromEntries(Object.entries(F.beats).map(([k,b])=>[k,Object.assign({},b,{from:b.from*SP(),to:b.to*SP()})])),hold:HOLD*SP(),speed:SP(),pays:F.pays?Object.assign({},F.pays,{paidAt:F.pays.paidAt*SP()}):null,
+    crossings:F.crossings||null,runCrossings:F.loop&&F.loop.crossings?(c=>({period:c.period*SP(),out:c.out.map(([a,b])=>[a*SP(),b*SP()]),in:c.in.map(([a,b])=>[a*SP(),b*SP()])}))(F.loop.crossings()):null}),
+  captions:()=>TXT().caps.slice(),closing:()=>TXT().closing,after:()=>TXT().after||null,
+  sources:()=>(F.sources||[]).map(x=>x.slice()),sourcesLine:()=>{const p=$("sources");return p?p.textContent:"";},
   el:elInfo,watchIds:()=>Object.assign({},F.watchIds||{}),loopCount:()=>F.loop&&F.loop.count?F.loop.count():null,
   text:()=>$("stage").textContent+"\n"+$("card").textContent};
 
@@ -609,6 +624,8 @@ const GPCR=(function(){
   const H=1000,MY=232,MB=382,BLH=150,PX=740,DX=900,IX=900,IY=596,EY=566,EBLH=118,CXX=1320;
   const WATERPTS=[[539.3,162.3],[1023.4,156.9],[853.1,176.9],[145.8,186.5],[115.5,181.5],[163.4,158.2],[688.3,208.2],[243.2,167.2],[988.6,216.4],[914.1,179.0],[1504.9,155.2],[1330.5,171.7],[273.5,160.0],[516.6,207.5],[327.5,191.5],[1005.6,177.3],[870.7,156.3],[148.2,166.0],[1067.0,181.1],[524.9,191.8],[730.7,172.4],[1235.7,199.5],[421.3,191.1],[837.3,211.5],[1139.6,171.6],[1510.7,160.0]];
   const CAPCOL=[P.FLAG,P.PRO,P.PRO,P.GO,P.CARB,P.CA];
+  /* the still's three sources: IP3 releasing calcium from the ER store (Streb), IP3 named a second messenger and PIP2's split into DAG and IP3 (Berridge & Irvine), the receptor caught with its G protein (Rasmussen) */
+  const SOURCES=[["Streb 1983","https://doi.org/10.1038/306067a0"],["Berridge & Irvine 1984","https://doi.org/10.1038/312315a0"],["Rasmussen 2011","https://doi.org/10.1038/nature10361"]];
   /* words, by level. The DE words are the still's; the SOL words keep the same geometry. */
   const DE={
     caps:["The signal binds outside. It never enters.","The receptor twists. A G protein turns on.","The alpha subunit, carrying GTP, binds phospholipase C.",
@@ -729,8 +746,7 @@ const GPCR=(function(){
     /* the sentences, in reading order, wrapped exactly as the still wraps them */
     caps.forEach((cap,i)=>{const c=i%3,r=Math.floor(i/3),x=52+c*499,ty=742+r*78;let g=badge(i+1,x+19,ty,CAPCOL[i],19);
       wrap(cap,28).forEach((ln,j)=>{g+=text(x+50,ty+10+j*34,ln,"min","start");});s+=grp({id:"lg"+(i+1)},g);});
-    s+=foot(H,txt(level).closing,
-      [["Streb 1983","https://doi.org/10.1038/306067a0"],["Berridge & Irvine 1984","https://doi.org/10.1038/312315a0"],["Rasmussen 2011","https://doi.org/10.1038/nature10361"]],{id:"closing"});
+    s+=foot(H,txt(level).closing,SOURCES,{id:"closing"});
     return s;}
   const ANIM=["lig","ligArrow","b1","b2","b3","b4","b5","b6","lg1","lg2","lg3","lg4","lg5","lg6","rec","rib0","rib1","rib2","rib3","rib4","rib5","rib6",
     "gaO","gaI","gdp","arrRG","arrAP","arrCut","path1","ip3Label","dag","path2","arrCa","resp","closing","ip3O","ip3I","ip3b","chL","chR"];
@@ -807,7 +823,7 @@ const GPCR=(function(){
     title:"A receptor that never lets the signal in",short:"G-protein-coupled receptor",eyebrow:"DE Bio 101 Unit 5 · G-protein-coupled receptors",
     tag:[["amp","Amplification"]],bridge:"A different kind of receptor answers in more than one way at once.",
     txt,capColor:CAPCOL,
-    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,loop,
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,loop,sources:SOURCES,
     blanks:level=>txt(level).blanks.map(([id,name])=>({id,name})),blankClear:["lblResp2"],blankHide:["lg1","lg2","lg3","lg4","lg5","lg6","closing"],
     watchIds:{ligand:"lig",travellers:["ip3O","ip3I","gaO","gaI","caA0","caB0","caC0"]}};
 })();
@@ -887,7 +903,7 @@ const DOGMA=(function(){
     s+=text(364,PRE_Y-28,L.intron,"min","middle",P.INKSOFT,{id:"lblIn1"});
     s+=text(541,PRE_Y-28,L.intron,"min","middle",P.INKSOFT,{id:"lblIn2"});
     s+=badge(2,686,PRE_Y,P.CARB,25,{id:"b2"});
-    /* 3. capped, tailed, spliced, and out through the pore */
+    /* 3. capped, then spliced, then tailed, and out through the pore (the cap goes on first, R5) */
     s+=arrow(404,PRE_Y+28,404,M_Y-30,P.CARB,6,"arb",null,{id:"arrCT"});
     s+=text(90,PRE_Y+62,L.capt,"min","start",P.CARB,{id:"lblCapT"});
     if(L.mUnder)s+=text(238,M_Y+46,L.m,"min","start",P.NUC,{id:"lblM"});else s+=text(76,M_Y+10,L.m,"lab","start",P.NUC,{id:"lblM"});
@@ -951,15 +967,17 @@ const DOGMA=(function(){
     return S;}
   /* forward timing. Steps 3 and 5 are the slow beats (D6): the copy leaving the nucleus, and one
      tRNA seating on its codon; nothing else moves inside them. The message carries waypoints,
-     jittered once with a fixed seed, so it drifts and bumps the envelope before it passes (D5). */
+     jittered once with a fixed seed, so it drifts and bumps the envelope before it passes (D5).
+     Step 3 runs cap, then splice, then tail, then out (R5): the 5' cap goes on while the transcript
+     is still short, long before splicing finishes, and the poly-A tail comes at the end. */
   const R=rng(5);const J=(a,b)=>[a+(R()-.5)*28,b+(R()-.5)*22];
   const A=(d,dur,way)=>way?{d,dur,way}:{d,dur};
   const SEQ={
     1:{pol:A(0,1000,[[-190,0],[-125,0],[-62,0]]),pre1:A(150,300),pre2:A(330,300),pre3:A(510,300),pre4:A(690,300),pre5:A(870,300),lblPre:A(400,300),arrPol:A(1000,300),b1:A(1000,300),lg1:A(1000,300)},
     2:{lblIn1:A(0,300),lblIn2:A(0,300),b2:A(300,300),lg2:A(300,300)},
     3:{arrCT:A(0,300),lblCapT:A(0,300),lblM:A(0,300),arrPore:A(0,300),b3:A(0,300),lg3:A(0,300),
-       ex1:A(100,900,[[-6,0]]),ex2:A(100,900,[[68,0]]),ex3:A(100,900,[[136,0]]),cap:A(900,300),tail:A(900,300),
-       msgO:A(1200,900,[J(0,-26),J(0,-8),J(0,4)]),msgI:A(1200,900,[J(70,0),J(120,0),J(300,0)])},
+       cap:A(0,300),ex1:A(300,900,[[-6,0]]),ex2:A(300,900,[[68,0]]),ex3:A(300,900,[[136,0]]),tail:A(1200,300),
+       msgO:A(1500,900,[J(0,-26),J(0,-8),J(0,4)]),msgI:A(1500,900,[J(70,0),J(120,0),J(300,0)])},
     4:{msgO:A(0,400),strand:A(0,400),rL:A(0,700,[J(0,-90),J(0,-40)]),rS:A(0,700,[J(0,80),J(0,30)]),tA:A(0,800,[J(170,130),J(90,70),J(30,20)]),
        lblCodon:A(800,300),arrCodon:A(800,300),arrReads:A(800,300),lblReads:A(800,300),lblRib:A(800,300),b4:A(800,300),lg4:A(800,300)},
     5:{tB:A(0,1300,[J(150,-6),J(104,8),J(56,-10),[10,-16]]),lblAnti:A(1300,300),arrAnti:A(1300,300),tC:A(1300,600,[J(100,-10),J(50,6)]),lblT:A(1500,300),lblT2:A(1500,300),lg5:A(1500,300)},
@@ -967,24 +985,264 @@ const DOGMA=(function(){
   /* step 6: the chain grows the way a chain grows. Each new amino acid appears at the ribosome end
      and the ones before it move one place along, so the far end is the oldest */
   const TICK=180;PTS.forEach((p,i)=>{const way=[];for(let j=5;j>i;j--)way.push([PTS[j][0]-p[0],PTS[j][1]-p[1]]);SEQ[6]["bead"+i]=A(i*TICK,TICK*(6-i),way.length?way:null);});
-  const DUR=[0,1300,750,2100,1200,1900,1300];
-  const BEATS={3:{name:"the copy leaves the nucleus",from:1200,to:2100,ids:["msgO","msgI"]},5:{name:"the anticodon seats on its codon",from:400,to:1300,ids:["tB"]}};
+  const DUR=[0,1300,750,2400,1200,1900,1300];
+  const BEATS={3:{name:"the copy leaves the nucleus",from:1500,to:2400,ids:["msgO","msgI"]},5:{name:"the anticodon seats on its codon",from:400,to:1300,ids:["tB"]}};
   const FOCUS={1:["pol","pre1","pre2","pre3","pre4","pre5","b1","lg1"],2:["pre2","pre4","b2","lg2"],3:["msgI","b3","lg3"],4:["rL","rS","tA","b4","lg4"],5:["tB","lg5"],6:["bead0","bead1","bead2","bead3","bead4","bead5","b5","lg6"]};
   return {key:"dogma",num:27,subject:"central dogma of molecular genetics",enabled:true,n:6,levels:true,
     title:"One message, written out and then read aloud",short:"central dogma",eyebrow:"SOL Bio Module 4 · DE Bio 101 · gene expression",
     tag:[["amp","Amplification"],["mov","Movement"]],bridge:"And here is how we borrow that machinery ourselves.",
     txt,capColor:CAPCOL,
-    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,sources:SOURCES,
     blanks:level=>txt(level).blanks.map(([id,name])=>({id,name})),blankClear:["lblIn2","lblT2"],blankHide:["lg1","lg2","lg3","lg4","lg5","lg6","closing"],
     watchIds:{gene:"dna",travellers:["pol","msgO","msgI","rL","rS","tA","tB","tC","bead0"]}};
 })();
 
-/* the other four appear in the selector, in the arc's order, disabled until their Phase 2 build */
+/* ================= Figure 3: a gated channel beside a pump =================
+   One idea: both move the same ion across the same membrane, but only one of them costs the cell
+   anything. The first figure in the set that is a comparison rather than a sequence, so it runs as
+   three states (D1): the channel alone with the pump dimmed, the pump alone with the channel dimmed,
+   then both together, which is where "only the pump pays" lands. Geometry is the still's own
+   (fig3_channel_pump.py), with ids and groups on the things that move. The last step is the still,
+   except where a traveller has moved: the phosphate that ATP gave up lies free inside the cell,
+   below the pump. Two levels share the geometry and differ in words. The ATP beat is the slow beat
+   and the payment lands before anything it pays for moves (D2, T19). The pump is a P-type pump, so
+   its ion pathway opens to one side at a time (alternating access): the three sodium are out before
+   the first potassium sets off, in step 2 and in the run-on alike (R1, T28). Ions jitter and a few
+   drift the wrong way while the net movement is still inward (D3). Step 3 loops gently, with no
+   counter and no numbers on screen (D4). */
+const TRANSPORT=(function(){
+  const H=1000,MY=306,BLH=150,MB=MY+BLH,CH=430,PXC=1130;
+  const NA_EDGE="#6E6252",K_EDGE="#5E6878",DEEP="#46345E";
+  const CAPCOL=[P.GO,P.FLAG,P.PRO];
+  const SOURCES=[["Skou 1957","https://doi.org/10.1016/0006-3002(57)90343-8"]];
+  /* the gradient itself, as the still scatters it: crowded outside, scarce inside. Four of these
+     carry ids so they can jitter in place (D3); the rest hold still */
+  const OUT=[[96,263],[152,266],[214,246],[259,266],[320,245,"jo1"],[538,262,"jo2"],[597,243],[650,236],[714,259],[768,244],[830,234],[890,238],[933,236],[1328,249],[1390,235],[1449,263],[1498,262]];
+  const IN=[[128,580],[276,568,"ji2"],[424,578,"ji1"],[572,569],[720,582],[880,571],[1028,577]];
+  const CLOSING="Both move the same ion through the same membrane. Only the pump pays.";
+  const START="Sodium is crowded outside the cell and scarce inside. Two proteins sit in the same membrane, a gated channel and a pump, and neither has moved yet.";
+  const CHECK_Q="Does sodium need energy to move through the channel?";
+  const EXPLAIN="Explain in one sentence why the pump needs ATP and the channel does not.";
+  /* words, by level. The DE words are the still's; the SOL words keep the same geometry (D5).
+     Captions 1 and 2 are the still's legend lines, verbatim, at both levels; caption 3 is the
+     comparison and differs by level. */
+  const DE={
+    caps:["The gate opens and sodium falls inward, the way it was already leaning. Passive.","The pump pushes sodium out into the crowd and potassium in. Active.",
+      "Both run at once. The channel moves sodium down its electrochemical gradient for free; the Na⁺/K⁺ ATPase moves it back against the gradient, one ATP per cycle."],
+    prompts:[
+      {q:"A signal is about to open the channel. Which way does sodium go, and what does it cost?",choices:["Inward, down its electrochemical gradient, for free","Inward, but it costs one ATP","Outward, toward the crowd"],happened:"The gate opened and sodium fell inward, the way it was already leaning. No ATP was spent. A few ions wandered the other way; the net movement was still inward."},
+      {q:"What has to happen before the pump can push sodium out?",choices:["ATP splits; then the pump moves the ions","The pump moves the ions; no ATP is needed","Sodium flows in and turns the pump"],happened:"ATP split first and its phosphate moved onto the pump. Then three Na⁺ went out, and only after the last had left did two K⁺ come in. Both legs are uphill: potassium's gradient runs the other way, high inside and low outside, so one ATP buys the pair. Payment, then result."},
+      {q:"Both proteins are about to run at once. Which costs the cell energy?",choices:["Only the pump","Both the channel and the pump","Neither; the gradient does the work"],happened:"Only the pump paid. The channel let sodium fall down the electrochemical gradient for nothing; the Na⁺/K⁺ ATPase split one ATP every cycle to push it back out."}],
+    labels:{ch:"ligand-gated channel",pump:["sodium-potassium","pump"],naOut:["3 Na^+ out",true,994],kIn:["2 K^+ in",true,1160]},
+    closing:CLOSING,start:START,
+    after:"The gradient the channel runs down is stored energy. The pump spent ATP to build it, so the channel's free ride was paid for earlier, by the pump.",
+    watch:"Keep watching both. The channel keeps letting sodium fall in for nothing. The Na⁺/K⁺ ATPase keeps splitting an ATP to push sodium back out and bring potassium in; that is what keeps the inside scarce.",
+    runon:{playing:"Both running: the channel lets sodium fall in for nothing; the pump pays one ATP each cycle to push it back out. Pause stops it. Back, or any step number, clears it.",paused:"Paused. Play runs both again. Back, or any step number, clears it."},
+    end:{explain:EXPLAIN,check:{q:CHECK_Q,choices:["Yes","No"],correct:"no",answer:"No. It falls inward the way it was already leaning, from crowded to scarce. Only the pump, pushing against the gradient, pays."}},
+    blanks:[["lblChTitle","A gated channel"],["lblSig","a signal opens it"],["lblCh","ligand-gated channel"],["lblOut","Outside: sodium is crowded"],["lblIn","Inside: sodium is scarce"],["goLine","Down the gradient. No ATP is spent."],
+      ["lblPumpTitle","A pump"],["lblNaOut","3 Na⁺ out"],["lblKIn","2 K⁺ in"],["lblPump","sodium-potassium pump"],["lblAtp","ATP"],["lblSplit","split every cycle"],["flagLine","Against the gradient. One ATP per cycle."]]};
+  const SOL={
+    caps:["The gate opens and sodium falls inward, the way it was already leaning. Passive.","The pump pushes sodium out into the crowd and potassium in. Active.",
+      "Both run at once. The channel lets sodium fall in, from crowded to scarce, for free; the pump pushes it back out the hard way and spends one energy molecule, ATP, every cycle."],
+    prompts:[
+      {q:"A signal is about to open the channel. Which way does sodium go, and what does it cost?",choices:["Inward, from crowded to scarce, for free","Inward, but it costs energy","Outward, toward the crowd"],happened:"The gate opened and sodium fell inward, the way it was already leaning. No energy was spent. A few ions wandered the other way; most fell in."},
+      {q:"The pump is about to push sodium out into the crowd. What happens first?",choices:["The energy molecule, ATP, splits; then the pump moves the ions","The pump moves the ions; it needs no energy","Sodium flows in and turns the pump"],happened:"ATP, the energy molecule, split first and a piece of it stuck to the pump. Then three sodium went out into the crowd, and once they were out two potassium came in. Payment, then result."},
+      {q:"Both proteins are about to run at once. Which one costs the cell energy?",choices:["Only the pump","Both the channel and the pump","Neither; sodium moves on its own"],happened:"Only the pump paid. The channel let sodium fall from crowded to scarce for nothing; the pump spent one energy molecule, ATP, every cycle to push it back out."}],
+    labels:{ch:"gated channel",pump:["pump"],naOut:["3 sodium out",false,994],kIn:["2 potassium in",false,1216]},
+    closing:CLOSING,start:START,
+    after:"The crowd outside is there because the pump put it there. The channel's free fall was paid for earlier, by the pump.",
+    watch:"Keep watching both. The channel keeps letting sodium fall in for nothing. The pump keeps spending an energy molecule, ATP, to push sodium back out and bring potassium in; that is what keeps the inside scarce.",
+    runon:{playing:"Both running: the channel lets sodium fall in for nothing; the pump spends one energy molecule, ATP, each cycle to push it back out. Pause stops it. Back, or any step number, clears it.",paused:"Paused. Play runs both again. Back, or any step number, clears it."},
+    end:{explain:EXPLAIN,check:{q:CHECK_Q,choices:["Yes","No"],correct:"no",answer:"No. It falls inward the way it was already leaning, from crowded to scarce. Only the pump, pushing the hard way, pays."}},
+    blanks:[["lblChTitle","A gated channel"],["lblSig","a signal opens it"],["lblCh","gated channel"],["lblOut","Outside: sodium is crowded"],["lblIn","Inside: sodium is scarce"],["goLine","Down the gradient. No ATP is spent."],
+      ["lblPumpTitle","A pump"],["lblNaOut","3 sodium out"],["lblKIn","2 potassium in"],["lblPump","pump"],["lblAtp","ATP"],["lblSplit","split every cycle"],["flagLine","Against the gradient. One ATP per cycle."]]};
+  const txt=l=>l==="de"?DE:SOL;
+  const ion=(x,y,kind,o)=>circ(x,y,14,kind==="K"?P.K:P.NA,kind==="K"?K_EDGE:NA_EDGE,2,o);
+  function svg(level){const L=txt(level).labels,caps=txt(level).caps;
+    let s=head(H,"Downhill is free. Uphill is paid for.","DE Bio 101 Unit 5 . SOL Bio Module 2 . transport");
+    OUT.forEach(([x,y,id])=>{s+=ion(x,y,"Na",id?{id}:null);});
+    IN.forEach(([x,y,id])=>{s+=ion(x,y,"Na",id?{id}:null);});
+    s+=bilayer(52,MY,1496,46,11,28,32).svg;
+    s+=text(1548,212,"Outside: sodium is crowded","min","end",P.INKSOFT,{id:"lblOut"});
+    s+=text(1548,640,"Inside: sodium is scarce","min","end",P.INKSOFT,{id:"lblIn"});
+    s+=`<line x1="806" y1="150" x2="806" y2="700" stroke="${P.RULE}" stroke-width="3"/>\n`;
+    /* 1. the channel. Everything on this side is one group, so the whole side can dim while the pump runs */
+    let c=badge(1,66,166,P.GO,19,{id:"b1"});
+    c+=text(96,176,"A gated channel","key","start",P.PRO,{id:"lblChTitle"});
+    c+=rrect(CH-56,MY-16,46,BLH+32,10,P.PRO,P.PRO_SIDE,4,{id:"chL"});
+    c+=rrect(CH+10,MY-16,46,BLH+32,10,P.PRO,P.PRO_SIDE,4,{id:"chR"});
+    c+=arrow(CH,MY-30,CH,MB+86,P.NA,9,"arna",null,{id:"arrNa"});
+    c+=circ(CH,222,19,P.FLAG,P.HEADEDGE,3,{id:"sig"});
+    c+=arrow(CH,244,CH,MY-26,P.FLAG,5,"arf",null,{id:"sigArrow"});
+    c+=text(CH+48,228,"a signal opens it","min","start",P.FLAG,{id:"lblSig"});
+    c+=ion(CH,MY+40,"Na",{id:"ionC2"});
+    c+=ion(CH,MY+104,"Na",{id:"ionC1"});
+    c+=ion(CH,MB+52,"Na",{id:"ionC0"});
+    c+=text(60,500,L.ch,"min","start",P.PRO,{id:"lblCh"});
+    c+=text(76,692,"Down the gradient. No ATP is spent.","key","start",P.GO,{id:"goLine"});
+    let g1=badge(1,71,742,P.GO,19);wrap(caps[0],44).forEach((ln,j)=>{g1+=text(102,752+j*34,ln,"min","start");});c+=grp({id:"lg1"},g1);
+    s+=grp({id:"chanG"},c);
+    /* 2. the pump, the same way */
+    let p=badge(2,822,166,P.FLAG,19,{id:"b2"});
+    p+=text(852,176,"A pump","key","start",P.PRO,{id:"lblPumpTitle"});
+    p+=rrect(PXC-76,MY-18,152,BLH+36,16,P.PRO,P.PRO_SIDE,4);
+    p+=rrect(PXC-50,MY-10,34,BLH+20,10,P.PRO_TOP)+rrect(PXC+18,MY-10,34,BLH+20,10,P.PRO_TOP);
+    p+=arrow(PXC-33,MB+84,PXC-33,256,P.NA,9,"arna",null,{id:"arrPNa"});
+    p+=arrow(PXC+35,256,PXC+35,MB+84,P.K,9,"ark",null,{id:"arrK"});
+    p+=text(1240,500,L.pump[0],"min","start",P.PRO,{id:"lblPump"});
+    if(L.pump[1])p+=text(1240,536,L.pump[1],"min","start",P.PRO,{id:"lblPump2"});
+    /* the three sodium the pump has just put out, and the two potassium waiting outside and the two just brought in */
+    [-122,-78,-34].forEach((dx,i)=>{p+=ion(PXC+dx,230,"Na",{id:"naP"+i});});
+    p+=ion(PXC+36,230,"K",{id:"kC"})+ion(PXC+80,230,"K",{id:"kD"});
+    p+=ion(PXC+22,MB+112,"K",{id:"kA"})+ion(PXC+66,MB+112,"K",{id:"kB"});
+    p+=(L.naOut[1]?chem:text)(L.naOut[2],176,L.naOut[0],"lab","start",NA_EDGE,{id:"lblNaOut"});
+    p+=(L.kIn[1]?chem:text)(L.kIn[2],176,L.kIn[0],"lab","start",K_EDGE,{id:"lblKIn"});
+    /* the price: the ATP pentagon, and the phosphate it gives up, which ends free inside the cell */
+    p+=pentagon(922,528,26,P.NUC,DEEP,3,{id:"atp"});
+    p+=circ(1120,616,12,P.NUC,DEEP,2,{id:"pi"});
+    p+=arrow(952,522,PXC-92,486,P.NUC,6,"arn");
+    p+=text(922,594,"ATP","key","middle",P.NUC,{id:"lblAtp"});
+    p+=text(922,632,"split every cycle","min","middle",P.INKSOFT,{id:"lblSplit"});
+    p+=text(852,692,"Against the gradient. One ATP per cycle.","key","start",P.FLAG,{id:"flagLine"});
+    let g2=badge(2,819,742,P.FLAG,19);wrap(caps[1],44).forEach((ln,j)=>{g2+=text(850,752+j*34,ln,"min","start");});p+=grp({id:"lg2"},g2);
+    s+=grp({id:"pumpG"},p);
+    s+=grp({id:"runLayer"},"");
+    s+=foot(H,txt(level).closing,SOURCES,{id:"closing"});
+    return s;}
+  const ANIM=["chanG","pumpG","b1","chL","chR","arrNa","sig","sigArrow","lblSig","ionC0","ionC1","ionC2","goLine","lg1","jo1","jo2","ji1","ji2",
+    "b2","arrPNa","arrK","naP0","naP1","naP2","kA","kB","kC","kD","lblNaOut","lblKIn","pi","flagLine","lg2","closing"];
+  /* every state as absolute positions, so state 2 looks the same whether you arrived from 1 or from 3.
+     State 1 holds the pump at half; state 2 holds the channel at half; state 3 is the still (D1). */
+  function state(k){const S={};const on=(id,from)=>{S[id]={o:k>=from?1:0};};
+    S.chanG={o:k===2?0.5:1};S.pumpG={o:k===1?0.5:1};
+    ["b1","lg1","goLine","arrNa","sigArrow","lblSig"].forEach(id=>on(id,1));
+    S.chL=k===0?{x:8}:{};S.chR=k===0?{x:-8}:{};
+    S.sig=k===0?{x:70,y:-56}:{};
+    S.ionC0=k===0?{x:-38,y:-250}:{};S.ionC1=k===0?{x:40,y:-148}:{};S.ionC2=k===0?{x:-46,y:-136}:{};
+    ["jo1","jo2","ji1","ji2"].forEach(id=>{S[id]={};});
+    ["b2","lg2","flagLine","arrPNa","arrK","lblNaOut","lblKIn"].forEach(id=>on(id,2));
+    S.naP0=k<=1?{x:50,y:376}:{};S.naP1=k<=1?{x:45,y:404}:{};S.naP2=k<=1?{x:54,y:372}:{};
+    S.kA=k<=1?{x:14,y:-338}:{};S.kB=k<=1?{x:14,y:-338}:{};
+    S.kC=k<=1?{x:78,y:48}:{};S.kD=k<=1?{x:78,y:40}:{};
+    S.pi=k<=1?{x:-170,y:-110}:{};
+    on("closing",3);
+    return S;}
+  /* forward timing. Step 1 has no slow beat: the channel should feel effortless. Step 2's ATP split is
+     the slow beat, 400 to 1700 ms, and nothing the ATP pays for moves until it has landed (D2, T19).
+     The three sodium go out at 1700, 1900 and 2100 ms, each taking 900 ms, so the last arrives at 3000;
+     the first potassium sets off at 3000, after it (alternating access, R1, T28). The phosphate stays
+     seated on the pump until about 3060 ms and is let go inside while the potassium comes in.
+     Travellers carry waypoints, jittered once with a fixed seed, so they wander rather than aim; two of
+     them visibly drift the wrong way before the net movement carries them in (D3). */
+  const R=rng(3);const J=(a,b)=>[a+(R()-.5)*28,b+(R()-.5)*22];const J2=(a,b)=>[a+(R()-.5)*8,b+(R()-.5)*20];
+  const A=(d,dur,way)=>way?{d,dur,way}:{d,dur};
+  const PUMP=[11,-176];   /* the phosphate seated on the pump, relative to where it ends up free inside */
+  const SEQ={
+    1:{pumpG:A(0,300),sig:A(0,900,[J(54,-42),J(36,-16),J(20,-26),J(6,-8)]),
+       jo1:A(300,700,[J(8,6),J(-6,10)]),jo2:A(500,700,[J(-10,4),J(-4,-8)]),
+       chL:A(800,300),chR:A(800,300),sigArrow:A(800,300),lblSig:A(800,300),arrNa:A(1000,300),
+       ionC0:A(1100,800,[J(-14,-216),J2(0,-128),J2(0,-48)]),
+       ionC1:A(1250,800,[J(8,-118),J2(0,-60),J2(0,-80),J2(0,-32)]),     /* down, back up a little, then in */
+       ionC2:A(1400,800,[J(-20,-94),J2(-2,-48),J2(0,26)]),               /* overshoots, then settles back up */
+       ji1:A(1100,900,[J2(4,-26),J2(8,-36),J2(2,-14)]),                  /* an inside ion wanders up to the gate and back */
+       ji2:A(1400,500,[J(6,-10)]),
+       b1:A(2000,300),goLine:A(2000,300),lg1:A(2000,300)},
+    2:{chanG:A(0,300),pumpG:A(0,300),
+       pi:A(400,3250,[J(-140,-122),J(-96,-140),J(-40,-158),PUMP,PUMP,PUMP,PUMP,PUMP,PUMP,J2(6,-60)]),
+       arrPNa:A(1700,300),naP0:A(1700,900,[J2(89,326),J2(89,240),J2(89,150),[89,32]]),
+       naP1:A(1900,900,[J2(45,326),J2(45,240),J2(45,150),[45,32]]),lblNaOut:A(1900,300),
+       naP2:A(2100,900,[J2(1,326),J2(1,240),J2(1,150),[1,32]]),
+       arrK:A(3000,300),kA:A(3000,900,[J2(13,-306),J2(13,-208),J2(13,-98),[13,-20]]),
+       kB:A(3150,900,[J2(-31,-306),J2(-31,-208),J2(-31,-98),[-31,-20]]),lblKIn:A(3200,300),
+       kC:A(3500,500,[J(52,34),J(24,12)]),kD:A(3600,500,[J(50,28),J(22,10)]),
+       b2:A(3900,300),flagLine:A(3900,300),lg2:A(3900,300)},
+    3:{chanG:A(0,300),closing:A(0,400)}};
+  const DUR=[0,2300,4200,500];
+  const BEATS={2:{name:"ATP splits before the pump moves anything",from:400,to:1700,ids:["pi"]}};
+  /* T19: the payment, and what it pays for. The split has landed (the phosphate is on the pump) at
+     `paidAt`; nothing in `funds` starts before that. */
+  const PAYS={step:2,atp:"pi",paidAt:1700,funds:["naP0","naP1","naP2","kA","kB"]};
+  /* T28: the movers that cross the membrane through the pump in opposite directions. Their active
+     intervals in SEQ[2] must never intersect, and the run-on declares its own below. */
+  const CROSSINGS={step:2,protein:"pump",out:["naP0","naP1","naP2"],in:["kA","kB"]};
+  const FOCUS={1:["sig","ionC0","ionC1","ionC2","b1"],2:["pi","naP0","naP1","naP2","kA","kB","b2"],3:["b1","b2"]};
+  /* the run-on after step 3: both run together. Through the channel, sodium keeps falling in for
+     nothing; the pump keeps splitting an ATP and pushing three sodium out and two potassium in. Clones
+     appear where the thing they stand for is (in the crowd, inside the cell, on the ATP) and move by
+     jittered legs, never in lines. Gentle: a handful of channel passes and two pump cycles, then it
+     holds. No counter (D4). */
+  let seed=5;const rnd=()=>{seed=(seed+0x6D2B79F5)|0;let t=seed;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};
+  const jit=(a,b)=>[a+(rnd()-.5)*18,b+(rnd()-.5)*14];
+  const CH_FROM=[[392,258],[470,262],[404,250]];
+  const CH_REST=[[386,618],[474,614],[430,648],[330,646],[540,644],[486,590]];
+  const NA_FROM=[[1058,606],[1097,634],[1150,602]];
+  const NA_REST=[[866,198],[914,200],[962,202],[1010,198],[1058,200],[1106,202]];
+  const K_FROM=[[1244,278],[1288,270]];
+  const K_REST=[[1240,574],[1284,586],[1328,572],[1372,588]];
+  const PI_FROM=[950,506],PI_PUMP=[1131,440],PI_REST=[[1060,652],[1150,650]];
+  const CH_TICKS=6,CYCLES=2,CH_EVERY=1150,PERIOD=3600;
+  /* one pump cycle: the phosphate lands at 1300 ms; each ion crosses in five legs of LEG ms (four
+     listed plus the rest); sodium i sets off at NA_T0 + i*NA_GAP, and the first potassium at K_T0,
+     which is after the last sodium has arrived (R1, T28) */
+  const LEG=170,SPAN=5*LEG,NA_T0=1300,NA_GAP=220,K_T0=2650,K_GAP=160;
+  const loop={nCh:0,nCy:0,
+    start(api){const svg=$("stage").querySelector("svg");if(!svg)return;const layer=svg.querySelector("#runLayer");if(!layer)return;
+      const sp=api.sp;
+      const make=(html)=>{const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML="<g>"+html+"</g>";const g=tmp.firstElementChild;g.classList.add("mv");g.style.opacity="0";layer.appendChild(g);return g;};
+      const place=(g,x,y)=>{g.style.transition="none";g.style.transform=`translate(${x}px, ${y}px)`;};
+      const fade=(g,ms)=>{g.style.transition="none";g.style.opacity="0";g.getBoundingClientRect();g.style.transition=`opacity ${ms*sp()}ms ease-in-out`;g.style.opacity="1";};
+      /* a clone is drawn at its resting place (`rest`) and translated back to where it starts; `pts` are
+         absolute points it passes through, each leg taking `ms`. walk() ends at rest; legsTo() stops at the last point */
+      const legsTo=(g,rest,pts,ms,t0)=>{pts.forEach((pt,i)=>{api.after(()=>{g.style.transition=`transform ${ms*sp()}ms ease-in-out`;g.style.transform=`translate(${pt[0]-rest[0]}px, ${pt[1]-rest[1]}px)`;},t0+i*ms);});};
+      const walk=(g,rest,legs,ms,t0)=>legsTo(g,rest,legs.concat([rest]),ms,t0);
+      const tickCh=()=>{if(!api.on()||loop.nCh>=CH_TICKS)return;const i=loop.nCh++;
+        const from=CH_FROM[i%CH_FROM.length],rest=CH_REST[i%CH_REST.length];
+        const g=make(ion(rest[0],rest[1],"Na"));
+        if(api.reduce()){place(g,0,0);g.style.opacity="1";}
+        else{place(g,from[0]-rest[0],from[1]-rest[1]);fade(g,200);
+          const legs=[jit(CH,292),jit(CH,380)];if(i%3===1)legs.push(jit(CH,352));   /* every third one drifts back up before it falls */
+          legs.push(jit(CH,470),jit(CH,530));walk(g,rest,legs,210,250);
+          if(i%3===2){const j=svg.querySelector("#ji1");if(j){walk(j,[424,578],[jit(428,552),jit(430,542)],300,400);}}}   /* and an inside ion wanders up to the gate and back */
+        api.after(tickCh,CH_EVERY);};
+      const cycle=()=>{if(!api.on()||loop.nCy>=CYCLES)return;const c=loop.nCy++;
+        const pi=make(circ(PI_REST[c][0],PI_REST[c][1],12,P.NUC,DEEP,2));
+        const nas=NA_FROM.map((f,i)=>make(ion(NA_REST[c*3+i][0],NA_REST[c*3+i][1],"Na")));
+        const ks=K_FROM.map((f,i)=>make(ion(K_REST[c*2+i][0],K_REST[c*2+i][1],"K")));
+        if(api.reduce()){[pi].concat(nas,ks).forEach(g=>{place(g,0,0);g.style.opacity="1";});}
+        else{
+          /* payment first: a phosphate forms on the ATP and is carried to the pump, landing at 1300 ms */
+          const pr=PI_REST[c];place(pi,PI_FROM[0]-pr[0],PI_FROM[1]-pr[1]);fade(pi,250);
+          legsTo(pi,pr,[jit(986,496),jit(1036,478),jit(1086,456),PI_PUMP],250,300);
+          /* then the result: three sodium up and out into the crowd, staggered, none before 1300 ms */
+          nas.forEach((g,i)=>{const f=NA_FROM[i],r=NA_REST[c*3+i];place(g,f[0]-r[0],f[1]-r[1]);api.after(()=>fade(g,200),0);
+            walk(g,r,[jit(PXC-33,556),[PXC-33,470],[PXC-33,380],[PXC-33,262]],LEG,NA_T0+i*NA_GAP);});
+          /* two potassium arrive outside, wait for the last sodium to be out, then down and in */
+          ks.forEach((g,i)=>{const f=K_FROM[i],r=K_REST[c*2+i];place(g,f[0]-r[0],f[1]-r[1]);api.after(()=>fade(g,200),1500);
+            walk(g,r,[jit(PXC+35,262),[PXC+35,360],[PXC+35,470],[PXC+35,548]],LEG,K_T0+i*K_GAP);});
+          /* the phosphate is let go inside */
+          legsTo(pi,pr,[pr],400,2950);}
+        api.after(cycle,PERIOD);};
+      api.after(tickCh,500);api.after(cycle,300);},
+    clear(){loop.nCh=0;loop.nCy=0;seed=5;const svg=$("stage").querySelector("svg");if(!svg)return;const L=svg.querySelector("#runLayer");if(L)L.innerHTML="";
+      const j=svg.querySelector("#ji1");if(j){j.style.transition="none";j.style.transform="translate(0px, 0px)";}},
+    /* the schedule of one cycle, for T28: every sodium's and every potassium's active interval, in ms from the cycle's start */
+    crossings(){return {period:PERIOD,out:NA_FROM.map((_,i)=>[NA_T0+i*NA_GAP,NA_T0+i*NA_GAP+SPAN]),in:K_FROM.map((_,i)=>[K_T0+i*K_GAP,K_T0+i*K_GAP+SPAN])};}};
+  return {key:"transport",num:25,subject:"channel and pump",enabled:true,n:3,levels:true,
+    title:"Downhill is free. Uphill is paid for.",short:"channel and pump",eyebrow:"DE Bio 101 Unit 5 · SOL Bio Module 2 · transport",
+    tag:[["mov","Movement"],["nrg","Energy transfer"]],bridge:"Moving things uphill runs on ATP. Here is where the ATP comes from.",
+    note:"On the channel side a few sodium ions drift the wrong way while most fall in: net movement is not every particle moving.",
+    txt,capColor:CAPCOL,
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,pays:PAYS,crossings:CROSSINGS,loop,sources:SOURCES,
+    blanks:level=>txt(level).blanks.map(([id,name])=>({id,name})),blankClear:["lblPump2"],blankHide:["lg1","lg2","closing"],
+    watchIds:{signal:"sig",atp:"pi",travellers:["sig","ionC0","ionC1","ionC2","pi","naP0","naP1","naP2","kA","kB","kC","kD"]}};
+})();
+
+/* the other three appear in the selector, in the arc's order, disabled until their Phase 2 build */
 /* each carries its permanent Bio Tool number now, so an unbuilt entry reads as numbered and coming */
 const SOON=(key,num,subject,title,tag,bridge,n,levels)=>({key,num,subject,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",txt:()=>({caps:[],prompts:[],closing:"",counter:()=>""}),capColor:[],anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
 FIGS=[GPCR,
   SOON("rtk",24,"receptor tyrosine kinase","Two halves, then several answers at once",[["amp","Amplification"]],"Both of those end in things moving across a membrane.",4),
-  SOON("transport",25,"channel and pump","Downhill is free. Uphill is paid for.",[["mov","Movement"],["nrg","Energy transfer"]],"Moving things uphill runs on ATP. Here is where the ATP comes from.",2,true),
+  TRANSPORT,
   SOON("etc",26,"electron transport chain","Electrons buy a gradient. The gradient buys the ATP.",[["nrg","Energy transfer"]],"A signal can also reach all the way to the genes.",6),
   DOGMA,
   SOON("cloning",28,"cloning a gene","Cut both with one enzyme and the ends fit",[["mov","Movement"]],null,5)];
