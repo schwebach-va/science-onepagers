@@ -67,6 +67,10 @@
     var start = Math.max(0, at - 80), end = Math.min(b.length, at + 150);
     return (start ? '…' : '') + b.slice(start, end).trim() + (end < b.length ? '…' : '');
   }
+  // The code-names page opens filtered to the name that was searched (biology/code-names-biodiversity.html).
+  function codeNameLink(e, terms) {
+    return (e.u === 'biology/code-names-biodiversity.html' && terms.length === 1 && /^[a-z]+$/.test(terms[0])) ? '?name=' + terms[0] : '';
+  }
   function run() {
     var raw = q.value.trim(), terms = norm(raw).split(/\s+/).filter(Boolean);
     if (!terms.length) { out.innerHTML = ''; count.textContent = IDX.length + ' pages to search.'; return; }
@@ -91,7 +95,7 @@
     count.textContent = hits.length ? hits.length + (hits.length === 1 ? ' page' : ' pages') + ' match.' : 'No pages match. Try fewer or shorter words.';
     out.innerHTML = hits.slice(0, 40).map(function (h) {
       var e = h[1], where = [e.n, e.s].filter(Boolean).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(' · ');
-      return '<li><span class="where">' + esc(where) + '</span><a class="hit" href="' + e.u + '">' + mark(e.t, terms) +
+      return '<li><span class="where">' + esc(where) + '</span><a class="hit" href="' + e.u + codeNameLink(e, terms) + '">' + mark(e.t, terms) +
         '</a><span class="snip">' + mark(snippet(e, terms), terms) + '</span></li>';
     }).join('');
   }
