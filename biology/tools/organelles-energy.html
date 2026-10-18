@@ -909,14 +909,14 @@ const WORDRX={electron:/\belectrons?\b/i,hion:/hydrogen ions?|H⁺/i,synthase:/A
 
 /* Stage labels. nine = the 9th-grade words (§7), de = the deck's words. */
 const LBL={
- nine:{light:"Light",chl:"Chlorophyll",rc:"Reaction center",thy:"Stacked membrane sacs (thylakoids)",tsp:"Inside the stacked sacs",stroma:"Fluid around the sacs",water:"Water",o2:"Oxygen (O₂)",h:"Hydrogen ions (H⁺)",syn:"ATP synthase",atp:"ATP",adp:"ADP",calvin:"Sugar-building (Calvin) cycle",co2:"Carbon dioxide (CO₂)",c3:"Three-carbon piece",glu:"Glucose",cyto:"Cytoplasm",outer:"Outer membrane",inner:"Inner membrane",matrix:"Inside the mitochondrion",ims:"Space between the two membranes",carrier:"Carrier",e:"Electron",chain:"Carrier line on the inner membrane",cycle:"The cycle that takes the pieces apart",trim:"Trimmed: one carbon leaves",split:"The glucose ring breaks",c2:"Two-carbon piece",lhc:"Chlorophyll",ps1:"Second reaction center",wp:"Magnified patch",leftover:"Leftover pieces (far less ATP)",fer:"",gap:"Not a map of one cell: how the two organelles feed each other."},
+ nine:{light:"Light",chl:"Chlorophyll",rc:"Reaction center",thy:"Stacked membrane sacs (thylakoids)",tsp:"Inside the stacked sacs",stroma:"Fluid around the sacs",water:"Water",o2:"Oxygen (O₂)",h:"Hydrogen ions (H⁺)",syn:"ATP synthase",atp:"ATP",adp:"ADP",calvin:"Sugar-building (Calvin) cycle",co2:"Carbon dioxide (CO₂)",c3:"Three-carbon piece",glu:"Glucose",cyto:"Cytoplasm",outer:"Outer membrane",inner:"Inner membrane",matrix:"Inside the mitochondrion",ims:"Space between the two membranes",carrier:"Carrier",e:"Electron",chain:"Carrier line on the inner membrane",cycle:"The cycle that takes the pieces apart",trim:"Trimmed: one carbon leaves",split:"The glucose ring breaks",c2:"Two-carbon piece",lhc:"Chlorophyll",ps1:"Second reaction center",wp:"Magnified patch",leftover:"Leftover pieces (far less ATP)",fer:"Fermentation",lac:"Lactic acid",eth:"Ethanol",yeast:"Yeast or bacteria",muscle:"Muscle cell",gap:"Not a map of one cell: how the two organelles feed each other."},
  de:{light:"Light",chl:"Light-harvesting complex",rc:"Photosystem II (P680)",thy:"Thylakoid membrane",tsp:"Thylakoid space",stroma:"Stroma",water:"H₂O",o2:"O₂",h:"H⁺",syn:"ATP synthase",atp:"ATP",adp:"ADP",calvin:"Calvin cycle",co2:"CO₂",c3:"G3P",glu:"Glucose",cyto:"Cytosol",outer:"Outer membrane",inner:"Inner membrane",matrix:"Matrix",ims:"Intermembrane space",carrier:"NADH",e:"Electron",chain:"Electron transport chain",cycle:"Citric acid cycle",trim:"Pyruvate oxidation",split:"Glycolysis",c2:"Acetyl CoA",lhc:"Light-harvesting complex",ps1:"Photosystem I (P700)",wp:"Magnified patch",leftover:"",fer:"Fermentation",gap:"Not a map of one cell: how the two organelles feed each other.",
-   pq:"Pq",cyt:"Cytochrome complex",pc:"Pc",fd:"Fd",nr:"NADP⁺ reductase",nadph:"NADPH",pea:"Primary electron acceptor",rubisco:"Rubisco",rubp:"RuBP",pga:"3-phosphoglycerate",g3p:"G3P",cristae:"Cristae",pyr:"Pyruvate",cI:"Complex I",cII:"Complex II",q:"Q",cIII:"Complex III",cytc:"Cytochrome c",cIV:"Complex IV",nadh:"NADH",fadh2:"FADH₂",lac:"Lactate",eth:"Ethanol",h2o:"H₂O"}
+   pq:"Pq",cyt:"Cytochrome complex",pc:"Pc",fd:"Fd",nr:"NADP⁺ reductase",nadph:"NADPH",pea:"Primary electron acceptor",rubisco:"Rubisco",rubp:"RuBP",pga:"3-phosphoglycerate",g3p:"G3P",cristae:"Cristae",pyr:"Pyruvate",cI:"Complex I",cII:"Complex II",q:"Q",cIII:"Complex III",cytc:"Cytochrome c",cIV:"Complex IV",nadh:"NADH",fadh2:"FADH₂",lac:"Lactate",eth:"Ethanol",h2o:"H₂O",yeast:"Yeast or bacteria",muscle:"Muscle cell"}
 };
 /* Parts a teacher can pin a callout on (Teaching view). One line each, in the level's words. */
 const PARTS={
- nine:{light:["Light","Sunlight is the energy source. Chlorophyll absorbs it."],rc:["Reaction center","The chlorophyll that gives up an electron when light hits it."],thy:["Stacked membrane sacs (thylakoids)","Where the chlorophyll sits and where hydrogen ions pile up inside."],water:["Water","Pulled apart to replace the lost electron. Its oxygen leaves as O₂."],o2:["Oxygen (O₂)","Given off by the chloroplast, taken in by the mitochondrion."],h:["Hydrogen ions (H⁺)","Hydrogen that has lost its electron. Piled up, they make the space acidic."],syn:["ATP synthase","A spinning protein that makes ATP as hydrogen ions flow through it."],calvin:["Sugar-building (Calvin) cycle","Attaches one carbon dioxide at a time and builds three-carbon pieces."],co2:["Carbon dioxide (CO₂)","One carbon bead with two oxygens. In for sugar; out from the mitochondrion."],glu:["Glucose","A ring of six carbon beads."],c3:["Three-carbon piece","Half a glucose: three beads."],cyto:["Cytoplasm","Where the glucose ring breaks, before anything enters the mitochondrion."],matrix:["Inside the mitochondrion","Where the pieces are taken apart and carbon dioxide is made."],ims:["Space between the two membranes","Where hydrogen ions pile up."],carrier:["Carrier","A molecule that carries electrons and their energy to the inner membrane."],e:["Electron","A tiny negative particle, carrying energy."],chain:["Carrier line on the inner membrane","Electrons pass along it; their energy pumps hydrogen ions across."],cycle:["The cycle that takes the pieces apart","Every carbon of the two-carbon piece leaves as carbon dioxide."],atp:["ATP","The cell's rechargeable battery."],lhc:["Chlorophyll","The green pigment that absorbs the light."],ps1:["Second reaction center","Light hits here too and re-energizes the electron."],wp:["Working patch","One bit of membrane, magnified: this is where the molecule-by-molecule action happens."]},
- de:{light:["Light","Photons absorbed by the light-harvesting complexes."],rc:["Photosystem II (P680)","Its reaction-center chlorophyll pair gives an excited electron to the primary electron acceptor."],lhc:["Light-harvesting complex","Pigments pass absorbed energy to the reaction center."],pq:["Pq","Plastoquinone carries the electron to the cytochrome complex."],cyt:["Cytochrome complex","Pumps H⁺ into the thylakoid space as electrons fall in energy."],pc:["Pc","Plastocyanin carries the electron to PS I."],ps1:["Photosystem I (P700)","Light re-energizes the electron here."],fd:["Fd","Ferredoxin hands the electron to NADP⁺ reductase."],nr:["NADP⁺ reductase","Reduces NADP⁺ to NADPH on the stroma side."],thy:["Thylakoid membrane","Holds the photosystems, the carriers and ATP synthase."],tsp:["Thylakoid space","Where H⁺ piles up, near pH 5 while running."],stroma:["Stroma","Where ATP and NADPH are released and the Calvin cycle runs, near pH 8."],water:["H₂O","Split at PS II: 2 H₂O → 4 e⁻ + 4 H⁺ + O₂."],o2:["O₂","Released by PS II; reduced to water at complex IV."],h:["H⁺","Proton-motive force: the gradient that turns ATP synthase."],syn:["ATP synthase","Turned by H⁺ flowing down its gradient; makes ATP on the stroma or matrix side."],calvin:["Calvin cycle","Fixation, reduction, regeneration. 3 CO₂, 9 ATP and 6 NADPH per G3P."],rubisco:["Rubisco","Attaches CO₂ to RuBP; the 6C product splits into two 3-phosphoglycerate."],co2:["CO₂","Fixed by rubisco; released by pyruvate oxidation and the citric acid cycle."],glu:["Glucose","Six carbons. Built from two G3P; broken down by glycolysis."],c3:["G3P / pyruvate","Three carbons."],cyto:["Cytosol","Where glycolysis runs, with or without O₂."],matrix:["Matrix","Pyruvate oxidation and the citric acid cycle; ATP made here."],ims:["Intermembrane space","Where H⁺ piles up, pumped by complexes I, III and IV."],cristae:["Cristae","Folds of the inner membrane that hold the chain and ATP synthase."],carrier:["NADH","Delivers electrons to complex I."],e:["Electron","Falls in free energy down the chain to O₂."],chain:["Electron transport chain","Complexes I–IV with Q and cytochrome c, in the inner membrane."],cI:["Complex I","Takes electrons from NADH; pumps H⁺."],cII:["Complex II","Takes electrons from FADH₂; pumps none."],q:["Q","Ubiquinone carries electrons to complex III."],cIII:["Complex III","Pumps H⁺."],cytc:["Cytochrome c","Carries electrons to complex IV."],cIV:["Complex IV","½ O₂ + 2 e⁻ + 2 H⁺ → H₂O. Pumps H⁺."],cycle:["Citric acid cycle","Per turn: 2 CO₂, 3 NADH, 1 FADH₂, 1 ATP."],trim:["Pyruvate oxidation","1 CO₂ and 1 NADH per pyruvate; acetyl CoA enters the cycle."],split:["Glycolysis","Glucose → 2 pyruvate, net 2 ATP, 2 NADH, no CO₂."],c2:["Acetyl CoA","Two carbons on coenzyme A."],atp:["ATP","Up to about 32 per glucose with O₂; 2 by fermentation."],fer:["Fermentation","Regenerates NAD⁺ by handing NADH's electrons to pyruvate."],wp:["Working patch","One bit of membrane, magnified: thousands of these sit in the real organelle."]}
+ nine:{light:["Light","Sunlight is the energy source. Chlorophyll absorbs it."],rc:["Reaction center","The chlorophyll that gives up an electron when light hits it."],thy:["Stacked membrane sacs (thylakoids)","Where the chlorophyll sits and where hydrogen ions pile up inside."],water:["Water","Pulled apart to replace the lost electron. Its oxygen leaves as O₂."],o2:["Oxygen (O₂)","Given off by the chloroplast, taken in by the mitochondrion."],h:["Hydrogen ions (H⁺)","Hydrogen that has lost its electron. Piled up, they make the space acidic."],syn:["ATP synthase","A spinning protein that makes ATP as hydrogen ions flow through it."],calvin:["Sugar-building (Calvin) cycle","Attaches one carbon dioxide at a time and builds three-carbon pieces."],co2:["Carbon dioxide (CO₂)","One carbon bead with two oxygens. In for sugar; out from the mitochondrion."],glu:["Glucose","A ring of six carbon beads."],c3:["Three-carbon piece","Half a glucose: three beads."],cyto:["Cytoplasm","Where the glucose ring breaks, before anything enters the mitochondrion."],matrix:["Inside the mitochondrion","Where the pieces are taken apart and carbon dioxide is made."],ims:["Space between the two membranes","Where hydrogen ions pile up."],carrier:["Carrier","A molecule that carries electrons and their energy to the inner membrane."],e:["Electron","A tiny negative particle, carrying energy."],chain:["Carrier line on the inner membrane","Electrons pass along it; their energy pumps hydrogen ions across."],cycle:["The cycle that takes the pieces apart","Every carbon of the two-carbon piece leaves as carbon dioxide."],atp:["ATP","The cell's rechargeable battery."],lhc:["Chlorophyll","The green pigment that absorbs the light."],ps1:["Second reaction center","Light hits here too and re-energizes the electron."],wp:["Working patch","One bit of membrane, magnified: this is where the molecule-by-molecule action happens."],fer:["Fermentation","Without oxygen the pieces are finished off in the cytoplasm: ethanol and carbon dioxide in yeast or bacteria, lactic acid in muscle. No extra ATP."],tally:["ATP tally","About 32 ATP per glucose with oxygen; 2 without. The 2 come from the cytoplasm step either way."],ledger:["Carbon count","Every bead is one carbon atom. Six carbon dioxide make one glucose, and one glucose gives back six carbon dioxide."]},
+ de:{light:["Light","Photons absorbed by the light-harvesting complexes."],rc:["Photosystem II (P680)","Its reaction-center chlorophyll pair gives an excited electron to the primary electron acceptor."],lhc:["Light-harvesting complex","Pigments pass absorbed energy to the reaction center."],pq:["Pq","Plastoquinone carries the electron to the cytochrome complex."],cyt:["Cytochrome complex","Pumps H⁺ into the thylakoid space as electrons fall in energy."],pc:["Pc","Plastocyanin carries the electron to PS I."],ps1:["Photosystem I (P700)","Light re-energizes the electron here."],fd:["Fd","Ferredoxin hands the electron to NADP⁺ reductase."],nr:["NADP⁺ reductase","Reduces NADP⁺ to NADPH on the stroma side."],thy:["Thylakoid membrane","Holds the photosystems, the carriers and ATP synthase."],tsp:["Thylakoid space","Where H⁺ piles up, near pH 5 while running."],stroma:["Stroma","Where ATP and NADPH are released and the Calvin cycle runs, near pH 8."],water:["H₂O","Split at PS II: 2 H₂O → 4 e⁻ + 4 H⁺ + O₂."],o2:["O₂","Released by PS II; reduced to water at complex IV."],h:["H⁺","Proton-motive force: the gradient that turns ATP synthase."],syn:["ATP synthase","Turned by H⁺ flowing down its gradient; makes ATP on the stroma or matrix side."],calvin:["Calvin cycle","Fixation, reduction, regeneration. 3 CO₂, 9 ATP and 6 NADPH per G3P."],rubisco:["Rubisco","Attaches CO₂ to RuBP; the 6C product splits into two 3-phosphoglycerate."],co2:["CO₂","Fixed by rubisco; released by pyruvate oxidation and the citric acid cycle."],glu:["Glucose","Six carbons. Built from two G3P; broken down by glycolysis."],c3:["G3P / pyruvate","Three carbons."],cyto:["Cytosol","Where glycolysis runs, with or without O₂."],matrix:["Matrix","Pyruvate oxidation and the citric acid cycle; ATP made here."],ims:["Intermembrane space","Where H⁺ piles up, pumped by complexes I, III and IV."],cristae:["Cristae","Folds of the inner membrane that hold the chain and ATP synthase."],carrier:["NADH","Delivers electrons to complex I."],e:["Electron","Falls in free energy down the chain to O₂."],chain:["Electron transport chain","Complexes I–IV with Q and cytochrome c, in the inner membrane."],cI:["Complex I","Takes electrons from NADH; pumps H⁺."],cII:["Complex II","Takes electrons from FADH₂; pumps none."],q:["Q","Ubiquinone carries electrons to complex III."],cIII:["Complex III","Pumps H⁺."],cytc:["Cytochrome c","Carries electrons to complex IV."],cIV:["Complex IV","½ O₂ + 2 e⁻ + 2 H⁺ → H₂O. Pumps H⁺."],cycle:["Citric acid cycle","Per turn: 2 CO₂, 3 NADH, 1 FADH₂, 1 ATP."],trim:["Pyruvate oxidation","1 CO₂ and 1 NADH per pyruvate; acetyl CoA enters the cycle."],split:["Glycolysis","Glucose → 2 pyruvate, net 2 ATP, 2 NADH, no CO₂."],c2:["Acetyl CoA","Two carbons on coenzyme A."],atp:["ATP","Up to about 32 per glucose with O₂; 2 by fermentation."],fer:["Fermentation","Regenerates NAD⁺ by handing NADH's electrons to pyruvate."],wp:["Working patch","One bit of membrane, magnified: thousands of these sit in the real organelle."],tally:["ATP tally","Glycolysis 2, citric acid cycle 2, oxidative phosphorylation about 26 to 28: up to about 32 per glucose with O₂; 2 by fermentation."],ledger:["Carbon count","Six CO₂ fixed per glucose; six CO₂ released per glucose oxidized. Carbon is conserved."]}
 };
 
 /* ================= content: steps ================= */
@@ -928,7 +928,7 @@ const TABS=[
   steps:[
  {key:"C1",short:{nine:"Light hits",de:"Light hits"},head:{nine:"Light hits the chloroplast",de:"Light hits the chloroplast"},
   pre:{nine:"N1",de:"D15"},post:{nine:["N2"],de:["D24"]},
-  task:{nine:"Turn the light up and watch the beam hit the reaction center. Then turn it down and watch what slows.",de:"Turn the light up, then try red, blue and green light and watch the rate readout."},
+  task:{nine:"Turn the light up and watch the beam hit the reaction center. Then turn it down and watch what slows. The speed number under the cycle changes as you go.",de:"Turn the light up, then try red, blue and green light and watch the rate readout."},
   goals:{nine:[["beam","Light hits the reaction center",3],["dim","Light taken below 20% and back above 60%"]],de:[["beam","Photon hits on a reaction center",3],["colours","Red, blue and green each tried for 2 s"]]},
   words:["rc","electron","thylakoids"],
   nine:"Sunlight is the energy source for everything that follows. Chlorophyll, the green pigment packed into the chloroplast's stacked membrane sacs (thylakoids), absorbs the light. At the reaction center (the chlorophyll that gives up an electron when light hits it), the light's energy knocks an electron loose. An electron is a tiny negative particle, and this one now carries energy the chloroplast will store in sugar. Turn the light down and fewer electrons move. Turn it up and more do, until the chloroplast is working as fast as it can.",
@@ -955,10 +955,10 @@ const TABS=[
   de:"Photosystem I can run on its own. Its excited electron goes from Fd back to the cytochrome complex, then through Pc to P700 again, instead of on to NADP⁺ reductase. The loop still pumps H⁺, so ATP synthase keeps turning. But no NADPH forms, no water is split and no O₂ leaves; photosystem II sits idle. Why bother? The Calvin cycle spends 3 ATP for every 2 NADPH, and linear flow alone makes a little less ATP than that, so cyclic flow tops up the ATP. Many courses teach linear flow first; this step goes further."},
  {key:"C4",short:{nine:"Sugar-building",de:"Calvin cycle"},head:{nine:"The sugar-building cycle takes in CO₂",de:"The Calvin cycle"},
   pre:{nine:"N4",de:"D22"},post:{nine:["N5","N16","A2"],de:["D21","D23"]},
-  task:{nine:"Build two three-carbon pieces and watch them join into glucose. Then turn the CO₂ down and back up.",de:"Build one G3P and check the counter: CO₂ in, ATP and NADPH spent. Then turn the light off with CO₂ steady and watch the RuBP and 3-phosphoglycerate bars."},
+  task:{nine:"Build two three-carbon pieces and watch them join into glucose, counting carbons in. Then set the CO₂ slider at 10, 25, 50, 75 and 100 and write down the speed number at each.",de:"Build one G3P and check the counter: CO₂ in, ATP and NADPH spent. Then turn the light off with CO₂ steady and watch the RuBP and 3-phosphoglycerate bars."},
   goals:{nine:[["sugar","Three-carbon pieces built",2],["co2low","CO₂ taken below 20% and back above 60%"]],de:[["sugar","G3P out",1],["dark","Light at 0 for 3 s while CO₂ is at 50% or more"]]},
   words:["calvin","thylakoids","carrier"],defaults:{light:100,co2:50},
-  nine:"In the fluid around the stacked sacs, the Calvin cycle, the sugar-building cycle, runs on the ATP and energized carriers that light has made. Each turn attaches one carbon dioxide molecule, one carbon bead, to a five-carbon molecule, and spends ATP turning the result into three-carbon pieces. For every three CO₂ that come in, one three-carbon piece leaves the cycle; the rest are rebuilt so that the cycle can keep turning. Two three-carbon pieces join to make one glucose ring of six carbons, so building one glucose takes six CO₂. Glucose the plant doesn't use right away can be stored as starch. Turn down the CO₂, and the cycle slows. Turn it up, and the cycle speeds up, then levels off, because it is already working as fast as the light allows.",
+  nine:"In the fluid around the stacked sacs, the Calvin cycle, the sugar-building cycle, runs on the ATP and energized carriers that light has made. Each turn attaches one carbon dioxide molecule, one carbon bead, to a five-carbon molecule, and spends ATP turning the result into three-carbon pieces. For every three CO₂ that come in, one three-carbon piece leaves the cycle; the rest are rebuilt so that the cycle can keep turning. Two three-carbon pieces join to make one glucose ring of six carbons, so building one glucose takes six CO₂. Glucose the plant doesn't use right away can be stored as starch. Turn down the CO₂, and the cycle slows. Turn it up, and the cycle speeds up, then levels off, because it is already working as fast as the light allows. The same happens with the light slider: brighter light speeds the cycle until the CO₂ runs short. Plot the speed numbers against the slider settings, and the curve rises and then flattens.",
   de:"The Calvin cycle runs in three phases in the stroma.",
   deList:["Fixation: rubisco attaches CO₂ to RuBP (5C), and the unstable 6C product splits into two 3-phosphoglycerate.","Reduction: each 3-phosphoglycerate is phosphorylated by ATP and reduced by NADPH to G3P.","Regeneration: five of every six G3P are rearranged, using 3 more ATP, back into three RuBP."],
   de2:"Net, for one G3P out: 3 CO₂, 9 ATP and 6 NADPH. The bead counter shows it: three beads in, one three-bead chain out. Two G3P make one glucose, so it takes 6 CO₂, 18 ATP and 12 NADPH per glucose. Rubisco does this in every plant, C3, C4 and CAM alike; C4 and CAM plants change only where and when CO₂ is delivered to it. Turn the light off with CO₂ steady and watch the pools: RuBP falls and 3-phosphoglycerate builds up, because fixation needs no light but the next steps do."}
@@ -990,10 +990,10 @@ const TABS=[
   de:"Acetyl CoA's two carbons join oxaloacetate (4C) to make citrate (6C). Over one turn of the citric acid cycle (also called the Krebs cycle), two carbons leave as CO₂ and oxaloacetate is regenerated. One turn yields 3 NADH, 1 FADH₂ and 1 ATP by substrate-level phosphorylation, so two turns per glucose give 4 CO₂, 6 NADH, 2 FADH₂ and 2 ATP. Strictly, the two carbons that leave in a turn are not the two that just entered, but the count per turn is exact. Add pyruvate oxidation and it comes to 6 CO₂ per glucose: all of glucose's carbon is gone, and only 4 ATP have been made. Where is the rest of the energy? Step 4 follows it."},
  {key:"M4",short:{nine:"Oxygen",de:"Electron transport"},head:{nine:"Oxygen keeps the line running",de:"The electron transport chain and chemiosmosis"},
   pre:{nine:"N11",de:"D6"},post:{nine:["N12"],de:["D7","D8","D5","D13","D10"]},
-  task:{nine:"Make four ATP. Then turn the oxygen off, watch what stops, and turn it back on.",de:"Follow one NADH's electrons down the chain to O₂. Watch the pH readouts and the ATP tally, and open the staircase panel."},
-  goals:{nine:[["atpM","ATP made by ATP synthase",4],["o2off","Oxygen off for 3 s, then back on"]],de:[["atpM","ATP made by ATP synthase",4],["water","H₂O formed at complex IV",2],["stairs","Staircase panel opened"]]},
+  task:{nine:"Make four ATP and watch the ATP tally. Then turn the oxygen off, watch what stops, and feed a glucose to a yeast or bacteria cell and then to a muscle cell. Turn the oxygen back on.",de:"Follow one NADH's electrons down the chain to O₂. Watch the pH readouts and the ATP tally, and open the staircase panel."},
+  goals:{nine:[["atpM","ATP made by ATP synthase",4],["o2off","Oxygen off for 3 s, then back on"],["ends","Both endings seen: ethanol + CO₂, and lactic acid",null,true]],de:[["atpM","ATP made by ATP synthase",4],["water","H₂O formed at complex IV",2],["stairs","Staircase panel opened"]]},
   words:["carrier","electron","hion","synthase"],feed:"auto",
-  nine:"The carriers bring their electrons to the inner membrane. As the electrons pass along it, their energy pumps hydrogen ions (H⁺) out of the inside of the mitochondrion and into the narrow space between its two membranes. The H⁺ flows back through ATP synthase, the same kind of spinning protein as in the chloroplast. This is where the mitochondrion makes far more ATP than the cytoplasm did. At the end of the line the electrons need somewhere to go: they join oxygen and hydrogen ions to make water. Turn the oxygen off. The line stops, the H⁺ stops piling up, and carbon dioxide and ATP stop coming out. Without oxygen the cell falls back on fermentation, which gets far less usable energy from each glucose.",
+  nine:"The carriers bring their electrons to the inner membrane. As the electrons pass along it, their energy pumps hydrogen ions (H⁺) out of the inside of the mitochondrion and into the narrow space between its two membranes. The H⁺ flows back through ATP synthase, the same kind of spinning protein as in the chloroplast. This is where the mitochondrion makes far more ATP than the cytoplasm did. At the end of the line the electrons need somewhere to go: they join oxygen and hydrogen ions to make water. Turn the oxygen off. The line stops, the H⁺ stops piling up, and carbon dioxide and ATP stop coming out of the mitochondrion. Only the cytoplasm step keeps running, so the tally drops from about 32 ATP per glucose to 2. Without oxygen the cell falls back on fermentation: the three-carbon pieces are finished off in the cytoplasm, and the cell keeps only the small amount of energy it gets there. In yeast or bacteria the pieces become ethanol (an alcohol) and carbon dioxide; that gas is what makes bread rise and the bubbles in the Barf Bag lab. In a muscle cell the pieces become lactic acid, the burn of a hard sprint. Fermentation makes no extra ATP. It only frees the cytoplasm step to keep making its 2.",
   de:"NADH hands its electrons to complex I, and FADH₂ hands its electrons to complex II. They pass through ubiquinone (Q), complex III, cytochrome c and complex IV, each carrier more electronegative than the last: a staircase of falling free energy (open the panel). Complexes I, III and IV use that fall to pump H⁺ from the matrix into the intermembrane space. At complex IV, ½ O₂ + 2 e⁻ + 2 H⁺ → H₂O, so per glucose 6 O₂ become 12 H₂O. The proton-motive force drives H⁺ back through ATP synthase into the matrix. This is oxidative phosphorylation, about 26 to 28 ATP, almost 90% of the total. Watch the pH: the matrix rises toward 7.8 as H⁺ leaves it. In all, up to about 32 ATP per glucose."},
  {key:"M5",lv:"de",short:{de:"Fermentation"},head:{de:"No oxygen: fermentation"},
   pre:{de:"D9"},post:{de:["D11","D12"]},
@@ -1014,10 +1014,10 @@ const TABS=[
   steps:[
  {key:"B1",short:{nine:"What travels",de:"Opposite redox"},head:{nine:"What travels between the two",de:"Two processes, opposite redox"},
   pre:{nine:"N13",de:"D27"},post:{nine:["N14","N15"],de:["D26"]},
-  task:{nine:"Press Run both. Follow one glucose from the chloroplast into the mitochondrion, and watch where the oxygen goes.",de:"Press Run both. Follow one glucose from the chloroplast into the mitochondrion, and watch where the oxygen goes."},
+  task:{nine:"Press Run both. Follow one glucose from the chloroplast into the mitochondrion, and watch where the oxygen goes. Read the carbon count: six in, six out. Then turn the oxygen off and see which side still makes it.",de:"Press Run both. Follow one glucose from the chloroplast into the mitochondrion, and watch where the oxygen goes."},
   goals:{nine:[["loop","One glucose built on the left and taken apart on the right"],["o2trip","Oxygen (O₂) carried across",3]],de:[["loop","One glucose built on the left and oxidized on the right"],["o2trip","O₂ carried across",3]]},
   words:[],
-  nine:"Run both. The chloroplast gives off oxygen and builds sugar. The mitochondrion takes in oxygen, breaks the sugar down, and gives off carbon dioxide and water, which the chloroplast takes back in. The products of one are the raw materials of the other, so the two can be thought of as a cycle. Energy does not cycle. It comes in as light, is stored in sugar and captured in ATP, and most of it ends as heat. Plant cells have both organelles and run both processes; animal cells have mitochondria only. This picture is not a map of one cell; it shows how the two organelles depend on each other.",
+  nine:"Run both. The chloroplast gives off oxygen and builds sugar. The mitochondrion takes in oxygen, breaks the sugar down, and gives off carbon dioxide and water, which the chloroplast takes back in. The products of one are the raw materials of the other, so the two can be thought of as a cycle. Energy does not cycle. It comes in as light, is stored in sugar and captured in ATP, and most of it ends as heat. Count the carbon: six carbon dioxide go into the chloroplast to build one glucose, and six carbon dioxide come out of the mitochondrion when that glucose is taken apart. Carbon in equals carbon out. Turn the oxygen off on the right, and the chloroplast on the left still releases oxygen as long as it has light; that is where the mitochondrion's oxygen normally comes from. Plant cells have both organelles and run both processes; animal cells have mitochondria only. This picture is not a map of one cell; it shows how the two organelles depend on each other.",
   de:"Side by side, the two run electrons in opposite directions. Photosynthesis oxidizes water and reduces CO₂, using light to push electrons uphill into sugar. Respiration oxidizes glucose and reduces O₂, letting the electrons fall back downhill to water and capturing part of the fall as ATP. Matter cycles: 6 CO₂ and 6 O₂ go around the loop with every glucose, and 12 water molecules are split on one side and made on the other. Energy does not cycle. About a third of glucose's energy ends up in ATP, and the rest leaves as heat."},
  {key:"B2",short:{nine:"Same machine",de:"Same machine"},head:{nine:"The same machine, twice",de:"The same machine, twice"},
   pre:{nine:null,de:"D25"},post:{nine:[],de:[]},
@@ -1036,18 +1036,20 @@ const LEGEND={
 };
 /* control labels per level, listed so the vocabulary test can read them */
 const CTLTEXT={
- nine:["▶ Play","❚❚ Pause","◂ Step","Step ▸","½×","1×","2×","Fill screen","Restore page","Reset this step","Light","CO₂","More","Light colour","White","Red","Blue","Green","Feed one glucose","Oxygen (O₂)","On","Off","Run both","Speed","Teaching view","Hide card","Show card","Card ▸","Close card","far less ATP without oxygen"],
+ nine:["▶ Play","❚❚ Pause","◂ Step","Step ▸","½×","1×","2×","Fill screen","Restore page","Reset this step","Light","CO₂","More","Light colour","White","Red","Blue","Green","Feed one glucose","Oxygen (O₂)","On","Off","Which cell?","Yeast or bacteria","Muscle cell","Run both","Speed","Teaching view","Hide card","Show card","Card ▸","Close card","far less ATP without oxygen"],
  de:["▶ Play","❚❚ Pause","◂ Step","Step ▸","½×","1×","2×","Fill screen","Restore page","Reset this step","Light","CO₂","Light colour","White","Red","Blue","Green","Going further","Cyclic flow","Linear","Cyclic","Energy panel: Z scheme","Feed one glucose","O₂","On","Off","Fermentation","Lactate","Alcohol","Uncoupler","Energy panel: staircase","Run both","Speed","Teaching view","Hide card","Show card","Card ▸","Close card"]
 };
 const READTEXT={
- nine:["CO₂ in","CO₂ out","carbons in transit","carbons inside","O₂ released","O₂ used","ATP","Sugar-building speed","glucose built","glucose broken","three-carbon pieces","far less ATP without oxygen","water in, water out"],
- de:["CO₂ in","CO₂ out","carbons in transit","carbons inside","O₂ released","O₂ used","ATP","Rate","of max","glucose built","glucose broken","G3P out","NADPH","NADH","FADH₂","H₂O split","H₂O made","thylakoid space pH","stroma pH","intermembrane space pH","matrix pH","heat","ATP per glucose so far","up to about 32 with O₂; 2 by fermentation","The overall equation shows 6 H₂O because the cycles use and release some water internally."]
+ nine:["CO₂ in","CO₂ out","carbons in transit","carbons inside","O₂ released","O₂ used","ATP","Sugar-building speed","of 100","glucose built","glucose broken","three-carbon pieces","far less ATP without oxygen","water in, water out",
+   "Carbon count","in as CO₂","in the cycle","out as sugar","in as glucose","out as CO₂","out by fermentation","still inside","CO₂ into the chloroplast","CO₂ out of the mitochondrion","carbon in = carbon out","on the way",
+   "ATP tally","this glucose","cytoplasm","mitochondrion","with oxygen: about 32 per glucose","without oxygen: 2","Without oxygen, the cell keeps only the small amount of energy it gets in the cytoplasm.","Oxygen off in the mitochondrion. The chloroplast still makes oxygen in light.","Oxygen off: the line stops"],
+ de:["CO₂ in","CO₂ out","carbons in transit","carbons inside","O₂ released","O₂ used","ATP","Rate","of max","glucose built","glucose broken","G3P out","NADPH","NADH","FADH₂","H₂O split","H₂O made","thylakoid space pH","stroma pH","intermembrane space pH","matrix pH","heat","ATP per glucose so far","up to about 32 with O₂; 2 by fermentation","Carbon count","fixed","in the cycle","out as G3P","in as glucose","out as CO₂","out by fermentation","still inside","CO₂ into the chloroplast","CO₂ out of the mitochondrion","carbon in = carbon out","on the way","ATP tally","this glucose","glycolysis","cycle","ATP synthase","O₂ off in the mitochondrion. The chloroplast still releases O₂ in light.","The overall equation shows 6 H₂O because the cycles use and release some water internally."]
 };
 const EYEBROW={nine:["Bio Tool #11 · Biology I Unit 3 · SOL BIO.2e","Bio Tool #11 · Biology I Unit 3 · SOL BIO.2e","Bio Tool #11 · Biology I Unit 3 · SOL BIO.2e"],
   de:["Bio Tool #11 · DE Bio 101 Unit 8 · Photosynthesis (Campbell Ch. 8)","Bio Tool #11 · DE Bio 101 Unit 7 · Cellular Respiration and Fermentation (Campbell Ch. 7)","Bio Tool #11 · DE Bio 101 Units 7–8"]};
 const FOOT={nine:"Unit 3, Cell Energetics · Biology I, SOL BIO.2e · PWCS LT 3.1–3.3",de:"DE Bio 101 Units 7–8 · Campbell Biology in Focus 3e, Ch. 7 and 8"};
 const SIMPLIFIES={
- nine:"What the model simplifies: the organelles are drawn flat and far larger than scale. One magnified patch of membrane stands for thousands of carrier lines and ATP synthases. Token speeds are slowed so they can be followed, and the rates are relative, not measured. Where a number is exaggerated so it can be seen, the step says so.",
+ nine:"What the model simplifies: the organelles are drawn flat and far larger than scale. One magnified patch of membrane stands for thousands of carrier lines and ATP synthases. Token speeds are slowed so they can be followed, and the rates are relative, not measured. Where a number is exaggerated so it can be seen, the step says so. The ATP tally counts what the model actually makes, and it comes to about 32 per glucose with oxygen. Slides and textbooks often say 34 to 36; real cells make 30 to 38, depending on the cell.",
  de:"What the model simplifies: the organelles are drawn flat and far larger than scale. One magnified patch of membrane stands for thousands of chains and ATP synthases. Token speeds are slowed so they can be followed, and the rates are relative, not measured. The ATP count per glucose is a maximum, up to about 32, and real cells often get less."
 };
 const FURTHER={
@@ -1093,15 +1095,16 @@ const GLOG=[];   /* glucose records since the page loaded, keyed by gid (deduped
 const GLOGK={};
 function newOrg(kind){return{kind,tok:[],hres:0,hq:[],hmax:40,rot:0,synP:0,synRate:0,synEMA:0,
   psE:0,holes:0,psiE:2,o2half:0,eAtNR:0,atpPool:0,nadphPool:[],rubp:3,pga:0,g3pInt:[],calvinC:0,co2Wait:0,joinQ:[],photonT:0,co2T:9,redT:0,waterT:0,waterFly:0,co2Fly:0,laneCo2Fly:0,laneWaterFly:0,psiHit:0,
-  glyQ:[],pdhQ:[],cacQ:[],cIQ:[],cIIQ:[],ivQ:[],chainT:0,nad:4,nadc:4,o2At:0,o2Fly:0,laneO2Fly:0,o2T:9,o2Need:0,feedT:0,fPyr:[],fNadh:[],phA:7.2,phB:7.2,heat:0,left:0,o2Grace:0,airT:0,atpMPool:0,rateEMA:0};}
-function mkCounts(){return{co2In:0,co2Out:0,co2OutMito:0,co2OutFerment:0,glucoseBuilt:0,glucoseBroken:0,g3pOut:0,o2Released:0,o2Used:0,waterSplit:0,waterMade:0,atpChloro:0,atpSynthaseMito:0,atpGlycolysis:0,atpCAC:0,nadphMade:0,nadphUsed:0,atpUsedCalvin:0,nadhMade:0,fadh2Made:0,rubp:3,pga:0,phThylakoidSpace:7.2,phStroma:7.2,phIMS:7.4,phMatrix:7.4,heat:0,rate:0,ps2Active:true,photonHits:0,o2Trip:0,lacDone:0,alcDone:0,loopDone:0,sixDone:0,lastAtpPerGlucose:0};}
+  glyQ:[],pdhQ:[],cacQ:[],cIQ:[],cIIQ:[],ivQ:[],chainT:0,nad:4,nadc:4,o2At:0,o2Fly:0,laneO2Fly:0,o2T:9,o2Need:0,feedT:0,fPyr:[],fNadh:[],phA:7.2,phB:7.2,heat:0,left:0,o2Grace:0,airT:0,atpMPool:0,rateEMA:0,srot:0};}
+/* glucoseFed: glucose dropped in from outside; glucoseIn: every glucose that reached the cytoplasm step (fed or from the chloroplast); cOutFerm: carbons that left as lactic acid or ethanol */
+function mkCounts(){return{co2In:0,co2Out:0,co2OutMito:0,co2OutFerment:0,glucoseFed:0,glucoseIn:0,cOutFerm:0,glucoseBuilt:0,glucoseBroken:0,g3pOut:0,o2Released:0,o2Used:0,waterSplit:0,waterMade:0,atpChloro:0,atpSynthaseMito:0,atpGlycolysis:0,atpCAC:0,nadphMade:0,nadphUsed:0,atpUsedCalvin:0,nadhMade:0,fadh2Made:0,rubp:3,pga:0,phThylakoidSpace:7.2,phStroma:7.2,phIMS:7.4,phMatrix:7.4,heat:0,rate:0,ps2Active:true,photonHits:0,o2Trip:0,lacDone:0,alcDone:0,loopDone:0,sixDone:0,lastAtpPerGlucose:0};}
 function newSim(keepCtl){
   const S=curStep(),T=TAB();
   const prev=SIM&&keepCtl?SIM.ctl:null;
   const d=S.defaults||{};
   SIM={t:0,ev:0,view:st.view,tab:st.tab,level:st.level,stepKey:S.key,org:T.org,
     chl:newOrg("chl"),mit:newOrg("mit"),lane:[],G:{},cnt:mkCounts(),led:{carbonIn:0,carbonOut:0},
-    ctl:prev||{light:d.light!=null?d.light:70,co2:d.co2!=null?d.co2:60,colour:"white",cyclic:false,o2:true,ferment:"lactate",uncoupler:false,runBoth:false},
+    ctl:prev||{light:d.light!=null?d.light:70,co2:d.co2!=null?d.co2:60,colour:"white",cyclic:false,o2:true,ferment:st.level==="nine"?"alcohol":"lactate",uncoupler:false,runBoth:false},
     gw:{dimLow:false,dimDone:false,colT:{red:0,blue:0,green:0},cycT:0,cycAtp0:-1,cycOk:false,darkT:0,o2offT:0,o2offDone:false,uncT:0,coLow:false},
     lastEv:"",snaps:[]};
   if(st.level==="nine"){SIM.ctl.cyclic=false;SIM.ctl.uncoupler=false;}
@@ -1280,7 +1283,7 @@ function mitPaths(o,what){
   if(what==="hdown")return[[NX.syn-10,PATCH.my-40],[NX.syn,PATCH.my+30]];
   return[[0,0]];
 }
-function feedGlucose(fromOutside){const o=SIM.mit;const g=newG("fed");SIM.led.carbonIn+=6;mk(o,"glucose",mitPaths(o,"glucoseIn"),{to:"glu_gly",C:6,g,v:PACE*.9});event("feed");}
+function feedGlucose(fromOutside){const o=SIM.mit;const g=newG("fed");SIM.led.carbonIn+=6;SIM.cnt.glucoseFed++;mk(o,"glucose",mitPaths(o,"glucoseIn"),{to:"glu_gly",C:6,g,v:PACE*.9});event("feed");}
 function mitStep(o,dt){
   const c=SIM.ctl,cn=SIM.cnt,lvl=SIM.level,L=lanes(),S=curStep();
   const anox=!c.o2;
@@ -1294,7 +1297,7 @@ function mitStep(o,dt){
       if(q.t>=1.2){q.phase=1;q.t=0;}}
     else if(q.phase===1){if(needNad&&o.nadc<2)return;q.t+=dt;if(q.t>=1.2){
       removeTok(o,tok);q.dead=true;const g=q.g,R=SIM.G[g];cn.glucoseBroken++;cn.atpGlycolysis+=4;cn.nadhMade+=2;if(needNad)o.nadc-=2;
-      R.gly={co2:0,atpNet:2,nadh:2};R.mode=c.o2?"aerobic":(lvl==="nine"?"lactate":c.ferment);R.pendE+=2;
+      R.gly={co2:0,atpNet:2,nadh:2};R.mode=c.o2?"aerobic":c.ferment;R.pendE+=2;
       for(let i=0;i<4;i++)mk(o,"atp",mitPaths(o,"atpG"),{to:"atp_gone",v:PACE*.8});
       const fer=!c.o2;
       for(let i=0;i<2;i++){mk(o,"pyr",mitPaths(o,fer?"pyrF":"pyr"),{to:fer?"pyr_ferm":"pyr_pdh",C:3,g,v:PACE*.9,d:{k:i}});
@@ -1323,11 +1326,12 @@ function mitStep(o,dt){
       else if(q.st===3&&q.t>=2.6){q.st=4;cn.fadh2Made++;R.cac.fadh2++;R.pendE++;mk(o,"fadh2",mitPaths(o,"fadh2"),{to:"fadh2_cII",g,v:PACE});}
       else if(q.st===4&&q.t>=3.1&&o.nad>=1){q.st=5;emitNADH();o.cacQ.shift();event("turn");checkDone(g);}
     }}
-  /* fermentation (DE, O2 off): pyruvate + NADH -> lactate, or -> CO2 + ethanol; NAD+ comes back to glycolysis */
+  /* fermentation (O2 off, both levels): pyruvate + NADH -> lactate (muscle), or -> CO2 + ethanol (yeast, bacteria); NAD+ comes back to glycolysis. No ATP is made here. */
   while(o.fPyr.length&&o.fNadh.length){const p=o.fPyr.shift(),nh=o.fNadh.shift();const pt=o.tok.find(t=>t.id===p),nt=o.tok.find(t=>t.id===nh);if(!pt||!nt)continue;
     const g=pt.g,R=SIM.G[g];removeTok(o,pt);removeTok(o,nt);o.nadc++;R.pendE=Math.max(0,R.pendE-1);
-    if(lvl==="de"&&c.ferment==="alcohol"){cn.co2OutFerment++;R.ferm.co2++;R.cRel++;mk(o,"co2",mitPaths(o,"co2ferm"),{to:"co2_air",C:1,g,v:PACE});mk(o,"eth",mitPaths(o,"lac"),{to:"c_out",C:2,g,v:PACE*.6});}
-    else{mk(o,lvl==="de"?"lac":"left",mitPaths(o,"lac"),{to:"c_out",C:3,g,v:PACE*.5});}
+    if(R.mode!=="aerobic")R.mode=c.ferment;
+    if(c.ferment==="alcohol"){cn.co2OutFerment++;R.ferm.co2++;R.cRel++;mk(o,"co2",mitPaths(o,"co2ferm"),{to:"co2_air",C:1,g,v:PACE});mk(o,"eth",mitPaths(o,"lac"),{to:"c_out",C:2,g,v:PACE*.6});}
+    else{mk(o,"lac",mitPaths(o,"lac"),{to:"c_out",C:3,g,v:PACE*.5});}
     event("ferment");}
   /* the chain: NADH at complex I, FADH2 at complex II; electrons fall to O2 at complex IV; H+ pumped at I, III, IV */
   o.chainT+=dt;const back=o.ivQ.length>=2||o.tok.filter(t=>t.k==="e").length>=6;
@@ -1345,7 +1349,9 @@ function mitStep(o,dt){
     while(o.ivQ.length&&o.o2At>=1)finishAtIV(o,o.ivQ.shift());}
   synthase(o,dt);
   const f=clamp(o.hres/o.hmax,0,1);o.phA+=(7.4-.4*f-o.phA)*Math.min(1,dt*1.2);o.phB+=(7.4+.4*f-o.phB)*Math.min(1,dt*1.2);cn.phIMS=o.phA;cn.phMatrix=o.phB;
-  if(!o.cacQ.length)o.rot+=dt*.25;
+  /* the cycle wheel idles only while oxygen is on; ATP synthase turns with the H+ flow, so it stops once the gradient has run down */
+  if(!o.cacQ.length&&c.o2)o.rot+=dt*.25;
+  o.srot=(o.srot||0)+dt*((c.o2?.25:0)+1.2*o.synRate);
 }
 function finishAtIV(o,g){const cn=SIM.cnt,R=SIM.G[g],L=lanes();o.o2At--;pumpH(o,2,"hpump",g);cn.waterMade++;
   if(R){R.chain.waterMade++;R.chain.o2Used+=.5;R.pendE=Math.max(0,R.pendE-1);}
@@ -1353,7 +1359,7 @@ function finishAtIV(o,g){const cn=SIM.cnt,R=SIM.G[g],L=lanes();o.o2At--;pumpH(o,
 function mitArrive(o,t){
   const cn=SIM.cnt,c=SIM.ctl,L=lanes();
   switch(t.to){
-    case "glu_gly":t.wait=true;o.glyQ.push({tid:t.id,g:t.g,t:0,phase:0});break;
+    case "glu_gly":t.wait=true;cn.glucoseIn++;o.glyQ.push({tid:t.id,g:t.g,t:0,phase:0});break;
     case "pyr_pdh":t.wait=true;o.pdhQ.push({tid:t.id,g:t.g,t:0});break;
     case "pyr_ferm":t.wait=true;o.fPyr.push(t.id);break;
     case "nadh_ferm":t.wait=true;o.fNadh.push(t.id);break;
@@ -1362,7 +1368,9 @@ function mitArrive(o,t){
     case "acetyl_cac":removeTok(o,t);o.cacQ.push({g:t.g,t:0,st:0,c:2});break;
     case "e_cIII":removeTok(o,t);pumpH(o,4,"hpump",t.g);mk(o,"e",mitPaths(o,"e2"),{to:"e_cIV",g:t.g,v:PACE*1.2});event("pump");break;
     case "e_cIV":removeTok(o,t);if(c.o2&&o.o2At>=1)finishAtIV(o,t.g);else o.ivQ.push(t.g);break;
-    case "o2_cIV":removeTok(o,t);if(t.d&&t.d.lane)o.laneO2Fly--;else o.o2Fly--;if(!c.o2){break;}cn.o2Used++;o.o2At+=2;event("o2");break;
+    case "o2_cIV":if(t.d&&t.d.lane)o.laneO2Fly--;else o.o2Fly--;
+      if(!c.o2){t.to="o2_back";t.path=[[t.x,t.y],[t.x,-60]];t.i=0;t.d=null;break;} /* oxygen off: turned away at the door, not used */
+      removeTok(o,t);cn.o2Used++;o.o2At+=2;event("o2");break;
     case "o2_back":removeTok(o,t);break;
     case "co2_air":removeTok(o,t);SIM.led.carbonOut+=t.C;cn.co2Out+=1;break;
     case "co2_lane":removeTok(o,t);laneStart("co2",t);break;
@@ -1370,7 +1378,7 @@ function mitArrive(o,t){
     case "water_lane":removeTok(o,t);laneStart("water",t);break;
     case "atp_pool":removeTok(o,t);o.atpMPool=Math.min(14,o.atpMPool+1);break;
     case "atp_gone":case "adp_gly":removeTok(o,t);break;
-    case "c_out":removeTok(o,t);SIM.led.carbonOut+=t.C;if(SIM.G[t.g]){SIM.G[t.g].cRel+=t.C;checkDone(t.g);}break;
+    case "c_out":removeTok(o,t);SIM.led.carbonOut+=t.C;cn.cOutFerm+=t.C;if(SIM.G[t.g]){SIM.G[t.g].cRel+=t.C;checkDone(t.g);}break;
     case "h_res":case "h_syn":removeTok(o,t);break;
   }
 }
@@ -1425,7 +1433,7 @@ function setCyclic(on){const o=SIM.chl;SIM.ctl.cyclic=!!on;
 function setO2(on){const o=SIM.mit;SIM.ctl.o2=!!on;
   if(!on){o.tok.forEach(t=>{if(t.k==="o2"&&t.to==="o2_cIV"){t.to="o2_back";t.path=[[t.x,t.y],[t.x,-60]];t.i=0;}});o.o2Fly=0;o.nad=0;o.o2At=Math.min(o.o2At,1);
     /* pyruvate already heading for the matrix in DE fermentation mode turns back to the cytosol */
-    if(SIM.level==="de"||SIM.level==="nine"){o.tok.forEach(t=>{if(t.k==="pyr"&&t.to==="pyr_pdh"&&!t.wait){t.to="pyr_ferm";t.path=[[t.x,t.y],[150,700]];t.i=0;if(SIM.G[t.g])SIM.G[t.g].mode=SIM.level==="nine"?"lactate":SIM.ctl.ferment;}
+    {o.tok.forEach(t=>{if(t.k==="pyr"&&t.to==="pyr_pdh"&&!t.wait){t.to="pyr_ferm";t.path=[[t.x,t.y],[150,700]];t.i=0;if(SIM.G[t.g])SIM.G[t.g].mode=SIM.ctl.ferment;}
       if(t.k==="nadh"&&t.to==="nadh_cI"&&t.d&&t.d.src==="gly"&&!t.wait){t.to="nadh_ferm";t.path=[[t.x,t.y],[150,700]];t.i=0;}});}
   }else{o.nad=Math.max(o.nad,2);o.o2Grace=0;}
   event("o2switch");}
@@ -1446,7 +1454,7 @@ function watchGoals(dt){
   if(k==="M2")bumpCount("enter",cn.co2OutMito>0?Math.max(1,cn.co2OutMito):0);
   if(k==="M3"){if(cn.sixDone>0)markGoal("six");}
   if(k==="M4"){bumpCount("atpM",cn.atpSynthaseMito);
-    if(lvl==="nine"){if(!c.o2)gw.o2offT+=dt;if(gw.o2offT>=3)gw.o2offDone=true;if(gw.o2offDone&&c.o2)markGoal("o2off");}
+    if(lvl==="nine"){if(!c.o2)gw.o2offT+=dt;if(gw.o2offT>=3)gw.o2offDone=true;if(gw.o2offDone&&c.o2)markGoal("o2off");if(cn.lacDone>0&&cn.alcDone>0)markGoal("ends");}
     else bumpCount("water",cn.waterMade);}
   if(k==="M5"){if(!c.o2)gw.o2offT+=dt;if(gw.o2offT>=3)markGoal("o2off");if(cn.lacDone>0)markGoal("lac");if(cn.alcDone>0)markGoal("alc");}
   if(k==="M6"){if(c.uncoupler)gw.uncT+=dt;else gw.uncT=0;if(gw.uncT>=3)markGoal("unc");}
@@ -1491,7 +1499,7 @@ function draw(){
 }
 function drawLanes(){
   const S=SIM,L=lanes(),a=S.tab===2;
-  ctx.save();
+  ctx.save();OT={ox:0,oy:0,sc:1};
   const x0=870,x1=1130;
   const lane=(y,dir,c,text)=>{ctx.globalAlpha=L?.9:.35;ctx.strokeStyle=col("lane");ctx.lineWidth=22;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
     ctx.strokeStyle=c;ctx.lineWidth=3;ctx.beginPath();const ax=dir>0?x1-14:x0+14,bx=dir>0?x0+14:x1-14;ctx.moveTo(bx,y);ctx.lineTo(ax,y);ctx.moveTo(ax-dir*12,y-8);ctx.lineTo(ax,y);ctx.lineTo(ax-dir*12,y+8);ctx.stroke();ctx.globalAlpha=1;
@@ -1503,6 +1511,10 @@ function drawLanes(){
   lane(LANEY.water,-1,col("waterE"),lv==="nine"?"Water":"H₂O");
   tag(LBL[lv].gap,1000,760,null,"center");
   if(!L&&a)tag("Press Run both",1000,300,null,"center",true);
+  /* the carbon count for the loop, between the oxygen lane and the water lane: CO2 into the chloroplast on the left, CO2 out of the mitochondrion on the right */
+  if(L&&a&&cw>=620){const v=ledgerVals(),lh=lineH(),y0=238,cn=S.cnt;tag("Carbon count",1000,y0,"ledger","center",true);
+    tag("CO₂ in "+v.inC+" · CO₂ out "+v.outC,1000,y0+lh,"ledger","center");
+    tag(cn.loopDone>0?"6 in = 6 out per glucose ✓":(v.way>0?"on the way: "+v.way:"carbon in = carbon out"),1000,y0+2*lh,"ledger","center");}
   /* lane tokens */
   OT={ox:0,oy:0,sc:1};S.lane.forEach(t=>drawTok(t));
   ctx.restore();
@@ -1516,6 +1528,7 @@ function drawOrg(o){
   /* tokens on top */
   o.tok.forEach(t=>drawTok(t));
   drawReadoutsOnStage(o);
+  drawLedger(o);
   ctx.restore();
 }
 function drawChloroBody(o){
@@ -1566,9 +1579,50 @@ function drawMitoBody(o){
   ctx.setLineDash([4,5]);circ(130,600,46,null,col("goldE"),1.5);ctx.setLineDash([]);
   tag(L.split,20,665,"split","left");
   const anox=!c.o2;
-  if(anox&&lvl==="de"){tag(L.fer+": "+(c.ferment==="alcohol"?L.eth+" + CO₂":L.lac),20,745,"fer","left");}
-  if(anox&&lvl==="nine"){tag(L.leftover,20,745,"leftover","left");}
+  /* oxygen off: the fermentation spot in the cytoplasm names the cell and its ending */
+  if(anox){const alc=c.ferment==="alcohol";const who=alc?L.yeast:L.muscle,what=alc?L.eth.toLowerCase()+" + CO₂":L.lac.toLowerCase();
+    tag(lvl==="nine"?who+": "+what:L.fer+" ("+who.toLowerCase()+"): "+what,20,745,"fer","left");}
   if(lvl==="de"){tag(L.trim,300,612,"trim","center",false,true);}
+  drawTally(o);
+}
+/* the ATP tally for the glucose most recently started: cytoplasm step, mitochondrion, and the comparison the step is about */
+function tallyG(){const G=SIM.G,tot=R=>R.gly.atpNet+R.cac.atp+Math.round(R.chain.atp)+R.ferm.atp;
+  let R=null,prev=null;Object.keys(G).forEach(k=>{const q=G[k];if(!q.mode)return;if(R&&!R.done&&tot(R)>2)prev=R;R=q;});
+  /* a glucose that has only just split (2 so far) does not take the tally away from one still being broken down */
+  if(R&&!R.done&&tot(R)<=2&&prev&&!prev.done)R=prev;
+  if(!R)return null;const chain=Math.round(R.chain.atp);return{gly:R.gly.atpNet,cac:R.cac.atp,chain,mit:R.cac.atp+chain,total:tot(R),done:R.done,mode:R.mode};}
+function lineH(){return labelPx()*1.6/(OT.sc*VX.k);} /* one label line, in organelle-local units */
+function drawTally(o){
+  /* a short column in the open lower-right of the mitochondrion, right-aligned. Lines are kept short so they fit at board size (Teaching view) and side by side. The comparison, about 32 with oxygen and 2 without, sits in the readout and in the tally's callout. */
+  const S=SIM,lvl=S.level,short=S.view==="side"||st.teach,T=tallyG(),lh=lineH(),x=1130;
+  if(cw<620)return; /* a phone-width stage: the readout under the picture carries the tally */
+  let lines;
+  if(S.view==="side"){lines=[T?"ATP: "+(lvl==="nine"?T.gly+" + "+T.mit:T.gly+" + "+T.cac+" + "+T.chain)+" = "+T.total:"ATP tally"];}
+  else if(lvl==="nine"){
+    if(!T)lines=["ATP tally","feed a glucose"];
+    else lines=short?[T.gly+" cytoplasm","+ "+T.mit+" mitochondrion","= "+T.total+" ATP"]:["ATP tally, this glucose","cytoplasm: "+T.gly,"mitochondrion: "+T.mit,"total: "+T.total+(T.done?" (finished)":"")];
+  }else{
+    if(!T)lines=["ATP tally","feed a glucose"];
+    else lines=short?[T.gly+" glycolysis","+ "+T.cac+" cycle","+ "+T.chain+" ATP synthase","= "+T.total+" ATP"]:["ATP tally, this glucose","glycolysis: "+T.gly,"cycle: "+T.cac,"ATP synthase: "+T.chain,"total: "+T.total+(T.done?" (finished)":"")];
+  }
+  const y0=H1-40-lh*(lines.length-1);
+  lines.forEach((t,i)=>tag(t,x,y0+i*lh,"tally","right"));
+}
+/* the carbon count: every bead is one carbon, so the numbers must balance */
+function ledgerVals(){const cn=SIM.cnt;const inC=cn.co2In+6*cn.glucoseFed,outC=cn.co2OutMito+cn.co2OutFerment+cn.cOutFerm;
+  return{chlIn:cn.co2In,cycle:SIM.chl.calvinC,sugar:3*cn.g3pOut,mitIn:6*cn.glucoseIn,mitCo2:cn.co2OutMito+cn.co2OutFerment,mitFerm:cn.cOutFerm,mitInside:Math.max(0,6*cn.glucoseIn-cn.co2OutMito-cn.co2OutFerment-cn.cOutFerm),inC,outC,way:Math.max(0,inC-outC)};}
+function drawLedger(o){
+  const S=SIM,lvl=S.level,side=S.view==="side",v=ledgerVals(),isC=o.kind==="chl";
+  const short=side||st.teach,lh=lineH();
+  if(cw<620)return; /* a phone-width stage: the readout under the picture carries the count */
+  if(S.tab===2){ /* Module 3 draws the loop's count between the organelles; the chloroplast only notes that it still makes oxygen */
+    if(isC&&!S.ctl.o2)tag(S.ctl.light>0?(lvl==="nine"?"Still making oxygen in light":"Still releasing O₂ in light"):(lvl==="nine"?"No light, so no oxygen":"No light, so no O₂"),700,56,"o2","center");
+    return;}
+  /* top right, clear of the stage label at the top left: two short lines for the chloroplast, one for the mitochondrion */
+  if(isC){tag(short?"Carbon: "+v.chlIn+" in as CO₂":"Carbon count: "+v.chlIn+" in as CO₂",W1-30,18,"ledger","right");
+    tag(short?v.cycle+" in cycle · "+v.sugar+" out as sugar":v.cycle+" in the cycle · "+v.sugar+(lvl==="nine"?" out as sugar":" out as G3P"),W1-30,18+lh,"ledger","right");}
+  else{tag(short?"Carbon: "+v.mitIn+" in as glucose":"Carbon count: "+v.mitIn+" in as glucose",W1-30,18,"ledger","right");
+    tag(short?(v.mitCo2+v.mitFerm)+" out":v.mitCo2+" out as CO₂"+(v.mitFerm?" · "+v.mitFerm+" by fermentation":"")+" · "+v.mitInside+" inside",W1-30,18+lh,"ledger","right");}
 }
 function drawWheel(o){
   const S=SIM,lvl=S.level,L=LBL[lvl],isC=o.kind==="chl",W=WHEEL;
@@ -1584,7 +1638,9 @@ function drawWheel(o){
   const arrow=(a0)=>{const a=o.rot*1+a0;ctx.beginPath();ctx.moveTo(W.x+Math.cos(a)*(W.r+14),W.y+Math.sin(a)*(W.r+14));ctx.lineTo(W.x+Math.cos(a+.16)*(W.r+2),W.y+Math.sin(a+.16)*(W.r+2));ctx.stroke();};
   ctx.strokeStyle=isC?col("chlL"):col("mitL");ctx.lineWidth=3;arrow(0);arrow(TAU/3);arrow(2*TAU/3);
   if(isC){tag(L.calvin,W.x,W.y-W.r-26,"calvin","center");if(lvl==="de")tag(L.rubisco,W.x-W.r-10,W.y-40,"rubisco","right",false,true);
-    tag(L.co2,20,690,"co2","left");}
+    tag(L.co2,20,690,"co2","left");
+    /* the live rate, so the light and CO2 curves can be sketched from the numbers */
+    const r=Math.round(SIM.cnt.rate);tag(lvl==="nine"?"Speed: "+r+" of 100":"Rate: "+r+"% of max",W.x,W.y+W.r+28,"calvin","center");}
   else{tag(L.cycle,W.x-60,W.y-W.r-26,"cycle","center");}
   part(isC?"calvin":"cycle",W.x,W.y,W.r);
   ctx.restore();
@@ -1644,7 +1700,9 @@ function drawPatch(o){
     tag(L.h,N.c4+60,P.y0+72,"h","center");
     tag(L.carrier+(lvl==="de"?"":"s")+": "+o.cIQ.length,N.c1-60,P.my+95,"carrier","center",false,true);
     tag(L.atp+": "+o.atpMPool,POOL.atp[0]-20,POOL.atp[1],"atp","right",false,true);
-    if(!c.o2){tag(lvl==="nine"?"Oxygen off: the line stops":"O₂ off: complex IV has nowhere to pass electrons",N.c4,P.y1-20,null,"center");}
+    /* electrons waiting at the end of the line: with oxygen off they pile up at complex IV */
+    const nq=Math.min(6,o.ivQ.length);for(let i=0;i<nq;i++){circ(N.c4-30+(i%3)*14,P.my+42+Math.floor(i/3)*14,6,col("e"),col("eE"),1.2);}
+    if(!c.o2){if(lvl==="nine")tag("Oxygen off: the line stops",N.c3+20,P.y1-14,null,"center");else tag("O₂ off: the chain backs up at complex IV",640,P.y1-14,null,"center");}
     if(c.uncoupler&&lvl==="de"){tag("Uncoupler on: H⁺ leaks back, heat "+Math.round(o.heat),N.syn-200,P.y0+16,null,"center");}
   }
   drawSynthase(o,N.syn,P.my);
@@ -1666,7 +1724,7 @@ function drawSynthase(o,x,y){
   rrect(x-16,y-P.mh/2-10,32,P.mh+20,8,f,e,1.5);            /* the part in the membrane (Fo) */
   ctx.fillStyle=f;ctx.fillRect(x-5,y+P.mh/2,10,28);         /* the stalk */
   const hy=y+P.mh/2+52;circ(x,hy,30,f,e,1.5);               /* the head (F1), matrix / stroma side */
-  ctx.save();ctx.translate(x,hy);ctx.rotate(o.rot*2.2);ctx.fillStyle=BG;for(let i=0;i<3;i++){const a=i*TAU/3;circ(Math.cos(a)*14,Math.sin(a)*14,7,BG);}ctx.restore();
+  ctx.save();ctx.translate(x,hy);ctx.rotate((o.kind==="mit"?(o.srot||0):o.rot)*2.2);ctx.fillStyle=BG;for(let i=0;i<3;i++){const a=i*TAU/3;circ(Math.cos(a)*14,Math.sin(a)*14,7,BG);}ctx.restore();
   ctx.strokeStyle=col("h");ctx.lineWidth=2;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(x-6,y-P.mh/2-24);ctx.lineTo(x-6,y+P.mh/2+18);ctx.stroke();ctx.setLineDash([]);
   part("syn",x,hy,40);
 }
@@ -1883,8 +1941,11 @@ function buildCtl(){
   if(mit){
     ctl.appendChild(btn("Feed one glucose",()=>{feedGlucose(true);},"go"));
     const w=el("span","gf");w.appendChild(el("span","",lvl==="nine"?"Oxygen (O₂)":"O₂"));UI.o2=seg("Oxygen",[["on","On"],["off","Off"]],c.o2?"on":"off",v=>setCtl("o2",v==="on"),lvl==="nine"?"Oxygen":"O₂");w.appendChild(UI.o2);ctl.appendChild(w);
-    if(lvl==="de"){const f=el("span","gf");f.id="fermRow";f.appendChild(el("span","","Fermentation"));UI.ferment=seg("Fermentation",[["lactate","Lactate"],["alcohol","Alcohol"]],c.ferment,v=>setCtl("ferment",v));f.appendChild(UI.ferment);if(c.o2)f.classList.add("hidden");ctl.appendChild(f);
-      const g=el("span","gf");g.appendChild(el("span","","Going further"));UI.unc=seg("Uncoupler",[["off","Uncoupler off"],["on","Uncoupler on"]],c.uncoupler?"on":"off",v=>setCtl("uncoupler",v==="on"),"Uncoupler");g.appendChild(UI.unc);ctl.appendChild(g);
+    /* with oxygen off, a choice of cell decides the ending: yeast or bacteria (ethanol + CO2) or muscle (lactic acid) */
+    {const f=el("span","gf");f.id="fermRow";f.appendChild(el("span","",lvl==="nine"?"Which cell?":"Fermentation"));
+      UI.ferment=lvl==="nine"?seg("Which cell?",[["alcohol","Yeast or bacteria"],["lactate","Muscle cell"]],c.ferment,v=>setCtl("ferment",v),"Which cell ferments the sugar"):seg("Fermentation",[["lactate","Lactate"],["alcohol","Alcohol"]],c.ferment,v=>setCtl("ferment",v));
+      f.appendChild(UI.ferment);if(c.o2)f.classList.add("hidden");ctl.appendChild(f);}
+    if(lvl==="de"){const g=el("span","gf");g.appendChild(el("span","","Going further"));UI.unc=seg("Uncoupler",[["off","Uncoupler off"],["on","Uncoupler on"]],c.uncoupler?"on":"off",v=>setCtl("uncoupler",v==="on"),"Uncoupler");g.appendChild(UI.unc);ctl.appendChild(g);
       ctl.appendChild(btn("Energy panel: staircase",()=>openPanel("staircase"),"ghost"));}
   }
   if(org==="both"){UI.run=btn(c.runBoth?"Run both: on":"Run both",()=>setCtl("runBoth",!SIM.ctl.runBoth),"go"+(c.runBoth?" on":""),"Run both organelles");ctl.appendChild(UI.run);}
@@ -1910,18 +1971,28 @@ let roT=0;
 function gauge(v,cls){return '<span class="g'+(cls?" "+cls:"")+'" aria-hidden="true"><i style="width:'+Math.round(clamp(v,0,1)*100)+'%"></i></span>';}
 function readout(){
   const S=SIM,cn=S.cnt,lvl=st.level,org=TAB().org,c=S.ctl;const parts=[];
-  const inside=ledgerInside();
+  const inside=ledgerInside(),v=ledgerVals(),T=tallyG();
   if(org==="chl"||org==="both"){
     parts.push("CO₂ in: "+cn.co2In);
-    if(lvl==="nine"){parts.push("O₂ released: "+cn.o2Released,"three-carbon pieces: "+cn.g3pOut,"glucose built: "+cn.glucoseBuilt,"ATP "+gauge(S.chl.synEMA/4.5),"Sugar-building speed "+gauge(cn.rate/100,"sp"));}
-    else{parts.push("O₂ released: "+cn.o2Released,"H₂O split: "+cn.waterSplit,"G3P out: "+cn.g3pOut,"glucose built: "+cn.glucoseBuilt,"ATP: "+cn.atpChloro,"NADPH: "+cn.nadphMade+" made, "+cn.nadphUsed+" used","Rate: "+Math.round(cn.rate)+"% of max","thylakoid space pH "+cn.phThylakoidSpace.toFixed(1)+", stroma pH "+cn.phStroma.toFixed(1));}
+    if(lvl==="nine"){parts.push("O₂ released: "+cn.o2Released,"three-carbon pieces: "+cn.g3pOut,"glucose built: "+cn.glucoseBuilt,"ATP "+gauge(S.chl.synEMA/4.5),"Sugar-building speed: <b>"+Math.round(cn.rate)+"</b> of 100 "+gauge(cn.rate/100,"sp"));}
+    else{parts.push("O₂ released: "+cn.o2Released,"H₂O split: "+cn.waterSplit,"G3P out: "+cn.g3pOut,"glucose built: "+cn.glucoseBuilt,"ATP: "+cn.atpChloro,"NADPH: "+cn.nadphMade+" made, "+cn.nadphUsed+" used","Rate: <b>"+Math.round(cn.rate)+"</b>% of max","thylakoid space pH "+cn.phThylakoidSpace.toFixed(1)+", stroma pH "+cn.phStroma.toFixed(1));}
   }
   if(org==="mit"||org==="both"){
     parts.push("CO₂ out: "+(cn.co2OutMito+cn.co2OutFerment));
-    if(lvl==="nine"){parts.push("carbons inside: "+inside,"O₂ used: "+cn.o2Used,"glucose broken: "+cn.glucoseBroken,"ATP "+gauge(S.mit.synEMA/4.5));if(!c.o2)parts.push('<span class="note">far less ATP without oxygen</span>');}
+    if(lvl==="nine"){parts.push("carbons inside: "+inside,"O₂ used: "+cn.o2Used,"glucose broken: "+cn.glucoseBroken,"ATP "+gauge(S.mit.synEMA/4.5));
+      /* the ATP tally: what this glucose has given so far, against the two numbers the step is about */
+      if(T)parts.push("ATP tally, this glucose: cytoplasm "+T.gly+" + mitochondrion "+T.mit+" = <b>"+T.total+"</b>"+(T.done?" (finished)":""));
+      parts.push("with oxygen: about 32 per glucose · without oxygen: 2");
+      if(!c.o2)parts.push('<span class="note">Without oxygen, the cell keeps only the small amount of energy it gets in the cytoplasm.</span>');}
     else{const atp=cn.atpGlycolysis+cn.atpCAC+cn.atpSynthaseMito;parts.push("carbons inside: "+inside,"O₂ used: "+cn.o2Used,"H₂O made: "+cn.waterMade,"glucose broken: "+cn.glucoseBroken,"ATP: "+atp+(org==="both"?"":" (glycolysis "+cn.atpGlycolysis+", cycle "+cn.atpCAC+", ATP synthase "+cn.atpSynthaseMito+")"),"NADH: "+cn.nadhMade,"FADH₂: "+cn.fadh2Made,"intermembrane space pH "+cn.phIMS.toFixed(1)+", matrix pH "+cn.phMatrix.toFixed(1));
-      if(cn.lastAtpPerGlucose)parts.push("ATP per glucose so far: "+cn.lastAtpPerGlucose);if(c.uncoupler)parts.push("heat: "+cn.heat);}
+      if(T)parts.push("ATP tally, this glucose: glycolysis "+T.gly+" + cycle "+T.cac+" + ATP synthase "+T.chain+" = <b>"+T.total+"</b>"+(T.done?" (finished)":""));
+      if(cn.lastAtpPerGlucose)parts.push("ATP per glucose so far: "+cn.lastAtpPerGlucose);if(c.uncoupler)parts.push("heat: "+cn.heat);
+      if(!c.o2)parts.push('<span class="note">O₂ off: no final electron acceptor, so the chain backs up and only glycolysis makes ATP, 2 per glucose.</span>');}
   }
+  /* the carbon count, in the level's words */
+  if(org==="chl")parts.push("Carbon count: "+v.chlIn+" in as CO₂, "+v.cycle+" in the cycle, "+v.sugar+(lvl==="nine"?" out as sugar":" out as G3P"));
+  if(org==="mit")parts.push("Carbon count: "+v.mitIn+" in as glucose, "+v.mitCo2+" out as CO₂"+(v.mitFerm?", "+v.mitFerm+" out by fermentation":"")+", "+v.mitInside+" still inside");
+  if(org==="both")parts.push("Carbon count: "+v.inC+" in as CO₂, "+v.outC+" out of the mitochondrion"+(v.inC>0&&v.inC===v.outC?" · <b>carbon in = carbon out</b>":(v.way>0?" · on the way: "+v.way:"")));
   if(org==="both"&&lvl==="nine")parts.push("carbons in transit: "+inside);
   if(lvl==="de"&&(org==="both"||S.stepKey==="C2"||S.stepKey==="M4"))parts.push('<span class="fine">'+READTEXT.de[READTEXT.de.length-1]+"</span>");
   $("readout").innerHTML=parts.join(" · ");
@@ -2074,7 +2145,7 @@ function allText(level){
   add($("finenote").textContent);add("Words in this step");add("Check yourself");add("Advanced Biology");add("Not quite");add("Right. Here is the reasoning");add("The reasoning");add("Study:");add("Going further");add("Build a SAM from this miss");
   add("Answer the prediction first; the controls under the picture unlock once you have committed to an answer.");add("Teaching view: every part of this step is open and the labels are board-sized. Tap a label on the picture to pin a big callout. The step lights up only once its prediction, its tasks and its checks are done.");
   add("Module 3 needs the side-by-side view, so it switched.");add("Module 3 shows both organelles: switch to Side by side.");add("Press Run both");add(level==="nine"?"Two pieces join into glucose":"2 G3P → glucose");
-  add(level==="nine"?["Oxygen off: the line stops","A chloroplast, with one bit of membrane magnified","A mitochondrion, with one bit of inner membrane magnified","Chloroplast (left) and mitochondrion (right)","Oxygen","Sugar","Carbon dioxide","Water"]:["O₂ off: complex IV has nowhere to pass electrons","Uncoupler on: H⁺ leaks back, heat","Cyclic flow: PS I → Fd → cytochrome complex → Pc → PS I","Linear flow","A chloroplast, with one thylakoid membrane patch magnified","A mitochondrion, with one crista magnified","Chloroplast (left) and mitochondrion (right)","Energy panel: Z scheme","Energy panel: the chain's staircase"]);
+  add(level==="nine"?["Oxygen off: the line stops","A chloroplast, with one bit of membrane magnified","A mitochondrion, with one bit of inner membrane magnified","Chloroplast (left) and mitochondrion (right)","Oxygen","Sugar","Carbon dioxide","Water","Speed: 0 of 100","Still making oxygen in light","No light, so no oxygen","ATP tally","feed a glucose","ATP tally, this glucose","cytoplasm","mitochondrion","total","(finished)","Carbon count","in as CO₂","in the cycle","in cycle","out as sugar","in as glucose","out as CO₂","by fermentation","inside","CO₂ in","CO₂ out","6 in = 6 out per glucose ✓","on the way","carbon in = carbon out","Yeast or bacteria: ethanol + CO₂","Muscle cell: lactic acid"]:["O₂ off: the chain backs up at complex IV","Uncoupler on: H⁺ leaks back, heat","Cyclic flow: PS I → Fd → cytochrome complex → Pc → PS I","Linear flow","A chloroplast, with one thylakoid membrane patch magnified","A mitochondrion, with one crista magnified","Chloroplast (left) and mitochondrion (right)","Energy panel: Z scheme","Energy panel: the chain's staircase","Rate: 0% of max","Still releasing O₂ in light","No light, so no O₂","ATP tally","feed a glucose","glycolysis","cycle","ATP synthase","total","Carbon count","in as CO₂","in the cycle","out as G3P","in as glucose","out as CO₂","by fermentation","inside","6 in = 6 out per glucose ✓","on the way","Fermentation (yeast or bacteria): ethanol + CO₂","Fermentation (muscle cell): lactate"]);
   (level==="nine"?BANK9:BANKDE).forEach(it=>{add(it.topic);add(it.stem);add(it.opts);add(it.why);add(it.miss);add(it.sam);add(it.va);add(it.study);});
   return out;
 }
