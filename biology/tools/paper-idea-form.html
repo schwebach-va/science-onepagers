@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<!-- 2026-10-19: changes from the lab assistant test of 10-05 (Save as PDF blocked on managed iPads -> Print + export-from-Word note; AI log 3 rows + Add another use; Part 6 opening question; Part 4 DOI note and worked Vancouver example; milestone schedule above Part 1; save/load/print dock always on screen). -->
 <!-- Bio Tool #20, published 2026-10-04 at Reid's direction; Part 5 outline A-D and milestone labels aligned with his NVCC spec the same night. Built 2026-10-04 from Reid's notes on the semester paper,
      his NVCC assignment "Annotated Bibliography for Paper #1" (the three reflection questions, ten Google
      Scholar sources, the annotation questions) and the syllabus (25 points, revisable, topic of the
@@ -92,7 +93,22 @@ button:focus-visible,.btn:focus-visible{outline:3px solid var(--stuck);outline-o
 .reflist li{margin:0 0 .35rem;word-wrap:break-word}
 .flagline{font-family:var(--sans);font-size:.8rem;color:var(--flag);margin:.2rem 0 0}
 .log{border-top:1px solid var(--rule);padding:.5rem 0}
-.toast{position:fixed;left:50%;bottom:1.2rem;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:.9rem;padding:.6rem 1rem;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
+.sched{border-left:4px solid var(--bond)}
+.sched table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem;margin:.3rem 0 .6rem}
+.sched td{padding:.42rem .3rem;border-top:1px solid var(--rule);vertical-align:top}
+.sched td:first-child{white-space:nowrap;font-weight:700;color:var(--bond);width:7.2rem}
+.example{border:1px solid var(--rule);background:var(--field);border-radius:10px;padding:.75rem .9rem;margin:0 0 .9rem;font-size:.9rem;line-height:1.45}
+.example .lab{font-family:var(--sans);font-weight:700;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--bond);display:block;margin:0 0 .3rem}
+.example .ref{word-wrap:break-word;margin:0 0 .5rem}
+.example p:last-child{margin:0}
+.addlog{margin:.4rem 0 0}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--rule);display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;padding:.45rem .6rem calc(.45rem + env(safe-area-inset-bottom));box-shadow:0 -2px 10px rgba(0,0,0,.06)}
+.dock button{min-height:40px;padding:.4rem .85rem;font-size:.84rem}
+@media (min-width:1180px){
+  .dock{left:auto;right:1rem;top:50%;bottom:auto;transform:translateY(-50%);flex-direction:column;border:1px solid var(--rule);border-radius:14px;padding:.6rem;box-shadow:0 2px 12px rgba(0,0,0,.08);width:12rem}
+  .dock button{justify-content:center}
+}
+.toast{position:fixed;left:50%;bottom:4.6rem;z-index:30;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:.9rem;padding:.6rem 1rem;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
 .finish{background:var(--solid-soft);border-color:var(--solid)}
 .save-state{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);margin:.6rem 0 0}
@@ -101,6 +117,7 @@ footer{font-size:.82rem;color:var(--ink-soft);margin-top:2rem;border-top:1px sol
 @media print{
   body{background:#fff;color:#000;font-size:11pt}
   .wrap{display:none}
+  .dock{display:none}
   #printview{display:block;font-family:Georgia,serif;line-height:1.4}
   #printview h1{font-size:18pt;margin:0 0 4pt}
   #printview h2{font-size:12.5pt;margin:14pt 0 4pt;border-bottom:1px solid #999}
@@ -118,10 +135,26 @@ footer{font-size:.82rem;color:var(--ink-soft);margin-top:2rem;border-top:1px sol
   <p class="lede">From what interests you to a paper you can start writing, in eight short parts: a question narrow enough to answer, ten real sources, the figures that will carry your argument, and where the science goes next.</p>
 
   <div class="note">
-    <p><b>Your work stays on this iPad.</b> Everything you type saves in this browser as you go. Nothing is sent to me or anyone else. When a milestone is due, tap <b>Download Word file</b> at the bottom and upload that file to the Canvas assignment.</p>
-    <p><b>Keep a backup.</b> Download the Word file each time you finish a part. If this iPad is reset, you change iPads or the form comes up empty, tap <b>Load a saved Word file</b> at the bottom and choose the last file you downloaded from this form. Everything comes back.</p>
+    <p><b>Your work stays on this iPad.</b> Everything you type saves in this browser as you go. Nothing is sent to me or anyone else. When a milestone is due, tap <b>Download Word file</b> (always on screen) and upload that file to the Canvas assignment.</p>
+    <p><b>Keep a backup.</b> Download the Word file each time you finish a part. If this iPad is reset, you change iPads or the form comes up empty, tap <b>Load Word file</b> and choose the last file you downloaded from this form. Everything comes back.</p>
     <p>The guide that goes with this form: <a href="../../teaching/writing-a-science-paper.html">Writing a Science Paper in DE Biology</a>.</p>
   </div>
+
+  <section class="card sched" id="schedule">
+    <div class="num">Before you start</div>
+    <h2>The whole paper, milestone by milestone</h2>
+    <p class="intro">A two-page paper with ten real sources takes about ten weeks done well, and almost nobody can do it in one. Each milestone is a Canvas upload of the Word file from this form, then a short talk with me in Flex or class about where your thinking is headed.</p>
+    <table>
+      <tr><td>Fri Oct 30 (P1)<br>Wed Nov 4 (P4)</td><td>Start in class: this schedule, then Parts 1 and 2.</td></tr>
+      <tr><td>Tue Nov 10</td><td><b>Milestone 1</b> · Topic and question (Parts 1–3)</td></tr>
+      <tr><td>Fri Nov 20</td><td><b>Milestone 2</b> · Ten sources, annotated (Part 4)</td></tr>
+      <tr><td>Fri Dec 4</td><td><b>Milestone 3</b> · Outline and figure plan (Parts 5–6), talked through with me in Flex by this week</td></tr>
+      <tr><td>Fri Dec 18</td><td><b>Milestone 4</b> · First full draft, before winter break</td></tr>
+      <tr><td>Wed Jan 6</td><td><b>Milestone 5</b> · Peer review and AI log (Part 7)</td></tr>
+      <tr><td>Fri Jan 8</td><td><b>Milestone 6</b> · Final paper, uploaded to NOVA Canvas</td></tr>
+    </table>
+    <p class="fine">Copy these dates into Part 8 so your plan travels with your Word file. If a date moves, Canvas has the current one.</p>
+  </section>
 
   <nav class="progress" id="progress" aria-label="Parts of the form"></nav>
   <div id="form"></div>
@@ -132,21 +165,27 @@ footer{font-size:.82rem;color:var(--ink-soft);margin-top:2rem;border-top:1px sol
     <p class="intro">The Word file opens in Word on your iPad, so you can keep writing in it. Upload it to the Canvas assignment for that milestone, then bring it to Flex or class and talk me through it.</p>
     <div class="btnrow">
       <button class="primary" id="dlWord" type="button">Download Word file</button>
-      <button id="dlPdf" type="button">Save as PDF</button>
+      <button id="dlPdf" type="button">Print</button>
       <button id="copyAll" type="button">Copy everything as text</button>
     </div>
     <div class="btnrow">
-      <button id="loadWord" type="button">Load a saved Word file</button>
+      <button id="loadWord" type="button">Load Word file</button>
       <input type="file" id="loadFile" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
       <button class="warn" id="clearAll" type="button">Start over</button>
     </div>
     <p class="save-state" id="saveState">Nothing typed yet.</p>
+    <p class="fine">Need a PDF? Open your Word file in Word and export it there (File, then Export, then PDF). Canvas takes the Word file itself, so most of the time you will not need one.</p>
     <p class="fine">Safari can clear saved work if you switch iPads, clear its history, or leave the site unopened for a week or more. The Word file is your backup: loading it puts every answer back, including your sources and your AI log.</p>
   </section>
 
   <footer>
     Bio Tool #20 &middot; written and maintained by Mr. Schwebach &middot; &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. The Copilot and Google Scholar buttons open those sites in a new tab. Copilot is the AI tool PWCS approves for high school students; use it with your PWCS account and your teacher&rsquo;s permission, and leave your name and anything personal out of what you send.
   </footer>
+</div>
+<div class="dock" id="dock" aria-label="Save and load">
+  <button class="primary" type="button" data-for="dlWord">Download Word file</button>
+  <button type="button" data-for="loadWord">Load Word file</button>
+  <button type="button" data-for="dlPdf">Print</button>
 </div>
 <div id="printview" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -244,6 +283,7 @@ var SECTIONS=[
   scholar:true},
  {id:"s4",short:"Sources",num:"Part 4",title:"Ten sources from Google Scholar",
   intro:"Find ten sources in Google Scholar. Under each paper, tap Cite (the quotation mark), choose Vancouver, copy it and paste it here. Then fix what Scholar gets wrong: capitalize the journal name, list the first six authors and then “et al.”, and add the DOI if there is one. It is fine to begin with Wikipedia or a news story to learn the words, but the ten here must be papers you opened yourself.",
+  example:true,
   sources:10},
  {id:"s5",short:"Outline",num:"Part 5",title:"Outline your four parts, then plan the figures",
   intro:"Two pages hold four parts of about half a page each. Write a line or two for each part, in any order that suits your paper. Then plan one figure and one table; each should make one point a reader sees at a glance.",
@@ -266,6 +306,7 @@ var SECTIONS=[
  {id:"s6",short:"Big idea",num:"Part 6",title:"Part D: future research, and what could come next",
   intro:"Every good science paper ends by looking forward, and in your paper that is Part D. Use what you found in Part 3, and think for yourself here: this is the part of the paper that is most yours.",
   fields:[
+   {id:"horizon",label:"Where is this topic headed? Picture it ten years from now.",hint:"Start big and loose: what will scientists know then that they do not know now, and who will care? The three questions below narrow it down.",type:"area"},
    {id:"unknown",label:"What is still unknown",type:"area"},
    {id:"nextexp",label:"The next experiment you would run",hint:"What would you change, what would you measure, and what would your control be?",type:"area"},
    {id:"innovation",label:"An innovation this could lead to",hint:"A treatment, a tool, a crop, a test. Say what would have to be true for it to work.",type:"area"}
@@ -273,10 +314,10 @@ var SECTIONS=[
   prompt:{key:"future",title:"Ask AI to test your future-research ideas"}},
  {id:"s7",short:"AI log",num:"Part 7",title:"Your AI log",
   intro:"Scientists now use AI to search, summarize and check their work, and they report how they used it. Do the same. Every time you use Copilot for this paper, add a line. We will talk through this log together.",
-  ailog:6,
+  ailog:3,
   prompt:{key:"tighten",title:"Later, when you have a draft: ask AI to tighten a paragraph you wrote"}},
  {id:"s8",short:"Plan",num:"Part 8",title:"Your plan to the finish",
-  intro:"Copy the due dates from Canvas, so the whole path is in one place.",
+  intro:"Copy the due dates from the schedule at the top, so the whole path travels with your Word file.",
   fields:[
    {id:"ptitle",label:"Putative title",hint:"A working title you can change as the paper grows. Make it specific enough that a reader knows your question.",type:"text"},
    {id:"m1",label:"Milestone 1 · Topic and question, Parts 1–3 · due",type:"text"},
@@ -390,9 +431,20 @@ function refreshRefs(){
   for(var i=1;i<=10;i++){var t=v("src"+i+"v"); if(t) ol.appendChild(el("li",{text:t}));}
   if(!ol.children.length) ol.appendChild(el("li",{style:"list-style:none;margin-left:-1.8rem;color:var(--ink-soft)",text:"Nothing pasted yet."}));
 }
-function aiLogNode(n){
-  var box=el("div");
-  for(var i=1;i<=n;i++){
+function exampleNode(){
+  var box=el("div",{"class":"example"});
+  box.appendChild(el("span",{"class":"lab",text:"One finished reference, Vancouver style"}));
+  box.appendChild(el("p",{"class":"ref",text:"Abegglen LM, Caulin AF, Chan A, Lee K, Robinson R, Campbell MS, et al. Potential mechanisms for cancer resistance in elephants and comparative cellular response to DNA damage in humans. JAMA. 2015;314(17):1850-60. doi:10.1001/jama.2015.13134"}));
+  box.appendChild(el("p",{text:"Read it left to right: authors (the first six, then et al.), the article title, the journal, then year;volume(issue):pages, then the DOI."}));
+  box.appendChild(el("p",{html:"<b>What the DOI is.</b> A DOI (digital object identifier) is a permanent ID for one article, a string that starts with <b>10.</b> and a slash. Put <b>https://doi.org/</b> in front of it and it opens that paper anywhere, even after a website moves. Find it near the top of the article page or in its PDF; Scholar’s Cite box usually leaves it off, so copy it from the article itself."}));
+  return box;
+}
+function aiCount(){
+  var n=Math.max(3,parseInt(state.ailogN,10)||0);
+  for(var k in state){var m=k.match(/^ai(\d+)[takc]$/); if(m&&state[k]&&+m[1]>n) n=+m[1];}
+  return n;
+}
+function aiRow(i){
     var row=el("div",{"class":"log"});
     row.appendChild(el("div",{"class":"n",style:"font-family:var(--sans);font-weight:700;color:var(--bond);font-size:.9rem",text:"Use "+i}));
     [["t","Tool and date","Example: Copilot, Oct 12"],["a","What I asked","Which prompt, or what I typed"],["k","What I kept, and how I checked it","Which ideas I used, and the paper that confirmed each one"],["c","What I rejected or changed, and why",""]].forEach(function(o){
@@ -401,8 +453,18 @@ function aiLogNode(n){
       var inp=o[0]==="t"?el("input",{type:"text",id:id}):el("textarea",{id:id,rows:"2"});
       bindInput(inp,id); row.appendChild(lab); row.appendChild(inp);
     });
-    box.appendChild(row);
-  }
+    return row;
+}
+function aiLogNode(){
+  var box=el("div"), rows=el("div"), n=aiCount();
+  for(var i=1;i<=n;i++) rows.appendChild(aiRow(i));
+  var add=el("button",{type:"button","class":"addlog",text:"+ Add another use"});
+  add.addEventListener("click",function(){
+    var next=rows.children.length+1; state.ailogN=String(next); save();
+    var r=aiRow(next); rows.appendChild(r);
+    var f=r.querySelector("input"); if(f) f.focus();
+  });
+  box.appendChild(rows); box.appendChild(add);
   return box;
 }
 SECTIONS.forEach(function(s){
@@ -411,8 +473,9 @@ SECTIONS.forEach(function(s){
   card.appendChild(el("h2",{text:s.title}));
   card.appendChild(el("p",{"class":"intro",text:s.intro}));
   (s.fields||[]).forEach(function(f){card.appendChild(fieldNode(f));});
+  if(s.example) card.appendChild(exampleNode());
   if(s.sources) card.appendChild(sourcesNode(s.sources));
-  if(s.ailog) card.appendChild(aiLogNode(s.ailog));
+  if(s.ailog) card.appendChild(aiLogNode());
   if(s.scholar) card.appendChild(scholarNode());
   if(s.prompt) card.appendChild(promptNode(s.prompt));
   form.appendChild(card);
@@ -449,7 +512,7 @@ function outline(){
       if(!items.length) items.push(["Sources","None pasted yet."]);
     }
     if(s.ailog){
-      for(var j=1;j<=s.ailog;j++){if(!v("ai"+j+"a")&&!v("ai"+j+"t")) continue;
+      for(var j=1,nn=aiCount();j<=nn;j++){if(!v("ai"+j+"a")&&!v("ai"+j+"t")) continue;
         items.push(["Use "+j+": "+(v("ai"+j+"t")||"tool and date not given"),"Asked: "+(v("ai"+j+"a")||"—")+"\nKept and checked: "+(v("ai"+j+"k")||"—")+"\nRejected or changed: "+(v("ai"+j+"c")||"—")]);}
       if(!items.length) items.push(["AI log","No AI use recorded yet."]);
     }
@@ -560,6 +623,7 @@ loadFile.addEventListener("change",function(){
   }).catch(function(){toast("That file could not be read. Choose a Word file downloaded from this form.");});
 });
 window.__paperForm={loadBuffer:loadBuffer};
+[].forEach.call(document.querySelectorAll("#dock [data-for]"),function(b){b.addEventListener("click",function(){document.getElementById(b.getAttribute("data-for")).click();});});
 try{if(navigator.storage&&navigator.storage.persist) navigator.storage.persist();}catch(e){}
 
 /* ---------- a real .docx, built here with no library ---------- */
