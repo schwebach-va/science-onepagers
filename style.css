@@ -735,7 +735,19 @@ table.modular-index .none { color: var(--muted); }
    page and opens search.html; the word "Search" drops away on narrow screens. */
 nav.site-nav a.nav-search { float: right; display: inline-flex; align-items: center; gap: 0.4rem; }
 nav.site-nav a.nav-search svg { display: block; }
-@media (max-width: 640px) { nav.site-nav a.nav-search .nav-search-label { display: none; } }
+/* On phones the bare glass was easy to miss: it becomes a white, labelled button on its own row. */
+@media (max-width: 640px) {
+  nav.site-nav { display: flow-root; }
+  nav.site-nav a.nav-search {
+    float: none; display: flex; justify-content: center; gap: 0.5rem;
+    margin: 0.2rem 1.1rem 0.8rem; padding: 0.7rem 1rem;
+    background: white; color: var(--teal); font-weight: 700; border-radius: 999px;
+  }
+}
+/* Home-page search box: sends the words to search.html. */
+form.home-search { margin: 0 0 1.4rem; }
+form.home-search button { font: inherit; font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 700;
+  padding: 0.6rem 1.1rem; border: 0; border-radius: 6px; background: var(--teal); color: white; cursor: pointer; }
 .search-box { display: flex; gap: 0.5rem; margin: 1.2rem 0 0.4rem; }
 .search-box input { flex: 1; font: inherit; font-size: 1.1rem; padding: 0.6rem 0.8rem;
   border: 2px solid var(--teal); border-radius: 6px; background: white; color: var(--ink); min-width: 0; }
