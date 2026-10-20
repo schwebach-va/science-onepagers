@@ -24,7 +24,7 @@ python3 t3-compare-rtk.py                     # T3 for rtk, from the suite's own
 Chromium needs Archivo installed as a system font when the Google Fonts fetch is blocked, or T3 compares a
 fallback face: the stills embed Archivo 600 and 700 as woff2, and a copy converted to TTF (fontTools) in the
 user font folder is enough (`fc-cache -f` after; the family name inside the subset reads "Archivo SemiBold", so rename it to "Archivo" with fontTools if Chromium does not match it).
-`D1-rtk-stage4-before-after.png` is the crop the rtk brief asked for: stage 4 of the rtk still before and after the 2026-10-20 re-render.
+`D1-rtk-stage4-before-after.png` is the crop the rtk brief asked for: stage 4 of the rtk still as shipped and after the 2026-10-20 re-renders (relays at -40/0/+40).
 
 `mechanism-reel-tests.js` requires Playwright at `/opt/node22/lib/node_modules/playwright`; change the
 `require` line to `require('playwright')` after `npm i playwright` elsewhere. `t3-compare.py` needs Pillow and numpy.

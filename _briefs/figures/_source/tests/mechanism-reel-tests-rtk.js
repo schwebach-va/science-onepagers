@@ -260,13 +260,13 @@ async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width
        the dimer being phosphorylated holds at full (it is kept, not dimmed), and the phosphorylated tyrosine shows only when its phosphate lands */
     {await go(pg,2);await pg.evaluate(()=>__MR.goStep(3));await sleep(700);
       const mid=await pg.evaluate(()=>({f:__MR.focus(),live:!!document.querySelector('#card .cap.live'),h1:__MR.el('h1L').opacity,t1:__MR.el('t1').opacity,p3:__MR.el('p3').opacity,tyr0:__MR.el('tyr0').opacity,pool:__MR.el('atpPool').opacity}));
-      await sleep(1400);const landed=await pg.evaluate(()=>({tyr0:__MR.el('tyr0').opacity,tyr1:__MR.el('tyr1').opacity}));
+      await sleep(1550);const landed=await pg.evaluate(()=>({tyr0:__MR.el('tyr0').opacity,tyr1:__MR.el('tyr1').opacity}));   /* ~2.25 s: tyr0's fade ended at 2090, tyr1's starts at 2540 */
       await settle(pg);await sleep(450);const after=await pg.evaluate(()=>({f:__MR.focus(),live:!!document.querySelector('#card .cap.live'),h1:__MR.el('h1L').opacity,t1:__MR.el('t1').opacity,tyr:[0,1,2,3,4,5].map(i=>__MR.el('tyr'+i).opacity)}));
       const near=(a,b)=>Math.abs(a-b)<0.03;
       const ok=mid.f.live&&mid.f.scaled.includes('ph0')&&mid.f.scaled.includes('adp0')&&mid.f.scaled.length>=12&&mid.f.dimmedCount>12&&near(mid.h1,0.5)&&near(mid.t1,0.5)&&near(mid.p3,1)&&near(mid.pool,1)&&mid.tyr0<0.03&&mid.live
         &&landed.tyr0>0.97&&landed.tyr1<0.03&&!after.f.live&&after.f.scaled.length===0&&after.f.dimmedCount===0&&near(after.h1,1)&&near(after.t1,1)&&after.tyr.every(o=>o>0.97)&&!after.live;
       res('T21',ok,`${tag}: mid=${JSON.stringify({scaled:mid.f.scaled.length,dimmed:mid.f.dimmedCount,h1:mid.h1,t1:mid.t1,p3:mid.p3,tyr0:mid.tyr0,live:mid.live})} landed=${JSON.stringify(landed)} after=${JSON.stringify({scaled:after.f.scaled,dimmed:after.f.dimmedCount,h1:after.h1,tyr:after.tyr})}`);
-      note('T21',`${tag}: during step 3, ${mid.f.scaled.length} parts scaled and ${mid.f.dimmedCount} of ${mid.f.topCount} drawing parts dimmed; the dimer held at full while the first phosphate crossed; the first phosphorylated tyrosine showed only when its phosphate landed (at 2.1 s it was on, the second still off)`);}
+      note('T21',`${tag}: during step 3, ${mid.f.scaled.length} parts scaled and ${mid.f.dimmedCount} of ${mid.f.topCount} drawing parts dimmed; the dimer held at full while the first phosphate crossed; the first phosphorylated tyrosine showed only when its phosphate landed (at 2.25 s it was on, the second still off)`);}
     /* T22: committed predictions: 2-3 buttons of 44 px, Next never blocked, "You predicted" beside "What happened" */
     {await pg.evaluate(()=>__MR.reset());await settle(pg);
       const b=await pg.evaluate(()=>[...document.querySelectorAll('#predict .choices .opt')].map(x=>({t:x.textContent,h:x.getBoundingClientRect().height})));

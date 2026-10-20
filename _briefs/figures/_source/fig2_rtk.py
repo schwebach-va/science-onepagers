@@ -80,7 +80,8 @@ s += arrow(782, 586, 826, 522, NUC, 5, "arn")
 s += text(762, 652, "ATP > ADP", "min", "middle", NUC)
 
 # ---- 4. relay proteins dock, and the answers branch ------------------------
-s += arrow(946, 466, 1004, 466, INK, 6, "ar")
+# the arrow from stage 3 ends clear of stage 4's left-tail phosphotyrosines (tip at 989; their edge is at 995)
+s += arrow(930, 466, 982, 466, INK, 6, "ar")
 AX, BX = 1032, 1080
 s += monomer(AX) + monomer(BX) + ligand(AX) + ligand(BX)
 s += rrect(AX - 26, MY - 42, 100, 10, 5, PRO_SIDE)
@@ -93,10 +94,12 @@ for i in range(3):
     s += tyr(BX + 2, MB + 22 + i*28, 1, True)
 # each relay seats on one of the right tail's phosphates. Three 22 px circles on
 # 28 px spacing collide in a column, so they fan out: each centre is 33 px
-# (11 + 22, touching) from its own phosphate, at -10, 30 and 85 degrees
+# (11 + 22, touching) from its own phosphate, at -40, 0 and +40 degrees, which
+# keeps all three to the right of the tail and clear of each other; Relay A's
+# top reaches the inner leaflet, as the receptor's own tail does
 import math
 PHX = BX + 2 + 23
-RELAYS = (("Relay A", "cell grows", -10), ("Relay B", "cell divides", 30), ("Relay C", "cell survives", 85))
+RELAYS = (("Relay A", "cell grows", -40), ("Relay B", "cell divides", 0), ("Relay C", "cell survives", 40))
 for i, (name, resp, ang) in enumerate(RELAYS):
     py = MB + 22 + i*28
     cx = PHX + 33*math.cos(math.radians(ang))

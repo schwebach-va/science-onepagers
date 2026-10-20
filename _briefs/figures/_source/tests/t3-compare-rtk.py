@@ -2,8 +2,8 @@
 """T3 for rtk: compare the stage screenshot written by mechanism-reel-tests-rtk.js with the delivered PNG,
 re-rendered on 2026-10-20 with stage 4 fixed (D1). Prints the pixel-difference percentage and writes a
 two-up image. Run from the tests folder after the suite. rtk has one level, so there is one frame. The
-expected difference is the six ADP pentagons that paid for the six phosphates and lie in the cytosol beside
-the dimer (one ATP per phosphate, D3; travel beats pixel-equivalence)."""
+six ADP that paid for the six phosphates have drifted out of the frame, so no difference is expected beyond
+text rendering."""
 import sys
 from PIL import Image
 import numpy as np

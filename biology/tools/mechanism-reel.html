@@ -1545,8 +1545,8 @@ const ETC=(function(){
    signal is answered in several ways at once. Geometry is the still's own (fig2_rtk.py, stage 4
    re-rendered 2026-10-20 so every relay sits on a phosphate that sits on the tail). The still shows
    four stages side by side; the animation reveals them one per step, left to right, and the movers
-   travel inside each stage. The last step is the still, except where a traveller has moved: the six
-   ADP pentagons that paid for the six phosphates lie in the cytosol beside the dimer.
+   travel inside each stage. The last step is the still: the six ADP that paid for the six phosphates
+   have drifted down out of the frame, so nothing is left that is not on the still.
    Three things are the figure's content, not polish (brief, 2026-10-19):
    - trans-autophosphorylation: each phosphate leaves an ATP at one half's kinase domain and crosses
      to a tyrosine on the OTHER half's tail (D2, T30);
@@ -1567,15 +1567,17 @@ const RTK=(function(){
   const TY=[MB+22,MB+50,MB+78];              /* the three tyrosines on each tail: 422, 450, 478 */
   const POOL=[762,600];                      /* the still's ATP > ADP token: the pool the six ATP come from */
   const KL=[818,518],KR=[878,518];           /* where an ATP docks: the foot of the left and the right kinase domain */
-  /* the six phosphates, in the order they are paid for: target tail, tyrosine row, donor kinase, and where the spent ADP comes to rest.
-     Sides alternate so the crossing is visible: the first ATP docks at the RIGHT half's kinase and its phosphate crosses to the LEFT tail */
-  const PHOS=[{tail:"L",row:0,from:KR,rest:[918,556]},{tail:"R",row:0,from:KL,rest:[690,604]},{tail:"L",row:1,from:KR,rest:[926,630]},
-              {tail:"R",row:1,from:KL,rest:[648,662]},{tail:"L",row:2,from:KR,rest:[984,668]},{tail:"R",row:2,from:KL,rest:[700,690]}];
+  /* the six phosphates, in the order they are paid for: target tail, tyrosine row, donor kinase. Sides alternate so the crossing is
+     visible: the first ATP docks at the RIGHT half's kinase and its phosphate crosses to the LEFT tail. Every spent ADP drifts down
+     through the gap between the legend's two columns and out of the frame (EXIT, below the viewBox), the same shape and colour as
+     ATP, so it must not be left lying about to be read as ATP still waiting */
+  const PHOS=[{tail:"L",row:0,from:KR},{tail:"R",row:0,from:KL},{tail:"L",row:1,from:KR},{tail:"R",row:1,from:KL},{tail:"L",row:2,from:KR},{tail:"R",row:2,from:KL}];
+  const EXIT=[772,1040];
   const phAt=p=>[p.tail==="L"?LX-2-23:RX+2+23,TY[p.row]];   /* where the still parks the phosphate: 799 or 897 */
   /* stage 4's relays, as the re-rendered still fans them on the right tail's three phosphates (D1) */
-  const RELAY=[{id:"relA",lbl:"lblRelA",arr:"arrRA",resp:"lblRespA",name:"Relay A",says:"cell grows",ang:-10,from:[1250,598]},
-               {id:"relB",lbl:"lblRelB",arr:"arrRB",resp:"lblRespB",name:"Relay B",says:"cell divides",ang:30,from:[1352,566]},
-               {id:"relC",lbl:"lblRelC",arr:"arrRC",resp:"lblRespC",name:"Relay C",says:"cell survives",ang:85,from:[1196,650]}];
+  const RELAY=[{id:"relA",lbl:"lblRelA",arr:"arrRA",resp:"lblRespA",name:"Relay A",says:"cell grows",ang:-40,from:[1250,598]},
+               {id:"relB",lbl:"lblRelB",arr:"arrRB",resp:"lblRespB",name:"Relay B",says:"cell divides",ang:0,from:[1352,566]},
+               {id:"relC",lbl:"lblRelC",arr:"arrRC",resp:"lblRespC",name:"Relay C",says:"cell survives",ang:40,from:[1196,650]}];
   const relAt=r=>{const px=BX+2+23,py=TY[RELAY.indexOf(r)];const a=r.ang*Math.PI/180;return [+(px+33*Math.cos(a)).toFixed(1),+(py+33*Math.sin(a)).toFixed(1)];};
   const CLOSING="No dimer, no phosphates, no answer. Joining up is the switch.";
   const NOTE1="Some of these receptors are already paired",NOTE2="before the signal arrives; it reshapes it.";
@@ -1640,7 +1642,7 @@ const RTK=(function(){
        its rest) and, under it, the phosphate it carries (which crosses to the other tail) */
     PHOS.forEach((p,i)=>{const [kx,ky]=p.from;s+=grp({id:"atp"+i},phos(kx,ky,{id:"ph"+i})+pentagon(kx,ky,23,P.NUC,DEEP,3,{id:"adp"+i}));});
     /* 4. relay proteins dock, and the answers branch. The six phosphotyrosines are the still's; the relays drift in from the cytosol */
-    s+=arrow(946,466,1004,466,P.INK,6,"ar",null,{id:"a34"});
+    s+=arrow(930,466,982,466,P.INK,6,"ar",null,{id:"a34"});
     let p4=monomer(AX)+monomer(BX)+ligand(AX)+ligand(BX)+bar(AX);
     TY.forEach(y=>{p4+=tyrRect(AX-2,y,true)+phos(AX-2-23,y)+tyrRect(BX+2,y,true)+phos(BX+2+23,y);});
     s+=grp({id:"p4"},p4);
@@ -1672,7 +1674,7 @@ const RTK=(function(){
       S["tyr"+i]={o:k>=3?1:0};
       S["atp"+i]=k<=2?{x:POOL[0]-kx,y:POOL[1]-ky,o:0}:{};
       S["ph"+i]=k<=2?{}:{x:tx-kx,y:ty-ky};
-      S["adp"+i]=k<=2?{}:{x:p.rest[0]-kx,y:p.rest[1]-ky};});
+      S["adp"+i]=k<=2?{}:{x:EXIT[0]-kx,y:EXIT[1]-ky};});
     on("a34",4);on("p4",4);on("box4",4);on("closing",4);
     RELAY.forEach(r=>{const [cx,cy]=relAt(r);S[r.id]=k<=3?{x:r.from[0]-cx,y:r.from[1]-cy,o:0}:{};on(r.lbl,4);on(r.resp,4);S[r.arr]=k<=3?{x:-60,o:0}:{};});
     if(coda&&k===4){S.h1L={x:28};S.h1R={x:-28};S.ligA={x:-26,y:-32};S.ligB={x:26,y:-32};S.arrA={o:0};S.arrB={o:0};S.t1={o:0};}
@@ -1681,7 +1683,7 @@ const RTK=(function(){
      Step 3 is the energy beat: the first ATP docks, splits, and its phosphate crosses, 400 to 2000 ms, with nothing
      else moving (the focus dim has settled by 350); the other five splits follow quickly, each phosphate leaving only
      after its own ATP has docked (D3, T19). */
-  const R=rng(24);const J=(a,b)=>[a+(R()-.5)*26,b+(R()-.5)*20];const J2=(a,b)=>[a+(R()-.5)*10,b+(R()-.5)*6];
+  const R=rng(24);const J=(a,b)=>[a+(R()-.5)*26,b+(R()-.5)*20];const J2=(a,b)=>[a+(R()-.5)*10,b+(R()-.5)*6];const J3=(a,b)=>[a+(R()-.5)*6,b+(R()-.5)*20];
   const A=(d,dur,way)=>way?{d,dur,way}:{d,dur};
   const rel=(pts,[dx,dy])=>pts.map(([x,y])=>[x-dx,y-dy]);
   const SEQ={};
@@ -1691,8 +1693,9 @@ const RTK=(function(){
   /* step 2: the two halves, each with its signal, drift laterally in the membrane, touch, and the ligand bar joins them */
   SEQ[2]={a12:A(0,300),h2L:A(100,1400,[J2(-46,0),J2(-32,0),J2(-16,0),[4,0]]),h2R:A(100,1400,[J2(46,0),J2(30,0),J2(14,0),[-4,0]]),bar2:A(1500,300),b2:A(1600,300),lg2:A(1600,300),t2:A(1600,300)};
   /* step 3: six ATP, one slow beat. The first ATP leaves the pool at 400 and docks at the right half's kinase at 1100; its phosphate
-     crosses to the left tail 1200-2000 while the ADP drifts off. Then five quick ones, 360 ms apart, alternating sides */
-  SEQ[3]={a23:A(0,200),p3:A(0,200),atpPool:A(0,200),arrAtp:A(1100,300),lblAtp:A(1100,300),b3:A(4100,300),lg3:A(4100,300)};
+     crosses to the left tail 1200-2000 while the ADP drifts off (1 s, out of the frame by 2200). Then five quick ones, 360 ms apart,
+     alternating sides; the last ADP is gone by 4720 */
+  SEQ[3]={a23:A(0,200),p3:A(0,200),atpPool:A(0,200),arrAtp:A(1100,300),lblAtp:A(1100,300),b3:A(4400,300),lg3:A(4400,300)};
   const PAY=[];
   PHOS.forEach((p,i)=>{const [kx,ky]=p.from,[tx,ty]=phAt(p);const quick=i>0;
     const tA=quick?2000+360*(i-1):400,dA=quick?230:700;            /* the ATP's travel from the pool to the kinase */
@@ -1703,8 +1706,9 @@ const RTK=(function(){
     const arc=p.tail==="L"?[J2(850,532),J2(804,522),J2(788,ty+36)]:[J2(846,532),J2(892,522),J2(908,ty+36)];
     SEQ[3]["ph"+i]=A(tP,dP,rel(arc,[kx,ky]));
     SEQ[3]["tyr"+i]=A(tP+dP-60,150);
-    const drift=p.from===KR?[J((kx+p.rest[0])/2,(ky+p.rest[1])/2+10)]:[J((kx+p.rest[0])/2,(ky+p.rest[1])/2+12)];
-    SEQ[3]["adp"+i]=A(tP,quick?550:800,rel(drift,[kx,ky]));
+    /* the spent ADP drifts off: round the right end of the ATP > ADP label, down through the gap between the legend columns, and out */
+    const drift=p.from===KR?[J2(870,566),J2(862,650),J3(772,760),J3(772,870)]:[J2(806,560),J2(858,650),J3(772,760),J3(772,870)];
+    SEQ[3]["adp"+i]=A(tP,1000,rel(drift,[kx,ky]));
     PAY.push({atp:"atp"+i,paidAt:tA+dA,funds:["ph"+i],tyr:"tyr"+i,landsAt:tP+dP});});
   /* step 4: the fourth stage appears with its six phosphotyrosines; then, and only then, the three relays drift in from the cytosol by
      collisions, bump, and seat on three of them; they set off 150 ms after the panel's fade has ended, so the phosphates are there first (T31).
@@ -1714,7 +1718,7 @@ const RTK=(function(){
     const way=[J(fx+(cx-fx)*.3,fy+(cy-fy)*.3),J(fx+(cx-fx)*.6,fy+(cy-fy)*.6),J2(cx+8,cy+6),[cx-5,cy-2]];
     SEQ[4][r.id]=A(450+i*60,1100,rel(way,[cx,cy]));
     SEQ[4][r.lbl]=A(1550,250);SEQ[4][r.arr]=A(1700+[0,75,150][i],450);SEQ[4][r.resp]=A(1700+[0,75,150][i],450);});
-  const DUR=[0,1400,1900,4400,2600];
+  const DUR=[0,1400,1900,4700,2600];
   const BEATS={3:{name:"the first ATP is spent: it docks, splits, and its phosphate crosses to the other half",from:400,to:2000,ids:["atp0","ph0","adp0","tyr0","arrAtp","lblAtp"]}};
   /* T19, per phosphate (D3): each ATP has docked (paidAt) before its own phosphate leaves it. `each` lists all six */
   const PAYS=Object.assign({step:3,each:PAY},PAY[0]);
