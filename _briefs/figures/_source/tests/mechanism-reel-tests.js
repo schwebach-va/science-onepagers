@@ -32,6 +32,33 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
   return {present:true,visible:r.height>0&&getComputedStyle(p).display!=='none'&&getComputedStyle(p).visibility!=='hidden',disclosed:!!p.closest('details,[hidden]'),text:p.textContent,links,inBuild:!!p.closest('#build'),
     matches:want.length===links.length&&want.every(([t,h],i)=>links[i].t===t&&links[i].h===h)&&__MR.sources().length===want.length};};
 
+/* T32 (Part B, B1): when a link names a figure, the reel is on the first screen. Measured on arrival with ?anim=<key> in a fresh
+   context (state 0, as the hub and Canvas links arrive): the stage's top edge is within the first 320 px of the page at 1440x900,
+   1180x820 and 820x1180, and at the two landscape sizes the prediction card for the current step is fully on screen without
+   scrolling. The intro is folded to one line and the selector to one row, and both open on tap. With no ?anim= the page opens as
+   before. B2 and B3 ride along, reported under T1: the back link follows the level, the footer's course line is the figure's
+   eyebrow, and one line under the sources links the figure's still and the page on where the diagrams come from */
+async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width:1180,height:820,card:true},{width:820,height:1180,card:false}];const out=[];
+  for(const vp of sizes){const {ctx,pg}=await fresh(br,vp);const tag=`${vp.width}x${vp.height}`;await open(pg,`${BASE}?anim=${key}`);await sleep(250);
+    const m=await pg.evaluate(()=>{const st=document.getElementById('stage').getBoundingClientRect();const p=document.getElementById('predict');const pr=p?p.getBoundingClientRect():null;
+      return {stageTop:Math.round(st.top+window.scrollY),scrollY:window.scrollY,ih:window.innerHeight,predict:pr?{top:Math.round(pr.top+window.scrollY),bottom:Math.round(pr.bottom+window.scrollY)}:null,rows:[...document.querySelectorAll('#sel > li.fig')].filter(l=>l.getBoundingClientRect().height>0).length,bridges:document.querySelectorAll('#sel > li.bridge').length,intro:document.getElementById('intro').classList.contains('collapsed'),lede:document.querySelector('#intro .lede').getBoundingClientRect().height,step:__MR.step(),fig:__MR.fig()};});
+    const ok=m.fig===key&&m.stageTop<=320&&m.scrollY===0&&m.rows===1&&m.bridges===0&&m.intro&&m.lede===0&&(!vp.card||(m.predict&&m.predict.top>=0&&m.predict.bottom<=m.ih));
+    res('T32',ok,`${tag}: ${JSON.stringify(m)}`);out.push(`${tag}: stage top ${m.stageTop} px${vp.card&&m.predict?`, step-${m.step+1} prediction card ${m.predict.top}-${m.predict.bottom} of ${m.ih}`:''}`);
+    if(vp.width===1440){
+      await open(pg,BASE);const plain=await pg.evaluate(()=>({stageTop:Math.round(document.getElementById('stage').getBoundingClientRect().top+window.scrollY),rows:[...document.querySelectorAll('#sel > li.fig')].filter(l=>l.getBoundingClientRect().height>0).length,bridges:document.querySelectorAll('#sel > li.bridge').length,intro:document.getElementById('intro').classList.contains('collapsed'),lede:document.querySelector('#intro .lede').getBoundingClientRect().height}));
+      res('T32',!plain.intro&&plain.rows===6&&plain.bridges===5&&plain.lede>0,`no ?anim=: ${JSON.stringify(plain)}`);out.push(`no ?anim=: stage top ${plain.stageTop} px, all six rows and the intro open`);
+      await open(pg,`${BASE}?anim=${key}`);const row=await pg.evaluate(()=>(document.querySelector('.selbtn .showall')||{}).textContent||'');await pg.click('#introMore');await pg.click('.selbtn .showall');
+      const opened=await pg.evaluate(()=>({intro:document.getElementById('intro').classList.contains('collapsed'),rows:[...document.querySelectorAll('#sel > li.fig')].filter(l=>l.getBoundingClientRect().height>0).length,bridges:document.querySelectorAll('#sel > li.bridge').length,fig:__MR.fig(),lede:document.querySelector('#intro .lede').getBoundingClientRect().height}));
+      res('T32',/one of six/.test(row)&&/show all/.test(row)&&!opened.intro&&opened.rows===6&&opened.bridges===5&&opened.fig===key&&opened.lede>0,`tap to open: row="${row}" ${JSON.stringify(opened)}`);
+      /* B2, B3 */
+      const ch=await pg.evaluate(()=>{const f=__MR.figs().find(x=>x.key===__MR.fig());const out={levels:f.levels,eyebrow:document.getElementById('eyebrow').textContent};
+        if(f.levels){__MR.setLevel('sol');out.sol=__MR.chrome();__MR.setLevel('de');out.de=__MR.chrome();__MR.setLevel('sol');}else out.de=__MR.chrome();return out;});
+      const still=ch.de.still;const b2=(!ch.levels||(ch.sol.back==='../classroom-tools.html'&&/Biology Classroom Tools/.test(ch.sol.backText)))&&ch.de.back==='../de-biology-101-resources.html'&&/DE Biology 101 Resources/.test(ch.de.backText)&&ch.eyebrow.indexOf(ch.de.foot)>0&&ch.de.foot.length>10;
+      const b3=still.length===2&&still[0][0]==='Print the still (PNG)'&&/^\.\.\/figures\/0[1-6]-[a-z-]+\.png$/.test(still[0][1])&&still[1][0]==='Where these diagrams come from'&&still[1][1]===`../figure-sources.html#${key}`;
+      res('T1',b2&&b3,`B2/B3 chrome: ${JSON.stringify(ch)}`);note('T1',`B2: back link ${ch.levels?`"${ch.sol.backText}" → ${ch.sol.back} at SOL, `:''}"${ch.de.backText}" → ${ch.de.back} at DE; footer course line "${ch.de.foot}"; B3: ${still.map(([t,h])=>`"${t}" → ${h}`).join(', ')}`);}
+    await ctx.close();}
+  note('T32',out.join('; ')+'; the folded intro and selector open on tap');}
+
 (async()=>{
   const br=await chromium.launch();
   for(const vp of [{width:1180,height:820},{width:390,height:844}]){
@@ -217,6 +244,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
       await open(p3);const ok=await p3.evaluate(()=>__MR.fig()==='gpcr'&&!!document.querySelector('#stage svg')&&document.querySelectorAll('#dots button').length===6);
       const w3=await walkT2(p3,tag+' no-storage');res('T11',ok&&w3.ok,`${tag}: renders=${ok} ${w3.why}`);await c3.close();}
   }
+  await t32(br,'gpcr');
   /* T27: Fill screen on a 16:9 frame: the stage and the panel use the whole height */
   {const {ctx,pg}=await fresh(br,{width:1920,height:1080});await open(pg);await go(pg,3);await pg.click('#fill');await sleep(300);
     const m=await pg.evaluate(()=>{const s=document.querySelector('#stage svg').getBoundingClientRect(),b=document.getElementById('build').getBoundingClientRect(),c=document.getElementById('card').getBoundingClientRect();
@@ -238,5 +266,5 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
   R.T19='N/A';NOTE.T19='No ATP is spent in gpcr; applies to transport, etc and rtk in Phase 2';
   R.T20='N/A';NOTE.T20='rtk only: see mechanism-reel-tests-rtk.js';
   fs.writeFileSync(`${OUT}/results.json`,JSON.stringify({R,NOTE},null,1));
-  for(let i=1;i<=27;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
+  for(let i=1;i<=32;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
 })().catch(e=>{console.error(e);process.exit(1);});

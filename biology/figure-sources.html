@@ -31,6 +31,12 @@ ul.srcs .what{display:block;color:var(--muted);font-size:.88rem}
 .howto{background:#fff;border-radius:4px;padding:.8rem 1rem;margin:1.4rem 0 2rem;font-size:.93rem}
 .howto p{margin:0 0 .6rem}
 .howto p:last-child{margin:0}
+/* the still itself, beside each block: a thumbnail linking the PNG, and the SVG for editing or printing at any size */
+.thumb{float:right;width:200px;margin:.25rem 0 .6rem 1.1rem;font-family:"Helvetica Neue",Arial,sans-serif;font-size:.78rem;line-height:1.4;color:var(--muted);text-align:center}
+.thumb img{display:block;width:200px;height:auto;border:1px solid #DDD8CE;border-radius:3px;margin:0 0 .3rem;background:#F5F3EE}
+.thumb a{color:var(--teal)}
+.figblock::after{content:"";display:block;clear:both}
+@media (max-width:600px){.thumb{float:none;width:auto;margin:.3rem 0 .8rem;text-align:left}.thumb img{width:100%;max-width:320px}}
 </style>
 </head>
 <body>
@@ -72,7 +78,8 @@ ul.srcs .what{display:block;color:var(--muted);font-size:.88rem}
       makes ATP.</p>
     </div>
 
-    <div class="figblock">
+    <div class="figblock" id="gpcr">
+      <p class="thumb"><a href="figures/01-gpcr-pathway.png"><img src="figures/01-gpcr-pathway.png" alt="The still of figure 1, A receptor that never lets the signal in" width="200" height="125" loading="lazy"></a>The still: <a href="figures/01-gpcr-pathway.png">PNG</a> &middot; <a href="figures/01-gpcr-pathway.svg">SVG</a></p>
       <h3><span class="fnum">1</span>A receptor that never lets the signal in</h3>
       <p class="fmeta">G-protein-coupled receptor &middot; PIP<sub>2</sub> &middot; IP<sub>3</sub> and calcium</p>
       <p class="shows">The claim: a signal molecule binds the outside of the membrane and never crosses
@@ -110,7 +117,8 @@ ul.srcs .what{display:block;color:var(--muted);font-size:.88rem}
       figure.</p>
     </div>
 
-    <div class="figblock">
+    <div class="figblock" id="rtk">
+      <p class="thumb"><a href="figures/02-receptor-tyrosine-kinase.png"><img src="figures/02-receptor-tyrosine-kinase.png" alt="The still of figure 2, Two halves, then several answers at once" width="200" height="125" loading="lazy"></a>The still: <a href="figures/02-receptor-tyrosine-kinase.png">PNG</a> &middot; <a href="figures/02-receptor-tyrosine-kinase.svg">SVG</a></p>
       <h3><span class="fnum">2</span>Two halves, then several answers at once</h3>
       <p class="fmeta">Receptor tyrosine kinase &middot; dimerization &middot; phosphotyrosine docking</p>
       <p class="shows">The claim: two receptor halves sit apart, each binds a signal, they join, each
@@ -144,7 +152,8 @@ ul.srcs .what{display:block;color:var(--muted);font-size:.88rem}
       always changes what the joined pair can do.</p>
     </div>
 
-    <div class="figblock">
+    <div class="figblock" id="transport">
+      <p class="thumb"><a href="figures/03-channel-and-pump.png"><img src="figures/03-channel-and-pump.png" alt="The still of figure 3, Downhill is free. Uphill is paid for." width="200" height="125" loading="lazy"></a>The still: <a href="figures/03-channel-and-pump.png">PNG</a> &middot; <a href="figures/03-channel-and-pump.svg">SVG</a></p>
       <h3><span class="fnum">3</span>Downhill is free. Uphill is paid for.</h3>
       <p class="fmeta">Gated channel &middot; the sodium-potassium pump &middot; passive and active transport</p>
       <p class="shows">The claim: two proteins move the same ion through the same membrane, and only
@@ -165,7 +174,8 @@ ul.srcs .what{display:block;color:var(--muted);font-size:.88rem}
       them.</p>
     </div>
 
-    <div class="figblock">
+    <div class="figblock" id="etc">
+      <p class="thumb"><a href="figures/04-electron-transport-chain.png"><img src="figures/04-electron-transport-chain.png" alt="The still of figure 4, Electrons buy a gradient. The gradient buys the ATP." width="200" height="125" loading="lazy"></a>The still: <a href="figures/04-electron-transport-chain.png">PNG</a> &middot; <a href="figures/04-electron-transport-chain.svg">SVG</a></p>
       <h3><span class="fnum">4</span>Electrons buy a gradient. The gradient buys the ATP.</h3>
       <p class="fmeta">Electron transport chain &middot; chemiosmosis &middot; ATP synthase</p>
       <p class="shows">The claim: electrons are passed down a chain of carriers, the energy released
@@ -213,7 +223,8 @@ ul.srcs .what{display:block;color:var(--muted);font-size:.88rem}
       changes the mechanism.</p>
     </div>
 
-    <div class="figblock">
+    <div class="figblock" id="dogma">
+      <p class="thumb"><a href="figures/05-central-dogma.png"><img src="figures/05-central-dogma.png" alt="The still of figure 5, One message, written out and then read aloud" width="200" height="125" loading="lazy"></a>The still: <a href="figures/05-central-dogma.png">PNG</a> &middot; <a href="figures/05-central-dogma.svg">SVG</a></p>
       <h3><span class="fnum">5</span>One message, written out and then read aloud</h3>
       <p class="fmeta">Transcription &middot; splicing &middot; translation</p>
       <p class="shows">The claim: a gene is copied into RNA inside the nucleus, the copy is processed
@@ -263,7 +274,8 @@ ul.srcs .what{display:block;color:var(--muted);font-size:.88rem}
       thing an animation of this figure could fix for free.</p>
     </div>
 
-    <div class="figblock">
+    <div class="figblock" id="cloning">
+      <p class="thumb"><a href="figures/06-cloning-a-gene.png"><img src="figures/06-cloning-a-gene.png" alt="The still of figure 6, Cut both with one enzyme and the ends fit" width="200" height="125" loading="lazy"></a>The still: <a href="figures/06-cloning-a-gene.png">PNG</a> &middot; <a href="figures/06-cloning-a-gene.svg">SVG</a></p>
       <h3><span class="fnum">6</span>Cut both with one enzyme and the ends fit</h3>
       <p class="fmeta">Restriction enzymes &middot; sticky ends &middot; recombinant plasmids</p>
       <p class="shows">The claim: cutting a plasmid and a piece of donor DNA with the same enzyme

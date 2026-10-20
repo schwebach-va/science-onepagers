@@ -93,6 +93,19 @@ button{font:inherit;cursor:pointer}
 :root[data-theme="dark"] .selbtn[aria-pressed="true"] .n{color:#12100D}
 .sel li.bridge{margin:0;padding:.3rem .8rem .35rem 3.2rem;font-size:.9rem;font-style:italic;color:var(--ink-soft);background:var(--paper);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .sel li.bridge::before{content:"\2193\00a0";font-style:normal}
+/* a link that names a figure opens with the intro folded to one line and the selector to one row (B1); each unfolds on tap */
+.introline{display:none;font-family:var(--sans);font-size:.92rem;line-height:1.4;color:var(--ink-soft);margin:0 0 .5rem;max-width:none}
+#intro.collapsed .lede,#intro.collapsed .lines,#intro.collapsed .fine{display:none}
+#intro.collapsed .introline{display:block}
+#intro.collapsed h1{font-size:1.35rem;margin:0 0 .3rem}
+html[data-compact="1"] .wrap{padding-top:.6rem}
+html[data-compact="1"] .sop-back{margin-bottom:.4rem}
+html[data-compact="1"] .sel.compact{margin-bottom:.6rem}
+.sel li.fig.row{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .8rem}
+.sel li.fig.row .selbtn{flex:1 1 20rem;width:auto}
+.sel li.fig.row .levelrow{margin:0 .6rem 0 0}
+.linkbtn{background:none;border:none;padding:.55rem .35rem;margin:-.55rem 0;font:inherit;font-family:var(--sans);font-weight:600;color:var(--bond);text-decoration:underline;cursor:pointer;min-height:44px}
+.selbtn .showall{margin-left:auto;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--bond);text-decoration:underline;white-space:nowrap}
 .notice{font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--ink-soft);background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--carb);border-radius:3px;padding:.55rem .8rem;margin:0 0 1rem}
 
 /* level switch: present only on the figures that have two levels */
@@ -190,6 +203,7 @@ button{font:inherit;cursor:pointer}
 /* the selected figure's sources: a visible line under the reel, never behind a disclosure (R6) */
 .sources{font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft);text-align:center;margin:.55rem 0 0}
 .sources a{color:var(--bond)}
+.stillline{margin-top:.25rem}
 @media (min-width:900px){.sources{text-align:left}}
 /* a figure may add one line under its closing caption (transport, R2) */
 .afterline{font-family:var(--sans);font-size:.98rem;line-height:1.45;margin:0 0 .9rem}
@@ -240,12 +254,13 @@ html[data-fill="1"] .stagecol{position:static}
 <body>
 <div class="wrap">
 
-<a class="sop-back" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+<a class="sop-back" id="backlink" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
 
 <p class="sop-eyebrow" id="eyebrow">Bio Tools #22 and #24 to #28 &middot; DE Bio 101 &middot; six mechanisms, signal to cell effect</p>
 
 <section id="intro" class="narrow">
   <h1>The Mechanism Reel</h1>
+  <p class="introline">Predict, press <b>Next</b>, watch one thing move. Nothing is submitted. <button type="button" class="linkbtn" id="introMore">About the reel</button></p>
   <p class="lede">Six cell mechanisms, each one its own numbered Bio Tool. Each is a short series of states to step through: predict before every step, then press <b>Next</b> and watch one thing move. Any one of the six can be assigned on its own, by its number or by a link to a single step. Taken in order, they are also one sequence, from a signal arriving at the cell to the cell responding.</p>
   <ul class="lines" aria-label="The three ideas every animation is about">
     <li><span class="tag amp">Amplification</span><span>One input, an enormous output.</span></li>
@@ -287,6 +302,7 @@ html[data-fill="1"] .stagecol{position:static}
       <button type="button" class="ghost" id="teach" aria-pressed="false" title="Shows every caption at once and no prediction prompts, for projecting.">Teaching view</button>
     </div>
     <p class="sources" id="sources"></p>
+    <p class="sources stillline" id="stillline"></p>
   </div>
   <div class="cardcol">
     <div class="card" id="card" aria-live="polite"></div>
@@ -387,7 +403,17 @@ let busy=false,busyT=null,focusLive=false;
 let playing=false,playT=null,loopOn=false;
 let fillOn=false,runonHold=false,blankOn=false,revealList=false;
 let codaOn=false;   /* the uncounted closing state after the last step, where a figure has one (rtk, D8) */
-let MOTION_BASE=null;   /* the shared sentence under the reel; a figure may add one of its own (transport, D3) */
+let MOTION_BASE=null;
+/* B1: a link that names a figure opens with the intro folded to one line and the selector to one row; either unfolds on tap */
+let INTRO_COMPACT=false,SEL_COMPACT=false;
+function renderIntro(){const i=$("intro");if(i)i.classList.toggle("collapsed",INTRO_COMPACT);document.documentElement.setAttribute("data-compact",INTRO_COMPACT||SEL_COMPACT?"1":"0");}
+/* B2 and B3: the back link follows the level the page resolves, the footer's course line is the figure's eyebrow,
+   and one line under the sources links the figure's still and the page on where the diagrams come from */
+const STILLS={gpcr:"01-gpcr-pathway",rtk:"02-receptor-tyrosine-kinase",transport:"03-channel-and-pump",etc:"04-electron-transport-chain",dogma:"05-central-dogma",cloning:"06-cloning-a-gene"};
+function renderChrome(){if(!F)return;const de=!F.levels||st.level==="de";const a=$("backlink");
+  if(a){a.setAttribute("href",de?"../de-biology-101-resources.html":"../classroom-tools.html");a.innerHTML=de?"&larr; DE Biology 101 Resources":"&larr; Biology Classroom Tools";}
+  const fl=$("footlv");if(fl)fl.textContent=F.eyebrow;
+  const sl=$("stillline");if(sl){const stem=STILLS[F.key];sl.innerHTML=stem?`<a href="../figures/${stem}.png" target="_blank" rel="noopener">Print the still (PNG)</a> &middot; <a href="../figure-sources.html#${F.key}">Where these diagrams come from</a>`:"";sl.classList.toggle("hidden",!stem);}}   /* the shared sentence under the reel; a figure may add one of its own (transport, D3) */
 const HOLD=1500,FOCUS_HOLD=1500;
 const SP=()=>st.slow?2:1;
 function timers(){const o={list:[],after(fn,ms){const id=setTimeout(()=>{o.list=o.list.filter(x=>x!==id);fn();},ms);o.list.push(id);return id;},clear(){o.list.forEach(clearTimeout);o.list=[];}};return o;}
@@ -466,17 +492,22 @@ function syncCounter(){const c=$("counter");if(!c)return;if(F&&F.loop&&F.loop.co
 function tagHtml(f){return (f.tag||[]).map(([c,n])=>`<span class="tag ${c}">${esc(n)}</span>`).join("");}
 /* the selected figure's sources, keyed per figure like txt and svg, shown under the reel (R6) */
 function renderSources(){const p=$("sources");if(!p)return;const S=F.sources||[];p.innerHTML=S.length?(S.length>1?"Sources: ":"Source: ")+S.map(([label,doi])=>`<a href="${esc(doi)}" target="_blank" rel="noopener">${esc(label)}</a>`).join(" &middot; "):"";p.classList.toggle("hidden",!S.length);}
-function renderSel(){const ol=$("sel");ol.innerHTML="";
-  FIGS.forEach((f,i)=>{const li=el("li","fig");const b=el("button","selbtn");b.type="button";b.dataset.fig=f.key;
+function renderSel(){const ol=$("sel");ol.innerHTML="";const compact=SEL_COMPACT&&!!F;ol.classList.toggle("compact",compact);
+  FIGS.forEach((f,i)=>{if(compact&&f.key!==F.key)return;const li=el("li","fig"+(compact?" row":""));if(compact)li.id="selrow";const b=el("button","selbtn");b.type="button";b.dataset.fig=f.key;
     b.innerHTML=`<span class="n">${i+1}</span><span class="idnum">Bio Tool #${f.num}</span><span class="t"><b>${esc(f.subject)}</b> &middot; ${esc(f.title)}</span>${tagHtml(f)}`+(f.enabled?"":`<span class="soon">coming</span>`);
     if(!f.enabled){b.disabled=true;b.setAttribute("aria-disabled","true");}
     b.setAttribute("aria-pressed",String(F&&F.key===f.key));
-    b.addEventListener("click",()=>setFig(f.key));li.appendChild(b);ol.appendChild(li);
-    if(f.bridge){ol.appendChild(el("li","bridge",esc(f.bridge)));}});}
+    if(compact){b.insertAdjacentHTML("beforeend",`<span class="showall">one of six &mdash; show all</span>`);b.setAttribute("aria-expanded","false");b.title="Show all six";b.addEventListener("click",()=>{SEL_COMPACT=false;renderSel();renderIntro();renderLevelRow();});}
+    else b.addEventListener("click",()=>setFig(f.key));
+    li.appendChild(b);ol.appendChild(li);
+    if(!compact&&f.bridge){ol.appendChild(el("li","bridge",esc(f.bridge)));}});}
 /* the level switch exists in the DOM only on a figure that has two levels; elsewhere it is absent, not dead */
 let LEVELROW=null;
 function renderLevelRow(){if(!LEVELROW){LEVELROW=$("levelrow");LEVELROW.classList.remove("hidden");}
-  if(F.levels){if(!LEVELROW.isConnected)$("build").parentNode.insertBefore(LEVELROW,$("build"));LEVELROW.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));}
+  if(F.levels){/* in the folded opening (B1) the switch rides in the selector's one row; otherwise it sits above the reel as before */
+    const row=SEL_COMPACT?$("selrow"):null;const home=row||$("build").parentNode;
+    if(LEVELROW.parentNode!==home){if(row)row.appendChild(LEVELROW);else home.insertBefore(LEVELROW,$("build"));}
+    LEVELROW.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));}
   else if(LEVELROW.isConnected)LEVELROW.remove();}
 function renderDots(){const d=$("dots");d.innerHTML="";const per=perFig(F.key),caps=TXT().caps;
   for(let i=1;i<=F.n;i++){const b=el("button","");b.type="button";b.textContent=i;const done=!!per.done[i];
@@ -560,7 +591,7 @@ function setFig(k,keepCoda){const f=FIGMAP[k];if(!f||!f.enabled)return false;
   st.fig=k;F=f;cur=clamp(perFig(k).step,0,F.n);save();
   buildStage();apply(cur,{jump:true});
   renderSel();renderLevelRow();renderDots();renderCard();syncNext();syncCtl();
-  $("eyebrow").innerHTML="Bio Tool #"+F.num+" &middot; "+esc(F.eyebrow);renderSources();
+  $("eyebrow").innerHTML="Bio Tool #"+F.num+" &middot; "+esc(F.eyebrow);renderSources();renderChrome();
   const mn=$("motionnote");if(mn){if(MOTION_BASE==null)MOTION_BASE=mn.textContent;mn.textContent=MOTION_BASE+(F.note?" "+F.note:"");}
   syncUrl();
   if(cur===F.n&&F.loop&&!runonHold&&!blankOn)startLoop();runonHold=false;syncCtl();
@@ -569,7 +600,7 @@ function setFig(k,keepCoda){const f=FIGMAP[k];if(!f||!f.enabled)return false;
    the run-on waiting on Play; &labels=blank opens the blank-label still */
 function syncUrl(){try{const u=new URL(location.href);["fig","runon","labels"].forEach(p=>u.searchParams.delete(p));u.searchParams.set("anim",F.key);u.searchParams.set("step",String(cur));if(F.levels)u.searchParams.set("level",st.level);else u.searchParams.delete("level");if(blankOn)u.searchParams.set("labels","blank");if(codaOn)u.searchParams.set("coda","1");else u.searchParams.delete("coda");history.replaceState(null,"",u);}catch(e){}}
 function rebuild(){const k=cur;buildStage();cur=-1;apply(k,{jump:true});focusLive=false;renderDots();renderCard();syncNext();syncCtl();syncUrl();}
-function setLevel(l){l=l==="de"?"de":"sol";if(l===st.level)return;st.level=l;save();renderLevelRow();if(F.levels){stopLoop();rebuild();if(cur===F.n&&F.loop&&!blankOn)startLoop();}}
+function setLevel(l){l=l==="de"?"de":"sol";if(l===st.level)return;st.level=l;save();renderLevelRow();renderChrome();if(F.levels){stopLoop();rebuild();if(cur===F.n&&F.loop&&!blankOn)startLoop();}}
 function setTeach(on){st.teach=!!on;save();syncCtl();renderCard();syncNext();}
 function setSlow(on){st.slow=!!on;save();syncCtl();}
 function setBlank(on,reveal){on=!!on;if(on===blankOn){if(!on&&reveal){revealList=true;renderCard();}return;}
@@ -619,16 +650,19 @@ window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title
     crossings:F.crossings||null,runCrossings:F.loop&&F.loop.crossings?(c=>({period:c.period*SP(),out:c.out.map(([a,b])=>[a*SP(),b*SP()]),in:c.in.map(([a,b])=>[a*SP(),b*SP()])}))(F.loop.crossings()):null}),
   captions:()=>TXT().caps.slice(),closing:()=>TXT().closing,after:()=>TXT().after||null,
   sources:()=>(F.sources||[]).map(x=>x.slice()),sourcesLine:()=>{const p=$("sources");return p?p.textContent:"";},
+  compact:()=>({intro:INTRO_COMPACT,sel:SEL_COMPACT}),chrome:()=>({back:$("backlink").getAttribute("href"),backText:$("backlink").textContent,foot:$("footlv").textContent,still:[...$("stillline").querySelectorAll("a")].map(a=>[a.textContent,a.getAttribute("href")])}),
   el:elInfo,watchIds:()=>Object.assign({},F.watchIds||{}),loopCount:()=>F.loop&&F.loop.count?F.loop.count():null,
   text:()=>$("stage").textContent+"\n"+$("card").textContent};
 
 /* ================= wiring ================= */
 function init(){load();FIGMAP={};FIGS.forEach(f=>{FIGMAP[f.key]=f;});
-  let want=st.fig,stepQ=null;try{const q=new URL(location.href).searchParams;const a=q.get("anim")||q.get("fig");if(a)want=a;
+  let want=st.fig,stepQ=null,named=null;try{const q=new URL(location.href).searchParams;const a=q.get("anim")||q.get("fig");if(a){want=a;named=a;}
     if(q.get("step")!=null){const n=parseInt(q.get("step"),10);if(!isNaN(n))stepQ=n;}runonHold=q.get("runon")==="paused";
     if(q.get("level")==="de"||q.get("level")==="sol")st.level=q.get("level");blankOn=q.get("labels")==="blank";codaOn=q.get("coda")==="1";}catch(e){}
   if(!FIGMAP[want]||!FIGMAP[want].enabled){if(FIGMAP[want]){const n=$("notice");n.textContent=FIGMAP[want].title+" is coming next. Showing the first figure for now.";n.classList.remove("hidden");}
     want=FIGS.find(f=>f.enabled).key;}
+  if(named&&FIGMAP[named]&&FIGMAP[named].enabled){INTRO_COMPACT=true;SEL_COMPACT=true;}renderIntro();
+  const im=$("introMore");if(im)im.addEventListener("click",()=>{INTRO_COMPACT=false;renderIntro();});
   $("next").addEventListener("click",revealNext);$("back").addEventListener("click",back);
   $("play").addEventListener("click",()=>setPlaying(!(cur>=F.n?loopOn:playing)));
   $("teach").addEventListener("click",()=>setTeach(!st.teach));
