@@ -1844,8 +1844,14 @@ const CLONING=(function(){
     s+=text(606,186,"One enzyme cuts both","key","start",CUT,{id:"h2"});
     s+=grp({id:"enz"},rrect(600,240,150,74,14,P.PRO,P.PRO_SIDE,4)+text(675,286,"enzyme","min","middle",P.PAPER,{id:"lblEnz"}));
     s+=arrow(675,320,675,364,CUT,6,"arf",null,{id:"arrCut"});
-    s+=grp({id:"cutL"},rrect(592,384,190,18,5,P.NUC)+rrect(592,408,108,18,5,P.NUC)+[720,740,760].map(bx=>rrect(bx,384,3,18,1.5,P.PAPER)).join(""));
     s+=grp({id:"cutR"},rrect(866,384,134,18,5,P.NUC)+rrect(784,408,216,18,5,P.NUC)+[804,824,844].map(bx=>rrect(bx,408,3,18,1.5,P.PAPER)).join(""));
+    /* the left piece is drawn after the right one so that its two bridges sit over both pieces' rounded corners: before the cut the butt
+       joins at x 782 (top strand) and x 700 (bottom) would show a notch, and the backbone must read as whole until the enzyme breaks it.
+       The bridges are strand-coloured, shown while the strip is one duplex, and faded out at the moment the right piece starts to part
+       (1500 ms of step 2); at opacity 0 in every state from then on, so the final frame is the still's. Nested in the group, they ride
+       its own fade-in and need no gate of their own */
+    s+=grp({id:"cutL"},rrect(592,384,190,18,5,P.NUC)+rrect(592,408,108,18,5,P.NUC)+[720,740,760].map(bx=>rrect(bx,384,3,18,1.5,P.PAPER)).join("")
+      +rrect(774,384,16,18,0,P.NUC,null,null,{id:"brgT"})+rrect(692,408,16,18,0,P.NUC,null,null,{id:"brgB"}));
     s+=`<path d="M 700 440 L 700 452 L 782 452 L 782 440" fill="none" stroke="${CUT}" stroke-width="4" id="brkL"/>\n`;
     s+=`<path d="M 784 370 L 784 358 L 866 358 L 866 370" fill="none" stroke="${CUT}" stroke-width="4" id="brkR"/>\n`;
     s+=text(796,474,"four unpaired bases on each end, and they pair","min","middle",P.INKSOFT,{id:"lblBases"});
@@ -1882,7 +1888,7 @@ const CLONING=(function(){
     s+=foot(H,CLOSING,SOURCES,{id:"closing"});
     return s;}
   const ANIM=["site1","site2","site3","b1","h1","lg1",
-    "enz","arrCut","cutL","cutR","brkL","brkR","lblBases","b2","h2","lg2",
+    "enz","arrCut","cutL","cutR","brgT","brgB","brkL","brkR","lblBases","b2","h2","lg2",
     "a23","ring3","ins","seal1","seal2","lblRecomb","lblSeals","b3","h3","lg3",
     "path4","cell","plas","lblChrom1","lblChrom2","b4","h4",
     "plate","lblPlate","box5","b5","h5","closing"].concat(COL);
@@ -1892,6 +1898,7 @@ const CLONING=(function(){
   function state(k){const S={};const on=(id,from)=>{S[id]={o:k>=from?1:0};};
     ["site1","site2","site3","b1","h1","lg1"].forEach(id=>on(id,1));
     S.enz=k<=1?{y:-90,o:0}:{};S.cutR=k<=1?{x:-SHIFT,o:0}:{};
+    S.brgT=S.brgB={o:k<=1?1:0};   /* the seam bridges: on inside the hidden strip until step 2, off from the cut onward */
     ["arrCut","cutL","brkL","brkR","lblBases","b2","h2","lg2"].forEach(id=>on(id,2));
     S.ins=k<=2?{x:INS_FROM[0]-SEAT[0],y:INS_FROM[1]-SEAT[1],o:0}:{};
     ["a23","ring3","lblRecomb","seal1","seal2","lblSeals","b3","h3","lg3"].forEach(id=>on(id,3));
@@ -1911,7 +1918,7 @@ const CLONING=(function(){
   /* step 2: the strip appears as one intact duplex. The enzyme drifts down from above by collisions (200-1400), dips to the duplex
      (800-1100) and settles where the still draws it. Its arrow comes up; the duplex comes apart along the staggered line as the right
      piece drifts right (1500-2100, holding its place until then); the brackets and the line about the four unpaired bases follow */
-  SEQ[2]={cutL:A(0,300),cutR:A(0,2100,[[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],J2(-56,0)]),
+  SEQ[2]={cutL:A(0,300),cutR:A(0,2100,[[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],J2(-56,0)]),brgT:A(1500,200),brgB:A(1500,200),
     enz:A(200,1200,[J(8,-58),J(-6,-26),[2,60]],120),arrCut:A(1400,250),
     brkL:A(2150,300),brkR:A(2150,300),lblBases:A(2150,300),b2:A(2300,300),h2:A(2300,300),lg2:A(2300,300)};
   /* step 3: the arrow, the opened ring and its name come up (0-300). Then, with nothing else moving, the insert appears at the arrow's
