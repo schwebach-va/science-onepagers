@@ -11,7 +11,7 @@ const OUT=__dirname;  /* screenshots and results-transport.json land here */
 const BASE='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
 const URL=BASE+'?anim=transport';
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
-const ENABLED={gpcr:true,rtk:true,dogma:true,transport:true,etc:true};
+const ENABLED={gpcr:true,rtk:true,dogma:true,transport:true,etc:true,cloning:true};   /* all six are built; nothing is a placeholder */
 const N=3;   /* transport has three states (D1) */
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
@@ -78,11 +78,13 @@ async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width
   for(const vp of [{width:1180,height:820},{width:390,height:844}]){
     const tag=`${vp.width}x${vp.height}`;
     const {ctx,pg}=await fresh(br,vp);
-    /* T1: six deep links; gpcr, dogma and transport open, the three placeholders assert as disabled, not missing */
+    /* T1: six deep links; all six open, and no selector entry is disabled (the placeholder branch below never fires now) */
     for(const k of KEYS){await open(pg,`${BASE}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(ENABLED[k]){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
       else{res('T1',fig==='gpcr'&&info.present&&info.enabled===false&&info.btn&&info.disabled===true,`${tag}: ?fig=${k} entry present=${info.present} disabled=${info.disabled} fig=${fig}`);}}
+    await open(pg,BASE);const dis=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
+    res('T1',dis.length===0,`${tag}: selector entries still disabled: ${dis}`);   /* with cloning built there are no placeholders */
     await open(pg,BASE);await pg.click('.selbtn[data-fig="transport"]');res('T1',(await pg.evaluate(()=>__MR.fig()))==='transport',`${tag}: selector click on transport`);
     /* per-step links, and the paused run-on, for recording */
     await open(pg,`${BASE}?anim=transport&step=2`);const s2=await pg.evaluate(()=>({step:__MR.step(),done:__MR.done(2),url:location.search,level:__MR.level(),eyebrow:document.getElementById('eyebrow').textContent}));
@@ -105,7 +107,7 @@ async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width
     await pg.evaluate(()=>__MR.setFig('transport'));
     res('T1',srcT.present&&srcT.visible&&!srcT.disclosed&&srcT.inBuild&&srcT.matches&&/^Source: Skou 1957$/.test(srcT.text.trim())&&srcD.visible&&srcD.matches&&/^Sources: Nirenberg 1961/.test(srcD.text.trim()),`${tag}: sources line transport=${JSON.stringify(srcT)} dogma=${JSON.stringify(srcD)}`);
     note('T1',`${tag}: ?anim=transport&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout; Pause stops it; Back clears the clones and the wandering ion; the sources line under the reel reads "${srcT.text.trim()}" and follows the figure (R6)`);
-    /* T15: order and bridges; the one placeholder (opened with no ?anim=, since a link that names a figure folds the selector to one row, B1) */
+    /* T15: order and bridges; nothing disabled (opened with no ?anim=, since a link that names a figure folds the selector to one row, B1) */
     await open(pg,BASE);
     const selText=await pg.evaluate(()=>[...document.querySelectorAll('#sel > li')].map(l=>l.textContent.trim()));
     const titleIdx=TITLES.map(t=>selText.findIndex(s=>s.includes(t)));
@@ -113,7 +115,7 @@ async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width
     const bridgesOk=BRIDGES.every((b,i)=>{const j=selText.findIndex(s=>s===b);return j===titleIdx[i]+1;});
     const soon=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
     const tags=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn[data-fig="transport"] .tag')].map(t=>t.textContent));
-    res('T15',ordered&&bridgesOk&&soon.join(',')==='cloning'&&tags.join('|')==='Movement|Energy transfer',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} tags=${tags}`);
+    res('T15',ordered&&bridgesOk&&soon.length===0&&tags.join('|')==='Movement|Energy transfer',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} disabled=${JSON.stringify(soon)} (none expected) tags=${tags}`);
     /* T2 */
     const w=await walkT2(pg,tag);res('T2',w.ok,w.why);
     /* T4: every step, both levels */

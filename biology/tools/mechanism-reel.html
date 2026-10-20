@@ -427,7 +427,7 @@ const TXT=()=>F.txt(st.level);
    carry waypoints, so it wanders instead of flying straight. While a step plays, its own parts are
    in focus: they scale up a little, everything else dims to half, and it all settles when the
    step finishes. */
-function setTr(e,du,d){e.style.transition=du?`transform ${du}ms ease-in-out ${d||0}ms, opacity ${du}ms ease-in-out ${d||0}ms`:"none";}
+function setTr(e,du,d,fd){e.style.transition=du?`transform ${du}ms ease-in-out ${d||0}ms, opacity ${fd||du}ms ease-in-out ${d||0}ms`:"none";}   /* fd: a traveller that must be seen at once fades in faster than it moves (cloning, T34) */
 function blankHidden(id){return blankOn&&F.blankHide&&F.blankHide.indexOf(id)>=0;}
 function focusSet(k){return new Set((F.focus&&F.focus[k])||[]);}
 /* parts that appear on a delay inside a step: left alone by the focus dim, and not scaled */
@@ -440,13 +440,13 @@ function buildStage(){const stage=$("stage");stage.innerHTML=F.svg(st.level);sta
 function apply(k,opts){opts=opts||{};const codaNow=codaOn&&k===F.n;const S=F.state(k,st.level,codaNow);const fwd=opts.coda?codaNow:k===cur+1;
   const tween=!REDUCE&&!opts.jump&&(k!==cur||!!opts.coda);const fs=opts.focus&&!REDUCE?focusSet(opts.coda?"coda":k):null;ST.clear();let end=0;
   for(const id of F.anim){const e=EL[id];if(!e)continue;const v=S[id]||{};const x=v.x||0,y=v.y||0,r=v.r||0;let o=v.o==null?1:v.o;if(blankHidden(id))o=0;
-    let d=0,du=0,way=null;
-    if(tween){if(fwd){const SQ=opts.coda?F.coda.seq:F.seq[k];const q=SQ&&SQ[id];d=(q&&q.d||0)*SP();du=(q&&q.dur||(opts.coda?F.coda.dur:F.dur[k])||700)*SP();way=q&&q.way||null;}else du=600*SP();}
-    const sc=fs&&fs.has(id)?" scale(1.3)":"";
-    const tf=(px,py)=>`translate(${px}px, ${py}px)`+(r?` rotate(${r}deg)`:"")+sc;
-    if(way&&way.length){const seg=du/(way.length+1);setTr(e,seg,d);e.style.transform=tf(way[0][0],way[0][1]);e.style.opacity=String(o);
+    let d=0,du=0,way=null,fd=0;
+    if(tween){if(fwd){const SQ=opts.coda?F.coda.seq:F.seq[k];const q=SQ&&SQ[id];d=(q&&q.d||0)*SP();du=(q&&q.dur||(opts.coda?F.coda.dur:F.dur[k])||700)*SP();way=q&&q.way||null;fd=(q&&q.fade||0)*SP();}else du=600*SP();}
+    const sc=fs&&fs.has(id)?" scale(1.3)":"";const ss=v.s!=null?` scale(${v.s})`:"";   /* a state's own scale: a colony grows from a point (cloning, D6) */
+    const tf=(px,py)=>`translate(${px}px, ${py}px)`+(r?` rotate(${r}deg)`:"")+ss+sc;
+    if(way&&way.length){const seg=du/(way.length+1);setTr(e,seg,d,fd);e.style.transform=tf(way[0][0],way[0][1]);e.style.opacity=String(o);
       way.slice(1).concat([[x,y]]).forEach((w,i)=>ST.after(()=>{setTr(e,seg,0);e.style.transform=tf(w[0],w[1]);},d+seg*(i+1)));}
-    else{setTr(e,du,d);e.style.transform=tf(x,y);e.style.opacity=String(o);}
+    else{setTr(e,du,d,fd);e.style.transform=tf(x,y);e.style.opacity=String(o);}
     end=Math.max(end,d+du);}
   if(!tween)void $("stage").offsetWidth;   /* a jump sets values with no transition: flush them now, so the next forward step tweens from here and not from a stale style */
   cur=k;return end;}
@@ -459,7 +459,7 @@ function dimAll(k){const key=codaOn&&k===F.n?"coda":k;const fs=focusSet(key),ks=
 function undimAll(){if(!focusLive)return;const key=codaOn&&cur===F.n?"coda":cur;const S=F.state(cur,st.level,codaOn&&cur===F.n);const dur=REDUCE?0:300*SP();
   TOP.forEach(c=>{if(!c.dataset.dim)return;delete c.dataset.dim;c.style.transition=dur?`opacity ${dur}ms ease-in-out`:"none";
     if(c.id&&EL[c.id]){const o=(S[c.id]||{}).o==null?1:(S[c.id]||{}).o;c.style.opacity=String(blankHidden(c.id)?0:o);}else c.style.opacity="";});
-  focusSet(key).forEach(id=>{const e=EL[id];if(!e)return;const v=S[id]||{};setTr(e,dur,0);e.style.transform=`translate(${v.x||0}px, ${v.y||0}px)`+(v.r?` rotate(${v.r}deg)`:"");});
+  focusSet(key).forEach(id=>{const e=EL[id];if(!e)return;const v=S[id]||{};setTr(e,dur,0);e.style.transform=`translate(${v.x||0}px, ${v.y||0}px)`+(v.r?` rotate(${v.r}deg)`:"")+(v.s!=null?` scale(${v.s})`:"");});
   focusLive=false;}
 function goStep(k,opts){opts=opts||{};k=clamp(k,0,F.n);
   stopLoop();codaOn=false;if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();undimAll();
@@ -646,7 +646,8 @@ window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title
   focus:focusInfo,
   timing:()=>({dur:F.dur.map(d=>d*SP()),seq:F.seq,beats:Object.fromEntries(Object.entries(F.beats).map(([k,b])=>[k,Object.assign({},b,{from:b.from*SP(),to:b.to*SP()})])),hold:HOLD*SP(),speed:SP(),
     pays:F.pays?Object.assign({},F.pays,{paidAt:F.pays.paidAt*SP()},F.pays.each?{each:F.pays.each.map(p=>Object.assign({},p,{paidAt:p.paidAt*SP(),landsAt:p.landsAt==null?null:p.landsAt*SP()}))}:{}):null,
-    trans:F.trans||null,relays:F.relays?Object.assign({},F.relays,{lastPhosphateLandsAt:F.relays.lastPhosphateLandsAt*SP()}):null,keep:F.keep||null,coda:F.coda?{dur:F.coda.dur*SP(),seq:F.coda.seq}:null,
+    trans:F.trans||null,relays:F.relays?Object.assign({},F.relays,{lastPhosphateLandsAt:F.relays.lastPhosphateLandsAt*SP()}):null,
+    pairs:F.pairs?Object.assign({},F.pairs,{seatsAt:F.pairs.seatsAt*SP()}):null,beside:F.beside||null,colonies:F.colonies?Object.assign({},F.colonies,{starts:F.colonies.starts.map(t=>t*SP()),grow:F.colonies.grow*SP(),lastEndsAt:F.colonies.lastEndsAt*SP()}):null,keep:F.keep||null,coda:F.coda?{dur:F.coda.dur*SP(),seq:F.coda.seq}:null,
     crossings:F.crossings||null,runCrossings:F.loop&&F.loop.crossings?(c=>({period:c.period*SP(),out:c.out.map(([a,b])=>[a*SP(),b*SP()]),in:c.in.map(([a,b])=>[a*SP(),b*SP()])}))(F.loop.crossings()):null}),
   captions:()=>TXT().caps.slice(),closing:()=>TXT().closing,after:()=>TXT().after||null,
   sources:()=>(F.sources||[]).map(x=>x.slice()),sourcesLine:()=>{const p=$("sources");return p?p.textContent:"";},
@@ -1743,15 +1744,222 @@ const RTK=(function(){
     watchIds:{ligand:"ligA",atp:"atp0",travellers:["ligA","ligB","h2L","h2R"].concat(ATP,PH,ADP,RELAY.map(r=>r.id))}};
 })();
 
-/* the last one appears in the selector, in the arc's order, disabled until its Phase 2 build */
-/* it carries its permanent Bio Tool number now, so the unbuilt entry reads as numbered and coming */
-const SOON=(key,num,subject,title,tag,bridge,n,levels)=>({key,num,subject,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",txt:()=>({caps:[],prompts:[],closing:"",counter:()=>""}),capColor:[],anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
+/* ================= Figure 6: cloning a gene =================
+   One idea: cut both pieces with the same enzyme and the ends are made to fit; everything after that
+   is sealing, delivering and sorting. Geometry is the still's own (fig6_cloning.py), with ids and
+   groups on the things that move. The still shows five stages side by side; the animation reveals
+   them one per step, left to right, and the travellers move inside each stage. The last step is the
+   still. Four things are the figure's content, not polish (brief, 2026-10-20):
+   - the cut is staggered: the stage-2 strip opens as one intact duplex (the right piece 84 units left
+     of where the still draws it) and comes apart along the offset line, four unpaired bases on each
+     end; the enzyme stays, because enzymes are not used up (D3);
+   - pairing comes before sealing: the insert seats in the opened plasmid, and only then do the two
+     seals appear (D4, T33);
+   - the plasmid sits beside the chromosome and never joins it (D5, T34);
+   - ampicillin selects for the plasmid, not for the gene: said in the card, never on the still (D7).
+   Two levels share the geometry and differ in words (D1); on the drawing only "recombinant plasmid"
+   and legend lines 2 and 3 change at SOL. No run-on and no counter (D10). */
+const CLONING=(function(){
+  const H=1000,CUT="#B23A2B",DEEP="#46345E";
+  const CAPCOL=[P.NUC,CUT,P.GO,P.PRO,P.GO];
+  /* the still's two sources, under the reel as well (D11, R6) */
+  const SOURCES=[["Mertz & Davis 1972","https://doi.org/10.1073/pnas.69.11.3370"],["Cohen & Boyer 1973","https://doi.org/10.1073/pnas.70.11.3240"]];
+  const CLOSING="The enzyme makes the ends fit before anything is joined.";
+  const CHECK_Q="Does ligase make the ends fit?";
+  const EXPLAIN="Explain in one sentence why both pieces are cut with the same enzyme.";
+  /* stage geometry, as the generator sets it */
+  const R3=[1300,298],RR=74;                     /* the stage-3 ring */
+  const SHIFT=84;                                /* the right cut piece is 84 units right of its place in the intact duplex: top strands meet at 782, bottom at 700 (D3) */
+  const SEAT=[1364.5,298];                       /* the insert arc's centre once seated: 318 to 42 degrees on the ring */
+  const INS_FROM=[1020,298];                     /* where the insert appears: the tail of the stage 2 to 3 arrow */
+  const PLAS=[372,638],PLAS_FROM=[1300,300];     /* the still's plasmid in the cell, and where its copy appears: inside the stage-3 ring */
+  const COLONY=[[-42,-26],[6,-44],[46,-12],[-18,22],[32,34],[-52,16],[12,0]];
+  const COL=COLONY.map((_,i)=>"col"+i);
+  const BOX="Each colony grew from one cell, so all of them carry the same gene.";
+  /* words, by level (D1). DE is the still's: legend lines 1-3 verbatim as captions 1-3, the stage headings as captions 4 and 5 (D2).
+     SOL keeps the same geometry and says cutting enzyme, matching ends, sealing enzyme (ligase), a ring of DNA (plasmid). The one drawing
+     label that changes is "recombinant plasmid"; "plasmid" and "enzyme" stay, since the plain phrases do not fit at the type floor beside
+     their neighbours, and the plain words go in the captions and prompts instead, as etc did. The D7 line about selection is `after`. */
+  const PROMPTS_COMMON=[
+    ["Anywhere along either piece","Only the plasmid"],["Any cut ends fit together","It is faster than using two"],null,["Joined into the chromosome","Outside the cell, read through the wall"],["All of them","Only the cells that took up the gene you want"]];
+  const DE={
+    caps:["A plasmid and donor DNA, same site in both.","One enzyme cuts both, leaving matching ends.","The ends pair and ligase seals the backbone.","Bacteria take it up.","Only cells that took one grow."],
+    prompts:[
+      {q:"A restriction enzyme is coming. Where will it cut?",choices:["At the same short sequence in both pieces"].concat(PROMPTS_COMMON[0]),happened:"The red marks show the same recognition sequence in both pieces: once in the plasmid, and on either side of the gene in the donor DNA. The enzyme cuts only there."},
+      {q:"Both pieces are cut with the same restriction enzyme. Why the same one?",choices:["So the ends match and can pair"].concat(PROMPTS_COMMON[1]),happened:"The enzyme cut the two strands at offset points, leaving four unpaired bases on each end. The same enzyme leaves the same sticky ends, so an end of the donor DNA matches an end of the plasmid."},
+      {q:"The sticky ends have met. What holds the ends together for good?",choices:["Ligase seals the backbone after the ends have paired","The base pairs alone hold them","The restriction enzyme glues them back"],happened:"The overhangs paired by base pairing on their own. Only then did ligase seal the sugar-phosphate backbone at each join: two seals. Ligase did not pull the ends together, and it did not make them fit."},
+      {q:"A bacterium takes up the recombinant plasmid. Where does it end up?",choices:["Inside the cell, beside the chromosome"].concat(PROMPTS_COMMON[3]),happened:"The plasmid crossed the envelope and settled inside the cell, beside the chromosome. It did not join it: a plasmid stays a separate ring."},
+      {q:"The cells are spread on an ampicillin plate. Which ones grow?",choices:["Only the cells that took up a plasmid"].concat(PROMPTS_COMMON[4]),happened:"Only cells with a plasmid carry the resistance gene, so only they grew, each colony from one cell. A plasmid that closed on itself without the insert gives a colony too, so colonies are screened for the gene next."}],
+    labels:{recomb:"recombinant plasmid"},
+    closing:CLOSING,
+    start:"A plasmid, a small ring of DNA carrying an ampicillin-resistance gene, sits beside a piece of donor DNA carrying the gene you want. One restriction enzyme will cut both. Nothing has been cut yet.",
+    after:"Every colony on ampicillin took up a plasmid, but a plasmid cut with one enzyme can also close on itself without the insert, so colonies are screened for the gene next.",
+    watch:"Look back at step 2: the ends fitted before ligase arrived. Ligase sealed them; it did not make them fit.",
+    end:{explain:EXPLAIN,check:{q:CHECK_Q,choices:["Yes","No"],correct:"no",answer:"No. The enzyme made the ends fit when it cut both pieces. Ligase only seals ends that have already paired."}},
+    blanks:[["h1","Two pieces, one site"],["lblPlasmid","plasmid"],["lblRes","its resistance gene"],["lblDonor","donor DNA"],["lblGene","the gene you want"],["h2","One enzyme cuts both"],["lblEnz","enzyme"],
+      ["lblBases","four unpaired bases on each end, and they pair"],["h3","Ligase seals the joins"],["lblRecomb","recombinant plasmid"],["lblSeals","green dots: the two seals"],["h4","Bacteria take it up"],
+      ["lblChrom1","chromosome, and the plasmid beside it"],["h5","Only cells that took one grow"],["lblPlate","ampicillin plate"],["lblBox",BOX]]};
+  const SOL={
+    caps:["A plasmid and donor DNA, same site in both.","One cutting enzyme cuts both, leaving matching ends.","The ends pair, and a sealing enzyme, ligase, seals them.","Bacteria take it up.","Only cells that took one grow."],
+    prompts:[
+      {q:"A cutting enzyme is coming. Where will it cut?",choices:["At the same short DNA sequence in both pieces","Anywhere along either piece","Only the ring of DNA (the plasmid)"],happened:"The red marks show the same short sequence in both pieces: once in the plasmid, and on either side of the gene in the donor DNA. The enzyme cuts only there."},
+      {q:"Both pieces are cut with the same cutting enzyme. Why the same one?",choices:["So the ends match and can pair"].concat(PROMPTS_COMMON[1]),happened:"The enzyme cut the two strands at different points, leaving four unpaired bases on each end. The same enzyme leaves the same matching ends, so an end of the donor DNA fits an end of the plasmid."},
+      {q:"The matching ends have met. What holds the ends together for good?",choices:["A sealing enzyme (ligase) seals them after they pair","The base pairs alone hold them","The cutting enzyme glues them back"],happened:"The ends paired on their own, base to base. Only then did the sealing enzyme, ligase, seal each join: two seals. Ligase did not pull the ends together, and it did not make them fit."},
+      {q:"A bacterium takes up the plasmid with the gene. Where does it end up?",choices:["Inside the cell, beside the chromosome"].concat(PROMPTS_COMMON[3]),happened:"The plasmid crossed the cell's outer layer and settled inside, beside the chromosome. It did not join it: a plasmid stays a separate ring."},
+      {q:"The cells are spread on a plate with the antibiotic ampicillin. Which ones grow?",choices:["Only the cells that took up a plasmid"].concat(PROMPTS_COMMON[4]),happened:"Only cells with a plasmid have the gene for surviving ampicillin, so only they grew, each colony from one cell. Some plasmids closed back up without the gene, so a lab checks colonies to find the ones that carry it."}],
+    labels:{recomb:"plasmid with the gene"},
+    closing:CLOSING,
+    start:"A plasmid is a small ring of DNA. This one carries a gene for surviving the antibiotic ampicillin. Beside it is a piece of donor DNA carrying the gene you want. One cutting enzyme will cut both. Nothing has been cut yet.",
+    after:"Every colony here took up a plasmid. Some plasmids close back up without the gene, so a lab checks colonies to find the ones that carry it.",
+    watch:"Look back at step 2: the ends fitted before the sealing enzyme arrived. It sealed them; it did not make them fit.",
+    end:{explain:EXPLAIN,check:{q:CHECK_Q,choices:["Yes","No"],correct:"no",answer:"No. The cutting enzyme made the ends fit when it cut both pieces. The sealing enzyme, ligase, only seals ends that have already paired."}},
+    blanks:[["h1","Two pieces, one site"],["lblPlasmid","plasmid"],["lblRes","its resistance gene"],["lblDonor","donor DNA"],["lblGene","the gene you want"],["h2","One enzyme cuts both"],["lblEnz","enzyme"],
+      ["lblBases","four unpaired bases on each end, and they pair"],["h3","Ligase seals the joins"],["lblRecomb","plasmid with the gene"],["lblSeals","green dots: the two seals"],["h4","Bacteria take it up"],
+      ["lblChrom1","chromosome, and the plasmid beside it"],["h5","Only cells that took one grow"],["lblPlate","ampicillin plate"],["lblBox",BOX]]};
+  const txt=l=>l==="de"?DE:SOL;
+  /* an arc of the ring, as the generator draws it */
+  const arc=(cx,cy,r,a0,a1,color,sw,o)=>{const p=a=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];const [x0,y0]=p(a0),[x1,y1]=p(a1);const large=(((a1-a0)%360)+360)%360>180?1:0;
+    return `<path d="M ${f1(x0)} ${f1(y0)} A ${r} ${r} 0 ${large} 1 ${f1(x1)} ${f1(y1)}" fill="none" stroke="${color}" stroke-width="${sw}"${at(o)}/>\n`;};
+  const tick=(x,y,o)=>rrect(x-4,y-26,8,52,4,CUT,null,null,o);
+  function svg(level){const L=txt(level).labels,caps=txt(level).caps;
+    let s=head(H,"Cut both with one enzyme and the ends fit","DE Bio 101 . biotechnology . gene cloning");
+    /* 1. the two pieces. The pieces and their names are there from the start; the three cut sites come up in step 1 */
+    s+=badge(1,76,176,P.NUC,25,{id:"b1"});
+    s+=text(106,186,"Two pieces, one site","key","start",P.NUC,{id:"h1"});
+    s+=`<circle cx="188" cy="298" r="74" fill="none" stroke="${P.NUC}" stroke-width="16"/>\n`;
+    s+=arc(188,298,74,120,196,P.PRO,16);
+    s+=tick(188,224,{id:"site1"});
+    s+=text(188,420,"plasmid","lab","middle",P.NUC,{id:"lblPlasmid"});
+    s+=text(60,462,"its resistance gene","min","start",P.PRO,{id:"lblRes"});
+    s+=arrow(128,436,158,376,P.PRO,4,"art");
+    s+=rrect(316,288,196,20,6,P.NUC);
+    s+=rrect(372,284,84,28,7,P.PRO,P.PRO_SIDE,3);
+    s+=tick(352,298,{id:"site2"});
+    s+=tick(476,298,{id:"site3"});
+    s+=text(414,420,"donor DNA","lab","middle",P.NUC,{id:"lblDonor"});
+    s+=text(414,250,"the gene you want","min","middle",P.PRO,{id:"lblGene"});
+    /* 2. the same cut. The enzyme is a mover (it drifts down from above); the two cut pieces are groups, each carrying its own
+       three white base ticks, and the right one is a mover: it starts 84 units left, meeting the left piece as one duplex (D3) */
+    s+=badge(2,576,176,CUT,25,{id:"b2"});
+    s+=text(606,186,"One enzyme cuts both","key","start",CUT,{id:"h2"});
+    s+=grp({id:"enz"},rrect(600,240,150,74,14,P.PRO,P.PRO_SIDE,4)+text(675,286,"enzyme","min","middle",P.PAPER,{id:"lblEnz"}));
+    s+=arrow(675,320,675,364,CUT,6,"arf",null,{id:"arrCut"});
+    s+=grp({id:"cutL"},rrect(592,384,190,18,5,P.NUC)+rrect(592,408,108,18,5,P.NUC)+[720,740,760].map(bx=>rrect(bx,384,3,18,1.5,P.PAPER)).join(""));
+    s+=grp({id:"cutR"},rrect(866,384,134,18,5,P.NUC)+rrect(784,408,216,18,5,P.NUC)+[804,824,844].map(bx=>rrect(bx,408,3,18,1.5,P.PAPER)).join(""));
+    s+=`<path d="M 700 440 L 700 452 L 782 452 L 782 440" fill="none" stroke="${CUT}" stroke-width="4" id="brkL"/>\n`;
+    s+=`<path d="M 784 370 L 784 358 L 866 358 L 866 370" fill="none" stroke="${CUT}" stroke-width="4" id="brkR"/>\n`;
+    s+=text(796,474,"four unpaired bases on each end, and they pair","min","middle",P.INKSOFT,{id:"lblBases"});
+    /* 3. ligase seals. The ring opens with a gap where the insert will go: the plasmid's own DNA runs 42 to 318 degrees with its
+       resistance gene over it; the insert arc (318 to 42) is the traveller; the two seals come only after it has seated (D4, T33).
+       In the final frame the arcs cover the same pixels as the still's full circle, and the seals sit on the two joins */
+    s+=badge(3,1086,176,P.GO,25,{id:"b3"});
+    s+=text(1116,186,"Ligase seals the joins","key","start",P.GO,{id:"h3"});
+    s+=arrow(1030,298,1110,298,P.INK,6,"ar",null,{id:"a23"});
+    s+=grp({id:"ring3"},arc(R3[0],R3[1],RR,42,318,P.NUC,16)+arc(R3[0],R3[1],RR,120,196,P.PRO,16));
+    s+=arc(R3[0],R3[1],RR,318,42,P.PRO,16,{id:"ins"});
+    [318,42].forEach((a,i)=>{s+=circ(R3[0]+RR*Math.cos(a*Math.PI/180),R3[1]+RR*Math.sin(a*Math.PI/180),11,P.GO,"#2A5438",3,{id:"seal"+(i+1)});});
+    s+=text(1300,420,L.recomb,"lab","middle",P.NUC,{id:"lblRecomb"});
+    s+=text(1548,462,"green dots: the two seals","min","end",P.GO,{id:"lblSeals"});
+    /* 4. into a cell. The dashed path is where the plasmid ends up; the copy travels it. The chromosome never moves (D5, T34) */
+    s+=curve("M 1292 400 C 1250 500, 940 536, 486 528",P.NUC,6,"arn","16 12",{id:"path4"});
+    s+=badge(4,76,534,P.PRO,25,{id:"b4"});
+    s+=text(106,544,"Bacteria take it up","key","start",P.PRO,{id:"h4"});
+    s+=grp({id:"cell"},rrect(110,580,326,118,59,P.PRO_SOFT,P.PRO,4,{id:"env"})+curve("M 160 660 C 196 620, 240 684, 282 638",DEEP,7,null,null,{id:"chrom"}));
+    s+=grp({id:"plas"},`<circle cx="372" cy="638" r="30" fill="none" stroke="${P.NUC}" stroke-width="9"/>\n`+arc(372,638,30,318,42,P.PRO,9));
+    s+=text(452,604,"chromosome, and the","min","start",P.INKSOFT,{id:"lblChrom1"});
+    s+=text(452,640,"plasmid beside it","min","start",P.INKSOFT,{id:"lblChrom2"});
+    /* 5. the plate. Seven colonies, each a mover that grows from a point (D6, T35); the label and the box follow the last one */
+    s+=badge(5,806,534,P.GO,25,{id:"b5"});
+    s+=text(836,544,"Only cells that took one grow","key","start",P.GO,{id:"h5"});
+    s+=circ(944,636,86,P.CARB_SOFT,P.SHELL,5,{id:"plate"});
+    COLONY.forEach(([dx,dy],i)=>{s+=circ(944+dx,636+dy,13,P.GO,"#2A5438",2,{id:COL[i]});});
+    s+=text(944,750,"ampicillin plate","min","middle",P.INKSOFT,{id:"lblPlate"});
+    let box=rrect(1060,572,488,132,10,P.GO_SOFT,P.GO,4);wrap(BOX,28).forEach((ln,j)=>{box+=text(1084,614+j*34,ln,"min","start",null,{id:"lblBox"+(j?j+1:"")});});
+    s+=grp({id:"box5"},box);
+    /* the three legend lines, in reading order, wrapped exactly as the still wraps them (three columns; no lines for stages 4 and 5, D2) */
+    caps.slice(0,3).forEach((cap,i)=>{const x=52+i*499,ty=798;let g=badge(i+1,x+19,ty,CAPCOL[i],19);
+      wrap(cap,28).forEach((ln,j)=>{g+=text(x+50,ty+10+j*34,ln,"min","start");});s+=grp({id:"lg"+(i+1)},g);});
+    s+=foot(H,CLOSING,SOURCES,{id:"closing"});
+    return s;}
+  const ANIM=["site1","site2","site3","b1","h1","lg1",
+    "enz","arrCut","cutL","cutR","brkL","brkR","lblBases","b2","h2","lg2",
+    "a23","ring3","ins","seal1","seal2","lblRecomb","lblSeals","b3","h3","lg3",
+    "path4","cell","plas","lblChrom1","lblChrom2","b4","h4",
+    "plate","lblPlate","box5","b5","h5","closing"].concat(COL);
+  /* every state as absolute positions, so state 3 looks the same whether you arrived from 2 or from 4. The enzyme waits above the
+     frame, the right cut piece 84 units left (one duplex), the insert at the arrow's tail, the plasmid copy inside the stage-3 ring,
+     and each colony at a point, until its step */
+  function state(k){const S={};const on=(id,from)=>{S[id]={o:k>=from?1:0};};
+    ["site1","site2","site3","b1","h1","lg1"].forEach(id=>on(id,1));
+    S.enz=k<=1?{y:-90,o:0}:{};S.cutR=k<=1?{x:-SHIFT,o:0}:{};
+    ["arrCut","cutL","brkL","brkR","lblBases","b2","h2","lg2"].forEach(id=>on(id,2));
+    S.ins=k<=2?{x:INS_FROM[0]-SEAT[0],y:INS_FROM[1]-SEAT[1],o:0}:{};
+    ["a23","ring3","lblRecomb","seal1","seal2","lblSeals","b3","h3","lg3"].forEach(id=>on(id,3));
+    S.plas=k<=3?{x:PLAS_FROM[0]-PLAS[0],y:PLAS_FROM[1]-PLAS[1],o:0}:{};
+    ["path4","cell","lblChrom1","lblChrom2","b4","h4"].forEach(id=>on(id,4));
+    COL.forEach(id=>{S[id]=k<=4?{s:0.15,o:0}:{};});
+    ["plate","lblPlate","box5","b5","h5","closing"].forEach(id=>on(id,5));
+    return S;}
+  /* forward timing. Travellers carry waypoints, jittered once with a fixed seed, so they wander rather than aim; each fades in
+     within 120 ms of setting off and is then continuously visible (T34). Step 3 is the memorable beat (D4) */
+  const R=rng(28);const J=(a,b)=>[a+(R()-.5)*20,b+(R()-.5)*16];const J2=(a,b)=>[a+(R()-.5)*8,b+(R()-.5)*6];
+  const A=(d,dur,way,fade)=>{const q={d,dur};if(way)q.way=way;if(fade)q.fade=fade;return q;};
+  const rel=(pts,[dx,dy])=>pts.map(([x,y])=>[+(x-dx).toFixed(1),+(y-dy).toFixed(1)]);
+  const SEQ={};
+  /* step 1: the three cut sites come up one after another, then the badge, the heading and the legend line */
+  SEQ[1]={site1:A(100,400),site2:A(300,400),site3:A(500,400),b1:A(900,300),h1:A(900,300),lg1:A(900,300)};
+  /* step 2: the strip appears as one intact duplex. The enzyme drifts down from above by collisions (200-1400), dips to the duplex
+     (800-1100) and settles where the still draws it. Its arrow comes up; the duplex comes apart along the staggered line as the right
+     piece drifts right (1500-2100, holding its place until then); the brackets and the line about the four unpaired bases follow */
+  SEQ[2]={cutL:A(0,300),cutR:A(0,2100,[[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],[-SHIFT,0],J2(-56,0)]),
+    enz:A(200,1200,[J(8,-58),J(-6,-26),[2,60]],120),arrCut:A(1400,250),
+    brkL:A(2150,300),brkR:A(2150,300),lblBases:A(2150,300),b2:A(2300,300),h2:A(2300,300),lg2:A(2300,300)};
+  /* step 3: the arrow, the opened ring and its name come up (0-300). Then, with nothing else moving, the insert appears at the arrow's
+     tail, crosses into the ring and seats in the gap, 400-2100: the slow beat. Only then do the two seals appear, one at each join
+     (T33); the caption about them, the badge, the heading and the legend line follow */
+  SEQ[3]={a23:A(0,300),ring3:A(0,300),lblRecomb:A(0,300),
+    ins:A(400,1700,rel([J(1110,292),J(1200,312),J(1290,284),J2(1352,308)],SEAT),120),
+    seal1:A(2150,300),seal2:A(2200,300),lblSeals:A(2400,300),b3:A(2550,300),h3:A(2550,300),lg3:A(2550,300)};
+  /* step 4: the dashed path and the cell come up. A copy of the recombinant plasmid appears inside the stage-3 ring, travels down along
+     the path by collisions, bumps the cell envelope at its upper right and settles beside the chromosome, which never moves (D5, T34) */
+  SEQ[4]={path4:A(0,300),cell:A(0,300),
+    plas:A(300,1600,rel([J2(1292,400),J(1212,463),J(1043,505),J(798,526),J(618,529),[444,571],J2(404,626)],PLAS),120),
+    lblChrom1:A(1950,300),lblChrom2:A(1950,300),b4:A(1950,300),h4:A(1950,300)};
+  /* step 5: the plate comes up; the seven colonies grow one at a time from a point, in a seeded irregular order, 210-330 ms apart
+     (D6, T35); the plate's label and the box follow the last one. No numbers, no counter (T16) */
+  const ORDER=COL.map((_,i)=>i);for(let i=ORDER.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[ORDER[i],ORDER[j]]=[ORDER[j],ORDER[i]];}
+  const GAPS=[210,240,260,280,300,330];for(let i=GAPS.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[GAPS[i],GAPS[j]]=[GAPS[j],GAPS[i]];}
+  const GROW=400,STARTS=[];{let t=300;ORDER.forEach((c,i)=>{STARTS[c]=t;if(i<GAPS.length)t+=GAPS[i];});}
+  const LAST_END=Math.max(...STARTS)+GROW;
+  SEQ[5]={plate:A(0,300),lblPlate:A(LAST_END+50,300),box5:A(LAST_END+50,300),b5:A(LAST_END+50,300),h5:A(LAST_END+50,300),closing:A(LAST_END+50,300)};
+  COL.forEach((id,i)=>{SEQ[5][id]=A(STARTS[i],GROW);});
+  const DUR=[0,1200,2600,2850,2250,LAST_END+350];
+  const BEATS={3:{name:"the two sticky ends meet: the insert seats in the opened plasmid, and only then do the seals appear",from:400,to:2100,ids:["ins"]}};
+  /* T33 (D4): each seal's first transition starts at or after the insert's seating transition has ended */
+  const PAIRS={step:3,insert:"ins",seatsAt:SEQ[3].ins.d+SEQ[3].ins.dur,seals:["seal1","seal2"]};
+  /* T34 (D5): the travellers stay visible; at the end of step 4 the plasmid's box does not touch the chromosome's */
+  const BESIDE={step:4,plasmid:"plas",chromosome:"chrom",envelope:"env",travellers:{3:"ins",4:"plas"}};
+  /* T35 (D6): the colonies, their start times and the scale each starts from */
+  const COLONIES={step:5,ids:COL,starts:STARTS.slice(),grow:GROW,startScale:0.15,lastEndsAt:LAST_END,after:["lblPlate","box5"]};
+  const FOCUS={1:["site1","site2","site3","b1","lg1"],2:["enz","b2","lg2"],3:["ins","seal1","seal2","b3","lg3"],4:["plas","b4"],5:COL.concat(["b5"])};
+  /* parts that appear on a delay inside a step and must neither dim nor scale meanwhile; the right cut piece travels unscaled, so the two pieces stay the same size */
+  const KEEP={1:["h1"],2:["cutL","cutR","arrCut","brkL","brkR","lblBases","h2"],3:["a23","ring3","lblRecomb","lblSeals","h3"],4:["path4","cell","lblChrom1","lblChrom2","h4"],5:["plate","lblPlate","box5","h5","closing"]};
+  return {key:"cloning",num:28,subject:"cloning a gene",enabled:true,n:5,levels:true,
+    title:"Cut both with one enzyme and the ends fit",short:"cloning a gene",eyebrow:"DE Bio 101 · biotechnology · SOL Bio Unit 4 · gene cloning",
+    tag:[["mov","Movement"]],bridge:null,
+    note:"The gene fragment finds the opened plasmid by collisions, and the plasmid copy drifts to the cell the same way; nothing aims. The enzyme is not used up: it stays where it cut.",
+    txt,capColor:CAPCOL,
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,keep:KEEP,pairs:PAIRS,beside:BESIDE,colonies:COLONIES,sources:SOURCES,
+    blanks:level=>txt(level).blanks.map(([id,name])=>({id,name})),blankClear:["lblChrom2","lblBox2","lblBox3"],blankHide:["lg1","lg2","lg3","closing"],
+    watchIds:{insert:"ins",plasmid:"plas",chromosome:"chrom",enzyme:"enz",travellers:["enz","cutR","ins","plas"],colonies:COL,seals:["seal1","seal2"]}};
+})();
+
 FIGS=[GPCR,
   RTK,
   TRANSPORT,
   ETC,
   DOGMA,
-  SOON("cloning",28,"cloning a gene","Cut both with one enzyme and the ends fit",[["mov","Movement"]],null,5)];
+  CLONING];
 
 init();
 })();

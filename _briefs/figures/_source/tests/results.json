@@ -37,8 +37,8 @@
   "T21": "1180x820: during step 4, 4 parts scaled and 433 of 437 drawing parts dimmed to half; all settled after | 390x844: during step 4, 4 parts scaled and 433 of 437 drawing parts dimmed to half; all settled after",
   "T24": "1180x820: end \"Outside: 1 signal molecule. Inside: 14 IP₃, 28 calcium ions\" | 390x844: end \"Outside: 1 signal molecule. Inside: 14 IP₃, 28 calcium ions\"",
   "T25": "1180x820: 11 labels blanked at >= 18.13 px; reveal lists them all | 390x844: 11 labels blanked at >= 18.13 px; reveal lists them all",
-  "T26": "1180x820: step 2 took 1574 ms at half speed (750 ms at full) | 390x844: step 2 took 1571 ms at half speed (750 ms at full)",
-  "T32": "1440x900: stage top 226 px, step-1 prediction card 428-650 of 900; no ?anim=: stage top 1153 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 428-650 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
+  "T26": "1180x820: step 2 took 1561 ms at half speed (750 ms at full) | 390x844: step 2 took 1561 ms at half speed (750 ms at full)",
+  "T32": "1440x900: stage top 226 px, step-1 prediction card 428-650 of 900; no ?anim=: stage top 1143 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 428-650 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
   "T27": "1920x1080 fill: stage 1352x859 of 1920x1080, panel 539 px wide",
   "T19": "No ATP is spent in gpcr; applies to transport, etc and rtk in Phase 2",
   "T20": "rtk only: see mechanism-reel-tests-rtk.js"

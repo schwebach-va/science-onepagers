@@ -17,9 +17,13 @@ node mechanism-reel-tests-etc.js              # Phase 2, etc: the same table wit
 python3 t3-compare-etc.py                     # T3 for etc, from the suite's own screenshots, against ../../04-electron-transport-chain.png
 node mechanism-reel-tests-rtk.js              # Phase 2, rtk: the same table with T19 per phosphate (D3), T20 (the closing state, D8), T30 (trans, D2), T31 (relays after phosphates, D4), ~12 minutes
 python3 t3-compare-rtk.py                     # T3 for rtk, from the suite's own screenshot, against ../../02-receptor-tyrosine-kinase.png (re-rendered 2026-10-20, D1)
+node mechanism-reel-tests-cloning.js          # Phase 2, cloning: the same table with T33 (pairing before sealing, D4), T34 (travellers visible, the plasmid beside the chromosome, D5), T35 (colonies one at a time, D6), ~13 minutes
+python3 t3-compare-cloning.py                 # T3 for cloning, from the suite's own screenshots, against ../../06-cloning-a-gene.png (unchanged, D12)
 ```
 
-`mechanism-reel-tests-etc.js` and `mechanism-reel-tests-rtk.js` read the Playwright path from `PLAYWRIGHT_PATH` when it is set, so on a Mac
+With cloning built there are no placeholders: every suite's T1 and T15 assert that none of the six selector entries is disabled.
+
+`mechanism-reel-tests-etc.js`, `mechanism-reel-tests-rtk.js` and `mechanism-reel-tests-cloning.js` read the Playwright path from `PLAYWRIGHT_PATH` when it is set, so on a Mac
 `PLAYWRIGHT_PATH=/path/to/node_modules/playwright node mechanism-reel-tests-etc.js` runs it without an edit.
 Chromium needs Archivo installed as a system font when the Google Fonts fetch is blocked, or T3 compares a
 fallback face: the stills embed Archivo 600 and 700 as woff2, and a copy converted to TTF (fontTools) in the

@@ -65,13 +65,15 @@ async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width
   for(const vp of [{width:1180,height:820},{width:390,height:844}]){
     const tag=`${vp.width}x${vp.height}`;
     const {ctx,pg}=await fresh(br,vp);
-    /* T1: six deep links; every figure not yet built asserts as disabled, not missing.
-       Add a key to BUILT as each Phase 2 figure lands. */
-    const BUILT=['gpcr','rtk','dogma','transport','etc'];
+    /* T1: six deep links; all six are built, so every one opens and no selector entry is disabled (the
+       placeholder branch below stays for the record and never fires) */
+    const BUILT=['gpcr','rtk','dogma','transport','etc','cloning'];
     for(const k of KEYS){await open(pg,`${URL}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(BUILT.includes(k)){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
       else{res('T1',fig==='gpcr'&&info.present&&info.enabled===false&&info.btn&&info.disabled===true,`${tag}: ?fig=${k} entry present=${info.present} disabled=${info.disabled} fig=${fig}`);}}
+    await open(pg);const dis=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
+    res('T1',dis.length===0,`${tag}: selector entries still disabled: ${dis}`);   /* with cloning built there are no placeholders */
     await open(pg);await pg.click('.selbtn[data-fig="gpcr"]');res('T1',(await pg.evaluate(()=>__MR.fig()))==='gpcr',`${tag}: selector click`);
     /* per-step links and the paused run-on, for recording */
     await open(pg,`${URL}?anim=gpcr&step=3`);const s3=await pg.evaluate(()=>({step:__MR.step(),done:__MR.done(3),url:location.search}));

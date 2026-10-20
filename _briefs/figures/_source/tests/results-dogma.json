@@ -37,8 +37,8 @@
   "T21": "1180x820: during step 4, 5 parts scaled and 54 of 59 drawing parts dimmed to half; all settled after | 390x844: during step 4, 5 parts scaled and 54 of 59 drawing parts dimmed to half; all settled after",
   "T24": "390x844: no counter and no run-on on dogma (D8); counter empty, Play disabled at the last step",
   "T25": "1180x820: 14 labels blanked at >= 18.13 px; reveal lists them all; the check is \"Does the DNA leave the nucleus?\" | 390x844: 14 labels blanked at >= 18.13 px; reveal lists them all; the check is \"Does the DNA leave the nucleus?\"",
-  "T26": "1180x820: step 2 took 1558 ms at half speed (750 ms at full) | 390x844: step 2 took 1557 ms at half speed (750 ms at full)",
-  "T32": "1440x900: stage top 226 px, step-1 prediction card 428-726 of 900; no ?anim=: stage top 1153 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 456-754 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
+  "T26": "1180x820: step 2 took 1547 ms at half speed (750 ms at full) | 390x844: step 2 took 1555 ms at half speed (750 ms at full)",
+  "T32": "1440x900: stage top 226 px, step-1 prediction card 428-726 of 900; no ?anim=: stage top 1143 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 456-754 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
   "T27": "1920x1080 fill: stage 1352x859 of 1920x1080, panel 539 px wide",
   "T19": "No ATP is spent in dogma; applies to transport, etc and rtk",
   "T20": "rtk only: see mechanism-reel-tests-rtk.js"
