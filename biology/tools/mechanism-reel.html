@@ -1237,13 +1237,254 @@ const TRANSPORT=(function(){
     watchIds:{signal:"sig",atp:"pi",travellers:["sig","ionC0","ionC1","ionC2","pi","naP0","naP1","naP2","kA","kB","kC","kD"]}};
 })();
 
-/* the other three appear in the selector, in the arc's order, disabled until their Phase 2 build */
+/* ================= Figure 4: the electron transport chain =================
+   One idea: the electrons never touch the ATP. They pay for a proton gradient, and the gradient
+   is what pays for the ATP. Geometry is the still's own (fig4_etc.py), with ids on the things
+   that move. The last step is the still, except where a traveller has moved: eight protons that
+   were pumped up in step 3 and fell back through the synthase in step 5 lie in the matrix beside
+   its head. Two levels share the geometry and differ only in words. The step-6 run-on keeps the
+   chain turning over, with no counter (D6, D10). */
+const ETC=(function(){
+  const H=1000,MY=382,BLH=128,MB=MY+BLH,AX=1328;
+  const ELEC="#2F6E3F",PRO_EDGE="#8A5E16";   /* the electrons' own green, kept out of the class four; the proton edge */
+  const CAPCOL=[P.NUC,P.CARB,P.CARB,P.PRO,P.GO,P.GO];
+  /* the still's own foot keeps its three sources (the still does not change, D12); the line under the reel
+     carries the two the brief recommends (D11), both verified: Mitchell's chemiosmotic hypothesis and Boyer's
+     account of the rotary synthase */
+  const STILL_SOURCES=[["Mitchell 1961","https://doi.org/10.1038/191144a0"],["Jagendorf & Uribe 1966","https://doi.org/10.1073/pnas.55.1.170"],["Walker 1994","https://doi.org/10.1038/370621a0"]];
+  const SOURCES=[["Mitchell 1961","https://doi.org/10.1038/191144a0"],["Boyer 1997","https://doi.org/10.1146/annurev.biochem.66.1.717"]];
+  /* the proton crowd, as the still scatters it: 31 above the membrane and 4 in the matrix */
+  const ABOVE=[[93,238],[137,244],[180,266],[221,263],[260,223],[301,271],[339,263],[378,232],[421,245],[469,277],[507,246],[554,228],[597,237],[630,268],[675,248],[718,233],[768,246],[800,270],[852,226],[884,261],[933,250],[968,230],[1008,277],[1050,235],[1104,235],[1136,277],[1178,240],[1223,234],[1436,278],[1480,262],[1515,233]];
+  const BELOW=[[140,594],[325,600],[510,597],[695,588]];
+  /* fourteen of the thirty-one start in the matrix and are pumped up in step 3, each through the complex
+     nearest its place in the crowd; the other seventeen are there from the start (the thin crowd) */
+  const PUMPED={1:"I",3:"I",5:"I",7:"I",9:"III",11:"III",13:"III",15:"III",17:"III",19:"IV",21:"IV",23:"IV",25:"IV",27:"IV"};
+  const CX={I:152,III:644,IV:918};
+  const START={I:[[118,648],[160,644],[202,650],[262,640]],III:[[568,640],[656,642],[744,646],[832,648],[700,676]],IV:[[1140,578],[1182,566],[1224,588],[1156,616],[1200,618]]};
+  /* eight more protons, not on the still: pumped up with the rest in step 3 (three through III, five through IV),
+     they are the crowd's surplus, and they are the ones that fall back through the synthase in step 5. They end
+     in the matrix beside its head, which is the only place the final frame differs from the still */
+  const EX_FROM=[[612,672],[788,678],[690,708],[1010,650],[1060,640],[1052,682],[1000,694],[1100,690]];
+  const EX_VIA=["III","III","III","IV","IV","IV","IV","IV"];
+  const EX_ABOVE=[[1026,211],[1072,209],[1120,212],[1162,210],[1204,211],[1248,209],[1456,210],[1500,212]];
+  const EX_REST=[[1240,702],[1290,704],[1332,700],[1374,703],[1452,580],[1498,562],[1540,600],[1532,700]];
+  const JIT={0:"a0",4:"a4",26:"a26",27:"a27",28:"a28",29:"a29"};   /* crowd members that jostle in place */
+  const CLOSING="No oxygen at the end, no flow. No flow, no gradient. No gradient, no ATP.";
+  const CHECK_Q="Does oxygen make the ATP?";
+  const CHECK_A="No. Oxygen pulls the electrons through at the end of the chain. The protons falling back through ATP synthase turn its head, and that is what makes the ATP.";
+  const EXPLAIN="Explain in one sentence why no oxygen means no ATP.";
+  const RUNON={playing:"Running: electrons in, protons out through I, III and IV, protons back through the synthase, the head turning. Pause stops it. Back, or any step number, clears it.",paused:"Paused. Play runs the chain again. Back, or any step number, clears it."};
+  /* words, by level. The DE words are the still's; the SOL words keep the same geometry (D7). Caption 4 is
+     the same at both levels; "Chemiosmosis" is DE only. */
+  const DE={
+    caps:["NADH and FADH2 hand the chain electrons.","Q and cytochrome c carry them on, lower.","Complexes I, III and IV pump protons out.",
+      "Oxygen takes them last and becomes water.","The protons fall back through the synthase.","Its turning builds the ATP. Chemiosmosis."],
+    prompts:[
+      {q:"NADH and FADH₂ have arrived at the inner membrane. What do they hand the chain?",choices:["Electrons","ATP","Oxygen"],happened:"They handed over electrons: NADH to Complex I, FADH₂ to Complex II. No ATP changed hands."},
+      {q:"How do the electrons get from Complex I to Complex III, across the gap?",choices:["A mobile carrier, Q, shuttles them across","They jump the gap on their own","They travel through the membrane lipids"],happened:"Q carried them from I to III, and cytochrome c carried them from III to IV, each handoff a step lower in energy."},
+      {q:"The electrons are passing through. Which complexes pump protons out into the intermembrane space?",choices:["I, III and IV, but not II","All four complexes pump","Only Complex IV"],happened:"Complexes I, III and IV each pushed protons out, and the crowd above the membrane thickened. Complex II passed its electrons on and pumped nothing."},
+      {q:"The electrons reach the end of the chain at Complex IV. What takes them?",choices:["Oxygen; it becomes water","Oxygen; it becomes ATP","Nothing; they go back to NADH"],happened:"Oxygen took the electrons last, picked up two protons, and became water. No ATP was made here."},
+      {q:"The crowd of protons outside is thick now. Where do they go?",choices:["Back in through ATP synthase, down the gradient","Back in through the complexes that pumped them","Nowhere; they stay outside"],happened:"They fell back in through ATP synthase, the one open door, and the crowd thinned. A few drifted the other way; the net flow was through the synthase."},
+      {q:"Protons are falling through the synthase. Where is the ATP made?",choices:["At ATP synthase, as its head turns","At Complex IV, where oxygen takes the electrons","At Complex I, where NADH arrives"],happened:"The head turned first, and only then did ADP + P become ATP. The electrons never touched the ATP; the falling protons made it."}],
+    labels:{ims:"Intermembrane space - protons crowd here",syn:"ATP synthase"},
+    closing:CLOSING,
+    start:"NADH and FADH₂ have arrived at the inner mitochondrial membrane carrying electrons from food. Four complexes and an ATP synthase sit in the membrane. Most of the protons are still in the matrix; the space outside is thin. Nothing has moved yet.",
+    after:"The electrons never touch the ATP. They pay for the proton gradient, and the gradient pays for the ATP.",
+    watch:"Keep watching. Electrons keep arriving, the pumps keep pushing protons out, the protons keep falling back through the synthase, and its head keeps turning.",
+    runon:RUNON,
+    end:{explain:EXPLAIN,check:{q:CHECK_Q,choices:["Yes","No"],correct:"no",answer:CHECK_A}},
+    blanks:[["lblIms","Intermembrane space - protons crowd here"],["lblMatrix","Mitochondrial matrix"],["lblI","Complex I"],["lblII","Complex II"],["lblIII","Complex III"],["lblIV","Complex IV"],["lblQ","Q (ubiquinone)"],["lblCytc","cyt c (cytochrome c)"],["lblElectrons","electrons"],["lblNadh","NADH"],["lblFadh","FADH₂"],["lblPumped1","pumped"],["lblNoPump","no pumping here"],["lblO2","½ O₂ + 2 H⁺"],["lblH2o","becomes H₂O"],["lblSyn","ATP synthase"],["lblTurns","turns"],["lblAdp","ADP + P"],["lblAtp","ATP"]]};
+  const SOL={
+    caps:["Energy carriers hand the chain electrons.","Two carriers pass them along, each step downhill.","Three protein pumps push hydrogen ions out.",
+      "Oxygen takes them last and becomes water.","The hydrogen ions fall back through the enzyme.","Its turning builds the ATP."],
+    prompts:[
+      {q:"Two energy carriers, NADH and FADH₂, have arrived at the membrane. What do they hand the chain?",choices:["Electrons","ATP","Oxygen"],happened:"They handed over electrons, NADH to the first pump and FADH₂ to the small protein beside it. No ATP changed hands."},
+      {q:"How do the electrons get from the first pump to the next one, across the gap?",choices:["A small carrier, Q, shuttles them across","They jump the gap on their own","They travel through the membrane lipids"],happened:"Q carried them from the first pump to the second, and cyt c carried them on to the third, each handoff a step downhill in energy."},
+      {q:"The electrons are passing through. Which proteins push hydrogen ions out across the membrane?",choices:["The three pumps, I, III and IV, but not II","All four proteins pump","Only the last one, IV"],happened:"The three pumps each pushed hydrogen ions out, and the crowd above the membrane thickened. The small protein, II, passed its electrons on and pumped nothing."},
+      {q:"The electrons reach the end of the chain. What takes them?",choices:["Oxygen; it becomes water","Oxygen; it becomes ATP","Nothing; they go back to NADH"],happened:"Oxygen took the electrons last, picked up two hydrogen ions, and became water. No ATP was made here."},
+      {q:"The crowd of hydrogen ions outside is thick now. Where do they go?",choices:["Back in through the ATP-making enzyme, from crowded to scarce","Back in through the pumps that pushed them out","Nowhere; they stay outside"],happened:"They fell back in through the ATP-making enzyme, the one open door, and the crowd thinned. A few drifted the other way; most fell through."},
+      {q:"Hydrogen ions are falling through the enzyme. Where is the ATP made?",choices:["At the ATP-making enzyme, as its head turns","At the last pump, where oxygen takes the electrons","At the first pump, where NADH arrives"],happened:"The head turned first, and only then did ADP + P become ATP. The electrons never touched the ATP; the falling hydrogen ions made it."}],
+    labels:{ims:"Intermembrane space - hydrogen ions crowd here",syn:"ATP-making enzyme"},
+    closing:CLOSING,
+    start:"Two energy carriers, NADH and FADH₂, have arrived at the inner membrane of the mitochondrion with electrons from food. Four proteins and an ATP-making enzyme sit in the membrane. Most of the hydrogen ions are still inside; the space outside is thin. Nothing has moved yet.",
+    after:"The electrons never touch the ATP. They build the crowd of hydrogen ions outside, and the crowd falling back in makes the ATP.",
+    watch:"Keep watching. Electrons keep arriving, the pumps keep pushing hydrogen ions out, the ions keep falling back through the enzyme, and its head keeps turning.",
+    runon:RUNON,
+    end:{explain:EXPLAIN,check:{q:CHECK_Q,choices:["Yes","No"],correct:"no",answer:"No. Oxygen pulls the electrons through at the end of the chain. The hydrogen ions falling back through the ATP-making enzyme turn its head, and that is what makes the ATP."}},
+    blanks:[["lblIms","Intermembrane space - hydrogen ions crowd here"],["lblMatrix","Mitochondrial matrix"],["lblI","Pump I"],["lblII","Protein II (no pumping)"],["lblIII","Pump III"],["lblIV","Pump IV"],["lblQ","Q, a carrier"],["lblCytc","cyt c, a carrier"],["lblElectrons","electrons"],["lblNadh","NADH"],["lblFadh","FADH₂"],["lblPumped1","pumped"],["lblNoPump","no pumping here"],["lblO2","½ O₂ + 2 H⁺"],["lblH2o","becomes H₂O"],["lblSyn","ATP-making enzyme"],["lblTurns","turns"],["lblAdp","ADP + P"],["lblAtp","ATP"]]};
+  const txt=l=>l==="de"?DE:SOL;
+  const proton=(x,y,o)=>circ(x,y,12,P.CARB,PRO_EDGE,2,o);
+  function svg(level){const L=txt(level).labels,caps=txt(level).caps;
+    let s=head(H,"Electrons buy a gradient. The gradient buys the ATP.","DE Bio 101 . Unit 7 . cellular respiration");
+    /* the crowd that is there from the start, and the four in the matrix; the pumped ones are drawn later, over the complexes */
+    ABOVE.forEach(([x,y],i)=>{if(PUMPED[i])return;s+=proton(x,y,JIT[i]?{id:JIT[i]}:null);});
+    BELOW.forEach(([x,y])=>{s+=proton(x,y);});
+    s+=bilayer(52,MY,1496,46,10,22,32).svg;
+    s+=text(1548,196,L.ims,"min","end",P.INKSOFT,{id:"lblIms"});
+    s+=text(60,694,"Mitochondrial matrix","min","start",P.INKSOFT,{id:"lblMatrix"});
+    /* the four complexes; II is short, and it does not pump */
+    [[118,128,true],[372,110,false],[610,128,true],[884,128,true]].forEach(([x,w,tall])=>{s+=rrect(x,tall?MY-18:MY+10,w,tall?BLH+36:BLH-20,12,P.PRO,P.PRO_SIDE,4);});
+    /* the two mobile carriers: Q in the membrane, cytochrome c on the outer face */
+    s+=circ(316,MY+BLH/2,26,P.CARB,PRO_EDGE,3,{id:"q"});
+    s+=text(316,MB+56,"Q","key","middle",P.CARB,{id:"lblQ"});
+    s+=circ(818,MY-30,26,P.CARB,PRO_EDGE,3,{id:"cytc"});
+    s+=text(818,MY-56,"cyt c","lab","middle",P.CARB,{id:"lblCytc"});
+    /* the electrons' downhill run, lit from the left as they travel */
+    s+=curve(`M 150 ${MB+44} C 170 ${MB+10}, 182 ${MY+86}, 246 ${MY+76}`,ELEC,6,null,null,{id:"e1"});
+    s+=curve(`M 246 ${MY+76} L 290 ${MY+72}`,ELEC,6,"are",null,{id:"e2"});
+    s+=curve(`M 342 ${MY+70} L 606 ${MY+66}`,ELEC,6,"are",null,{id:"e3"});
+    s+=curve(`M 404 ${MB+30} C 420 ${MB+6}, 430 ${MY+86}, 470 ${MY+70}`,ELEC,6,"are",null,{id:"e4"});
+    s+=curve(`M 700 ${MY+40} C 740 ${MY-26}, 772 ${MY-34}, 790 ${MY-30}`,ELEC,6,"are",null,{id:"e5"});
+    s+=curve(`M 846 ${MY-30} C 880 ${MY-28}, 918 ${MY-8}, 930 ${MY+40}`,ELEC,6,"are",null,{id:"e6"});
+    s+=text(530,MY+36,"electrons","min","middle",ELEC,{id:"lblElectrons"});
+    /* the electron sources */
+    s+=rrect(96,MB+54,134,60,10,P.NUC_SOFT,P.NUC,3);
+    s+=text(163,MB+94,"NADH","lab","middle",P.NUC,{id:"lblNadh"});
+    s+=rrect(344,MB+40,148,60,10,P.NUC_SOFT,P.NUC,3);
+    s+=chem(418,MB+80,"FADH_2","lab","middle",P.NUC,{id:"lblFadh"});
+    /* where the electrons end up */
+    s+=chem(884,MB+56,"1/2 O_2 + 2 H^+","lab","start",P.INK,{id:"lblO2"});
+    s+=arrow(948,MB+20,926,MB+42,ELEC,6,"are",null,{id:"arrO2"});
+    s+=chem(884,MB+102,"becomes H_2O","key","start",P.PRO,{id:"lblH2o"});
+    /* the protons the complexes pump */
+    [152,644,918].forEach((x,i)=>{s+=arrow(x,MB+10,x,300,P.CARB,8,"arp",null,{id:"arrP"+(i+1)});});
+    [[216,"I","lblI"],[427,"II","lblII"],[708,"III","lblIII"],[982,"IV","lblIV"]].forEach(([x,t,id])=>{s+=text(x,MY+BLH/2+12,t,"key","middle",P.PAPER,{id});});
+    [152,644,918].forEach((x,i)=>{s+=text(x,MY-58,"pumped","min","middle",P.CARB,{id:"lblPumped"+(i+1)});});
+    s+=text(428,MY-20,"no pumping here","min","middle",P.INKSOFT,{id:"lblNoPump"});
+    /* ATP synthase, the only place ATP is actually made. The head is a group of its own so it can turn */
+    s+=rrect(AX-76,MY-16,152,BLH+32,16,P.PRO,P.PRO_SIDE,4);
+    s+=rrect(AX-14,MY-10,28,BLH+20,10,P.PRO_TOP);
+    s+=rrect(AX-13,MB+14,26,56,8,P.PRO,P.PRO_SIDE,3);
+    s+=grp({id:"head"},`<ellipse cx="${AX}" cy="${MB+118}" rx="86" ry="52" fill="${P.PRO}" stroke="${P.PRO_SIDE}" stroke-width="4"/>\n`);
+    s+=arrow(AX,292,AX,MB+60,P.CARB,10,"arb",null,{id:"arrSyn"});
+    s+=text(1548,350,L.syn,"key","end",P.PRO,{id:"lblSyn"});
+    s+=text(AX,MB+128,"turns","min","middle",P.PAPER,{id:"lblTurns"});
+    s+=chem(AX-124,MB+150,"ADP + P","lab","end",P.NUC,{id:"lblAdp"});
+    s+=arrow(AX-112,MB+142,AX-60,MB+142,P.NUC,6,"arn",null,{id:"arrAtp"});
+    s+=text(AX+102,MB+150,"ATP","key","start",P.GO,{id:"lblAtp"});
+    /* the pumped protons, drawn where they end: fourteen at their place in the crowd, eight in the matrix beside the head */
+    ABOVE.forEach(([x,y],i)=>{if(PUMPED[i])s+=proton(x,y,{id:"pr"+i});});
+    EX_REST.forEach(([x,y],i)=>{s+=proton(x,y,{id:"pe"+i});});
+    s+=grp({id:"runLayer"},"");
+    /* the sentences, in reading order, wrapped exactly as the still wraps them */
+    caps.forEach((cap,i)=>{const c=i%3,r=Math.floor(i/3),x=52+c*499,ty=742+r*78;let g=badge(i+1,x+19,ty,CAPCOL[i],19);
+      wrap(cap,28).forEach((ln,j)=>{g+=text(x+50,ty+10+j*34,ln,"min","start");});s+=grp({id:"lg"+(i+1)},g);});
+    s+=foot(H,txt(level).closing,STILL_SOURCES,{id:"closing"});
+    return s;}
+  const PR=Object.keys(PUMPED).map(i=>"pr"+i),PE=EX_REST.map((_,i)=>"pe"+i),JI=Object.values(JIT);
+  const ANIM=["e1","e2","e3","e4","e5","e6","lblElectrons","q","cytc","arrP1","arrP2","arrP3","lblPumped1","lblPumped2","lblPumped3","lblNoPump",
+    "lblO2","arrO2","lblH2o","arrSyn","head","lblTurns","arrAtp","lblAtp","b1","b2","b3","b4","b5","b6","lg1","lg2","lg3","lg4","lg5","lg6","closing"].concat(PR,PE,JI);
+  /* every state as absolute positions, so state 4 looks the same whether you arrived from 3 or from 5.
+     A pumped proton is in the matrix through state 2 and in the crowd from state 3; a surplus proton
+     is in the matrix through state 2, in the crowd through state 4, and back in the matrix from state 5. */
+  const nth={I:0,III:0,IV:0};const STARTOF={};Object.keys(PUMPED).forEach(i=>{const c=PUMPED[i];STARTOF["pr"+i]=START[c][nth[c]++];});
+  function state(k){const S={};const on=(id,from)=>{S[id]={o:k>=from?1:0};};
+    ["e1","e4"].forEach(id=>on(id,1));["e2","e3","e5","e6","lblElectrons"].forEach(id=>on(id,2));
+    S.q={};S.cytc={};JI.forEach(id=>{S[id]={};});
+    ["arrP1","arrP2","arrP3","lblPumped1","lblPumped2","lblPumped3","lblNoPump"].forEach(id=>on(id,3));
+    ["lblO2","arrO2","lblH2o"].forEach(id=>on(id,4));
+    on("arrSyn",5);
+    S.head=k>=6?{r:360}:{};["lblTurns","arrAtp","lblAtp"].forEach(id=>on(id,6));
+    for(let i=1;i<=6;i++){on("b"+i,i);on("lg"+i,i);}on("closing",6);
+    Object.keys(PUMPED).forEach(i=>{const [tx,ty]=ABOVE[i],[sx,sy]=STARTOF["pr"+i];S["pr"+i]=k<=2?{x:sx-tx,y:sy-ty}:{};});
+    EX_REST.forEach(([rx,ry],i)=>{const [sx,sy]=EX_FROM[i],[ax,ay]=EX_ABOVE[i];S["pe"+i]=k<=2?{x:sx-rx,y:sy-ry}:k<=4?{x:ax-rx,y:ay-ry}:{};});
+    return S;}
+  /* forward timing. Steps 3 and 5 are the memorable beats (D2): the crowd thickening above the membrane
+     and the crowd draining through the synthase, each about 1.6 s with nothing else moving. Every
+     traveller carries waypoints, jittered once with a fixed seed, so it wanders rather than aims (D4). */
+  const R=rng(26);const J=(a,b)=>[a+(R()-.5)*18,b+(R()-.5)*14];const J2=(a,b)=>[a+(R()-.5)*8,b+(R()-.5)*8];
+  const A=(d,dur,way)=>way?{d,dur,way}:{d,dur};
+  const rel=(pts,[dx,dy])=>pts.map(([x,y])=>[x-dx,y-dy]);
+  /* a pumped proton's climb: to the foot of its complex, up through it, out the top, then across to its place */
+  const climb=(c,[tx,ty])=>{const cx=CX[c];return [J(cx,536),J2(cx,430),J2(cx,296),J((cx+tx)/2,(296+ty)/2-14)];};
+  const SEQ={
+    1:{e1:A(0,500),e4:A(300,500),b1:A(700,300),lg1:A(700,300)},
+    2:{e2:A(0,300),q:A(100,1400,rel([J2(400,450),J2(500,452),J2(578,450),J2(470,452),J2(380,450)],[316,MY+BLH/2])),
+       e3:A(300,500),lblElectrons:A(300,400),e5:A(900,300),cytc:A(900,800,rel([J2(884,356),J2(900,372),J2(862,356)],[818,MY-30])),e6:A(1200,300),
+       b2:A(1500,300),lg2:A(1500,300)},
+    3:{arrP1:A(0,300),arrP2:A(0,300),arrP3:A(0,300),lblPumped1:A(0,300),lblPumped2:A(0,300),lblPumped3:A(0,300),lblNoPump:A(0,300),
+       a0:A(900,600,[[6,-8],[-4,6]]),a4:A(1200,500,[[-6,8],[5,-4]]),b3:A(2000,300),lg3:A(2000,300)},
+    4:{lblO2:A(0,300),arrO2:A(300,300),lblH2o:A(700,400),b4:A(900,300),lg4:A(900,300)},
+    5:{arrSyn:A(0,300),a26:A(500,900,[[62,28],[112,50],[32,12]]),a27:A(800,600,[[8,10],[-6,4]]),a28:A(600,700,[[-10,-6],[6,8]]),a29:A(1000,600,[[-30,16],[-8,4]]),
+       b5:A(2100,300),lg5:A(2100,300)},
+    6:{head:A(0,900),lblTurns:A(0,300),arrAtp:A(900,300),lblAtp:A(1000,400),b6:A(1200,300),lg6:A(1200,300),closing:A(1200,300)}};
+  /* step 3: each complex sends its protons up in a stagger; IV sends the most. The beat runs 400 to 2000 ms */
+  {const n={I:0,III:0,IV:0},gap={I:180,III:100,IV:80};
+    Object.keys(PUMPED).forEach(i=>{const c=PUMPED[i];SEQ[3]["pr"+i]=A(400+gap[c]*n[c]++,800,rel(climb(c,ABOVE[i]),ABOVE[i]));});
+    EX_REST.forEach((rest,i)=>{const c=EX_VIA[i];SEQ[3]["pe"+i]=A(400+gap[c]*n[c]++,800,rel(climb(c,EX_ABOVE[i]),rest));});}
+  /* step 5: the surplus falls back through the synthase one after another, 400 to 2100 ms. Two drift away from
+     the mouth before they come; the crowd around it jostles, and one resident wanders toward the synthase and back */
+  EX_REST.forEach((rest,i)=>{const [ax,ay]=EX_ABOVE[i];const way=[];
+    if(i===0)way.push(J(ax-34,ay+16));if(i===6)way.push(J(ax+36,ay+18));
+    way.push(J2(AX+(ax<AX?-8:8),302),J2(AX,440),J2(AX,556));
+    SEQ[5]["pe"+i]=A(400+i*140,650,rel(way,rest));});
+  const DUR=[0,1000,1800,2300,1200,2400,1500];
+  const BEATS={3:{name:"the proton crowd thickens above the membrane",from:400,to:2000,ids:PR.concat(PE,["a0","a4"])},
+               5:{name:"the crowd drains through the synthase",from:400,to:2100,ids:PE.concat(["a26","a27","a28","a29"])}};
+  /* D5, T19: payment, then result. The head has turned (`paidAt`) before the arrow and the ATP appear */
+  const PAYS={step:6,atp:"head",paidAt:900,funds:["arrAtp","lblAtp"]};
+  const FOCUS={1:["e1","e4","b1","lg1"],2:["q","cytc","b2","lg2"],3:PR.concat(PE,["b3","lg3"]),4:["lblO2","arrO2","lblH2o","b4","lg4"],
+    5:PE.concat(["a26","b5","lg5"]),6:["head","lblTurns","arrAtp","lblAtp","b6","lg6"]};
+  /* the run-on after step 6 (D10): the chain keeps turning over. Each cycle three protons rise from the matrix
+     through I, III and IV into the crowd, the three from the cycle before fall back through the synthase, Q and
+     cytochrome c shuttle again, and the head keeps turning. Two cycles, then it holds. No counter. */
+  let seed=9;const rnd=()=>{seed=(seed+0x6D2B79F5)|0;let t=seed;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};
+  const jit=(a,b)=>[a+(rnd()-.5)*16,b+(rnd()-.5)*12];
+  const RUN_FROM=[[[140,650],[612,672],[1010,650]],[[202,650],[788,678],[1100,690]]];
+  const RUN_UP=[[EX_ABOVE[0],EX_ABOVE[2],EX_ABOVE[4]],[EX_ABOVE[1],EX_ABOVE[3],EX_ABOVE[5]]];
+  const RUN_DOWN=[[1420,700],[1470,700],[1560,640]];
+  const CYCLES=2,PERIOD=3200,SPIN=500;
+  const loop={nCy:0,ang:360,last:null,
+    start(api){const svg=$("stage").querySelector("svg");if(!svg)return;const layer=svg.querySelector("#runLayer");if(!layer)return;
+      const sp=api.sp;
+      const make=(html)=>{const tmp=document.createElementNS("http://www.w3.org/2000/svg","g");tmp.innerHTML="<g>"+html+"</g>";const g=tmp.firstElementChild;g.classList.add("mv");g.style.opacity="0";layer.appendChild(g);return g;};
+      const place=(g,x,y)=>{g.style.transition="none";g.style.transform=`translate(${x}px, ${y}px)`;};
+      const fade=(g,ms)=>{g.style.transition="none";g.style.opacity="0";g.getBoundingClientRect();g.style.transition=`opacity ${ms*sp()}ms ease-in-out`;g.style.opacity="1";};
+      const legsTo=(g,rest,pts,ms,t0)=>{pts.forEach((pt,i)=>{api.after(()=>{g.style.transition=`transform ${ms*sp()}ms ease-in-out`;g.style.transform=`translate(${pt[0]-rest[0]}px, ${pt[1]-rest[1]}px)`;},t0+i*ms);});};
+      const walk=(g,rest,legs,ms,t0)=>legsTo(g,rest,legs.concat([rest]),ms,t0);
+      /* the head turns as long as the run-on plays: a quarter turn every SPIN ms, linear, so it reads as one motion */
+      const head=svg.querySelector("#head");
+      const spin=()=>{if(!api.on()||!head)return;loop.ang+=90;head.style.transition=`transform ${SPIN*sp()}ms linear`;head.style.transform=`translate(0px, 0px) rotate(${loop.ang}deg)`;api.after(spin,SPIN);};
+      const cycle=()=>{if(!api.on()||loop.nCy>=CYCLES)return;const c=loop.nCy++;
+        const ups=RUN_FROM[c].map((f,i)=>{const r=RUN_UP[c][i];return make(proton(r[0],r[1]));});
+        const downs=loop.last||[];loop.last=ups;   /* the three that rose last cycle are the three that fall now */
+        if(api.reduce()){ups.forEach(g=>{place(g,0,0);g.style.opacity="1";});downs.forEach((g,i)=>{const u=RUN_UP[c-1][i],d=RUN_DOWN[i];place(g,d[0]-u[0],d[1]-u[1]);});}
+        else{
+          /* three rise, one through each pumping complex, legs jittered so they wander */
+          ups.forEach((g,i)=>{const f=RUN_FROM[c][i],r=RUN_UP[c][i],cx=[152,644,918][i];place(g,f[0]-r[0],f[1]-r[1]);api.after(()=>fade(g,200),0);
+            walk(g,r,[jit(cx,536),jit(cx,430),jit(cx,296),jit((cx+r[0])/2,(296+r[1])/2-14)],190,300+i*160);});
+          /* the same glyphs that rose last cycle now travel to the synthase and fall back through it, continuously visible */
+          downs.forEach((g,i)=>{const u=RUN_UP[c-1][i],d=RUN_DOWN[i];
+            legsTo(g,u,[jit(AX+(u[0]<AX?-8:8),302),jit(AX,440),jit(AX,556),d],190,1700+i*180);});
+          /* Q and cytochrome c shuttle again */
+          const q=svg.querySelector("#q"),cc=svg.querySelector("#cytc");
+          if(q)walk(q,[316,MY+BLH/2],[jit(430,451),jit(560,450),jit(440,451)],230,100);
+          if(cc)walk(cc,[818,MY-30],[jit(884,356),jit(900,372)],230,900);}
+        api.after(cycle,PERIOD);};
+      if(!api.reduce())api.after(spin,0);
+      api.after(cycle,300);},
+    clear(){loop.nCy=0;loop.ang=360;loop.last=null;seed=9;const svg=$("stage").querySelector("svg");if(!svg)return;const L=svg.querySelector("#runLayer");if(L)L.innerHTML="";
+      const head=svg.querySelector("#head");if(head){head.style.transition="none";head.style.transform="translate(0px, 0px) rotate(360deg)";}
+      [["#q",0],["#cytc",0]].forEach(([sel])=>{const e=svg.querySelector(sel);if(e){e.style.transition="none";e.style.transform="translate(0px, 0px)";}});}};
+  return {key:"etc",num:26,subject:"electron transport chain",enabled:true,n:6,levels:true,
+    title:"Electrons buy a gradient. The gradient buys the ATP.",short:"electron transport chain",eyebrow:"DE Bio 101 Unit 7 · SOL Bio Unit 3 · cellular respiration",
+    tag:[["nrg","Energy transfer"]],bridge:"A signal can also reach all the way to the genes.",
+    note:"When the crowd drains, a few protons drift away from the synthase while the rest fall through it: the gradient runs down as a net flow, not a march.",
+    txt,capColor:CAPCOL,
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,pays:PAYS,loop,sources:SOURCES,
+    blanks:level=>txt(level).blanks.map(([id,name])=>({id,name})),blankClear:["lblPumped2","lblPumped3"],blankHide:["lg1","lg2","lg3","lg4","lg5","lg6","closing"],
+    /* the crowd, for the density assertion (T29): every proton glyph that can be above the membrane, by id */
+    crowd:{above:PR.concat(PE),band:[180,320]},
+    watchIds:{atp:"head",travellers:["q","cytc"].concat(PR,PE)}};
+})();
+
+/* the other two appear in the selector, in the arc's order, disabled until their Phase 2 build */
 /* each carries its permanent Bio Tool number now, so an unbuilt entry reads as numbered and coming */
 const SOON=(key,num,subject,title,tag,bridge,n,levels)=>({key,num,subject,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",txt:()=>({caps:[],prompts:[],closing:"",counter:()=>""}),capColor:[],anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
 FIGS=[GPCR,
   SOON("rtk",24,"receptor tyrosine kinase","Two halves, then several answers at once",[["amp","Amplification"]],"Both of those end in things moving across a membrane.",4),
   TRANSPORT,
-  SOON("etc",26,"electron transport chain","Electrons buy a gradient. The gradient buys the ATP.",[["nrg","Energy transfer"]],"A signal can also reach all the way to the genes.",6),
+  ETC,
   DOGMA,
   SOON("cloning",28,"cloning a gene","Cut both with one enzyme and the ends fit",[["mov","Movement"]],null,5)];
 

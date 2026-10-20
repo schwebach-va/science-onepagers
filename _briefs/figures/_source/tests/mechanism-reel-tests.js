@@ -13,7 +13,7 @@ function res(t,ok,reason){if(R[t]===false)return;R[t]=ok;if(!ok)NOTE[t]=(NOTE[t]
 function note(t,s){NOTE[t]=(NOTE[t]?NOTE[t]+' | ':'')+s;}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fresh(br,vp,opts){const ctx=await br.newContext(Object.assign({viewport:vp},opts||{}));const pg=await ctx.newPage();
-  pg.on('console',m=>{if(m.type()==='error')consoleErrs.push(m.text());});pg.on('pageerror',e=>consoleErrs.push('PAGEERROR '+e.message));
+  pg.on('console',m=>{if(m.type()==='error'){const u=(m.location()||{}).url||'';consoleErrs.push(m.text()+(u?' @ '+u:''));}});pg.on('pageerror',e=>consoleErrs.push('PAGEERROR '+e.message));
   pg.on('requestfailed',q=>{const u=q.url();if(!/fonts\.g(oogleapis|static)\.com/.test(u))consoleErrs.push('REQFAIL '+u);});
   return {ctx,pg};}
 async function open(pg,url){await pg.goto(url||URL,{waitUntil:'load'});await pg.waitForFunction(()=>window.__MR&&window.__MR.fig());}
@@ -39,7 +39,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
     const {ctx,pg}=await fresh(br,vp);
     /* T1: six deep links; every figure not yet built asserts as disabled, not missing.
        Add a key to BUILT as each Phase 2 figure lands. */
-    const BUILT=['gpcr','dogma','transport'];
+    const BUILT=['gpcr','dogma','transport','etc'];
     for(const k of KEYS){await open(pg,`${URL}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(BUILT.includes(k)){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
