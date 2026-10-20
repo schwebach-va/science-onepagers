@@ -22,13 +22,14 @@
   "T26": true,
   "T8": true,
   "T11": true,
+  "T32": true,
   "T27": true,
   "T12": true,
   "T19": "N/A",
   "T20": "N/A"
  },
  "NOTE": {
-  "T1": "1180x820: ?anim=gpcr&step=n opens state n unlit; &runon=paused holds the run-on on Play; Pause stops it; Back clears it; the sources line under the reel reads \"Sources: Streb 1983 · Berridge & Irvine 1984 · Rasmussen 2011\" and follows the figure (R6) | 390x844: ?anim=gpcr&step=n opens state n unlit; &runon=paused holds the run-on on Play; Pause stops it; Back clears it; the sources line under the reel reads \"Sources: Streb 1983 · Berridge & Irvine 1984 · Rasmussen 2011\" and follows the figure (R6)",
+  "T1": "1180x820: ?anim=gpcr&step=n opens state n unlit; &runon=paused holds the run-on on Play; Pause stops it; Back clears it; the sources line under the reel reads \"Sources: Streb 1983 · Berridge & Irvine 1984 · Rasmussen 2011\" and follows the figure (R6) | 390x844: ?anim=gpcr&step=n opens state n unlit; &runon=paused holds the run-on on Play; Pause stops it; Back clears it; the sources line under the reel reads \"Sources: Streb 1983 · Berridge & Irvine 1984 · Rasmussen 2011\" and follows the figure (R6) | B2: back link \"← Biology Classroom Tools\" → ../classroom-tools.html at SOL, \"← DE Biology 101 Resources\" → ../de-biology-101-resources.html at DE; footer course line \"DE Bio 101 Unit 5 · G-protein-coupled receptors\"; B3: \"Print the still (PNG)\" → ../figures/01-gpcr-pathway.png, \"Where these diagrams come from\" → ../figure-sources.html#gpcr",
   "T4": "1180x820: min label 18.13 px at a 1000 px stage; smallest sub/superscript run 15.3 px | 390x844: min label 18.13 px at a 1000 px stage; smallest sub/superscript run 15.3 px",
   "T9": "1180x820: level switch present on gpcr; SOL and DE captions and labels differ; PKC drawn at DE only | 390x844: level switch present on gpcr; SOL and DE captions and labels differ; PKC drawn at DE only",
   "T17": "1180x820: step durations ms [1300,750,900,1700,800,1800]; beats at steps 4 and 6 | 390x844: step durations ms [1300,750,900,1700,800,1800]; beats at steps 4 and 6",
@@ -36,9 +37,10 @@
   "T21": "1180x820: during step 4, 4 parts scaled and 433 of 437 drawing parts dimmed to half; all settled after | 390x844: during step 4, 4 parts scaled and 433 of 437 drawing parts dimmed to half; all settled after",
   "T24": "1180x820: end \"Outside: 1 signal molecule. Inside: 14 IP₃, 28 calcium ions\" | 390x844: end \"Outside: 1 signal molecule. Inside: 14 IP₃, 28 calcium ions\"",
   "T25": "1180x820: 11 labels blanked at >= 18.13 px; reveal lists them all | 390x844: 11 labels blanked at >= 18.13 px; reveal lists them all",
-  "T26": "1180x820: step 2 took 1577 ms at half speed (750 ms at full) | 390x844: step 2 took 1575 ms at half speed (750 ms at full)",
-  "T27": "1920x1080 fill: stage 1352x883 of 1920x1080, panel 539 px wide",
+  "T26": "1180x820: step 2 took 1574 ms at half speed (750 ms at full) | 390x844: step 2 took 1571 ms at half speed (750 ms at full)",
+  "T32": "1440x900: stage top 226 px, step-1 prediction card 428-650 of 900; no ?anim=: stage top 1153 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 428-650 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
+  "T27": "1920x1080 fill: stage 1352x859 of 1920x1080, panel 539 px wide",
   "T19": "No ATP is spent in gpcr; applies to transport, etc and rtk in Phase 2",
-  "T20": "Phase 2 (rtk)"
+  "T20": "rtk only: see mechanism-reel-tests-rtk.js"
  }
 }

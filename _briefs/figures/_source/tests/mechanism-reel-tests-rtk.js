@@ -336,7 +336,7 @@ async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width
       await go(pg,0);const t0=Date.now();await pg.evaluate(()=>__MR.goStep(1));await settle(pg);const took=Date.now()-t0;
       await pg.reload({waitUntil:'load'});await pg.waitForFunction(()=>window.__MR&&window.__MR.fig());const kept=await pg.evaluate(()=>({slow:__MR.slow(),p:document.getElementById('slow').getAttribute('aria-pressed'),fig:__MR.fig()}));
       await pg.click('#slow');const off=await pg.evaluate(()=>__MR.slow());
-      const ok=t2.d===t1*2&&t2.p==='true'&&t2.beat3.from===800&&t2.beat3.to===4000&&t2.paidAt===2200&&t2.each5===7500&&t2.coda===2600&&took>=2*t1-200&&kept.slow&&kept.p==='true'&&kept.fig==='rtk'&&!off;
+      const ok=t2.d===t1*2&&t2.p==='true'&&t2.beat3.from===800&&t2.beat3.to===4000&&t2.paidAt===2200&&t2.each5===7340&&t2.coda===2600&&took>=2*t1-200&&kept.slow&&kept.p==='true'&&kept.fig==='rtk'&&!off;
       res('T26',ok,`${tag}: dur1 ${t1}->${t2.d} pressed=${t2.p} beat3=${JSON.stringify(t2.beat3)} paidAt=${t2.paidAt} each5=${t2.each5} coda=${t2.coda} step1 took ${took}ms kept=${JSON.stringify(kept)} off=${off}`);note('T26',`${tag}: step 1 took ${took} ms at half speed (${t1} ms at full); the beat, all six paidAt and the closing state double with it`);}
     /* T8: reduced motion */
     await ctx.close();

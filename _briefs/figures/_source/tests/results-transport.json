@@ -24,12 +24,13 @@
   "T26": true,
   "T8": true,
   "T11": true,
+  "T32": true,
   "T27": true,
   "T12": true,
   "T20": "N/A"
  },
  "NOTE": {
-  "T1": "1180x820: ?anim=transport&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout; Pause stops it; Back clears the clones and the wandering ion; the sources line under the reel reads \"Source: Skou 1957\" and follows the figure (R6) | 390x844: ?anim=transport&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout; Pause stops it; Back clears the clones and the wandering ion; the sources line under the reel reads \"Source: Skou 1957\" and follows the figure (R6)",
+  "T1": "1180x820: ?anim=transport&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout; Pause stops it; Back clears the clones and the wandering ion; the sources line under the reel reads \"Source: Skou 1957\" and follows the figure (R6) | 390x844: ?anim=transport&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout; Pause stops it; Back clears the clones and the wandering ion; the sources line under the reel reads \"Source: Skou 1957\" and follows the figure (R6) | B2: back link \"← Biology Classroom Tools\" → ../classroom-tools.html at SOL, \"← DE Biology 101 Resources\" → ../de-biology-101-resources.html at DE; footer course line \"DE Bio 101 Unit 5 · SOL Bio Module 2 · transport\"; B3: \"Print the still (PNG)\" → ../figures/03-channel-and-pump.png, \"Where these diagrams come from\" → ../figure-sources.html#transport",
   "T4": "1180x820: min label 18.13 px at a 1000 px stage; smallest sub/superscript run 12.75 px (the ⁺ on Na⁺ and K⁺, as on gpcr's Ca²⁺) | 390x844: min label 18.13 px at a 1000 px stage; smallest sub/superscript run 12.75 px (the ⁺ on Na⁺ and K⁺, as on gpcr's Ca²⁺)",
   "T9": "1180x820: level switch present on transport; SOL and DE captions and labels differ (gated channel / ligand-gated channel, pump / sodium-potassium pump, 3 sodium out / 3 Na⁺ out; crowded-to-scarce and energy molecule / electrochemical gradient and Na⁺/K⁺ ATPase in the prompts) | 390x844: level switch present on transport; SOL and DE captions and labels differ (gated channel / ligand-gated channel, pump / sodium-potassium pump, 3 sodium out / 3 Na⁺ out; crowded-to-scarce and energy molecule / electrochemical gradient and Na⁺/K⁺ ATPase in the prompts)",
   "T17": "1180x820: step durations ms [2300,4200,500]; the one beat is step 2 (ATP splits before the pump moves anything, 400-1700 ms); step 1 has none, so the channel feels effortless by comparison (D2) | 390x844: step durations ms [2300,4200,500]; the one beat is step 2 (ATP splits before the pump moves anything, 400-1700 ms); step 1 has none, so the channel feels effortless by comparison (D2)",
@@ -39,9 +40,10 @@
   "T21": "1180x820: during step 2, 7 parts scaled and 306 of 307 drawing parts dimmed; the channel side held at half through state 2 (D1), the pump side at half through state 1, both full at state 3 | 390x844: during step 2, 7 parts scaled and 306 of 307 drawing parts dimmed; the channel side held at half through state 2 (D1), the pump side at half through state 1, both full at state 3",
   "T24": "390x844: no counter on transport (D4); the run-on ran both sides, 8 clones after 2.6 s, held at 18 (12 sodium, 4 potassium, 2 phosphate), no number on screen",
   "T25": "1180x820: 13 labels blanked at >= 18.13 px with the run-on cleared; reveal lists them all; the check is \"Does sodium need energy to move through the channel?\" | 390x844: 13 labels blanked at >= 18.13 px with the run-on cleared; reveal lists them all; the check is \"Does sodium need energy to move through the channel?\"",
-  "T26": "1180x820: step 1 took 4667 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it | 390x844: step 1 took 4681 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it",
+  "T26": "1180x820: step 1 took 4663 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it | 390x844: step 1 took 4673 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it",
   "T8": "1180x820: reduced motion: no stage animation in any transition or in the run-on (8 clones placed, not moved); captions intact | 390x844: reduced motion: no stage animation in any transition or in the run-on (8 clones placed, not moved); captions intact",
-  "T27": "1920x1080 fill: stage 1352x883 of 1920x1080, panel 539 px wide",
-  "T20": "rtk only"
+  "T32": "1440x900: stage top 226 px, step-1 prediction card 484-782 of 900; no ?anim=: stage top 1153 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 484-782 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
+  "T27": "1920x1080 fill: stage 1352x859 of 1920x1080, panel 539 px wide",
+  "T20": "rtk only: see mechanism-reel-tests-rtk.js"
  }
 }

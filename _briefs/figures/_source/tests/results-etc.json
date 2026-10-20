@@ -24,13 +24,14 @@
   "T26": true,
   "T8": true,
   "T11": true,
+  "T32": true,
   "T27": true,
   "T12": true,
   "T20": "N/A",
   "T28": "N/A"
  },
  "NOTE": {
-  "T1": "1180x820: ?anim=etc&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout and the head at rest; Play turns the head and sends protons up; Pause stops it; Back clears the clones, the head and the carriers; the sources line under the reel reads \"Sources: Mitchell 1961 · Boyer 1997\" and follows the figure (R6, D11) | 390x844: ?anim=etc&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout and the head at rest; Play turns the head and sends protons up; Pause stops it; Back clears the clones, the head and the carriers; the sources line under the reel reads \"Sources: Mitchell 1961 · Boyer 1997\" and follows the figure (R6, D11)",
+  "T1": "1180x820: ?anim=etc&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout and the head at rest; Play turns the head and sends protons up; Pause stops it; Back clears the clones, the head and the carriers; the sources line under the reel reads \"Sources: Mitchell 1961 · Boyer 1997\" and follows the figure (R6, D11) | 390x844: ?anim=etc&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout and the head at rest; Play turns the head and sends protons up; Pause stops it; Back clears the clones, the head and the carriers; the sources line under the reel reads \"Sources: Mitchell 1961 · Boyer 1997\" and follows the figure (R6, D11) | B2: back link \"← Biology Classroom Tools\" → ../classroom-tools.html at SOL, \"← DE Biology 101 Resources\" → ../de-biology-101-resources.html at DE; footer course line \"DE Bio 101 Unit 7 · SOL Bio Unit 3 · cellular respiration\"; B3: \"Print the still (PNG)\" → ../figures/04-electron-transport-chain.png, \"Where these diagrams come from\" → ../figure-sources.html#etc",
   "T4": "1180x820: min label 18.13 px at a 1000 px stage; smallest sub/superscript run 12.75 px (the ₂ on FADH₂ and H₂O and the ⁺ on H⁺, as on gpcr's Ca²⁺) | 390x844: min label 18.13 px at a 1000 px stage; smallest sub/superscript run 12.75 px (the ₂ on FADH₂ and H₂O and the ⁺ on H⁺, as on gpcr's Ca²⁺)",
   "T9": "1180x820: level switch present on etc; SOL and DE captions, labels and prompts differ (energy carriers / NADH and FADH2, hydrogen ions / protons, protein pumps / Complexes I, III and IV, ATP-making enzyme / ATP synthase; Chemiosmosis at DE only) | 390x844: level switch present on etc; SOL and DE captions, labels and prompts differ (energy carriers / NADH and FADH2, hydrogen ions / protons, protein pumps / Complexes I, III and IV, ATP-making enzyme / ATP synthase; Chemiosmosis at DE only)",
   "T17": "1180x820: step durations ms [1000,1800,2300,1200,2400,1500]; the two beats are step 3 (the proton crowd thickens above the membrane, 400-2000 ms) and step 5 (the crowd drains through the synthase, 400-2100 ms); nothing else moved inside either | 390x844: step durations ms [1000,1800,2300,1200,2400,1500]; the two beats are step 3 (the proton crowd thickens above the membrane, 400-2000 ms) and step 5 (the crowd drains through the synthase, 400-2100 ms); nothing else moved inside either",
@@ -40,10 +41,11 @@
   "T21": "1180x820: during step 3, 23 parts scaled and 349 of 372 drawing parts dimmed; Complex II held at half and still while I, III and IV pumped (D3) | 390x844: during step 3, 23 parts scaled and 349 of 372 drawing parts dimmed; Complex II held at half and still while I, III and IV pumped (D3)",
   "T24": "390x844: no counter on etc (D6); the run-on sent 3 protons up after 2.6 s, held at 6 (3 in the crowd, 3 fallen back through the synthase), the head at 1800 degrees and still turning, no number on screen",
   "T25": "1180x820: 19 labels blanked at >= 18.13 px with the run-on cleared and the head at rest; reveal lists them all; the check is \"Does oxygen make the ATP?\" | 390x844: 19 labels blanked at >= 18.13 px with the run-on cleared and the head at rest; reveal lists them all; the check is \"Does oxygen make the ATP?\"",
-  "T26": "1180x820: step 1 took 2062 ms at half speed (1000 ms at full); both beats and paidAt double with it | 390x844: step 1 took 2058 ms at half speed (1000 ms at full); both beats and paidAt double with it",
+  "T26": "1180x820: step 1 took 2073 ms at half speed (1000 ms at full); both beats and paidAt double with it | 390x844: step 1 took 2067 ms at half speed (1000 ms at full); both beats and paidAt double with it",
   "T8": "1180x820: reduced motion: no stage animation in any transition or in the run-on (3 clones placed, not moved; the head does not turn); captions intact | 390x844: reduced motion: no stage animation in any transition or in the run-on (3 clones placed, not moved; the head does not turn); captions intact",
-  "T27": "1920x1080 fill: stage 1352x883 of 1920x1080, panel 539 px wide",
-  "T20": "rtk only",
+  "T32": "1440x900: stage top 226 px, step-1 prediction card 597-818 of 900; no ?anim=: stage top 1153 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 597-818 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
+  "T27": "1920x1080 fill: stage 1352x859 of 1920x1080, panel 539 px wide",
+  "T20": "rtk only: see mechanism-reel-tests-rtk.js",
   "T28": "transport only: no protein on etc moves two ions in opposite directions"
  }
 }

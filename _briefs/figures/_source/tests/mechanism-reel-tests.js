@@ -5,6 +5,7 @@ const {chromium}=require('/opt/node22/lib/node_modules/playwright');
 const fs=require('fs');
 const OUT=__dirname;  /* screenshots and results.json land here */
 const URL='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
+const BASE=URL;   /* the Phase 2 suites' name for the same address, used by T32 */
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
@@ -91,7 +92,8 @@ async function t32(br,key){const sizes=[{width:1440,height:900,card:true},{width
     await pg.evaluate(()=>__MR.setFig('gpcr'));
     res('T1',srcG.present&&srcG.visible&&!srcG.disclosed&&srcG.inBuild&&srcG.matches&&/^Sources: Streb 1983 · Berridge & Irvine 1984 · Rasmussen 2011$/.test(srcG.text.trim())&&srcT.visible&&srcT.matches,`${tag}: sources line gpcr=${JSON.stringify(srcG)} transport=${JSON.stringify(srcT)}`);
     note('T1',`${tag}: ?anim=gpcr&step=n opens state n unlit; &runon=paused holds the run-on on Play; Pause stops it; Back clears it; the sources line under the reel reads "${srcG.text.trim()}" and follows the figure (R6)`);
-    /* T15: order and bridges */
+    /* T15: order and bridges (opened with no ?anim=, since a link that names a figure folds the selector to one row, B1) */
+    await open(pg);
     const selText=await pg.evaluate(()=>[...document.querySelectorAll('#sel > li')].map(l=>l.textContent.trim()));
     const titleIdx=TITLES.map(t=>selText.findIndex(s=>s.includes(t)));
     const ordered=titleIdx.every((v,i)=>v>=0&&(i===0||v>titleIdx[i-1]));
