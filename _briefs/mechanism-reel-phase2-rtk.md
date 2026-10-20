@@ -167,3 +167,58 @@ Report every test PASS or FAIL with a one-line reason for each FAIL, T4's minimu
 percentage, the step durations, the D1 before/after crop, and anything in D1–D11 you could not build
 as written (say so rather than choosing silently, as dogma's D2 did). Commit Part A and Part B
 separately. Say which branch you used.
+
+---
+
+# Addendum, 2026-10-20 (1 a.m.): etc was built first. This addendum overrides the brief where they differ.
+
+After this brief was pushed, a separate session built **etc, Bio Tool #26**, on
+`claude/mechanism-reel-etc` (`52f1986`, not merged, awaiting Reid's review on the iPad and Mac).
+Both figures edit `biology/tools/mechanism-reel.html` and the `BUILT` lists in every suite, so
+building rtk beside etc would leave two branches that collide on merge. `claude/mechanism-reel-rtk`
+now **contains etc** (merge commit on this branch). Build rtk on top of it.
+
+**A1. etc stays built.** Ignore "`etc` and `cloning` stay as `SOON(...)`" above. Only `cloning`
+stays `SOON`. Do not change any part of etc's figure, text or timing. If Part B forces a change near
+etc, report it.
+
+**A2. Test numbers move up by one.** etc's suite already defines **T29** (the proton crowd rises in
+step 3 and falls in step 5). The three tests this brief calls T29, T30, T31 are therefore:
+
+| Brief said | Now | What |
+|---|---|---|
+| T29 | **T30** | Each phosphate on one half's tail comes from the other half (trans) |
+| T30 | **T31** | No relay moves before its phosphotyrosine exists |
+| T31 | **T32** | The reel is on the first screen when a link names a figure (Part B, B1) |
+
+Never renumber etc's T29. T28 must still PASS on transport, T29 on etc.
+
+**A3. The full regression is five figures.** Add `rtk` to `BUILT` (it reads
+`['gpcr','dogma','transport','etc']` now) in every suite that carries the list, and update any
+hard-coded "soon" list (the transport suite had one; etc's session fixed it for etc). Run gpcr,
+dogma, transport, etc and rtk suites at both widths. Reported T3 at last run: gpcr 0.868 %, dogma
+0.000 %, transport 0.035 %, etc 0.293 % (fonts from a local TTF; see A5). If any of those moves by
+more than a few hundredths, a final position was disturbed: stop and report.
+
+**A4. Part B covers etc too.** B1/T32 measures every built figure, etc included. B2: etc has
+`levels:true`, so at SOL level its back link goes to Biology Classroom Tools like the others, and its
+footer course line comes from its own eyebrow. B3: etc's still is `03-electron-transport-chain` (check
+the filename in `biology/figures/`), linked the same way.
+
+**A5. Test environment, learned on the etc build.**
+- Google Fonts is blocked in the cloud sandbox. The suites' console filter now carries each error's
+  resource URL so the blocked font fetch is excluded (T12). Keep that filter.
+- T3 compares against stills that embed **Archivo** as base64 woff2. Without the font installed,
+  Chromium renders a fallback face and T3 fails. Extract it from the still's SVG `<style>` data URI,
+  convert to TTF with fontTools, put it in `~/.local/share/fonts` and run `fc-cache -f`.
+- Each suite takes 10–15 minutes. Run them in the background and poll the log.
+
+**A6. Merge order for Reid.** etc first, then rtk. If Reid asks for changes to etc after this build,
+they go on `claude/mechanism-reel-etc` and get merged into this branch again.
+
+**A7. Accuracy, checked 2026-10-20.** The three mechanism claims above stand as written:
+trans-autophosphorylation, one ATP per phosphate (six phosphates on the still, three per tail, so six
+ATP), and SH2-type docking only on phosphotyrosines. Ligand-induced dimerization for the step-2
+default and the pre-paired closing state (insulin-receptor type) for D8 are both correct. If a
+choice you make while building rests on a mechanism claim not in this brief, put it in the report
+under "Mechanism claims I made" so it can be checked.
