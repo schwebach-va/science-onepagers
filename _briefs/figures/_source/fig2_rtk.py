@@ -85,15 +85,26 @@ AX, BX = 1032, 1080
 s += monomer(AX) + monomer(BX) + ligand(AX) + ligand(BX)
 s += rrect(AX - 26, MY - 42, 100, 10, 5, PRO_SIDE)
 s += step(4, 1138, 304, GO)
-for i, (name, resp) in enumerate((("Relay A", "cell grows"),
-                                  ("Relay B", "cell divides"),
-                                  ("Relay C", "cell survives"))):
-    y = MB + 14 + i*62
-    s += tyr(BX + 2, y, 1, True)
-    s += circ(BX + 56, y, 22, PRO_TOP, PRO_SIDE, 3)
-    s += text(BX + 86, y + 10, name, "min", "start", PRO)
-    s += arrow(BX + 212, y, BX + 254, y, GO, 5, "arg")
-    s += text(BX + 268, y + 10, resp, "lab", "start", GO)
+# all six phosphotyrosines stay exactly where stage 3 put them: phosphates do not
+# vanish when relays dock (re-rendered 2026-10-20; before this, stage 4 spaced its
+# three tyrosines at 62 px on a tail drawn for 28, so Relay C sat below the tail)
+for i in range(3):
+    s += tyr(AX - 2, MB + 22 + i*28, -1, True)
+    s += tyr(BX + 2, MB + 22 + i*28, 1, True)
+# each relay seats on one of the right tail's phosphates. Three 22 px circles on
+# 28 px spacing collide in a column, so they fan out: each centre is 33 px
+# (11 + 22, touching) from its own phosphate, at -10, 30 and 85 degrees
+import math
+PHX = BX + 2 + 23
+RELAYS = (("Relay A", "cell grows", -10), ("Relay B", "cell divides", 30), ("Relay C", "cell survives", 85))
+for i, (name, resp, ang) in enumerate(RELAYS):
+    py = MB + 22 + i*28
+    cx = PHX + 33*math.cos(math.radians(ang))
+    cy = py + 33*math.sin(math.radians(ang))
+    s += circ(cx, cy, 22, PRO_TOP, PRO_SIDE, 3)
+    s += text(BX + 86, cy + 10, name, "min", "start", PRO)
+    s += arrow(BX + 212, cy, BX + 254, cy, GO, 5, "arg")
+    s += text(BX + 268, cy + 10, resp, "lab", "start", GO)
 
 s += rrect(1026, 646, 522, 56, 8, GO_SOFT, GO, 3)
 s += text(1052, 684, "One signal, several answers", "key", "start", GO)

@@ -11,7 +11,7 @@ const OUT=__dirname;  /* screenshots and results-transport.json land here */
 const BASE='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
 const URL=BASE+'?anim=transport';
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
-const ENABLED={gpcr:true,dogma:true,transport:true,etc:true};
+const ENABLED={gpcr:true,rtk:true,dogma:true,transport:true,etc:true};
 const N=3;   /* transport has three states (D1) */
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
@@ -86,7 +86,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
     const bridgesOk=BRIDGES.every((b,i)=>{const j=selText.findIndex(s=>s===b);return j===titleIdx[i]+1;});
     const soon=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
     const tags=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn[data-fig="transport"] .tag')].map(t=>t.textContent));
-    res('T15',ordered&&bridgesOk&&soon.join(',')==='rtk,cloning'&&tags.join('|')==='Movement|Energy transfer',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} tags=${tags}`);
+    res('T15',ordered&&bridgesOk&&soon.join(',')==='cloning'&&tags.join('|')==='Movement|Energy transfer',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} tags=${tags}`);
     /* T2 */
     const w=await walkT2(pg,tag);res('T2',w.ok,w.why);
     /* T4: every step, both levels */
@@ -322,7 +322,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
   /* T12 */
   const errs=consoleErrs.filter(e=>!/fonts\.g(oogleapis|static)\.com/.test(e));
   res('T12',errs.length===0,`console: ${errs.slice(0,3).join(' || ')}`);
-  R.T20='N/A';NOTE.T20='rtk only';
+  R.T20='N/A';NOTE.T20='rtk only: see mechanism-reel-tests-rtk.js';
   fs.writeFileSync(`${OUT}/results-transport.json`,JSON.stringify({R,NOTE},null,1));
   for(let i=1;i<=28;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
 })().catch(e=>{console.error(e);process.exit(1);});

@@ -10,7 +10,7 @@ const OUT=__dirname;  /* screenshots and results-dogma.json land here */
 const BASE='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
 const URL=BASE+'?anim=dogma';
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
-const ENABLED={gpcr:true,dogma:true,transport:true,etc:true};   /* add a key as each Phase 2 figure lands */
+const ENABLED={gpcr:true,rtk:true,dogma:true,transport:true,etc:true};   /* add a key as each Phase 2 figure lands */
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
 const R={};const NOTE={};const consoleErrs=[];
@@ -255,7 +255,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
   const errs=consoleErrs.filter(e=>!/fonts\.g(oogleapis|static)\.com/.test(e));
   res('T12',errs.length===0,`console: ${errs.slice(0,3).join(' || ')}`);
   R.T19='N/A';NOTE.T19='No ATP is spent in dogma; applies to transport, etc and rtk';
-  R.T20='N/A';NOTE.T20='rtk only';
+  R.T20='N/A';NOTE.T20='rtk only: see mechanism-reel-tests-rtk.js';
   fs.writeFileSync(`${OUT}/results-dogma.json`,JSON.stringify({R,NOTE},null,1));
   for(let i=1;i<=27;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
 })().catch(e=>{console.error(e);process.exit(1);});

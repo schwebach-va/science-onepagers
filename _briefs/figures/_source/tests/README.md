@@ -15,13 +15,16 @@ node mechanism-reel-tests-transport.js        # Phase 2, transport: the same tab
 python3 t3-compare-transport.py               # T3 for transport, from the suite's own screenshots, against ../../03-channel-and-pump.png
 node mechanism-reel-tests-etc.js              # Phase 2, etc: the same table with T19 on the synthase (D5) and T29, the proton-density assertion (D2), ~12 minutes
 python3 t3-compare-etc.py                     # T3 for etc, from the suite's own screenshots, against ../../04-electron-transport-chain.png
+node mechanism-reel-tests-rtk.js              # Phase 2, rtk: the same table with T19 per phosphate (D3), T20 (the closing state, D8), T30 (trans, D2), T31 (relays after phosphates, D4), ~12 minutes
+python3 t3-compare-rtk.py                     # T3 for rtk, from the suite's own screenshot, against ../../02-receptor-tyrosine-kinase.png (re-rendered 2026-10-20, D1)
 ```
 
-`mechanism-reel-tests-etc.js` reads the Playwright path from `PLAYWRIGHT_PATH` when it is set, so on a Mac
+`mechanism-reel-tests-etc.js` and `mechanism-reel-tests-rtk.js` read the Playwright path from `PLAYWRIGHT_PATH` when it is set, so on a Mac
 `PLAYWRIGHT_PATH=/path/to/node_modules/playwright node mechanism-reel-tests-etc.js` runs it without an edit.
 Chromium needs Archivo installed as a system font when the Google Fonts fetch is blocked, or T3 compares a
 fallback face: the stills embed Archivo 600 and 700 as woff2, and a copy converted to TTF (fontTools) in the
-user font folder is enough.
+user font folder is enough (`fc-cache -f` after; the family name inside the subset reads "Archivo SemiBold", so rename it to "Archivo" with fontTools if Chromium does not match it).
+`D1-rtk-stage4-before-after.png` is the crop the rtk brief asked for: stage 4 of the rtk still before and after the 2026-10-20 re-render.
 
 `mechanism-reel-tests.js` requires Playwright at `/opt/node22/lib/node_modules/playwright`; change the
 `require` line to `require('playwright')` after `npm i playwright` elsewhere. `t3-compare.py` needs Pillow and numpy.

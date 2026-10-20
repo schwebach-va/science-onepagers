@@ -39,7 +39,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
     const {ctx,pg}=await fresh(br,vp);
     /* T1: six deep links; every figure not yet built asserts as disabled, not missing.
        Add a key to BUILT as each Phase 2 figure lands. */
-    const BUILT=['gpcr','dogma','transport','etc'];
+    const BUILT=['gpcr','rtk','dogma','transport','etc'];
     for(const k of KEYS){await open(pg,`${URL}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(BUILT.includes(k)){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
@@ -236,7 +236,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
   const errs=consoleErrs.filter(e=>!/fonts\.g(oogleapis|static)\.com/.test(e));
   res('T12',errs.length===0,`console: ${errs.slice(0,3).join(' || ')}`);
   R.T19='N/A';NOTE.T19='No ATP is spent in gpcr; applies to transport, etc and rtk in Phase 2';
-  R.T20='N/A';NOTE.T20='Phase 2 (rtk)';
+  R.T20='N/A';NOTE.T20='rtk only: see mechanism-reel-tests-rtk.js';
   fs.writeFileSync(`${OUT}/results.json`,JSON.stringify({R,NOTE},null,1));
   for(let i=1;i<=27;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
 })().catch(e=>{console.error(e);process.exit(1);});

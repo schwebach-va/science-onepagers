@@ -193,6 +193,10 @@ button{font:inherit;cursor:pointer}
 @media (min-width:900px){.sources{text-align:left}}
 /* a figure may add one line under its closing caption (transport, R2) */
 .afterline{font-family:var(--sans);font-size:.98rem;line-height:1.45;margin:0 0 .9rem}
+/* the closing state after the last step (rtk, D8): its line and its one button */
+.coda{border-top:1.5px solid var(--rule);padding-top:.8rem;margin:0 0 .9rem}
+.codaline{font-family:var(--sans);font-size:.98rem;line-height:1.45;margin:0 0 .6rem}
+.coda .then{margin:.4rem 0 0}
 .endscreen{border-top:1.5px solid var(--rule);padding-top:.9rem;margin-top:.4rem}
 .endscreen .q{font-family:var(--sans);font-weight:600;font-size:1rem;display:block;margin:0 0 .45rem}
 .endscreen textarea{display:block;width:100%;font:inherit;font-size:1rem;line-height:1.4;padding:.55rem .7rem;border:1.5px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink);margin:0 0 .9rem;resize:vertical}
@@ -382,6 +386,7 @@ let F=null,EL={},TOP=[],cur=0;
 let busy=false,busyT=null,focusLive=false;
 let playing=false,playT=null,loopOn=false;
 let fillOn=false,runonHold=false,blankOn=false,revealList=false;
+let codaOn=false;   /* the uncounted closing state after the last step, where a figure has one (rtk, D8) */
 let MOTION_BASE=null;   /* the shared sentence under the reel; a figure may add one of its own (transport, D3) */
 const HOLD=1500,FOCUS_HOLD=1500;
 const SP=()=>st.slow?2:1;
@@ -399,16 +404,18 @@ const TXT=()=>F.txt(st.level);
 function setTr(e,du,d){e.style.transition=du?`transform ${du}ms ease-in-out ${d||0}ms, opacity ${du}ms ease-in-out ${d||0}ms`:"none";}
 function blankHidden(id){return blankOn&&F.blankHide&&F.blankHide.indexOf(id)>=0;}
 function focusSet(k){return new Set((F.focus&&F.focus[k])||[]);}
+/* parts that appear on a delay inside a step: left alone by the focus dim, and not scaled */
+function keepSet(k){return new Set((F.keep&&F.keep[k])||[]);}
 function buildStage(){const stage=$("stage");stage.innerHTML=F.svg(st.level);stage.setAttribute("aria-label",F.title);
   EL={};F.anim.forEach(id=>{const e=stage.querySelector("#"+id);if(e){e.classList.add("mv");EL[id]=e;}});
   const main=stage.querySelector("#mr-main");TOP=main?Array.from(main.children):[];
   if(blankOn){const names=F.blanks(st.level);names.forEach((b,i)=>{const t=stage.querySelector("#"+b.id);if(t){t.dataset.full=t.textContent;t.textContent="( "+(i+1)+" )";}});
     (F.blankClear||[]).forEach(id=>{const t=stage.querySelector("#"+id);if(t)t.textContent="";});}}
-function apply(k,opts){opts=opts||{};const S=F.state(k,st.level);const fwd=k===cur+1;const base=(F.dur[k]||700)*SP();
-  const tween=!REDUCE&&!opts.jump&&k!==cur;const fs=opts.focus&&!REDUCE?focusSet(k):null;ST.clear();let end=0;
+function apply(k,opts){opts=opts||{};const codaNow=codaOn&&k===F.n;const S=F.state(k,st.level,codaNow);const fwd=opts.coda?codaNow:k===cur+1;
+  const tween=!REDUCE&&!opts.jump&&(k!==cur||!!opts.coda);const fs=opts.focus&&!REDUCE?focusSet(opts.coda?"coda":k):null;ST.clear();let end=0;
   for(const id of F.anim){const e=EL[id];if(!e)continue;const v=S[id]||{};const x=v.x||0,y=v.y||0,r=v.r||0;let o=v.o==null?1:v.o;if(blankHidden(id))o=0;
     let d=0,du=0,way=null;
-    if(tween){if(fwd){const q=F.seq[k]&&F.seq[k][id];d=(q&&q.d||0)*SP();du=(q&&q.dur||F.dur[k]||700)*SP();way=q&&q.way||null;}else du=600*SP();}
+    if(tween){if(fwd){const SQ=opts.coda?F.coda.seq:F.seq[k];const q=SQ&&SQ[id];d=(q&&q.d||0)*SP();du=(q&&q.dur||(opts.coda?F.coda.dur:F.dur[k])||700)*SP();way=q&&q.way||null;}else du=600*SP();}
     const sc=fs&&fs.has(id)?" scale(1.3)":"";
     const tf=(px,py)=>`translate(${px}px, ${py}px)`+(r?` rotate(${r}deg)`:"")+sc;
     if(way&&way.length){const seg=du/(way.length+1);setTr(e,seg,d);e.style.transform=tf(way[0][0],way[0][1]);e.style.opacity=String(o);
@@ -418,18 +425,18 @@ function apply(k,opts){opts=opts||{};const S=F.state(k,st.level);const fwd=k===c
   if(!tween)void $("stage").offsetWidth;   /* a jump sets values with no transition: flush them now, so the next forward step tweens from here and not from a stale style */
   cur=k;return end;}
 /* focus: dim every top-level part of the drawing that is not part of this step */
-function dimAll(k){const fs=focusSet(k);const S=F.state(k,st.level);const dur=REDUCE?0:300*SP();
-  TOP.forEach(c=>{const keep=(c.id&&fs.has(c.id))||Array.from(fs).some(id=>c.querySelector("#"+id));if(keep)return;
+function dimAll(k){const key=codaOn&&k===F.n?"coda":k;const fs=focusSet(key),ks=keepSet(key);const S=F.state(k,st.level,codaOn&&k===F.n);const dur=REDUCE?0:300*SP();
+  TOP.forEach(c=>{const keep=(c.id&&(fs.has(c.id)||ks.has(c.id)))||Array.from(fs).some(id=>c.querySelector("#"+id));if(keep)return;
     const base=(c.id&&EL[c.id])?((S[c.id]||{}).o==null?1:(S[c.id]||{}).o):parseFloat(c.getAttribute("opacity")||"1");
     c.style.transition=dur?`opacity ${dur}ms ease-in-out`:"none";c.style.opacity=String(blankHidden(c.id)?0:base*0.5);c.dataset.dim="1";});
   focusLive=true;}
-function undimAll(){if(!focusLive)return;const S=F.state(cur,st.level);const dur=REDUCE?0:300*SP();
+function undimAll(){if(!focusLive)return;const key=codaOn&&cur===F.n?"coda":cur;const S=F.state(cur,st.level,codaOn&&cur===F.n);const dur=REDUCE?0:300*SP();
   TOP.forEach(c=>{if(!c.dataset.dim)return;delete c.dataset.dim;c.style.transition=dur?`opacity ${dur}ms ease-in-out`:"none";
     if(c.id&&EL[c.id]){const o=(S[c.id]||{}).o==null?1:(S[c.id]||{}).o;c.style.opacity=String(blankHidden(c.id)?0:o);}else c.style.opacity="";});
-  focusSet(cur).forEach(id=>{const e=EL[id];if(!e)return;const v=S[id]||{};setTr(e,dur,0);e.style.transform=`translate(${v.x||0}px, ${v.y||0}px)`+(v.r?` rotate(${v.r}deg)`:"");});
+  focusSet(key).forEach(id=>{const e=EL[id];if(!e)return;const v=S[id]||{};setTr(e,dur,0);e.style.transform=`translate(${v.x||0}px, ${v.y||0}px)`+(v.r?` rotate(${v.r}deg)`:"");});
   focusLive=false;}
 function goStep(k,opts){opts=opts||{};k=clamp(k,0,F.n);
-  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();undimAll();
+  stopLoop();codaOn=false;if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();undimAll();
   const jump=!!opts.jump||Math.abs(k-cur)!==1;
   const end=apply(k,{jump,focus:!jump});if(!jump)dimAll(k);busy=end>0;
   perFig(F.key).step=k;save();syncUrl();renderDots();renderCard();syncNext();syncCtl();
@@ -481,6 +488,13 @@ function capItem(i,cls){const li=el("li","cap"+(cls?" "+cls:""));li.dataset.step
   li.innerHTML=`<span class="b" style="background:${F.capColor[i-1]}">${i}</span><span>${esc(TXT().caps[i-1])}</span>`;return li;}
 /* the closing caption, and the one line a figure may hang under it (R2) */
 function addClosing(card,X){card.appendChild(el("p","closing",esc(X.closing)));if(X.after)card.appendChild(el("p","afterline",esc(X.after)));}
+/* the closing state's card: its one line while it shows, and the button that opens or closes it (rtk, D8) */
+function codaBox(card,X){const C=X.coda;if(!C)return;const box=el("div","coda");box.id="coda";
+  if(codaOn){box.appendChild(el("p","sub",esc(C.label)));box.appendChild(el("p","codaline",esc(C.line)));
+    if(!busy){const b=el("button","ghost");b.type="button";b.id="codaOff";b.textContent=C.back;b.addEventListener("click",()=>setCoda(false));box.appendChild(b);}}
+  else{const b=el("button","ghost");b.type="button";b.id="codaBtn";b.textContent=C.label;b.addEventListener("click",()=>setCoda(true));box.appendChild(b);
+    box.appendChild(el("p","fine then",esc(C.hint||"Optional, after the four steps: what the newest structures show.")));}
+  card.appendChild(box);}
 function optBtn(label,pressed,fn){const b=el("button","opt");b.type="button";b.textContent=label;b.setAttribute("aria-pressed",String(!!pressed));b.addEventListener("click",fn);return b;}
 function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X=TXT(),per=perFig(F.key);
   if(blankOn){card.appendChild(el("div","meta",`<span>Label it from memory</span><span>${esc(F.short)}</span>`));
@@ -498,6 +512,7 @@ function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X
     if(X.start)card.appendChild(el("p","",esc(X.start)));
     const ul=el("ul","caps");for(let i=1;i<=F.n;i++)ul.appendChild(capItem(i,i===cur?(busy?"cur live":"cur"):""));card.appendChild(ul);
     addClosing(card,X);
+    if(F.coda&&(codaOn||cur===F.n&&!busy))codaBox(card,X);
     if(cur===F.n&&!busy){if(X.watch)card.appendChild(el("p","watch",esc(X.watch)));if(F.blanks){const b=el("button","ghost");b.type="button";b.id="blankBtn";b.textContent="Label it from memory";b.addEventListener("click",()=>setBlank(true));card.appendChild(b);}}
     return;}
   if(cur===0){if(X.start)card.appendChild(el("p","",esc(X.start)));}
@@ -508,7 +523,9 @@ function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X
     p.innerHTML=`<span class="tagline">Predict before you press</span><p class="q">${esc(P.q)}</p>`;
     const row=el("div","choices");P.choices.forEach((c,i)=>row.appendChild(optBtn(c,per.pred[k]===i,()=>{per.pred[k]=i;save();renderCard();})));p.appendChild(row);
     p.appendChild(el("p","fine then","Then press Next. Next works whether or not you chose; a choice is only kept on this device."));card.appendChild(p);}
+  if(cur===F.n&&F.coda&&codaOn&&busy)codaBox(card,X);
   if(cur===F.n&&!busy){addClosing(card,X);if(X.watch)card.appendChild(el("p","watch",esc(X.watch)));
+    if(F.coda)codaBox(card,X);
     if(X.end){const E=X.end,box=el("div","endscreen");box.id="endscreen";
       const lab=el("label","",`<span class="q">${esc(E.explain)}</span>`);const ta=document.createElement("textarea");ta.id="explain";ta.rows=2;ta.maxLength=400;ta.value=per.explain||"";ta.placeholder="One sentence, in your own words. It stays on this device.";
       ta.addEventListener("input",()=>{per.explain=ta.value.slice(0,400);save();});lab.appendChild(ta);box.appendChild(lab);
@@ -519,7 +536,7 @@ function renderCard(){const card=$("card");card.innerHTML="";const Tv=st.teach,X
       card.appendChild(box);}}}
 let nextEl=null;
 /* at the last step the ring goes to Play when a run-on waits on it; a figure with no run-on sends it to Label it from memory once the card shows it */
-function syncNext(){const t=blankOn?$("card").querySelector("#reveal")||$("play"):cur<F.n?$("next"):F.loop?$("play"):$("card").querySelector("#blankBtn")||$("next");if(t===nextEl&&t.classList.contains("next"))return;
+function syncNext(){const t=blankOn?$("card").querySelector("#reveal")||$("play"):cur<F.n?$("next"):F.loop?$("play"):(F.coda&&!codaOn?$("card").querySelector("#codaBtn"):null)||$("card").querySelector("#blankBtn")||$("next");if(t===nextEl&&t.classList.contains("next"))return;
   document.querySelectorAll(".next").forEach(e=>e.classList.remove("next"));nextEl=t;if(t)t.classList.add("next");}
 function syncCtl(){$("back").disabled=cur<=0||blankOn;$("next").disabled=cur>=F.n||blankOn;
   const on=cur>=F.n?loopOn:playing;$("play").innerHTML=on?"&#10074;&#10074; Pause":"&#9654; Play";$("play").setAttribute("aria-pressed",String(on));$("play").disabled=blankOn||(cur>=F.n&&!F.loop);
@@ -538,8 +555,8 @@ function scrollToCard(){if(fillOn)return;const card=$("card");
   try{window.scrollTo({top:Math.max(0,r.top+window.scrollY-off),behavior:REDUCE?"auto":"smooth"});}catch(e){}}
 
 /* ================= switches ================= */
-function setFig(k){const f=FIGMAP[k];if(!f||!f.enabled)return false;
-  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();playing=false;busy=false;focusLive=false;
+function setFig(k,keepCoda){const f=FIGMAP[k];if(!f||!f.enabled)return false;
+  stopLoop();if(!keepCoda||!f.coda)codaOn=false;if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();playing=false;busy=false;focusLive=false;
   st.fig=k;F=f;cur=clamp(perFig(k).step,0,F.n);save();
   buildStage();apply(cur,{jump:true});
   renderSel();renderLevelRow();renderDots();renderCard();syncNext();syncCtl();
@@ -550,15 +567,23 @@ function setFig(k){const f=FIGMAP[k];if(!f||!f.enabled)return false;
   return true;}
 /* every step has its own link: ?anim=<key>&step=<n>&level=<sol|de>; &runon=paused opens the last step with
    the run-on waiting on Play; &labels=blank opens the blank-label still */
-function syncUrl(){try{const u=new URL(location.href);["fig","runon","labels"].forEach(p=>u.searchParams.delete(p));u.searchParams.set("anim",F.key);u.searchParams.set("step",String(cur));if(F.levels)u.searchParams.set("level",st.level);else u.searchParams.delete("level");if(blankOn)u.searchParams.set("labels","blank");history.replaceState(null,"",u);}catch(e){}}
+function syncUrl(){try{const u=new URL(location.href);["fig","runon","labels"].forEach(p=>u.searchParams.delete(p));u.searchParams.set("anim",F.key);u.searchParams.set("step",String(cur));if(F.levels)u.searchParams.set("level",st.level);else u.searchParams.delete("level");if(blankOn)u.searchParams.set("labels","blank");if(codaOn)u.searchParams.set("coda","1");else u.searchParams.delete("coda");history.replaceState(null,"",u);}catch(e){}}
 function rebuild(){const k=cur;buildStage();cur=-1;apply(k,{jump:true});focusLive=false;renderDots();renderCard();syncNext();syncCtl();syncUrl();}
 function setLevel(l){l=l==="de"?"de":"sol";if(l===st.level)return;st.level=l;save();renderLevelRow();if(F.levels){stopLoop();rebuild();if(cur===F.n&&F.loop&&!blankOn)startLoop();}}
 function setTeach(on){st.teach=!!on;save();syncCtl();renderCard();syncNext();}
 function setSlow(on){st.slow=!!on;save();syncCtl();}
 function setBlank(on,reveal){on=!!on;if(on===blankOn){if(!on&&reveal){revealList=true;renderCard();}return;}
-  blankOn=on;stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}ST.clear();busy=false;playing=false;
+  blankOn=on;stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}ST.clear();busy=false;playing=false;if(on)codaOn=false;
   if(on){revealList=false;cur=F.n;perFig(F.key).step=cur;save();}else revealList=!!reveal;
   rebuild();if(!on)scrollToCard();}
+/* the uncounted closing state after the last step (rtk, D8): the same picture carried one state further, tweened like a step,
+   with its own focus; Back, any step number, the selector or the blank-label still clears it */
+function setCoda(on){on=!!on;if(!F.coda||cur!==F.n||blankOn||busy||on===codaOn)return false;
+  stopLoop();if(busyT){clearTimeout(busyT);busyT=null;}if(playT){clearTimeout(playT);playT=null;}ST.clear();undimAll();playing=false;
+  codaOn=on;const end=apply(F.n,{coda:true,focus:on});if(on)dimAll(F.n);busy=end>0;
+  syncUrl();renderCard();syncNext();syncCtl();
+  const fin=()=>{busy=false;busyT=null;if(on){if(REDUCE)ST.after(undimAll,FOCUS_HOLD*SP());else undimAll();}renderCard();syncNext();syncCtl();};
+  if(busy)busyT=setTimeout(fin,end+40);else fin();return true;}
 function setFill(on){fillOn=!!on;document.documentElement.setAttribute("data-fill",fillOn?"1":"0");syncCtl();
   try{const b=$("build");if(fillOn&&!document.fullscreenElement){if(b.requestFullscreen)b.requestFullscreen().catch(()=>{});else if(b.webkitRequestFullscreen)b.webkitRequestFullscreen();}
     else if(!fillOn&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}}
@@ -574,7 +599,7 @@ function labels(){const svg=$("stage").querySelector("svg");if(!svg)return[];con
     return {text:t.textContent.trim(),id:t.id||null,units,px:+(units*k).toFixed(2),minRunPx:+(minRun*k).toFixed(2),screenPx:+(units*sw/vb.width).toFixed(2),x:r.x,y:r.y,w:r.width,h:r.height,visible:opacityOf(t)>0.01};});}
 function colours(){const out=new Set();$("stage").querySelectorAll("*").forEach(e=>{for(const a of["fill","stroke"]){const v=e.getAttribute(a);if(v&&v!=="none"&&v[0]==="#")out.add(v.toUpperCase());}});return Array.from(out).sort();}
 function state(){const els={};F.anim.forEach(id=>{const e=EL[id];if(e)els[id]={t:e.style.transform,o:e.style.opacity};});
-  return {fig:F.key,step:cur,level:st.level,teach:!!st.teach,slow:!!st.slow,fill:fillOn,blank:blankOn,playing,loop:loopOn,busy,done:Object.assign({},perFig(F.key).done),pred:Object.assign({},perFig(F.key).pred),els};}
+  return {fig:F.key,step:cur,level:st.level,teach:!!st.teach,slow:!!st.slow,fill:fillOn,blank:blankOn,coda:codaOn,playing,loop:loopOn,busy,done:Object.assign({},perFig(F.key).done),pred:Object.assign({},perFig(F.key).pred),els};}
 function elInfo(id){const e=$("stage").querySelector("#"+id);if(!e)return null;const r=e.getBoundingClientRect();return {transform:e.style.transform,opacity:opacityOf(e),styleOpacity:e.style.opacity,x:r.x,y:r.y,w:r.width,h:r.height};}
 function focusInfo(){const scaled=F.anim.filter(id=>EL[id]&&/scale\(/.test(EL[id].style.transform));const dimmed=TOP.filter(c=>c.dataset.dim).map(c=>c.id||c.tagName.toLowerCase());return {live:focusLive,scaled,dimmed,dimmedCount:dimmed.length,topCount:TOP.length};}
 window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title,enabled:!!f.enabled,steps:f.n,levels:!!f.levels})),
@@ -585,10 +610,12 @@ window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title
   choices:k=>TXT().prompts[k-1]?TXT().prompts[k-1].choices.slice():[],predict:(k,c)=>{perFig(F.key).pred[k]=c;save();renderCard();},pred:k=>{const v=perFig(F.key).pred[k];return v==null?null:v;},
   happened:k=>TXT().prompts[k-1]?TXT().prompts[k-1].happened:null,
   teach:()=>!!st.teach,setTeach,slow:()=>!!st.slow,setSlow,fill:()=>fillOn,setFill,reset,stopLoop:()=>{stopLoop();playing=false;syncCtl();},readout:()=>$("readout").textContent,counter:()=>$("counter").textContent,
-  blank:()=>blankOn,setBlank,blanks:()=>F.blanks?F.blanks(st.level).map(b=>Object.assign({},b,{shown:(()=>{const t=$("stage").querySelector("#"+b.id);return t?t.textContent.trim():null;})()})):[],
+  blank:()=>blankOn,setBlank,coda:()=>codaOn,setCoda,blanks:()=>F.blanks?F.blanks(st.level).map(b=>Object.assign({},b,{shown:(()=>{const t=$("stage").querySelector("#"+b.id);return t?t.textContent.trim():null;})()})):[],
   explain:()=>perFig(F.key).explain,setExplain:s=>{perFig(F.key).explain=String(s).slice(0,400);save();renderCard();},enter:()=>perFig(F.key).enter,setEnter:v=>{perFig(F.key).enter=v==="yes"?"yes":"no";save();renderCard();},
   focus:focusInfo,
-  timing:()=>({dur:F.dur.map(d=>d*SP()),seq:F.seq,beats:Object.fromEntries(Object.entries(F.beats).map(([k,b])=>[k,Object.assign({},b,{from:b.from*SP(),to:b.to*SP()})])),hold:HOLD*SP(),speed:SP(),pays:F.pays?Object.assign({},F.pays,{paidAt:F.pays.paidAt*SP()}):null,
+  timing:()=>({dur:F.dur.map(d=>d*SP()),seq:F.seq,beats:Object.fromEntries(Object.entries(F.beats).map(([k,b])=>[k,Object.assign({},b,{from:b.from*SP(),to:b.to*SP()})])),hold:HOLD*SP(),speed:SP(),
+    pays:F.pays?Object.assign({},F.pays,{paidAt:F.pays.paidAt*SP()},F.pays.each?{each:F.pays.each.map(p=>Object.assign({},p,{paidAt:p.paidAt*SP(),landsAt:p.landsAt==null?null:p.landsAt*SP()}))}:{}):null,
+    trans:F.trans||null,relays:F.relays?Object.assign({},F.relays,{lastPhosphateLandsAt:F.relays.lastPhosphateLandsAt*SP()}):null,keep:F.keep||null,coda:F.coda?{dur:F.coda.dur*SP(),seq:F.coda.seq}:null,
     crossings:F.crossings||null,runCrossings:F.loop&&F.loop.crossings?(c=>({period:c.period*SP(),out:c.out.map(([a,b])=>[a*SP(),b*SP()]),in:c.in.map(([a,b])=>[a*SP(),b*SP()])}))(F.loop.crossings()):null}),
   captions:()=>TXT().caps.slice(),closing:()=>TXT().closing,after:()=>TXT().after||null,
   sources:()=>(F.sources||[]).map(x=>x.slice()),sourcesLine:()=>{const p=$("sources");return p?p.textContent:"";},
@@ -599,7 +626,7 @@ window.__MR={fig:()=>F.key,setFig,figs:()=>FIGS.map(f=>({key:f.key,title:f.title
 function init(){load();FIGMAP={};FIGS.forEach(f=>{FIGMAP[f.key]=f;});
   let want=st.fig,stepQ=null;try{const q=new URL(location.href).searchParams;const a=q.get("anim")||q.get("fig");if(a)want=a;
     if(q.get("step")!=null){const n=parseInt(q.get("step"),10);if(!isNaN(n))stepQ=n;}runonHold=q.get("runon")==="paused";
-    if(q.get("level")==="de"||q.get("level")==="sol")st.level=q.get("level");blankOn=q.get("labels")==="blank";}catch(e){}
+    if(q.get("level")==="de"||q.get("level")==="sol")st.level=q.get("level");blankOn=q.get("labels")==="blank";codaOn=q.get("coda")==="1";}catch(e){}
   if(!FIGMAP[want]||!FIGMAP[want].enabled){if(FIGMAP[want]){const n=$("notice");n.textContent=FIGMAP[want].title+" is coming next. Showing the first figure for now.";n.classList.remove("hidden");}
     want=FIGS.find(f=>f.enabled).key;}
   $("next").addEventListener("click",revealNext);$("back").addEventListener("click",back);
@@ -613,7 +640,8 @@ function init(){load();FIGMAP={};FIGS.forEach(f=>{FIGMAP[f.key]=f;});
   document.documentElement.setAttribute("data-fill","0");
   if(stepQ!=null&&FIGMAP[want]&&FIGMAP[want].enabled)perFig(want).step=stepQ;
   if(blankOn&&FIGMAP[want]&&FIGMAP[want].enabled){if(!FIGMAP[want].blanks)blankOn=false;else perFig(want).step=FIGMAP[want].n;}
-  setFig(want);}
+  if(codaOn){if(blankOn||!FIGMAP[want]||!FIGMAP[want].enabled||!FIGMAP[want].coda)codaOn=false;else perFig(want).step=FIGMAP[want].n;}
+  setFig(want,true);}
 
 /* ================= Figure 1: the G-protein-coupled receptor route =================
    One idea: the signal molecule never gets in, yet the inside of the cell changes, because the
@@ -1478,11 +1506,210 @@ const ETC=(function(){
     watchIds:{atp:"head",travellers:["q","cytc"].concat(PR,PE)}};
 })();
 
-/* the other two appear in the selector, in the arc's order, disabled until their Phase 2 build */
-/* each carries its permanent Bio Tool number now, so an unbuilt entry reads as numbered and coming */
+/* ================= Figure 2: the receptor tyrosine kinase =================
+   One idea: two halves have to find each other before anything happens, and once they do, one
+   signal is answered in several ways at once. Geometry is the still's own (fig2_rtk.py, stage 4
+   re-rendered 2026-10-20 so every relay sits on a phosphate that sits on the tail). The still shows
+   four stages side by side; the animation reveals them one per step, left to right, and the movers
+   travel inside each stage. The last step is the still, except where a traveller has moved: the six
+   ADP pentagons that paid for the six phosphates lie in the cytosol beside the dimer.
+   Three things are the figure's content, not polish (brief, 2026-10-19):
+   - trans-autophosphorylation: each phosphate leaves an ATP at one half's kinase domain and crosses
+     to a tyrosine on the OTHER half's tail (D2, T30);
+   - one ATP per phosphate: six splits, each immediately before the phosphate it pays for (D3, T19);
+   - relays dock only on phosphotyrosines that already exist (D4, T31).
+   DE only, no level switch (D5). No run-on and no counter (D11). After step 4 an optional, uncounted
+   closing state shows the same pair already joined, with no ligand (D8, T20). */
+const RTK=(function(){
+  const H=1000,MY=250,MB=400,MID=848;
+  const PH_EDGE="#8A5E16",DEEP="#46345E";
+  const CAPCOL=[P.FLAG,P.PRO,P.CARB,P.GO];
+  const WATERPTS=[[539.3,176.0],[1023.4,170.8],[853.1,190.1],[145.8,199.5],[115.5,194.6],[163.4,172.0],[688.3,220.6],[243.2,180.7],[988.6,228.5],[914.1,192.2],[1504.9,169.1],[1330.5,185.1],[273.5,173.8],[516.6,219.9],[327.5,204.4],[1005.6,190.6],[870.7,170.1],[148.2,179.6],[1067.0,194.2],[524.9,204.6],[730.7,185.8],[1235.7,212.1]];
+  /* the still's two sources, shown under the reel as well (R6) */
+  const SOURCES=[["Lemmon & Schlessinger 2010","https://doi.org/10.1016/j.cell.2010.06.011"],["Zuo 2026","https://doi.org/10.1073/pnas.2602436123"]];
+  /* stage geometry, as the generator sets it */
+  const LX=824,RX=872;                       /* stage 3's two halves */
+  const AX=1032,BX=1080;                     /* stage 4's */
+  const TY=[MB+22,MB+50,MB+78];              /* the three tyrosines on each tail: 422, 450, 478 */
+  const POOL=[762,600];                      /* the still's ATP > ADP token: the pool the six ATP come from */
+  const KL=[818,518],KR=[878,518];           /* where an ATP docks: the foot of the left and the right kinase domain */
+  /* the six phosphates, in the order they are paid for: target tail, tyrosine row, donor kinase, and where the spent ADP comes to rest.
+     Sides alternate so the crossing is visible: the first ATP docks at the RIGHT half's kinase and its phosphate crosses to the LEFT tail */
+  const PHOS=[{tail:"L",row:0,from:KR,rest:[918,556]},{tail:"R",row:0,from:KL,rest:[690,604]},{tail:"L",row:1,from:KR,rest:[926,630]},
+              {tail:"R",row:1,from:KL,rest:[648,662]},{tail:"L",row:2,from:KR,rest:[984,668]},{tail:"R",row:2,from:KL,rest:[700,690]}];
+  const phAt=p=>[p.tail==="L"?LX-2-23:RX+2+23,TY[p.row]];   /* where the still parks the phosphate: 799 or 897 */
+  /* stage 4's relays, as the re-rendered still fans them on the right tail's three phosphates (D1) */
+  const RELAY=[{id:"relA",lbl:"lblRelA",arr:"arrRA",resp:"lblRespA",name:"Relay A",says:"cell grows",ang:-10,from:[1250,598]},
+               {id:"relB",lbl:"lblRelB",arr:"arrRB",resp:"lblRespB",name:"Relay B",says:"cell divides",ang:30,from:[1352,566]},
+               {id:"relC",lbl:"lblRelC",arr:"arrRC",resp:"lblRespC",name:"Relay C",says:"cell survives",ang:85,from:[1196,650]}];
+  const relAt=r=>{const px=BX+2+23,py=TY[RELAY.indexOf(r)];const a=r.ang*Math.PI/180;return [+(px+33*Math.cos(a)).toFixed(1),+(py+33*Math.sin(a)).toFixed(1)];};
+  const CLOSING="No dimer, no phosphates, no answer. Joining up is the switch.";
+  const NOTE1="Some of these receptors are already paired",NOTE2="before the signal arrives; it reshapes it.";
+  /* words. DE only (D5): the still's words, one level */
+  const DE={
+    caps:["Two halves sit apart. One signal each.","Bound, they join up. Neither works alone.","Each half phosphorylates the other, paying with ATP.","Relay proteins dock on those phosphates."],
+    prompts:[
+      {q:"Two receptor halves sit apart in the membrane, and two signal molecules are coming. Where does each signal end up?",choices:["Outside, bound to one half","Inside the cell, carried through the receptor","In the membrane, between the two halves"],happened:"Each signal bound outside, one per half. Nothing crossed the membrane, and the halves are still apart."},
+      {q:"Each half has its signal. What has to happen before anything changes inside the cell?",choices:["The two halves find each other and join","One half passes the signal inside on its own","The signals cross to the inside"],happened:"The two halves drifted together in the membrane and joined into one dimer. Neither works alone."},
+      {q:"The dimer has formed. Each half is a kinase. Which tail does it phosphorylate, and what pays for it?",choices:["The other half's tail, one ATP per phosphate","Its own tail, one ATP per phosphate","The other half's tail, one ATP for all of them"],happened:"Each half phosphorylated the other half's tail. Every phosphate came off its own ATP, and every ADP drifted away."},
+      {q:"The tails are phosphorylated. What do the relay proteins do when they arrive?",choices:["Dock on the phosphates and start their own responses","Carry the signal molecule into the cell","Dock anywhere on the receptor, phosphates or not"],happened:"Each relay docked on a phosphotyrosine that was already there, and the responses started together: grows, divides, survives. The signal molecules never moved."}],
+    closing:CLOSING,
+    start:"Two halves of a receptor sit apart in the membrane. Each can bind one signal molecule. Nothing has arrived yet.",
+    watch:"Look at the signal molecules: still outside, still on the receptor. One bound pair, three relays, three answers at once.",
+    end:{explain:"Explain in one sentence why one signal can start several answers at once.",
+      check:{q:"Can one half, on its own, pass the signal inside?",choices:["Yes","No"],correct:"no",answer:"No. Neither works alone. Each half phosphorylates the other half's tail, so a half by itself has no phosphates and nothing for a relay to dock on."}},
+    coda:{label:"Some receptors are already paired",line:"Some of these receptors are already paired before the signal arrives. The signal does not bring the halves together; it reshapes a pair that already exists, and the rest follows as before.",back:"Back to the four steps"},
+    blanks:[["lblOut","Outside the cell"],["lblCyt","Cytosol"],["lblSig","Signal"],["t1","Two separate halves"],["t2","One dimer"],["lblAtp","ATP > ADP"],
+      ["lblRelA","Relay A"],["lblRespA","cell grows"],["lblRelB","Relay B"],["lblRespB","cell divides"],["lblRelC","Relay C"],["lblRespC","cell survives"],["lblBox","One signal, several answers"]]};
+  const txt=()=>DE;
+  /* one receptor polypeptide: a binding part outside, one pass through the membrane, a tail inside */
+  const monomer=x=>rrect(x-26,MY-36,52,62,12,P.PRO,P.PRO_SIDE,4)+rrect(x-17,MY-2,34,154,8,P.PRO_TOP)+rrect(x-26,MB-6,52,104,12,P.PRO,P.PRO_SIDE,4);
+  const tyrRect=(x,y,on,o)=>rrect(x-11,y-9,22,18,6,on?P.PRO:P.PRO_TOP,P.PRO_SIDE,2,o);
+  const phos=(x,y,o)=>circ(x,y,11,P.CARB,PH_EDGE,2,o);
+  const ligCirc=(x,o)=>circ(x,182,19,P.FLAG,P.HEADEDGE,3,o);
+  const ligArr=(x,o)=>arrow(x,204,x,MY-42,P.FLAG,5,"arf",null,o);
+  const ligand=x=>ligCirc(x)+ligArr(x);
+  const bar=x=>rrect(x-26,MY-42,100,10,5,P.PRO_SIDE);
+  function svg(){const caps=DE.caps;
+    let s=head(H,"Two halves, then several answers at once","DE Bio 101 . Unit 5 . receptor tyrosine kinases");
+    WATERPTS.forEach(([x,y])=>{s+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="9.0" fill="${P.WATER}" opacity="0.5"/>\n`;});
+    s+=bilayer(52,MY,1496,46,11,28,32).svg;
+    s+=text(1548,212,"Outside the cell","min","end",P.INKSOFT,{id:"lblOut"});
+    s+=text(60,448,"Cytosol","min","start",P.INKSOFT,{id:"lblCyt"});
+    /* 1. apart. The two halves and the two signals are movers: the signals drift down in step 1, the halves join in the closing state */
+    s+=grp({id:"h1L"},monomer(196))+grp({id:"h1R"},monomer(300));
+    s+=ligCirc(196,{id:"ligA"})+ligCirc(300,{id:"ligB"})+ligArr(196,{id:"arrA"})+ligArr(300,{id:"arrB"});
+    s+=text(60,182,"Signal","lab","start",P.FLAG,{id:"lblSig"});
+    s+=badge(1,128,304,P.FLAG,25,{id:"b1"});
+    s+=text(248,560,"Two separate halves","min","middle",P.INKSOFT,{id:"t1"});
+    s+=text(52,620,NOTE1,"min","start",P.INKSOFT,{id:"note1"});
+    s+=text(52,654,NOTE2,"min","start",P.INKSOFT,{id:"note2"});
+    /* 2. joined: each half carries its signal and drifts in the membrane until the two meet */
+    s+=arrow(392,466,468,466,P.INK,6,"ar",null,{id:"a12"});
+    s+=grp({id:"h2L"},monomer(556)+ligand(556))+grp({id:"h2R"},monomer(604)+ligand(604));
+    s+=rrect(530,MY-42,100,10,5,P.PRO_SIDE,null,null,{id:"bar2"});
+    s+=badge(2,486,304,P.PRO,25,{id:"b2"});
+    s+=text(580,560,"One dimer","min","middle",P.INKSOFT,{id:"t2"});
+    /* 3. each half phosphorylates the other. The six tyrosines are drawn bare, with the phosphorylated
+       rect over each, shown as its phosphate lands */
+    s+=arrow(660,466,726,466,P.INK,6,"ar",null,{id:"a23"});
+    let p3=monomer(LX)+monomer(RX)+ligand(LX)+ligand(RX)+bar(LX);
+    TY.forEach(y=>{p3+=tyrRect(LX-2,y,false)+tyrRect(RX+2,y,false);});
+    s+=grp({id:"p3"},p3);
+    PHOS.forEach((p,i)=>{s+=tyrRect(p.tail==="L"?LX-2:RX+2,TY[p.row],true,{id:"tyr"+i});});
+    s+=badge(3,756,304,P.CARB,25,{id:"b3"});
+    /* the pool: the still's one ATP > ADP token. Six more ATP start stacked on it, exactly under it */
+    s+=pentagon(POOL[0],POOL[1],23,P.NUC,DEEP,3,{id:"atpPool"});
+    s+=arrow(782,586,826,522,P.NUC,5,"arn",null,{id:"arrAtp"});
+    s+=text(762,652,"ATP > ADP","min","middle",P.NUC,{id:"lblAtp"});
+    /* each ATP is a group drawn at the kinase it will dock on: the pentagon (which becomes the ADP and drifts to
+       its rest) and, under it, the phosphate it carries (which crosses to the other tail) */
+    PHOS.forEach((p,i)=>{const [kx,ky]=p.from;s+=grp({id:"atp"+i},phos(kx,ky,{id:"ph"+i})+pentagon(kx,ky,23,P.NUC,DEEP,3,{id:"adp"+i}));});
+    /* 4. relay proteins dock, and the answers branch. The six phosphotyrosines are the still's; the relays drift in from the cytosol */
+    s+=arrow(946,466,1004,466,P.INK,6,"ar",null,{id:"a34"});
+    let p4=monomer(AX)+monomer(BX)+ligand(AX)+ligand(BX)+bar(AX);
+    TY.forEach(y=>{p4+=tyrRect(AX-2,y,true)+phos(AX-2-23,y)+tyrRect(BX+2,y,true)+phos(BX+2+23,y);});
+    s+=grp({id:"p4"},p4);
+    s+=badge(4,1138,304,P.GO,25,{id:"b4"});
+    RELAY.forEach(r=>{const [cx,cy]=relAt(r);
+      s+=circ(cx,cy,22,P.PRO_TOP,P.PRO_SIDE,3,{id:r.id});
+      s+=text(BX+86,cy+10,r.name,"min","start",P.PRO,{id:r.lbl});
+      s+=arrow(BX+212,cy,BX+254,cy,P.GO,5,"arg",null,{id:r.arr});
+      s+=text(BX+268,cy+10,r.says,"lab","start",P.GO,{id:r.resp});});
+    s+=grp({id:"box4"},rrect(1026,646,522,56,8,P.GO_SOFT,P.GO,3)+text(1052,684,"One signal, several answers","key","start",P.GO,{id:"lblBox"}));
+    /* the sentences, in reading order, wrapped exactly as the still wraps them (two columns) */
+    caps.forEach((cap,i)=>{const c=i%2,r=Math.floor(i/2),x=52+c*748,ty=742+r*78;let g=badge(i+1,x+19,ty,CAPCOL[i],19);
+      wrap(cap,44).forEach((ln,j)=>{g+=text(x+50,ty+10+j*34,ln,"min","start");});s+=grp({id:"lg"+(i+1)},g);});
+    s+=foot(H,CLOSING,SOURCES,{id:"closing"});
+    return s;}
+  const PH=PHOS.map((_,i)=>"ph"+i),ADP=PHOS.map((_,i)=>"adp"+i),ATP=PHOS.map((_,i)=>"atp"+i),TYR=PHOS.map((_,i)=>"tyr"+i);
+  const ANIM=["h1L","h1R","ligA","ligB","arrA","arrB","b1","t1","note1","note2","a12","h2L","h2R","bar2","b2","t2","a23","p3","b3","atpPool","arrAtp","lblAtp",
+    "a34","p4","b4","box4","lg1","lg2","lg3","lg4","closing"].concat(TYR,ATP,PH,ADP,RELAY.map(r=>r.id),RELAY.map(r=>r.lbl),RELAY.map(r=>r.arr),RELAY.map(r=>r.resp));
+  /* every state as absolute positions, so state 3 looks the same whether you arrived from 2 or from 4.
+     `coda` is the uncounted closing state after step 4: stage 1's pair already joined, its signals away (D8) */
+  function state(k,level,coda){const S={};const on=(id,from)=>{S[id]={o:k>=from?1:0};};
+    S.h1L={};S.h1R={};
+    S.ligA=k===0?{x:40,y:-24}:{};S.ligB=k===0?{x:60,y:-22}:{};on("arrA",1);on("arrB",1);
+    for(let i=1;i<=4;i++){on("b"+i,i);on("lg"+i,i);}
+    on("t1",1);on("note1",4);on("note2",4);
+    on("a12",2);S.h2L=k<=1?{x:-60,o:0}:{};S.h2R=k<=1?{x:60,o:0}:{};on("bar2",2);on("t2",2);
+    on("a23",3);on("p3",3);on("atpPool",3);on("arrAtp",3);on("lblAtp",3);
+    PHOS.forEach((p,i)=>{const [kx,ky]=p.from,[tx,ty]=phAt(p);
+      S["tyr"+i]={o:k>=3?1:0};
+      S["atp"+i]=k<=2?{x:POOL[0]-kx,y:POOL[1]-ky,o:0}:{};
+      S["ph"+i]=k<=2?{}:{x:tx-kx,y:ty-ky};
+      S["adp"+i]=k<=2?{}:{x:p.rest[0]-kx,y:p.rest[1]-ky};});
+    on("a34",4);on("p4",4);on("box4",4);on("closing",4);
+    RELAY.forEach(r=>{const [cx,cy]=relAt(r);S[r.id]=k<=3?{x:r.from[0]-cx,y:r.from[1]-cy,o:0}:{};on(r.lbl,4);on(r.resp,4);S[r.arr]=k<=3?{x:-60,o:0}:{};});
+    if(coda&&k===4){S.h1L={x:28};S.h1R={x:-28};S.ligA={x:-26,y:-32};S.ligB={x:26,y:-32};S.arrA={o:0};S.arrB={o:0};S.t1={o:0};}
+    return S;}
+  /* forward timing. Travellers carry waypoints, jittered once with a fixed seed, so they wander rather than aim (D6).
+     Step 3 is the energy beat: the first ATP docks, splits, and its phosphate crosses, 400 to 2000 ms, with nothing
+     else moving (the focus dim has settled by 350); the other five splits follow quickly, each phosphate leaving only
+     after its own ATP has docked (D3, T19). */
+  const R=rng(24);const J=(a,b)=>[a+(R()-.5)*26,b+(R()-.5)*20];const J2=(a,b)=>[a+(R()-.5)*10,b+(R()-.5)*6];
+  const A=(d,dur,way)=>way?{d,dur,way}:{d,dur};
+  const rel=(pts,[dx,dy])=>pts.map(([x,y])=>[x-dx,y-dy]);
+  const SEQ={};
+  /* step 1: the two signals drift down through the water, bump the binding part, and seat; the arrowheads, badge, legend line and caption follow */
+  SEQ[1]={ligA:A(0,1200,rel([J(232,160),J(216,174),[198,192],J(194,184)],[196,182])),ligB:A(100,1200,rel([J(352,166),J(330,178),[302,192],J(298,184)],[300,182])),
+    arrA:A(1150,250),arrB:A(1150,250),b1:A(1150,250),lg1:A(1150,250),t1:A(1150,250)};
+  /* step 2: the two halves, each with its signal, drift laterally in the membrane, touch, and the ligand bar joins them */
+  SEQ[2]={a12:A(0,300),h2L:A(100,1400,[J2(-46,0),J2(-32,0),J2(-16,0),[4,0]]),h2R:A(100,1400,[J2(46,0),J2(30,0),J2(14,0),[-4,0]]),bar2:A(1500,300),b2:A(1600,300),lg2:A(1600,300),t2:A(1600,300)};
+  /* step 3: six ATP, one slow beat. The first ATP leaves the pool at 400 and docks at the right half's kinase at 1100; its phosphate
+     crosses to the left tail 1200-2000 while the ADP drifts off. Then five quick ones, 360 ms apart, alternating sides */
+  SEQ[3]={a23:A(0,200),p3:A(0,200),atpPool:A(0,200),arrAtp:A(1100,300),lblAtp:A(1100,300),b3:A(4100,300),lg3:A(4100,300)};
+  const PAY=[];
+  PHOS.forEach((p,i)=>{const [kx,ky]=p.from,[tx,ty]=phAt(p);const quick=i>0;
+    const tA=quick?2000+360*(i-1):400,dA=quick?230:700;            /* the ATP's travel from the pool to the kinase */
+    const tP=tA+dA+(quick?50:100),dP=quick?320:800;                /* the phosphate's crossing, only after the ATP has docked */
+    const toK=p.from===KR?[J(800,590),J(840,562),J(866,538)]:[J(780,578),J(800,548)];
+    SEQ[3]["atp"+i]=A(tA,dA,rel(toK,[kx,ky]));
+    /* the arc: out from under the kinase's foot, across the midline, up the far side of the other tail */
+    const arc=p.tail==="L"?[J2(850,532),J2(804,522),J2(788,ty+36)]:[J2(846,532),J2(892,522),J2(908,ty+36)];
+    SEQ[3]["ph"+i]=A(tP,dP,rel(arc,[kx,ky]));
+    SEQ[3]["tyr"+i]=A(tP+dP-60,150);
+    const drift=p.from===KR?[J((kx+p.rest[0])/2,(ky+p.rest[1])/2+10)]:[J((kx+p.rest[0])/2,(ky+p.rest[1])/2+12)];
+    SEQ[3]["adp"+i]=A(tP,quick?550:800,rel(drift,[kx,ky]));
+    PAY.push({atp:"atp"+i,paidAt:tA+dA,funds:["ph"+i],tyr:"tyr"+i,landsAt:tP+dP});});
+  /* step 4: the fourth stage appears with its six phosphotyrosines; then, and only then, the three relays drift in from the cytosol by
+     collisions, bump, and seat on three of them; they set off 150 ms after the panel's fade has ended, so the phosphates are there first (T31).
+     The three answers come up together, within 150 ms, each arrow sliding on to the right (D7) */
+  SEQ[4]={a34:A(0,300),p4:A(0,300),b4:A(2250,300),lg4:A(2250,300),box4:A(2250,300),closing:A(2250,300),note1:A(2250,300),note2:A(2250,300)};
+  RELAY.forEach((r,i)=>{const [cx,cy]=relAt(r),[fx,fy]=r.from;
+    const way=[J(fx+(cx-fx)*.3,fy+(cy-fy)*.3),J(fx+(cx-fx)*.6,fy+(cy-fy)*.6),J2(cx+8,cy+6),[cx-5,cy-2]];
+    SEQ[4][r.id]=A(450+i*60,1100,rel(way,[cx,cy]));
+    SEQ[4][r.lbl]=A(1550,250);SEQ[4][r.arr]=A(1700+[0,75,150][i],450);SEQ[4][r.resp]=A(1700+[0,75,150][i],450);});
+  const DUR=[0,1400,1900,4400,2600];
+  const BEATS={3:{name:"the first ATP is spent: it docks, splits, and its phosphate crosses to the other half",from:400,to:2000,ids:["atp0","ph0","adp0","tyr0","arrAtp","lblAtp"]}};
+  /* T19, per phosphate (D3): each ATP has docked (paidAt) before its own phosphate leaves it. `each` lists all six */
+  const PAYS=Object.assign({step:3,each:PAY},PAY[0]);
+  /* T30 (D2): every phosphate's tween starts at the opposite half's kinase (x on the far side of MID) and ends on its target tail.
+     T31 (D4): no relay starts before the phosphotyrosine it seats on exists: stage 4's phosphates are in p4, shown 0-300 ms of step 4,
+     and every one of step 3's phosphates has landed by the end of step 3 */
+  const TRANS={step:3,mid:MID,list:PHOS.map((p,i)=>({ph:"ph"+i,atp:"atp"+i,adp:"adp"+i,tyr:"tyr"+i,targetX:phAt(p)[0],fromX:p.from[0],side:p.tail}))};
+  const RELAYS={step:4,panel:"p4",lastPhosphateLandsAt:Math.max(...PAY.map(p=>p.landsAt)),list:RELAY.map((r,i)=>({relay:r.id,row:i,seatsOn:"stage 4, right tail, row "+i}))};
+  const FOCUS={1:["ligA","ligB","b1","lg1"],2:["h2L","h2R","b2","lg2"],3:PH.concat(ADP,["b3","lg3"]),4:RELAY.map(r=>r.id).concat(RELAY.map(r=>r.arr),["b4","lg4"]),
+    coda:["h1L","h1R","ligA","ligB","note1","note2"]};
+  /* parts that appear on a delay inside a step and must neither dim nor scale meanwhile */
+  const KEEP={1:["arrA","arrB","t1"],2:["bar2","t2"],3:["p3","atpPool","arrAtp","lblAtp"].concat(TYR),4:["p4","box4","closing","note1","note2"].concat(RELAY.map(r=>r.lbl),RELAY.map(r=>r.resp)),coda:["t1","arrA","arrB"]};
+  /* the closing state (D8): stage 1's two halves drift together with no signal on them; the signals hover away; the note is the caption */
+  const CODA={dur:1300,seq:{h1L:A(0,1200,[J2(8,0),J2(18,0),[30,0]]),h1R:A(0,1200,[J2(-8,0),J2(-18,0),[-30,0]]),ligA:A(0,900,[J(-10,-26),J(-20,-30)]),ligB:A(0,900,[J(10,-24),J(22,-30)]),arrA:A(0,300),arrB:A(0,300),t1:A(0,300)}};
+  return {key:"rtk",num:24,subject:"receptor tyrosine kinase",enabled:true,n:4,levels:null,
+    title:"Two halves, then several answers at once",short:"receptor tyrosine kinase",eyebrow:"DE Bio 101 Unit 5 · receptor tyrosine kinases",
+    tag:[["amp","Amplification"]],bridge:"Both of those end in things moving across a membrane.",
+    note:"The two halves find each other by drifting in the membrane, and each relay finds its phosphate by collisions in the cytosol; nothing aims.",
+    txt,capColor:CAPCOL,
+    svg,state,anim:ANIM,seq:SEQ,dur:DUR,beats:BEATS,focus:FOCUS,keep:KEEP,pays:PAYS,trans:TRANS,relays:RELAYS,coda:CODA,sources:SOURCES,
+    blanks:()=>DE.blanks.map(([id,name])=>({id,name})),blankHide:["lg1","lg2","lg3","lg4","closing","note1","note2"],
+    watchIds:{ligand:"ligA",atp:"atp0",travellers:["ligA","ligB","h2L","h2R"].concat(ATP,PH,ADP,RELAY.map(r=>r.id))}};
+})();
+
+/* the last one appears in the selector, in the arc's order, disabled until its Phase 2 build */
+/* it carries its permanent Bio Tool number now, so the unbuilt entry reads as numbered and coming */
 const SOON=(key,num,subject,title,tag,bridge,n,levels)=>({key,num,subject,enabled:false,title,tag,bridge,n,levels:levels||null,short:"",txt:()=>({caps:[],prompts:[],closing:"",counter:()=>""}),capColor:[],anim:[],seq:{},dur:[],beats:{},svg:()=>"",state:()=>({})});
 FIGS=[GPCR,
-  SOON("rtk",24,"receptor tyrosine kinase","Two halves, then several answers at once",[["amp","Amplification"]],"Both of those end in things moving across a membrane.",4),
+  RTK,
   TRANSPORT,
   ETC,
   DOGMA,

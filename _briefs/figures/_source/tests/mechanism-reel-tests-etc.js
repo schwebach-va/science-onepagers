@@ -12,7 +12,7 @@ const OUT=__dirname;  /* screenshots and results-etc.json land here */
 const BASE='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
 const URL=BASE+'?anim=etc';
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
-const ENABLED={gpcr:true,dogma:true,transport:true,etc:true};
+const ENABLED={gpcr:true,rtk:true,dogma:true,transport:true,etc:true};
 const N=6;
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
@@ -56,7 +56,7 @@ const headAngle=()=>{const m=(__MR.el('head').transform||'').match(/rotate\(([-\
   for(const vp of [{width:1180,height:820},{width:390,height:844}]){
     const tag=`${vp.width}x${vp.height}`;
     const {ctx,pg}=await fresh(br,vp);
-    /* T1: six deep links; gpcr, dogma, transport and etc open, the two placeholders assert as disabled, not missing */
+    /* T1: six deep links; gpcr, rtk, dogma, transport and etc open, the one placeholder asserts as disabled, not missing */
     for(const k of KEYS){await open(pg,`${BASE}?fig=${k}`);const fig=await pg.evaluate(()=>__MR.fig());
       const info=await pg.evaluate(k=>{const f=__MR.figs().find(x=>x.key===k);const b=document.querySelector(`.selbtn[data-fig="${k}"]`);return {present:!!f,enabled:f&&f.enabled,btn:!!b,disabled:b&&b.disabled};},k);
       if(ENABLED[k]){res('T1',fig===k&&info.btn&&!info.disabled,`${tag}: ?fig=${k} gave ${fig}`);}
@@ -83,7 +83,7 @@ const headAngle=()=>{const m=(__MR.el('head').transform||'').match(/rotate\(([-\
     await pg.evaluate(()=>__MR.setFig('etc'));
     res('T1',srcE.present&&srcE.visible&&!srcE.disclosed&&srcE.inBuild&&srcE.matches&&/^Sources: Mitchell 1961 · Boyer 1997$/.test(srcE.text.trim())&&srcT.visible&&srcT.matches&&/^Source: Skou 1957$/.test(srcT.text.trim()),`${tag}: sources line etc=${JSON.stringify(srcE)} transport=${JSON.stringify(srcT)}`);
     note('T1',`${tag}: ?anim=etc&step=n opens state n unlit; &level=de holds; &runon=paused holds the run-on on Play with its own readout and the head at rest; Play turns the head and sends protons up; Pause stops it; Back clears the clones, the head and the carriers; the sources line under the reel reads "${srcE.text.trim()}" and follows the figure (R6, D11)`);
-    /* T15: order and bridges; the two placeholders */
+    /* T15: order and bridges; the one placeholder */
     await open(pg);
     const selText=await pg.evaluate(()=>[...document.querySelectorAll('#sel > li')].map(l=>l.textContent.trim()));
     const titleIdx=TITLES.map(t=>selText.findIndex(s=>s.includes(t)));
@@ -92,7 +92,7 @@ const headAngle=()=>{const m=(__MR.el('head').transform||'').match(/rotate\(([-\
     const soon=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
     const tags=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn[data-fig="etc"] .tag')].map(t=>t.textContent));
     const num=await pg.evaluate(()=>document.querySelector('.selbtn[data-fig="etc"] .idnum').textContent);
-    res('T15',ordered&&bridgesOk&&soon.join(',')==='rtk,cloning'&&tags.join('|')==='Energy transfer'&&num==='Bio Tool #26',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} tags=${tags} num=${num}`);
+    res('T15',ordered&&bridgesOk&&soon.join(',')==='cloning'&&tags.join('|')==='Energy transfer'&&num==='Bio Tool #26',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} tags=${tags} num=${num}`);
     /* T2 */
     const w=await walkT2(pg,tag);res('T2',w.ok,w.why);
     /* T4: every step, both levels */
@@ -313,7 +313,7 @@ const headAngle=()=>{const m=(__MR.el('head').transform||'').match(/rotate\(([-\
   /* T12 */
   const errs=consoleErrs.filter(e=>!/fonts\.g(oogleapis|static)\.com/.test(e));
   res('T12',errs.length===0,`console: ${errs.slice(0,3).join(' || ')}`);
-  R.T20='N/A';NOTE.T20='rtk only';
+  R.T20='N/A';NOTE.T20='rtk only: see mechanism-reel-tests-rtk.js';
   R.T28='N/A';NOTE.T28='transport only: no protein on etc moves two ions in opposite directions';
   fs.writeFileSync(`${OUT}/results-etc.json`,JSON.stringify({R,NOTE},null,1));
   for(let i=1;i<=29;i++){const t='T'+i;console.log(t,R[t]===true?'PASS':R[t]===false?'FAIL':R[t]||'not run',NOTE[t]?' -- '+NOTE[t]:'');}
