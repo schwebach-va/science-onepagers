@@ -202,8 +202,7 @@ more than a few hundredths, a final position was disturbed: stop and report.
 
 **A4. Part B covers etc too.** B1/T32 measures every built figure, etc included. B2: etc has
 `levels:true`, so at SOL level its back link goes to Biology Classroom Tools like the others, and its
-footer course line comes from its own eyebrow. B3: etc's still is `03-electron-transport-chain` (check
-the filename in `biology/figures/`), linked the same way.
+footer course line comes from its own eyebrow. B3: etc's still is `04-electron-transport-chain`, linked the same way.
 
 **A5. Test environment, learned on the etc build.**
 - Google Fonts is blocked in the cloud sandbox. The suites' console filter now carries each error's
