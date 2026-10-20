@@ -41,9 +41,9 @@
   "T21": "1180x820: during step 3, 23 parts scaled and 349 of 372 drawing parts dimmed; Complex II held at half and still while I, III and IV pumped (D3) | 390x844: during step 3, 23 parts scaled and 349 of 372 drawing parts dimmed; Complex II held at half and still while I, III and IV pumped (D3)",
   "T24": "390x844: no counter on etc (D6); the run-on sent 3 protons up after 2.6 s, held at 6 (3 in the crowd, 3 fallen back through the synthase), the head at 1800 degrees and still turning, no number on screen",
   "T25": "1180x820: 19 labels blanked at >= 18.13 px with the run-on cleared and the head at rest; reveal lists them all; the check is \"Does oxygen make the ATP?\" | 390x844: 19 labels blanked at >= 18.13 px with the run-on cleared and the head at rest; reveal lists them all; the check is \"Does oxygen make the ATP?\"",
-  "T26": "1180x820: step 1 took 2073 ms at half speed (1000 ms at full); both beats and paidAt double with it | 390x844: step 1 took 2067 ms at half speed (1000 ms at full); both beats and paidAt double with it",
+  "T26": "1180x820: step 1 took 2061 ms at half speed (1000 ms at full); both beats and paidAt double with it | 390x844: step 1 took 2065 ms at half speed (1000 ms at full); both beats and paidAt double with it",
   "T8": "1180x820: reduced motion: no stage animation in any transition or in the run-on (3 clones placed, not moved; the head does not turn); captions intact | 390x844: reduced motion: no stage animation in any transition or in the run-on (3 clones placed, not moved; the head does not turn); captions intact",
-  "T32": "1440x900: stage top 226 px, step-1 prediction card 597-818 of 900; no ?anim=: stage top 1153 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 597-818 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
+  "T32": "1440x900: stage top 226 px, step-1 prediction card 597-818 of 900; no ?anim=: stage top 1143 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 597-818 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
   "T27": "1920x1080 fill: stage 1352x859 of 1920x1080, panel 539 px wide",
   "T20": "rtk only: see mechanism-reel-tests-rtk.js",
   "T28": "transport only: no protein on etc moves two ions in opposite directions"

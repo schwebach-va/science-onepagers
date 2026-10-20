@@ -40,9 +40,9 @@
   "T21": "1180x820: during step 2, 7 parts scaled and 306 of 307 drawing parts dimmed; the channel side held at half through state 2 (D1), the pump side at half through state 1, both full at state 3 | 390x844: during step 2, 7 parts scaled and 306 of 307 drawing parts dimmed; the channel side held at half through state 2 (D1), the pump side at half through state 1, both full at state 3",
   "T24": "390x844: no counter on transport (D4); the run-on ran both sides, 8 clones after 2.6 s, held at 18 (12 sodium, 4 potassium, 2 phosphate), no number on screen",
   "T25": "1180x820: 13 labels blanked at >= 18.13 px with the run-on cleared; reveal lists them all; the check is \"Does sodium need energy to move through the channel?\" | 390x844: 13 labels blanked at >= 18.13 px with the run-on cleared; reveal lists them all; the check is \"Does sodium need energy to move through the channel?\"",
-  "T26": "1180x820: step 1 took 4663 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it | 390x844: step 1 took 4673 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it",
+  "T26": "1180x820: step 1 took 4656 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it | 390x844: step 1 took 4671 ms at half speed (2300 ms at full); the ATP beat and paidAt double with it",
   "T8": "1180x820: reduced motion: no stage animation in any transition or in the run-on (8 clones placed, not moved); captions intact | 390x844: reduced motion: no stage animation in any transition or in the run-on (8 clones placed, not moved); captions intact",
-  "T32": "1440x900: stage top 226 px, step-1 prediction card 484-782 of 900; no ?anim=: stage top 1153 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 484-782 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
+  "T32": "1440x900: stage top 226 px, step-1 prediction card 484-782 of 900; no ?anim=: stage top 1143 px, all six rows and the intro open; 1180x820: stage top 226 px, step-1 prediction card 484-782 of 820; 820x1180: stage top 232 px; the folded intro and selector open on tap",
   "T27": "1920x1080 fill: stage 1352x859 of 1920x1080, panel 539 px wide",
   "T20": "rtk only: see mechanism-reel-tests-rtk.js"
  }
