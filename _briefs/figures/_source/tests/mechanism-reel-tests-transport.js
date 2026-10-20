@@ -11,7 +11,7 @@ const OUT=__dirname;  /* screenshots and results-transport.json land here */
 const BASE='http://127.0.0.1:8765/biology/tools/mechanism-reel.html';
 const URL=BASE+'?anim=transport';
 const KEYS=['gpcr','rtk','transport','etc','dogma','cloning'];
-const ENABLED={gpcr:true,dogma:true,transport:true};
+const ENABLED={gpcr:true,dogma:true,transport:true,etc:true};
 const N=3;   /* transport has three states (D1) */
 const TITLES=['A receptor that never lets the signal in','Two halves, then several answers at once','Downhill is free. Uphill is paid for.','Electrons buy a gradient. The gradient buys the ATP.','One message, written out and then read aloud','Cut both with one enzyme and the ends fit'];
 const BRIDGES=['A different kind of receptor answers in more than one way at once.','Both of those end in things moving across a membrane.','Moving things uphill runs on ATP. Here is where the ATP comes from.','A signal can also reach all the way to the genes.','And here is how we borrow that machinery ourselves.'];
@@ -20,7 +20,7 @@ function res(t,ok,reason){if(R[t]===false)return;R[t]=ok;if(!ok)NOTE[t]=(NOTE[t]
 function note(t,s){NOTE[t]=(NOTE[t]?NOTE[t]+' | ':'')+s;}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fresh(br,vp,opts){const ctx=await br.newContext(Object.assign({viewport:vp},opts||{}));const pg=await ctx.newPage();
-  pg.on('console',m=>{if(m.type()==='error')consoleErrs.push(m.text());});pg.on('pageerror',e=>consoleErrs.push('PAGEERROR '+e.message));
+  pg.on('console',m=>{if(m.type()==='error'){const u=(m.location()||{}).url||'';consoleErrs.push(m.text()+(u?' @ '+u:''));}});pg.on('pageerror',e=>consoleErrs.push('PAGEERROR '+e.message));
   pg.on('requestfailed',q=>{const u=q.url();if(!/fonts\.g(oogleapis|static)\.com/.test(u))consoleErrs.push('REQFAIL '+u);});
   return {ctx,pg};}
 async function open(pg,url){await pg.goto(url||URL,{waitUntil:'load'});await pg.waitForFunction(()=>window.__MR&&window.__MR.fig());}
@@ -86,7 +86,7 @@ const sourcesLine=want=>{const p=document.getElementById('sources');if(!p)return
     const bridgesOk=BRIDGES.every((b,i)=>{const j=selText.findIndex(s=>s===b);return j===titleIdx[i]+1;});
     const soon=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn')].filter(b=>b.disabled).map(b=>b.dataset.fig));
     const tags=await pg.evaluate(()=>[...document.querySelectorAll('.selbtn[data-fig="transport"] .tag')].map(t=>t.textContent));
-    res('T15',ordered&&bridgesOk&&soon.join(',')==='rtk,etc,cloning'&&tags.join('|')==='Movement|Energy transfer',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} tags=${tags}`);
+    res('T15',ordered&&bridgesOk&&soon.join(',')==='rtk,cloning'&&tags.join('|')==='Movement|Energy transfer',`${tag}: order ${JSON.stringify(titleIdx)} bridges ${bridgesOk} soon=${soon} tags=${tags}`);
     /* T2 */
     const w=await walkT2(pg,tag);res('T2',w.ok,w.why);
     /* T4: every step, both levels */
