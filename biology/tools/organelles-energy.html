@@ -1267,7 +1267,10 @@ function mitPaths(o,what){
   if(what==="glucoseIn")return[[-40,650],[130,600]];
   if(what==="glucoseTop")return[[130,GAPY-STACK.mit.oy],[130,560],[130,600]]; /* Module 3: glucose from the chloroplast drops into the cytoplasm from above */
   if(what==="pyr")return[[130,600],[250,565],[400,560]];
+  /* the second pyruvate takes its own lane just below the first, so both three-carbon pieces are seen going in; they used to overlap exactly and look like one */
+  if(what==="pyr2")return[[130,600],[215,578],[275,605],[400,620]]; /* through the same transporter, then its own lane */
   if(what==="pyrF")return[[130,600],[150,700]];
+  if(what==="pyrF2")return[[130,600],[190,712]];
   if(what==="co2pdh")return L?[[400,560],[470,735],[W1+40,735]]:[[400,560],[300,700],[300,H1+40]];
   if(what==="co2cac")return L?[[WHEEL.x-WHEEL.r,WHEEL.y+30],[470,735],[W1+40,735]]:[[WHEEL.x-WHEEL.r,WHEEL.y+30],[300,700],[300,H1+40]];
   if(what==="co2ferm")return[[150,700],[60,760],[-40,H1-40]];
@@ -1309,7 +1312,7 @@ function mitStep(o,dt){
       R.gly={co2:0,atpNet:2,nadh:2};R.mode=c.o2?"aerobic":c.ferment;R.pendE+=2;
       for(let i=0;i<4;i++)mk(o,"atp",mitPaths(o,"atpG"),{to:"atp_gone",v:PACE*.8});
       const fer=!c.o2;
-      for(let i=0;i<2;i++){mk(o,"pyr",mitPaths(o,fer?"pyrF":"pyr"),{to:fer?"pyr_ferm":"pyr_pdh",C:3,g,v:PACE*.9,d:{k:i}});
+      for(let i=0;i<2;i++){mk(o,"pyr",mitPaths(o,(fer?"pyrF":"pyr")+(i?"2":"")),{to:fer?"pyr_ferm":"pyr_pdh",C:3,g,v:PACE*.9,d:{k:i}});
         mk(o,"nadh",mitPaths(o,fer?"nadhF":"nadhG"),{to:fer?"nadh_ferm":"nadh_cI",g,v:PACE,d:{src:"gly"}});}
       event("split");}}
   });
@@ -1318,9 +1321,10 @@ function mitStep(o,dt){
   o.pdhQ.forEach(q=>{const tok=o.tok.find(t=>t.id===q.tid);if(!tok){q.dead=true;return;}
     if(o.nad<1||anox)return;q.t+=dt;
     if(q.t>=1.3){removeTok(o,tok);q.dead=true;const g=q.g,R=SIM.G[g];o.nad--;
-      cn.co2OutMito++;R.pox.co2++;R.cRel++;mk(o,"co2",mitPaths(o,"co2pdh"),{to:L?"co2_lane":"co2_air",C:1,g,v:PACE,exit:"mit"});
-      cn.nadhMade++;R.pox.nadh++;R.pendE++;mk(o,"nadh",mitPaths(o,"nadhP"),{to:"nadh_cI",g,v:PACE});
-      mk(o,"acetyl",mitPaths(o,"acetyl"),{to:"acetyl_cac",C:2,g,v:PACE*.9});event("trim");checkDone(g);}
+      const at=P=>{P[0]=[tok.x,tok.y];return P;}; /* start from where this pyruvate sits */
+      cn.co2OutMito++;R.pox.co2++;R.cRel++;mk(o,"co2",at(mitPaths(o,"co2pdh")),{to:L?"co2_lane":"co2_air",C:1,g,v:PACE,exit:"mit"});
+      cn.nadhMade++;R.pox.nadh++;R.pendE++;mk(o,"nadh",at(mitPaths(o,"nadhP")),{to:"nadh_cI",g,v:PACE});
+      mk(o,"acetyl",at(mitPaths(o,"acetyl")),{to:"acetyl_cac",C:2,g,v:PACE*.9});event("trim");checkDone(g);}
   });
   o.pdhQ=o.pdhQ.filter(q=>!q.dead);
   /* the citric acid cycle: one turn at a time; 2 CO2, 3 NADH, 1 FADH2, 1 ATP per turn */
@@ -1369,7 +1373,7 @@ function mitArrive(o,t){
   const cn=SIM.cnt,c=SIM.ctl,L=lanes();
   switch(t.to){
     case "glu_gly":t.wait=true;cn.glucoseIn++;o.glyQ.push({tid:t.id,g:t.g,t:0,phase:0});break;
-    case "pyr_pdh":t.wait=true;o.pdhQ.push({tid:t.id,g:t.g,t:0});break;
+    case "pyr_pdh":t.wait=true;o.pdhQ.push({tid:t.id,g:t.g,t:t.d&&t.d.k?-.9:0});break;
     case "pyr_ferm":t.wait=true;o.fPyr.push(t.id);break;
     case "nadh_ferm":t.wait=true;o.fNadh.push(t.id);break;
     case "nadh_cI":removeTok(o,t);if(t.d&&t.d.src==="gly")o.nadc=Math.min(4,o.nadc+1);o.cIQ.push({g:t.g,src:t.d?t.d.src:""});break;
