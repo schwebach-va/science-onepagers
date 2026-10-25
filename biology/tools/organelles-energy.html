@@ -947,7 +947,7 @@ const TABS=[
   task:{nine:"Watch hydrogen ions pile up inside the stacked sacs, then flow out through ATP synthase. Make four ATP.",de:"Follow one electron from water to NADPH, then open the Z scheme panel."},
   goals:{nine:[["atp","ATP made",4]],de:[["atp","ATP made",4],["nadph","NADPH made",2],["zpanel","Z scheme panel opened"]]},
   words:["electron","hion","thylakoids","synthase","carrier"],
-  nine:"As the electron is passed along the membrane, its energy is used to push hydrogen ions (H⁺) into the stacked membrane sacs, and splitting water adds more. The H⁺ piles up until the inside is acidic. The only way back out is through ATP synthase, a spinning protein that makes ATP. As the H⁺ flows through, it turns the protein the way running water turns a mill wheel, and each turn joins a phosphate to ADP to make ATP. ATP is the cell's rechargeable battery: giving up its last phosphate releases usable energy for work. At the end of the line, the electron is handed to a carrier molecule that takes it, with its energy, to the sugar-building cycle.",
+  nine:"As the electron is passed along the membrane, its energy is used to push hydrogen ions (H⁺) into the stacked membrane sacs, and splitting water adds more. Partway along, light strikes a second reaction center and gives the electron a second boost of energy. The H⁺ piles up until the inside is acidic. The only way back out is through ATP synthase, a spinning protein that makes ATP. As the H⁺ flows through, it turns the protein the way running water turns a mill wheel, and each turn joins a phosphate to ADP to make ATP. ATP is the cell's rechargeable battery: giving up its last phosphate releases usable energy for work. At the end of the line, the electron is handed to a carrier molecule that takes it, with its energy, to the sugar-building cycle.",
   de:"Linear electron flow runs PS II → Pq → cytochrome complex → Pc → PS I → Fd → NADP⁺ reductase. Light strikes PS I (P700) too, and re-energizes the electron so that it can reduce NADP⁺ to NADPH on the stroma side. The cytochrome complex uses the electrons' fall in energy to pump H⁺ into the thylakoid space. Water splitting adds H⁺ there, and making NADPH removes H⁺ from the stroma, so the thylakoid space falls to about pH 5 while the stroma sits near pH 8. That proton-motive force drives H⁺ back through ATP synthase into the stroma. This is photophosphorylation by chemiosmosis. ATP and NADPH are both released into the stroma, where the Calvin cycle uses them. Open the Z scheme panel to see each electron's energy along the way."},
  {key:"C3x",lv:"de",short:{de:"Cyclic flow"},head:{de:"Going further: cyclic flow"},further:true,
   pre:{de:"D20"},post:{de:[]},
@@ -1176,7 +1176,7 @@ function chlStep(o,dt){
   if(lig&&eRate>.03){o.photonT+=dt;const iv=1/eRate;
     if(o.photonT>=iv){o.photonT-=iv;
       if(c.cyclic)mk(o,"photon",chlPaths(o,"photon1"),{v:420,to:"ph_ps1"});
-      else{mk(o,"photon",chlPaths(o,"photon"),{v:420,to:"ph_ps2"});if(lvl==="de"&&o.tok.filter(t=>t.k==="photon").length<10)mk(o,"photon",chlPaths(o,"photon1"),{v:420,to:"ph_ps1v"});}}}
+      else{mk(o,"photon",chlPaths(o,"photon"),{v:420,to:"ph_ps2"});if(o.tok.filter(t=>t.k==="photon").length<10)mk(o,"photon",chlPaths(o,"photon1"),{v:420,to:"ph_ps1v"});}}}
   else{o.photonT=0;
     /* light off: electron flow stops at once, and the stroma's other work uses up the ATP and NADPH within moments */
     if(!lig){o.tok=o.tok.filter(t=>!(t.k==="photon"||t.k==="e"));o.holes=0;o.drainT=(o.drainT||0)+dt;while(o.drainT>=.25){o.drainT-=.25;if(o.atpPool>0)o.atpPool--;if(o.nadphPool.length)o.nadphPool.shift();}}}
@@ -1577,8 +1577,9 @@ function drawChloroBody(o){
   /* light beam(s) */
   if(c.light>0&&(!c.cyclic||true)){const lc=LIGHTCOL[c.colour][DARK?1:0];const a=.12+.5*(c.light/100);
     const beam=(x0,y0,x1,y1,w)=>{ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=lc;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();ctx.restore();};
-    if(!c.cyclic)beam(-60,-60,NX.ps2,PATCH.my-20,46);
-    if(S.level==="de"||c.cyclic)beam(NX.ps1-260,-60,NX.ps1,PATCH.my-20,c.cyclic?46:26);
+    /* light reaches both photosystems: it energizes the electron at the first, and again at the second. In cyclic flow only the second runs. */
+    if(!c.cyclic)beam(-60,-60,NX.ps2,PATCH.my-20,40);
+    beam(NX.ps1-260,-60,NX.ps1,PATCH.my-20,40);
   }
   tagS(L.light,150,60,"light","center");
   /* leader from the granum to the magnified patch */
@@ -1708,10 +1709,10 @@ function drawPatch(o){
     small(N.pq,P.my,12,col("grey"),"pq",lvl==="de"?L.pq:"",true);
     blob(N.cyt,46,52,col("grey"),"cyt",lvl==="de"?L.cyt:"",false,0,true);
     small(N.pc,P.my,12,col("grey"),"pc",lvl==="de"?L.pc:"",true);
-    blob(N.ps1,54,58,g,"ps1",L.ps1,false,0,true);
+    blob(N.ps1,54,58,g,"ps1",L.ps1,true,0,true); /* label below, so the light lands on the photosystem, not on its name */
     small(N.fd,P.my+40,11,col("grey"),"fd",lvl==="de"?L.fd:"",true);
     rrect(N.nr-22,P.my+38,44,26,6,col("shuttle"),INK,1.5);part("nr",N.nr,P.my+50,24);if(lvl==="de")tag(L.nr,N.nr,P.my+82,"nr","center",false,true);
-    if(lvl==="de"&&o.psiHit&&S.t-o.psiHit<.25){circ(N.ps1,P.my,38,null,LIGHTCOL[c.colour][DARK?1:0],3);}
+    if(o.psiHit&&S.t-o.psiHit<.25){circ(N.ps1,P.my,38,null,LIGHTCOL[c.colour][DARK?1:0],3);}
     if(lvl==="de"&&(c.cyclic||S.stepKey==="C3x")){tag(c.cyclic?"Cyclic flow: PS I → Fd → cytochrome complex → Pc → PS I":"Linear flow",N.ps1-30,P.y1-20,null,"center");}
     /* water in, oxygen out */
     tag(L.water,N.ps2-30,P.my+112,"water","center");
