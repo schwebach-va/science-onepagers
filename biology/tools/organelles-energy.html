@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Photosynthesis in the chloroplast and cellular respiration in the mitochondrion, animated molecule by molecule: light hits a reaction center, water splits, hydrogen ions pile up and turn ATP synthase, the sugar-building cycle takes in carbon dioxide, and a glucose ring is broken down until every carbon leaves as carbon dioxide. Run the two organelles side by side and watch what travels between them. Biology I (SOL BIO.2e) and DE Bio 101. Nothing is submitted.">
+<meta name="description" content="Photosynthesis in the chloroplast and cellular respiration in the mitochondrion, animated molecule by molecule: light hits a reaction center, water splits, hydrogen ions pile up and turn ATP synthase, the sugar-building cycle takes in carbon dioxide, and a glucose ring is broken down until every carbon leaves as carbon dioxide. Stack the two organelles, chloroplast over mitochondrion, and watch what travels between them. Biology I (SOL BIO.2e) and DE Bio 101. Nothing is submitted.">
 <link rel="canonical" href="https://scienceonepagers.org/biology/tools/organelles-energy.html">
 <meta name="author" content="J. R. Schwebach">
 <meta property="og:type" content="website">
@@ -60,7 +60,7 @@ p{margin:0 0 1rem;max-width:38rem}
 .sop-foot a{color:inherit}
 button{font:inherit;cursor:pointer}
 
-/* the switches at the top: device, module, view */
+/* the switches at the top: device and module (Module 3 always shows both organelles, stacked) */
 .topbar{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:flex-end;margin:0 0 1rem;padding:0 0 .9rem;border-bottom:1.5px solid var(--rule)}
 .sw{display:flex;flex-direction:column;gap:.25rem}
 .sw .swl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
@@ -237,6 +237,19 @@ html[data-dev="pc"] .stage canvas.hov{cursor:pointer}
 .further a{font-family:var(--sans);font-weight:700;color:var(--bond)}
 .hidden{display:none!important}
 
+/* the green highway: one ring at a time, on the control the step is waiting for (lime / chartreuse, the same as the other Bio Tools) */
+:root{--next:#B8E600;--next-soft:rgba(184,230,0,.45)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--next:#C8F520;--next-soft:rgba(200,245,32,.45)}}
+:root[data-theme="dark"]{--next:#C8F520;--next-soft:rgba(200,245,32,.45)}
+.next{box-shadow:0 0 0 3px var(--next),0 0 0 7px var(--next-soft);animation:nextpulse 1.3s ease-in-out infinite;position:relative;z-index:1}
+.opts.next{border-radius:4px}
+.slider.next{border-radius:4px}
+.seg.nextwrap{overflow:visible}
+.seg button.next{border-radius:3px}
+.ctl.locked .next{opacity:1}
+@keyframes nextpulse{0%,100%{box-shadow:0 0 0 3px var(--next),0 0 0 6px var(--next-soft)}50%{box-shadow:0 0 0 4px var(--next),0 0 0 12px rgba(184,230,0,0)}}
+@media (prefers-reduced-motion:reduce){.next{animation:none}}
+
 /* energy panels (DE) and teaching callouts, over the stage */
 .panel{position:absolute;inset:0;z-index:6;background:var(--card);display:none;flex-direction:column;padding:.4rem .6rem}
 .panel.open{display:flex}
@@ -275,13 +288,6 @@ html[data-dev="pc"] .stage canvas.hov{cursor:pointer}
       <button type="button" role="tab" data-tab="2" aria-selected="false">3 &middot; Both together</button>
     </div>
   </div>
-  <div class="sw">
-    <span class="swl" id="viewL">View</span>
-    <div class="seg" role="group" aria-labelledby="viewL">
-      <button type="button" data-view="one" aria-pressed="true">One organelle</button>
-      <button type="button" data-view="side" aria-pressed="false">Side by side</button>
-    </div>
-  </div>
 </div>
 
 <p class="sop-eyebrow" id="eyebrow">Bio Tool #11 &middot; Biology I Unit 3 &middot; SOL BIO.2e</p>
@@ -306,10 +312,6 @@ html[data-dev="pc"] .stage canvas.hov{cursor:pointer}
         <button type="button" data-tab="0" aria-pressed="true">1 &middot; Chloroplast</button>
         <button type="button" data-tab="1" aria-pressed="false">2 &middot; Mitochondrion</button>
         <button type="button" data-tab="2" aria-pressed="false">3 &middot; Both</button>
-      </div>
-      <div class="seg" role="group" aria-label="View">
-        <button type="button" data-view="one" aria-pressed="true">One</button>
-        <button type="button" data-view="side" aria-pressed="false">Side by side</button>
       </div>
       <div class="seg" role="group" aria-label="Level">
         <button type="button" data-lv="nine" aria-pressed="true">9th</button>
@@ -915,8 +917,8 @@ const LBL={
 };
 /* Parts a teacher can pin a callout on (Teaching view). One line each, in the level's words. */
 const PARTS={
- nine:{light:["Light","Sunlight is the energy source. Chlorophyll absorbs it."],rc:["Reaction center","The chlorophyll that gives up an electron when light hits it."],thy:["Stacked membrane sacs (thylakoids)","Where the chlorophyll sits and where hydrogen ions pile up inside."],water:["Water","Pulled apart to replace the lost electron. Its oxygen leaves as O₂."],o2:["Oxygen (O₂)","Given off by the chloroplast, taken in by the mitochondrion."],h:["Hydrogen ions (H⁺)","Hydrogen that has lost its electron. Piled up, they make the space acidic."],syn:["ATP synthase","A spinning protein that makes ATP as hydrogen ions flow through it."],calvin:["Sugar-building (Calvin) cycle","Attaches one carbon dioxide at a time and builds three-carbon pieces."],co2:["Carbon dioxide (CO₂)","One carbon bead with two oxygens. In for sugar; out from the mitochondrion."],glu:["Glucose","A ring of six carbon beads."],c3:["Three-carbon piece","Half a glucose: three beads."],cyto:["Cytoplasm","Where the glucose ring breaks, before anything enters the mitochondrion."],matrix:["Inside the mitochondrion","Where the pieces are taken apart and carbon dioxide is made."],ims:["Space between the two membranes","Where hydrogen ions pile up."],carrier:["Carrier","A molecule that carries electrons and their energy to the inner membrane."],e:["Electron","A tiny negative particle, carrying energy."],chain:["Carrier line on the inner membrane","Electrons pass along it; their energy pumps hydrogen ions across."],cycle:["The cycle that takes the pieces apart","Every carbon of the two-carbon piece leaves as carbon dioxide."],atp:["ATP","The cell's rechargeable battery."],lhc:["Chlorophyll","The green pigment that absorbs the light."],ps1:["Second reaction center","Light hits here too and re-energizes the electron."],wp:["Working patch","One bit of membrane, magnified: this is where the molecule-by-molecule action happens."],fer:["Fermentation","Without oxygen the pieces are finished off in the cytoplasm: ethanol and carbon dioxide in yeast or bacteria, lactic acid in muscle. No extra ATP."],tally:["ATP tally","About 32 ATP per glucose with oxygen; 2 without. The 2 come from the cytoplasm step either way."],ledger:["Carbon count","Every bead is one carbon atom. Six carbon dioxide make one glucose, and one glucose gives back six carbon dioxide."]},
- de:{light:["Light","Photons absorbed by the light-harvesting complexes."],rc:["Photosystem II (P680)","Its reaction-center chlorophyll pair gives an excited electron to the primary electron acceptor."],lhc:["Light-harvesting complex","Pigments pass absorbed energy to the reaction center."],pq:["Pq","Plastoquinone carries the electron to the cytochrome complex."],cyt:["Cytochrome complex","Pumps H⁺ into the thylakoid space as electrons fall in energy."],pc:["Pc","Plastocyanin carries the electron to PS I."],ps1:["Photosystem I (P700)","Light re-energizes the electron here."],fd:["Fd","Ferredoxin hands the electron to NADP⁺ reductase."],nr:["NADP⁺ reductase","Reduces NADP⁺ to NADPH on the stroma side."],thy:["Thylakoid membrane","Holds the photosystems, the carriers and ATP synthase."],tsp:["Thylakoid space","Where H⁺ piles up, near pH 5 while running."],stroma:["Stroma","Where ATP and NADPH are released and the Calvin cycle runs, near pH 8."],water:["H₂O","Split at PS II: 2 H₂O → 4 e⁻ + 4 H⁺ + O₂."],o2:["O₂","Released by PS II; reduced to water at complex IV."],h:["H⁺","Proton-motive force: the gradient that turns ATP synthase."],syn:["ATP synthase","Turned by H⁺ flowing down its gradient; makes ATP on the stroma or matrix side."],calvin:["Calvin cycle","Fixation, reduction, regeneration. 3 CO₂, 9 ATP and 6 NADPH per G3P."],rubisco:["Rubisco","Attaches CO₂ to RuBP; the 6C product splits into two 3-phosphoglycerate."],co2:["CO₂","Fixed by rubisco; released by pyruvate oxidation and the citric acid cycle."],glu:["Glucose","Six carbons. Built from two G3P; broken down by glycolysis."],c3:["G3P / pyruvate","Three carbons."],cyto:["Cytosol","Where glycolysis runs, with or without O₂."],matrix:["Matrix","Pyruvate oxidation and the citric acid cycle; ATP made here."],ims:["Intermembrane space","Where H⁺ piles up, pumped by complexes I, III and IV."],cristae:["Cristae","Folds of the inner membrane that hold the chain and ATP synthase."],carrier:["NADH","Delivers electrons to complex I."],e:["Electron","Falls in free energy down the chain to O₂."],chain:["Electron transport chain","Complexes I–IV with Q and cytochrome c, in the inner membrane."],cI:["Complex I","Takes electrons from NADH; pumps H⁺."],cII:["Complex II","Takes electrons from FADH₂; pumps none."],q:["Q","Ubiquinone carries electrons to complex III."],cIII:["Complex III","Pumps H⁺."],cytc:["Cytochrome c","Carries electrons to complex IV."],cIV:["Complex IV","½ O₂ + 2 e⁻ + 2 H⁺ → H₂O. Pumps H⁺."],cycle:["Citric acid cycle","Per turn: 2 CO₂, 3 NADH, 1 FADH₂, 1 ATP."],trim:["Pyruvate oxidation","1 CO₂ and 1 NADH per pyruvate; acetyl CoA enters the cycle."],split:["Glycolysis","Glucose → 2 pyruvate, net 2 ATP, 2 NADH, no CO₂."],c2:["Acetyl CoA","Two carbons on coenzyme A."],atp:["ATP","Up to about 32 per glucose with O₂; 2 by fermentation."],fer:["Fermentation","Regenerates NAD⁺ by handing NADH's electrons to pyruvate."],wp:["Working patch","One bit of membrane, magnified: thousands of these sit in the real organelle."],tally:["ATP tally","Glycolysis 2, citric acid cycle 2, oxidative phosphorylation about 26 to 28: up to about 32 per glucose with O₂; 2 by fermentation."],ledger:["Carbon count","Six CO₂ fixed per glucose; six CO₂ released per glucose oxidized. Carbon is conserved."]}
+ nine:{light:["Light","Sunlight is the energy source. Chlorophyll absorbs it."],rc:["Reaction center","The chlorophyll that gives up an electron when light hits it."],thy:["Stacked membrane sacs (thylakoids)","Where the chlorophyll sits and where hydrogen ions pile up inside."],water:["Water","Pulled apart to replace the lost electron. Its oxygen leaves as O₂."],o2:["Oxygen (O₂)","Given off by the chloroplast, taken in by the mitochondrion."],h:["Hydrogen ions (H⁺)","Hydrogen that has lost its electron. Piled up, they make the space acidic."],syn:["ATP synthase","A spinning protein that makes ATP as hydrogen ions flow through it."],calvin:["Sugar-building (Calvin) cycle","Attaches one carbon dioxide at a time and builds three-carbon pieces."],co2:["Carbon dioxide (CO₂)","O=C=O: one carbon bead held to two oxygens by double bonds. In for sugar; out from the mitochondrion."],glu:["Glucose","A ring of six carbon beads."],c3:["Three-carbon piece","Half a glucose: three beads."],cyto:["Cytoplasm","Where the glucose ring breaks, before anything enters the mitochondrion."],matrix:["Inside the mitochondrion","Where the pieces are taken apart and carbon dioxide is made."],ims:["Space between the two membranes","Where hydrogen ions pile up."],carrier:["Carrier","A molecule that carries electrons and their energy to the inner membrane."],e:["Electron","A tiny negative particle, carrying energy."],chain:["Carrier line on the inner membrane","Electrons pass along it; their energy pumps hydrogen ions across."],cycle:["The cycle that takes the pieces apart","Every carbon of the two-carbon piece leaves as carbon dioxide."],atp:["ATP","The cell's rechargeable battery."],lhc:["Chlorophyll","The green pigment that absorbs the light."],ps1:["Second reaction center","Light hits here too and re-energizes the electron."],wp:["Working patch","One bit of membrane, magnified: this is where the molecule-by-molecule action happens."],fer:["Fermentation","Without oxygen the pieces are finished off in the cytoplasm: ethanol and carbon dioxide in yeast or bacteria, lactic acid in muscle. No extra ATP."],tally:["ATP tally","About 32 ATP per glucose with oxygen; 2 without. The 2 come from the cytoplasm step either way."],ledger:["Carbon count","Every bead is one carbon atom. Six carbon dioxide make one glucose, and one glucose gives back six carbon dioxide."]},
+ de:{light:["Light","Photons absorbed by the light-harvesting complexes."],rc:["Photosystem II (P680)","Its reaction-center chlorophyll pair gives an excited electron to the primary electron acceptor."],lhc:["Light-harvesting complex","Pigments pass absorbed energy to the reaction center."],pq:["Pq","Plastoquinone carries the electron to the cytochrome complex."],cyt:["Cytochrome complex","Pumps H⁺ into the thylakoid space as electrons fall in energy."],pc:["Pc","Plastocyanin carries the electron to PS I."],ps1:["Photosystem I (P700)","Light re-energizes the electron here."],fd:["Fd","Ferredoxin hands the electron to NADP⁺ reductase."],nr:["NADP⁺ reductase","Reduces NADP⁺ to NADPH on the stroma side."],thy:["Thylakoid membrane","Holds the photosystems, the carriers and ATP synthase."],tsp:["Thylakoid space","Where H⁺ piles up, near pH 5 while running."],stroma:["Stroma","Where ATP and NADPH are released and the Calvin cycle runs, near pH 8."],water:["H₂O","Split at PS II: 2 H₂O → 4 e⁻ + 4 H⁺ + O₂."],o2:["O₂","Released by PS II; reduced to water at complex IV."],h:["H⁺","Proton-motive force: the gradient that turns ATP synthase."],syn:["ATP synthase","Turned by H⁺ flowing down its gradient; makes ATP on the stroma or matrix side."],calvin:["Calvin cycle","Fixation, reduction, regeneration. 3 CO₂, 9 ATP and 6 NADPH per G3P."],rubisco:["Rubisco","Attaches CO₂ to RuBP; the 6C product splits into two 3-phosphoglycerate."],co2:["CO₂","O=C=O, linear, two double bonds. Fixed by rubisco; released by pyruvate oxidation and the citric acid cycle."],glu:["Glucose","Six carbons. Built from two G3P; broken down by glycolysis."],c3:["G3P / pyruvate","Three carbons."],cyto:["Cytosol","Where glycolysis runs, with or without O₂."],matrix:["Matrix","Pyruvate oxidation and the citric acid cycle; ATP made here."],ims:["Intermembrane space","Where H⁺ piles up, pumped by complexes I, III and IV."],cristae:["Cristae","Folds of the inner membrane that hold the chain and ATP synthase."],carrier:["NADH","Delivers electrons to complex I."],e:["Electron","Falls in free energy down the chain to O₂."],chain:["Electron transport chain","Complexes I–IV with Q and cytochrome c, in the inner membrane."],cI:["Complex I","Takes electrons from NADH; pumps H⁺."],cII:["Complex II","Takes electrons from FADH₂; pumps none."],q:["Q","Ubiquinone carries electrons to complex III."],cIII:["Complex III","Pumps H⁺."],cytc:["Cytochrome c","Carries electrons to complex IV."],cIV:["Complex IV","½ O₂ + 2 e⁻ + 2 H⁺ → H₂O. Pumps H⁺."],cycle:["Citric acid cycle","Per turn: 2 CO₂, 3 NADH, 1 FADH₂, 1 ATP."],trim:["Pyruvate oxidation","1 CO₂ and 1 NADH per pyruvate; acetyl CoA enters the cycle."],split:["Glycolysis","Glucose → 2 pyruvate, net 2 ATP, 2 NADH, no CO₂."],c2:["Acetyl CoA","Two carbons on coenzyme A."],atp:["ATP","Up to about 32 per glucose with O₂; 2 by fermentation."],fer:["Fermentation","Regenerates NAD⁺ by handing NADH's electrons to pyruvate."],wp:["Working patch","One bit of membrane, magnified: thousands of these sit in the real organelle."],tally:["ATP tally","Glycolysis 2, citric acid cycle 2, oxidative phosphorylation about 26 to 28: up to about 32 per glucose with O₂; 2 by fermentation."],ledger:["Carbon count","Six CO₂ fixed per glucose; six CO₂ released per glucose oxidized. Carbon is conserved."]}
 };
 
 /* ================= content: steps ================= */
@@ -1015,10 +1017,10 @@ const TABS=[
  {key:"B1",short:{nine:"What travels",de:"Opposite redox"},head:{nine:"What travels between the two",de:"Two processes, opposite redox"},
   pre:{nine:"N13",de:"D27"},post:{nine:["N14","N15"],de:["D26"]},
   task:{nine:"Press Run both. Follow one glucose from the chloroplast into the mitochondrion, and watch where the oxygen goes. Read the carbon count: six in, six out. Then turn the oxygen off and see which side still makes it.",de:"Press Run both. Follow one glucose from the chloroplast into the mitochondrion, and watch where the oxygen goes."},
-  goals:{nine:[["loop","One glucose built on the left and taken apart on the right"],["o2trip","Oxygen (O₂) carried across",3]],de:[["loop","One glucose built on the left and oxidized on the right"],["o2trip","O₂ carried across",3]]},
+  goals:{nine:[["loop","One glucose built on top and taken apart below"],["o2trip","Oxygen (O₂) carried across",3]],de:[["loop","One glucose built on top and oxidized below"],["o2trip","O₂ carried across",3]]},
   words:[],
-  nine:"Run both. The chloroplast gives off oxygen and builds sugar. The mitochondrion takes in oxygen, breaks the sugar down, and gives off carbon dioxide and water, which the chloroplast takes back in. The products of one are the raw materials of the other, so the two can be thought of as a cycle. Energy does not cycle. It comes in as light, is stored in sugar and captured in ATP, and most of it ends as heat. Count the carbon: six carbon dioxide go into the chloroplast to build one glucose, and six carbon dioxide come out of the mitochondrion when that glucose is taken apart. Carbon in equals carbon out. Turn the oxygen off on the right, and the chloroplast on the left still releases oxygen as long as it has light; that is where the mitochondrion's oxygen normally comes from. Plant cells have both organelles and run both processes; animal cells have mitochondria only. This picture is not a map of one cell; it shows how the two organelles depend on each other.",
-  de:"Side by side, the two run electrons in opposite directions. Photosynthesis oxidizes water and reduces CO₂, using light to push electrons uphill into sugar. Respiration oxidizes glucose and reduces O₂, letting the electrons fall back downhill to water and capturing part of the fall as ATP. Matter cycles: 6 CO₂ and 6 O₂ go around the loop with every glucose, and 12 water molecules are split on one side and made on the other. Energy does not cycle. About a third of glucose's energy ends up in ATP, and the rest leaves as heat."},
+  nine:"Run both. The chloroplast gives off oxygen and builds sugar. The mitochondrion takes in oxygen, breaks the sugar down, and gives off carbon dioxide and water, which the chloroplast takes back in. The products of one are the raw materials of the other, so the two can be thought of as a cycle. Energy does not cycle. It comes in as light, is stored in sugar and captured in ATP, and most of it ends as heat. Count the carbon: six carbon dioxide go into the chloroplast to build one glucose, and six carbon dioxide come out of the mitochondrion when that glucose is taken apart. Carbon in equals carbon out. Turn the oxygen off in the mitochondrion below, and the chloroplast on top still releases oxygen as long as it has light; that is where the mitochondrion's oxygen normally comes from. Plant cells have both organelles and run both processes; animal cells have mitochondria only. This picture is not a map of one cell; it shows how the two organelles depend on each other.",
+  de:"Stacked, the two run electrons in opposite directions. Photosynthesis oxidizes water and reduces CO₂, using light to push electrons uphill into sugar. Respiration oxidizes glucose and reduces O₂, letting the electrons fall back downhill to water and capturing part of the fall as ATP. Matter cycles: 6 CO₂ and 6 O₂ go around the loop with every glucose, and 12 water molecules are split on one side and made on the other. Energy does not cycle. About a third of glucose's energy ends up in ATP, and the rest leaves as heat."},
  {key:"B2",short:{nine:"Same machine",de:"Same machine"},head:{nine:"The same machine, twice",de:"The same machine, twice"},
   pre:{nine:null,de:"D25"},post:{nine:[],de:[]},
   task:{nine:"Watch both ATP synthases turn at once.",de:"Compare the two pH readouts and the two working patches."},
@@ -1071,7 +1073,7 @@ function readTheme(){try{const cs=getComputedStyle(document.documentElement);con
 readTheme();
 if(window.matchMedia){const mq=window.matchMedia("(prefers-color-scheme: dark)");const h=()=>readTheme();if(mq.addEventListener)mq.addEventListener("change",h);else if(mq.addListener)mq.addListener(h);}
 /* each colour once, [light, dark] (§5.4) */
-const COL={carbon:["#3B3631","#D9D2C6"],co2:["#D2382F","#E8675E"],gold:["#C98A2E","#E0A64A"],goldE:["#7A4E12","#F3C97A"],o2:["#E58FB0","#F0A9C4"],o2E:["#A64D74","#F7C9DA"],
+const COL={carbon:["#3B3631","#D9D2C6"],co2:["#D2382F","#E8675E"],co2E:["#8A1F18","#F6B3AC"],gold:["#C98A2E","#E0A64A"],goldE:["#7A4E12","#F3C97A"],o2:["#E58FB0","#F0A9C4"],o2E:["#A64D74","#F7C9DA"],
   water:["#8FC7E8","#9FD3F0"],waterE:["#2E6F94","#CFEAF8"],h:["#1F7A8C","#6FC0CE"],e:["#F2C230","#F7D468"],eE:["#8A6A00","#FFF0B8"],light:["#F2C230","#F7D468"],
   atp:["#6B4E8C","#B39BD1"],shuttle:["#44607A","#8FA9C2"],chlL:["#3F7A55","#7FC395"],chlF:["#E2EDE6","#18291E"],mitL:["#B8704F","#E0A080"],mitF:["#F6EAE2","#2A1D17"],
   memb:["#7A9A86","#5E8A6C"],membM:["#C08A70","#B07A5E"],space:["#D3E4DA","#20362A"],spaceM:["#EFD9CC","#3A2820"],grey:["#9A9388","#8C857A"],lane:["#E8E4DC","#2A2620"]};
@@ -1080,13 +1082,18 @@ const LIGHTCOL={white:["#F2C230","#F7D468"],red:["#D2382F","#E8675E"],blue:["#3B
 const LFACT={white:.8,red:1,blue:.9,green:.3};
 
 /* ================= geometry (organelle-local, 1200 x 800) ================= */
-const W1=1200,H1=800,W2=2000;
+const W1=1200,H1=800;
 const PATCH={x0:250,x1:1120,y0:140,y1:440,my:290,mh:28};
 const NX={ps2:360,pq:470,cyt:570,pc:670,ps1:770,fd:850,nr:930,syn:1040,c1:360,c2:440,q:470,c3:570,cc:670,c4:770};
 const WHEEL={x:560,y:610,r:105};
 const POOL={atp:[400,520],nadph:[700,520],nadh:[700,520]};
-const SIDE={chl:{ox:0,oy:112,sc:.72},mit:{ox:1136,oy:112,sc:.72}};
-const LANEY={o2:184,sugar:580,co2:645,water:458};
+/* Module 3: the chloroplast stacked over the mitochondrion, full size, with the transfer arrows in a band down the right (2026-10-24 rebuild) */
+const STACK={chl:{ox:0,oy:20,sc:1},mit:{ox:0,oy:860,sc:1}};
+const WS=1700,HS=1700;
+const TRK={sugar:1270,o2:1340,water:1410,co2:1480}; /* the x of each arrow, inner to outer */
+const GAPY=845; /* the run between the two organelles, where sugar crosses to the cytoplasm */
+/* the mitochondrion's outer membrane, trimmed so the organelle fills its frame */
+const MCAP={x0:215,y0:40,x1:1190,y1:785};
 const PACE=200; /* world units per second at speed 1 */
 
 /* ================= simulation state (plain data, so a step back can restore a snapshot) ================= */
@@ -1102,7 +1109,7 @@ function newSim(keepCtl){
   const S=curStep(),T=TAB();
   const prev=SIM&&keepCtl?SIM.ctl:null;
   const d=S.defaults||{};
-  SIM={t:0,ev:0,view:st.view,tab:st.tab,level:st.level,stepKey:S.key,org:T.org,
+  SIM={t:0,ev:0,view:st.tab===2?"stack":"one",tab:st.tab,level:st.level,stepKey:S.key,org:T.org,
     chl:newOrg("chl"),mit:newOrg("mit"),lane:[],G:{},cnt:mkCounts(),led:{carbonIn:0,carbonOut:0},
     ctl:prev||{light:d.light!=null?d.light:70,co2:d.co2!=null?d.co2:60,colour:"white",cyclic:false,o2:true,ferment:st.level==="nine"?"alcohol":"lactate",uncoupler:false,runBoth:false},
     gw:{dimLow:false,dimDone:false,colT:{red:0,blue:0,green:0},cycT:0,cycAtp0:-1,cycOk:false,darkT:0,o2offT:0,o2offDone:false,uncT:0,coLow:false},
@@ -1110,9 +1117,9 @@ function newSim(keepCtl){
   if(st.level==="nine"){SIM.ctl.cyclic=false;SIM.ctl.uncoupler=false;}
   return SIM;
 }
-const lanes=()=>SIM.view==="side"&&SIM.ctl.runBoth&&SIM.tab===2;
-function orgActive(o){ /* which organelles run: single view runs the module's organelle only */
-  if(SIM.view==="side")return true;
+const lanes=()=>SIM.view==="stack"&&SIM.ctl.runBoth;
+function orgActive(o){ /* which organelles run: Modules 1 and 2 run their own organelle; Module 3 runs both */
+  if(SIM.view==="stack")return true;
   return SIM.tab===2?true:(SIM.tab===0?o.kind==="chl":o.kind==="mit");
 }
 function mk(o,k,path,opt){const t={id:nextId++,k,x:path[0][0],y:path[0][1],path,i:0,v:PACE,C:0,g:0,to:"",d:null,a:1,age:0,wait:false};
@@ -1189,7 +1196,7 @@ function chlStep(o,dt){
   o.redT+=dt;
   if(o.pga>=1&&o.atpPool>=1&&o.nadphPool.length>=1&&o.redT>=.3){o.redT=0;o.pga--;o.atpPool--;const u=o.nadphPool.shift();o.g3pInt.push(u);cn.atpUsedCalvin++;cn.nadphUsed++;event("reduce");}
   if(o.g3pInt.length>=6&&o.atpPool>=3){const us=o.g3pInt.splice(0,6);let w=0,ox=0;us.forEach(u=>{w+=u.w;ox+=u.o;});o.atpPool-=3;cn.atpUsedCalvin+=3;o.rubp+=3;cn.g3pOut++;o.calvinC-=3;
-    mk(o,"g3p",chlPaths(o,"g3p"),{to:L?"g3p_lane":"g3p_join",C:3,d:{co2:3,atp:9,nadph:6,water:w,o2:ox},v:PACE*.9});event("g3p");}
+    mk(o,"g3p",chlPaths(o,"g3p"),{to:L?"g3p_lane":"g3p_join",C:3,d:{co2:3,atp:9,nadph:6,water:w,o2:ox},v:PACE*.9,exit:L?"chl":null});event("g3p");}
   cn.rubp=o.rubp;cn.pga=o.pga;
   /* pH (DE readouts) */
   const f=clamp(o.hres/o.hmax,0,1);o.phA+=(8-3*f-o.phA)*Math.min(1,dt*.8);o.phB+=(7.2+.8*f-o.phB)*Math.min(1,dt*.8);cn.phThylakoidSpace=o.phA;cn.phStroma=o.phB;
@@ -1204,7 +1211,7 @@ function chlArrive(o,t){
     case "ph_ps1v":removeTok(o,t);o.psiHit=SIM.t;break;
     case "ph_ps1":removeTok(o,t);cn.photonHits++;o.psiHit=SIM.t;if(c.cyclic&&o.psiE>0){o.psiE--;mk(o,"e",chlPaths(o,"cyc1"),{to:"cyc_cyt",v:PACE*1.2});event("photon");}break;
     case "water_ps2":removeTok(o,t);if(t.d&&t.d.lane)o.laneWaterFly--;else o.waterFly--;cn.waterSplit++;o.psE+=2;pumpH(o,2,"hwater");o.o2half++;
-      if(o.o2half>=2){o.o2half-=2;cn.o2Released++;mk(o,"o2",chlPaths(o,"o2"),{to:L?"o2_lane":"o2_air",v:PACE});}event("water");break;
+      if(o.o2half>=2){o.o2half-=2;cn.o2Released++;mk(o,"o2",chlPaths(o,"o2"),{to:L?"o2_lane":"o2_air",v:PACE,exit:"chl"});}event("water");break;
     case "e_cyt":removeTok(o,t);pumpH(o,3,"hpump");mk(o,"e",chlPaths(o,"e2"),{to:"e_ps1",v:PACE*1.2});event("pump");break;
     case "e_ps1":removeTok(o,t);if(c.cyclic)o.psiE++;else mk(o,"e",chlPaths(o,"e3"),{to:"e_nr",v:PACE*1.2});break;
     case "e_nr":removeTok(o,t);o.eAtNR++;if(o.eAtNR>=2){o.eAtNR-=2;cn.nadphMade++;mk(o,"nadph",chlPaths(o,"nadph"),{to:"nadph_pool",d:{w:1,o:.5},v:PACE});event("nadph");}break;
@@ -1218,7 +1225,7 @@ function chlArrive(o,t){
     case "o2_air":removeTok(o,t);break;
     case "o2_lane":removeTok(o,t);laneStart("o2",t);break;
     case "co2_fix":if(t.d&&t.d.lane)o.laneCo2Fly--;else o.co2Fly--;if(o.rubp>=1){removeTok(o,t);fixCO2(o);}else{t.wait=true;o.co2Wait++;}break;
-    case "g3p_join":removeTok(o,t);o.joinQ.push(t.d);event("join");if(o.joinQ.length>=2){const a=o.joinQ.shift(),b=o.joinQ.shift();const g=formGlucose(a,b);mk(o,"glucose",chlPaths(o,"glucoseOut"),{to:"glucose_out",C:6,g,v:PACE*.8});}break;
+    case "g3p_join":removeTok(o,t);o.joinQ.push(t.d);event("join");if(o.joinQ.length>=2){const a=o.joinQ.shift(),b=o.joinQ.shift();const g=formGlucose(a,b);mk(o,"glucose",chlPaths(o,"glucoseOut"),{to:"glucose_out",C:6,g,v:PACE*.8,exit:"chl"});}break;
     case "g3p_lane":removeTok(o,t);laneStart("g3p",t);break;
     case "glucose_out":removeTok(o,t);SIM.led.carbonOut+=6;break;
   }
@@ -1242,7 +1249,7 @@ function synthase(o,dt){
   const f=o.hres>6?clamp((o.hres-6)/(o.hmax-6),0,1):0;
   o.synRate=f;o.synP+=f*4.5*dt;
   if(o.synP>=1&&o.hres>=4){o.synP-=1;o.hres-=4;
-    if(isM){takeH(o,4,true);o.synP=Math.min(o.synP,1);cn.atpSynthaseMito++;mk(o,"atp",mitPaths(o,"atp"),{to:"atp_pool",v:PACE});}
+    if(isM){takeH(o,4,true);o.synP=Math.min(o.synP,1);cn.atpSynthaseMito++;mk(o,"atp",mitPaths(o,"atp"),{to:"atp_out",v:PACE,exit:"mit"});}
     else{cn.atpChloro++;mk(o,"atp",chlPaths(o,"atp"),{to:"atp_pool",v:PACE});}
     mk(o,o.kind==="chl"?"hflow":"hflow",o.kind==="chl"?chlPaths(o,"hdown"):mitPaths(o,"hdown"),{to:"h_syn",v:PACE*1.3});
     event("atp");}
@@ -1258,10 +1265,11 @@ function takeH(o,n,credit){let left=n;while(left>1e-9&&o.hq.length){const q=o.hq
 function mitPaths(o,what){
   const L=lanes();
   if(what==="glucoseIn")return[[-40,650],[130,600]];
+  if(what==="glucoseTop")return[[130,GAPY-STACK.mit.oy],[130,560],[130,600]]; /* Module 3: glucose from the chloroplast drops into the cytoplasm from above */
   if(what==="pyr")return[[130,600],[250,565],[400,560]];
   if(what==="pyrF")return[[130,600],[150,700]];
-  if(what==="co2pdh")return L?[[400,560],[300,700],[-40,720]]:[[400,560],[300,700],[300,H1+40]];
-  if(what==="co2cac")return L?[[WHEEL.x-WHEEL.r,WHEEL.y+30],[300,700],[-40,720]]:[[WHEEL.x-WHEEL.r,WHEEL.y+30],[300,700],[300,H1+40]];
+  if(what==="co2pdh")return L?[[400,560],[470,735],[W1+40,735]]:[[400,560],[300,700],[300,H1+40]];
+  if(what==="co2cac")return L?[[WHEEL.x-WHEEL.r,WHEEL.y+30],[470,735],[W1+40,735]]:[[WHEEL.x-WHEEL.r,WHEEL.y+30],[300,700],[300,H1+40]];
   if(what==="co2ferm")return[[150,700],[60,760],[-40,H1-40]];
   if(what==="lac")return[[150,700],[60,760],[-40,H1-20]];
   if(what==="nadhG")return[[130,600],[250,470],[NX.c1,PATCH.my+40]];
@@ -1273,12 +1281,13 @@ function mitPaths(o,what){
   if(what==="e1")return[[NX.c1,PATCH.my],[NX.q,PATCH.my],[NX.c3,PATCH.my]];
   if(what==="e1b")return[[NX.c2,PATCH.my+30],[NX.q,PATCH.my],[NX.c3,PATCH.my]];
   if(what==="e2")return[[NX.c3,PATCH.my],[NX.cc,PATCH.my],[NX.c4,PATCH.my]];
-  if(what==="o2")return L?[[-40,100],[NX.c4,100],[NX.c4,PATCH.my+40]]:[[W1+40,100],[NX.c4,100],[NX.c4,PATCH.my+40]];
-  if(what==="water")return L?[[NX.c4,PATCH.my+40],[NX.c4-40,PATCH.my+120],[200,470],[-40,480]]:[[NX.c4,PATCH.my+40],[NX.c4+60,PATCH.my+130],[NX.c4+120,PATCH.my+200]];
-  if(what==="atp")return[[NX.syn,PATCH.my+60],[NX.syn-120,PATCH.my+130],POOL.atp];
+  if(what==="o2")return[[W1+40,100],[NX.c4,100],[NX.c4,PATCH.my+40]];
+  /* water and ATP made in the mitochondrion leave it, out through the right-hand membranes, glowing as they cross */
+  if(what==="water")return[[NX.c4,PATCH.my+40],[NX.c4+60,PATCH.my+130],[1100,470],[W1+40,480]];
+  if(what==="atp")return[[NX.syn,PATCH.my+60],[1120,520],[W1+60,600]];
   if(what==="atpG")return[[130,600],[130+(rnd()-.5)*80,520]];
   if(what==="adpG")return[[80,520],[130,600]];
-  if(what==="atpC")return[[WHEEL.x,WHEEL.y+WHEEL.r],[WHEEL.x+140,WHEEL.y+WHEEL.r+30]];
+  if(what==="atpC")return[[WHEEL.x,WHEEL.y+WHEEL.r],[600,800],[620,H1+50]];
   if(what==="hpump")return[[NX.c1+(rnd()<.5?0:(rnd()<.5?210:410)),PATCH.my-10],[NX.c1+(rnd()-.5)*180+200,PATCH.y0+30+rnd()*80]];
   if(what==="hdown")return[[NX.syn-10,PATCH.my-40],[NX.syn,PATCH.my+30]];
   return[[0,0]];
@@ -1288,7 +1297,7 @@ function mitStep(o,dt){
   const c=SIM.ctl,cn=SIM.cnt,lvl=SIM.level,L=lanes(),S=curStep();
   const anox=!c.o2;
   /* feeding: manual in M1-M3; automatic every 8 s where the mitochondrion runs continuously; from the lane with Run both */
-  const auto=(S.feed==="auto"&&SIM.tab===1)||(SIM.tab!==1&&SIM.view==="side"&&!L);
+  const auto=(S.feed==="auto"&&SIM.tab===1)||(SIM.view==="stack"&&!L);
   if(auto){o.feedT+=dt;if(o.feedT>=8){o.feedT=0;if(o.tok.filter(t=>t.k==="glucose"||t.k==="pyr").length<6)feedGlucose(true);}}
   /* glycolysis: -2 ATP, then the ring breaks: 2 pyruvate, +4 ATP, 2 NADH */
   o.glyQ.forEach(q=>{const tok=o.tok.find(t=>t.id===q.tid);if(!tok){q.dead=true;return;}
@@ -1309,7 +1318,7 @@ function mitStep(o,dt){
   o.pdhQ.forEach(q=>{const tok=o.tok.find(t=>t.id===q.tid);if(!tok){q.dead=true;return;}
     if(o.nad<1||anox)return;q.t+=dt;
     if(q.t>=1.3){removeTok(o,tok);q.dead=true;const g=q.g,R=SIM.G[g];o.nad--;
-      cn.co2OutMito++;R.pox.co2++;R.cRel++;mk(o,"co2",mitPaths(o,"co2pdh"),{to:L?"co2_lane":"co2_air",C:1,g,v:PACE});
+      cn.co2OutMito++;R.pox.co2++;R.cRel++;mk(o,"co2",mitPaths(o,"co2pdh"),{to:L?"co2_lane":"co2_air",C:1,g,v:PACE,exit:"mit"});
       cn.nadhMade++;R.pox.nadh++;R.pendE++;mk(o,"nadh",mitPaths(o,"nadhP"),{to:"nadh_cI",g,v:PACE});
       mk(o,"acetyl",mitPaths(o,"acetyl"),{to:"acetyl_cac",C:2,g,v:PACE*.9});event("trim");checkDone(g);}
   });
@@ -1318,11 +1327,11 @@ function mitStep(o,dt){
   if(o.cacQ.length){const q=o.cacQ[0];const g=q.g,R=SIM.G[g];
     const ok=o.nad>=1&&!anox;
     if(ok){q.t+=dt;o.rot+=dt*1.4;
-      const emitCO2=()=>{q.c--;cn.co2OutMito++;R.cac.co2++;R.cRel++;mk(o,"co2",mitPaths(o,"co2cac"),{to:L?"co2_lane":"co2_air",C:1,g,v:PACE});};
+      const emitCO2=()=>{q.c--;cn.co2OutMito++;R.cac.co2++;R.cRel++;mk(o,"co2",mitPaths(o,"co2cac"),{to:L?"co2_lane":"co2_air",C:1,g,v:PACE,exit:"mit"});};
       const emitNADH=()=>{o.nad--;cn.nadhMade++;R.cac.nadh++;R.pendE++;mk(o,"nadh",mitPaths(o,"nadhC"),{to:"nadh_cI",g,v:PACE});};
       if(q.st===0&&q.t>=.7){q.st=1;emitCO2();emitNADH();event("co2");}
       else if(q.st===1&&q.t>=1.5&&o.nad>=1){q.st=2;emitCO2();emitNADH();event("co2");}
-      else if(q.st===2&&q.t>=2.1){q.st=3;cn.atpCAC++;R.cac.atp++;mk(o,"atp",mitPaths(o,"atpC"),{to:"atp_gone",v:PACE*.8});event("atp");}
+      else if(q.st===2&&q.t>=2.1){q.st=3;cn.atpCAC++;R.cac.atp++;mk(o,"atp",mitPaths(o,"atpC"),{to:"atp_gone",v:PACE*.8,exit:"mit"});event("atp");}
       else if(q.st===3&&q.t>=2.6){q.st=4;cn.fadh2Made++;R.cac.fadh2++;R.pendE++;mk(o,"fadh2",mitPaths(o,"fadh2"),{to:"fadh2_cII",g,v:PACE});}
       else if(q.st===4&&q.t>=3.1&&o.nad>=1){q.st=5;emitNADH();o.cacQ.shift();event("turn");checkDone(g);}
     }}
@@ -1355,7 +1364,7 @@ function mitStep(o,dt){
 }
 function finishAtIV(o,g){const cn=SIM.cnt,R=SIM.G[g],L=lanes();o.o2At--;pumpH(o,2,"hpump",g);cn.waterMade++;
   if(R){R.chain.waterMade++;R.chain.o2Used+=.5;R.pendE=Math.max(0,R.pendE-1);}
-  mk(o,"water",mitPaths(o,"water"),{to:L?"water_lane":"water_gone",v:PACE*.8});event("water");if(R)checkDone(g);}
+  mk(o,"water",mitPaths(o,"water"),{to:L?"water_lane":"water_gone",v:PACE*.8,exit:"mit"});event("water");if(R)checkDone(g);}
 function mitArrive(o,t){
   const cn=SIM.cnt,c=SIM.ctl,L=lanes();
   switch(t.to){
@@ -1376,7 +1385,7 @@ function mitArrive(o,t){
     case "co2_lane":removeTok(o,t);laneStart("co2",t);break;
     case "water_gone":removeTok(o,t);break;
     case "water_lane":removeTok(o,t);laneStart("water",t);break;
-    case "atp_pool":removeTok(o,t);o.atpMPool=Math.min(14,o.atpMPool+1);break;
+    case "atp_out":removeTok(o,t);o.atpMPool++;break; /* counted as it leaves for the rest of the cell */
     case "atp_gone":case "adp_gly":removeTok(o,t);break;
     case "c_out":removeTok(o,t);SIM.led.carbonOut+=t.C;cn.cOutFerm+=t.C;if(SIM.G[t.g]){SIM.G[t.g].cRel+=t.C;checkDone(t.g);}break;
     case "h_res":case "h_syn":removeTok(o,t);break;
@@ -1384,21 +1393,28 @@ function mitArrive(o,t){
 }
 
 /* ================= the lanes between the organelles (side by side, Run both) ================= */
-function toGlobal(kind,x,y){const s=SIDE[kind];return[s.ox+x*s.sc,s.oy+y*s.sc];}
+function toGlobal(kind,x,y){const s=STACK[kind];return[s.ox+x*s.sc,s.oy+y*s.sc];}
+/* each transfer runs along its own arrow: out of one organelle's right side, along the band, into the other. Oxygen and sugar go down; carbon dioxide and water come back up. */
+const LANEV=PACE*1.1;
+function lanePath(kind){const G=toGlobal;
+  if(kind==="o2"){const p0=G("chl",W1+40,90),p1=G("mit",W1+40,100);return[p0,[TRK.o2,p0[1]],[TRK.o2,p1[1]],p1];}
+  if(kind==="sugar"){const p0=G("chl",W1+40,650);return[p0,[TRK.sugar,p0[1]],[TRK.sugar,GAPY],[130,GAPY]];}
+  if(kind==="co2"){const p0=G("mit",W1+40,735),p1=G("chl",W1+40,740);return[p0,[TRK.co2,p0[1]],[TRK.co2,p1[1]],p1];}
+  if(kind==="water"){const p0=G("mit",W1+40,480),p1=G("chl",W1+40,480);return[p0,[TRK.water,p0[1]],[TRK.water,p1[1]],p1];}
+  return[[0,0]];}
 function laneStart(kind,t){
-  const A=SIDE.chl,B=SIDE.mit;
-  if(kind==="o2"){const p0=toGlobal("chl",W1+40,90),p1=toGlobal("mit",-40,100);mk(null,"o2",[p0,[p0[0]+60,LANEY.o2],[p1[0]-60,LANEY.o2],p1],{to:"lane_o2",v:PACE*.72});SIM.mit.laneO2Fly++;}
-  if(kind==="g3p"){const p0=toGlobal("chl",W1+40,650);mk(null,"g3p",[p0,[1000,LANEY.sugar]],{to:"lane_join",v:PACE*.72,C:3,d:t.d});}
-  if(kind==="co2"){const p0=toGlobal("mit",-40,720),p1=toGlobal("chl",W1+40,740);mk(null,"co2",[p0,[p0[0]-60,LANEY.co2],[p1[0]+60,LANEY.co2],p1],{to:"lane_co2",v:PACE*.72,C:1,g:t.g});SIM.chl.laneCo2Fly++;}
-  if(kind==="water"){const p0=toGlobal("mit",-40,480),p1=toGlobal("chl",W1+40,480);mk(null,"water",[p0,[p1[0]+60,LANEY.water],p1],{to:"lane_water",v:PACE*.72});SIM.chl.laneWaterFly++;}
+  if(kind==="o2"){mk(null,"o2",lanePath("o2"),{to:"lane_o2",v:LANEV,exit:"lane",d:{lane:"o2"}});SIM.mit.laneO2Fly++;}
+  if(kind==="g3p"){const P=lanePath("sugar");mk(null,"g3p",[P[0],P[1],[TRK.sugar,GAPY-34]],{to:"lane_join",v:LANEV,C:3,d:Object.assign({lane:"sugar"},t.d),exit:"lane"});}
+  if(kind==="co2"){mk(null,"co2",lanePath("co2"),{to:"lane_co2",v:LANEV,C:1,g:t.g,exit:"lane",d:{lane:"co2"}});SIM.chl.laneCo2Fly++;}
+  if(kind==="water"){mk(null,"water",lanePath("water"),{to:"lane_water",v:LANEV,exit:"lane",d:{lane:"water"}});SIM.chl.laneWaterFly++;}
 }
 function laneArrive(t){
   const cn=SIM.cnt;
   switch(t.to){
     case "lane_o2":removeTok(null,t);cn.o2Trip++;mk(SIM.mit,"o2",mitPaths(SIM.mit,"o2"),{to:"o2_cIV",v:PACE,d:{lane:true}});break;
     case "lane_join":t.wait=true;{const w=SIM.lane.filter(q=>q.k==="g3p"&&q.wait);if(w.length>=2){const a=w[0],b=w[1];removeTok(null,a);removeTok(null,b);const g=formGlucose(a.d,b.d);
-      const p1=toGlobal("mit",-40,650);mk(null,"glucose",[[1000,LANEY.sugar],[p1[0]-40,LANEY.sugar],p1],{to:"lane_glucose",v:PACE*.6,C:6,g});}}break;
-    case "lane_glucose":removeTok(null,t);mk(SIM.mit,"glucose",mitPaths(SIM.mit,"glucoseIn"),{to:"glu_gly",C:6,g:t.g,v:PACE*.9});break;
+      mk(null,"glucose",[[TRK.sugar,GAPY-34],[TRK.sugar,GAPY],[130,GAPY]],{to:"lane_glucose",v:LANEV*1.25,C:6,g,exit:"lane",d:{lane:"sugar"}});}}break;
+    case "lane_glucose":removeTok(null,t);mk(SIM.mit,"glucose",mitPaths(SIM.mit,"glucoseTop"),{to:"glu_gly",C:6,g:t.g,v:PACE*1.4});break;
     case "lane_co2":removeTok(null,t);mk(SIM.chl,"co2",chlPaths(SIM.chl,"co2lane"),{to:"co2_fix",C:1,v:PACE,d:{lane:true}});break;
     case "lane_water":removeTok(null,t);mk(SIM.chl,"water",chlPaths(SIM.chl,"water"),{to:"water_ps2",v:PACE*1.1,d:{lane:true}});break;
   }
@@ -1468,12 +1484,14 @@ const TAU=Math.PI*2;
 function lx(x){return (OT.ox+x*OT.sc);}  /* organelle-local -> stage-world */
 function ly(y){return (OT.oy+y*OT.sc);}
 function sPx(x,y){return[(VX.ox+lx(x)*VX.k)*1,(VX.oy+ly(y)*VX.k)*1];} /* -> CSS px on the canvas */
-function labelPx(){return st.teach?28:(st.dev==="pc"?16:16);}
+function labelPx(){const stk=SIM&&SIM.view==="stack";return st.teach?(stk?22:28):(stk?13:16);}
+let stackShow=false; /* Module 3 shows only the labels drawn through tagS: fewer words, so the movement carries the explanation */
+function tagS(){stackShow=true;try{tag.apply(null,arguments);}finally{stackShow=false;}}
 function circ(x,y,r,f,e,w){ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(f){ctx.fillStyle=f;ctx.fill();}if(e){ctx.strokeStyle=e;ctx.lineWidth=w||2;ctx.stroke();}}
 function rrect(x,y,w,h,r,f,e,lw){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();if(f){ctx.fillStyle=f;ctx.fill();}if(e){ctx.strokeStyle=e;ctx.lineWidth=lw||2;ctx.stroke();}}
 /* a boxed label, drawn at a fixed screen size on a backing plate; registers a hit area for Teaching view */
 function tag(text,x,y,key,align,big,minor){
-  if(!text)return;if(minor&&(SIM.view==="side"||st.teach))return;const[X,Y]=sPx(x,y);const px=big?labelPx()+4:labelPx();
+  if(!text)return;if(minor&&(SIM.view==="stack"||st.teach))return;if(SIM.view==="stack"&&!stackShow)return;const[X,Y]=sPx(x,y);const px=big?labelPx()+4:labelPx();
   ctx.save();ctx.setTransform(kpx,0,0,kpx,0,0);ctx.font="600 "+px+"px Archivo, 'Helvetica Neue', Arial, sans-serif";ctx.textBaseline="middle";ctx.textAlign=align||"center";
   const w=ctx.measureText(text).width,x0=align==="left"?X:align==="right"?X-w:X-w/2,h=px*1.5;
   ctx.fillStyle=BG;ctx.globalAlpha=.9;ctx.fillRect(x0-5,Y-h/2,w+10,h);ctx.globalAlpha=1;
@@ -1487,36 +1505,50 @@ function part(key,x,y,r){ /* an unlabelled part that can still be tapped in Teac
 function draw(){
   const S=SIM;if(!S)return;hits=[];
   ctx.setTransform(kpx,0,0,kpx,0,0);ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);
-  const side=S.view==="side",WW=side?W2:W1;
-  const k=Math.min(cw/WW,ch/H1);VX={k,ox:(cw-WW*k)/2,oy:(ch-H1*k)/2};
+  const stk=S.view==="stack",WW=stk?WS:W1,HH=stk?HS:H1;
+  const k=Math.min(cw/WW,ch/HH);VX={k,ox:(cw-WW*k)/2,oy:(ch-HH*k)/2};
   ctx.setTransform(kpx*k,0,0,kpx*k,kpx*VX.ox,kpx*VX.oy);ctx.lineCap="round";ctx.lineJoin="round";
-  if(side){drawLanes();
-    const act=S.tab===2?null:(S.tab===0?"chl":"mit");
-    [S.chl,S.mit].forEach(o=>{OT=SIDE[o.kind];ctx.save();ctx.globalAlpha=(act&&o.kind!==act)?.5:1;drawOrg(o);ctx.restore();});
+  if(stk){drawLanes(false);
+    [S.chl,S.mit].forEach(o=>{OT=STACK[o.kind];drawOrg(o);});
+    drawLanes(true);
     OT={ox:0,oy:0,sc:1};
   }else{const o=S.tab===1?S.mit:S.chl;OT={ox:0,oy:0,sc:1};drawOrg(o);}
   fpsN++;
 }
-function drawLanes(){
-  const S=SIM,L=lanes(),a=S.tab===2;
+/* the four transfer arrows down the right of the stack. Each is faint until a molecule is on it, then it lights up in that molecule's colour. Drawn twice: the tracks under the organelles, then the moving molecules, labels and counts on top. */
+function drawLanes(top){
+  const S=SIM,L=lanes(),lv=S.level;
   ctx.save();OT={ox:0,oy:0,sc:1};
-  const x0=870,x1=1130;
-  const lane=(y,dir,c,text)=>{ctx.globalAlpha=L?.9:.35;ctx.strokeStyle=col("lane");ctx.lineWidth=22;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
-    ctx.strokeStyle=c;ctx.lineWidth=3;ctx.beginPath();const ax=dir>0?x1-14:x0+14,bx=dir>0?x0+14:x1-14;ctx.moveTo(bx,y);ctx.lineTo(ax,y);ctx.moveTo(ax-dir*12,y-8);ctx.lineTo(ax,y);ctx.lineTo(ax-dir*12,y+8);ctx.stroke();ctx.globalAlpha=1;
-    tag(text,(x0+x1)/2,y-22,null,"center");};
-  const lv=S.level;
-  lane(LANEY.o2,1,col("o2E"),lv==="nine"?"Oxygen":"O₂");
-  lane(LANEY.sugar,1,col("goldE"),lv==="nine"?"Sugar":"2 G3P → glucose");
-  lane(LANEY.co2,-1,col("co2"),lv==="nine"?"Carbon dioxide":"CO₂");
-  lane(LANEY.water,-1,col("waterE"),lv==="nine"?"Water":"H₂O");
-  tag(LBL[lv].gap,1000,760,null,"center");
-  if(!L&&a)tag("Press Run both",1000,300,null,"center",true);
-  /* the carbon count for the loop, between the oxygen lane and the water lane: CO2 into the chloroplast on the left, CO2 out of the mitochondrion on the right */
-  if(L&&a&&cw>=620){const v=ledgerVals(),lh=lineH(),y0=238,cn=S.cnt;tag("Carbon count",1000,y0,"ledger","center",true);
-    tag("CO₂ in "+v.inC+" · CO₂ out "+v.outC,1000,y0+lh,"ledger","center");
-    tag(cn.loopDone>0?"6 in = 6 out per glucose ✓":(v.way>0?"on the way: "+v.way:"carbon in = carbon out"),1000,y0+2*lh,"ledger","center");}
-  /* lane tokens */
-  OT={ox:0,oy:0,sc:1};S.lane.forEach(t=>drawTok(t));
+  const busy=k=>S.lane.some(t=>t.d&&t.d.lane===k);
+  const head=(x,y,dir,c)=>{ctx.strokeStyle=c;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(x-13,y-dir*13);ctx.lineTo(x,y);ctx.lineTo(x+13,y-dir*13);ctx.stroke();};
+  const arrow=(key,c)=>{const P=lanePath(key),on=L&&busy(key);
+    ctx.globalAlpha=on?.95:(L?.5:.3);ctx.strokeStyle=c;ctx.lineWidth=on?9:5;ctx.setLineDash(on?[]:[14,10]);
+    ctx.beginPath();P.forEach((p,i)=>{if(i)ctx.lineTo(p[0],p[1]);else ctx.moveTo(p[0],p[1]);});ctx.stroke();ctx.setLineDash([]);
+    /* chevrons along the vertical run, pointing the way the molecule travels */
+    const a=P[1],b=P[2],dir=b[1]>a[1]?1:-1,n=Math.max(2,Math.floor(Math.abs(b[1]-a[1])/260));
+    for(let i=1;i<=n;i++)head(a[0],a[1]+(b[1]-a[1])*i/(n+1)+dir*10,dir,c);
+    if(key==="sugar"){const e=P[P.length-1];ctx.strokeStyle=c;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(e[0]+16,e[1]-13);ctx.lineTo(e[0],e[1]);ctx.lineTo(e[0]+16,e[1]+13);ctx.stroke();}
+    ctx.globalAlpha=1;};
+  if(!top){
+    arrow("sugar",col("goldE"));arrow("o2",col("o2E"));arrow("water",col("waterE"));arrow("co2",col("co2"));
+    /* where two three-carbon pieces join into glucose, on the way down */
+    ctx.setLineDash([4,5]);circ(TRK.sugar,GAPY-34,30,null,col("goldE"),2);ctx.setLineDash([]);
+    ctx.restore();return;}
+  /* labels at the ends where each molecule leaves its organelle */
+  const nine=lv==="nine";
+  tagS(nine?"Oxygen (O₂)":"O₂",TRK.o2-14,84,"o2","right",true);
+  tagS(nine?"Sugar":"Glucose (2 G3P)",760,GAPY,"glu","center",true);
+  tagS(nine?"Water":"H₂O",TRK.water-14,toGlobal("mit",0,480)[1]-26,"water","right",true);
+  tagS(nine?"Carbon dioxide (CO₂)":"CO₂",TRK.co2-14,toGlobal("mit",0,735)[1]+30,"co2","right",true);
+  if(!L)tagS("Press Run both",620,GAPY-2,null,"center",true);
+  /* the carbon count for the loop: CO2 into the chloroplast, CO2 out of the mitochondrion */
+  if(cw>=520){const v=ledgerVals(),lh=lineH(),y0=260,cn=S.cnt,x=WS-12;
+    tagS("Carbon count",x,y0,"ledger","right",true);
+    tagS("CO₂ in "+v.inC+" · CO₂ out "+v.outC,x,y0+lh,"ledger","right");
+    tagS(cn.loopDone>0?"6 in = 6 out per glucose ✓":(v.way>0?"on the way: "+v.way:"carbon in = carbon out"),x,y0+2*lh,"ledger","right");}
+  tagS(LBL[lv].gap,WS/2,HS-14,null,"center");
+  /* the moving molecules on the arrows */
+  S.lane.forEach(t=>drawTok(t));
   ctx.restore();
 }
 function drawOrg(o){
@@ -1529,6 +1561,7 @@ function drawOrg(o){
   o.tok.forEach(t=>drawTok(t));
   drawReadoutsOnStage(o);
   drawLedger(o);
+  if(S.view==="stack"){if(isC)tagS("Chloroplast",620,30,null,"center",true);else tagS("Mitochondrion",20,112,null,"left",true);}
   ctx.restore();
 }
 function drawChloroBody(o){
@@ -1547,7 +1580,7 @@ function drawChloroBody(o){
     if(!c.cyclic)beam(-60,-60,NX.ps2,PATCH.my-20,46);
     if(S.level==="de"||c.cyclic)beam(NX.ps1-260,-60,NX.ps1,PATCH.my-20,c.cyclic?46:26);
   }
-  tag(L.light,150,60,"light","center");
+  tagS(L.light,150,60,"light","center");
   /* leader from the granum to the magnified patch */
   ctx.setLineDash([8,6]);ctx.strokeStyle=col("grey");ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(190,520);ctx.lineTo(PATCH.x0,PATCH.y1);ctx.stroke();ctx.setLineDash([]);
   part("stroma",900,520,60);
@@ -1559,29 +1592,30 @@ function drawChloroBody(o){
 function drawMitoBody(o){
   const S=SIM,L=LBL[S.level],lvl=S.level,c=S.ctl;
   /* cytoplasm strip is the plain background; the capsule with two membranes */
-  rrect(250,90,910,670,220,col("mitF"),col("mitL"),5);
-  rrect(272,112,866,626,200,null,col("mitL"),3);
+  const M=MCAP;
+  rrect(M.x0,M.y0,M.x1-M.x0,M.y1-M.y0,220,col("mitF"),col("mitL"),5);
+  rrect(M.x0+22,M.y0+22,M.x1-M.x0-44,M.y1-M.y0-44,200,null,col("mitL"),3);
   /* cristae: folds of the inner membrane along the bottom and right */
-  ctx.strokeStyle=col("mitL");ctx.lineWidth=3;ctx.beginPath();
-  for(let i=0;i<6;i++){const x=330+i*70;if(x>520&&x<720)continue;ctx.moveTo(x,738);ctx.quadraticCurveTo(x+18,640,x+35,738);}
-  for(let i=0;i<3;i++){const y=520+i*60;ctx.moveTo(1138,y);ctx.quadraticCurveTo(1060,y+18,1138,y+40);}
+  ctx.strokeStyle=col("mitL");ctx.lineWidth=3;ctx.beginPath();const yb=M.y1-22,xr=M.x1-22;
+  for(let i=0;i<6;i++){const x=300+i*70;if(x>500&&x<720)continue;ctx.moveTo(x,yb);ctx.quadraticCurveTo(x+18,yb-98,x+35,yb);}
+  for(let i=0;i<3;i++){const y=520+i*60;ctx.moveTo(xr,y);ctx.quadraticCurveTo(xr-78,y+18,xr,y+40);}
   ctx.stroke();
   /* transporter where pyruvate crosses both membranes */
-  rrect(238,548,44,34,8,col("grey"),null);
-  tag(L.cyto,120,420,"cyto","center",false,true);
-  tag(L.outer,300,60,"outer","center",false,true);
-  tag(L.inner,560,745,"inner","center",false,true);
+  rrect(M.x0-12,548,44,34,8,col("grey"),null);
+  tag(L.cyto,110,420,"cyto","center",false,true);
+  tag(L.outer,330,M.y0-18,"outer","center",false,true);
+  tag(L.inner,600,M.y1-20,"inner","center",false,true);
   part("matrix",900,520,60);
   if(lvl==="de")tag(L.cristae,470,640,"cristae","center",false,true);
   /* leader from a crista to the magnified patch */
-  ctx.setLineDash([8,6]);ctx.strokeStyle=col("grey");ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(1120,530);ctx.lineTo(PATCH.x1,PATCH.y1);ctx.stroke();ctx.setLineDash([]);
+  ctx.setLineDash([8,6]);ctx.strokeStyle=col("grey");ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(MCAP.x1-40,530);ctx.lineTo(PATCH.x1,PATCH.y1);ctx.stroke();ctx.setLineDash([]);
   /* glycolysis spot and fermentation spot */
   ctx.setLineDash([4,5]);circ(130,600,46,null,col("goldE"),1.5);ctx.setLineDash([]);
   tag(L.split,20,665,"split","left");
   const anox=!c.o2;
   /* oxygen off: the fermentation spot in the cytoplasm names the cell and its ending */
   if(anox){const alc=c.ferment==="alcohol";const who=alc?L.yeast:L.muscle,what=alc?L.eth.toLowerCase()+" + CO₂":L.lac.toLowerCase();
-    tag(lvl==="nine"?who+": "+what:L.fer+" ("+who.toLowerCase()+"): "+what,20,745,"fer","left");}
+    tagS(lvl==="nine"?who+": "+what:L.fer+" ("+who.toLowerCase()+"): "+what,20,775,"fer","left");}
   if(lvl==="de"){tag(L.trim,300,612,"trim","center",false,true);}
   drawTally(o);
 }
@@ -1593,11 +1627,11 @@ function tallyG(){const G=SIM.G,tot=R=>R.gly.atpNet+R.cac.atp+Math.round(R.chain
   if(!R)return null;const chain=Math.round(R.chain.atp);return{gly:R.gly.atpNet,cac:R.cac.atp,chain,mit:R.cac.atp+chain,total:tot(R),done:R.done,mode:R.mode};}
 function lineH(){return labelPx()*1.6/(OT.sc*VX.k);} /* one label line, in organelle-local units */
 function drawTally(o){
-  /* a short column in the open lower-right of the mitochondrion, right-aligned. Lines are kept short so they fit at board size (Teaching view) and side by side. The comparison, about 32 with oxygen and 2 without, sits in the readout and in the tally's callout. */
-  const S=SIM,lvl=S.level,short=S.view==="side"||st.teach,T=tallyG(),lh=lineH(),x=1130;
+  /* a short column in the open lower-right of the mitochondrion, right-aligned. Lines are kept short so they fit at board size (Teaching view) and in the stack. The comparison, about 32 with oxygen and 2 without, sits in the readout and in the tally's callout. */
+  const S=SIM,lvl=S.level,short=S.view==="stack"||st.teach,T=tallyG(),lh=lineH(),x=1130;
   if(cw<620)return; /* a phone-width stage: the readout under the picture carries the tally */
   let lines;
-  if(S.view==="side"){lines=[T?"ATP: "+(lvl==="nine"?T.gly+" + "+T.mit:T.gly+" + "+T.cac+" + "+T.chain)+" = "+T.total:"ATP tally"];}
+  if(S.view==="stack"){if(T)tagS("ATP this glucose: "+(lvl==="nine"?T.gly+" + "+T.mit:T.gly+" + "+T.cac+" + "+T.chain)+" = "+T.total,x,H1-115,"tally","right");return;}
   else if(lvl==="nine"){
     if(!T)lines=["ATP tally","feed a glucose"];
     else lines=short?[T.gly+" cytoplasm","+ "+T.mit+" mitochondrion","= "+T.total+" ATP"]:["ATP tally, this glucose","cytoplasm: "+T.gly,"mitochondrion: "+T.mit,"total: "+T.total+(T.done?" (finished)":"")];
@@ -1612,11 +1646,11 @@ function drawTally(o){
 function ledgerVals(){const cn=SIM.cnt;const inC=cn.co2In+6*cn.glucoseFed,outC=cn.co2OutMito+cn.co2OutFerment+cn.cOutFerm;
   return{chlIn:cn.co2In,cycle:SIM.chl.calvinC,sugar:3*cn.g3pOut,mitIn:6*cn.glucoseIn,mitCo2:cn.co2OutMito+cn.co2OutFerment,mitFerm:cn.cOutFerm,mitInside:Math.max(0,6*cn.glucoseIn-cn.co2OutMito-cn.co2OutFerment-cn.cOutFerm),inC,outC,way:Math.max(0,inC-outC)};}
 function drawLedger(o){
-  const S=SIM,lvl=S.level,side=S.view==="side",v=ledgerVals(),isC=o.kind==="chl";
-  const short=side||st.teach,lh=lineH();
+  const S=SIM,lvl=S.level,v=ledgerVals(),isC=o.kind==="chl";
+  const short=st.teach,lh=lineH();
   if(cw<620)return; /* a phone-width stage: the readout under the picture carries the count */
   if(S.tab===2){ /* Module 3 draws the loop's count between the organelles; the chloroplast only notes that it still makes oxygen */
-    if(isC&&!S.ctl.o2)tag(S.ctl.light>0?(lvl==="nine"?"Still making oxygen in light":"Still releasing O₂ in light"):(lvl==="nine"?"No light, so no oxygen":"No light, so no O₂"),700,56,"o2","center");
+    if(isC&&!S.ctl.o2)tagS(S.ctl.light>0?(lvl==="nine"?"Still making oxygen in light":"Still releasing O₂ in light"):(lvl==="nine"?"No light, so no oxygen":"No light, so no O₂"),700,56,"o2","center");
     return;}
   /* top right, clear of the stage label at the top left: two short lines for the chloroplast, one for the mitochondrion */
   if(isC){tag(short?"Carbon: "+v.chlIn+" in as CO₂":"Carbon count: "+v.chlIn+" in as CO₂",W1-30,18,"ledger","right");
@@ -1637,11 +1671,11 @@ function drawWheel(o){
   for(let i=0;i<n;i++){const a=o.rot+i*TAU/6;bead(W.x+Math.cos(a)*W.r,W.y+Math.sin(a)*W.r,10);}
   const arrow=(a0)=>{const a=o.rot*1+a0;ctx.beginPath();ctx.moveTo(W.x+Math.cos(a)*(W.r+14),W.y+Math.sin(a)*(W.r+14));ctx.lineTo(W.x+Math.cos(a+.16)*(W.r+2),W.y+Math.sin(a+.16)*(W.r+2));ctx.stroke();};
   ctx.strokeStyle=isC?col("chlL"):col("mitL");ctx.lineWidth=3;arrow(0);arrow(TAU/3);arrow(2*TAU/3);
-  if(isC){tag(L.calvin,W.x,W.y-W.r-26,"calvin","center");if(lvl==="de")tag(L.rubisco,W.x-W.r-10,W.y-40,"rubisco","right",false,true);
+  if(isC){tagS(L.calvin,W.x,W.y-W.r-26,"calvin","center");if(lvl==="de")tag(L.rubisco,W.x-W.r-10,W.y-40,"rubisco","right",false,true);
     tag(L.co2,20,690,"co2","left");
     /* the live rate, so the light and CO2 curves can be sketched from the numbers */
     const r=Math.round(SIM.cnt.rate);tag(lvl==="nine"?"Speed: "+r+" of 100":"Rate: "+r+"% of max",W.x,W.y+W.r+28,"calvin","center");}
-  else{tag(L.cycle,W.x-60,W.y-W.r-26,"cycle","center");}
+  else{tagS(L.cycle,W.x-60,W.y-W.r-26,"cycle","center");}
   part(isC?"calvin":"cycle",W.x,W.y,W.r);
   ctx.restore();
 }
@@ -1699,15 +1733,15 @@ function drawPatch(o){
     tag(lvl==="de"?L.h2o:L.water,N.c4+70,P.my+70,"water","left");
     tag(L.h,N.c4+60,P.y0+72,"h","center");
     tag(L.carrier+(lvl==="de"?"":"s")+": "+o.cIQ.length,N.c1-60,P.my+95,"carrier","center",false,true);
-    tag(L.atp+": "+o.atpMPool,POOL.atp[0]-20,POOL.atp[1],"atp","right",false,true);
+    tag((lvl==="nine"?"ATP out to the cell: ":"ATP exported: ")+o.atpMPool,1150,P.y1+108,"atp","right",false,true);
     /* electrons waiting at the end of the line: with oxygen off they pile up at complex IV */
     const nq=Math.min(6,o.ivQ.length);for(let i=0;i<nq;i++){circ(N.c4-30+(i%3)*14,P.my+42+Math.floor(i/3)*14,6,col("e"),col("eE"),1.2);}
-    if(!c.o2){if(lvl==="nine")tag("Oxygen off: the line stops",N.c3+20,P.y1-14,null,"center");else tag("O₂ off: the chain backs up at complex IV",640,P.y1-14,null,"center");}
+    if(!c.o2){if(lvl==="nine")tagS("Oxygen off: the line stops",N.c3+20,P.y1-14,null,"center");else tagS("O₂ off: the chain backs up at complex IV",640,P.y1-14,null,"center");}
     if(c.uncoupler&&lvl==="de"){tag("Uncoupler on: H⁺ leaks back, heat "+Math.round(o.heat),N.syn-200,P.y0+16,null,"center");}
   }
   drawSynthase(o,N.syn,P.my);
   tag(L.syn,N.syn,P.y1+40,"syn","center");
-  tag(L.e,isC?N.pq+30:N.q+70,P.my+46,"e","center",false,true);
+  if(isC)tag(L.e,N.pq+85,P.my+46,"e","center",false,true);else tag(L.e,N.cc-30,P.my-40,"e","center",false,true);
 }
 function drawHcloud(o){
   const P=PATCH,n=Math.min(DEV[st.dev].hdots,Math.round(o.hres*DEV[st.dev].hdots/o.hmax));
@@ -1729,10 +1763,31 @@ function drawSynthase(o,x,y){
   part("syn",x,hy,40);
 }
 function bead(x,y,r){circ(x,y,r,col("carbon"),DARK?"#15130F":"#FFFFFF",1.2);}
+/* carbon dioxide as chemists write it, O=C=O: a straight line of three atoms, two double bonds, and the two lone pairs on each oxygen. The carbon stays the dark bead, so the carbon count still reads bead by bead. */
+function co2Mol(x,y){
+  const dx=27,ro=9,e=col("co2E");
+  ctx.strokeStyle=e;ctx.lineWidth=2.2;ctx.beginPath();
+  for(const s of[-1,1])for(const b of[-3.4,3.4]){ctx.moveTo(x+s*8,y+b);ctx.lineTo(x+s*(dx-ro+1),y+b);}
+  ctx.stroke();
+  for(const s of[-1,1]){const ox=x+s*dx;circ(ox,y,ro,col("co2"),e,1.4);
+    ctx.fillStyle=e;for(const vy of[-1,1])for(const vx of[-3.2,3.2]){ctx.beginPath();ctx.arc(ox+vx,y+vy*(ro+4.6),1.9,0,TAU);ctx.fill();}}
+  bead(x,y,9);
+}
+/* exit glow: a molecule that is leaving an organelle lights up as it reaches the outer membrane and stays lit once it is out, so leaving reads differently from being used up. Molecules on Module 3's arrows glow the whole way. */
+function glowOf(t){
+  if(!t.exit)return 0;if(t.exit==="lane")return 1;
+  if(t.exit==="chl"){const q=Math.hypot((t.x-600)/560,(t.y-415)/345);return clamp((q-.84)/.16,0,1);}
+  const M=MCAP,d=Math.min(t.x-M.x0,M.x1-t.x,t.y-M.y0,M.y1-t.y);return clamp(1-d/70,0,1);}
+function glowHalo(t,g){
+  const r=34*(1+.12*Math.sin(SIM.t*9+t.id)),gr=ctx.createRadialGradient(t.x,t.y,0,t.x,t.y,r);
+  gr.addColorStop(0,"rgba(255,232,140,"+(.95*g)+")");gr.addColorStop(.55,"rgba(255,214,80,"+(.5*g)+")");gr.addColorStop(1,"rgba(255,205,60,0)");
+  ctx.fillStyle=gr;ctx.beginPath();ctx.arc(t.x,t.y,r,0,TAU);ctx.fill();
+  ctx.shadowColor="rgba(255,200,40,.95)";ctx.shadowBlur=12*g*kpx;}
 function drawTok(t){
   const k=t.k;ctx.save();if(t.a<1)ctx.globalAlpha=t.a;
+  const gl=glowOf(t);if(gl>0)glowHalo(t,gl);
   const gold=col("gold"),ge=col("goldE");
-  if(k==="co2"){ctx.strokeStyle=col("co2");ctx.lineWidth=1.5;circ(t.x,t.y,15,null,col("co2"),1.5);circ(t.x-14,t.y,6,col("co2"));circ(t.x+14,t.y,6,col("co2"));bead(t.x,t.y,9);}
+  if(k==="co2")co2Mol(t.x,t.y);
   else if(k==="glucose"){ctx.beginPath();for(let i=0;i<6;i++){const a=i*TAU/6-Math.PI/2;const px=t.x+Math.cos(a)*26,py=t.y+Math.sin(a)*26;if(i)ctx.lineTo(px,py);else ctx.moveTo(px,py);}ctx.closePath();ctx.fillStyle=gold;ctx.fill();ctx.strokeStyle=ge;ctx.lineWidth=2;ctx.stroke();
     for(let i=0;i<6;i++){const a=i*TAU/6-Math.PI/2;bead(t.x+Math.cos(a)*26,t.y+Math.sin(a)*26,8);}}
   else if(k==="g3p"||k==="pyr"||k==="lac"||k==="left"){ctx.globalAlpha*=k==="left"?.75:(k==="lac"?.85:.7);rrect(t.x-30,t.y-13,60,26,13,gold,ge,1.5);ctx.globalAlpha=t.a;for(let i=-1;i<=1;i++)bead(t.x+i*17,t.y,8);}
@@ -1748,7 +1803,7 @@ function drawTok(t){
 }
 function drawReadoutsOnStage(o){
   const S=SIM,lvl=S.level,isC=o.kind==="chl";
-  if(lvl==="de"&&isC&&S.view!=="side"&&(S.stepKey==="C4"||S.stepKey==="C3x")){ /* pool bars: RuBP and 3-phosphoglycerate */
+  if(lvl==="de"&&isC&&S.view!=="stack"&&(S.stepKey==="C4"||S.stepKey==="C3x")){ /* pool bars: RuBP and 3-phosphoglycerate */
     const x=760,y=560;const bar=(lab,v,max,yy)=>{tag(lab,x,yy,null,"left");rrect(x+150,yy-8,180,16,3,BG,col("grey"),1.5);ctx.fillStyle=col("gold");ctx.fillRect(x+151,yy-7,178*clamp(v/max,0,1),14);};
     bar(LBL.de.rubp,o.rubp,3,y);bar(LBL.de.pga,o.pga,6,y+34);}
 }
@@ -1800,10 +1855,10 @@ const ITEMS={};BANK9.forEach(it=>{it.id=it.n;it.lvl="nine";ITEMS[it.n]=it;});BAN
 
 /* ================= state and saving ================= */
 const KEY="energypatch";
-let st={dev:"ipad",tab:0,view:"one",level:"nine",step:[0,0,0],ans:{},goals:{},cnt:{},teach:false,fill:false,cardHidden:false,rec:[false,false,false]};
+let st={dev:"ipad",tab:0,level:"nine",step:[0,0,0],ans:{},goals:{},cnt:{},teach:false,fill:false,cardHidden:false,rec:[false,false,false]};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 try{const raw=localStorage.getItem(KEY);if(raw){const s=JSON.parse(raw);if(s&&typeof s==="object"){
-  st.dev=s.dev==="pc"?"pc":"ipad";st.tab=[0,1,2].indexOf(s.tab)>=0?s.tab:0;st.view=s.view==="side"?"side":"one";st.level=s.level==="de"?"de":"nine";
+  st.dev=s.dev==="pc"?"pc":"ipad";st.tab=[0,1,2].indexOf(s.tab)>=0?s.tab:0;/* an old saved "view" setting is ignored: the View switch is gone */st.level=s.level==="de"?"de":"nine";
   if(Array.isArray(s.step))st.step=[0,1,2].map(i=>clamp(s.step[i]|0,0,TABS[i].steps.length-1));
   if(s.ans&&typeof s.ans==="object")Object.keys(s.ans).forEach(k=>{if(ITEMS[k]&&s.ans[k]&&typeof s.ans[k].f==="boolean")st.ans[k]={f:s.ans[k].f,c:clamp(s.ans[k].c|0,0,3)};});
   if(s.goals&&typeof s.goals==="object")Object.keys(s.goals).forEach(k=>{if(s.goals[k])st.goals[k]=1;});
@@ -1835,7 +1890,7 @@ function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className
 function mcBlock(it){
   const w=el("div","");if(it.adv)w.appendChild(el("span","badge adv","Advanced Biology"));
   w.appendChild(el("p","q",esc(it.stem)));
-  const box=el("div","opts"),r=st.ans[it.id];
+  const box=el("div","opts"),r=st.ans[it.id];box.dataset.item=it.id;
   it.opts.forEach((t,n)=>{const b=el("button","opt");b.type="button";b.textContent=t;b.setAttribute("aria-label","Option "+(n+1)+": "+t);
     if(r){b.disabled=true;if(n===it.key)b.classList.add("right");else if(n===r.c)b.classList.add("wrong");}
     b.addEventListener("click",()=>answer(it.id,n));box.appendChild(b);});
@@ -1886,10 +1941,10 @@ function renderCard(){
     card.appendChild(ex);
     const posts=postOf(S);if(posts.length){card.appendChild(el("p","sub","Check yourself"));posts.forEach(id=>card.appendChild(mcBlock(ITEMS[id])));}}
   const done=stepDoneS(S),last=i>=vis.length-1;
-  const b=el("button","go"+(done?"":" ghostnext"));b.type="button";b.textContent=last?"See my record":(done?"Next step":"Skip to the next step");b.style.marginTop=".4rem";
+  const b=el("button","nextbtn go"+(done?"":" ghostnext"));b.type="button";b.textContent=last?"See my record":(done?"Next step":"Skip to the next step");b.style.marginTop=".4rem";
   b.addEventListener("click",()=>{if(!last)goStep(i+1);else showRecord();});card.appendChild(b);
-  if(last&&st.tab<2){const b2=el("button","ghost");b2.type="button";b2.textContent="Go to Module "+(st.tab+2)+": "+TABS[st.tab+1].name;b2.style.margin=".4rem 0 0 .5rem";b2.addEventListener("click",()=>setTab(st.tab+1,true));card.appendChild(b2);}
-  renderDots();
+  if(last&&st.tab<2){const b2=el("button","ghost nextmod");b2.type="button";b2.textContent="Go to Module "+(st.tab+2)+": "+TABS[st.tab+1].name;b2.style.margin=".4rem 0 0 .5rem";b2.addEventListener("click",()=>setTab(st.tab+1,true));card.appendChild(b2);}
+  renderDots();syncNext();
 }
 function renderDots(){
   const d=$("dots");d.innerHTML="";const vis=visSteps(st.tab),S=curStep();
@@ -1922,7 +1977,7 @@ function slider(id,label,min,max,val,step,fmt,fn){
 let UI={};
 function buildCtl(){
   ctl.innerHTML="";UI={};const S=curStep(),c=SIM.ctl,lvl=st.level,org=TAB().org;
-  UI.play=btn(paused?"▶ Play":"❚❚ Pause",()=>{paused=!paused;UI.play.textContent=paused?"▶ Play":"❚❚ Pause";},"ghost","Play or pause the animation");ctl.appendChild(UI.play);
+  UI.play=btn(paused?"▶ Play":"❚❚ Pause",()=>{paused=!paused;UI.play.textContent=paused?"▶ Play":"❚❚ Pause";syncNext();},"ghost","Play or pause the animation");ctl.appendChild(UI.play);
   ctl.appendChild(btn("◂ Step",stepBack,"ghost","Step back to the previous event"));
   ctl.appendChild(btn("Step ▸",stepFwd,"ghost","Step forward to the next event"));
   UI.speed=seg("Speed",[["0.5","½×"],["1","1×"],["2","2×"]],String(speed),v=>{speed=+v;},"Speed");ctl.appendChild(UI.speed);
@@ -1935,18 +1990,18 @@ function buildCtl(){
     const colourSeg=seg("Light colour",[["white","White"],["red","Red"],["blue","Blue"],["green","Green"]],c.colour,v=>setCtl("colour",v));UI.colour=colourSeg;
     if(lvl==="de"){const w=el("span","gf");w.appendChild(el("span","","Light colour"));w.appendChild(colourSeg);ctl.appendChild(w);
       const g=el("span","gf");g.appendChild(el("span","","Going further"));UI.cyclic=seg("Cyclic flow",[["lin","Linear"],["cyc","Cyclic"]],c.cyclic?"cyc":"lin",v=>setCtl("cyclic",v==="cyc"),"Cyclic flow");g.appendChild(UI.cyclic);ctl.appendChild(g);
-      ctl.appendChild(btn("Energy panel: Z scheme",()=>openPanel("zscheme"),"ghost"));}
+      UI.zp=btn("Energy panel: Z scheme",()=>openPanel("zscheme"),"ghost");ctl.appendChild(UI.zp);}
     else{ctl.appendChild(btn("More",()=>openPanel("more"),"ghost","More controls: light colour"));const row=el("span","gf hidden");row.id="moreRow";row.appendChild(el("span","","Light colour"));row.appendChild(colourSeg);ctl.appendChild(row);}
   }
   if(mit){
-    ctl.appendChild(btn("Feed one glucose",()=>{feedGlucose(true);},"go"));
+    UI.feed=btn("Feed one glucose",()=>{feedGlucose(true);syncNext();},"go");ctl.appendChild(UI.feed);
     const w=el("span","gf");w.appendChild(el("span","",lvl==="nine"?"Oxygen (O₂)":"O₂"));UI.o2=seg("Oxygen",[["on","On"],["off","Off"]],c.o2?"on":"off",v=>setCtl("o2",v==="on"),lvl==="nine"?"Oxygen":"O₂");w.appendChild(UI.o2);ctl.appendChild(w);
     /* with oxygen off, a choice of cell decides the ending: yeast or bacteria (ethanol + CO2) or muscle (lactic acid) */
     {const f=el("span","gf");f.id="fermRow";f.appendChild(el("span","",lvl==="nine"?"Which cell?":"Fermentation"));
       UI.ferment=lvl==="nine"?seg("Which cell?",[["alcohol","Yeast or bacteria"],["lactate","Muscle cell"]],c.ferment,v=>setCtl("ferment",v),"Which cell ferments the sugar"):seg("Fermentation",[["lactate","Lactate"],["alcohol","Alcohol"]],c.ferment,v=>setCtl("ferment",v));
       f.appendChild(UI.ferment);if(c.o2)f.classList.add("hidden");ctl.appendChild(f);}
     if(lvl==="de"){const g=el("span","gf");g.appendChild(el("span","","Going further"));UI.unc=seg("Uncoupler",[["off","Uncoupler off"],["on","Uncoupler on"]],c.uncoupler?"on":"off",v=>setCtl("uncoupler",v==="on"),"Uncoupler");g.appendChild(UI.unc);ctl.appendChild(g);
-      ctl.appendChild(btn("Energy panel: staircase",()=>openPanel("staircase"),"ghost"));}
+      UI.stairs=btn("Energy panel: staircase",()=>openPanel("staircase"),"ghost");ctl.appendChild(UI.stairs);}
   }
   if(org==="both"){UI.run=btn(c.runBoth?"Run both: on":"Run both",()=>setCtl("runBoth",!SIM.ctl.runBoth),"go"+(c.runBoth?" on":""),"Run both organelles");ctl.appendChild(UI.run);}
   syncCtl();
@@ -1963,8 +2018,55 @@ function setCtl(name,v){
   else if(name==="runBoth"){c.runBoth=!!v;if(UI.run){UI.run.textContent=c.runBoth?"Run both: on":"Run both";UI.run.classList.toggle("on",c.runBoth);}if(c.runBoth)SIM.mit.o2Grace=0;}
   else if(name==="speed"){speed=[.5,1,2].indexOf(+v)>=0?+v:1;if(UI.speed)UI.speed._set(String(speed));}
   else if(name==="teach"){setTeach(!!v);}
+  syncNext();
 }
-function syncCtl(){const open=unlocked();ctl.classList.toggle("locked",!open);ctl.querySelectorAll("button,input").forEach(x=>{if(!open)x.setAttribute("tabindex","-1");else x.removeAttribute("tabindex");});}
+function syncCtl(){const open=unlocked();ctl.classList.toggle("locked",!open);ctl.querySelectorAll("button,input").forEach(x=>{if(!open)x.setAttribute("tabindex","-1");else x.removeAttribute("tabindex");});syncNext();}
+
+/* ================= the green highway: which control the step is waiting for =================
+   In order: the prediction, then the control each task needs (nothing while the model is doing the work, or Play if it is paused), then the checks, then Next step. */
+function segBtn(sg,v){return sg?sg.querySelector('button[data-v="'+v+'"]'):null;}
+function inCard(e){if(e&&card.contains(e)&&st.cardHidden&&!$("cardover").classList.contains("open"))return $("cardtab");return e;}
+function mitIdle(){const m=SIM.mit;return !m.tok.some(t=>t.k==="glucose"||t.k==="pyr"||t.k==="acetyl")&&!m.glyQ.length&&!m.pdhQ.length&&!m.cacQ.length;}
+function nextTarget(){
+  if(!SIM)return null;const S=curStep(),k=S.key,c=SIM.ctl,cn=SIM.cnt,gw=SIM.gw,lvl=st.level;
+  const pre=preOf(S);
+  if(!st.teach&&pre&&!st.ans[pre])return inCard(card.querySelector('.opts[data-item="'+pre+'"]'));
+  const g=q=>!!st.goals[gid(S,q)];
+  const watch=()=>paused?UI.play:null;
+  const feedOr=()=>mitIdle()?UI.feed:watch();
+  if(!goalsMet(S)){
+    if(k==="C1"){if(!g("beam"))return c.light<=0?UI.light:watch();
+      if(lvl==="nine")return UI.light;
+      if(c.light<=0)return UI.light;const nx=["red","blue","green"].find(q=>gw.colT[q]<2);return nx&&c.colour!==nx?segBtn(UI.colour,nx):watch();}
+    if(k==="C2")return c.light<=0?UI.light:watch();
+    if(k==="C3"){if(!g("atp")||(lvl==="de"&&!g("nadph")))return c.light<=0?UI.light:watch();return lvl==="de"?UI.zp:watch();}
+    if(k==="C3x"){if(!g("cyc"))return c.cyclic?watch():segBtn(UI.cyclic,"cyc");return segBtn(UI.cyclic,"lin");}
+    if(k==="C4"){if(!g("sugar"))return c.light<=0?UI.light:(c.co2<=0?UI.co2:watch());
+      if(lvl==="nine")return UI.co2;
+      if(c.co2<50)return UI.co2;return c.light>0?UI.light:watch();}
+    if(k==="M1"||k==="M2"||k==="M3")return feedOr();
+    if(k==="M4"){if(!g("atpM"))return watch();
+      if(lvl==="de")return g("water")?UI.stairs:watch();
+      if(c.o2&&!gw.o2offDone)return segBtn(UI.o2,"off");
+      if(!c.o2){if(!g("ends")){const want=cn.alcDone<1?"alcohol":(cn.lacDone<1?"lactate":null);if(want)return c.ferment!==want?segBtn(UI.ferment,want):feedOr();}
+        return gw.o2offDone?segBtn(UI.o2,"on"):watch();}
+      return watch();}
+    if(k==="M5"){if(c.o2)return segBtn(UI.o2,"off");if(!g("o2off"))return watch();
+      const want=!g("lac")?"lactate":(!g("alc")?"alcohol":null);if(want)return c.ferment!==want?segBtn(UI.ferment,want):feedOr();return watch();}
+    if(k==="M6")return c.uncoupler?watch():segBtn(UI.unc,"on");
+    if(k==="B1")return c.runBoth?watch():UI.run;
+    if(k==="B2")return watch();
+    return null;}
+  const posts=postOf(S).filter(id=>!ITEMS[id].adv&&!st.ans[id]);
+  if(posts.length&&!st.teach)return inCard(card.querySelector('.opts[data-item="'+posts[0]+'"]'));
+  if(st.rec[st.tab]&&!$("record").classList.contains("hidden")&&visSteps(st.tab).indexOf(S)===visSteps(st.tab).length-1)return inCard(card.querySelector(".nextmod"));
+  return inCard(card.querySelector(".nextbtn"));
+}
+let nextEl=null;
+function syncNext(){let t=null;try{t=nextTarget();}catch(e){t=null;}
+  if(t===nextEl&&(!t||t.classList.contains("next")))return;
+  document.querySelectorAll(".next").forEach(e=>e.classList.remove("next"));document.querySelectorAll(".nextwrap").forEach(e=>e.classList.remove("nextwrap"));
+  nextEl=t;if(t){t.classList.add("next");if(t.parentElement&&t.parentElement.classList.contains("seg"))t.parentElement.classList.add("nextwrap");}}
 
 /* ================= readout ================= */
 let roT=0;
@@ -1972,12 +2074,17 @@ function gauge(v,cls){return '<span class="g'+(cls?" "+cls:"")+'" aria-hidden="t
 function readout(){
   const S=SIM,cn=S.cnt,lvl=st.level,org=TAB().org,c=S.ctl;const parts=[];
   const inside=ledgerInside(),v=ledgerVals(),T=tallyG();
-  if(org==="chl"||org==="both"){
+  if(org==="both"){ /* Module 3: what crossed between the two, and the carbon count. The picture carries the rest. */
+    parts.push((lvl==="nine"?"Oxygen carried across: ":"O₂ carried across: ")+cn.o2Trip,"glucose built: "+cn.glucoseBuilt,"glucose broken: "+cn.glucoseBroken,"ATP: chloroplast "+cn.atpChloro+", mitochondrion "+cn.atpSynthaseMito);
+    parts.push("Carbon count: "+v.inC+" in as CO₂, "+v.outC+" out of the mitochondrion"+(v.inC>0&&v.inC===v.outC?" · <b>carbon in = carbon out</b>":(v.way>0?" · on the way: "+v.way:"")));
+    if(!c.o2)parts.push('<span class="note">'+(lvl==="nine"?"Oxygen off in the mitochondrion. The chloroplast still makes oxygen in light.":"O₂ off in the mitochondrion. The chloroplast still releases O₂ in light.")+"</span>");
+    $("readout").innerHTML=parts.join(" · ");return;}
+  if(org==="chl"){
     parts.push("CO₂ in: "+cn.co2In);
     if(lvl==="nine"){parts.push("O₂ released: "+cn.o2Released,"three-carbon pieces: "+cn.g3pOut,"glucose built: "+cn.glucoseBuilt,"ATP "+gauge(S.chl.synEMA/4.5),"Sugar-building speed: <b>"+Math.round(cn.rate)+"</b> of 100 "+gauge(cn.rate/100,"sp"));}
     else{parts.push("O₂ released: "+cn.o2Released,"H₂O split: "+cn.waterSplit,"G3P out: "+cn.g3pOut,"glucose built: "+cn.glucoseBuilt,"ATP: "+cn.atpChloro,"NADPH: "+cn.nadphMade+" made, "+cn.nadphUsed+" used","Rate: <b>"+Math.round(cn.rate)+"</b>% of max","thylakoid space pH "+cn.phThylakoidSpace.toFixed(1)+", stroma pH "+cn.phStroma.toFixed(1));}
   }
-  if(org==="mit"||org==="both"){
+  if(org==="mit"){
     parts.push("CO₂ out: "+(cn.co2OutMito+cn.co2OutFerment));
     if(lvl==="nine"){parts.push("carbons inside: "+inside,"O₂ used: "+cn.o2Used,"glucose broken: "+cn.glucoseBroken,"ATP "+gauge(S.mit.synEMA/4.5));
       /* the ATP tally: what this glucose has given so far, against the two numbers the step is about */
@@ -2001,9 +2108,9 @@ function readout(){
 /* ================= step, module, view, level, device ================= */
 function goStep(i,noScroll){
   const vis=visSteps(st.tab),S=vis[clamp(i,0,vis.length-1)];st.step[st.tab]=TAB().steps.indexOf(S);save();
-  if(st.tab===2&&st.view!=="side"){setView("side",true);toast("Module 3 needs the side-by-side view, so it switched.");}
   newSim(false);
-  $("stagelab").textContent=TAB().org==="chl"?(st.level==="nine"?"A chloroplast, with one bit of membrane magnified":"A chloroplast, with one thylakoid membrane patch magnified"):TAB().org==="mit"?(st.level==="nine"?"A mitochondrion, with one bit of inner membrane magnified":"A mitochondrion, with one crista magnified"):"Chloroplast (left) and mitochondrion (right)";
+  $("stagelab").classList.toggle("hidden",st.tab===2);
+  $("stagelab").textContent=TAB().org==="chl"?(st.level==="nine"?"A chloroplast, with one bit of membrane magnified":"A chloroplast, with one thylakoid membrane patch magnified"):TAB().org==="mit"?(st.level==="nine"?"A mitochondrion, with one bit of inner membrane magnified":"A mitochondrion, with one crista magnified"):(st.level==="nine"?"Chloroplast (top) and mitochondrion (bottom)":"Chloroplast (top) and mitochondrion (bottom): what crosses between them");
   cv.setAttribute("aria-label",L(S,"head"));
   closePanel();pinned=null;$("callout").classList.remove("open");
   buildCtl();renderCard();$("record").classList.add("hidden");
@@ -2037,21 +2144,15 @@ function setDev(d){st.dev=d==="pc"?"pc":"ipad";save();
   document.documentElement.setAttribute("data-dev",st.dev);
   document.querySelectorAll("button[data-dev]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.dev===st.dev)));
   buildCtl();resize();}
-function setView(v,quiet){st.view=v==="side"?"side":"one";save();
-  document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===st.view)));
-  if(st.view==="side"&&window.innerWidth<1400&&!quiet)setCardHidden(true);
-  if(SIM){SIM.view=st.view;if(st.view!=="side")SIM.lane=[];}
-  if(!quiet&&st.tab===2&&st.view!=="side"){toast("Module 3 shows both organelles: switch to Side by side.");}
-  resize();}
 function setFill(on){st.fill=!!on;save();document.documentElement.setAttribute("data-fill",st.fill?"1":"0");
   if(UI.fill)UI.fill.textContent=st.fill?"Restore page":"Fill screen";
   try{const b=$("build");if(st.fill&&!document.fullscreenElement){if(b.requestFullscreen)b.requestFullscreen().catch(()=>{});else if(b.webkitRequestFullscreen)b.webkitRequestFullscreen();}
     else if(!st.fill&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}
   window.scrollTo(0,0);requestAnimationFrame(()=>resize());}
 function setCardHidden(on){st.cardHidden=!!on;save();$("build").classList.toggle("nocard",st.cardHidden);$("hidecard").setAttribute("aria-pressed",String(st.cardHidden));$("hidecard").textContent=st.cardHidden?"Show card":"Hide card";
-  if(!st.cardHidden){closeOver();}requestAnimationFrame(()=>resize());}
-function openOver(){$("cardover").appendChild(card);$("cardover").classList.add("open");}
-function closeOver(){$("cardcol").appendChild(card);$("cardover").classList.remove("open");}
+  if(!st.cardHidden){closeOver();}syncNext();requestAnimationFrame(()=>resize());}
+function openOver(){$("cardover").appendChild(card);$("cardover").classList.add("open");syncNext();}
+function closeOver(){$("cardcol").appendChild(card);$("cardover").classList.remove("open");syncNext();}
 $("cardtab").addEventListener("click",openOver);$("closeover").addEventListener("click",closeOver);
 $("hidecard").addEventListener("click",()=>setCardHidden(!st.cardHidden));
 function setTeach(on){st.teach=!!on;save();$("teach").setAttribute("aria-pressed",String(st.teach));if(!st.teach){pinned=null;$("callout").classList.remove("open");}renderCard();syncCtl();}
@@ -2070,7 +2171,7 @@ function renderRecord(){
   body.appendChild(tb);
   $("recSum").textContent=done+" of "+vis.length+" steps finished; "+right+" of "+tot+" predictions and checks right on the first try.";
 }
-function showRecord(){st.rec[st.tab]=true;save();renderRecord();$("record").classList.remove("hidden");if(st.fill)setFill(false);$("record").scrollIntoView({behavior:REDUCE?"auto":"smooth"});}
+function showRecord(){st.rec[st.tab]=true;save();renderRecord();$("record").classList.remove("hidden");syncNext();if(st.fill)setFill(false);$("record").scrollIntoView({behavior:REDUCE?"auto":"smooth"});}
 let armed=false,armT=0;
 $("reset").addEventListener("click",()=>{const b=$("reset");
   if(!armed){armed=true;b.textContent="Tap again within 4 seconds to clear this module";armT=setTimeout(()=>{armed=false;b.textContent="Start this module over";},4000);return;}
@@ -2097,7 +2198,7 @@ function frame(now){
   if(!paused){acc+=el2*speed;let n=0;while(acc>=DT&&n<4){simStep(DT);acc-=DT;n++;}if(n>=4)acc=0;
     if(SIM.t-snapT>=.25&&SIM.ev!==SIM.snapEv){snapT=SIM.t;snapshot();}}
   draw();
-  roT+=el2;if(roT>.25){roT=0;readout();}
+  roT+=el2;if(roT>.25){roT=0;readout();syncNext();}
   fpsT+=el2;fpsHist.push(el2);while(fpsHist.length&&fpsT>3){fpsT-=fpsHist.shift();}
 }
 function snapshot(){const snaps=SIM.snaps;SIM.snaps=null;const s=JSON.stringify(SIM);SIM.snaps=snaps;snaps.push(s);if(snaps.length>40)snaps.shift();SIM.snapEv=SIM.ev;}
@@ -2105,9 +2206,9 @@ function stepFwd(){paused=true;if(UI.play)UI.play.textContent="▶ Play";snapsho
 function stepBack(){paused=true;if(UI.play)UI.play.textContent="▶ Play";const snaps=SIM.snaps;if(!snaps||!snaps.length)return;const s=snaps.pop();const S=JSON.parse(s);S.snaps=snaps;SIM=S;draw();readout();renderCard();}
 if(window.IntersectionObserver)new IntersectionObserver(es=>{es.forEach(e=>{visible=e.isIntersecting;});}).observe(cv);
 function resize(){
-  const stage=$("stage"),side=st.view==="side";
+  const stage=$("stage"),stk=st.tab===2;
   const stacked=!(window.innerWidth>=900&&window.innerWidth>window.innerHeight);
-  if(stacked){const w=stage.clientWidth||900;const h=Math.min(window.innerHeight*.46,w*(side?.42:.62));stage.style.setProperty("--stageh",h+"px");}
+  if(stacked){const w=stage.clientWidth||900;const h=Math.min(window.innerHeight*(stk?.66:.46),w*(stk?1:.62));stage.style.setProperty("--stageh",h+"px");}
   else stage.style.removeProperty("--stageh");
   const w=stage.clientWidth||1200,h=stage.clientHeight||800,dpr=Math.min(window.devicePixelRatio||1,DEV[st.dev].dpr);
   cw=w;ch=h;cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);kpx=dpr;
@@ -2118,12 +2219,10 @@ function resize(){
 document.querySelectorAll("button[data-dev]").forEach(b=>b.addEventListener("click",()=>setDev(b.dataset.dev)));
 document.querySelectorAll(".tabs button,.tabs2 button").forEach(b=>b.addEventListener("click",()=>setTab(+b.dataset.tab,true)));
 document.querySelectorAll("[data-lv]").forEach(b=>b.addEventListener("click",()=>setLevel(b.dataset.lv)));
-document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
 document.documentElement.setAttribute("data-dev",st.dev);
 document.querySelectorAll("button[data-dev]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.dev===st.dev)));
 document.documentElement.setAttribute("data-level",st.level);
 document.querySelectorAll("[data-lv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lv===st.level)));
-document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===st.view)));
 $("teach").setAttribute("aria-pressed",String(st.teach));
 $("build").classList.toggle("nocard",st.cardHidden);$("hidecard").textContent=st.cardHidden?"Show card":"Hide card";$("hidecard").setAttribute("aria-pressed",String(st.cardHidden));
 document.documentElement.setAttribute("data-fill",st.fill?"1":"0");
@@ -2144,8 +2243,8 @@ function allText(level){
   FURTHER[level].site.forEach(x=>{add(x[1]);add(x[2]);});FURTHER[level].mol.forEach(x=>add(x[1]));
   add($("finenote").textContent);add("Words in this step");add("Check yourself");add("Advanced Biology");add("Not quite");add("Right. Here is the reasoning");add("The reasoning");add("Study:");add("Going further");add("Build a SAM from this miss");
   add("Answer the prediction first; the controls under the picture unlock once you have committed to an answer.");add("Teaching view: every part of this step is open and the labels are board-sized. Tap a label on the picture to pin a big callout. The step lights up only once its prediction, its tasks and its checks are done.");
-  add("Module 3 needs the side-by-side view, so it switched.");add("Module 3 shows both organelles: switch to Side by side.");add("Press Run both");add(level==="nine"?"Two pieces join into glucose":"2 G3P → glucose");
-  add(level==="nine"?["Oxygen off: the line stops","A chloroplast, with one bit of membrane magnified","A mitochondrion, with one bit of inner membrane magnified","Chloroplast (left) and mitochondrion (right)","Oxygen","Sugar","Carbon dioxide","Water","Speed: 0 of 100","Still making oxygen in light","No light, so no oxygen","ATP tally","feed a glucose","ATP tally, this glucose","cytoplasm","mitochondrion","total","(finished)","Carbon count","in as CO₂","in the cycle","in cycle","out as sugar","in as glucose","out as CO₂","by fermentation","inside","CO₂ in","CO₂ out","6 in = 6 out per glucose ✓","on the way","carbon in = carbon out","Yeast or bacteria: ethanol + CO₂","Muscle cell: lactic acid"]:["O₂ off: the chain backs up at complex IV","Uncoupler on: H⁺ leaks back, heat","Cyclic flow: PS I → Fd → cytochrome complex → Pc → PS I","Linear flow","A chloroplast, with one thylakoid membrane patch magnified","A mitochondrion, with one crista magnified","Chloroplast (left) and mitochondrion (right)","Energy panel: Z scheme","Energy panel: the chain's staircase","Rate: 0% of max","Still releasing O₂ in light","No light, so no O₂","ATP tally","feed a glucose","glycolysis","cycle","ATP synthase","total","Carbon count","in as CO₂","in the cycle","out as G3P","in as glucose","out as CO₂","by fermentation","inside","6 in = 6 out per glucose ✓","on the way","Fermentation (yeast or bacteria): ethanol + CO₂","Fermentation (muscle cell): lactate"]);
+  add("Press Run both");add(level==="nine"?["Chloroplast","Mitochondrion","Oxygen (O₂)","Sugar","Carbon dioxide (CO₂)","ATP out to the cell: ","ATP this glucose: ","Oxygen carried across: ","Chloroplast (top) and mitochondrion (bottom)"]:["Chloroplast","Mitochondrion","Glucose (2 G3P)","ATP exported: ","ATP this glucose: ","O₂ carried across: ","Chloroplast (top) and mitochondrion (bottom): what crosses between them"]);add(level==="nine"?"Two pieces join into glucose":"2 G3P → glucose");
+  add(level==="nine"?["Oxygen off: the line stops","A chloroplast, with one bit of membrane magnified","A mitochondrion, with one bit of inner membrane magnified","Oxygen","Sugar","Carbon dioxide","Water","Speed: 0 of 100","Still making oxygen in light","No light, so no oxygen","ATP tally","feed a glucose","ATP tally, this glucose","cytoplasm","mitochondrion","total","(finished)","Carbon count","in as CO₂","in the cycle","in cycle","out as sugar","in as glucose","out as CO₂","by fermentation","inside","CO₂ in","CO₂ out","6 in = 6 out per glucose ✓","on the way","carbon in = carbon out","Yeast or bacteria: ethanol + CO₂","Muscle cell: lactic acid"]:["O₂ off: the chain backs up at complex IV","Uncoupler on: H⁺ leaks back, heat","Cyclic flow: PS I → Fd → cytochrome complex → Pc → PS I","Linear flow","A chloroplast, with one thylakoid membrane patch magnified","A mitochondrion, with one crista magnified","Energy panel: Z scheme","Energy panel: the chain's staircase","Rate: 0% of max","Still releasing O₂ in light","No light, so no O₂","ATP tally","feed a glucose","glycolysis","cycle","ATP synthase","total","Carbon count","in as CO₂","in the cycle","out as G3P","in as glucose","out as CO₂","by fermentation","inside","6 in = 6 out per glucose ✓","on the way","Fermentation (yeast or bacteria): ethanol + CO₂","Fermentation (muscle cell): lactate"]);
   (level==="nine"?BANK9:BANKDE).forEach(it=>{add(it.topic);add(it.stem);add(it.opts);add(it.why);add(it.miss);add(it.sam);add(it.va);add(it.study);});
   return out;
 }
@@ -2157,14 +2256,14 @@ function colours(){
   return out;
 }
 function layout(){
-  const side=st.view==="side",WW=side?W2:W1,k=Math.min(cw/WW,ch/H1),ox=(cw-WW*k)/2,oy=(ch-H1*k)/2;
-  const of=kind=>{const s=side?SIDE[kind]:{ox:0,oy:0,sc:1};const m=(x,y)=>[ox+(s.ox+x*s.sc)*k,oy+(s.oy+y*s.sc)*k];const my=m(0,PATCH.my)[1],syn=m(NX.syn,PATCH.my+PATCH.mh/2+52);
+  const stk=st.tab===2,WW=stk?WS:W1,HH=stk?HS:H1,k=Math.min(cw/WW,ch/HH),ox=(cw-WW*k)/2,oy=(ch-HH*k)/2;
+  const of=kind=>{const s=stk?STACK[kind]:{ox:0,oy:0,sc:1};const m=(x,y)=>[ox+(s.ox+x*s.sc)*k,oy+(s.oy+y*s.sc)*k];const my=m(0,PATCH.my)[1],syn=m(NX.syn,PATCH.my+PATCH.mh/2+52);
     return{membraneY:my,hSide:"above",atpSide:"below",synthase:{x:syn[0],y:syn[1]}};};
   return{chloro:of("chl"),mito:of("mit"),stageH:ch};
 }
 window.__EP={
   st:()=>st,sim:()=>SIM,
-  setTab:t=>setTab(t,false),goStep:i=>goStep(i,true),setView:v=>setView(v,true),setLevel,setDev,fill:setFill,cardHidden:setCardHidden,
+  setTab:t=>setTab(t,false),goStep:i=>goStep(i,true),setView:()=>{},setLevel,setDev,fill:setFill,cardHidden:setCardHidden,
   set:(n,v)=>setCtl(n,v),feedGlucose:()=>feedGlucose(true),open:openPanel,answer,
   run:sec=>{const n=Math.round(sec/DT);for(let i=0;i<n;i++)simStep(DT);readout();},
   counts:()=>Object.assign({},SIM.cnt),
@@ -2172,6 +2271,7 @@ window.__EP={
   glucoseLog:()=>GLOG.map(r=>JSON.parse(JSON.stringify(r))),
   layout,items:level=>JSON.parse(JSON.stringify(level==="de"?BANKDE:BANK9)).map(it=>{delete it.id;delete it.lvl;return it;}),allText,colours,
   fps:()=>{const n=fpsHist.length,t=fpsHist.reduce((a,b)=>a+b,0);return t>0?n/t:0;},
+  next:()=>{syncNext();const e=document.querySelector(".next");return e?(e.getAttribute("aria-label")||e.dataset.item||e.textContent.trim().slice(0,40)):null;},
   stepFwd,stepBack,paused:()=>paused,hits:()=>hits.slice(),curStep:()=>curStep().key,visSteps:()=>visSteps(st.tab).map(s=>s.key),stepDone:i=>stepDoneS(visSteps(st.tab)[i]),draw
 };
 })();
