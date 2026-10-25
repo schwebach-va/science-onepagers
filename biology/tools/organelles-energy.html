@@ -1033,8 +1033,8 @@ const TABS=[
 
 /* legend per level: [colour, label, edge?, class?] */
 const LEGEND={
- nine:[["#3B3631","Carbon (one bead)"],["#D2382F","Carbon dioxide (CO₂)"],["#C98A2E","Glucose / three-carbon piece"],["#E58FB0","Oxygen (O₂)"],["#8FC7E8","Water"],["#1F7A8C","Hydrogen ion (H⁺)"],["#F2C230","Electron / light","#8A6A00"],["#6B4E8C","ATP / ADP"],["#44607A","Carrier"]],
- de:[["#3B3631","Carbon (one bead)"],["#D2382F","CO₂"],["#C98A2E","Glucose / G3P / pyruvate"],["#E58FB0","O₂"],["#8FC7E8","H₂O"],["#1F7A8C","H⁺"],["#F2C230","Electron / photon","#8A6A00"],["#6B4E8C","ATP / ADP"],["#44607A","NADPH / NADH / FADH₂"]]
+ nine:[["#3B3631","Carbon (one bead)"],["#D2382F","Carbon dioxide (CO₂)"],["#C98A2E","Glucose / three-carbon piece"],["#E58FB0","Oxygen (O₂)"],["#8FC7E8","Water"],["#1F7A8C","Hydrogen ion (H⁺)"],["#F07A12","Electron","#8F3F00"],["#F2C230","Light","#8A6A00"],["#6B4E8C","ATP / ADP"],["#44607A","Carrier"]],
+ de:[["#3B3631","Carbon (one bead)"],["#D2382F","CO₂"],["#C98A2E","Glucose / G3P / pyruvate"],["#E58FB0","O₂"],["#8FC7E8","H₂O"],["#1F7A8C","H⁺"],["#F07A12","Electron","#8F3F00"],["#F2C230","Photon (light)","#8A6A00"],["#6B4E8C","ATP / ADP"],["#44607A","NADPH / NADH / FADH₂"]]
 };
 /* control labels per level, listed so the vocabulary test can read them */
 const CTLTEXT={
@@ -1074,7 +1074,7 @@ readTheme();
 if(window.matchMedia){const mq=window.matchMedia("(prefers-color-scheme: dark)");const h=()=>readTheme();if(mq.addEventListener)mq.addEventListener("change",h);else if(mq.addListener)mq.addListener(h);}
 /* each colour once, [light, dark] (§5.4) */
 const COL={carbon:["#3B3631","#D9D2C6"],co2:["#D2382F","#E8675E"],co2E:["#8A1F18","#F6B3AC"],gold:["#C98A2E","#E0A64A"],goldE:["#7A4E12","#F3C97A"],o2:["#E58FB0","#F0A9C4"],o2E:["#A64D74","#F7C9DA"],
-  water:["#8FC7E8","#9FD3F0"],waterE:["#2E6F94","#CFEAF8"],h:["#1F7A8C","#6FC0CE"],e:["#F2C230","#F7D468"],eE:["#8A6A00","#FFF0B8"],light:["#F2C230","#F7D468"],
+  water:["#8FC7E8","#9FD3F0"],waterE:["#2E6F94","#CFEAF8"],h:["#1F7A8C","#6FC0CE"],e:["#F07A12","#FF9E45"],eE:["#8F3F00","#FFD9B5"],light:["#F2C230","#F7D468"],lightE:["#8A6A00","#FFF0B8"],
   atp:["#6B4E8C","#B39BD1"],shuttle:["#44607A","#8FA9C2"],chlL:["#3F7A55","#7FC395"],chlF:["#E2EDE6","#18291E"],mitL:["#B8704F","#E0A080"],mitF:["#F6EAE2","#2A1D17"],
   memb:["#7A9A86","#5E8A6C"],membM:["#C08A70","#B07A5E"],space:["#D3E4DA","#20362A"],spaceM:["#EFD9CC","#3A2820"],grey:["#9A9388","#8C857A"],lane:["#E8E4DC","#2A2620"]};
 const col=k=>COL[k][DARK?1:0];
@@ -1207,7 +1207,7 @@ function removeTok(o,t){const a=o?o.tok:SIM.lane;const i=a.indexOf(t);if(i>=0)a.
 function chlArrive(o,t){
   const cn=SIM.cnt,c=SIM.ctl,L=lanes();
   switch(t.to){
-    case "ph_ps2":removeTok(o,t);if(!c.cyclic){o.holes=Math.min(o.holes+1,6);cn.photonHits++;event("photon");}break;
+    case "ph_ps2":removeTok(o,t);o.ps2Hit=SIM.t;if(!c.cyclic){o.holes=Math.min(o.holes+1,6);cn.photonHits++;event("photon");}break;
     case "ph_ps1v":removeTok(o,t);o.psiHit=SIM.t;break;
     case "ph_ps1":removeTok(o,t);cn.photonHits++;o.psiHit=SIM.t;if(c.cyclic&&o.psiE>0){o.psiE--;mk(o,"e",chlPaths(o,"cyc1"),{to:"cyc_cyt",v:PACE*1.2});event("photon");}break;
     case "water_ps2":removeTok(o,t);if(t.d&&t.d.lane)o.laneWaterFly--;else o.waterFly--;cn.waterSplit++;o.psE+=2;pumpH(o,2,"hwater");o.o2half++;
@@ -1709,10 +1709,12 @@ function drawPatch(o){
     small(N.pq,P.my,12,col("grey"),"pq",lvl==="de"?L.pq:"",true);
     blob(N.cyt,46,52,col("grey"),"cyt",lvl==="de"?L.cyt:"",false,0,true);
     small(N.pc,P.my,12,col("grey"),"pc",lvl==="de"?L.pc:"",true);
-    blob(N.ps1,54,58,g,"ps1",L.ps1,true,0,true); /* label below, so the light lands on the photosystem, not on its name */
+    /* 9th grade: the second reaction center is named below and to its left, so its beam lands on the photosystem, not on the name */
+    if(lvl==="nine"){blob(N.ps1,54,58,g,"ps1","",false,0,true);tag(L.ps1,N.ps1+30,P.my+47,"ps1","right",false,true);}else blob(N.ps1,54,58,g,"ps1",L.ps1,false,0,true);
     small(N.fd,P.my+40,11,col("grey"),"fd",lvl==="de"?L.fd:"",true);
     rrect(N.nr-22,P.my+38,44,26,6,col("shuttle"),INK,1.5);part("nr",N.nr,P.my+50,24);if(lvl==="de")tag(L.nr,N.nr,P.my+82,"nr","center",false,true);
     if(o.psiHit&&S.t-o.psiHit<.25){circ(N.ps1,P.my,38,null,LIGHTCOL[c.colour][DARK?1:0],3);}
+    if(o.ps2Hit&&S.t-o.ps2Hit<.25){circ(N.ps2,P.my,38,null,LIGHTCOL[c.colour][DARK?1:0],3);}
     if(lvl==="de"&&(c.cyclic||S.stepKey==="C3x")){tag(c.cyclic?"Cyclic flow: PS I → Fd → cytochrome complex → Pc → PS I":"Linear flow",N.ps1-30,P.y1-20,null,"center");}
     /* water in, oxygen out */
     tag(L.water,N.ps2-30,P.my+112,"water","center");
@@ -1742,7 +1744,7 @@ function drawPatch(o){
   }
   drawSynthase(o,N.syn,P.my);
   tag(L.syn,N.syn,P.y1+40,"syn","center");
-  if(isC)tag(L.e,N.pq+85,P.my+46,"e","center",false,true);else tag(L.e,N.cc-30,P.my-40,"e","center",false,true);
+  if(isC)tag(L.e,N.pq+50,P.my-46,"e","center",false,true);else tag(L.e,N.cc-30,P.my-40,"e","center",false,true);
 }
 function drawHcloud(o){
   const P=PATCH,n=Math.min(DEV[st.dev].hdots,Math.round(o.hres*DEV[st.dev].hdots/o.hmax));
@@ -1796,8 +1798,10 @@ function drawTok(t){
   else if(k==="o2"){circ(t.x-7,t.y,9,col("o2"),col("o2E"),1.5);circ(t.x+7,t.y,9,col("o2"),col("o2E"),1.5);}
   else if(k==="water"){ctx.beginPath();ctx.moveTo(t.x,t.y-15);ctx.quadraticCurveTo(t.x+13,t.y+2,t.x,t.y+11);ctx.quadraticCurveTo(t.x-13,t.y+2,t.x,t.y-15);ctx.closePath();ctx.fillStyle=col("water");ctx.fill();ctx.strokeStyle=col("waterE");ctx.lineWidth=1.5;ctx.stroke();}
   else if(k==="h"||k==="hflow"){hplus(t.x,t.y,7);}
-  else if(k==="e"||k==="photon"){const c=k==="photon"?LIGHTCOL[SIM.ctl.colour][DARK?1:0]:col("e");const p=t.path[Math.min(t.i+1,t.path.length-1)],dx=p[0]-t.x,dy=p[1]-t.y,L=Math.hypot(dx,dy)||1;
-    for(let j=1;j<=3;j++){ctx.globalAlpha=t.a*(.35-j*.09);circ(t.x-dx/L*j*9,t.y-dy/L*j*9,7-j,c);}ctx.globalAlpha=t.a;circ(t.x,t.y,8,c,col("eE"),1.5);}
+  else if(k==="e"||k==="photon"){const ph=k==="photon",c=ph?LIGHTCOL[SIM.ctl.colour][DARK?1:0]:col("e");const p=t.path[Math.min(t.i+1,t.path.length-1)],dx=p[0]-t.x,dy=p[1]-t.y,L=Math.hypot(dx,dy)||1;
+    /* light stays yellow; the electron it knocks loose is orange and glows, so the hand-off at a reaction center is visible */
+    if(!ph){ctx.shadowColor=c;ctx.shadowBlur=10*kpx;}
+    for(let j=1;j<=3;j++){ctx.globalAlpha=t.a*(.35-j*.09);circ(t.x-dx/L*j*9,t.y-dy/L*j*9,7-j,c);}ctx.globalAlpha=t.a;circ(t.x,t.y,8,c,col(ph?"lightE":"eE"),1.5);}
   else if(k==="atp"||k==="adp"){rrect(t.x-20,t.y-9,26,18,4,col("atp"),null);const n=k==="atp"?3:2;for(let i=0;i<n;i++)circ(t.x+10+i*11,t.y,5,col("atp"),BG,1);}
   else if(k==="nadph"||k==="nadh"||k==="fadh2"){rrect(t.x-22,t.y-10,44,20,10,col("shuttle"),null);circ(t.x-6,t.y,4,col("e"));circ(t.x+6,t.y,4,col("e"));}
   ctx.restore();
