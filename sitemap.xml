@@ -626,4 +626,10 @@
     <loc>https://scienceonepagers.org/biology/tools/biochemistrypedia-de-biology.html</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
+  <url>
+    <loc>https://scienceonepagers.org/biology/cer-u3-lt3-4-dawn-in-cobbs-creek.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

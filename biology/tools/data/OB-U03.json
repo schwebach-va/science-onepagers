@@ -1,0 +1,1358 @@
+{
+ "meta": {
+  "bank": "OB-U03",
+  "title": "Unit 3 · Energy and Matter (Cell Energetics) — original SOL practice bank",
+  "version": "v2 2026-10-25 (CLT learning-target numbering; 20 items added; about 36 ATP)",
+  "status": "first site version; drafted 2026-10-17, revised and extended 2026-10-25 under the eight-point originality check",
+  "statement": "These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education's Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test's wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE's released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. © J. R. Schwebach, CC BY-NC 4.0.",
+  "unit": 3,
+  "unit_name": "Energy and Matter",
+  "lts": {
+   "3.1": "ATP: the energy cells spend",
+   "3.2": "Photosynthesis",
+   "3.3": "Cellular respiration and fermentation",
+   "3.4": "How photosynthesis and respiration connect"
+  },
+  "source_ig": "VDOE, Instructional Guide to Support the 2018 Biology Standards of Learning (doc 77084); page numbers are printed pages",
+  "footer": "Original practice questions written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education.",
+  "copyright": "© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org",
+  "count": 42
+ },
+ "items": [
+  {
+   "id": "OB-U03-01",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Energy change in photosynthesis",
+   "dok": 1,
+   "stem": "Which energy change takes place during photosynthesis?",
+   "opts": [
+    "Chemical energy is changed into light energy",
+    "Light energy is changed into chemical energy",
+    "Heat energy is changed into light energy",
+    "Chemical energy is changed into heat energy"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "This is backwards. A plant takes in light and stores the energy in sugar; it does not give off light.",
+    "2": "Plants do not use heat as their energy source, and they do not glow. Light is the input.",
+    "3": "Releasing heat from stored chemical energy describes what happens when food is used up, not when it is made."
+   },
+   "why": "Photosynthesis captures light energy and stores it as chemical energy in the bonds of sugar (glucose).",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: photosynthesis transforms light (radiant) energy into chemical energy stored in sugar; PWCS UoS K4-K5; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-02",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Where light is captured",
+   "dok": 1,
+   "stem": "A student looks at a leaf from a pond plant collected at Lake Anna under a microscope. Each cell holds many small green structures. Which structures are these, and what do they do?",
+   "opts": [
+    "Mitochondria, which release energy from sugar",
+    "Vacuoles, which store water for the cell",
+    "Chloroplasts, which capture light energy to make sugar",
+    "Nuclei, which control which proteins the cell makes"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Mitochondria release energy from sugar, but they are not green. They do not contain chlorophyll.",
+    "1": "Vacuoles store water and other materials. They are not the green structures that capture light.",
+    "3": "A cell has only one nucleus, and it is not green. The many green bodies are chloroplasts."
+   },
+   "why": "Chloroplasts are green because they contain chlorophyll, the pigment that absorbs light energy. That energy is used to build sugar from carbon dioxide and water.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: chloroplasts, with the pigment chlorophyll, convert radiant energy into chemical energy in sugar; PWCS UoS K5, S3; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-03",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Light-intensity data: leveling off",
+   "dok": 2,
+   "stem": "Students placed a sprig of pondweed in water and counted the oxygen bubbles it gave off in one minute at different light levels. Temperature and carbon dioxide were kept the same.",
+   "table": [
+    [
+     "Light level (units)",
+     "Bubbles per minute"
+    ],
+    [
+     "0",
+     "0"
+    ],
+    [
+     "200",
+     "8"
+    ],
+    [
+     "400",
+     "15"
+    ],
+    [
+     "600",
+     "21"
+    ],
+    [
+     "800",
+     "24"
+    ],
+    [
+     "1000",
+     "24"
+    ]
+   ],
+   "stem2": "Which statement best explains why the bubble count did not change between 800 and 1000 units of light?",
+   "opts": [
+    "The plant stopped making oxygen at high light levels",
+    "The extra light was turned into heat instead of sugar",
+    "The plant began using all of its oxygen for respiration",
+    "Another factor, such as the supply of carbon dioxide, was limiting the rate"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "The plant was still making 24 bubbles per minute, so it did not stop. The rate only stopped climbing.",
+    "1": "Nothing in the data measures heat. The table only shows that more light no longer raised the rate.",
+    "2": "If the plant used up its oxygen, the bubble count would drop. It stayed at 24."
+   },
+   "why": "Photosynthesis needs light, carbon dioxide and water. Once light is plentiful, something else, such as carbon dioxide, runs short and sets the top speed. That is why the curve levels off.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: factors affecting the rate of photosynthesis; BIO.1d-e graphing and conclusions from data; PWCS LT 3.2 (rate vs light and CO2); IG p. 10 (BIO.2e)",
+   "sol_also": "BIO.1"
+  },
+  {
+   "id": "OB-U03-04",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Carbon dioxide data: conclusion",
+   "dok": 2,
+   "stem": "A class grew eelgrass from the Chesapeake Bay in tanks under the same bright light. Each tank had a different amount of dissolved carbon dioxide. The class measured how fast the eelgrass made sugar.",
+   "table": [
+    [
+     "Carbon dioxide (relative units)",
+     "Rate of sugar production (relative units)"
+    ],
+    [
+     "1",
+     "4"
+    ],
+    [
+     "2",
+     "8"
+    ],
+    [
+     "3",
+     "11"
+    ],
+    [
+     "4",
+     "12"
+    ],
+    [
+     "5",
+     "12"
+    ]
+   ],
+   "stem2": "Which conclusion is best supported by these data?",
+   "opts": [
+    "The rate rises as carbon dioxide increases, until it levels off",
+    "The rate rises because the light was getting brighter",
+    "The rate falls as carbon dioxide increases",
+    "The rate will keep rising with no limit as more carbon dioxide is added"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "The light was the same in every tank. Only the carbon dioxide changed.",
+    "2": "The rate went up from 4 to 12. It never went down.",
+    "3": "From 4 to 5 units the rate stayed at 12. The data show a limit, not endless growth."
+   },
+   "why": "Carbon dioxide supplies the carbon atoms for sugar, so adding it speeds up photosynthesis. Once something else, such as light, is the limiting factor, extra carbon dioxide has no effect and the rate levels off.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: carbon dioxide as a reactant of photosynthesis; BIO.1d-e interpreting data; PWCS LT 3.2; IG p. 10 (BIO.2e)",
+   "sol_also": "BIO.1"
+  },
+  {
+   "id": "OB-U03-05",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Where a tree's mass comes from",
+   "dok": 2,
+   "stem": "A red oak in Shenandoah National Park grows from a small acorn into a tree weighing several tons. Most of the carbon atoms in the oak's wood came from —",
+   "opts": [
+    "minerals the roots took from the soil",
+    "carbon dioxide the leaves took from the air",
+    "water the roots pulled up from the ground",
+    "sunlight the leaves absorbed"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Soil supplies water and small amounts of minerals. The soil around a tree barely shrinks as the tree grows.",
+    "2": "Water (H2O) contains hydrogen and oxygen but no carbon, so it cannot be the source of carbon atoms.",
+    "3": "Sunlight supplies energy, not atoms. Light has no mass to add to the tree."
+   },
+   "why": "In photosynthesis, a plant joins carbon dioxide from the air with water to build sugar. The plant uses that sugar to build wood and other tissues, so the carbon in the wood came from the air.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: photosynthesis combines carbon dioxide and water into energy-rich compounds; sugars are rearranged into other compounds; PWCS UoS K4, K6; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-06",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Leaf-disk experiment",
+   "dok": 3,
+   "stem": "Students cut small disks from spinach leaves and pulled the air out of them so they sank in a cup of water with baking soda added. Baking soda gives the water extra carbon dioxide. One cup sat under a lamp, and one cup sat in a dark cabinet. After 15 minutes, most disks under the lamp were floating, and all disks in the dark were still on the bottom. What best explains why the disks under the lamp floated?",
+   "opts": [
+    "The lamp heated the water, so the disks became lighter",
+    "The disks in the light absorbed the baking soda",
+    "The disks in the light made oxygen gas, which collected inside the leaf",
+    "The disks in the light broke down sugar and made carbon dioxide"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Warming water does not make solid leaf pieces float. The dark cup is the control for light, and only the lit disks made gas.",
+    "1": "Both cups had baking soda. If absorbing it made disks float, the dark disks would have floated too.",
+    "3": "Leaf cells do respire in both cups, but the disks in the dark did not float. The difference is the gas made only in the light."
+   },
+   "why": "In light, chloroplasts use carbon dioxide and water to make sugar and release oxygen gas. The oxygen fills the air spaces in the leaf disk and lifts it. Without light, no photosynthesis happens, so the disks stay down.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: photosynthesis releases oxygen into the environment and requires light; BIO.1c, e controlled experiments; PWCS LT 3.2; IG p. 10 (BIO.2e)",
+   "sol_also": "BIO.1"
+  },
+  {
+   "id": "OB-U03-07",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Organelle for aerobic respiration",
+   "dok": 1,
+   "stem": "In a muscle cell, which organelle uses oxygen to release most of the energy stored in sugar?",
+   "opts": [
+    "Ribosome",
+    "Chloroplast",
+    "Cell membrane",
+    "Mitochondrion"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Ribosomes build proteins. They do not break down sugar for energy.",
+    "1": "Muscle cells have no chloroplasts. Chloroplasts make sugar in plants; they do not release its energy.",
+    "2": "The cell membrane controls what enters and leaves the cell. Sugar and oxygen pass through it, but the energy is released in the mitochondrion."
+   },
+   "why": "Mitochondria carry out cellular respiration with oxygen, releasing the energy in sugar and storing it in ATP.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: mitochondria make energy available for life processes; PWCS UoS K3, K8; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-08",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Products of aerobic respiration",
+   "dok": 1,
+   "stem": "When a cell breaks down glucose using oxygen, which substances are produced?",
+   "opts": [
+    "Carbon dioxide, water and ATP",
+    "Glucose, oxygen and ATP",
+    "Oxygen, water and chlorophyll",
+    "Carbon dioxide, glucose and lactic acid"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Glucose and oxygen are what the cell uses up. They go in, not out.",
+    "2": "Oxygen is used up in respiration, and chlorophyll is a pigment in chloroplasts, not a product.",
+    "3": "Glucose is the fuel being broken down, and lactic acid forms only when oxygen is short."
+   },
+   "why": "Cellular respiration uses glucose and oxygen and produces carbon dioxide, water and energy stored in ATP.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: oxygen reacts with sugars to provide energy as ATP and produce carbon dioxide and water; PWCS UoS K8, S7; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-09",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Yeast and rising bread",
+   "dok": 2,
+   "stem": "A baker in Richmond mixes yeast, sugar, flour and warm water and covers the dough. An hour later, the dough has doubled in size and is full of small bubbles. What gas made the bubbles, and how was it produced?",
+   "opts": [
+    "Oxygen, released as the yeast made sugar",
+    "Nitrogen, released from the flour as it warmed",
+    "Carbon dioxide, released as the yeast broke down sugar",
+    "Water vapor, released as the dough dried out"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Yeast are fungi. They cannot make sugar from light, and they do not release oxygen.",
+    "1": "Flour does not give off nitrogen gas when warmed. The bubbles come from the living yeast.",
+    "3": "Warm, covered dough does not dry out enough to fill with steam. The yeast is producing a gas from sugar."
+   },
+   "why": "Yeast break down sugar for energy. In covered dough, oxygen runs low, and yeast ferment the sugar, releasing carbon dioxide gas (and alcohol, which bakes off). The trapped carbon dioxide makes the dough rise.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: breakdown of nutrient molecules releases energy; how oxygen affects energy available to an organism; PWCS LT 3.3 (fermentation in yeast); IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-10",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Muscles in a sprint",
+   "dok": 2,
+   "stem": "At a school track meet, a runner sprints the 400-meter dash. Near the end, her leg muscles burn and feel weak. What is happening in her muscle cells?",
+   "opts": [
+    "They have stopped breaking down sugar completely",
+    "Oxygen is running short, so they make less ATP and produce lactic acid",
+    "They are making extra oxygen to keep up with the race",
+    "They are using carbon dioxide to make more ATP"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "The muscles are still breaking down sugar, or they would stop working entirely. They are just getting less energy from each sugar.",
+    "2": "Muscle cells cannot make oxygen. Oxygen comes from the lungs and blood.",
+    "3": "Carbon dioxide is a waste product of respiration. Cells release it; they do not use it to make ATP."
+   },
+   "why": "During hard exercise, blood cannot deliver oxygen fast enough. Muscle cells keep breaking down sugar without oxygen, which makes only a little ATP and produces lactic acid, adding to the burning feeling.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: presence of oxygen affects the amount of energy available to an organism; PWCS UoS S6; LT 3.3 (fermentation in muscle); IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-11",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Oxygen and ATP yield",
+   "dok": 2,
+   "stem": "A cell gets about 36 ATP from one glucose molecule when oxygen is present, and about 2 ATP from one glucose molecule when oxygen is absent. Which statement best describes the effect of oxygen?",
+   "opts": [
+    "Oxygen makes no difference; it only speeds up the process",
+    "Without oxygen, the cell gets about twice as much ATP from each glucose",
+    "Without oxygen, the cell cannot break down glucose at all",
+    "With oxygen, the cell gets about 18 times as much ATP from each glucose"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "36 ATP and 2 ATP are very different amounts, so oxygen changes how much energy the cell gets, not only how fast.",
+    "1": "This reverses the numbers. The cell gets far less ATP without oxygen.",
+    "2": "Without oxygen, the cell still gets about 2 ATP from each glucose by fermentation."
+   },
+   "why": "Oxygen lets the mitochondrion finish breaking down glucose, so the cell captures about 36 ATP instead of about 2. Dividing 36 by 2 gives 18 times as much energy per glucose. (Some books give 30 to 38; every version shows oxygen multiplies the yield many times over.)",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: presence of oxygen affects the amount of energy available to an organism; PWCS UoS S6, K8; Module 3 class figure about 36; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-12",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Yeast balloon investigation",
+   "dok": 3,
+   "stem": "Students set up four sealed bottles, each with a balloon stretched over the top. After 30 minutes they measured how wide each balloon had grown.",
+   "table": [
+    [
+     "Bottle",
+     "Contents",
+     "Balloon width (cm)"
+    ],
+    [
+     "1",
+     "yeast + sugar + warm water",
+     "9"
+    ],
+    [
+     "2",
+     "yeast + warm water (no sugar)",
+     "0"
+    ],
+    [
+     "3",
+     "sugar + warm water (no yeast)",
+     "0"
+    ],
+    [
+     "4",
+     "yeast + sugar + cold water",
+     "2"
+    ]
+   ],
+   "stem2": "Which conclusion is best supported?",
+   "opts": [
+    "Yeast need sugar to produce gas, and warm water speeds up the process",
+    "Sugar produces gas on its own when it dissolves in water",
+    "Cold water stops yeast from breaking down sugar completely",
+    "Yeast produce gas from water, so sugar is not needed"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Bottle 3 had sugar and warm water but no yeast, and its balloon did not grow.",
+    "2": "Bottle 4 still made 2 cm of gas, so cold slowed the yeast but did not stop it.",
+    "3": "Bottle 2 had yeast and water but no sugar, and it made no gas."
+   },
+   "why": "Only bottles with both yeast and sugar made gas, so the living yeast break down sugar to release carbon dioxide. Bottle 1 grew more than bottle 4, showing warmth speeds the process.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: breakdown of nutrient molecules (sugar) releases energy and carbon dioxide; BIO.1c, e variables and conclusions; PWCS LT 3.3; IG p. 10 (BIO.2e)",
+   "sol_also": "BIO.1"
+  },
+  {
+   "id": "OB-U03-13",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Fermentation: yeast vs muscle",
+   "dok": 2,
+   "stem": "How does breaking down sugar without oxygen in yeast compare with the same process in human muscle cells?",
+   "opts": [
+    "Both release oxygen, but only yeast make ATP",
+    "Yeast make lactic acid, and muscle cells make carbon dioxide and alcohol",
+    "Yeast make carbon dioxide and alcohol, muscle cells make lactic acid, and both get only a little ATP",
+    "Both make about 36 ATP per glucose, but only muscle cells release carbon dioxide"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Neither one releases oxygen, and both make a small amount of ATP.",
+    "1": "This swaps the two. Yeast make carbon dioxide and alcohol; muscle cells make lactic acid.",
+    "3": "About 36 ATP needs oxygen. Without oxygen, each gets only about 2 ATP per glucose."
+   },
+   "why": "Without oxygen, yeast ferment sugar into carbon dioxide and alcohol, while muscle cells produce lactic acid. Either way the cell gets only about 2 ATP per glucose.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: presence of oxygen affects the amount of energy available; PWCS LT 3.3 (fermentation in yeast/bacteria vs muscle); IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-14",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Oxygen links the two processes",
+   "dok": 1,
+   "stem": "Which substance is released by photosynthesis and then used by cellular respiration?",
+   "opts": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Water",
+    "Chlorophyll"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Carbon dioxide goes the other way. Respiration releases it, and photosynthesis uses it.",
+    "2": "Water is used by photosynthesis and released by respiration, the reverse of what the question asks.",
+    "3": "Chlorophyll is a pigment that stays in the chloroplast. It is not released or used up."
+   },
+   "why": "Photosynthesis releases oxygen, and cellular respiration uses oxygen to break down sugar. The products of one process are the reactants of the other.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: products of photosynthesis are the reactants of cellular respiration; PWCS UoS K10, S8; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-15",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Carbon counting: building glucose",
+   "dok": 2,
+   "stem": "Each glucose molecule (C6H12O6) contains 6 carbon atoms. A leaf takes in 12 molecules of carbon dioxide (CO2) and uses all of their carbon to build glucose. How many glucose molecules can it build?",
+   "opts": [
+    "1",
+    "2",
+    "6",
+    "12"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "One glucose needs only 6 carbon atoms. The leaf has 12, enough for more than one.",
+    "2": "6 is the number of carbon atoms in one glucose, not the number of glucose molecules.",
+    "3": "12 is the number of carbon dioxide molecules. Each glucose uses 6 of them."
+   },
+   "why": "Each CO2 brings one carbon atom, so 12 CO2 supply 12 carbon atoms. Each glucose holds 6, so 12 / 6 = 2 glucose molecules. Atoms are rearranged, not created or destroyed.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: photosynthesis combines carbon dioxide and water into sugar; conservation of matter in energy transfer; PWCS LT 3.4 (matter conserved); IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-16",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Carbon counting: breaking glucose",
+   "dok": 2,
+   "stem": "A yeast cell with plenty of oxygen completely breaks down one glucose molecule (C6H12O6). How many carbon dioxide (CO2) molecules are released?",
+   "opts": [
+    "1",
+    "2",
+    "6",
+    "12"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Glucose has 6 carbon atoms, and each CO2 carries only one. One CO2 would leave 5 carbons unaccounted for.",
+    "1": "2 CO2 would account for only 2 of glucose's 6 carbon atoms.",
+    "3": "12 is the number of hydrogen atoms in glucose. Only 6 carbon atoms are available to form CO2."
+   },
+   "why": "With oxygen, all 6 carbon atoms of glucose leave as carbon dioxide, one carbon per CO2, so 6 CO2 are released. The carbon atoms are conserved.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: in most organisms oxygen reacts with sugars to produce carbon dioxide and water; matter is conserved; PWCS LT 3.4; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-17",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Path of energy",
+   "dok": 2,
+   "stem": "A white-tailed deer eats clover in a Virginia meadow. Which sequence best shows how energy reaches the deer's running muscles?",
+   "opts": [
+    "Soil → water in clover → oxygen in deer → ATP in deer muscle",
+    "ATP in deer muscle → sugar in deer → sugar in clover → sunlight",
+    "Sunlight → oxygen in clover → carbon dioxide in deer → sugar in deer muscle",
+    "Sunlight → sugar in clover → sugar in deer → ATP in deer muscle"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Soil and water do not supply energy, and oxygen carries no stored food energy of its own.",
+    "1": "This runs the path backwards. Energy starts with sunlight and ends in the deer.",
+    "2": "Oxygen and carbon dioxide are gases that move between the processes; they do not carry the stored energy. The energy travels in sugar."
+   },
+   "why": "Clover stores light energy in sugar by photosynthesis. The deer eats the clover, and its cells break down the sugar by cellular respiration to make ATP for its muscles.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: capture, storage, transformation and flow of energy through photosynthesis and respiration; PWCS UoS K10, S8; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-18",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Day/night oxygen data",
+   "dok": 3,
+   "stem": "Scientists measured dissolved oxygen in a shallow marsh in the Chesapeake Bay over one day. The marsh is full of underwater plants and small animals.",
+   "table": [
+    [
+     "Time",
+     "Dissolved oxygen (mg/L)"
+    ],
+    [
+     "6 a.m.",
+     "5.0"
+    ],
+    [
+     "Noon",
+     "8.0"
+    ],
+    [
+     "6 p.m.",
+     "9.5"
+    ],
+    [
+     "Midnight",
+     "7.0"
+    ],
+    [
+     "6 a.m. (next day)",
+     "5.2"
+    ]
+   ],
+   "stem2": "Which explanation best accounts for the drop in oxygen between 6 p.m. and 6 a.m.?",
+   "opts": [
+    "Without light, photosynthesis stops, but respiration by plants and animals continues to use oxygen",
+    "At night, plants switch from making oxygen to making carbon dioxide by photosynthesis",
+    "Animals only respire at night, so they use oxygen only after dark",
+    "Cooler night water causes plants to make oxygen faster"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Photosynthesis never makes carbon dioxide. Plants release carbon dioxide by respiration, which they carry out day and night.",
+    "2": "Animals respire all the time. The oxygen falls at night because nothing is replacing it.",
+    "3": "If plants made oxygen faster at night, the oxygen level would rise, but it fell."
+   },
+   "why": "Plants and animals respire around the clock, using oxygen. In daylight, photosynthesis adds more oxygen than respiration uses, so the level rises. After dark, photosynthesis stops and respiration keeps using oxygen, so the level falls.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: photosynthesis and respiration exchange oxygen and carbon dioxide with the environment; BIO.1d-e data analysis; PWCS UoS U3, K10; IG p. 10 (BIO.2e)",
+   "sol_also": "BIO.1"
+  },
+  {
+   "id": "OB-U03-19",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why plants need mitochondria",
+   "dok": 2,
+   "stem": "A sunflower makes its own sugar by photosynthesis. Why do the sunflower's cells also contain mitochondria?",
+   "opts": [
+    "To make more sugar on cloudy days",
+    "To absorb light that the chloroplasts miss",
+    "To turn carbon dioxide into oxygen at night",
+    "To break down sugar and store its energy in ATP the cells can use"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Mitochondria do not make sugar. Only chloroplasts build sugar, using light.",
+    "1": "Mitochondria have no chlorophyll and do not absorb light.",
+    "2": "Mitochondria use oxygen and release carbon dioxide, the opposite of this choice."
+   },
+   "why": "Sugar stores energy, but cells run on ATP. Plant cells, like animal cells, use mitochondria to break down sugar by cellular respiration and capture its energy in ATP.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: sugars from photosynthesis can be used immediately for energy by plants; mitochondria make energy available; PWCS UoS K3, K6; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-20",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Classify an organism from metabolic clues",
+   "dok": 3,
+   "stem": "A biologist studies an unknown single-celled organism from a cave pool in the Shenandoah Valley. She records these observations.",
+   "table": [
+    [
+     "Her observations"
+    ],
+    [
+     "It takes in oxygen and releases carbon dioxide, both in light and in total darkness."
+    ],
+    [
+     "It contains no chlorophyll."
+    ],
+    [
+     "It grows only when bits of other organisms are added to its water."
+    ]
+   ],
+   "stem2": "Which description best fits this organism?",
+   "opts": [
+    "A producer that makes sugar by photosynthesis",
+    "A producer that makes sugar only at night",
+    "A consumer that gets sugar from other organisms and breaks it down with oxygen",
+    "An organism that carries out neither photosynthesis nor respiration"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Without chlorophyll it cannot capture light to make sugar, and it does not release oxygen.",
+    "1": "Photosynthesis needs light, and the organism grows only when it is fed. It is not making its own sugar at any time.",
+    "3": "Taking in oxygen and releasing carbon dioxide is the sign of cellular respiration, so it does respire."
+   },
+   "why": "Taking in oxygen and giving off carbon dioxide shows cellular respiration. No chlorophyll and growth only when fed show it cannot make its own sugar, so it is a consumer (heterotroph).",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: photosynthesis and respiration as processes exchanging oxygen and carbon dioxide; organisms that do and do not photosynthesize; PWCS LT 3.4; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-21",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.1",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "How ATP releases energy",
+   "dok": 1,
+   "stem": "How does an ATP molecule release energy for a cell to use?",
+   "opts": [
+    "By joining with oxygen to form carbon dioxide",
+    "By breaking off one phosphate group to become ADP",
+    "By absorbing light like chlorophyll does",
+    "By adding a phosphate group to become larger"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "That describes breaking down sugar with oxygen. ATP itself releases energy by losing a phosphate.",
+    "2": "ATP does not absorb light. Chlorophyll is the pigment that does.",
+    "3": "Adding a phosphate to ADP stores energy; it does not release it."
+   },
+   "why": "ATP has three phosphate groups. When the bond to the last phosphate breaks, energy is released for cell work, and ATP becomes ADP.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: energy is captured in the bonds of ATP; ATP bonds are broken each time energy is needed; PWCS UoS K9; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-22",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.1",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "What recharges ADP",
+   "dok": 2,
+   "stem": "Think of ATP as a charged battery and ADP as a used one. In an animal cell, what supplies the energy to turn ADP back into ATP?",
+   "opts": [
+    "Energy released by breaking down glucose in cellular respiration",
+    "Energy from light absorbed in the chloroplast",
+    "Energy released when the cell takes in water",
+    "Energy released when carbon dioxide enters the cell"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Animal cells have no chloroplasts. Their energy comes from food, not directly from light.",
+    "2": "Taking in water does not release usable energy for making ATP.",
+    "3": "Carbon dioxide is a waste product of respiration and carries no usable food energy."
+   },
+   "why": "Cellular respiration breaks down glucose, and the energy released is used to add a phosphate back onto ADP, making ATP again. The ATP-ADP cycle repeats as the cell spends and recharges energy.",
+   "src": "VDOE 2018 Biology Curriculum Framework / Instructional Guide, SOL BIO.2e EK: food-molecule bonds are broken and the energy captured in ATP; PWCS UoS K9; Module 3 ATP cycle; IG p. 10 (BIO.2e)"
+  },
+  {
+   "id": "OB-U03-23",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.1",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Keeping ATP supplied during a long effort",
+   "dok": 2,
+   "stem": "A ruby-throated hummingbird hovers at a feeder in a Fairfax backyard, beating its wings about 50 times a second for several minutes. Its flight muscle cells hold only a few seconds' worth of ATP at any moment. How do the muscles keep working?",
+   "opts": [
+    "The muscles store a large supply of ATP before each flight and slowly use it up",
+    "The muscle cells keep rebuilding ATP from ADP and phosphate, using energy released from the sugar they break down",
+    "The bird absorbs ATP directly from the nectar it drinks",
+    "The muscles switch to running on sunlight while the bird is outside"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "A cell holds only a small amount of ATP. It cannot store minutes of flight; it must keep remaking ATP as it spends it.",
+    "2": "Nectar is mostly sugar. The energy in that sugar has to be released by cellular respiration and moved into ATP first.",
+    "3": "Animal cells have no chloroplasts, so they cannot capture light energy. Their energy comes from food."
+   },
+   "why": "ATP is spent and remade over and over. Each time ATP releases energy it becomes ADP, and the energy from breaking down sugar is used to add a phosphate back, making ATP again. That cycle keeps working muscles supplied.",
+   "src": "BIO.2e; IG UtS: ATP bonds are broken each time energy is needed and re-formed using energy from food; PWCS UoS K9; Module 3 ATP cycle (packet p. 2)"
+  },
+  {
+   "id": "OB-U03-24",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.1",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why cells spend ATP instead of glucose",
+   "dok": 2,
+   "stem": "One glucose molecule holds far more energy than one ATP molecule. Why do cells use ATP, not glucose, to power most jobs such as moving a muscle protein?",
+   "opts": [
+    "Glucose cannot be broken down by animal cells",
+    "ATP releases a small, usable amount of energy in one step, right where the job is happening",
+    "ATP holds more energy than glucose, so it is the better fuel",
+    "Glucose is only used for building cell walls"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Animal cells break down glucose all the time in cellular respiration. That is how they make ATP.",
+    "2": "The stem says the opposite: glucose holds more energy. ATP is useful because its energy comes in small, ready-to-use amounts.",
+    "3": "Plants use some glucose to build cellulose, but glucose is mainly a fuel and a storage molecule."
+   },
+   "why": "Glucose is like a large bill and ATP is like coins. Cells break down glucose in steps and store the energy in many ATP molecules, then spend ATP one phosphate at a time wherever energy is needed right now.",
+   "src": "BIO.2e; IG UtS: energy captured in ATP is released for cell work; PWCS UoS K9; packet p. 2 (stored vs immediate energy)"
+  },
+  {
+   "id": "OB-U03-25",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.1",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Stored energy versus immediate energy",
+   "dok": 1,
+   "stem": "Which statement correctly compares glucose and ATP?",
+   "opts": [
+    "Glucose stores energy for later; ATP carries energy the cell can use right away",
+    "ATP stores energy for months; glucose is used up in seconds",
+    "Both carry exactly the same amount of energy",
+    "Neither molecule contains energy; energy comes only from oxygen"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "This is reversed. A cell holds only seconds' worth of ATP; glucose and starch are the long-term stores.",
+    "2": "One glucose molecule can be used to make dozens of ATP, so they do not carry the same amount.",
+    "3": "Oxygen does not contain the energy. The energy is stored in the chemical bonds of molecules such as glucose and ATP."
+   },
+   "why": "Glucose (and starch or fat) is stored energy. ATP is the immediate, spendable form the cell makes from it.",
+   "src": "BIO.2e; IG UtS: energy stored in sugar is transferred to ATP; PWCS UoS K9"
+  },
+  {
+   "id": "OB-U03-26",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.1",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Which cell jobs spend ATP (spiral to Unit 2)",
+   "dok": 2,
+   "stem": "Which of these cell processes need energy from ATP? Select all that apply.",
+   "opts": [
+    "A protein pump moving sodium out of a nerve cell against its concentration gradient",
+    "Oxygen diffusing from the blood into a muscle cell",
+    "A muscle protein pulling to contract the muscle",
+    "Water moving into a cell by osmosis",
+    "A ribosome joining amino acids into a protein"
+   ],
+   "key": [
+    0,
+    2,
+    4
+   ],
+   "miss": {
+    "1": "Diffusion is passive transport. Oxygen moves from high to low concentration on its own, with no ATP spent.",
+    "3": "Osmosis is the diffusion of water, so it is passive and needs no ATP."
+   },
+   "why": "Active transport, movement and building large molecules all take energy, and ATP supplies it. Diffusion and osmosis move materials down a concentration gradient and need no ATP.",
+   "src": "BIO.2e with BIO.3d (Unit 2 transport); IG UtS: ATP provides energy for cell processes; PWCS UoS K9; Unit 2 LT 2.5",
+   "spiral": "BIO.3d"
+  },
+  {
+   "id": "OB-U03-27",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.1",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Firefly glow experiment",
+   "dok": 3,
+   "stem": "A firefly's light comes from a chemical reaction in its tail. Students ground up dried firefly tails (no living cells remained), split the powder into three tubes, and added one substance to each.",
+   "table": [
+    [
+     "Tube",
+     "Substance added",
+     "Result"
+    ],
+    [
+     "1",
+     "Water",
+     "No glow"
+    ],
+    [
+     "2",
+     "Glucose",
+     "No glow"
+    ],
+    [
+     "3",
+     "ATP",
+     "Bright glow for about one minute"
+    ]
+   ],
+   "stem2": "Which conclusion is best supported by these results?",
+   "opts": [
+    "Glucose is the molecule that directly powers the light reaction",
+    "The light reaction is powered directly by ATP; the energy in glucose must first be moved into ATP by living cells",
+    "Water stops the light reaction from happening",
+    "Fireflies make light without using any energy"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Tube 2 had glucose and did not glow. Without living cells to break it down, glucose's energy never reached the reaction.",
+    "2": "Water is the control. It shows what happens when nothing that carries usable energy is added.",
+    "3": "Tube 3 glowed only when ATP was added and stopped after about a minute, so the light uses up energy from ATP."
+   },
+   "why": "Only the ATP tube glowed, so ATP is the direct energy source for the reaction. In a living firefly, cells break down glucose by cellular respiration to make that ATP. The glow faded when the ATP was used up.",
+   "src": "BIO.2e; BIO.1 (controls, conclusions from data); IG UtS: ATP is the energy molecule used by cells; PWCS UoS K9",
+   "sol_also": "BIO.1"
+  },
+  {
+   "id": "OB-U03-28",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Photosynthesis without chloroplasts (spiral to Unit 2)",
+   "dok": 2,
+   "stem": "Prokaryotic cells have no membrane-bound organelles, so they have no chloroplasts. Yet some prokaryotes give off oxygen in sunlight and grow in water with no food added. Which explanation fits?",
+   "opts": [
+    "They release oxygen made by cellular respiration",
+    "They have chlorophyll in folded membranes inside the cell, so they can still carry out photosynthesis",
+    "They take in sugar made by nearby plants",
+    "They are tiny plants, so they must have chloroplasts after all"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Cellular respiration uses oxygen. It does not release it.",
+    "2": "The stem says they grow with no food added. They are making their own sugar.",
+    "3": "Prokaryotes are not plants, and they have no membrane-bound organelles, so no chloroplasts."
+   },
+   "why": "Photosynthesis needs chlorophyll to capture light, not the chloroplast itself. Photosynthetic prokaryotes such as cyanobacteria hold chlorophyll in membranes in their cytoplasm. Chloroplasts likely began as cells like these.",
+   "src": "BIO.2e with BIO.3b (prokaryotes lack membrane-bound organelles); IG UtS: chlorophyll captures light energy; PWCS UoS K5",
+   "spiral": "BIO.3b"
+  },
+  {
+   "id": "OB-U03-29",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Breath bubbled into water: carbon dioxide and rate",
+   "dok": 3,
+   "stem": "A student put the same length of pondweed into two tubes of water under the same lamp at the same temperature. Before starting, she blew through a straw into Tube B for one minute. She counted oxygen bubbles for five minutes.",
+   "table": [
+    [
+     "Tube",
+     "Water",
+     "Bubbles in 5 minutes"
+    ],
+    [
+     "A",
+     "Tap water",
+     "12"
+    ],
+    [
+     "B",
+     "Tap water after blowing through a straw",
+     "31"
+    ]
+   ],
+   "stem2": "Which explanation best accounts for the difference?",
+   "opts": [
+    "Her breath added oxygen, and the plant released that extra oxygen as bubbles",
+    "Her breath warmed the water a great deal, which made the plant grow",
+    "Her breath added carbon dioxide, a reactant of photosynthesis, so the plant made sugar and oxygen faster",
+    "Her breath added sugar to the water, which the plant used for energy"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Exhaled breath has less oxygen than air, and the bubbles here are oxygen the plant produced. The extra ingredient is carbon dioxide.",
+    "1": "Both tubes were kept at the same temperature, and the plant could not grow much in five minutes.",
+    "3": "Breath does not contain sugar. Plants make their own sugar from carbon dioxide and water."
+   },
+   "why": "Exhaled breath is rich in carbon dioxide, the gas cellular respiration releases. Carbon dioxide is a reactant of photosynthesis, so more of it let the pondweed photosynthesize faster and release more oxygen. One organism's respiration fed another's photosynthesis.",
+   "src": "BIO.2e; BIO.1 (controlled variables); IG UtS: carbon dioxide is a reactant of photosynthesis; factors affecting rate; PWCS LT 3.2",
+   "sol_also": "BIO.1"
+  },
+  {
+   "id": "OB-U03-30",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Leaf pigments and fall color",
+   "dok": 2,
+   "stem": "Paper chromatography of a green maple leaf in summer shows a large green band and a smaller yellow-orange band. In October the same tree's leaves turn orange. Which explanation fits both observations?",
+   "opts": [
+    "In fall the leaf makes chlorophyll that is orange instead of green",
+    "The orange pigment was in the leaf all summer, and it shows once the green chlorophyll breaks down",
+    "Cold weather paints the leaf surface orange",
+    "The leaf turns orange because it begins photosynthesizing faster"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Chlorophyll is green. The orange color comes from a different pigment.",
+    "2": "The orange pigment already showed up on the summer chromatography strip, so it was inside the leaf before the cold.",
+    "3": "As chlorophyll breaks down in fall, the leaf photosynthesizes less, not more."
+   },
+   "why": "Leaves hold several pigments. Chlorophyll is the main one and its green hides the others. When chlorophyll breaks down in fall, the yellow and orange pigments that were there all along become visible.",
+   "src": "BIO.2e; IG UtS: chlorophyll and other pigments capture light energy; PWCS UoS K5; packet pp. 10-11, 13-14"
+  },
+  {
+   "id": "OB-U03-31",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Completing the photosynthesis equation",
+   "dok": 1,
+   "stem": "Which molecule completes the equation for photosynthesis?",
+   "stem2": "6CO2 + 6H2O + light energy → ______ + 6O2",
+   "opts": [
+    "ATP",
+    "C6H12O6 (glucose)",
+    "CO2 (carbon dioxide)",
+    "Chlorophyll"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "ATP is made and used inside the chloroplast along the way, but the stored product of photosynthesis is glucose.",
+    "2": "Carbon dioxide is already on the left side. It is a reactant that gets used up.",
+    "3": "Chlorophyll captures the light but is not used up or produced."
+   },
+   "why": "Photosynthesis uses carbon dioxide, water and light energy to make glucose and release oxygen. The light energy ends up stored in glucose's bonds.",
+   "src": "BIO.2e; IG UtS: reactants and products of photosynthesis; PWCS UoS K4; packet p. 3"
+  },
+  {
+   "id": "OB-U03-32",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.2",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Temperature and rate (spiral to Unit 1 enzymes)",
+   "dok": 3,
+   "stem": "Students measured how fast pondweed released oxygen at three water temperatures. Light and carbon dioxide were the same in every trial.",
+   "table": [
+    [
+     "Water temperature (°C)",
+     "Bubbles per minute"
+    ],
+    [
+     "10",
+     "6"
+    ],
+    [
+     "25",
+     "18"
+    ],
+    [
+     "40",
+     "5"
+    ]
+   ],
+   "stem2": "Which explanation best accounts for the drop at 40 °C?",
+   "opts": [
+    "Warm water holds more carbon dioxide, so the plant had too much",
+    "The enzymes that run photosynthesis change shape at high temperature and stop working well",
+    "At 40 °C the plant switches to making carbon dioxide by photosynthesis",
+    "Light cannot pass through warm water"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Warm water actually holds less dissolved gas, and the stem says carbon dioxide was kept the same.",
+    "2": "Photosynthesis never makes carbon dioxide. The rate simply fell.",
+    "3": "The lamp was the same in every trial, and warm water is just as clear as cool water."
+   },
+   "why": "Photosynthesis is a series of reactions run by enzymes. Warmth speeds enzymes up to a point, which is why 25 °C beat 10 °C. Too much heat changes an enzyme's shape (denatures it), so the rate drops.",
+   "src": "BIO.2e with BIO.2d (enzymes, Unit 1); BIO.1 data; IG UtS: factors affecting rate of photosynthesis; PWCS LT 3.2",
+   "sol_also": "BIO.1",
+   "spiral": "BIO.2d"
+  },
+  {
+   "id": "OB-U03-33",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Plant cells that never see light",
+   "dok": 2,
+   "stem": "A carrot's orange root grows underground and never receives light. Its cells are alive and use energy every day. How do the root cells get the ATP they need?",
+   "opts": [
+    "They make sugar by photosynthesis in the dark",
+    "They break down sugar sent down from the leaves by cellular respiration in their mitochondria",
+    "They absorb ATP from the soil",
+    "They do not need ATP because they are underground"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Photosynthesis needs light, and root cells have no chlorophyll. That is why carrots are orange, not green.",
+    "2": "Soil does not supply ATP. Every living cell has to make its own.",
+    "3": "Every living cell needs ATP for jobs such as active transport and building proteins."
+   },
+   "why": "Leaves make sugar and send it through the plant. Root cells, like all plant cells, use cellular respiration in their mitochondria to break that sugar down and make ATP. Plants respire, day and night, in every living cell.",
+   "src": "BIO.2e; IG UtS: sugars made in photosynthesis are used by plants for energy; PWCS UoS K3, K6; Oct 21 gap: plants also respire"
+  },
+  {
+   "id": "OB-U03-34",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Yeast with and without air",
+   "dok": 2,
+   "stem": "Yeast can live with or without oxygen. A lab growing yeast finds that bubbling air through the tank makes the yeast multiply much faster than in a sealed tank with the same sugar. Which explanation is best?",
+   "opts": [
+    "With oxygen the yeast carry out aerobic respiration and get about 36 ATP per glucose instead of about 2, so they have more energy for growing",
+    "Air contains sugar, which feeds the yeast",
+    "Without air, the yeast cannot break down sugar at all",
+    "Air bubbles stir the tank, which is the only reason they grow faster"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Air is mostly nitrogen and oxygen. The sugar comes from the tank.",
+    "2": "Without oxygen, yeast still break down sugar by fermentation and make about 2 ATP per glucose. They grow, just slowly.",
+    "3": "Stirring may help a little, but the big difference is energy: oxygen lets the yeast get far more ATP from each sugar."
+   },
+   "why": "Oxygen lets cells finish breaking down glucose in the mitochondria, producing about 36 ATP per glucose. Fermentation without oxygen produces about 2. More ATP means more energy for building new cells.",
+   "src": "BIO.2e; IG UtS: the presence of oxygen affects the amount of energy available to an organism; PWCS UoS S6, K8"
+  },
+  {
+   "id": "OB-U03-35",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Glycolysis happens in the cytoplasm",
+   "dok": 2,
+   "stem": "The first step in breaking down glucose, called glycolysis, happens in the cytoplasm and does not need oxygen. It releases a small amount of ATP. Which observation does this explain?",
+   "opts": [
+    "Muscle cells can still make some ATP during a sprint, when oxygen runs short",
+    "Plants release oxygen in sunlight",
+    "Mitochondria are found only in animal cells",
+    "Carbon dioxide is a reactant of photosynthesis"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "That is photosynthesis in chloroplasts, not the first step of breaking down glucose.",
+    "2": "Plant cells have mitochondria too, and the stem is about the cytoplasm.",
+    "3": "True, but it is about photosynthesis and does not follow from where glycolysis happens."
+   },
+   "why": "Because glycolysis needs no oxygen and happens in the cytoplasm, a cell short on oxygen can keep running glycolysis and fermentation for about 2 ATP per glucose. The rest of aerobic respiration, which needs oxygen, happens in the mitochondria.",
+   "src": "BIO.2e; IG UtS: presence of oxygen affects energy available; PWCS UoS S6; Advanced slide 20 (glycolysis)"
+  },
+  {
+   "id": "OB-U03-36",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.3",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Where exhaled carbon comes from",
+   "dok": 2,
+   "stem": "Every breath you breathe out carries carbon dioxide. Where did most of the carbon atoms in that carbon dioxide come from?",
+   "opts": [
+    "Carbon dioxide you breathed in a moment earlier",
+    "The food molecules, such as glucose, that your cells broke down",
+    "The oxygen you breathed in",
+    "Water you drank"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Air you breathe in has very little carbon dioxide, about 0.04 percent. Exhaled air has about 100 times more.",
+    "2": "Oxygen (O2) has no carbon atoms. In respiration it ends up in water.",
+    "3": "Water (H2O) contains no carbon."
+   },
+   "why": "In cellular respiration your cells break down glucose (C6H12O6). Its six carbon atoms leave as six carbon dioxide molecules, which your blood carries to your lungs. The carbon you breathe out was in your food.",
+   "src": "BIO.2e; IG UtS: oxygen reacts with sugars to produce carbon dioxide and water; matter is conserved; PWCS UoS K8"
+  },
+  {
+   "id": "OB-U03-37",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Carbon dioxide around a plant, light and dark",
+   "dok": 3,
+   "stem": "A tomato seedling sat in a clear sealed box with a carbon dioxide sensor. A grow light was on from 8 a.m. to 8 p.m. and off overnight.",
+   "table": [
+    [
+     "Time",
+     "Light",
+     "Carbon dioxide (ppm)"
+    ],
+    [
+     "8 a.m.",
+     "on",
+     "620"
+    ],
+    [
+     "2 p.m.",
+     "on",
+     "410"
+    ],
+    [
+     "8 p.m.",
+     "on",
+     "330"
+    ],
+    [
+     "2 a.m.",
+     "off",
+     "480"
+    ],
+    [
+     "8 a.m.",
+     "off",
+     "600"
+    ]
+   ],
+   "stem2": "Which explanation best accounts for the rise in carbon dioxide from 8 p.m. to 8 a.m.?",
+   "opts": [
+    "In the dark, photosynthesis stopped, but the seedling's cells kept carrying out cellular respiration and releasing carbon dioxide",
+    "In the dark, the seedling's photosynthesis began making carbon dioxide",
+    "The sensor stops working when the light is off",
+    "Plants respire only at night, so they release carbon dioxide only in the dark"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Photosynthesis uses carbon dioxide. It never makes it.",
+    "2": "The readings change smoothly and match what the plant is doing, so there is no reason to think the sensor failed.",
+    "3": "Plants respire all the time. In the light, photosynthesis uses carbon dioxide faster than respiration releases it, so the level falls."
+   },
+   "why": "Plant cells respire day and night. With the light on, photosynthesis takes in more carbon dioxide than respiration gives off, so the level drops. With the light off, only respiration is happening, so carbon dioxide builds up.",
+   "src": "BIO.2e; BIO.1 data; IG UtS: photosynthesis and respiration exchange carbon dioxide and oxygen with the environment; PWCS LT 3.4"
+  },
+  {
+   "id": "OB-U03-38",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Matter cycles, energy flows",
+   "dok": 2,
+   "stem": "Which statement best compares how matter and energy move through photosynthesis and cellular respiration?",
+   "opts": [
+    "Both matter and energy are recycled over and over between the two processes",
+    "Atoms are reused over and over, but energy enters as sunlight and leaves as heat, so it must keep being added",
+    "Energy is recycled, but atoms are used up and disappear",
+    "Neither matter nor energy moves between the two processes"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Atoms cycle, but energy does not. Each time energy is used, some leaves as heat that living things cannot capture again.",
+    "2": "This is reversed. Atoms are never used up; they are rearranged. Energy is what has to keep coming in.",
+    "3": "The products of photosynthesis are the reactants of respiration, and the reverse, so matter moves between them constantly."
+   },
+   "why": "Carbon, hydrogen and oxygen atoms move back and forth between the two processes: matter cycles. Energy enters as sunlight, is stored in sugar, moves into ATP, and is finally released as heat: energy flows one way. That is why life needs the sun every day.",
+   "src": "BIO.2e; IG UtS: capture, storage, transformation and flow of energy; matter is conserved; PWCS UoS U3, K10"
+  },
+  {
+   "id": "OB-U03-39",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Plants on a long space mission",
+   "dok": 2,
+   "stem": "Engineers plan to grow lettuce on a spacecraft on a three-year mission. Which benefits would the growing lettuce provide for the crew? Select all that apply.",
+   "opts": [
+    "It takes in carbon dioxide that the crew breathes out",
+    "It releases oxygen the crew can breathe",
+    "It gives the crew ATP directly through the air",
+    "It makes sugar the crew can eat",
+    "It means the lettuce itself never needs oxygen"
+   ],
+   "key": [
+    0,
+    1,
+    3
+   ],
+   "miss": {
+    "2": "ATP stays inside cells. The crew makes its own ATP by breaking down the food it eats.",
+    "4": "Lettuce cells carry out cellular respiration too, so the lettuce also uses some oxygen. Under light it makes more than it uses."
+   },
+   "why": "Photosynthesis uses the carbon dioxide the crew exhales and produces oxygen and sugar, which the crew uses for cellular respiration. The products of each process are the reactants of the other.",
+   "src": "BIO.2e; IG UtS: products of photosynthesis are reactants of cellular respiration and the reverse; PWCS UoS K10"
+  },
+  {
+   "id": "OB-U03-40",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Chloroplast and mitochondrion compared",
+   "dok": 1,
+   "stem": "Which row correctly describes the two organelles?",
+   "opts": [
+    "Chloroplast: uses carbon dioxide and water, releases glucose and oxygen. Mitochondrion: uses glucose and oxygen, releases carbon dioxide, water and ATP.",
+    "Chloroplast: uses glucose and oxygen, releases carbon dioxide. Mitochondrion: uses carbon dioxide, releases oxygen.",
+    "Chloroplast: found in all cells. Mitochondrion: found only in plant cells.",
+    "Chloroplast: releases ATP for the whole cell. Mitochondrion: absorbs light."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "This swaps the two organelles' inputs and outputs.",
+    "2": "Chloroplasts are found only in plants and algae. Mitochondria are in nearly all eukaryotic cells, plant and animal.",
+    "3": "Mitochondria do not absorb light; chlorophyll in chloroplasts does. Mitochondria supply most of the cell's ATP."
+   },
+   "why": "Chloroplasts run photosynthesis: carbon dioxide + water + light energy → glucose + oxygen. Mitochondria run cellular respiration: glucose + oxygen → carbon dioxide + water + ATP. Plant cells have both.",
+   "src": "BIO.2e; IG UtS: chloroplasts and mitochondria; PWCS UoS K3, K5; Deck B card sort"
+  },
+  {
+   "id": "OB-U03-41",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Decomposers return carbon to the air",
+   "dok": 2,
+   "stem": "Each fall, oak leaves pile up on the floor of a Prince William Forest Park hollow. By summer most of the pile is gone. What happened to most of the carbon in those leaves?",
+   "opts": [
+    "It sank into the soil and turned into rock",
+    "Fungi and bacteria broke the leaves down by cellular respiration and released the carbon as carbon dioxide",
+    "It was destroyed, because carbon atoms are used up when leaves rot",
+    "Sunlight turned it into oxygen"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "A small amount becomes part of the soil, but most of the pile disappears into the air, not into rock.",
+    "2": "Atoms are never destroyed. They are rearranged into new molecules.",
+    "3": "Light cannot turn carbon into oxygen. Carbon and oxygen are different elements."
+   },
+   "why": "Decomposers such as fungi and bacteria feed on dead leaves. Their cellular respiration breaks down the leaves' sugars and releases the carbon as carbon dioxide, which trees can take in again by photosynthesis. This is part of the carbon cycle.",
+   "src": "BIO.2e with BIO.8 (decomposers, cycles); IG UtS: matter is conserved; PWCS LT 3.4 (carbon cycle, packet p. 5)",
+   "spiral": "BIO.8"
+  },
+  {
+   "id": "OB-U03-42",
+   "set": "practice",
+   "unit": 3,
+   "lt": "3.4",
+   "sol": "BIO.2e",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Where the carbon in coal came from",
+   "dok": 2,
+   "stem": "Coal formed from swamp plants that lived about 300 million years ago. When a power plant burns coal, it releases carbon dioxide. How did that carbon originally get into the coal?",
+   "opts": [
+    "Ancient plants took carbon dioxide from the air and built it into their bodies by photosynthesis",
+    "Volcanoes added carbon to the coal after it formed",
+    "Animals breathed it into the swamp water",
+    "Coal makes new carbon when it is heated"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Coal is made of buried plant remains. The carbon was in the plants before they were buried.",
+    "2": "Animals did release some carbon dioxide, but it reached the coal only after plants captured it by photosynthesis.",
+    "3": "Burning rearranges atoms; it does not create new ones."
+   },
+   "why": "Photosynthesis pulled carbon dioxide from the ancient air and built it into sugar and plant tissue. Buried and pressed for millions of years, that tissue became coal. Burning coal releases the same carbon back to the air.",
+   "src": "BIO.2e with BIO.8 (carbon cycle); IG UtS: photosynthesis combines carbon dioxide and water into energy-rich compounds; PWCS LT 3.4",
+   "spiral": "BIO.8"
+  }
+ ]
+}
