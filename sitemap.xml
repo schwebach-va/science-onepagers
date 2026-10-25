@@ -618,4 +618,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://scienceonepagers.org/biology/tools/biochemistrypedia-sol-biology.html</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://scienceonepagers.org/biology/tools/biochemistrypedia-de-biology.html</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
 </urlset>
