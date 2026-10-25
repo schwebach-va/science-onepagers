@@ -1494,12 +1494,20 @@ function tagS(){stackShow=true;try{tag.apply(null,arguments);}finally{stackShow=
 function circ(x,y,r,f,e,w){ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(f){ctx.fillStyle=f;ctx.fill();}if(e){ctx.strokeStyle=e;ctx.lineWidth=w||2;ctx.stroke();}}
 function rrect(x,y,w,h,r,f,e,lw){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();if(f){ctx.fillStyle=f;ctx.fill();}if(e){ctx.strokeStyle=e;ctx.lineWidth=lw||2;ctx.stroke();}}
 /* a boxed label, drawn at a fixed screen size on a backing plate; registers a hit area for Teaching view */
+/* the label's box takes the colour of what it sits on (organelle fill, patch, or page), so it hides the lines behind the words without showing as a block */
+let curOrg=null;
+function plateCol(x,y){if(!curOrg)return BG;const P=PATCH,isC=curOrg==="chl";
+  if(x>=P.x0&&x<=P.x1&&y>=P.y0&&y<=P.y1)return y<P.my?col(isC?"space":"spaceM"):col(isC?"chlF":"mitF");
+  const inside=isC?Math.hypot((x-600)/560,(y-415)/345)<.97:(x>MCAP.x0+10&&x<MCAP.x1-10&&y>MCAP.y0+10&&y<MCAP.y1-10);
+  return inside?col(isC?"chlF":"mitF"):BG;}
 function tag(text,x,y,key,align,big,minor){
   if(!text)return;if(minor&&(SIM.view==="stack"||st.teach))return;if(SIM.view==="stack"&&!stackShow)return;const[X,Y]=sPx(x,y);const px=big?labelPx()+4:labelPx();
-  ctx.save();ctx.setTransform(kpx,0,0,kpx,0,0);ctx.font="600 "+px+"px Archivo, 'Helvetica Neue', Arial, sans-serif";ctx.textBaseline="middle";ctx.textAlign=align||"center";
-  const w=ctx.measureText(text).width,x0=align==="left"?X:align==="right"?X-w:X-w/2,h=px*1.5;
-  ctx.fillStyle=BG;ctx.globalAlpha=.9;ctx.fillRect(x0-5,Y-h/2,w+10,h);ctx.globalAlpha=1;
+  /* softer labels (Reid, 10/25): a lighter weight, and a faint tight box plus a thin halo in the background colour, so the working parts show through instead of being blotted out */
+  ctx.save();ctx.setTransform(kpx,0,0,kpx,0,0);ctx.font="500 "+px+"px Archivo, 'Helvetica Neue', Arial, sans-serif";ctx.textBaseline="middle";ctx.textAlign=align||"center";
+  const w=ctx.measureText(text).width,x0=align==="left"?X:align==="right"?X-w:X-w/2,h=px*1.3;
+  ctx.fillStyle=plateCol(x,y);ctx.globalAlpha=.92;ctx.fillRect(x0-3,Y-h/2,w+6,h);ctx.globalAlpha=1;
   if(pinned&&pinned===key){ctx.strokeStyle=BOND;ctx.lineWidth=2;ctx.strokeRect(x0-5,Y-h/2,w+10,h);}
+  ctx.lineJoin="round";ctx.strokeStyle=plateCol(x,y);ctx.lineWidth=Math.max(3,px*.22);ctx.strokeText(text,X,Y);
   ctx.fillStyle=SOFT;ctx.fillText(text,X,Y);ctx.restore();
   if(key)hits.push({key,x0:x0-5,y0:Y-h/2,x1:x0+w+5,y1:Y+h/2});
 }
@@ -1557,7 +1565,7 @@ function drawLanes(top){
 }
 function drawOrg(o){
   const S=SIM,lvl=S.level,L=LBL[lvl],isC=o.kind==="chl";
-  ctx.save();ctx.translate(OT.ox,OT.oy);ctx.scale(OT.sc,OT.sc);
+  ctx.save();ctx.translate(OT.ox,OT.oy);ctx.scale(OT.sc,OT.sc);curOrg=o.kind;
   if(isC)drawChloroBody(o);else drawMitoBody(o);
   drawWheel(o);
   drawPatch(o);
@@ -1566,7 +1574,7 @@ function drawOrg(o){
   drawReadoutsOnStage(o);
   drawLedger(o);
   if(S.view==="stack"){if(isC)tagS("Chloroplast",620,30,null,"center",true);else tagS("Mitochondrion",20,112,null,"left",true);}
-  ctx.restore();
+  curOrg=null;ctx.restore();
 }
 function drawChloroBody(o){
   const S=SIM,L=LBL[S.level],c=S.ctl;
