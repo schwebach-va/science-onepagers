@@ -1,0 +1,908 @@
+{
+ "ALMOND": {
+  "f": "almond.jpg",
+  "file": "Almonds_-_in_shell,_shell_cracked_open,_shelled,_blanched.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Ivar Leidus",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "BAMBOO": {
+  "f": "bamboo.jpg",
+  "file": "Bamboo_forest.jpg",
+  "w": 500,
+  "h": 667,
+  "artist": "Kamakura",
+  "lic": "CC BY-SA 3.0",
+  "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "BANYAN": {
+  "f": "banyan.jpg",
+  "file": "Great_banyan_tree_kol.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "McKay Savage",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "BAOBAB": {
+  "f": "baobab.jpg",
+  "file": "Baobab_and_elephant,_Tanzania.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Ferdinand Reus from Arnhem, Holland",
+  "lic": "CC BY-SA 2.0",
+  "url": "https://creativecommons.org/licenses/by-sa/2.0"
+ },
+ "BASSWOOD": {
+  "f": "basswood.jpg",
+  "file": "Tilia_americana_(American_Linden)_(28268263222).jpg",
+  "w": 500,
+  "h": 625,
+  "artist": "Plant Image Library",
+  "lic": "CC BY-SA 2.0",
+  "url": "https://creativecommons.org/licenses/by-sa/2.0"
+ },
+ "BAYBERRY": {
+  "f": "bayberry.jpg",
+  "file": "Northern_Bayberry_Leaf_Cluster_2420px.jpg",
+  "w": 500,
+  "h": 389,
+  "artist": "Photo by Derek Ramsey (Ram-Man)",
+  "lic": "CC BY-SA 2.5",
+  "url": "https://creativecommons.org/licenses/by-sa/2.5"
+ },
+ "BEETLE": {
+  "f": "beetle.png",
+  "file": "Coleoptera_collage.png",
+  "w": 500,
+  "h": 477,
+  "artist": "Bugboy52.40",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "BITTERN": {
+  "f": "bittern.jpg",
+  "file": "Botaurus_lentiginosus_28079.JPG",
+  "w": 500,
+  "h": 667,
+  "artist": "Walter Siegmund",
+  "lic": "CC BY 2.5",
+  "url": "https://creativecommons.org/licenses/by/2.5"
+ },
+ "BOBCAT": {
+  "f": "bobcat.jpg",
+  "file": "Bobcat_at_Columbus_Zoo_Boo.jpg",
+  "w": 500,
+  "h": 747,
+  "artist": "Becker1999 (Paul and Cathy)",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "CARDINAL": {
+  "f": "cardinal.jpg",
+  "file": "Male_northern_cardinal_in_Central_Park_(52612).jpg",
+  "w": 500,
+  "h": 657,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "CHANTERELLE": {
+  "f": "chanterelle.jpg",
+  "file": "Chanterelle_Cantharellus_cibarius.jpg",
+  "w": 500,
+  "h": 376,
+  "artist": "",
+  "lic": "CC BY-SA 3.0",
+  "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "CHERRY": {
+  "f": "cherry.jpg",
+  "file": "Amerikaanse_vogelkers_Prunus_serotina_closeup.jpg",
+  "w": 500,
+  "h": 614,
+  "artist": "",
+  "lic": "CC BY-SA 3.0",
+  "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "CHIPMUNK": {
+  "f": "chipmunk.jpg",
+  "file": "Chipmunk_with_stuffed_cheeks_in_Prospect_Park_(05980).jpg",
+  "w": 500,
+  "h": 362,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "COBALT": {
+  "f": "cobalt.jpg",
+  "file": "Kobalt_electrolytic_and_1cm3_cube.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Alchemist-hp (talk) (www.pse-mendelejew.de)",
+  "lic": "FAL",
+  "url": "http://artlibre.org/licence/lal/en"
+ },
+ "COPPER": {
+  "f": "copper.jpg",
+  "file": "Limulus_polyphemus_(aq.).jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Hans Hillewaert",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "COSMOS": {
+  "f": "cosmos.jpg",
+  "file": "Cosmos_bipinnatus_pink,_Burdwan,_West_Bengal,_India_10_01_2013.jpg",
+  "w": 500,
+  "h": 372,
+  "artist": "Joydeep",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "CRICKET": {
+  "f": "cricket.jpg",
+  "file": "Gryllus_pennsylvanicus_male_01.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Kevinjudge",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "CROCUS": {
+  "f": "crocus.jpg",
+  "file": "Crocus_vernus_with_bee.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Generalrelative",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "DAISY": {
+  "f": "daisy.jpg",
+  "file": "Leucanthemum_vulgare_'Filigran'_Flower_2200px.jpg",
+  "w": 500,
+  "h": 455,
+  "artist": "Photo by and (c)2008 Derek Ramsey (Ram-Man). Co-attribution must be given to the Chanticleer Garden.",
+  "lic": "CC BY-SA 3.0",
+  "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "DAMSELFLY": {
+  "f": "damselfly.jpg",
+  "file": "Ebony_Jewelwing,_male,_Gatineau_Park.jpg",
+  "w": 500,
+  "h": 365,
+  "artist": "D. Gordon E. Robertson",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "DANDELION": {
+  "f": "dandelion.jpg",
+  "file": "Taraxacum_officinale_-_Köhler–s_Medizinal-Pflanzen-135.jpg",
+  "w": 500,
+  "h": 688,
+  "artist": "Walther Otto Müller",
+  "lic": "Public domain"
+ },
+ "DOVE": {
+  "f": "dove.jpg",
+  "file": "Mourning_dove_perched_(61179).jpg",
+  "w": 500,
+  "h": 379,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "DUNLIN": {
+  "f": "dunlin.png",
+  "file": "Dunlin_(Calidris_alpina)_in_the_Delaware_Bay_at_Heislerville_Wildlife_Management_Area,_New_Jersey,_USA.png",
+  "w": 500,
+  "h": 333,
+  "artist": "Charles Homler d/b/a FocusOnWildlife",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "EBONY": {
+  "f": "ebony.jpg",
+  "file": "Ebonytreeforest.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Rajaramraok en wikipedia",
+  "lic": "Public domain"
+ },
+ "ERMINE": {
+  "f": "ermine.jpg",
+  "file": "Røyskatt_(Mustela_erminea_erminea),_Lista,_Norway.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Marton Berntsen, crop by User:MPF",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "FELDSPAR": {
+  "f": "feldspar.png",
+  "file": "Feldspar_diversity.png",
+  "w": 500,
+  "h": 288,
+  "artist": "PaleoNeolitic",
+  "lic": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "FENNEL": {
+  "f": "fennel.jpg",
+  "file": "Foeniculum_July_2011-1a.jpg",
+  "w": 500,
+  "h": 599,
+  "artist": "Alvesgaspar",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "FOXGLOVE": {
+  "f": "foxglove.jpg",
+  "file": "Digitalis_purpurea_LC0101.jpg",
+  "w": 500,
+  "h": 760,
+  "artist": "Jörg Hempel",
+  "lic": "CC BY-SA 3.0 de",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+ },
+ "GANNET": {
+  "f": "gannet.jpg",
+  "file": "Morus_bassanus_adu.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Andreas Trepte",
+  "lic": "CC BY-SA 2.5",
+  "url": "https://creativecommons.org/licenses/by-sa/2.5"
+ },
+ "GENTIAN": {
+  "f": "gentian.jpg",
+  "file": "GentianaAndrewsii.jpg",
+  "w": 500,
+  "h": 658,
+  "artist": "Hugowolf at en.wikipedia",
+  "lic": "CC BY 2.5",
+  "url": "https://creativecommons.org/licenses/by/2.5"
+ },
+ "GEODE": {
+  "f": "geode.jpg",
+  "file": "Geode_inside_outside.jpg",
+  "w": 500,
+  "h": 764,
+  "artist": "Manfred Heyde",
+  "lic": "CC BY-SA 3.0",
+  "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "GLACIER": {
+  "f": "glacier.png",
+  "file": "Mesenchytraeus_solifugus_anterior.png",
+  "w": 500,
+  "h": 650,
+  "artist": "John Persy Moore (1869–1965)",
+  "lic": "Public domain"
+ },
+ "GOLDFINCH": {
+  "f": "goldfinch.jpg",
+  "file": "Carduelis_tristis_-Michigan,_USA_-male-8.jpg",
+  "w": 500,
+  "h": 404,
+  "artist": "Rodney Campbell",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "GRACKLE": {
+  "f": "grackle.jpg",
+  "file": "Common_grackle_in_PP_(36732).jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "GREBE": {
+  "f": "grebe.jpg",
+  "file": "Pied-billed_Grebe_0561.jpg",
+  "w": 500,
+  "h": 334,
+  "artist": "Dori",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "GROTTO": {
+  "f": "grotto.jpg",
+  "file": "Typhlichthys_subterraneus_(10.3897-subtbiol.20.9693)_Figure_1.jpg",
+  "w": 500,
+  "h": 192,
+  "artist": "Niemiller ML, Zigler KS, Hart PB, Kuhajda BR, Armbruster JW, Ayala BN, Engel AS (2016) First definitive record of a stygobiotic fish (Percopsiformes, Amblyopsidae, Typhlichthys) from the Appalachians karst region in the eastern United States. Subterranean Biology 20: 39-50. https://doi.org/10.3897/subtbiol.20.9693",
+  "lic": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "GYPSUM": {
+  "f": "gypsum.jpg",
+  "file": "White_Sands_National_Park_visitor_center_and_native_plant_garden,_New_Mexico,_United_States.jpg",
+  "w": 500,
+  "h": 250,
+  "artist": "uncredited National Park Service employee",
+  "lic": "Public domain"
+ },
+ "HAWTHORN": {
+  "f": "hawthorn.jpg",
+  "file": "Crataegus,_various_species,_fruit.jpg",
+  "w": 500,
+  "h": 356,
+  "artist": "Nadiatalent",
+  "lic": "Public domain"
+ },
+ "HOLLY": {
+  "f": "holly.jpg",
+  "file": "Ilex_opaca_USDA.jpg",
+  "w": 500,
+  "h": 339,
+  "artist": "",
+  "lic": "Public domain"
+ },
+ "HOOPOE": {
+  "f": "hoopoe.jpg",
+  "file": "Israel._Eurasian_Hoopoe_(6497645007).jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Greg Schechter from San Francisco, USA",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "HORNBEAM": {
+  "f": "hornbeam.jpg",
+  "file": "American_Hornbeam_Leaves_600.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Photo by and (c)2005 Derek Ramsey (Ram-Man)",
+  "lic": "CC BY-SA 2.5",
+  "url": "https://creativecommons.org/licenses/by-sa/2.5"
+ },
+ "HYACINTH": {
+  "f": "hyacinth.jpg",
+  "file": "Eichhornia_crassipes_C.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Wouter Hagens",
+  "lic": "Public domain"
+ },
+ "JACKDAW": {
+  "f": "jackdaw.jpg",
+  "file": "Nordic_jackdaw_(52563242448).jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "hedera.baltica from Wrocław, Poland",
+  "lic": "CC BY-SA 2.0",
+  "url": "https://creativecommons.org/licenses/by-sa/2.0"
+ },
+ "JUNCO": {
+  "f": "junco.jpg",
+  "file": "Junco_hyemalis_hyemalis_CT1_(cropped).jpg",
+  "w": 500,
+  "h": 334,
+  "artist": "Cephas",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "KINGFISHER": {
+  "f": "kingfisher.jpg",
+  "file": "BeltedKingfisherJG_Male.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "JeffreyGammon",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "LADYBUG": {
+  "f": "ladybug.jpg",
+  "file": "7-Spotted-Ladybug-Coccinella-septempunctata-sq1.jpg",
+  "w": 500,
+  "h": 500,
+  "artist": "Photographer: Dominik Stodulski Graphic Processing: User:MathKnight",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "LARCH": {
+  "f": "larch.jpg",
+  "file": "2024-10-17_12_32_32_American_Larches-Tamaracks_changing_color_in_autumn_in_a_bog_near_Rensselaer_County_Route_42_(Taborton_Road)_in_Sand_Lake,_Rensselaer_County,_New_York.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Famartin",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "LARKSPUR": {
+  "f": "larkspur.png",
+  "file": "Delphinium_elatum_var._palmatifidum_as_Delphinium_intermedium_var._palmatifidum_by_S._A._Drake._Edwards's_Botanical_Register_vol._24,_t._38_(1838).tif",
+  "w": 500,
+  "h": 808,
+  "artist": "Sarah Ann Drake",
+  "lic": "Public domain"
+ },
+ "LILAC": {
+  "f": "lilac.jpg",
+  "file": "Lilac_Flower&Leaves,_SC,_Vic,_13.10.2007.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Jjron",
+  "lic": "CC BY-SA 3.0",
+  "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "MARMOT": {
+  "f": "marmot.jpg",
+  "file": "Marmota_monax_UL_04.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Cephas",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "MESA": {
+  "f": "mesa.jpg",
+  "file": "Pinus_edulis_Torrey-UT.jpg",
+  "w": 500,
+  "h": 463,
+  "artist": "jotor at Flickr",
+  "lic": "CC BY-SA 2.0",
+  "url": "https://creativecommons.org/licenses/by-sa/2.0"
+ },
+ "MESQUITE": {
+  "f": "mesquite.jpg",
+  "file": "Prosopis-glandulosa-foliage.JPG",
+  "w": 500,
+  "h": 375,
+  "artist": "Don A.W. Carlson",
+  "lic": "CC BY 2.5",
+  "url": "https://creativecommons.org/licenses/by/2.5"
+ },
+ "MISTLETOE": {
+  "f": "mistletoe.jpg",
+  "file": "American_Mistletoe_(NGM_XXXI_p514).jpg",
+  "w": 500,
+  "h": 635,
+  "artist": "",
+  "lic": "Public domain"
+ },
+ "MOOSE": {
+  "f": "moose.jpg",
+  "file": "Alaska_moose.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Paxson Woelber",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "MOTH": {
+  "f": "moth.jpg",
+  "file": "Actias_luna-male.jpg",
+  "w": 500,
+  "h": 501,
+  "artist": "David notMD",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "MULBERRY": {
+  "f": "mulberry.jpg",
+  "file": "MorusRubra9.jpg",
+  "w": 500,
+  "h": 335,
+  "artist": "Douglas Goldman",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "MUSKRAT": {
+  "f": "muskrat.jpg",
+  "file": "Muskrat_swimming_Ottawa.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "D. Gordon E. Robertson",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "NUTHATCH": {
+  "f": "nuthatch.jpg",
+  "file": "White-breasted_nuthatch_(26471).jpg",
+  "w": 500,
+  "h": 376,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "OBSIDIAN": {
+  "f": "obsidian.jpg",
+  "file": "Lipari-Obsidienne_(5).jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Ji-Elle It feels nice and warm It feels like a love storm",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "ORCHID": {
+  "f": "orchid.jpg",
+  "file": "Cypripedium_acaule_-_Sasata_edit1.jpg",
+  "w": 500,
+  "h": 750,
+  "artist": "Sasata (edited by Noodle snacks",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "OSTRICH": {
+  "f": "ostrich.jpg",
+  "file": "Struthio_camelus_-_Etosha_2014_(3).jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Yathin S Krishnappa",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "OYSTERCATCHER": {
+  "f": "oystercatcher.jpg",
+  "file": "American_oystercatcher_on_Fort_Tilden_beach_(93754).jpg",
+  "w": 500,
+  "h": 366,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "PALM": {
+  "f": "palm.jpg",
+  "file": "2025-09-13_15_42_10_Dwarf_palmetto_near_40-Acre_Lake_within_Brazos_Bend_State_Park_in_Fort_Bend_County,_Texas.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Famartin",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "PEBBLE": {
+  "f": "pebble.jpg",
+  "file": "Trichoptera_caddisfly_1.jpg",
+  "w": 500,
+  "h": 324,
+  "artist": "Bruce Marlin",
+  "lic": "CC BY-SA 2.5",
+  "url": "https://creativecommons.org/licenses/by-sa/2.5"
+ },
+ "PENGUIN": {
+  "f": "penguin.jpg",
+  "file": "Aptenodytes_forsteri_-Snow_Hill_Island,_Antarctica_-adults_and_juvenile-8.jpg",
+  "w": 500,
+  "h": 803,
+  "artist": "Ian Duffy from UK",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "PETUNIA": {
+  "f": "petunia.jpg",
+  "file": "Petúnia_(do_tupi_petyma,_'tabaco').jpg",
+  "w": 500,
+  "h": 667,
+  "artist": "Gabriel Collares",
+  "lic": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "PHEASANT": {
+  "f": "pheasant.jpg",
+  "file": "Phasianus_colchicus_Oulu_20200524_02.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Estormiz",
+  "lic": "CC0",
+  "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+ },
+ "PIGEON": {
+  "f": "pigeon.jpg",
+  "file": "Columba_livia_(Rock_Dove,_wild),_Duncansby_Head,_Caithness,_Scotland_1.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "william_stephens",
+  "lic": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "PIKA": {
+  "f": "pika.jpg",
+  "file": "Ochotona_princeps_rockies.JPG",
+  "w": 500,
+  "h": 408,
+  "artist": "sevenstar",
+  "lic": "Public domain"
+ },
+ "PINTAIL": {
+  "f": "pintail.jpg",
+  "file": "Northern_Pintails_(Male_&_Female)_I_IMG_0911.jpg",
+  "w": 500,
+  "h": 293,
+  "artist": "J.M.Garg",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "POPPY": {
+  "f": "poppy.jpg",
+  "file": "Papaver_somniferum_flowers.jpg",
+  "w": 500,
+  "h": 427,
+  "artist": "tanja niggendijker from apeldoorn, the netherlands",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "PRIMROSE": {
+  "f": "primrose.jpg",
+  "file": "Oenothera_biennis,_Vic-la-Gardiole_01.jpg",
+  "w": 500,
+  "h": 334,
+  "artist": "Christian Ferrer",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "PTARMIGAN": {
+  "f": "ptarmigan.jpg",
+  "file": "Lagopus_lagopus_-_adult_(Denali,_2010).jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Yathin S Krishnappa",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "REDBUD": {
+  "f": "redbud.jpg",
+  "file": "RedbudOhio02.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Greg Hume",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "REDSTART": {
+  "f": "redstart.jpg",
+  "file": "American_redstart_in_JBWR_(24754).jpg",
+  "w": 500,
+  "h": 354,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "ROOKERY": {
+  "f": "rookery.png",
+  "file": "Great_Egret_(Ardea_alba)_in_Breeding_Plumage,_Cape_May_County,_New_Jersey,_USA_(cropped).png",
+  "w": 500,
+  "h": 413,
+  "artist": "Chuck Homler (FocusOnWildlife.Me)",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "SANDERLING": {
+  "f": "sanderling.jpg",
+  "file": "Sanderling_(Calidris_alba)_in_Breeding_Plumage_in_the_Delaware_Bay_-_Heislerville_WMA_-_Cumberland_County_-_New_Jersey_-_May_2026.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Chuck Homler, Focus On Wildlife",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "SANDSTONE": {
+  "f": "sandstone.png",
+  "file": "Trilobita_Diversity.png",
+  "w": 500,
+  "h": 298,
+  "artist": "PaleoNeolitic (montage creator)",
+  "lic": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "SAPSUCKER": {
+  "f": "sapsucker.jpg",
+  "file": "Yellow-bellied_sapsucker_in_CP_(40484).jpg",
+  "w": 500,
+  "h": 408,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "SASSAFRAS": {
+  "f": "sassafras.jpg",
+  "file": "Sassafras_Leaves_June_Nbg_(261691941).jpeg",
+  "w": 500,
+  "h": 355,
+  "artist": "Randy Everette",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "SHREW": {
+  "f": "shrew.jpg",
+  "file": "Blarina_brevicauda.jpg",
+  "w": 500,
+  "h": 500,
+  "artist": "Gilles Gonthier from Canada",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "SHRIKE": {
+  "f": "shrike.jpg",
+  "file": "Shrike_Loggerhead_JG.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "JeffreyGammon",
+  "lic": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "SISKIN": {
+  "f": "siskin.jpg",
+  "file": "Carduelis_pinus_CT7.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Cephas",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "SKYLARK": {
+  "f": "skylark.jpg",
+  "file": "Skylark_2,_Lake_District,_England_-_June_2009.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "User:Diliff",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "SNIPE": {
+  "f": "snipe.jpg",
+  "file": "Gallinago-delicata-002-cropped.jpg",
+  "w": 500,
+  "h": 400,
+  "artist": "Gallinago-delicata-002.jpg: Mdf derivative work: Donkey shot",
+  "lic": "CC BY-SA 3.0",
+  "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "SPARROW": {
+  "f": "sparrow.jpg",
+  "file": "Song_sparrow_in_Prospect_Park_(93031).jpg",
+  "w": 500,
+  "h": 351,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "SUMMIT": {
+  "f": "summit.jpg",
+  "file": "Abies_fraseri_(Fraser_fir)_(Clingmans_Dome,_Great_Smoky_Mountains,_North_Carolina,_USA)_11_(36843487182).jpg",
+  "w": 500,
+  "h": 326,
+  "artist": "James St. John",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "SYCAMORE": {
+  "f": "sycamore.jpg",
+  "file": "Pawling_Sycamore,_Valley_Forge_National_Historic_Park,_Pennsylvania_June_2024.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Marty Aligata",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "TALUS": {
+  "f": "talus.jpg",
+  "file": "Shenandoah_Salamander_(Plethodon_shenandoah).jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Benjamin Genter",
+  "lic": "Public domain"
+ },
+ "TEAK": {
+  "f": "teak.jpg",
+  "file": "Starr_010304-0485_Tectona_grandis.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "Forest & Kim Starr",
+  "lic": "CC BY 3.0",
+  "url": "https://creativecommons.org/licenses/by/3.0"
+ },
+ "TEASEL": {
+  "f": "teasel.jpg",
+  "file": "Dipsacus_fullonum1.jpg",
+  "w": 500,
+  "h": 697,
+  "artist": "MPF",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "THRUSH": {
+  "f": "thrush.jpg",
+  "file": "Wood_thrush_(Hylocichla_mustelina)_Peten.jpg",
+  "w": 500,
+  "h": 333,
+  "artist": "Charles J. Sharp",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "TITMOUSE": {
+  "f": "titmouse.jpg",
+  "file": "Tufted_titmouse_(84917).jpg",
+  "w": 500,
+  "h": 365,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "TRILLIUM": {
+  "f": "trillium.jpg",
+  "file": "Trillium_grandiflorum_at_Backus_Woods.jpg",
+  "w": 500,
+  "h": 508,
+  "artist": "СССР",
+  "lic": "CC BY-SA 2.5 ca",
+  "url": "https://creativecommons.org/licenses/by-sa/2.5/ca/deed.en"
+ },
+ "TUPELO": {
+  "f": "tupelo.jpg",
+  "file": "Nyssa_sylvatica_v_sylvatica.jpg",
+  "w": 500,
+  "h": 500,
+  "artist": "Eric Hunt",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "VIOLET": {
+  "f": "violet.jpg",
+  "file": "Viola_sororia_in_Wisconsin.jpg",
+  "w": 500,
+  "h": 375,
+  "artist": "James Steakley",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "VIREO": {
+  "f": "vireo.jpg",
+  "file": "Vireo_olivaceus_-Madison_-Wisconsin_-USA-8.jpg",
+  "w": 500,
+  "h": 625,
+  "artist": "John Benson from Madison WI",
+  "lic": "CC BY 2.0",
+  "url": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "WAXWING": {
+  "f": "waxwing.jpg",
+  "file": "Cedar_waxwing_in_pokeweed_(10132).jpg",
+  "w": 500,
+  "h": 381,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "WEEVIL": {
+  "f": "weevil.jpg",
+  "file": "Boll_weevil.jpg",
+  "w": 500,
+  "h": 382,
+  "artist": "Agricultural Research Service, United States Department of Agriculture.",
+  "lic": "Public domain"
+ },
+ "WHIMBREL": {
+  "f": "whimbrel.jpg",
+  "file": "Hudsonian_whimbrel_(Numenius_hudsonicus)_Chiloe.jpg",
+  "w": 500,
+  "h": 334,
+  "artist": "Charles J. Sharp",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "WOLVERINE": {
+  "f": "wolverine.jpg",
+  "file": "Järv1.jpg",
+  "w": 500,
+  "h": 313,
+  "artist": "Esquilo",
+  "lic": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "WOODCOCK": {
+  "f": "woodcock.jpg",
+  "file": "American_woodcock_(95252).jpg",
+  "w": 500,
+  "h": 358,
+  "artist": "Rhododendrites",
+  "lic": "CC BY-SA 4.0",
+  "url": "https://creativecommons.org/licenses/by-sa/4.0"
+ }
+}
