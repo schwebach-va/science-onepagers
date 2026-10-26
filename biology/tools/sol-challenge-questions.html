@@ -1965,6 +1965,7 @@ const BANK = [
       }
     }
     h += '<p>' + esc(q.why) + '</p>';
+    if (q.move) h += '<p><b>Test move:</b> ' + esc(q.move) + '</p>';
     h += '<div class="study"><span class="lbl">Where to study</span><p style="margin:0">' + esc(q.sol) + (q.sol_also ? ' and ' + esc(q.sol_also) : '') + ' · Learning target ' + esc(q.lt) + (LTNAME[q.lt] ? ': ' + esc(LTNAME[q.lt]) : '') + '.</p>';
     if (q.src) h += '<p class="src">Written from: ' + esc(q.src.replace(/\bIG\b/g, "Instructional Guide").replace(/\bSiP\b/g, "Skills in Practice").replace(/\bUtS\b/g, "Understanding the Standard")) + '</p>';
     h += '</div></div>';

@@ -2,7 +2,7 @@
  "meta": {
   "bank": "OB-U02",
   "title": "Unit 2 · Cell Structure and Function — original SOL practice bank (pilot)",
-  "version": "v2 2026-10-06 (card v2.1 re-check: src, set, §3 check)",
+  "version": "v3 2026-10-25 (OB-U02-31 to -73: just-in-time twins before the Unit 2 test)",
   "status": "re-checked under card v2.1 (src on every item, eight-point originality check passed); first site version",
   "statement": "These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education's Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test's wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE's released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. © J. R. Schwebach, CC BY-NC 4.0.",
   "unit": 2,
@@ -17,7 +17,7 @@
   "source_ig": "VDOE, Instructional Guide to Support the 2018 Biology Standards of Learning (doc 77084); page numbers are printed pages",
   "footer": "Original practice questions written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education.",
   "copyright": "© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org",
-  "count": 30
+  "count": 73
  },
  "items": [
   {
@@ -1044,6 +1044,1330 @@
    },
    "why": "Because water is polar, the nonpolar core of the membrane slows it, and aquaporins give it a polar channel to pass through quickly.",
    "src": "BIO.2a; IG p. 9 UtS 'polarity of its molecules'; BIO.3d, IG p. 18 UtS 'structure of the membrane supports its function in transport'"
+  },
+  {
+   "id": "OB-U02-31",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.1d",
+   "sol_also": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A ranger's prediction about trout eggs",
+   "dok": 2,
+   "stem": "A park ranger in Shenandoah writes in her field notebook: “Brook trout eggs laid in colder streams will hatch later than eggs laid in warmer streams.” What kind of statement has she written?",
+   "opts": [
+    "A scientific law",
+    "An observation",
+    "A hypothesis",
+    "A scientific theory"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "A law describes a pattern that always holds, like gravity. The ranger is predicting one result she can still test.",
+    "1": "An observation records something already seen or measured. Nothing has hatched yet; she is predicting.",
+    "3": "A theory is a broad explanation supported by many tested hypotheses. This is one testable prediction."
+   },
+   "why": "She makes a testable prediction about what will happen, which is a hypothesis.",
+   "move": "Look for a prediction about one situation. Words like 'will' or 'if…then' usually mark a hypothesis.",
+   "src": "BIO.1d; IG p. 7 'differentiate among a scientific hypothesis, theory, and law'"
+  },
+  {
+   "id": "OB-U02-32",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Which statements belong to cell theory",
+   "dok": 2,
+   "stem": "Read the three statements. I. Cells are the basic unit of structure and function in living things. II. Every cell makes its own food from sunlight. III. A new cell can form only when an existing cell divides. Which statements are part of cell theory?",
+   "opts": [
+    "I and III",
+    "I only",
+    "II and III",
+    "I, II and III"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Statement III is also a tenet: new cells come only from cells that already exist.",
+    "2": "Statement II is false: animal cells and most bacteria cannot make food from sunlight.",
+    "3": "Statement II is not part of cell theory. Only cells with chloroplasts or similar machinery use sunlight."
+   },
+   "why": "Cell theory says living things are made of cells, cells are the basic unit of life, and cells come from existing cells. Making food from sunlight is not a tenet.",
+   "move": "Judge I, II and III one at a time. Write T or F beside each, then find the letter that matches.",
+   "src": "BIO.3a; IG p. 17 UtS cell theory tenets 'all living organisms are composed of cells … all cells arise from pre-existing cells'"
+  },
+  {
+   "id": "OB-U02-33",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A frog egg divides on film",
+   "dok": 2,
+   "stem": "A biologist films a fertilized frog egg for six hours. The single cell becomes two, then four, then eight, and every new cell appears when an earlier cell splits. Which part of cell theory does this film support best?",
+   "opts": [
+    "Every cell contains a nucleus.",
+    "Cells are the smallest units that can be alive.",
+    "All living things are made of exactly one cell.",
+    "New cells come from cells that already exist."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Frog cells do have nuclei, but the film shows where cells come from, not what is inside them.",
+    "1": "That tenet is true, but the film is about new cells forming from old ones.",
+    "2": "Frogs are made of many cells, and cell theory never says one cell."
+   },
+   "why": "Each new cell in the film forms only when an existing cell divides, which is the tenet that cells come from pre-existing cells.",
+   "move": "Name the three tenets before you read the choices, then ask which one the evidence is about.",
+   "src": "BIO.3a; IG p. 17 UtS cell theory tenets 'all living organisms are composed of cells … all cells arise from pre-existing cells'"
+  },
+  {
+   "id": "OB-U02-34",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Sealed flasks change an old idea",
+   "dok": 2,
+   "stem": "In the 1800s many people believed microbes could arise on their own from broth. Then experiments with heated broth in flasks that kept dust out showed microbes appeared only when living microbes got in. What does this change show about science?",
+   "opts": [
+    "Once an idea is widely accepted, it can never be changed.",
+    "Evidence from better-designed experiments can overturn an earlier explanation.",
+    "Scientists decide what is true by voting on the most popular idea.",
+    "Experiments matter less than the opinions of famous scientists."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Scientific ideas are always open to revision when new evidence appears, as the flask experiments showed.",
+    "2": "Science changes through evidence, not by vote.",
+    "3": "The flask results replaced an idea many respected people held, so evidence outweighed reputation."
+   },
+   "why": "Better experiments produced evidence the old idea could not explain, so the explanation was revised. Cell theory grew the same way.",
+   "move": "Name the three tenets before you read the choices, then ask which one the evidence is about.",
+   "src": "BIO.3a; IG p. 17 UtS 'Advances in science and technology have added to our understanding of the cell'; IG p. 19 SiP 'technological and experimental advances'"
+  },
+  {
+   "id": "OB-U02-35",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Match each observation to a tenet",
+   "dok": 2,
+   "stem": "Match each observation to the part of cell theory it supports best. Use each choice once.",
+   "rows": [
+    "A yeast cell grows a bud that pinches off as a new yeast cell.",
+    "An amoeba, a single cell, eats, moves and reproduces on its own.",
+    "Samples of pond scum, tree bark and muscle all turn out to be made of cells."
+   ],
+   "opts": [
+    "All living things are made of one or more cells.",
+    "New cells come from cells that already exist.",
+    "The cell is the basic unit of life."
+   ],
+   "key": [
+    1,
+    2,
+    0
+   ],
+   "miss": {
+    "All living things are made of one or more cells.": "This tenet is about what living things are built from, so it fits a survey of many organisms.",
+    "New cells come from cells that already exist.": "This tenet is about where cells come from, so it fits a cell splitting or budding.",
+    "The cell is the basic unit of life.": "This tenet says one cell can carry out life, so it fits a single cell doing every life job."
+   },
+   "why": "Each tenet answers a different question: what living things are made of, what the smallest living unit is, and where new cells come from.",
+   "move": "Name the three tenets before you read the choices, then ask which one the evidence is about.",
+   "src": "BIO.3a; IG p. 17 UtS cell theory tenets 'all living organisms are composed of cells … all cells arise from pre-existing cells'"
+  },
+  {
+   "id": "OB-U02-36",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Choose the two tenets",
+   "dok": 1,
+   "stem": "Which TWO statements are part of cell theory? Select two.",
+   "opts": [
+    "All cells have a nucleus.",
+    "All living things are made of one or more cells.",
+    "All cells are about the same size.",
+    "Cells come only from cells that already exist.",
+    "All cells make food from sunlight."
+   ],
+   "key": [
+    1,
+    3
+   ],
+   "miss": {
+    "0": "Bacteria have no nucleus, and they are still cells.",
+    "2": "Cells range from bacteria far smaller than a red blood cell to nerve cells over a meter long.",
+    "4": "Only cells with chloroplasts or similar machinery use sunlight; yours do not."
+   },
+   "why": "The tenets apply to every cell, so a statement that fails for animal cells or bacteria cannot be one.",
+   "move": "Choose TWO: mark every choice T or F first. Both picks must be right to earn the point.",
+   "src": "BIO.3a; IG p. 17 UtS cell theory tenets 'all living organisms are composed of cells … all cells arise from pre-existing cells'"
+  },
+  {
+   "id": "OB-U02-37",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.1",
+   "sol": "BIO.3a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "What a light microscope cannot show",
+   "dok": 2,
+   "stem": "A student looks at stained cheek cells with the class light microscope. She sees each cell's outline and a dark nucleus but no ribosomes. What is the best explanation?",
+   "opts": [
+    "Cheek cells have no ribosomes.",
+    "Ribosomes are too small for a light microscope to show.",
+    "The stain dissolved the ribosomes.",
+    "Ribosomes appear only while a cell is dividing."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Every cell has ribosomes, because every cell makes proteins.",
+    "2": "Stains help show structures; the limit here is the microscope's power.",
+    "3": "Ribosomes are present all the time, because cells make proteins all the time."
+   },
+   "why": "Ribosomes are far smaller than a light microscope can resolve. Electron microscopes revealed them, one way new tools added to cell theory.",
+   "move": "Name the three tenets before you read the choices, then ask which one the evidence is about.",
+   "src": "BIO.3a; IG p. 17 UtS 'Advances in science and technology have added to our understanding of the cell'; IG p. 19 SiP 'technological and experimental advances'"
+  },
+  {
+   "id": "OB-U02-38",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Prokaryote, eukaryote, or both",
+   "dok": 2,
+   "stem": "For each feature, choose whether it belongs to prokaryotic cells only, eukaryotic cells only, or both. Each row is its own point.",
+   "rows": [
+    "DNA",
+    "A nucleus",
+    "Ribosomes",
+    "A cell membrane",
+    "Mitochondria",
+    "A bacterium such as E. coli"
+   ],
+   "opts": [
+    "Prokaryote only",
+    "Both",
+    "Eukaryote only"
+   ],
+   "key": [
+    1,
+    2,
+    1,
+    1,
+    2,
+    0
+   ],
+   "miss": {
+    "Prokaryote only": "Prokaryotes are bacteria and their relatives, cells with no nucleus.",
+    "Both": "Every cell has DNA, ribosomes and a cell membrane, prokaryote or eukaryote.",
+    "Eukaryote only": "Membrane-bound organelles such as the nucleus and mitochondria belong only to eukaryotic cells."
+   },
+   "why": "Every cell has DNA, ribosomes and a membrane. Only eukaryotes have membrane-bound organelles like a nucleus and mitochondria.",
+   "move": "Every row is its own point, and 'both' is a real answer. Decide each row on its own.",
+   "src": "BIO.3b; IG p. 18 UtS 'simple prokaryotic cells'; IG p. 17 UtS 'Different types of cells have different numbers and types of organelles'"
+  },
+  {
+   "id": "OB-U02-39",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Choose the two correct organelle jobs",
+   "dok": 1,
+   "stem": "Which TWO pairs correctly match an organelle with its job? Select two.",
+   "opts": [
+    "Mitochondrion: releases energy from food as ATP",
+    "Ribosome: stores water and salts",
+    "Cell wall: builds proteins",
+    "Nucleus: holds DNA and directs the cell's activities",
+    "Lysosome: captures light energy"
+   ],
+   "key": [
+    0,
+    3
+   ],
+   "miss": {
+    "1": "Ribosomes build proteins. The vacuole stores water and salts.",
+    "2": "The cell wall supports and protects plant cells; ribosomes build proteins.",
+    "4": "Chloroplasts capture light. Lysosomes break down worn-out parts and food particles."
+   },
+   "why": "The mitochondrion releases energy as ATP, and the nucleus holds DNA and directs the cell.",
+   "move": "Choose TWO: mark every choice T or F first. Both picks must be right to earn the point.",
+   "src": "BIO.3b; IG p. 17 UtS 'Organelles perform specific functions in the cell'; organelle list"
+  },
+  {
+   "id": "OB-U02-40",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Two signs of a plant cell",
+   "dok": 1,
+   "stem": "A cell from a sample has a large central vacuole. Which TWO other structures would show it came from a plant and not an animal? Select two.",
+   "opts": [
+    "Mitochondria",
+    "Cell wall",
+    "Ribosomes",
+    "Chloroplasts",
+    "Cell membrane"
+   ],
+   "key": [
+    1,
+    3
+   ],
+   "miss": {
+    "0": "Animal cells have mitochondria too, so they cannot tell the two apart.",
+    "2": "Every cell has ribosomes.",
+    "4": "Every cell has a cell membrane."
+   },
+   "why": "A cell wall and chloroplasts are found in plant cells but not in animal cells.",
+   "move": "Choose TWO: mark every choice T or F first. Both picks must be right to earn the point.",
+   "src": "BIO.3b; IG p. 17 UtS 'Organelles perform specific functions in the cell'; organelle list"
+  },
+  {
+   "id": "OB-U02-41",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Sperm cells and their energy supply",
+   "dok": 2,
+   "stem": "A sperm cell swims a long distance by whipping its tail. Which organelle would you expect to find packed near the base of the tail?",
+   "opts": [
+    "Chloroplasts",
+    "Lysosomes",
+    "Central vacuoles",
+    "Mitochondria"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Animal cells have no chloroplasts, and swimming needs energy from food, not sunlight.",
+    "1": "Lysosomes digest worn-out parts; they do not power movement.",
+    "2": "Animal cells have no large central vacuole, and storage does not power a tail."
+   },
+   "why": "Moving a tail takes a steady supply of ATP, which mitochondria release from food.",
+   "move": "Ask what job the cell does all day, then match the organelle that does that job.",
+   "src": "BIO.3b; IG p. 17 UtS 'Organelles perform specific functions in the cell'; organelle list"
+  },
+  {
+   "id": "OB-U02-42",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Cells that ship protein all day",
+   "dok": 2,
+   "stem": "Cells in the stomach lining make large amounts of pepsin, a digestive protein they send out into the stomach. Which organelle should be especially plentiful in these cells?",
+   "opts": [
+    "Rough endoplasmic reticulum",
+    "Central vacuole",
+    "Chloroplast",
+    "Cell wall"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "A central vacuole stores water in plant cells; it does not build proteins.",
+    "2": "Chloroplasts capture light in plants and algae. Stomach cells have none.",
+    "3": "Animal cells have no cell wall, and a wall does not make proteins."
+   },
+   "why": "The rough ER is studded with ribosomes that build proteins meant to leave the cell, so protein-shipping cells have a lot of it.",
+   "move": "Ask what job the cell does all day, then match the organelle that does that job.",
+   "src": "BIO.3b; IG p. 19 SiP 'how organelles interact as a system to support cellular function'"
+  },
+  {
+   "id": "OB-U02-43",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "order",
+   "topic": "The route of an antibody leaving a cell",
+   "dok": 2,
+   "stem": "A white blood cell makes antibodies, proteins it releases into the blood. Put the steps in order, starting with the instructions in DNA.",
+   "opts": [
+    "The Golgi apparatus modifies and packages the antibodies.",
+    "Ribosomes on the rough ER build the antibody protein.",
+    "A vesicle carries the antibodies to the cell membrane.",
+    "Instructions for the antibody are copied from DNA in the nucleus.",
+    "The vesicle fuses with the membrane and releases the antibodies outside the cell."
+   ],
+   "key": [
+    3,
+    1,
+    0,
+    2,
+    4
+   ],
+   "miss": {
+    "golgi-before-er": "The Golgi finishes and packages proteins, so it comes after the ribosomes on the rough ER build them.",
+    "vesicle-first": "Vesicles carry finished proteins, so they come late in the route.",
+    "nucleus-builds": "The nucleus stores and copies instructions; ribosomes do the building."
+   },
+   "why": "DNA instructions → ribosomes on the rough ER build → Golgi packages → vesicle carries → vesicle fuses and releases (exocytosis).",
+   "move": "Anchor the first and last steps, then fill the middle.",
+   "src": "BIO.3b; IG p. 19 SiP 'how organelles interact as a system to support cellular function'"
+  },
+  {
+   "id": "OB-U02-44",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A city's shipping center",
+   "dok": 1,
+   "stem": "If a cell were a city, which organelle would be its shipping center, packaging products and sending them where they need to go?",
+   "opts": [
+    "Nucleus",
+    "Mitochondrion",
+    "Golgi apparatus",
+    "Cell wall"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "The nucleus is more like city hall: it holds the DNA instructions and directs the work.",
+    "1": "The mitochondrion is the power plant: it releases energy from food.",
+    "3": "A cell wall is more like a city wall: it supports and protects plant cells."
+   },
+   "why": "The Golgi apparatus modifies, sorts and packages proteins into vesicles for delivery.",
+   "move": "Ask what job the cell does all day, then match the organelle that does that job.",
+   "src": "BIO.3b; IG p. 17 UtS 'Organelles perform specific functions in the cell'; organelle list"
+  },
+  {
+   "id": "OB-U02-45",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.2",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "What a bacterium and a liver cell share",
+   "dok": 1,
+   "stem": "A bacterium and a human liver cell both make proteins. Which structure do both cells use to build them?",
+   "opts": [
+    "Nucleus",
+    "Golgi apparatus",
+    "Ribosomes",
+    "Endoplasmic reticulum"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Bacteria have no nucleus, so it cannot be the shared protein builder.",
+    "1": "The Golgi is a membrane-bound organelle, which bacteria lack.",
+    "3": "The ER is a membrane-bound organelle, which bacteria lack."
+   },
+   "why": "Ribosomes build proteins in every cell, prokaryote and eukaryote alike.",
+   "move": "Every row is its own point, and 'both' is a real answer. Decide each row on its own.",
+   "src": "BIO.3b; IG p. 18 UtS 'simple prokaryotic cells'; IG p. 17 UtS 'Different types of cells have different numbers and types of organelles'"
+  },
+  {
+   "id": "OB-U02-46",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "order",
+   "topic": "Levels of organization in a sunflower",
+   "dok": 1,
+   "stem": "Arrange these parts of a sunflower from the smallest level of organization to the largest.",
+   "opts": [
+    "Shoot system (stems and leaves together)",
+    "Leaf",
+    "A single leaf cell",
+    "The whole sunflower plant",
+    "Leaf tissue"
+   ],
+   "key": [
+    2,
+    4,
+    1,
+    0,
+    3
+   ],
+   "miss": {
+    "tissue-organ": "A tissue is a group of similar cells; an organ such as a leaf is built from several tissues.",
+    "system-organ": "An organ system, like the shoot system, is made of several organs working together.",
+    "cell-last": "The cell is the smallest level that is alive, so it always comes first."
+   },
+   "why": "Cell → tissue → organ → organ system → organism.",
+   "move": "Anchor the first and last steps, then fill the middle.",
+   "src": "BIO.3b; IG p. 17 UtS 'Organisms are complex, organized systems built on a hierarchical structure'"
+  },
+  {
+   "id": "OB-U02-47",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A diatom and a heron's eye cell",
+   "dok": 2,
+   "stem": "A single-celled diatom in the Potomac River makes food, grows and divides by itself. A cell in a heron's eye can only detect light. Which statement best explains the difference?",
+   "opts": [
+    "The diatom is unicellular and must carry out every life process; the eye cell is specialized and depends on other cells for the rest.",
+    "The eye cell is larger than the diatom, so it does fewer jobs.",
+    "The diatom has no organelles, so it has to work harder.",
+    "Both cells carry out all life processes equally."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Size is not the reason. Specialization is.",
+    "2": "Diatoms are eukaryotes with organelles, including chloroplasts.",
+    "3": "An eye cell cannot digest food or exchange gases for the whole heron; other cells do those jobs."
+   },
+   "why": "A single-celled organism must do every life job itself. In a multicellular organism, cells specialize and depend on one another.",
+   "move": "Homeostasis means a change is followed by a response that brings things back toward normal.",
+   "src": "BIO.3b; IG p. 17 UtS 'A single-celled organism has to conduct all life processes by itself. A multicellular organism has groups of cells that specialize'"
+  },
+  {
+   "id": "OB-U02-48",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why a muscle cell can specialize",
+   "dok": 2,
+   "stem": "Why can a muscle cell in your arm specialize in contracting and nothing else?",
+   "opts": [
+    "Muscle cells do not need energy.",
+    "Muscle cells have no DNA, so they can do only one job.",
+    "A muscle cell is a unicellular organism.",
+    "Other cells, organized into tissues and organs, handle jobs like digestion and gas exchange."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Contracting takes a lot of energy, which is why muscle cells are packed with mitochondria.",
+    "1": "Muscle cells have DNA like your other body cells; specialization comes from which instructions are used.",
+    "2": "A muscle cell is one of trillions of cells in a multicellular organism."
+   },
+   "why": "In a multicellular body, cells divide the work, so each kind can specialize.",
+   "move": "Homeostasis means a change is followed by a response that brings things back toward normal.",
+   "src": "BIO.3b; IG p. 17 UtS 'A single-celled organism has to conduct all life processes by itself. A multicellular organism has groups of cells that specialize'"
+  },
+  {
+   "id": "OB-U02-49",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Sweat and body temperature during a workout",
+   "dok": 3,
+   "stem": "A student's body temperature and sweat rate were measured during and after a 30-minute workout.",
+   "table": [
+    [
+     "Time (min)",
+     "0",
+     "10",
+     "20",
+     "30",
+     "40"
+    ],
+    [
+     "Body temperature (°C)",
+     "37.0",
+     "37.8",
+     "38.1",
+     "37.6",
+     "37.1"
+    ],
+    [
+     "Sweat (mL per 10 min)",
+     "0",
+     "60",
+     "110",
+     "70",
+     "10"
+    ]
+   ],
+   "stem2": "Which statement best describes what the data show?",
+   "opts": [
+    "Sweating caused the body temperature to rise.",
+    "Sweating rose as temperature rose, then fell as temperature returned toward 37 °C, a response that keeps body temperature steady.",
+    "Body temperature stayed exactly the same the whole time.",
+    "Sweat rate shows no connection to body temperature."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Sweat cools the body. Temperature rose first, from exercise, and sweating followed.",
+    "2": "Temperature rose to 38.1 °C before coming back down.",
+    "3": "Sweat rate peaks when temperature peaks and drops as temperature falls."
+   },
+   "why": "A change (heating) triggered a response (sweating) that brought temperature back toward normal, which is homeostasis.",
+   "move": "Say the trend in your own words (rises, peaks, falls) before you read the choices.",
+   "src": "BIO.3b; IG p. 18 UtS 'Organisms maintain homeostasis through a variety of mechanisms'; IG p. 19 SiP 'evidence that mechanisms maintain homeostasis'"
+  },
+  {
+   "id": "OB-U02-50",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Stomata as the soil dries",
+   "dok": 3,
+   "stem": "A tomato plant was not watered for a week. Each day a student estimated how open its leaf stomata were.",
+   "table": [
+    [
+     "Day",
+     "1 (moist soil)",
+     "3",
+     "5",
+     "7 (dry soil)"
+    ],
+    [
+     "Stomata open (%)",
+     "80",
+     "60",
+     "25",
+     "10"
+    ]
+   ],
+   "stem2": "What best explains the pattern?",
+   "opts": [
+    "The stomata close because the plant no longer needs carbon dioxide.",
+    "The plant closes its stomata as the soil dries, cutting water loss to keep its internal water steady.",
+    "Dry soil pushes water into the leaves through the stomata.",
+    "Dry soil damages the stomata, so they can no longer open."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "The plant still needs carbon dioxide; closing the stomata is a trade-off to save water.",
+    "2": "Water leaves a leaf through open stomata. It does not enter that way from the soil.",
+    "3": "When the plant is watered again the stomata reopen, so they are responding, not broken."
+   },
+   "why": "As water becomes scarce the plant closes its stomata, reducing water loss. That response keeps conditions inside the plant steady.",
+   "move": "Say the trend in your own words (rises, peaks, falls) before you read the choices.",
+   "src": "BIO.3b; IG p. 18 UtS 'Organisms maintain homeostasis through a variety of mechanisms'; IG p. 19 SiP 'evidence that mechanisms maintain homeostasis'"
+  },
+  {
+   "id": "OB-U02-51",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Two examples of homeostasis",
+   "dok": 2,
+   "stem": "Which TWO are examples of homeostasis? Select two.",
+   "opts": [
+    "Shivering on a cold morning, which warms the body back up",
+    "A plant growing taller over the summer",
+    "A tadpole turning into a frog",
+    "The kidneys saving water when you are dehydrated, keeping the body's water level steady",
+    "One cell dividing into two"
+   ],
+   "key": [
+    0,
+    3
+   ],
+   "miss": {
+    "1": "Growth is a change over time, not a return to a steady internal condition.",
+    "2": "Development is a change of form, not a response that restores balance.",
+    "4": "Cell division is reproduction and growth, not balancing an internal condition."
+   },
+   "why": "Homeostasis is a response that brings an internal condition, like temperature or water balance, back toward its normal range.",
+   "move": "Choose TWO: mark every choice T or F first. Both picks must be right to earn the point.",
+   "src": "BIO.3b; IG p. 18 UtS 'Organisms maintain homeostasis through a variety of mechanisms'; IG p. 19 SiP 'evidence that mechanisms maintain homeostasis'"
+  },
+  {
+   "id": "OB-U02-52",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.3",
+   "sol": "BIO.3b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "The trade-off of closing stomata",
+   "dok": 3,
+   "stem": "On a hot, dry afternoon a corn plant closes its stomata. What is the trade-off for the plant?",
+   "opts": [
+    "It loses more water but makes more sugar.",
+    "It stops every process in its cells.",
+    "It takes in more oxygen and less water.",
+    "It loses less water but takes in less carbon dioxide for photosynthesis."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Closing stomata reduces water loss; it does not increase it.",
+    "1": "Cells keep working; only the gas exchange through the stomata slows.",
+    "2": "Closed stomata reduce all gas exchange, so oxygen intake does not rise."
+   },
+   "why": "Stomata let carbon dioxide in and water vapor out, so closing them saves water at the cost of less carbon dioxide.",
+   "move": "Homeostasis means a change is followed by a response that brings things back toward normal.",
+   "src": "BIO.3b; IG p. 18 UtS 'Organisms maintain homeostasis through a variety of mechanisms'; IG p. 19 SiP 'evidence that mechanisms maintain homeostasis'"
+  },
+  {
+   "id": "OB-U02-53",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Membrane parts and their jobs",
+   "dok": 2,
+   "stem": "Match each part of the cell membrane with its job. Use each choice once.",
+   "rows": [
+    "Cholesterol",
+    "Channel protein",
+    "Carbohydrate chain on the outer surface",
+    "Phospholipid bilayer"
+   ],
+   "opts": [
+    "Forms the barrier that most water-soluble substances cannot cross on their own",
+    "Lets specific ions or molecules pass through a passage",
+    "Keeps the membrane flexible but steady as temperature changes",
+    "Helps the cell recognize other cells and signals"
+   ],
+   "key": [
+    2,
+    1,
+    3,
+    0
+   ],
+   "miss": {
+    "Forms the barrier that most water-soluble substances cannot cross on their own": "The bilayer's hydrophobic middle is the main barrier.",
+    "Lets specific ions or molecules pass through a passage": "Channel proteins form passages through the bilayer.",
+    "Keeps the membrane flexible but steady as temperature changes": "Cholesterol sits among the tails and steadies the membrane.",
+    "Helps the cell recognize other cells and signals": "Carbohydrate chains on the outside act like name tags."
+   },
+   "why": "The bilayer is the barrier, proteins are the passages, cholesterol steadies the layer, and carbohydrate chains help with recognition.",
+   "move": "Every row is its own point, and 'both' is a real answer. Decide each row on its own.",
+   "src": "BIO.3d; IG p. 18 UtS 'The structure of the membrane supports its function in transport'; IG p. 19 SiP model of the cell membrane"
+  },
+  {
+   "id": "OB-U02-54",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Colored membrane proteins mix",
+   "dok": 3,
+   "stem": "Scientists fuse a mouse cell with a human cell and tag the mouse membrane proteins green and the human ones red. An hour later the green and red are mixed all over the surface. What does this show about the membrane?",
+   "opts": [
+    "Its parts can drift sideways, the 'fluid' part of the fluid mosaic model.",
+    "The membrane is rigid and its parts never move.",
+    "Proteins are made inside the membrane.",
+    "The dyes passed through channel proteins into the cell."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "If the membrane were rigid, the two colors would stay on their own halves.",
+    "2": "Proteins are built by ribosomes; the membrane only holds them.",
+    "3": "The dyes stayed on the surface proteins; they mixed across the surface, not into the cell."
+   },
+   "why": "The proteins spread across the whole surface because the membrane's parts move sideways, like a moving mosaic.",
+   "move": "Water sits on both sides of the membrane, so the water-loving heads face out on both sides.",
+   "src": "BIO.3d; IG p. 18 UtS 'The structure of the membrane supports its function in transport'; IG p. 19 SiP model of the cell membrane"
+  },
+  {
+   "id": "OB-U02-55",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Membranes in icy water",
+   "dok": 2,
+   "stem": "Fish that live in icy water need cell membranes that stay flexible in the cold. In animal cells, which membrane molecule helps keep the membrane from becoming too stiff or too runny?",
+   "opts": [
+    "Glucose",
+    "DNA",
+    "Cholesterol",
+    "Starch"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Glucose is a sugar the cell uses for energy, not a part that steadies the membrane.",
+    "1": "DNA stays in the nucleus and is not part of the membrane.",
+    "3": "Starch is how plants store sugar; it is not in animal membranes."
+   },
+   "why": "Cholesterol sits among the phospholipid tails and keeps the membrane's flexibility steady as temperature changes.",
+   "move": "Water sits on both sides of the membrane, so the water-loving heads face out on both sides.",
+   "src": "BIO.3d; IG p. 18 UtS 'The structure of the membrane supports its function in transport'; IG p. 19 SiP model of the cell membrane"
+  },
+  {
+   "id": "OB-U02-56",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Some things in, some things out",
+   "dok": 1,
+   "stem": "A cell's membrane lets oxygen and water in but keeps most large proteins out. Which term describes this membrane?",
+   "opts": [
+    "Impermeable",
+    "Fully permeable",
+    "Selectively permeable",
+    "Hypertonic"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "An impermeable membrane would let nothing through, but oxygen and water get in.",
+    "1": "A fully permeable membrane would let everything through, but large proteins stay out.",
+    "3": "Hypertonic describes a solution with more dissolved particles, not a membrane."
+   },
+   "why": "Selectively permeable means the membrane lets some substances cross and blocks others.",
+   "move": "Water sits on both sides of the membrane, so the water-loving heads face out on both sides.",
+   "src": "BIO.3d; IG p. 18 UtS 'The structure of the membrane supports its function in transport'; IG p. 19 SiP model of the cell membrane"
+  },
+  {
+   "id": "OB-U02-57",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "spiral": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Which end faces the water",
+   "dok": 1,
+   "stem": "Which part of a phospholipid faces the watery fluid inside and outside a cell, and why?",
+   "opts": [
+    "The heads, because they are hydrophilic (water-loving)",
+    "The tails, because they are hydrophobic (water-fearing)",
+    "The tails, because they are hydrophilic (water-loving)",
+    "Neither part, because the membrane is dry"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Hydrophobic tails avoid water, so they hide in the middle of the bilayer.",
+    "2": "This reverses the labels: tails are hydrophobic and heads are hydrophilic.",
+    "3": "Both sides of the membrane touch watery fluid, which is why there are two layers."
+   },
+   "why": "Water-loving heads face the water on both sides, and water-fearing tails tuck into the middle.",
+   "move": "Water sits on both sides of the membrane, so the water-loving heads face out on both sides.",
+   "src": "BIO.3d; IG p. 18 UtS 'The structure of the membrane supports its function in transport'; IG p. 19 SiP model of the cell membrane"
+  },
+  {
+   "id": "OB-U02-58",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.4",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A tunnel for potassium",
+   "dok": 2,
+   "stem": "A protein in a nerve cell's membrane forms a tunnel that lets only potassium ions pass, from higher to lower concentration, with no energy used. What is the protein, and what transport does it allow?",
+   "opts": [
+    "A pump; active transport",
+    "Cholesterol; simple diffusion",
+    "A carbohydrate chain; endocytosis",
+    "A channel protein; facilitated diffusion"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "A pump spends ATP to move particles from low to high. This tunnel uses no energy.",
+    "1": "Cholesterol steadies the membrane; it does not form tunnels.",
+    "2": "Carbohydrate chains help with recognition; endocytosis brings large items in by folding the membrane."
+   },
+   "why": "A protein passage that lets particles move down their gradient without energy is a channel, and the transport is facilitated diffusion.",
+   "move": "Uphill (low to high), or a vesicle moving: energy. Downhill (high to low): no energy, even with a protein.",
+   "src": "BIO.3d; IG p. 18 UtS 'The structure of the membrane supports its function in transport'; IG p. 19 SiP model of the cell membrane"
+  },
+  {
+   "id": "OB-U02-59",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Simple diffusion, facilitated diffusion, or both",
+   "dok": 2,
+   "stem": "For each statement, choose simple diffusion only, facilitated diffusion only, or both. Each row is its own point.",
+   "rows": [
+    "Uses a channel or carrier protein",
+    "Moves particles from higher to lower concentration",
+    "Small, nonpolar molecules such as oxygen slip between phospholipids",
+    "Uses no ATP",
+    "Glucose enters a red blood cell through a carrier protein"
+   ],
+   "opts": [
+    "Simple diffusion only",
+    "Both",
+    "Facilitated diffusion only"
+   ],
+   "key": [
+    2,
+    1,
+    0,
+    1,
+    2
+   ],
+   "miss": {
+    "Simple diffusion only": "Simple diffusion needs no protein: small, nonpolar particles cross the bilayer directly.",
+    "Both": "Both kinds are passive: high to low, with no ATP.",
+    "Facilitated diffusion only": "Facilitated diffusion needs a channel or carrier protein, still with no ATP."
+   },
+   "why": "Both are passive (high to low, no ATP). Only facilitated diffusion needs a protein.",
+   "move": "Every row is its own point, and 'both' is a real answer. Decide each row on its own.",
+   "src": "BIO.3d; IG p. 18 UtS passive transport 'from high to low concentration' and 'does not require energy'"
+  },
+  {
+   "id": "OB-U02-60",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Energy or no energy",
+   "dok": 2,
+   "stem": "Sort each process: does the cell spend energy (ATP) on it, or not? Each row is its own point.",
+   "rows": [
+    "Osmosis",
+    "A sodium-potassium pump",
+    "Facilitated diffusion",
+    "Endocytosis",
+    "Simple diffusion",
+    "Exocytosis"
+   ],
+   "opts": [
+    "Needs energy (ATP)",
+    "No energy needed"
+   ],
+   "key": [
+    1,
+    0,
+    1,
+    0,
+    1,
+    0
+   ],
+   "miss": {
+    "Needs energy (ATP)": "Pumps work against the gradient, and vesicle transport (endo- and exocytosis) moves whole bundles; both spend ATP.",
+    "No energy needed": "Diffusion of any kind, including osmosis and facilitated diffusion, runs downhill on its own."
+   },
+   "why": "Passive: diffusion, facilitated diffusion, osmosis. Active: pumps, endocytosis, exocytosis.",
+   "move": "Uphill (low to high), or a vesicle moving: energy. Downhill (high to low): no energy, even with a protein.",
+   "src": "BIO.3d; IG p. 18 UtS active transport 'requires energy and moves substances against a concentration gradient'"
+  },
+  {
+   "id": "OB-U02-61",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Red blood cells in three solutions",
+   "dok": 2,
+   "stem": "Red blood cells hold about 0.9% salt. Match each solution the cells are placed in with what happens.",
+   "rows": [
+    "Distilled water",
+    "0.9% salt solution",
+    "5% salt solution"
+   ],
+   "opts": [
+    "Hypertonic: water leaves, the cell shrinks",
+    "Isotonic: no net water movement, the cell keeps its shape",
+    "Hypotonic: water enters, the cell swells and may burst"
+   ],
+   "key": [
+    2,
+    1,
+    0
+   ],
+   "miss": {
+    "Hypertonic: water leaves, the cell shrinks": "A hypertonic solution has more dissolved salt than the cell, so water leaves toward it.",
+    "Isotonic: no net water movement, the cell keeps its shape": "Equal concentrations mean water moves in and out at equal rates.",
+    "Hypotonic: water enters, the cell swells and may burst": "A hypotonic solution has less salt than the cell, so water moves into the saltier cell."
+   },
+   "why": "Water moves toward the saltier side: into the cell in distilled water, nowhere overall at 0.9%, and out of the cell at 5%.",
+   "move": "Water moves toward the side with more dissolved salt or sugar. Find that side first.",
+   "src": "BIO.3d; IG p. 18 UtS osmosis; spiral BIO.2a, IG p. 9 water and polarity"
+  },
+  {
+   "id": "OB-U02-62",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A U-tube with more sugar on side A",
+   "dok": 2,
+   "stem": "A U-tube is divided by a membrane that water can cross but sugar cannot. Side A holds 10% sugar, and side B holds 2% sugar. What happens over the next hour?",
+   "opts": [
+    "Water moves from A to B, and side B rises.",
+    "Water moves from B to A, and side A rises.",
+    "Sugar moves from A to B until both sides match.",
+    "Nothing moves, because sugar cannot cross."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Water moves toward more sugar, which is side A, not away from it.",
+    "2": "The membrane blocks sugar, so only water can move.",
+    "3": "Water can still cross, and it does, toward the side with more sugar."
+   },
+   "why": "Water moves by osmosis toward the higher sugar concentration, so side A gains water and rises.",
+   "move": "Water moves toward the side with more dissolved salt or sugar. Find that side first.",
+   "src": "BIO.3d; IG p. 18 UtS osmosis; spiral BIO.2a, IG p. 9 water and polarity"
+  },
+  {
+   "id": "OB-U02-63",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A U-tube with equal salt",
+   "dok": 2,
+   "stem": "In a U-tube, side X holds 5% salt and side Y holds 5% salt. The membrane lets water through but not salt. What happens?",
+   "opts": [
+    "Water moves from X to Y, and side Y rises.",
+    "Water moves both ways at equal rates, so the levels stay the same.",
+    "Water moves from Y to X, and side X rises.",
+    "Salt moves until one side has none."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "With equal concentrations neither side pulls water more than the other.",
+    "2": "With equal concentrations neither side pulls water more than the other.",
+    "3": "The membrane blocks salt, so salt cannot move at all."
+   },
+   "why": "Equal concentrations on both sides make the solutions isotonic: water keeps crossing, but in equal amounts both ways.",
+   "move": "Water moves toward the side with more dissolved salt or sugar. Find that side first.",
+   "src": "BIO.3d; IG p. 18 UtS osmosis; spiral BIO.2a, IG p. 9 water and polarity"
+  },
+  {
+   "id": "OB-U02-64",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Elodea leaves in salt water",
+   "dok": 2,
+   "stem": "A student mounts a leaf from elodea, a freshwater plant, in salt water and watches under the microscope. What will she most likely see?",
+   "opts": [
+    "The cells swell and burst as water rushes in.",
+    "Nothing changes, because the cell wall stops all water movement.",
+    "Chloroplasts move out of the cells through the membrane.",
+    "The cell contents shrink away from the cell wall as water leaves the cells."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Water rushes in only when the outside is less salty, which is the opposite here.",
+    "1": "Water passes through the cell wall easily; the wall only keeps the cell from bursting.",
+    "2": "Chloroplasts are far too large to cross the membrane."
+   },
+   "why": "Salt water is hypertonic to the elodea cells, so water leaves by osmosis and the cell contents shrink inside the wall.",
+   "move": "Water moves toward the side with more dissolved salt or sugar. Find that side first.",
+   "src": "BIO.3d; IG p. 18 UtS osmosis; spiral BIO.2a, IG p. 9 water and polarity"
+  },
+  {
+   "id": "OB-U02-65",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why IV fluid is not pure water",
+   "dok": 2,
+   "stem": "Nurses give patients IV fluid with the same salt concentration as blood rather than pure water. Why?",
+   "opts": [
+    "Pure water is hypotonic to blood cells, so water would rush in and burst them.",
+    "Pure water is hypertonic, so blood cells would shrink.",
+    "Pure water cannot cross cell membranes.",
+    "Blood cells use the salt as food."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Pure water has less dissolved salt than the cells, which makes it hypotonic, not hypertonic.",
+    "2": "Water crosses membranes easily, through the bilayer and through aquaporins.",
+    "3": "The salt keeps the fluid isotonic; cells do not eat it for energy."
+   },
+   "why": "Matching the blood's salt concentration keeps the fluid isotonic, so blood cells neither swell nor shrink.",
+   "move": "Water moves toward the side with more dissolved salt or sugar. Find that side first.",
+   "src": "BIO.3d; IG p. 18 UtS osmosis; spiral BIO.2a, IG p. 9 water and polarity"
+  },
+  {
+   "id": "OB-U02-66",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Thyroid cells gather iodide",
+   "dok": 3,
+   "stem": "Thyroid cells collect iodide from the blood even though they already hold about 30 times more iodide than the blood around them. What must the cells spend to do this, and why?",
+   "opts": [
+    "Nothing, because iodide diffuses in on its own",
+    "Water, because osmosis carries the iodide in",
+    "ATP, because they move iodide from low to high concentration by active transport",
+    "Cholesterol, because it opens the channels"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Diffusion runs from high to low. Here iodide moves from low (blood) to high (cell).",
+    "1": "Osmosis moves water, not iodide.",
+    "3": "Cholesterol steadies the membrane; it is not an energy source and does not open channels."
+   },
+   "why": "Moving a substance against its concentration gradient takes energy, so the cells use ATP-powered pumps.",
+   "move": "Uphill (low to high), or a vesicle moving: energy. Downhill (high to low): no energy, even with a protein.",
+   "src": "BIO.3d; IG p. 18 UtS active transport 'requires energy and moves substances against a concentration gradient'"
+  },
+  {
+   "id": "OB-U02-67",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Packaged sweat proteins leave a cell",
+   "dok": 1,
+   "stem": "A gland cell packages proteins into vesicles. The vesicles fuse with the cell membrane and release the proteins outside. What is this process?",
+   "opts": [
+    "Endocytosis",
+    "Osmosis",
+    "Exocytosis",
+    "Facilitated diffusion"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Endocytosis brings material into the cell by folding the membrane inward.",
+    "1": "Osmosis moves water only.",
+    "3": "Facilitated diffusion moves single particles through proteins; it does not use vesicles."
+   },
+   "why": "Exo- means out: vesicles fuse with the membrane and release their contents outside.",
+   "move": "Uphill (low to high), or a vesicle moving: energy. Downhill (high to low): no energy, even with a protein.",
+   "src": "BIO.3d; IG p. 18 UtS active transport 'requires energy and moves substances against a concentration gradient'"
+  },
+  {
+   "id": "OB-U02-68",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "An amoeba swallows a bacterium",
+   "dok": 2,
+   "stem": "An amoeba wraps its membrane around a bacterium and pulls it inside in a vesicle. Which statement is true?",
+   "opts": [
+    "This is endocytosis, a kind of active transport that uses energy.",
+    "This is diffusion, so no energy is used.",
+    "This is exocytosis, because the bacterium leaves the amoeba.",
+    "This is osmosis, because the bacterium is mostly water."
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Diffusion moves single small particles; a whole bacterium is carried in a vesicle.",
+    "2": "Exocytosis sends material out. Here the bacterium comes in.",
+    "3": "Osmosis is the movement of water alone."
+   },
+   "why": "Endo- means in: the membrane folds around the item and pinches off a vesicle, which takes energy.",
+   "move": "Uphill (low to high), or a vesicle moving: energy. Downhill (high to low): no energy, even with a protein.",
+   "src": "BIO.3d; IG p. 18 UtS active transport 'requires energy and moves substances against a concentration gradient'"
+  },
+  {
+   "id": "OB-U02-69",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Concentration difference and diffusion time",
+   "dok": 3,
+   "stem": "Students timed how long a dye took to cross a thin gel when the dye's concentration difference across the gel was changed.",
+   "table": [
+    [
+     "Concentration difference (%)",
+     "1",
+     "2",
+     "4",
+     "8"
+    ],
+    [
+     "Time to cross (min)",
+     "40",
+     "21",
+     "11",
+     "5"
+    ]
+   ],
+   "stem2": "Which conclusion do the data support?",
+   "opts": [
+    "The bigger the concentration difference, the slower the dye crossed.",
+    "Concentration difference had no effect on the time.",
+    "The dye needed ATP to cross at high concentrations.",
+    "The bigger the concentration difference, the faster the dye crossed."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Time went down as the difference went up, which means faster, not slower.",
+    "1": "Time changed from 40 minutes to 5, a large effect.",
+    "2": "The gel has no cells and no ATP; diffusion is passive."
+   },
+   "why": "A steeper concentration difference drives faster diffusion, so the crossing time dropped as the difference grew.",
+   "move": "Say the trend in your own words (rises, peaks, falls) before you read the choices.",
+   "src": "BIO.3d; IG p. 19 SiP 'relationship between concentration and the rate of diffusion'"
+  },
+  {
+   "id": "OB-U02-70",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "A raisin left in water",
+   "dok": 1,
+   "stem": "A raisin left in a cup of water overnight swells up. Which process explains this?",
+   "opts": [
+    "Active transport of sugar out of the raisin.",
+    "Osmosis: water moved into the raisin, toward the higher sugar concentration inside.",
+    "Exocytosis of water from the cup.",
+    "Diffusion of salt into the raisin."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "No energy is spent here, and sugar is not leaving; water is entering.",
+    "2": "Exocytosis sends material out of a cell in vesicles; this is water moving in.",
+    "3": "Plain water has no salt to diffuse."
+   },
+   "why": "The raisin is full of sugar, so water moves in by osmosis toward the higher sugar concentration.",
+   "move": "Water moves toward the side with more dissolved salt or sugar. Find that side first.",
+   "src": "BIO.3d; IG p. 18 UtS osmosis; spiral BIO.2a, IG p. 9 water and polarity"
+  },
+  {
+   "id": "OB-U02-71",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Contact lens solution",
+   "dok": 2,
+   "stem": "Contact lens solution is made isotonic to the cells on the surface of the eye. What does that mean for those cells?",
+   "opts": [
+    "Water only leaves the cells, so they shrink.",
+    "Water enters and leaves the cells at equal rates, so they keep their shape.",
+    "Water only enters the cells, so they swell.",
+    "Salt is pumped into the cells by the solution."
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Water leaves only when the solution is hypertonic, saltier than the cells.",
+    "2": "Water rushes in only when the solution is hypotonic, less salty than the cells.",
+    "3": "A solution cannot pump anything; pumps are proteins in the cell's own membrane."
+   },
+   "why": "Isotonic means equal concentrations, so water crosses both ways in equal amounts and the cells keep their shape.",
+   "move": "Water moves toward the side with more dissolved salt or sugar. Find that side first.",
+   "src": "BIO.3d; IG p. 18 UtS osmosis; spiral BIO.2a, IG p. 9 water and polarity"
+  },
+  {
+   "id": "OB-U02-72",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Two ways in without ATP",
+   "dok": 2,
+   "stem": "Which TWO processes move materials across a membrane without the cell spending ATP? Select two.",
+   "opts": [
+    "Endocytosis",
+    "Osmosis",
+    "A sodium-potassium pump",
+    "Facilitated diffusion",
+    "Exocytosis"
+   ],
+   "key": [
+    1,
+    3
+   ],
+   "miss": {
+    "0": "Endocytosis folds the membrane around material, which takes energy.",
+    "2": "Pumps push particles uphill with ATP.",
+    "4": "Exocytosis moves vesicles to the membrane, which takes energy."
+   },
+   "why": "Osmosis and facilitated diffusion are passive: particles move from high to low concentration on their own.",
+   "move": "Choose TWO: mark every choice T or F first. Both picks must be right to earn the point.",
+   "src": "BIO.3d; IG p. 18 UtS passive transport 'from high to low concentration' and 'does not require energy'"
+  },
+  {
+   "id": "OB-U02-73",
+   "set": "practice",
+   "unit": 2,
+   "lt": "2.5",
+   "sol": "BIO.3d",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Facilitated diffusion versus active transport",
+   "dok": 2,
+   "stem": "Facilitated diffusion and active transport both use membrane proteins. What is the difference?",
+   "opts": [
+    "Only facilitated diffusion uses ATP.",
+    "Active transport moves only water.",
+    "Facilitated diffusion moves only whole food particles.",
+    "Only active transport uses ATP and can move particles from low to high concentration."
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Facilitated diffusion is passive, so it never uses ATP.",
+    "1": "Osmosis is the movement of water; active transport moves ions and molecules.",
+    "2": "Whole food particles come in by endocytosis; facilitated diffusion moves single ions and molecules."
+   },
+   "why": "Both use proteins, but only active transport spends ATP to push particles against their gradient.",
+   "move": "Uphill (low to high), or a vesicle moving: energy. Downhill (high to low): no energy, even with a protein.",
+   "src": "BIO.3d; IG p. 18 UtS active transport 'requires energy and moves substances against a concentration gradient'"
   }
  ]
 }
