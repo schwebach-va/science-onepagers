@@ -1,0 +1,1365 @@
+{
+ "meta": {
+  "bank": "OB-U01",
+  "title": "Unit 1 · Biochemistry — original SOL practice bank",
+  "version": "v1 2026-10-27",
+  "status": "first site version; written 2026-10-27 under the eight-point originality check",
+  "statement": "These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education's Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test's wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE's released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. © J. R. Schwebach, CC BY-NC 4.0.",
+  "unit": 1,
+  "unit_name": "Biochemistry",
+  "lts": {
+   "1.1": "Water: polarity, hydrogen bonds and the properties of water",
+   "1.2": "Macromolecules: elements, monomers, polymers and jobs",
+   "1.3": "Enzymes: reactions, activation energy and the factors that change the rate"
+  },
+  "source_ig": "VDOE, Instructional Guide to Support the 2018 Biology Standards of Learning (doc 77084); page numbers are printed pages",
+  "footer": "Original practice questions written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education.",
+  "copyright": "© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org",
+  "count": 46
+ },
+ "items": [
+  {
+   "id": "OB-U01-01",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Partial charges on a water molecule",
+   "dok": 1,
+   "stem": "A student labels the partial charges on a drawing of one water molecule. Which labeling is correct?",
+   "opts": [
+    "The oxygen is δ+ and each hydrogen is δ−",
+    "None of the atoms carries a partial charge",
+    "All three atoms are δ−",
+    "The oxygen is δ− and each hydrogen is δ+"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Reversed. Oxygen holds the shared electrons longer, and electrons are negative, so oxygen is the negative end.",
+    "2": "A molecule with only negative regions would have a net charge. Water is neutral overall: one negative end, two positive ends.",
+    "1": "Equal sharing would leave no partial charges. Water's sharing is uneven, which is what makes it polar."
+   },
+   "why": "Oxygen pulls the shared electrons harder than hydrogen does, so the oxygen end is slightly negative (δ−) and each hydrogen end is slightly positive (δ+).",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 1
+  },
+  {
+   "id": "OB-U01-02",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Where a hydrogen bond forms",
+   "dok": 1,
+   "stem": "In a glass of water, where does a hydrogen bond form?",
+   "opts": [
+    "Between the oxygen and a hydrogen inside the same water molecule",
+    "Between the slightly positive hydrogen of one water molecule and the slightly negative oxygen of a neighboring molecule",
+    "Between the oxygen atoms of two neighboring water molecules",
+    "Between the hydrogen atoms of two neighboring water molecules"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "The link inside one molecule is a polar covalent bond, where electrons are shared. A hydrogen bond is an attraction between molecules.",
+    "2": "Two oxygens are both slightly negative, and like charges repel.",
+    "3": "Two hydrogens are both slightly positive, and like charges repel."
+   },
+   "why": "Opposite partial charges attract: the δ+ hydrogen of one molecule is drawn to the δ− oxygen of the next. That attraction between molecules is a hydrogen bond.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 1
+  },
+  {
+   "id": "OB-U01-03",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Covalent bonds inside, hydrogen bonds between",
+   "dok": 2,
+   "stem": "Which two statements about the bonds in water are true? Select two.",
+   "opts": [
+    "Polar covalent bonds hold each hydrogen to the oxygen inside one molecule.",
+    "Hydrogen bonds are stronger than the covalent bonds inside a molecule.",
+    "Hydrogen bonds attract one water molecule to another.",
+    "Water molecules are held together by ionic bonds.",
+    "Hydrogen bonds hold the three atoms of one molecule together."
+   ],
+   "key": [
+    0,
+    2
+   ],
+   "miss": {
+    "1": "Hydrogen bonds are much weaker. That is why water can boil (hydrogen bonds break) without the molecules falling apart (covalent bonds stay).",
+    "3": "No electron moves completely from one atom to another in water. The electrons are shared, so the bonds are covalent.",
+    "4": "That job belongs to the covalent bonds. Hydrogen bonds work between molecules."
+   },
+   "why": "Inside each molecule, shared electrons make polar covalent bonds. Between molecules, weaker hydrogen bonds pull neighbors together.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 1
+  },
+  {
+   "id": "OB-U01-04",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Cohesion in a growing drop",
+   "dok": 2,
+   "stem": "A drop of water hanging from a leaky faucet grows larger and larger before it finally falls. Which property lets the drop hold together as it grows?",
+   "opts": [
+    "High heat capacity: water warms slowly",
+    "Density: water is heavier than air",
+    "Cohesion: hydrogen bonds pull water molecules toward each other",
+    "Universal solvent: water dissolves the metal of the faucet"
+   ],
+   "key": 2,
+   "miss": {
+    "1": "Density explains why the drop eventually falls, not why it holds together while it grows.",
+    "3": "Water does not dissolve the faucet. The question is what holds the water molecules to one another.",
+    "0": "Heat capacity is about temperature change. Nothing here is being heated."
+   },
+   "why": "Cohesion is water sticking to water. Each molecule's hydrogen bonds pull on its neighbors, so the drop stays together until its weight wins.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 1
+  },
+  {
+   "id": "OB-U01-05",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Capillary action in a paper towel",
+   "dok": 2,
+   "stem": "The corner of a dry paper towel is dipped into a puddle, and water creeps several centimeters up the towel against gravity. What explains the climb?",
+   "opts": [
+    "Water molecules are less dense than the paper towel",
+    "The towel dissolves in water and pulls the solution upward",
+    "The paper towel heats the water, and warm water rises",
+    "Adhesion pulls water onto the towel's fibers, and cohesion drags more water along behind it"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Density decides what floats and what sinks, not what climbs a fiber.",
+    "2": "Nothing is heated here. The climb happens at room temperature.",
+    "1": "The towel does not dissolve; it stays intact while the water moves through it."
+   },
+   "why": "Water sticks to the fibers (adhesion) and to itself (cohesion). Together they pull water up narrow spaces: capillary action.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-06",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Property of water from an everyday example",
+   "dok": 2,
+   "stem": "Match each observation to the property of water it shows. Use each property once.",
+   "rows": [
+    "Water curves upward where it touches the inside of a glass graduated cylinder.",
+    "Ice cubes float at the top of a glass of lemonade.",
+    "A large pot of water takes a long time to come to a boil on the stove.",
+    "A spoonful of drink-mix powder disappears when it is stirred into water."
+   ],
+   "opts": [
+    "Adhesion",
+    "Density (ice is less dense than liquid water)",
+    "High heat capacity",
+    "Universal solvent"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "miss": {
+    "Adhesion": "Adhesion is water sticking to a different surface, such as glass.",
+    "Density (ice is less dense than liquid water)": "Frozen water is spread into an open lattice by hydrogen bonds, so it floats.",
+    "High heat capacity": "Water soaks up a lot of heat energy before its temperature rises, because hydrogen bonds absorb energy first.",
+    "Universal solvent": "Water's charged ends surround polar and charged particles and pull them apart."
+   },
+   "mc_twin": {
+    "stem": "Water curves upward where it touches the inside of a glass graduated cylinder. Which property of water does this show?",
+    "opts": [
+     "Cohesion",
+     "Adhesion",
+     "Density",
+     "High heat capacity"
+    ],
+    "key": 1,
+    "miss": {
+     "0": "Cohesion is water sticking to water. Here the water is sticking to glass.",
+     "2": "Density is mass per volume; it does not make water climb a wall.",
+     "3": "Heat capacity is about temperature, and nothing is heated here."
+    }
+   },
+   "why": "Every property on this list traces back to hydrogen bonds. Name the property, then say what the hydrogen bonds are doing.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-07",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why ice floats",
+   "dok": 2,
+   "stem": "Why does solid water (ice) float on liquid water, when most solids sink in their own liquid?",
+   "opts": [
+    "Ice contains trapped air bubbles that lift it",
+    "Hydrogen bonds lock frozen water molecules into an open pattern, so ice is less dense than liquid water",
+    "Ice has more mass than the same volume of liquid water",
+    "Cold liquid water is less dense than ice"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Clear ice with no bubbles still floats. The reason is the spacing of the molecules.",
+    "2": "More mass in the same volume would make ice denser, and it would sink.",
+    "3": "Reversed. Liquid water is the denser one, which is why ice rises to the top."
+   },
+   "why": "As water freezes, hydrogen bonds hold the molecules apart in an open lattice. Fewer molecules fit in the same space, so ice is less dense and floats.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-08",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Sweating cools the body",
+   "dok": 2,
+   "stem": "During an August soccer practice, sweat evaporating from your skin cools you down. Why does evaporating water carry away so much heat?",
+   "opts": [
+    "Salt in sweat absorbs the heat",
+    "Sweat is colder than the air when it leaves the body",
+    "Water is less dense than skin, so it rises and takes heat with it",
+    "Water molecules must absorb a lot of energy to break their hydrogen bonds and escape as vapor"
+   ],
+   "key": 3,
+   "miss": {
+    "1": "Sweat leaves the body at body temperature. The cooling comes from evaporation, not from cold sweat.",
+    "2": "Density does not explain cooling. Energy is needed to turn liquid into vapor.",
+    "0": "The salt stays behind on the skin. The water does the cooling as it evaporates."
+   },
+   "why": "To evaporate, a water molecule has to break the hydrogen bonds holding it to its neighbors. That takes energy, and the energy comes from your skin.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-09",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why oil and water separate",
+   "dok": 2,
+   "stem": "Salt and sugar both dissolve in the water inside a cell, but olive oil does not. What explains the difference?",
+   "opts": [
+    "Water's charged ends surround polar and charged particles, but oil is nonpolar and has no charges for water to pull on",
+    "Oil molecules are too large to fit between water molecules",
+    "Oil is denser than water",
+    "Salt and sugar are made of carbon, and oil is not"
+   ],
+   "key": 0,
+   "miss": {
+    "2": "Oil floats on water, so it is less dense. Either way, density does not decide what dissolves.",
+    "3": "Salt contains no carbon, and oil is full of carbon. Charge, not carbon, is what matters here.",
+    "1": "Size is not the reason; some very large polar molecules dissolve well in water."
+   },
+   "why": "Like dissolves like. Water's δ− and δ+ ends attract charged and polar particles and pull them apart; nonpolar oil gives water nothing to grab.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-10",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Water steadies body temperature",
+   "dok": 2,
+   "stem": "On a spring day the air goes from 50 °F in the morning to 85 °F in the afternoon, yet a person's body temperature stays close to 98.6 °F. Which property of water, which makes up most of the body, helps most?",
+   "opts": [
+    "Adhesion",
+    "Surface tension",
+    "Low density",
+    "High heat capacity"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Adhesion is water sticking to other surfaces. It does not slow temperature change.",
+    "2": "Density decides floating and sinking, not how fast something heats up.",
+    "1": "Surface tension holds a water surface together. It does not slow heating."
+   },
+   "why": "Water can absorb or lose a lot of heat with only a small change in temperature, because its hydrogen bonds soak up energy first. A body that is mostly water changes temperature slowly.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-11",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Fixing a claim about water's bonds",
+   "dok": 2,
+   "stem": "A student writes: “Hydrogen bonds are what hold each H₂O molecule together.” What is wrong with the claim?",
+   "opts": [
+    "Nothing; hydrogen bonds hold the atoms of each molecule together",
+    "Water has no bonds; it is a mixture of hydrogen and oxygen gas",
+    "Ionic bonds hold the atoms together; hydrogen bonds hold the ions in place",
+    "Polar covalent bonds hold the atoms of each molecule together; hydrogen bonds attract one molecule to another"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "This is the mix-up the question is testing. Inside the molecule the electrons are shared: covalent bonds.",
+    "2": "Water is not ionic. Its electrons are shared, unevenly.",
+    "1": "Water is a compound with bonds, not a mixture of gases."
+   },
+   "why": "Two kinds of attraction, two places: covalent bonds inside each molecule, hydrogen bonds between molecules.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 1
+  },
+  {
+   "id": "OB-U01-12",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Colored water climbs a celery stalk",
+   "dok": 2,
+   "stem": "A celery stalk stands in a cup of water with blue food coloring. A day later, the leaves at the top have blue streaks. Which pair of properties moved the water up the narrow tubes in the stalk?",
+   "opts": [
+    "Density and high heat capacity",
+    "Surface tension and high heat capacity",
+    "Polarity and density",
+    "Adhesion and cohesion"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Neither explains movement against gravity up a narrow tube.",
+    "2": "Polarity is the root cause, but density plays no part in the climb.",
+    "1": "Heat capacity is about temperature. The climb needs water sticking to the tube walls and to itself."
+   },
+   "why": "Water sticks to the tube walls (adhesion) and to itself (cohesion), so it climbs: capillary action, the same pull that helps move water up through plants.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-13",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Reading a two-molecule drawing",
+   "dok": 1,
+   "stem": "A drawing shows two water molecules side by side. A solid line joins each hydrogen to its own oxygen, and a dashed line joins a hydrogen of the first molecule to the oxygen of the second. What does the dashed line stand for?",
+   "opts": [
+    "A polar covalent bond",
+    "A hydrogen bond",
+    "An ionic bond",
+    "A shared pair of electrons"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "The solid lines are the polar covalent bonds inside each molecule.",
+    "3": "A shared pair of electrons is a covalent bond, the solid line.",
+    "2": "Water has no ionic bonds."
+   },
+   "why": "By convention the dashed line is the hydrogen bond: the weaker attraction between the δ+ hydrogen of one molecule and the δ− oxygen of another.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 1
+  },
+  {
+   "id": "OB-U01-14",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.1",
+   "sol": "BIO.2a",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "What hydrogen bonds explain",
+   "dok": 2,
+   "stem": "Which of these come from hydrogen bonds between water molecules? Select all that apply.",
+   "opts": [
+    "Water's cohesion and surface tension",
+    "Water's high heat capacity",
+    "Ice floating on liquid water",
+    "Each water molecule containing two hydrogen atoms",
+    "Water molecules being too small to see"
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "miss": {
+    "3": "The number of atoms is set by the covalent bonds inside the molecule, not by hydrogen bonds.",
+    "4": "Size has nothing to do with hydrogen bonding."
+   },
+   "why": "Cohesion, surface tension, heat capacity and the low density of ice all come from hydrogen bonds pulling molecules toward each other.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2a (the unique properties of water and their importance to living things); PWCS LT 1.1",
+   "lesson": 2
+  },
+  {
+   "id": "OB-U01-15",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Elements in a sugar",
+   "dok": 1,
+   "stem": "A sample of table sugar is broken down completely, and only three elements are found. Which three?",
+   "opts": [
+    "Carbon, hydrogen and oxygen",
+    "Carbon, hydrogen and nitrogen",
+    "Carbon, oxygen and phosphorus",
+    "Hydrogen, oxygen and sulfur"
+   ],
+   "key": 0,
+   "miss": {
+    "2": "Phosphorus is part of nucleic acids and phospholipids, not sugar.",
+    "3": "Sulfur appears in some amino acids, not in sugar.",
+    "1": "Nitrogen shows up in proteins and nucleic acids, not in sugars."
+   },
+   "why": "Carbohydrates, sugars included, are built from carbon, hydrogen and oxygen only (CHO).",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 3
+  },
+  {
+   "id": "OB-U01-16",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Nitrogen builds proteins and nucleic acids",
+   "dok": 2,
+   "stem": "A farmer in Fauquier County spreads nitrogen fertilizer on a cornfield. The corn plants need that nitrogen to build which two kinds of macromolecules?",
+   "opts": [
+    "Carbohydrates and lipids",
+    "Lipids and proteins",
+    "Proteins and nucleic acids",
+    "Carbohydrates and nucleic acids"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Both are built from carbon, hydrogen and oxygen; neither needs nitrogen.",
+    "3": "Nucleic acids need nitrogen, but sugars and starch do not.",
+    "1": "Proteins need nitrogen, but fats do not."
+   },
+   "why": "Every amino acid carries nitrogen, and every nucleotide has a nitrogen base, so proteins and nucleic acids are where a plant's nitrogen goes.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 3
+  },
+  {
+   "id": "OB-U01-17",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Each monomer and the polymer it builds",
+   "dok": 1,
+   "stem": "Match each monomer to the macromolecule it builds. Use each choice once.",
+   "rows": [
+    "Amino acids",
+    "Nucleotides",
+    "Monosaccharides such as glucose",
+    "Fatty acids and glycerol"
+   ],
+   "opts": [
+    "Protein",
+    "Nucleic acid (DNA or RNA)",
+    "Carbohydrate (such as starch)",
+    "Lipid (such as a fat)"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "miss": {
+    "Protein": "Proteins are chains of amino acids.",
+    "Nucleic acid (DNA or RNA)": "DNA and RNA are chains of nucleotides.",
+    "Carbohydrate (such as starch)": "Starch, glycogen and cellulose are chains of simple sugars.",
+    "Lipid (such as a fat)": "A fat is built from glycerol and fatty acids."
+   },
+   "mc_twin": {
+    "stem": "Which monomer builds a nucleic acid?",
+    "opts": [
+     "Amino acid",
+     "Nucleotide",
+     "Glucose",
+     "Fatty acid"
+    ],
+    "key": 1,
+    "miss": {
+     "0": "Amino acids build proteins.",
+     "2": "Glucose builds carbohydrates such as starch.",
+     "3": "Fatty acids are part of lipids."
+    }
+   },
+   "why": "Each macromolecule has its own building block: amino acids → proteins, nucleotides → nucleic acids, simple sugars → carbohydrates, glycerol and fatty acids → fats.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 3
+  },
+  {
+   "id": "OB-U01-18",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "What a polymer is",
+   "dok": 1,
+   "stem": "Which description fits a polymer?",
+   "opts": [
+    "A long molecule built by linking many smaller repeating units",
+    "A single small unit that can join with others",
+    "Any molecule that contains carbon",
+    "Any molecule that dissolves in water"
+   ],
+   "key": 0,
+   "miss": {
+    "2": "Many small carbon molecules, such as glucose, are not polymers.",
+    "3": "Dissolving in water has nothing to do with being a chain.",
+    "1": "That describes a monomer, the single unit."
+   },
+   "why": "Poly- means many and mono- means one: a polymer is many monomers linked into a chain.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 3
+  },
+  {
+   "id": "OB-U01-19",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Joining monomers gives off water",
+   "dok": 2,
+   "stem": "When a plant cell joins two glucose molecules into one larger sugar, a molecule of water is released. What is this process called?",
+   "opts": [
+    "Hydrolysis",
+    "Denaturation",
+    "Dehydration synthesis",
+    "Photosynthesis"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Hydrolysis is the reverse: water is added to split a bond.",
+    "3": "Photosynthesis makes glucose from carbon dioxide and water; it is not the joining of two sugars.",
+    "1": "Denaturing is a protein losing its shape, not two sugars joining."
+   },
+   "why": "Dehydration (water out) synthesis (putting together): every new link between monomers releases one water molecule.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 4,
+   "advanced": true
+  },
+  {
+   "id": "OB-U01-20",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Counting waters in hydrolysis",
+   "dok": 3,
+   "stem": "A short protein chain of six amino acids is broken completely into single amino acids. How many water molecules are used?",
+   "opts": [
+    "4",
+    "5",
+    "6",
+    "12"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Count the links between the units: six units in a row have five links.",
+    "2": "Six is the number of amino acids, not the number of bonds between them.",
+    "3": "One water goes into each bond that breaks, not two."
+   },
+   "why": "Six units in a row are joined by five bonds. Hydrolysis adds one water to each bond it breaks, so five waters.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 4,
+   "advanced": true
+  },
+  {
+   "id": "OB-U01-21",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Enzyme or sugar from the word ending",
+   "dok": 2,
+   "stem": "The enzyme sucrase breaks down sucrose. Which statement is correct?",
+   "opts": [
+    "Sucrase is a carbohydrate and sucrose is a protein",
+    "Both are carbohydrates because they share a root word",
+    "Sucrase is a protein (an enzyme, -ase) and sucrose is a carbohydrate (a sugar, -ose)",
+    "Both are lipids"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Reversed. The -ase ending names the enzyme, and enzymes are proteins.",
+    "3": "Neither ending marks a lipid.",
+    "1": "The shared root names what the enzyme works on. The ending tells you the group."
+   },
+   "why": "Word endings help: -ose marks a sugar (a carbohydrate), and -ase marks an enzyme (a protein) named for the substance it acts on.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 4
+  },
+  {
+   "id": "OB-U01-22",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Oil in seeds stores energy",
+   "dok": 2,
+   "stem": "Peanuts and sunflower seeds are rich in oil, which the young plant uses after it sprouts. Which macromolecule is the oil, and what job does it do for the seed?",
+   "opts": [
+    "Protein, which speeds up reactions",
+    "Lipid, which stores energy for the long term",
+    "Nucleic acid, which stores instructions",
+    "Carbohydrate, which builds the cell wall"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Speeding up reactions is the job of enzymes, which are proteins. Oil is not a protein.",
+    "2": "Instructions are stored in DNA. Oil carries no instructions.",
+    "3": "Cell walls are built from cellulose, a carbohydrate. Oil is a lipid."
+   },
+   "why": "Oils and fats are lipids. They pack a lot of energy into a small space, so seeds and animals use them for long-term storage.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 5
+  },
+  {
+   "id": "OB-U01-23",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Proteins do the work",
+   "dok": 2,
+   "stem": "Antibodies that help your body fight a cold virus, and hemoglobin that carries oxygen in your blood, belong to the same group of macromolecules. Which group?",
+   "opts": [
+    "Carbohydrates",
+    "Lipids",
+    "Proteins",
+    "Nucleic acids"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Carbohydrates mainly supply quick energy and build structures like cell walls.",
+    "1": "Lipids store energy and build membranes; they do not grab viruses or carry oxygen.",
+    "3": "Nucleic acids store and carry instructions; they do not do these jobs themselves."
+   },
+   "why": "Proteins do most of a cell's work: defense, transport, movement, structure and speeding up reactions.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 5
+  },
+  {
+   "id": "OB-U01-24",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Instructions are stored in nucleic acids",
+   "dok": 2,
+   "stem": "A tomato breeder wants to find the instructions that control when a tomato ripens. In which macromolecule are those instructions stored?",
+   "opts": [
+    "Protein",
+    "Nucleic acid (DNA)",
+    "Carbohydrate",
+    "Lipid"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Proteins carry out instructions, but the instructions themselves are stored in DNA.",
+    "2": "Carbohydrates store energy and build structure, not instructions.",
+    "3": "Lipids store energy and build membranes, not instructions."
+   },
+   "why": "DNA, a nucleic acid, stores the instructions for building every protein in an organism.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 5
+  },
+  {
+   "id": "OB-U01-25",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Quick energy for a sprint",
+   "dok": 2,
+   "stem": "In the first seconds of a 100-meter sprint, a runner's muscle cells reach for the fastest available fuel. Which macromolecule supplies it?",
+   "opts": [
+    "Proteins from the muscle fibers",
+    "Lipids, as stored fat",
+    "Nucleic acids",
+    "Carbohydrates, as glucose and stored glycogen"
+   ],
+   "key": 3,
+   "miss": {
+    "1": "Fat holds the most energy, but it is slow to release. It powers long, steady exercise, not a sprint.",
+    "2": "Nucleic acids store instructions; they are not used as fuel.",
+    "0": "Muscle protein is used for fuel only when other sources run out."
+   },
+   "why": "Carbohydrates are the quick-energy group. Glucose and its stored form, glycogen, can be broken down fast.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 5
+  },
+  {
+   "id": "OB-U01-26",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Energy per gram on a label",
+   "dok": 2,
+   "stem": "One snack has 10 grams of fat; another has 10 grams of carbohydrate. Which gives more energy, and about how much more?",
+   "opts": [
+    "The carbohydrate snack, about twice as much",
+    "The carbohydrate snack, because sugar burns faster",
+    "They give the same energy, because both weigh 10 grams",
+    "The fat snack, a little more than twice as much"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Reversed. Fat stores about 9 Calories per gram; carbohydrate about 4.",
+    "2": "Equal mass does not mean equal energy. Fat packs more energy into each gram.",
+    "1": "Speed of release is not the same as total energy."
+   },
+   "why": "Fat stores about 9 Calories per gram and carbohydrate about 4, so 10 grams of fat holds roughly 90 Calories against about 40.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 5
+  },
+  {
+   "id": "OB-U01-27",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Parts of a nucleotide",
+   "dok": 1,
+   "stem": "Which description fits a nucleotide?",
+   "opts": [
+    "A sugar, a phosphate group and a nitrogen base",
+    "Glycerol joined to three fatty acids",
+    "A carbon with an amino group, an acid group and a side chain",
+    "A single ring of six carbons and nothing else"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "That describes a fat, a lipid.",
+    "2": "That describes an amino acid, the monomer of proteins.",
+    "3": "A ring of carbons is part of a sugar, but a nucleotide also carries a phosphate and a base."
+   },
+   "why": "Every nucleotide has three parts: a five-carbon sugar, a phosphate group and a nitrogen base.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 4
+  },
+  {
+   "id": "OB-U01-28",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Which molecule is organic",
+   "dok": 1,
+   "stem": "Which of these is an organic molecule?",
+   "opts": [
+    "Glucose, C₆H₁₂O₆",
+    "Table salt, NaCl",
+    "Water, H₂O",
+    "Oxygen gas, O₂"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Salt has no carbon.",
+    "3": "Oxygen gas has no carbon.",
+    "2": "Water has no carbon. It is essential to life, but it is inorganic."
+   },
+   "why": "Organic molecules are built on a carbon backbone, usually with hydrogen bonded to the carbon. Glucose is one.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 3
+  },
+  {
+   "id": "OB-U01-29",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "Which molecules are lipids",
+   "dok": 2,
+   "stem": "Which of these are lipids? Select all that apply.",
+   "opts": [
+    "Cholesterol",
+    "Olive oil",
+    "Phospholipids in a cell membrane",
+    "Starch",
+    "Insulin",
+    "DNA"
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "miss": {
+    "3": "Starch is a carbohydrate, a chain of glucose.",
+    "4": "Insulin is a protein, a chain of amino acids.",
+    "5": "DNA is a nucleic acid, a chain of nucleotides."
+   },
+   "why": "Lipids include fats and oils, phospholipids and steroids such as cholesterol. They mix poorly with water.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 5
+  },
+  {
+   "id": "OB-U01-30",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Enzymes are proteins",
+   "dok": 1,
+   "stem": "Every enzyme in your body belongs to which group of macromolecules?",
+   "opts": [
+    "Proteins",
+    "Lipids",
+    "Carbohydrates",
+    "Nucleic acids"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Lipids store energy and build membranes, not enzymes.",
+    "3": "Nucleic acids store the instructions for making enzymes; the enzymes themselves are proteins.",
+    "2": "Carbohydrates are fuel and structure, not enzymes."
+   },
+   "why": "Enzymes are proteins. Their folded shape forms an active site that fits their substrate.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-31",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "One monomer, three polymers",
+   "dok": 2,
+   "stem": "Starch in a potato, glycogen in your liver and cellulose in a celery stalk are built from the same monomer. Which one?",
+   "opts": [
+    "Glucose",
+    "Amino acids",
+    "Nucleotides",
+    "Fatty acids"
+   ],
+   "key": 0,
+   "miss": {
+    "2": "Nucleotides build nucleic acids.",
+    "3": "Fatty acids are parts of lipids.",
+    "1": "Amino acids build proteins."
+   },
+   "why": "All three are polysaccharides, chains of glucose. The way the glucose units are linked gives each one a different job: storage in plants, storage in animals, or structure.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 4
+  },
+  {
+   "id": "OB-U01-32",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.2",
+   "sol": "BIO.2b",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Checking a drink label's claim",
+   "dok": 2,
+   "stem": "A bottle says “No carbohydrates!” on the front, but the label on the back lists 30 grams of sugar. Is the front claim correct?",
+   "opts": [
+    "Yes, because sugar is a lipid",
+    "Yes, because sugar is a protein",
+    "No, because sugars are carbohydrates",
+    "It cannot be known from the label"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Sugar is not a lipid. Simple sugars are the monomers of carbohydrates.",
+    "3": "The label gives enough information: any grams of sugar are grams of carbohydrate.",
+    "1": "Sugar is not a protein; it has no amino acids."
+   },
+   "why": "Sugars are the simplest carbohydrates, so 30 grams of sugar means at least 30 grams of carbohydrate.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2b (the structure and function of macromolecules); PWCS LT 1.2",
+   "lesson": 5
+  },
+  {
+   "id": "OB-U01-33",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Reactants and products",
+   "dok": 1,
+   "stem": "In the reaction starch + water → maltose, which are the reactants?",
+   "opts": [
+    "Maltose only",
+    "Starch, water and maltose",
+    "Starch and water",
+    "Water and maltose"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Maltose is made by the reaction: it is the product.",
+    "3": "Maltose is the product. Reactants are what you start with.",
+    "1": "Maltose is on the right side of the arrow, so it is a product."
+   },
+   "why": "Reactants sit on the left of the arrow and are used up; products sit on the right and are made.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-34",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Activation energy",
+   "dok": 1,
+   "stem": "What is activation energy?",
+   "opts": [
+    "The energy released when a reaction finishes",
+    "The energy an enzyme adds to a reaction",
+    "The energy stored in the products",
+    "The energy needed to get a reaction started"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Energy released is the difference between reactants and products, not the push needed to start.",
+    "2": "That is the energy level of the products.",
+    "1": "Enzymes add no energy. They lower the amount needed to start."
+   },
+   "why": "Activation energy is the push a reaction needs before it can begin: the height of the hill on a reaction graph.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-35",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Labeling a reaction-progress graph",
+   "dok": 2,
+   "stem": "On a graph of energy during a reaction, the line starts at the reactants, rises to a peak, and falls to the products. What is the height from the reactants' starting level up to the peak?",
+   "opts": [
+    "The energy of the products",
+    "The activation energy",
+    "The total energy released",
+    "The energy of the enzyme"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "The products' energy is where the line ends, on the right.",
+    "2": "Energy released is the drop from reactants down to products.",
+    "3": "Enzymes are not drawn as an energy level on this graph."
+   },
+   "why": "The climb from the reactants to the top of the hill is the activation energy.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-36",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "With and without an enzyme on a graph",
+   "dok": 2,
+   "stem": "A graph shows two curves for the same reaction. Both start at the same reactant energy and end at the same product energy, but one hump is much lower. What does the lower curve show?",
+   "opts": [
+    "The reaction without an enzyme",
+    "A reaction that releases more energy",
+    "A reaction that makes more products",
+    "The reaction with an enzyme"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Without an enzyme the hill is higher.",
+    "2": "The end point is the same, so the products are the same.",
+    "1": "The start and end levels match, so the energy released is the same."
+   },
+   "why": "An enzyme lowers the activation energy, so its curve has a lower hump. The starting and ending energies do not change.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-37",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "How enzymes speed reactions",
+   "dok": 1,
+   "stem": "How does an enzyme make a reaction go faster?",
+   "opts": [
+    "It adds heat energy to the reactants",
+    "It lowers the activation energy needed to start the reaction",
+    "It becomes part of the products",
+    "It raises the energy of the products"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Enzymes add no energy. They make the hill lower.",
+    "2": "The enzyme comes out of the reaction unchanged and can be used again.",
+    "3": "The products' energy is the same with or without the enzyme."
+   },
+   "why": "An enzyme is a catalyst: it lowers the activation energy and is not used up.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-38",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Why an enzyme acts on one substrate",
+   "dok": 2,
+   "stem": "Pepsin breaks down proteins in your stomach but has no effect on the fat in the same meal. Why?",
+   "opts": [
+    "Fat molecules are too small to react",
+    "Pepsin's active site has a shape that fits protein substrates, not fats",
+    "Pepsin is used up by the proteins first",
+    "Fat dissolves pepsin"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Size is not the issue; fats are large molecules.",
+    "2": "Enzymes are not used up; they are reused.",
+    "3": "Fat does not dissolve the enzyme. The shapes simply do not fit."
+   },
+   "why": "Each enzyme's active site fits only certain substrates, like a key fits one lock. That is why enzymes are specific.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-39",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "match",
+   "topic": "Parts of an enzyme reaction",
+   "dok": 1,
+   "stem": "Match each term to its description. Use each choice once.",
+   "rows": [
+    "Substrate",
+    "Active site",
+    "Enzyme–substrate complex",
+    "Product"
+   ],
+   "opts": [
+    "The molecule the enzyme acts on",
+    "The pocket on the enzyme where the substrate fits",
+    "The enzyme and substrate joined together for a moment",
+    "The new molecule released when the reaction is done"
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "miss": {
+    "The molecule the enzyme acts on": "The substrate is the reactant the enzyme works on.",
+    "The pocket on the enzyme where the substrate fits": "The active site is part of the enzyme, shaped by how the protein folds.",
+    "The enzyme and substrate joined together for a moment": "The complex forms when the substrate is held in the active site.",
+    "The new molecule released when the reaction is done": "Products leave, and the enzyme is free to work again."
+   },
+   "mc_twin": {
+    "stem": "What is the active site?",
+    "opts": [
+     "The molecule the enzyme acts on",
+     "The pocket on the enzyme where the substrate fits",
+     "The product of the reaction",
+     "The energy needed to start the reaction"
+    ],
+    "key": 1,
+    "miss": {
+     "0": "That is the substrate.",
+     "2": "The product is what the reaction makes.",
+     "3": "That is activation energy."
+    }
+   },
+   "why": "Substrate enters the active site, forms an enzyme–substrate complex, and leaves as product; the enzyme is unchanged.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  },
+  {
+   "id": "OB-U01-40",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Heat denatures an enzyme",
+   "dok": 2,
+   "stem": "An enzyme from the human body works fastest near 37 °C. Heated to 60 °C, it stops working, and it does not start again when it cools down. What happened?",
+   "opts": [
+    "The enzyme was used up by the reaction",
+    "Cooling made the enzyme work faster",
+    "The substrate melted",
+    "The heat changed the enzyme's shape, so its active site no longer fits the substrate"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Enzymes are not used up by the reactions they speed up.",
+    "2": "The substrate was not damaged; the enzyme's folding was.",
+    "1": "It did not start again after cooling, so something permanent happened to the enzyme."
+   },
+   "why": "High heat breaks the bonds that hold a protein in its folded shape. The enzyme is denatured: its active site changes shape and no longer fits.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 7
+  },
+  {
+   "id": "OB-U01-41",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Reading an enzyme's best pH",
+   "dok": 2,
+   "stem": "A class measured the activity of an enzyme from papaya at five pH values: pH 3 → 10 units, pH 5 → 45 units, pH 7 → 80 units, pH 9 → 30 units, pH 11 → 5 units. What is the best conclusion?",
+   "opts": [
+    "The enzyme works best near pH 7, and activity drops on either side",
+    "The more acidic the solution, the faster the enzyme works",
+    "pH has no effect on this enzyme",
+    "The enzyme works best at pH 11"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Activity was lowest at pH 3, the most acidic value tested.",
+    "2": "Activity changed from 5 to 80 units, so pH clearly matters.",
+    "3": "pH 11 gave the lowest activity of all."
+   },
+   "why": "Find the peak: 80 units at pH 7. Every enzyme has an optimum pH, and moving away from it bends the active site out of shape.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 7
+  },
+  {
+   "id": "OB-U01-42",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Frozen versus boiled enzyme",
+   "dok": 2,
+   "stem": "One tube of an enzyme solution is frozen overnight and thawed; another is boiled for five minutes and cooled. Both are mixed with their substrate at room temperature. What should happen?",
+   "opts": [
+    "Neither tube works",
+    "The thawed tube works; the boiled tube does not",
+    "Both tubes work equally well",
+    "The boiled tube works; the thawed tube does not"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Freezing slows an enzyme, but once thawed it can work again.",
+    "3": "Reversed. Boiling unfolds the protein for good; freezing only slows it down.",
+    "2": "Boiling denatures the enzyme, so the boiled tube should fail."
+   },
+   "why": "Cold slows enzymes without changing their shape. Boiling unfolds them permanently.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 7
+  },
+  {
+   "id": "OB-U01-43",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Naming the variables in an enzyme test",
+   "dok": 2,
+   "stem": "A lab group adds the same amount of enzyme to hydrogen peroxide at 5 °C, 20 °C, 37 °C and 60 °C, and measures the height of the foam in centimeters after 60 seconds. What is the independent variable?",
+   "opts": [
+    "The height of the foam",
+    "The amount of enzyme",
+    "The temperature",
+    "The 60-second time"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Foam height is what they measure: the dependent variable.",
+    "3": "The time is kept the same for every trial: a controlled variable.",
+    "1": "The amount of enzyme is kept the same: a controlled variable."
+   },
+   "why": "The independent variable is the one the experimenter changes on purpose, here the temperature. Foam height is the dependent variable.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 7
+  },
+  {
+   "id": "OB-U01-44",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "pH and a stomach enzyme",
+   "dok": 2,
+   "stem": "Pepsin works well in the stomach at about pH 2. When food moves on to the small intestine at about pH 8, pepsin stops working. What is the best explanation?",
+   "opts": [
+    "The change in pH alters pepsin's shape, so its active site no longer fits",
+    "Pepsin is used up in the stomach",
+    "There are no proteins left in the small intestine",
+    "The small intestine is colder than the stomach"
+   ],
+   "key": 0,
+   "miss": {
+    "2": "Plenty of protein reaches the small intestine; other enzymes digest it there.",
+    "3": "Both organs are at body temperature.",
+    "1": "Enzymes are reused, not used up."
+   },
+   "why": "Each enzyme has an optimum pH. Far from it, the protein's shape changes and the active site stops fitting the substrate.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 7
+  },
+  {
+   "id": "OB-U01-45",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "ms",
+   "topic": "True statements about enzymes",
+   "dok": 2,
+   "stem": "Which statements about enzymes are true? Select all that apply.",
+   "opts": [
+    "Enzymes are proteins.",
+    "Each enzyme fits only certain substrates.",
+    "Enzymes are used up in the reactions they speed up.",
+    "Enzymes speed reactions by lowering activation energy.",
+    "Enzymes add energy to reactions."
+   ],
+   "key": [
+    0,
+    1,
+    3
+   ],
+   "miss": {
+    "2": "An enzyme comes out of each reaction unchanged and can be used again and again.",
+    "4": "Enzymes add no energy. They lower the amount needed to start."
+   },
+   "why": "Enzymes are reusable protein catalysts, specific to their substrates, that lower activation energy.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 7
+  },
+  {
+   "id": "OB-U01-46",
+   "set": "practice",
+   "unit": 1,
+   "lt": "1.3",
+   "sol": "BIO.2c",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Metabolism",
+   "dok": 1,
+   "stem": "What is the word for all of the chemical reactions that take place in an organism?",
+   "opts": [
+    "Homeostasis",
+    "Activation energy",
+    "Metabolism",
+    "Digestion"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Homeostasis is keeping conditions inside the body steady.",
+    "3": "Digestion is one set of reactions, not all of them.",
+    "1": "Activation energy is the push one reaction needs to start."
+   },
+   "why": "Metabolism is the sum of every chemical reaction in an organism, nearly all of them sped up by enzymes.",
+   "src": "VDOE 2018 Biology Instructional Guide, BIO.2c (the nature of enzymes); PWCS LT 1.3",
+   "lesson": 6
+  }
+ ]
+}
