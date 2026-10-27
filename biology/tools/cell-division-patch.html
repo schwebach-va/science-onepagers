@@ -2021,13 +2021,14 @@ function drawChrom(L,C,ch,lvl){
 function drawCellLabels(L,C,lvl){
   const sup=supports(),LB=LBL[lvl],r=C.r*C.grow,k=cellK(C),big=st.teach;const seg=L.tl[L.si];
   if(C.polar){if(sup>=1)tag(LB.polar,C.cx,C.cy-C.r-14*k-4,"polar",null,big);return;}
-  const topY=C.shape==="rect"?C.cy-(C.rh||C.r*1.8)/2:C.cy-r;const firstCell=L.cells.filter(q=>!q.polar).indexOf(C)===0;
+  const topY=C.shape==="rect"?C.cy-(C.rh||C.r*1.8)/2:C.cy-r;const firstCell=L.cells.filter(q=>!q.polar).indexOf(C)===0;const multi=L.cells.filter(q=>!q.polar).length>1,lhW=labelPx()*1.5/(VX.k*OT.sc);
   if(!L.m3||sup>=1)tag(C.egg?LB.eggc:(L.m3?"":LB.cell),C.cx,topY+14,"cell",null,big);
   const first=orderItems(C.chroms)[0];
   if(first&&firstCell){const loose=first.coil<.5,lb=loose?LB.thread:(first.rep&&!first.split?LB.chromX:LB.chrom);const vert=Math.abs(Math.cos(first.ang))>.7;
     const tipX=vert?first.x:first.x-ROD[first.pair]*k*.5,tipY=vert?first.y-ROD[first.pair]*k*.5:first.y;const sideL=first.synapsed||vert&&C.axis==="h"&&first.x<C.cx;
-    const lx2=loose?first.x:(sideL?tipX-ROD.sis*k*2-6:tipX+ROD.sis*k*2+6),ly2=loose?first.y-ROD[first.pair]*k*.7-10:tipY+(vert?-14:-22);
-    if(sup===0&&!st.teach)tag(loose?LB.thread:LB.chrom,lx2,ly2,"chrom",loose?null:(sideL?"right":"left"),big);else tag(lb,lx2,ly2,first.rep&&!first.split?"chromX":"chrom",loose?null:(sideL?"right":"left"),big);}
+    const lx2=loose?(multi?Math.max(C.cx-r*.6,12):first.x):(sideL?tipX-ROD.sis*k*2-6:tipX+ROD.sis*k*2+6),ly2=loose?(multi?C.cy+r+16+lhW:C.cy+r*.5+14):tipY+(vert?-14:-22);
+    const al=loose?(multi?"left":null):(sideL?"right":"left");
+    if(sup===0&&!st.teach)tag(loose?LB.thread:LB.chrom,lx2,ly2,"chrom",al,big);else tag(lb,lx2,ly2,first.rep&&!first.split?"chromX":"chrom",al,big);}
   if(sup===0&&!st.teach)return;
   if(!firstCell)return;
   if(L.m3){ /* Module 3: fewer words, so the movement carries the comparison */
@@ -2036,7 +2037,7 @@ function drawCellLabels(L,C,lvl){
     if(C.furrow>0&&C.furrow<1)tag(LB.furrow,C.cx,C.cy-r*.78,"furrow",null,big);
     if(sup>=2&&seg&&L.si<L.tl.length&&!L.done){const mv=MOVING[lvl][seg.name];if(mv)tag(mv,C.cx,C.cy+r+16,null,null,big);}
     return;}
-  if(C.envelope==="intact"||C.envelope==="breaking"){tag(LB.nucleus,C.cx,C.cy-r*.5-10*k-6,"nucleus",null,big);tag(LB.envelope,C.cx+r*.5*.72,C.cy+r*.5*.72+8,"envelope","left",big);}
+  if(C.envelope==="intact"||C.envelope==="breaking"){tag(LB.nucleus,C.cx,C.cy-r*.5-10*k-6,"nucleus",null,big);if(multi)tag(LB.envelope,Math.max(C.cx-r*.6,12),C.cy+r+16,"envelope","left",big);else tag(LB.envelope,C.cx+r-8,C.cy+r*.5*.72+10,"envelope","right",big);}
   if(C.spindle>.3){const P=poles(C);if(C.axis==="h")tag(LB.spindle,(P[0][0]+C.cx)/2,C.cy+r*.5,"spindle",null,big);else tag(LB.spindle,C.cx-r*.5,(P[0][1]+C.cy)/2,"spindle","right",big);
     tag(LB.pole,P[0][0],P[0][1]+22,"pole",C.axis==="h"?"left":"center",big);
     if(lvl==="de"&&C.shape!=="rect")tag(LB.centriole,P[1][0],P[1][1]-22,"centriole",C.axis==="h"?"right":"center",big);}
@@ -2074,10 +2075,11 @@ function drawClock(L,lvl){
   tag(PHASEN[0]+": "+D.counts[0],K.x,K.y-10,null,null,false,true);
   tag("of "+D.tot+" cells",K.x,K.y+12,null,null,false,true);
   const hrs=i=>(D.hours*D.counts[i]/D.tot);const showH=!!(st.clock&&st.clock.counts);
-  for(let i=1;i<5;i++){tag(PHASEN[i]+" "+D.counts[i]+(showH?" · "+hrs(i).toFixed(1)+" h":""),K.x-K.R-10,K.y+K.R+40+(i-1)*20,null,"left",false,true);
-    ctx.fillStyle=colsR[i];ctx.fillRect(K.x-K.R-30,K.y+K.R+34+(i-1)*20,14,12);}
-  if(showH)tag("Interphase about "+hrs(0).toFixed(1)+" h of "+D.hours,K.x-K.R-10,K.y+K.R+40+4*20,null,"left",false,true);
-  const capY=K.y+K.R+40+(showH?5:4)*20+6;tag("Onion root tip counts, 200 cells",K.x,capY,null,null,false,true);tag("(SOL Challenge Q37)",K.x,capY+18,null,null,false,true);
+  const lh=Math.max(20,(st.teach?15:13)*1.5/(VX.k*OT.sc)),sw=lh*.55,y0=K.y+K.R+40;
+  for(let i=1;i<5;i++){const y=y0+(i-1)*lh;tag(PHASEN[i]+" "+D.counts[i]+(showH?" · "+hrs(i).toFixed(1)+" h":""),K.x-K.R-10,y,null,"left",false,true);
+    ctx.fillStyle=colsR[i];ctx.fillRect(K.x-K.R-14-sw-8,y-sw/2,sw,sw);}
+  if(showH)tag("Interphase about "+hrs(0).toFixed(1)+" h of "+D.hours,K.x-K.R-10,y0+4*lh,null,"left",false,true);
+  const capY=y0+(showH?5:4)*lh+6;tag("Onion root tip counts, 200 cells",K.x,capY,null,null,false,true);tag("(SOL Challenge Q37)",K.x,capY+lh*.9,null,null,false,true);
 }
 /* ================= the tally (Module 2) ================= */
 const KINDS=["AB","Ab","aB","ab"];
