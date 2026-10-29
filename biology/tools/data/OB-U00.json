@@ -1,0 +1,694 @@
+{
+ "meta": {
+  "bank": "OB-U00",
+  "title": "Unit 0 · Characteristics of Life and Lab Safety — original SOL practice bank (lesson openers)",
+  "version": "v1 2026-10-27",
+  "status": "first site version; written 2026-10-27 under the eight-point originality check",
+  "statement": "These practice questions were written from the Virginia 2018 Biology Standards of Learning and the Virginia Department of Education's Biology Instructional Guide. None was written from a released SOL test item: the released sets stayed closed while these were drafted, and every question records the standard it was written from. The scenarios, organisms, data, figures and answer choices are original, and many use Virginia places students know. VDOE publishes its released items so that teachers and students can see the depth and rigor of the standards, and says the items are not meant to be mirrored in classroom instruction; these questions follow that guidance by practicing the same skills on new material rather than rehearsing the test's wording. They are for practice and learning. They are not produced or endorsed by the Virginia Department of Education, and students who want to see real released items should open VDOE's released set in TestNav. Original practice questions written to the Virginia 2018 Biology SOL. © J. R. Schwebach, CC BY-NC 4.0.",
+  "footer": "Original practice questions written to the Virginia 2018 Biology SOL. Not produced or endorsed by the Virginia Department of Education.",
+  "copyright": "© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org",
+  "source_ig": "VDOE, Instructional Guide to Support the 2018 Biology Standards of Learning (doc 77084); page numbers are printed pages",
+  "unit": 0,
+  "unit_name": "Characteristics of Life",
+  "count": 24,
+  "lts": {
+   "0.1": "Lab safety and a fair test",
+   "0.2": "Living or nonliving",
+   "0.3": "The characteristics of life at work"
+  }
+ },
+ "items": [
+  {
+   "id": "OB-U00-01",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Broken glass",
+   "dok": 1,
+   "stem": "A test tube slips out of a student's hand and shatters on the lab floor. What should happen first?",
+   "opts": [
+    "The student tells the teacher, and everyone stays back while the teacher sweeps the glass into the broken-glass box",
+    "The student picks up the large pieces carefully with bare hands",
+    "The student pushes the pieces under the bench so nobody steps on them",
+    "The student wraps the pieces in paper towel and drops them in the regular trash"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Bare hands and broken glass mean cuts, even when you are careful. Glass is swept up with a brush and dustpan, never picked up.",
+    "2": "Glass under a bench is still on the floor. Someone kneeling or cleaning later finds it with their hands.",
+    "3": "Glass in the regular trash cuts whoever empties the bag. Broken glass has its own labeled box."
+   },
+   "why": "Tell the teacher right away and keep people back. Broken glass is swept with a brush and dustpan and goes only into the broken-glass container.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 1,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-02",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "When goggles go on",
+   "dok": 1,
+   "stem": "Your group has finished its part of a lab, but the group next to you is still heating and pouring liquids. What should you do with your goggles?",
+   "opts": [
+    "Take them off, because your own group is done",
+    "Keep them on until every group in the room has finished and cleaned up",
+    "Push them up onto your forehead so they are ready if needed",
+    "Take them off unless the teacher is looking"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "A splash from the next bench reaches your eyes whether or not your group is done. The danger is in the room, not only at your bench.",
+    "2": "Goggles on your forehead protect nothing. A splash takes less than a second.",
+    "3": "Goggles protect your eyes, not your grade. The rule holds whether anyone is watching or not."
+   },
+   "why": "Goggles stay on as long as anyone in the room is working with chemicals, heat or glass, because a splash can come from any bench.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 1,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-03",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "A testable hypothesis",
+   "dok": 2,
+   "stem": "A student wonders whether bean seeds sprout faster in warm soil. Which is a testable hypothesis?",
+   "opts": [
+    "Bean seeds are interesting plants to grow in a classroom",
+    "Do bean seeds like warm soil better than cool soil?",
+    "If bean seeds are kept in soil at 25 °C instead of 15 °C, then more of them will sprout within five days",
+    "Warm soil is better for every kind of living thing"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "An opinion cannot be tested. Nothing you could measure would prove it right or wrong.",
+    "1": "A question is where an investigation starts, but a hypothesis is a prediction you can check, usually written as if ... then ....",
+    "3": "\"Every kind of living thing\" is too broad to test in one experiment, and it is not about the bean seeds at all."
+   },
+   "why": "A testable hypothesis names what you will change (soil temperature), what you will measure (seeds sprouted in five days) and the result you predict.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 1,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-04",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Independent variable",
+   "dok": 2,
+   "stem": "In the bean experiment, one tray of pots is kept at 25 °C and the other at 15 °C, and the student counts sprouted seeds after five days. What is the independent variable?",
+   "opts": [
+    "The number of seeds that sprouted",
+    "The kind of bean planted",
+    "The amount of water each pot gets",
+    "The soil temperature"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "The number sprouted is what the student measures. It is the dependent variable: it depends on the temperature.",
+    "1": "Every pot gets the same kind of bean. That is a controlled variable, kept the same on purpose.",
+    "2": "Every pot gets the same water. That is a controlled variable too."
+   },
+   "why": "The independent variable is the one thing the investigator changes on purpose. Here that is soil temperature.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 1,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-05",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Controlled variables",
+   "dok": 2,
+   "stem": "Why should every pot in the bean experiment get the same amount of water?",
+   "opts": [
+    "Because water makes seeds sprout faster",
+    "To save water during the experiment",
+    "So that any difference in sprouting can be traced to temperature alone",
+    "So that the data table has fewer columns"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Water does matter to seeds, which is exactly why it has to be the same everywhere. If it differed, you could not tell whether water or temperature caused the result.",
+    "1": "Saving water is a fine habit, but it is not why scientists hold a variable constant.",
+    "3": "The table is not the reason. Controlled variables protect the conclusion, not the paperwork."
+   },
+   "why": "Holding everything else the same means only one thing differs between the groups, so a difference in the results can be traced to that one thing.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 1,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-06",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Repeated trials",
+   "dok": 2,
+   "stem": "A student measures a plant's height once and records 14.2 cm. Why do scientists repeat a measurement several times?",
+   "opts": [
+    "Repeating makes the measurement larger",
+    "A graph needs at least three numbers",
+    "Repeating a measurement proves the hypothesis is correct",
+    "Repeated trials show whether a result holds up, and an average reduces the effect of one careless or unusual reading"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Repeating does not change the size of the thing measured. It tells you how much the readings vary.",
+    "1": "Graphs can show a single value. Repetition is about trusting the number, not filling the graph.",
+    "2": "No number of repeats proves a hypothesis. Repeats make the data more reliable; the data can still go against the hypothesis."
+   },
+   "why": "Repeated trials check that a result is reliable, and averaging them keeps one odd reading from deciding the conclusion.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 1,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-07",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Dependent variable in the penny lab",
+   "dok": 1,
+   "stem": "In the penny lab you put drops of water, then of rubbing alcohol at three strengths, onto a penny. Which was the dependent variable?",
+   "opts": [
+    "The number of drops that fit before the liquid spilled",
+    "The strength of the alcohol",
+    "The penny",
+    "The pipette"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "You chose the alcohol strength on purpose. That makes it the independent variable.",
+    "2": "The same kind of penny was used every time. It is a controlled variable.",
+    "3": "The pipette is equipment, kept the same for each liquid so every drop is about the same size."
+   },
+   "why": "The dependent variable is what you measured: the number of drops that fit on the penny.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 2,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-08",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Controlled variable in the penny lab",
+   "dok": 2,
+   "stem": "Which of these was a controlled variable in the penny lab?",
+   "opts": [
+    "The strength of the alcohol",
+    "Using a clean, dry penny of the same kind for every trial",
+    "The number of drops counted",
+    "The hypothesis your group wrote"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Alcohol strength was changed on purpose. It is the independent variable.",
+    "2": "The number of drops is the result you measured, the dependent variable.",
+    "3": "A hypothesis is a prediction, not a variable."
+   },
+   "why": "A controlled variable is kept the same in every trial. A clean, dry penny of the same kind each time means the penny cannot explain the differences.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 2,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-09",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "A conclusion the data support",
+   "dok": 2,
+   "stem": "One group's averages: water 41 drops, 50% alcohol 30 drops, 70% alcohol 24 drops, 99% alcohol 17 drops. Which conclusion do these data support?",
+   "opts": [
+    "Alcohol is heavier than water",
+    "As the alcohol gets stronger, fewer drops fit on the penny",
+    "The pennies soaked up the alcohol",
+    "Water is always the best liquid for any experiment"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Nobody weighed anything. A conclusion has to come from what was measured.",
+    "2": "Nothing measured whether the penny absorbed liquid. Copper does not soak up alcohol.",
+    "3": "The data compare four liquids on a penny, nothing more. A conclusion stays inside the evidence."
+   },
+   "why": "The averages fall steadily as alcohol strength rises, so the supported conclusion is the trend itself: stronger alcohol, fewer drops.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 2,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-10",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Choosing a graph",
+   "dok": 2,
+   "stem": "You want to show the average number of drops for water and the three alcohol strengths. Which graph fits best?",
+   "opts": [
+    "A bar graph with one bar per liquid and average drops on the y-axis",
+    "A pie chart of the four averages",
+    "A line graph with average drops on the x-axis",
+    "No graph; the data table is enough"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "A pie chart shows parts of one whole. The four averages are separate measurements, not slices of a total.",
+    "2": "The measured value belongs on the y-axis, and four separate liquids are categories, which bars show best.",
+    "3": "The lab sheet asks for a graph because a graph shows the trend at a glance."
+   },
+   "why": "Separate categories (four liquids) with one measured value each make a bar graph: liquids on the x-axis, average drops on the y-axis, with a title and labeled axes.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 2,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-11",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Working safely with alcohol",
+   "dok": 1,
+   "stem": "Isopropyl (rubbing) alcohol catches fire easily. Which practice is safe in the penny lab?",
+   "opts": [
+    "Pour leftover alcohol back into the class stock bottle",
+    "Lean over the cup and sniff the alcohol to identify it",
+    "Skip goggles, because rubbing alcohol is sold in stores",
+    "Keep flames and heat sources away and wear goggles the whole time"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Leftovers go where the teacher says, never back into the stock bottle, which can contaminate the whole supply.",
+    "1": "Never sniff a chemical directly. If smell is needed, waft a little toward your nose with your hand.",
+    "2": "Sold in stores does not mean safe in the eyes. Alcohol in the eye burns and needs the eyewash."
+   },
+   "why": "Flammable liquids stay away from flames and heat, and goggles stay on as long as liquids are in use.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 2,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-12",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.1",
+   "sol": "BIO.1",
+   "category": "Scientific and Engineering Practices",
+   "type": "mc",
+   "topic": "Observation or inference",
+   "dok": 2,
+   "stem": "Which statement is an observation from the penny lab rather than an inference?",
+   "opts": [
+    "Water molecules pull on each other more strongly than alcohol molecules do",
+    "The alcohol spilled sooner because it is a weaker liquid",
+    "The water formed a dome that rose above the edge of the penny before it spilled",
+    "The penny must have been dirty"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "You cannot see molecules pulling. That is an explanation of what you saw, an inference.",
+    "1": "\"Weaker liquid\" is an explanation, and a vague one. The observation is how many drops fit.",
+    "3": "\"Must have been\" is a guess about a cause, an inference, and nothing in the data shows it."
+   },
+   "why": "An observation is what you saw, measured or counted. An inference explains it. The dome above the penny's edge is something you watched happen.",
+   "src": "Virginia 2018 Biology SOL BIO.1 (scientific and engineering practices: questions and hypotheses, planning a controlled investigation, analyzing data, lab safety); PWCS Module 0 LT 0.1 as proposed 2026-10-27. Instructional Guide page refs to add on the originality check.",
+   "lesson": 2,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-13",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.2",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Came from a living thing",
+   "dok": 2,
+   "stem": "A wooden pencil is made from a tree that was once alive. Why do biologists call the pencil nonliving?",
+   "opts": [
+    "It is too hard to be alive",
+    "It never contained any cells",
+    "It does not move on its own",
+    "It no longer carries out life processes: it does not use energy, grow, respond or reproduce"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Hardness is not one of the eight characteristics. Tree bark and turtle shells are hard and come from living things.",
+    "1": "Wood is made of the walls of cells that were once alive. Having been made of cells is not enough; the cells have to be alive now.",
+    "2": "Plenty of living things, like trees, do not move from place to place. Movement is not one of the eight."
+   },
+   "why": "Something that came from a living thing can still be nonliving now. The pencil has stopped all life processes.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 3,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-14",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.2",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Dormant but alive",
+   "dok": 2,
+   "stem": "An acorn sits in a jar on a shelf for six months and does nothing you can see. How should it be classified?",
+   "opts": [
+    "Nonliving, because it does not move",
+    "Nonliving, because it does not eat",
+    "Alive but dormant: its cells are alive and it can grow when it gets water and warmth",
+    "Alive only in the spring"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Movement is not one of the eight characteristics.",
+    "1": "An acorn stores its own food; it does not need to eat. It still uses a tiny amount of that energy while it waits.",
+    "3": "Life does not switch off and on with the season. The acorn is alive all year; it grows when conditions allow."
+   },
+   "why": "A dormant seed is alive. Its cells are using energy very slowly, and given water and warmth it will grow and develop into a tree.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 3,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-15",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.2",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Growth without life",
+   "dok": 2,
+   "stem": "Salt crystals left in a dish of salty water get bigger every day. Which characteristic shows the crystals are not alive?",
+   "opts": [
+    "They grow larger",
+    "They are not made of cells and contain no DNA",
+    "They have a regular shape",
+    "They dissolve if you add water"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Growth alone is not enough; crystals and volcanoes get bigger too. That is why one characteristic never decides the question.",
+    "2": "Shape is not one of the eight characteristics. Many living things have regular shapes.",
+    "3": "Dissolving is a physical change, not a response by a living thing."
+   },
+   "why": "To be alive a thing needs all eight characteristics. Salt crystals grow, but they are not made of cells and have no genetic code.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 3,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-16",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.2",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Evidence that mold is alive",
+   "dok": 2,
+   "stem": "At one station, green mold covered more of a slice of bread each day. Which observation is the best evidence that the mold is alive?",
+   "opts": [
+    "It spreads across the bread as its cells grow and reproduce, using the bread for energy",
+    "It is green",
+    "It has a strong smell",
+    "It is growing on food"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Color is not a characteristic of life. Green paint is not alive.",
+    "2": "Smell alone tells you nothing about life. A chemical can smell strong.",
+    "3": "Where it is found does not show that it is alive. Crumbs are on food too."
+   },
+   "why": "The spreading mold shows several characteristics at once: cells that grow and reproduce, and energy taken from the bread.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 3,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-17",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.2",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Moving is not required",
+   "dok": 2,
+   "stem": "A student says, \"Trees are not alive, because they cannot walk anywhere.\" What is wrong with the claim?",
+   "opts": [
+    "Moving from place to place is not one of the eight characteristics; trees grow, reproduce, respond and use energy",
+    "Trees do walk, very slowly",
+    "Trees are alive only in the summer",
+    "Nothing is wrong; the student is right"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Trees stay rooted. The claim is wrong for another reason: movement is not on the list.",
+    "2": "A tree in winter is dormant, not dead. Its cells stay alive.",
+    "3": "Trees have all eight characteristics, so the student is wrong."
+   },
+   "why": "Movement is not one of the eight characteristics. Trees respond (leaves turn toward light), grow, reproduce and use energy.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 3,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-18",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.2",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Biotic and abiotic",
+   "dok": 1,
+   "stem": "Biotic means living or once living; abiotic means never living. Which list is entirely abiotic?",
+   "opts": [
+    "Oak leaves, acorns, and sunlight",
+    "A shed antler, soil bacteria, and rain",
+    "Sunlight, river water, and rock",
+    "Mold, a potato, and an egg"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "Oak leaves and acorns come from a living tree, so they are biotic, even after they fall.",
+    "1": "A shed antler came from a living deer and soil bacteria are alive. Both are biotic.",
+    "3": "All three are living or came from a living thing. They are biotic."
+   },
+   "why": "Sunlight, water and rock were never alive, so they are abiotic. Anything living or once part of a living thing is biotic.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 3,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-19",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.3",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Reproduction in yeast",
+   "dok": 2,
+   "stem": "A jar of sourdough starter doubles overnight as each yeast cell splits into more yeast cells. Which characteristic of life is this?",
+   "opts": [
+    "Maintain homeostasis",
+    "Reproduce",
+    "Respond to the environment",
+    "Evolve as a population"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Homeostasis keeps conditions inside an organism steady. Making new yeast cells is something else.",
+    "2": "A response is a reaction to a stimulus, like moving away from heat. Here new organisms are being made.",
+    "3": "Evolution is a change in a population over many generations, not one night of doubling."
+   },
+   "why": "Each yeast cell divides to make new yeast cells. That is reproduction, and because one parent cell makes the offspring, it is asexual.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 4,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-20",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.3",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Growth or development",
+   "dok": 2,
+   "stem": "A tadpole in a Shenandoah pond loses its tail, grows legs and becomes a frog. Which word best describes this change?",
+   "opts": [
+    "Growth",
+    "Evolution",
+    "Reproduction",
+    "Development"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "Growth is getting bigger. The tadpole is changing its form and maturing, which is more than getting bigger.",
+    "1": "One frog cannot evolve. Evolution happens to a population over generations.",
+    "2": "No new organism is made here. One tadpole is becoming one frog."
+   },
+   "why": "Development is maturing and changing form over time. Growth is an increase in size; the tadpole does both, but the change in form is development.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 4,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-21",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.3",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Homeostasis in heat",
+   "dok": 2,
+   "stem": "On a hot August afternoon your face turns red as more blood flows near your skin, releasing heat. Which characteristic of life does this show?",
+   "opts": [
+    "Reproduce",
+    "Grow and develop",
+    "Universal genetic code",
+    "Maintain homeostasis"
+   ],
+   "key": 3,
+   "miss": {
+    "0": "No new organism is being made.",
+    "1": "Your body is not getting bigger or maturing; it is getting rid of extra heat.",
+    "2": "DNA carries the instructions, but the event here is your body keeping its temperature steady."
+   },
+   "why": "Sending more blood to the skin releases heat and keeps your internal temperature near its normal value. Keeping inside conditions stable is homeostasis.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 4,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-22",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.3",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "One cell does it all",
+   "dok": 2,
+   "stem": "A paramecium living in a roadside ditch is made of one cell. Which statement is true?",
+   "opts": [
+    "A one-celled organism is too small to be alive",
+    "Its one cell carries out every life process, while a multicellular organism divides the work among specialized cells",
+    "A multicellular organism has one cell that does all the work for the others",
+    "A paramecium has organs, like a tiny animal"
+   ],
+   "key": 1,
+   "miss": {
+    "0": "Size does not decide life. A paramecium has all eight characteristics.",
+    "2": "In a multicellular organism the work is shared: muscle cells, nerve cells and gut cells each do different jobs.",
+    "3": "Organs are made of many cells. A single cell has organelles, not organs."
+   },
+   "why": "A unicellular organism must get energy, respond and keep homeostasis all in one cell. A multicellular organism's cells specialize and depend on each other.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 4,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-23",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.3",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Who evolves",
+   "dok": 2,
+   "stem": "Which statement about evolution is accurate?",
+   "opts": [
+    "A single deer can evolve a thicker coat during one cold winter",
+    "Only bacteria evolve",
+    "A population changes over many generations as individuals with helpful traits leave more offspring",
+    "Organisms evolve because they want to survive"
+   ],
+   "key": 2,
+   "miss": {
+    "0": "One individual cannot evolve. A deer's coat may thicken in winter, but that is not passed on as a new trait.",
+    "1": "All populations of living things can evolve, from bacteria to oak trees.",
+    "3": "Wanting has nothing to do with it. Traits that help survival become more common because those individuals reproduce more."
+   },
+   "why": "Evolution is a change in a population over generations. Individuals with helpful traits survive and reproduce more, so those traits become more common.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 4,
+   "role": "opener"
+  },
+  {
+   "id": "OB-U00-24",
+   "set": "practice",
+   "unit": 0,
+   "lt": "0.3",
+   "sol": "BIO.3",
+   "category": "Molecular and Cellular",
+   "type": "mc",
+   "topic": "Metabolism",
+   "dok": 1,
+   "stem": "Which word names all the chemical reactions an organism uses to build up and break down materials as it lives?",
+   "opts": [
+    "Metabolism",
+    "Homeostasis",
+    "Development",
+    "Adaptation"
+   ],
+   "key": 0,
+   "miss": {
+    "1": "Homeostasis is keeping internal conditions stable. Metabolism supplies the energy that homeostasis uses.",
+    "2": "Development is maturing over time.",
+    "3": "An adaptation is an inherited trait that helps survival."
+   },
+   "why": "Metabolism is the sum of an organism's chemical reactions, building up and breaking down materials. It is how living things obtain and use energy.",
+   "src": "Virginia 2018 Biology SOL BIO.3 and BIO.4a as named in the Module 0 title; Module 0 class slides 3-24; PWCS Characteristics of Life targets. Instructional Guide page refs to add on the originality check.",
+   "lesson": 4,
+   "role": "opener"
+  }
+ ]
+}

@@ -304,7 +304,9 @@ ol.pj-rows li{list-style:decimal}
 // key = index (0-3) of the correct option, in the order shown. miss = note for each wrong option.
 // sch / va = why it is a Schwebach / Virginia challenge (null if not). canvas = [label,url] for Mr. Schwebach's classes.
 // site = [label, relative path] on scienceonepagers.org. maps = Module 1 summative items (M1-xx) this question practices.
+const PUNITS_EXTRA = {"0":"Characteristics of Life"};
 const UNITS = {"1":"Biochemistry","2":"Cell Structure & Function","3":"Cell Energetics","4":"Nucleic Acids & Protein Synthesis","5":"Cell Growth, Division & Specialization","6":"Genetics & Heredity","7":"Evolution","8":"Classification & Biodiversity","9":"Bacteria & Viruses","10":"Ecology"};
+const PUNITS = Object.assign({}, PUNITS_EXTRA, UNITS);
 const BANK = [
 
 // ───── Unit 1 · Biochemistry ─────
@@ -1981,26 +1983,26 @@ const BANK = [
     Object.keys(S.data).forEach(id => { if (S.data[id] && S.data[id].c) checkedSet.add(id); });
     const ans = id => S.data[id] ? S.data[id].a : undefined;
     const avail = Object.keys(idx.units).map(Number).sort((a,b) => a-b);
-    let unit = Number(params.get("unit") || 0) || 0;
+    let unit = params.get("unit") !== null && params.get("unit") !== "" && !isNaN(Number(params.get("unit"))) ? Number(params.get("unit")) : null;
     let lt = params.get("lt") || "";
-    if (lt && !unit) unit = Number(lt.split(".")[0]) || 0;
+    if (lt && unit === null) unit = Number(lt.split(".")[0]);
     let only = params.get("q") ? new Set(params.get("q").split(/[\s,]+/).filter(Boolean).map(s => s.toUpperCase())) : null;
-    if (only && !unit){ const m = [...only][0].match(/^OB-U(\d+)/); if (m) unit = Number(m[1]); }
+    if (only && unit === null){ const m = [...only][0].match(/^OB-U(\d+)/); if (m) unit = Number(m[1]); }
     const projector = params.get("projector") === "1";
 
     const uSel = $("p-unit"), ltSel = $("p-lt");
-    Object.keys(UNITS).forEach(u => {
+    Object.keys(PUNITS).forEach(u => {
       const o = document.createElement("option"); o.value = u;
-      o.textContent = "Unit " + u + " · " + UNITS[u] + (idx.units[u] ? " (" + idx.units[u].count + ")" : " · coming");
+      o.textContent = "Unit " + u + " · " + PUNITS[u] + (idx.units[u] ? " (" + idx.units[u].count + ")" : " · coming");
       uSel.appendChild(o);
     });
 
-    const want = unit ? (idx.units[unit] ? [unit] : []) : avail;
+    const want = unit !== null ? (idx.units[unit] ? [unit] : []) : avail;
     loadUnits(idx, want).then(res => {
       let items = [];
       res.forEach(({d}) => { Object.assign(LTNAME, d.meta.lts || {}); items = items.concat(d.items); });
       if (projector){ runProjector(items, {unit, lt, only}); return; }
-      if (!unit && avail.length) unit = avail[0];
+      if (unit === null && avail.length) unit = avail[0];
       uSel.value = String(unit);
       function fillLT(){
         ltSel.innerHTML = '<option value="">All learning targets</option>';
@@ -2040,7 +2042,7 @@ const BANK = [
         } else {
           let lastLT = null;
           shown.forEach(q => {
-            if (q.lt !== lastLT){ lastLT = q.lt; h += '<h2 class="unit-head">LT ' + esc(q.lt) + (LTNAME[q.lt] ? ' · ' + esc(LTNAME[q.lt]) : '') + '<span>Unit ' + q.unit + ' · ' + esc(UNITS[q.unit]) + '</span></h2>'; }
+            if (q.lt !== lastLT){ lastLT = q.lt; h += '<h2 class="unit-head">LT ' + esc(q.lt) + (LTNAME[q.lt] ? ' · ' + esc(LTNAME[q.lt]) : '') + '<span>Unit ' + q.unit + ' · ' + esc(PUNITS[q.unit]) + '</span></h2>'; }
             h += card(q);
           });
           if (!h) h = '<p class="empty">No questions match. Choose another learning target.</p>';
@@ -2083,7 +2085,7 @@ const BANK = [
       });
       function setURL(){
         const p = new URLSearchParams(); p.set("set","practice");
-        if (lt) p.set("lt", lt); else if (unit) p.set("unit", unit);
+        if (lt) p.set("lt", lt); else if (unit !== null) p.set("unit", unit);
         history.replaceState(null, "", location.pathname + "?" + p.toString());
       }
       uSel.addEventListener("change", () => {
@@ -2119,7 +2121,7 @@ const BANK = [
 
   // ── WARM-UP / PROJECTOR ──
   function runProjector(items, f){
-    let pool = items.filter(q => f.only ? f.only.has(q.id) : ((!f.unit || q.unit === f.unit) && (!f.lt || q.lt === f.lt)));
+    let pool = items.filter(q => f.only ? f.only.has(q.id) : ((f.unit == null || q.unit === f.unit) && (!f.lt || q.lt === f.lt)));
     const seed = params.get("seed");
     const r = rng(seed || String(Date.now()));
     pool = pool.slice().sort((a,b) => a.id < b.id ? -1 : 1);
@@ -2129,11 +2131,11 @@ const BANK = [
     document.body.classList.add("projecting");
     const P = $("proj"); P.classList.remove("hidden");
     let k = 0, shown = false;
-    const label = f.lt ? "LT " + f.lt + (LTNAME[f.lt] ? " · " + LTNAME[f.lt] : "") : f.unit ? "Unit " + f.unit + " · " + UNITS[f.unit] : "Practice";
+    const label = f.lt ? "LT " + f.lt + (LTNAME[f.lt] ? " · " + LTNAME[f.lt] : "") : f.unit != null ? "Unit " + f.unit + " · " + PUNITS[f.unit] : "Practice";
     function draw(){
       if (!pool.length){ P.innerHTML = '<div class="pj-top"><span>Warm-up</span><a class="pj-x" href="' + location.pathname + '?set=practice">Exit</a></div><p class="pj-stem">No questions for this learning target yet.</p>'; return; }
       const q = pool[k], v = viewOf(q);
-      let h = '<div class="pj-top"><span>Warm-up · ' + esc(label) + '</span><span>' + (k+1) + ' of ' + pool.length + '</span><a class="pj-x" href="' + esc(location.pathname + "?set=practice&" + (f.lt ? "lt=" + f.lt : "unit=" + (f.unit || ""))) + '">Exit</a></div>';
+      let h = '<div class="pj-top"><span>Warm-up · ' + esc(label) + '</span><span>' + (k+1) + ' of ' + pool.length + '</span><a class="pj-x" href="' + esc(location.pathname + "?set=practice&" + (f.lt ? "lt=" + f.lt : "unit=" + (f.unit != null ? f.unit : ""))) + '">Exit</a></div>';
       h += '<div class="pj-body"><p class="pj-stem">' + esc(q.type === "hotspot" ? v.stem : q.stem) + '</p>' + table(q.table);
       if (q.figure) h += '<figure class="pfig pj-fig"><img src="data/fig/' + esc(q.figure) + '.svg" alt="' + esc(q.topic) + '"></figure>';
       if (q.stem2) h += '<p class="pj-stem">' + esc(q.stem2) + '</p>';
@@ -2150,7 +2152,7 @@ const BANK = [
       if (shown) h += '<div class="pj-why">' + esc(q.why) + '</div>';
       h += '</div><div class="pj-nav">';
       if (k > 0) h += '<button type="button" class="pj-btn ghosty" data-pj="prev">Back</button>';
-      h += shown ? (k < pool.length - 1 ? '<button type="button" class="pj-btn" data-pj="next">Next question</button>' : '<a class="pj-btn" href="' + esc(location.pathname + "?set=practice&" + (f.lt ? "lt=" + f.lt : "unit=" + (f.unit || ""))) + '">Done</a>')
+      h += shown ? (k < pool.length - 1 ? '<button type="button" class="pj-btn" data-pj="next">Next question</button>' : '<a class="pj-btn" href="' + esc(location.pathname + "?set=practice&" + (f.lt ? "lt=" + f.lt : "unit=" + (f.unit != null ? f.unit : ""))) + '">Done</a>')
                  : '<button type="button" class="pj-btn" data-pj="show">Show the answer</button>';
       h += '</div>';
       P.innerHTML = h;
