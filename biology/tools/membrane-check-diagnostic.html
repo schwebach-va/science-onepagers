@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Fifteen questions across the five ideas of Campbell Chapter 5 - membrane structure and fluidity, osmosis and tonicity, transport, signal reception, and transduction and response - each one answered with the reasoning and followed by something to draw. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/membrane-check-diagnostic.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Membrane Check - The Five Ideas Behind Crossing and Signalling">
+<meta property="og:description" content="Fifteen questions across the five ideas of Campbell Chapter 5 - membrane structure and fluidity, osmosis and tonicity, transport, signal reception, and transduction and response - each one answered with the reasoning and followed by something to draw. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/membrane-check-diagnostic.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Membrane Check | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;
+  --card:#FFFFFF;
+  --ink:#1D1A15;
+  --ink-soft:#5A544A;
+  --bond:#1F7A8C;
+  --bond-soft:#DEEBEE;
+  --shell:#D2CCC0;
+  --rule:#DDD8CE;
+  --flag:#B85042;
+  --flag-soft:#F7E9E6;
+  --solid:#3F7A55;
+  --solid-soft:#E2EDE6;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;
+    --card:#1D1A15;
+    --ink:#EDE9E1;
+    --ink-soft:#A8A198;
+    --bond:#6FC0CE;
+    --bond-soft:#172E33;
+    --shell:#423D34;
+    --rule:#332E27;
+    --flag:#E08A7C;
+    --flag-soft:#2E1E1A;
+    --solid:#7FC395;
+    --solid-soft:#18291E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);
+  line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+p{margin:0 0 1rem;max-width:36rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+
+/* ---- tile grid : one card per idea, coloured the way the board is coloured ---- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin:1.6rem 0 1.8rem}
+@media (max-width:34rem){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:24rem){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{
+  position:relative;background:var(--card);border:1.5px solid var(--shell);
+  border-left:5px solid var(--accent,var(--shell));
+  border-radius:3px;padding:.7rem .6rem .6rem;min-height:6rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.tile .idx{font-family:var(--sans);font-size:.7rem;font-weight:600;color:var(--ink-soft)}
+.tile .sym{font-family:var(--sans);font-size:1.35rem;font-weight:700;line-height:1;margin:.2rem 0 .3rem;letter-spacing:-0.01em;color:var(--accent,var(--ink))}
+.tile .nm{font-family:var(--sans);font-size:.74rem;font-weight:500;color:var(--ink-soft);line-height:1.25}
+.tile.solid{background:var(--solid-soft);border-color:var(--solid)}
+.tile.mid{background:var(--bond-soft);border-color:var(--bond)}
+.tile.flag{background:var(--flag-soft);border-color:var(--flag);border-width:2.5px;border-left-width:5px}
+.tile .score{position:absolute;top:.55rem;right:.6rem;font-family:var(--sans);
+  font-size:.72rem;font-weight:700;color:var(--ink-soft)}
+
+/* ---- buttons ---- */
+button{font:inherit;cursor:pointer}
+.go{
+  font-family:var(--sans);font-weight:600;font-size:1rem;
+  background:var(--bond);color:var(--paper);border:none;border-radius:3px;
+  padding:.85rem 1.5rem;min-height:3rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);
+  font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+
+/* ---- question ---- */
+.bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden;margin-bottom:1rem}
+.bar i{display:block;height:100%;background:var(--bond);transition:width .25s}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);
+  border-bottom:1.5px solid var(--rule);padding-bottom:.5rem;margin-bottom:1.4rem}
+.q{font-size:1.2rem;line-height:1.45;margin:0 0 1.3rem;max-width:34rem}
+.opts{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem}
+.opt{
+  text-align:left;background:var(--card);border:1.5px solid var(--rule);
+  border-radius:3px;padding:.85rem 1rem;min-height:3.1rem;color:var(--ink);
+  font-family:var(--serif);font-size:1rem;line-height:1.4;width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--bond)}
+.opt:disabled{cursor:default;opacity:1}
+.opt.right{border-color:var(--solid);background:var(--solid-soft);font-weight:600}
+.opt.wrong{border-color:var(--flag);background:var(--flag-soft)}
+.why{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);
+  border-radius:3px;padding:1rem 1.1rem;margin-bottom:1.2rem}
+.why .tag{display:block;font-family:var(--sans);font-size:.76rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+.why p{margin:0;font-size:1rem;line-height:1.5}
+
+/* ---- results ---- */
+.band{border-top:1.5px solid var(--rule);padding:1.1rem 0 .3rem}
+.band.flag{border-top-color:var(--flag);border-top-width:2.5px}
+.band h3{font-family:var(--sans);font-weight:700;font-size:1.05rem;margin:0 0 .2rem}
+.band .verdict{font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft);margin:0 0 .7rem}
+.do{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.9rem 1rem}
+.do h4{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 .4rem}
+.do p{margin:0;font-size:1rem;line-height:1.5}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+<p class="sop-eyebrow">Bio Tool #34 &middot; DE Bio 101 Unit 5 &middot; Campbell Chapter 5</p>
+
+
+<!-- ========== INTRO ========== -->
+<section id="intro">
+  <h1>Membrane Check</h1>
+  <p class="lede">Chapter 5 asks two different kinds of question that happen to share one structure: what gets across a membrane, and how a message gets through one without crossing at all. Fifteen questions sort out which of the five ideas you already own. About thirteen minutes.</p>
+  <p class="fine">Nothing is submitted. No score leaves this iPad and I never see it. Answer honestly and the result is worth something.</p>
+
+  <div class="grid" id="introGrid"></div>
+
+  <p class="fine" style="margin-bottom:1.6rem">Three questions on each idea. Reception and transduction are kept apart on purpose, because they fail separately and the second one is where this chapter usually costs people marks.</p>
+  <button class="go" id="start">Start the check</button>
+</section>
+
+<!-- ========== QUESTION ========== -->
+<section id="quiz" class="hidden">
+  <div class="bar"><i id="fill" style="width:0%"></i></div>
+  <div class="meta"><span id="bandName"></span><span id="counter"></span></div>
+  <p class="q" id="stem"></p>
+  <div class="opts" id="opts"></div>
+  <div class="why hidden" id="why"><span class="tag" id="whyTag"></span><p id="whyText"></p></div>
+  <button class="go hidden" id="next">Next</button>
+</section>
+
+<!-- ========== RESULTS ========== -->
+<section id="results" class="hidden">
+  <h1>What this maps, and where to start</h1>
+  <p class="lede" id="summary"></p>
+  <div class="grid" id="resultGrid"></div>
+  <p class="fine">The outlined tiles are the ones worth a weekend. The filled ones you can skip.</p>
+  <h2>Where your hands go first</h2>
+  <div id="bands"></div>
+  <h2>How the Checkpoint asks Chapter 5</h2>
+  <p>Checkpoint Chapter 5 sits on the NOVA Canvas Quizzes tab. Unlimited attempts, highest score kept, and it shows the right answer after every try. Take it cold, work the drawings above, take it again. Nearly a quarter of its questions put a labelled diagram in front of you &mdash; a membrane with its parts marked, a U-tube, a transport protein mid-cycle &mdash; and ask what you are looking at, so practise reading those off a drawing rather than off a list of terms.</p>
+  <p>Two things in Unit 5 are built to be handled rather than read. <a href="signal-relay.html">The Signal Relay</a> runs one signal at a time through three receptors and lets you switch off any step to see what stops. <a href="membrane-patch.html">The Membrane Patch</a> turns a piece of membrane over so you can name the parts from either side.</p>
+  <p style="margin-top:1.8rem"><button class="ghost" id="again">Run the check again</button></p>
+</section>
+
+
+<footer class="sop-foot">Unit 5, Membrane Transport and Cell Signaling &middot; NVCC BIO 101, Campbell Chapter 5 &middot; five ideas, three questions each, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+<script>
+const BANDS=[
+ {id:"fluidity",sym:"37°C",name:"Membrane structure and fluidity",color:"#4C5A56",
+  task:"Draw the bilayer twice, once cold and once warm, using capsules for the tails — straight ones for saturated, a kink in the middle for a cis double bond. In both drawings wedge in a few cholesterol molecules as short rigid plates between the tails. On the cold drawing mark where the tails are packing too tightly together; on the warm one mark where they have drifted too far apart. Beside each mark write what the cholesterol is doing there. It is the same molecule in both drawings doing opposite-sounding jobs, which is why your membranes keep working through a fever."},
+ {id:"osmosis",sym:"H₂O→",name:"Osmosis, tonicity and water",color:"#1F7A8C",
+  task:"Draw a U-tube with a membrane across the bottom. Put two solute dots in the left arm and six in the right, and write the molarity under each. Now draw arrows for water only — never for the solute, which cannot get through. Redraw the tube as it finishes, with the arms at different heights, and label the higher one. Then write one sentence on why the level stops rising instead of going over the top. That stopping point is the same thing as a carrot stick going stiff instead of exploding."},
+ {id:"transport",sym:"Na⁺/K⁺",name:"Transport across the membrane",color:"#C98A2E",
+  task:"Draw one membrane carrying three proteins: a channel as an open pore, a carrier as a shape caught mid-flip, and a pump with ATP arriving at it. Beside each, draw the concentration gradient as a wedge and put an arrow showing which way the solute goes relative to that wedge. Then add a pair next door — a proton pump, and a cotransporter beside it — and trace one H⁺ out through the pump and back in through the cotransporter, bringing a sucrose with it. Cross out the ATP on the cotransporter and write where its energy actually came from."},
+ {id:"reception",sym:"7TM",name:"Signal reception",color:"#6B4E8C",
+  task:"Draw one membrane with three receptors on it. Make the first a ribbon that crosses the bilayer and comes back, seven crossings in all, and count them on your own drawing. Make the second a pore with a lid on it. Draw the third floating in the cytosol, touching no membrane at all. Then draw three signals outside — a small lipid-soluble one, a water-soluble one, a neurotransmitter — and send each to the only receptor it could possibly use, deciding each by whether that molecule can slip through a bilayer on its own. Beside every pairing write the first thing the cell does next."},
+ {id:"transduction",sym:"P→P",name:"Transduction and response",color:"#B85042",
+  task:"Draw four boxes in a row — receptor, relay protein, kinase, response — with an arrow between each. Put a small circled P on every protein that a kinase has handed a phosphate to. Now take a pencil and draw an X through one arrow in the middle, and shade every box downstream of it. Write what the cell is still doing and what it has stopped doing. Then say what would be different if you had drawn the X through the very first arrow instead, and which of the two a drug would rather be."}
+];
+
+const ITEMS=[
+ {b:0,q:"Two membranes are identical except that one contains cholesterol. Both are tested at 10 °C and again at 40 °C. Which statement describes what the cholesterol does?",
+  o:["It makes the membrane more fluid at both temperatures",
+     "It makes the membrane less fluid at both temperatures",
+     "It holds fluidity steadier: less fluid than it would be when warm, less likely to solidify when cold",
+     "It has no effect on fluidity and only changes the thickness of the membrane"],a:2,
+  w:"Cholesterol sits between the tails and gets in the way of both things a membrane can do wrong. When it is warm, the rigid rings keep the tails from drifting too freely; when it is cold, the same rings stop the tails packing into a solid. One molecule, two opposite-sounding jobs, and the result is a membrane whose fluidity barely moves. Keep this in mind when you reach the mitochondrion, because a membrane that has to hold a gradient cannot afford to leak at either temperature."},
+ {b:0,q:"A membrane protein's amino acid sequence contains no stretch of hydrophobic residues anywhere along it. Where must that protein sit?",
+  o:["Attached to one surface of the membrane",
+     "Spanning the bilayer from one side to the other",
+     "Buried in the core of the bilayer, surrounded by tails",
+     "Floating in the cytosol, never touching the membrane"],a:0,
+  w:"Anything that crosses the bilayer, or parks inside it, has to be comfortable among the fatty acid tails, and that takes a run of hydrophobic residues. Without one, the protein can only hold onto a surface, which is what peripheral means. The useful consequence is that you can predict where a protein sits from its sequence alone, which is how whole genomes get sorted into membrane and non-membrane proteins before anyone looks at a cell."},
+ {b:0,q:"One cell's plasma membrane, inner mitochondrial membrane and endoplasmic reticulum membrane are compared. What differs most between them?",
+  o:["Whether they are built as a phospholipid bilayer",
+     "Whether they are fluid at body temperature",
+     "Whether their phospholipids have a water-loving head and water-fearing tails",
+     "The particular proteins and lipids each one carries"],a:3,
+  w:"All of a cell's membranes are the same architecture: a fluid bilayer of amphipathic phospholipids. What makes one of them a respiring membrane and another a shipping membrane is the set of proteins embedded in it, plus smaller differences in lipid composition. Architecture is shared, function is bolted on — which is why the inner mitochondrial membrane can run a proton gradient and the plasma membrane around it cannot."},
+ {b:1,q:"A U-tube is divided by a membrane that lets water through but not sucrose. The left arm holds 0.2 M sucrose and the right arm 0.6 M sucrose, filled to the same height. What happens?",
+  o:["Water moves from the right arm to the left, and the left level rises",
+     "Water moves from the left arm to the right, and the right level rises",
+     "Nothing moves, because both arms contain sucrose",
+     "Sucrose moves from right to left until the concentrations match"],a:1,
+  w:"Water crosses toward the side with more dissolved solute, which here is the right arm, so the right level climbs and the left drops. Nothing is pulling the water across; there is simply more room for it to move one way than the other. Notice that the sucrose never moves at all, because the membrane does not pass it — in these problems, identifying what cannot cross is what settles the direction."},
+ {b:1,q:"Carrot sticks are left overnight, some in distilled water and some in concentrated salt solution. The ones in distilled water come out stiff and the ones in salt come out limp. What happened?",
+  o:["Water left the cells in both, at different rates",
+     "Water entered the cells in distilled water and left the cells in salt solution",
+     "Salt entered the cells in the salt solution and stiffened them",
+     "The cells in salt solution took up water and swelled"],a:1,
+  w:"Distilled water has almost no solute in it, so it is hypotonic to the carrot cells and water moves in until the cell presses against its wall and goes stiff. The salt solution is hypertonic, so water leaves and the cells go slack. The direction is always set by which side has more dissolved solute, and that one rule covers a wilted plant recovering after watering just as well as it covers a carrot stick."},
+ {b:1,q:"Two cells sit in pond water, which is well below both of them in solute concentration: a root hair cell and a human red blood cell. The root hair cell swells and then holds; the red blood cell bursts. What accounts for the difference?",
+  o:["The root hair cell is impermeable to water, so almost none enters it",
+     "Pond water is hypertonic to the root hair cell and hypotonic to the blood cell",
+     "The red blood cell pumps water inward until it ruptures",
+     "The root hair cell's wall pushes back, and that pressure opposes further water entry"],a:3,
+  w:"Water enters both cells, because the pond is the dilute side for both of them. The difference is what happens next. The root hair cell swells until it is pressing hard on its own cell wall, and the wall presses back; that pressure opposes any further water coming in, and the cell settles at turgid. The red blood cell has no wall and nothing to stop the swelling. An animal cell living in fresh water has to deal with this some other way, which is what a contractile vacuole is for, and it is why fluid given into a vein is matched to the blood rather than being plain water."},
+ {b:2,q:"Proton pumps that move H⁺ against its gradient are found in bacteria, in archaea and in eukaryotes. What does that distribution most strongly suggest?",
+  o:["Pumping H⁺ out is an old solution that was already in use before the three domains separated",
+     "H⁺ is the only ion that a cell is able to pump",
+     "Eukaryotes obtained all of their pumps from bacteria they engulfed",
+     "Moving H⁺ against its gradient turns out not to require energy"],a:0,
+  w:"When something appears in all three domains, the straightforward reading is that it was present in their common ancestor rather than invented three separate times. Pumping protons is apparently that old, and it is worth the cost because a proton gradient can then be spent on other work. That is exactly the trick you will meet again in respiration and photosynthesis, where the gradient a pump builds is cashed in to make ATP."},
+ {b:2,q:"CFTR forms a pore in the membrane, and chloride ions move through that pore down their electrochemical gradient. Which category does the chloride movement belong to?",
+  o:["A pump carrying out active transport",
+     "A carrier protein that changes shape and spends ATP on each ion",
+     "A channel protein carrying out facilitated diffusion",
+     "Bulk transport in a vesicle"],a:2,
+  w:"Two features in the description settle it: there is a pore, and the ions are going down their gradient. That is a channel, and movement down a gradient through a channel is facilitated diffusion, which costs the cell nothing per ion. The cell does spend something to work the gate that opens the pore, so the protein is not free to operate — but the ions' trip itself is passive, and keeping those two costs separate is the whole distinction. When this channel is faulty the surface mucus loses water and thickens, which is cystic fibrosis."},
+ {b:2,q:"A plant cell takes up sucrose using a cotransporter that carries H⁺ in at the same time. To raise the rate at which sucrose enters, what should you do?",
+  o:["Lower the sucrose concentration outside the cell",
+     "Inhibit the proton pump so that more H⁺ stays outside",
+     "Raise the pH outside the cell so that fewer H⁺ are present",
+     "Raise the activity of the proton pump that builds the H⁺ gradient"],a:3,
+  w:"The cotransporter has no ATP of its own. It runs on H⁺ falling back down a gradient, and that gradient is built by a separate pump that does spend ATP. Make the pump work harder and the gradient steepens, so more sucrose is dragged in alongside the returning protons. Inhibiting the pump or stripping out the H⁺ removes the energy source entirely. Your own intestine pulls glucose in by the same indirect arrangement, using a sodium gradient instead."},
+ {b:3,q:"A cell sitting directly beside one that is releasing a paracrine signal shows no response at all, while a cell further away does respond. What is the best explanation?",
+  o:["The signal cannot travel a short distance, only a long one",
+     "The nearby cell has no receptor for that signal",
+     "The signal was destroyed before it had gone any distance",
+     "The signal is too large to have left the cell that released it"],a:1,
+  w:"Being close enough is necessary but it decides nothing on its own. A cell is a target for a signal only if it carries a receptor that the signal fits, and a cell without that receptor sits in the middle of the message and ignores it. Notice that the signal plainly did leave its cell, because a cell further off responded to it. This is also the answer to a question that comes up with hormones: a hormone reaches every tissue through the blood, yet only some tissues change, and the receptor is the reason."},
+ {b:3,q:"A receptor's single polypeptide crosses the membrane seven times, and when a signal binds to it, the receptor activates a nearby protein that binds GTP. Which kind of receptor is this?",
+  o:["A ligand-gated ion channel",
+     "An intracellular receptor",
+     "A G protein-coupled receptor",
+     "A carrier protein"],a:2,
+  w:"Two details name it: the seven passes through the bilayer, and the GTP-binding partner it switches on. A ligand-gated channel opens a pore instead, and an intracellular receptor is not in the membrane at all. This receptor family is worth recognising on sight, because a large share of the medicines in a pharmacy act on one of them."},
+ {b:3,q:"Aldosterone is a steroid and passes through membranes easily. Where is its receptor, and what does the bound receptor then do?",
+  o:["Inside the cell, and the complex acts on the DNA to change which genes are transcribed",
+     "On the cell surface, and it opens an ion channel",
+     "On the cell surface, and it switches on a G protein",
+     "Inside the cell, and it pumps ions out across the membrane"],a:0,
+  w:"A signal that can cross a bilayer by itself has no need to be detected at the surface, and aldosterone is not: its receptor waits inside, and the pair of them end up acting at the DNA, changing which genes get read. That is why a steroid's effects take longer to appear and last longer than a surface signal's, and why only cells carrying that internal receptor respond even though the hormone reaches all of them."},
+ {b:4,q:"In a phosphorylation cascade, each active kinase attaches a phosphate group to the next protein down the line. What does attaching that phosphate accomplish?",
+  o:["It changes the next protein's shape, switching its activity on",
+     "It stores energy in that protein for the cell to spend later",
+     "It marks the protein to be destroyed straight away",
+     "It converts the protein into a second messenger"],a:0,
+  w:"A phosphate is a bulky group carrying negative charge, and hanging one on a protein pulls the protein into a different shape — which, for a kinase, is an active shape. The step is a switch, not a battery. It is a reversible switch too, because phosphatases take the phosphate back off again, and a cell that could only switch things on would be in serious trouble. Watch for this same on-off mechanism running the cell cycle when you reach cell division."},
+ {b:4,q:"Two cell types receive the identical signal. In one, the response is a change in the activity of an enzyme in the cytoplasm; in the other, it is a change in which genes are switched on. What does that show?",
+  o:["One of the two cells received the signal incorrectly",
+     "The signal must have been chemically altered before reaching the second cell",
+     "The same signal can produce different responses, depending on what each cell already contains",
+     "Only one of the two cells carried out transduction"],a:2,
+  w:"A signalling pathway does not carry its own instructions about what to do at the end. It carries only the fact that a signal arrived, and the response comes out of whatever relay proteins, enzymes and genes that particular cell has to work with. The response is decided by the receiving cell rather than by the message, which is also why the same hormone can speed your heart and slow your digestion at once."},
+ {b:4,q:"A tumour's growth pathway runs receptor, then relay protein, then kinase, then transcription of a cell-division gene. A treatment is aimed at the relay protein in the middle rather than at the receptor. What is the argument for choosing the middle of the pathway?",
+  o:["The receptor is too small a target to aim a drug at",
+     "A relay protein is not actually required for the gene to be transcribed",
+     "Blocking the receptor would amplify the signal instead of stopping it",
+     "A step inside the pathway can still be shut off even when a mutated receptor is stuck permanently on"],a:3,
+  w:"Many cancers get going because the receptor itself is mutated into a form that behaves as though a signal were always bound, so blocking the outside of it achieves nothing. The pathway is a sequence, though, and cutting it anywhere stops everything downstream of the cut — so a step below the fault is still a usable target. This also tells you where resistance comes from: a second mutation further down the line restores the signal below the drug."}
+];
+
+const $=id=>document.getElementById(id);
+let i=0,answers=new Array(ITEMS.length).fill(null);
+
+function tile(b,idx,score){
+  const d=document.createElement("div");
+  d.className="tile";
+  d.style.setProperty("--accent",b.color);
+  if(score!==undefined){
+    if(score===3)d.classList.add("solid");
+    else if(score===2)d.classList.add("mid");
+    else d.classList.add("flag");
+  }
+  d.innerHTML='<span class="idx">'+(idx+1)+'</span>'+
+    (score!==undefined?'<span class="score">'+score+'/3</span>':'')+
+    '<span class="sym">'+b.sym+'</span><span class="nm">'+b.name+'</span>';
+  return d;
+}
+BANDS.forEach((b,n)=>$("introGrid").appendChild(tile(b,n)));
+
+function render(){
+  const it=ITEMS[i];
+  $("bandName").textContent=BANDS[it.b].name;
+  $("counter").textContent=(i+1)+" of "+ITEMS.length;
+  $("fill").style.width=(i/ITEMS.length*100)+"%";
+  $("stem").textContent=it.q;
+  $("why").classList.add("hidden");
+  $("next").classList.add("hidden");
+  const box=$("opts");box.innerHTML="";
+  it.o.forEach((text,n)=>{
+    const btn=document.createElement("button");
+    btn.className="opt";btn.type="button";btn.textContent=text;
+    btn.addEventListener("click",()=>choose(n));
+    box.appendChild(btn);
+  });
+  window.scrollTo(0,0);
+}
+
+function choose(n){
+  const it=ITEMS[i];
+  answers[i]=(n===it.a);
+  [...$("opts").children].forEach((b,k)=>{
+    b.disabled=true;
+    if(k===it.a)b.classList.add("right");
+    else if(k===n)b.classList.add("wrong");
+  });
+  $("whyTag").textContent=(n===it.a)?"Right — and here is why":"The reasoning";
+  $("whyText").textContent=it.w;
+  $("why").classList.remove("hidden");
+  $("next").textContent=(i===ITEMS.length-1)?"See what it found":"Next";
+  $("next").classList.remove("hidden");
+  save();
+}
+
+$("next").addEventListener("click",()=>{
+  if(i===ITEMS.length-1){finish();}
+  else{i++;render();save();}
+});
+
+$("start").addEventListener("click",()=>{
+  $("intro").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  render();
+});
+
+function finish(){
+  $("quiz").classList.add("hidden");
+  $("results").classList.remove("hidden");
+  const scores=BANDS.map((b,n)=>
+    ITEMS.reduce((s,it,k)=>s+((it.b===n&&answers[k])?1:0),0));
+  const total=scores.reduce((a,c)=>a+c,0);
+  const weak=scores.filter(s=>s<=1).length;
+  $("summary").textContent=
+    total+" of 15 correct. "+
+    (weak===0?"Nothing here is asking for a weekend. Take the two lowest tiles, work their drawings once, and give the rest of your time to the Checkpoint itself. This is a map of where your time goes rather than a score, so run it again another day, rested, and see whether it still reads the same."
+     :weak===1?"One of the five is where your studying starts. Its drawing is below and the other four are close enough to leave alone. This is a map rather than a score, so run it again on a different day, after a proper night's sleep, to see whether that one holds."
+     :(weak===BANDS.length?"All five are":weak+" of the five are")+" where your studying starts. Take them one at a time in the order below. Work two of the drawings, then come back to this on another day and rested — it is a map of where your time goes, and the map only reads true when you are fresh.");
+  const g=$("resultGrid");g.innerHTML="";
+  BANDS.forEach((b,n)=>g.appendChild(tile(b,n,scores[n])));
+  const holder=$("bands");holder.innerHTML="";
+  BANDS.map((b,n)=>({b,n,s:scores[n]})).sort((x,y)=>x.s-y.s).forEach(({b,n,s})=>{
+    const sec=document.createElement("section");
+    sec.className="band"+(s<=1?" flag":"");
+    sec.innerHTML='<h3>'+b.name+'</h3><p class="verdict">'+s+' of 3 — '+
+      (s===3?"this one is yours":s===2?"one loose end":"start your studying here")+'</p>'+
+      (s<3?'<div class="do"><h4>Draw it before you read it</h4><p>'+b.task+'</p></div>':'');
+    holder.appendChild(sec);
+  });
+  window.scrollTo(0,0);
+  save();
+}
+
+$("again").addEventListener("click",()=>{
+  i=0;answers.fill(null);
+  $("results").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  render();save();
+});
+
+function save(){
+  try{localStorage.setItem("membranecheck",JSON.stringify({i,answers}));}catch(e){}
+}
+try{
+  const raw=localStorage.getItem("membranecheck");
+  if(raw){
+    const st=JSON.parse(raw);
+    if(st&&Array.isArray(st.answers)&&st.answers.length===ITEMS.length&&st.answers.some(a=>a!==null)){
+      answers=st.answers;i=Math.min(st.i||0,ITEMS.length-1);
+      $("start").textContent="Pick up where you left off";
+    }
+  }
+}catch(e){}
+</script>
+</body>
+</html>
