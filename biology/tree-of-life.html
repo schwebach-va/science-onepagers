@@ -5,73 +5,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="A zoomable tree of life from the first cell to the organisms alive today, with a picture and a short story for every branch. Free, for students and teachers.">
 <title>The Tree of Life | Science One-Pagers</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
 :root{
-  --bg:#f5f6f8; --ink:#141a2b; --muted:#5b6478; --panel:#ffffff; --line:rgba(20,26,43,.14); --line2:rgba(20,26,43,.28);
-  --chip:#eceef3; --accent:#1d4ed8; --shadow:0 12px 40px rgba(20,26,43,.18);
+  --bg:#f6f3ec; --ink:#1a1d2b; --muted:#666a78; --panel:#fffdf8; --line:rgba(26,29,43,.13); --line2:rgba(26,29,43,.28);
+  --chip:#ece8de; --accent:#1d4ed8; --shadow:0 18px 50px rgba(26,29,43,.18); --glass:rgba(246,243,236,.78);
   --fd:'Fraunces',Georgia,'Times New Roman',serif; --fb:'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 :root[data-mode="dark"]{
-  --bg:#0b1020; --ink:#e6edf7; --muted:#8b95a7; --panel:#111a2e; --line:rgba(230,237,247,.14); --line2:rgba(230,237,247,.3);
-  --chip:#1b2540; --accent:#7dd3fc; --shadow:0 12px 40px rgba(0,0,0,.5);
+  --bg:#070b18; --ink:#e8edf7; --muted:#8e98ac; --panel:#0f172a; --line:rgba(232,237,247,.13); --line2:rgba(232,237,247,.3);
+  --chip:#1a2440; --accent:#7dd3fc; --shadow:0 18px 50px rgba(0,0,0,.55); --glass:rgba(9,14,30,.72);
 }
 html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.45;overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.45;overflow:hidden;overscroll-behavior:none}
 *{box-sizing:border-box}
 #app{display:grid;grid-template-rows:auto 1fr;height:100vh;height:100dvh}
-header{display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--bg);z-index:5;flex-wrap:wrap}
-header h1{font-family:var(--fd);font-weight:500;font-size:22px;margin:0;letter-spacing:-.01em;white-space:nowrap}
+header{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--line);background:var(--bg);z-index:5}
+.brand{min-width:0}
+header h1{font-family:var(--fd);font-weight:500;font-size:23px;margin:0;letter-spacing:-.01em;white-space:nowrap;line-height:1.15}
 header h1 em{font-style:italic;font-weight:700}
-.sub{color:var(--muted);font-size:13px;white-space:nowrap}
+.sub{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub a{color:inherit}
 .spacer{flex:1}
 .search{position:relative}
-.search input{width:260px;max-width:50vw;padding:7px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--panel);color:var(--ink);font:inherit;font-size:14px}
+.search input{width:250px;max-width:38vw;padding:8px 12px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--ink);font:inherit;font-size:14px}
 .search input:focus{outline:2px solid var(--accent);outline-offset:1px}
-.results{position:absolute;top:100%;left:0;right:0;background:var(--panel);border:1px solid var(--line2);border-radius:6px;box-shadow:var(--shadow);max-height:300px;overflow:auto;z-index:20;display:none}
-.results div{padding:7px 10px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.results{position:absolute;top:calc(100% + 4px);left:0;right:0;min-width:260px;background:var(--panel);border:1px solid var(--line2);border-radius:10px;box-shadow:var(--shadow);max-height:320px;overflow:auto;z-index:20;display:none}
+.results div{padding:8px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
 .results div:hover,.results div.on{background:var(--chip)}
 .results .sw{width:10px;height:10px;border-radius:50%;flex:none}
 .results small{color:var(--muted)}
-button{font:inherit;font-size:13px;font-weight:600;padding:6px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--panel);color:var(--ink);cursor:pointer}
+button{font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--ink);cursor:pointer;white-space:nowrap}
 button:hover{border-color:var(--ink)}
-button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.group{display:flex;gap:6px;align-items:center}
+.menu{position:relative}
+.menu summary{list-style:none;font-size:13px;font-weight:600;padding:7px 12px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);cursor:pointer;white-space:nowrap;user-select:none}
+.menu summary::-webkit-details-marker{display:none}
+.menu[open] summary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.menu .pop{position:absolute;right:0;top:calc(100% + 6px);background:var(--panel);border:1px solid var(--line2);border-radius:12px;box-shadow:var(--shadow);padding:12px;display:grid;gap:10px;z-index:30;min-width:232px}
+.menu .lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:-4px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.menu .pop>button{text-align:left;border-radius:8px}
 main{position:relative;overflow:hidden}
-#stage{position:absolute;inset:0;cursor:grab;touch-action:none}
+#stage{position:absolute;inset:0;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #stage.dragging{cursor:grabbing}
-#stage svg{width:100%;height:100%;display:block}
-#stage .node{cursor:pointer}
-#stage .node text{pointer-events:all;cursor:pointer}
-#stage svg text{cursor:pointer}
-#stage .node.sel circle:first-child{stroke:var(--ink);stroke-width:3}
-#stage .flagged-ring{pointer-events:none}
-#stage.dim #branches *{opacity:.18}
-#stage.dim #branches .lit{opacity:1}
-#stage.dim #nodes .node{opacity:.25}
-#stage.dim #nodes .node.lit{opacity:1}
+#stage.point{cursor:pointer}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);border:1px solid var(--line)}
 .zoom{position:absolute;left:14px;bottom:14px;display:flex;flex-direction:column;gap:6px}
-.zoom button{width:36px;height:36px;padding:0;font-size:18px;font-weight:400}
-.legend{position:absolute;left:14px;top:14px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;display:grid;gap:4px;max-width:210px}
-.legend .row{display:flex;gap:8px;align-items:center}
-.legend .sw{width:16px;height:9px;border-radius:2px;flex:none}
-.legend .note{color:var(--muted);margin-top:4px;line-height:1.35}
-.hint{position:absolute;right:14px;bottom:14px;color:var(--muted);font-size:12.5px;background:color-mix(in srgb,var(--bg) 82%,transparent);padding:6px 10px;border-radius:6px;border:1px solid var(--line)}
-aside{position:absolute;top:0;right:0;bottom:0;width:380px;max-width:100%;background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(105%);transition:transform .25s ease;overflow:auto;z-index:6;display:flex;flex-direction:column}
+.zoom button{width:40px;height:40px;padding:0;font-size:19px;font-weight:400;border-radius:50%;background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.zoom .turnbtn{width:auto;height:40px;padding:0 13px;font-size:13px;font-weight:600;border-radius:999px;align-self:flex-start}
+.zoom .turnbtn.on{background:var(--ink);color:var(--bg)}
+#stage.turn{cursor:alias}
+.legend{position:absolute;left:14px;top:14px;border-radius:12px;padding:10px 12px;font-size:12.5px;display:grid;gap:2px;max-width:200px}
+.legend .row{display:flex;gap:8px;align-items:center;padding:2px 4px;border-radius:6px}
+.legend .row[data-go]{cursor:pointer}
+.legend .row[data-go]:hover{background:var(--chip)}
+.legend .note{color:var(--muted);margin-top:4px;line-height:1.35;padding:0 4px}
+.legend summary{cursor:pointer;color:var(--muted);font-size:12px;padding:2px 4px;margin-top:2px}
+.hud{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);font-size:13px;padding:7px 14px;border-radius:999px;white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums;max-width:calc(100% - 330px);overflow:hidden;text-overflow:ellipsis}
+.hud b{font-weight:600}
+.hud .era{color:var(--muted)}
+#mini{position:absolute;right:14px;bottom:14px;width:132px;height:132px;border-radius:50%;opacity:0;transition:opacity .3s;cursor:crosshair;touch-action:none}
+#mini.show{opacity:1}
+aside{position:absolute;top:0;right:0;bottom:0;width:380px;max-width:100%;background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(105%);transition:transform .28s cubic-bezier(.2,.7,.2,1);overflow:auto;z-index:6;display:flex;flex-direction:column}
 aside.open{transform:none}
-@media (prefers-reduced-motion:reduce){aside{transition:none}}
+@media (prefers-reduced-motion:reduce){aside{transition:none}#mini{transition:none}}
 .stripe{height:6px;flex:none}
 .card{padding:16px 20px 24px;display:grid;gap:14px}
-.card .eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.card .eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;align-items:center;padding-right:34px}
 .card h2{font-family:var(--fd);font-weight:500;font-size:28px;line-height:1.1;margin:0;text-wrap:balance}
 .pic{margin:0;display:grid;gap:6px}
 .pic[hidden]{display:none}
-.pic img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:var(--chip);display:block}
+.pic img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--chip);display:block}
 .pic figcaption{font-size:12px;color:var(--muted);line-height:1.35}
 .pic figcaption a{color:var(--muted)}
 .pic .note{font-size:13px;color:var(--ink);line-height:1.4}
-.card .common{color:var(--muted);font-size:15px;margin-top:2px}
+.card .common{color:var(--muted);font-size:15px;margin-top:2px;font-family:var(--fd);font-style:italic}
 .card .age{font-size:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-variant-numeric:tabular-nums}
 .card .age b{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
 .card p{margin:0;font-size:15.5px;line-height:1.5;max-width:60ch}
@@ -84,13 +95,12 @@ aside.open{transform:none}
 .chip{background:var(--chip);border-radius:999px;padding:3px 10px;font-size:13px;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:6px}
 .chip:hover{border-color:var(--line2)}
 .chip .sw{width:8px;height:8px;border-radius:50%}
-textarea{width:100%;min-height:84px;font:inherit;font-size:14px;padding:8px;border:1px solid var(--line2);border-radius:6px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea{width:100%;min-height:84px;font:inherit;font-size:14px;padding:8px;border:1px solid var(--line2);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
 textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
 .tagrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.tagrow input{flex:1;min-width:120px;font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line2);border-radius:6px;background:var(--bg);color:var(--ink)}
-.close{position:absolute;top:12px;right:12px;width:30px;height:30px;padding:0;border-radius:50%;font-size:16px;line-height:1}
-.evolving{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:4px 10px;border-radius:6px;background:var(--chip)}
-dialog{border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink);max-width:640px;width:92vw;padding:20px;box-shadow:var(--shadow)}
+.tagrow input{flex:1;min-width:120px;font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--bg);color:var(--ink)}
+.close{position:absolute;top:14px;right:12px;width:32px;height:32px;padding:0;border-radius:50%;font-size:16px;line-height:1;z-index:2}
+dialog{border:1px solid var(--line2);border-radius:14px;background:var(--panel);color:var(--ink);max-width:640px;width:92vw;padding:20px;box-shadow:var(--shadow)}
 dialog::backdrop{background:rgba(0,0,0,.45)}
 dialog h2{font-family:var(--fd);font-weight:500;margin:0 0 6px}
 dialog .list{display:grid;gap:6px;max-height:50vh;overflow:auto;margin:10px 0}
@@ -104,41 +114,64 @@ dialog .more a:hover{background:var(--chip)}
 dialog .more a b{font-family:var(--fd);font-weight:500;font-size:16px}
 dialog .more a .who{color:var(--muted);font-size:12px;white-space:nowrap;align-self:center}
 dialog .more a>span:last-child{grid-column:1/-1;color:var(--muted)}
-.toast{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.opts{display:grid;gap:8px}
+.opt{padding:13px 14px;border-radius:12px;text-align:left;font-size:16px;font-weight:600;white-space:normal;display:flex;gap:10px;align-items:center}
+.opt .sw{width:11px;height:11px;border-radius:50%;flex:none}
+.verdict{font-family:var(--fd);font-style:italic;font-size:17px;color:var(--muted);margin-bottom:4px}
+.pairs{display:grid;gap:8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0}
+.pair{display:grid;gap:1px;font-size:14.5px}
+.pair span{color:var(--muted)}
+.card p.muted,.muted{color:var(--muted);font-size:13.5px}
+.how summary{cursor:pointer;font-size:14px;font-weight:600}
+.how p{margin-top:6px!important;font-size:14.5px!important}
+.toast{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
 .toast.show{opacity:1}
+@media (max-width:980px){ .sub{display:none} .search input{width:190px} }
 @media (max-width:760px){
-  header{gap:8px;padding:8px 10px}
-  .sub,.hint{display:none}
+  header{gap:6px;padding:8px 10px;flex-wrap:wrap}
+  header h1{font-size:19px}
+  .search input{width:130px}
+  #bFlags{display:none}
   aside{top:auto;height:62%;width:100%;border-left:0;border-top:1px solid var(--line);transform:translateY(105%)}
   aside.open{transform:none}
-  .legend{display:none}
+  .legend,#mini{display:none}
+  .hud{max-width:calc(100% - 80px);font-size:12px}
 }
 </style>
 </head>
 <body>
 <div id="app">
 <header>
-  <div><h1>The <em>Tree of Life</em></h1><div class="sub">From the first cell to the branches still growing today · tap any name or dot to open it · <a href="../index.html#biology" style="color:inherit">Science One-Pagers</a></div></div>
+  <div class="brand"><h1>The <em>Tree of Life</em></h1><div class="sub">From the first cell to the branches still growing today · <a href="../index.html#biology">Science One-Pagers</a></div></div>
   <div class="spacer"></div>
-  <div class="search"><input id="q" type="search" placeholder="Find a group — try “fungi” or “whales”" aria-label="Find a group" autocomplete="off"><div class="results" id="results"></div></div>
-  <div class="group">
-    <button id="bColor" class="on" title="Full colour">Colour</button>
-    <button id="bGrey" title="Greyscale for accessibility checks and B&amp;W printing">Greyscale</button>
-  </div>
+  <div class="search"><input id="q" type="search" placeholder="Find a group: fungi, whales…" aria-label="Find a group" autocomplete="off"><div class="results" id="results"></div></div>
+  <details class="menu" id="tmenu"><summary>Tasks</summary>
+    <div class="pop">
+      <div class="lab">Who is closer?</div>
+      <button id="tCloser" title="Twelve rounds: which of two shares the more recent ancestor?">Twelve rounds</button>
+      <button id="tOwn" title="Tap any three tips and ask the tree">Choose your own three</button>
+    </div>
+  </details>
   <button id="bKing" title="Shade the tree by the six kingdoms: Eubacteria, Archaebacteria, Protista, Fungi, Plantae, Animalia">Kingdoms</button>
-  <div class="group">
-    <button id="bDark" class="on">Dark</button>
-    <button id="bLight">Light</button>
-  </div>
   <button id="bFlags" title="Everything you have flagged for discussion">Flagged <span id="flagCount">0</span></button>
-  <button id="bNotes" title="Copy or paste your notes and flags as text, to move them between computers">Notes…</button>
-  <button id="bMore" title="Other tree-of-life explorers, and when each one is the right tool">Go further</button>
+  <details class="menu" id="menu"><summary>View</summary>
+    <div class="pop">
+      <div class="lab">Background</div>
+      <div class="seg"><button id="bDark" class="on">Dark</button><button id="bLight">Light</button></div>
+      <div class="lab">Ink</div>
+      <div class="seg"><button id="bColor" class="on" title="Full colour">Colour</button><button id="bGrey" title="Greyscale for accessibility checks and B&amp;W printing">Greyscale</button></div>
+      <div class="lab">More</div>
+      <button id="bNotes" title="Copy or paste your notes and flags as text, to move them between computers">Notes and flags…</button>
+      <button id="bMore" title="Other tree-of-life explorers, and when each one is the right tool">Go further…</button>
+    </div>
+  </details>
 </header>
 <main>
-  <div id="stage"></div>
-  <div class="legend" id="legend"></div>
-  <div class="zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zfit" aria-label="Fit whole tree" title="Fit whole tree">⌂</button></div>
-  <div class="hint">Scroll or pinch to zoom · drag to pan · double-tap to zoom in</div>
+  <div id="stage" tabindex="0" aria-label="The tree of life. Drag to move, pinch or scroll to zoom, arrow keys to move, plus and minus to zoom."><canvas id="cv"></canvas></div>
+  <div class="legend glass" id="legend"></div>
+  <div class="zoom"><button id="bTurn" class="turnbtn" aria-pressed="false" title="Let the wheel spin, so any branch can be brought to the side where its words read level. Press again to set it upright.">Turn</button><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zfit" aria-label="Fit whole tree" title="Fit whole tree">⌂</button></div>
+  <div class="hud glass" id="hud"></div>
+  <canvas id="mini" class="glass" width="264" height="264" aria-hidden="true"></canvas>
   <aside id="panel" aria-live="polite">
     <div class="stripe" id="stripe"></div>
     <button class="close" id="close" aria-label="Close">×</button>
@@ -1424,177 +1457,497 @@ const IMAGES={
 "Denisovans":{"u":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Homo_longi_holotype.jpg/500px-Homo_longi_holotype.jpg","p":"https://commons.wikimedia.org/wiki/File:Homo_longi_holotype.jpg","l":"CC BY 4.0","b":"Fu et al. (2025)","n":"The Harbin skull, described as Homo longi in 2021 and matched to Denisovan proteins and DNA in 2025."}
 };
 (function(){
+// ---------------------------------------------------------------------------------------------
+// Tree of Life, view layer v5 (2026-11-09). The data, the radial time layout and the print SVG
+// renderer above are unchanged. This script draws the same tree on a canvas, every frame, so
+// nothing is swapped for a snapshot while it moves; what is on screen depends on how close you are.
+// ---------------------------------------------------------------------------------------------
 const $=s=>document.querySelector(s);
-const stage=$('#stage'), panel=$('#panel'), card=$('#card');
-const ST={theme:'dark', grey:false, kingdoms:false, sel:null, notes:{}, flags:{}};
+const stage=$('#stage'), cv=$('#cv'), ctx=cv.getContext('2d'), panel=$('#panel'), card=$('#card'), hud=$('#hud'), mini=$('#mini'), mctx=mini.getContext('2d');
+const ST={theme:'dark', grey:false, kingdoms:false, sel:null, hover:null, ev:null, turn:false, notes:{}, flags:{}};
 try{ const s=JSON.parse(localStorage.getItem('tol.notes')||'{}'); ST.notes=s.notes||{}; ST.flags=s.flags||{}; }catch(e){}
 try{ const m=localStorage.getItem('tol.mode'); if(m==='light'||m==='dark') ST.theme=m; }catch(e){}
 function save(){ try{ localStorage.setItem('tol.notes',JSON.stringify({notes:ST.notes,flags:ST.flags})); localStorage.setItem('tol.mode',ST.theme);}catch(e){} }
 document.documentElement.setAttribute('data-mode',ST.theme);
 
-// index nodes
+const S=2600, R=1000, CX=S/2, CY=S/2, TAU=Math.PI*2;
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const LAY=TOL.layout(TREE,TIME_SCALE,{slotWeight:SLOT_WEIGHT});
+const sc=a=>TOL.scaleAge(a,TIME_SCALE);
 const byId={}, list=[];
 (function walk(n,p,path){ n._p=p; n._id=path; byId[path]=n; list.push(n); (n.k||[]).forEach((c,i)=>walk(c,n,path+'.'+i)); })(TREE,null,'0');
+let slotTotal=0; list.forEach(n=>{ n._leaf=!(n.k&&n.k.length); if(n._leaf) slotTotal+=n._slots; });
+let ROT=0, rotAnim=null;
+list.forEach(n=>{ n._t0=n._t; });
+function setRot(r){ ROT=r; for(const n of list){ n._t=n._t0+r; n._x=CX+R*n._r*Math.cos(n._t); n._y=CY+R*n._r*Math.sin(n._t); } }
+function normAng(a){ a=a%(2*Math.PI); if(a>Math.PI) a-=2*Math.PI; if(a<-Math.PI) a+=2*Math.PI; return a; }
+function spinTo(r,dur){ if(matchMedia('(prefers-reduced-motion: reduce)').matches||!dur){ rotAnim=null; setRot(r); requestDraw(); return; } rotAnim={from:ROT,to:r,t0:0,dur}; requestDraw(); }
+list.forEach(n=>{ n._x=CX+R*n._r*Math.cos(n._t); n._y=CY+R*n._r*Math.sin(n._t); n._da=n._leaf?LAY.span*n._slots/slotTotal:0; n._la=0; n._lv=false; n._ma=0;
+  n._label=(n.x?'† ':'')+(n._leaf||n.w<3?n.n:n.n.toUpperCase())+(n.e?' ✦':''); });
+const ERAS=[{n:'Archean',a0:3800,a1:2500},{n:'Proterozoic',a0:2500,a1:539},{n:'Paleozoic',a0:539,a1:252},{n:'Mesozoic',a0:252,a1:66},{n:'Cenozoic',a0:66,a1:0}];
+function ageAt(f){ if(f<=0) return TIME_SCALE[0][0]; for(let i=0;i<TIME_SCALE.length-1;i++){ const [a0,f0]=TIME_SCALE[i],[a1,f1]=TIME_SCALE[i+1]; if(f>=f0&&f<=f1) return a0+(a1-a0)*(f-f0)/(f1-f0); } return 0; }
+function eraOf(a){ for(const e of ERAS) if(a<=e.a0&&a>=e.a1) return e.n; return ''; }
+function fmtAge(a){ if(a<=0) return 'Living today'; if(a>=1000) return (a/1000).toFixed(1).replace(/\.0$/,'')+' billion years ago'; if(a<1) return Math.round(a*1000)+',000 years ago'; return a+' million years ago'; }
+function fmtHud(a){ if(a>=1000) return (a/1000).toFixed(2)+' billion years ago'; if(a>=100) return Math.round(a/5)*5+' million years ago'; if(a>=10) return Math.round(a)+' million years ago'; if(a>=1) return a.toFixed(1)+' million years ago'; if(a>=0.02) return Math.round(a*100)*10+',000 years ago'; return 'today'; }
 
-let VB={x:0,y:0,w:2600,h:2600}, svg=null;
-const S=2600;
+// ---- colour ---------------------------------------------------------------------------------
 function themeName(){ return ST.grey ? (ST.theme==='dark'?'grey':'greylight') : ST.theme; }
-function TC(){ return TOL.themeColors(themeName(),GROUPS,ST.kingdoms); }
+let T=null; const rgbaCache={};
+function hexA(hex,a){ const key=hex+a; let v=rgbaCache[key]; if(v) return v; let h=hex.replace('#',''); if(h.length===3) h=h.split('').map(c=>c+c).join(''); const n=parseInt(h,16); v=`rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; rgbaCache[key]=v; return v; }
+function setTheme(){ T=TOL.themeColors(themeName(),GROUPS,ST.kingdoms); T.bg=T.dark?'#070b18':'#f6f3ec'; T.fg=T.dark?'#e8edf7':'#1a1d2b'; buildMini(); }
+function TC(){ return T; }
 function ckey(n){ return ST.kingdoms ? n._k : n.g; }
-// ---- smooth camera ----------------------------------------------------------------------
-// Redrawing two thousand SVG elements on every frame is too slow for a smooth zoom, so the page
-// works the way map sites do: while anything is moving it shows a snapshot picture of the tree and
-// only slides and scales that (cheap for the browser); when the motion settles it redraws the real
-// SVG at the new view, sharp, and quietly takes a fresh snapshot for the next gesture.
-const cam={img:null, snap:null, motion:false, settleTimer:null, building:false, dirty:true, fontCSS:null};
-cam.img=document.createElement('img'); cam.img.alt=''; cam.img.draggable=false;
-cam.img.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;display:none;pointer-events:none;transform-origin:0 0;will-change:transform;user-select:none';
-let TG=null, anchor=null, raf=null, vel=null, lastTs=0;   // TG = where the view is heading; VB = what is on screen
-function render(){
-  const {svg:s}=TOL.renderSVG(TREE,GROUPS,TIME_SCALE,EVENTS,{theme:themeName(),chrome:false,kingdoms:ST.kingdoms,slotWeight:SLOT_WEIGHT,font:"'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif"});
-  stage.innerHTML=s; svg=stage.querySelector('svg'); stage.appendChild(cam.img);
-  svg.removeAttribute('width'); svg.removeAttribute('height');
-  list.forEach(n=>{ byId[n._id]=n; });
-  cam.snap=null; cam.dirty=true; cam.motion=false; cam.img.style.display='none';
-  applyVB(); drawFlags(); if(ST.sel) markSel();
-  buildLegend();
-  scheduleSnap();
+const colOf=n=>T.col(ckey(n));
+
+// ---- camera ---------------------------------------------------------------------------------
+// cam.x, cam.y: the point of the tree at the middle of the screen. cam.k: screen pixels per tree unit.
+let W=0, H=0, DPR=1, kFit=0.25, kMin=0.15, RECT={left:0,top:0};
+const kMax=15;
+const cam={x:CX,y:CY,k:0.25};
+let fly=null, zt=null, vel=null, raf=null, lastTs=0, dirty=true, fading=false, frameNo=0, touched=false;
+const SX=x=>(x-cam.x)*cam.k+W/2, SY=y=>(y-cam.y)*cam.k+H/2;
+function requestDraw(){ dirty=true; if(!raf) raf=requestAnimationFrame(tick); }
+function clampCam(){ cam.k=clamp(cam.k,kMin,kMax); const dx=cam.x-CX, dy=cam.y-CY, d=Math.hypot(dx,dy), m=R*1.22; if(d>m){ cam.x=CX+dx/d*m; cam.y=CY+dy/d*m; } }
+function stopAnim(){ fly=null; zt=null; vel=null; if(rotAnim){ setRot(rotAnim.to); rotAnim=null; } }
+function zoomAbout(f, sx, sy, eased){
+  if(eased && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const base=zt?zt.k:cam.k; fly=null; vel=null;
+    zt={k:clamp(base*f,kMin,kMax), ax:cam.x+(sx-W/2)/cam.k, ay:cam.y+(sy-H/2)/cam.k, sx, sy};
+  } else {
+    const ax=cam.x+(sx-W/2)/cam.k, ay=cam.y+(sy-H/2)/cam.k; cam.k=clamp(cam.k*f,kMin,kMax);
+    cam.x=ax-(sx-W/2)/cam.k; cam.y=ay-(sy-H/2)/cam.k; clampCam();
+  }
+  requestDraw();
 }
-function applyVB(){ svg.setAttribute('viewBox',`${VB.x} ${VB.y} ${VB.w} ${VB.h}`); }
-function clampW(w){ return Math.min(Math.max(w,120),S*4); }
-// show the current VB: through the snapshot while moving, through the real SVG when still
-function showFrame(){
-  clearTimeout(cam.settleTimer); cam.settleTimer=setTimeout(settle,150);
-  if(!cam.motion && cam.snap && !cam.dirty){ cam.motion=true; cam.img.style.display='block'; }
-  if(cam.motion){
-    const sv=cam.snap.vb, r=stage.getBoundingClientRect();
-    const k=sv.w/VB.w, tx=(sv.x-VB.x)/VB.w*r.width, ty=(sv.y-VB.y)/VB.h*r.height;
-    cam.img.style.transform=`translate(${tx}px,${ty}px) scale(${k})`;
-  } else applyVB();
+function flyCam(x,y,k,dur){
+  k=clamp(k,kMin,kMax); zt=null; vel=null;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ cam.x=x; cam.y=y; cam.k=k; fly=null; requestDraw(); return; }
+  const dz=Math.abs(Math.log(k/cam.k)), dp=Math.hypot(x-cam.x,y-cam.y)*Math.min(k,cam.k);
+  fly={x0:cam.x,y0:cam.y,k0:cam.k,x1:x,y1:y,k1:k,t0:0,dur:dur||clamp(420+dz*230+dp*0.25,420,1500)};
+  requestDraw();
 }
-function settle(){
-  cam.settleTimer=null;
-  if(TG||vel||(drag&&drag.moved)||pinch){ cam.settleTimer=setTimeout(settle,150); return; }
-  applyVB();
-  if(cam.motion){ cam.motion=false; // let the SVG paint underneath before the snapshot is lifted
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{ if(!cam.motion){ cam.img.style.display='none'; cam.dirty=true; scheduleSnap(); } })); }
-  else { cam.dirty=true; scheduleSnap(); }
+function panelPad(){ if(!panel.classList.contains('open')) return {x:0,y:0}; return innerWidth>760 ? {x:Math.min(380,W*0.5)/2,y:0} : {x:0,y:H*0.62/2}; }
+function fit(now){ if(now){ stopAnim(); cam.x=CX; cam.y=CY; cam.k=kFit; requestDraw(); } else flyCam(CX,CY,kFit); }
+function flyTo(n){
+  let k, x, y;
+  if(n._leaf){ k=Math.max(cam.k, Math.min(kMax, 66/Math.max(2,n._r*R*n._da))); const o=70/k; x=n._x+Math.cos(n._t)*o; y=n._y+Math.sin(n._t)*o; }
+  else { const mid=(n._r+1.03)/2; k=Math.max(Math.min(cam.k,kFit*1.4), Math.min(kMax, 0.46*Math.min(W,H)/((1.03-n._r)*R*0.62+70)));
+    const tips=[]; (function g(m){ if(m._leaf) tips.push(m._t); else m.k.forEach(g); })(n); const tm=(Math.min(...tips)+Math.max(...tips))/2; const sp=Math.max(...tips)-Math.min(...tips);
+    if(sp>Math.PI*0.9){ x=CX; y=CY; k=kFit; } else { x=CX+R*mid*Math.cos(tm); y=CY+R*mid*Math.sin(tm); k=Math.min(k, 0.8*Math.min(W,H)/(2*R*Math.sin(sp/2)+160)); k=Math.max(k,kFit); } }
+  let turned=false;
+  if(ST.turn){ // bring the branch to the nearer side of the wheel, where its words read level
+    let a0; if(n._leaf) a0=n._t; else { const tips=[]; (function g(m){ if(m._leaf) tips.push(m._t); else m.k.forEach(g); })(n); a0=(Math.min(...tips)+Math.max(...tips))/2; }
+    const toRight=normAng(-a0), toLeft=normAng(Math.PI-a0), d=Math.abs(toRight)<=Math.abs(toLeft)?toRight:toLeft;
+    if(Math.abs(d)>0.01){ const c=Math.cos(d), s=Math.sin(d), dx=x-CX, dy=y-CY; x=CX+dx*c-dy*s; y=CY+dx*s+dy*c; turned=d; } }
+  const pad=panelPad(); flyCam(x+pad.x/k, y+pad.y/k, k);
+  if(turned!==false) spinTo(ROT+turned, fly?fly.dur:0);
 }
-function scheduleSnap(){ clearTimeout(cam.snapTimer); cam.snapTimer=setTimeout(buildSnap,60); }
-function buildSnap(){
-  if(cam.building||cam.motion||!svg) { if(cam.building) cam.pending=true; return; }
-  cam.building=true;
-  const vb={...VB}; const r=stage.getBoundingClientRect(); const dpr=Math.min(2,window.devicePixelRatio||1);
-  const clone=svg.cloneNode(true);
-  clone.setAttribute('width',Math.round(r.width*dpr)); clone.setAttribute('height',Math.round(r.height*dpr));
-  clone.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
-  clone.querySelectorAll('.hit,.flagged-ring').forEach(e=>e.remove());
-  if(cam.fontCSS){ const st=document.createElementNS('http://www.w3.org/2000/svg','style'); st.textContent=cam.fontCSS; clone.insertBefore(st,clone.firstChild); }
-  const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'}));
-  const im=new Image();
-  im.onload=()=>{ const old=cam.img.src; cam.img.src=url; if(old&&old.startsWith('blob:')) URL.revokeObjectURL(old); cam.snap={vb}; cam.dirty=false; cam.building=false; if(cam.pending){cam.pending=false; scheduleSnap();} };
-  im.onerror=()=>{ URL.revokeObjectURL(url); cam.building=false; };
-  im.src=url;
-}
-// the snapshot is an SVG image, which cannot see the page's web font, so the font is inlined once
-(async function(){ try{
-  const css=await fetch('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap').then(r=>r.text());
-  const blocks=css.split('@font-face').slice(1).filter(b=>/U\+0000-00FF/.test(b));
-  const out=[]; for(const b of blocks){ const m=b.match(/url\((https:[^)]+)\)/); if(!m) continue; const buf=await fetch(m[1]).then(r=>r.arrayBuffer()); let bin=''; const u8=new Uint8Array(buf); for(let i=0;i<u8.length;i+=0x8000) bin+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000)); out.push('@font-face'+b.replace(m[1],'data:font/woff2;base64,'+btoa(bin))); }
-  if(out.length){ cam.fontCSS=out.join('\n'); cam.dirty=true; scheduleSnap(); }
-}catch(e){} })();
-// easing loop: log-space zoom toward TG with the anchor point held still under the cursor; pan glide with friction
-function goTo(t, anc, rate){ TG=t; TG.k=rate||0.22; anchor=anc||null; vel=null; if(!raf) raf=requestAnimationFrame(tick); }
 function tick(ts){
   raf=null; const dt=Math.min(50, ts-(lastTs||ts)); lastTs=ts; let moving=false;
-  if(TG){
-    const k=1-Math.pow(1-TG.k, dt/16.7);
-    const lw=Math.log(VB.w), lt=Math.log(TG.w); let nw=Math.exp(lw+(lt-lw)*k); if(Math.abs(lt-Math.log(nw))<0.0015) nw=TG.w;
-    const nh=nw*(VB.h/VB.w); let nx,ny;
-    if(anchor){ nx=anchor.ax-anchor.sx*nw; ny=anchor.ay-anchor.sy*nh; }
-    else { nx=VB.x+(TG.x-VB.x)*k; ny=VB.y+(TG.y-VB.y)*k; if(Math.abs(TG.x-nx)<nw*0.0004) nx=TG.x; if(Math.abs(TG.y-ny)<nh*0.0004) ny=TG.y; }
-    VB={x:nx,y:ny,w:nw,h:nh};
-    if(nw===TG.w && (anchor||(nx===TG.x&&ny===TG.y))){ VB={x:TG.x,y:TG.y,w:TG.w,h:TG.h}; TG=null; anchor=null; } else moving=true;
-  } else if(vel){
-    VB.x+=vel.x*dt; VB.y+=vel.y*dt; const f=Math.exp(-dt/220); vel.x*=f; vel.y*=f;
-    if(Math.hypot(vel.x,vel.y)*16<VB.w*0.0003) vel=null; else moving=true;
+  if(fly){ if(!fly.t0) fly.t0=ts; const t=clamp((ts-fly.t0)/fly.dur,0,1), e=t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    const k=Math.exp(Math.log(fly.k0)+(Math.log(fly.k1)-Math.log(fly.k0))*e);
+    const u=Math.abs(fly.k1-fly.k0)<fly.k0*0.02 ? e : (1/fly.k0-1/k)/(1/fly.k0-1/fly.k1);
+    cam.k=k; cam.x=fly.x0+(fly.x1-fly.x0)*u; cam.y=fly.y0+(fly.y1-fly.y0)*u;
+    if(t>=1){ cam.x=fly.x1; cam.y=fly.y1; cam.k=fly.k1; fly=null; } else moving=true;
+  } else if(zt){ const a=1-Math.pow(1-0.26, dt/16.7); let lk=Math.log(cam.k)+(Math.log(zt.k)-Math.log(cam.k))*a; if(Math.abs(lk-Math.log(zt.k))<0.002) lk=Math.log(zt.k);
+    cam.k=Math.exp(lk); cam.x=zt.ax-(zt.sx-W/2)/cam.k; cam.y=zt.ay-(zt.sy-H/2)/cam.k; clampCam();
+    if(cam.k===zt.k||Math.abs(cam.k-zt.k)<1e-9) zt=null; else moving=true;
+  } else if(vel){ cam.x-=vel.x*dt/cam.k; cam.y-=vel.y*dt/cam.k; const f=Math.exp(-dt/260); vel.x*=f; vel.y*=f; clampCam();
+    if(Math.hypot(vel.x,vel.y)<0.012) vel=null; else moving=true; }
+  if(rotAnim){ if(!rotAnim.t0) rotAnim.t0=ts; const t=clamp((ts-rotAnim.t0)/rotAnim.dur,0,1), e=t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; setRot(rotAnim.from+(rotAnim.to-rotAnim.from)*e); if(t>=1){ setRot(rotAnim.to); rotAnim=null; } else moving=true; dirty=true; }
+  if(moving||dirty||fading){ dirty=false; draw(dt); }
+  if(moving||dirty||fading) raf=requestAnimationFrame(tick); else lastTs=0;
+}
+function resize(){
+  const r=stage.getBoundingClientRect(); if(!r.width||!r.height) return; const first=!W; RECT=r;
+  W=r.width; H=r.height; DPR=Math.min(2,window.devicePixelRatio||1); cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+  const m=Math.min(W,H); const wasFit=Math.abs(cam.k-kFit)<1e-6;
+  kFit=Math.max(0.06,(m/2-Math.min(112,m*0.17))/R); kMin=kFit*0.62;
+  if(first||wasFit){ cam.k=kFit; if(first){cam.x=CX;cam.y=CY;} }
+  clampCam(); requestDraw();
+}
+
+// ---- pictures at the tips -------------------------------------------------------------------
+const IMG=new Map(); let loading=0; const waitq=[];
+function startLoad(o){ loading++; o.im.onload=()=>{ o.ok=true; loading--; pump(); requestDraw(); }; o.im.onerror=()=>{ o.fail=true; loading--; pump(); }; o.im.referrerPolicy='no-referrer'; o.im.decoding='async'; o.im.src=o.u; }
+function pump(){ while(loading<6 && waitq.length){ const o=waitq.pop(); if(frameNo-o.t<90) startLoad(o); else IMG.delete(o.name); } }
+function getImg(name){ let o=IMG.get(name); if(o){ o.t=frameNo; return o.ok?o.im:null; } const meta=(typeof IMAGES!=='undefined')&&IMAGES[name]; if(!meta||!meta.u) return null;
+  o={name,u:meta.u,im:new Image(),ok:false,fail:false,t:frameNo}; IMG.set(name,o); waitq.push(o); pump();
+  if(IMG.size>140){ let old=null; IMG.forEach(v=>{ if(v.ok&&(!old||v.t<old.t)) old=v; }); if(old&&frameNo-old.t>120) IMG.delete(old.name); }
+  return null; }
+
+// ---- drawing --------------------------------------------------------------------------------
+const FB="'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif", FD="'Fraunces',Georgia,'Times New Roman',serif";
+const MOTES=[]; (function(){ let s=20261109; const rnd=()=>{ s=(s*1664525+1013904223)>>>0; return s/4294967296; }; for(let i=0;i<150;i++) MOTES.push({u:rnd(),v:rnd(),r:0.5+rnd()*1.1,a:0.12+rnd()*0.4,d:0.03+rnd()*0.08}); })();
+const twCache={};
+function textW(str,weight,fs,font){ const key=weight+(font||'')+str; let w=twCache[key]; if(w===undefined){ ctx.font=`${weight} 100px ${font||FB}`; w=twCache[key]=ctx.measureText(str).width; } return w*fs/100; }
+let KRUNS=null;
+function kingdomRuns(){ if(KRUNS) return KRUNS; const leaves=list.filter(n=>n._leaf).sort((a,b)=>a._t0-b._t0); const runs=[];
+  leaves.forEach(n=>{ const half=n._da/2; const r=runs[runs.length-1]; if(r&&r.k===n._k) r.b1=n._t0+half; else runs.push({k:n._k,b0:n._t0-half,b1:n._t0+half}); }); return KRUNS=runs; }
+function litSet(){ if(TK.on&&TK.phase==='shown'){ const top=mrca(TK.m1,TK.m2), ids=new Set(); for(const s of TK.set){ let x=s; while(x){ ids.add(x._id); if(x===top) break; x=x._p; } } return ids; }
+  const n=TK.on?null:(ST.hover||ST.sel); if(!n) return null; const ids=new Set(); let x=n; while(x){ ids.add(x._id); x=x._p; } (function sub(m){ ids.add(m._id); (m.k||[]).forEach(sub); })(n); return ids; }
+function arcText(str, ox, oy, rad, mid, fs, color, weight){
+  ctx.font=`${weight||700} ${fs}px ${FB}`; ctx.fillStyle=color; ctx.textAlign='center'; ctx.textBaseline='middle';
+  const sp=fs*0.16, chars=[...str]; const ws=chars.map(c=>ctx.measureText(c).width+sp); const total=ws.reduce((a,b)=>a+b,0);
+  const bottom=Math.sin(mid)>0.05; let a=bottom? mid+total/rad/2 : mid-total/rad/2;
+  chars.forEach((c,i)=>{ const half=ws[i]/rad/2; a+=bottom?-half:half; ctx.save(); ctx.translate(ox+rad*Math.cos(a), oy+rad*Math.sin(a)); ctx.rotate(a+(bottom?-Math.PI/2:Math.PI/2)); ctx.fillText(c,0,0); ctx.restore(); a+=bottom?-half:half; });
+  return total;
+}
+function wrap(str,maxW,fs,maxLines){ const words=str.split(' '), lines=[]; let cur=''; ctx.font=`400 ${fs}px ${FB}`;
+  for(const w of words){ const t=cur?cur+' '+w:w; if(ctx.measureText(t).width>maxW&&cur){ lines.push(cur); cur=w; if(lines.length===maxLines){ break; } } else cur=t; }
+  if(lines.length<maxLines&&cur) lines.push(cur); else if(lines.length===maxLines) lines[maxLines-1]=lines[maxLines-1].replace(/[\s,;:.]+$/,'')+'…'; return lines; }
+let HIT=[];           // what can be tapped this frame: labels and pictures (dots are tested from the layout)
+function draw(dt){
+  frameNo++; fading=false;
+  const k=cam.k, z=Math.log2(k/kFit), Rk=R*k, ox=SX(CX), oy=SY(CY), dark=T.dark;
+  const lit=litSet(); HIT=[]; const pre=[];
+  ctx.setTransform(DPR,0,0,DPR,0,0); ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over'; ctx.setLineDash([]);
+  ctx.fillStyle=T.bg; ctx.fillRect(0,0,W,H);
+  // the light at the origin: brightest at LUCA, fading toward the present
+  let g=ctx.createRadialGradient(ox,oy,0,ox,oy,Rk*1.3);
+  if(dark){ g.addColorStop(0,T.grey?'rgba(150,150,150,.26)':'rgba(96,122,214,.34)'); g.addColorStop(0.3,T.grey?'rgba(90,90,90,.14)':'rgba(46,66,140,.17)'); g.addColorStop(1,'rgba(7,11,24,0)'); }
+  else { g.addColorStop(0,'rgba(255,255,255,.95)'); g.addColorStop(0.45,'rgba(255,253,246,.55)'); g.addColorStop(1,'rgba(246,243,236,0)'); }
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  // far dust: moves a little when the tree moves a lot, so the tree sits in front of something
+  const tile=1500; ctx.fillStyle=dark?'#cfdcff':'#3a3320';
+  for(const m of MOTES){ let px=(m.u*tile-(cam.x-CX)*k*m.d)%tile, py=(m.v*tile-(cam.y-CY)*k*m.d)%tile; if(px<0)px+=tile; if(py<0)py+=tile;
+    for(let tx=px; tx<W; tx+=tile) for(let ty=py; ty<H; ty+=tile){ ctx.globalAlpha=m.a*(dark?0.5:0.16); ctx.beginPath(); ctx.arc(tx,ty,m.r,0,TAU); ctx.fill(); } }
+  ctx.globalAlpha=1;
+  // time: alternate eras are shaded bands, like growth rings; thin rings at the scale breakpoints
+  ERAS.forEach((e,i)=>{ if(i%2) return; const r0=sc(e.a0)*Rk, r1=sc(e.a1)*Rk; ctx.beginPath(); ctx.arc(ox,oy,r1,0,TAU); if(r0>0.5){ ctx.moveTo(ox+r0,oy); ctx.arc(ox,oy,r0,0,TAU,true); }
+    ctx.fillStyle=dark?'rgba(170,190,255,.045)':'rgba(120,96,40,.055)'; ctx.fill(); });
+  ctx.lineWidth=1; ctx.strokeStyle=T.faint;
+  TIME_SCALE.forEach(([a])=>{ const r=sc(a)*Rk; if(r<=0) return; ctx.beginPath(); ctx.arc(ox,oy,r,0,TAU); ctx.stroke(); });
+  ctx.setLineDash([3,8]); ctx.strokeStyle=T.faint2; ctx.globalAlpha=0.7;
+  EVENTS.forEach(ev=>{ const r=sc(ev.a)*Rk; if(r<=0) return; ctx.beginPath(); ctx.arc(ox,oy,r,0,TAU); ctx.stroke(); });
+  ctx.setLineDash([]); ctx.globalAlpha=1;
+  if(ST.ev){ const r=sc(ST.ev.a)*Rk; ctx.beginPath(); ctx.arc(ox,oy,r,0,TAU); ctx.strokeStyle=T.fg; ctx.globalAlpha=0.85; ctx.lineWidth=2.2; ctx.stroke(); ctx.globalAlpha=1; }
+  const AX=-Math.PI/2+ROT, axc=Math.cos(AX), axs=Math.sin(AX);
+  ctx.strokeStyle=T.faint2; ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(ox+axc*Rk,oy+axs*Rk); ctx.stroke();
+  // kingdoms layer
+  if(ST.kingdoms){ kingdomRuns().forEach(run=>{ run.t0=run.b0+ROT; run.t1=run.b1+ROT; const c=T.col(run.k); ctx.beginPath(); ctx.arc(ox,oy,Rk,run.t0,run.t1); ctx.arc(ox,oy,Rk*0.06,run.t1,run.t0,true); ctx.closePath(); ctx.fillStyle=hexA(c,dark?0.085:0.07); ctx.fill();
+      ctx.beginPath(); ctx.arc(ox,oy,Rk+9,run.t0+0.004,run.t1-0.004); ctx.strokeStyle=c; ctx.lineWidth=3; ctx.lineCap='round'; ctx.stroke();
+      const fs=clamp(11+z*1.6,11,17), name=TOL.KINGDOMS[run.k].name.toUpperCase(), arcLen=(run.t1-run.t0)*(Rk+24);
+      ctx.font=`700 ${fs}px ${FB}`; if(arcLen>ctx.measureText(name).width+name.length*fs*0.16+10){ const tot=arcText(name,ox,oy,Rk+24,(run.t0+run.t1)/2,fs,c,700), mid=(run.t0+run.t1)/2, ha=tot/(Rk+24)/2+0.01; for(let t=mid-ha;t<=mid+ha;t+=5/(Rk+24)) for(const rr of [Rk+16,Rk+24,Rk+32]) pre.push((((ox+rr*Math.cos(t))/7)|0)*8192+(((oy+rr*Math.sin(t))/7)|0)); } }); }
+  // ---- branches ----
+  const wf=1.15*Math.pow(k,0.42);
+  ctx.lineCap='round'; ctx.lineJoin='round';
+  function link(p,c,first,last){ // the path from a parent to one child: along the parent's ring, then out through time
+    const pr=p._r*Rk, cr=c._r*Rk, ca=Math.cos(c._t), sa=Math.sin(c._t);
+    let rho=0, da=0; if((first||last)&&pr>1&&p.k.length>1){ const nb=first?p.k[1]:p.k[p.k.length-2]; rho=Math.min(13*Math.sqrt(k)+2, 0.42*(cr-pr), 0.45*pr*Math.abs(c._t-nb._t)); da=rho/pr*(first?1:-1); }
+    ctx.beginPath();
+    if(rho>0.5){ ctx.moveTo(ox+pr*Math.cos(c._t+da), oy+pr*Math.sin(c._t+da)); ctx.quadraticCurveTo(ox+pr*ca, oy+pr*sa, ox+(pr+rho)*ca, oy+(pr+rho)*sa); }
+    else ctx.moveTo(ox+pr*ca, oy+pr*sa);
+    ctx.lineTo(ox+cr*ca, oy+cr*sa); return da;
   }
-  showFrame();
-  if(moving) raf=requestAnimationFrame(tick); else lastTs=0;
+  function pass(filter, alpha, glow){
+    for(const n of list){ if(n._leaf) continue; const kids=n.k, pr=n._r*Rk; const nOn=filter(n);
+      let a0=kids[0]._t, a1=kids[kids.length-1]._t;
+      const das=kids.map((c,i)=>{ const on=filter(c); const da=link(n,c,i===0,i===kids.length-1); if(on){ const col=colOf(c), w=c._w*wf*(c.x?0.8:1);
+          if(glow){ ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=alpha*0.13; ctx.strokeStyle=col; ctx.lineWidth=w*3+3; ctx.stroke(); ctx.globalCompositeOperation='source-over'; }
+          ctx.globalAlpha=alpha*(c.x?0.75:1); ctx.strokeStyle=col; ctx.lineWidth=w; const d=T.dash(ckey(c)); ctx.setLineDash(d?d.split(' ').map(v=>+v*clamp(k,0.5,2)):(c.x&&c._leaf?[w*2.2,w*2.2]:[])); ctx.stroke(); ctx.setLineDash([]);
+          if(sheen&&w>2.4&&!d){ ctx.globalAlpha=alpha*0.42; ctx.strokeStyle=sheen; ctx.lineWidth=w*0.3; ctx.stroke(); } }
+        return da; });
+      if(nOn&&kids.length>1&&pr>1){ a0+=das[0]; a1+=das[das.length-1]; if(a1>a0){ const col=colOf(n), w=n._w*wf; ctx.beginPath(); ctx.arc(ox,oy,pr,a0,a1);
+          if(glow){ ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=alpha*0.13; ctx.strokeStyle=col; ctx.lineWidth=w*3+3; ctx.stroke(); ctx.globalCompositeOperation='source-over'; }
+          ctx.globalAlpha=alpha; ctx.strokeStyle=col; ctx.lineWidth=w; ctx.stroke(); if(sheen&&w>2.4){ ctx.globalAlpha=alpha*0.42; ctx.strokeStyle=sheen; ctx.lineWidth=w*0.3; ctx.stroke(); } } }
+    }
+    ctx.globalAlpha=1;
+  }
+  const glow=dark&&!T.grey, sheen=T.grey?null:(dark?'#ffffff':'#fffbe8');
+  // haze over deep time when the view sits out in recent time: the centre recedes
+  const vr=clamp(Math.hypot(cam.x-CX,cam.y-CY)/R,0,1), haze=clamp((z-0.8)*0.16,0,0.5)*vr;
+  if(lit){ pass(()=>true, 0.2, false); pass(n=>lit.has(n._id), 1, glow); } else pass(()=>true, 1, glow);
+  if(haze>0.01){ const hg=ctx.createRadialGradient(ox,oy,0,ox,oy,Rk*0.86); const hc=dark?'7,11,24':'246,243,236'; hg.addColorStop(0,`rgba(${hc},${haze})`); hg.addColorStop(0.6,`rgba(${hc},${haze*0.7})`); hg.addColorStop(1,`rgba(${hc},0)`); ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(ox,oy,Rk*0.86,0,TAU); ctx.fill(); }
+  // the selected lineage, drawn once more as a single bright thread back to LUCA
+  function thread(c,stop){ ctx.strokeStyle=T.fg; while(c._p&&c!==stop){ const p=c._p, i=p.k.indexOf(c); const da=link(p,c,i===0,i===p.k.length-1); ctx.globalAlpha=0.92; ctx.lineWidth=Math.max(1.6,c._w*wf*0.5); ctx.stroke();
+      const pr=p._r*Rk; if(pr>1&&Math.abs(c._t+da-p._t)>1e-4){ ctx.beginPath(); ctx.arc(ox,oy,pr,Math.min(c._t+da,p._t),Math.max(c._t+da,p._t)); ctx.stroke(); } c=p; } ctx.globalAlpha=1; }
+  if(TK.on){ if(TK.phase==='shown'&&TK.m1!==TK.m2){ const near=TK.m1.a<TK.m2.a, mc=near?TK.m1:TK.m2; thread(TK.f,mc); thread(near?TK.a:TK.b,mc); } }
+  else if(ST.sel) thread(ST.sel,null);
+  // ---- nodes, pictures, and the labels that fit ----
+  const cand=[]; const M=160; const koff=ST.kingdoms?32:0;
+  const zs=1+0.2*clamp(z,0,5);
+  for(const n of list){
+    const x=SX(n._x), y=SY(n._y); if(x<-M||x>W+M||y<-M||y>H+M) continue;
+    const col=colOf(n), on=!lit||lit.has(n._id), al=on?1:0.25; const ca=Math.cos(n._t), sa=Math.sin(n._t);
+    const flip=ca<0, rot=flip?n._t+Math.PI:n._t;
+    ctx.globalAlpha=al;
+    if(n._leaf){
+      const rad=(n.w>=3?3.3:(n.w===2?2.7:2.1))*zs; n._rad=rad;
+      const slot=Math.max(n._r,0.5)*Rk*n._da; let off=rad+6+(n.e?4:0)+(n.x?0:koff);
+      // picture medallion once there is room for one
+      const hasPic=(typeof IMAGES!=='undefined')&&IMAGES[n.n]; const mt=hasPic&&slot>=30?1:0; n._ma+=(mt-n._ma)*Math.min(1,dt/140); if(Math.abs(mt-n._ma)>0.02) fading=true; else n._ma=mt;
+      if(n._ma>0.02){ const d=Math.min(96, 26+(slot-30)*0.62), cxm=x+ca*(off+d/2), cym=y+sa*(off+d/2); const im=getImg(n.n);
+        ctx.save(); ctx.globalAlpha=al*n._ma; ctx.shadowColor=dark?'rgba(0,0,0,.6)':'rgba(40,30,10,.28)'; ctx.shadowBlur=d*0.22; ctx.shadowOffsetY=d*0.06;
+        ctx.beginPath(); ctx.arc(cxm,cym,d/2,0,TAU); ctx.fillStyle=dark?'#101a33':'#e9e4d6'; ctx.fill(); ctx.shadowColor='transparent';
+        if(im){ ctx.clip(); const s=Math.max(d/im.naturalWidth,d/im.naturalHeight), iw=im.naturalWidth*s, ih=im.naturalHeight*s; ctx.drawImage(im,cxm-iw/2,cym-ih/2,iw,ih); }
+        else { ctx.fillStyle=hexA(col,0.22); ctx.fill(); }
+        ctx.restore(); ctx.globalAlpha=al*n._ma; ctx.beginPath(); ctx.arc(cxm,cym,d/2,0,TAU); ctx.strokeStyle=col; ctx.lineWidth=clamp(d/26,1.2,2.6); ctx.stroke(); ctx.globalAlpha=al;
+        HIT.push({n,cx:cxm,cy:cym,r:d/2+4}); off+=(d+8)*n._ma; n._md=(d+12)*n._ma; } else n._md=0;
+      // tip
+      if(n.x){ ctx.beginPath(); ctx.arc(x,y,rad+1,0,TAU); ctx.fillStyle=T.bg; ctx.fill(); ctx.strokeStyle=col; ctx.lineWidth=1.6; ctx.stroke(); const rr=rad+3.5; ctx.beginPath(); ctx.moveTo(x+sa*rr,y-ca*rr); ctx.lineTo(x-sa*rr,y+ca*rr); ctx.stroke(); }
+      else { ctx.beginPath(); ctx.arc(x,y,rad,0,TAU); ctx.fillStyle=col; ctx.fill(); if(n.e){ ctx.beginPath(); ctx.arc(x,y,rad+4.5,0,TAU); ctx.setLineDash([3,3]); ctx.strokeStyle=col; ctx.lineWidth=1.3; ctx.stroke(); ctx.setLineDash([]); } }
+      const inT=TK.on&&TK.set.has(n); const need=inT?99:(n.w>=2?-9:0.95);
+      if(z>=need){ const fs=n.x?clamp((n.w>=3?11.5:10.5)+0.8*z,10,15.5):clamp((n.w>=3?12:(n.w===2?11:10.5))+0.85*z,10,16.5), wt=n.w>=2?600:400;
+        const tw=textW(n._label,wt,fs); const two=slot>=46&&n.c, three=slot>=118&&n.d;
+        cand.push({n,x:x+ca*off,y:y+sa*off,rot,flip,x0:flip?-tw:0,x1:flip?0:tw,fs,wt,text:n._label,col,halo:!!n.x,al,two,three,
+          pr:n.w*10+(n._lv?4:0)+(n===ST.sel?100:0)+(n===ST.hover?50:0)+(n.e?1:0)-(n.x?0.5:0)+(inT?300:0)}); }
+      else n._lv=false;
+    } else {
+      const rad=(n.w>=3?4.2:(n.w===2?3:2.1))*(1+0.16*clamp(z,0,5)); n._rad=rad;
+      if(n.w>=2||z>1.2){ ctx.beginPath(); ctx.arc(x,y,rad,0,TAU); ctx.fillStyle=T.bg; ctx.fill(); ctx.strokeStyle=col; ctx.lineWidth=n.w>=3?2.4:1.6; ctx.stroke(); }
+      const need=n.w>=3?-9:(n.w===2?0.75:2.3);
+      if(z>=need){ const fs=n.w>=3?clamp(11+1.25*z,10.5,18):clamp(10.5+0.8*z,10.5,15), wt=n.w>=3?700:600;
+        const tw=textW(n._label,wt,fs)+(n.w>=3?n._label.length*fs*0.08:0); const inward=!!n.li||n._r>0.84, end=(flip!==inward), off=rad+6;
+        cand.push({n,x,y,rot,flip,x0:end?-off-tw:off,x1:end?-off:off+tw,dy:-(fs*0.62+1),fs,wt,text:n._label,col,halo:true,al,ls:n.w>=3?fs*0.08:0,
+          pr:n.w*10+2+(n._lv?4:0)+(n===ST.sel?100:0)+(n===ST.hover?50:0)+Math.min(1,n._leaves/40)}); }
+      else n._lv=false;
+    }
+    if(TK.on&&TK.set.has(n)){ ctx.globalAlpha=1; ctx.strokeStyle=T.fg; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(x,y,n._rad+6,0,TAU); ctx.stroke(); if(n===TK.f||(TK.phase==='pick'&&n===TK.picks[0])){ ctx.beginPath(); ctx.arc(x,y,n._rad+10.5,0,TAU); ctx.stroke(); } }
+    if(n===ST.sel&&!TK.on){ ctx.globalAlpha=1; ctx.beginPath(); ctx.arc(x,y,n._rad+5,0,TAU); ctx.strokeStyle=T.fg; ctx.lineWidth=2; ctx.stroke(); }
+    if(ST.flags[n._id]!==undefined){ ctx.globalAlpha=1; ctx.beginPath(); ctx.arc(x,y,n._rad+9,0,TAU); ctx.setLineDash([2,4]); ctx.strokeStyle=T.fg; ctx.lineWidth=2.2; ctx.stroke(); ctx.setLineDash([]); }
+  }
+  ctx.globalAlpha=1;
+  if(TK.on){ const side=panel.classList.contains('open')&&innerWidth>760?Math.min(380,W*0.5):0; let i=0;
+    for(const n of TK.set){ const x=SX(n._x), y=SY(n._y), ca=Math.cos(n._t), sa=Math.sin(n._t); const t=TK.phase==='pick'?n.n:(n===TK.f?TK.fl:(n===TK.a?TK.al:TK.bl)); const txt=t.charAt(0).toUpperCase()+t.slice(1);
+      const fs=14, tw=textW(txt,700,fs), o=20+(n._md||0), px=x+ca*o, py=y+sa*o, left=ca<-0.25||px+tw>W-side-8; cand.push({axis:true,tries:5,x:px,y:py,rot:0,x0:left?-tw-4:4,x1:left?-4:tw+4,dy:0,fs,wt:700,text:txt,col:T.fg,halo:true,al:1,pr:950-(i++)}); } }
+  if(TK.on&&TK.phase==='shown'){ const side=panel.classList.contains('open')&&innerWidth>760?Math.min(380,W*0.5):0; const ms=TK.m1===TK.m2?[TK.m1]:[TK.m1,TK.m2]; ms.forEach(m=>{ const x=SX(m._x), y=SY(m._y), near=m===(TK.m1.a<=TK.m2.a?TK.m1:TK.m2);
+      ctx.beginPath(); ctx.arc(x,y,near?8:6,0,TAU); ctx.fillStyle=near?T.fg:T.bg; ctx.fill(); ctx.strokeStyle=T.fg; ctx.lineWidth=2.4; ctx.stroke();
+      const t=m.n+' \u00b7 '+fmtAge(m.a), fs=13, tw=textW(t,600,fs), left=x+14+tw>W-side-8; cand.push({axis:true,tries:4,x,y,rot:0,x0:left?-14-tw:14,x1:left?-14:14+tw,dy:-15,fs,wt:600,text:t,col:T.fg,halo:true,al:1,pr:900+(near?1:0)}); }); }
+  // the time axis: events to the left of it, era names to the right where the gap is wide enough
+  { const px=axs, py=-axc;   // unit vector to the side of the axis where the event names go (left when the axis points up)
+    const upright=Math.abs(axc)<0.6;
+    EVENTS.forEach((ev,i)=>{ const r=sc(ev.a)*Rk, x=ox+axc*r, y=oy+axs*r; if(x<-30||x>W+30||y<-30||y>H+30) return; const on=ev===ST.ev;
+      ctx.beginPath(); ctx.arc(x,y,on?8:6.5,0,TAU); ctx.fillStyle=T.bg; ctx.fill(); ctx.strokeStyle=T.fg; ctx.globalAlpha=on?1:0.55; ctx.lineWidth=on?2.2:1.2; ctx.stroke(); ctx.globalAlpha=1;
+      ctx.beginPath(); ctx.arc(x,y,on?4.2:3.2,0,TAU); ctx.fillStyle=T.fg; ctx.fill(); HIT.push({n:ev._hit,cx:x,cy:y,r:13});
+      const fs=11.5, wt=on?700:400, tw=textW(ev.t,wt,fs); let x0,x1,dy=0;
+      if(px<-0.3){ x0=px*13-tw; x1=px*13; } else if(px>0.3){ x0=px*13; x1=px*13+tw; } else { x0=-tw/2; x1=tw/2; } dy=py*(Math.abs(px)>0.3?13:17);
+      cand.push({axis:true,ev,tries:upright?0:4,x,y,rot:0,x0,x1,dy,fs,wt,text:ev.t,col:T.fg,halo:true,al:on?1:0.86,pr:60-i+(on?40:0)}); });
+    ERAS.forEach(e=>{ const rm=(sc(e.a0)+sc(e.a1))/2*Rk, x=ox+axc*rm, y=oy+axs*rm, half=rm*Math.sin(11*Math.PI/180), len=(sc(e.a1)-sc(e.a0))*Rk, fs=10.5, name=e.n.toUpperCase(), tw=textW(name,600,fs)+name.length*fs*0.14; if(x<-30||x>W+30||y<-30||y>H+30) return;
+      if(upright){ if(half>tw+22&&len>22){ const x0=px<0?10:-10-tw; cand.push({axis:true,x,y,rot:0,x0,x1:x0+tw,fs,wt:600,text:name,col:T.fg,halo:true,al:0.5,ls:fs*0.14,pr:55}); } }
+      else if(len>tw+16&&half>fs+8) cand.push({axis:true,x,y,rot:0,x0:-tw/2,x1:tw/2,dy:py<0?15:-15,fs,wt:600,text:name,col:T.fg,halo:true,al:0.5,ls:fs*0.14,pr:55}); });
+  }
+  // place labels in order of importance; a label that would sit on another waits until you come closer
+  cand.sort((a,b)=>b.pr-a.pr); const grid=new Set(pre); const CELL=7;
+  function cells(c){ const out=[], cr=Math.cos(c.rot), sr=Math.sin(c.rot), dy=c.dy||0, hh=c.fs*0.58+(c.two?c.fs*0.5:0); const x0=c.x0-2, x1=c.x1+2;
+    for(let lx=x0; ; lx+=5){ if(lx>x1) lx=x1; for(const ly of [dy-hh,dy,dy+hh]){ const px=c.x+lx*cr-ly*sr, py=c.y+lx*sr+ly*cr; out.push(((px/CELL)|0)*8192+((py/CELL)|0)); } if(lx>=x1) break; } return out; }
+  const edge=z<0.4;
+  for(const c of cand){ const cs=cells(c); let free=true;
+    if(edge&&c.n&&c.n._leaf&&!(TK.on&&TK.set.has(c.n))){ const far=c.flip?c.x0:c.x1, ex=c.x+far*Math.cos(c.rot), ey=c.y+far*Math.sin(c.rot); if(ex<6||ex>W-6||ey<6||ey>H-62) free=false; } for(const v of cs){ if(grid.has(v)){ free=false; break; } } if(free) cs.forEach(v=>grid.add(v));
+    if(c.axis){ if(!free&&c.tries){ const y0=c.y; for(let s=1;s<=c.tries&&!free;s++){ for(const sg of [1,-1]){ c.y=y0+sg*s*17; const cs2=cells(c); if(!cs2.some(v=>grid.has(v))){ cs2.forEach(v=>grid.add(v)); free=true; break; } } } if(!free) c.y=y0; }
+      if(free||c.tries) text(c,1); if(c.ev&&(free||c.tries)) HIT.push({n:c.ev._hit,x:c.x,y:c.y,rot:0,x0:c.x0-5,x1:c.x1+5,dy:c.dy||0,h:c.fs*0.9}); continue; }
+    const n=c.n; n._lv=free; const target=free?1:0; if(n._la!==target){ n._la+=(target-n._la)*Math.min(1,dt/110); if(Math.abs(target-n._la)<0.03) n._la=target; else fading=true; }
+    if(n._la>0.02){ text(c,n._la); if(free) HIT.push({n,x:c.x,y:c.y,rot:c.rot,x0:c.x0-4,x1:c.x1+4,dy:c.dy||0,h:c.fs*0.8}); } }
+  function text(c,a){ ctx.save(); ctx.translate(c.x,c.y); ctx.rotate(c.rot); ctx.globalAlpha=c.al*a; ctx.font=`${c.wt} ${c.fs}px ${FB}`; ctx.textBaseline='middle'; if('letterSpacing' in ctx) ctx.letterSpacing=(c.ls||0)+'px';
+    const right=c.x1<=0||(c.flip&&c.x0<0&&c.x1<=0); ctx.textAlign=right?'right':'left'; const tx=right?c.x1:c.x0; let ty=c.dy||0; if(c.two) ty-=c.fs*0.5;
+    if(c.halo){ ctx.lineWidth=3.2; ctx.strokeStyle=T.bg; ctx.lineJoin='round'; ctx.strokeText(c.text,tx,ty); }
+    ctx.fillStyle=c.col; ctx.fillText(c.text,tx,ty);
+    if(c.two){ if('letterSpacing' in ctx) ctx.letterSpacing='0px'; ctx.font=`italic 400 ${c.fs*0.86}px ${FD}`; ctx.fillStyle=T.fg; ctx.globalAlpha=c.al*a*0.72; ctx.fillText(c.n.c,tx,ty+c.fs*1.08);
+      if(c.three){ const lines=wrap(c.n.d,Math.min(300,W*0.4),c.fs*0.82,3); ctx.font=`400 ${c.fs*0.82}px ${FB}`; ctx.globalAlpha=c.al*a*0.62; lines.forEach((l,i)=>ctx.fillText(l,tx,ty+c.fs*(2.2+i*1.0))); } }
+    else if(c.three&&c.n&&c.n.d){ const lines=wrap(c.n.d,Math.min(300,W*0.4),c.fs*0.82,3); ctx.font=`400 ${c.fs*0.82}px ${FB}`; ctx.fillStyle=T.fg; ctx.globalAlpha=c.al*a*0.62; lines.forEach((l,i)=>ctx.fillText(l,tx,ty+c.fs*(1.15+i*1.0))); }
+    ctx.restore(); }
+  // edge shading: the middle of the view is the lit part
+  g=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.42,W/2,H/2,Math.hypot(W,H)*0.62); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,dark?'rgba(2,4,12,.5)':'rgba(120,104,70,.12)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  drawMini(); updateHud();
 }
-function stopMotion(){ TG=null; anchor=null; vel=null; if(raf){cancelAnimationFrame(raf); raf=null; lastTs=0;} }
-function fit(now){ stopMotion(); const r=stage.getBoundingClientRect(); const a=r.width/r.height; const to=a>=1?{x:S/2-(S*a)/2,y:0,w:S*a,h:S}:{x:0,y:S/2-(S/a)/2,w:S,h:S/a}; if(now===true){ VB=to; applyVB(); cam.dirty=true; scheduleSnap(); return; } goTo(to,null,0.14); }
-function zoomAt(factor, cx, cy){ // eased zoom that keeps the point under (cx,cy) fixed; repeated wheel ticks accumulate on the pending target
-  const r=stage.getBoundingClientRect(); const sx=(cx-r.left)/r.width, sy=(cy-r.top)/r.height;
-  const ax=VB.x+sx*VB.w, ay=VB.y+sy*VB.h;
-  const base=TG?TG.w:VB.w; const nw=clampW(base/factor), nh=nw*(VB.h/VB.w);
-  goTo({x:ax-sx*nw,y:ay-sy*nh,w:nw,h:nh},{ax,ay,sx,sy});
+
+// ---- overview disc --------------------------------------------------------------------------
+let MM=null; const MMS=264, mmk=MMS/(2*R*1.1);
+function buildMini(){ MM=document.createElement('canvas'); MM.width=MM.height=MMS; const c=MM.getContext('2d'); const o=MMS/2; c.lineCap='round';
+  for(const n of list){ if(n._leaf) continue; const pr=n._r*R*mmk; c.strokeStyle=colOf(n); c.lineWidth=Math.max(0.5,n._w*0.45); if(n.k.length>1&&pr>0.5){ c.beginPath(); c.arc(o,o,pr,n.k[0]._t,n.k[n.k.length-1]._t); c.stroke(); }
+    n.k.forEach(ch=>{ c.strokeStyle=colOf(ch); c.lineWidth=Math.max(0.5,ch._w*0.45); c.beginPath(); c.moveTo(o+pr*Math.cos(ch._t),o+pr*Math.sin(ch._t)); c.lineTo(o+ch._r*R*mmk*Math.cos(ch._t),o+ch._r*R*mmk*Math.sin(ch._t)); c.stroke(); }); } }
+function drawMini(){ const show=cam.k>kFit*1.7; mini.classList.toggle('show',show); if(!show||!MM) return; mctx.clearRect(0,0,MMS,MMS); mctx.globalAlpha=0.9; mctx.save(); mctx.translate(MMS/2,MMS/2); mctx.rotate(ROT); mctx.drawImage(MM,-MMS/2,-MMS/2); mctx.restore(); mctx.globalAlpha=1;
+  const o=MMS/2, x=o+(cam.x-CX)*mmk, y=o+(cam.y-CY)*mmk, w=Math.max(10,W/cam.k*mmk), h=Math.max(10,H/cam.k*mmk);
+  mctx.save(); mctx.beginPath(); mctx.arc(o,o,o-1,0,TAU); mctx.clip(); mctx.fillStyle=T.dark?'rgba(255,255,255,.14)':'rgba(0,0,0,.09)'; mctx.strokeStyle=T.fg; mctx.lineWidth=2.5; mctx.beginPath(); mctx.rect(x-w/2,y-h/2,w,h); mctx.fill(); mctx.stroke(); mctx.restore(); }
+function miniGo(e){ const r=mini.getBoundingClientRect(); const mx=(e.clientX-r.left)/r.width*MMS, my=(e.clientY-r.top)/r.height*MMS; stopAnim(); cam.x=CX+(mx-MMS/2)/mmk; cam.y=CY+(my-MMS/2)/mmk; clampCam(); requestDraw(); }
+mini.addEventListener('pointerdown',e=>{ if(!mini.classList.contains('show')) return; mini.setPointerCapture(e.pointerId); mini._d=true; miniGo(e); });
+mini.addEventListener('pointermove',e=>{ if(mini._d) miniGo(e); });
+mini.addEventListener('pointerup',()=>{ mini._d=false; }); mini.addEventListener('pointercancel',()=>{ mini._d=false; });
+
+// ---- where you are in time ------------------------------------------------------------------
+let mouse=null, hudText='';
+function updateHud(){ let html;
+  if(ST.turn&&!mouse&&!pts.size&&turnHint){ html='Drag to turn the wheel \u00b7 tap a name to bring it level \u00b7 pinch still zooms'; }
+  else if(!touched){ html=matchMedia('(pointer:coarse)').matches ? 'Pinch to zoom · drag to move · tap a name or a dot' : 'Pinch or scroll to zoom · drag to move · click a name or a dot'; }
+  else { const px=mouse?mouse.x:W/2, py=mouse?mouse.y:H/2; const f=Math.hypot(px-SX(CX),py-SY(CY))/(R*cam.k);
+    if(f>1.004) html=(mouse?'Under the pointer':'Centre of view')+': <b>today</b> <span class="era">· the rim of the tree</span>';
+    else { const a=ageAt(f); html=(mouse?'Under the pointer':'Centre of view')+': <b>'+fmtHud(a)+'</b> <span class="era">· '+eraOf(a)+'</span>'; } }
+  if(html!==hudText){ hudText=html; hud.innerHTML=html; } }
+
+// ---- hands: touch, mouse, trackpad ----------------------------------------------------------
+function hitTest(sx,sy,coarse){
+  let best=null, bd=coarse?26:15; const M=40;
+  for(const n of list){ const x=SX(n._x), y=SY(n._y); if(x<-M||x>W+M||y<-M||y>H+M) continue; if(!n._leaf&&n.w<2&&cam.k<kFit*2.3) continue; const d=Math.hypot(x-sx,y-sy)-(n._rad||3)*0.5; if(d<bd){ bd=d; best=n; } }
+  if(best&&bd<(coarse?12:8)) return best;
+  let circ=null, cd=1e9, rect=null;
+  for(let i=HIT.length-1;i>=0;i--){ const h=HIT[i]; if(h.r!==undefined){ const d=Math.hypot(sx-h.cx,sy-h.cy); if(d<=h.r&&d<cd){ cd=d; circ=h.n; } continue; }
+    if(rect) continue; const dx=sx-h.x, dy=sy-h.y, cr=Math.cos(-h.rot), sr=Math.sin(-h.rot), lx=dx*cr-dy*sr, ly=dx*sr+dy*cr-h.dy; if(lx>=h.x0&&lx<=h.x1&&Math.abs(ly)<=h.h+(coarse?6:0)) rect=h.n; }
+  return circ||rect||best;
 }
-function flyTo(n, targetW){
-  const cx=S/2+1000*n._r*Math.cos(n._t), cy=S/2+1000*n._r*Math.sin(n._t);
-  const asp=VB.h/VB.w; const w=targetW||Math.min(VB.w,700); const h=w*asp;
-  const r=stage.getBoundingClientRect(); const panelW=(window.innerWidth>760)?Math.min(380,r.width*0.5):0; const panelH=(window.innerWidth<=760)?r.height*0.62:0;
-  const offx=(panelW/2)/r.width*w, offy=(panelH/2)/r.height*h; // keep the target centred in the uncovered part of the stage
-  const to={x:cx-w/2+offx,y:cy-h/2+offy,w,h};
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ stopMotion(); VB=to; showFrame(); return; }
-  goTo(to,null,0.13);
-}
-// pointer interactions
-let drag=null, pinch=null, lastTap=null;
-stage.addEventListener('wheel',e=>{ e.preventDefault();
-  let d=e.deltaY; if(e.deltaMode===1) d*=16; else if(e.deltaMode===2) d*=120; d=Math.max(-160,Math.min(160,d));
-  zoomAt(Math.exp(-d*(e.ctrlKey?0.009:0.0022)), e.clientX, e.clientY); // ctrlKey = trackpad pinch, which sends small deltas
-},{passive:false});
-stage.addEventListener('pointerdown',e=>{ const hit=(e.target.closest&&e.target.closest('[data-id]'))||null; stage.setPointerCapture(e.pointerId); /* capture retargets later events to the stage, so remember what was under the pointer now */
-  if(pinch===null && drag===null){ stopMotion(); drag={id:e.pointerId,x:e.clientX,y:e.clientY,vx:VB.x,vy:VB.y,moved:false,hit,type:e.pointerType,trail:[[performance.now(),e.clientX,e.clientY]]}; }
-  else if(drag && !pinch){ stopMotion(); pinch={a:drag.id,b:e.pointerId,ax:drag.x,ay:drag.y,bx:e.clientX,by:e.clientY}; pinch.d0=Math.hypot(pinch.ax-pinch.bx,pinch.ay-pinch.by); pinch.mx=(pinch.ax+pinch.bx)/2; pinch.my=(pinch.ay+pinch.by)/2; } });
+const pts=new Map(); let ges=null, lastTap=null;
+const loc=e=>({x:e.clientX-RECT.left,y:e.clientY-RECT.top});
+function two(){ const it=pts.values(), a=it.next().value, b=it.next().value; return {cx:(a.x+b.x)/2, cy:(a.y+b.y)/2, d:Math.hypot(a.x-b.x,a.y-b.y)}; }
+stage.addEventListener('pointerdown',()=>{ turnHint=false; });
+stage.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse'&&e.button!==0) return; RECT=stage.getBoundingClientRect();
+  try{ stage.setPointerCapture(e.pointerId); }catch(_){}
+  stopAnim(); const p=loc(e); pts.set(e.pointerId,p); if(!touched){ touched=true; }
+  if(pts.size===1) ges={moved:false,multi:false,t0:performance.now(),x0:p.x,y0:p.y,type:e.pointerType,trail:[],twoT0:0,twoMove:0};
+  else if(ges){ ges.multi=true; ges.trail=[]; if(pts.size===2){ ges.twoT0=performance.now(); ges.twoMove=0; } }
+  requestDraw();
+});
 stage.addEventListener('pointermove',e=>{
-  if(pinch){ if(e.pointerId===pinch.a){pinch.ax=e.clientX;pinch.ay=e.clientY;} else if(e.pointerId===pinch.b){pinch.bx=e.clientX;pinch.by=e.clientY;} else return;
-    const d=Math.hypot(pinch.ax-pinch.bx,pinch.ay-pinch.by), mx=(pinch.ax+pinch.bx)/2, my=(pinch.ay+pinch.by)/2; if(d<1) return;
-    const r=stage.getBoundingClientRect(); const f=d/pinch.d0;
-    const sxo=(pinch.mx-r.left)/r.width, syo=(pinch.my-r.top)/r.height, sxn=(mx-r.left)/r.width, syn=(my-r.top)/r.height;
-    const wx=VB.x+sxo*VB.w, wy=VB.y+syo*VB.h; const nw=clampW(VB.w/f), nh=nw*(VB.h/VB.w);
-    VB={x:wx-sxn*nw, y:wy-syn*nh, w:nw, h:nh}; // the point that was between the fingers stays between the fingers
-    pinch.d0=d; pinch.mx=mx; pinch.my=my; showFrame(); return; }
-  if(!drag||e.pointerId!==drag.id) return;
-  const r=stage.getBoundingClientRect(); const dx=(e.clientX-drag.x)/r.width*VB.w, dy=(e.clientY-drag.y)/r.height*VB.h;
-  if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>(e.pointerType==='touch'?10:4)){ drag.moved=true; stage.classList.add('dragging'); }
-  if(drag.moved){ VB.x=drag.vx-dx; VB.y=drag.vy-dy; const now=performance.now(); drag.trail.push([now,e.clientX,e.clientY]); while(drag.trail.length>2&&now-drag.trail[0][0]>90) drag.trail.shift(); showFrame(); }
+  const p=pts.get(e.pointerId), q=loc(e);
+  if(!p){ if(e.pointerType==='mouse'){ mouse=q; const h=hitTest(q.x,q.y,false); stage.classList.toggle('point',!!h); const hn=h&&!h._ev?h:null; if(hn!==ST.hover){ ST.hover=hn; requestDraw(); } else updateHud(); } return; }
+  if(!ges) return;
+  if(pts.size>=2){ const b=two(); p.x=q.x; p.y=q.y; const a=two(); if(b.d>4&&a.d>4){ const ax=cam.x+(b.cx-W/2)/cam.k, ay=cam.y+(b.cy-H/2)/cam.k; cam.k=clamp(cam.k*a.d/b.d,kMin,kMax); cam.x=ax-(a.cx-W/2)/cam.k; cam.y=ay-(a.cy-H/2)/cam.k; clampCam(); }
+    ges.twoMove+=Math.abs(a.d-b.d)+Math.hypot(a.cx-b.cx,a.cy-b.cy); ges.moved=true; requestDraw(); return; }
+  if(!ges.moved){ if(Math.hypot(q.x-ges.x0,q.y-ges.y0)>(e.pointerType==='touch'?9:4)){ ges.moved=true; stage.classList.add('dragging'); } else return; }
+  if(ST.turn){ const cx=SX(CX), cy=SY(CY); if(Math.hypot(q.x-cx,q.y-cy)>12&&Math.hypot(p.x-cx,p.y-cy)>12){ rotAnim=null; setRot(ROT+normAng(Math.atan2(q.y-cy,q.x-cx)-Math.atan2(p.y-cy,p.x-cx))); } p.x=q.x; p.y=q.y; requestDraw(); return; }
+  cam.x-=(q.x-p.x)/cam.k; cam.y-=(q.y-p.y)/cam.k; p.x=q.x; p.y=q.y; clampCam();
+  const now=performance.now(); ges.trail.push([now,q.x,q.y]); while(ges.trail.length>2&&now-ges.trail[0][0]>100) ges.trail.shift(); requestDraw();
 });
 function endPointer(e){
-  if(pinch){ if(e.pointerId===pinch.a||e.pointerId===pinch.b){ pinch=null; drag=null; showFrame(); } return; }
-  if(!drag||e.pointerId!==drag.id) return;
-  const d=drag; drag=null; stage.classList.remove('dragging');
-  if(d.moved){ // glide on: velocity from the last ~90 ms of the drag
-    const r=stage.getBoundingClientRect(); const t0=d.trail[0], t1=d.trail[d.trail.length-1]; const dt=t1[0]-t0[0];
-    if(dt>8 && e.type==='pointerup'){ const vx=-(t1[1]-t0[1])/dt/r.width*VB.w, vy=-(t1[2]-t0[2])/dt/r.height*VB.h; const sp=Math.hypot(vx,vy), cap=VB.w*0.0025; const s=sp>cap?cap/sp:1; if(sp*16>VB.w*0.002){ vel={x:vx*s,y:vy*s}; if(!raf) raf=requestAnimationFrame(tick); return; } }
-    showFrame(); return;
-  }
-  if(e.type!=='pointerup') return;
-  const h=d.hit; if(h&&byId[h.dataset.id]){ lastTap=null; select(byId[h.dataset.id],true); return; }
-  const now=performance.now(); // double-tap (or double-click) on empty space zooms in there
-  if(lastTap && now-lastTap.t<320 && Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<30){ lastTap=null; zoomAt(2,e.clientX,e.clientY); }
-  else lastTap={t:now,x:e.clientX,y:e.clientY};
+  const p=pts.get(e.pointerId); if(!p) return; pts.delete(e.pointerId); if(!ges) return;
+  if(pts.size>0){ ges.trail=[]; return; }                      // one finger lifted: the other keeps moving the tree
+  const gg=ges; ges=null; stage.classList.remove('dragging'); const now=performance.now();
+  if(e.type!=='pointerup'){ requestDraw(); return; }
+  if(gg.multi){ if(gg.twoMove<14&&now-gg.twoT0<380){ zoomAbout(1/2.1,p.x,p.y,true); } return; }      // two-finger tap steps back out
+  if(gg.moved){ const t=gg.trail; if(t.length>1&&now-t[t.length-1][0]<60){ const a=t[0], b=t[t.length-1], dt=b[0]-a[0]; if(dt>12){ let vx=(b[1]-a[1])/dt, vy=(b[2]-a[2])/dt; const sp=Math.hypot(vx,vy), cap=3.2; if(sp>cap){ vx*=cap/sp; vy*=cap/sp; } if(sp>0.12){ vel={x:vx,y:vy}; requestDraw(); } } } return; }
+  const coarse=gg.type!=='mouse'; const h=hitTest(p.x,p.y,coarse);
+  if(h){ lastTap=null; if(TK.on){ if(!h._ev) taskTap(h); return; } if(h._ev){ selectEvent(h._ev); return; } select(h,true); return; }
+  if(lastTap&&now-lastTap.t<330&&Math.hypot(p.x-lastTap.x,p.y-lastTap.y)<34){ lastTap=null; zoomAbout(2.2,p.x,p.y,true); } else lastTap={t:now,x:p.x,y:p.y};
 }
 stage.addEventListener('pointerup',endPointer); stage.addEventListener('pointercancel',endPointer);
-// hover highlight of lineage
-stage.addEventListener('pointerover',e=>{ const g=e.target.closest('[data-id]'); if(!g){return;} light(byId[g.dataset.id]); });
-stage.addEventListener('pointerout',e=>{ if(!e.relatedTarget||!e.relatedTarget.closest||!e.relatedTarget.closest('[data-id]')) unlight(); });
-function light(n){ unlight(); if(!n) return; stage.classList.add('dim'); let x=n; const ids=new Set(); while(x){ids.add(x._id); x=x._p;} (function sub(m){ ids.add(m._id); (m.k||[]).forEach(sub); })(n);
-  svg.querySelectorAll('[data-id]').forEach(el=>{ if(ids.has(el.dataset.id)) el.classList.add('lit'); }); }
-function unlight(){ stage.classList.remove('dim'); svg.querySelectorAll('.lit').forEach(el=>el.classList.remove('lit')); }
+stage.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse'&&!pts.size){ mouse=null; if(ST.hover){ ST.hover=null; requestDraw(); } else updateHud(); stage.classList.remove('point'); } });
+// Wheel: a pinch on a trackpad zooms, two fingers sliding moves the tree, a mouse wheel zooms.
+let wLast=0, wMouse=false;
+stage.addEventListener('wheel',e=>{ e.preventDefault(); RECT=stage.getBoundingClientRect(); const p=loc(e); touched=true;
+  let dx=e.deltaX, dy=e.deltaY; if(e.deltaMode===1){ dx*=16; dy*=16; } else if(e.deltaMode===2){ dx*=120; dy*=120; }
+  if(e.ctrlKey||e.metaKey){ fly=null; vel=null; zt=null; zoomAbout(Math.exp(-clamp(dy,-80,80)*0.012),p.x,p.y,false); return; }
+  const now=performance.now(); if(now-wLast>160){ const wd=e.wheelDeltaY; wMouse=e.deltaMode!==0||(e.deltaX===0&&((wd!==undefined&&wd!==0&&Math.abs(wd)>=120&&wd%120===0)||(Math.abs(e.deltaY)>=50&&Number.isInteger(e.deltaY)))); } wLast=now;
+  if(wMouse) zoomAbout(Math.exp(-clamp(dy,-160,160)*0.0026),p.x,p.y,true);
+  else { stopAnim(); cam.x+=dx/cam.k; cam.y+=dy/cam.k; clampCam(); requestDraw(); }
+},{passive:false});
+// Safari on a Mac reports a trackpad pinch as gesture events instead of a wheel
+let gsc=null;
+stage.addEventListener('gesturestart',e=>{ e.preventDefault(); if(!pts.size){ gsc=e.scale||1; stopAnim(); } });
+stage.addEventListener('gesturechange',e=>{ e.preventDefault(); if(gsc===null||pts.size) return; const f=(e.scale||1)/gsc; gsc=e.scale||1; const m=mouse||{x:W/2,y:H/2}; touched=true; zoomAbout(f,m.x,m.y,false); });
+stage.addEventListener('gestureend',e=>{ e.preventDefault(); gsc=null; });
 
-// selection + card
-function fmtAge(a){ if(a<=0) return 'Living today'; if(a>=1000) return (a/1000).toFixed(1).replace(/\.0$/,'')+' billion years ago'; if(a<1) return Math.round(a*1000)+',000 years ago'; return a+' million years ago'; }
-function select(n,fly){ ST.sel=n; markSel(); card.innerHTML=cardHTML(n); wireCard(n); $('#stripe').style.background=TC().col(ckey(n)); panel.classList.add('open'); if(fly) flyTo(n, Math.min(VB.w, n.k?900:600)); }
-function markSel(){ svg.querySelectorAll('.node.sel').forEach(e=>e.classList.remove('sel')); if(ST.sel){ const g=svg.querySelector(`.node[data-id="${ST.sel._id}"]`); if(g) g.classList.add('sel'); } }
+// ---- task: Who is closer? ---------------------------------------------------------------------
+// Three tips. Which of two shares the more recent ancestor with the first? The answer is read off the
+// tree itself: every age below comes from the branch points in TREE, nothing is typed in by hand.
+const ROUNDS=[
+ {f:'Cetacea',fl:'a whale',a:'Hippopotamus',al:'A hippopotamus',b:'Chondrichthyes',bl:'A shark',why:'A whale has fins and lives in the sea, as a shark does. It also breathes air, has hair and feeds its young milk, as a hippo does. Body shape follows the water; hair and milk were inherited.'},
+ {f:'Homo sapiens',fl:'a human',a:'Chimpanzees & bonobos',al:'A chimpanzee',b:'Gorillas',bl:'A gorilla',why:'Chimpanzees and bonobos are our closest living relatives. The gorilla line split from ours a little earlier.'},
+ {f:'Chiroptera',fl:'a bat',a:'Rodentia',al:'A mouse',b:'Raptors & owls',bl:'An owl',why:'Bats and birds both fly, but each line built its wing separately. A bat has hair and nurses its young, so the mouse is the nearer relative.'},
+ {f:'Agaricus',fl:'a mushroom',a:'Homo sapiens',al:'A human',b:'Oaks',bl:'An oak tree',why:'A mushroom grows from the ground and does not move, yet fungi take in food made by other living things, as animals do. Fungi and animals share an ancestor that plants do not.'},
+ {f:'Crocodiles & gharials',fl:'a crocodile',a:'Warblers, thrushes & sparrows',al:'A sparrow',b:'Iguanas, geckos & wall lizards',bl:'An iguana',why:'A crocodile looks like a large lizard. Its closest living relatives are the birds; both descend from the archosaurs, the group that held the dinosaurs.'},
+ {f:'Tyrannosaurus rex',fl:'Tyrannosaurus rex',a:'Galloanserae',al:'A chicken',b:'American alligator',bl:'An alligator',why:'Birds are living dinosaurs. T. rex and a chicken are both theropods; the alligator line left earlier.'},
+ {f:'Cephalopoda',fl:'an octopus',a:'Bivalvia',al:'A clam',b:'Tuna, cod & perch',bl:'A tuna',why:'An octopus eye works much like a fish eye, a likeness that arose twice. Octopus and clam are both mollusks.'},
+ {f:'Manatees & dugongs',fl:'a manatee',a:'Elephants',al:'An elephant',b:'Pinnipedia',bl:'A seal',why:'Manatees and seals both swim with flippers. Manatees belong with elephants in a group that arose in Africa; seals are carnivores, relatives of bears and dogs.'},
+ {f:'Horseshoe crabs',fl:'a horseshoe crab',a:'Arachnida',al:'A spider',b:'Blue crab & true crabs',bl:'A blue crab',why:'A horseshoe crab is not a crab. It belongs with spiders and scorpions; true crabs are crustaceans.'},
+ {f:'Brown algae',fl:'kelp',a:'Ciliates',al:'A Paramecium',b:'Oaks',bl:'An oak tree',why:'Kelp looks like a plant and makes sugar from light, but its line gained that ability separately. Brown algae sit with the ciliates and diatoms, far from the land plants.'},
+ {f:'Lungfishes',fl:'a lungfish',a:'Anura',al:'A frog',b:'Tuna, cod & perch',bl:'A tuna',why:'A lungfish is a fish by shape. Its fleshy fins and its lungs come from the ancestor it shares with four-limbed animals. The two splits lie close together in time, which makes this one hard to read.'},
+ {f:'Methanogens',fl:'a methanogen, one of the archaea',a:'Homo sapiens',al:'A human',b:'Escherichia coli',bl:'E. coli, a bacterium',why:'A methanogen and E. coli are both single cells with no nucleus. On this tree the eukaryotes branch from within the archaea, so an archaeon shares a more recent ancestor with you than with any bacterium.'}
+];
+const TK={on:false,custom:false,i:0,f:null,a:null,b:null,fl:'',al:'',bl:'',why:'',phase:'ask',pick:null,right:0,done:0,picks:[],set:new Set(),m1:null,m2:null};
+const tnode=name=>list.find(n=>n.n===name);
+function ancestors(n){ const a=[]; while(n){ a.push(n); n=n._p; } return a; }
+function mrca(a,b){ const s=new Set(ancestors(a)); let x=b; while(!s.has(x)) x=x._p; return x; }
+function taskSet(f,a,b,fl,al,bl,why){ TK.f=f; TK.a=a; TK.b=b; TK.fl=fl; TK.al=al; TK.bl=bl; TK.why=why; TK.set=new Set([f,a,b]); TK.m1=mrca(f,a); TK.m2=mrca(f,b); TK.phase='ask'; TK.pick=null; }
+function taskOpen(){ ST.sel=null; ST.hover=null; ST.ev=null; TK.on=true; touched=true; $('#stripe').style.background=T.fg; panel.classList.add('open'); panel.scrollTop=0; }
+function taskRound(i){ taskOpen(); TK.custom=false; TK.i=i; const r=ROUNDS[i], flip=i%2===1;
+  taskSet(tnode(r.f), tnode(flip?r.b:r.a), tnode(flip?r.a:r.b), r.fl, flip?r.bl:r.al, flip?r.al:r.bl, r.why); taskCard(); taskFly(); }
+function taskStart(){ TK.right=0; TK.done=0; taskRound(0); }
+function taskCustom(){ taskOpen(); TK.custom=true; TK.phase='pick'; TK.picks=[]; TK.set=new Set(); TK.f=TK.a=TK.b=null; taskCard(); fit(); }
+function taskEnd(){ TK.on=false; TK.set=new Set(); }
+function taskTap(n){ if(!TK.on||TK.phase!=='pick') return; if(!n._leaf){ toast('Tap a tip: the dot at the outer end of a branch'); return; } if(TK.picks.includes(n)) return;
+  TK.picks.push(n); TK.set=new Set(TK.picks);
+  if(TK.picks.length===3){ const [f,a,b]=TK.picks; taskSet(f,a,b,f.n,a.n,b.n,''); taskFly(); } taskCard(); requestDraw(); }
+function taskFly(){ const top=mrca(TK.m1,TK.m2), pts=[TK.f,TK.a,TK.b,top]; const xs=pts.map(p=>p._x), ys=pts.map(p=>p._y);
+  const x0=Math.min(...xs), x1=Math.max(...xs), y0=Math.min(...ys), y1=Math.max(...ys); const side=innerWidth>760?Math.min(380,W*0.5):0, bottom=innerWidth>760?0:H*0.62, lead=innerWidth>760?175:0;
+  const k=clamp(Math.min((W-side-lead-240)/Math.max(1,x1-x0),(H-bottom-210)/Math.max(1,y1-y0)),kFit*0.8,5); flyCam((x0+x1)/2+(side-lead)/2/k,(y0+y1)/2+bottom/2/k,k); }
+function taskAnswer(which){ if(TK.phase!=='ask') return; TK.pick=which; TK.phase='shown'; if(!TK.custom){ TK.done++; if(taskCorrect()===which) TK.right++; } taskCard(); requestDraw(); }
+function taskCorrect(){ return TK.m1===TK.m2?'tie':(TK.m1.a<TK.m2.a?'a':'b'); }
+function pairLine(l,m){ return `<div class="pair"><b>${esc(l)}</b><span>last shared an ancestor about ${esc(fmtAge(m.a))}, at the branch point ${esc(m.n)}</span></div>`; }
+function taskCard(){
+  const head=`<div class="eyebrow"><span>Task · Who is closer?</span><span>${TK.custom?'Your own three':'Round '+(TK.i+1)+' of '+ROUNDS.length}</span></div>`;
+  let h=head;
+  if(TK.phase==='pick'){ h+=`<div><h2>Choose your own three</h2></div><p>Tap three tips on the tree. The first one you tap is the organism you are asking about; the next two are the candidates.</p>
+    <div class="chips">${TK.picks.map((n,i)=>`<span class="chip"><span class="sw" style="background:${colOf(n)}"></span>${i===0?'Asking about: ':''}${esc(n.n)}</span>`).join('')||'<span class="chip">Nothing chosen yet</span>'}</div>
+    <div class="tagrow"><button id="tBack">Back to the rounds</button></div>`; }
+  else if(TK.phase==='ask'){ h+=`<div><h2>Which shares a more recent ancestor with ${esc(TK.fl)}?</h2></div>
+    <div class="opts"><button class="opt" id="tA"><span class="sw" style="background:${colOf(TK.a)}"></span>${esc(TK.al)}</button><button class="opt" id="tB"><span class="sw" style="background:${colOf(TK.b)}"></span>${esc(TK.bl)}</button></div>
+    <details class="how"><summary>How can the tree tell me?</summary><p>Follow each candidate's branch inward until it meets the branch of ${esc(TK.fl)}. The centre of the tree is the distant past and the rim is today, so the meeting point nearer the rim is the more recent ancestor. Which names sit side by side on the rim does not matter.</p></details>
+    <p class="muted">All three are ringed on the tree. Decide, then press.</p>`; }
+  else { const c=taskCorrect(), ok=c===TK.pick; const cl=c==='a'?TK.al:TK.bl;
+    h+=`<div><div class="verdict">${c==='tie'?'Neither one.':(ok?'Yes.':'The tree says otherwise.')}</div><h2>${c==='tie'?'Both are equally related to '+esc(TK.fl)+'.':esc(cl)+' is the closer relative of '+esc(TK.fl)+'.'}</h2></div>
+    <div class="pairs">${pairLine(TK.al,TK.m1)}${pairLine(TK.bl,TK.m2)}</div>
+    ${c==='tie'?'<p>Both branches meet the first one at the same branch point, so neither is closer.</p>':''}${TK.why?`<p>${esc(TK.why)}</p>`:''}
+    <p class="muted">The bright thread joins the closer pair at their shared ancestor. Ages are rounded estimates.</p>`;
+    if(TK.custom) h+=`<div class="tagrow"><button id="tCustom" class="on">Choose another three</button><button id="tBack">Back to the rounds</button></div>`;
+    else if(TK.i<ROUNDS.length-1) h+=`<div class="tagrow"><button id="tNext" class="on">Next round</button><span class="muted">${TK.right} of ${TK.done} so far</span></div>`;
+    else h+=`<p><b>You chose the closer relative in ${TK.right} of ${TK.done}.</b> Nothing was sent anywhere.</p><div class="tagrow"><button id="tCustom" class="on">Choose your own three</button><button id="tAgain">Start over</button></div>`; }
+  card.innerHTML=h;
+  const on=(id,fn)=>{ const el=document.getElementById(id); if(el) el.onclick=fn; };
+  on('tA',()=>taskAnswer('a')); on('tB',()=>taskAnswer('b')); on('tNext',()=>taskRound(TK.i+1)); on('tAgain',taskStart); on('tCustom',taskCustom); on('tBack',()=>taskRound(Math.min(TK.i,ROUNDS.length-1)));
+}
+
+// ---- the dated events on the time axis: what happened, and why each one belongs on a tree of life ----
+const EVENT_INFO={
+ 2400:{title:'The Great Oxidation',when:'About 2.4 billion years ago',
+  what:'Cyanobacteria had been releasing oxygen as a waste product of photosynthesis for a long time. About 2.4 billion years ago that oxygen began to build up in the air and the shallow sea for the first time, a change recorded in the chemistry of rocks from that age. To much of the life then living, oxygen was a poison.',
+  why:'Oxygen-making photosynthesis arose once, on the Cyanobacteria branch, and every chloroplast descends from a cyanobacterium. Free oxygen also made aerobic respiration possible, the pathway mitochondria still run, and mitochondria descend from a bacterium on the Alphaproteobacteria branch.',
+  go:['Cyanobacteria','Alphaproteobacteria']},
+ 1800:{title:'The first eukaryotes',when:'About 1.8 billion years ago; the date is uncertain',
+  what:'A eukaryote keeps its DNA inside a nucleus and carries mitochondria, which began as free-living bacteria taken in by a host cell. The oldest fossils widely accepted as eukaryotes are roughly 1.6 to 1.8 billion years old, and estimates from DNA run older.',
+  why:'On this tree the Eukarya branch leaves from inside the Archaea, at the Asgard group. Every plant, animal, fungus and protist sits on that single branch, so each of them is a merger: an archaeal host with a bacterium living inside it.',
+  go:['Eukarya','Asgard','Alphaproteobacteria']},
+ 540:{title:'The Cambrian explosion',when:'Beginning about 540 million years ago',
+  what:'Over roughly 20 million years, most of the major animal body plans appear in the fossil record for the first time, including the first animals with hard shells, jointed legs and eyes. Sites such as the Burgess Shale in Canada and Chengjiang in China preserved even the soft-bodied ones.',
+  why:'Follow the Animalia branch outward and the arthropods, the mollusks and the chordates all part ways close to this ring. Their lines had begun to diverge earlier; the Cambrian is when they became large, hard and common enough to leave fossils.',
+  go:['Animalia','Arthropoda','Mollusca','Chordata']},
+ 470:{title:'Plants reach land',when:'About 470 million years ago',
+  what:'Spores in rocks about 470 million years old are the earliest evidence of plants living on land. Those plants were small and grew close to wet ground, much as liverworts do today. Roots, leaves, wood and seeds all came later.',
+  why:'The Embryophyta branch holds every land plant, and its closest living relatives are the Charophytes, green algae of fresh water. Land plants built soil and fed everything that followed them ashore: arthropods first, and about 100 million years later the four-limbed relatives of Tiktaalik.',
+  go:['Embryophyta','Charophytes','Tiktaalik']},
+ 252:{title:'The end-Permian extinction',when:'About 252 million years ago',
+  what:'The largest mass extinction known. Enormous volcanic eruptions in what is now Siberia released carbon dioxide and other gases; the climate warmed sharply and the oceans lost oxygen and turned more acidic. By many estimates more than 80 percent of marine species died out, along with about 70 percent of land vertebrate species.',
+  why:'A tree is shaped by what was lost as much as by what survived. The Archosauria branch point sits just outside this ring: crocodiles, dinosaurs and birds all descend from survivors. So do the mammals, by way of the Synapsida.',
+  go:['Archosauria','Synapsida','Mammalia']},
+ 66:{title:'The asteroid impact',when:'66 million years ago',
+  what:'An asteroid about 10 kilometres wide struck the sea floor at what is now Chicxulub, on the Yucatán Peninsula of Mexico. A thin layer rich in the rare metal iridium marks the moment in rocks around the world. About three quarters of all species died out.',
+  why:'The branches of Tyrannosaurus rex, Triceratops and the sauropods all end at this ring. One dinosaur branch crosses it: Aves, the birds. The mammals cross it too, and the orders of placental mammals spread out in the time that followed.',
+  go:['Tyrannosaurus rex','Triceratops','Aves','Placentalia']},
+ 0:{title:'Today',when:'The rim of the tree',
+  what:'Every tip that reaches the rim is alive now. The ✦ marks lineages in which evolution has been measured within human lifetimes, such as bacteria that became resistant to antibiotics within decades.',
+  why:'Every living tip sits at the same distance from the centre, because every living thing has been evolving for the same 3.8 billion years. No living species is the ancestor of another, and none is further along than the rest.',
+  go:['Staphylococcus aureus (MRSA)','Escherichia coli','Homo sapiens']}
+};
+EVENTS.forEach(ev=>{ ev._hit={_ev:ev}; });
+function selectEvent(ev){ const I=EVENT_INFO[ev.a]; if(!I) return; taskEnd(); ST.sel=null; ST.hover=null; ST.ev=ev; touched=true;
+  const chips=I.go.map(name=>list.find(n=>n.n===name)).filter(Boolean);
+  card.innerHTML=`<div class="eyebrow"><span>Time axis</span><span>event</span></div>
+  <div><h2>${esc(I.title)}</h2><div class="common">${esc(I.when)}</div></div>
+  <h3>What happened</h3><p>${esc(I.what)}</p>
+  <h3>Why it is marked on the tree</h3><p>${esc(I.why)}</p>
+  <h3>See it on the tree</h3><div class="chips">${chips.map(c=>`<span class="chip" data-go="${c._id}"><span class="sw" style="background:${colOf(c)}"></span>${esc(c.n)}</span>`).join('')}</div>
+  <p class="muted">The matching ring is drawn bright. Dates are rounded estimates.</p>`;
+  card.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>select(byId[el.dataset.go],true)));
+  $('#stripe').style.background=T.fg; panel.classList.add('open'); panel.scrollTop=0; requestDraw(); }
+
+// ---- selection + card -----------------------------------------------------------------------
+function select(n,go){ taskEnd(); ST.ev=null; ST.sel=n; card.innerHTML=cardHTML(n); wireCard(n); $('#stripe').style.background=colOf(n); panel.classList.add('open'); panel.scrollTop=0; if(go) flyTo(n); requestDraw(); }
+function deselect(){ taskEnd(); panel.classList.remove('open'); ST.sel=null; ST.ev=null; requestDraw(); }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
 function picHTML(n){
   const im=(typeof IMAGES!=='undefined')&&IMAGES[n.n]; if(!im) return '';
-  return `<figure class="pic"><img src="${im.u}" alt="${esc(n.c||n.n)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').hidden=true">${im.n?`<div class="note">${esc(im.n)}</div>`:''}<figcaption>Photo: ${esc(im.b||'Wikimedia Commons')} · ${esc(im.l)} · <a href="${im.p}" target="_blank" rel="noopener">source</a></figcaption></figure>`;
+  return `<figure class="pic"><img src="${im.u}" alt="${esc(n.c||n.n)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').hidden=true">${im.n?`<div class="note">${esc(im.n)}</div>`:''}<figcaption>Photo: ${esc(im.b||'Wikimedia Commons')} · <a href="${im.p}" target="_blank" rel="noopener">${esc(im.l||'licence')}</a></figcaption></figure>`;
 }
 function cardHTML(n){
-  const G=GROUPS[n.g]||GROUPS.root; const isLeaf=!(n.k&&n.k.length);
+  const G=GROUPS[n.g]||GROUPS.root; const isLeaf=n._leaf;
   const lin=[]; let x=n._p; while(x){ lin.unshift(x); x=x._p; }
   const nleaves=n._leaves||1;
   return `
@@ -1609,9 +1962,9 @@ function cardHTML(n){
   </div>
   <p>${esc(n.d)}</p>
   ${lin.length?`<h3>Lineage</h3><div class="lineage">${lin.map(m=>`<a data-go="${m._id}">${esc(m.n)}</a><span>›</span>`).join('')}<strong>${esc(n.n)}</strong></div>`:''}
-  ${!isLeaf?`<h3>Branches from here</h3><div class="chips">${n.k.map(c=>`<span class="chip" data-go="${c._id}"><span class="sw" style="background:${TC().col(ckey(c))}"></span>${esc(c.n)}</span>`).join('')}</div>`:''}
+  ${!isLeaf?`<h3>Branches from here</h3><div class="chips">${n.k.map(c=>`<span class="chip" data-go="${c._id}"><span class="sw" style="background:${colOf(c)}"></span>${esc(c.n)}</span>`).join('')}</div>`:''}
   <h3>Discussion</h3>
-  <div class="tagrow"><button id="flagBtn" class="${ST.flags[n._id]?'on':''}">${ST.flags[n._id]?'⚑ Flagged':'⚐ Flag for discussion'}</button><input id="tagIn" placeholder="tag, e.g. Unit 3" value="${esc(ST.flags[n._id]||'')}" ${ST.flags[n._id]?'':'hidden'}></div>
+  <div class="tagrow"><button id="flagBtn" class="${ST.flags[n._id]!==undefined?'on':''}">${ST.flags[n._id]!==undefined?'⚑ Flagged':'⚐ Flag for discussion'}</button><input id="tagIn" placeholder="tag, e.g. Unit 3" value="${esc(ST.flags[n._id]||'')}" ${ST.flags[n._id]!==undefined?'':'hidden'}></div>
   <textarea id="noteIn" placeholder="Your notes on this branch: what to say in class, what to ask, a page reference…">${esc(ST.notes[n._id]||'')}</textarea>`;
 }
 function wireCard(n){
@@ -1621,52 +1974,69 @@ function wireCard(n){
   ti.addEventListener('input',()=>{ ST.flags[n._id]=ti.value||'discuss'; save(); });
   ni.addEventListener('input',()=>{ if(ni.value) ST.notes[n._id]=ni.value; else delete ST.notes[n._id]; save(); });
 }
-function drawFlags(){
-  svg.querySelectorAll('.flagged-ring').forEach(e=>e.remove());
-  const layer=svg.querySelector('#nodes'); const T=TC();
-  Object.keys(ST.flags).forEach(id=>{ const n=byId[id]; if(!n) return; const cx=S/2+1000*n._r*Math.cos(n._t), cy=S/2+1000*n._r*Math.sin(n._t);
-    const c=document.createElementNS('http://www.w3.org/2000/svg','circle'); c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',14); c.setAttribute('fill','none'); c.setAttribute('stroke',T.fg); c.setAttribute('stroke-width','2.5'); c.setAttribute('class','flagged-ring'); layer.appendChild(c); });
-  $('#flagCount').textContent=Object.keys(ST.flags).length;
-}
+function drawFlags(){ $('#flagCount').textContent=Object.keys(ST.flags).length; requestDraw(); }
+const LEGEND_GO={bac:'Bacteria',arc:'Archaea',pro:'Eukarya',sar:'SAR',pla:'Embryophyta',fun:'Fungi',ani:'Animalia',eub:'Bacteria',arb:'Archaea'};
 function buildLegend(){
-  const T=TC(); const keys=ST.kingdoms?['eub','arb','pro','fun','pla','ani']:['bac','arc','pro','sar','pla','fun','ani']; const PAL=ST.kingdoms?TOL.KINGDOMS:GROUPS;
-  $('#legend').innerHTML=(ST.kingdoms?'<div class="row"><b>The six kingdoms</b></div>':'')+keys.map(k=>`<div class="row"><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${T.col(k)}" stroke-width="4" stroke-linecap="round"${T.dash(k)?` stroke-dasharray="${T.dash(k)}"`:''}/></svg>${esc(PAL[k].name)}</div>`).join('')+`<div class="note">${ST.kingdoms?'Shaded wedges show where each kingdom sits on the tree. Notice that Protista is scattered: it is every eukaryote that is not a fungus, a land plant or an animal, not one branch of its own.':'Centre is LUCA, ~3.8 billion years ago; the rim is today. Recent time is stretched so the crowded last 600 million years have room. ✦ = evolution watched in our lifetimes. † = an extinct branch, drawn to when it was last alive.'}</div>`;
+  const keys=ST.kingdoms?['eub','arb','pro','fun','pla','ani']:['bac','arc','pro','sar','pla','fun','ani']; const PAL=ST.kingdoms?TOL.KINGDOMS:GROUPS;
+  $('#legend').innerHTML=(ST.kingdoms?'<div class="row"><b>The six kingdoms</b></div>':'')+keys.map(k=>{ const t=list.find(n=>n.n===LEGEND_GO[k]); return `<div class="row"${t?` data-go="${t._id}" title="Go to ${esc(t.n)}"`:''}><svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="${T.col(k)}" stroke-width="4" stroke-linecap="round"${T.dash(k)?` stroke-dasharray="${T.dash(k)}"`:''}/></svg>${esc(PAL[k].name)}</div>`; }).join('')
+    +'<details><summary>How to read it</summary><div class="note">The centre is LUCA, about 3.8 billion years ago; the rim is today. Recent time is stretched so the crowded last 600 million years have room. ✦ marks evolution watched in our lifetimes. † marks an extinct branch, drawn to when it was last alive. More names and pictures arrive as you come closer. Tap a date on the time axis to read what happened then. Turn lets you spin the wheel so any branch reads level.</div></details>';
+  $('#legend').querySelectorAll('[data-go]').forEach(el=>el.onclick=()=>select(byId[el.dataset.go],true));
 }
-// search
+function render(){ setTheme(); buildLegend(); requestDraw(); }
+
+// ---- search ---------------------------------------------------------------------------------
 const q=$('#q'), res=$('#results'); let hi=-1;
 q.addEventListener('input',()=>{ const v=q.value.trim().toLowerCase(); hi=-1; if(!v){res.style.display='none';return;}
-  const T=TC();
-  const hits=list.filter(n=>n.n.toLowerCase().includes(v)||(n.x&&'extinct fossil'.includes(v))||(n.c||'').toLowerCase().includes(v)||(n.d||'').toLowerCase().includes(v)||((typeof IMAGES!=='undefined')&&IMAGES[n.n]&&IMAGES[n.n].n&&IMAGES[n.n].n.toLowerCase().includes(v))).slice(0,14);
-  res.innerHTML=hits.map(n=>`<div data-id="${n._id}"><span class="sw" style="background:${T.col(ckey(n))}"></span>${esc(n.n)}${n.c?` <small>${esc(n.c)}</small>`:''}</div>`).join('')||'<div><small>No match</small></div>';
-  res.style.display='block'; res.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>{ select(byId[el.dataset.id],true); res.style.display='none'; q.value=''; })); });
-q.addEventListener('keydown',e=>{ const items=[...res.querySelectorAll('[data-id]')]; if(e.key==='ArrowDown'){hi=Math.min(items.length-1,hi+1);} else if(e.key==='ArrowUp'){hi=Math.max(0,hi-1);} else if(e.key==='Enter'){ if(items[hi>=0?hi:0]) items[hi>=0?hi:0].click(); return;} else if(e.key==='Escape'){res.style.display='none';return;} else return; items.forEach((it,i)=>it.classList.toggle('on',i===hi)); });
-document.addEventListener('click',e=>{ if(!e.target.closest('.search')) res.style.display='none'; });
-// controls
+  const hits=list.filter(n=>n.n.toLowerCase().includes(v)||(n.x&&'extinct fossil'.includes(v))||(n.c||'').toLowerCase().includes(v)||(n.d||'').toLowerCase().includes(v)||((typeof IMAGES!=='undefined')&&IMAGES[n.n]&&IMAGES[n.n].n&&IMAGES[n.n].n.toLowerCase().includes(v)))
+    .sort((a,b)=>(b.n.toLowerCase().startsWith(v)||(b.c||'').toLowerCase().startsWith(v)?1:0)-(a.n.toLowerCase().startsWith(v)||(a.c||'').toLowerCase().startsWith(v)?1:0)).slice(0,14);
+  res.innerHTML=hits.map(n=>`<div data-id="${n._id}"><span class="sw" style="background:${colOf(n)}"></span>${esc(n.n)}${n.c?` <small>${esc(n.c)}</small>`:''}</div>`).join('')||'<div><small>No match</small></div>';
+  res.style.display='block'; res.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>{ select(byId[el.dataset.id],true); res.style.display='none'; q.value=''; q.blur(); })); });
+q.addEventListener('keydown',e=>{ const items=[...res.querySelectorAll('[data-id]')]; if(e.key==='ArrowDown'){hi=Math.min(items.length-1,hi+1);} else if(e.key==='ArrowUp'){hi=Math.max(0,hi-1);} else if(e.key==='Enter'){ if(items[hi>=0?hi:0]) items[hi>=0?hi:0].click(); return; } else if(e.key==='Escape'){ res.style.display='none'; q.blur(); return; } else return; e.preventDefault(); items.forEach((it,i)=>it.classList.toggle('on',i===hi)); });
+document.addEventListener('click',e=>{ if(!e.target.closest('.search')) res.style.display='none'; for(const id of ['#menu','#tmenu']){ const m=$(id); if(m.open&&!e.target.closest(id)) m.open=false; } });
+
+// ---- controls -------------------------------------------------------------------------------
 $('#bColor').onclick=()=>{ST.grey=false;$('#bColor').classList.add('on');$('#bGrey').classList.remove('on');render();};
 $('#bGrey').onclick=()=>{ST.grey=true;$('#bGrey').classList.add('on');$('#bColor').classList.remove('on');render();};
-$('#bKing').onclick=()=>{ST.kingdoms=!ST.kingdoms;$('#bKing').classList.toggle('on',ST.kingdoms);render();};
+$('#bKing').onclick=()=>{ST.kingdoms=!ST.kingdoms;$('#bKing').classList.toggle('on',ST.kingdoms);render(); if(ST.sel){ $('#stripe').style.background=colOf(ST.sel); }};
 $('#bDark').onclick=()=>{ST.theme='dark';document.documentElement.setAttribute('data-mode','dark');$('#bDark').classList.add('on');$('#bLight').classList.remove('on');save();render();};
 $('#bLight').onclick=()=>{ST.theme='light';document.documentElement.setAttribute('data-mode','light');$('#bLight').classList.add('on');$('#bDark').classList.remove('on');save();render();};
-$('#zin').onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(1.5,r.left+r.width/2,r.top+r.height/2);};
-$('#zout').onclick=()=>{const r=stage.getBoundingClientRect();zoomAt(1/1.5,r.left+r.width/2,r.top+r.height/2);};
+$('#zin').onclick=()=>{ touched=true; zoomAbout(1.7,W/2,H/2,true); };
+$('#zout').onclick=()=>{ touched=true; zoomAbout(1/1.7,W/2,H/2,true); };
 $('#zfit').onclick=()=>fit();
-$('#close').onclick=()=>{panel.classList.remove('open');ST.sel=null;markSel();};
-document.addEventListener('keydown',e=>{ if(e.target.matches('input,textarea')) return; if(e.key==='Escape'){panel.classList.remove('open');} if(e.key==='+'||e.key==='=') $('#zin').click(); if(e.key==='-') $('#zout').click(); if(e.key==='0') fit(); if(e.key==='/'){e.preventDefault();q.focus();} });
-// flagged list
-$('#bFlags').onclick=()=>{ const ids=Object.keys(ST.flags); $('#flagList').innerHTML=ids.length?ids.map(id=>{const n=byId[id]; return n?`<a data-id="${id}"><b>${esc(n.n)}</b><small>${esc(ST.flags[id])}${ST.notes[id]?' · '+esc(ST.notes[id].slice(0,80)):''}</small></a>`:'';}).join(''):'<small>Nothing flagged yet. Open a branch and press “Flag for discussion”.</small>';
+let turnHint=false;
+$('#bTurn').onclick=()=>{ ST.turn=!ST.turn; $('#bTurn').classList.toggle('on',ST.turn); $('#bTurn').setAttribute('aria-pressed',ST.turn); stage.classList.toggle('turn',ST.turn); turnHint=ST.turn; touched=true;
+  if(ST.turn){ if(ST.sel) flyTo(ST.sel); toast('Turn is on: drag to spin the wheel'); } else { const back=normAng(-ROT); spinTo(ROT+back, Math.abs(back)>0.01?700:0); } requestDraw(); };
+$('#close').onclick=deselect;
+$('#tCloser').onclick=()=>{ $('#tmenu').open=false; taskStart(); };
+$('#tOwn').onclick=()=>{ $('#tmenu').open=false; taskCustom(); };
+document.addEventListener('keydown',e=>{ if(e.target.matches('input,textarea')) return; const st=90/cam.k; let used=true;
+  if(e.key==='Escape'){ if($('#menu').open) $('#menu').open=false; else deselect(); }
+  else if(e.key==='+'||e.key==='=') $('#zin').click(); else if(e.key==='-'||e.key==='_') $('#zout').click(); else if(e.key==='0') fit();
+  else if(e.key==='/'){ q.focus(); }
+  else if(e.key==='ArrowLeft'){ stopAnim(); cam.x-=st; } else if(e.key==='ArrowRight'){ stopAnim(); cam.x+=st; } else if(e.key==='ArrowUp'){ stopAnim(); cam.y-=st; } else if(e.key==='ArrowDown'){ stopAnim(); cam.y+=st; }
+  else used=false;
+  if(used){ if(e.key.startsWith('Arrow')||e.key==='/') e.preventDefault(); touched=true; clampCam(); requestDraw(); } });
+$('#bFlags').onclick=()=>{ const ids=Object.keys(ST.flags); $('#flagList').innerHTML=ids.length?ids.map(id=>{const n=byId[id]; return n?`<a data-id="${id}"><b>${esc(n.n)}</b><small>${esc(ST.flags[id])}${ST.notes[id]?' · '+esc(ST.notes[id].slice(0,80)):''}</small></a>`:'';}).join(''):'<small style="color:var(--muted)">Nothing flagged yet. Open a branch and press “Flag for discussion”.</small>';
   $('#flagList').querySelectorAll('a').forEach(a=>a.onclick=()=>{$('#dlgFlags').close();select(byId[a.dataset.id],true);}); $('#dlgFlags').showModal(); };
 $('#dlgFlagsClose').onclick=()=>$('#dlgFlags').close();
-$('#bNotes').onclick=()=>{ $('#notesText').value=JSON.stringify({notes:ST.notes,flags:ST.flags},null,1); $('#dlgNotes').showModal(); };
+$('#bNotes').onclick=()=>{ $('#menu').open=false; $('#notesText').value=JSON.stringify({notes:ST.notes,flags:ST.flags},null,1); $('#dlgNotes').showModal(); };
 $('#dlgNotesClose').onclick=()=>$('#dlgNotes').close();
-$('#bMore').onclick=()=>$('#dlgMore').showModal();
+$('#bMore').onclick=()=>{ $('#menu').open=false; $('#dlgMore').showModal(); };
 $('#dlgMoreClose').onclick=()=>$('#dlgMore').close();
 $('#copyNotes').onclick=async()=>{ try{ await navigator.clipboard.writeText($('#notesText').value); toast('Copied'); }catch(e){ $('#notesText').select(); toast('Select all and copy'); } };
 $('#loadNotes').onclick=()=>{ try{ const o=JSON.parse($('#notesText').value); ST.notes=o.notes||{}; ST.flags=o.flags||{}; save(); drawFlags(); if(ST.sel) select(ST.sel,false); toast('Loaded'); $('#dlgNotes').close(); }catch(e){ toast('That is not a notes backup'); } };
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
-// mode buttons initial
+
+// ---- start ----------------------------------------------------------------------------------
 if(ST.theme==='light'){$('#bLight').classList.add('on');$('#bDark').classList.remove('on');}
-render(); fit(true);
-window.addEventListener('resize',()=>{ /* keep centre, refit aspect */ stopMotion(); const r=stage.getBoundingClientRect(); const cx=VB.x+VB.w/2, cy=VB.y+VB.h/2; const a=r.width/r.height; VB.h=VB.w/a; VB.x=cx-VB.w/2; VB.y=cy-VB.h/2; applyVB(); cam.snap=null; cam.dirty=true; cam.motion=false; cam.img.style.display='none'; scheduleSnap(); });
+setTheme(); resize(); buildLegend(); drawFlags();
+window.addEventListener('resize',resize);
+if(window.ResizeObserver) new ResizeObserver(resize).observe(stage);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ for(const key in twCache) delete twCache[key]; requestDraw(); });
+// open straight to a branch: tree-of-life.html?go=whales
+try{ const go=new URLSearchParams(location.search).get('go'); if(go){ const v=go.trim().toLowerCase(); const n=list.find(m=>m.n.toLowerCase()===v||(m.c||'').toLowerCase()===v)||list.find(m=>m.n.toLowerCase().includes(v)||(m.c||'').toLowerCase().includes(v)); if(n){ touched=true; setTimeout(()=>select(n,true),350); } }
+  const tk=new URLSearchParams(location.search).get('task'); if(tk==='closer'){ const r=parseInt(new URLSearchParams(location.search).get('round'),10); setTimeout(()=>{ TK.right=0; TK.done=0; taskRound(r>=1&&r<=ROUNDS.length?r-1:0); },350); } }catch(e){}
+window.__TOL={cam,list,select,fit,flyTo,zoomAbout,selectEvent,EVENTS,get rot(){return ROT;},TK,taskStart,taskRound,taskAnswer,taskCustom,taskTap,get kFit(){return kFit;},state:ST};
 })();
 </script>
 
