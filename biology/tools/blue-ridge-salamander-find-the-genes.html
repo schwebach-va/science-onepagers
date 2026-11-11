@@ -73,7 +73,6 @@ ol.rule li{padding:8px 10px;border:1.5px solid var(--rule);border-radius:5px;fon
 .dna .b i.lit{opacity:1;font-weight:700;background:var(--ok-soft);outline:2px solid var(--pg);outline-offset:-2px}
 .dna .grp{display:inline-flex}
 .dna[data-k] .b{cursor:pointer}
-.dna .b.ten{box-sizing:content-box;border-right:.5em solid transparent}
 .dna .b.t b{background:var(--pt);color:var(--pt-ink);border-radius:0}
 .dna .b.r b{background:var(--pr);color:#fff} .dna .b.g b{background:var(--pg);color:#fff} .dna .b.p b{background:var(--pp);color:#fff}
 .dna .b.t.g b,.dna .b.t.p b{box-shadow:inset 0 5px 0 var(--pt)}
@@ -412,7 +411,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.code && BRS.parseCode(j.code).ok) S = Object.assign(fresh(j.code), j); } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
   let CR = BRS.creature(S.code), anchor = null, fb = {}, codeMsg = '', downloads = null, saveMsg = '';
-  const PENS = [['r', 'TATA box'], ['g', 'Start · ATG'], ['p', 'Stop'], ['t', 'Whole gene'], ['x', 'Eraser']];
+  const PENS = [['r', 'TATA box'], ['g', 'Start · ATG'], ['p', 'Stop · TAA TAG TGA'], ['t', 'Whole gene'], ['x', 'Eraser']];
   const COMP = { A: 'T', T: 'A', G: 'C', C: 'G' }, BASEHEX = { A: '#0072b2', C: '#f0c419', G: '#3d4750', T: '#d55e00' };
   const PENHEX = { r: '#d5362b', g: '#23894a', p: '#7748c2', t: '#5fd3d6' };
   const view = () => { const h = (location.hash || '').slice(1); return ['genome'].indexOf(h) >= 0 ? h : 'find'; };
@@ -424,14 +423,15 @@ if (typeof module !== 'undefined') module.exports = BRS;
   function dna(ch, marks, opts) {
     opts = opts || {};
     const cls = new Array(ch.seq.length).fill(''), lit = {};
-    marks.forEach(m => { for (let i = m.a; i <= m.b; i++) if (cls[i].indexOf(' ' + m.pen) < 0) cls[i] += ' ' + m.pen; if (m.pen === 'g' && ch.seq.substr(m.a, m.b - m.a + 1) === 'ATG') for (let i = m.a; i <= m.b; i++) lit[i] = 1; });
+    marks.forEach(m => { for (let i = m.a; i <= m.b; i++) if (cls[i].indexOf(' ' + m.pen) < 0) cls[i] += ' ' + m.pen; });
+    runs(marks, 'g').forEach(m => { if (ch.seq.substr(m.a, m.b - m.a + 1) === 'ATG') for (let i = m.a; i <= m.b; i++) lit[i] = 1; });
     if (opts.codons) ch.genes.forEach(g => { for (let i = g.start; i <= g.end; i += 3) cls[i] += ' cs'; });
     const two = !!opts.two;
     let h = '<div class="dna' + (opts.small ? ' small' : '') + (two ? ' two' : '') + '"' + (opts.live ? ' data-k="' + ch.key + '"' : '') + '>';
     if (two) h += '<span class="end"><b>5′</b><i>3′</i></span>';
     for (let i = 0; i < ch.seq.length; i++) {
       const x = ch.seq[i];
-      h += '<span class="b s' + x + cls[i] + (anchor && opts.live && anchor.key === ch.key && anchor.i === i ? ' anchor' : '') + (i % 10 === 9 ? ' ten' : '') + '"' + (opts.live ? ' data-i="' + i + '"' : '') + '><b>' + x + '</b>' + (two ? '<i class="c' + COMP[x] + (lit[i] ? ' lit' : '') + '">' + COMP[x] + '</i>' : '') + '</span>';
+      h += '<span class="b s' + x + cls[i] + (anchor && opts.live && anchor.key === ch.key && anchor.i === i ? ' anchor' : '') + '"' + (opts.live ? ' data-i="' + i + '"' : '') + '><b>' + x + '</b>' + (two ? '<i class="c' + COMP[x] + (lit[i] ? ' lit' : '') + '">' + COMP[x] + '</i>' : '') + '</span>';
     }
     if (two) { const k = h.lastIndexOf('<span class="b '); h = h.slice(0, k) + '<span class="grp">' + h.slice(k) + '<span class="end"><b>3′</b><i>5′</i></span></span>'; }
     return h + '</div>';
@@ -462,7 +462,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     const tot = totalGenes(), fd = foundGenes();
     let h = '<section class="block"><span class="eyebrow">Before decoding · find the genes</span><h2>Most of this DNA is not a gene. Mark the parts that are.</h2>' +
       '<p class="lede">These are all 15 chromosomes of ' + S.code + ', one strand of each, read left to right. Somewhere in them are the genes that build this salamander.</p>' +
-      '<ol class="rule"><li><b class="k r">TATA</b> A gene is switched on at a TATA box. Find every one.</li><li><b class="k g">ATG</b> The gene starts at the first ATG after the TATA box.</li><li><b class="k p">Stop</b> Count by threes from the start. The first TAA, TAG or TGA that lands on a count of three ends the gene.</li><li><b class="k t">Gene</b> Everything from the start through the stop is the gene.</li></ol>' +
+      '<ol class="rule"><li><b class="k r">TATA</b> A gene is switched on at a TATA box. Find every one.</li><li><b class="k g">ATG</b> The gene starts at the first ATG after the TATA box.</li><li><b class="k p">TAA · TAG · TGA</b> These three codons are stops. Count by threes from the start. The first TAA, TAG or TGA that lands on a count of three ends the gene.</li><li><b class="k t">Gene</b> Everything from the start through the stop is the gene.</li></ol>' +
       '<p><b>To highlight:</b> pick a pen, tap the first letter, then tap the last letter.</p><p class="basekey" aria-label="Base colors"><span>Under every letter:</span><span><i style="background:var(--bA)"></i>A</span><span><i style="background:var(--bC)"></i>C</span><span><i style="background:var(--bG)"></i>G</span><span><i style="background:var(--bT)"></i>T</span><span>In RNA, U takes T’s color on a round tile.</span></p>' +
       (S.example ? '<p class="say">This is an example salamander. Type your own Creature Code to load yours.</p>' : '') +
       '<form class="row" data-form="code"><div class="field"><label for="code">Creature Code</label><input type="text" id="code" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="TF-7K3QM" value="' + (S.example ? '' : esc(S.code)) + '"></div><button class="ghost" style="align-self:flex-end">Load</button></form>' + (codeMsg ? '<p class="say warn">' + codeMsg + '</p>' : '') + '</section>';
@@ -483,9 +483,10 @@ if (typeof module !== 'undefined') module.exports = BRS;
   }
 
   /* ---------- checking ---------- */
+  function runs(ms, pen) { const on = {}; ms.forEach(m => { if (m.pen === pen) for (let i = m.a; i <= m.b; i++) on[i] = 1; }); const out = []; Object.keys(on).map(Number).sort((a, b) => a - b).forEach(function (i) { const last = out[out.length - 1]; if (last && last.b === i - 1) last.b = i; else out.push({ pen: pen, a: i, b: i }); }); return out; }
   function checkChrom(ch) {
     const ms = S.marks[ch.key] || [], by = { r: [], g: [], p: [], t: [] }, hints = [];
-    ms.forEach(m => by[m.pen].push(m));
+    ['r', 'g', 'p', 't'].forEach(function (pen) { by[pen] = runs(ms, pen); }); // judged by the letters covered, however many taps it took
     const same = (m, a, b) => m.a === a && m.b === b, txt = m => ch.seq.substr(m.a, m.b - m.a + 1), n = ch.genes.length;
     if (!n) {
       if (S.none[ch.key] && !ms.length) return { ok: true };
@@ -501,7 +502,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     const pF = ch.genes.filter(g => by.p.some(m => same(m, g.stop, g.stop + 2))).length, pBad = by.p.find(m => !ch.genes.some(g => same(m, g.stop, g.stop + 2)));
     if (pF < n || pBad) {
       let msg = 'Purple: ' + pF + ' of ' + n + ' stops marked.';
-      if (!by.p.length) msg = 'Purple: count by threes from each start to the first stop.';
+      if (!by.p.length) msg = 'Purple: count by threes from each start to the first stop. A stop is TAA, TAG or TGA.';
       else if (pBad && ['TAA', 'TAG', 'TGA'].indexOf(txt(pBad)) < 0) msg = 'A stop is TAA, TAG or TGA. Purple covers all three letters.';
       else if (pBad) { const g = ch.genes.filter(x => x.start < pBad.a).pop(); msg = !g ? 'A purple mark sits before any gene starts.' : (pBad.a - g.start) % 3 ? 'That stop is out of frame. Count by threes from the green start: 1-2-3, 1-2-3.' : 'That stop is past the end of the gene. The first stop in frame ends it.'; }
       hints.push(msg);
@@ -513,7 +514,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
 
   /* ---------- export ---------- */
   function exportBlob(done) {
-    const PER = 50, CW = 22, CH = 30, M = 40, W = M * 2 + PER * CW + 9 * 6;
+    const PER = 50, CW = 22, CH = 30, M = 40, W = M * 2 + PER * CW;
     let rows = 0; CR.chroms.forEach(c => { rows += Math.ceil(c.seq.length / PER); });
     const H = 150 + CR.chroms.length * 44 + rows * (CH + 4) + M, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
     const g = cv.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0, 0, W, H); g.fillStyle = '#1d2925'; g.textBaseline = 'alphabetic';
@@ -527,9 +528,9 @@ if (typeof module !== 'undefined') module.exports = BRS;
       g.fillStyle = '#1d2925'; g.font = '700 17px Helvetica, Arial, sans-serif'; g.fillText(ch.label + (S.ok[ch.key] ? '  ✓' : ''), M, y + 20);
       g.font = '14px Helvetica, Arial, sans-serif'; g.fillStyle = '#55655d'; g.fillText(ch.seq.length + ' bases, 5′ → 3′', M + 300, y + 20); y += 30;
       for (let i = 0; i < ch.seq.length; i++) {
-        const col = i % PER, row = Math.floor(i / PER), x = M + col * CW + Math.floor(col / 10) * 6, yy = y + row * (CH + 4), c = cls[i];
+        const col = i % PER, row = Math.floor(i / PER), x = M + col * CW, yy = y + row * (CH + 4), c = cls[i];
         const top = c.indexOf('r') >= 0 ? 'r' : c.indexOf('g') >= 0 ? 'g' : c.indexOf('p') >= 0 ? 'p' : c.indexOf('t') >= 0 ? 't' : '';
-        const nx = (col % 10 === 9 && col < PER - 1 && i + 1 < ch.seq.length) ? cls[i + 1] : null, bridge = nx !== null && top && (nx.indexOf(top) >= 0) ? 6 : 0, tb = nx !== null && c.indexOf('t') >= 0 && nx.indexOf('t') >= 0 ? 6 : 0;
+        const bridge = 0, tb = 0;
         if (top) { g.fillStyle = PENHEX[top]; g.fillRect(x, yy, CW + bridge, CH); if (top !== 't' && c.indexOf('t') >= 0) { g.fillStyle = PENHEX.t; g.fillRect(x, yy, CW + tb, 5); } }
         g.fillStyle = BASEHEX[ch.seq[i]]; g.fillRect(x + 2, yy + CH - 4, CW - 4, 4);
         g.fillStyle = top && top !== 't' ? '#ffffff' : '#1d2925'; g.font = '600 18px "IBM Plex Mono", Menlo, Consolas, monospace'; g.textAlign = 'center'; g.fillText(ch.seq[i], x + CW / 2, yy + 21); g.textAlign = 'left';

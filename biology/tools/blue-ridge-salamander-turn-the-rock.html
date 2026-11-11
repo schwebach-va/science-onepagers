@@ -896,7 +896,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
 
   /* ---------- teacher view ---------- */
   function teacherView() {
-    let h = '<section class="block"><span class="eyebrow">Teacher view · not for students</span><h2>Keys, stamps and slips</h2><p>Affordable Teachers Pay Teachers lesson plans coming soon.</p><p class="muted">Draft engine. Once students hold codes, the allele table below must not change, or their creatures change with it.</p></section>';
+    let h = '<section class="block"><span class="eyebrow">Teacher view · not for students</span><h2>Keys, stamps and slips</h2><p class="muted">Draft engine. Once students hold codes, the allele table below must not change, or their creatures change with it.</p></section>';
     h += '<section class="block"><h3>Answer key for one code</h3><form class="row" data-form="key"><div class="field"><label for="t-key">Creature Code</label><input type="text" id="t-key" value="' + esc(teacher.key) + '" placeholder="TF-7K3QM" maxlength="10" autocapitalize="characters" spellcheck="false"></div><button style="align-self:flex-end">Show key</button></form>';
     if (teacher.key) {
       const cr = BRS.creature(teacher.key);
