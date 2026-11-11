@@ -1,0 +1,586 @@
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta name="author" content="J. R. Schwebach"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Find the Genes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one field-book column, a sticky strip of four survey steps on top, sequences set in mono on a ruled page. */
+:root{
+  --paper:#eef1ea; --panel:#f9faf6; --ink:#1d2925; --muted:#55655d; --rule:#c8d2c7;
+  --ember:#b8480f; --ember-soft:#f6dfd0; --moss:#2f6347; --moss-soft:#dbe9de;
+  --ok:#236b41; --ok-soft:#d9eedf; --bad:#a8301f; --bad-soft:#f6ddd8;
+  --tray:#e2e7df; --tray-ink:#1d2925; --skin:#3a4147;
+  --litter:#b9a57e; --leaf:#9c7f4f; --soil:#4a3a2a; --stone1:#7c8a80; --stone2:#a9a59a; --stone3:#b08f6c; --wood:#6e5238; --mossfill:#5d8a4c; --slip:#fbfaf2; --water:#3878a4; --pr:#d5362b; --pg:#23894a; --pp:#7748c2; --pt:#5fd3d6; --pt-ink:#0d3b3d; --bA:#0072b2; --bC:#f0c419; --bG:#3d4750; --bT:#d55e00; --bA-ink:#fff; --bC-ink:#14201c; --bG-ink:#fff; --bT-ink:#fff;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Verdana","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#131a17; --panel:#1a2320; --ink:#e3eae4; --muted:#9aaca2; --rule:#2f3c36;
+  --ember:#f2935a; --ember-soft:#3a2518; --moss:#86c09a; --moss-soft:#1f3327;
+  --ok:#74c990; --ok-soft:#183324; --bad:#f09283; --bad-soft:#3b1d18;
+  --tray:#ccd3c9; --tray-ink:#1d2925; --skin:#3a4147;
+  --litter:#4a4334; --leaf:#5f5236; --soil:#1c1611; --stone1:#56625b; --stone2:#77746c; --stone3:#7a6550; --wood:#4c3a29; --mossfill:#42683a; --slip:#e9e7da; --water:#7db3d6; --pr:#e2574d; --pg:#3aa864; --pp:#9a72dd; --pt:#4fc4c8; --pt-ink:#06292b; --bA:#3f9be0; --bC:#f5d547; --bG:#e1e6ea; --bT:#e8662a; --bA-ink:#0b1512; --bC-ink:#0b1512; --bG-ink:#0b1512; --bT-ink:#0b1512;
+  color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#131a17; --panel:#1a2320; --ink:#e3eae4; --muted:#9aaca2; --rule:#2f3c36;
+  --ember:#f2935a; --ember-soft:#3a2518; --moss:#86c09a; --moss-soft:#1f3327;
+  --ok:#74c990; --ok-soft:#183324; --bad:#f09283; --bad-soft:#3b1d18;
+  --tray:#ccd3c9; --tray-ink:#1d2925; --skin:#3a4147;
+  --litter:#4a4334; --leaf:#5f5236; --soil:#1c1611; --stone1:#56625b; --stone2:#77746c; --stone3:#7a6550; --wood:#4c3a29; --mossfill:#42683a; --slip:#e9e7da; --water:#7db3d6; --pr:#e2574d; --pg:#3aa864; --pp:#9a72dd; --pt:#4fc4c8; --pt-ink:#06292b; --bA:#3f9be0; --bC:#f5d547; --bG:#e1e6ea; --bT:#e8662a; --bA-ink:#0b1512; --bC-ink:#0b1512; --bG-ink:#0b1512; --bT-ink:#0b1512;
+  color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:17px/1.5 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:16px;padding-block:14px 48px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:1.5rem} h2{font-size:1.45rem} h3{font-size:1.05rem}
+p{margin:0;max-width:65ch} .muted{color:var(--muted)} .small{font-size:.88rem} .lede{font-size:1.05rem}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.top a{color:var(--ink);text-decoration:none}
+.sheet{display:flex;flex-direction:column;gap:14px}
+.block,.chrom{background:var(--panel);border:1.5px solid var(--rule);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.chrom.done{border-color:var(--ok)}
+.eyebrow{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
+button,.btn{font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+button.ghost,.btn.ghost{background:transparent;color:var(--ink)} button.quiet{border-color:var(--rule);background:transparent;color:var(--ink);font-weight:400}
+:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=text]{font:600 16px var(--mono);color:var(--ink);background:var(--paper);border:1.5px solid var(--muted);border-radius:4px;padding:9px 8px;min-height:46px;min-width:0}
+label,legend{font-weight:700} .field{display:flex;flex-direction:column;gap:4px;min-width:0}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border:1.5px solid var(--rule);border-radius:5px;font-weight:400;cursor:pointer} .opt input{margin-top:5px;accent-color:var(--ember)}
+.say{padding:10px 12px;border-radius:5px;background:var(--moss-soft);border:1.5px solid var(--moss)} .say.warn{background:var(--bad-soft);border-color:var(--bad)} .say.good{background:var(--ok-soft);border-color:var(--ok)}
+ol.rule{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+ol.rule li{padding:8px 10px;border:1.5px solid var(--rule);border-radius:5px;font-size:.95rem;display:flex;flex-direction:column;gap:4px}
+.k{font:600 .9rem var(--mono);padding:1px 8px;border-radius:3px;align-self:flex-start;color:#fff}
+.k.r{background:var(--pr)} .k.g{background:var(--pg)} .k.p{background:var(--pp)} .k.t{background:var(--pt);color:var(--pt-ink)}
+.sticky{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--paper);padding-block:8px;border-bottom:1.5px solid var(--rule);display:flex;flex-direction:column;gap:6px}
+.pens,.legend{display:flex;flex-wrap:wrap;gap:6px}
+.pen{min-height:44px;padding:6px 12px;background:var(--panel);color:var(--ink);border:2px solid var(--rule);font:700 .92rem var(--body);border-radius:22px;display:inline-flex;align-items:center;gap:8px}
+.pen i{width:22px;height:14px;border-radius:3px;display:inline-block;border:1px solid var(--ink)}
+.pen-r i{background:var(--pr)} .pen-g i{background:var(--pg)} .pen-p i{background:var(--pp)} .pen-t i{background:var(--pt)} .pen-x i{background:var(--paper);border-style:dashed}
+.pen[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.progress{font:600 .85rem var(--mono);color:var(--muted)}
+.chead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.tick{font:600 .8rem var(--mono);color:var(--ok)}
+.dna{display:flex;flex-wrap:wrap;row-gap:7px;font:600 19px/1 var(--mono);user-select:none;-webkit-user-select:none}
+.dna .b,.dna .end{width:1.16em;display:inline-flex;flex-direction:column;align-items:stretch}
+.dna .b b,.dna .end b{height:1.85em;display:flex;align-items:center;justify-content:center;font-weight:600;border-radius:2px 2px 0 0;border-bottom:4px solid transparent}
+.dna .b i,.dna .end i{font-style:normal;height:1.6em;display:flex;align-items:center;justify-content:center;font-weight:400;font-size:.9em;opacity:.55;border-bottom:3px solid transparent}
+.dna .end{width:1.5em;color:var(--muted);font-size:.62em;margin-right:.3em} .dna .end:last-child{margin:0 0 0 .3em} .dna .end b{height:3em} .dna .end i{height:2.6em;opacity:1}
+.dna .b.sA b,.dna .b i.cA{border-bottom-color:var(--bA)} .dna .b.sC b,.dna .b i.cC{border-bottom-color:var(--bC)} .dna .b.sG b,.dna .b i.cG{border-bottom-color:var(--bG)} .dna .b.sT b,.dna .b i.cT{border-bottom-color:var(--bT)}
+.dna .b i.lit{opacity:1;font-weight:700;background:var(--ok-soft);outline:2px solid var(--pg);outline-offset:-2px}
+.dna .grp{display:inline-flex}
+.dna[data-k] .b{cursor:pointer}
+.dna .b.ten{box-sizing:content-box;border-right:.5em solid transparent}
+.dna .b.t b{background:var(--pt);color:var(--pt-ink);border-radius:0}
+.dna .b.r b{background:var(--pr);color:#fff} .dna .b.g b{background:var(--pg);color:#fff} .dna .b.p b{background:var(--pp);color:#fff}
+.dna .b.t.g b,.dna .b.t.p b{box-shadow:inset 0 5px 0 var(--pt)}
+.dna .b.cs{border-left:2px solid var(--ink)}
+.dna .b.anchor b{outline:3px solid var(--ink);outline-offset:-1px}
+.dna.small{font-size:14px;row-gap:4px}
+.basekey{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.85rem;color:var(--muted)} .basekey span{display:inline-flex;align-items:center;gap:5px} .basekey i{width:1.5em;height:5px;border-radius:2px;display:inline-block}
+.hints{margin:0;padding:8px 10px 8px 28px;border:1.5px solid var(--bad);background:var(--bad-soft);border-radius:5px;display:flex;flex-direction:column;gap:4px}
+.gline{display:flex;flex-direction:column;gap:4px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px} footer a{color:var(--ember)}
+@media (max-width:520px){ body{font-size:16px} .block,.chrom{padding:12px} .dna{font-size:17px} .pen{padding:6px 9px;font-size:.82rem} }
+</style>
+<div class="wrap"><header class="top"><h1><a href="#find">Find the Genes</a></h1><span class="small muted">Blue Ridge Salamander Project · draft</span></header><main id="app" class="sheet"></main><footer><span>© J. R. Schwebach. All rights reserved. Free to use with your own students. Draft for classroom testing.</span><span><a href="blue-ridge-salamander.html">All salamander pages</a></span></footer></div>
+<script>
+/* Blue Ridge Salamander Project genome engine. Draft v2 (genes on chromosomes), 2026-11-11.
+   A Creature Code regenerates the same genome every time. No server, no student data.
+   Every gene draws from its own seeded stream (code + gene id), so adding a gene later
+   never changes a gene students already decoded. */
+const BRS = (function () {
+  'use strict';
+  const VERSION = 'v2 draft 2026-11-11';
+  const ALPHA = '23456789ABCDEFGHJKMNPQRSTUVWXYZ'; // 31 characters, no 0 O 1 I L
+
+  function hashStr(s) {
+    let h = 1779033703 ^ s.length;
+    for (let i = 0; i < s.length; i++) {
+      h = Math.imul(h ^ s.charCodeAt(i), 3432918353);
+      h = (h << 13) | (h >>> 19);
+    }
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return (h ^ (h >>> 16)) >>> 0;
+  }
+  function rng(seed) {
+    let a = hashStr(seed);
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  /* ---------- Three sites, three populations. Every fact here has a source in the session record. ---------- */
+  const SITES = [
+    { id: 'TF', die: [1, 2], pop: 'Talus Firetail', place: 'Hawksbill', region: 'Shenandoah National Park · Page and Madison counties', elev: '4,050 ft', lat: 38.555, lon: -78.395,
+      rocks: ['greenstone slab', 'greenstone block', 'mossy greenstone'],
+      text: 'The rock is greenstone, basalt lava changed by heat and pressure, and on the steep sides it breaks into slopes of loose blocks called talus. Balsam fir grows at the summit, one of the few places in the park where it does. The real Shenandoah salamander lives on this mountain and two others, and nowhere else on Earth.',
+      legend: '' },
+    { id: 'CE', die: [3, 4], pop: 'Cinder Eft', place: 'James River water gap', region: 'Blue Ridge Parkway at Otter Creek', elev: '649 ft', lat: 37.555, lon: -79.367,
+      rocks: ['flat river stone', 'river cobble', 'mossy boulder'],
+      text: 'The James River cuts straight through the Blue Ridge here, and the bank is the lowest point on the whole Blue Ridge Parkway. Stone locks from the old James River and Kanawha Canal still stand beside the water. In the mountains to the south, the real Peaks of Otter salamander lives in old hardwood forest in three Virginia counties and nowhere outside the state.',
+      legend: '' },
+    { id: 'HE', die: [5, 6], pop: 'Highland Emberback', place: 'Mount Rogers', region: 'Grayson and Smyth counties', elev: '5,729 ft', lat: 36.66, lon: -81.545,
+      rocks: ['rhyolite slab', 'rhyolite block', 'mossy rhyolite'],
+      text: 'Mount Rogers is the highest point in Virginia. Its rock is rhyolite, left by volcanoes that erupted here long ago, and a dark forest of spruce and Fraser fir covers the top. In the rivers of this corner of the state lives the real eastern hellbender, a salamander more than two feet long that local people call the snot-otter and the devil dog.',
+      legend: '' }
+  ];
+  const site = id => SITES.find(s => s.id === id);
+  const siteForRoll = n => SITES.find(s => s.die.indexOf(n) >= 0);
+
+  /* ---------- Creature Codes: two site letters + four characters + one check character ---------- */
+  function checkChar(six) {
+    let sum = 0;
+    for (let i = 0; i < six.length; i++) sum += ALPHA.indexOf(six[i]) * (i + 1);
+    return ALPHA[sum % 31];
+  }
+  function parseCode(raw) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (s.length !== 7) return { ok: false, why: 'A Creature Code is two site letters and five characters, like TF-7K3QM.' };
+    const pre = s.slice(0, 2), body = s.slice(2);
+    if (!site(pre)) return { ok: false, why: 'A Creature Code starts with TF, CE or HE, the letters of the site where it was found.' };
+    for (const ch of body) if (ALPHA.indexOf(ch) < 0) return { ok: false, why: 'Codes never use 0, 1, I, L or O. Look at the slip again.' };
+    if (checkChar(pre + body.slice(0, 4)) !== body[4]) return { ok: false, why: 'That code has a typo in it. Check each character against the slip.' };
+    return { ok: true, code: pre + '-' + body, site: pre };
+  }
+  function codeFrom(rand, siteId) {
+    let four = '';
+    for (let i = 0; i < 4; i++) four += ALPHA[Math.floor(rand() * 31)];
+    return siteId + '-' + four + checkChar(siteId + four);
+  }
+  function batch(word, n, siteId) {
+    const r = rng('batch|' + String(word).trim().toLowerCase() + '|' + siteId);
+    const out = [];
+    while (out.length < n) { const c = codeFrom(r, siteId); if (out.indexOf(c) < 0) out.push(c); }
+    return out;
+  }
+
+  /* ---------- The universal genetic code ---------- */
+  const BASES = 'UCAG';
+  const AA1 = 'FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG';
+  const THREE = { F: 'Phe', L: 'Leu', S: 'Ser', Y: 'Tyr', '*': 'STOP', C: 'Cys', W: 'Trp', P: 'Pro', H: 'His', Q: 'Gln', R: 'Arg', I: 'Ile', M: 'Met', T: 'Thr', N: 'Asn', K: 'Lys', V: 'Val', A: 'Ala', D: 'Asp', E: 'Glu', G: 'Gly' };
+  const CODON = {}, SYN = {};
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) {
+    const c = BASES[i] + BASES[j] + BASES[k], aa = THREE[AA1[i * 16 + j * 4 + k]];
+    CODON[c] = aa; (SYN[aa] = SYN[aa] || []).push(c);
+  }
+  const AMINO = Object.keys(SYN).filter(a => a !== 'STOP').sort();
+  const toRNA = { A: 'U', T: 'A', G: 'C', C: 'G' }, toDNA = { A: 'T', U: 'A', G: 'C', C: 'G' };
+  const transcribe = dna => dna.split('').map(b => toRNA[b]).join('');
+  const templateOf = rna => rna.split('').map(b => toDNA[b]).join('');
+  function translate(codons) {
+    const out = []; let stopped = false;
+    for (const c of codons) {
+      if (stopped) { out.push('none'); continue; }
+      const aa = CODON[c]; out.push(aa); if (aa === 'STOP') stopped = true;
+    }
+    return out;
+  }
+
+  /* ---------- DRAFT trait list, genome format v2 ----------
+     15 chromosome pairs: 1 to 14 plus the sex pair. Every gene sits on a chromosome; some chromosomes carry two genes and two carry none.
+     A gene on the coding strand: TATAAA, a short spacer, ATG, seven more codons, a stop. pf = allele frequencies per population. */
+  const GENES = [
+    { id: 'STR', chr: '1', name: 'Back stripe', kind: 'complete dominance', real: 'modeled on the striped and lead-backed forms of the red-backed salamander',
+      alleles: [{ s: 'S', label: 'striped', p: ['Ala', 'Cys', 'Pro', 'Leu', 'Gly', 'Asp', 'Ser'] }, { s: 's', label: 'lead-backed', p: ['Ala', 'Arg', 'Pro', 'Leu', 'Gly', 'Asp', 'Ser'] }], pf: { TF: [0.3, 0.7], CE: [0.6, 0.4], HE: [0.7, 0.3] } },
+    { id: 'COL', chr: '2', name: 'Ember color', kind: 'incomplete dominance', real: 'real stripes run from red to yellow',
+      alleles: [{ s: 'R', label: 'red', p: ['His', 'Val', 'Ser', 'Gly', 'Lys', 'Ala', 'Leu'] }, { s: 'Y', label: 'yellow', p: ['His', 'Val', 'Phe', 'Gly', 'Lys', 'Ala', 'Leu'] }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+    { id: 'TOX', chr: '2', name: 'Skin toxin', kind: 'complete dominance', real: 'many salamanders secrete skin toxins',
+      alleles: [{ s: 'T', label: 'toxin glands', p: ['Lys', 'Asp', 'Thr', 'Ile', 'Gly', 'Ala', 'Phe'] }, { s: 't', label: 'no toxin', p: ['Lys', 'Asn', 'Thr', 'Ile', 'Gly', 'Ala', 'Phe'] }], pf: { TF: [0.6, 0.4], CE: [0.4, 0.6], HE: [0.5, 0.5] } },
+    { id: 'SPT', chr: '3', name: 'Flecks and spots', kind: 'codominance', real: 'brass flecks occur on real woodland salamanders of the Blue Ridge',
+      alleles: [{ s: 'B', label: 'brass flecks', p: ['Glu', 'Leu', 'Gln', 'Ser', 'Val', 'Thr', 'Asp'] }, { s: 'W', label: 'white spots', p: ['Glu', 'Pro', 'Gln', 'Ser', 'Val', 'Thr', 'Asp'] }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+    { id: 'GLO', chr: '4', name: 'Glow', kind: 'multiple alleles', real: 'fantasy trait',
+      alleles: [{ s: 'E', label: 'ember glow', p: ['Phe', 'Thr', 'Trp', 'Val', 'Asn', 'Gly', 'Pro'] }, { s: 'F', label: 'foxfire glow', p: ['Phe', 'Thr', 'Cys', 'Val', 'Asn', 'Gly', 'Pro'] }, { s: 'n', label: 'no glow', p: ['Phe', 'Thr', 'Arg', 'Val', 'Asn', 'Gly', 'Pro'] }], pf: { TF: [0.45, 0.15, 0.4], CE: [0.15, 0.5, 0.35], HE: [0.3, 0.3, 0.4] } },
+    { id: 'CLW', chr: '4', name: 'Claws', kind: 'complete dominance', real: 'fantasy trait: real salamanders have no claws',
+      alleles: [{ s: 'C', label: 'clawed', p: ['Ser', 'Tyr', 'Asp', 'Ala', 'Leu', 'Lys', 'Thr'] }, { s: 'c', label: 'no claws', p: ['Ser', 'His', 'Asp', 'Ala', 'Leu', 'Lys', 'Thr'] }], pf: { TF: [0.6, 0.4], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+    { id: 'GIL', chr: '5', name: 'Gills', kind: 'complete dominance', real: 'some salamanders keep larval gills as adults',
+      alleles: [{ s: 'G', label: 'gills lost', p: ['Asn', 'Ile', 'Glu', 'Lys', 'Val', 'Ser', 'Arg'] }, { s: 'g', label: 'gills kept', p: ['Asn', 'Ile', 'Gly', 'Lys', 'Val', 'Ser', 'Arg'] }], pf: { TF: [0.9, 0.1], CE: [0.35, 0.65], HE: [0.7, 0.3] } },
+    { id: 'REG', chr: '6', name: 'Healing skin', kind: 'complete dominance', real: 'fantasy trait; a poultice is a real folk remedy, and Appalachian healers were known for them',
+      alleles: [{ s: 'H', label: 'healing poultice', p: ['Leu', 'Asp', 'Cys', 'Gln', 'Ala', 'Ile', 'Glu'] }, { s: 'h', label: 'plain skin', p: ['Leu', 'Asp', 'Tyr', 'Gln', 'Ala', 'Ile', 'Glu'] }], pf: { TF: [0.4, 0.6], CE: [0.6, 0.4], HE: [0.5, 0.5] } },
+    { id: 'BRE', chr: '7', name: 'Breath', kind: 'multiple alleles, codominant', real: 'fantasy trait; the fire legend about salamanders is real folklore',
+      alleles: [{ s: 'F', label: 'fire', p: ['Cys', 'Glu', 'His', 'Arg', 'Thr', 'Val', 'Gly'] }, { s: 'I', label: 'ice', p: ['Cys', 'Glu', 'Asn', 'Arg', 'Thr', 'Val', 'Gly'] }, { s: 'P', label: 'poison gas', p: ['Cys', 'Glu', 'Asp', 'Arg', 'Thr', 'Val', 'Gly'] }], pf: { TF: [0.6, 0.25, 0.15], CE: [0.2, 0.2, 0.6], HE: [0.25, 0.6, 0.15] } },
+    { id: 'AUR', chr: '8', name: 'Gift', kind: 'multiple alleles, codominant', real: 'fantasy trait; a species that helps many others thrive is called a keystone species',
+      alleles: [{ s: 'P', label: 'plants grow', p: ['Ile', 'Gly', 'Thr', 'Trp', 'Glu', 'Asp', 'Leu'] }, { s: 'A', label: 'animals thrive', p: ['Ile', 'Gly', 'Ala', 'Trp', 'Glu', 'Asp', 'Leu'] }, { s: 'K', label: 'friendships form', p: ['Ile', 'Gly', 'Ser', 'Trp', 'Glu', 'Asp', 'Leu'] }], pf: { TF: [0.2, 0.3, 0.5], CE: [0.3, 0.5, 0.2], HE: [0.5, 0.2, 0.3] } },
+    { id: 'VOC', chr: 'X', name: 'Call', kind: 'sex-linked, three alleles', real: 'fantasy trait: most real salamanders are nearly silent',
+      alleles: [{ s: 'S', label: 'a woman’s singing voice', p: ['Pro', 'Gln', 'Leu', 'Thr', 'Gly', 'Lys', 'Ser'] }, { s: 'B', label: 'a man’s singing voice', p: ['Pro', 'Gln', 'Leu', 'Ala', 'Gly', 'Lys', 'Ser'] }, { s: 'c', label: 'clicks', p: ['Pro', 'Gln', 'Leu', 'Ile', 'Gly', 'Lys', 'Ser'] }], pf: { TF: [0.3, 0.3, 0.4], CE: [0.4, 0.3, 0.3], HE: [0.3, 0.4, 0.3] } },
+    { id: 'VIS', chr: 'X', name: 'Color vision', kind: 'sex-linked recessive', real: 'modeled on red-green colorblindness, the classic sex-linked trait',
+      alleles: [{ s: 'V', label: 'full color vision', p: ['Trp', 'Ser', 'Ala', 'His', 'Leu', 'Val', 'Arg'] }, { s: 'v', label: 'red-blind', p: ['Trp', 'Ser', 'Asp', 'His', 'Leu', 'Val', 'Arg'] }], pf: { TF: [0.7, 0.3], CE: [0.7, 0.3], HE: [0.7, 0.3] } },
+    { id: 'LN1', chr: '10', name: 'Length gene 1', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      alleles: [{ s: '+', label: 'adds length', p: ['Gly', 'Arg', 'Val', 'Asp', 'Ser', 'Pro', 'Ala'] }, { s: '0', label: 'adds none', p: ['Gly', 'Arg', 'Val', 'Glu', 'Ser', 'Pro', 'Ala'] }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
+    { id: 'LN2', chr: '11', name: 'Length gene 2', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      alleles: [{ s: '+', label: 'adds length', p: ['Thr', 'Leu', 'Ser', 'Lys', 'Gly', 'Glu', 'Ile'] }, { s: '0', label: 'adds none', p: ['Thr', 'Leu', 'Ser', 'Asn', 'Gly', 'Glu', 'Ile'] }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
+    { id: 'LN3', chr: '12', name: 'Length gene 3', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      alleles: [{ s: '+', label: 'adds length', p: ['Val', 'Ala', 'His', 'Phe', 'Lys', 'Thr', 'Gly'] }, { s: '0', label: 'adds none', p: ['Val', 'Ala', 'Gln', 'Phe', 'Lys', 'Thr', 'Gly'] }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } }
+  ];
+  const STOPS = ['UAA', 'UAG', 'UGA'];
+  /* Which genes sit on which chromosome, in order along it. Chromosomes 13 and 14 carry no gene in this set. */
+  const LAYOUT = { 1: ['STR'], 2: ['COL', 'TOX'], 3: ['SPT'], 4: ['GLO', 'CLW'], 5: ['GIL'], 6: ['REG'], 7: ['BRE'], 8: ['AUR'], 9: ['EMB'], 10: ['LN1'], 11: ['LN2'], 12: ['LN3'], 13: [], 14: [], X: ['VOC', 'VIS'], Y: [] };
+
+  /* The ember gene, on chromosome 9: one fixed reference sequence for the whole ridge. It has no second AUG in any frame. */
+  const EMB = { id: 'EMB', chr: '9', name: 'Ember gene', mrna: ['AUG', 'UGG', 'AAA', 'GGA', 'UAU', 'CAA', 'CUU', 'UCA', 'UAA'] };
+  EMB.template = EMB.mrna.map(templateOf);
+  EMB.protein = translate(EMB.mrna);
+  EMB.dna = EMB.mrna.join('').replace(/U/g, 'T');
+
+  function makeCopy(id, g, allele, from) {
+    const r = rng(id + '|' + g.id + '|d|' + allele.s);
+    let mrna;
+    for (let tries = 0; tries < 200; tries++) {
+      mrna = ['AUG'];
+      for (const aa of allele.p) mrna.push(SYN[aa][Math.floor(r() * SYN[aa].length)]);
+      mrna.push(STOPS[Math.floor(r() * 3)]);
+      if (mrna.join('').indexOf('UAUA') < 0) break; // keep TATA out of the gene body
+    }
+    return { allele: allele, from: from, mrna: mrna, template: mrna.map(templateOf), dna: mrna.join('').replace(/U/g, 'T'), protein: ['Met'].concat(allele.p, ['STOP']) };
+  }
+
+  /* ---------- chromosomes: the coding strand, 5' to 3', as students see it ---------- */
+  function countAll(s, sub) { const out = []; let i = s.indexOf(sub); while (i >= 0) { out.push(i); i = s.indexOf(sub, i + 1); } return out; }
+  function buildChrom(id, name, which, bodies) {
+    const r = rng(id + '|chr|' + name + '|' + which);
+    const junk = n => { let s = ''; while (s.length < n) s += 'ACGT'[Math.floor(r() * 4)]; return s; };
+    for (let tries = 0; tries < 2000; tries++) {
+      let seq = junk(8 + Math.floor(r() * 7));
+      const genes = [];
+      if (!bodies.length) seq += 'ATG' + junk(name === 'Y' ? 22 + Math.floor(r() * 8) : 34 + Math.floor(r() * 14));
+      bodies.forEach(function (b) {
+        const t = seq.length; seq += 'TATAAA' + junk(6 + Math.floor(r() * 4));
+        const s = seq.length; seq += b.dna;
+        genes.push({ id: b.id, tata: t, start: s, stop: s + b.dna.length - 3, end: s + b.dna.length - 1 });
+        seq += junk(8 + Math.floor(r() * 6));
+      });
+      const boxes = countAll(seq, 'TATA');
+      if (boxes.length !== genes.length || !genes.every((g, i) => boxes[i] === g.tata && seq.indexOf('ATG', g.tata + 6) === g.start)) continue;
+      return { name: name, seq: seq, genes: genes };
+    }
+    throw new Error('could not build chromosome ' + name);
+  }
+  function chromosomes(cr) {
+    const body = (gid, k) => gid === 'EMB' ? { id: 'EMB', dna: EMB.dna } : { id: gid, dna: entry(cr, gid).copies[k].dna };
+    const out = [];
+    for (let n = 1; n <= 14; n++) { const c = buildChrom(cr.code, String(n), 'm', LAYOUT[n].map(g => body(g, 0))); c.key = 'c' + n; c.label = 'Chromosome ' + n; out.push(c); }
+    const a = buildChrom(cr.code, 'X', 'm', LAYOUT.X.map(g => body(g, 0))); a.key = 'sA'; a.label = 'Chromosome 15, first copy'; out.push(a);
+    const b = cr.sex === 'XX' ? buildChrom(cr.code, 'X', 'p', LAYOUT.X.map(g => body(g, 1))) : buildChrom(cr.code, 'Y', 'p', []); b.key = 'sB'; b.label = 'Chromosome 15, second copy'; out.push(b);
+    return out;
+  }
+
+  function mutation(id) {
+    const r = rng(id + '|EMB|m');
+    const pool = { silent: [], missense: [], nonsense: [] };
+    for (let ci = 1; ci <= EMB.mrna.length - 2; ci++) for (let pos = 0; pos < 3; pos++) for (const b of BASES) {
+      const old = EMB.mrna[ci]; if (old[pos] === b) continue;
+      const neu = old.slice(0, pos) + b + old.slice(pos + 1);
+      const kind = CODON[neu] === CODON[old] ? 'silent' : CODON[neu] === 'STOP' ? 'nonsense' : 'missense';
+      pool[kind].push({ codon: ci, pos: pos, oldCodon: old, newCodon: neu, kind: kind });
+    }
+    const x = r();
+    const kind = x < 0.30 ? 'silent' : x < 0.75 ? 'missense' : 'nonsense';
+    const m = pool[kind][Math.floor(r() * pool[kind].length)];
+    const mrna = EMB.mrna.slice(); mrna[m.codon] = m.newCodon;
+    return {
+      kind: m.kind, codon: m.codon, pos: m.pos, oldCodon: m.oldCodon, newCodon: m.newCodon,
+      oldAA: CODON[m.oldCodon], newAA: CODON[m.newCodon],
+      dnaFrom: toDNA[m.oldCodon[m.pos]], dnaTo: toDNA[m.newCodon[m.pos]],
+      mrna: mrna, template: mrna.map(templateOf), protein: translate(mrna)
+    };
+  }
+
+  function creature(raw) {
+    const c = parseCode(raw); if (!c.ok) return null;
+    const id = c.code;
+    const sex = rng(id + '|sex')() < 0.5 ? 'XX' : 'XY';
+    const genes = GENES.map(function (g) {
+      const r = rng(id + '|' + g.id + '|a'), f = g.pf[c.site];
+      const pick = function () { const x = r(); let acc = 0; for (let i = 0; i < g.alleles.length; i++) { acc += f[i]; if (x < acc) return g.alleles[i]; } return g.alleles[g.alleles.length - 1]; };
+      const mat = pick(), pat = pick();
+      const one = g.chr === 'X' && sex === 'XY';
+      const copies = one ? [makeCopy(id, g, mat, 'on the X chromosome')] : [makeCopy(id, g, mat, 'from the mother'), makeCopy(id, g, pat, 'from the father')];
+      return { gene: g, copies: copies, same: copies.length === 2 && copies[0].allele.s === copies[1].allele.s };
+    });
+    const cr = { code: id, site: c.site, sex: sex, genes: genes, mut: mutation(id) };
+    const plus = ['LN1', 'LN2', 'LN3'].reduce((n, gid) => n + alleles(cr, gid).filter(s => s === '+').length, 0);
+    const r = rng(id + '|size');
+    const n1 = (r() + r() + r()) / 3 - 0.5, n2 = (r() + r() + r()) / 3 - 0.5;
+    cr.plus = plus;
+    cr.length = Math.round((9 + 1.5 * plus + n1 * 4.0) * 10) / 10;
+    cr.mass = Math.round(0.012 * Math.pow(cr.length, 3) * (1 + n2 * 0.3) * 10) / 10;
+    cr.ph = phenotype(cr);
+    cr.stats = stats(cr);
+    cr.chroms = chromosomes(cr);
+    return cr;
+  }
+  function entry(cr, gid) { return cr.genes.find(e => e.gene.id === gid); }
+  function alleles(cr, gid) { return entry(cr, gid).copies.map(c => c.allele.s); }
+
+  function phenotype(cr) {
+    const has = (gid, s) => alleles(cr, gid).indexOf(s) >= 0;
+    const col = alleles(cr, 'COL').slice().sort().join('');
+    const ph = {
+      striped: has('STR', 'S'),
+      color: col === 'RR' ? 'red' : col === 'YY' ? 'yellow' : 'orange',
+      brass: has('SPT', 'B'), white: has('SPT', 'W'),
+      glow: has('GLO', 'E') && has('GLO', 'F') ? 'both' : has('GLO', 'E') ? 'ember' : has('GLO', 'F') ? 'foxfire' : 'none',
+      claws: has('CLW', 'C'), toxin: has('TOX', 'T'), gills: !has('GIL', 'G'),
+      heals: has('REG', 'H'), color_vision: has('VIS', 'V'),
+      calls: has('VOC', 'S') || has('VOC', 'B') ? ['soprano', 'baritone'].filter((c, i) => has('VOC', 'SB'[i])) : ['clicks'],
+      breath: ['fire', 'ice', 'gas'].filter((b, i) => has('BRE', 'FIP'[i])),
+      gifts: ['plants', 'animals', 'friends'].filter((b, i) => has('AUR', 'PAK'[i]))
+    };
+    const size = 'Its length comes from three genes working together. This animal carries ' + cr.plus + ' of 6 possible length-adding alleles.';
+    const BT = { fire: 'a short jet of fire', ice: 'a plume of frost that ices the leaves in front of it', gas: 'a puff of bitter green gas that drives predators off' };
+    const GT = { plants: 'plants grow taller where it has passed', animals: 'deer and other animals gather and do well near it', friends: 'people who meet it become friends' };
+    ph.lines = {
+      BRE: [(ph.breath.length === 2 ? 'Two breaths: ' : 'Breath: ') + ph.breath.map(b => BT[b]).join(', and ') + '.', 'Draw the mouth open, with ' + ph.breath.map(b => b === 'gas' ? 'green gas' : b).join(' and ') + ' leaving it.'],
+      AUR: [(ph.gifts.length === 2 ? 'Two gifts: ' : 'Gift: ') + ph.gifts.map(b => GT[b]).join(', and ') + '.', ''],
+      STR: ph.striped
+        ? ['One stripe runs down the middle of the back, from the head onto the tail.', 'Draw one stripe down the center of the back, about a third as wide as the body, narrowing toward the tail tip.']
+        : ['No stripe. The back is one even dark gray, the form field biologists call lead-backed.', 'Leave the back unstriped: even dark gray from head to tail.'],
+      COL: ['Ember color: ' + ph.color + '. It shows on the cheeks, the tail tip, and the stripe if there is one.', 'Color a small patch on each cheek and the last centimeter of the tail ' + ph.color + '. A stripe takes the same color.'],
+      SPT: ph.brass && ph.white
+        ? ['Brass flecks on the back and white spots along the sides, both at once.', 'Scatter small brass flecks over the back, and add a row of white spots low on each side.']
+        : ph.brass ? ['Brass-colored flecks are scattered over the back and sides.', 'Scatter small brass flecks over the back and sides. No white spots.']
+          : ['A row of small white spots runs along each side.', 'Add a row of white spots low on each side. No brass flecks.'],
+      GLO: ph.glow === 'both' ? ['Two glows: dull orange along the body and pale green along the tail.', 'Shade a soft orange halo around the body and a pale green halo around the tail.']
+        : ph.glow === 'ember' ? ['The skin gives off a dull orange glow, like coals.', 'Shade a soft orange halo around the whole animal.']
+          : ph.glow === 'foxfire' ? ['The skin gives off a pale green glow, like foxfire on a rotting log.', 'Shade a soft pale green halo around the whole animal.']
+            : ['No glow.', 'No halo. Leave the outline clean.'],
+      CLW: ph.claws ? ['A small dark claw tips every toe.', 'Four toes on each front foot, five on each hind foot, each ending in a sharp dark claw.']
+        : ['Toes end in soft rounded tips. No claws.', 'Four toes on each front foot, five on each hind foot, each ending in a round tip.'],
+      TOX: ph.toxin ? ['Glands along the base of the tail ooze a milky toxin when the animal is disturbed.', 'Draw two rows of small raised dots along the top of the tail base.']
+        : ['No toxin glands. The skin of the tail base is smooth.', 'No gland dots on the tail.'],
+      GIL: ph.gills ? ['Three feathery red gills on each side of the neck, kept from its larval stage.', 'Draw three feathery gills on each side of the neck, sweeping back.']
+        : ['No gills. The neck is smooth.', 'Leave the neck smooth.'],
+      REG: ph.heals ? ['Healing skin: it oozes a glowing poultice. A cut, a scrape or even a tumor touched to its skin is gone.', 'Dot the back with a few glowing gold drops.']
+        : ['Plain skin: no healing poultice.', 'No gold drops on the back.'],
+      VOC: ph.calls.length === 2 ? ['Call: two voices singing together, a woman\u2019s and a man\u2019s.', 'In the margin, sketch the call as two long lines, one high and one low.']
+        : ph.calls[0] === 'soprano' ? ['Call: a woman\u2019s voice singing, far off.', 'In the margin, sketch the call as one long rising and falling line.']
+          : ph.calls[0] === 'baritone' ? ['Call: a man\u2019s voice singing, low and steady.', 'In the margin, sketch the call as one long low line.']
+            : ['Call: a quick run of dry clicks.', 'In the margin, sketch the call as a row of short ticks.'],
+      VIS: ph.color_vision ? ['Sees in full color.', ''] : ['Red-blind: red and green look alike to this animal.', ''],
+      LN1: [size, ''], LN2: [size, ''], LN3: [size, '']
+    };
+    return ph;
+  }
+
+  /* Field stats. Each one is fed by several genes, and several genes feed more than one stat (pleiotropy). */
+  const STATMAP = [['Lifespan', 'REG, TOX, GLO, GIL, LN1\u2013LN3'], ['Land speed', 'LN1\u2013LN3, CLW, GIL'], ['Stealth', 'STR, GLO, VOC, LN1\u2013LN3'], ['Breath reach', 'BRE, LN1\u2013LN3'], ['Time underwater', 'GIL, LN1\u2013LN3']];
+  function stats(cr) {
+    const ph = cr.ph, r = rng(cr.code + '|stats'), j = () => r() - 0.5, cl = (v, a, b) => Math.max(a, Math.min(b, Math.round(v)));
+    const life = cl(12 + (ph.heals ? 7 : 0) + (ph.toxin ? 3 : 0) + 0.8 * cr.plus - (ph.glow !== 'none' ? 2 : 0) + (ph.gills ? 2 : 0) + j() * 3, 6, 32);
+    const speed = cl(8 - 0.6 * cr.plus + (ph.claws ? 2 : 0) - (ph.gills ? 1 : 0) + j() * 1.5, 1, 10);
+    const stealth = cl(5 + (ph.striped ? -1 : 2) + (ph.glow === 'none' ? 2 : -2) - 0.3 * cr.plus + (ph.calls[0] === 'clicks' ? 1 : -1) + j(), 1, 10);
+    const reach = cl(cr.length * (0.9 + 0.35 * ph.breath.length) + j() * 3, 4, 40);
+    const dive = cl(5 + 1.5 * cr.plus + j() * 2, 2, 20);
+    return [
+      { k: 'Lifespan', v: life + ' years', bar: life / 32 }, { k: 'Land speed', v: speed + ' of 10', bar: speed / 10 }, { k: 'Stealth', v: stealth + ' of 10', bar: stealth / 10 },
+      { k: 'Breath reach', v: reach + ' cm', bar: reach / 40 }, { k: 'Time underwater', v: ph.gills ? 'no limit' : dive + ' min', bar: ph.gills ? 1 : dive / 20 }
+    ];
+  }
+
+  function stamp(code, n, mut) {
+    const h = hashStr('field-stamp|' + code + '|' + n + '|' + (mut ? 1 : 0));
+    const s = ALPHA[h % 31] + ALPHA[(h >>> 5) % 31] + ALPHA[(h >>> 10) % 31];
+    return s + '-' + (n < 10 ? '0' : '') + n + (mut ? 'M' : '');
+  }
+  function readStamp(raw) {
+    const m = /^([A-Z0-9]{3})-?(\d{2})(M?)$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
+    return m ? { n: parseInt(m[2], 10), mut: m[3] === 'M', text: m[1] + '-' + m[2] + m[3] } : null;
+  }
+
+  return { VERSION, ALPHA, SITES, STATMAP, LAYOUT, site, siteForRoll, GENES, EMB, CODON, SYN, AMINO, BASES, parseCode, codeFrom, batch, creature, entry, alleles, transcribe, templateOf, translate, stamp, readStamp, rng, checkChar };
+})();
+if (typeof module !== 'undefined') module.exports = BRS;
+
+</script>
+<script>
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const app = $('#app');
+  const KEY = 'find-the-genes-v1';
+  const EXAMPLE = BRS.codeFrom(BRS.rng('example-salamander'), 'TF');
+  const fresh = code => ({ code: code, example: code === EXAMPLE, pen: 'r', marks: {}, none: {}, ok: {}, other: {}, sex: '', sexOk: false, name: '' });
+  let S = fresh(EXAMPLE);
+  try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.code && BRS.parseCode(j.code).ok) S = Object.assign(fresh(j.code), j); } catch (e) { /* storage is a convenience only */ }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
+  let CR = BRS.creature(S.code), anchor = null, fb = {}, codeMsg = '', downloads = null, saveMsg = '';
+  const PENS = [['r', 'TATA box'], ['g', 'Start · ATG'], ['p', 'Stop'], ['t', 'Whole gene'], ['x', 'Eraser']];
+  const COMP = { A: 'T', T: 'A', G: 'C', C: 'G' }, BASEHEX = { A: '#0072b2', C: '#f0c419', G: '#3d4750', T: '#d55e00' };
+  const PENHEX = { r: '#d5362b', g: '#23894a', p: '#7748c2', t: '#5fd3d6' };
+  const view = () => { const h = (location.hash || '').slice(1); return ['genome'].indexOf(h) >= 0 ? h : 'find'; };
+  const totalGenes = () => CR.chroms.reduce((n, c) => n + c.genes.length, 0);
+  const foundGenes = () => CR.chroms.reduce((n, c) => n + (S.ok[c.key] ? c.genes.length : 0), 0);
+  const allDone = () => CR.chroms.every(c => S.ok[c.key]) && S.sexOk;
+
+  function keyMarks(ch) { const m = []; ch.genes.forEach(g => { m.push({ pen: 't', a: g.start, b: g.end }, { pen: 'r', a: g.tata, b: g.tata + 3 }, { pen: 'g', a: g.start, b: g.start + 2 }, { pen: 'p', a: g.stop, b: g.stop + 2 }); }); return m; }
+  function dna(ch, marks, opts) {
+    opts = opts || {};
+    const cls = new Array(ch.seq.length).fill(''), lit = {};
+    marks.forEach(m => { for (let i = m.a; i <= m.b; i++) if (cls[i].indexOf(' ' + m.pen) < 0) cls[i] += ' ' + m.pen; if (m.pen === 'g' && ch.seq.substr(m.a, m.b - m.a + 1) === 'ATG') for (let i = m.a; i <= m.b; i++) lit[i] = 1; });
+    if (opts.codons) ch.genes.forEach(g => { for (let i = g.start; i <= g.end; i += 3) cls[i] += ' cs'; });
+    const two = !!opts.two;
+    let h = '<div class="dna' + (opts.small ? ' small' : '') + (two ? ' two' : '') + '"' + (opts.live ? ' data-k="' + ch.key + '"' : '') + '>';
+    if (two) h += '<span class="end"><b>5′</b><i>3′</i></span>';
+    for (let i = 0; i < ch.seq.length; i++) {
+      const x = ch.seq[i];
+      h += '<span class="b s' + x + cls[i] + (anchor && opts.live && anchor.key === ch.key && anchor.i === i ? ' anchor' : '') + (i % 10 === 9 ? ' ten' : '') + '"' + (opts.live ? ' data-i="' + i + '"' : '') + '><b>' + x + '</b>' + (two ? '<i class="c' + COMP[x] + (lit[i] ? ' lit' : '') + '">' + COMP[x] + '</i>' : '') + '</span>';
+    }
+    if (two) { const k = h.lastIndexOf('<span class="b '); h = h.slice(0, k) + '<span class="grp">' + h.slice(k) + '<span class="end"><b>3′</b><i>5′</i></span></span>'; }
+    return h + '</div>';
+  }
+  function chromHTML(ch) {
+    const done = !!S.ok[ch.key], ms = S.marks[ch.key] || [];
+    let h = '<section class="chrom' + (done ? ' done' : '') + '" id="ch-' + ch.key + '"><div class="chead"><h3>' + ch.label + (done ? ' <span class="tick">✓ ' + (ch.genes.length ? ch.genes.length + (ch.genes.length === 1 ? ' gene' : ' genes') : 'no gene') + '</span>' : '') + '</h3><span class="small muted">' + ch.seq.length + ' bases · 5′ → 3′</span></div>';
+    const two = !!S.other[ch.key];
+    h += dna(ch, ms, { live: !done, codons: done, two: two });
+    h += '<div class="row"><button class="quiet" data-act="other" data-k="' + ch.key + '" aria-pressed="' + two + '">' + (two ? 'Hide the other strand' : 'Show the other strand') + '</button>' + (two ? '<span class="small muted">DNA has two strands. The lower one pairs with the upper one, letter for letter, and runs the opposite way.</span>' : '') + '</div>';
+    if (done) h += ch.genes.length ? '<p class="small muted">Each gene is split into threes from its start: ' + ch.genes.map(() => '9 codons').join(' and ') + '.</p>' : '<p class="small muted">An ATG with no TATA box in front of it does not start a gene.</p>';
+    else {
+      h += '<div class="row"><button data-act="check" data-k="' + ch.key + '">Check this chromosome</button><button class="quiet" data-act="none" data-k="' + ch.key + '" aria-pressed="' + !!S.none[ch.key] + '">' + (S.none[ch.key] ? '☑' : '☐') + ' No gene here</button><button class="quiet" data-act="clear" data-k="' + ch.key + '">Clear marks</button></div>';
+      if (fb[ch.key]) h += '<ul class="hints" role="status">' + fb[ch.key].map(x => '<li>' + x + '</li>').join('') + '</ul>';
+    }
+    return h + '</section>';
+  }
+  function pensHTML() {
+    return '<div class="pens" role="group" aria-label="Highlighters">' + PENS.map(p => '<button class="pen pen-' + p[0] + '" data-act="pen" data-p="' + p[0] + '" aria-pressed="' + (S.pen === p[0]) + '"><i></i>' + p[1] + '</button>').join('') + '</div>';
+  }
+  function sexHTML() {
+    const ready = S.ok.sA && S.ok.sB;
+    if (!ready) return '';
+    if (S.sexOk) return '<section class="block"><h3>Pair 15 decides the sex</h3><p class="say good"><b>' + (CR.sex === 'XX' ? 'XX, female.' : 'XY, male.') + '</b> ' + (CR.sex === 'XX' ? 'Both copies are X chromosomes: the same two genes sit in the same places on each.' : 'The first copy is an X with two genes. The second is a Y: shorter, with no gene on it.') + '</p></section>';
+    return '<section class="block"><h3>Pair 15 decides the sex</h3><fieldset id="sexq"><legend>Compare the two copies of chromosome 15. What is this salamander?</legend><label class="opt"><input type="radio" name="sex" id="sex-XX" value="XX"' + (S.sex === 'XX' ? ' checked' : '') + '><span><b>XX, female.</b> Two copies about the same length, with the same genes.</span></label><label class="opt"><input type="radio" name="sex" id="sex-XY" value="XY"' + (S.sex === 'XY' ? ' checked' : '') + '><span><b>XY, male.</b> The second copy is shorter and carries no gene.</span></label></fieldset><div class="row"><button data-act="sex">Check</button></div>' + (fb.sex ? '<p class="say warn" role="status">' + fb.sex + '</p>' : '') + '</section>';
+  }
+  function findView() {
+    const tot = totalGenes(), fd = foundGenes();
+    let h = '<section class="block"><span class="eyebrow">Before decoding · find the genes</span><h2>Most of this DNA is not a gene. Mark the parts that are.</h2>' +
+      '<p class="lede">These are all 15 chromosomes of ' + S.code + ', one strand of each, read left to right. Somewhere in them are the genes that build this salamander.</p>' +
+      '<ol class="rule"><li><b class="k r">TATA</b> A gene is switched on at a TATA box. Find every one.</li><li><b class="k g">ATG</b> The gene starts at the first ATG after the TATA box.</li><li><b class="k p">Stop</b> Count by threes from the start. The first TAA, TAG or TGA that lands on a count of three ends the gene.</li><li><b class="k t">Gene</b> Everything from the start through the stop is the gene.</li></ol>' +
+      '<p><b>To highlight:</b> pick a pen, tap the first letter, then tap the last letter.</p><p class="basekey" aria-label="Base colors"><span>Under every letter:</span><span><i style="background:var(--bA)"></i>A</span><span><i style="background:var(--bC)"></i>C</span><span><i style="background:var(--bG)"></i>G</span><span><i style="background:var(--bT)"></i>T</span><span>In RNA, U takes T’s color on a round tile.</span></p>' +
+      (S.example ? '<p class="say">This is an example salamander. Type your own Creature Code to load yours.</p>' : '') +
+      '<form class="row" data-form="code"><div class="field"><label for="code">Creature Code</label><input type="text" id="code" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="TF-7K3QM" value="' + (S.example ? '' : esc(S.code)) + '"></div><button class="ghost" style="align-self:flex-end">Load</button></form>' + (codeMsg ? '<p class="say warn">' + codeMsg + '</p>' : '') + '</section>';
+    h += '<div class="sticky">' + pensHTML() + '<p class="progress" id="prog">' + progressText() + '</p></div>';
+    h += CR.chroms.map(chromHTML).join('') + '<div id="sexbox">' + sexHTML() + '</div>';
+    h += '<section class="block"><h3>Keep your genome</h3><p>Your highlighted genome page is the record of this animal’s DNA. Save it and upload it to Canvas.</p><div class="row"><a class="btn" href="#genome">Open my genome page</a></div></section>';
+    void tot; void fd;
+    return h;
+  }
+  function progressText() { const ck = CR.chroms.filter(c => S.ok[c.key]).length; return allDone() ? 'Every gene found. ' + totalGenes() + ' genes on 15 chromosome pairs.' : 'Genes found: ' + foundGenes() + ' of ' + totalGenes() + ' · chromosomes checked: ' + ck + ' of ' + CR.chroms.length; }
+  function genomeView(teacher) {
+    let h = '<section class="block"><span class="eyebrow">' + (teacher ? 'Teacher key · not for students' : 'My genome page') + '</span><h2>' + (teacher ? 'Key for ' + S.code : 'The genome of ' + (S.name ? esc(S.name) + ', ' : '') + S.code) + '</h2>';
+    if (!teacher) h += '<div class="field"><label for="sname">Salamander’s name</label><input type="text" id="sname" maxlength="24" autocomplete="off" value="' + esc(S.name) + '" style="max-width:22rem"></div><p>' + (allDone() ? 'Every gene is found and checked.' : progressText() + '. The page can be saved at any point.') + '</p><div class="row"><button data-act="png" id="pngbtn"' + (downloads ? '' : ' hidden') + '>Save as an image</button><a class="btn ghost" href="#find">Back to highlighting</a></div><p class="small muted" id="savemsg" aria-live="polite">' + (saveMsg || (downloads ? 'The image holds every chromosome with your highlights. Upload it to the Canvas assignment.' : 'To keep this page, take a screenshot, then upload the screenshot to the Canvas assignment.')) + '</p>';
+    else h += '<p>' + (CR.sex === 'XX' ? 'Female, XX.' : 'Male, XY.') + ' ' + totalGenes() + ' genes. Chromosomes 13 and 14 carry no gene.</p><div class="row"><a class="btn ghost" href="#find">Back</a></div>';
+    h += '<div class="legend">' + PENS.slice(0, 4).map(p => '<span class="pen pen-' + p[0] + '"><i></i>' + p[1] + '</span>').join('') + '</div></section><section class="block">';
+    CR.chroms.forEach(function (ch) { h += '<div class="gline"><div class="chead"><b>' + ch.label + '</b><span class="small muted">' + (teacher ? ch.name + ' · ' + (ch.genes.map(g => g.id).join(', ') || 'no gene') : (S.ok[ch.key] ? '✓ checked' : 'not checked yet')) + '</span></div>' + dna(ch, teacher ? keyMarks(ch) : (S.marks[ch.key] || []), { small: true, codons: teacher || !!S.ok[ch.key] }) + '</div>'; });
+    return h + '</section>';
+  }
+
+  /* ---------- checking ---------- */
+  function checkChrom(ch) {
+    const ms = S.marks[ch.key] || [], by = { r: [], g: [], p: [], t: [] }, hints = [];
+    ms.forEach(m => by[m.pen].push(m));
+    const same = (m, a, b) => m.a === a && m.b === b, txt = m => ch.seq.substr(m.a, m.b - m.a + 1), n = ch.genes.length;
+    if (!n) {
+      if (S.none[ch.key] && !ms.length) return { ok: true };
+      if (S.none[ch.key]) return { ok: false, hints: ['Erase the marks on this chromosome, then check again.'] };
+      if (!ms.length) return { ok: false, hints: ['Nothing is marked yet. If there is no TATA box here, tap “No gene here.”'] };
+      return { ok: false, hints: [by.g.some(m => txt(m) === 'ATG') ? 'That ATG has no TATA box in front of it, so it does not start a gene.' : 'Look for a TATA box first. With no TATA box there is no gene.'] };
+    }
+    if (S.none[ch.key]) return { ok: false, hints: ['There is a TATA box on this chromosome. Turn off “No gene here” and look again.'] };
+    const rF = ch.genes.filter(g => by.r.some(m => same(m, g.tata, g.tata + 3) || same(m, g.tata, g.tata + 5))).length;
+    if (rF < n || by.r.length > rF) hints.push(!by.r.length ? 'Start with the red pen: find every TATA.' : rF === n ? 'One red mark is not on a TATA box.' : 'Red: ' + rF + ' of ' + n + ' TATA boxes marked. Cover the letters T-A-T-A exactly.');
+    const gF = ch.genes.filter(g => by.g.some(m => same(m, g.start, g.start + 2))).length, gBad = by.g.find(m => !ch.genes.some(g => same(m, g.start, g.start + 2)));
+    if (gF < n || gBad) hints.push(!by.g.length ? 'Green: mark the start, the first ATG after each TATA box.' : gBad && txt(gBad) !== 'ATG' ? 'Green goes on exactly three letters: A-T-G.' : gBad ? 'A green mark is on an ATG that is not the first one after a TATA box.' : 'Green: ' + gF + ' of ' + n + ' starts marked.');
+    const pF = ch.genes.filter(g => by.p.some(m => same(m, g.stop, g.stop + 2))).length, pBad = by.p.find(m => !ch.genes.some(g => same(m, g.stop, g.stop + 2)));
+    if (pF < n || pBad) {
+      let msg = 'Purple: ' + pF + ' of ' + n + ' stops marked.';
+      if (!by.p.length) msg = 'Purple: count by threes from each start to the first stop.';
+      else if (pBad && ['TAA', 'TAG', 'TGA'].indexOf(txt(pBad)) < 0) msg = 'A stop is TAA, TAG or TGA. Purple covers all three letters.';
+      else if (pBad) { const g = ch.genes.filter(x => x.start < pBad.a).pop(); msg = !g ? 'A purple mark sits before any gene starts.' : (pBad.a - g.start) % 3 ? 'That stop is out of frame. Count by threes from the green start: 1-2-3, 1-2-3.' : 'That stop is past the end of the gene. The first stop in frame ends it.'; }
+      hints.push(msg);
+    }
+    const tF = ch.genes.filter(g => by.t.some(m => same(m, g.start, g.end) || same(m, g.start + 3, g.stop - 1))).length;
+    if (tF < n || by.t.length > tF) hints.push(!by.t.length ? 'Turquoise: cover the whole gene, from the start through the stop.' : 'Turquoise should run from the first letter of the start through the last letter of the stop.');
+    return { ok: !hints.length, hints: hints.slice(0, 3) };
+  }
+
+  /* ---------- export ---------- */
+  function exportBlob(done) {
+    const PER = 50, CW = 22, CH = 30, M = 40, W = M * 2 + PER * CW + 9 * 6;
+    let rows = 0; CR.chroms.forEach(c => { rows += Math.ceil(c.seq.length / PER); });
+    const H = 150 + CR.chroms.length * 44 + rows * (CH + 4) + M, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const g = cv.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0, 0, W, H); g.fillStyle = '#1d2925'; g.textBaseline = 'alphabetic';
+    g.font = '700 30px Helvetica, Arial, sans-serif'; g.fillText('Blue Ridge Salamander Project · genome of ' + S.code, M, 52);
+    g.font = '18px Helvetica, Arial, sans-serif'; g.fillText((S.name ? 'Name: ' + S.name + '   ' : '') + progressText(), M, 82);
+    let lx = M; PENS.slice(0, 4).forEach(function (p) { g.fillStyle = PENHEX[p[0]]; g.fillRect(lx, 100, 26, 20); g.fillStyle = '#1d2925'; g.font = '16px Helvetica, Arial, sans-serif'; g.fillText(p[1], lx + 34, 116); lx += 60 + g.measureText(p[1]).width; });
+    let y = 150;
+    CR.chroms.forEach(function (ch) {
+      const ms = S.marks[ch.key] || [], cls = new Array(ch.seq.length).fill('');
+      ms.forEach(m => { for (let i = m.a; i <= m.b; i++) cls[i] += m.pen; });
+      g.fillStyle = '#1d2925'; g.font = '700 17px Helvetica, Arial, sans-serif'; g.fillText(ch.label + (S.ok[ch.key] ? '  ✓' : ''), M, y + 20);
+      g.font = '14px Helvetica, Arial, sans-serif'; g.fillStyle = '#55655d'; g.fillText(ch.seq.length + ' bases, 5′ → 3′', M + 300, y + 20); y += 30;
+      for (let i = 0; i < ch.seq.length; i++) {
+        const col = i % PER, row = Math.floor(i / PER), x = M + col * CW + Math.floor(col / 10) * 6, yy = y + row * (CH + 4), c = cls[i];
+        const top = c.indexOf('r') >= 0 ? 'r' : c.indexOf('g') >= 0 ? 'g' : c.indexOf('p') >= 0 ? 'p' : c.indexOf('t') >= 0 ? 't' : '';
+        const nx = (col % 10 === 9 && col < PER - 1 && i + 1 < ch.seq.length) ? cls[i + 1] : null, bridge = nx !== null && top && (nx.indexOf(top) >= 0) ? 6 : 0, tb = nx !== null && c.indexOf('t') >= 0 && nx.indexOf('t') >= 0 ? 6 : 0;
+        if (top) { g.fillStyle = PENHEX[top]; g.fillRect(x, yy, CW + bridge, CH); if (top !== 't' && c.indexOf('t') >= 0) { g.fillStyle = PENHEX.t; g.fillRect(x, yy, CW + tb, 5); } }
+        g.fillStyle = BASEHEX[ch.seq[i]]; g.fillRect(x + 2, yy + CH - 4, CW - 4, 4);
+        g.fillStyle = top && top !== 't' ? '#ffffff' : '#1d2925'; g.font = '600 18px "IBM Plex Mono", Menlo, Consolas, monospace'; g.textAlign = 'center'; g.fillText(ch.seq[i], x + CW / 2, yy + 21); g.textAlign = 'left';
+      }
+      y += Math.ceil(ch.seq.length / PER) * (CH + 4) + 14;
+    });
+    g.fillStyle = '#55655d'; g.font = '13px Helvetica, Arial, sans-serif'; g.fillText('© J. R. Schwebach. All rights reserved.', M, H - 14);
+    cv.toBlob(done, 'image/png');
+  }
+
+  /* ---------- render and events ---------- */
+  function render() { const v = view(); app.innerHTML = v === 'genome' ? genomeView(false) : v === 'teacher' ? genomeView(true) : findView(); }
+  function repaint(key) { const el = $('#ch-' + key), ch = CR.chroms.find(c => c.key === key); if (el && ch) el.outerHTML = chromHTML(ch); const p = $('#prog'); if (p) p.textContent = progressText(); const sb = $('#sexbox'); if (sb) sb.innerHTML = sexHTML(); }
+  app.addEventListener('click', function (ev) {
+    const base = ev.target.closest('.dna[data-k] .b');
+    if (base) {
+      const key = base.parentNode.dataset.k, i = +base.dataset.i; S.marks[key] = S.marks[key] || []; fb[key] = null;
+      if (S.pen === 'x') { S.marks[key] = S.marks[key].filter(m => i < m.a || i > m.b); anchor = null; }
+      else if (anchor && anchor.key === key && anchor.pen === S.pen) { S.marks[key].push({ pen: S.pen, a: Math.min(anchor.i, i), b: Math.max(anchor.i, i) }); anchor = null; }
+      else anchor = { key: key, i: i, pen: S.pen };
+      save(); repaint(key); return;
+    }
+    const t = ev.target.closest('[data-act]'); if (!t) return;
+    const a = t.dataset.act, key = t.dataset.k;
+    if (a === 'pen') { S.pen = t.dataset.p; anchor = null; save(); const old = anchor; void old; document.querySelectorAll('.pen[data-p]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.p === S.pen))); document.querySelectorAll('.b.anchor').forEach(b => b.classList.remove('anchor')); }
+    else if (a === 'other') { S.other[key] = !S.other[key]; save(); repaint(key); }
+    else if (a === 'clear') { S.marks[key] = []; fb[key] = null; anchor = null; save(); repaint(key); }
+    else if (a === 'none') { S.none[key] = !S.none[key]; fb[key] = null; save(); repaint(key); }
+    else if (a === 'check') { const ch = CR.chroms.find(c => c.key === key), r = checkChrom(ch); anchor = null; if (r.ok) { S.ok[key] = true; fb[key] = null; } else fb[key] = r.hints; save(); repaint(key); }
+    else if (a === 'sex') { if (S.sex === CR.sex) { S.sexOk = true; fb.sex = null; } else fb.sex = S.sex ? 'Look again at the second copy of chromosome 15: how long is it, and how many genes did you find on it?' : 'Choose one first.'; save(); const sb = $('#sexbox'); sb.innerHTML = sexHTML(); $('#prog').textContent = progressText(); }
+    else if (a === 'png') {
+      const msg = $('#savemsg'); msg.textContent = 'Building the image…';
+      exportBlob(function (blob) { if (!blob || !downloads) { msg.textContent = 'The image could not be made here. Take a screenshot instead.'; return; } downloads.save({ filename: S.code + '-genome.png', data: blob }).then(function () { msg.textContent = 'Saved. Upload that image to the Canvas assignment.'; }, function (e) { msg.textContent = e && e.code === 'declined' ? 'Not saved. Press the button again when ready.' : 'Saving is not available here. Take a screenshot instead.'; }); });
+    }
+  });
+  app.addEventListener('change', function (ev) { const t = ev.target; if (t.name === 'sex') { S.sex = t.value; save(); } });
+  app.addEventListener('input', function (ev) { const t = ev.target; if (t.id === 'sname') { S.name = t.value.slice(0, 24); save(); } });
+  app.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    const p = BRS.parseCode($('#code').value);
+    if (!p.ok) { codeMsg = p.why; render(); return; }
+    codeMsg = ''; if (p.code !== S.code) { S = fresh(p.code); CR = BRS.creature(p.code); fb = {}; anchor = null; save(); }
+    render();
+  });
+  window.addEventListener('hashchange', function () { anchor = null; render(); window.scrollTo(0, 0); });
+  render();
+  if (!(window.claude && window.claude.use)) { downloads = { save: function (o) { return new Promise(function (res) { const u = URL.createObjectURL(o.data), a = document.createElement('a'); a.href = u; a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 6000); res(); }); } }; const b0 = $('#pngbtn'); if (b0) b0.hidden = false; }
+  if (window.claude && window.claude.use) window.claude.use('downloads').then(function (d) { downloads = d; const b = $('#pngbtn'); if (d && b) { b.hidden = false; const m = $('#savemsg'); if (m) m.textContent = 'The image holds every chromosome with your highlights. Upload it to the Canvas assignment.'; } }, function () { /* no saving here */ });
+  window.__BRS_FIND = { exportBlob: exportBlob };
+})();
+
+</script>
+
+</body></html>

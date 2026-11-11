@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="J. R. Schwebach">
+<meta name="description" content="Draft pages of the Blue Ridge Salamander Project, for classroom testing.">
+<title>Blue Ridge Salamander Project</title>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one field-book column; the pages in the order a class uses them. */
+:root{
+  --paper:#eef1ea; --panel:#f9faf6; --ink:#1d2925; --muted:#55655d; --rule:#c8d2c7; --ember:#b8480f; --moss:#2f6347;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Verdana","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --paper:#131a17; --panel:#1a2320; --ink:#e3eae4; --muted:#9aaca2; --rule:#2f3c36; --ember:#f2935a; --moss:#86c09a; color-scheme:dark } }
+:root[data-theme="dark"]{ --paper:#131a17; --panel:#1a2320; --ink:#e3eae4; --muted:#9aaca2; --rule:#2f3c36; --ember:#f2935a; --moss:#86c09a; color-scheme:dark }
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:17px/1.5 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 48px;display:flex;flex-direction:column;gap:20px}
+h1{font:700 1.9rem/1.12 var(--display);margin:0;text-wrap:balance}
+.eyebrow{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
+p{margin:0;max-width:62ch}
+.muted{color:var(--muted)}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:2px solid var(--ink)}
+li{border-bottom:1.5px solid var(--rule)}
+li a{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:4px 14px;padding:14px 4px;color:var(--ink);text-decoration:none;min-height:48px}
+li a:hover b,li a:focus-visible b{color:var(--ember);text-decoration:underline}
+li .when{font:600 .74rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:5px}
+li b{font:700 1.2rem/1.2 var(--display);display:block}
+li span.what{color:var(--muted);font-size:.95rem}
+:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+footer{font-size:.88rem;color:var(--muted);border-top:1.5px solid var(--rule);padding-top:14px}
+@media (max-width:480px){ li a{grid-template-columns:1fr} li .when{padding-top:0} h1{font-size:1.5rem} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Draft for classroom testing</span>
+    <h1>Blue Ridge Salamander Project</h1>
+  </header>
+  <p>Turn over a rock in the Blue Ridge, find the animal's DNA, and decode it gene by gene. The animal stays hidden until every gene checks correct.</p>
+  <ol>
+    <!--HOWTO-->
+    <li><a href="blue-ridge-salamander-turn-the-rock.html"><span class="when">Start here</span><span><b>Turn the Rock and Decode</b><span class="what">Roll the die, turn a rock, get a Creature Code. Check each gene you decode on paper.</span></span></a></li>
+    <li><a href="blue-ridge-salamander-find-the-genes.html"><span class="when">With your code</span><span><b>Find the Genes</b><span class="what">Fifteen chromosomes of DNA. Highlight the TATA box, the start, the stop and the gene.</span></span></a></li>
+    <li><a href="blue-ridge-salamander-codon-bingo.html"><span class="when">Whole class</span><span><b>Codon Bingo</b><span class="what">One caller, a different card on every iPad, and a round played on your own animal.</span></span></a></li>
+    <li><a href="blue-ridge-salamander-3d-test.html"><span class="when">Preview</span><span><b>The Animal in 3D</b><span class="what">Four sample animals at night, with sound. A device test.</span></span></a></li>
+  </ol>
+  <footer>© J. R. Schwebach. All rights reserved. Free to use with your own students.</footer>
+</div>
+</body>
+</html>
