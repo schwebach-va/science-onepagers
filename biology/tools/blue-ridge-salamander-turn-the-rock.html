@@ -93,7 +93,7 @@ label{font-weight:700}
 .genes button.done[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px}
 .strand{display:flex;flex-direction:column;gap:4px;padding:10px;border:1.5px solid var(--rule);border-radius:5px;background:repeating-linear-gradient(var(--panel) 0 27px,var(--rule) 27px 28px)}
 .strand .lab{font:600 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--panel);align-self:flex-start;padding:0 4px}
-.six{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.six{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px}
 .six>*{min-width:0;width:100%;text-align:center;font:600 16px var(--mono);letter-spacing:.06em}
 .six span{padding:8px 0;background:var(--panel);border:1.5px solid var(--rule);border-radius:4px}
 .six span.diff{border-color:var(--ember);background:var(--ember-soft)}
@@ -171,6 +171,15 @@ button.die:hover{border-color:var(--ember)}
 .tray canvas{display:block;width:100%;height:auto}
 @media (max-width:520px){ .stat{grid-template-columns:6.4rem minmax(0,1fr) 4.6rem;gap:6px} .stat .k{font-size:.66rem;letter-spacing:0} body{font-size:16px} .steps a{font-size:.74rem;padding:6px 5px} .block{padding:12px} .six{gap:3px} .six>*{letter-spacing:0} .notes li{grid-template-columns:1fr;gap:2px} .chart td{font-size:.7rem} .chart th,.chart td{padding:4px 4px} }
 @media (max-width:520px){ .six .cod .bt{font-size:11.5px;border-radius:2px} .six .cod{gap:1px} .bt.tu{box-shadow:0 0 0 1px var(--panel),0 0 0 2.5px var(--ember)} .pol{font-size:.64rem;padding:2px 6px} }
+@media (max-width:760px){ .six{gap:3px} .six>*{font-size:13px;letter-spacing:0} .six input,.six select{font-size:13px;padding:8px 0} }
+@media (max-width:520px){ .six{gap:2px} .six>*{font-size:10.5px} .six input,.six select{font-size:10.5px;padding:7px 0;border-width:1px} .six span.num{font-size:.6rem} }
+.odds{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border:1.5px solid var(--rule);border-radius:5px;background:var(--paper)}
+.faces{display:flex;gap:6px;flex-wrap:wrap}
+.face{line-height:0;padding:3px;border-radius:8px;border:2px solid transparent}
+.face.mut{background:var(--ember-soft)}
+.face.on{border-color:var(--ember)}
+.slip{display:flex;flex-direction:column;gap:4px;padding:12px 14px;background:var(--slip);color:var(--tray-ink);border:1.5px dashed var(--tray-ink);border-radius:4px;max-width:26rem}
+.slip .eyebrow{color:var(--tray-ink)} .slip .big{font:700 1.5rem var(--mono);letter-spacing:.04em}
 @media (prefers-reduced-motion:reduce){ .cover,.under{transition:none} .pol,.strand.open .top .bt.hid,.strand.shown .rise,.bt.tu{animation:none} }
 </style>
 <div class="wrap">
@@ -178,7 +187,7 @@ button.die:hover{border-color:var(--ember)}
   <div class="top"><h1>Blue Ridge Salamander Project</h1><span class="code-chip" id="chip">no creature yet</span></div>
   <nav aria-label="Survey steps"><ol class="steps" id="steps"></ol></nav>
 </header>
-<p class="draft">Draft v1, 11/11/2026. Codes and traits will change until Mr. Schwebach approves the trait list.</p>
+<p class="draft">Test build, 11/11/2026. Codes and traits can still change until Mr. Schwebach freezes the genome.</p>
 <main id="app" class="sheet"></main>
 <footer>
   <span>© J. R. Schwebach. All rights reserved. Free to use with your own students. Draft for classroom testing.</span>
@@ -186,13 +195,32 @@ button.die:hover{border-color:var(--ember)}
 </footer>
 </div>
 <script>
-/* Blue Ridge Salamander Project genome engine. Draft v1, 2026-11-11.
+/* Blue Ridge Salamander Project genome engine. DRAFT v3 (two alleles, one spelling per allele), 2026-11-11.
+   NOT FROZEN. Reid's answers of 11/11, 2:13 to 3:01 pm, are built in; the freeze waits on the tools and his go.
    A Creature Code regenerates the same genome every time. No server, no student data.
    Every gene draws from its own seeded stream (code + gene id), so adding a gene later
-   never changes a gene students already decoded. */
+   never changes a gene students already decoded.
+
+   What changed from v2 (decisions of 11/11, 1:04 to 1:40 pm):
+   - One DNA spelling per allele for the whole ridge. Any two alleles of a gene differ at exactly one base.
+   - Within one animal, the father's copy of a chromosome uses the mother's copy's filler DNA and gene
+     positions, and differs only at the allele letters. Filler and positions stay unique to each animal.
+   - The drawn set is the mother's: chromosomes 1 to 14 and the X she gave (15 strips). Males get a 16th
+     strip, the Y from the father. A female's second X is a partner, not a strip.
+   - Power gene (four codominant alleles) in place of Breath.
+   - The stamp carries the edition and which genes are done. Keeper code = Creature Code + first three
+     characters of the final stamp. */
 const BRS = (function () {
   'use strict';
-  const VERSION = 'v1 draft 2026-11-11';
+  const VERSION = 'v3 draft 2026-11-11';
+  const EDITION = { id: '2026-27', mark: 'A', label: 'Edition 2026-27' };
+  const EDITIONS = { A: EDITION };
+  /* Both rules were settled with Reid on 11/11 (decisions log). They stay switches so the checks can run each way. */
+  const DEFAULTS = {
+    emberOnMotherCopy: true, // a new mutation sits on the mother's copy of chromosome 9; the father's copy is the ridge reference
+    toxinGraded: true        // TT strong toxin, Tt mild, tt none (decided 2:17 pm)
+  };
+  const MUTATION_ODDS = 0.5; // a second die roll at the rock: 1 to 3 means the animal carries a new mutation (decided 2:13 pm)
   const ALPHA = '23456789ABCDEFGHJKMNPQRSTUVWXYZ'; // 31 characters, no 0 O 1 I L
 
   function hashStr(s) {
@@ -253,6 +281,13 @@ const BRS = (function () {
     for (let i = 0; i < 4; i++) four += ALPHA[Math.floor(rand() * 31)];
     return siteId + '-' + four + checkChar(siteId + four);
   }
+  /* The second die roll. 1 to 3: the animal carries a new mutation. 4 to 6: it does not.
+     The page draws codes until the animal behind one matches the roll, so the code alone still rebuilds the animal. */
+  const mutationForRoll = n => n >= 1 && n <= 3;
+  function codeForRolls(rand, siteRoll, mutationRoll) {
+    const s = siteForRoll(siteRoll); if (!s || !(mutationRoll >= 1 && mutationRoll <= 6)) return null;
+    for (;;) { const c = codeFrom(rand, s.id); if (hasMutation(c) === mutationForRoll(mutationRoll)) return c; }
+  }
   function batch(word, n, siteId) {
     const r = rng('batch|' + String(word).trim().toLowerCase() + '|' + siteId);
     const out = [];
@@ -282,179 +317,354 @@ const BRS = (function () {
     return out;
   }
 
-  /* ---------- DRAFT trait list. pf = allele frequencies in each population, in allele order. ---------- */
+  /* ---------- Trait list, genome format v3 ----------
+     15 chromosome pairs: 1 to 14 plus the sex pair. A gene on the coding strand: TATAAA, a short spacer,
+     ATG, seven more codons, a stop.
+     ref = the gene's one spelling for the whole ridge, written as mRNA and carrying the first allele.
+     at  = the codon (start codon = 0) where the alleles differ. Each allele swaps in its own codon there,
+           and every pair of those codons is exactly one base apart.
+     pf  = allele frequencies per site, as Reid approved them on 11/11 (decisions log). An animal's two alleles are drawn
+           independently from pf, so every site is in Hardy-Weinberg proportions by construction. */
   const GENES = [
     { id: 'STR', chr: '1', name: 'Back stripe', kind: 'complete dominance', real: 'modeled on the striped and lead-backed forms of the red-backed salamander',
-      alleles: [{ s: 'S', label: 'striped', p: ['Ala', 'Cys', 'Pro', 'Leu'] }, { s: 's', label: 'lead-backed', p: ['Ala', 'Arg', 'Pro', 'Leu'] }], pf: { TF: [0.3, 0.7], CE: [0.6, 0.4], HE: [0.7, 0.3] } },
+      ref: 'AUG GCU UGU CCU CUG GGA GAU UCU UAG', at: 2,
+      alleles: [{ s: 'S', label: 'striped', codon: 'UGU' }, { s: 's', label: 'lead-backed', codon: 'CGU' }], pf: { TF: [0.3, 0.7], CE: [0.6, 0.4], HE: [0.7, 0.3] } },
     { id: 'COL', chr: '2', name: 'Ember color', kind: 'incomplete dominance', real: 'real stripes run from red to yellow',
-      alleles: [{ s: 'R', label: 'red', p: ['His', 'Val', 'Ser', 'Gly'] }, { s: 'Y', label: 'yellow', p: ['His', 'Val', 'Phe', 'Gly'] }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+      ref: 'AUG CAC GUC UCU GGG AAA GCU CUU UAG', at: 3,
+      alleles: [{ s: 'R', label: 'red', codon: 'UCU' }, { s: 'Y', label: 'yellow', codon: 'UUU' }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+    { id: 'TOX', chr: '2', name: 'Skin toxin', kind: 'incomplete dominance', real: 'many salamanders secrete skin toxins',
+      ref: 'AUG AAA GAC ACG AUA GGG GCA UUC UGA', at: 2,
+      alleles: [{ s: 'T', label: 'toxin glands', codon: 'GAC' }, { s: 't', label: 'no toxin', codon: 'AAC' }], pf: { TF: [0.6, 0.4], CE: [0.4, 0.6], HE: [0.5, 0.5] } },
     { id: 'SPT', chr: '3', name: 'Flecks and spots', kind: 'codominance', real: 'brass flecks occur on real woodland salamanders of the Blue Ridge',
-      alleles: [{ s: 'B', label: 'brass flecks', p: ['Glu', 'Leu', 'Gln', 'Ser'] }, { s: 'W', label: 'white spots', p: ['Glu', 'Pro', 'Gln', 'Ser'] }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+      ref: 'AUG GAG CUC CAG AGU GUG ACU GAU UGA', at: 2,
+      alleles: [{ s: 'B', label: 'brass flecks', codon: 'CUC' }, { s: 'W', label: 'white spots', codon: 'CCC' }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.68, 0.32] } },
     { id: 'GLO', chr: '4', name: 'Glow', kind: 'multiple alleles', real: 'fantasy trait',
-      alleles: [{ s: 'E', label: 'ember glow', p: ['Phe', 'Thr', 'Trp', 'Val'] }, { s: 'F', label: 'foxfire glow', p: ['Phe', 'Thr', 'Cys', 'Val'] }, { s: 'n', label: 'no glow', p: ['Phe', 'Thr', 'Arg', 'Val'] }], pf: { TF: [0.45, 0.15, 0.4], CE: [0.15, 0.5, 0.35], HE: [0.3, 0.3, 0.4] } },
+      ref: 'AUG UUC ACG GGU GUG AAC GGU CCG UAA', at: 3,
+      alleles: [{ s: 'E', label: 'ember glow', codon: 'GGU' }, { s: 'F', label: 'foxfire glow', codon: 'UGU' }, { s: 'n', label: 'no glow', codon: 'CGU' }], pf: { TF: [0.45, 0.15, 0.4], CE: [0.15, 0.5, 0.35], HE: [0.3, 0.3, 0.4] } },
     { id: 'CLW', chr: '4', name: 'Claws', kind: 'complete dominance', real: 'fantasy trait: real salamanders have no claws',
-      alleles: [{ s: 'C', label: 'clawed', p: ['Ser', 'Tyr', 'Asp', 'Ala'] }, { s: 'c', label: 'no claws', p: ['Ser', 'His', 'Asp', 'Ala'] }], pf: { TF: [0.6, 0.4], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
-    { id: 'TOX', chr: '2', name: 'Skin toxin', kind: 'complete dominance', real: 'many salamanders secrete skin toxins',
-      alleles: [{ s: 'T', label: 'toxin glands', p: ['Lys', 'Asp', 'Thr', 'Ile'] }, { s: 't', label: 'no toxin', p: ['Lys', 'Asn', 'Thr', 'Ile'] }], pf: { TF: [0.6, 0.4], CE: [0.4, 0.6], HE: [0.5, 0.5] } },
+      ref: 'AUG UCG UAC GAC GCG UUG AAG ACC UAA', at: 2,
+      alleles: [{ s: 'C', label: 'clawed', codon: 'UAC' }, { s: 'c', label: 'no claws', codon: 'CAC' }], pf: { TF: [0.6, 0.4], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
     { id: 'GIL', chr: '5', name: 'Gills', kind: 'complete dominance', real: 'some salamanders keep larval gills as adults',
-      alleles: [{ s: 'G', label: 'gills lost', p: ['Asn', 'Ile', 'Glu', 'Lys'] }, { s: 'g', label: 'gills kept', p: ['Asn', 'Ile', 'Gly', 'Lys'] }], pf: { TF: [0.9, 0.1], CE: [0.35, 0.65], HE: [0.7, 0.3] } },
+      ref: 'AUG AAC AUC GAA AAG GUU AGC AGA UAA', at: 3,
+      alleles: [{ s: 'G', label: 'gills lost', codon: 'GAA' }, { s: 'g', label: 'gills kept', codon: 'GGA' }], pf: { TF: [0.9, 0.1], CE: [0.225, 0.775], HE: [0.7, 0.3] } },
     { id: 'REG', chr: '6', name: 'Healing skin', kind: 'complete dominance', real: 'fantasy trait; a poultice is a real folk remedy, and Appalachian healers were known for them',
-      alleles: [{ s: 'H', label: 'healing poultice', p: ['Leu', 'Asp', 'Cys', 'Gln'] }, { s: 'h', label: 'plain skin', p: ['Leu', 'Asp', 'Tyr', 'Gln'] }], pf: { TF: [0.4, 0.6], CE: [0.6, 0.4], HE: [0.5, 0.5] } },
-    { id: 'BRE', chr: '6', name: 'Breath', kind: 'multiple alleles, codominant', real: 'fantasy trait; the fire legend about salamanders is real folklore',
-      alleles: [{ s: 'F', label: 'fire', p: ['Cys', 'Glu', 'His', 'Arg'] }, { s: 'I', label: 'ice', p: ['Cys', 'Glu', 'Asn', 'Arg'] }, { s: 'P', label: 'poison gas', p: ['Cys', 'Glu', 'Asp', 'Arg'] }], pf: { TF: [0.6, 0.25, 0.15], CE: [0.2, 0.2, 0.6], HE: [0.25, 0.6, 0.15] } },
-    { id: 'AUR', chr: '3', name: 'Gift', kind: 'multiple alleles, codominant', real: 'fantasy trait; a species that helps many others thrive is called a keystone species',
-      alleles: [{ s: 'P', label: 'plants grow', p: ['Ile', 'Gly', 'Thr', 'Trp'] }, { s: 'A', label: 'animals thrive', p: ['Ile', 'Gly', 'Ala', 'Trp'] }, { s: 'K', label: 'friendships form', p: ['Ile', 'Gly', 'Ser', 'Trp'] }], pf: { TF: [0.2, 0.3, 0.5], CE: [0.3, 0.5, 0.2], HE: [0.5, 0.2, 0.3] } },
+      ref: 'AUG CUA GAU UGC CAG GCA AUC GAA UAG', at: 3,
+      alleles: [{ s: 'H', label: 'healing poultice', codon: 'UGC' }, { s: 'h', label: 'plain skin', codon: 'UAC' }], pf: { TF: [0.6, 0.4], CE: [0.4, 0.6], HE: [0.5, 0.5] } },
+    { id: 'POW', chr: '7', name: 'Power', kind: 'multiple alleles, codominant', real: 'fantasy trait; the fire legend about salamanders is real folklore',
+      ref: 'AUG UGU GAA CAC CGC ACC GUA GGG UGA', at: 3,
+      alleles: [{ s: 'F', label: 'fire', codon: 'CAC' }, { s: 'T', label: 'strike tongue', codon: 'UAC' }, { s: 'A', label: 'acid spray', codon: 'GAC' }, { s: 'H', label: 'heat sight', codon: 'AAC' }], pf: { TF: [0.55, 0.2, 0.1, 0.15], CE: [0.2, 0.55, 0.1, 0.15], HE: [0.2, 0.15, 0.1, 0.55] } },
+    { id: 'AUR', chr: '8', name: 'Gift', kind: 'multiple alleles, codominant', real: 'fantasy trait; a species that helps many others thrive is called a keystone species',
+      ref: 'AUG AUU GGC ACC UGG GAA GAU UUG UGA', at: 3,
+      alleles: [{ s: 'P', label: 'plants grow', codon: 'ACC' }, { s: 'A', label: 'animals thrive', codon: 'GCC' }, { s: 'K', label: 'friendships form', codon: 'UCC' }], pf: { TF: [1 / 3, 1 / 3, 1 / 3], CE: [1 / 3, 1 / 3, 1 / 3], HE: [1 / 3, 1 / 3, 1 / 3] } },
     { id: 'VOC', chr: 'X', name: 'Call', kind: 'sex-linked, three alleles', real: 'fantasy trait: most real salamanders are nearly silent',
-      alleles: [{ s: 'S', label: 'a woman\u2019s singing voice', p: ['Pro', 'Gln', 'Leu', 'Thr'] }, { s: 'B', label: 'a man\u2019s singing voice', p: ['Pro', 'Gln', 'Leu', 'Ala'] }, { s: 'c', label: 'clicks', p: ['Pro', 'Gln', 'Leu', 'Ile'] }], pf: { TF: [0.3, 0.3, 0.4], CE: [0.4, 0.3, 0.3], HE: [0.3, 0.4, 0.3] } },
+      ref: 'AUG CCG CAG UUA ACG GGC AAA UCC UAA', at: 4,
+      alleles: [{ s: 'S', label: 'a woman’s singing voice', codon: 'ACG' }, { s: 'B', label: 'a man’s singing voice', codon: 'GCG' }, { s: 'c', label: 'clicks', codon: 'CCG' }], pf: { TF: [0.3, 0.3, 0.4], CE: [0.4, 0.3, 0.3], HE: [0.4, 0.45, 0.15] } },
     { id: 'VIS', chr: 'X', name: 'Color vision', kind: 'sex-linked recessive', real: 'modeled on red-green colorblindness, the classic sex-linked trait',
-      alleles: [{ s: 'V', label: 'full color vision', p: ['Trp', 'Ser', 'Ala', 'Met'] }, { s: 'v', label: 'red-blind', p: ['Trp', 'Ser', 'Asp', 'Met'] }], pf: { TF: [0.7, 0.3], CE: [0.7, 0.3], HE: [0.7, 0.3] } },
-    { id: 'LN1', chr: '1', name: 'Length gene 1', kind: 'polygenic', real: 'body size in real animals comes from many genes',
-      alleles: [{ s: '+', label: 'adds length', p: ['Gly', 'Arg', 'Val', 'Asp'] }, { s: '0', label: 'adds none', p: ['Gly', 'Arg', 'Val', 'Glu'] }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
-    { id: 'LN2', chr: '3', name: 'Length gene 2', kind: 'polygenic', real: 'body size in real animals comes from many genes',
-      alleles: [{ s: '+', label: 'adds length', p: ['Thr', 'Leu', 'Ser', 'Lys'] }, { s: '0', label: 'adds none', p: ['Thr', 'Leu', 'Ser', 'Asn'] }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
-    { id: 'LN3', chr: '5', name: 'Length gene 3', kind: 'polygenic', real: 'body size in real animals comes from many genes',
-      alleles: [{ s: '+', label: 'adds length', p: ['Val', 'Ala', 'His', 'Phe'] }, { s: '0', label: 'adds none', p: ['Val', 'Ala', 'Gln', 'Phe'] }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } }
+      ref: 'AUG UGG AGC GCC CAU CUC GUA CGG UGA', at: 3,
+      alleles: [{ s: 'V', label: 'full color vision', codon: 'GCC' }, { s: 'v', label: 'red-blind', codon: 'GAC' }], pf: { TF: [0.7, 0.3], CE: [0.7, 0.3], HE: [0.7, 0.3] } },
+    { id: 'LN1', chr: '10', name: 'Length gene 1', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      ref: 'AUG GGC AGA GUU GAC AGC CCA GCC UAA', at: 4,
+      alleles: [{ s: '+', label: 'adds length', codon: 'GAC' }, { s: '0', label: 'adds none', codon: 'GAG' }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
+    { id: 'LN2', chr: '11', name: 'Length gene 2', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      ref: 'AUG ACC UUG UCU AAG GGC GAA AUU UAA', at: 4,
+      alleles: [{ s: '+', label: 'adds length', codon: 'AAG' }, { s: '0', label: 'adds none', codon: 'AAC' }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
+    { id: 'LN3', chr: '12', name: 'Length gene 3', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      ref: 'AUG GUA GCU CAU UUU AAA ACC GGG UAA', at: 3,
+      alleles: [{ s: '+', label: 'adds length', codon: 'CAU' }, { s: '0', label: 'adds none', codon: 'CAA' }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } }
   ];
-  const STOPS = ['UAA', 'UAG', 'UGA'];
+  /* Every allele gets its fixed mRNA, template, coding DNA and protein once, here. Nothing below varies by animal. */
+  GENES.forEach(function (g) {
+    const ref = g.ref.split(' ');
+    g.alleles.forEach(function (a) {
+      const m = ref.slice(); m[g.at] = a.codon;
+      a.mrna = m; a.template = m.map(templateOf); a.dna = m.join('').replace(/U/g, 'T');
+      a.protein = translate(m); a.p = a.protein.slice(1, 8); a.aa = CODON[a.codon];
+    });
+  });
+  /* Which genes sit on which chromosome, in order along it. Chromosomes 13 and 14 carry no gene in this set. */
+  const LAYOUT = { 1: ['STR'], 2: ['COL', 'TOX'], 3: ['SPT'], 4: ['GLO', 'CLW'], 5: ['GIL'], 6: ['REG'], 7: ['POW'], 8: ['AUR'], 9: ['EMB'], 10: ['LN1'], 11: ['LN2'], 12: ['LN3'], 13: [], 14: [], X: ['VOC', 'VIS'], Y: [] };
+  const STOPDNA = { TAA: 1, TAG: 1, TGA: 1 };
 
-  /* The ember gene: one fixed reference sequence for the whole ridge. */
-  const EMB = { id: 'EMB', chr: '2', name: 'Ember gene', mrna: ['AUG', 'UGG', 'AAA', 'GGA', 'UAU', 'UAA'] };
+  /* The ember gene, on chromosome 9: one fixed reference sequence for the whole ridge. It has no second AUG in any frame. */
+  const EMB = { id: 'EMB', chr: '9', name: 'Ember gene', mrna: ['AUG', 'UGG', 'AAA', 'GGA', 'UAU', 'CAA', 'CUU', 'UCA', 'UAA'] };
   EMB.template = EMB.mrna.map(templateOf);
   EMB.protein = translate(EMB.mrna);
-
-  function makeCopy(id, g, allele, from) {
-    const r = rng(id + '|' + g.id + '|d|' + allele.s);
-    const mrna = ['AUG'];
-    for (const aa of allele.p) mrna.push(SYN[aa][Math.floor(r() * SYN[aa].length)]);
-    mrna.push(STOPS[Math.floor(r() * 3)]);
-    return { allele: allele, from: from, mrna: mrna, template: mrna.map(templateOf), protein: ['Met'].concat(allele.p, ['STOP']) };
+  EMB.dna = EMB.mrna.join('').replace(/U/g, 'T');
+  /* Every single-base change the ember gene may carry. A change is left out if it would write a second TATA box
+     or a second ATG into the gene, because the changed copy can now sit on a chromosome strip. */
+  const EMB_POOL = { silent: [], missense: [], nonsense: [] };
+  for (let ci = 1; ci <= EMB.mrna.length - 2; ci++) for (let pos = 0; pos < 3; pos++) for (const b of BASES) {
+    const old = EMB.mrna[ci]; if (old[pos] === b) continue;
+    const neu = old.slice(0, pos) + b + old.slice(pos + 1);
+    const m = EMB.mrna.slice(); m[ci] = neu; const s = m.join('');
+    if (s.indexOf('UAUA') >= 0 || s.indexOf('AUG', 1) >= 0) continue;
+    const kind = CODON[neu] === CODON[old] ? 'silent' : CODON[neu] === 'STOP' ? 'nonsense' : 'missense';
+    EMB_POOL[kind].push({ codon: ci, pos: pos, oldCodon: old, newCodon: neu, kind: kind });
   }
-
+  const EMB_ALL = EMB_POOL.silent.concat(EMB_POOL.missense, EMB_POOL.nonsense);
+  /* Half the animals carry a new mutation. Each allowed one-letter change is equally likely, so the kinds
+     fall at this gene's own odds: about 1 in 5 silent, 1 in 7 a stop, the rest a changed amino acid. */
+  function hasMutation(id) { return rng(id + '|EMB|has')() < MUTATION_ODDS; }
   function mutation(id) {
+    if (!hasMutation(id)) return null;
     const r = rng(id + '|EMB|m');
-    const pool = { silent: [], missense: [], nonsense: [] };
-    for (let ci = 1; ci <= 4; ci++) for (let pos = 0; pos < 3; pos++) for (const b of BASES) {
-      const old = EMB.mrna[ci]; if (old[pos] === b) continue;
-      const neu = old.slice(0, pos) + b + old.slice(pos + 1);
-      const kind = CODON[neu] === CODON[old] ? 'silent' : CODON[neu] === 'STOP' ? 'nonsense' : 'missense';
-      pool[kind].push({ codon: ci, pos: pos, oldCodon: old, newCodon: neu, kind: kind });
-    }
-    const x = r();
-    const kind = x < 0.30 ? 'silent' : x < 0.75 ? 'missense' : 'nonsense';
-    const m = pool[kind][Math.floor(r() * pool[kind].length)];
+    const m = EMB_ALL[Math.floor(r() * EMB_ALL.length)];
     const mrna = EMB.mrna.slice(); mrna[m.codon] = m.newCodon;
     return {
       kind: m.kind, codon: m.codon, pos: m.pos, oldCodon: m.oldCodon, newCodon: m.newCodon,
       oldAA: CODON[m.oldCodon], newAA: CODON[m.newCodon],
-      dnaFrom: toDNA[m.oldCodon[m.pos]], dnaTo: toDNA[m.newCodon[m.pos]],
-      mrna: mrna, template: mrna.map(templateOf), protein: translate(mrna)
+      dnaFrom: toDNA[m.oldCodon[m.pos]], dnaTo: toDNA[m.newCodon[m.pos]],       // on the template strand
+      codingFrom: m.oldCodon[m.pos].replace('U', 'T'), codingTo: m.newCodon[m.pos].replace('U', 'T'), // on the strand students highlight
+      mrna: mrna, template: mrna.map(templateOf), dna: mrna.join('').replace(/U/g, 'T'), protein: translate(mrna)
     };
   }
 
-  function creature(raw) {
-    const c = parseCode(raw); if (!c.ok) return null;
-    const id = c.code;
-    const sex = rng(id + '|sex')() < 0.5 ? 'XX' : 'XY';
-    const genes = GENES.map(function (g) {
-      const r = rng(id + '|' + g.id + '|a'), f = g.pf[c.site];
-      const pick = function () { const x = r(); let acc = 0; for (let i = 0; i < g.alleles.length; i++) { acc += f[i]; if (x < acc) return g.alleles[i]; } return g.alleles[g.alleles.length - 1]; };
-      const mat = pick(), pat = pick();
-      const one = g.chr === 'X' && sex === 'XY';
-      const copies = one ? [makeCopy(id, g, mat, 'on the X chromosome')] : [makeCopy(id, g, mat, 'from the mother'), makeCopy(id, g, pat, 'from the father')];
-      return { gene: g, copies: copies, same: copies.length === 2 && copies[0].allele.s === copies[1].allele.s };
-    });
-    const cr = { code: id, site: c.site, sex: sex, genes: genes, mut: mutation(id) };
-    const plus = ['LN1', 'LN2', 'LN3'].reduce((n, gid) => n + alleles(cr, gid).filter(s => s === '+').length, 0);
-    const r = rng(id + '|size');
-    const n1 = (r() + r() + r()) / 3 - 0.5, n2 = (r() + r() + r()) / 3 - 0.5;
-    cr.plus = plus;
-    cr.length = Math.round((9 + 1.5 * plus + n1 * 4.0) * 10) / 10;
-    cr.mass = Math.round(0.012 * Math.pow(cr.length, 3) * (1 + n2 * 0.3) * 10) / 10;
-    cr.ph = phenotype(cr);
-    cr.stats = stats(cr);
-    return cr;
+  /* One copy of a gene as it sits in one animal: the allele's fixed spelling plus where it came from. */
+  function copyOf(allele, from) {
+    return { allele: allele, from: from, mrna: allele.mrna, template: allele.template, dna: allele.dna, protein: allele.protein };
   }
-  function entry(cr, gid) { return cr.genes.find(e => e.gene.id === gid); }
-  function alleles(cr, gid) { return entry(cr, gid).copies.map(c => c.allele.s); }
-
-  function phenotype(cr) {
-    const has = (gid, s) => alleles(cr, gid).indexOf(s) >= 0;
-    const col = alleles(cr, 'COL').slice().sort().join('');
-    const ph = {
-      striped: has('STR', 'S'),
-      color: col === 'RR' ? 'red' : col === 'YY' ? 'yellow' : 'orange',
-      brass: has('SPT', 'B'), white: has('SPT', 'W'),
-      glow: has('GLO', 'E') && has('GLO', 'F') ? 'both' : has('GLO', 'E') ? 'ember' : has('GLO', 'F') ? 'foxfire' : 'none',
-      claws: has('CLW', 'C'), toxin: has('TOX', 'T'), gills: !has('GIL', 'G'),
-      heals: has('REG', 'H'), color_vision: has('VIS', 'V'),
-      calls: has('VOC', 'S') || has('VOC', 'B') ? ['soprano', 'baritone'].filter((c, i) => has('VOC', 'SB'[i])) : ['clicks'],
-      breath: ['fire', 'ice', 'gas'].filter((b, i) => has('BRE', 'FIP'[i])),
-      gifts: ['plants', 'animals', 'friends'].filter((b, i) => has('AUR', 'PAK'[i]))
-    };
-    const size = 'Its length comes from three genes working together. This animal carries ' + cr.plus + ' of 6 possible length-adding alleles.';
-    const BT = { fire: 'a short jet of fire', ice: 'a plume of frost that ices the leaves in front of it', gas: 'a puff of bitter green gas that drives predators off' };
-    const GT = { plants: 'plants grow taller where it has passed', animals: 'deer and other animals gather and do well near it', friends: 'people who meet it become friends' };
-    ph.lines = {
-      BRE: [(ph.breath.length === 2 ? 'Two breaths: ' : 'Breath: ') + ph.breath.map(b => BT[b]).join(', and ') + '.', 'Draw the mouth open, with ' + ph.breath.map(b => b === 'gas' ? 'green gas' : b).join(' and ') + ' leaving it.'],
-      AUR: [(ph.gifts.length === 2 ? 'Two gifts: ' : 'Gift: ') + ph.gifts.map(b => GT[b]).join(', and ') + '.', ''],
-      STR: ph.striped
-        ? ['One stripe runs down the middle of the back, from the head onto the tail.', 'Draw one stripe down the center of the back, about a third as wide as the body, narrowing toward the tail tip.']
-        : ['No stripe. The back is one even dark gray, the form field biologists call lead-backed.', 'Leave the back unstriped: even dark gray from head to tail.'],
-      COL: ['Ember color: ' + ph.color + '. It shows on the cheeks, the tail tip, and the stripe if there is one.', 'Color a small patch on each cheek and the last centimeter of the tail ' + ph.color + '. A stripe takes the same color.'],
-      SPT: ph.brass && ph.white
-        ? ['Brass flecks on the back and white spots along the sides, both at once.', 'Scatter small brass flecks over the back, and add a row of white spots low on each side.']
-        : ph.brass ? ['Brass-colored flecks are scattered over the back and sides.', 'Scatter small brass flecks over the back and sides. No white spots.']
-          : ['A row of small white spots runs along each side.', 'Add a row of white spots low on each side. No brass flecks.'],
-      GLO: ph.glow === 'both' ? ['Two glows: dull orange along the body and pale green along the tail.', 'Shade a soft orange halo around the body and a pale green halo around the tail.']
-        : ph.glow === 'ember' ? ['The skin gives off a dull orange glow, like coals.', 'Shade a soft orange halo around the whole animal.']
-          : ph.glow === 'foxfire' ? ['The skin gives off a pale green glow, like foxfire on a rotting log.', 'Shade a soft pale green halo around the whole animal.']
-            : ['No glow.', 'No halo. Leave the outline clean.'],
-      CLW: ph.claws ? ['A small dark claw tips every toe.', 'Four toes on each front foot, five on each hind foot, each ending in a sharp dark claw.']
-        : ['Toes end in soft rounded tips. No claws.', 'Four toes on each front foot, five on each hind foot, each ending in a round tip.'],
-      TOX: ph.toxin ? ['Glands along the base of the tail ooze a milky toxin when the animal is disturbed.', 'Draw two rows of small raised dots along the top of the tail base.']
-        : ['No toxin glands. The skin of the tail base is smooth.', 'No gland dots on the tail.'],
-      GIL: ph.gills ? ['Three feathery red gills on each side of the neck, kept from its larval stage.', 'Draw three feathery gills on each side of the neck, sweeping back.']
-        : ['No gills. The neck is smooth.', 'Leave the neck smooth.'],
-      REG: ph.heals ? ['Healing skin: it oozes a glowing poultice. A cut, a scrape or even a tumor touched to its skin is gone.', 'Dot the back with a few glowing gold drops.']
-        : ['Plain skin: no healing poultice.', 'No gold drops on the back.'],
-      VOC: ph.calls.length === 2 ? ['Call: two voices singing together, a woman\u2019s and a man\u2019s.', 'In the margin, sketch the call as two long lines, one high and one low.']
-        : ph.calls[0] === 'soprano' ? ['Call: a woman\u2019s voice singing, far off.', 'In the margin, sketch the call as one long rising and falling line.']
-          : ph.calls[0] === 'baritone' ? ['Call: a man\u2019s voice singing, low and steady.', 'In the margin, sketch the call as one long low line.']
-            : ['Call: a quick run of dry clicks.', 'In the margin, sketch the call as a row of short ticks.'],
-      VIS: ph.color_vision ? ['Sees in full color.', ''] : ['Red-blind: red and green look alike to this animal.', ''],
-      LN1: [size, ''], LN2: [size, ''], LN3: [size, '']
-    };
-    return ph;
+  /* Where two lined-up copies differ. Returns null when they are letter-for-letter the same. */
+  function diffOf(a, b) {
+    const out = [];
+    for (let i = 0; i < a.dna.length; i++) if (a.dna[i] !== b.dna[i]) out.push(i);
+    if (!out.length) return null;
+    const i = out[0], ci = Math.floor(i / 3);
+    return { count: out.length, base: i, codon: ci, pos: i % 3, mother: a.dna[i], father: b.dna[i], motherCodon: a.mrna[ci], fatherCodon: b.mrna[ci], motherAA: CODON[a.mrna[ci]], fatherAA: CODON[b.mrna[ci]] };
   }
 
-  /* Field stats. Each one is fed by several genes, and several genes feed more than one stat (pleiotropy). */
-  const STATMAP = [['Lifespan', 'REG, TOX, GLO, GIL, LN1\u2013LN3'], ['Land speed', 'LN1\u2013LN3, CLW, GIL'], ['Stealth', 'STR, GLO, VOC, LN1\u2013LN3'], ['Breath reach', 'BRE, LN1\u2013LN3'], ['Time underwater', 'GIL, LN1\u2013LN3']];
-  function stats(cr) {
-    const ph = cr.ph, r = rng(cr.code + '|stats'), j = () => r() - 0.5, cl = (v, a, b) => Math.max(a, Math.min(b, Math.round(v)));
-    const life = cl(12 + (ph.heals ? 7 : 0) + (ph.toxin ? 3 : 0) + 0.8 * cr.plus - (ph.glow !== 'none' ? 2 : 0) + (ph.gills ? 2 : 0) + j() * 3, 6, 32);
-    const speed = cl(8 - 0.6 * cr.plus + (ph.claws ? 2 : 0) - (ph.gills ? 1 : 0) + j() * 1.5, 1, 10);
-    const stealth = cl(5 + (ph.striped ? -1 : 2) + (ph.glow === 'none' ? 2 : -2) - 0.3 * cr.plus + (ph.calls[0] === 'clicks' ? 1 : -1) + j(), 1, 10);
-    const reach = cl(cr.length * (0.9 + 0.35 * ph.breath.length) + j() * 3, 4, 40);
-    const dive = cl(5 + 1.5 * cr.plus + j() * 2, 2, 20);
-    return [
-      { k: 'Lifespan', v: life + ' years', bar: life / 32 }, { k: 'Land speed', v: speed + ' of 10', bar: speed / 10 }, { k: 'Stealth', v: stealth + ' of 10', bar: stealth / 10 },
-      { k: 'Breath reach', v: reach + ' cm', bar: reach / 40 }, { k: 'Time underwater', v: ph.gills ? 'no limit' : dive + ' min', bar: ph.gills ? 1 : dive / 20 }
-    ];
+  /* ---------- chromosomes: the coding strand, 5' to 3', as students see it ---------- */
+  function countAll(s, sub) { const out = []; let i = s.indexOf(sub); while (i >= 0) { out.push(i); i = s.indexOf(sub, i + 1); } return out; }
+  function coords(b, t, s) {
+    let off = 0; while (off + 3 <= b.dna.length && !STOPDNA[b.dna.substr(off, 3)]) off += 3; // the first stop that lands on the count
+    return { id: b.id, tata: t, start: s, stop: s + off, end: s + off + 2, refEnd: s + b.dna.length - 1 };
+  }
+  function findable(seq, genes) {
+    const boxes = countAll(seq, 'TATA');
+    return boxes.length === genes.length && genes.every((g, i) => boxes[i] === g.tata && seq.indexOf('ATG', g.tata + 5) === g.start); // from +5: an ATG may not borrow the box's last A
+  }
+  /* Builds the mother's copy and, when the animal has one, the father's copy on the same filler and positions. */
+  function buildPair(id, name, mats, pats) {
+    const r = rng(id + '|chr|' + name);
+    const junk = n => { let s = ''; while (s.length < n) s += 'ACGT'[Math.floor(r() * 4)]; return s; };
+    for (let tries = 0; tries < 4000; tries++) {
+      let m = junk(8 + Math.floor(r() * 7)), p = m; const gm = [], gp = [];
+      if (!mats.length) { const d = 'ATG' + junk(name === 'Y' ? 22 + Math.floor(r() * 8) : 34 + Math.floor(r() * 14)); m += d; p += d; }
+      mats.forEach(function (b, i) {
+        const pre = 'TATAAA' + junk(6 + Math.floor(r() * 4)); const t = m.length; m += pre; p += pre;
+        const s = m.length; m += b.dna; gm.push(coords(b, t, s));
+        if (pats) { p += pats[i].dna; gp.push(coords(pats[i], t, s)); }
+        const post = junk(8 + Math.floor(r() * 6)); m += post; p += post;
+      });
+      if (!findable(m, gm) || (pats && !findable(p, gp))) continue;
+      const out = { name: name, seq: m, genes: gm, partner: null };
+      if (pats) { const d = []; for (let i = 0; i < m.length; i++) if (m[i] !== p[i]) d.push(i); out.partner = { from: 'father', seq: p, genes: gp, diffs: d }; }
+      return out;
+    }
+    throw new Error('could not build chromosome ' + name);
   }
 
-  function stamp(code, n, mut) {
-    const h = hashStr('field-stamp|' + code + '|' + n + '|' + (mut ? 1 : 0));
-    const s = ALPHA[h % 31] + ALPHA[(h >>> 5) % 31] + ALPHA[(h >>> 10) % 31];
-    return s + '-' + (n < 10 ? '0' : '') + n + (mut ? 'M' : '');
-  }
-  function readStamp(raw) {
-    const m = /^([A-Z0-9]{3})-?(\d{2})(M?)$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
-    return m ? { n: parseInt(m[2], 10), mut: m[3] === 'M', text: m[1] + '-' + m[2] + m[3] } : null;
+  function make(options) {
+    const OPT = Object.assign({}, DEFAULTS, options || {});
+
+    function chromosomes(cr) {
+      const body = function (gid, k) {
+        if (gid === 'EMB') return { id: 'EMB', dna: cr.ember.copies[k].dna };
+        return { id: gid, dna: entry(cr, gid).copies[k].dna };
+      };
+      const out = [];
+      for (let n = 1; n <= 14; n++) {
+        const c = buildPair(cr.code, String(n), LAYOUT[n].map(g => body(g, 0)), LAYOUT[n].map(g => body(g, 1)));
+        c.key = 'c' + n; c.n = n; c.from = 'mother'; c.label = 'Chromosome ' + n; out.push(c);
+      }
+      const x = buildPair(cr.code, 'X', LAYOUT.X.map(g => body(g, 0)), cr.sex === 'XX' ? LAYOUT.X.map(g => body(g, 1)) : null);
+      x.key = 'cX'; x.n = 15; x.from = 'mother'; x.label = 'X chromosome, from the mother'; out.push(x);
+      if (cr.sex === 'XY') { const y = buildPair(cr.code, 'Y', [], null); y.key = 'cY'; y.n = 15; y.from = 'father'; y.label = 'Y chromosome, from the father'; out.push(y); }
+      return out;
+    }
+
+    function creature(raw) {
+      const c = parseCode(raw); if (!c.ok) return null;
+      const id = c.code;
+      const sex = rng(id + '|sex')() < 0.5 ? 'XX' : 'XY';
+      const genes = GENES.map(function (g) {
+        const r = rng(id + '|' + g.id + '|a'), f = g.pf[c.site];
+        const pick = function () { const x = r(); let acc = 0; for (let i = 0; i < g.alleles.length; i++) { acc += f[i]; if (x < acc) return g.alleles[i]; } return g.alleles[g.alleles.length - 1]; };
+        const mat = pick(), pat = pick();
+        const one = g.chr === 'X' && sex === 'XY';
+        const copies = one ? [copyOf(mat, 'from the mother')] : [copyOf(mat, 'from the mother'), copyOf(pat, 'from the father')];
+        const diff = one ? null : diffOf(copies[0], copies[1]);
+        const letters = copies.map(cp => cp.allele).sort((a, b) => g.alleles.indexOf(a) - g.alleles.indexOf(b)).map(a => a.s);
+        return { gene: g, copies: copies, same: !one && !diff, diff: diff, zyg: one ? 'one copy' : diff ? 'heterozygous' : 'homozygous', genotype: letters.join('') };
+      });
+      const cr = { code: id, site: c.site, sex: sex, edition: EDITION.id, genes: genes, mut: mutation(id) };
+      /* The ember gene: every animal carries one new single-base change. */
+      const refCopy = { allele: null, from: 'from the father', mrna: EMB.mrna, template: EMB.template, dna: EMB.dna, protein: EMB.protein };
+      if (OPT.emberOnMotherCopy && cr.mut) {
+        const mom = { allele: null, from: 'from the mother', mrna: cr.mut.mrna, template: cr.mut.template, dna: cr.mut.dna, protein: cr.mut.protein };
+        cr.ember = { gene: EMB, copies: [mom, refCopy], diff: diffOf(mom, refCopy), zyg: 'heterozygous', onStrip: true };
+      } else {
+        const mom = Object.assign({}, refCopy, { from: 'from the mother' });
+        cr.ember = { gene: EMB, copies: [mom, refCopy], diff: null, zyg: 'homozygous', onStrip: false };
+      }
+      const plus = ['LN1', 'LN2', 'LN3'].reduce((n, gid) => n + alleles(cr, gid).filter(s => s === '+').length, 0);
+      const r = rng(id + '|size');
+      const n1 = (r() + r() + r()) / 3 - 0.5, n2 = (r() + r() + r()) / 3 - 0.5;
+      cr.plus = plus;
+      cr.length = Math.round((9 + 1.5 * plus + n1 * 4.0) * 10) / 10;
+      cr.mass = Math.round(0.012 * Math.pow(cr.length, 3) * (1 + n2 * 0.3) * 10) / 10;
+      cr.ph = phenotype(cr);
+      cr.stats = stats(cr);
+      cr.chroms = chromosomes(cr); // the strips that are drawn: 15 for a female, 16 for a male
+      return cr;
+    }
+    function entry(cr, gid) { return cr.genes.find(e => e.gene.id === gid); }
+    function alleles(cr, gid) { return entry(cr, gid).copies.map(c => c.allele.s); }
+
+    function phenotype(cr) {
+      const has = (gid, s) => alleles(cr, gid).indexOf(s) >= 0;
+      const col = alleles(cr, 'COL').slice().sort().join('');
+      const tox = alleles(cr, 'TOX').filter(s => s === 'T').length;
+      const ph = {
+        striped: has('STR', 'S'),
+        color: col === 'RR' ? 'red' : col === 'YY' ? 'yellow' : 'orange',
+        brass: has('SPT', 'B'), white: has('SPT', 'W'),
+        glow: has('GLO', 'E') && has('GLO', 'F') ? 'both' : has('GLO', 'E') ? 'ember' : has('GLO', 'F') ? 'foxfire' : 'none',
+        claws: has('CLW', 'C'), toxin: tox > 0, toxinLevel: tox === 0 ? 'none' : !OPT.toxinGraded ? 'glands' : tox === 2 ? 'strong' : 'mild',
+        gills: !has('GIL', 'G'),
+        heals: has('REG', 'H'), color_vision: has('VIS', 'V'),
+        calls: has('VOC', 'S') || has('VOC', 'B') ? ['soprano', 'baritone'].filter((c, i) => has('VOC', 'SB'[i])) : ['clicks'],
+        powers: ['fire', 'tongue', 'acid', 'heat'].filter((b, i) => has('POW', 'FTAH'[i])),
+        gifts: ['plants', 'animals', 'friends'].filter((b, i) => has('AUR', 'PAK'[i]))
+      };
+      const size = 'Its length comes from three genes working together. This animal carries ' + cr.plus + ' of 6 possible length-adding alleles.';
+      /* DRAFT wording for Reid. Fantasy only: the real Blue Ridge anchor for each power goes in after its source is checked. */
+      const PT = {
+        fire: 'a short jet of fire',
+        tongue: 'a strike tongue that shoots out farther than its body is long',
+        acid: 'a burning spray it spits at anything that grabs it',
+        heat: 'heat sight that finds warm bodies in the dark, with a beam of light from each eye when it locks on'
+      };
+      const PD = {
+        fire: 'the mouth open with a jet of fire leaving it',
+        tongue: 'the tongue shot straight out past the snout, longer than the body',
+        acid: 'a fan of spray leaving the mouth',
+        heat: 'both eyes glowing, with a thin beam of light from each'
+      };
+      const GT = { plants: 'plants grow taller where it has passed', animals: 'deer and other animals gather and do well near it', friends: 'people who meet it become friends' };
+      ph.lines = {
+        POW: [(ph.powers.length === 2 ? 'Two powers: ' : 'Power: ') + ph.powers.map(b => PT[b]).join('; and ') + '.', 'Draw ' + ph.powers.map(b => PD[b]).join('; and ') + '.'],
+        AUR: [(ph.gifts.length === 2 ? 'Two gifts: ' : 'Gift: ') + ph.gifts.map(b => GT[b]).join(', and ') + '.', ''],
+        STR: ph.striped
+          ? ['One stripe runs down the middle of the back, from the head onto the tail.', 'Draw one stripe down the center of the back, about a third as wide as the body, narrowing toward the tail tip.']
+          : ['No stripe. The back is one even dark gray, the form field biologists call lead-backed.', 'Leave the back unstriped: even dark gray from head to tail.'],
+        COL: ['Ember color: ' + ph.color + '. It shows on the cheeks, the tail tip, and the stripe if there is one.', 'Color a small patch on each cheek and the last centimeter of the tail ' + ph.color + '. A stripe takes the same color.'],
+        SPT: ph.brass && ph.white
+          ? ['Brass flecks on the back and white spots along the sides, both at once.', 'Scatter small brass flecks over the back, and add a row of white spots low on each side.']
+          : ph.brass ? ['Brass-colored flecks are scattered over the back and sides.', 'Scatter small brass flecks over the back and sides. No white spots.']
+            : ['A row of small white spots runs along each side.', 'Add a row of white spots low on each side. No brass flecks.'],
+        GLO: ph.glow === 'both' ? ['Two glows: dull orange along the body and pale green along the tail.', 'Shade a soft orange halo around the body and a pale green halo around the tail.']
+          : ph.glow === 'ember' ? ['The skin gives off a dull orange glow, like coals.', 'Shade a soft orange halo around the whole animal.']
+            : ph.glow === 'foxfire' ? ['The skin gives off a pale green glow, like foxfire on a rotting log.', 'Shade a soft pale green halo around the whole animal.']
+              : ['No glow.', 'No halo. Leave the outline clean.'],
+        CLW: ph.claws ? ['A small dark claw tips every toe.', 'Four toes on each front foot, five on each hind foot, each ending in a sharp dark claw.']
+          : ['Toes end in soft rounded tips. No claws.', 'Four toes on each front foot, five on each hind foot, each ending in a round tip.'],
+        TOX: ph.toxinLevel === 'strong' ? ['Glands along the base of the tail ooze a strong milky toxin when the animal is disturbed.', 'Draw two rows of small raised dots along the top of the tail base.']
+          : ph.toxinLevel === 'mild' ? ['Glands along the base of the tail ooze a mild toxin: bitter enough that a predator drops the animal.', 'Draw one row of small raised dots along the top of the tail base.']
+            : ph.toxinLevel === 'glands' ? ['Glands along the base of the tail ooze a milky toxin when the animal is disturbed.', 'Draw two rows of small raised dots along the top of the tail base.']
+              : ['No toxin glands. The skin of the tail base is smooth.', 'No gland dots on the tail.'],
+        GIL: ph.gills ? ['Three feathery red gills on each side of the neck, kept from its larval stage.', 'Draw three feathery gills on each side of the neck, sweeping back.']
+          : ['No gills. The neck is smooth.', 'Leave the neck smooth.'],
+        REG: ph.heals ? ['Healing skin: it oozes a glowing poultice. A cut, a scrape or even a tumor touched to its skin is gone.', 'Dot the back with a few glowing gold drops.']
+          : ['Plain skin: no healing poultice.', 'No gold drops on the back.'],
+        VOC: ph.calls.length === 2 ? ['Call: two voices singing together, a woman’s and a man’s.', 'In the margin, sketch the call as two long lines, one high and one low.']
+          : ph.calls[0] === 'soprano' ? ['Call: a woman’s voice singing, far off.', 'In the margin, sketch the call as one long rising and falling line.']
+            : ph.calls[0] === 'baritone' ? ['Call: a man’s voice singing, low and steady.', 'In the margin, sketch the call as one long low line.']
+              : ['Call: a quick run of dry clicks.', 'In the margin, sketch the call as a row of short ticks.'],
+        VIS: ph.color_vision ? ['Sees in full color.', ''] : ['Red-blind: red and green look alike to this animal.', ''],
+        LN1: [size, ''], LN2: [size, ''], LN3: [size, '']
+      };
+      return ph;
+    }
+
+    /* Field stats. Each one is fed by several genes, and several genes feed more than one stat (pleiotropy). */
+    const STATMAP = [['Lifespan', 'REG, TOX, GLO, GIL, LN1–LN3'], ['Land speed', 'LN1–LN3, CLW, GIL'], ['Stealth', 'STR, GLO, VOC, LN1–LN3'], ['Strike range', 'POW, LN1–LN3'], ['Time underwater', 'GIL, LN1–LN3']];
+    function stats(cr) {
+      const ph = cr.ph, r = rng(cr.code + '|stats'), j = () => r() - 0.5, cl = (v, a, b) => Math.max(a, Math.min(b, Math.round(v)));
+      const toxYears = ph.toxinLevel === 'none' ? 0 : ph.toxinLevel === 'mild' ? 1.5 : 3;
+      const life = cl(12 + (ph.heals ? 7 : 0) + toxYears + 0.8 * cr.plus - (ph.glow !== 'none' ? 2 : 0) + (ph.gills ? 2 : 0) + j() * 3, 6, 32);
+      const speed = cl(8 - 0.6 * cr.plus + (ph.claws ? 2 : 0) - (ph.gills ? 1 : 0) + j() * 1.5, 1, 10);
+      const stealth = cl(5 + (ph.striped ? -1 : 2) + (ph.glow === 'none' ? 2 : -2) - 0.3 * cr.plus + (ph.calls[0] === 'clicks' ? 1 : -1) + j(), 1, 10);
+      const reach = cl(cr.length * (0.9 + 0.35 * ph.powers.length) + j() * 3, 4, 40);
+      const dive = cl(5 + 1.5 * cr.plus + j() * 2, 2, 20);
+      return [
+        { k: 'Lifespan', v: life + ' years', bar: life / 32 }, { k: 'Land speed', v: speed + ' of 10', bar: speed / 10 }, { k: 'Stealth', v: stealth + ' of 10', bar: stealth / 10 },
+        { k: 'Strike range', v: reach + ' cm', bar: reach / 40 }, { k: 'Time underwater', v: ph.gills ? 'no limit' : dive + ' min', bar: ph.gills ? 1 : dive / 20 }
+      ];
+    }
+
+    return { OPTIONS: OPT, STATMAP, creature, entry, alleles };
   }
 
-  return { VERSION, ALPHA, SITES, STATMAP, site, siteForRoll, GENES, EMB, CODON, SYN, AMINO, BASES, parseCode, codeFrom, batch, creature, entry, alleles, transcribe, templateOf, translate, stamp, readStamp, rng, checkChar };
+  /* ---------- Stamps: edition, progress that can be picked up, and the keeper code ----------
+     A stamp is: edition mark + two check characters + hyphen + what is done.
+       A4Y-15M   final: all 15 genes and the ember gene are done
+       A4Y-K7Q2  progress: the last four characters record exactly which genes are done
+     The check characters are tied to the Creature Code, the edition and what is done, so a stamp from one
+     animal does not pass for another. Keeper code = Creature Code + hyphen + first three characters of the final stamp. */
+  const PARTS = GENES.map(g => g.id).concat(['EMB']);            // 16 things a student finishes
+  const FULL = Math.pow(2, PARTS.length) - 1;
+  function maskOf(ids) { let m = 0; ids.forEach(function (id) { const i = PARTS.indexOf(id); if (i >= 0) m |= (1 << i); }); return m >>> 0; }
+  function idsOf(mask) { return PARTS.filter((id, i) => (mask >>> i) & 1); }
+  function enc4(n) { let s = ''; for (let i = 0; i < 4; i++) { s = ALPHA[n % 31] + s; n = Math.floor(n / 31); } return s; }
+  function dec4(s) { let n = 0; for (const ch of s) { const v = ALPHA.indexOf(ch); if (v < 0) return -1; n = n * 31 + v; } return n; }
+  function stampHead(code, mask, ed) {
+    const h = hashStr('field-stamp|' + ed.id + '|' + code + '|' + mask);
+    return ed.mark + ALPHA[h % 31] + ALPHA[(h >>> 5) % 31];
+  }
+  function stamp(code, done) {
+    const mask = typeof done === 'number' ? done >>> 0 : maskOf(done);
+    return stampHead(code, mask, EDITION) + '-' + (mask === FULL ? '15M' : enc4(mask));
+  }
+  function readStamp(code, raw) {
+    const c = parseCode(code); if (!c.ok) return { ok: false, why: c.why };
+    const m = /^([A-Z0-9]{3})-?(15M|[A-Z0-9]{4})$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
+    if (!m) return { ok: false, why: 'A stamp looks like A4Y-K7Q2, or A4Y-15M when everything is done.' };
+    const ed = EDITIONS[m[1][0]]; if (!ed) return { ok: false, why: 'That stamp is from an edition this page does not know.' };
+    const mask = m[2] === '15M' ? FULL : dec4(m[2]);
+    if (mask < 0 || mask > FULL || (m[2] !== '15M' && mask === FULL) || stampHead(c.code, mask, ed) !== m[1]) return { ok: false, why: 'That stamp does not belong to this Creature Code. Check each character.' };
+    const done = idsOf(mask);
+    return { ok: true, edition: ed.id, mask: mask, final: mask === FULL, done: done, left: PARTS.filter(id => done.indexOf(id) < 0), text: m[1] + '-' + m[2] };
+  }
+  function keeper(code) { const c = parseCode(code); return c.ok ? c.code + '-' + stampHead(c.code, FULL, EDITION) : null; }
+  function readKeeper(raw) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (s.length !== 10) return { ok: false, why: 'A keeper code is a Creature Code and three more characters, like CE-MKYUK-A4Y.' };
+    const c = parseCode(s.slice(0, 7)); if (!c.ok) return { ok: false, why: c.why };
+    const ed = EDITIONS[s[7]]; if (!ed) return { ok: false, why: 'That keeper code is from an edition this page does not know.' };
+    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check the pocket card.' };
+    return { ok: true, code: c.code, site: c.site, edition: ed.id, text: c.code + '-' + s.slice(7) };
+  }
+
+  const std = make();
+  /* A short mark of the whole genome build. Two pages that print the same mark draw the same animal for every code. */
+  function fingerprint() {
+    const r = rng('fingerprint'); let h = 2166136261;
+    for (let n = 0; n < 12; n++) {
+      const a = std.creature(codeFrom(r, SITES[n % 3].id));
+      const t = a.code + a.sex + a.chroms.map(c => c.seq + (c.partner ? c.partner.seq : '')).join('') + a.genes.map(e => e.genotype).join('') + stamp(a.code, FULL);
+      for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    }
+    let out = ''; for (let i = 0; i < 6; i++) { out += ALPHA[h % ALPHA.length]; h = Math.floor(h / ALPHA.length); }
+    return out.slice(0, 3) + '-' + out.slice(3);
+  }
+  return {
+    VERSION, EDITION, EDITIONS, DEFAULTS, MUTATION_ODDS, hasMutation, mutationForRoll, codeForRolls, OPTIONS: std.OPTIONS, ALPHA, SITES, STATMAP: std.STATMAP, LAYOUT, site, siteForRoll, GENES, EMB, EMB_POOL, PARTS, FULL,
+    CODON, SYN, AMINO, BASES, parseCode, codeFrom, batch, creature: std.creature, entry: std.entry, alleles: std.alleles, make,
+    transcribe, templateOf, translate, stamp, readStamp, keeper, readKeeper, maskOf, idsOf, rng, checkChar, fingerprint
+  };
 })();
 if (typeof module !== 'undefined') module.exports = BRS;
+
 </script>
 <script>
 (function () {
@@ -462,14 +672,14 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const $ = (s, r) => (r || document).querySelector(s);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const app = $('#app');
-  const KEY = 'brs-v1';
-  const fresh = () => ({ code: null, site: null, roll: null, flips: 0, foundAt: null, placed: false, ans: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false });
+  const KEY = 'brs-v3';
+  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false });
   let S = fresh();
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && typeof j === 'object') S = Object.assign(fresh(), j, { asking: false }); } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
   let CR = S.code ? BRS.creature(S.code) : null;
   if ((S.code && !CR) || (S.site && !BRS.site(S.site))) { S = fresh(); CR = null; }
-  let lifted = null, flash = null, teacher = { key: '', stampCode: '', stamp: '', word: 'period 2', n: 12 };
+  let lifted = null, flash = null;
 
   const VIEWS = ['rock', 'decode', 'base', 'notes'];
   const view = () => { const h = (location.hash || '').slice(1); return VIEWS.indexOf(h) >= 0 ? h : 'rock'; };
@@ -480,10 +690,10 @@ if (typeof module !== 'undefined') module.exports = BRS;
   function chip() { $('#chip').textContent = S.code ? (S.name ? S.name + ' · ' : '') + S.code : 'no creature yet'; }
   function header() {
     const v = view();
-    const items = [['rock', 'Turn the rock', !!S.code && S.placed], ['decode', 'Decode', nDone() === BRS.GENES.length], ['base', 'One changed base', S.mutDone], ['notes', 'Field notes', false]];
+    const items = [['rock', 'Turn the rock', !!S.code && S.placed], ['decode', 'Decode', nDone() === BRS.GENES.length], ['base', 'The ember gene', S.mutDone], ['notes', 'Field notes', false]];
     $('#steps').innerHTML = items.map((it, i) => '<li><a href="#' + it[0] + '"' + (v === it[0] ? ' aria-current="page"' : '') + (it[2] ? ' class="done"' : '') + '><b>STEP ' + (i + 1) + '</b>' + it[1] + '</a></li>').join('');
     chip();
-    $('#ver').textContent = BRS.VERSION;
+    $('#ver').textContent = BRS.VERSION + ' · genome mark ' + BRS.fingerprint();
   }
 
   /* ---------- step 1: roll for a site, then survey the plot ---------- */
@@ -521,7 +731,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     COVER.forEach(function (o, i) {
       const up = lifted === i, found = S.foundAt === i, nm = coverName(i);
       out += '<g class="under' + (up ? ' show' : '') + '"><ellipse cx="' + o.x + '" cy="' + (o.y + 4) + '" rx="' + (o.w / 2 - 6) + '" ry="' + (o.h / 2 - 5) + '" fill="var(--soil)"/>';
-      if (found) out += '<rect x="' + (o.x - 46) + '" y="' + (o.y - 9) + '" width="92" height="24" rx="2" fill="var(--slip)" stroke="var(--tray-ink)"/><text x="' + o.x + '" y="' + (o.y + 8) + '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="600" font-size="15" fill="var(--tray-ink)">' + S.code + '</text>';
+      if (found) out += '<rect x="' + (o.x - 46) + '" y="' + (o.y - 9) + '" width="92" height="24" rx="2" fill="var(--slip)" stroke="var(--tray-ink)"/><text x="' + o.x + '" y="' + (o.y + 8) + '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="600" font-size="15" fill="var(--tray-ink)">' + (S.code || 'swabbed') + '</text>';
       out += '</g>';
       let shape;
       if (o.k === 'rock') shape = '<path class="shape" d="' + blob(o, i) + '" fill="' + o.c + '" stroke="var(--ink)" stroke-width="1.5"/><path d="M' + (o.x - o.w * 0.25) + ' ' + (o.y - o.h * 0.1) + ' q' + (o.w * 0.2) + ' -8 ' + (o.w * 0.42) + ' 2" fill="none" stroke="var(--ink)" stroke-width="1" opacity=".35"/>';
@@ -568,31 +778,43 @@ if (typeof module !== 'undefined') module.exports = BRS;
     return '<div class="sitecard"><span class="eyebrow">' + st.region + ' · ' + st.elev + '</span><h3>' + st.place + ', home of the ' + st.pop + '</h3><p>' + st.text + '</p>' +
       (st.legend ? '<p class="legend"><b>Sighting on file.</b> ' + st.legend + '</p>' : '') + '</div>';
   }
+  const oddsHTML = () => '<div class="odds"><div class="faces" aria-hidden="true">' + [1, 2, 3, 4, 5, 6].map(n => '<span class="face' + (n <= 3 ? ' mut' : '') + (S.roll2 === n ? ' on' : '') + '">' + dieSVG(n, 34) + '</span>').join('') + '</div><p class="small"><b>1, 2 or 3:</b> a new mutation. <b>4, 5 or 6:</b> none. Three of the six faces mean a mutation, so the chance is 3 in 6, which is 1 in 2. About half of the animals in the room will carry one. The die does not remember: your neighbor’s roll changes nothing about yours.</p></div>';
+  function labHTML() {
+    if (S.code) {
+      return '<section class="block"><h3>The lab slip</h3><div class="slip"><span class="eyebrow">Ridge lab · ember gene test</span><b class="big">' + S.code + '</b><span>' + (CR.mut ? 'A new mutation was found. The lab does not say where in the gene.' : 'No new mutation was found.') + '</span></div>' +
+        (S.roll2 ? '<div class="row">' + dieSVG(S.roll2, 40) + '<b>Your second roll was ' + S.roll2 + '.</b></div>' : '<p>This code came from a slip in class, so the lab had already run its test.</p>') + oddsHTML() +
+        '<p><b>Write ' + S.code + ' on your Field Sheet now.</b> You are the one who records it: type it into the Canvas assignment yourself. Nobody else has your code.</p></section>';
+    }
+    if (S.foundAt === null || !S.placed) return '';
+    return '<section class="block"><h3>Second roll: the lab test</h3><p>You touched a swab to the animal’s back before you set its cover down. The lab reads the ember gene from that swab and compares it with the ridge’s reference copy. A new mutation is a change in the DNA that appeared when the egg cell this animal grew from was made. Roll to see whether the lab finds one.</p>' + oddsHTML() +
+      '<div class="dice" role="group" aria-label="Second die roll">' + [1, 2, 3, 4, 5, 6].map(n => '<button class="die" data-act="die2" data-n="' + n + '" aria-label="Rolled ' + n + '">' + dieSVG(n, 44) + '</button>').join('') + '<button class="ghost" data-act="rollme2">Roll for me</button></div></section>';
+  }
   function rockView() {
     let h = '<section class="block"><span class="eyebrow">Step 1 · field survey</span><h2>Roll for a site. Lift a cover. Find your salamander.</h2>' +
-      '<p class="lede">Three populations of the Blue Ridge salamander are said to live along the mountains of Virginia. A roll of the die decides which one you survey.</p>';
+      '<p class="lede">Three populations of the Blue Ridge salamander are said to live along the mountains of Virginia. A roll of the die decides which one you survey. A second roll comes after you find your animal.</p>';
     if (!S.site) {
       h += '<p><b>What did the die show?</b> Tap the number rolled in class, or roll here.</p><div class="dice" role="group" aria-label="Die roll">' + [1, 2, 3, 4, 5, 6].map(n => '<button class="die" data-act="die" data-n="' + n + '" aria-label="Rolled ' + n + '">' + dieSVG(n, 44) + '</button>').join('') + '<button class="ghost" data-act="rollme">Roll for me</button></div>' + mapSVG(null) + MAPCREDIT + '</section>';
     } else {
-      const st = BRS.site(S.site);
+      const st = BRS.site(S.site), have = S.foundAt !== null;
       h += '<div class="row">' + (S.roll ? dieSVG(S.roll, 40) + '<b>You rolled ' + S.roll + '.</b>' : '<b>Your code came from the ' + st.place + ' rock.</b>') + '</div>' + siteCard(st) + mapSVG(st.id) + MAPCREDIT + '</section>';
       let msg;
       if (lifted !== null) {
         const nm = coverName(lifted);
         msg = S.foundAt === lifted
-          ? '<p class="say good" role="status"><b>A slip under the ' + nm + ': ' + S.code + '.</b> A salamander was here. That code is its whole genome. Write it in your Field Record, then set the cover back.</p>'
+          ? '<p class="say good" role="status"><b>A salamander under the ' + nm + '.</b> ' + (S.code ? 'Its lab slip reads ' + S.code + '.' : 'You do not pick it up. You touch a swab to its back for the lab, then set the cover down.') + '</p>'
           : '<p class="say" role="status"><b>Damp soil, nothing else.</b> Most cover objects in a real survey are empty. Set this one back before you lift another.</p>';
         msg += '<div class="row"><button data-act="setback">Set the ' + nm + ' back exactly as it was</button></div>';
       } else if (flash) { msg = '<p class="say' + (flash.warn ? ' warn' : '') + '" role="status">' + flash.t + '</p>'; }
       else if (S.code && S.placed) msg = '<p class="say good" role="status"><b>Your creature is ' + S.code + ', a ' + st.pop + '.</b> <a href="#decode">Go to step 2 and decode its genes.</a></p>';
-      else if (S.code) msg = '<p class="say" role="status">You found ' + S.code + '. Its cover object is still out of place.</p>';
+      else if (have && S.placed) msg = '<p class="say" role="status"><b>The swab is on its way to the lab.</b> Roll the second die below.</p>';
+      else if (have) msg = '<p class="say" role="status">You found your animal. Its cover object is still out of place.</p>';
       else msg = '<p class="say" role="status">Tap a rock, the log or the bark to lift one edge and look underneath.</p>';
       h += '<section class="block"><h3>The survey plot at ' + st.place + '</h3>' +
         '<ul class="ethic"><li><b>One at a time</b>Lift one edge slowly and look.</li><li><b>Back as it was</b>Set the cover down in the same spot, the same way up. The damp space under it is the animal’s home.</li><li><b>Hands off</b>A lungless salamander breathes through its skin. Oil and soap on a bare hand can hurt it.</li></ul>' +
-        plotSVG() + msg + '</section>';
+        plotSVG() + msg + '</section>' + labHTML();
     }
     if (!S.site && flash) h += '<p class="say warn" role="status">' + flash.t + '</p>';
-    h += '<section class="block"><h3>Got a slip from under a rock in class?</h3><p class="small muted">The first two letters name the site: TF Hawksbill, CE James River, HE Mount Rogers.</p><form class="row" data-form="classcode"><div class="field"><label for="classcode">Creature Code</label><input type="text" id="classcode" placeholder="TF-7K3QM" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><button class="ghost" style="align-self:flex-end">Use this code</button></form></section>';
+    h += '<section class="block"><h3>Already have a Creature Code?</h3><p class="small muted">Type it here to pick up your animal on this iPad. The first two letters name the site: TF Hawksbill, CE James River, HE Mount Rogers.</p><form class="row" data-form="classcode"><div class="field"><label for="classcode">Creature Code</label><input type="text" id="classcode" placeholder="TF-7K3QM" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><button class="ghost" style="align-self:flex-end">Use this code</button></form></section>';
     if (S.code || S.site) h += '<section class="block"><h3>Wrong creature?</h3>' + (S.asking
       ? '<p>Starting over erases the site, the code and the decoding saved on this iPad.</p><div class="row"><button data-act="wipe">Yes, start over</button><button class="ghost" data-act="keep">Keep what I have</button></div>'
       : '<div class="row"><button class="quiet" data-act="ask">Start over</button></div>') + '</section>';
@@ -655,7 +877,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   function markCells(gid, rows, withT) {
     let all = true, sawT = false, blank = false;
     rows.forEach(function (row, ri) {
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < row.mrna.length; i++) {
         const mi = $('#m-' + gid + '-' + ri + '-' + i), ai = $('#a-' + gid + '-' + ri + '-' + i);
         const mv = mi.value.trim().toUpperCase(), okm = mv === row.mrna[i], oka = ai.value === row.protein[i];
         if (mv.indexOf('T') >= 0) sawT = true;
@@ -669,55 +891,68 @@ if (typeof module !== 'undefined') module.exports = BRS;
   }
   const needCreature = step => '<section class="block"><span class="eyebrow">' + step + '</span><h2>No creature yet</h2><p>Every gene on this page belongs to one animal. <a href="#rock">Go to step 1 and find a Creature Code first.</a></p></section>';
 
-  /* ---------- step 2: decode ---------- */
-  function rowsOf(e) { return e.same ? [e.copies[0]] : e.copies; }
+  /* ---------- step 2: decode the mother's copy, then compare the father's ---------- */
   function decodeView() {
     if (!CR) return needCreature('Step 2 · decode');
     if (!BRS.GENES.some(g => g.id === S.gene)) S.gene = 'STR';
-    const e = BRS.entry(CR, S.gene), g = e.gene, rows = rowsOf(e);
+    const e = BRS.entry(CR, S.gene), g = e.gene, m = e.copies[0], f = e.copies[1] || null, dc = e.diff ? e.diff.codon : undefined;
     let h = '<section class="block"><span class="eyebrow">Step 2 · decode</span><h2>Read ' + S.code + ' one gene at a time</h2>' +
       '<p class="lede">Each gene is a short stretch of double-stranded DNA. RNA polymerase unzips it and reads one strand, the template. Build the mRNA by pairing a base with each template base, then use the codon chart to translate the mRNA into a chain of amino acids. The chain is the protein, and the protein gives the animal a trait.</p>' +
-      '<p class="muted">' + nDone() + ' of ' + BRS.GENES.length + ' genes decoded. Each one adds a line to your field notes.</p>' +
+      '<p>' + S.code + ' has two copies of most genes, one from each parent. You decode the copy from its mother. Then the copy from its father appears, and you compare the two.</p>' +
+      '<p class="muted">' + nDone() + ' of ' + BRS.GENES.length + ' genes finished. Each one adds a line to your field notes.</p>' +
       '<div class="genes" role="group" aria-label="Genes">' + BRS.GENES.map(x => '<button data-act="gene" data-g="' + x.id + '" aria-pressed="' + (x.id === S.gene) + '"' + (S.done[x.id] ? ' class="done"' : '') + '>' + x.id + (S.done[x.id] ? ' ✓' : '') + '</button>').join('') + '</div></section>';
 
     h += '<details><summary>Worked example: the ember gene</summary><p>Every animal on the ridge carries this gene. Pair each DNA base with its RNA partner (A with U, T with A, C with G, G with C), then read the mRNA three bases at a time on the chart.</p>' + strand('EMB', 9, BRS.EMB.template, { given: BRS.EMB, top: S.why, mine: false }) + '</details>';
 
-    h += '<section class="block"><h3>' + g.id + ' · ' + g.name + ' <span class="muted small">chromosome ' + g.chr + '</span></h3>';
-    if (S.done[g.id]) {
-      h += rows.map((c, ri) => strand(g.id, ri, c.template, { given: c, top: true, label: e.copies.length === 1 ? 'One copy, ' + c.from : e.same ? 'Both copies read the same' : 'Copy ' + c.from })).join('');
-      h += '<div class="result"><b>Decoded.</b>' + e.copies.map(c => '<span class="chain">' + dash(c.protein.slice(0, 5)) + ' → allele ' + c.allele.s + ' (' + c.allele.label + '), ' + c.from + '</span>').join('') + '<span><a href="#notes">Your field notes gained a line.</a></span></div>' + whyHTML();
-      const next = BRS.GENES.find(x => !S.done[x.id]);
-      h += next ? '<div class="row"><button data-act="gene" data-g="' + next.id + '">Next gene: ' + next.id + '</button></div>' : '<p class="say good">All ' + BRS.GENES.length + ' genes decoded. <a href="#base">Step 3 has one more copy of the ember gene to read.</a></p>';
+    h += '<section class="block"><h3>' + g.id + ' · ' + g.name + ' <span class="muted small">' + (g.chr === 'X' ? 'X chromosome' : 'chromosome ' + g.chr) + '</span></h3>';
+    if (!S.dec[g.id]) {
+      h += '<p>This is the copy ' + S.code + ' got from its mother. Transcribe it, then translate it. Codon 9 is a stop: choose STOP there.</p>' + strand(g.id, 0, m.template, { label: 'Copy from the mother' }) +
+        '<div class="row"><button data-act="check">Check this gene</button></div><div id="fb" aria-live="polite"></div>';
+    } else if (!S.done[g.id]) {
+      h += strand(g.id, 0, m.template, { given: m, top: true, label: 'Copy from the mother · you decoded this one' }) +
+        strand(g.id, 1, f.template, { given: f, label: 'Copy from the father · given to you' }) +
+        '<fieldset id="zygq" class="why"><legend>Line the father’s template up under the mother’s and read them codon by codon. For this gene, ' + S.code + ' is:</legend>' +
+        '<label class="opt"><input type="radio" name="zyg" id="zyg-homozygous" value="homozygous"><span><b>Homozygous.</b> The two copies read the same.</span></label>' +
+        '<label class="opt"><input type="radio" name="zyg" id="zyg-heterozygous" value="heterozygous"><span><b>Heterozygous.</b> The two copies differ.</span></label>' +
+        '<div class="row"><button data-act="zyg">Check</button></div><div id="zygfb" aria-live="polite"></div></fieldset>';
     } else {
-      h += '<p>' + (e.copies.length === 1 ? 'This gene sits on the X chromosome, and this animal has one X, so there is one copy to read.' : e.same ? 'This animal got the same sequence from both parents, so one reading covers both copies.' : 'This animal got a different sequence from each parent. Read both copies.') + '</p>';
-      h += rows.map((c, ri) => strand(g.id, ri, c.template, { label: e.copies.length === 1 ? 'One copy, ' + c.from : e.same ? 'Both copies' : 'Copy ' + c.from })).join('');
-      h += '<div class="row"><button data-act="check">Check this gene</button></div><div id="fb" aria-live="polite"></div>';
+      h += strand(g.id, 0, m.template, { given: m, top: true, label: f ? 'Copy from the mother · you decoded this one' : 'One copy, from the mother', diff: dc });
+      if (f) h += strand(g.id, 1, f.template, { given: f, label: 'Copy from the father · given to you', diff: dc });
+      h += '<div class="result"><b>Decoded.</b><span class="chain">Mother’s copy: ' + dash(m.protein.slice(0, 8)) + ' → allele ' + m.allele.s + ' (' + m.allele.label + ')</span>' +
+        (f ? '<span class="chain">Father’s copy: ' + dash(f.protein.slice(0, 8)) + ' → allele ' + f.allele.s + ' (' + f.allele.label + ')</span><span><b>Genotype ' + esc(e.genotype) + ', ' + e.zyg + '.</b> ' + (e.diff ? 'The copies differ by one base, in codon ' + (e.diff.codon + 1) + ': ' + e.diff.motherAA + ' in one protein, ' + e.diff.fatherAA + ' in the other.' : 'Both copies build the same protein.') + ' Both copies are switched on in this animal’s cells. You decoded one of them to save time.</span>'
+          : '<span><b>One copy.</b> This gene sits on the X chromosome, and a male has one X, from his mother. His father gave him a Y, which carries no copy of this gene.</span>') +
+        '<span><a href="#notes">Your field notes gained a line.</a></span></div>' + whyHTML();
+      const next = BRS.GENES.find(x => !S.done[x.id]);
+      h += next ? '<div class="row"><button data-act="gene" data-g="' + next.id + '">Next gene: ' + next.id + '</button></div>' : '<p class="say good">All ' + BRS.GENES.length + ' genes decoded. <a href="#base">Step 3 checks the lab slip against the ember gene.</a></p>';
     }
-    h += '</section><details open><summary>Codon chart</summary><p class="small muted">Find the first base on the left, the second base across the top, then the third base in the box. AUG starts every chain. Three codons stop it.</p>' + chart() + '</details>';
+    h += '</section><details open><summary>Codon chart</summary><p class="small muted">Find the first base on the left, the second base across the top, then the third base in the box. AUG starts every chain. Three codons stop it: UAA, UAG and UGA.</p>' + chart() + '</details>';
     return h;
   }
 
-  /* ---------- step 3: one changed base ---------- */
-  const KINDS = [['silent', 'The same amino acid is still built. The protein does not change.'], ['missense', 'One amino acid is swapped for a different one.'], ['nonsense', 'A stop codon appears early. The chain is cut short.'], ['frameshift', 'A base was added or lost, so every codon after it reads differently.']];
+  /* ---------- step 3: the ember gene and the lab slip ---------- */
+  const KINDS = [['same', 'Nothing changed. The two copies read the same.'], ['silent', 'One base changed, but the same amino acid is still built. The protein does not change.'], ['missense', 'One amino acid is swapped for a different one.'], ['nonsense', 'A stop codon appears early. The chain is cut short.'], ['frameshift', 'A base was added or lost, so every codon after it reads differently.']];
   function baseView() {
-    if (!CR) return needCreature('Step 3 · one changed base');
-    const m = CR.mut, q = S.ans.MUTQ || {};
-    let h = '<section class="block"><span class="eyebrow">Step 3 · one changed base</span><h2>One copy of the ember gene is different</h2>' +
-      '<p class="lede">Every breath this animal makes, fire, frost or gas, depends on one protein, built by the ember gene. ' + S.code + ' carries the ridge reference sequence from its father. The copy from its mother differs by a single base.</p>' +
-      strand('EMB', 9, BRS.EMB.template, { given: BRS.EMB, top: S.why, mine: false, label: 'Ridge reference, copy from the father' });
+    if (!CR) return needCreature('Step 3 · the ember gene');
+    const m = CR.mut, mom = CR.ember.copies[0], q = S.ans.MUTQ || {};
+    let h = '<section class="block"><span class="eyebrow">Step 3 · the ember gene</span><h2>Check the lab slip</h2>' +
+      '<p class="lede">The lab slip for ' + S.code + ' said that ' + (m ? 'a new mutation was found' : 'no new mutation was found') + ' in its ember gene, on chromosome 9. Check the lab’s work. The copy from the father is the ridge’s reference sequence. Decode the copy from the mother, then compare the two.</p>' +
+      strand('EMB', 9, BRS.EMB.template, { given: BRS.EMB, top: S.why, mine: false, label: 'Ridge reference, copy from the father', diff: S.mutDone && m ? m.codon : undefined });
     if (S.mutDone) {
-      h += strand('EMB', 0, m.template, { given: m, top: true, label: 'Copy from the mother', diff: m.codon });
-      const what = m.kind === 'silent' ? m.oldCodon + ' and ' + m.newCodon + ' both code for ' + m.oldAA + ', so the protein is exactly the same. Several codons can spell one amino acid.'
-        : m.kind === 'missense' ? 'Codon ' + (m.codon + 1) + ' now reads ' + m.newCodon + ', so ' + m.oldAA + ' became ' + m.newAA + '. One amino acid in the chain is different, which can change how the protein folds.'
-          : 'Codon ' + (m.codon + 1) + ' now reads ' + m.newCodon + ', a stop codon. The ribosome lets go early and the chain is ' + (m.codon) + ' amino acids long, too short to work.';
-      h += '<div class="result"><b>Found it.</b><span>In codon ' + (m.codon + 1) + ' of the template, base ' + (m.pos + 1) + ' changed from ' + m.dnaFrom + ' to ' + m.dnaTo + '. ' + what + '</span>' +
-        '<span>' + (m.kind === 'silent' ? 'A mutation is a change in DNA. This one changes nothing about the animal.' : 'Its breath still works, because the copy from its father builds the working protein. It carries the changed copy and can pass it on.') + '</span></div>' +
-        '<p class="say good"><a href="#notes">Go to step 4 for your field notes and your stamp.</a></p>';
+      h += strand('EMB', 0, mom.template, { given: mom, top: true, label: 'Copy from the mother', diff: m ? m.codon : undefined });
+      if (!m) h += '<div class="result"><b>The lab was right.</b><span>The two copies match at every base, so ' + S.code + ' is homozygous for the ember gene. It carries no new mutation.</span><span>About half of the animals in your class are like this one. It counts in the class tally beside the animals that do carry a change.</span></div>';
+      else {
+        const what = m.kind === 'silent' ? m.oldCodon + ' and ' + m.newCodon + ' both code for ' + m.oldAA + ', so the protein is exactly the same. Several codons can spell one amino acid.'
+          : m.kind === 'missense' ? 'Codon ' + (m.codon + 1) + ' now reads ' + m.newCodon + ', so ' + m.oldAA + ' became ' + m.newAA + '. One amino acid in the chain is different, which can change how the protein folds.'
+            : 'Codon ' + (m.codon + 1) + ' now reads ' + m.newCodon + ', a stop codon. The ribosome lets go early and the chain is ' + m.codon + ' amino acids long in place of 8.';
+        h += '<div class="result"><b>Found it.</b><span>In codon ' + (m.codon + 1) + ' of the template, base ' + (m.pos + 1) + ' changed from ' + m.dnaFrom + ' to ' + m.dnaTo + '. ' + what + '</span>' +
+          '<span>' + (m.kind === 'silent' ? 'A mutation is a change in DNA. This one changes nothing about the protein. ' : 'The copy from its father still builds the full protein. ') + S.code + ' is heterozygous for the ember gene and can pass either copy on.</span></div>';
+      }
+      h += '<p class="say good"><a href="#notes">Go to step 4 for your field notes and your stamp.</a></p>';
     } else {
-      h += strand('EMB', 0, m.template, { label: 'Copy from the mother', withNone: true }) +
+      h += strand('EMB', 0, mom.template, { label: 'Copy from the mother', withNone: true }) +
         '<p class="small muted">If a stop codon comes early, choose STOP there and “none” for every codon after it. The ribosome has already let go.</p>' +
-        '<div class="field"><label for="q-codon">Which codon reads differently from the reference?</label><select id="q-codon" data-q="codon" style="max-width:12rem">' + ['', 1, 2, 3, 4, 5, 6].map(v => '<option value="' + v + '"' + (String(q.codon || '') === String(v) ? ' selected' : '') + '>' + (v ? 'Codon ' + v : 'Choose') + '</option>').join('') + '</select></div>' +
-        '<fieldset id="q-kind"><legend>What does the change do to the protein?</legend>' + KINDS.map(k => '<label class="opt"><input type="radio" name="kind" id="k-' + k[0] + '" value="' + k[0] + '" data-q="kind"' + (q.kind === k[0] ? ' checked' : '') + '><span>' + k[1] + '</span></label>').join('') + '</fieldset>' +
+        '<div class="field"><label for="q-codon">Which codon reads differently from the reference?</label><select id="q-codon" data-q="codon" style="max-width:20rem">' + ['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(v => '<option value="' + v + '"' + (String(q.codon == null ? '' : q.codon) === String(v) ? ' selected' : '') + '>' + (v === '' ? 'Choose' : v === 0 ? 'No codon. The copies match.' : 'Codon ' + v) + '</option>').join('') + '</select></div>' +
+        '<fieldset id="q-kind"><legend>What happened to the protein?</legend>' + KINDS.map(k => '<label class="opt"><input type="radio" name="kind" id="k-' + k[0] + '" value="' + k[0] + '" data-q="kind"' + (q.kind === k[0] ? ' checked' : '') + '><span>' + k[1] + '</span></label>').join('') + '</fieldset>' +
         '<div class="row"><button data-act="checkbase">Check my answers</button></div><div id="fb" aria-live="polite"></div>';
     }
     return h + '</section><details><summary>Codon chart</summary>' + chart() + '</details>';
@@ -725,7 +960,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
 
   /* ---------- the model: a living top view drawn from the phenotype ---------- */
   const EMC = { red: '#c63d28', orange: '#e2791c', yellow: '#e2b61c' };
-  const BRC = { fire: ['#f08a2e', '#ffd565'], ice: ['#6fbbe6', '#ffffff'], gas: ['#79b73a', '#d6ec92'] };
+  const BRC = { fire: ['#f08a2e', '#ffd565'], acid: ['#79b73a', '#d6ec92'] }, PNAME = { fire: 'fire', tongue: 'strike tongue', acid: 'acid spray', heat: 'heat sight' };
   const SKIN = '#3a4147', INK = '#1d2925';
   const PROF = [[0, 0.05], [0.012, 0.5], [0.04, 0.78], [0.09, 0.82], [0.13, 0.66], [0.2, 0.95], [0.34, 1], [0.46, 0.9], [0.55, 0.68], [0.75, 0.36], [0.92, 0.13], [1, 0.02]];
   const VW = 600, VH = 250, PX = 24, CY = 116;
@@ -787,16 +1022,27 @@ if (typeof module !== 'undefined') module.exports = BRS;
     });
     if (ph.brass) st.flecks.forEach(function (f) { if (ph.striped && Math.abs(f[1]) < 0.47) return; dot(at(f[0], f[1] * 0.85 * hw(f[0])), f[2], '#d3ad45'); });
     if (ph.white) [1, -1].forEach(function (side) { for (let i = 0; i < 8; i++) { const t = 0.17 + i * 0.068; dot(at(t, hw(t) * 0.8 * side), W * 0.11 + 0.8, '#f4f4ec'); } });
-    if (ph.toxin) [1, -1].forEach(function (side) { for (let i = 0; i < 5; i++) { const t = 0.5 + i * 0.035; dot(at(t, hw(t) * 0.55 * side), W * 0.1 + 0.8, '#a9bd84', '#16191b'); } });
+    if (ph.toxin) [1, -1].forEach(function (side) { for (let i = 0; i < (ph.toxinLevel === 'mild' ? 3 : 5); i++) { const t = 0.5 + i * 0.035; dot(at(t, hw(t) * 0.55 * side), W * 0.1 + 0.8, '#a9bd84', '#16191b'); } });
     if (ph.heals) st.flecks.slice(0, 9).forEach(function (f, i) { const p = at(0.2 + i * 0.06, f[1] * 0.5 * hw(0.2 + i * 0.06)); g.save(); g.shadowColor = '#ffe9a3'; g.shadowBlur = 8; dot(p, 2.2 + 0.5 * Math.sin(st.t * 2 + i), '#ffeeb0'); g.restore(); });
     if (st.mouth > 0.03) { path([at(0.055, 0), at(0.002, W * 0.6 * st.mouth), at(0.002, -W * 0.6 * st.mouth)]); g.fillStyle = '#6d1712'; g.fill(); }
     st.parts.forEach(function (p) {
       const k = p.age / p.life, c = BRC[p.kind];
-      g.globalAlpha = Math.max(0, (p.kind === 'gas' ? 0.5 : 0.95) * (1 - k));
+      g.globalAlpha = Math.max(0, (p.kind === 'acid' ? 0.75 : 0.95) * (1 - k));
       g.fillStyle = k < 0.35 ? c[1] : c[0];
-      if (p.kind === 'ice') { const r = p.r * 0.9; g.beginPath(); g.moveTo(p.x, p.y - r); g.lineTo(p.x + r * 0.6, p.y); g.lineTo(p.x, p.y + r); g.lineTo(p.x - r * 0.6, p.y); g.closePath(); g.fill(); g.strokeStyle = c[0]; g.lineWidth = 0.8; g.stroke(); }
-      else { g.beginPath(); g.arc(p.x, p.y, p.r * (1 + k * (p.kind === 'gas' ? 1.6 : 0.6)), 0, 6.2832); g.fill(); }
+      g.beginPath(); g.arc(p.x, p.y, p.r * (1 + k * (p.kind === 'acid' ? 1.1 : 0.6)), 0, 6.2832); g.fill();
     });
+    if (st.breath && st.breath.kind === 'tongue') {
+      const k = 1 - Math.max(0, st.breath.left) / 1.3, reach = Math.sin(Math.min(1, k * 1.5) * Math.PI) * Math.min(x0 - 14, 5 * PX);
+      g.globalAlpha = 1; g.lineCap = 'round'; g.strokeStyle = '#e5788a'; g.lineWidth = Math.max(2, W * 0.22); g.beginPath(); g.moveTo(x0 + 2, CY); g.lineTo(x0 - reach, CY); g.stroke(); dot([x0 - reach, CY], Math.max(2.5, W * 0.3), '#f29aaa', '#8a2f43');
+    }
+    if (st.breath && st.breath.kind === 'heat') {
+      const k = Math.min(1, (1 - Math.max(0, st.breath.left) / 1.3) * 2.2);
+      [1, -1].forEach(function (side) {
+        const e = at(0.05, hw(0.05) * 0.62 * side);
+        g.save(); g.globalAlpha = 0.55; g.strokeStyle = '#ffcf6b'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(e[0], e[1]); g.lineTo(e[0] - k * Math.min(x0 - 12, 6 * PX), e[1] + side * k * 10); g.stroke();
+        g.globalAlpha = 1; g.shadowColor = '#ffb347'; g.shadowBlur = 12; dot(e, W * 0.24, '#ffdf8a'); g.restore();
+      });
+    }
     g.globalAlpha = 1;
     g.strokeStyle = INK; g.lineWidth = 1.5; g.lineCap = 'butt'; g.beginPath(); g.moveTo(24, 228); g.lineTo(24 + 5 * PX, 228);
     for (let i = 0; i <= 5; i++) { g.moveTo(24 + i * PX, 222); g.lineTo(24 + i * PX, 234); }
@@ -804,12 +1050,12 @@ if (typeof module !== 'undefined') module.exports = BRS;
   }
   function stepModel(st, dt, cr) {
     st.t += dt;
-    const open = st.breath || st.t < st.mouthUntil ? 1 : 0;
+    const open = (st.breath && st.breath.kind !== 'heat') || st.t < st.mouthUntil ? 1 : 0;
     st.mouth += (open - st.mouth) * Math.min(1, dt * 10);
     if (st.breath) {
       st.breath.left -= dt;
       const kind = st.breath.kind, x = snoutX(cr);
-      for (let i = 0; i < (kind === 'gas' ? 2 : 4); i++) st.parts.push({ kind: kind, x: x - 3, y: CY + (Math.random() - 0.5) * 6, vx: -(kind === 'gas' ? 35 + Math.random() * 40 : 95 + Math.random() * 90), vy: (Math.random() - 0.5) * (kind === 'gas' ? 26 : 56) - (kind === 'gas' ? 8 : 0), age: 0, life: kind === 'gas' ? 0.9 + Math.random() * 0.6 : 0.35 + Math.random() * 0.4, r: kind === 'gas' ? 6 + Math.random() * 7 : 2.5 + Math.random() * 4 });
+      if (kind === 'fire' || kind === 'acid') for (let i = 0; i < 4; i++) st.parts.push({ kind: kind, x: x - 3, y: CY + (Math.random() - 0.5) * 6, vx: -(kind === 'acid' ? 70 + Math.random() * 70 : 95 + Math.random() * 90), vy: (Math.random() - 0.5) * (kind === 'acid' ? 84 : 56), age: 0, life: 0.35 + Math.random() * 0.4, r: 2.5 + Math.random() * 4 });
       if (st.breath.left <= 0) st.breath = st.queue.length ? { kind: st.queue.shift(), left: 1.3 } : null;
     }
     st.parts = st.parts.filter(function (p) { p.age += dt; p.x += p.vx * dt; p.y += p.vy * dt; return p.age < p.life; });
@@ -830,7 +1076,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     me.kick = function () { if (!me.raf) me.raf = requestAnimationFrame(frame); };
     drawModel(cv, CR, me.st); me.kick();
   }
-  function breathe() { if (!anim) return; const q = CR.ph.breath.slice(); anim.st.breath = { kind: q.shift(), left: 1.3 }; anim.st.queue = q; anim.kick(); }
+  function breathe() { if (!anim) return; const q = CR.ph.powers.slice(); anim.st.breath = { kind: q.shift(), left: 1.3 }; anim.st.queue = q; anim.kick(); }
   function playCall() {
     let dur = 1.2;
     try {
@@ -863,7 +1109,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   /* ---------- step 4: field notes ---------- */
   function notesView() {
     if (!CR) return needCreature('Step 4 · field notes');
-    const n = nDone(), st = BRS.stamp(S.code, n, S.mutDone), site = BRS.site(CR.site);
+    const n = nDone(), complete = n === BRS.GENES.length && S.mutDone, st = BRS.stamp(S.code, complete ? BRS.FULL : BRS.GENES.filter(g => S.done[g.id]).map(g => g.id).concat(S.mutDone ? ['EMB'] : [])), site = BRS.site(CR.site);
     const found = typeof S.foundAt === 'number' ? coverName(S.foundAt, CR.site) : 'a rock in class';
     const seen = {}; let lines = '', brief = '';
     BRS.GENES.forEach(function (g) {
@@ -872,8 +1118,8 @@ if (typeof module !== 'undefined') module.exports = BRS;
       if (S.done[g.id]) { lines += '<li><span class="g">' + g.id + '</span><span>' + ln[0] + '</span></li>'; if (ln[1]) brief += '<li>' + ln[1] + '</li>'; }
       else lines += '<li class="locked"><span class="g">' + g.id + '</span><span>' + g.name + ': not decoded yet.</span></li>';
     });
-    const complete = n === BRS.GENES.length && S.mutDone, shown = S.reveal && complete;
-    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nChose to: ' + (S.choice === 'draw' ? 'draw it first' : S.choice === 'see' ? 'see it first' : '(not chosen yet)') + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nOne changed base: ' + (S.mutDone ? 'found' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)' : 'Progress stamp: ' + st + '  (not finished)');
+    const shown = S.reveal && complete;
+    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nChose to: ' + (S.choice === 'draw' ? 'draw it first' : S.choice === 'see' ? 'see it first' : '(not chosen yet)') + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nLab slip: ' + (CR.mut ? 'a new mutation' : 'no new mutation') + '\nEmber gene checked: ' + (S.mutDone ? 'yes' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)\nKEEPER CODE: ' + BRS.keeper(S.code) : 'Progress stamp: ' + st + '  (not finished)');
     let h = '<section class="block"><span class="eyebrow">Step 4 · field notes</span><h2>' + (S.name ? esc(S.name) + ', ' : '') + S.code + '</h2>' +
       '<div class="field"><label for="cname">Name your salamander</label><input type="text" id="cname" maxlength="24" autocomplete="off" value="' + esc(S.name) + '" placeholder="A name worth a legend" style="max-width:22rem"></div>' +
       '<div class="record"><div><span class="k">Population</span><span class="v">' + site.pop + '</span></div><div><span class="k">Found under</span><span class="v">' + found + '</span></div><div><span class="k">Sex</span><span class="v">' + (CR.sex === 'XX' ? 'female · XX' : 'male · XY') + '</span></div><div><span class="k">Length</span><span class="v">' + CR.length.toFixed(1) + ' cm</span></div><div><span class="k">Mass</span><span class="v">' + CR.mass.toFixed(1) + ' g</span></div></div>' +
@@ -881,47 +1127,16 @@ if (typeof module !== 'undefined') module.exports = BRS;
       '<p class="small muted">Every stat comes from the genes you are decoding, and most genes change more than one stat. Compare with a neighbor and work out which genes feed which.</p>' +
       '<h3>What the genes say</h3><ul class="notes">' + lines + '</ul></section>';
     h += '<section class="block"><h3>Meet ' + (S.name ? esc(S.name) : 'your salamander') + '</h3>';
-    if (!complete) h += '<p class="say"><b>Not yet.</b> Your salamander appears when all ' + BRS.GENES.length + ' genes are decoded and the changed base is found. So far: ' + n + ' of ' + BRS.GENES.length + ' genes, changed base ' + (S.mutDone ? 'found' : 'not found yet') + '.</p>' + (brief ? '<p>Drawing notes so far. An artist can start the sketch now.</p><ul>' + brief + '</ul>' : '');
-    else if (!S.choice) h += '<p>Choose how you want to meet it. An artist may want to draw it from the field notes before seeing it. Either way, it will move, breathe and call when it appears.</p><div class="row"><button data-act="choose" data-c="draw">I will draw it first</button><button class="ghost" data-act="choose" data-c="see">Show it to me now</button></div>';
+    if (!complete) h += '<p class="say"><b>Not yet.</b> Your salamander appears when all ' + BRS.GENES.length + ' genes are decoded and the ember gene is checked in step 3. So far: ' + n + ' of ' + BRS.GENES.length + ' genes, ember gene ' + (S.mutDone ? 'checked' : 'not checked yet') + '.</p>' + (brief ? '<p>Drawing notes so far. An artist can start the sketch now.</p><ul>' + brief + '</ul>' : '');
+    else if (!S.choice) h += '<p>Choose how you want to meet it. An artist may want to draw it from the field notes before seeing it. Either way, it will move, use its power and call when it appears.</p><div class="row"><button data-act="choose" data-c="draw">I will draw it first</button><button class="ghost" data-act="choose" data-c="see">Show it to me now</button></div>';
     else {
       if (S.choice === 'draw') h += '<p>Draw it from above, nose to the left, with a scale bar. At ' + CR.length.toFixed(1) + ' cm, the body is about one tenth as wide as the animal is long, and the tail is a little over half the length.</p>' + (brief ? '<ul>' + brief + '</ul>' : '<p class="muted">Decode a gene and the first drawing note appears here.</p>');
       if (shown) h += '<div class="tray"><canvas id="model" width="600" height="250" role="img" aria-label="' + S.code + ' drawn from its genes, moving"></canvas></div>' +
-        '<div class="row"><button data-act="walk" aria-pressed="false">Walk</button><button class="ghost" data-act="breathe">Breathe ' + CR.ph.breath.map(b => b === 'gas' ? 'gas' : b).join(' and ') + '</button><button class="ghost" data-act="call">Call</button><span id="callfb" class="small muted" aria-live="polite"></span></div>' +
+        '<div class="row"><button data-act="walk" aria-pressed="false">Walk</button><button class="ghost" data-act="breathe">Power: ' + CR.ph.powers.map(p => PNAME[p]).join(' and ') + '</button><button class="ghost" data-act="call">Call</button><span id="callfb" class="small muted" aria-live="polite"></span></div>' +
         '<p class="small muted">The call here is a stand-in tone until the recorded voices are added.</p>';
       else h += '<div class="row"><button data-act="reveal">My drawing is done. Show it to me.</button></div>';
     }
-    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete ? 'The final stamp proves every gene was decoded correctly. Paste this into the Field Record assignment.' : 'The final stamp appears here when every gene is decoded and the changed base is found. Until then this shows a progress stamp.') + '</p><textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
-    return h;
-  }
-
-  /* ---------- teacher view ---------- */
-  function teacherView() {
-    let h = '<section class="block"><span class="eyebrow">Teacher view · not for students</span><h2>Keys, stamps and slips</h2><p class="muted">Draft engine. Once students hold codes, the allele table below must not change, or their creatures change with it.</p></section>';
-    h += '<section class="block"><h3>Answer key for one code</h3><form class="row" data-form="key"><div class="field"><label for="t-key">Creature Code</label><input type="text" id="t-key" value="' + esc(teacher.key) + '" placeholder="TF-7K3QM" maxlength="10" autocapitalize="characters" spellcheck="false"></div><button style="align-self:flex-end">Show key</button></form>';
-    if (teacher.key) {
-      const cr = BRS.creature(teacher.key);
-      if (!cr) h += '<p class="say warn">' + BRS.parseCode(teacher.key).why + '</p>';
-      else {
-        h += '<p><b>' + cr.code + '</b> · ' + BRS.site(cr.site).pop + ' · ' + (cr.sex === 'XX' ? 'female XX' : 'male XY') + ' · ' + cr.length.toFixed(1) + ' cm · ' + cr.mass.toFixed(1) + ' g · ' + cr.stats.map(x => x.k + ' ' + x.v).join(' · ') + '</p><div class="scroll"><table><thead><tr><th>Gene</th><th>Copy</th><th>Template 3′→5′</th><th>mRNA</th><th>Protein</th><th>Allele</th></tr></thead><tbody>';
-        cr.genes.forEach(e => e.copies.forEach(c => { h += '<tr><td>' + e.gene.id + '</td><td>' + c.from + '</td><td class="chain">' + c.template.join(' ') + '</td><td class="chain">' + c.mrna.join(' ') + '</td><td>' + dash(c.protein) + '</td><td>' + c.allele.s + ' ' + c.allele.label + '</td></tr>'; }));
-        const m = cr.mut;
-        h += '<tr><td>EMB</td><td>from the mother, changed</td><td class="chain">' + m.template.join(' ') + '</td><td class="chain">' + m.mrna.join(' ') + '</td><td>' + dash(m.protein) + '</td><td>' + m.kind + ', codon ' + (m.codon + 1) + ', ' + m.oldCodon + ' → ' + m.newCodon + '</td></tr></tbody></table></div>';
-        h += '<p class="small">Phenotype: ' + BRS.GENES.filter(g => g.id.indexOf('LN') !== 0).map(g => cr.ph.lines[g.id][0]).join(' ') + '</p><div class="tray"><canvas id="tmodel" width="600" height="250" role="img" aria-label="Top view of ' + cr.code + '"></canvas></div>';
-      }
-    }
-    h += '</section><section class="block"><h3>Check a stamp</h3><form class="row" data-form="stamp"><div class="field"><label for="t-sc">Creature Code</label><input type="text" id="t-sc" value="' + esc(teacher.stampCode) + '" maxlength="10" spellcheck="false"></div><div class="field"><label for="t-st">Stamp</label><input type="text" id="t-st" value="' + esc(teacher.stamp) + '" maxlength="8" spellcheck="false"></div><button style="align-self:flex-end">Check</button></form>';
-    if (teacher.stampCode || teacher.stamp) {
-      const pc = BRS.parseCode(teacher.stampCode), rs = BRS.readStamp(teacher.stamp);
-      h += !pc.ok ? '<p class="say warn">' + pc.why + '</p>' : !rs ? '<p class="say warn">A stamp looks like K7Q-06 or K7Q-15M.</p>'
-        : BRS.stamp(pc.code, rs.n, rs.mut) === rs.text ? '<p class="say good"><b>' + (rs.n === BRS.GENES.length && rs.mut ? 'Valid and COMPLETE.' : 'Valid, not finished.') + '</b> ' + pc.code + ' decoded ' + rs.n + ' of ' + BRS.GENES.length + ' genes' + (rs.mut ? ' and found the changed base.' : '. The changed base is not done.') + '</p>'
-          : '<p class="say warn"><b>Does not match.</b> That stamp was not issued for ' + pc.code + '.</p>';
-    }
-    h += '</section><section class="block"><h3>Code slips for the three rocks</h3><form class="row" data-form="slips"><div class="field"><label for="t-w">Batch name</label><input type="text" id="t-w" value="' + esc(teacher.word) + '" maxlength="24"></div><div class="field"><label for="t-n">Slips per rock</label><input type="text" id="t-n" inputmode="numeric" value="' + teacher.n + '" maxlength="2" style="width:5rem"></div><button style="align-self:flex-end">Make slips</button></form><p class="small muted">' + (teacher.n * 3) + ' different animals for this class. The same batch name always gives the same codes, so a lost sheet can be remade. A student who rolls 1 or 2 draws from the Hawksbill rock, 3 or 4 from the James River rock, 5 or 6 from the Mount Rogers rock.</p>' +
-      BRS.SITES.map(st => '<h3>' + st.place + ' rock · roll ' + st.die.join(' or ') + ' · ' + st.pop + '</h3><div class="slips">' + BRS.batch(teacher.word, teacher.n, st.id).map(c => '<span>' + c + '</span>').join('') + '</div>').join('') + '</section>';
-    h += '<section class="block"><h3>Draft allele table</h3><p class="small muted">Percentages are how common each allele is at Hawksbill / James River / Mount Rogers. The three populations differ on purpose, for Unit 7.</p><div class="scroll"><table><thead><tr><th>Gene</th><th>Chr</th><th>Inheritance</th><th>Alleles and their amino acid chains</th><th>Real or fantasy</th></tr></thead><tbody>' +
-      BRS.GENES.map(g => '<tr><td>' + g.id + ' ' + g.name + '</td><td>' + g.chr + '</td><td>' + g.kind + '</td><td>' + g.alleles.map((a, i) => '<span class="chain">' + a.s + '</span> ' + a.label + ': Met–' + a.p.join('–') + ' (' + BRS.SITES.map(st => Math.round(g.pf[st.id][i] * 100)).join(' / ') + '%)').join('<br>') + '</td><td>' + g.real + '</td></tr>').join('') +
-      '<tr><td>EMB Ember gene</td><td>2</td><td>one changed base per animal</td><td>Reference: ' + dash(BRS.EMB.protein.slice(0, 5)) + '. Changes drawn 30% silent, 45% missense, 25% nonsense.</td><td>fantasy: the protein every breath depends on</td></tr></tbody></table></div></section>';
-    h += '<section class="block"><h3>Which genes feed which stat</h3><div class="scroll"><table><thead><tr><th>Stat</th><th>Genes that change it</th></tr></thead><tbody>' + BRS.STATMAP.map(r => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>').join('') + '</tbody></table></div><p class="small muted">Sightings on file: ' + BRS.SITES.map(st => st.place + (st.legend ? ' written' : ' not written yet')).join(' · ') + '.</p></section>';
+    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete ? 'The final stamp proves every gene was decoded correctly. Paste this into the Field Record assignment.' : 'The final stamp appears here when every gene is decoded and the ember gene is checked. Until then this shows a progress stamp.') + '</p>' + (complete ? '<div class="slip"><span class="eyebrow">Keeper code · copy it onto your pocket card</span><b class="big">' + BRS.keeper(S.code) + '</b><span>This code is the way back to ' + (S.name ? esc(S.name) : 'your salamander') + ' later, without redoing the work. Keep it.</span></div>' : '') + '<textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
     return h;
   }
 
@@ -929,20 +1144,19 @@ if (typeof module !== 'undefined') module.exports = BRS;
   function render() {
     stopAnim(); header();
     const v = view();
-    app.innerHTML = v === 'rock' ? rockView() : v === 'decode' ? decodeView() : v === 'base' ? baseView() : v === 'notes' ? notesView() : teacherView();
+    app.innerHTML = v === 'decode' ? decodeView() : v === 'base' ? baseView() : v === 'notes' ? notesView() : rockView();
     if (v === 'notes') startAnim();
-    if (v === 'teacher' && $('#tmodel')) { const cr = BRS.creature(teacher.key); drawModel($('#tmodel'), cr, newState(cr)); }
   }
   function setCode(code, where) {
     const p = BRS.parseCode(code);
-    S = Object.assign(fresh(), { code: p.code, site: p.site, roll: where === 'class' ? null : S.roll, foundAt: where, placed: where === 'class', flips: S.flips });
+    S = Object.assign(fresh(), { code: p.code, site: p.site, roll: where === 'class' ? null : S.roll, roll2: where === 'class' ? null : S.roll2, foundAt: where, placed: true, flips: S.flips });
     CR = BRS.creature(p.code); save();
   }
   function lift(i) {
     flash = null;
-    if (lifted !== null) { if (lifted !== i) { flash = { warn: 1, t: 'Set the ' + coverName(lifted) + ' back first. One cover object at a time.' }; lifted = null; if (S.code) S.placed = true; } render(); return; }
+    if (lifted !== null) { if (lifted !== i) { flash = { warn: 1, t: 'Set the ' + coverName(lifted) + ' back first. One cover object at a time.' }; lifted = null; if (S.foundAt !== null) S.placed = true; save(); } render(); return; }
     lifted = i;
-    if (!S.code) { S.flips++; if (S.flips >= 3 || Math.random() < 0.45) setCode(BRS.codeFrom(Math.random, S.site), i); else save(); }
+    if (S.foundAt === null) { S.flips++; if (S.flips >= 3 || Math.random() < 0.45) S.foundAt = i; save(); }
     render();
     const el = $('[data-act="setback"]'); if (el) el.focus();
   }
@@ -952,15 +1166,22 @@ if (typeof module !== 'undefined') module.exports = BRS;
     const act = t.dataset.act;
     if (act === 'lift') lift(+t.dataset.i);
     else if (act === 'die' || act === 'rollme') { const n = act === 'die' ? +t.dataset.n : 1 + Math.floor(Math.random() * 6); S.roll = n; S.site = BRS.siteForRoll(n).id; flash = null; save(); render(); }
+    else if (act === 'die2' || act === 'rollme2') { if (S.code || S.foundAt === null || !S.roll) return; const n = act === 'die2' ? +t.dataset.n : 1 + Math.floor(Math.random() * 6); S.roll2 = n; setCode(BRS.codeForRolls(Math.random, S.roll, n), S.foundAt); flash = null; render(); const el = $('.slip'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center' }); }
     else if (act === 'setback') { if (S.foundAt === lifted) S.placed = true; lifted = null; save(); render(); }
     else if (act === 'ask') { S.asking = true; render(); }
     else if (act === 'keep') { S.asking = false; render(); }
     else if (act === 'wipe') { S = fresh(); CR = null; lifted = null; flash = null; save(); render(); }
     else if (act === 'gene') { S.gene = t.dataset.g; save(); render(); }
     else if (act === 'check') {
-      const e = BRS.entry(CR, S.gene), res = markCells(S.gene, rowsOf(e));
-      if (res.all) { S.done[S.gene] = true; save(); render(); }
+      const e = BRS.entry(CR, S.gene), res = markCells(S.gene, [e.copies[0]]);
+      if (res.all) { S.dec[S.gene] = true; if (e.copies.length === 1) S.done[S.gene] = true; save(); render(); }
       else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.blank ? 'Some boxes are still empty. ' : '') + 'Boxes with a dashed border need another look. Check the base pairing first, because one wrong mRNA base changes the amino acid too.</p>';
+    }
+    else if (act === 'zyg') {
+      const pick = document.querySelector('input[name="zyg"]:checked'), e = BRS.entry(CR, S.gene);
+      if (!pick) $('#zygfb').innerHTML = '<p class="say warn">Choose one first.</p>';
+      else if (pick.value === e.zyg) { S.done[S.gene] = true; save(); render(); }
+      else $('#zygfb').innerHTML = '<p class="say warn">Look again. Read the two template rows one codon at a time, left to right, and count the bases that differ.</p>';
     }
     else if (act === 'why') {
       const pick = document.querySelector('input[name="why"]:checked');
@@ -969,12 +1190,12 @@ if (typeof module !== 'undefined') module.exports = BRS;
       else { S.whyTries = (S.whyTries || 0) + 1; save(); $('#whyfb').innerHTML = '<p class="say warn">Not that one. Look back at the template strand. It is the strand you paired every base with, and it has a partner of its own. Then choose again.</p>'; }
     }
     else if (act === 'checkbase') {
-      const m = CR.mut, res = markCells('EMB', [m]), qc = $('#q-codon'), kind = (S.ans.MUTQ || {}).kind;
-      const okc = +qc.value === m.codon + 1, okk = kind === m.kind;
+      const m = CR.mut, res = markCells('EMB', [CR.ember.copies[0]]), qc = $('#q-codon'), kind = (S.ans.MUTQ || {}).kind;
+      const okc = qc.value !== '' && +qc.value === (m ? m.codon + 1 : 0), okk = kind === (m ? m.kind : 'same');
       qc.classList.toggle('ok', okc); qc.classList.toggle('bad', !okc);
       const fs = $('#q-kind'); fs.classList.toggle('ok', okk); fs.classList.toggle('bad', !okk); fs.style.padding = '8px'; fs.style.borderRadius = '5px';
       if (res.all && okc && okk) { S.mutDone = true; save(); render(); }
-      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + 'Anything with a dashed border needs another look. Line the two templates up codon by codon to find the base that changed.</p>';
+      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.all ? 'Your decoding is right. Now line' : 'Anything with a dashed border needs another look. Line') + ' the two templates up codon by codon and count the bases that differ.</p>';
     }
     else if (act === 'choose') { if (nDone() !== BRS.GENES.length || !S.mutDone) return; S.choice = t.dataset.c; save(); if (S.choice === 'see') reveal(); else render(); }
     else if (act === 'reveal') reveal();
@@ -998,12 +1219,12 @@ if (typeof module !== 'undefined') module.exports = BRS;
       const g = t.dataset.g, r = t.dataset.r, i = +t.dataset.i;
       S.ans[g] = S.ans[g] || {}; S.ans[g][r] = S.ans[g][r] || { m: [], a: [] }; S.ans[g][r].m[i] = t.value; save();
       t.classList.remove('ok', 'bad');
-      if (t.value.length === 3 && i < 5) { const nx = $('#m-' + g + '-' + r + '-' + (i + 1)); if (nx && !nx.value) nx.focus(); }
+      if (t.value.length === 3 && i < 8) { const nx = $('#m-' + g + '-' + r + '-' + (i + 1)); if (nx && !nx.value) nx.focus(); }
     }
   });
   app.addEventListener('change', function (ev) {
     const t = ev.target;
-    if (t.id === 'cname') { render(); }
+    if (t.id === 'cname') { chip(); } // a full redraw here swallowed the next tap
     else if (t.classList.contains('aa')) { const g = t.dataset.g, r = t.dataset.r; S.ans[g] = S.ans[g] || {}; S.ans[g][r] = S.ans[g][r] || { m: [], a: [] }; S.ans[g][r].a[+t.dataset.i] = t.value; t.classList.remove('ok', 'bad'); save(); }
     else if (t.dataset.q) { S.ans.MUTQ = S.ans.MUTQ || {}; S.ans.MUTQ[t.dataset.q] = t.value; save(); }
   });
@@ -1016,9 +1237,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       else if (S.code && S.code !== p.code) { flash = { warn: 1, t: 'This iPad already holds ' + S.code + '. Use Start over below if ' + p.code + ' is really yours.' }; }
       else { if (!S.code) setCode(p.code, 'class'); flash = null; }
       lifted = null; render();
-    } else if (f === 'key') { teacher.key = $('#t-key').value.trim(); render(); }
-    else if (f === 'stamp') { teacher.stampCode = $('#t-sc').value.trim(); teacher.stamp = $('#t-st').value.trim(); render(); }
-    else if (f === 'slips') { teacher.word = $('#t-w').value.trim().replace(/[^\w ]/g, '') || 'period 2'; teacher.n = Math.max(1, Math.min(20, parseInt($('#t-n').value, 10) || 12)); render(); }
+    }
   });
   window.addEventListener('hashchange', function () { lifted = null; flash = null; S.asking = false; render(); window.scrollTo(0, 0); });
   render();
