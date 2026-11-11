@@ -814,7 +814,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
         plotSVG() + msg + '</section>' + labHTML();
     }
     if (!S.site && flash) h += '<p class="say warn" role="status">' + flash.t + '</p>';
-    h += '<section class="block"><h3>Already have a Creature Code?</h3><p class="small muted">Type it here to pick up your animal on this iPad. The first two letters name the site: TF Hawksbill, CE James River, HE Mount Rogers.</p><form class="row" data-form="classcode"><div class="field"><label for="classcode">Creature Code</label><input type="text" id="classcode" placeholder="TF-7K3QM" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><button class="ghost" style="align-self:flex-end">Use this code</button></form></section>';
+    h += '<section class="block"><h3>Already have a Creature Code?</h3><p class="small muted">Type it here to pick up your animal on this iPad. The first two letters name the site: TF Hawksbill, CE James River, HE Mount Rogers. If you wrote down a stamp from your field notes, type it too, and the genes you already checked come back.</p><form class="row" data-form="classcode"><div class="field"><label for="classcode">Creature Code</label><input type="text" id="classcode" placeholder="TF-7K3QM" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><div class="field"><label for="classstamp">Stamp, if you have one</label><input type="text" id="classstamp" placeholder="A4Y-K7Q2" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><button class="ghost" style="align-self:flex-end">Use this code</button></form></section>';
     if (S.code || S.site) h += '<section class="block"><h3>Wrong creature?</h3>' + (S.asking
       ? '<p>Starting over erases the site, the code and the decoding saved on this iPad.</p><div class="row"><button data-act="wipe">Yes, start over</button><button class="ghost" data-act="keep">Keep what I have</button></div>'
       : '<div class="row"><button class="quiet" data-act="ask">Start over</button></div>') + '</section>';
@@ -1235,7 +1235,14 @@ if (typeof module !== 'undefined') module.exports = BRS;
       const p = BRS.parseCode($('#classcode').value);
       if (!p.ok) { flash = { warn: 1, t: p.why }; }
       else if (S.code && S.code !== p.code) { flash = { warn: 1, t: 'This iPad already holds ' + S.code + '. Use Start over below if ' + p.code + ' is really yours.' }; }
-      else { if (!S.code) setCode(p.code, 'class'); flash = null; }
+      else {
+        const sv = $('#classstamp').value.trim(), rs = sv ? BRS.readStamp(p.code, sv) : null;
+        if (rs && !rs.ok) flash = { warn: 1, t: rs.why };
+        else {
+          if (!S.code) setCode(p.code, 'class'); flash = null;
+          if (rs) { rs.done.forEach(function (id) { if (id === 'EMB') S.mutDone = true; else { S.dec[id] = true; S.done[id] = true; } }); save(); flash = { t: '<b>Picked up ' + p.code + '.</b> ' + rs.done.length + ' of ' + BRS.PARTS.length + ' parts were already checked. <a href="#decode">Go on to step 2.</a>' }; }
+        }
+      }
       lifted = null; render();
     }
   });
