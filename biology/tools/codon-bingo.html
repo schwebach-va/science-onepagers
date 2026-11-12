@@ -108,6 +108,26 @@ th{background:var(--moss-soft)} .chart td{font:400 .82rem/1.45 var(--mono);white
 footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 @media (max-width:520px){ body{font-size:16px} .block{padding:12px} .six{gap:3px} .chart td{font-size:.7rem} .chart th,.chart td{padding:4px} }
 @media (prefers-reduced-motion:reduce){ .arrive{animation:none} }
+/* paper cards */
+.pcards{display:grid;gap:18px}
+.pcard{background:#fff;color:#111;border:1.5px solid #333;border-radius:6px;padding:14px 16px;break-inside:avoid;page-break-inside:avoid}
+.pcard .ph{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font:600 .95rem var(--mono);margin-bottom:8px}
+.pcard .ph b{font:700 1.15rem "Bricolage Grotesque",system-ui,sans-serif}
+.pgrid{display:grid;grid-template-columns:repeat(5,1fr);border:2px solid #111}
+.pgrid span{aspect-ratio:1.25;display:flex;align-items:center;justify-content:center;border:1px solid #555;font:700 1.35rem var(--mono);letter-spacing:.12em;color:#111}
+.pcard .pf{display:flex;justify-content:space-between;font-size:.8rem;margin-top:6px;color:#333}
+.pcheck .pgrid span.hit{background:#cfe9d6;outline:2px solid #2f6347;outline-offset:-3px}
+@media print{
+  @page{size:letter;margin:.45in}
+  body{background:#fff!important}
+  header.top,footer,.noprint{display:none!important}
+  .block{border:0!important;padding:0!important;background:none!important}
+  .pcards{display:block}
+  .pcard{width:6.4in;margin:0 auto .3in;padding:10px 14px}
+  .pcard:nth-child(2n){page-break-after:always;break-after:page;margin-bottom:0}
+  .pgrid span{aspect-ratio:auto;height:.74in;font-size:17pt}
+  main.sheet,.wrap{padding:0!important;margin:0!important;max-width:none!important}
+}
 </style>
 <div class="wrap"><header class="top"><h1><a href="#home">Codon Bingo</a></h1><span class="small muted"><a href="../classroom-tools.html#unit-4">Bio Tool #37 · Biology Classroom Tools</a></span></header><main id="app" class="sheet"></main><footer><span>© J. R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>: free to use, adapt and hand to a class; not for resale.</span><span><a href="../classroom-tools.html#unit-4">← Biology Classroom Tools</a></span></footer></div>
 <script>
@@ -171,7 +191,7 @@ const BRS = (function () {
   }
   const cardCodons = (game, id) => shuffled(ALLCODONS, BRS.rng('bingo|' + norm(game) + '|card|' + id)).slice(0, 25);
   const LINES = (function () { const L = []; for (let i = 0; i < 5; i++) { L.push([0, 1, 2, 3, 4].map(k => i * 5 + k)); L.push([0, 1, 2, 3, 4].map(k => k * 5 + i)); } L.push([0, 6, 12, 18, 24]); L.push([4, 8, 12, 16, 20]); return L; })();
-  const view = () => { const h = (location.hash || '').slice(1); return ['caller', 'card', 'howto'].indexOf(h) >= 0 ? h : 'home'; };
+  const view = () => { const h = (location.hash || '').slice(1); return ['caller', 'card', 'howto', 'paper'].indexOf(h) >= 0 ? h : 'home'; };
 
   /* one color per base everywhere; U is a round tile, T a square one; the letter is always printed */
   const bt = x => '<i class="bt b' + (x === 'U' ? 'T u' : x) + '">' + x + '</i>';
@@ -210,15 +230,40 @@ const BRS = (function () {
   /* ---------- home and how to play ---------- */
   function homeView() {
     return '<section class="block"><span class="eyebrow">Unit 4 · LT 4.3</span><h2>One caller, a different card on every iPad</h2><p class="lede">The teacher calls an amino acid. Each student finds the codons on their own card that code for it, using a codon chart or wheel. After every call the projector shows the tRNA that carries that amino acid into the ribosome.</p>' +
-      '<div class="row"><a class="btn" href="#caller">Run the game on the projector</a><a class="btn ghost" href="#card">Open my card</a><a class="btn quiet" href="#howto">How to play</a></div></section>';
+      '<div class="row"><a class="btn" href="#caller">Run the game on the projector</a><a class="btn ghost" href="#card">Open my card</a><a class="btn quiet" href="#paper">Print paper cards</a><a class="btn quiet" href="#howto">How to play</a></div></section>';
   }
   function howView() {
     return '<section class="block"><span class="eyebrow">For the teacher</span><h2>How to run Codon Bingo</h2><p class="lede">About fifteen minutes a game. Students need a codon chart or wheel.</p>' +
       '<h3>Set up, two minutes</h3><ol><li>On the projector, choose <b>Run the game</b>, type a game word, and press Start.</li><li>Students choose <b>Open my card</b> and type the same game word. Every iPad draws a different card of 25 mRNA codons.</li></ol>' +
-      '<h3>Play</h3><ol><li>Press <b>Next call</b> and read the amino acid aloud.</li><li>Students find <b>every</b> codon on their card that codes for it and tap each one. Give them about half a minute.</li><li>Press <b>Show the tRNA</b>. Say what the picture shows: the tRNA carries the amino acid, and its anticodon pairs with the codon on the mRNA.</li><li>Call again. A student with a full line of five taps <b>Check my bingo</b> and enters the call number from the projector. A green screen is a true bingo. A red message outlines any marked square that does not code for something called, and one wrong mark anywhere on the card blocks the bingo.</li></ol>' +
+      '<h3>Paper or iPad</h3><p>Students without an iPad can play on a printed card. Choose <b>Print paper cards</b> on the first screen and use the same game word as the projector.</p><h3>Play</h3><ol><li>Press <b>Next call</b> and read the amino acid aloud.</li><li>Students find <b>every</b> codon on their card that codes for it and tap each one. Give them about half a minute.</li><li>Press <b>Show the tRNA</b>. Say what the picture shows: the tRNA carries the amino acid, and its anticodon pairs with the codon on the mRNA.</li><li>Call again. A student with a full line of five taps <b>Check my bingo</b> and enters the call number from the projector. A green screen is a true bingo. A red message outlines any marked square that does not code for something called, and one wrong mark anywhere on the card blocks the bingo.</li></ol>' +
       '<p><b>Setting the length.</b> In a class of 30, the first true line usually comes around call 7 and the first two-line card around call 10. A full card is rare before call 19, and every card is full by call 21.</p>' +
       '<h3>Playing on a salamander</h3><p>Classes running the Blue Ridge Salamander Project have a second round, the Ember Round, where each student checks the calls against their own animal’s gene. It lives on <a href="blue-ridge-salamander-codon-bingo.html">the salamander project’s copy of Codon Bingo</a>.</p>' +
       '<p class="muted">A DE Bio round, with a TATA box, the AUG start and a poly-A tail on the projector, is not built yet.</p><div class="row"><a class="btn ghost" href="#home">Back</a></div></section>';
+  }
+
+
+  /* ---------- paper cards: same game word, same generator, so paper and iPad players share one game ---------- */
+  const pid = n => 'P' + (n < 10 ? '0' : '') + n;
+  function pcardHTML(game, n, called) {
+    const cds = cardCodons(game, pid(n));
+    return '<div class="pcard"><div class="ph"><b>Codon Bingo</b><span>game ' + esc(norm(game)) + ' · card ' + pid(n) + '</span></div><div class="pgrid">' +
+      cds.map(cd => '<span' + (called && called[BRS.CODON[cd]] ? ' class="hit"' : '') + '>' + cd + '</span>').join('') +
+      '</div><div class="pf"><span>Name ______________________</span><span>Mark every codon that codes for the called amino acid.</span></div><div class="pf"><span>© J. R. Schwebach · CC BY-NC 4.0 · scienceonepagers.org</span></div></div>';
+  }
+  function paperView() {
+    const pg = S.p || (S.p = { game: '', count: 30 });
+    let h = '<section class="block noprint"><span class="eyebrow">For the teacher</span><h2>Print paper cards</h2><p class="lede">Paper cards play the same game as the iPads. Use the same game word, run the calls from the projector, and paper and iPad players can be in one game together.</p>' +
+      '<form data-form="paper" class="row"><div class="field"><label for="pw">Game word</label><input type="text" id="pw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" value="' + esc(pg.game || S.c.game || 'RIDGE' + (10 + Math.floor(Math.random() * 89))) + '" style="max-width:12rem"></div><div class="field"><label for="pn">How many cards</label><input type="number" id="pn" min="2" max="60" step="2" value="' + pg.count + '" style="max-width:7rem"></div><button style="align-self:flex-end">Make the cards</button></form>' +
+      '<p class="small muted">Two cards to a page. Each card has its own number (P01, P02 …). To check a paper bingo, open <b>Run the game</b>, choose <b>Check a paper card</b> and type the card number: every square that codes for something already called lights up green.</p>' +
+      (pg.game ? '<div class="row"><button data-act="print">Print</button><a class="btn quiet" href="#home">Back</a></div>' : '<div class="row"><a class="btn quiet" href="#home">Back</a></div>') + '</section>';
+    if (pg.game) { h += '<section class="block"><div class="pcards">'; for (let n = 1; n <= pg.count; n++) h += pcardHTML(pg.game, n, null); h += '</div></section>'; }
+    return h;
+  }
+  function paperCheckHTML() {
+    const c = S.c, n = +(c.pcheck || 0);
+    let h = '<details class="noprint"' + (n ? ' open' : '') + '><summary>Check a paper card</summary><form data-form="pcheck" class="row"><div class="field"><label for="pcn">Paper card number</label><input type="number" id="pcn" min="1" max="60" value="' + (n || '') + '" style="max-width:7rem"></div><button style="align-self:flex-end">Show it</button></form>';
+    if (n) { const called = {}; callList(c.game, 'classic').slice(0, c.n).forEach(x => { called[x.aa] = 1; }); h += '<div class="pcheck">' + pcardHTML(c.game, n, called) + '</div><p class="small muted">Green squares code for an amino acid called so far (calls 1 to ' + c.n + '). A student’s mark on any other square is a wrong mark.</p>'; }
+    return h + '</details>';
   }
 
   /* ---------- caller ---------- */
@@ -239,7 +284,7 @@ const BRS = (function () {
     h += '<div class="row">' + (cur && !c.shown ? '<button data-act="show">Show the tRNA</button>' : '') + (c.n < total ? '<button class="' + (cur && !c.shown ? 'ghost' : '') + '" data-act="next">Next call</button>' : '<b>That was the last call.</b>') + (c.n > 0 ? '<button class="quiet" data-act="back">Back one</button>' : '') + '</div>';
     if (c.n) h += '<div class="called" aria-label="Called so far">' + calls.slice(0, c.n).map((x, i) => '<span' + (i === c.n - 1 ? ' class="now"' : '') + '><i>' + (i + 1) + '</i>' + x.aa + '</span>').join('') + '</div>';
     if (c.round === 'ember' && c.n === total && c.shown) h += '<p class="say good">Check your answers now. A mismatch is your salamander’s changed amino acid. If every call matched, look at your lab slip: either the change is silent and still there in the DNA, or your animal has no new mutation.</p>';
-    h += '</section><section class="block">' + (c.ending ? '<p>End this game and set up a new one?</p><div class="row"><button data-act="end">Yes, end it</button><button class="ghost" data-act="keepgame">Keep playing</button></div>' : '<div class="row"><button class="quiet" data-act="askend">End this game</button><a class="btn quiet" href="#howto">How to play</a></div>') + '</section>';
+    h += '</section><section class="block">' + (c.ending ? '<p>End this game and set up a new one?</p><div class="row"><button data-act="end">Yes, end it</button><button class="ghost" data-act="keepgame">Keep playing</button></div>' : '<div class="row"><button class="quiet" data-act="askend">End this game</button><a class="btn quiet" href="#howto">How to play</a></div>') + paperCheckHTML() + '</section>';
     return h;
   }
 
@@ -294,7 +339,7 @@ const BRS = (function () {
   }
 
   /* ---------- render and events ---------- */
-  function render() { const v = view(); app.innerHTML = v === 'caller' ? callerView() : v === 'card' ? cardView() : v === 'howto' ? howView() : homeView(); }
+  function render() { const v = view(); app.innerHTML = v === 'caller' ? callerView() : v === 'card' ? cardView() : v === 'howto' ? howView() : v === 'paper' ? paperView() : homeView(); }
   app.addEventListener('click', function (ev) {
     const t = ev.target.closest('[data-act]'); if (!t) return;
     const a = t.dataset.act, c = S.c, s = S.s;
@@ -307,6 +352,7 @@ const BRS = (function () {
     else if (a === 'tab') { s.tab = t.dataset.t; fb = ''; claim = null; }
     else if (a === 'mark') { const i = t.dataset.i; s.marks[i] = !s.marks[i]; claim = null; save(); t.setAttribute('aria-pressed', String(!!s.marks[i])); t.classList.remove('wrong'); const w = $('.win'); if (w) render(); return; }
     else if (a === 'claim') claim = checkClaim();
+    else if (a === 'print') { window.print(); return; }
     else if (a === 'clear') { s.marks = {}; claim = null; }
     else if (a === 'leave') { const keep = { code: s.code }; S.s = Object.assign(fresh().s, keep); claim = null; fb = ''; }
     else if (a === 'ecode') { s.code = ''; s.m = []; s.yn = []; s.done = false; fb = ''; }
@@ -335,6 +381,8 @@ const BRS = (function () {
     ev.preventDefault();
     const f = ev.target.dataset.form;
     if (f === 'start') { const g = norm($('#gw').value); if (g.length < 3) { $('#gw').focus(); return; } S.c = Object.assign(fresh().c, { game: g, round: 'classic', pattern: +$('#pat').value, on: true }); }
+    else if (f === 'paper') { const g = norm($('#pw').value); if (g.length < 3) { $('#pw').focus(); return; } let k = Math.round(+$('#pn').value || 30); k = Math.max(2, Math.min(60, k + (k % 2))); S.p = { game: g, count: k }; }
+    else if (f === 'pcheck') { S.c.pcheck = Math.max(0, Math.min(60, Math.round(+$('#pcn').value || 0))); }
     else if (f === 'join') { const g = norm($('#jw').value); if (g.length < 3) { fb = 'Type the game word exactly as the projector shows it.'; render(); return; } fb = ''; S.s = Object.assign(fresh().s, { game: g, cardId: 1000 + Math.floor(Math.random() * 9000), code: S.s.code }); }
     else if (f === 'code') { const p = BRS.parseCode($('#cc').value); if (!p.ok) { fb = p.why; render(); return; } fb = ''; S.s.code = p.code; S.s.m = []; S.s.yn = []; S.s.done = false; }
     save(); render();
