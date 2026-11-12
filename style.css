@@ -784,3 +784,23 @@ article.onepager .pub-note { font-size: 0.95rem; color: var(--muted); margin: -0
 .section-blurb a, .more-link a { color: var(--teal); }
 ul.topic-list li.more-link { border-bottom: none; padding-top: 0.9rem; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.95rem; }
 ul.topic-list li.more-link a { color: var(--teach); font-weight: 600; }
+
+/* Collapsible home-page sections (script at the foot of index.html). */
+.subject-block h2 .section-toggle {
+  all: unset; box-sizing: border-box; cursor: pointer;
+  display: flex; align-items: baseline; gap: 0.75rem; width: 100%;
+  font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
+}
+.subject-block h2 .section-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 2px; }
+.section-toggle .toggle-count {
+  font-size: 0.75rem; font-weight: 400; letter-spacing: 0.02em; text-transform: none; color: var(--muted);
+}
+.section-toggle .toggle-chevron {
+  margin-left: auto; align-self: center; width: 0.55rem; height: 0.55rem;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px); transition: transform 0.15s ease;
+}
+.section-toggle[aria-expanded="false"] .toggle-chevron { transform: rotate(-45deg); }
+.section-toggle:hover .toggle-name { text-decoration: underline; text-underline-offset: 3px; }
+.subject-block.is-collapsed { margin-bottom: 1.4rem; }
+@media print { .subject-block ul.topic-list[hidden] { display: block !important; } .toggle-chevron { display: none; } }
