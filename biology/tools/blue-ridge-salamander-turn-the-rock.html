@@ -118,6 +118,14 @@ label{font-weight:700}
 .six span.num{border:0;background:transparent;padding:0;font-size:.7rem;color:var(--muted)}
 .six input,.six select{padding:8px 0;text-transform:uppercase}
 .six select{appearance:none;-webkit-appearance:none;text-transform:none;text-align-last:center;letter-spacing:0}
+.six input.aa{text-transform:none;letter-spacing:0}
+input.aa.no{border:2.5px solid var(--bad)!important;background:var(--bad-soft)!important;color:var(--bad)}
+.six.nm{margin-top:-4px}
+.six.nm>span{border:0;background:transparent;padding:0 1px;font:400 .68rem/1.15 var(--body);letter-spacing:0;color:var(--muted);overflow-wrap:anywhere;-webkit-hyphens:auto;hyphens:auto;min-height:1.2em}
+.six.nm>span.no{color:var(--bad);font-weight:700}
+.aabar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.aabar button{min-height:38px;padding:5px 12px;font-size:.85rem}
+.aamsg{margin:0;min-height:1.35em;font-size:.92rem;font-weight:700;color:var(--bad)}
 .ok{border:2.5px solid var(--ok)!important;background:var(--ok-soft)!important}
 .bad{border:2.5px dashed var(--bad)!important;background:var(--bad-soft)!important}
 .result{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1.5px solid var(--ok);border-radius:5px;background:var(--ok-soft)}
@@ -172,7 +180,7 @@ button.die:hover{border-color:var(--ember)}
 @media (max-width:520px){ .stat{grid-template-columns:6.4rem minmax(0,1fr) 4.6rem;gap:6px} .stat .k{font-size:.66rem;letter-spacing:0} body{font-size:16px} .steps a{font-size:.74rem;padding:6px 5px} .block{padding:12px} .six{gap:3px} .six>*{letter-spacing:0} .notes li{grid-template-columns:1fr;gap:2px} .chart td{font-size:.7rem} .chart th,.chart td{padding:4px 4px} }
 @media (max-width:520px){ .six .cod .bt{font-size:11.5px;border-radius:2px} .six .cod{gap:1px} .bt.tu{box-shadow:0 0 0 1px var(--panel),0 0 0 2.5px var(--ember)} .pol{font-size:.64rem;padding:2px 6px} }
 @media (max-width:760px){ .six{gap:3px} .six>*{font-size:13px;letter-spacing:0} .six input,.six select{font-size:13px;padding:8px 0} }
-@media (max-width:520px){ .six{gap:2px} .six>*{font-size:10.5px} .six input,.six select{font-size:10.5px;padding:7px 0;border-width:1px} .six span.num{font-size:.6rem} }
+@media (max-width:520px){ .six{gap:2px} .six>*{font-size:10.5px} .six input,.six select{font-size:10.5px;padding:7px 0;border-width:1px} .six span.num{font-size:.6rem} .six.nm>span{font-size:.5rem} }
 .odds{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border:1.5px solid var(--rule);border-radius:5px;background:var(--paper)}
 .faces{display:flex;gap:6px;flex-wrap:wrap}
 .face{line-height:0;padding:3px;border-radius:8px;border:2px solid transparent}
@@ -673,7 +681,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const app = $('#app');
   const KEY = 'brs-v3';
-  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false });
+  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false, pick: false });
   let S = fresh();
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && typeof j === 'object') S = Object.assign(fresh(), j, { asking: false }); } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
@@ -828,6 +836,43 @@ if (typeof module !== 'undefined') module.exports = BRS;
     if (withNone) o += '<option value="none"' + (sel === 'none' ? ' selected' : '') + '>none</option>';
     return o;
   }
+  /* Typed amino acids (11/12): three letters as the chart spells them, any case; STOP for a stop codon.
+     A box that is not a real amino acid turns red and never counts as an answer. */
+  const AAFULL = { Ala: 'alanine', Arg: 'arginine', Asn: 'asparagine', Asp: 'aspartic acid', Cys: 'cysteine', Gln: 'glutamine', Glu: 'glutamic acid', Gly: 'glycine', His: 'histidine', Ile: 'isoleucine', Leu: 'leucine', Lys: 'lysine', Met: 'methionine', Phe: 'phenylalanine', Pro: 'proline', Ser: 'serine', Thr: 'threonine', Trp: 'tryptophan', Tyr: 'tyrosine', Val: 'valine', STOP: 'chain ends', none: 'no amino acid' };
+  function aaCanon(v, withNone) {
+    v = String(v == null ? '' : v).trim().toLowerCase();
+    if (v === 'stop') return 'STOP';
+    if (v === 'none') return withNone ? 'none' : null;
+    if (v.length !== 3) return null;
+    const c = v[0].toUpperCase() + v.slice(1);
+    return BRS.AMINO.indexOf(c) >= 0 ? c : null;
+  }
+  const aaVal = el => el.tagName === 'SELECT' ? el.value : (aaCanon(el.value, el.dataset.n === '1') || '');
+  function aaStore(t, v) { const g = t.dataset.g, r = t.dataset.r; S.ans[g] = S.ans[g] || {}; S.ans[g][r] = S.ans[g][r] || { m: [], a: [] }; S.ans[g][r].a[+t.dataset.i] = v; save(); }
+  function aaNote(t, name, bad, msg) {
+    const g = t.dataset.g, r = t.dataset.r, i = +t.dataset.i, nm = $('#n-' + g + '-' + r + '-' + i), box = $('#aamsg-' + g + '-' + r);
+    if (nm) { nm.textContent = name || ''; nm.classList.toggle('no', !!bad); }
+    if (box && (msg || box.dataset.i === String(i))) { box.textContent = msg || ''; box.dataset.i = msg ? String(i) : ''; }
+  }
+  function aaTyped(t, final) {
+    const wn = t.dataset.n === '1', i = +t.dataset.i;
+    const raw = t.value.replace(/[^A-Za-z]/g, '').slice(0, 4); if (raw !== t.value) t.value = raw;
+    const low = raw.toLowerCase(), can = aaCanon(raw, wn);
+    t.classList.remove('ok', 'bad');
+    if (can) {
+      t.value = can; t.classList.remove('no'); t.removeAttribute('aria-invalid'); aaStore(t, can); aaNote(t, AAFULL[can], false, '');
+      if (!final && i < 8) {
+        const g = t.dataset.g, r = t.dataset.r, nx = [$('#m-' + g + '-' + r + '-' + (i + 1)), $('#a-' + g + '-' + r + '-' + (i + 1))].find(x => x && !x.value);
+        if (nx) nx.focus();
+      }
+      return;
+    }
+    aaStore(t, '');
+    const waiting = !final && (low.length < 3 || (low.length === 3 && (low === 'sto' || (wn && low === 'non'))));
+    if (!raw || waiting) { t.classList.remove('no'); t.removeAttribute('aria-invalid'); aaNote(t, '', false, ''); return; }
+    t.classList.add('no'); t.setAttribute('aria-invalid', 'true');
+    aaNote(t, 'not on chart', true, 'Box ' + (i + 1) + ': “' + raw + '” is not an amino acid. Check the chart.');
+  }
   const bt = (x, extra) => '<i class="bt b' + (x === 'U' ? 'T u' : x) + (extra || '') + '">' + x + '</i>';
   const cods = (arr, fn) => arr.map((c, i) => '<div class="cod' + (fn && fn.diff === i ? ' diff' : '') + '">' + c.split('').map((x, j) => (fn && fn.tile ? fn.tile(x, i * 3 + j) : bt(x))).join('') + '</div>').join('');
   function strand(gid, ri, template, opt) {
@@ -851,10 +896,16 @@ if (typeof module !== 'undefined') module.exports = BRS;
       h += '<span class="lab">mRNA 5′ → 3′ · pair a base with each template base</span><div class="six">' +
         template.map((t, i) => '<input type="text" class="mrna" id="m-' + gid + '-' + ri + '-' + i + '" data-g="' + gid + '" data-r="' + ri + '" data-i="' + i + '" maxlength="3" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="mRNA codon ' + (i + 1) + '" value="' + (a.m[i] || '').replace(/[^A-Z]/g, '') + '">').join('') + '</div>';
     }
-    h += '<span class="lab">Amino acids</span><div class="six">';
-    h += given ? given.protein.map(c => '<span>' + (c === 'none' ? '·' : c) + '</span>').join('')
-      : template.map((t, i) => '<select class="aa" id="a-' + gid + '-' + ri + '-' + i + '" data-g="' + gid + '" data-r="' + ri + '" data-i="' + i + '" aria-label="Amino acid ' + (i + 1) + '">' + aaOpts(a.a[i] || '', opt.withNone) + '</select>').join('');
-    return h + '</div></div>';
+    if (given) return h + '<span class="lab">Amino acids</span><div class="six">' + given.protein.map(c => '<span>' + (c === 'none' ? '·' : c) + '</span>').join('') + '</div></div>';
+    const wn = opt.withNone ? '1' : '0', at = i => 'id="a-' + gid + '-' + ri + '-' + i + '" data-g="' + gid + '" data-r="' + ri + '" data-i="' + i + '" data-n="' + wn + '" aria-label="Amino acid ' + (i + 1) + '"';
+    h += '<div class="aabar"><span class="lab">Amino acids · ' + (S.pick ? 'choose from each list' : 'three letters, ' + (opt.withNone ? 'STOP or none' : 'or STOP')) + '</span>' +
+      '<button type="button" class="quiet" data-act="aapick" data-g="' + gid + '">' + (S.pick ? 'Type them' : 'Pick from a list') + '</button></div><div class="six">';
+    h += template.map((t, i) => S.pick
+      ? '<select class="aa" ' + at(i) + '>' + aaOpts(a.a[i] || '', opt.withNone) + '</select>'
+      : '<input type="text" class="aa" ' + at(i) + ' maxlength="4" inputmode="text" enterkeyhint="next" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="' + (aaCanon(a.a[i], opt.withNone) || '') + '">').join('');
+    h += '</div><div class="six nm">' + template.map((t, i) => '<span id="n-' + gid + '-' + ri + '-' + i + '">' + (AAFULL[aaCanon(a.a[i], opt.withNone)] || '') + '</span>').join('') + '</div>' +
+      '<p class="aamsg" id="aamsg-' + gid + '-' + ri + '" role="status" aria-live="polite"></p>';
+    return h + '</div>';
   }
   const WHY = [['copy', 'RNA polymerase copies the top strand directly.'], ['pair', 'It pairs with the template strand, and the template is the complement of the top strand, so a complement of a complement matches the original.'], ['same', 'mRNA and DNA use the same four bases.'], ['ribo', 'The ribosome changes the letters to match.']];
   let whyJust = false;
@@ -875,19 +926,21 @@ if (typeof module !== 'undefined') module.exports = BRS;
     return h + '</tbody></table></div>';
   }
   function markCells(gid, rows, withT) {
-    let all = true, sawT = false, blank = false;
+    let all = true, sawT = false, blank = false, notAA = false;
     rows.forEach(function (row, ri) {
       for (let i = 0; i < row.mrna.length; i++) {
         const mi = $('#m-' + gid + '-' + ri + '-' + i), ai = $('#a-' + gid + '-' + ri + '-' + i);
-        const mv = mi.value.trim().toUpperCase(), okm = mv === row.mrna[i], oka = ai.value === row.protein[i];
+        const av = aaVal(ai), no = ai.tagName !== 'SELECT' && !!ai.value.trim() && !av;
+        const mv = mi.value.trim().toUpperCase(), okm = mv === row.mrna[i], oka = av === row.protein[i];
         if (mv.indexOf('T') >= 0) sawT = true;
-        if (!mv || !ai.value) blank = true;
+        if (no) { notAA = true; aaTyped(ai, true); }
+        if (!mv || (!av && !no)) blank = true;
         mi.classList.toggle('ok', okm); mi.classList.toggle('bad', !okm); mi.setAttribute('aria-invalid', String(!okm));
-        ai.classList.toggle('ok', oka); ai.classList.toggle('bad', !oka); ai.setAttribute('aria-invalid', String(!oka));
+        ai.classList.toggle('ok', oka); ai.classList.toggle('bad', !oka && !no); ai.setAttribute('aria-invalid', String(!oka));
         all = all && okm && oka;
       }
     });
-    return { all: all, sawT: sawT, blank: blank };
+    return { all: all, sawT: sawT, blank: blank, notAA: notAA };
   }
   const needCreature = step => '<section class="block"><span class="eyebrow">' + step + '</span><h2>No creature yet</h2><p>Every gene on this page belongs to one animal. <a href="#rock">Go to step 1 and find a Creature Code first.</a></p></section>';
 
@@ -906,7 +959,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
 
     h += '<section class="block"><h3>' + g.id + ' · ' + g.name + ' <span class="muted small">' + (g.chr === 'X' ? 'X chromosome' : 'chromosome ' + g.chr) + '</span></h3>';
     if (!S.dec[g.id]) {
-      h += '<p>This is the copy ' + S.code + ' got from its mother. Transcribe it, then translate it. Codon 9 is a stop: choose STOP there.</p>' + strand(g.id, 0, m.template, { label: 'Copy from the mother' }) +
+      h += '<p>This is the copy ' + S.code + ' got from its mother. Transcribe it, then translate it. Codon 9 is a stop: enter STOP there.</p>' + strand(g.id, 0, m.template, { label: 'Copy from the mother' }) +
         '<div class="row"><button data-act="check">Check this gene</button></div><div id="fb" aria-live="polite"></div>';
     } else if (!S.done[g.id]) {
       h += strand(g.id, 0, m.template, { given: m, top: true, label: 'Copy from the mother · you decoded this one' }) +
@@ -950,7 +1003,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       h += '<p class="say good"><a href="#notes">Go to step 4 for your field notes and your stamp.</a></p>';
     } else {
       h += strand('EMB', 0, mom.template, { label: 'Copy from the mother', withNone: true }) +
-        '<p class="small muted">If a stop codon comes early, choose STOP there and “none” for every codon after it. The ribosome has already let go.</p>' +
+        '<p class="small muted">If a stop codon comes early, enter STOP there and “none” in every box after it. The ribosome has already let go.</p>' +
         '<div class="field"><label for="q-codon">Which codon reads differently from the reference?</label><select id="q-codon" data-q="codon" style="max-width:20rem">' + ['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(v => '<option value="' + v + '"' + (String(q.codon == null ? '' : q.codon) === String(v) ? ' selected' : '') + '>' + (v === '' ? 'Choose' : v === 0 ? 'No codon. The copies match.' : 'Codon ' + v) + '</option>').join('') + '</select></div>' +
         '<fieldset id="q-kind"><legend>What happened to the protein?</legend>' + KINDS.map(k => '<label class="opt"><input type="radio" name="kind" id="k-' + k[0] + '" value="' + k[0] + '" data-q="kind"' + (q.kind === k[0] ? ' checked' : '') + '><span>' + k[1] + '</span></label>').join('') + '</fieldset>' +
         '<div class="row"><button data-act="checkbase">Check my answers</button></div><div id="fb" aria-live="polite"></div>';
@@ -1172,10 +1225,11 @@ if (typeof module !== 'undefined') module.exports = BRS;
     else if (act === 'keep') { S.asking = false; render(); }
     else if (act === 'wipe') { S = fresh(); CR = null; lifted = null; flash = null; save(); render(); }
     else if (act === 'gene') { S.gene = t.dataset.g; save(); render(); }
+    else if (act === 'aapick') { S.pick = !S.pick; save(); const y = window.scrollY; render(); window.scrollTo(0, y); const b = $('[data-act="aapick"][data-g="' + t.dataset.g + '"]'); if (b) b.focus({ preventScroll: true }); }
     else if (act === 'check') {
       const e = BRS.entry(CR, S.gene), res = markCells(S.gene, [e.copies[0]]);
       if (res.all) { S.dec[S.gene] = true; if (e.copies.length === 1) S.done[S.gene] = true; save(); render(); }
-      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.blank ? 'Some boxes are still empty. ' : '') + 'Boxes with a dashed border need another look. Check the base pairing first, because one wrong mRNA base changes the amino acid too.</p>';
+      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.blank ? 'Some boxes are still empty. ' : '') + (res.notAA ? 'A solid red box is not an amino acid, so it does not count yet. ' : '') + 'Boxes with a dashed border need another look. Check the base pairing first, because one wrong mRNA base changes the amino acid too.</p>';
     }
     else if (act === 'zyg') {
       const pick = document.querySelector('input[name="zyg"]:checked'), e = BRS.entry(CR, S.gene);
@@ -1195,7 +1249,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       qc.classList.toggle('ok', okc); qc.classList.toggle('bad', !okc);
       const fs = $('#q-kind'); fs.classList.toggle('ok', okk); fs.classList.toggle('bad', !okk); fs.style.padding = '8px'; fs.style.borderRadius = '5px';
       if (res.all && okc && okk) { S.mutDone = true; save(); render(); }
-      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.all ? 'Your decoding is right. Now line' : 'Anything with a dashed border needs another look. Line') + ' the two templates up codon by codon and count the bases that differ.</p>';
+      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.notAA ? 'A solid red box is not an amino acid, so it does not count yet. ' : '') + (res.all ? 'Your decoding is right. Now line' : 'Anything with a dashed border needs another look. Line') + ' the two templates up codon by codon and count the bases that differ.</p>';
     }
     else if (act === 'choose') { if (nDone() !== BRS.GENES.length || !S.mutDone) return; S.choice = t.dataset.c; save(); if (S.choice === 'see') reveal(); else render(); }
     else if (act === 'reveal') reveal();
@@ -1210,6 +1264,11 @@ if (typeof module !== 'undefined') module.exports = BRS;
   });
   app.addEventListener('keydown', function (ev) {
     const t = ev.target.closest('.cover'); if (t && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); lift(+t.dataset.i); }
+    const bx = ev.target;
+    if (ev.key === 'Enter' && bx.matches && bx.matches('input.mrna, input.aa')) { /* the keyboard's next key walks box to box */
+      ev.preventDefault(); if (bx.classList.contains('aa')) aaTyped(bx, true);
+      const all = Array.prototype.slice.call(bx.closest('.strand').querySelectorAll('input.mrna, input.aa')), nx = all[all.indexOf(bx) + 1]; if (nx) nx.focus();
+    }
   });
   app.addEventListener('input', function (ev) {
     const t = ev.target;
@@ -1221,11 +1280,13 @@ if (typeof module !== 'undefined') module.exports = BRS;
       t.classList.remove('ok', 'bad');
       if (t.value.length === 3 && i < 8) { const nx = $('#m-' + g + '-' + r + '-' + (i + 1)); if (nx && !nx.value) nx.focus(); }
     }
+    else if (t.classList.contains('aa') && t.tagName === 'INPUT') aaTyped(t, false);
   });
   app.addEventListener('change', function (ev) {
     const t = ev.target;
     if (t.id === 'cname') { chip(); } // a full redraw here swallowed the next tap
-    else if (t.classList.contains('aa')) { const g = t.dataset.g, r = t.dataset.r; S.ans[g] = S.ans[g] || {}; S.ans[g][r] = S.ans[g][r] || { m: [], a: [] }; S.ans[g][r].a[+t.dataset.i] = t.value; t.classList.remove('ok', 'bad'); save(); }
+    else if (t.classList.contains('aa') && t.tagName === 'INPUT') aaTyped(t, true);
+    else if (t.classList.contains('aa')) { aaStore(t, t.value); t.classList.remove('ok', 'bad'); aaNote(t, AAFULL[t.value] || '', false, ''); }
     else if (t.dataset.q) { S.ans.MUTQ = S.ans.MUTQ || {}; S.ans.MUTQ[t.dataset.q] = t.value; save(); }
   });
   app.addEventListener('submit', function (ev) {
