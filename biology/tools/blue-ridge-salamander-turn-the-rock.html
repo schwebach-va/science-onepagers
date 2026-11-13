@@ -155,6 +155,8 @@ legend{font-weight:700;padding:0;margin-bottom:4px}
 .notes li{padding:9px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:10px}
 .notes li .g{font:600 .78rem var(--mono);color:var(--moss);padding-top:3px}
 .notes li.locked{color:var(--muted)}
+.progress{padding:10px 12px;border:1.5px solid var(--moss);border-radius:5px;background:var(--moss-soft)}
+.progress .bar{display:block;height:8px;border-radius:4px;background:var(--rule);margin:6px 0;overflow:hidden} .progress .bar i{display:block;height:100%;background:var(--moss)}
 .notes li .draw{display:block;color:var(--muted);font-size:.93rem}
 .tray{background:var(--tray);color:var(--tray-ink);border-radius:5px;border:1.5px solid var(--rule);padding:6px}
 .tray svg{display:block;width:100%;height:auto}
@@ -687,7 +689,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const app = $('#app');
   const KEY = 'brs-v3';
-  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false, pick: false, view: '3d', no3d: false });
+  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false, pick: false, view: '3d', no3d: false, fails: {} });
   let S = fresh();
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && typeof j === 'object') S = Object.assign(fresh(), j, { asking: false }); } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
@@ -698,6 +700,35 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const VIEWS = ['rock', 'decode', 'base', 'notes'];
   const view = () => { const h = (location.hash || '').slice(1); return VIEWS.indexOf(h) >= 0 ? h : 'rock'; };
   const nDone = () => BRS.GENES.filter(g => S.done[g.id]).length;
+  /* Traits fill in as genes are decoded (11/12): one plain line per finished gene. The animal itself stays hidden. */
+  function traitWord(id) {
+    const p = CR.ph, yn = v => (v ? 'yes' : 'no');
+    switch (id) {
+      case 'STR': return 'Back stripe: ' + yn(p.striped);
+      case 'COL': return 'Ember color: ' + p.color;
+      case 'TOX': return 'Toxin: ' + (p.toxinLevel === 'glands' ? 'yes' : p.toxinLevel);
+      case 'SPT': return 'Markings: ' + ([p.brass ? 'brass flecks' : '', p.white ? 'white spots' : ''].filter(Boolean).join(' and ') || 'none');
+      case 'GLO': return 'Glow: ' + (p.glow === 'both' ? 'ember and foxfire' : p.glow);
+      case 'CLW': return 'Claws: ' + yn(p.claws);
+      case 'GIL': return 'Gills: ' + yn(p.gills);
+      case 'REG': return 'Healing skin: ' + yn(p.heals);
+      case 'POW': return 'Power: ' + p.powers.map(k => PNAME[k]).join(' and ');
+      case 'AUR': return 'Gift: ' + (p.gifts.map(k => ({ plants: 'plants grow where it has passed', animals: 'animals gather near it', friends: 'people who meet it become friends' }[k])).join('; ') || 'none');
+      case 'VOC': return 'Call: ' + (p.calls.length === 2 ? 'two voices, a woman’s and a man’s' : p.calls[0] === 'soprano' ? 'a woman’s voice' : p.calls[0] === 'baritone' ? 'a man’s voice' : 'clicks');
+      case 'VIS': return 'Color vision: ' + (p.color_vision ? 'full color' : 'red-blind');
+      case 'LEN': return 'Length: ' + CR.length.toFixed(1) + ' cm';
+      default: return '';
+    }
+  }
+  const lenDone = () => ['LN1', 'LN2', 'LN3'].every(x => S.done[x]);
+  function traitsSoFar() { const out = []; let len = false; BRS.GENES.forEach(function (g) { if (g.id.indexOf('LN') === 0) { if (!len && lenDone()) { len = true; out.push(traitWord('LEN')); } } else if (S.done[g.id]) out.push(traitWord(g.id)); }); return out; }
+  const partsDone = () => nDone() + (S.mutDone ? 1 : 0);
+  const partsLeft = () => BRS.GENES.filter(g => !S.done[g.id]).map(g => g.id + ' (' + g.name.toLowerCase() + ')').concat(S.mutDone ? [] : ['the ember gene in step 3']);
+  function progressHTML() {
+    const d = partsDone(), all = BRS.PARTS.length, left = partsLeft();
+    return '<div class="progress" id="progress"><b>' + d + ' of ' + all + ' parts done.</b><span class="bar" role="img" aria-label="' + d + ' of ' + all + ' parts done"><i style="width:' + Math.round(100 * d / all) + '%"></i></span>' +
+      (left.length ? '<span class="small">Still to do: ' + left.join(', ') + '.</span>' : '<span class="small">Every gene checks correct.</span>') + '</div>';
+  }
   const dash = a => a.map(x => x === 'none' ? '(not built)' : x).join('–');
 
   /* ---------- header ---------- */
@@ -958,7 +989,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     let h = '<section class="block"><span class="eyebrow">Step 2 · decode</span><h2>Read ' + S.code + ' one gene at a time</h2>' +
       '<p class="lede">Each gene is a short stretch of double-stranded DNA. RNA polymerase unzips it and reads one strand, the template. Build the mRNA by pairing a base with each template base, then use the codon chart to translate the mRNA into a chain of amino acids. The chain is the protein, and the protein gives the animal a trait.</p>' +
       '<p>' + S.code + ' has two copies of most genes, one from each parent. You decode the copy from its mother. Then the copy from its father appears, and you compare the two.</p>' +
-      '<p class="muted">' + nDone() + ' of ' + BRS.GENES.length + ' genes finished. Each one adds a line to your field notes.</p>' +
+      '<p class="muted">' + partsDone() + ' of ' + BRS.PARTS.length + ' parts done (' + nDone() + ' of ' + BRS.GENES.length + ' genes, and the ember gene in step 3). Each gene that checks correct writes its trait into <a href="#notes">your field notes</a> right away.</p>' +
       '<div class="genes" role="group" aria-label="Genes">' + BRS.GENES.map(x => '<button data-act="gene" data-g="' + x.id + '" aria-pressed="' + (x.id === S.gene) + '"' + (S.done[x.id] ? ' class="done"' : '') + '>' + x.id + (S.done[x.id] ? ' ✓' : '') + '</button>').join('') + '</div></section>';
 
     h += '<details><summary>Worked example: the ember gene</summary><p>Every animal on the ridge carries this gene. Pair each DNA base with its RNA partner (A with U, T with A, C with G, G with C), then read the mRNA three bases at a time on the chart.</p>' + strand('EMB', 9, BRS.EMB.template, { given: BRS.EMB, top: S.why, mine: false }) + '</details>';
@@ -1185,18 +1216,18 @@ if (typeof module !== 'undefined') module.exports = BRS;
     const seen = {}; let lines = '', brief = '';
     BRS.GENES.forEach(function (g) {
       const ln = CR.ph.lines[g.id], isLen = g.id.indexOf('LN') === 0;
-      if (isLen) { if (seen.len) return; seen.len = 1; const all = ['LN1', 'LN2', 'LN3'].every(x => S.done[x]); lines += all ? '<li><span class="g">LN1–LN3</span><span>' + ln[0] + '</span></li>' : '<li class="locked"><span class="g">LN1–LN3</span><span>Decode all three length genes to learn why it is this long.</span></li>'; return; }
-      if (S.done[g.id]) { lines += '<li><span class="g">' + g.id + '</span><span>' + ln[0] + '</span></li>'; if (ln[1]) brief += '<li>' + ln[1] + '</li>'; }
+      if (isLen) { if (seen.len) return; seen.len = 1; const all = ['LN1', 'LN2', 'LN3'].every(x => S.done[x]); lines += all ? '<li><span class="g">LN1–LN3</span><span><b>' + traitWord('LEN') + '.</b> ' + ln[0] + '</span></li>' : '<li class="locked"><span class="g">LN1–LN3</span><span>Decode all three length genes to learn why it is this long.</span></li>'; return; }
+      if (S.done[g.id]) { lines += '<li><span class="g">' + g.id + '</span><span><b>' + traitWord(g.id) + '.</b>' + (/^(Power|Two powers|Gift|Two gifts|Call|Ember color)\b/.test(ln[0]) ? '' : ' ' + ln[0]) + '</span></li>'; if (ln[1]) brief += '<li>' + ln[1] + '</li>'; }
       else lines += '<li class="locked"><span class="g">' + g.id + '</span><span>' + g.name + ': not decoded yet.</span></li>';
     });
     const shown = S.reveal && complete;
-    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nReveal: ' + (!S.reveal ? 'not yet' : S.no3d ? 'seen as the field drawing' : 'seen in 3D') + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nLab slip: ' + (CR.mut ? 'a new mutation' : 'no new mutation') + '\nEmber gene checked: ' + (S.mutDone ? 'yes' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)\nKEEPER CODE: ' + BRS.keeper(S.code) : 'Progress stamp: ' + st + '  (not finished)');
+    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nReveal: ' + (!S.reveal ? 'not yet' : S.no3d ? 'seen as the field drawing' : 'seen in 3D') + '\nParts done: ' + partsDone() + ' of ' + BRS.PARTS.length + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nTraits so far: ' + (traitsSoFar().join('; ') || '(none yet)') + (complete ? '' : '\nStill to do: ' + partsLeft().join(', ')) + '\nLab slip: ' + (CR.mut ? 'a new mutation' : 'no new mutation') + '\nEmber gene checked: ' + (S.mutDone ? 'yes' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)\nKEEPER CODE: ' + BRS.keeper(S.code) : 'Progress stamp: ' + st + '  (not finished)');
     let h = '<section class="block"><span class="eyebrow">Step 4 · field notes</span><h2>' + (S.name ? esc(S.name) + ', ' : '') + S.code + '</h2>' +
       '<div class="field"><label for="cname">Name your salamander</label><input type="text" id="cname" maxlength="24" autocomplete="off" value="' + esc(S.name) + '" placeholder="A name worth a legend" style="max-width:22rem"></div>' +
       '<div class="record"><div><span class="k">Population</span><span class="v">' + site.pop + '</span></div><div><span class="k">Found under</span><span class="v">' + found + '</span></div><div><span class="k">Sex</span><span class="v">' + (CR.sex === 'XX' ? 'female · XX' : 'male · XY') + '</span></div><div><span class="k">Length</span><span class="v">' + CR.length.toFixed(1) + ' cm</span></div><div><span class="k">Mass</span><span class="v">' + CR.mass.toFixed(1) + ' g</span></div></div>' +
       '<h3>Field stats</h3><div class="stats">' + CR.stats.map(x => '<div class="stat"><span class="k">' + x.k + '</span><span class="meter"><i style="width:' + Math.round(x.bar * 100) + '%"></i></span><span class="v">' + x.v + '</span></div>').join('') + '</div>' +
       '<p class="small muted">Every stat comes from the genes you are decoding, and most genes change more than one stat. Compare with a neighbor and work out which genes feed which.</p>' +
-      '<h3>What the genes say</h3><ul class="notes">' + lines + '</ul></section>';
+      '<h3>What the genes say</h3>' + progressHTML() + '<ul class="notes">' + lines + '</ul></section>';
     /* The reveal (11/12): a blank dark box until every gene checks correct; then the 3D animal, asked for with one tap;
        the field drawing opens only after the 3D reveal has played, and the two views link to each other. */
     h += '<section class="block" id="meet"><h3>Meet ' + (S.name ? esc(S.name) : 'your salamander') + '</h3>';
@@ -1214,7 +1245,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
         '<p class="small muted">The call in this drawing is a stand-in tone. The recorded voice is in the 3D view.</p><details><summary>Drawing notes</summary>' + drawNotes + '</details>';
     }
 
-    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete ? 'The final stamp proves every gene was decoded correctly. Paste this into the Field Record assignment.' : 'The final stamp appears here when every gene is decoded and the ember gene is checked. Until then this shows a progress stamp.') + '</p>' + (complete ? '<div class="slip"><span class="eyebrow">Keeper code · copy it onto your pocket card</span><b class="big">' + BRS.keeper(S.code) + '</b><span>This code is the way back to ' + (S.name ? esc(S.name) : 'your salamander') + ' later, without redoing the work. Keep it.</span><span>It also opens the reveal on any other computer or iPad: <a href="blue-ridge-salamander-3d.html">the 3D page</a> asks for this code.</span></div>' : '') + '<textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
+    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete ? 'The final stamp proves every gene was decoded correctly. Paste this into the Field Record assignment.' : 'The final stamp appears here when every gene is decoded and the ember gene is checked. Until then this shows a progress stamp, the traits you have decoded so far and what is left. It can be handed in as it is.') + '</p>' + (complete ? '<div class="slip"><span class="eyebrow">Keeper code · copy it onto your pocket card</span><b class="big">' + BRS.keeper(S.code) + '</b><span>This code is the way back to ' + (S.name ? esc(S.name) : 'your salamander') + ' later, without redoing the work. Keep it.</span><span>It also opens the reveal on any other computer or iPad: <a href="blue-ridge-salamander-3d.html">the 3D page</a> asks for this code.</span></div>' : '') + '<textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
     return h;
   }
 
@@ -1254,7 +1285,8 @@ if (typeof module !== 'undefined') module.exports = BRS;
     else if (act === 'check') {
       const e = BRS.entry(CR, S.gene), res = markCells(S.gene, [e.copies[0]]);
       if (res.all) { S.dec[S.gene] = true; if (e.copies.length === 1) S.done[S.gene] = true; save(); render(); }
-      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.blank ? 'Some boxes are still empty. ' : '') + (res.notAA ? 'A solid red box is not an amino acid, so it does not count yet. ' : '') + 'Boxes with a dashed border need another look. Check the base pairing first, because one wrong mRNA base changes the amino acid too.</p>';
+      else { S.fails = S.fails || {}; S.fails[S.gene] = (S.fails[S.gene] || 0) + 1; save(); }
+      if (!res.all) $('#fb').innerHTML = (S.fails[S.gene] >= 3 ? '<p class="say" id="stuck"><b>Stuck?</b> Ask your teacher. They can check this gene with you.</p>' : '') + '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.blank ? 'Some boxes are still empty. ' : '') + (res.notAA ? 'A solid red box is not an amino acid, so it does not count yet. ' : '') + 'Boxes with a dashed border need another look. Check the base pairing first, because one wrong mRNA base changes the amino acid too.</p>';
     }
     else if (act === 'zyg') {
       const pick = document.querySelector('input[name="zyg"]:checked'), e = BRS.entry(CR, S.gene);
@@ -1274,7 +1306,8 @@ if (typeof module !== 'undefined') module.exports = BRS;
       qc.classList.toggle('ok', okc); qc.classList.toggle('bad', !okc);
       const fs = $('#q-kind'); fs.classList.toggle('ok', okk); fs.classList.toggle('bad', !okk); fs.style.padding = '8px'; fs.style.borderRadius = '5px';
       if (res.all && okc && okk) { S.mutDone = true; save(); render(); }
-      else $('#fb').innerHTML = '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.notAA ? 'A solid red box is not an amino acid, so it does not count yet. ' : '') + (res.all ? 'Your decoding is right. Now line' : 'Anything with a dashed border needs another look. Line') + ' the two templates up codon by codon and count the bases that differ.</p>';
+      else { S.fails = S.fails || {}; S.fails.EMB = (S.fails.EMB || 0) + 1; save(); }
+      if (!(res.all && okc && okk)) $('#fb').innerHTML = (S.fails.EMB >= 3 ? '<p class="say" id="stuck"><b>Stuck?</b> Ask your teacher. They can check this gene with you.</p>' : '') + '<p class="say warn">' + (res.sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + (res.notAA ? 'A solid red box is not an amino acid, so it does not count yet. ' : '') + (res.all ? 'Your decoding is right. Now line' : 'Anything with a dashed border needs another look. Line') + ' the two templates up codon by codon and count the bases that differ.</p>';
     }
     else if (act === 'choose') { if (nDone() !== BRS.GENES.length || !S.mutDone) return; S.choice = t.dataset.c; save(); if (S.choice === 'see') reveal(); else render(); }
     else if (act === 'reveal') reveal();
