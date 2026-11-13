@@ -177,6 +177,12 @@ button.die:hover{border-color:var(--ember)}
 .meter{height:12px;border:1.5px solid var(--ink);border-radius:2px;background:var(--paper);overflow:hidden}
 .meter i{display:block;height:100%;background:var(--ember)}
 .tray canvas{display:block;width:100%;height:auto}
+.rbox{position:relative;width:100%;aspect-ratio:16/10;min-height:320px;max-height:78vh;background:#05070c;border:1.5px solid var(--rule);border-radius:6px;overflow:hidden}
+.rbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.rbox.dark{display:flex;align-items:center;justify-content:center;padding:24px;text-align:center}
+.rbox.dark p{margin:0;max-width:30ch;color:#7f8a9a}
+.views{margin-bottom:8px} .views button{background:transparent;color:var(--ink)} .views button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+@media (max-width:520px){ .rbox{aspect-ratio:4/5;min-height:430px} }
 @media (max-width:520px){ .stat{grid-template-columns:6.4rem minmax(0,1fr) 4.6rem;gap:6px} .stat .k{font-size:.66rem;letter-spacing:0} body{font-size:16px} .steps a{font-size:.74rem;padding:6px 5px} .block{padding:12px} .six{gap:3px} .six>*{letter-spacing:0} .notes li{grid-template-columns:1fr;gap:2px} .chart td{font-size:.7rem} .chart th,.chart td{padding:4px 4px} }
 @media (max-width:520px){ .six .cod .bt{font-size:11.5px;border-radius:2px} .six .cod{gap:1px} .bt.tu{box-shadow:0 0 0 1px var(--panel),0 0 0 2.5px var(--ember)} .pol{font-size:.64rem;padding:2px 6px} }
 @media (max-width:760px){ .six{gap:3px} .six>*{font-size:13px;letter-spacing:0} .six input,.six select{font-size:13px;padding:8px 0} }
@@ -681,7 +687,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const app = $('#app');
   const KEY = 'brs-v3';
-  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false, pick: false });
+  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false, pick: false, view: '3d', no3d: false });
   let S = fresh();
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && typeof j === 'object') S = Object.assign(fresh(), j, { asking: false }); } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
@@ -1160,6 +1166,18 @@ if (typeof module !== 'undefined') module.exports = BRS;
   }
 
   /* ---------- step 4: field notes ---------- */
+  const viewNow = () => (!S.reveal ? '3d' : (S.no3d || S.view === '2d') ? '2d' : '3d');
+  function viewLinks() {
+    if (!S.reveal || S.no3d) return '';
+    const v = viewNow();
+    return '<div class="row views" role="group" aria-label="Two views of your salamander"><button data-act="view" data-v="3d" aria-pressed="' + (v === '3d') + '">See it in 3D</button><button data-act="view" data-v="2d" aria-pressed="' + (v === '2d') + '">Field drawing (2D)</button></div>';
+  }
+  /* the 3D viewer in the box reports back: the reveal has played, or 3D could not start */
+  window.addEventListener('message', function (ev) {
+    const m = ev.data, fr = $('#v3d'); if (!m || !m.brs3d || !fr || ev.source !== fr.contentWindow) return;
+    if (m.ev === 'revealed' && !S.reveal) { S.reveal = true; S.view = '3d'; save(); const vl = $('#viewlinks'); if (vl) vl.innerHTML = viewLinks(); const a = $('#after3d'); if (a) a.textContent = 'The field drawing is open now. The two buttons above the box switch between the views.'; const df = $('#drawfirst summary'); if (df) df.textContent = 'Drawing notes'; }
+    else if (m.ev === 'nogl') { S.no3d = true; S.reveal = true; save(); render(); }
+  });
   function notesView() {
     if (!CR) return needCreature('Step 4 · field notes');
     const n = nDone(), complete = n === BRS.GENES.length && S.mutDone, st = BRS.stamp(S.code, complete ? BRS.FULL : BRS.GENES.filter(g => S.done[g.id]).map(g => g.id).concat(S.mutDone ? ['EMB'] : [])), site = BRS.site(CR.site);
@@ -1172,24 +1190,31 @@ if (typeof module !== 'undefined') module.exports = BRS;
       else lines += '<li class="locked"><span class="g">' + g.id + '</span><span>' + g.name + ': not decoded yet.</span></li>';
     });
     const shown = S.reveal && complete;
-    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nChose to: ' + (S.choice === 'draw' ? 'draw it first' : S.choice === 'see' ? 'see it first' : '(not chosen yet)') + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nLab slip: ' + (CR.mut ? 'a new mutation' : 'no new mutation') + '\nEmber gene checked: ' + (S.mutDone ? 'yes' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)\nKEEPER CODE: ' + BRS.keeper(S.code) : 'Progress stamp: ' + st + '  (not finished)');
+    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nReveal: ' + (!S.reveal ? 'not yet' : S.no3d ? 'seen as the field drawing' : 'seen in 3D') + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nLab slip: ' + (CR.mut ? 'a new mutation' : 'no new mutation') + '\nEmber gene checked: ' + (S.mutDone ? 'yes' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)\nKEEPER CODE: ' + BRS.keeper(S.code) : 'Progress stamp: ' + st + '  (not finished)');
     let h = '<section class="block"><span class="eyebrow">Step 4 · field notes</span><h2>' + (S.name ? esc(S.name) + ', ' : '') + S.code + '</h2>' +
       '<div class="field"><label for="cname">Name your salamander</label><input type="text" id="cname" maxlength="24" autocomplete="off" value="' + esc(S.name) + '" placeholder="A name worth a legend" style="max-width:22rem"></div>' +
       '<div class="record"><div><span class="k">Population</span><span class="v">' + site.pop + '</span></div><div><span class="k">Found under</span><span class="v">' + found + '</span></div><div><span class="k">Sex</span><span class="v">' + (CR.sex === 'XX' ? 'female · XX' : 'male · XY') + '</span></div><div><span class="k">Length</span><span class="v">' + CR.length.toFixed(1) + ' cm</span></div><div><span class="k">Mass</span><span class="v">' + CR.mass.toFixed(1) + ' g</span></div></div>' +
       '<h3>Field stats</h3><div class="stats">' + CR.stats.map(x => '<div class="stat"><span class="k">' + x.k + '</span><span class="meter"><i style="width:' + Math.round(x.bar * 100) + '%"></i></span><span class="v">' + x.v + '</span></div>').join('') + '</div>' +
       '<p class="small muted">Every stat comes from the genes you are decoding, and most genes change more than one stat. Compare with a neighbor and work out which genes feed which.</p>' +
       '<h3>What the genes say</h3><ul class="notes">' + lines + '</ul></section>';
-    h += '<section class="block"><h3>Meet ' + (S.name ? esc(S.name) : 'your salamander') + '</h3>';
-    if (!complete) h += '<p class="say"><b>Not yet.</b> Your salamander appears when all ' + BRS.GENES.length + ' genes are decoded and the ember gene is checked in step 3. So far: ' + n + ' of ' + BRS.GENES.length + ' genes, ember gene ' + (S.mutDone ? 'checked' : 'not checked yet') + '.</p>' + (brief ? '<p>Drawing notes so far. An artist can start the sketch now.</p><ul>' + brief + '</ul>' : '');
-    else if (!S.choice) h += '<p>Choose how you want to meet it. An artist may want to draw it from the field notes before seeing it. Either way, it will move, use its power and call when it appears.</p><div class="row"><button data-act="choose" data-c="draw">I will draw it first</button><button class="ghost" data-act="choose" data-c="see">Show it to me now</button></div>';
+    /* The reveal (11/12): a blank dark box until every gene checks correct; then the 3D animal, asked for with one tap;
+       the field drawing opens only after the 3D reveal has played, and the two views link to each other. */
+    h += '<section class="block" id="meet"><h3>Meet ' + (S.name ? esc(S.name) : 'your salamander') + '</h3>';
+    const drawNotes = '<p>Draw it from above, nose to the left, with a scale bar. At ' + CR.length.toFixed(1) + ' cm, the body is about one tenth as wide as the animal is long, and the tail is a little over half the length.</p>' + (brief ? '<ul>' + brief + '</ul>' : '');
+    if (!complete) h += '<div class="rbox dark"><p>Your salamander appears here when every gene checks correct.</p></div>' +
+      '<p class="small muted">So far: ' + n + ' of ' + BRS.GENES.length + ' genes, ember gene ' + (S.mutDone ? 'checked' : 'not checked yet') + '.</p>' + (brief ? '<p>Drawing notes so far. An artist can start the sketch now.</p><ul>' + brief + '</ul>' : '');
     else {
-      if (S.choice === 'draw') h += '<p>Draw it from above, nose to the left, with a scale bar. At ' + CR.length.toFixed(1) + ' cm, the body is about one tenth as wide as the animal is long, and the tail is a little over half the length.</p>' + (brief ? '<ul>' + brief + '</ul>' : '<p class="muted">Decode a gene and the first drawing note appears here.</p>');
-      if (shown) h += '<div class="tray"><canvas id="model" width="600" height="250" role="img" aria-label="' + S.code + ' drawn from its genes, moving"></canvas></div>' +
+      const v = viewNow();
+      h += '<div id="viewlinks">' + viewLinks() + '</div>';
+      if (v === '3d') h += '<div class="rbox"><iframe id="v3d" title="' + S.code + ' in 3D" allow="autoplay; fullscreen" src="blue-ridge-salamander-3d.html#k=' + BRS.keeper(S.code) + '&embed' + (S.reveal ? '&seen' : '') + '"></iframe></div>' +
+        (S.reveal ? '' : '<p class="small muted" id="after3d">The field drawing opens after the reveal.</p><details id="drawfirst"><summary>Want to draw it before you see it?</summary>' + drawNotes + '</details>');
+      else h += (S.no3d ? '<p class="say">3D could not start on this iPad, so this is the field drawing. To see the reveal, open <a href="blue-ridge-salamander-3d.html">the 3D page</a> on another computer or iPad and enter your keeper code, <b>' + BRS.keeper(S.code) + '</b>. <button class="quiet" data-act="try3d">Try 3D again</button></p>' : '') +
+        '<div class="tray"><canvas id="model" width="600" height="250" role="img" aria-label="' + S.code + ' drawn from its genes, moving"></canvas></div>' +
         '<div class="row"><button data-act="walk" aria-pressed="false">Walk</button><button class="ghost" data-act="breathe">Power: ' + CR.ph.powers.map(p => PNAME[p]).join(' and ') + '</button><button class="ghost" data-act="call">Call</button><span id="callfb" class="small muted" aria-live="polite"></span></div>' +
-        '<p class="small muted">The call here is a stand-in tone until the recorded voices are added.</p>';
-      else h += '<div class="row"><button data-act="reveal">My drawing is done. Show it to me.</button></div>';
+        '<p class="small muted">The call in this drawing is a stand-in tone. The recorded voice is in the 3D view.</p><details><summary>Drawing notes</summary>' + drawNotes + '</details>';
     }
-    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete ? 'The final stamp proves every gene was decoded correctly. Paste this into the Field Record assignment.' : 'The final stamp appears here when every gene is decoded and the ember gene is checked. Until then this shows a progress stamp.') + '</p>' + (complete ? '<div class="slip"><span class="eyebrow">Keeper code · copy it onto your pocket card</span><b class="big">' + BRS.keeper(S.code) + '</b><span>This code is the way back to ' + (S.name ? esc(S.name) : 'your salamander') + ' later, without redoing the work. Keep it.</span></div>' : '') + '<textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
+
+    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete ? 'The final stamp proves every gene was decoded correctly. Paste this into the Field Record assignment.' : 'The final stamp appears here when every gene is decoded and the ember gene is checked. Until then this shows a progress stamp.') + '</p>' + (complete ? '<div class="slip"><span class="eyebrow">Keeper code · copy it onto your pocket card</span><b class="big">' + BRS.keeper(S.code) + '</b><span>This code is the way back to ' + (S.name ? esc(S.name) : 'your salamander') + ' later, without redoing the work. Keep it.</span><span>It also opens the reveal on any other computer or iPad: <a href="blue-ridge-salamander-3d.html">the 3D page</a> asks for this code.</span></div>' : '') + '<textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
     return h;
   }
 
@@ -1253,6 +1278,8 @@ if (typeof module !== 'undefined') module.exports = BRS;
     }
     else if (act === 'choose') { if (nDone() !== BRS.GENES.length || !S.mutDone) return; S.choice = t.dataset.c; save(); if (S.choice === 'see') reveal(); else render(); }
     else if (act === 'reveal') reveal();
+    else if (act === 'view') { if (!S.reveal) return; S.view = t.dataset.v === '2d' ? '2d' : '3d'; save(); render(); const b = $('[data-act="view"][data-v="' + S.view + '"]'); if (b) b.focus({ preventScroll: true }); }
+    else if (act === 'try3d') { S.no3d = false; S.view = '3d'; save(); render(); }
     else if (act === 'walk') { if (anim) { anim.st.walk = !anim.st.walk; t.setAttribute('aria-pressed', String(anim.st.walk)); t.textContent = anim.st.walk ? 'Stop' : 'Walk'; anim.kick(); } }
     else if (act === 'breathe') breathe();
     else if (act === 'call') playCall();
