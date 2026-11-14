@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="light only">
 <link rel="canonical" href="https://scienceonepagers.org/biology/tools/toolbox.html">
 <meta name="description" content="The Toolbox: four DNA tools in one page. Copy DNA with PCR, cut it, run it on a gel in the Crime Lab, and edit it. Biology I Unit 4 (SOL BIO.5e). Nothing is saved or submitted.">
 <meta name="author" content="J. R. Schwebach">
@@ -21,7 +21,7 @@
   --next:#B8E600;
   --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
   --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
-  box-sizing:border-box;
+  color-scheme:light;box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 *,*::before,*::after{box-sizing:inherit}
@@ -295,6 +295,7 @@ function drawGel(c,o){
     s+=tx(LX[i],87,i<2?14:17,LLAB[i],{w:700,f:i===1?"#B3261E":"#1D1A15"});
     s+='<rect x="'+(LX[i]-29)+'" y="110" width="58" height="13" rx="2" fill="'+((w[i]&&!(o.prog>0))?"#2F5FA8":"#C4D2DC")+'" stroke="#8FA3B5"/>';
   }
+  if(o.guides)SIZES.forEach(function(bp){var gy=(yB(bp)+4.5).toFixed(1);s+='<line x1="56" y1="'+gy+'" x2="544" y2="'+gy+'" stroke="#8FA3B5" stroke-width="1.2" stroke-dasharray="5 5"/>';});
   function glow(x,y,wd,op){return '<rect x="'+x+'" y="'+(y-6)+'" width="'+wd+'" height="21" rx="7" fill="#B8E600" opacity="'+op+'"/>';}
   if(o.ghost){var j=o.ghost.j,q=o.ghost.q,pul=(q>.3&&q<.9)?Math.pow(Math.sin(Math.PI*2*(q-.3)/.6),2):0;
     c.scene.forEach(function(bp){if(L[j].indexOf(bp)>=0)s+=glow(LX[j]-69,yB(bp),101,pul);});}
@@ -387,8 +388,8 @@ var SC={
     var h=head("twist","One more question",q)+mcHtml("twist",opts.map(function(o){return '<span>'+o+'</span>';}),1,hint,ok);
     return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Station Record &#9654;","go",st.done?"":"disabled")+'</div>'};},
   record:function(){var c=CASES[S.ci],L=LEVELS[S.level],bl='<span class="blank"></span>';if(!S.t1)S.t1=Date.now();
-    var h=head("record","Packet p. 6A, box 2 &middot; Case "+c.n,"Copy the gel band for band: ladder, scene and suspects 1, 2, 3 (label their roles).");
-    h+='<div class="stage sm"><svg viewBox="0 70 600 516" role="img" aria-label="The finished gel to copy: ladder, scene and suspects 1, 2, 3">'+drawGel(c,{prog:1,ends:true})+'</svg></div><ul class="sus">';
+    var h=head("record","Packet p. 6A, box 2 &middot; Case "+c.n,"The ladder is printed for you. Copy the scene and suspects 1, 2, 3 band for band; each band sits on a dashed line. Label their roles.");
+    h+='<div class="stage sm"><svg viewBox="0 70 600 516" role="img" aria-label="The finished gel to copy: ladder, scene and suspects 1, 2, 3">'+drawGel(c,{prog:1,ends:true,guides:true})+'</svg></div><ul class="sus">';
     c.who.forEach(function(w,i){h+='<li><b>'+(i+1)+'</b>'+w+'</li>';});
     h+='</ul><div class="frame"><p><b>Claim:</b> the DNA at the scene came from '+bl+'.</p><p><b>Evidence:</b> '+bl+' bands line up.</p><p><b>Reasoning:</b> '+(L.reason?'same cuts mean the same DNA spelling in those places; small pieces run farther.':'<span class="blank long"></span>')+'</p><p>Does a match prove this person did it? <b>yes / no</b></p></div>';
     if(S.finished)h+='<p class="done">&#10003; Crime Lab done.</p>';
@@ -468,6 +469,7 @@ function teacherKey(){
 
 /* start */
 paintLevel();
+if(!TEACHER)document.getElementById("levelsw").classList.add("hidden"); /* students stay on the level their link sets */
 var start=-1,want=Q.get("case");
 if(want)CASES.forEach(function(c,i){if(c.n===want)start=i;});
 if(start>=0&&CASES[start].twist&&!LEVELS[S.level].twist){S.level="advanced";paintLevel();}
