@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light">
 <link rel="canonical" href="https://scienceonepagers.org/biology/tools/toolbox.html">
 <meta name="description" content="The Toolbox: four DNA tools in one page. Copy DNA with PCR, cut it, run it on a gel in the Crime Lab, and edit it. Biology I Unit 4 (SOL BIO.5e). Nothing is saved or submitted.">
 <meta name="author" content="J. R. Schwebach">
@@ -23,14 +23,6 @@
   --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
-    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
-    --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
-    --gold-soft:#2F2614;--gold-ink:#F2CF8C;--next:#C8F520;
-  }
 }
 *,*::before,*::after{box-sizing:inherit}
 html{-webkit-text-size-adjust:100%}
@@ -110,7 +102,7 @@ table.key th,table.key td{border:1px solid var(--rule);padding:.3rem .45rem;text
   <div class="top">
     <div>
       <a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
-      <p class="sop-eyebrow">Bio Tool &middot; Unit 4 &middot; Interactive &middot; nothing submitted</p>
+      <p class="sop-eyebrow">Bio Tool #39 &middot; Unit 4 &middot; Interactive &middot; nothing submitted</p>
       <h1>The Toolbox: Copy, Cut, Run, Edit</h1>
     </div>
     <div class="seg" id="levelsw" role="group" aria-label="Level">
@@ -371,7 +363,7 @@ var SC={
   pCut:function(){return predScr("pCut");},
   cut:function(){return animScr({name:"cut",key:"cut",title:"Cut it",say:"The enzyme cuts wherever it finds its spelling. Different people have the spelling in different places, so their pieces are different sizes.",vb:"0 0 600 340",aria:"An enzyme cuts two people's DNA at different places",dur:7000,draw:drawCut,next:"Add dye &#9654;",after:function(){return predFb("pCut");}});},
   pRun:function(){return predScr("pRun");},
-  load:function(){var c=CASES[S.ci],lab=["Scene","A","B","C"],h=head("load","Load the gel","Blue dye lets you see each sample. Drag each tube to the gel. The ladder is already in lane 1.")+'<div class="tubes">';
+  load:function(){var c=CASES[S.ci],lab=["Scene","1","2","3"],h=head("load","Load the gel","Blue dye lets you see each sample. Drag each tube to the gel. The ladder is already in lane 1.")+'<div class="tubes">';
     lab.forEach(function(l,i){h+='<button type="button" class="tube'+(S.loaded[i]?' used':'')+'" data-tube="'+i+'" aria-label="Load tube '+l+'"><svg viewBox="0 0 34 50" aria-hidden="true"><rect x="5" y="2" width="24" height="6" rx="2" fill="#6E8898"/><path d="M8 8 V32 L17 48 L26 32 V8 Z" fill="#fff" stroke="#6E8898" stroke-width="2"/><path d="M9 24 V32 L17 46 L25 32 V24 Z" fill="#2F5FA8"/></svg>'+l+'</button>';});
     h+='</div><div class="stage sm"><svg id="stage" viewBox="0 70 600 486" role="img" aria-label="A gel with five wells"></svg></div><p class="fb" id="fb" aria-live="polite"></p><div class="btnrow">'+B("back","&larr; Back")+B("next","Run the gel &#9654;","go",S.loaded.indexOf(0)>=0?"disabled":"")+'</div>';
     return {html:h,enter:function(){paintLoad();bindTubes();}};},
