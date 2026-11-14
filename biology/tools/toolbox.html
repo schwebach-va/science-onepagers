@@ -103,6 +103,12 @@ table.key th,table.key td{border:1px solid var(--rule);padding:.3rem .45rem;text
 .fill{border-bottom:2px solid var(--ink);font-weight:700;padding:0 .35rem}
 .note{font-family:var(--sans);font-size:1rem;line-height:1.4;margin:.55rem 0 0;max-width:44rem}
 .early{border:2px dashed var(--shell);border-radius:8px;padding:.55rem .8rem;font-family:var(--sans);font-size:1rem;line-height:1.4;margin:.4rem 0}
+.pcrgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:.5rem}
+table.pcrt{border-collapse:collapse;width:100%;font-family:var(--sans);margin:.1rem 0 .2rem}
+table.pcrt th{text-align:left;font-size:.95rem;font-weight:700;padding:.3rem .55rem;border:1.5px solid var(--shell);background:var(--paper)}
+table.pcrt td{text-align:center;font-size:1.2rem;font-weight:700;padding:.3rem .4rem;border:1.5px solid var(--shell);width:15%}
+table.pcrt td.new{background:var(--next)}
+@media (min-width:900px) and (max-height:860px){.pcrgrid{grid-template-columns:minmax(0,1fr) 15.5rem;align-items:center}}
 .sop-foot{margin-top:1.6rem;padding-top:.7rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--ink-soft)}
 .sop-foot a{color:inherit}
 @media (max-height:800px){.stage svg{max-height:44vh}.stage.sm svg{max-height:32vh}.bigcase{font-size:2.2rem}}
@@ -130,9 +136,9 @@ table.key th,table.key td{border:1px solid var(--rule);padding:.3rem .45rem;text
     <a href="#sort">Which<br>Tool?</a>
   </nav>
 
-  <section class="panel sec hidden" id="sec-pcr"><h2>PCR: copy the DNA</h2><p class="soon">This section is next in the build. The Crime Lab and CRISPR are ready: tap them above.</p></section>
+  <section class="panel sec hidden" id="sec-pcr"><div id="pcrroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec" id="sec-gel"><div id="gelroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
-  <section class="panel sec hidden" id="sec-plasmid"><h2>Plasmid: paste a gene into bacteria</h2><p class="soon">This section is next in the build.</p></section>
+  <section class="panel sec hidden" id="sec-plasmid"><h2>Plasmid: paste a gene into bacteria</h2><p class="soon">This section is next in the build. PCR, the Crime Lab and CRISPR are ready: tap them above.</p></section>
   <section class="panel sec hidden" id="sec-crispr"><div id="crisprroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec hidden" id="sec-sort"><h2>Which tool?</h2><p class="soon">This section is next in the build.</p></section>
 
@@ -650,6 +656,166 @@ croot.addEventListener("click",function(e){
   else if(act==="done"){CR.finished=true;CR.t2=Date.now();crender();}
 });
 
+/* ================= PCR (#pcr): the DNA copier =================
+   Station 1. The paper is station card 1 and packet p. 6A box 1 (Canvas Original #70); the last screen
+   carries the box 1 words exactly. The pipe cleaners are the activity at this station, so the section is
+   optional there and has to run in 2½ minutes or less. It runs the same doubling as the card's figure and
+   table: black strands are the original DNA, orange strands are new DNA.
+   SOL level: heat and cool only, with no lab settings and no numbers on the thermometer.
+   Levels: same cycles, same table, same answers. A third level (DE Bio 101) can add the lab detail from
+   the spring lab: add an entry to PLEVELS. */
+var PLEVELS={general:{predict:false,frame:true},advanced:{predict:true,frame:false}};
+var PC={i:0,screens:[],cyc:0,auto:false,pred:null,mc:{},t0:0,t1:0,t2:0,finished:false,started:false};
+var proot=document.getElementById("pcrroot");
+function pq(s){return proot.querySelector(s);}
+function commas(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");}
+
+/* ---------- drawings ---------- */
+var PK="#111",PO="#E07A1F",PPOL="#6B4E8C",PX0=236,PX1=600,PCY=160,PD=7,PH=354;
+/* strands of each DNA after k cycles, top then bottom: B = original (black), O = new (orange) */
+function pComp(k){var a=[["B","B"]],j;for(j=0;j<k;j++){var b=[];a.forEach(function(m){b.push([m[0],"O"],["O",m[1]]);});a=b;}return a;}
+/* each DNA's two strands move apart and stay where they land, so a student can follow one strand through all three cycles */
+function pY(k,i){var y=PCY,j;for(j=1;j<=k;j++)y+=(((i>>(k-j))&1)?1:-1)*66/Math.pow(2,j-1);return y;}
+function pBar(x0,x1,y,c){return x1-x0<1?"":'<rect x="'+x0.toFixed(1)+'" y="'+(y-3.5).toFixed(1)+'" width="'+(x1-x0).toFixed(1)+'" height="7" rx="3" fill="'+(c==="B"?PK:PO)+'"/>';}
+function pRungs(x0,x1,y,op){if(op<=0)return "";var s='<g stroke="#7C8A98" stroke-width="2" opacity="'+op.toFixed(2)+'">',x;
+  for(x=PX0+14;x<PX1;x+=28){if(x>=x0&&x<=x1)s+='<line x1="'+x+'" y1="'+(y-PD+3.5)+'" x2="'+x+'" y2="'+(y+PD-3.5)+'"/>';}return s+'</g>';}
+function pBack(y,op){return op<=0?"":'<rect x="'+(PX0-7)+'" y="'+(y-13).toFixed(1)+'" width="'+(PX1-PX0+14)+'" height="26" rx="8" fill="#fff" stroke="#9FB2C0" stroke-width="1.5" opacity="'+op.toFixed(2)+'"/>';}   /* one outline per DNA, so 8 can be counted */
+function pPol(x,y){return '<ellipse cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="11" ry="10.5" fill="'+PPOL+'" opacity=".92"/>';}
+function pThermo(t){
+  var c="rgb("+Math.round(47+163*t)+","+Math.round(111-68*t)+","+Math.round(176-145*t)+")",h=(.16+.76*t)*132,s,j;
+  s='<rect x="36" y="44" width="16" height="142" rx="8" fill="#fff" stroke="#5A544A" stroke-width="2"/><rect x="39" y="'+(180-h).toFixed(1)+'" width="10" height="'+(h+8).toFixed(1)+'" rx="5" fill="'+c+'"/><circle cx="44" cy="196" r="16" fill="'+c+'" stroke="#5A544A" stroke-width="2"/>';
+  for(j=0;j<4;j++)s+='<line x1="56" y1="'+(62+j*30)+'" x2="62" y2="'+(62+j*30)+'" stroke="#5A544A" stroke-width="1.5"/>';
+  return s;}
+var ZT="TACGGATC",ZN="ATGCCTAG";
+function drawCyc(k,p){
+  var s='<rect width="640" height="'+PH+'" fill="#fff"/>',heat=p>0&&p<.42,cool=p>=.42&&p<.9;
+  var temp=p<.42?seg(p,0,.1):1-seg(p,.42,.5),bonds=1-seg(p,.06,.14),part=ease(seg(p,.16,.38)),grow=seg(p,.5,.88);
+  var n=(k===0||p>=.9)?Math.pow(2,k):Math.pow(2,k-1),hot=p>=.9&&p<1;
+  if(p>0&&p<1)s+='<rect x="222" y="30" width="394" height="266" rx="10" fill="#FBE7E2" opacity="'+temp.toFixed(2)+'"/><rect x="222" y="30" width="394" height="266" rx="10" fill="#E6F0F8" opacity="'+(p>=.42?(1-temp)*(1-seg(p,.9,1)):0).toFixed(2)+'"/>';
+  var born=seg(p,.86,.92);
+  if(k===0)s+=pBack(PCY,1)+pRungs(PX0,PX1,PCY,1)+pBar(PX0,PX1,PCY-PD,"B")+pBar(PX0,PX1,PCY+PD,"B");
+  else pComp(k-1).forEach(function(m,i){
+    var yp=pY(k-1,i),ya=pY(k,2*i),yb=pY(k,2*i+1),L=PX1-PX0,gR=PX1-L*grow,gL=PX0+L*grow;
+    s+=pBack(yp,bonds)+pBack(ya,born)+pBack(yb,born)+pRungs(PX0,PX1,yp,bonds);
+    if(grow>0)s+=pRungs(gR,PX1,ya,1)+pRungs(PX0,gL,yb,1);
+    s+=pBar(PX0,PX1,yp-PD+(ya-yp)*part,m[0])+pBar(PX0,PX1,yp+PD+(yb-yp)*part,m[1]);   /* the two templates */
+    s+=pBar(gR,PX1,ya+PD,"O")+pBar(PX0,gL,yb-PD,"O");                                 /* a new strand on each */
+    if(grow>0&&grow<1)s+=pPol(gR,ya)+pPol(gL,yb);
+  });
+  if(heat)s+=tx(326,21,16,"Heat breaks the hydrogen bonds.",{w:700,f:"#B3261E"});
+  else if(cool)s+=tx(326,21,16,"DNA polymerase builds a complementary strand on each template.",{w:700,f:"#23408E"});
+  s+=pThermo(temp);
+  if(heat)s+=tx(70,84,24,"HEAT",{a:"start",w:700,f:"#C62828"});else if(cool)s+=tx(70,84,24,"COOL",{a:"start",w:700,f:"#2F6FB0"});
+  s+=tx(70,112,16,k===0?"Start":"Cycle "+k,{a:"start",f:"#5A544A"});
+  if(k>0)s+=pPol(31,236)+tx(48,241,15,"DNA polymerase",{a:"start",f:"#5A544A"});
+  if(hot)s+='<rect x="12" y="270" width="'+(n>9?196:170)+'" height="46" rx="8" fill="#B8E600"/>';
+  s+=tx(20,305,38,n+" DNA",{a:"start",w:700});
+  if(k===1&&p>.44){                                                                    /* cycle 1 only: a close look at the bases */
+    var zop=seg(p,.44,.5),nn=Math.min(8,Math.floor(grow*8+1e-6)),ZX=330,ZY=262,yb1=pY(1,1),j;
+    s+='<g opacity="'+zop.toFixed(2)+'"><rect x="'+(PX0-5)+'" y="'+(yb1-15)+'" width="130" height="30" rx="6" fill="none" stroke="#5A544A" stroke-width="1.5" stroke-dasharray="5 4"/>';
+    s+='<path d="M'+(PX0-5)+' '+(yb1+15)+' L226 '+ZY+' M'+(PX0+125)+' '+(yb1+15)+' L630 '+ZY+'" stroke="#5A544A" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>';
+    s+='<rect x="226" y="'+ZY+'" width="404" height="88" rx="8" fill="#F8FAFB" stroke="#5A544A" stroke-width="1.5"/>';
+    if(nn>0)s+='<rect x="'+(ZX-2)+'" y="'+(ZY+6)+'" width="'+(nn*30+1)+'" height="6" rx="3" fill="'+PO+'"/>';
+    s+='<rect x="'+(ZX-2)+'" y="'+(ZY+76)+'" width="241" height="6" rx="3" fill="'+PK+'"/>';
+    if(nn<8)s+='<rect x="'+(ZX+nn*30-3)+'" y="'+(ZY+9)+'" width="33" height="68" rx="11" fill="'+PPOL+'" fill-opacity=".2" stroke="'+PPOL+'" stroke-width="2.5"/>';
+    for(j=0;j<8;j++){s+=dTile(ZT.charAt(j),ZX+j*30,ZY+46);if(j<nn)s+=dTile(ZN.charAt(j),ZX+j*30,ZY+15);}
+    s+=tx(322,ZY+34,14,"new strand",{a:"end",w:700,f:"#A6540B"})+tx(322,ZY+65,14,"template",{a:"end",w:700});
+    s+=tx(601,ZY+36,17,"A&ndash;T",{w:700})+tx(601,ZY+64,17,"C&ndash;G",{w:700})+'</g>';
+  }
+  return s;
+}
+function drawOne(){
+  var s='<rect width="640" height="220" fill="#fff"/>',y,a,d1="",d2="";
+  s+='<path d="'+tubePath(210,74,96,128)+' Z" fill="#EAF2F7"/><path d="'+tubePath(210,24,96,178)+'" fill="none" stroke="#6E8898" stroke-width="3"/><rect x="154" y="14" width="112" height="11" rx="4" fill="#6E8898"/>';
+  for(y=90;y<=180;y+=10){a=(y-86)/98*Math.PI*3;s+='<line x1="'+(210+19*Math.sin(a)).toFixed(1)+'" y1="'+y+'" x2="'+(210-19*Math.sin(a)).toFixed(1)+'" y2="'+y+'" stroke="#7C8A98" stroke-width="2"/>';}
+  for(y=86;y<=184;y+=2){a=(y-86)/98*Math.PI*3;d1+=(y===86?"M":"L")+(210+19*Math.sin(a)).toFixed(1)+" "+y+" ";d2+=(y===86?"M":"L")+(210-19*Math.sin(a)).toFixed(1)+" "+y+" ";}
+  s+='<path d="'+d1+'" fill="none" stroke="'+PK+'" stroke-width="5" stroke-linecap="round"/><path d="'+d2+'" fill="none" stroke="'+PK+'" stroke-width="5" stroke-linecap="round"/>';
+  s+=tx(430,112,40,"1 DNA",{w:700})+tx(430,142,17,"one double helix",{f:"#5A544A"});
+  return s;
+}
+function drawJump(p){
+  var f=Math.pow(seg(p,0,.86),2.4),c=p>=1?30:Math.min(30,3+Math.floor(27*f+1e-9)),s='<rect width="640" height="196" fill="#fff"/>',j;
+  s+='<rect x="24" y="40" width="170" height="118" rx="10" fill="#4A5560"/><rect x="24" y="30" width="170" height="26" rx="8" fill="#687480"/><rect x="42" y="72" width="134" height="46" rx="4" fill="#0E1A14"/>';
+  s+=tx(109,104,24,"Cycle "+c,{f:"#7CFF9B",w:700})+tx(109,142,13,"PCR machine",{f:"#fff"});
+  s+=tx(418,84,c<17?54:44,commas(Math.pow(2,c)),{w:700})+tx(418,114,17,"DNA molecules",{f:"#5A544A"});
+  for(j=1;j<=30;j++)s+='<rect x="'+(214+(j-1)*13.6).toFixed(1)+'" y="136" width="11.6" height="20" rx="2" fill="'+(j<=c?PO:"#E9E5DC")+'"/>';
+  s+=tx(214,176,13,"cycle 1",{a:"start",f:"#5A544A"})+tx(622,176,13,"cycle 30",{a:"end",f:"#5A544A"});
+  return s;
+}
+
+/* ---------- screens ---------- */
+function phead(title,say){
+  var n=PC.i+1,tot=PC.screens.length,d='',i;for(i=1;i<=tot;i++)d+='<i'+(i<=n?' class="on"':'')+'></i>';
+  return '<div class="stepline"><span class="chip case">PCR</span><span class="chip">Station 1 &middot; Step '+n+' of '+tot+'</span><span class="dots" aria-hidden="true">'+d+'</span></div><h2>'+title+'</h2>'+(say?'<p class="say">'+say+'</p>':'');
+}
+var PTAB=[["Cycles",[0,1,2,3]],["DNA molecules",[1,2,4,8]],["Pipe cleaners used",[2,4,8,16]]];
+function pcTable(n,hot,rows){var h='<table class="pcrt">';
+  PTAB.slice(0,rows||3).forEach(function(r,ri){h+='<tr><th scope="row">'+r[0]+'</th>';
+    r[1].forEach(function(v,c){var show=ri===0||c<=n;h+='<td'+(show?(c===hot&&ri>0?' class="new"':''):' class="empty"')+'>'+(show?v:'&nbsp;')+'</td>';});h+='</tr>';});
+  return h+'</table>';}
+function pcPaintTable(n,hot){var el=document.getElementById("ptable");if(el)el.innerHTML=pcTable(n,hot);}
+var PPRED=["1","2","4"];
+function pcAfter(k){
+  if(k===1)return (PC.pred!=null?'You predicted <b>'+PPRED[PC.pred]+'</b>. '+(PC.pred===1?'Right. ':''):'')+'Each strand got one new partner: 2 DNA.';
+  if(k===2)return 'Both DNA molecules were copied: 4 DNA.';
+  return '8 DNA. Each cycle doubles the DNA.';
+}
+function pcRest(){var st=document.getElementById("pstage"),fb=document.getElementById("pfb");if(!st)return;st.innerHTML=drawCyc(PC.cyc,1);pcPaintTable(PC.cyc,-1);fb.innerHTML=pcAfter(PC.cyc);}
+var JUMPEND='<b>1,073,741,824.</b> Over a billion copies in a few hours.';
+var PSC={
+  one:function(){return {html:phead("One DNA","PCR is replication in a tube, the same copying you learned in Lesson 2.")+'<div class="stage sm"><svg viewBox="0 0 640 220" role="img" aria-label="A tube holding one short black double helix: 1 DNA">'+drawOne()+'</svg></div><div class="btnrow">'+B("next","Next cycle &#9654;","go")+'</div>'};},
+  predict:function(){var h=phead("Predict first","How many DNA after one cycle?")+'<div class="choices three">';
+    PPRED.forEach(function(o,k){h+='<button type="button" class="choice" data-act="pred" data-k="'+k+'">'+o+'</button>';});
+    return {html:h+'</div><p class="fb">A guess is fine.</p><div class="btnrow">'+B("back","&larr; Back")+'</div>'};},
+  loop:function(){var k=PC.cyc;
+    var h=phead("Cycle "+k,"Black = the original DNA. Orange = new DNA.");
+    h+='<div class="pcrgrid"><div class="stage"><svg id="pstage" viewBox="0 0 640 '+PH+'" role="img" aria-label="DNA in the PCR machine. Heat parts the two strands of each DNA. As it cools, a new orange strand is built on each strand, so the number of DNA molecules doubles."></svg></div><div id="ptable"></div></div><p class="fb" id="pfb" aria-live="polite"></p>';
+    h+='<div class="btnrow">'+B("back","&larr; Back")+B("replay","Replay")+B("skip","Skip &#9654;","hidden")+(k<3?B("cycle","Next cycle &#9654;","go"):B("next","Next &#9654;","go"))+'</div>';
+    return {html:h,
+      enter:function(){if(PC.auto){PC.auto=false;this.play();}else pcRest();},
+      play:function(){
+        var key="pc-cyc"+k,was=!!S.seen[key],st=document.getElementById("pstage"),go=pq(".btn.go"),sk=pq('[data-act="skip"]'),fb=document.getElementById("pfb");
+        go.disabled=true;sk.classList.toggle("hidden",!was);fb.innerHTML="";pcPaintTable(was?k:k-1,-1);
+        run(key,(k===1?8000:6000)*(PROJ?1.3:1),function(p){st.innerHTML=drawCyc(k,p);},function(){go.disabled=false;sk.classList.add("hidden");pcPaintTable(k,k);fb.innerHTML=pcAfter(k);});
+      }};},
+  jump:function(){var seen=!!S.seen["pc-jump"];
+    var h=phead("30 cycles","");
+    h+='<div class="stage sm"><svg id="pstage" viewBox="0 0 640 196" role="img" aria-label="The PCR machine counts cycles up to 30 while the number of DNA molecules doubles each cycle, to 1,073,741,824">'+drawJump(seen?1:0)+'</svg></div><p class="fb" id="pfb" aria-live="polite">'+(seen?JUMPEND:'')+'</p>';
+    h+='<div class="btnrow">'+B("back","&larr; Back")+B("replay","Replay",seen?"":"hidden")+B("next",seen?"Next &#9654;":"Skip &#9654;",seen?"go":"")+B("jump","30 cycles &#9654;","go"+(seen?" hidden":""))+'</div>';
+    return {html:h,play:function(){
+      var st=document.getElementById("pstage"),jb=pq('[data-act="jump"]');if(jb)jb.disabled=true;document.getElementById("pfb").innerHTML="";
+      run("pc-jump",6000*(PROJ?1.3:1),function(p){st.innerHTML=drawJump(p);},function(){if(PC.screens[PC.i]==="jump")prender();});}};},
+  why:function(){var st=PC.mc.why||{};
+    var opts=['<span>Heat cuts the DNA; cooling sorts the pieces by size.</span>','<span>Heat pulls the strands apart so each is a template; cooling lets new strands be built.</span>','<span>The machine has to rest between copies.</span>'];
+    var h=phead("Why it cycles","Why does the machine heat and cool over and over?")+mcHtml("why",opts,1,"Before a strand can be copied, what has to happen to the double helix?","Right. Every cycle copies every DNA molecule in the tube.",PC.mc,"one");
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Station Record &#9654;","go",st.done?"":"disabled")+'</div>'};},
+  paper:function(){if(!PC.t1)PC.t1=Date.now();var L=PLEVELS[S.level];
+    var h=phead("Packet p. 6A, box 1","Cycles 0&ndash;3: 1, 2, 4, 8 DNA.")+pcTable(3,-1,2);
+    h+='<div class="frame"><p>The PCR machine heats and cools over and over because '+(L.frame?'<span class="fill">heat pulls the strands apart so each can be a template</span>':'<span class="blank long"></span>')+', and each cycle '+(L.frame?'<span class="fill">doubles</span>':'<span class="blank"></span>')+' the DNA.</p></div>';
+    if(PC.finished)h+='<p class="done">&#10003; PCR done.</p><div class="early"><b>Done early?</b> A police lab has one drop of blood, too little DNA to test. Explain to your group how PCR solves that problem, and how many copies 10 cycles would make.</div>';
+    if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(PC.t1-PC.t0)+(PC.t2?'. Done tapped at '+fmt(PC.t2-PC.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Start over")+(PC.finished?'':B("done","Done","go"))+'</div>'};}
+};
+function pcScreens(){var a=["one"];if(PLEVELS[S.level].predict)a.push("predict");a.push("loop","jump","why","paper");return a;}
+var PCUR=null;
+function prender(){stopAnim();PCUR=PSC[PC.screens[PC.i]]();proot.innerHTML=PCUR.html;if(PCUR.enter)PCUR.enter();}
+function pgo(i){if(i<0||i>=PC.screens.length)return;PC.i=i;prender();try{document.getElementById("sec-pcr").scrollIntoView({block:"nearest"});}catch(e){}}
+function pcStart(){stopAnim();PC.started=true;PC.i=0;PC.cyc=0;PC.auto=false;PC.pred=null;PC.mc={};PC.finished=false;PC.t0=Date.now();PC.t1=0;PC.t2=0;PC.screens=pcScreens();prender();}
+proot.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("[data-act]"):null;if(!b||b.disabled)return;
+  var act=b.getAttribute("data-act"),st,onLoop=PC.screens[PC.i]==="loop";
+  if(act==="next"){if(PC.screens[PC.i+1]==="loop"&&PC.cyc===0){PC.cyc=1;PC.auto=true;}pgo(PC.i+1);}
+  else if(act==="back"){if(onLoop&&PC.cyc>1){PC.cyc--;prender();}else{if(onLoop)PC.cyc=0;pgo(PC.i-1);}}   /* Back on the cycle screen steps back one cycle */
+  else if(act==="cycle"){if(PC.cyc<3){PC.cyc++;PC.auto=true;prender();}}
+  else if(act==="replay"||act==="jump"){if(PCUR&&PCUR.play)PCUR.play();}
+  else if(act==="skip"){if(anim)anim.skip();}
+  else if(act==="pred"){PC.pred=+b.getAttribute("data-k");PC.cyc=1;PC.auto=true;pgo(PC.i+1);}
+  else if(act==="pick"){st=PC.mc[b.getAttribute("data-mc")];if(+b.getAttribute("data-k")===+b.getAttribute("data-right"))st.done=true;else{st.tries++;st.wrong[b.getAttribute("data-k")]=true;}prender();}
+  else if(act==="showme"){st=PC.mc[b.getAttribute("data-mc")];st.done=true;st.shown=true;prender();}
+  else if(act==="again"){delete S.seen["pc-jump"];pcStart();}
+  else if(act==="done"){PC.finished=true;PC.t2=Date.now();prender();}
+});
+
 /* level switch */
 function paintLevel(){Array.prototype.forEach.call(document.querySelectorAll("#levelsw button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-level")===S.level?"true":"false");});}
 document.getElementById("levelsw").addEventListener("click",function(e){
@@ -658,6 +824,7 @@ document.getElementById("levelsw").addEventListener("click",function(e){
   try{var u=new URL(location.href);u.searchParams.set("level",S.level);history.replaceState(null,"",u.toString());}catch(x){}
   newCase(allowed().indexOf(S.ci)>=0?S.ci:randomCase(-1));
   if(CR.started){CR.started=false;crLeave();if(showSec.cur==="crispr")crStart();}
+  if(PC.started){PC.started=false;if(showSec.cur==="pcr")pcStart();}
 });
 
 /* sections: one on screen at a time, each with its own anchor */
@@ -670,6 +837,7 @@ function showSec(){
   if(was==="crispr"&&h!=="crispr"){stopAnim();crLeave();}
   if(h!=="gel")stopAnim();else if(CUR&&CUR.play&&!anim)render();
   if(h==="crispr"){if(CR.started)crender();else crStart();}
+  if(h==="pcr"){if(PC.started)prender();else pcStart();}
 }
 window.addEventListener("hashchange",showSec);
 
@@ -685,6 +853,13 @@ function teacherKey(){
   h+='<tr><th>One check</th><td>So Cas9 does not cut a different gene.</td></tr>';
   h+='<tr><th>p. 6A box 4</th><td>After the cut, the patient\'s cells turn <b>fetal hemoglobin</b> back on, and the red blood cells stay <b>round</b>.</td></tr></table>';
   h+='<p class="fine">The guide pairs at all 10 bases in one place only; the next best spot pairs 4 of 10. SOL General skips the predict, starts the guide 2 bases from the match and gets 2 picture choices on the check. Hints: after 30 seconds or one refused cut, then Show me. <code>?timer=1</code> shows the times on the last screen.</p></div>';
+  h+='<div class="panel" style="margin-top:1rem"><h2>Teacher key: PCR</h2>'+pcTable(3,-1)+'<table class="key">';
+  h+='<tr><th>Predict (Advanced only)</th><td>2 DNA after one cycle. Every strand gets exactly one new partner.</td></tr>';
+  h+='<tr><th>30 cycles</th><td>1,073,741,824: over a billion copies in a few hours.</td></tr>';
+  h+='<tr><th>Why it cycles</th><td>Heat pulls the strands apart so each is a template; cooling lets new strands be built.</td></tr>';
+  h+='<tr><th>p. 6A box 1</th><td>Cycles 0&ndash;3: 1, 2, 4, 8 DNA. The PCR machine heats and cools over and over because <b>heat pulls the strands apart so each can be a template</b>, and each cycle <b>doubles</b> the DNA.</td></tr>';
+  h+='<tr><th>Done early</th><td>10 cycles make 1,024 copies.</td></tr></table>';
+  h+='<p class="fine">SOL General skips the predict and sees the box 1 sentence filled in; SOL Advanced gets the blanks, as on the paper. Back on the cycle screen steps back one cycle, and the table follows. The 30-cycle count can be skipped. <code>?timer=1</code> shows the times on the last screen.</p></div>';
   t.innerHTML=h;t.classList.remove("hidden");
 }
 
@@ -697,7 +872,7 @@ if(start>=0&&CASES[start].twist&&!LEVELS[S.level].twist){S.level="advanced";pain
 if(TEACHER)teacherKey();
 newCase(start>=0?start:randomCase(-1));
 showSec();
-window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit};
+window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit,PC:PC};
 })();
 </script>
 </body>
