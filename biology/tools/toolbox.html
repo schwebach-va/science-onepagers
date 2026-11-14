@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/toolbox.html">
+<meta name="description" content="The Toolbox: four DNA tools in one page. Copy DNA with PCR, cut it, run it on a gel in the Crime Lab, and edit it. Biology I Unit 4 (SOL BIO.5e). Nothing is saved or submitted.">
+<meta name="author" content="J. R. Schwebach">
+<meta name="copyright" content="Copyright 2026 J. R. Schwebach. Licensed CC BY-NC 4.0. All graphics are drawn in code from scratch.">
+<title>The Toolbox: Copy, Cut, Run, Edit | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--solid:#3F7A55;--solid-soft:#E2EDE6;
+  --gold-soft:#FBF0DA;--gold-ink:#7A5212;
+  --next:#B8E600;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+    --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+    --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+    --gold-soft:#2F2614;--gold-ink:#F2CF8C;--next:#C8F520;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+.wrap{max-width:54rem;margin:0 auto;padding:.8rem 1rem 3rem}
+html.proj body{font-size:24px}
+html.proj .wrap{max-width:none}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.3rem,4vw,1.7rem);line-height:1.12;letter-spacing:-0.015em;margin:0}
+h2{font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:-0.01em;margin:.5rem 0 .3rem}
+p{margin:0 0 .7rem}
+.fine{font-size:.86rem;color:var(--ink-soft);line-height:1.45}
+.hidden{display:none!important}
+button{font:inherit;cursor:pointer;color:inherit}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:.5rem 1rem;margin:0 0 .6rem}
+.sop-back{display:inline-block;margin:0 .9rem .1rem 0;font-family:var(--sans);font-size:.86rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-eyebrow{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .15rem}
+.seg{display:inline-flex;border:1.5px solid var(--shell);border-radius:6px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;font-family:var(--sans);font-size:.84rem;font-weight:700;padding:.5rem .75rem;min-height:44px;color:var(--ink-soft)}
+.seg button[aria-pressed="true"]{background:var(--bond);color:#fff}
+.secbar{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem;margin:0 0 .7rem}
+.secbar a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:.3rem .25rem;border:1.5px solid var(--shell);border-radius:6px;background:var(--card);font-family:var(--sans);font-size:.86rem;font-weight:700;line-height:1.15;color:var(--ink);text-decoration:none}
+.secbar a[aria-current="true"]{border-color:var(--bond);background:var(--bond-soft);color:var(--bond)}
+.panel{background:var(--card);border:1.5px solid var(--rule);border-radius:8px;padding:.8rem .9rem 1rem}
+.stepline{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;font-family:var(--sans)}
+.chip{font-size:.8rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;background:var(--bond-soft);color:var(--bond);white-space:nowrap}
+.chip.case{background:var(--ink);color:var(--paper);font-size:.95rem;letter-spacing:.02em}
+.dots{display:inline-flex;gap:5px;margin-left:auto}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--shell)}
+.dots i.on{background:var(--bond)}
+.say{font-family:var(--sans);font-weight:600;font-size:1.14rem;line-height:1.35;margin:0 0 .55rem;max-width:44rem}
+.bigcase{font-family:var(--sans);font-weight:700;font-size:clamp(2.4rem,9vw,3.6rem);line-height:1;letter-spacing:.01em;margin:.5rem 0 .4rem}
+.stage{border:1.5px solid var(--rule);border-radius:6px;overflow:hidden;background:#fff}
+.stage svg{display:block;width:100%;height:auto;max-height:48vh}
+.stage.sm svg{max-height:35vh}
+html.proj .stage svg{max-height:62vh}
+.fb{font-family:var(--sans);font-size:1rem;min-height:1.5rem;margin:.5rem 0 .2rem;color:var(--ink)}
+.btnrow{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem;align-items:center}
+.btn{font-family:var(--sans);font-weight:700;font-size:1.02rem;min-height:52px;padding:.55rem 1.05rem;border-radius:8px;border:1.5px solid var(--shell);background:var(--card)}
+.btn.go{margin-left:auto;background:var(--next);border-color:#8FB300;color:#1D1A15;padding:.55rem 1.4rem}
+.btn.go:disabled{background:var(--rule);border-color:var(--rule);color:var(--ink-soft);cursor:default}
+.btn.small{min-height:44px;font-size:.92rem;padding:.35rem .8rem;margin-left:.4rem}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.6rem}
+.choices.one{grid-template-columns:1fr}
+.choice{display:flex;align-items:center;gap:.6rem;text-align:left;min-height:64px;padding:.5rem .75rem;border-radius:8px;border:2px solid var(--shell);background:var(--card);font-family:var(--sans);font-weight:600;font-size:1.02rem;line-height:1.25}
+.choice .mini{flex:0 0 26px;width:26px;height:44px}
+.choice small{display:block;font-weight:500;color:var(--ink-soft);font-size:.86rem}
+.choice.right{border-color:var(--solid);background:var(--solid-soft)}
+.choice.wrong{border-color:var(--flag);background:var(--flag-soft);opacity:.7}
+.sus{list-style:none;margin:.3rem 0 .6rem;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;font-family:var(--sans)}
+.sus li{border:1.5px solid var(--rule);border-radius:6px;padding:.4rem .55rem;font-size:.95rem;line-height:1.25}
+.sus b{display:block;font-size:.76rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
+.tubes{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:.2rem 0 .5rem}
+.tube{touch-action:none;display:flex;flex-direction:column;align-items:center;gap:.1rem;min-height:84px;padding:.3rem;border-radius:8px;border:2px dashed var(--bond);background:var(--bond-soft);font-family:var(--sans);font-weight:700;font-size:.95rem;position:relative;z-index:1}
+.tube svg{width:34px;height:50px}
+.tube.drag{z-index:5;box-shadow:0 6px 18px rgba(0,0,0,.25);border-style:solid}
+.tube.used{opacity:.35;border-color:var(--shell);background:none;cursor:default}
+.frame{margin:.2rem 0 .3rem;font-family:var(--sans);font-size:1.05rem}.frame p{margin:0 0 .4rem}.blank.long{min-width:16rem}
+.cer{margin:.3rem 0 0;padding:0;list-style:none;font-size:1.02rem}
+.cer li{margin:0 0 .55rem;padding-left:1.9rem;position:relative;line-height:1.45}
+.cer li b:first-child{position:absolute;left:0;top:0;font-family:var(--sans);width:1.45rem;height:1.45rem;border-radius:50%;background:var(--bond);color:#fff;font-size:.86rem;display:flex;align-items:center;justify-content:center}
+.blank{display:inline-block;min-width:5.5rem;border-bottom:2px solid var(--ink)}
+.bank{display:flex;flex-wrap:wrap;gap:.35rem;margin:.2rem 0 .3rem;font-family:var(--sans);font-size:.92rem}
+.bank span{border:1.5px solid var(--shell);border-radius:4px;padding:.1rem .5rem;font-weight:600}
+.copy{border:2px solid var(--ink);border-radius:6px;padding:.7rem .85rem;font-family:var(--sans);font-weight:700;font-size:1.15rem;line-height:1.35;background:var(--gold-soft);color:var(--gold-ink);margin:.4rem 0 .6rem}
+.done{font-family:var(--sans);font-weight:700;color:var(--solid);margin:.4rem 0}
+.soon{font-family:var(--sans);color:var(--ink-soft);padding:2rem 0}
+table.key{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:.86rem;margin:.5rem 0}
+table.key th,table.key td{border:1px solid var(--rule);padding:.3rem .45rem;text-align:left;vertical-align:top}
+.sop-foot{margin-top:1.6rem;padding-top:.7rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+@media (max-height:800px){.stage svg{max-height:44vh}.stage.sm svg{max-height:32vh}.bigcase{font-size:2.2rem}}
+@media (max-width:520px){.secbar a{font-size:.74rem}.choices{grid-template-columns:1fr}.sus{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+      <p class="sop-eyebrow">Bio Tool &middot; Unit 4 &middot; Interactive &middot; nothing submitted</p>
+      <h1>The Toolbox: Copy, Cut, Run, Edit</h1>
+    </div>
+    <div class="seg" id="levelsw" role="group" aria-label="Level">
+      <button type="button" data-level="general" aria-pressed="false">SOL General</button>
+      <button type="button" data-level="advanced" aria-pressed="false">SOL Advanced</button>
+    </div>
+  </div>
+  <nav class="secbar" aria-label="Sections">
+    <a href="#pcr">PCR<br>Copy</a>
+    <a href="#gel">Crime Lab<br>Cut + Run</a>
+    <a href="#plasmid">Plasmid<br>Paste</a>
+    <a href="#crispr">CRISPR<br>Edit</a>
+    <a href="#sort">Which<br>Tool?</a>
+  </nav>
+
+  <section class="panel sec hidden" id="sec-pcr"><h2>PCR: copy the DNA</h2><p class="soon">This section is next in the build. The Crime Lab is ready: tap <b>Crime Lab</b> above.</p></section>
+  <section class="panel sec" id="sec-gel"><div id="gelroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
+  <section class="panel sec hidden" id="sec-plasmid"><h2>Plasmid: paste a gene into bacteria</h2><p class="soon">This section is next in the build.</p></section>
+  <section class="panel sec hidden" id="sec-crispr"><h2>CRISPR: edit a gene</h2><p class="soon">This section is next in the build.</p></section>
+  <section class="panel sec hidden" id="sec-sort"><h2>Which tool?</h2><p class="soon">This section is next in the build.</p></section>
+
+  <div id="teacher" class="hidden"></div>
+
+  <footer class="sop-foot">Biology I &middot; Unit 4 &middot; SOL BIO.5e &middot; nothing is saved or submitted. The cases, places and suspects are made up. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.</footer>
+</div>
+<script>
+(function(){
+"use strict";
+/*DATA-START*/
+var SIZES=[1000,800,600,400,300,200,150,100];
+var CASES=[
+ {n:"1042",place:"A shed in Haymarket.",what:"Someone broke the window and cut a hand. A drop of blood is on the glass.",
+  who:["A neighbor","A delivery driver","A lawn worker"],
+  scene:[800,400,200,100],sus:[[800,300,200,150],[800,400,200,100],[1000,600,400]],match:1,twist:null},
+ {n:"2317",place:"A boat ramp at Lake Anna.",what:"A cooler is gone. A broken bottle beside the ramp has a drop of blood on it.",
+  who:["A boater","A person fishing","A dock worker"],
+  scene:[1000,600,300],sus:[[1000,400,300,150],[800,600,200],[1000,600,300]],match:2,twist:null},
+ {n:"3056",place:"The Manassas train station.",what:"A bike is gone. Its glass headlight is broken on the ground, with a drop of blood.",
+  who:["A commuter","A station worker","A bike courier"],
+  scene:[600,400,300,150,100],sus:[[600,400,300,150,100],[600,400,200,100],[1000,300,150]],match:0,twist:null},
+ {n:"4471",place:"A snack stand at a Gainesville ball field.",what:"Someone broke the window and cut a hand. A drop of blood is on the glass.",
+  who:["A coach","A groundskeeper","A snack vendor"],
+  scene:[800,600,200],sus:[[800,400,200,100],[1000,600,150],[800,600,200]],match:2,twist:null},
+ {n:"5120",place:"A rec center in Dale City.",what:"The glass on a vending machine is cracked. A drop of blood is on the glass.",
+  who:["A lifeguard","A front-desk worker","A gym member"],
+  scene:[1000,400,300,100],sus:[[1000,400,300,100],[1000,400,200,150],[800,300,100]],match:0,twist:null},
+ {n:"6238",place:"A kayak trailer at Leesylvania State Park.",what:"A tail light is broken and a paddle is gone. A drop of blood is on the glass.",
+  who:["A camper","A park visitor","A boat renter"],
+  scene:[800,400,300,150],sus:[[800,400,200,150],[1000,300,150],[600,400,300,100]],match:-1,twist:null},
+ {n:"7384",place:"A greenhouse in Nokesville.",what:"A glass pane is broken and tools are gone. A drop of blood is on the glass.",
+  who:["The greenhouse owner","A customer","A delivery driver"],
+  scene:[600,300,200,100],sus:[[600,300,200,100],[600,400,200],[1000,300,150,100]],match:0,
+  twist:"The owner replaced that pane last week and cut a thumb. The match is real, and innocent."},
+ {n:"8605",place:"A pickup truck parked in Occoquan.",what:"The side window is broken and a toolbox is gone. A drop of blood is on the glass.",
+  who:["A passerby","A tow-truck driver","The mechanic who put in that window"],
+  scene:[1000,800,300,150],sus:[[1000,600,300,100],[800,400,150],[1000,800,300,150]],match:2,
+  twist:"The mechanic put in that window on Monday and nicked a finger. The match is real, and innocent."}
+];
+function fr(bp){return (Math.log(1000)-Math.log(bp))/Math.log(10);}
+function yB(bp){return 150+fr(bp)*350;}
+function lined(scene,s){var k=0;scene.forEach(function(b){if(s.indexOf(b)>=0)k++;});return k;}
+function isMatch(scene,s){return s.length===scene.length&&lined(scene,s)===scene.length;}
+function matchIndex(c){var m=-1;c.sus.forEach(function(s,i){if(isMatch(c.scene,s))m=i;});return m;}
+/*DATA-END*/
+
+/* Levels. Same engine, same cases, same answers. A third level (DE Bio 101) is planned for spring:
+   add an entry here (predict, twist cases, ladder labels in bp) and a button in #levelsw. */
+var LEVELS={
+  general:{label:"SOL General",predict:false,twist:false,counts:true,reason:true},
+  advanced:{label:"SOL Advanced",predict:true,twist:true,counts:false,reason:false}
+};
+var Q;try{Q=new URLSearchParams(location.search);}catch(e){Q={get:function(){return null;}};}
+var PROJ=Q.get("projector")==="1", TEACHER=Q.get("teacher")==="1",TIMER=TEACHER||Q.get("timer")==="1";
+if(PROJ)document.documentElement.classList.add("proj");
+var S={level:LEVELS[Q.get("level")]?Q.get("level"):"advanced",ci:0,i:0,screens:[],loaded:[0,0,0,0],seen:{},pred:{},mc:{},t0:0,t1:0,t2:0,finished:false,kinds:{}};
+var root=document.getElementById("gelroot"),CUR=null,anim=null;
+
+var F='font-family="Archivo,Helvetica,Arial,sans-serif"';
+function tx(x,y,size,str,o){o=o||{};return '<text x="'+x+'" y="'+y+'" '+F+' font-size="'+size+'" font-weight="'+(o.w||600)+'" text-anchor="'+(o.a||"middle")+'" fill="'+(o.f||"#1D1A15")+'"'+(o.op!=null?' opacity="'+o.op+'"':'')+'>'+str+'</text>';}
+function cl(v){return v<0?0:v>1?1:v;}
+function seg(p,a,b){return cl((p-a)/(b-a));}
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+function qs(s){return root.querySelector(s);}
+function B(act,label,cls,extra){return '<button type="button" class="btn '+(cls||"")+'" data-act="'+act+'" '+(extra||"")+'>'+label+'</button>';}
+function fmt(ms){var s=Math.round(ms/1000);return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2);}
+
+function stopAnim(){if(anim){anim.stop();anim=null;}}
+function run(key,dur,draw,done){
+  stopAnim();
+  var t0=performance.now(),stopped=false,fin=false,raf=0,to=0;
+  function finish(){if(fin)return;fin=true;stopped=true;cancelAnimationFrame(raf);clearTimeout(to);draw(1);S.seen[key]=true;if(done)done();}
+  function f(now){if(stopped)return;var p=(now-t0)/dur;if(p>=1){finish();return;}draw(p<0?0:p);raf=requestAnimationFrame(f);}
+  draw(0);raf=requestAnimationFrame(f);
+  to=setTimeout(finish,dur+1200); /* a slow or hidden tab still finishes: nothing traps a student */
+  anim={skip:finish,stop:function(){stopped=true;fin=true;cancelAnimationFrame(raf);clearTimeout(to);}};
+}
+
+/* ---------- drawings ---------- */
+function tubePath(cx,top,w,h){var r=w/2;return 'M'+(cx-r)+' '+top+' V'+(top+h-r)+' A'+r+' '+r+' 0 0 0 '+(cx+r)+' '+(top+h-r)+' V'+top;}
+function drawScene(){
+  var s='<rect width="600" height="200" fill="#fff"/>';
+  s+='<rect x="190" y="14" width="220" height="172" fill="#CFE6F2" stroke="#6E8898" stroke-width="6"/>';
+  s+='<polygon points="268,186 300,104 344,120 372,186" fill="#fff" stroke="#7FA6BC" stroke-width="2"/>';
+  s+='<path d="M300 104 L282 52 M300 104 L236 92 M344 120 L392 84 M344 120 L360 40" stroke="#7FA6BC" stroke-width="2" fill="none"/>';
+  s+='<path d="M331 118 q-11 18 0 25 q11 -7 0 -25z" fill="#B3261E"/>';
+  s+='<line x1="352" y1="128" x2="430" y2="150" stroke="#5A544A" stroke-width="1.5"/>'+tx(436,155,15,"blood drop",{a:"start",f:"#5A544A"});
+  return s;
+}
+function drawSwab(p){
+  var a=seg(p,0,.3),b=seg(p,.3,.62),c=seg(p,.62,1),s='<rect width="600" height="330" fill="#fff"/>';
+  s+=tx(105,30,17,"1 · Swab",{w:700})+tx(300,30,17,"2 · Soap + salt",{w:700,op:b>0?1:.3})+tx(495,30,17,"3 · Cold alcohol",{w:700,op:c>0?1:.3});
+  s+=tx(202,180,26,"→",{f:"#8FA3B5"})+tx(398,180,26,"→",{f:"#8FA3B5"});
+  s+='<polygon points="40,262 66,96 150,66 184,168 138,282" fill="#CFE6F2" stroke="#7FA6BC" stroke-width="2"/><path d="M66 96 L120 176 L184 168 M120 176 L138 282" stroke="#7FA6BC" stroke-width="1.5" fill="none"/>';
+  s+='<path d="M118 150 q-13 21 0 29 q13 -8 0 -29z" fill="#B3261E" opacity="'+(1-.65*seg(a,.6,1))+'"/>';
+  var m=ease(seg(a,0,.6)),sx=186+(124-186)*m,sy=56+(160-56)*m;
+  s+='<g opacity="'+(1-seg(p,.3,.4))+'"><line x1="'+sx+'" y1="'+sy+'" x2="'+(sx+44)+'" y2="'+(sy-72)+'" stroke="#B9A27A" stroke-width="5" stroke-linecap="round"/><ellipse cx="'+sx+'" cy="'+sy+'" rx="9" ry="13" transform="rotate(32 '+sx+' '+sy+')" fill="'+(a>.6?"#E9A7A2":"#fff")+'" stroke="#8a8a8a" stroke-width="1.5"/></g>';
+  /* tube 2: cells break open */
+  s+='<g opacity="'+(b>0?1:.3)+'"><path d="'+tubePath(300,150,84,140)+' Z" fill="#F6E3E0"/><path d="'+tubePath(300,62,84,228)+'" fill="none" stroke="#6E8898" stroke-width="3"/>';
+  var CP=[[282,180],[318,196],[290,222],[322,240],[300,258],[276,246]];
+  CP.forEach(function(q,k){var bk=seg(b,.1+k*.1,.4+k*.1);
+    s+='<circle cx="'+q[0]+'" cy="'+q[1]+'" r="'+(11+bk*5)+'" fill="#F2B8B2" stroke="#B3261E" stroke-width="1.5" stroke-dasharray="'+(bk>0?"3 4":"none")+'" opacity="'+(1-bk)+'"/>';
+    s+='<path d="M'+(q[0]-8)+' '+q[1]+' q4 -7 8 0 t8 0" fill="none" stroke="#23408E" stroke-width="2" opacity="'+bk+'"/>';});
+  s+=tx(300,312,14,b>=1?"cells open: DNA is loose":"cells",{f:"#5A544A"})+'</g>';
+  /* tube 3: alcohol layer, DNA comes out */
+  var top=190-80*seg(c,0,.4),up=seg(c,.4,1);
+  s+='<g opacity="'+(c>0?1:.3)+'"><path d="'+tubePath(495,190,84,100)+' Z" fill="#F6E3E0"/><rect x="453" y="'+top+'" width="84" height="'+(190-top)+'" fill="#DCEBF5"/><path d="'+tubePath(495,62,84,228)+'" fill="none" stroke="#6E8898" stroke-width="3"/>';
+  for(var k=0;k<5;k++){var yy=192-up*(18+k*9),x0=468+k*3;
+    s+='<path d="M'+x0+' '+yy+' q9 -9 18 0 t18 0 t14 0" fill="none" stroke="#23408E" stroke-width="2.5" stroke-linecap="round" opacity="'+up+'"/>';}
+  if(up>.6)s+='<line x1="540" y1="165" x2="566" y2="140" stroke="#5A544A" stroke-width="1.5"/>'+tx(572,134,16,"DNA",{w:700,f:"#23408E"});
+  s+=tx(495,312,14,"alcohol on top",{f:"#5A544A"})+'</g>';
+  return s;
+}
+var COMP=[["BB"],["BO","OB"],["BO","OO","OO","OB"],["BO","OO","OO","OO","OO","OO","OO","OB"]];
+function drawPcr(p){
+  var CX=[95,235,375,515],LAB=["Start","Cycle 1","Cycle 2","Cycle 3"],s='<rect width="600" height="430" fill="#fff"/>',cyc=0;
+  for(var k=0;k<4;k++){var op=k===0?1:seg(p,k*.2,k*.2+.1);if(op>=.5)cyc=k;
+    s+='<g opacity="'+op+'">'+tx(CX[k],30,15,LAB[k],{f:"#5A544A"})+tx(CX[k],62,30,String(COMP[k].length),{w:700});
+    if(k>0)s+=tx(CX[k]-70,58,24,"→",{f:"#8FA3B5"});
+    COMP[k].forEach(function(d,i){var y=80+i*29;
+      s+='<rect x="'+(CX[k]-42)+'" y="'+y+'" width="84" height="7" rx="2" fill="'+(d[0]==="B"?"#111":"#E07A1F")+'"/><rect x="'+(CX[k]-42)+'" y="'+(y+10)+'" width="84" height="7" rx="2" fill="'+(d[1]==="B"?"#111":"#E07A1F")+'"/>';});
+    s+='</g>';}
+  var bil=seg(p,.82,.9);
+  s+='<rect x="34" y="176" width="150" height="112" rx="10" fill="#4A5560"/><rect x="34" y="166" width="150" height="26" rx="8" fill="#687480"/><rect x="52" y="212" width="114" height="42" rx="4" fill="#0E1A14"/>';
+  s+=tx(109,241,20,bil>0?"Cycle 30":(cyc===0?"Ready":"Cycle "+cyc),{f:"#7CFF9B",w:700})+tx(109,276,12,"PCR machine",{f:"#fff"});
+  s+='<rect x="210" y="356" width="356" height="42" rx="6" fill="#FBF0DA" opacity="'+bil+'"/>'+tx(388,384,21,"30 cycles: over a billion copies",{w:700,f:"#7A5212",op:bil});
+  s+='<rect x="34" y="372" width="26" height="7" fill="#111"/>'+tx(66,380,13,"original",{a:"start",f:"#5A544A"})+'<rect x="34" y="392" width="26" height="7" fill="#E07A1F"/>'+tx(66,400,13,"new copy",{a:"start",f:"#5A544A"});
+  return s;
+}
+var BASE={A:"#0072B2",C:"#F0E442",G:"#999999",T:"#D55E00"};
+function tiles(cx,y,op){var w="GAATTC",s='<g opacity="'+op+'">';
+  for(var i=0;i<6;i++){var ch=w.charAt(i),x=cx-45+i*15;
+    s+='<rect x="'+x+'" y="'+y+'" width="14" height="16" rx="'+(ch==="T"?0:4)+'" fill="'+BASE[ch]+'"/>'+tx(x+7,y+12.5,11,ch,{w:700,f:ch==="C"?"#1D1A15":"#fff"});}
+  return s+'</g>';}
+function cutRow(y,label,sites,p){
+  var s=tx(60,y-44,16,label,{a:"start",w:700}),ex=30+540*p,edges=[60].concat(sites,[540]),n=edges.length-1;
+  var done=sites.filter(function(x){return ex>x;}).length,drift=ease(seg(p,.92,1));
+  for(var i=0;i<n;i++){var cutL=i>0&&ex>edges[i],cutR=i<n-1&&ex>edges[i+1];
+    var x0=edges[i]+(cutL?4:0),x1=edges[i+1]-(cutR?4:0),sh=(i-(n-1)/2)*18*drift*(done===sites.length?1:0);
+    s+='<g transform="translate('+sh+',0)"><rect x="'+x0+'" y="'+y+'" width="'+(x1-x0)+'" height="9" rx="2" fill="#23408E"/><rect x="'+x0+'" y="'+(y+13)+'" width="'+(x1-x0)+'" height="9" rx="2" fill="#23408E"/></g>';}
+  sites.forEach(function(x){s+=tiles(x,y-26,ex>x?.45:1);});
+  if(p>0&&p<1)s+='<g transform="translate('+ex+','+(y+11)+')"><path d="M0 0 L17 -13 A22 22 0 1 0 17 13 Z" fill="#6B4E8C" transform="rotate(180)"/></g>'+tx(ex-12,y+52,13,"enzyme",{f:"#6B4E8C"});
+  return s;
+}
+function drawCut(p){
+  var s='<rect width="600" height="340" fill="#fff"/>';
+  s+=cutRow(84,"Person 1",[180,348],seg(p,.04,.46));
+  s+='<g opacity="'+(p>.46?1:.3)+'">'+cutRow(232,"Person 2",[420],seg(p,.5,.9))+'</g>';
+  s+=tx(300,322,18,"Same enzyme. Different places. Different sizes.",{w:700,f:"#7A5212",op:seg(p,.92,.98)});
+  return s;
+}
+var LX=[108,204,300,396,492],LLAB=["Ladder","Scene","1","2","3"];
+function lanesOf(c){return [SIZES,c.scene,c.sus[0],c.sus[1],c.sus[2]];}
+function drawGel(c,o){
+  o=o||{};var L=lanesOf(c),w=o.wells||[1,1,1,1,1],s='<rect x="0" y="0" width="600" height="600" fill="#fff"/>',i;
+  s+='<rect x="52" y="100" width="496" height="440" rx="6" fill="#E6EDF2" stroke="#9FB2C0" stroke-width="2"/>';
+  if(o.power){
+    s+='<rect x="52" y="6" width="318" height="56" rx="6" fill="#F5F3EE" stroke="#DDD8CE"/><rect x="72" y="30" width="170" height="7" rx="3" fill="#23408E"/><rect x="72" y="41" width="170" height="7" rx="3" fill="#23408E"/>';
+    for(i=0;i<7;i++)s+=tx(84+i*24,27,22,"−",{w:700,f:"#111"});
+    s+=tx(157,59,11,"one DNA piece: negative all along",{f:"#5A544A"});
+    s+='<path d="M286 16 V44" stroke="#C62828" stroke-width="4"/><path d="M276 40 L286 54 L296 40 Z" fill="#C62828"/>'+tx(302,40,13,"to the +",{a:"start",f:"#C62828",w:700});
+    s+='<rect x="400" y="8" width="148" height="50" rx="6" fill="#3A3F45"/>'+tx(474,30,13,"POWER",{f:"#fff",w:700})+'<circle cx="456" cy="44" r="5" fill="#7CFF9B"/>'+tx(468,48,11,"on",{a:"start",f:"#7CFF9B"});
+    s+='<path d="M430 58 V94" stroke="#111" stroke-width="4" fill="none"/><path d="M518 58 V68 H574 V544 H548" stroke="#C62828" stroke-width="4" fill="none"/>';
+  }
+  if(o.power||o.ends){
+    s+='<rect x="52" y="92" width="496" height="9" fill="#111"/><rect x="52" y="539" width="496" height="9" fill="#C62828"/>';
+    s+='<circle cx="27" cy="96" r="17" fill="#111"/>'+tx(27,105,28,"−",{f:"#fff",w:700})+'<circle cx="27" cy="544" r="17" fill="#C62828"/>'+tx(27,553,26,"+",{f:"#fff",w:700});
+    s+=tx(52,574,14,"black end = negative (−)",{a:"start",f:"#111",w:700})+tx(548,574,14,"red end = positive (+)",{a:"end",f:"#C62828",w:700});
+  }
+  for(i=0;i<5;i++){
+    s+=tx(LX[i],87,i<2?14:17,LLAB[i],{w:700,f:i===1?"#B3261E":"#1D1A15"});
+    s+='<rect x="'+(LX[i]-29)+'" y="110" width="58" height="13" rx="2" fill="'+((w[i]&&!(o.prog>0))?"#2F5FA8":"#C4D2DC")+'" stroke="#8FA3B5"/>';
+  }
+  function glow(x,y,wd,op){return '<rect x="'+x+'" y="'+(y-6)+'" width="'+wd+'" height="21" rx="7" fill="#B8E600" opacity="'+op+'"/>';}
+  if(o.ghost){var j=o.ghost.j,q=o.ghost.q,pul=(q>.3&&q<.9)?Math.pow(Math.sin(Math.PI*2*(q-.3)/.6),2):0;
+    c.scene.forEach(function(bp){if(L[j].indexOf(bp)>=0)s+=glow(LX[j]-69,yB(bp),101,pul);});}
+  if(o.glowLane!=null){c.scene.forEach(function(bp){if(L[o.glowLane].indexOf(bp)>=0)s+=glow(LX[1]-34,yB(bp),68,.9)+glow(LX[o.glowLane]-34,yB(bp),68,.9);});}
+  if(o.prog!=null){
+    if(o.prog>0&&o.prog<1){[156,252,348,444].forEach(function(x,gi){for(var k=0;k<2;k++){var t=(o.prog*5+k/2+gi*.13)%1,y=170+t*300;
+      s+='<path d="M'+(x-8)+' '+y+' l8 9 l8 -9" fill="none" stroke="#C62828" stroke-width="3" stroke-linecap="round" opacity="'+(.55*Math.sin(Math.PI*t))+'"/>';}});}
+    for(i=0;i<5;i++){if(!w[i])continue;L[i].forEach(function(bp){var y=114+(yB(bp)-114)*o.prog;
+      s+='<rect x="'+(LX[i]-28)+'" y="'+y.toFixed(1)+'" width="56" height="9" rx="3" fill="'+(i===0?"#7C8A98":"#23408E")+'"/>';});}
+  }
+  if(o.ghost){var m=ease(seg(o.ghost.q,0,.3)),gx=LX[1]+(LX[o.ghost.j]-48-LX[1])*m,gw=56+(34-56)*m,gop=1-seg(o.ghost.q,.92,1);
+    s+='<g opacity="'+gop+'">';c.scene.forEach(function(bp){s+='<rect x="'+(gx-gw/2)+'" y="'+yB(bp)+'" width="'+gw+'" height="9" rx="3" fill="#23408E" stroke="#B3261E" stroke-width="2"/>';});
+    s+=tx(gx,140,11,"scene",{f:"#B3261E",w:700})+'</g>';}
+  if(o.counts){for(i=2;i<5;i++){if(o.counts[i]!=null)s+=tx(LX[i],534,14,o.counts[i]+" of "+c.scene.length,{w:700,f:"#5A544A"});}}
+  return s;
+}
+function countsFor(c,upto){var L=lanesOf(c),a=[];for(var i=2;i<5;i++)a[i]=(i<=upto)?lined(c.scene,L[i]):null;return a;}
+function mini(b){var s='<svg class="mini" viewBox="0 0 26 44" aria-hidden="true"><rect x="1" y="1" width="24" height="42" rx="3" fill="#E6EDF2" stroke="#9FB2C0"/>';
+  b.forEach(function(bp){s+='<rect x="5" y="'+(4+fr(bp)*34).toFixed(1)+'" width="16" height="3" fill="#23408E"/>';});return s+'</svg>';}
+
+/* ---------- screens ---------- */
+var STEPN={"case":1,swab:2,pPcr:3,pcr:3,pCut:4,cut:4,pRun:5,load:5,run:6,compare:7,call:8,twist:8,record:9};
+var PRED={
+  pPcr:{q:"Each cycle doubles the DNA. Start with 1 piece. How many after 3 cycles?",opts:["3","6","8"],right:2,after:"Each cycle doubles it: 1, 2, 4, 8."},
+  pCut:{q:"The enzyme finds its spelling in 2 places on one piece. How many pieces after it cuts?",opts:["2","3","4"],right:1,after:"Two cuts make 3 pieces."},
+  pRun:{q:"The gel is like a thick sponge. Which pieces will move farthest?",opts:["Big pieces","Small pieces","All the same"],right:1,after:"Small pieces slip through and run farthest."}
+};
+function predFb(k){var P=PRED[k],v=S.pred[k];if(v==null)return "";return 'You predicted <b>'+P.opts[v]+'</b>. '+(v===P.right?'Right. ':'')+P.after;}
+function head(name,title,say){
+  var c=CASES[S.ci],st=STEPN[name],d='';for(var i=1;i<=9;i++)d+='<i'+(i<=st?' class="on"':'')+'></i>';
+  return '<div class="stepline"><span class="chip case">Case '+c.n+'</span><span class="chip">Crime Lab &middot; Step '+st+' of 9</span><span class="dots" aria-hidden="true">'+d+'</span></div><h2>'+title+'</h2>'+(say?'<p class="say">'+say+'</p>':'');
+}
+function animScr(o){
+  return {html:head(o.name,o.title,o.say)+'<div class="stage"><svg id="stage" viewBox="'+o.vb+'" role="img" aria-label="'+o.aria+'"></svg></div><p class="fb" id="fb" aria-live="polite"></p><div class="btnrow">'+B("back","&larr; Back")+B("replay","Replay")+B("skip","Skip &#9654;","hidden")+B("next",o.next,"go","disabled")+'</div>',
+    enter:function(){this.play();},
+    play:function(){
+      var st=document.getElementById("stage"),nx=qs('[data-act="next"]'),sk=qs('[data-act="skip"]'),fb=document.getElementById("fb"),was=!!S.seen[o.key];
+      nx.disabled=!was;sk.classList.toggle("hidden",!was);fb.innerHTML="";
+      run(o.key,o.dur*(PROJ?1.3:1),function(p){st.innerHTML=o.draw(p);},function(){nx.disabled=false;sk.classList.add("hidden");fb.innerHTML=o.after?o.after():"";});
+    }};
+}
+function predScr(k){
+  var P=PRED[k],h=head(k,"Predict first",P.q)+'<div class="choices">';
+  P.opts.forEach(function(o,i){h+='<button type="button" class="choice" data-act="pred" data-key="'+k+'" data-k="'+i+'">'+o+'</button>';});
+  return {html:h+'</div><p class="fb">A guess is fine. You will see the answer next.</p><div class="btnrow">'+B("back","&larr; Back")+'</div>'};
+}
+function mcHtml(id,opts,right,hint,okText){
+  var st=S.mc[id]||(S.mc[id]={tries:0,done:false,wrong:{},shown:false}),h='<div class="choices'+(opts.length%2?' one':'')+'">';
+  opts.forEach(function(o,k){var cls="choice";if(st.done&&k===right)cls+=" right";else if(st.wrong[k])cls+=" wrong";
+    h+='<button type="button" class="'+cls+'" data-act="pick" data-mc="'+id+'" data-k="'+k+'" data-right="'+right+'"'+((st.done||st.wrong[k])?' disabled':'')+'>'+o+'</button>';});
+  h+='</div><p class="fb" aria-live="polite">';
+  if(st.done)h+=okText;
+  else if(st.tries===1)h+=hint;
+  else if(st.tries>=2)h+=hint+B("showme","Show me","small",'data-mc="'+id+'"');
+  return h+'</p>';
+}
+var SC={
+  "case":function(){var c=CASES[S.ci];
+    var h='<div class="stepline"><span class="chip">Crime Lab &middot; Step 1 of 9</span><span class="chip">You are the investigator</span></div><p class="bigcase">Case '+c.n+'</p><p class="say">'+c.place+' '+c.what+'</p>';
+    h+='<div class="stage sm"><svg viewBox="0 0 600 200" role="img" aria-label="Broken glass with a drop of blood">'+drawScene()+'</svg></div><ul class="sus">';
+    c.who.forEach(function(w,i){h+='<li><b>Suspect '+(i+1)+'</b>'+w+'</li>';});
+    return {html:h+'</ul><div class="btnrow">'+B("next","Swab it &#9654;","go")+'</div>'};},
+  swab:function(){return animScr({name:"swab",key:"swab",title:"Get the DNA out",say:"Soap and salt break the cells open. Cold alcohol pulls the DNA out. Same as your strawberry lab.",vb:"0 0 600 330",aria:"A swab picks up the blood, soap and salt open the cells, and alcohol pulls the DNA out",dur:6000,draw:drawSwab,next:"Copy the DNA &#9654;"});},
+  pPcr:function(){return predScr("pPcr");},
+  pcr:function(){return animScr({name:"pcr",key:"pcr",title:"Copy it: PCR",say:"The PCR machine copies one stretch of the DNA. Each cycle doubles it.",vb:"0 0 600 430",aria:"DNA doubling: 1, 2, 4, 8 copies",dur:8000,draw:drawPcr,next:"Cut it &#9654;",after:function(){return predFb("pPcr");}});},
+  pCut:function(){return predScr("pCut");},
+  cut:function(){return animScr({name:"cut",key:"cut",title:"Cut it",say:"The enzyme cuts wherever it finds its spelling. Different people have the spelling in different places, so their pieces are different sizes.",vb:"0 0 600 340",aria:"An enzyme cuts two people's DNA at different places",dur:7000,draw:drawCut,next:"Add dye &#9654;",after:function(){return predFb("pCut");}});},
+  pRun:function(){return predScr("pRun");},
+  load:function(){var c=CASES[S.ci],lab=["Scene","A","B","C"],h=head("load","Load the gel","Blue dye lets you see each sample. Drag each tube to the gel. The ladder is already in lane 1.")+'<div class="tubes">';
+    lab.forEach(function(l,i){h+='<button type="button" class="tube'+(S.loaded[i]?' used':'')+'" data-tube="'+i+'" aria-label="Load tube '+l+'"><svg viewBox="0 0 34 50" aria-hidden="true"><rect x="5" y="2" width="24" height="6" rx="2" fill="#6E8898"/><path d="M8 8 V32 L17 48 L26 32 V8 Z" fill="#fff" stroke="#6E8898" stroke-width="2"/><path d="M9 24 V32 L17 46 L25 32 V24 Z" fill="#2F5FA8"/></svg>'+l+'</button>';});
+    h+='</div><div class="stage sm"><svg id="stage" viewBox="0 70 600 486" role="img" aria-label="A gel with five wells"></svg></div><p class="fb" id="fb" aria-live="polite"></p><div class="btnrow">'+B("back","&larr; Back")+B("next","Run the gel &#9654;","go",S.loaded.indexOf(0)>=0?"disabled":"")+'</div>';
+    return {html:h,enter:function(){paintLoad();bindTubes();}};},
+  run:function(){var c=CASES[S.ci];return animScr({name:"run",key:"run",title:"Run the gel",say:"DNA is negative. It moves toward the positive end. Small pieces run farther; big pieces run slower.",vb:"0 0 600 584",aria:"The power is on. Bands move from the black negative end toward the red positive end, small pieces farthest",dur:9000,draw:function(p){return drawGel(c,{power:true,prog:p});},next:"Compare &#9654;",after:function(){return predFb("pRun");}});},
+  compare:function(){var c=CASES[S.ci],L=LEVELS[S.level];return animScr({name:"compare",key:"compare",title:"Computer compare",say:"The computer slides the crime scene lane beside each suspect. A match means every band lines up.",vb:"0 70 600 486",aria:"The crime scene lane is compared with each suspect; bands at the same height glow",dur:9000,next:"Your call &#9654;",
+    draw:function(p){if(p>=1)return drawGel(c,{prog:1,counts:L.counts?countsFor(c,4):null});
+      var j=Math.min(2,Math.floor(p*3)),q=p*3-j,done=j+1+(q>=.9?1:0);
+      return drawGel(c,{prog:1,ghost:{j:j+2,q:q},counts:L.counts?countsFor(c,done):null});},
+    after:function(){return L.counts?"The numbers show how many crime scene bands lined up.":"Same height means same size. Replay if you need another look.";}});},
+  call:function(){var c=CASES[S.ci],m=c.match,st=S.mc.call||{},opts=[];
+    c.who.forEach(function(w,i){opts.push(mini(c.sus[i])+'<span>Suspect '+"123".charAt(i)+'<small>'+w+'</small></span>');});
+    opts.push('<span>None of them</span>');
+    var right=m<0?3:m,ok=m<0?"None of them. No suspect has every band lined up.":"Suspect "+"123".charAt(m)+": every band lines up with the crime scene.";
+    var h=head("call","Your call","Whose DNA was on the glass?")+'<div class="stage sm"><svg viewBox="0 70 600 486" role="img" aria-label="The finished gel">'+drawGel(c,{prog:1,glowLane:(st.done&&m>=0)?m+2:null,counts:(st.done&&(m<0||st.shown))?countsFor(c,4):null})+'</svg></div>';
+    h+=mcHtml("call",opts,right,"Check every band. A match means all of them line up.",ok);
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Next &#9654;","go",st.done?"":"disabled")+'</div>'};},
+  twist:function(){var c=CASES[S.ci],m=c.match,adv=LEVELS[S.level].twist,st=S.mc.twist||{},q,opts,ok,hint;
+    if(m<0){q="Nobody matched. What does that tell the investigator?";opts=["The test failed.","These three are ruled out. Keep looking.","Pick the closest one."];ok="Right. No match rules people out, and that matters too.";hint="Close is not a match. What can you say about these three?";}
+    else{q="Does a match prove this person did it?";opts=["Yes. DNA proves who did it.","No. It shows whose DNA was there, not who did it.","No. Gels are usually wrong."];ok=c.twist||"Right. A match puts the DNA there. Investigators still need other evidence.";hint="What can a gel show: whose DNA it is, or what the person did?";}
+    if(!adv)opts=opts.slice(0,2);
+    var h=head("twist","One more question",q)+mcHtml("twist",opts.map(function(o){return '<span>'+o+'</span>';}),1,hint,ok);
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Station Record &#9654;","go",st.done?"":"disabled")+'</div>'};},
+  record:function(){var c=CASES[S.ci],L=LEVELS[S.level],bl='<span class="blank"></span>';if(!S.t1)S.t1=Date.now();
+    var h=head("record","Packet p. 6A, box 2 &middot; Case "+c.n,"Copy the gel band for band: ladder, scene and suspects 1, 2, 3 (label their roles).");
+    h+='<div class="stage sm"><svg viewBox="0 70 600 516" role="img" aria-label="The finished gel to copy: ladder, scene and suspects 1, 2, 3">'+drawGel(c,{prog:1,ends:true})+'</svg></div><ul class="sus">';
+    c.who.forEach(function(w,i){h+='<li><b>'+(i+1)+'</b>'+w+'</li>';});
+    h+='</ul><div class="frame"><p><b>Claim:</b> the DNA at the scene came from '+bl+'.</p><p><b>Evidence:</b> '+bl+' bands line up.</p><p><b>Reasoning:</b> '+(L.reason?'same cuts mean the same DNA spelling in those places; small pieces run farther.':'<span class="blank long"></span>')+'</p><p>Does a match prove this person did it? <b>yes / no</b></p></div>';
+    if(S.finished)h+='<p class="done">&#10003; Crime Lab done.</p>';
+    if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(S.t1-S.t0)+(S.t2?'. Done tapped at '+fmt(S.t2-S.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Try another case")+(S.finished?'':B("done","Done","go"))+'</div><p class="fine" style="margin-top:.7rem">Crime labs today copy short repeats and read them on a machine instead of a gel. The idea is the same: different people, different DNA pieces.</p>'};}
+};
+function paintLoad(){var st=document.getElementById("stage");if(st)st.innerHTML=drawGel(CASES[S.ci],{wells:[1].concat(S.loaded)});}
+function loadTube(i){
+  if(S.loaded[i])return;S.loaded[i]=1;var t=qs('.tube[data-tube="'+i+'"]');if(t)t.classList.add("used");paintLoad();
+  var left=S.loaded.filter(function(v){return !v;}).length,fb=document.getElementById("fb");
+  if(fb)fb.textContent=left?left+" to go.":"All four are in. Lane 2 is the crime scene.";
+  if(!left){var nx=qs('[data-act="next"]');if(nx)nx.disabled=false;}
+}
+function bindTubes(){
+  Array.prototype.forEach.call(root.querySelectorAll(".tube"),function(t){
+    var sx=0,sy=0,drag=false,moved=false,i=+t.getAttribute("data-tube");
+    t.addEventListener("pointerdown",function(e){if(S.loaded[i])return;drag=true;moved=false;sx=e.clientX;sy=e.clientY;try{t.setPointerCapture(e.pointerId);}catch(x){}t.classList.add("drag");});
+    t.addEventListener("pointermove",function(e){if(!drag)return;var dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>8)moved=true;t.style.transform="translate("+dx+"px,"+dy+"px)";});
+    t.addEventListener("pointerup",function(e){if(!drag)return;drag=false;t.classList.remove("drag");t.style.transform="";
+      var ok=!moved;if(moved){var r=document.getElementById("stage").getBoundingClientRect();ok=e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top-10&&e.clientY<=r.top+r.height*.6;}
+      if(ok)loadTube(i);else{var fb=document.getElementById("fb");if(fb)fb.textContent="Drop it on the gel, or just tap the tube.";}});
+    t.addEventListener("pointercancel",function(){drag=false;t.classList.remove("drag");t.style.transform="";});
+    t.addEventListener("click",function(e){if(e.detail===0)loadTube(i);}); /* keyboard */
+  });
+}
+
+/* ---------- engine ---------- */
+function buildScreens(){var p=LEVELS[S.level].predict,a=["case","swab"];if(p)a.push("pPcr");a.push("pcr");if(p)a.push("pCut");a.push("cut");if(p)a.push("pRun");a.push("load","run","compare","call","twist","record");return a;}
+function allowed(){var a=[];CASES.forEach(function(c,i){if(LEVELS[S.level].twist||!c.twist)a.push(i);});return a;}
+function randomCase(not){var a=allowed().filter(function(i){return i!==not;});return a[Math.floor(Math.random()*a.length)];}
+function kind(c){return c.match<0?"none":(c.twist?"twist":"match");}
+function nextCase(){var a=allowed().filter(function(i){return i!==S.ci;}),pick=null;
+  ["none","twist","match"].forEach(function(k){if(pick||S.kinds[k])return;var b=a.filter(function(i){return kind(CASES[i])===k;});if(b.length)pick=b;});
+  pick=pick||a;return pick[Math.floor(Math.random()*pick.length)];}
+function render(){stopAnim();CUR=SC[S.screens[S.i]]();root.innerHTML=CUR.html;if(CUR.enter)CUR.enter();}
+function go(i){if(i<0||i>=S.screens.length)return;S.i=i;render();try{document.getElementById("sec-gel").scrollIntoView({block:"nearest"});}catch(e){}}
+function newCase(ci){S.kinds[kind(CASES[ci])]=true;S.ci=ci;S.i=0;S.loaded=[0,0,0,0];S.pred={};S.mc={};S.finished=false;S.t0=Date.now();S.t1=0;S.t2=0;S.screens=buildScreens();render();}
+root.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("[data-act]"):null;if(!b||b.disabled)return;
+  var act=b.getAttribute("data-act"),st;
+  if(act==="next")go(S.i+1);
+  else if(act==="back")go(S.i-1);
+  else if(act==="replay"){if(CUR&&CUR.play)CUR.play();}
+  else if(act==="skip"){if(anim)anim.skip();}
+  else if(act==="pred"){S.pred[b.getAttribute("data-key")]=+b.getAttribute("data-k");go(S.i+1);}
+  else if(act==="pick"){st=S.mc[b.getAttribute("data-mc")];if(+b.getAttribute("data-k")===+b.getAttribute("data-right"))st.done=true;else{st.tries++;st.wrong[b.getAttribute("data-k")]=true;}render();}
+  else if(act==="showme"){st=S.mc[b.getAttribute("data-mc")];st.done=true;st.shown=true;render();}
+  else if(act==="again")newCase(nextCase());
+  else if(act==="done"){S.finished=true;S.t2=Date.now();render();}
+});
+
+/* level switch */
+function paintLevel(){Array.prototype.forEach.call(document.querySelectorAll("#levelsw button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-level")===S.level?"true":"false");});}
+document.getElementById("levelsw").addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("[data-level]"):null;if(!b||b.getAttribute("data-level")===S.level)return;
+  S.level=b.getAttribute("data-level");paintLevel();
+  try{var u=new URL(location.href);u.searchParams.set("level",S.level);history.replaceState(null,"",u.toString());}catch(x){}
+  newCase(allowed().indexOf(S.ci)>=0?S.ci:randomCase(-1));
+});
+
+/* sections: one on screen at a time, each with its own anchor */
+var SECS=["pcr","gel","plasmid","crispr","sort"];
+function showSec(){
+  var h=(location.hash||"#gel").slice(1);if(SECS.indexOf(h)<0)h="gel";
+  SECS.forEach(function(s){document.getElementById("sec-"+s).classList.toggle("hidden",s!==h);});
+  Array.prototype.forEach.call(document.querySelectorAll(".secbar a"),function(a){a.setAttribute("aria-current",a.getAttribute("href")==="#"+h?"true":"false");});
+  if(h!=="gel")stopAnim();else if(CUR&&CUR.play&&!anim)render();
+}
+window.addEventListener("hashchange",showSec);
+
+/* teacher key: ?teacher=1 */
+function teacherKey(){
+  var t=document.getElementById("teacher"),h='<div class="panel" style="margin-top:1rem"><h2>Teacher key: Crime Lab</h2><p class="fine">Lane 1 is the ladder, lane 2 the crime scene, lanes 3 to 5 are Suspects 1, 2, 3. Open one case with <code>?case=1042</code>. SOL General draws from the six cases without a twist. Add <code>?timer=1</code> to a student link to show the times without this key.</p><table class="key"><tr><th>Case</th><th>Scene</th><th>Answer</th><th>Lane</th><th>Bands that line up (1, 2, 3)</th><th>Note</th></tr>';
+  CASES.forEach(function(c){var m=c.match;h+='<tr><td><b>'+c.n+'</b></td><td>'+c.place+'</td><td>'+(m<0?"None of them":"Suspect "+"123".charAt(m)+" ("+c.who[m]+")")+'</td><td>'+(m<0?"none":m+3)+'</td><td>'+c.sus.map(function(s){return lined(c.scene,s)+" of "+c.scene.length;}).join(", ")+'</td><td>'+(c.twist?"Twist, Advanced only. "+c.twist:(m<0?"No match: all three ruled out.":""))+'</td></tr>';});
+  t.innerHTML=h+'</table><p class="fine">Second question, every case: a match shows whose DNA was there, not who did it. The Which Tool sort key will be added with that section.</p></div>';t.classList.remove("hidden");
+}
+
+/* start */
+paintLevel();
+var start=-1,want=Q.get("case");
+if(want)CASES.forEach(function(c,i){if(c.n===want)start=i;});
+if(start>=0&&CASES[start].twist&&!LEVELS[S.level].twist){S.level="advanced";paintLevel();}
+if(TEACHER)teacherKey();
+newCase(start>=0?start:randomCase(-1));
+showSec();
+window.__toolbox={S:S,CASES:CASES};
+})();
+</script>
+</body>
+</html>
