@@ -91,6 +91,18 @@ html.proj .stage svg{max-height:62vh}
 .soon{font-family:var(--sans);color:var(--ink-soft);padding:2rem 0}
 table.key{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:.86rem;margin:.5rem 0}
 table.key th,table.key td{border:1px solid var(--rule);padding:.3rem .45rem;text-align:left;vertical-align:top}
+.slide{display:flex;justify-content:center;align-items:center;gap:.7rem;margin:.5rem 0 .1rem;font-family:var(--sans)}
+.slide .btn{min-width:92px;min-height:60px;font-size:1.5rem}
+.slide .btn:disabled{color:var(--shell);cursor:default}
+.slide span{font-size:.92rem;font-weight:600;color:var(--ink-soft)}
+.stage.slidable svg{touch-action:pan-y;cursor:grab}
+.btn.cutbtn{margin-left:auto;padding:.55rem 1.4rem}
+.choices.three{grid-template-columns:repeat(3,1fr)}
+.choices.three .choice{justify-content:center;font-size:1.7rem;font-weight:700}
+.choice .mini2{flex:0 0 150px;width:150px;height:56px}
+.fill{border-bottom:2px solid var(--ink);font-weight:700;padding:0 .35rem}
+.note{font-family:var(--sans);font-size:1rem;line-height:1.4;margin:.55rem 0 0;max-width:44rem}
+.early{border:2px dashed var(--shell);border-radius:8px;padding:.55rem .8rem;font-family:var(--sans);font-size:1rem;line-height:1.4;margin:.4rem 0}
 .sop-foot{margin-top:1.6rem;padding-top:.7rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--ink-soft)}
 .sop-foot a{color:inherit}
 @media (max-height:800px){.stage svg{max-height:44vh}.stage.sm svg{max-height:32vh}.bigcase{font-size:2.2rem}}
@@ -118,10 +130,10 @@ table.key th,table.key td{border:1px solid var(--rule);padding:.3rem .45rem;text
     <a href="#sort">Which<br>Tool?</a>
   </nav>
 
-  <section class="panel sec hidden" id="sec-pcr"><h2>PCR: copy the DNA</h2><p class="soon">This section is next in the build. The Crime Lab is ready: tap <b>Crime Lab</b> above.</p></section>
+  <section class="panel sec hidden" id="sec-pcr"><h2>PCR: copy the DNA</h2><p class="soon">This section is next in the build. The Crime Lab and CRISPR are ready: tap them above.</p></section>
   <section class="panel sec" id="sec-gel"><div id="gelroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec hidden" id="sec-plasmid"><h2>Plasmid: paste a gene into bacteria</h2><p class="soon">This section is next in the build.</p></section>
-  <section class="panel sec hidden" id="sec-crispr"><h2>CRISPR: edit a gene</h2><p class="soon">This section is next in the build.</p></section>
+  <section class="panel sec hidden" id="sec-crispr"><div id="crisprroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec hidden" id="sec-sort"><h2>Which tool?</h2><p class="soon">This section is next in the build.</p></section>
 
   <div id="teacher" class="hidden"></div>
@@ -342,8 +354,8 @@ function predScr(k){
   P.opts.forEach(function(o,i){h+='<button type="button" class="choice" data-act="pred" data-key="'+k+'" data-k="'+i+'">'+o+'</button>';});
   return {html:h+'</div><p class="fb">A guess is fine. You will see the answer next.</p><div class="btnrow">'+B("back","&larr; Back")+'</div>'};
 }
-function mcHtml(id,opts,right,hint,okText){
-  var st=S.mc[id]||(S.mc[id]={tries:0,done:false,wrong:{},shown:false}),h='<div class="choices'+(opts.length%2?' one':'')+'">';
+function mcHtml(id,opts,right,hint,okText,store,cls){
+  var M=store||S.mc,st=M[id]||(M[id]={tries:0,done:false,wrong:{},shown:false}),h='<div class="choices'+(cls?' '+cls:(opts.length%2?' one':''))+'">';
   opts.forEach(function(o,k){var cls="choice";if(st.done&&k===right)cls+=" right";else if(st.wrong[k])cls+=" wrong";
     h+='<button type="button" class="'+cls+'" data-act="pick" data-mc="'+id+'" data-k="'+k+'" data-right="'+right+'"'+((st.done||st.wrong[k])?' disabled':'')+'>'+o+'</button>';});
   h+='</div><p class="fb" aria-live="polite">';
@@ -441,6 +453,203 @@ root.addEventListener("click",function(e){
   else if(act==="done"){S.finished=true;S.t2=Date.now();render();}
 });
 
+/* ================= CRISPR (#crispr): Scissors with a GPS =================
+   Station 4. The paper is station card 4 and packet p. 6A box 4 (Canvas Original #70); the last screen
+   carries the box 4 words exactly. Lesson 3 comes before the lessons on how a gene is read, and the CLT
+   baseline CER the week after must measure cold, so no screen here names or shows what is different in
+   the sickle gene itself. The gene that gets cut is the switch gene.
+   Levels: same strip, same guide, same answers. A third level (DE Bio 101) can add the second DNA strand
+   and its direction: add an entry to CLEVELS. */
+var DNA20="GATCCTTGACCAGGTAACTG".split(""),GUIDE="GAACUGGUCC".split(""),T0=4,CUT=11; /* boxed bases 5-14; Cas9 cuts between strip bases 11 and 12 */
+var RPAIR={A:"U",T:"A",C:"G",G:"C"};
+function fits(off,i){return RPAIR[DNA20[off+i]]===GUIDE[i];}
+function nFit(off){var n=0;for(var i=0;i<10;i++)if(fits(off,i))n++;return n;}
+var CLEVELS={general:{predict:false,start:2,pics:true},advanced:{predict:true,start:0,pics:false}};
+var CR={i:0,screens:[],off:0,locked:false,refused:false,hint:0,mc:{},t0:0,t1:0,t2:0,finished:false,started:false,ht:0,st:0};
+var croot=document.getElementById("crisprroot");
+function cq(s){return croot.querySelector(s);}
+function tick(){try{var A=window.AudioContext||window.webkitAudioContext;if(!A)return;var a=tick.a||(tick.a=new A()),o=a.createOscillator(),g=a.createGain();
+  o.type="square";o.frequency.value=1500;g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.05);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.06);}catch(e){}}
+
+/* ---------- drawings ---------- */
+var TP=30,TS=27,TX=20,CUTX=TX+CUT*TP-1.5,YD=44,YG=YD+50;
+function ink(ch){return (ch==="C"||ch==="G")?"#1D1A15":"#fff";}
+function dTile(ch,x,y){return '<rect x="'+x+'" y="'+y+'" width="'+TS+'" height="'+TS+'" rx="'+(ch==="T"?0:5)+'" fill="'+BASE[ch]+'" stroke="#1D1A15" stroke-width="1"/>'+tx(x+TS/2,y+20,17,ch,{w:700,f:ink(ch)});}
+function gDot(ch,cx,cy){return '<circle cx="'+cx+'" cy="'+cy+'" r="13.5" fill="'+(ch==="U"?BASE.T:BASE[ch])+'" stroke="#1D1A15" stroke-width="1"/>'+tx(cx,cy+6,17,ch,{w:700,f:ink(ch)});}
+function drawStrip(o){
+  var yD=o.yD||YD,yG=yD+50,g=(o.gap||0)*7,s='<rect width="640" height="'+o.h+'" fill="#fff"/>',i,x;
+  s+=tx(TX,yD-12,14,"DNA",{a:"start",w:700,f:"#5A544A"});
+  if(o.pairs)for(i=0;i<10;i++){if(fits(o.off,i))s+='<rect x="'+(TX+(o.off+i)*TP-1.5)+'" y="'+(yD-4)+'" width="'+TP+'" height="'+(50+TS+8)+'" rx="8" fill="#B8E600" opacity=".9"/>';}
+  if(o.off!=null)s+='<rect x="'+(TX+o.off*TP-6)+'" y="'+(yG-5)+'" width="'+(10*TP+9)+'" height="'+(TS+10)+'" rx="18" fill="'+(o.pairs?"none":"#F5F3EE")+'" stroke="#5A544A" stroke-width="1.5"'+(o.locked?'':' stroke-dasharray="5 4"')+'/>';
+  for(i=0;i<20;i++)s+=dTile(DNA20[i],TX+i*TP+(i>=CUT?g:-g),yD);
+  if(o.box)s+='<rect x="'+(TX+T0*TP-5-g)+'" y="'+(yD-6)+'" width="'+(10*TP+7+2*g)+'" height="'+(TS+12)+'" rx="7" fill="none" stroke="#C62828" stroke-width="3"/>';
+  if(o.mark)s+='<path d="M'+(CUTX-9)+' '+(yD-25)+' h18 l-9 14 z" fill="#C62828"/>';
+  if(o.line)s+='<line x1="'+CUTX+'" y1="'+(yD-9)+'" x2="'+CUTX+'" y2="'+(yD+TS+9)+'" stroke="#C62828" stroke-width="4" stroke-linecap="round"/>';
+  if(o.off!=null){
+    s+='<g'+(o.gop!=null?' opacity="'+o.gop+'"':'')+'>';
+    for(i=0;i<10;i++){x=TX+(o.off+i)*TP+TS/2;s+=gDot(GUIDE[i],x,yG+TS/2);
+      if(o.pairs)s+=fits(o.off,i)?'<line x1="'+x+'" y1="'+(yD+TS+4)+'" x2="'+x+'" y2="'+(yG-4)+'" stroke="#1D1A15" stroke-width="3" stroke-linecap="round"/>':tx(x,yD+TS+17,15,"&#10005;",{w:700,f:"#B3261E"});}
+    s+=tx(TX+o.off*TP+5*TP-1.5,yG+TS+21,14,"guide RNA",{w:700,f:"#5A544A"})+'</g>';
+  }
+  return s;
+}
+function scissors(cx,cy,open,sc,op){var a=3+open*20;
+  function half(sg){return '<g transform="rotate('+(sg*a)+')"><path d="M-5 -6 L0 62 L5 -6 Z" fill="#AEB7C2" stroke="#4A5560" stroke-width="1.5"/><path d="M0 -6 L'+(sg*10)+' -32" stroke="#6B4E8C" stroke-width="7" stroke-linecap="round"/><circle cx="'+(sg*14)+'" cy="-45" r="13" fill="#fff" fill-opacity=".7" stroke="#6B4E8C" stroke-width="7"/></g>';}
+  return '<g transform="translate('+cx+','+cy+') scale('+(sc||1)+')" opacity="'+(op==null?1:op)+'">'+half(1)+half(-1)+'<circle r="4" fill="#4A5560"/></g>';}
+function sickle(cx,cy,sc,op){return '<g transform="translate('+cx+','+cy+') scale('+(sc||1)+')" opacity="'+(op==null?1:op)+'"><path d="M-52 18 A56 56 0 0 1 52 18 A78 78 0 0 0 -52 18 Z" fill="#C8372D" stroke="#8E1F18" stroke-width="2.5" stroke-linejoin="round"/></g>';}
+function roundCell(cx,cy,sc,op){return '<g transform="translate('+cx+','+cy+') scale('+(sc||1)+')" opacity="'+(op==null?1:op)+'"><circle r="42" fill="#C8372D" stroke="#8E1F18" stroke-width="2.5"/><circle r="17" fill="#8E1F18" opacity=".35"/></g>';}
+function drawProblem(){
+  var s='<rect width="640" height="200" fill="#fff"/>';
+  s+=sickle(180,84,1.15)+tx(180,150,17,"sickle cell disease",{w:700})+tx(180,173,14,"stiff and curved",{f:"#5A544A"});
+  s+=roundCell(460,82,1.1)+tx(460,150,17,"with fetal hemoglobin",{w:700})+tx(460,173,14,"round",{f:"#5A544A"});
+  return s;
+}
+function drawParts(){
+  var s='<rect width="640" height="200" fill="#fff"/>',i;
+  s+=tx(190,38,18,"guide RNA",{w:700})+'<rect x="34" y="58" width="312" height="40" rx="20" fill="#F5F3EE" stroke="#5A544A" stroke-width="1.5"/>';
+  for(i=0;i<10;i++)s+=gDot(GUIDE[i],55+i*30,78);
+  s+=tx(190,128,14,"RNA has U where DNA has T.",{f:"#5A544A"});
+  s+=scissors(500,96,.9,1.25)+tx(500,190,18,"Cas9",{w:700,f:"#6B4E8C"});
+  return s;
+}
+function drawPredict(done){
+  var s='<rect width="640" height="120" fill="#fff"/>';
+  s+=tx(286,36,14,"DNA",{a:"end",w:700,f:"#5A544A"})+dTile("A",306.5,16);
+  s+=tx(286,88,14,"guide RNA",{a:"end",w:700,f:"#5A544A"});
+  s+=done?gDot("U",320,82)+'<line x1="320" y1="47" x2="320" y2="65" stroke="#1D1A15" stroke-width="3" stroke-linecap="round"/>':'<circle cx="320" cy="82" r="13.5" fill="#fff" stroke="#1D1A15" stroke-width="1.5" stroke-dasharray="4 3"/>'+tx(320,88,17,"?",{w:700});
+  return s;
+}
+function drawCas(p){
+  var down=ease(seg(p,.08,.42)),open=1-ease(seg(p,.52,.66)),gap=ease(seg(p,.64,.86)),up=ease(seg(p,.86,1));
+  var s=drawStrip({h:206,yD:96,off:T0,box:true,mark:true,gap:gap,locked:true,gop:gap>0?.45:1});
+  var cy=-70+(60+70)*down-40*up;
+  s+=scissors(CUTX,cy,open,1,1-up)+(up<1?tx(CUTX+56,cy-40,16,"Cas9",{a:"start",w:700,f:"#6B4E8C",op:(1-up)*down}):"");
+  return s;
+}
+function drawSwitch(p){
+  var shake=seg(p,.22,.44),snap=ease(seg(p,.44,.6)),on=ease(seg(p,.62,.92)),s='<rect width="640" height="230" fill="#fff"/>',k;
+  /* the cut gene */
+  s+='<rect x="56" y="178" width="158" height="13" rx="3" fill="#23408E"/><rect x="226" y="178" width="158" height="13" rx="3" fill="#23408E"/><path d="M211 168 h18 l-9 13 z" fill="#C62828"/>'+tx(220,214,15,"switch gene, cut",{w:700,f:"#5A544A"});
+  /* the switch */
+  s+='<rect x="176" y="118" width="88" height="46" rx="8" fill="#4A5560"/>'+tx(220,156,12,"switch",{f:"#fff"});
+  var ang=-34+(shake>0&&snap<=0?Math.sin(shake*Math.PI*10)*7:0);
+  s+='<g transform="translate(220,134)"><g transform="rotate('+ang+')"><rect x="-5" y="-22" width="10" height="24" rx="3" fill="#D9D5CC" stroke="#1D1A15" stroke-width="1.5"/>';
+  s+='<g transform="translate('+(snap*-40)+','+(-22+snap*snap*92)+') rotate('+(snap*-150)+')" opacity="'+(1-seg(p,.56,.64))+'"><rect x="-5" y="-30" width="10" height="30" rx="3" fill="#D9D5CC" stroke="#1D1A15" stroke-width="1.5"/><circle cx="0" cy="-32" r="8" fill="#B85042" stroke="#1D1A15" stroke-width="1.5"/></g>';
+  s+='</g><circle r="6" fill="#1D1A15"/></g>';
+  if(snap>0&&snap<1)for(k=0;k<6;k++){var a=k*Math.PI/3+.4;s+='<line x1="'+(208+Math.cos(a)*10)+'" y1="'+(112+Math.sin(a)*10)+'" x2="'+(208+Math.cos(a)*(14+snap*12))+'" y2="'+(112+Math.sin(a)*(14+snap*12))+'" stroke="#C62828" stroke-width="2.5" stroke-linecap="round" opacity="'+(1-snap)+'"/>';}
+  s+=tx(238,108,15,snap>=1?"broken":"holding it OFF",{a:"start",w:700,f:snap>=1?"#B3261E":"#1D1A15"});
+  /* wire and light */
+  s+='<path d="M264 141 H400 V96 H452" fill="none" stroke="'+(on>0?"#B8860B":"#8a8a8a")+'" stroke-width="4"/>';
+  if(on>0)for(k=0;k<10;k++){var b=k*Math.PI/5;s+='<line x1="'+(500+Math.cos(b)*56)+'" y1="'+(96+Math.sin(b)*56)+'" x2="'+(500+Math.cos(b)*(62+on*12))+'" y2="'+(96+Math.sin(b)*(62+on*12))+'" stroke="#E0A800" stroke-width="4" stroke-linecap="round" opacity="'+on+'"/>';}
+  s+='<circle cx="500" cy="96" r="46" fill="#D9D5CC" stroke="#5A544A" stroke-width="2.5"/><circle cx="500" cy="96" r="46" fill="#FFD34D" stroke="#B8860B" stroke-width="2.5" opacity="'+on+'"/>';
+  s+=tx(500,103,20,on>.5?"ON":"off",{w:700,f:on>.5?"#5C4300":"#5A544A"})+tx(500,196,17,"fetal hemoglobin",{w:700})+tx(500,217,14,on>=1?"back on":"turned off",{f:"#5A544A"});
+  return s;
+}
+function drawCells(p){
+  var s='<rect width="640" height="210" fill="#fff"/>',SL=[250,390,530],k;
+  s+='<circle cx="84" cy="92" r="38" fill="#F3E3C3" stroke="#9C8250" stroke-width="2.5"/><circle cx="90" cy="88" r="16" fill="#C9A86A" stroke="#9C8250" stroke-width="1.5"/>'+tx(84,158,15,"edited",{w:700,f:"#5A544A"})+tx(84,177,15,"stem cell",{w:700,f:"#5A544A"});
+  s+=tx(168,100,26,"→",{f:"#8FA3B5"});
+  for(k=0;k<3;k++){var a=.06+k*.24,out=seg(p,a,a+.2),inn=ease(seg(p,a+.08,a+.4));
+    if(out<1)s+=sickle(SL[k]+out*26,84+out*70,.78,1-out);
+    if(inn>0)s+=roundCell(130+(SL[k]-130)*inn,92,.35+.5*inn,Math.min(1,inn*3));}
+  s+=tx(390,177,17,"new red blood cells stay round",{w:700,op:seg(p,.9,1)});
+  return s;
+}
+function pic(two){var s='<svg class="mini2" viewBox="0 0 150 56" aria-hidden="true"><rect x="2" y="22" width="146" height="10" rx="2" fill="#23408E"/><rect x="18" y="22" width="44" height="10" fill="#1F7A8C"/><rect x="88" y="22" width="44" height="10" fill="#E0A800"/>';
+  s+='<rect x="38" y="16" width="4" height="22" fill="#fff"/><path d="M32 3 h16 l-8 11 z" fill="#C62828"/>';
+  if(two)s+='<rect x="108" y="16" width="4" height="22" fill="#fff"/><path d="M102 3 h16 l-8 11 z" fill="#C62828"/>';
+  return s+tx(40,50,11,"switch gene",{f:"#5A544A"})+tx(110,50,11,"other gene",{f:"#5A544A"})+'</svg>';}
+
+/* ---------- screens ---------- */
+function chead(title,say){
+  var n=CR.i+1,tot=CR.screens.length,d='';for(var i=1;i<=tot;i++)d+='<i'+(i<=n?' class="on"':'')+'></i>';
+  return '<div class="stepline"><span class="chip case">CRISPR</span><span class="chip">Station 4 &middot; Step '+n+' of '+tot+'</span><span class="dots" aria-hidden="true">'+d+'</span></div><h2>'+title+'</h2>'+(say?'<p class="say">'+say+'</p>':'');
+}
+function cStill(o){return {html:chead(o.title,o.say)+'<div class="stage sm"><svg viewBox="'+o.vb+'" role="img" aria-label="'+o.aria+'">'+o.svg+'</svg></div><div class="btnrow">'+(CR.i>0?B("back","&larr; Back"):"")+B("next",o.next,"go")+'</div>'};}
+function cAnim(o){
+  return {html:chead(o.title,o.say)+'<div class="stage sm"><svg id="cstage" viewBox="'+o.vb+'" role="img" aria-label="'+o.aria+'"></svg></div>'+(o.under||'')+'<p class="fb" id="cfb" aria-live="polite"></p><div class="btnrow">'+B("back","&larr; Back")+B("replay","Replay")+B("skip","Skip &#9654;","hidden")+B("next",o.next,"go","disabled")+'</div>',
+    enter:function(){this.play();},
+    play:function(){
+      var st=document.getElementById("cstage"),nx=cq('[data-act="next"]'),sk=cq('[data-act="skip"]'),fb=document.getElementById("cfb"),was=!!S.seen[o.key];
+      nx.disabled=!was;sk.classList.toggle("hidden",!was);fb.innerHTML="";
+      run(o.key,o.dur*(PROJ?1.3:1),function(p){st.innerHTML=o.draw(p);},function(){nx.disabled=false;sk.classList.add("hidden");fb.innerHTML=o.after||"";});
+    }};
+}
+var SLIDEHINT="Look for C T T G in the DNA.";
+function paintSlide(){
+  var st=document.getElementById("cstage"),fb=document.getElementById("cfb");if(!st)return;
+  st.innerHTML=drawStrip({h:150,off:CR.off,pairs:true,box:CR.locked,locked:CR.locked});
+  var n=nFit(CR.off),t;
+  if(CR.locked)t='<b>Locked.</b> All 10 bases pair. Cas9 cuts here.';
+  else{t=(CR.refused?'Cas9 will not cut here. Only ':'')+n+' of 10 pair'+(CR.refused?'.':' here.');if(CR.hint>=1)t+=' '+SLIDEHINT;if(CR.hint>=2)t+=B("slideshow","Show me","small");}
+  fb.innerHTML=t;
+  cq('[data-act="left"]').disabled=CR.locked||CR.off<=0;cq('[data-act="right"]').disabled=CR.locked||CR.off>=10;
+  cq('[data-act="cut"]').classList.toggle("go",CR.locked);
+}
+function hintClock(){clearTimeout(CR.ht);if(CR.locked||CR.hint>=2)return;CR.ht=setTimeout(function(){CR.hint++;paintSlide();hintClock();},30000);}
+function setOff(n){if(CR.locked)return;n=n<0?0:n>10?10:n;if(n===CR.off)return;CR.off=n;CR.refused=false;if(n===T0){CR.locked=true;clearTimeout(CR.ht);tick();}paintSlide();}
+function bindSlide(){
+  var st=document.getElementById("cstage"),drag=false,sx=0,so=0;
+  function vx(e){var r=st.getBoundingClientRect(),k=Math.max(640/r.width,150/r.height);return {x:(e.clientX-r.left-(r.width-640/k)/2)*k,y:(e.clientY-r.top-(r.height-150/k)/2)*k};}
+  st.addEventListener("pointerdown",function(e){if(CR.locked)return;var q=vx(e);if(q.y<YG-12)return;drag=true;sx=q.x;so=CR.off;try{st.setPointerCapture(e.pointerId);}catch(x){}});
+  st.addEventListener("pointermove",function(e){if(!drag)return;setOff(Math.round(so+(vx(e).x-sx)/TP));});
+  st.addEventListener("pointerup",function(){drag=false;});
+  st.addEventListener("pointercancel",function(){drag=false;});
+  st.addEventListener("keydown",function(e){if(e.key==="ArrowLeft"){setOff(CR.off-1);e.preventDefault();}else if(e.key==="ArrowRight"){setOff(CR.off+1);e.preventDefault();}});
+}
+function slideShow(){clearTimeout(CR.ht);clearInterval(CR.st);CR.st=setInterval(function(){if(CR.locked||!document.getElementById("cstage")){clearInterval(CR.st);return;}setOff(CR.off+(CR.off<T0?1:-1));},320);}
+var CSC={
+  problem:function(){return cStill({title:"The problem",say:"Before birth, red cells carry <b>fetal hemoglobin</b> and stay round. After birth, a <b>switch gene</b> turns it off.",vb:"0 0 640 200",aria:"Two red blood cells: a stiff curved one in sickle cell disease, and a round one with fetal hemoglobin",svg:drawProblem(),next:"Meet CRISPR &#9654;"});},
+  parts:function(){return cStill({title:"CRISPR: two parts",say:"The guide RNA gives the address; Cas9 cuts at that address and nowhere else.",vb:"0 0 640 200",aria:"A guide RNA strip of ten bases, G A A C U G G U C C, and Cas9 drawn as scissors",svg:drawParts(),next:"Next &#9654;"});},
+  predict:function(){var st=CR.mc.pred||{},w=st.wrong||{};
+    var hint=w[0]?"RNA has no T. Where the DNA has A, the guide has U.":"A does not pair with G. Try again.";
+    var h=chead("Predict first","The DNA has <b>A</b> here. What goes in the guide RNA?")+'<div class="stage sm"><svg viewBox="0 0 640 120" role="img" aria-label="A DNA base A with an empty guide RNA circle under it">'+drawPredict(st.done)+'</svg></div>';
+    h+=mcHtml("pred",["T","U","G"],1,hint,"A pairs with <b>U</b>. RNA has U where DNA has T.",CR.mc,"three");
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Slide the guide &#9654;","go",st.done?"":"disabled")+'</div>'};},
+  slide:function(){
+    var h=chead("Slide to match","Slide the guide RNA along the DNA until every base pairs.")+'<div class="stage slidable"><svg id="cstage" viewBox="0 0 640 150" role="img" tabindex="0" aria-label="The DNA strip with the guide RNA under it. Use the arrow buttons to slide the guide."></svg></div>';
+    h+='<div class="slide">'+B("left","&#9664;","",'aria-label="Slide the guide left one base"')+'<span>one base at a time, or drag</span>'+B("right","&#9654;","",'aria-label="Slide the guide right one base"')+'</div><p class="fb" id="cfb" aria-live="polite"></p>';
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("cut","Cut here &#9986;","cutbtn")+'</div>',enter:function(){paintSlide();bindSlide();hintClock();}};},
+  cut:function(){return cAnim({key:"cr-cut",title:"Cas9 cuts",say:"Cas9 cuts the DNA at the red &#9660;.",vb:"0 0 640 206",aria:"Cas9, drawn as scissors, closes at the red mark and the DNA strip opens between bases 11 and 12",dur:7000,draw:drawCas,next:"What the cut does &#9654;",after:"The DNA is cut at the one place the guide RNA paired."});},
+  "switch":function(){return cAnim({key:"cr-switch",title:"The switch breaks",say:"The cut breaks the switch gene, so the switch can no longer turn fetal hemoglobin off.",vb:"0 0 640 230",aria:"The switch on the cut gene snaps, and the fetal hemoglobin light comes back on",dur:6000,draw:drawSwitch,next:"The red cells &#9654;",after:"The patient's cells make fetal hemoglobin again."});},
+  cells:function(){return cAnim({key:"cr-cells",title:"Cells stay round",vb:"0 0 640 210",aria:"An edited stem cell makes new red blood cells that stay round; the curved cells are replaced",dur:6500,draw:drawCells,next:"One check &#9654;",
+    under:'<p class="note">The first approved CRISPR medicine, in 2023, works this way: doctors edit the patient\'s own blood stem cells outside the body, then put them back.</p>'});},
+  check:function(){var L=CLEVELS[S.level],st=CR.mc.check||{},opts,right;
+    if(L.pics){opts=[pic(true)+'<span>So Cas9 cuts two genes.</span>',pic(false)+'<span>So Cas9 does not cut a different gene.</span>'];right=1;}
+    else{opts=['<span>So Cas9 cuts as many places as it can.</span>','<span>So the DNA pieces sort by size.</span>','<span>So Cas9 does not cut a different gene.</span>'];right=2;}
+    var h=chead("One check","Why must the guide match only one place in all the DNA?")+mcHtml("check",opts,right,"Cas9 cuts wherever the guide RNA pairs. What if it paired in two places?","Right. A guide that paired with the wrong spot would send Cas9 to cut a different gene.",CR.mc,"one");
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Station Record &#9654;","go",st.done?"":"disabled")+'</div>'};},
+  paper:function(){if(!CR.t1)CR.t1=Date.now();
+    var h=chead("Packet p. 6A, box 4","Write the guide RNA under the boxed DNA, one base per circle (U for T). Draw a line through the strip where Cas9 cuts, at the &#9660;.");
+    h+='<div class="stage sm"><svg viewBox="0 0 640 150" role="img" aria-label="DNA G A T C, then boxed C T T G A C C A G G, then T A A C T G. Guide RNA under the boxed bases: G A A C U G G U C C. A red line marks the cut between the seventh and eighth boxed bases.">'+drawStrip({h:150,off:T0,box:true,mark:true,line:true,locked:true})+'</svg></div>';
+    h+='<div class="frame"><p>After the cut, the patient\'s cells turn <span class="fill">fetal hemoglobin</span> back on, and the red blood cells stay <span class="fill">round</span>.</p></div>';
+    if(CR.finished)h+='<p class="done">&#10003; CRISPR done.</p><div class="early"><b>Done early?</b> Station 3 added a gene. Station 4 cut a gene. Tell your group one way they are alike and one way they are different.</div>';
+    if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(CR.t1-CR.t0)+(CR.t2?'. Done tapped at '+fmt(CR.t2-CR.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Start over")+(CR.finished?'':B("done","Done","go"))+'</div>'};}
+};
+function crScreens(){var a=["problem","parts"];if(CLEVELS[S.level].predict)a.push("predict");a.push("slide","cut","switch","cells","check","paper");return a;}
+var CCUR=null;
+function crLeave(){clearTimeout(CR.ht);clearInterval(CR.st);}
+function crender(){stopAnim();crLeave();CCUR=CSC[CR.screens[CR.i]]();croot.innerHTML=CCUR.html;if(CCUR.enter)CCUR.enter();}
+function cgo(i){if(i<0||i>=CR.screens.length)return;CR.i=i;crender();try{document.getElementById("sec-crispr").scrollIntoView({block:"nearest"});}catch(e){}}
+function crStart(){crLeave();CR.started=true;CR.i=0;CR.off=CLEVELS[S.level].start;CR.locked=false;CR.refused=false;CR.hint=0;CR.mc={};CR.finished=false;CR.t0=Date.now();CR.t1=0;CR.t2=0;CR.screens=crScreens();crender();}
+croot.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("[data-act]"):null;if(!b||b.disabled)return;
+  var act=b.getAttribute("data-act"),st;
+  if(act==="next")cgo(CR.i+1);
+  else if(act==="back")cgo(CR.i-1);
+  else if(act==="replay"){if(CCUR&&CCUR.play)CCUR.play();}
+  else if(act==="skip"){if(anim)anim.skip();}
+  else if(act==="pick"){st=CR.mc[b.getAttribute("data-mc")];if(+b.getAttribute("data-k")===+b.getAttribute("data-right"))st.done=true;else{st.tries++;st.wrong[b.getAttribute("data-k")]=true;}crender();}
+  else if(act==="showme"){st=CR.mc[b.getAttribute("data-mc")];st.done=true;st.shown=true;crender();}
+  else if(act==="left")setOff(CR.off-1);
+  else if(act==="right")setOff(CR.off+1);
+  else if(act==="cut"){if(CR.locked)cgo(CR.i+1);else{CR.refused=true;if(CR.hint<2)CR.hint++;paintSlide();hintClock();}}
+  else if(act==="slideshow")slideShow();
+  else if(act==="again")crStart();
+  else if(act==="done"){CR.finished=true;CR.t2=Date.now();crender();}
+});
+
 /* level switch */
 function paintLevel(){Array.prototype.forEach.call(document.querySelectorAll("#levelsw button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-level")===S.level?"true":"false");});}
 document.getElementById("levelsw").addEventListener("click",function(e){
@@ -448,6 +657,7 @@ document.getElementById("levelsw").addEventListener("click",function(e){
   S.level=b.getAttribute("data-level");paintLevel();
   try{var u=new URL(location.href);u.searchParams.set("level",S.level);history.replaceState(null,"",u.toString());}catch(x){}
   newCase(allowed().indexOf(S.ci)>=0?S.ci:randomCase(-1));
+  if(CR.started){CR.started=false;crLeave();if(showSec.cur==="crispr")crStart();}
 });
 
 /* sections: one on screen at a time, each with its own anchor */
@@ -456,7 +666,10 @@ function showSec(){
   var h=(location.hash||"#gel").slice(1);if(SECS.indexOf(h)<0)h="gel";
   SECS.forEach(function(s){document.getElementById("sec-"+s).classList.toggle("hidden",s!==h);});
   Array.prototype.forEach.call(document.querySelectorAll(".secbar a"),function(a){a.setAttribute("aria-current",a.getAttribute("href")==="#"+h?"true":"false");});
+  var was=showSec.cur;showSec.cur=h;
+  if(was==="crispr"&&h!=="crispr"){stopAnim();crLeave();}
   if(h!=="gel")stopAnim();else if(CUR&&CUR.play&&!anim)render();
+  if(h==="crispr"){if(CR.started)crender();else crStart();}
 }
 window.addEventListener("hashchange",showSec);
 
@@ -464,7 +677,15 @@ window.addEventListener("hashchange",showSec);
 function teacherKey(){
   var t=document.getElementById("teacher"),h='<div class="panel" style="margin-top:1rem"><h2>Teacher key: Crime Lab</h2><p class="fine">Lane 1 is the ladder, lane 2 the crime scene, lanes 3 to 5 are Suspects 1, 2, 3. Open one case with <code>?case=1042</code>. SOL General draws from the six cases without a twist. Add <code>?timer=1</code> to a student link to show the times without this key.</p><table class="key"><tr><th>Case</th><th>Scene</th><th>Answer</th><th>Lane</th><th>Bands that line up (1, 2, 3)</th><th>Note</th></tr>';
   CASES.forEach(function(c){var m=c.match;h+='<tr><td><b>'+c.n+'</b></td><td>'+c.place+'</td><td>'+(m<0?"None of them":"Suspect "+"123".charAt(m)+" ("+c.who[m]+")")+'</td><td>'+(m<0?"none":m+3)+'</td><td>'+c.sus.map(function(s){return lined(c.scene,s)+" of "+c.scene.length;}).join(", ")+'</td><td>'+(c.twist?"Twist, Advanced only. "+c.twist:(m<0?"No match: all three ruled out.":""))+'</td></tr>';});
-  t.innerHTML=h+'</table><p class="fine">Second question, every case: a match shows whose DNA was there, not who did it. The Which Tool sort key will be added with that section.</p></div>';t.classList.remove("hidden");
+  h+='</table><p class="fine">Second question, every case: a match shows whose DNA was there, not who did it. The Which Tool sort key will be added with that section.</p></div>';
+  h+='<div class="panel" style="margin-top:1rem"><h2>Teacher key: CRISPR</h2><table class="key">';
+  h+='<tr><th>DNA strip (20 bases)</th><td>'+DNA20.join(" ")+'</td></tr><tr><th>Boxed bases 5 to 14</th><td>'+DNA20.slice(T0,T0+10).join(" ")+'</td></tr><tr><th>Guide RNA</th><td>'+GUIDE.join(" ")+'</td></tr>';
+  h+='<tr><th>Where Cas9 cuts</th><td>Between the 7th and 8th boxed bases (strip bases 11 and 12, C | A), at the red &#9660;.</td></tr>';
+  h+='<tr><th>Predict (Advanced only)</th><td>U. The common slip is T: RNA has no T.</td></tr>';
+  h+='<tr><th>One check</th><td>So Cas9 does not cut a different gene.</td></tr>';
+  h+='<tr><th>p. 6A box 4</th><td>After the cut, the patient\'s cells turn <b>fetal hemoglobin</b> back on, and the red blood cells stay <b>round</b>.</td></tr></table>';
+  h+='<p class="fine">The guide pairs at all 10 bases in one place only; the next best spot pairs 4 of 10. SOL General skips the predict, starts the guide 2 bases from the match and gets 2 picture choices on the check. Hints: after 30 seconds or one refused cut, then Show me. <code>?timer=1</code> shows the times on the last screen.</p></div>';
+  t.innerHTML=h;t.classList.remove("hidden");
 }
 
 /* start */
@@ -476,7 +697,7 @@ if(start>=0&&CASES[start].twist&&!LEVELS[S.level].twist){S.level="advanced";pain
 if(TEACHER)teacherKey();
 newCase(start>=0?start:randomCase(-1));
 showSec();
-window.__toolbox={S:S,CASES:CASES};
+window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit};
 })();
 </script>
 </body>
