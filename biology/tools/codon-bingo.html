@@ -1,11 +1,11 @@
 <!doctype html><html lang="en"><head><meta name="author" content="J. R. Schwebach"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Codon Bingo</title>
-<meta name="description" content="Bio Tool #37. Whole-class codon bingo for iPads: the teacher calls an amino acid, every student has a different card of 25 mRNA codons, and the projector shows the tRNA carrying it to the ribosome. SOL Biology Unit 4, protein synthesis.">
+<meta name="description" content="Bio Tool #37. Whole-class codon bingo for iPads and paper: the projector reads a codon from template DNA, mRNA, tRNA or the amino acid, every student has a different card of 25 mRNA codons, a code on the board opens each call, and a wrong tap makes the card wait. SOL Biology Unit 4, protein synthesis.">
 <link rel="canonical" href="https://scienceonepagers.org/biology/tools/codon-bingo.html">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: one field-book column, a sticky strip of four survey steps on top, sequences set in mono on a ruled page. */
+/* Layout: a field-book page. The projector uses the whole screen; the student card sits beside its codon chart. */
 :root{
   --paper:#eef1ea; --panel:#f9faf6; --ink:#1d2925; --muted:#55655d; --rule:#c8d2c7;
   --ember:#b8480f; --ember-soft:#f6dfd0; --moss:#2f6347; --moss-soft:#dbe9de;
@@ -34,81 +34,144 @@
   --litter:#4a4334; --leaf:#5f5236; --soil:#1c1611; --stone1:#56625b; --stone2:#77746c; --stone3:#7a6550; --wood:#4c3a29; --mossfill:#42683a; --slip:#e9e7da; --water:#7db3d6;
   color-scheme:dark }
 
+
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font:17px/1.5 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:18px;padding-block:14px 48px}
+body[data-view="card"] .wrap{max-width:1180px;gap:10px;padding-block:8px 32px}
+body[data-view="caller"] .wrap{max-width:none;gap:calc(var(--u)*.8);padding-block:calc(var(--u)*.5) 32px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
 h1{font-size:1.5rem} h2{font-size:1.45rem} h3{font-size:1.05rem;margin-top:6px}
-p{margin:0;max-width:65ch} ol{margin:0;padding-left:1.3rem;max-width:65ch;display:flex;flex-direction:column;gap:6px}
+p{margin:0;max-width:65ch} ol,ul{margin:0;padding-left:1.3rem;max-width:65ch;display:flex;flex-direction:column;gap:6px}
 .muted{color:var(--muted)} .small{font-size:.9rem} .lede{font-size:1.05rem}
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
 .top a{color:var(--ink);text-decoration:none}
+body[data-view="card"] .top h1,body[data-view="caller"] .top h1{font-size:1.15rem}
+body[data-view="card"] .top,body[data-view="caller"] .top{padding-bottom:4px}
 .sheet,.stack{display:flex;flex-direction:column;gap:16px}
 .block{background:var(--panel);border:1.5px solid var(--rule);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .eyebrow{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--moss);margin:0}
-button,.btn{font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+button,.btn{font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 button.ghost,.btn.ghost{background:transparent;color:var(--ink)}
 button.quiet,.btn.quiet{border-color:var(--rule);background:transparent;color:var(--ink);font-weight:400}
+button[disabled]{opacity:.45;cursor:default}
 :focus-visible{outline:3px solid var(--ember);outline-offset:2px}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 input[type=text],select{font:600 16px var(--mono);color:var(--ink);background:var(--paper);border:1.5px solid var(--muted);border-radius:4px;padding:9px 8px;min-height:46px;min-width:0}
 label,legend{font-weight:700} .field{display:flex;flex-direction:column;gap:4px;min-width:0}
 fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
-.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border:1.5px solid var(--rule);border-radius:5px;font-weight:400;cursor:pointer}
-.opt input{margin-top:5px;accent-color:var(--ember)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{background:transparent;color:var(--ink);border-color:var(--rule);font-weight:400;min-height:44px;padding:8px 12px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
 .say{padding:10px 12px;border-radius:5px;background:var(--moss-soft);border:1.5px solid var(--moss)}
 .say.warn{background:var(--bad-soft);border-color:var(--bad)} .say.good{background:var(--ok-soft);border-color:var(--ok)}
-.gamebar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:600 .85rem var(--mono);color:var(--muted)}
+.gamebar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:600 .85rem var(--mono);color:var(--muted);align-items:center}
 .gw{font-size:1.25rem;color:var(--ink);letter-spacing:.08em;padding:1px 8px;border:1.5px solid var(--ink);border-radius:3px;background:var(--paper)}
-.bigcall{font:700 clamp(2.4rem,9vw,4.6rem)/1 var(--display);max-width:none;letter-spacing:-.01em}
-.bigcall span{font:600 .45em var(--mono);color:var(--ember);letter-spacing:.04em}
-.ribo{width:100%;height:auto;display:block}
-.arrive{animation:arrive 1.3s ease-out both}
-@keyframes arrive{from{transform:translate(210px,-150px);opacity:0}to{transform:none;opacity:1}}
-.caption{font-size:1.1rem;min-height:3.2em}
-.called{display:flex;flex-wrap:wrap;gap:6px}
-.called span{font:600 .9rem var(--mono);padding:4px 8px;border:1.5px solid var(--rule);border-radius:4px;display:inline-flex;gap:6px;align-items:baseline}
-.called span i{font-style:normal;font-size:.7rem;color:var(--muted)}
-.called span.now{border-color:var(--ember);background:var(--ember-soft)}
-.tabs{display:flex;gap:6px} .tabs button{background:transparent;color:var(--ink);border-color:var(--rule);min-height:44px}
-.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.card{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;max-width:520px}
-.sq{aspect-ratio:1;min-height:0;padding:0;justify-content:center;font:600 clamp(1rem,4.6vw,1.45rem) var(--mono);letter-spacing:.04em;background:var(--paper);color:var(--ink);border:2px solid var(--muted)}
-.sq{gap:2px;display:flex;align-items:center}
-.sq[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);box-shadow:inset 0 0 0 3px var(--paper)}
-.sq[aria-pressed="true"] .bt{box-shadow:0 0 0 1.5px var(--paper)}
 .bt{display:inline-flex;align-items:center;justify-content:center;width:1.55em;height:1.55em;border-radius:3px;font:700 .95em/1 var(--mono);font-style:normal;letter-spacing:0;vertical-align:middle}
 .bt.bA{background:var(--bA);color:var(--bA-ink)} .bt.bC{background:var(--bC);color:var(--bC-ink)} .bt.bG{background:var(--bG);color:var(--bG-ink)} .bt.bT{background:var(--bT);color:var(--bT-ink)}
 .bt.u{border-radius:50%}
-.sq .bt{flex:1 1 0;min-width:0;max-width:1.5em;width:auto;height:auto;aspect-ratio:1/1;font-size:.74em}
-.six .cod{display:flex;justify-content:center;gap:2px;padding:3px 0}
-.six .cod .bt{flex:1 1 0;min-width:0;max-width:1.75em;width:auto;height:auto;aspect-ratio:1/1}
-.chart th .bt{font-size:.85rem}
-@media (max-width:520px){ .six .cod .bt{font-size:11.5px;border-radius:2px} .six .cod{gap:1px} .sq{padding:2px;gap:1px} }
-.sq.wrong{border:3px dashed var(--bad)}
-.win{display:flex;flex-direction:column;gap:2px;padding:16px;border-radius:6px;background:var(--ok);color:var(--paper);text-align:center}
-.win b{font:700 3rem/1 var(--display);letter-spacing:.06em}
-.strand{display:flex;flex-direction:column;gap:4px;padding:10px;border:1.5px solid var(--rule);border-radius:5px;background:var(--paper)}
-.strand .lab{font:600 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.six{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px}
-@media (max-width:760px){ .six{gap:3px} .six>*{font-size:13px!important;letter-spacing:0} }
-@media (max-width:520px){ .six{gap:2px} .six>*{font-size:10.5px!important} }
-.six>*{min-width:0;width:100%;text-align:center;font:600 16px var(--mono)}
-.six span{padding:8px 0;background:var(--panel);border:1.5px solid var(--rule);border-radius:4px}
-.six input{padding:8px 0;text-transform:uppercase} .six select{padding:8px 2px;font-size:13px;white-space:normal}
-.ok{border:2.5px solid var(--ok)!important;background:var(--ok-soft)!important}
-.bad{border:2.5px dashed var(--bad)!important;background:var(--bad-soft)!important}
-.result{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1.5px solid var(--ok);border-radius:5px;background:var(--ok-soft)}
 details{border:1.5px solid var(--rule);border-radius:6px;background:var(--panel);padding:10px 14px}
 summary{cursor:pointer;font:700 1rem var(--display)} details>*+*{margin-top:10px}
 .scroll{overflow-x:auto;max-width:100%}
 table{border-collapse:collapse;width:100%} th,td{border:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
-th{background:var(--moss-soft)} .chart td{font:400 .82rem/1.45 var(--mono);white-space:nowrap} .chart th{text-align:center;font:600 .9rem var(--mono)}
-.chart .stop{color:var(--bad);font-weight:600} .chart .start{color:var(--ok);font-weight:600}
+th{background:var(--moss-soft)}
 footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
-@media (max-width:520px){ body{font-size:16px} .block{padding:12px} .six{gap:3px} .chart td{font-size:.7rem} .chart th,.chart td{padding:4px} }
-@media (prefers-reduced-motion:reduce){ .arrive{animation:none} }
-/* paper cards */
+
+/* ---------- projector: one unit, --u, scales the whole board with the screen (19.2 px at 1920 x 1080) ---------- */
+:root{--u:min(1vw,1.78vh)}
+.board{display:grid;grid-template-columns:minmax(0,38fr) minmax(0,62fr);gap:calc(var(--u)*1.6);align-items:start}
+.bbar{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.6) calc(var(--u)*2);align-items:center;font:600 calc(var(--u)*1.25) var(--mono);color:var(--muted)}
+.bbar .gw{font-size:calc(var(--u)*1.7)}
+.bbar b{color:var(--ink)}
+.callno{font:700 calc(var(--u)*1.5) var(--display);color:var(--ink);margin-left:auto}
+.rows{display:flex;flex-direction:column;gap:calc(var(--u)*.55)}
+.crow{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:calc(var(--u)*.4) calc(var(--u)*1);padding:calc(var(--u)*.45) calc(var(--u)*.8);border:1.5px solid var(--rule);border-radius:6px;background:var(--paper)}
+.crow .lab{grid-column:1/-1;font:600 calc(var(--u)*1.5)/1.1 var(--mono);color:var(--muted)}
+.crow .lab b{color:var(--ink);font-weight:600}
+.crow .lab .dir{font-size:.8em;margin-left:.5em}
+.crow.dna{background:var(--moss-soft);border-color:var(--moss)}
+.crow.dna .band{display:inline-block;font:700 calc(var(--u)*1.1) var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--moss);border:1.5px solid var(--moss);border-radius:3px;padding:0 .4em;margin-right:.6em;vertical-align:.1em}
+.tiles{display:flex;gap:calc(var(--u)*.35);align-items:center;min-height:calc(var(--u)*3.4)}
+.tiles .bt{width:calc(var(--u)*3.2);height:calc(var(--u)*3.2);font-size:calc(var(--u)*2);border-radius:calc(var(--u)*.3)}
+.tiles .bt.u{border-radius:50%}
+.tiles .ends{font:600 calc(var(--u)*1.3) var(--mono);color:var(--muted)}
+.cover{font:700 calc(var(--u)*2.4) var(--mono);color:var(--muted);letter-spacing:.3em;min-height:calc(var(--u)*3.4);display:flex;align-items:center}
+.crow .rv{font-size:calc(var(--u)*1.2);min-height:max(46px,calc(var(--u)*2.6));padding:0 calc(var(--u)*1)}
+.aaname{font:700 calc(var(--u)*3.8)/1.05 var(--display);letter-spacing:-.01em;display:flex;align-items:baseline;gap:.35em;flex-wrap:wrap;min-height:calc(var(--u)*4)}
+.aaname span{font:600 .5em var(--mono);color:var(--ember);letter-spacing:.04em}
+.aaname.stop{color:var(--bad)}
+.notrna{font:700 calc(var(--u)*2) var(--display);color:var(--bad)}
+.note{font:400 calc(var(--u)*1.15)/1.3 var(--body);color:var(--muted);padding:0 calc(var(--u)*.4)}
+.codebox{display:flex;align-items:center;gap:calc(var(--u)*1.4);padding:calc(var(--u)*.4) calc(var(--u)*1.2);border:3px solid var(--ink);border-radius:8px;background:var(--panel)}
+.codebox .k{font:600 calc(var(--u)*1.5)/1.15 var(--mono);color:var(--muted)}
+.codebox .k b{display:block;color:var(--ink);font-size:1.15em}
+.codebox .code{font:700 calc(var(--u)*6.5)/1 var(--mono);letter-spacing:.12em;color:var(--ink)}
+.ribo{width:100%;height:auto;display:block}
+.caption{font-size:calc(var(--u)*1.5);line-height:1.3;min-height:2.7em;max-width:none}
+.called{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.4)}
+.called span{font:600 calc(var(--u)*1.3) var(--mono);padding:calc(var(--u)*.2) calc(var(--u)*.5);border:1.5px solid var(--rule);border-radius:4px;display:inline-flex;gap:.4em;align-items:baseline}
+.called span i{font-style:normal;font-size:.7em;color:var(--muted)}
+.called span.now{border-color:var(--ember);background:var(--ember-soft)}
+.called span.stopchip{color:var(--bad)}
+.ctl button,.ctl .btn{font-size:max(1rem,calc(var(--u)*1.25));min-height:max(46px,calc(var(--u)*2.9));padding:0 calc(var(--u)*1.3)}
+.settings{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 24px}
+.settings .lbl{font-weight:700;display:block;margin-bottom:4px}
+.rolling .bt{animation:none}
+.flipin{animation:flipin .35s ease-out both}
+@keyframes flipin{from{transform:rotateX(90deg);opacity:.2}to{transform:none;opacity:1}}
+.arrive{animation:arrive 1.3s ease-out both}
+@keyframes arrive{from{transform:translate(260px,-190px);opacity:0}to{transform:none;opacity:1}}
+.slide{animation:slide .7s ease-out both}
+@keyframes slide{from{transform:translateX(180px)}to{transform:none}}
+.release{animation:release 1.6s ease-in .4s both}
+@keyframes release{from{transform:translate(50px,34px)}to{transform:none}}
+.aaname.pending{opacity:0}
+@media (max-width:900px){ .board{grid-template-columns:1fr} :root{--u:min(1.9vw,1.1vh)} }
+
+/* ---------- student card: card and chart side by side in landscape, chart under in portrait ---------- */
+.cardlayout{display:grid;grid-template-columns:1fr;gap:10px;align-items:start}
+@media (orientation:landscape) and (min-width:900px){ .cardlayout{grid-template-columns:minmax(0,56fr) minmax(0,44fr)} }
+.cardpane{gap:8px;padding:12px}
+.coderow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.coderow label{font-size:1rem}
+.coderow .openstat{flex:1 1 auto;white-space:nowrap}
+.coderow input{width:5.2em;font:700 1.7rem/1 var(--mono);letter-spacing:.18em;text-align:center;text-transform:uppercase;padding:6px 4px;min-height:52px}
+.openstat{font:600 .95rem var(--mono);color:var(--muted)}
+.openstat b{color:var(--ink)}
+.msg{min-height:2.4em;display:flex;flex-direction:column;justify-content:center;font-weight:700;font-size:1rem}
+.msg.bad{color:var(--bad)} .msg.ok{color:var(--ok)}
+.msg small{font-weight:400;font-size:.9rem;color:var(--ink)}
+.cardhead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.cardhead h2{font-size:1.15rem}
+.cardwrap{position:relative;width:100%;max-width:min(560px,calc(100vh - 300px));min-width:250px}
+.side{display:flex;flex-direction:column;gap:10px;min-width:0}
+.card{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.sq{aspect-ratio:1;min-height:0;padding:0;justify-content:center;font:600 clamp(1rem,4.6vw,1.45rem) var(--mono);letter-spacing:.04em;background:var(--paper);color:var(--ink);border:2px solid var(--muted);gap:2px;display:flex;align-items:center}
+.sq[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);box-shadow:inset 0 0 0 3px var(--paper)}
+.sq[aria-pressed="true"] .bt{box-shadow:0 0 0 1.5px var(--paper)}
+.sq .bt{flex:1 1 0;min-width:0;max-width:1.5em;width:auto;height:auto;aspect-ratio:1/1;font-size:.74em}
+.sq.nope{background:var(--bad);border-color:var(--bad);animation:shake .5s ease-in-out}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
+.card.idle .sq{opacity:.55}
+.lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--bad-soft);background:color-mix(in srgb,var(--bad-soft) 82%,transparent);border:3px solid var(--bad);border-radius:6px;color:var(--bad);text-align:center;font-weight:700}
+.lock b{font:700 5rem/1 var(--display)}
+.win{display:flex;flex-direction:column;gap:2px;padding:12px;border-radius:6px;background:var(--ok);color:var(--paper);text-align:center}
+.cardwrap .win{position:absolute;left:-4px;right:-4px;top:50%;transform:translateY(-50%);box-shadow:0 6px 24px rgba(0,0,0,.35);border:3px solid var(--paper);pointer-events:none}
+.win b{font:700 3rem/1 var(--display);letter-spacing:.06em}
+.win .wc{font:700 2rem/1.1 var(--mono);letter-spacing:.14em}
+.chartpane{padding:12px;gap:6px}
+.chartpane h2{font-size:1.1rem}
+.chart td{font:400 .86rem/1.45 var(--mono);white-space:nowrap;padding:4px 6px} .chart th{text-align:center;font:600 .9rem var(--mono);padding:4px}
+.chart th .bt{font-size:.85rem}
+.chart .stop{color:var(--bad);font-weight:700} .chart .start{color:var(--ok);font-weight:700}
+.chart .start i{font-style:normal;font-size:.78em;letter-spacing:.02em}
+@media (orientation:portrait){ .cardwrap{max-width:min(560px,calc(100vh - 745px));margin-inline:auto} .chart td{line-height:1.38} }
+@media (orientation:landscape) and (min-width:900px){ .chart td{font-size:1rem;line-height:1.62;padding:5px 9px} .chart th{font-size:1rem} }
+.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 10px;border:1.5px solid var(--bad);border-radius:5px;background:var(--bad-soft)}
+@media (max-width:520px){ body{font-size:16px} .block{padding:12px} .chart td{font-size:.7rem} .chart th,.chart td{padding:3px} .sq{padding:2px;gap:1px} }
+@media (prefers-reduced-motion:reduce){ .arrive,.slide,.release,.flipin,.sq.nope{animation:none}  }
+
+/* ---------- paper cards (unchanged) ---------- */
 .pcards{display:grid;gap:18px}
 .pcard{background:#fff;color:#111;border:1.5px solid #333;border-radius:6px;padding:14px 16px;break-inside:avoid;page-break-inside:avoid}
 .pcard .ph{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font:600 .95rem var(--mono);margin-bottom:8px}
@@ -117,6 +180,28 @@ footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;colo
 .pgrid span{aspect-ratio:1.25;display:flex;align-items:center;justify-content:center;border:1px solid #555;font:700 1.35rem var(--mono);letter-spacing:.12em;color:#111}
 .pcard .pf{display:flex;justify-content:space-between;font-size:.8rem;margin-top:6px;color:#333}
 .pcheck .pgrid span.hit{background:#cfe9d6;outline:2px solid #2f6347;outline-offset:-3px}
+
+/* ---------- the printable codon chart (#chart): outlines only, U round, start and STOP spelled out ---------- */
+.pchart{background:#fff;color:#111;padding:.2in .1in;max-width:7.6in;margin:0 auto}
+.pchart h2{font:700 28pt var(--display);margin:0 0 4pt}
+.pchart .how{font:13pt var(--body);margin:0 0 12pt;max-width:none}
+.pchart table{border-collapse:collapse;width:100%;border:2px solid #111}
+.pchart th,.pchart td{border:1px solid #111;background:#fff;color:#111}
+.pchart th{font:700 14pt var(--mono);text-align:center;padding:6pt}
+.pchart td{font:500 14pt/2.05 var(--mono);padding:5pt 9pt;white-space:nowrap}
+.pchart .pb{display:inline-flex;align-items:center;justify-content:center;width:1.6em;height:1.6em;border:1.6px solid #111;border-radius:3px;font:700 14pt/1 var(--mono);margin-left:3pt}
+.pchart .pb.u{border-radius:50%}
+.pchart .start b{font-weight:700;text-decoration:underline}
+.pchart .start i,.pchart .stop{font-style:normal;font-weight:700}
+.pchart .stop{letter-spacing:.02em}
+.pchart .third{font:600 8.5pt var(--mono);color:#333}
+.pchart .lic{font:10pt var(--body);color:#333;margin-top:10pt;max-width:none}
+.pchart.half{width:5.0in;max-width:5.0in;padding:.06in .06in 0;box-sizing:border-box}
+.pchart.half h2{font-size:17pt} .pchart.half .how{font-size:9.5pt;margin-bottom:6pt}
+.pchart.half th{font-size:10pt;padding:3pt} .pchart.half td{font-size:10.5pt;line-height:1.88;padding:3pt 5pt}
+.pchart.half .pb{font-size:10pt;width:1.5em;height:1.5em}
+.pchart.half .lic{font-size:7.5pt;margin-top:5pt}
+
 @media print{
   @page{size:letter;margin:.45in}
   body{background:#fff!important}
@@ -127,11 +212,11 @@ footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;colo
   .pcard:nth-child(2n){page-break-after:always;break-after:page;margin-bottom:0}
   .pgrid span{aspect-ratio:auto;height:.74in;font-size:17pt}
   main.sheet,.wrap{padding:0!important;margin:0!important;max-width:none!important}
+  .pchart{padding:0}
 }
 </style>
 <div class="wrap"><header class="top"><h1><a href="#home">Codon Bingo</a></h1><span class="small muted"><a href="../classroom-tools.html#unit-4">Bio Tool #37 · Biology Classroom Tools</a></span></header><main id="app" class="sheet"></main><footer><span>© J. R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>: free to use, adapt and hand to a class; not for resale.</span><span><a href="../classroom-tools.html#unit-4">← Biology Classroom Tools</a></span></footer></div>
 <script>
-/* The universal genetic code, shared by every round. Codon Bingo needs nothing else from the salamander engine. */
 const BRS = (function () {
   'use strict';
   function hashStr(s) {
@@ -171,14 +256,23 @@ const BRS = (function () {
   const $ = (s, r) => (r || document).querySelector(s);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const app = $('#app');
-  const KEY = 'codon-bingo-tool-v1';
-  const fresh = () => ({ c: { game: '', round: 'classic', pattern: 1, n: 0, shown: false, on: false, ending: false }, s: { game: '', cardId: null, tab: 'classic', marks: {}, pattern: 1, upto: '', code: '', m: [], yn: [], done: false } });
+  const KEY = 'codon-bingo-tool-v2', SOUNDKEY = 'codon-bingo-sound';
+  /* An optional recorded "Bingo!" can be dropped in later: put the file beside this page and name it here. */
+  const BINGO_VOICE = '';
+  const LOCKS = [0, 10, 15, 30], WINS = [1, 2, 12], PRESETS = ['dna', 'mrna', 'trna', 'aa'];
+  const fresh = () => ({
+    c: { game: '', n: 0, on: false, ending: false, preset: 'aa', lock: 10, win: 1, rev: { dna: false, mrna: false, trna: false, aa: true }, pcheck: '' },
+    s: { game: '', cardId: null, marks: {}, hi: 0, lock: 10, win: 1, lockUntil: 0, ask: '' }
+  });
   let S = fresh();
-  try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.c && j.s) { S = fresh(); Object.assign(S.c, j.c, { ending: false }); Object.assign(S.s, j.s); } } catch (e) { /* storage is a convenience only */ }
+  try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.c && j.s) { S = fresh(); Object.assign(S.c, j.c, { ending: false }); Object.assign(S.s, j.s, { ask: '' }); if (j.p) S.p = j.p; } } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
-  let claim = null, fb = '';
+  let sound = true;
+  try { sound = localStorage.getItem(SOUNDKEY) !== 'off'; } catch (e) { /* ignore */ }
+  let fb = null; /* the message line above the student card: { kind, text, hint } */
 
   const FULL = { Ala: 'Alanine', Arg: 'Arginine', Asn: 'Asparagine', Asp: 'Aspartic acid', Cys: 'Cysteine', Gln: 'Glutamine', Glu: 'Glutamic acid', Gly: 'Glycine', His: 'Histidine', Ile: 'Isoleucine', Leu: 'Leucine', Lys: 'Lysine', Met: 'Methionine', Phe: 'Phenylalanine', Pro: 'Proline', Ser: 'Serine', Thr: 'Threonine', Trp: 'Tryptophan', Tyr: 'Tyrosine', Val: 'Valine', STOP: 'Stop' };
+  /* ---- v1 generators, kept exactly as they were so printed cards and the video's game still play the same ---- */
   const norm = g => String(g || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
   const pair = { A: 'U', U: 'A', G: 'C', C: 'G' };
   const anti = codon => codon.split('').map(b => pair[b]).join('');
@@ -191,62 +285,164 @@ const BRS = (function () {
   }
   const cardCodons = (game, id) => shuffled(ALLCODONS, BRS.rng('bingo|' + norm(game) + '|card|' + id)).slice(0, 25);
   const LINES = (function () { const L = []; for (let i = 0; i < 5; i++) { L.push([0, 1, 2, 3, 4].map(k => i * 5 + k)); L.push([0, 1, 2, 3, 4].map(k => k * 5 + i)); } L.push([0, 6, 12, 18, 24]); L.push([4, 8, 12, 16, 20]); return L; })();
-  const view = () => { const h = (location.hash || '').slice(1); return ['caller', 'card', 'howto', 'paper'].indexOf(h) >= 0 ? h : 'home'; };
+  const view = () => { const h = (location.hash || '').slice(1); return ['caller', 'card', 'howto', 'paper', 'chart'].indexOf(h) >= 0 ? h : 'home'; };
+  const tdna = { A: 'T', U: 'A', G: 'C', C: 'G' };
+  const templ = codon => codon.split('').map(b => tdna[b]).join('');
+
+  /* ---- the call codes ----
+     24 characters that can't be misread (no 0/O, 1/I/L, 5/S, 2/Z, and only one of each look-alike pair B/8, G/6, U/V),
+     so 576 two-character codes. Each game word shuffles all 576 once; slot (call, lockout, win type) takes the code
+     at its index. 21 calls x 4 lockouts x 3 win types = 252 slots, every one with its own code. */
+  const CODEALPH = 'ACDEFHJKMNPQRTVWXY346789';
+  const ALLCODES = (function () { const a = []; for (const x of CODEALPH) for (const y of CODEALPH) a.push(x + y); return a; })();
+  const NSLOT = 21 * LOCKS.length * WINS.length;
+  const codeCache = {};
+  function codeTable(game) {
+    const g = norm(game);
+    if (!codeCache[g]) { const perm = shuffled(ALLCODES, BRS.rng('bingo|' + g + '|codes')), back = {}; for (let i = 0; i < NSLOT; i++) back[perm[i]] = i; codeCache[g] = { perm: perm, back: back }; }
+    return codeCache[g];
+  }
+  const slotOf = (call, lock, win) => ((call - 1) * LOCKS.length + LOCKS.indexOf(lock)) * WINS.length + WINS.indexOf(win);
+  const codeFor = (game, call, lock, win) => codeTable(game).perm[slotOf(call, lock, win)];
+  function decode(game, code) {
+    const k = String(code || '').toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/B/g, '8').replace(/G/g, '6').replace(/U/g, 'V');
+    const i = codeTable(game).back[k];
+    if (i == null) return null;
+    return { call: Math.floor(i / 12) + 1, lock: LOCKS[Math.floor(i / 3) % 4], win: WINS[i % 3], code: k };
+  }
+  const winWords = w => w === 1 ? 'one line' : w === 2 ? 'two lines' : 'the whole card';
+  const lockWords = l => l ? l + ' s' : 'off';
 
   /* one color per base everywhere; U is a round tile, T a square one; the letter is always printed */
   const bt = x => '<i class="bt b' + (x === 'U' ? 'T u' : x) + '">' + x + '</i>';
   const tiles = s => s.split('').map(bt).join('');
-  const svgBase = (cx, cy, x, dim) => '<g' + (dim ? ' opacity=".5"' : '') + '>' + (x === 'U' ? '<circle cx="' + cx + '" cy="' + cy + '" r="10.5" fill="var(--bT)"/>' : '<rect x="' + (cx - 10) + '" y="' + (cy - 10) + '" width="20" height="20" rx="3" fill="var(--b' + x + ')"/>') +
-    '<text x="' + cx + '" y="' + (cy + 5.5) + '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" font-size="15" fill="var(--b' + (x === 'U' ? 'T' : x) + '-ink)">' + x + '</text></g>';
-  /* ---------- the ribosome picture ---------- */
-  function trna(x, aa, codon, cls) {
-    const ac = anti(codon);
-    let s = '<g' + (cls ? ' class="' + cls + '"' : '') + '><rect x="' + (x - 20) + '" y="112" width="40" height="78" rx="14" fill="var(--ember-soft)" stroke="var(--ember)" stroke-width="2"/>' +
-      '<text x="' + x + '" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="var(--ink)">tRNA</text>' +
-      '<circle cx="' + x + '" cy="88" r="24" fill="var(--ember)" stroke="var(--ink)" stroke-width="1.5"/><text x="' + x + '" y="94" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-weight="700" font-size="17" fill="var(--paper)">' + aa + '</text>';
-    for (let i = 0; i < 3; i++) s += svgBase(x - 24 + i * 24, 201, ac[i]) + '<path d="M' + (x - 24 + i * 24) + ' 213 v9" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="2 2"/>';
-    return s + '</g>';
+
+  /* ---------- sound: synthesized, no files. Three rising mallet notes for a true bingo, one soft low note for a wrong tap ---------- */
+  let actx = null;
+  function audio() {
+    if (!actx) { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null; try { actx = new AC(); } catch (e) { return null; } }
+    if (actx.state === 'suspended') { try { actx.resume(); } catch (e) { /* ignore */ } }
+    return actx;
   }
-  const codonText = (x, codon, dim) => [0, 1, 2].map(i => svgBase(x - 24 + i * 24, 238, codon[i], dim)).join('');
-  function ribosome(calls, n, shown) {
-    const cur = calls[n - 1], prev = n > 1 ? calls[n - 2] : null, P = 270, A = 400;
-    let s = '<svg class="ribo" viewBox="0 0 720 300" role="img" aria-label="A ribosome reading mRNA"><ellipse cx="335" cy="150" rx="200" ry="104" fill="var(--moss-soft)" stroke="var(--moss)" stroke-width="2"/><ellipse cx="335" cy="262" rx="180" ry="28" fill="var(--moss-soft)" stroke="var(--moss)" stroke-width="2"/>' +
-      '<text x="335" y="64" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="2" fill="var(--moss)">RIBOSOME</text>' +
-      '<rect x="14" y="224" width="692" height="28" rx="4" fill="var(--panel)" stroke="var(--ink)" stroke-width="1.5"/><text x="22" y="218" font-family="IBM Plex Mono,monospace" font-size="12" fill="var(--muted)">mRNA 5′</text><text x="698" y="218" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="12" fill="var(--muted)">3′</text>';
-    [70, 150, 530, 630].forEach(x => { s += '<text x="' + x + '" y="243" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="19" fill="var(--muted)">· · ·</text>'; });
-    const chain = calls.slice(Math.max(0, n - 7), n - 1).filter(c => c.aa !== 'STOP');
-    if (prev && prev.aa !== 'STOP') {
-      s += codonText(P, prev.codon, true) + trna(P, prev.aa, prev.codon, '');
-      chain.slice(0, -1).reverse().forEach(function (c, k) { const x = P - 46 * (k + 1), y = 88 - 6 * (k + 1); s += '<circle cx="' + x + '" cy="' + y + '" r="21" fill="var(--panel)" stroke="var(--ember)" stroke-width="2"/><text x="' + x + '" y="' + (y + 5) + '" text-anchor="middle" font-family="Bricolage Grotesque,system-ui,sans-serif" font-weight="700" font-size="14" fill="var(--ink)">' + c.aa + '</text>'; });
+  ['touchend', 'click'].forEach(function (e) { document.addEventListener(e, function () { if (view() === 'card' && sound) audio(); }, { passive: true }); });
+  function mallet(ctx, f, t0, dur, vol) {
+    [[1, vol], [4, vol * .18]].forEach(function (p) {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = f * p[0];
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(p[1], t0 + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t0 + (p[0] === 1 ? dur : dur * .35));
+      o.connect(g); g.connect(ctx.destination); o.start(t0); o.stop(t0 + dur + 0.05);
+    });
+  }
+  const played = [];
+  function chime(kind) {
+    played.push(kind + (sound ? '' : ' (muted)'));
+    if (!sound) return;
+    const ctx = audio(); if (!ctx) return;
+    const t = ctx.currentTime + 0.02;
+    if (kind === 'bingo') { mallet(ctx, 523.25, t, 0.32, 0.32); mallet(ctx, 659.25, t + 0.19, 0.32, 0.32); mallet(ctx, 783.99, t + 0.38, 0.34, 0.34);
+      if (BINGO_VOICE) { try { const a = new Audio(BINGO_VOICE); setTimeout(function () { a.play().catch(function () {}); }, 750); } catch (e) { /* ignore */ } } }
+    else mallet(ctx, 174.61, t, 0.26, 0.14);
+  }
+
+  /* ---------- the ribosome picture ---------- */
+  const T = 44, G = 6, CW = 3 * T + 2 * G;
+  function svgTile(x, y, b, dim) {
+    const f = 'var(--b' + (b === 'U' ? 'T' : b) + ')', ink = 'var(--b' + (b === 'U' ? 'T' : b) + '-ink)';
+    return '<g' + (dim ? ' opacity=".45"' : '') + '>' + (b === 'U' ? '<circle cx="' + (x + T / 2) + '" cy="' + (y + T / 2) + '" r="' + (T / 2) + '" fill="' + f + '"/>' : '<rect x="' + x + '" y="' + y + '" width="' + T + '" height="' + T + '" rx="5" fill="' + f + '"/>') +
+      '<text x="' + (x + T / 2) + '" y="' + (y + T / 2 + 10) + '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" font-size="29" fill="' + ink + '">' + b + '</text></g>';
+  }
+  const svgCodon = (cx, y, s, dim) => s.split('').map((b, i) => svgTile(cx - CW / 2 + i * (T + G), y, b, dim)).join('');
+  const svgCover = (cx, y) => '<text x="' + cx + '" y="' + (y + 33) + '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" font-size="32" fill="var(--muted)">? ? ?</text>';
+  const txt = (x, y, s, o) => '<text x="' + x + '" y="' + y + '"' + (o || '') + '>' + s + '</text>';
+  const MONO = ' font-family="IBM Plex Mono,monospace"', DISP = ' font-family="Bricolage Grotesque,system-ui,sans-serif" font-weight="700"';
+  const MRNA_Y = 330, AC_Y = 270, AA_Y = 98, P = 430, A = 640;
+  function aaBall(x, y, aa, ring) { return '<circle cx="' + x + '" cy="' + y + '" r="32" fill="' + (ring ? 'var(--panel)' : 'var(--ember)') + '" stroke="' + (ring ? 'var(--ember)' : 'var(--ink)') + '" stroke-width="2.5"/>' + txt(x, y + 9, aa, ' text-anchor="middle"' + DISP + ' font-size="25" fill="' + (ring ? 'var(--ink)' : 'var(--paper)') + '"'); }
+  function trnaBody(x, cls, inner) {
+    return '<g' + (cls ? ' class="' + cls + '"' : '') + '><path d="M' + (x - 40) + ' ' + (AC_Y - T - 4) + ' V' + (AA_Y + 54) + ' q0 -18 18 -18 h44 q18 0 18 18 V' + (AC_Y - T - 4) + ' Z" fill="var(--ember-soft)" stroke="var(--ember)" stroke-width="2.5"/>' +
+      '<line x1="' + x + '" y1="' + (AA_Y + 32) + '" x2="' + x + '" y2="' + (AA_Y + 36) + '" stroke="var(--ember)" stroke-width="3"/>' + txt(x, AA_Y + 112, 'tRNA', ' text-anchor="middle"' + MONO + ' font-size="20" fill="var(--ink)"') + inner + '</g>';
+  }
+  let anim = { n: -1, arrived: false, released: false };
+  function ribosome(calls, n, rev, fx) {
+    const cur = n ? calls[n - 1] : null, prev = n > 1 ? calls[n - 2] : null;
+    if (anim.n !== n) anim = { n: n, arrived: false, released: false };
+    let s = '<svg class="ribo" viewBox="0 -40 1000 522" role="img" aria-label="A ribosome reading the mRNA">' +
+      '<ellipse cx="540" cy="200" rx="300" ry="152" fill="var(--moss-soft)" stroke="var(--moss)" stroke-width="2.5"/>' +
+      '<ellipse cx="540" cy="408" rx="270" ry="40" fill="var(--moss-soft)" stroke="var(--moss)" stroke-width="2.5"/>' +
+      txt(770, 176, 'RIBOSOME', ' text-anchor="middle"' + MONO + ' font-size="20" letter-spacing="3" fill="var(--moss)"') +
+      txt(P, 38, 'P site', ' text-anchor="middle"' + MONO + ' font-size="18" fill="var(--moss)"') + txt(A, 38, 'A site', ' text-anchor="middle"' + MONO + ' font-size="18" fill="var(--moss)"');
+    /* the mRNA strip slides in by one codon on each new read */
+    let strip = '<rect x="10" y="' + (MRNA_Y - 8) + '" width="980" height="' + (T + 16) + '" rx="6" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>';
+    [220, 860].forEach(x => { strip += txt(x, MRNA_Y + 31, '· · ·', ' text-anchor="middle"' + MONO + ' font-size="30" fill="var(--muted)"'); });
+    if (prev) strip += svgCodon(P, MRNA_Y, prev.codon, true);
+    if (cur) strip += rev.mrna ? svgCodon(A, MRNA_Y, cur.codon, false) : svgCover(A, MRNA_Y);
+    s += '<g' + (fx.slide ? ' class="slide"' : '') + '>' + strip + '</g>';
+    s += txt(18, MRNA_Y - 18, '5′', DISP + ' font-size="34" fill="var(--ink)"') + txt(982, MRNA_Y - 18, '3′', ' text-anchor="end"' + DISP + ' font-size="34" fill="var(--ink)"') +
+      txt(70, MRNA_Y - 18, 'mRNA', MONO + ' font-weight="600" font-size="24" fill="var(--ink)"');
+    if (cur) s += txt(A, MRNA_Y + T + 46, 'codon · on the mRNA', ' text-anchor="middle"' + MONO + ' font-weight="600" font-size="26" fill="var(--ink)"');
+    s += '<g>' + txt(500, 476, 'ribosome reads 5′ → 3′', ' text-anchor="middle"' + MONO + ' font-weight="600" font-size="24" fill="var(--moss)"') + '<path d="M676 469 h110" stroke="var(--moss)" stroke-width="3" marker-end="url(#ar)"/></g>' +
+      '<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--moss)"/></marker></defs>';
+    /* the chain: everything read since the last Stop, joined N to C, ending at the P-site tRNA's amino acid */
+    let start = 0; for (let i = 0; i < n - 1; i++) if (calls[i].aa === 'STOP') start = i + 1;
+    const chain = calls.slice(start, Math.max(start, n - 1)).map(c => c.aa);
+    if (prev && prev.aa !== 'STOP') s += trnaBody(P, '', svgCodon(P, AC_Y - T + 6 - 6, anti(prev.codon), true).replace(/opacity="\.45"/g, 'opacity=".55"'));
+    else if (prev && prev.aa === 'STOP') s += txt(P, AA_Y + 80, 'new chain starts', ' text-anchor="middle"' + MONO + ' font-size="20" fill="var(--muted)"');
+    if (chain.length) {
+      const show = chain.slice(-5), cut = chain.length > show.length;
+      let g = '', pts = show.map((aa, k) => { const back = show.length - 1 - k; return { x: P - 70 * back, y: AA_Y - 8 * back + (back ? 4 : 0), aa: aa }; });
+      for (let k = 1; k < pts.length; k++) g += '<line x1="' + pts[k - 1].x + '" y1="' + pts[k - 1].y + '" x2="' + pts[k].x + '" y2="' + pts[k].y + '" stroke="var(--ink)" stroke-width="5"/>';
+      pts.forEach((p, k) => { g += aaBall(p.x, p.y, p.aa, k < pts.length - 1); });
+      const n0 = pts[0];
+      g += txt(n0.x - 44, n0.y + 10, cut ? 'N …' : 'N', ' text-anchor="end"' + DISP + ' font-size="30" fill="var(--ink)"');
+      g += txt(P + 40, AA_Y + 10, 'C', DISP + ' font-size="30" fill="var(--ink)"');
+      const off = cur && cur.aa === 'STOP' && (rev.trna || rev.aa);
+      if (off) { g += txt(n0.x, n0.y - 48, 'let go', ' text-anchor="middle"' + MONO + ' font-size="20" fill="var(--bad)"'); s += '<g transform="translate(-50 -34)" opacity=".85"><g' + (anim.released ? '' : ' class="release"') + '>' + g + '</g></g>'; anim.released = true; }
+      else s += '<g>' + g + '</g>';
     }
-    if (cur && shown) {
-      s += codonText(A, cur.codon, false);
-      if (cur.aa === 'STOP') s += '<g class="arrive"><rect x="' + (A - 34) + '" y="96" width="68" height="112" rx="22" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="2"/><text x="' + A + '" y="146" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="var(--ink)">release</text><text x="' + A + '" y="162" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="var(--ink)">factor</text></g>';
-      else s += trna(A, cur.aa, cur.codon, 'arrive');
-    } else if (cur) s += '<text x="' + A + '" y="243" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="600" font-size="19" fill="var(--ink)">? ? ?</text>';
+    if (cur && (rev.trna || rev.aa)) {
+      const arr = anim.arrived ? '' : 'arrive'; anim.arrived = true;
+      if (cur.aa === 'STOP') s += '<g class="' + arr + '"><rect x="' + (A - 48) + '" y="' + (AA_Y + 20) + '" width="96" height="' + (AC_Y - AA_Y - 14) + '" rx="28" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="2.5"/>' + txt(A, AA_Y + 92, 'release', ' text-anchor="middle"' + MONO + ' font-size="20" fill="var(--ink)"') + txt(A, AA_Y + 116, 'factor', ' text-anchor="middle"' + MONO + ' font-size="20" fill="var(--ink)"') + '</g>';
+      else {
+        let inner = (rev.trna ? svgCodon(A, AC_Y - T, anti(cur.codon), false) : svgCover(A, AC_Y - T)) + (rev.aa ? aaBall(A, AA_Y, cur.aa, false) : '<circle cx="' + A + '" cy="' + AA_Y + '" r="32" fill="var(--panel)" stroke="var(--ember)" stroke-width="2.5" stroke-dasharray="6 5"/>' + txt(A, AA_Y + 10, '?', ' text-anchor="middle"' + DISP + ' font-size="30" fill="var(--muted)"'));
+        if (rev.trna && rev.mrna) for (let i = 0; i < 3; i++) { const x = A - CW / 2 + i * (T + G) + T / 2; inner += '<path d="M' + (x - 7) + ' ' + (AC_Y + 6) + ' v' + (MRNA_Y - AC_Y - 18) + ' M' + (x + 7) + ' ' + (AC_Y + 6) + ' v' + (MRNA_Y - AC_Y - 18) + '" stroke="var(--ink)" stroke-width="3"/>'; }
+        inner += txt(A + CW / 2 + 20, AC_Y - 14, 'anticodon', MONO + ' font-weight="600" font-size="26" fill="var(--ink)"') + txt(A + CW / 2 + 20, AC_Y + 16, '· on the tRNA', MONO + ' font-weight="600" font-size="26" fill="var(--ink)"');
+        s += trnaBody(A, arr, inner);
+      }
+    }
     return s + '</svg>';
   }
 
-  /* ---------- home and how to play ---------- */
+  /* ---------- home, how to play, the printable chart ---------- */
   function homeView() {
-    return '<section class="block"><span class="eyebrow">Unit 4 · LT 4.3</span><h2>One caller, a different card on every iPad</h2><p class="lede">The teacher calls an amino acid. Each student finds the codons on their own card that code for it, using a codon chart or wheel. After every call the projector shows the tRNA that carries that amino acid into the ribosome.</p>' +
-      '<div class="row"><a class="btn" href="#caller">Run the game on the projector</a><a class="btn ghost" href="#card">Open my card</a><a class="btn quiet" href="#paper">Print paper cards</a><a class="btn quiet" href="#howto">How to play</a></div></section>';
+    return '<section class="block"><span class="eyebrow">Unit 4 · LT 4.3</span><h2>One caller, a different card on every iPad</h2><p class="lede">The projector reads one codon at a time, from template DNA, mRNA, tRNA or the amino acid itself. Each student works out the amino acid and taps every codon on their own card that codes for it. A code on the board opens each call on the iPads, and a wrong tap makes the card wait.</p>' +
+      '<div class="row"><a class="btn" href="#caller">Run the game on the projector</a><a class="btn ghost" href="#card">Open my card</a><a class="btn quiet" href="#paper">Print paper cards</a><a class="btn quiet" href="#chart">Print a codon chart</a><a class="btn quiet" href="#howto">How to play</a></div></section>';
   }
   function howView() {
-    return '<section class="block"><span class="eyebrow">For the teacher</span><h2>How to run Codon Bingo</h2><p class="lede">About fifteen minutes a game. Students need a codon chart or wheel.</p>' +
-      '<h3>Set up, two minutes</h3><ol><li>On the projector, choose <b>Run the game</b>, type a game word, and press Start.</li><li>Students choose <b>Open my card</b> and type the same game word. Every iPad draws a different card of 25 mRNA codons.</li></ol>' +
-      '<h3>Paper or iPad</h3><p>Students without an iPad can play on a printed card. Choose <b>Print paper cards</b> on the first screen and use the same game word as the projector.</p><h3>Play</h3><ol><li>Press <b>Next call</b> and read the amino acid aloud.</li><li>Students find <b>every</b> codon on their card that codes for it and tap each one. Give them about half a minute.</li><li>Press <b>Show the tRNA</b>. Say what the picture shows: the tRNA carries the amino acid, and its anticodon pairs with the codon on the mRNA.</li><li>Call again. A student with a full line of five taps <b>Check my bingo</b> and enters the call number from the projector. A green screen is a true bingo. A red message outlines any marked square that does not code for something called, and one wrong mark anywhere on the card blocks the bingo.</li></ol>' +
+    return '<section class="block"><span class="eyebrow">For the teacher</span><h2>How to run Codon Bingo</h2><p class="lede">About ten minutes for a one-line game. Students need the codon chart: it sits beside the card on the iPad, and <a href="#chart">a printed copy</a> works on paper.</p>' +
+      '<h3>Set up</h3><ol><li>On the projector, choose <b>Run the game</b>. Pick a game word (a new one each class), the win, how long a wrong tap waits, and which row to start from: template DNA, mRNA, tRNA or the amino acid.</li><li>Students choose <b>Open my card</b> and type the game word. Every iPad draws a different card of 25 mRNA codons.</li></ol>' +
+      '<h3>Each call</h3><ol><li>Press <b>Read the next codon</b>. The board shows a two-character code. Students type it to open that call; until they do, their squares do nothing.</li><li>Students work out the amino acid, then tap <b>every</b> codon on their card that codes for it.</li><li>Reveal the hidden rows one at a time, or press <b>Reveal all</b>, and say what the picture shows.</li></ol>' +
+      '<h3>The rules the iPad keeps</h3><ul><li>A tap on a square that codes for nothing called so far shakes red, stays unmarked, and locks the card for the wait you chose. Unmarking is free.</li><li>A completed win turns the iPad green on its own: BINGO, the card, the game word and the code. Check the code against the board.</li><li>Change the win or the wait at any time; the board shows a new code and the iPads follow it.</li></ul>' +
+      '<p><b>Stop is an ordinary call.</b> When Stop is called, students mark every stop codon on their card (UAA, UAG, UGA). The calls are not one protein read in order: each call is its own codon.</p>' +
       '<p><b>Setting the length.</b> In a class of 30, the first true line usually comes around call 7 and the first two-line card around call 10. A full card is rare before call 19, and every card is full by call 21.</p>' +
-      '<h3>Playing on a salamander</h3><p>Classes running the Blue Ridge Salamander Project have a second round, the Ember Round, where each student checks the calls against their own animal’s gene. It lives on <a href="blue-ridge-salamander-codon-bingo.html">the salamander project’s copy of Codon Bingo</a>.</p>' +
-      '<p class="muted">A DE Bio round, with a TATA box, the AUG start and a poly-A tail on the projector, is not built yet.</p><div class="row"><a class="btn ghost" href="#home">Back</a></div></section>';
+      '<h3>Paper</h3><p>Students without an iPad play on a printed card from <b>Print paper cards</b> with the same game word. On the projector, <b>Check a paper card</b> lights the called squares green.</p>' +
+      '<h3>Playing on a salamander</h3><p>Classes running the Blue Ridge Salamander Project have a second round, the Ember Round, on <a href="blue-ridge-salamander-codon-bingo.html">the salamander project’s copy of Codon Bingo</a>.</p>' +
+      '<div class="row"><a class="btn ghost" href="#home">Back</a></div></section>';
   }
-
+  function printChart(half) {
+    const B = BRS.BASES, pb = b => '<span class="pb' + (b === 'U' ? ' u' : '') + '">' + b + '</span>';
+    let h = '<div class="pchart' + (half ? ' half' : '') + '"><h2>The codon chart</h2><p class="how">Read an mRNA codon: first base on the left, second base across the top, third base read down the box.</p><table><thead><tr><th>1st</th>' + B.split('').map(b => '<th>2nd' + pb(b) + '</th>').join('') + '</tr></thead><tbody>';
+    for (const a of B) { h += '<tr><th>' + pb(a) + '</th>'; for (const b of B) h += '<td>' + B.split('').map(c => { const cd = a + b + c, aa = BRS.CODON[cd]; return aa === 'STOP' ? '<span class="stop">' + cd + ' STOP</span>' : cd === 'AUG' ? '<span class="start"><b>' + cd + '</b> Met <i>start</i></span>' : cd + ' ' + aa; }).join('<br>') + '</td>'; h += '</tr>'; }
+    return h + '</tbody></table><p class="lic">© J. R. Schwebach · CC BY-NC 4.0 · scienceonepagers.org · Bio Tool #37 Codon Bingo</p></div>';
+  }
+  function chartView() {
+    const half = /half/.test(location.search);
+    return '<section class="block noprint"><span class="eyebrow">For the teacher</span><h2>Print a codon chart</h2><p class="lede">The same chart as the one beside each card, drawn in outline so it prints clean in black and white.</p><div class="row"><button data-act="print">Print</button><a class="btn quiet" href="codon-bingo-chart-letter.pdf">Letter PDF</a><a class="btn quiet" href="codon-bingo-chart-half-letter.pdf">Half-page PDF (5.0 × 6.3 in)</a><a class="btn quiet" href="codon-bingo-chart-half-letter.svg">Half-page SVG</a><a class="btn quiet" href="#home">Back</a></div></section>' + printChart(half);
+  }
 
   /* ---------- paper cards: same game word, same generator, so paper and iPad players share one game ---------- */
   const pid = n => 'P' + (n < 10 ? '0' : '') + n;
   function pcardHTML(game, n, called) {
-    const cds = cardCodons(game, pid(n));
-    return '<div class="pcard"><div class="ph"><b>Codon Bingo</b><span>game ' + esc(norm(game)) + ' · card ' + pid(n) + '</span></div><div class="pgrid">' +
+    const id = typeof n === 'string' ? n : pid(n), cds = cardCodons(game, id);
+    return '<div class="pcard"><div class="ph"><b>Codon Bingo</b><span>game ' + esc(norm(game)) + ' · card ' + id + '</span></div><div class="pgrid">' +
       cds.map(cd => '<span' + (called && called[BRS.CODON[cd]] ? ' class="hit"' : '') + '>' + cd + '</span>').join('') +
       '</div><div class="pf"><span>Name ______________________</span><span>Mark every codon that codes for the called amino acid.</span></div><div class="pf"><span>© J. R. Schwebach · CC BY-NC 4.0 · scienceonepagers.org</span></div></div>';
   }
@@ -260,138 +456,192 @@ const BRS = (function () {
     return h;
   }
   function paperCheckHTML() {
-    const c = S.c, n = +(c.pcheck || 0);
-    let h = '<details class="noprint"' + (n ? ' open' : '') + '><summary>Check a paper card</summary><form data-form="pcheck" class="row"><div class="field"><label for="pcn">Paper card number</label><input type="number" id="pcn" min="1" max="60" value="' + (n || '') + '" style="max-width:7rem"></div><button style="align-self:flex-end">Show it</button></form>';
-    if (n) { const called = {}; callList(c.game, 'classic').slice(0, c.n).forEach(x => { called[x.aa] = 1; }); h += '<div class="pcheck">' + pcardHTML(c.game, n, called) + '</div><p class="small muted">Green squares code for an amino acid called so far (calls 1 to ' + c.n + '). A student’s mark on any other square is a wrong mark.</p>'; }
+    const c = S.c, id = c.pcheck || '';
+    let h = '<details class="noprint"' + (id ? ' open' : '') + '><summary>Check a paper card</summary><form data-form="pcheck" class="row"><div class="field"><label for="pcn">Paper card number</label><input type="text" id="pcn" maxlength="4" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="P07 or D07" value="' + esc(id) + '" style="max-width:8rem"></div><button style="align-self:flex-end">Show it</button></form>';
+    if (id) { const called = {}; callList(c.game, 'classic').slice(0, c.n).forEach(x => { called[x.aa] = 1; }); h += '<div class="pcheck">' + pcardHTML(c.game, id, called) + '</div><p class="small muted">Green squares code for an amino acid called so far (calls 1 to ' + c.n + '). A student’s mark on any other square is a wrong mark.</p>'; }
     return h + '</details>';
   }
 
   /* ---------- caller ---------- */
+  const presetWords = { dna: 'Template DNA', mrna: 'mRNA codon', trna: 'tRNA anticodon', aa: 'Amino acid' };
+  const revFor = p => ({ dna: p === 'dna', mrna: p === 'mrna', trna: p === 'trna', aa: p === 'aa' });
+  let fx = { slide: false, release: false }, rollT = null;
+  function segHTML(name, opts, cur) { return '<div class="seg" role="group">' + opts.map(o => '<button type="button" data-act="set" data-k="' + name + '" data-v="' + o[0] + '" aria-pressed="' + (String(o[0]) === String(cur)) + '">' + o[1] + '</button>').join('') + '</div>'; }
+  const presetOpts = PRESETS.map(p => [p, presetWords[p]]), winOpts = WINS.map(w => [w, winWords(w)]), lockOpts = LOCKS.map(l => [l, lockWords(l)]);
+  function crow(cls, label, dir, shown, key, body) {
+    return '<div class="crow ' + cls + '"><span class="lab">' + (cls === 'dna' ? '<span class="band">nucleus</span>' : '') + label + (dir ? '<span class="dir">' + dir + '</span>' : '') + '</span>' +
+      (shown ? body : '<span class="cover" aria-label="hidden">? ? ?</span><button class="ghost rv" data-act="rev" data-k="' + key + '">Reveal</button>') + '</div>';
+  }
   function callerView() {
     const c = S.c;
     if (!c.on) {
-      return '<section class="block"><span class="eyebrow">Projector</span><h2>Start a game</h2><form data-form="start" class="stack"><div class="field"><label for="gw">Game word</label><input type="text" id="gw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" value="' + esc(c.game || 'RIDGE' + (10 + Math.floor(Math.random() * 89))) + '" style="max-width:14rem"><span class="small muted">Students type this word to get their cards.</span></div>' +
+      return '<section class="block" style="max-width:820px"><span class="eyebrow">Projector</span><h2>Start a game</h2><form data-form="start" class="stack"><div class="field"><label for="gw">Game word</label><input type="text" id="gw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" value="' + esc(c.game || 'RIDGE' + (10 + Math.floor(Math.random() * 89))) + '" style="max-width:14rem"><span class="small muted">Students type this word to get their cards. Use a new word each class, so codes from one class don’t work in the next.</span></div>' +
         '<p class="small muted">Calls: all 20 amino acids and Stop, in a shuffled order.</p>' +
-        '<div class="field"><label for="pat">A classic win is</label><select id="pat" style="max-width:14rem">' + [[1, 'one line of five'], [2, 'two lines'], [12, 'the whole card']].map(p => '<option value="' + p[0] + '"' + (c.pattern === p[0] ? ' selected' : '') + '>' + p[1] + '</option>').join('') + '</select></div><div class="row"><button>Start</button><a class="btn quiet" href="#howto">How to play</a></div></form></section>';
+        '<div class="settings"><div><span class="lbl">Start each call from</span>' + segHTML('preset', presetOpts, c.preset) + '</div><div><span class="lbl">A win is</span>' + segHTML('win', winOpts, c.win) + '</div><div><span class="lbl">A wrong tap waits</span>' + segHTML('lock', lockOpts, c.lock) + '</div></div>' +
+        '<div class="row"><button>Start</button><a class="btn quiet" href="#howto">How to play</a></div></form></section>';
     }
-    const calls = callList(c.game, c.round), cur = c.n ? calls[c.n - 1] : null, total = calls.length;
+    const calls = callList(c.game, 'classic'), cur = c.n ? calls[c.n - 1] : null, total = calls.length, r = c.rev, stop = cur && cur.aa === 'STOP';
+    let h = '<section class="block"><div class="bbar"><span>Game word <b class="gw">' + esc(norm(c.game)) + '</b></span><span>Win: <b>' + winWords(c.win) + '</b></span><span>Wrong tap waits: <b>' + lockWords(c.lock) + '</b></span><span class="callno">' + (cur ? 'Call ' + c.n + ' of ' + total : 'Ready') + '</span></div>';
+    h += '<div class="board"><div class="rows">';
+    if (cur) {
+      const rolling = !!rollT;
+      const tl = s => '<span class="tiles' + (rolling ? ' rolling' : '') + '">' + s.split('').map(bt).join('') + '</span>';
+      h += crow('dna', 'template DNA', '3′ → 5′', r.dna, 'dna', tl(templ(cur.codon)));
+      h += crow('mrna', '<b>codon</b> · on the mRNA', '5′ → 3′', r.mrna, 'mrna', tl(cur.codon));
+      h += crow('trna', '<b>anticodon</b> · on the tRNA', stop ? '' : '3′ → 5′', r.trna, 'trna', stop ? '<span class="notrna">no tRNA</span>' : tl(anti(cur.codon)));
+      h += crow('aa', '<b>amino acid</b> · on the tRNA', '', r.aa, 'aa', '<span class="aaname' + (stop ? ' stop' : '') + (rolling ? ' pending' : '') + '">' + (stop ? 'STOP <span>release factor</span>' : FULL[cur.aa] + ' <span>' + cur.aa + '</span>') + '</span>');
+      if (r.dna && r.trna && !stop) h += '<p class="note">The anticodon reads like the template DNA, with U in place of T.</p>';
+      h += '<div class="codebox"><span class="k">Code<b>call ' + c.n + '</b></span><span class="code" aria-label="Code for this call">' + codeFor(c.game, c.n, c.lock, c.win) + '</span></div>';
+    } else h += '<p class="aaname">Ready</p><p class="caption">Cards open? Press <b>Read the next codon</b>.</p>';
+    h += '</div><div>' + ribosome(calls, c.n, cur && !rollT ? r : {}, fx);
     let cap = '';
-    if (cur && c.shown) cap = cur.aa === 'STOP' ? 'No tRNA has an anticodon for ' + cur.codon + '. A release factor fits there instead, and the finished chain is set free.' : 'The tRNA with anticodon ' + anti(cur.codon) + ' carries ' + cur.aa + ' to the codon ' + cur.codon + '. ' + (BRS.SYN[cur.aa].length > 1 ? BRS.SYN[cur.aa].length + ' different codons code for ' + cur.aa + '.' : 'Only this one codon codes for ' + cur.aa + '.');
-    else if (cur) cap = 'Find it on the chart, mark your card, then watch the tRNA arrive.';
-    let h = '<section class="block callbox"><div class="gamebar"><span>Game word <b class="gw">' + esc(norm(c.game)) + '</b></span><span>' + (c.round === 'ember' ? 'Ember Round' : 'Classic · win with ' + (c.pattern === 1 ? 'one line' : c.pattern === 2 ? 'two lines' : 'the whole card')) + '</span></div>';
-    h += cur ? '<p class="eyebrow">Call ' + c.n + ' of ' + total + '</p><p class="bigcall">' + FULL[cur.aa] + (cur.aa !== 'STOP' ? ' <span>' + cur.aa + '</span>' : '') + '</p>' : '<p class="bigcall">Ready</p><p>Cards open? Press Next call.</p>';
-    h += ribosome(calls, c.n, c.shown) + '<p class="caption" aria-live="polite">' + cap + '</p>';
-    h += '<div class="row">' + (cur && !c.shown ? '<button data-act="show">Show the tRNA</button>' : '') + (c.n < total ? '<button class="' + (cur && !c.shown ? 'ghost' : '') + '" data-act="next">Next call</button>' : '<b>That was the last call.</b>') + (c.n > 0 ? '<button class="quiet" data-act="back">Back one</button>' : '') + '</div>';
-    if (c.n) h += '<div class="called" aria-label="Called so far">' + calls.slice(0, c.n).map((x, i) => '<span' + (i === c.n - 1 ? ' class="now"' : '') + '><i>' + (i + 1) + '</i>' + x.aa + '</span>').join('') + '</div>';
-    if (c.round === 'ember' && c.n === total && c.shown) h += '<p class="say good">Check your answers now. A mismatch is your salamander’s changed amino acid. If every call matched, look at your lab slip: either the change is silent and still there in the DNA, or your animal has no new mutation.</p>';
-    h += '</section><section class="block">' + (c.ending ? '<p>End this game and set up a new one?</p><div class="row"><button data-act="end">Yes, end it</button><button class="ghost" data-act="keepgame">Keep playing</button></div>' : '<div class="row"><button class="quiet" data-act="askend">End this game</button><a class="btn quiet" href="#howto">How to play</a></div>') + paperCheckHTML() + '</section>';
+    if (!cur) cap = '';
+    else if (rollT) cap = '';
+    else if (stop && (r.trna || r.aa)) cap = 'No tRNA carries anything to a stop codon, so the protein is let go. A release factor fits there instead.';
+    else if (!stop && r.mrna && r.trna && r.aa) cap = 'The tRNA with anticodon ' + anti(cur.codon) + ' carries ' + cur.aa + ' to the codon ' + cur.codon + '. ' + (BRS.SYN[cur.aa].length > 1 ? BRS.SYN[cur.aa].length + ' different codons code for ' + cur.aa + '.' : 'Only this one codon codes for ' + cur.aa + '.');
+    else cap = 'Work out the amino acid, then tap every codon on your card that codes for it.';
+    h += '<p class="caption" aria-live="polite">' + cap + '</p></div></div>';
+    const chips = calls.slice(0, c.n).map((x, i) => ({ x: x, i: i })).filter(o => o.i < c.n - 1 || (r.aa || r.trna) && !rollT);
+    if (chips.length) h += '<div class="called" aria-label="Called so far">' + chips.map(o => '<span class="' + (o.i === c.n - 1 ? 'now' : '') + (o.x.aa === 'STOP' ? ' stopchip' : '') + '"><i>' + (o.i + 1) + '</i>' + o.x.aa + '</span>').join('') + '</div>';
+    const hidden = cur && PRESETS.some(k => !r[k]);
+    h += '<div class="row ctl">' + (c.n < total ? '<button data-act="next">Read the next codon</button>' : '<b>That was the last call.</b>') + (hidden ? '<button class="ghost" data-act="revall">Reveal all</button>' : '') + (c.n > 0 ? '<button class="quiet" data-act="back">Back one</button>' : '') + '</div></section>';
+    h += '<section class="block" style="max-width:1200px"><div class="settings"><div><span class="lbl">Start the next call from</span>' + segHTML('preset', presetOpts, c.preset) + '</div><div><span class="lbl">A win is</span>' + segHTML('win', winOpts, c.win) + '</div><div><span class="lbl">A wrong tap waits</span>' + segHTML('lock', lockOpts, c.lock) + '</div></div><p class="small muted">A change to the win or the wait gives this call a new code at once; iPads follow it when students type it.</p>' +
+      (c.ending ? '<div class="confirm"><span>End this game and set up a new one?</span><button data-act="end">Yes, end it</button><button class="ghost" data-act="keepgame">Keep playing</button></div>' : '<div class="row"><button class="quiet" data-act="askend">End this game</button><a class="btn quiet" href="#howto">How to play</a></div>') + paperCheckHTML() + '</section>';
     return h;
+  }
+  function rollTiles() {
+    const els = Array.from(document.querySelectorAll('.tiles.rolling'));
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!els.length || reduce) { rollT = null; render(); return; }
+    const truth = els.map(e => Array.from(e.querySelectorAll('.bt')).map(b => b.textContent));
+    const t0 = performance.now(), letters = ['A', 'C', 'G', 'U'];
+    clearInterval(rollT);
+    rollT = setInterval(function () {
+      const dt = performance.now() - t0;
+      els.forEach(function (e, k) {
+        const dna = e.closest('.dna'), bs = e.querySelectorAll('.bt');
+        bs.forEach(function (b, i) {
+          let x = dt >= 500 * (i + 1) ? truth[k][i] : (dna ? 'ACGT' : 'ACGU')[Math.floor(Math.random() * 4)];
+          b.textContent = x; b.className = 'bt b' + (x === 'U' ? 'T u' : x);
+        });
+      });
+      if (dt >= 1500) { clearInterval(rollT); rollT = null; render(); }
+    }, 70);
+    void letters;
   }
 
   /* ---------- student card ---------- */
   function chart() {
     const B = BRS.BASES;
     let h = '<div class="scroll"><table class="chart"><thead><tr><th scope="col">1st</th>' + B.split('').map(b => '<th scope="col">2nd ' + bt(b) + '</th>').join('') + '</tr></thead><tbody>';
-    for (const a of B) { h += '<tr><th scope="row">' + bt(a) + '</th>'; for (const b of B) h += '<td>' + B.split('').map(c => { const cd = a + b + c, aa = BRS.CODON[cd]; return '<span class="' + (aa === 'STOP' ? 'stop' : cd === 'AUG' ? 'start' : '') + '">' + cd + ' ' + aa + '</span>'; }).join('<br>') + '</td>'; h += '</tr>'; }
+    for (const a of B) { h += '<tr><th scope="row">' + bt(a) + '</th>'; for (const b of B) h += '<td>' + B.split('').map(c => { const cd = a + b + c, aa = BRS.CODON[cd]; return aa === 'STOP' ? '<span class="stop">' + cd + ' STOP</span>' : cd === 'AUG' ? '<span class="start">' + cd + ' Met <i>start</i></span>' : cd + ' ' + aa; }).join('<br>') + '</td>'; h += '</tr>'; }
     return h + '</tbody></table></div>';
   }
+  const calledSet = (game, hi) => { const o = {}; callList(game, 'classic').slice(0, hi).forEach(c => { o[c.aa] = 1; }); return o; };
+  function hasWin(marks, win) { if (win === 12) { for (let i = 0; i < 25; i++) if (!marks[i]) return false; return true; } return LINES.filter(L => L.every(i => marks[i])).length >= win; }
+  const lockLeft = () => Math.max(0, Math.ceil((S.s.lockUntil - Date.now()) / 1000));
+  let lockTimer = null;
   function cardView() {
     const s = S.s;
-    if (!s.game) return '<section class="block"><span class="eyebrow">My card</span><h2>Type the game word from the projector</h2><form data-form="join" class="row"><div class="field"><label for="jw">Game word</label><input type="text" id="jw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="RIDGE42"></div><button style="align-self:flex-end">Get my card</button></form>' + (fb ? '<p class="say warn">' + fb + '</p>' : '') + '</section>';
-    let h = '<section class="block"><div class="gamebar"><span>Game <b class="gw">' + esc(norm(s.game)) + '</b></span><span>Card ' + s.cardId + '</span></div>';
-    if (true) {
-      const codons = cardCodons(s.game, s.cardId);
-      const bad = claim && claim.bad ? claim.bad : {};
-      h += '<p>When an amino acid is called, tap <b>every</b> codon on this card that codes for it.</p><div class="card" role="group" aria-label="Bingo card">' + codons.map((cd, i) => '<button class="sq' + (bad[i] ? ' wrong' : '') + '" data-act="mark" data-i="' + i + '" aria-pressed="' + !!s.marks[i] + '" aria-label="' + cd + '">' + tiles(cd) + '</button>').join('') + '</div>';
-      if (claim && claim.ok) h += '<div class="win" role="status"><b>BINGO</b><span>Card ' + s.cardId + ' · game ' + esc(norm(s.game)) + ' · true at call ' + claim.n + '</span></div>';
-      else if (claim) h += '<p class="say warn" role="status">' + claim.msg + '</p>';
-      h += '<div class="row"><div class="field"><label for="upto">Call number on the projector</label><select id="upto" style="max-width:9rem"><option value="">Choose</option>' + Array.from({ length: 21 }, (x, i) => '<option' + (String(s.upto) === String(i + 1) ? ' selected' : '') + '>' + (i + 1) + '</option>').join('') + '</select></div><div class="field"><label for="spat">A win is</label><select id="spat" style="max-width:11rem">' + [[1, 'one line'], [2, 'two lines'], [12, 'the whole card']].map(p => '<option value="' + p[0] + '"' + (s.pattern === p[0] ? ' selected' : '') + '>' + p[1] + '</option>').join('') + '</select></div><button data-act="claim" style="align-self:flex-end">Check my bingo</button></div><div class="row"><button class="quiet" data-act="clear">Clear my marks</button><button class="quiet" data-act="leave">Join a different game</button></div>';
-    } else {
-      const cr = s.code ? BRS.creature(s.code) : null;
-      if (!cr) h += '<p>The Ember Round is played on your own salamander.</p><form data-form="code" class="row"><div class="field"><label for="cc">Creature Code</label><input type="text" id="cc" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="TF-7K3QM"></div><button style="align-self:flex-end">Load my salamander</button></form>' + (fb ? '<p class="say warn">' + fb + '</p>' : '');
-      else {
-        const m = cr.mut || Object.assign({ kind: 'none' }, cr.ember.copies[0]), N = m.template.length;
-        h += '<p><b>' + cr.code + '</b> · its copy of the ember gene, from its mother. First transcribe the template DNA into mRNA. Then, for each amino acid called, check your own codon on the chart.</p><div class="strand"><span class="lab">Template DNA 3′ → 5′</span><div class="six">' + m.template.map(t => '<div class="cod">' + tiles(t) + '</div>').join('') + '</div><span class="lab">mRNA 5′ → 3′</span><div class="six">' + m.template.map((t, i) => s.done ? '<div class="cod">' + tiles(m.mrna[i]) + '</div>' : '<input type="text" class="mrna" id="em-' + i + '" data-i="' + i + '" maxlength="3" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="mRNA codon ' + (i + 1) + '" value="' + esc((s.m[i] || '').replace(/[^A-Z]/g, '')) + '">').join('') + '</div><span class="lab">Called: ' + BRS.EMB.protein.join(' · ') + '</span><div class="six">' + m.template.map((t, i) => s.done ? '<span>' + (BRS.CODON[m.mrna[i]] === BRS.EMB.protein[i] ? '✓' : '✗') + '</span>' : '<select class="yn" id="yn-' + i + '" data-i="' + i + '" aria-label="Call ' + (i + 1) + ', ' + BRS.EMB.protein[i] + '"><option value="">?</option><option value="y"' + (s.yn[i] === 'y' ? ' selected' : '') + '>codes for it</option><option value="n"' + (s.yn[i] === 'n' ? ' selected' : '') + '>does not</option></select>').join('') + '</div></div>';
-        if (s.done) {
-          const what = m.kind === 'none' ? 'Every call matched, and the DNA matches the ridge reference at every base. This salamander has no new mutation, as its lab slip said.' : m.kind === 'silent' ? 'Every call matched, so this salamander builds the normal ember protein. Its DNA still differs from the ridge reference by one base, in codon ' + (m.codon + 1) + ': ' + m.oldCodon + ' became ' + m.newCodon + ', and both code for ' + m.oldAA + '. That is a silent change.'
-            : m.kind === 'missense' ? 'Call ' + (m.codon + 1) + ' did not match. Where the ridge reference builds ' + m.oldAA + ', this salamander builds ' + m.newAA + '. One amino acid in the chain is different.'
-              : 'Call ' + (m.codon + 1) + ' did not match. This salamander’s codon ' + (m.codon + 1) + ' is a stop codon, so the ribosome lets go there and the chain is only ' + m.codon + ' amino acids long.';
-          h += '<div class="result"><b>' + (m.kind === 'none' ? 'Checked.' : 'Found it.') + '</b><span>' + what + '</span><span>Take this to step 3 of the Blue Ridge Salamander Project.</span></div>';
-        } else h += '<div class="row"><button data-act="echeck">Check my answers</button></div>' + (fb ? '<p class="say warn" role="status">' + fb + '</p>' : '');
-        h += '<div class="row"><button class="quiet" data-act="ecode">Use a different Creature Code</button></div>';
-      }
-    }
-    return h + '</section><details' + (S.s.tab === 'ember' ? ' open' : '') + '><summary>Codon chart</summary><p class="small muted">First base on the left, second base across the top, third base inside the box.</p>' + chart() + '</details>';
+    if (!s.game) return '<section class="block" style="max-width:820px"><span class="eyebrow">My card</span><h2>Type the game word from the projector</h2><form data-form="join" class="row"><div class="field"><label for="jw">Game word</label><input type="text" id="jw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="RIDGE42"></div><button style="align-self:flex-end">Get my card</button></form>' + (fb ? '<p class="say warn">' + esc(fb.text) + '</p>' : '') + '</section>';
+    const codons = cardCodons(s.game, s.cardId), won = s.hi && hasWin(s.marks, s.win), left = lockLeft();
+    let h = '<div class="cardlayout"><section class="block cardpane"><div class="gamebar"><span>Game <b class="gw">' + esc(norm(s.game)) + '</b></span><span>Card ' + s.cardId + '</span><button class="quiet" data-act="sound" aria-pressed="' + sound + '" style="min-height:40px;padding:4px 12px">Sound: ' + (sound ? 'on' : 'off') + '</button></div>';
+    h += '<form data-form="code" class="coderow"><label for="cc">Code from the board</label><input type="text" id="cc" maxlength="2" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" inputmode="text" aria-describedby="openstat"><button>Open</button><span class="openstat" id="openstat">' + (s.hi ? 'Call <b>' + s.hi + '</b> open · win: <b>' + winWords(s.win) + '</b> · wait <b>' + lockWords(s.lock) + '</b>' : 'No call open yet') + '</span></form>';
+    let m = '';
+    if (fb) m = '<div class="msg ' + fb.kind + '" role="status">' + esc(fb.text) + (fb.hint ? '<small>' + esc(fb.hint) + '</small>' : '') + '</div>';
+    else if (!s.hi) m = '<div class="msg" role="status">Type the code from the board.</div>';
+    else m = '<div class="msg" role="status"></div>';
+    h += m;
+    h += '<div class="cardhead"><h2>Your card: 25 mRNA codons.</h2><span class="small muted">Tap <b>every</b> codon that codes for the call.</span></div>';
+    h += '<div class="cardwrap"><div class="card' + (s.hi ? '' : ' idle') + '" role="group" aria-label="Bingo card">' + codons.map((cd, i) => '<button class="sq" data-act="mark" data-i="' + i + '" aria-pressed="' + !!s.marks[i] + '" aria-label="' + cd + '">' + tiles(cd) + '</button>').join('') + '</div>' +
+      (left ? '<div class="lock" role="status" aria-live="polite"><span>Card locked</span><b>' + left + '</b><span>seconds</span></div>' : '') +
+      (won ? '<div class="win" role="status"><b>BINGO</b><span>Card ' + s.cardId + ' · game ' + esc(norm(s.game)) + ' · call ' + s.hi + '</span><span class="wc">' + codeFor(s.game, s.hi, s.lock, s.win) + '</span></div>' : '') + '</div>';
+    h += '</section><div class="side"><section class="block chartpane"><h2>Codon chart</h2><p class="small muted">First base on the left, second across the top, third read down the box. <span style="color:var(--ok);font-weight:700">AUG</span> is start.</p>' + chart() + '</section>';
+    if (s.ask === 'clear') h += '<div class="confirm"><span>Clear every mark on this card?</span><button data-act="clear">Yes, clear</button><button class="ghost" data-act="noask">Keep my marks</button></div>';
+    else if (s.ask === 'leave') h += '<div class="confirm"><span>Leave this game? You get a new card and lose these marks.</span><button data-act="leave">Yes, leave</button><button class="ghost" data-act="noask">Stay</button></div>';
+    else h += '<div class="row"><button class="quiet" data-act="askclear">Clear my marks</button><button class="quiet" data-act="askleave">Join a different game</button></div>';
+    h += '</div></div>';
+    return h;
   }
-  function checkClaim() {
-    const s = S.s, n = +s.upto;
-    if (!n) return { msg: 'Choose the call number shown on the projector first.' };
-    const codons = cardCodons(s.game, s.cardId), called = {};
-    callList(s.game, 'classic').slice(0, n).forEach(c => { called[c.aa] = 1; });
-    const valid = i => !!called[BRS.CODON[codons[i]]];
-    const full = LINES.filter(L => L.every(i => s.marks[i])).length;
-    const marked = Array.from({ length: 25 }, (x, i) => i).filter(i => s.marks[i]);
-    const bad = {}; let nbad = 0;
-    marked.forEach(i => { if (!valid(i)) { bad[i] = 1; nbad++; } });
-    if (nbad) return { bad: bad, msg: nbad + ' marked ' + (nbad === 1 ? 'square does' : 'squares do') + ' not code for anything called by call ' + n + '. They are outlined with dashes. Check them on the chart, unmark them, and try again.' };
-    if (s.pattern === 12 ? marked.length === 25 : full >= s.pattern) return { ok: true, n: n };
-    return { msg: s.pattern === 12 ? 'The whole card is not marked yet.' : s.pattern === 2 ? 'Two full lines are needed. This card has ' + full + '.' : 'No full line of five yet.' };
+  function tickLock() {
+    clearInterval(lockTimer);
+    if (!lockLeft()) return;
+    lockTimer = setInterval(function () {
+      const left = lockLeft(), el = $('.lock b');
+      if (!left || view() !== 'card') { clearInterval(lockTimer); if (view() === 'card') { fb = null; render(); } return; }
+      if (el) el.textContent = left;
+    }, 200);
+  }
+  function tap(i, el) {
+    const s = S.s;
+    if (!s.hi) { fb = { kind: '', text: 'Type the code from the board.' }; render(); return; }
+    if (lockLeft()) return;
+    if (s.marks[i]) { delete s.marks[i]; fb = null; save(); render(); return; }
+    const cd = cardCodons(s.game, s.cardId)[i];
+    if (calledSet(s.game, s.hi)[BRS.CODON[cd]]) {
+      const before = hasWin(s.marks, s.win);
+      s.marks[i] = 1; fb = null; save(); render();
+      if (!before && hasWin(s.marks, s.win)) chime('bingo');
+      return;
+    }
+    fb = { kind: 'bad', text: 'Not this one. Check the chart.', hint: 'Is the new code in? Your card is on call ' + s.hi + '.' };
+    if (s.lock) s.lockUntil = Date.now() + s.lock * 1000;
+    save(); render(); chime('wrong');
+    const sq = app.querySelector('.sq[data-i="' + i + '"]'); if (sq) { sq.classList.add('nope'); setTimeout(function () { sq.classList.remove('nope'); }, 650); }
+    tickLock();
+    void el;
   }
 
   /* ---------- render and events ---------- */
-  function render() { const v = view(); app.innerHTML = v === 'caller' ? callerView() : v === 'card' ? cardView() : v === 'howto' ? howView() : v === 'paper' ? paperView() : homeView(); }
+  function render() {
+    const v = view(); document.body.dataset.view = v;
+    app.innerHTML = v === 'caller' ? callerView() : v === 'card' ? cardView() : v === 'howto' ? howView() : v === 'paper' ? paperView() : v === 'chart' ? chartView() : homeView();
+  }
   app.addEventListener('click', function (ev) {
     const t = ev.target.closest('[data-act]'); if (!t) return;
     const a = t.dataset.act, c = S.c, s = S.s;
-    if (a === 'next') { c.n++; c.shown = false; }
-    else if (a === 'show') c.shown = true;
-    else if (a === 'back') { c.n = Math.max(0, c.n - 1); c.shown = c.n > 0; }
+    if (a === 'mark') { tap(+t.dataset.i, t); return; }
+    if (a === 'next') { clearInterval(rollT); rollT = -1; c.n++; c.rev = revFor(c.preset); fx = { slide: true, release: false }; save(); render(); fx = { slide: false, release: false }; rollTiles(); return; }
+    if (a === 'rev') { c.rev[t.dataset.k] = true; if (c.n && callList(c.game, 'classic')[c.n - 1].aa === 'STOP' && (t.dataset.k === 'trna' || t.dataset.k === 'aa')) fx.release = true; save(); render(); fx.release = false; return; }
+    if (a === 'revall') { const st = c.n && callList(c.game, 'classic')[c.n - 1].aa === 'STOP' && !(c.rev.trna || c.rev.aa); c.rev = { dna: true, mrna: true, trna: true, aa: true }; fx.release = !!st; save(); render(); fx.release = false; return; }
+    if (a === 'back') { clearInterval(rollT); rollT = null; c.n = Math.max(0, c.n - 1); c.rev = { dna: true, mrna: true, trna: true, aa: true }; anim = { n: c.n, arrived: true, released: true }; }
+    else if (a === 'set') { const k = t.dataset.k, v = t.dataset.v; if (!c.on && $('#gw')) c.game = norm($('#gw').value); if (k === 'preset') c.preset = v; else c[k] = +v; }
     else if (a === 'askend') c.ending = true;
     else if (a === 'keepgame') c.ending = false;
-    else if (a === 'end') { const g = c.game; S.c = fresh().c; S.c.game = ''; void g; }
-    else if (a === 'tab') { s.tab = t.dataset.t; fb = ''; claim = null; }
-    else if (a === 'mark') { const i = t.dataset.i; s.marks[i] = !s.marks[i]; claim = null; save(); t.setAttribute('aria-pressed', String(!!s.marks[i])); t.classList.remove('wrong'); const w = $('.win'); if (w) render(); return; }
-    else if (a === 'claim') claim = checkClaim();
+    else if (a === 'end') { S.c = fresh().c; }
     else if (a === 'print') { window.print(); return; }
-    else if (a === 'clear') { s.marks = {}; claim = null; }
-    else if (a === 'leave') { const keep = { code: s.code }; S.s = Object.assign(fresh().s, keep); claim = null; fb = ''; }
-    else if (a === 'ecode') { s.code = ''; s.m = []; s.yn = []; s.done = false; fb = ''; }
-    else if (a === 'echeck') {
-      const cr = BRS.creature(s.code), m = cr.mut || Object.assign({ kind: 'none' }, cr.ember.copies[0]); let ok = true, sawT = false;
-      m.template.forEach(function (x, i) {
-        const mi = $('#em-' + i), yi = $('#yn-' + i), mv = mi.value.trim().toUpperCase(), okm = mv === m.mrna[i], oky = yi.value === (BRS.CODON[m.mrna[i]] === BRS.EMB.protein[i] ? 'y' : 'n');
-        if (mv.indexOf('T') >= 0) sawT = true;
-        mi.classList.toggle('ok', okm); mi.classList.toggle('bad', !okm); yi.classList.toggle('ok', oky); yi.classList.toggle('bad', !oky); ok = ok && okm && oky;
-      });
-      if (ok) { s.done = true; fb = ''; } else { const el = $('.say.warn'); const msg = (sawT ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + 'Boxes with a dashed border need another look. Fix the mRNA first, because a wrong base changes what the codon codes for.'; fb = msg; save(); if (el) el.textContent = msg; else t.parentNode.insertAdjacentHTML('afterend', '<p class="say warn" role="status">' + msg + '</p>'); return; }
-    }
+    else if (a === 'askclear') s.ask = 'clear';
+    else if (a === 'askleave') s.ask = 'leave';
+    else if (a === 'noask') s.ask = '';
+    else if (a === 'clear') { s.marks = {}; s.ask = ''; fb = null; }
+    else if (a === 'leave') { S.s = fresh().s; fb = null; }
+    else if (a === 'sound') { sound = !sound; try { localStorage.setItem(SOUNDKEY, sound ? 'on' : 'off'); } catch (e) { /* ignore */ } if (sound) audio(); }
     save(); render();
   });
   app.addEventListener('input', function (ev) {
     const t = ev.target;
-    if (t.classList.contains('mrna')) { t.value = t.value.toUpperCase().replace(/[^A-Z]/g, ''); S.s.m[+t.dataset.i] = t.value; save(); t.classList.remove('ok', 'bad'); if (t.value.length === 3) { const nx = $('#em-' + (+t.dataset.i + 1)); if (nx && !nx.value) nx.focus(); } }
-  });
-  app.addEventListener('change', function (ev) {
-    const t = ev.target;
-    if (t.classList.contains('yn')) { S.s.yn[+t.dataset.i] = t.value; t.classList.remove('ok', 'bad'); save(); }
-    else if (t.id === 'upto') { S.s.upto = t.value; save(); }
-    else if (t.id === 'spat') { S.s.pattern = +t.value; claim = null; save(); }
+    if (t.id === 'cc') { t.value = t.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 2); if (t.value.length === 2) t.form.requestSubmit ? t.form.requestSubmit() : t.form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true })); }
   });
   app.addEventListener('submit', function (ev) {
     ev.preventDefault();
-    const f = ev.target.dataset.form;
-    if (f === 'start') { const g = norm($('#gw').value); if (g.length < 3) { $('#gw').focus(); return; } S.c = Object.assign(fresh().c, { game: g, round: 'classic', pattern: +$('#pat').value, on: true }); }
+    const f = ev.target.dataset.form, s = S.s;
+    if (f === 'start') { const g = norm($('#gw').value); if (g.length < 3) { $('#gw').focus(); return; } const k = S.c; S.c = Object.assign(fresh().c, { game: g, on: true, preset: k.preset, lock: k.lock, win: k.win }); S.c.rev = revFor(S.c.preset); }
     else if (f === 'paper') { const g = norm($('#pw').value); if (g.length < 3) { $('#pw').focus(); return; } let k = Math.round(+$('#pn').value || 30); k = Math.max(2, Math.min(60, k + (k % 2))); S.p = { game: g, count: k }; }
-    else if (f === 'pcheck') { S.c.pcheck = Math.max(0, Math.min(60, Math.round(+$('#pcn').value || 0))); }
-    else if (f === 'join') { const g = norm($('#jw').value); if (g.length < 3) { fb = 'Type the game word exactly as the projector shows it.'; render(); return; } fb = ''; S.s = Object.assign(fresh().s, { game: g, cardId: 1000 + Math.floor(Math.random() * 9000), code: S.s.code }); }
-    else if (f === 'code') { const p = BRS.parseCode($('#cc').value); if (!p.ok) { fb = p.why; render(); return; } fb = ''; S.s.code = p.code; S.s.m = []; S.s.yn = []; S.s.done = false; }
+    else if (f === 'pcheck') { const m = String($('#pcn').value).toUpperCase().replace(/\s/g, '').match(/^([PD])?0*(\d{1,2})$/); S.c.pcheck = m && +m[2] >= 1 && +m[2] <= 60 ? (m[1] || 'P') + (+m[2] < 10 ? '0' : '') + (+m[2]) : ''; }
+    else if (f === 'join') { const g = norm($('#jw').value); if (g.length < 3) { fb = { kind: 'bad', text: 'Type the game word exactly as the projector shows it.' }; render(); return; } fb = null; S.s = Object.assign(fresh().s, { game: g, cardId: 1000 + Math.floor(Math.random() * 9000) }); }
+    else if (f === 'code') {
+      const d = decode(s.game, $('#cc').value);
+      if (!d) fb = { kind: 'bad', text: 'That code isn’t from this game. Check the board and your game word.' };
+      else if (d.call < s.hi) fb = { kind: 'bad', text: 'That code is from an earlier call.' };
+      else { const before = s.hi && hasWin(s.marks, s.win); s.hi = d.call; s.lock = d.lock; s.win = d.win; fb = null; save(); render(); if (!before && hasWin(s.marks, s.win)) chime('bingo'); return; }
+    }
     save(); render();
   });
-  window.addEventListener('hashchange', function () { fb = ''; claim = null; render(); window.scrollTo(0, 0); });
-  render();
-  
+  window.addEventListener('hashchange', function () { fb = null; render(); window.scrollTo(0, 0); tickLock(); });
+  render(); tickLock();
+  /* for the build and test scripts only */
+  window.CodonBingo = { callList: callList, cardCodons: cardCodons, codeFor: codeFor, decode: decode, hasWin: hasWin, LINES: LINES, LOCKS: LOCKS, WINS: WINS, CODEALPH: CODEALPH, played: played, templ: templ, anti: anti, FULL: FULL, printChart: printChart };
 })();
-
 </script>
 
 </body></html>
