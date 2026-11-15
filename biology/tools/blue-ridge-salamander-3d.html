@@ -110,7 +110,7 @@ body.embed .low{padding-block:0 8px}
     <button type="button" id="go" hidden>Reveal your salamander</button>
     <p id="gate-note" hidden>It calls when it wakes. Turn the sound up.</p>
     <div id="gate-more" hidden>
-      <span>Finished already? Enter your keeper code. It is on your pocket card and in your Field Record.</span>
+      <span>Finished already? Enter your keeper code. It is on your Field Sheet and in your Field Record.<span id="back-line" hidden> You can always come back to it at scienceonepagers.org/salamander.</span></span>
       <form id="keeper-form"><input id="keeper" type="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" maxlength="14" aria-label="Keeper code" placeholder="CE-MKYUK-A4Y"><button type="submit">Open</button></form>
       <p id="keeper-fb" role="status" aria-live="polite"></p>
       <a href="blue-ridge-salamander-turn-the-rock.html">Go to Turn the Rock and Decode</a>
@@ -567,7 +567,7 @@ const BRS = (function () {
     if (s.length !== 10) return { ok: false, why: 'A keeper code is a Creature Code and three more characters, like CE-MKYUK-A4Y.' };
     const c = parseCode(s.slice(0, 7)); if (!c.ok) return { ok: false, why: c.why };
     const ed = EDITIONS[s[7]]; if (!ed) return { ok: false, why: 'That keeper code is from an edition this page does not know.' };
-    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check the pocket card.' };
+    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check your Field Sheet.' };
     return { ok: true, code: c.code, site: c.site, edition: ed.id, text: c.code + '-' + s.slice(7) };
   }
 

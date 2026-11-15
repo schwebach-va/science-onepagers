@@ -47,6 +47,12 @@ p{margin:0;max-width:65ch}
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--paper);border-bottom:2px solid var(--ink);padding-block:10px 8px;display:flex;flex-direction:column;gap:8px}
 .bar .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
 .code-chip{font:600 .95rem var(--mono);letter-spacing:.04em;padding:2px 8px;border:1.5px solid var(--ink);border-radius:3px;background:var(--panel)}
+.chips{display:flex;gap:6px 8px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+.bar [hidden]{display:none!important}
+#copycodes{min-height:36px;padding:4px 10px;font-size:.85rem}
+#copymsg{margin:0;font-weight:600}
+.copyline{font:600 .95rem var(--mono);letter-spacing:.04em;width:17rem;max-width:100%;padding:4px 6px}
+.leave .stampword{font-family:var(--mono);letter-spacing:.04em;white-space:nowrap}
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}
 .steps a{display:flex;flex-direction:column;gap:1px;padding:6px 8px;border:1.5px solid var(--rule);border-radius:4px;color:var(--ink);text-decoration:none;background:var(--panel);min-height:48px;font-size:.88rem;line-height:1.2}
 .steps a b{font:600 .72rem var(--mono);letter-spacing:.08em;color:var(--muted)}
@@ -123,7 +129,7 @@ input.aa.no{border:2.5px solid var(--bad)!important;background:var(--bad-soft)!i
 .six.nm{margin-top:-4px}
 .six.nm>span{border:0;background:transparent;padding:0 1px;font:400 .68rem/1.15 var(--body);letter-spacing:0;color:var(--muted);overflow-wrap:anywhere;-webkit-hyphens:auto;hyphens:auto;min-height:1.2em}
 .six.nm>span.no{color:var(--bad);font-weight:700}
-.aabar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.aabar{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .aabar button{min-height:38px;padding:5px 12px;font-size:.85rem}
 .aamsg{margin:0;min-height:1.35em;font-size:.92rem;font-weight:700;color:var(--bad)}
 .ok{border:2.5px solid var(--ok)!important;background:var(--ok-soft)!important}
@@ -201,7 +207,8 @@ button.die:hover{border-color:var(--ember)}
 </style>
 <div class="wrap">
 <header class="bar">
-  <div class="top"><h1>Blue Ridge Salamander Project</h1><span class="code-chip" id="chip">no creature yet</span></div>
+  <div class="top"><h1>Blue Ridge Salamander Project</h1><span class="chips"><span class="code-chip" id="chip">no creature yet</span><span class="code-chip" id="stampchip" hidden></span><button type="button" class="quiet" id="copycodes" hidden>Copy my codes</button></span></div>
+  <p class="small" id="copymsg" role="status" hidden></p>
   <nav aria-label="Survey steps"><ol class="steps" id="steps"></ol></nav>
 </header>
 <p class="draft">Test build, 11/11/2026. Codes and traits can still change until Mr. Schwebach freezes the genome.</p>
@@ -675,7 +682,7 @@ const BRS = (function () {
     if (s.length !== 10) return { ok: false, why: 'A keeper code is a Creature Code and three more characters, like CE-MKYUK-A4Y.' };
     const c = parseCode(s.slice(0, 7)); if (!c.ok) return { ok: false, why: c.why };
     const ed = EDITIONS[s[7]]; if (!ed) return { ok: false, why: 'That keeper code is from an edition this page does not know.' };
-    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check the pocket card.' };
+    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check your Field Sheet.' };
     return { ok: true, code: c.code, site: c.site, edition: ed.id, text: c.code + '-' + s.slice(7) };
   }
 
@@ -754,7 +761,34 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const dash = a => a.map(x => x === 'none' ? '(not built)' : x).join('–');
 
   /* ---------- header ---------- */
-  function chip() { $('#chip').textContent = S.code ? (S.name ? S.name + ' · ' : '') + S.code : 'no creature yet'; }
+  /* Where a returning student comes back to. Empty until the site publishes the address; then set it to 'scienceonepagers.org/salamander'. */
+  const BACK = '';
+  /* The stamp for what is done right now: progress, final, or the teacher release stamp. Only checked, passed parts count. */
+  const stampNow = () => {
+    if (!S.code) return '';
+    const done = BRS.GENES.filter(g => S.done[g.id]).map(g => g.id).concat(S.mutDone ? ['EMB'] : []), all = done.length === BRS.PARTS.length, gv = all ? givenNow() : [];
+    return all && gv.length ? BRS.teacherStamp(S.code, BRS.PARTS.filter(id => gv.indexOf(id) < 0)) : BRS.stamp(S.code, all ? BRS.FULL : done);
+  };
+  function chip() {
+    $('#chip').textContent = S.code ? (S.name ? S.name + ' · ' : '') + S.code : 'no creature yet';
+    const sc = $('#stampchip'), cb = $('#copycodes'), msg = $('#copymsg'), st = stampNow(), words = st ? 'stamp ' + st : '';
+    if (sc.textContent !== words) { msg.textContent = ''; msg.hidden = true; }
+    sc.textContent = words; sc.hidden = cb.hidden = !st;
+  }
+  /* One line for Canvas: Creature Code, a space, the current stamp. */
+  function copyCodes(msg) {
+    if (!S.code || !msg) return;
+    const line = S.code + ' ' + stampNow();
+    const fallback = function () { msg.innerHTML = 'Select this line and copy it, then paste it into My Salamander Codes in Canvas: <input type="text" readonly class="copyline" aria-label="Your codes" value="' + line + '">'; const i = msg.querySelector('input'); try { i.focus(); i.select(); } catch (e) { /* shown either way */ } };
+    msg.hidden = false;
+    try { navigator.clipboard.writeText(line).then(function () { msg.textContent = 'Copied. Paste it into My Salamander Codes in Canvas.'; }, fallback); } catch (e) { fallback(); }
+  }
+  function leaveHTML() {
+    return '<section class="block leave"><p><b>Leaving for today?</b> Write your stamp <b class="stampword">' + stampNow() + '</b> in the <b>Where I stopped</b> box on your Field Sheet, and paste your codes into <b>My Salamander Codes</b> in Canvas.</p><div class="row"><button type="button" class="quiet" data-act="copycodes">Copy my codes</button><span class="small copymsg" role="status"></span></div></section>';
+  }
+  function backHTML() {
+    return '<section class="block" id="comeback"><h3>Coming back to your salamander?</h3><p class="small muted">Type your Creature Code and your last stamp, or paste the line from My Salamander Codes into the first box. Your last stamp is in My Salamander Codes in Canvas and in the Where I stopped box on your Field Sheet. Only finished genes come back. A gene you were partway through starts over.</p><form class="row" data-form="classcode"><div class="field"><label for="classcode">Creature Code</label><input type="text" id="classcode" placeholder="TF-7K3QM" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="24"></div><div class="field"><label for="classstamp">Stamp, if you have one</label><input type="text" id="classstamp" placeholder="A4Y-K7Q2" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><button class="ghost" style="align-self:flex-end">Use this code</button></form></section>';
+  }
   function header() {
     const v = view();
     const items = [['rock', 'Turn the rock', !!S.code && S.placed], ['decode', 'Decode', nDone() === BRS.GENES.length], ['base', 'The ember gene', S.mutDone], ['notes', 'Field notes', false]];
@@ -850,14 +884,14 @@ if (typeof module !== 'undefined') module.exports = BRS;
     if (S.code) {
       return '<section class="block"><h3>The lab slip</h3><div class="slip"><span class="eyebrow">Ridge lab · ember gene test</span><b class="big">' + S.code + '</b><span>' + (CR.mut ? 'A new mutation was found. The lab does not say where in the gene.' : 'No new mutation was found.') + '</span></div>' +
         (S.roll2 ? '<div class="row">' + dieSVG(S.roll2, 40) + '<b>Your second roll was ' + S.roll2 + '.</b></div>' : '<p>This code came from a slip in class, so the lab had already run its test.</p>') + oddsHTML() +
-        '<p><b>Write ' + S.code + ' on your Field Sheet now.</b> You are the one who records it: type it into the Canvas assignment yourself. Nobody else has your code.</p></section>';
+        '<p><b>Write ' + S.code + ' at the top of your Field Sheet. Paste it into My Salamander Codes in Canvas.</b> You are the one who records it. Nobody else has your code.</p><p class="small">Lose it? It’s in My Salamander Codes.</p></section>';
     }
     if (S.foundAt === null || !S.placed) return '';
     return '<section class="block"><h3>Second roll: the lab test</h3><p>You touched a swab to the animal’s back before you set its cover down. The lab reads the ember gene from that swab and compares it with the ridge’s reference copy. A new mutation is a change in the DNA that appeared when the egg cell this animal grew from was made. Roll to see whether the lab finds one.</p>' + oddsHTML() +
       '<div class="dice" role="group" aria-label="Second die roll">' + [1, 2, 3, 4, 5, 6].map(n => '<button class="die" data-act="die2" data-n="' + n + '" aria-label="Rolled ' + n + '">' + dieSVG(n, 44) + '</button>').join('') + '<button class="ghost" data-act="rollme2">Roll for me</button></div></section>';
   }
   function rockView() {
-    let h = '<section class="block"><span class="eyebrow">Step 1 · field survey</span><h2>Roll for a site. Lift a cover. Find your salamander.</h2>' +
+    let h = (S.code || S.site ? '' : backHTML()) + '<section class="block"><span class="eyebrow">Step 1 · field survey</span><h2>Roll for a site. Lift a cover. Find your salamander.</h2>' +
       '<p class="lede">Three populations of the Blue Ridge salamander are said to live along the mountains of Virginia. A roll of the die decides which one you survey. A second roll comes after you find your animal.</p>';
     if (!S.site) {
       h += '<p><b>What did the die show?</b> Tap the number rolled in class, or roll here.</p><div class="dice" role="group" aria-label="Die roll">' + [1, 2, 3, 4, 5, 6].map(n => '<button class="die" data-act="die" data-n="' + n + '" aria-label="Rolled ' + n + '">' + dieSVG(n, 44) + '</button>').join('') + '<button class="ghost" data-act="rollme">Roll for me</button></div>' + mapSVG(null) + MAPCREDIT + '</section>';
@@ -881,7 +915,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
         plotSVG() + msg + '</section>' + labHTML();
     }
     if (!S.site && flash) h += '<p class="say warn" role="status">' + flash.t + '</p>';
-    h += '<section class="block"><h3>Already have a Creature Code?</h3><p class="small muted">Type it here to pick up your animal on this iPad. The first two letters name the site: TF Hawksbill, CE James River, HE Mount Rogers. If you wrote down a stamp from your field notes, type it too, and the genes you already checked come back.</p><form class="row" data-form="classcode"><div class="field"><label for="classcode">Creature Code</label><input type="text" id="classcode" placeholder="TF-7K3QM" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><div class="field"><label for="classstamp">Stamp, if you have one</label><input type="text" id="classstamp" placeholder="A4Y-K7Q2" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="10"></div><button class="ghost" style="align-self:flex-end">Use this code</button></form></section>';
+    if (S.code || S.site) h += backHTML();
     if (S.code || S.site) h += '<section class="block"><h3>Wrong creature?</h3>' + (S.asking
       ? '<p>Starting over erases the site, the code and the decoding saved on this iPad.</p><div class="row"><button data-act="wipe">Yes, start over</button><button class="ghost" data-act="keep">Keep what I have</button></div>'
       : '<div class="row"><button class="quiet" data-act="ask">Start over</button></div>') + '</section>';
@@ -1022,8 +1056,9 @@ if (typeof module !== 'undefined') module.exports = BRS;
         '<div class="row"><button data-act="check">Check this gene</button></div><div id="fb" aria-live="polite"></div>';
     } else if (!S.done[g.id]) {
       h += strand(g.id, 0, m.template, { given: m, top: true, label: 'Copy from the mother · you decoded this one' }) +
+        '<p>Below is the father’s copy of this gene: a second piece of DNA, from the other parent. Compare the two copies.</p>' +
         strand(g.id, 1, f.template, { given: f, label: 'Copy from the father · given to you' }) +
-        '<fieldset id="zygq" class="why"><legend>Line the father’s template up under the mother’s and read them codon by codon. For this gene, ' + S.code + ' is:</legend>' +
+        '<fieldset id="zygq" class="why"><legend>Line the father’s copy up under the mother’s copy and read them codon by codon. For this gene, ' + S.code + ' is:</legend>' +
         '<label class="opt"><input type="radio" name="zyg" id="zyg-homozygous" value="homozygous"><span><b>Homozygous.</b> The two copies read the same.</span></label>' +
         '<label class="opt"><input type="radio" name="zyg" id="zyg-heterozygous" value="heterozygous"><span><b>Heterozygous.</b> The two copies differ.</span></label>' +
         '<div class="row"><button data-act="zyg">Check</button></div><div id="zygfb" aria-live="polite"></div></fieldset>';
@@ -1037,7 +1072,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       const next = BRS.GENES.find(x => !S.done[x.id]);
       h += next ? '<div class="row"><button data-act="gene" data-g="' + next.id + '">Next gene: ' + next.id + '</button></div>' : '<p class="say good">All ' + BRS.GENES.length + ' genes decoded. <a href="#base">Step 3 checks the lab slip against the ember gene.</a></p>';
     }
-    h += '</section><details open><summary>Codon chart</summary><p class="small muted">Find the first base on the left, the second base across the top, then the third base in the box. AUG starts every chain. Three codons stop it: UAA, UAG and UGA.</p>' + chart() + '</details>';
+    h += '</section>' + leaveHTML() + '<details open><summary>Codon chart</summary><p class="small muted">Find the first base on the left, the second base across the top, then the third base in the box. AUG starts every chain. Three codons stop it: UAA, UAG and UGA.</p>' + chart() + '</details>';
     return h;
   }
 
@@ -1067,7 +1102,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
         '<fieldset id="q-kind"><legend>What happened to the protein?</legend>' + KINDS.map(k => '<label class="opt"><input type="radio" name="kind" id="k-' + k[0] + '" value="' + k[0] + '" data-q="kind"' + (q.kind === k[0] ? ' checked' : '') + '><span>' + k[1] + '</span></label>').join('') + '</fieldset>' +
         '<div class="row"><button data-act="checkbase">Check my answers</button></div><div id="fb" aria-live="polite"></div>';
     }
-    return h + '</section><details><summary>Codon chart</summary>' + chart() + '</details>';
+    return h + '</section>' + leaveHTML() + '<details><summary>Codon chart</summary>' + chart() + '</details>';
   }
 
   /* ---------- the model: a living top view drawn from the phenotype ---------- */
@@ -1267,7 +1302,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
         '<p class="small muted">The call in this drawing is a stand-in tone. The recorded voice is in the 3D view.</p><details><summary>Drawing notes</summary>' + drawNotes + '</details>';
     }
 
-    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete && givenNow().length ? 'Your teacher released the reveal. The stamp below records which parts you decoded yourself. Paste this into the Field Record assignment.' : complete ? 'The final stamp proves every gene was decoded correctly. Paste this into the Field Record assignment.' : 'The final stamp appears here when every gene is decoded and the ember gene is checked. Until then this shows a progress stamp, the traits you have decoded so far and what is left. It can be handed in as it is.') + '</p>' + (complete ? '<div class="slip"><span class="eyebrow">Keeper code · copy it onto your pocket card</span><b class="big">' + BRS.keeper(S.code) + '</b><span>This code is the way back to ' + (S.name ? esc(S.name) : 'your salamander') + ' later, without redoing the work. Keep it.</span><span>It also opens the reveal on any other computer or iPad: <a href="blue-ridge-salamander-3d.html">the 3D page</a> asks for this code.</span></div>' : '') + '<textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
+    h += '</section><section class="block"><h3>Field Record for Canvas</h3><p>' + (complete && givenNow().length ? 'Your teacher released the reveal. The stamp below records which parts you decoded yourself. Paste this into <b>Keeper code and Field Sheet photo</b> in Canvas.' : complete ? 'The final stamp proves every gene was decoded correctly. Paste this into <b>Keeper code and Field Sheet photo</b> in Canvas.' : 'The final stamp appears here when every gene is decoded and the ember gene is checked. Until then this shows a progress stamp, the traits you have decoded so far and what is left. Before the iPad goes away, write the progress stamp in the <b>Where I stopped</b> box on your Field Sheet and paste your codes into <b>My Salamander Codes</b> in Canvas.') + '</p>' + (complete ? '<div class="slip"><span class="eyebrow">Keeper code · write it on your Field Sheet</span><b class="big">' + BRS.keeper(S.code) + '</b><span>This code is the way back to ' + (S.name ? esc(S.name) : 'your salamander') + ' later, without redoing the work. Keep it.</span>' + (BACK ? '<span>Come back any time, on any computer or iPad: go to <a href="https://' + BACK + '">' + BACK + '</a> and type this code.</span>' : '<span>It also opens the reveal on any other computer or iPad: <a href="blue-ridge-salamander-3d.html">the 3D page</a> asks for this code.</span>') + '</div>' : '') + '<textarea id="rec" rows="10" readonly aria-label="Field Record text">' + esc(rec) + '</textarea><div class="row"><button data-act="copy">Copy the Field Record</button><span id="copyfb" class="small" aria-live="polite"></span></div></section>';
     return h;
   }
 
@@ -1338,6 +1373,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     else if (act === 'walk') { if (anim) { anim.st.walk = !anim.st.walk; t.setAttribute('aria-pressed', String(anim.st.walk)); t.textContent = anim.st.walk ? 'Stop' : 'Walk'; anim.kick(); } }
     else if (act === 'breathe') breathe();
     else if (act === 'call') playCall();
+    else if (act === 'copycodes') copyCodes(t.parentNode.querySelector('.copymsg'));
     else if (act === 'copy') {
       const ta = $('#rec'), fb = $('#copyfb');
       const fallback = function () { ta.focus(); ta.select(); fb.textContent = 'Selected. Use Copy from the menu.'; };
@@ -1375,11 +1411,15 @@ if (typeof module !== 'undefined') module.exports = BRS;
     ev.preventDefault();
     const f = ev.target.dataset.form;
     if (f === 'classcode') {
-      const p = BRS.parseCode($('#classcode').value);
+      /* A line pasted from My Salamander Codes holds the code and the stamp together: split it. */
+      let rawCode = $('#classcode').value, rawStamp = $('#classstamp').value.trim();
+      const flat = rawCode.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (!rawStamp && flat.length >= 13 && flat.length <= 15) { rawCode = flat.slice(0, 7); rawStamp = flat.slice(7); }
+      const p = BRS.parseCode(rawCode);
       if (!p.ok) { flash = { warn: 1, t: p.why }; }
       else if (S.code && S.code !== p.code) { flash = { warn: 1, t: 'This iPad already holds ' + S.code + '. Use Start over below if ' + p.code + ' is really yours.' }; }
       else {
-        const sv = $('#classstamp').value.trim(), rs = sv ? BRS.readStamp(p.code, sv) : null;
+        const sv = rawStamp, rs = sv ? BRS.readStamp(p.code, sv) : null;
         if (rs && !rs.ok) flash = { warn: 1, t: rs.why };
         else {
           if (!S.code) setCode(p.code, 'class'); flash = null;
@@ -1392,6 +1432,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     }
   });
   window.addEventListener('hashchange', function () { lifted = null; flash = null; S.asking = false; render(); window.scrollTo(0, 0); });
+  $('#copycodes').addEventListener('click', function () { copyCodes($('#copymsg')); });
   render();
 })();
 </script>
