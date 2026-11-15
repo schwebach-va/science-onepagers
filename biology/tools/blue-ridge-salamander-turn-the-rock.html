@@ -686,6 +686,22 @@ const BRS = (function () {
     return { ok: true, code: c.code, site: c.site, edition: ed.id, text: c.code + '-' + s.slice(7) };
   }
 
+  /* A release code opens the reveal for one class period on one date (YYYY-MM-DD). The teacher makes it in the lookup;
+     the page checks it against today's date on the device. It carries no Creature Code: it works for any animal that day. */
+  const PERIODS = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8'];
+  function releaseCode(date, period) {
+    const p = String(period || '').toUpperCase();
+    if (PERIODS.indexOf(p) < 0 || !/^\d{4}-\d{2}-\d{2}$/.test(String(date))) return null;
+    const h = hashStr('release|' + EDITION.id + '|' + date + '|' + p), g = hashStr(p + '|' + date + '|release-2');
+    return 'R-' + ALPHA[h % 31] + ALPHA[(h >>> 7) % 31] + ALPHA[g % 31] + ALPHA[(g >>> 7) % 31];
+  }
+  function readRelease(raw, date) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!/^R[A-Z0-9]{4}$/.test(s)) return { ok: false, why: 'A release code looks like R-7K4Q. Ask your teacher.' };
+    for (const p of PERIODS) if (releaseCode(date, p).replace('-', '') === s) return { ok: true, period: p, date: date };
+    return { ok: false, why: 'That release code is not for today. Ask your teacher.' };
+  }
+
   const std = make();
   /* A short mark of the whole genome build. Two pages that print the same mark draw the same animal for every code. */
   function fingerprint() {
@@ -701,7 +717,7 @@ const BRS = (function () {
   return {
     VERSION, EDITION, EDITIONS, DEFAULTS, MUTATION_ODDS, hasMutation, mutationForRoll, codeForRolls, OPTIONS: std.OPTIONS, ALPHA, SITES, STATMAP: std.STATMAP, LAYOUT, site, siteForRoll, GENES, EMB, EMB_POOL, PARTS, FULL,
     CODON, SYN, AMINO, BASES, parseCode, codeFrom, batch, creature: std.creature, entry: std.entry, alleles: std.alleles, make,
-    transcribe, templateOf, translate, stamp, teacherStamp, readStamp, keeper, readKeeper, maskOf, idsOf, rng, checkChar, fingerprint
+    transcribe, templateOf, translate, stamp, teacherStamp, readStamp, keeper, readKeeper, PERIODS, releaseCode, readRelease, maskOf, idsOf, rng, checkChar, fingerprint
   };
 })();
 if (typeof module !== 'undefined') module.exports = BRS;
@@ -714,13 +730,13 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const app = $('#app');
   const KEY = 'brs-v3';
-  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false, pick: false, view: '3d', no3d: false, fails: {}, given: [] });
+  const fresh = () => ({ code: null, site: null, roll: null, roll2: null, flips: 0, foundAt: null, placed: false, ans: {}, dec: {}, done: {}, mutDone: false, choice: null, reveal: false, why: false, whyTries: 0, name: '', gene: 'STR', asking: false, pick: false, view: '3d', no3d: false, fails: {}, given: [], released: null });
   let S = fresh();
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && typeof j === 'object') S = Object.assign(fresh(), j, { asking: false }); } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
   let CR = S.code ? BRS.creature(S.code) : null;
   if ((S.code && !CR) || (S.site && !BRS.site(S.site))) { S = fresh(); CR = null; }
-  let lifted = null, flash = null;
+  let lifted = null, flash = null, relMsg = '';
 
   const VIEWS = ['rock', 'decode', 'base', 'notes'];
   const view = () => { const h = (location.hash || '').slice(1); return VIEWS.indexOf(h) >= 0 ? h : 'rock'; };
@@ -1279,7 +1295,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       else lines += '<li class="locked"><span class="g">' + g.id + '</span><span>' + g.name + ': not decoded yet.</span></li>';
     });
     const shown = S.reveal && complete;
-    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nReveal: ' + (!S.reveal ? 'not yet' : S.no3d ? 'seen as the field drawing' : 'seen in 3D') + '\nParts done: ' + partsDone() + ' of ' + BRS.PARTS.length + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nTraits so far: ' + (traitsSoFar().join('; ') || '(none yet)') + (complete ? '' : '\nStill to do: ' + partsLeft().join(', ')) + '\nLab slip: ' + (CR.mut ? 'a new mutation' : 'no new mutation') + '\nEmber gene checked: ' + (S.mutDone ? 'yes' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete && givenNow().length ? 'TEACHER RELEASE STAMP: ' + BRS.teacherStamp(S.code, BRS.PARTS.filter(id => givenNow().indexOf(id) < 0)) + '  (the teacher released the reveal)\nDecoded by the student: ' + (BRS.PARTS.length - givenNow().length) + ' of ' + BRS.PARTS.length + '\nGiven by teacher: ' + givenNow().join(', ') + '\nKEEPER CODE: ' + BRS.keeper(S.code) : complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)\nKEEPER CODE: ' + BRS.keeper(S.code) : 'Progress stamp: ' + st + '  (not finished)');
+    const rec = 'Name: ' + (S.name || '(not named yet)') + '\nCreature Code: ' + S.code + '\nPopulation: ' + site.pop + ', ' + site.place + '\nFound under: ' + found + '\nSex: ' + (CR.sex === 'XX' ? 'female (XX)' : 'male (XY)') + '\nLength: ' + CR.length.toFixed(1) + ' cm   Mass: ' + CR.mass.toFixed(1) + ' g\nReveal: ' + (!S.reveal ? 'not yet' : S.no3d ? 'seen as the field drawing' : 'seen in 3D') + '\nParts done: ' + partsDone() + ' of ' + BRS.PARTS.length + '\nGenes decoded: ' + n + ' of ' + BRS.GENES.length + '\nTraits so far: ' + (traitsSoFar().join('; ') || '(none yet)') + (complete ? '' : '\nStill to do: ' + partsLeft().join(', ')) + '\nLab slip: ' + (CR.mut ? 'a new mutation' : 'no new mutation') + '\nEmber gene checked: ' + (S.mutDone ? 'yes' : 'not yet') + '\nWhy mRNA matches the top strand: ' + (S.why ? (S.whyTries ? 'answered on try ' + (S.whyTries + 1) : 'answered on the first try') : 'not answered yet') + '\n' + (complete && givenNow().length ? 'TEACHER RELEASE STAMP: ' + BRS.teacherStamp(S.code, BRS.PARTS.filter(id => givenNow().indexOf(id) < 0)) + '  (the teacher released the reveal)\nDecoded by the student: ' + (BRS.PARTS.length - givenNow().length) + ' of ' + BRS.PARTS.length + '\nGiven by teacher: ' + givenNow().join(', ') + (S.released ? '\nReleased with the ' + S.released.period + ' code on ' + S.released.date : '') + '\nKEEPER CODE: ' + BRS.keeper(S.code) : complete ? 'FINAL STAMP: ' + st + '  (all decoding complete)\nKEEPER CODE: ' + BRS.keeper(S.code) : 'Progress stamp: ' + st + '  (not finished)');
     let h = '<section class="block"><span class="eyebrow">Step 4 · field notes</span><h2>' + (S.name ? esc(S.name) + ', ' : '') + S.code + '</h2>' +
       '<div class="field"><label for="cname">Name your salamander</label><input type="text" id="cname" maxlength="24" autocomplete="off" value="' + esc(S.name) + '" placeholder="A name worth a legend" style="max-width:22rem"></div>' +
       '<div class="record"><div><span class="k">Population</span><span class="v">' + site.pop + '</span></div><div><span class="k">Found under</span><span class="v">' + found + '</span></div><div><span class="k">Sex</span><span class="v">' + (CR.sex === 'XX' ? 'female · XX' : 'male · XY') + '</span></div><div><span class="k">Length</span><span class="v">' + CR.length.toFixed(1) + ' cm</span></div><div><span class="k">Mass</span><span class="v">' + CR.mass.toFixed(1) + ' g</span></div></div>' +
@@ -1291,6 +1307,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     h += '<section class="block" id="meet"><h3>Meet ' + (S.name ? esc(S.name) : 'your salamander') + '</h3>';
     const drawNotes = '<p>Draw it from above, nose to the left, with a scale bar. At ' + CR.length.toFixed(1) + ' cm, the body is about one tenth as wide as the animal is long, and the tail is a little over half the length.</p>' + (brief ? '<ul>' + brief + '</ul>' : '');
     if (!complete) h += '<div class="rbox dark"><p>Your salamander appears here when every gene checks correct.</p></div>' +
+      '<form class="row" data-form="release" id="releaseform"><div class="field"><label for="relcode">Release code from your teacher</label><input type="text" id="relcode" placeholder="R-7K4Q" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="8"></div><button class="ghost" style="align-self:flex-end">Use release code</button></form>' + (relMsg ? '<p class="say warn" id="relmsg" role="status">' + relMsg + '</p>' : '') +
       '<p class="small muted">So far: ' + n + ' of ' + BRS.GENES.length + ' genes, ember gene ' + (S.mutDone ? 'checked' : 'not checked yet') + '.</p>' + (brief ? '<p>Drawing notes so far. An artist can start the sketch now.</p><ul>' + brief + '</ul>' : '');
     else {
       const v = viewNow();
@@ -1411,6 +1428,18 @@ if (typeof module !== 'undefined') module.exports = BRS;
   app.addEventListener('submit', function (ev) {
     ev.preventDefault();
     const f = ev.target.dataset.form;
+    if (f === 'release') {
+      /* Today's release code marks every part done and tags the parts this student had not decoded, the way a teacher stamp does. */
+      const d = new Date(), today = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2), r = BRS.readRelease($('#relcode').value, today);
+      if (!S.code) relMsg = 'Find your salamander first.';
+      else if (!r.ok) relMsg = r.why;
+      else {
+        const given = BRS.PARTS.filter(id => !(id === 'EMB' ? S.mutDone : S.done[id]));
+        BRS.PARTS.forEach(function (id) { if (id === 'EMB') S.mutDone = true; else { S.dec[id] = true; S.done[id] = true; } });
+        S.given = given; S.released = { period: r.period, date: today }; relMsg = ''; save();
+      }
+      render(); return;
+    }
     if (f === 'classcode') {
       /* A line pasted from My Salamander Codes holds the code and the stamp together: split it. */
       let rawCode = $('#classcode').value, rawStamp = $('#classstamp').value.trim();
@@ -1432,7 +1461,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       lifted = null; render();
     }
   });
-  window.addEventListener('hashchange', function () { lifted = null; flash = null; S.asking = false; render(); window.scrollTo(0, 0); });
+  window.addEventListener('hashchange', function () { lifted = null; flash = null; relMsg = ''; S.asking = false; render(); window.scrollTo(0, 0); });
   $('#copycodes').addEventListener('click', function () { copyCodes($('#copymsg')); });
   render();
 })();
