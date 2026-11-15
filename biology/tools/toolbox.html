@@ -129,6 +129,38 @@ table.pcrt td.new{background:var(--next)}
 @media (max-height:860px){.stage.pl svg{max-height:27vh}}
 @media (min-width:900px) and (max-height:860px){.plg{display:grid;grid-template-columns:17rem minmax(0,1fr);grid-template-areas:"say stage" "fb stage";grid-template-rows:auto 1fr;column-gap:.9rem;align-items:start}.plg .say{grid-area:say}.plg .stage{grid-area:stage}.plg .fb{grid-area:fb;margin-top:0}.plg .stage.pl svg{max-height:50vh}.plg .stage.pl.short svg{max-height:26vh}}
 @media (max-height:780px){.ord{gap:.35rem}.strip{min-height:46px;padding:.25rem .7rem}.strip .num{flex-basis:2rem;height:2rem;font-size:1.15rem}.pgrid .cer li{margin-bottom:.25rem}.pgrid .stage svg{max-height:21vh}}
+.piles{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem;margin:.1rem 0 .2rem}
+.pile{grid-column:span 2;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:5.6rem;padding:.4rem .3rem .3rem;border:3px solid var(--ink);border-radius:6px;background:var(--card);font-family:var(--sans);cursor:pointer;-webkit-user-select:none;user-select:none}
+.pile:nth-child(-n+2){grid-column:span 3}
+.pile b{font-size:1.2rem;line-height:1.1}
+.pile small{font-size:.86rem;line-height:1.2;color:var(--ink-soft);margin-top:.15rem}
+.piles.big .pile small{font-size:1.02rem;font-weight:600;color:var(--ink)}
+.pile .got{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem;margin-top:auto;padding-top:.3rem;min-height:2.2rem}
+.let{display:inline-flex;align-items:center;justify-content:center;min-width:1.9rem;height:1.9rem;padding:0 .2rem;border:1.5px dashed var(--ink-soft);border-radius:4px;background:var(--solid-soft);font-weight:700;font-size:1rem}
+.let sup{font-size:.62em;margin-left:1px}
+.let.half{background:var(--gold-soft)}
+.let.pop{animation:spop .35s}
+.piles.arm .pile{box-shadow:0 0 0 3px var(--next)}
+.pile.over{background:var(--bond-soft)}
+.pile.no{border-color:var(--flag);background:var(--flag-soft);animation:sshake .35s}
+.srow{display:flex;align-items:flex-start;gap:.5rem}
+.srow .fb{flex:1;min-height:3rem;margin:.35rem 0 .1rem}.srow .fb .ask{font-weight:600;font-size:1.1rem}
+.srow .btn.small{margin:.3rem 0 0;white-space:nowrap}
+.deck{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin:.2rem 0 .1rem}
+.scard{display:flex;align-items:flex-start;text-align:left;min-height:4rem;padding:.45rem .6rem;border:1.5px dashed var(--ink-soft);border-radius:4px;background:var(--card);color:var(--ink);font-family:var(--sans);font-weight:500;font-size:1rem;line-height:1.3;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.scard b{font-weight:700;margin-right:.35rem}
+.scard.sel{border-style:solid;border-color:var(--bond);background:var(--bond-soft);box-shadow:0 0 0 2px var(--bond)}
+.scard.drag{position:relative;z-index:5;border-style:solid;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.scard .then{display:block;margin-top:.2rem;font-weight:700;color:var(--gold-ink)}
+@keyframes sshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes spop{0%{transform:scale(.4)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.pile.no,.let.pop{animation:none}}
+@media (min-width:700px) and (min-height:600px){.scard{touch-action:none}}
+@media (min-width:900px){.piles{grid-template-columns:repeat(5,1fr)}.pile,.pile:nth-child(-n+2){grid-column:auto}.deck{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:699px){.stick{position:sticky;top:0;z-index:3;background:var(--card);padding:.3rem 0 .1rem;box-shadow:0 6px 6px -6px rgba(0,0,0,.25)}.pile{min-height:4.4rem}.pile .got{min-height:1.7rem}.let{min-width:1.6rem;height:1.6rem;font-size:.9rem}.srow{flex-wrap:wrap}.srow .fb{flex-basis:100%;min-height:2.6rem}.srow .btn.small{margin:0 .4rem .2rem 0}}
+@media (max-width:520px){.pile b{font-size:.95rem}.pile small,.piles.big .pile small{font-size:.76rem}.deck{grid-template-columns:1fr}}
+@media (min-width:900px) and (max-height:780px){#sortroot h2{display:none}.pile{min-height:4.8rem}.pile .got{min-height:2rem;padding-top:.2rem}.scard{font-size:.95rem;line-height:1.25;padding:.35rem .5rem;min-height:3.4rem}#sortroot .btn{min-height:46px}}
+html.proj .scard{font-size:1.3rem}html.proj .pile b{font-size:1.5rem}html.proj .pile small,html.proj .piles.big .pile small{font-size:1.15rem}html.proj .srow .fb,html.proj .srow .fb .ask{font-size:1.3rem}
 </style>
 </head>
 <body>
@@ -156,7 +188,7 @@ table.pcrt td.new{background:var(--next)}
   <section class="panel sec" id="sec-gel"><div id="gelroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec hidden" id="sec-plasmid"><div id="plasmidroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec hidden" id="sec-crispr"><div id="crisprroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
-  <section class="panel sec hidden" id="sec-sort"><h2>Which tool?</h2><p class="soon">This section is next in the build. PCR, the Crime Lab, the plasmid and CRISPR are ready: tap them above.</p></section>
+  <section class="panel sec hidden" id="sec-sort"><div id="sortroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
 
   <div id="teacher" class="hidden"></div>
 
@@ -1043,6 +1075,165 @@ lroot.addEventListener("click",function(e){
   else if(act==="done"){PL.finished=true;PL.t2=Date.now();lrender();}
 });
 
+/* ================= WHICH TOOL? (#sort): eight jobs, five piles =================
+   The paper is the Which Tool sort set (8 printed sets, cards A to H, five tool cards) and its key slide;
+   packet p. 6A carries the line the last screen ends on. Lesson 3 does the sort on paper at the tables.
+   This section is for absent students, home, and the Lesson 8 review, and has to run in 5 minutes or less.
+   The cards, letters, piles and reasons are the paper's, word for word, so one key slide serves both.
+   Card A is the only card that needs two tools, in order: PCR, then gel.
+   Levels: the same 8 cards and answers. SOL General keeps each pile's job line on screen in larger type.
+   SOL Advanced hides the job lines after the first card, behind one tap.
+   Review day: #sort?review=1 (or ?review=1#sort) holds the reasons back until "Show all reasons" at the end.
+   A third level (DE Bio 101) can add cards: add an entry to SLEVELS and to SCARDS. */
+var STOOLS=[
+ {k:"pcr",name:"PCR",job:"copy DNA"},
+ {k:"gel",name:"Gel",job:"sort DNA pieces by size"},
+ {k:"plasmid",name:"Plasmid + ligase",job:"paste a gene in"},
+ {k:"crispr",name:"CRISPR",job:"cut one exact spot"},
+ {k:"none",name:"No tool here",job:"none of these can do it"}];
+/* L letter, t the card, a the pile or piles in order, ans and r as on the key slide, h the one hint */
+var SCARDS=[
+ {L:"A",t:"A drop of blood is left on broken glass at a shed. Police want to know whose blood it is.",a:["pcr","gel"],ans:"PCR, then gel",r:"PCR copies the tiny sample; the gel compares the bands with each suspect's.",h:"One drop holds very little DNA. Which tool makes more?"},
+ {L:"B",t:"A bone from the ice holds only a trace of mammoth DNA. Scientists need enough to study.",a:["pcr"],ans:"PCR",r:"PCR copies a tiny amount of DNA into millions of copies.",h:"A trace is too little to study. Which tool makes more DNA?"},
+ {L:"C",t:"A company wants big tanks of bacteria that make human insulin.",a:["plasmid"],ans:"Plasmid + ligase",r:"Cut the insulin gene and a plasmid with one enzyme, seal with ligase, put it in bacteria.",h:"The bacteria need a human gene. Which tool puts a gene in?"},
+ {L:"D",t:"Doctors want to break the switch gene that turns off fetal hemoglobin in a patient's blood stem cells.",a:["crispr"],ans:"CRISPR",r:"The guide RNA finds the switch gene; Cas9 cuts it there.",h:"Which tool can find one exact spot?"},
+ {L:"E",t:"A scientist wants to check whether a plasmid got bigger after a gene was pasted in.",a:["gel"],ans:"Gel",r:"A bigger plasmid runs a shorter distance than the plain plasmid.",h:"Bigger or the same: which tool sorts DNA by size?"},
+ {L:"F",t:"Identical twins both visited the scene. Which twin left the hair?",a:["none"],ans:"No tool here",r:"Identical twins have the same DNA, so their bands match each other.",h:"How does one identical twin's DNA compare with the other's?"},
+ {L:"G",t:"Farmers want corn plants that make their own caterpillar poison.",a:["plasmid"],ans:"Plasmid + ligase",r:"A bacterial poison gene is pasted into the plant's DNA: a GMO.",h:"The corn needs a gene it does not have. Which tool puts a gene in?"},
+ {L:"H",t:"A clinic has a nose swab and needs to know if a virus is in it.",a:["pcr"],ans:"PCR",r:"PCR copies the virus's genes if they are there; no virus, no copies.",h:"A swab holds very little virus. Which tool would make more of its genes?"}];
+var SA_ORDER="Which has to happen first with one drop of blood?";                       /* card A, gel tapped before PCR */
+var SA_THEN="Now there is plenty of DNA. Which tool compares it with each suspect's?";  /* card A, second tool missed */
+var SP6A="Write one card that needed two tools, and the two tools in order:";           /* packet p. 6A, Which Tool? */
+var SLEVELS={general:{jobs:"always"},advanced:{jobs:"first"}};
+var SO={started:false,i:0,order:[],sel:-1,placed:{},step:{},miss:{},shown:{},fb:"",jobs:false,nope:"",pop:-1,all:false,finished:false,t0:0,t1:0,t2:0};
+var sroot=document.getElementById("sortroot"),sKey=false;
+function isReview(){return Q.get("review")==="1"||/[?&]review=1(&|$)/.test(location.hash);}
+function sCount(){return Object.keys(SO.placed).length;}
+function sTool(k){var r=null;STOOLS.forEach(function(T){if(T.k===k)r=T;});return r;}
+function sAnswer(id){var c=SCARDS[id];return '<b>'+c.L+' &rarr; '+c.ans+'.</b>'+(isReview()?'':' '+c.r);}
+function sKeyTable(hints){
+  var h='<table class="key"><tr><th>Card</th><th>The job</th><th>Tool</th><th>Why</th>'+(hints?'<th>Hint after one miss</th>':'')+'</tr>';
+  SCARDS.forEach(function(c){h+='<tr><td><b>'+c.L+'</b></td><td>'+c.t+'</td><td><b>'+c.ans+'</b></td><td>'+c.r+'</td>'+(hints?'<td>'+c.h+'</td>':'')+'</tr>';});
+  return h+'</table>';
+}
+function shead(title,say){
+  var n=sCount(),d='',i;for(i=1;i<=SCARDS.length;i++)d+='<i'+(i<=n?' class="on"':'')+'></i>';
+  return '<div class="stepline"><span class="chip case">Which Tool?</span><span class="chip">'+n+' of '+SCARDS.length+' sorted</span>'+(isReview()?'<span class="chip">Review</span>':'')+'<span class="dots" aria-hidden="true">'+d+'</span></div><h2>'+title+'</h2>'+(say?'<p class="say">'+say+'</p>':'');
+}
+function sBoard(){
+  var L=SLEVELS[S.level],n=sCount(),tot=SCARDS.length,always=L.jobs==="always",jobs=always||n===0||SO.jobs;
+  var h=shead("Which tool does the job?");
+  h+='<div class="stick"><div class="piles'+(SO.sel>=0?' arm':'')+(always?' big':'')+'">';
+  STOOLS.forEach(function(T){
+    var got='';
+    SCARDS.forEach(function(c,id){var k=c.a.indexOf(T.k),two=c.a.length>1;if(k<0)return;
+      if(SO.placed[id])got+='<span class="let'+(SO.pop===id?' pop':'')+'" data-let="'+id+'">'+c.L+(two?'<sup>'+(k+1)+'</sup>':'')+'</span>';
+      else if((SO.step[id]||0)>k)got+='<span class="let half">'+c.L+'<sup>'+(k+1)+'</sup></span>';});
+    h+='<div class="pile'+(SO.nope===T.k?' no':'')+'" role="button" tabindex="0" data-pile="'+T.k+'" aria-label="'+T.name+': '+T.job+'"><b>'+T.name+'</b>'+(jobs?'<small>'+T.job+'</small>':'')+'<span class="got">'+got+'</span></div>';
+  });
+  h+='</div><div class="srow"><p class="fb" id="sfb" aria-live="polite">'+(SO.fb||(n===tot?'':'<span class="ask">'+(SO.sel>=0?'Now tap its tool.':(n?'Tap a card, then tap its tool.':'Tap a card, then tap its tool. Dragging the card works too.'))+'</span>'))+'</p>'+(SO.sel>=0&&SO.nope&&SO.miss[SO.sel]>=2?B("show","Show me","small",'data-id="'+SO.sel+'"'):'')+(!always&&n>0&&n<tot?B("jobs",SO.jobs?"Hide the jobs":"What each tool does","small"):'')+'</div></div><div class="deck">';
+  SO.order.forEach(function(id){if(SO.placed[id])return;var c=SCARDS[id],st=SO.step[id]||0;
+    h+='<button type="button" class="scard'+(SO.sel===id?' sel':'')+'" data-card="'+id+'" aria-pressed="'+(SO.sel===id)+'"><span><b>'+c.L+'</b>'+c.t+(st?'<span class="then">'+sTool(c.a[st-1]).name+' &#10003; &hellip;then?</span>':'')+'</span></button>';});
+  return {html:h+'</div><div class="btnrow">'+B("next","Packet p. 6A &#9654;","go",n===tot?"":"disabled")+'</div>'};
+}
+function sPaper(){
+  if(!SO.t1)SO.t1=Date.now();
+  var rev=isReview()||TEACHER,h=shead("Packet p. 6A, Which Tool?")+'<p class="bigcase">'+sCount()+' of '+SCARDS.length+'</p>';
+  h+='<div class="frame"><p>'+SP6A+'</p><p><span class="blank long"></span></p></div>';
+  if(SO.finished)h+='<p class="done">&#10003; Which Tool done.</p>';
+  if(rev&&SO.all)h+=sKeyTable(false);
+  if(TIMER)h+='<p class="fine">Timer: all 8 sorted at '+fmt(SO.t1-SO.t0)+(SO.t2?'. Done tapped at '+fmt(SO.t2-SO.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
+  return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Sort again")+(rev?B("all",SO.all?"Hide the reasons":"Show all reasons"):'')+(SO.finished?'':B("done","Done","go"))+'</div>'};
+}
+function srender(){
+  var el;sroot.innerHTML=(SO.i===1?sPaper():sBoard()).html;
+  if(sKey&&SO.i===0){el=sroot.querySelector(SO.sel>=0?'.scard.sel':'.scard');if(el)try{el.focus({preventScroll:true});}catch(x){}}
+}
+function sStart(){
+  var n=SCARDS.length,o,i,j,t,same,prev=SO.order.join();
+  do{o=[];for(i=0;i<n;i++)o.push(i);
+    for(i=n-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=o[i];o[i]=o[j];o[j]=t;}
+    same=o.join()===prev||o.every(function(v,k){return v===k;});}while(same);
+  SO.started=true;SO.i=0;SO.order=o;SO.sel=-1;SO.placed={};SO.step={};SO.miss={};SO.shown={};SO.fb="";SO.jobs=false;SO.nope="";SO.pop=-1;SO.all=false;SO.finished=false;SO.t0=Date.now();SO.t1=0;SO.t2=0;
+  srender();
+}
+function sSettle(id){
+  SO.placed[id]=true;SO.step[id]=SCARDS[id].a.length;SO.sel=-1;SO.pop=id;SO.jobs=false;SO.fb=sAnswer(id);
+  if(sCount()===SCARDS.length&&!SO.t1)SO.t1=Date.now();
+}
+/* card id onto pile k. Only the card's own pile takes it; card A takes PCR, then gel, in that order */
+function sPlace(id,k){
+  var c=SCARDS[id],st=SO.step[id]||0;if(SO.placed[id])return;
+  SO.nope="";SO.pop=-1;
+  if(k===c.a[st]){
+    if(st<c.a.length-1){SO.step[id]=st+1;SO.sel=id;SO.fb='<b>'+sTool(k).name+' first.</b> &hellip;then?';}
+    else sSettle(id);
+  }else{
+    SO.miss[id]=(SO.miss[id]||0)+1;SO.nope=k;SO.sel=id;
+    SO.fb='<b>Not that one.</b> '+(c.a.length>1?(st?SA_THEN:(c.a.indexOf(k)>st?SA_ORDER:c.h)):c.h);
+  }
+  srender();
+}
+function sPileAt(x,y){
+  var r=null;Array.prototype.forEach.call(sroot.querySelectorAll(".pile"),function(p){var b=p.getBoundingClientRect();if(x>=b.left&&x<=b.right&&y>=b.top&&y<=b.bottom)r=p;});return r;
+}
+function sTapCard(id){
+  SO.sel=SO.sel===id?-1:id;SO.nope="";SO.pop=-1;
+  SO.fb=SO.sel===id&&SO.step[id]?'<b>'+sTool(SCARDS[id].a[SO.step[id]-1]).name+' first.</b> &hellip;then?':"";srender();
+}
+function sTapPile(p,lt){
+  if(SO.sel>=0){sPlace(SO.sel,p.getAttribute("data-pile"));return;}
+  SO.nope="";SO.pop=-1;SO.fb=lt?sAnswer(+lt.getAttribute("data-let")):"Tap a card first.";srender();   /* tap a sorted letter to see its line again */
+}
+/* Cards and piles answer on pointerup, so a tap counts even when the browser holds back its click (it can, just
+   after a drag). The click that follows is ignored. The keyboard and the buttons still come through click. */
+var sPtr=null,sAte=0;
+sroot.addEventListener("click",function(e){
+  if(!e.target.closest)return;
+  var card=e.target.closest(".scard"),pile=e.target.closest(".pile"),b=e.target.closest("[data-act]"),act,id;
+  if(card||pile){if(e.detail&&Date.now()-sAte<700)return;                    /* e.detail is 0 for a keyboard click */
+    if(card)sTapCard(+card.getAttribute("data-card"));else sTapPile(pile,e.target.closest("[data-let]"));return;}
+  if(!b||b.disabled)return;act=b.getAttribute("data-act");
+  if(act==="next"){SO.i=1;srender();}
+  else if(act==="back"){SO.i=0;SO.pop=-1;SO.nope="";srender();}
+  else if(act==="jobs"){SO.jobs=!SO.jobs;SO.nope="";SO.pop=-1;srender();}
+  else if(act==="show"){id=+b.getAttribute("data-id");SO.shown[id]=true;SO.nope="";sSettle(id);srender();}
+  else if(act==="all"){SO.all=!SO.all;srender();}
+  else if(act==="again")sStart();
+  else if(act==="done"){SO.finished=true;SO.t2=Date.now();srender();}
+});
+sroot.addEventListener("keydown",function(e){
+  sKey=true;var p=e.target.closest?e.target.closest(".pile"):null;
+  if(p&&(e.key==="Enter"||e.key===" ")){e.preventDefault();sTapPile(p,null);}
+});
+/* dragging: the card follows the finger or the mouse and drops on the pile under it. A tap never needs it */
+sroot.addEventListener("pointerdown",function(e){
+  sKey=false;if(!e.target.closest||e.button>0)return;
+  var c=e.target.closest(".scard"),p=e.target.closest(".pile");if(!c&&!p){sPtr=null;return;}
+  sPtr={card:c,pile:p,lt:e.target.closest("[data-let]"),id:c?+c.getAttribute("data-card"):-1,x:e.clientX,y:e.clientY,pid:e.pointerId,on:false,moved:false};
+});
+sroot.addEventListener("pointermove",function(e){
+  var d=sPtr,dx,dy,over,ps;if(!d||e.pointerId!==d.pid)return;dx=e.clientX-d.x;dy=e.clientY-d.y;
+  if(!d.moved){if(Math.abs(dx)+Math.abs(dy)<12)return;d.moved=true;}
+  if(!d.card)return;
+  if(!d.on){d.on=true;d.card.classList.add("drag");try{d.card.setPointerCapture(d.pid);}catch(x){}
+    ps=sroot.querySelector(".piles");if(ps)ps.classList.add("arm");}
+  d.card.style.transform="translate("+dx+"px,"+dy+"px)";over=sPileAt(e.clientX,e.clientY);
+  Array.prototype.forEach.call(sroot.querySelectorAll(".pile"),function(q){q.classList.toggle("over",q===over);});
+});
+function sUp(e,cancel){
+  var d=sPtr,p;if(!d||e.pointerId!==d.pid)return;sPtr=null;
+  if(d.on){sAte=Date.now();
+    p=cancel?null:sPileAt(e.clientX,e.clientY);
+    if(p){SO.sel=d.id;sPlace(d.id,p.getAttribute("data-pile"));return;}
+    if(!cancel){SO.sel=d.id;SO.nope="";SO.pop=-1;SO.fb="Drop the card on a tool. Or tap the card, then tap the tool.";}
+    srender();return;}
+  if(cancel||d.moved)return;
+  sAte=Date.now();if(d.card)sTapCard(d.id);else sTapPile(d.pile,d.lt);
+}
+sroot.addEventListener("pointerup",function(e){sUp(e,false);});
+sroot.addEventListener("pointercancel",function(e){sUp(e,true);});
+
 /* level switch */
 function paintLevel(){Array.prototype.forEach.call(document.querySelectorAll("#levelsw button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-level")===S.level?"true":"false");});}
 document.getElementById("levelsw").addEventListener("click",function(e){
@@ -1053,12 +1244,13 @@ document.getElementById("levelsw").addEventListener("click",function(e){
   if(CR.started){CR.started=false;crLeave();if(showSec.cur==="crispr")crStart();}
   if(PC.started){PC.started=false;if(showSec.cur==="pcr")pcStart();}
   if(PL.started){PL.started=false;if(showSec.cur==="plasmid")lStart();}
+  if(SO.started){SO.started=false;if(showSec.cur==="sort")sStart();}
 });
 
 /* sections: one on screen at a time, each with its own anchor */
 var SECS=["pcr","gel","plasmid","crispr","sort"];
 function showSec(){
-  var h=(location.hash||"#gel").slice(1);if(SECS.indexOf(h)<0)h="gel";
+  var h=(location.hash||"#gel").slice(1).split("?")[0];if(SECS.indexOf(h)<0)h="gel";   /* #sort?review=1 is still #sort */
   SECS.forEach(function(s){document.getElementById("sec-"+s).classList.toggle("hidden",s!==h);});
   Array.prototype.forEach.call(document.querySelectorAll(".secbar a"),function(a){a.setAttribute("aria-current",a.getAttribute("href")==="#"+h?"true":"false");});
   var was=showSec.cur;showSec.cur=h;
@@ -1067,6 +1259,7 @@ function showSec(){
   if(h==="crispr"){if(CR.started)crender();else crStart();}
   if(h==="pcr"){if(PC.started)prender();else pcStart();}
   if(h==="plasmid"){if(PL.started)lrender();else lStart();}
+  if(h==="sort"){if(SO.started)srender();else sStart();}
 }
 window.addEventListener("hashchange",showSec);
 
@@ -1074,7 +1267,7 @@ window.addEventListener("hashchange",showSec);
 function teacherKey(){
   var t=document.getElementById("teacher"),h='<div class="panel" style="margin-top:1rem"><h2>Teacher key: Crime Lab</h2><p class="fine">Lane 1 is the ladder, lane 2 the crime scene, lanes 3 to 5 are Suspects 1, 2, 3. Open one case with <code>?case=1042</code>. SOL General draws from the six cases without a twist. Add <code>?timer=1</code> to a student link to show the times without this key.</p><table class="key"><tr><th>Case</th><th>Scene</th><th>Answer</th><th>Lane</th><th>Bands that line up (1, 2, 3)</th><th>Note</th></tr>';
   CASES.forEach(function(c){var m=c.match;h+='<tr><td><b>'+c.n+'</b></td><td>'+c.place+'</td><td>'+(m<0?"None of them":"Suspect "+"123".charAt(m)+" ("+c.who[m]+")")+'</td><td>'+(m<0?"none":m+3)+'</td><td>'+c.sus.map(function(s){return lined(c.scene,s)+" of "+c.scene.length;}).join(", ")+'</td><td>'+(c.twist?"Twist, Advanced only. "+c.twist:(m<0?"No match: all three ruled out.":""))+'</td></tr>';});
-  h+='</table><p class="fine">Second question, every case: a match shows whose DNA was there, not who did it. The Which Tool sort key will be added with that section.</p></div>';
+  h+='</table><p class="fine">Second question, every case: a match shows whose DNA was there, not who did it.</p></div>';
   h+='<div class="panel" style="margin-top:1rem"><h2>Teacher key: CRISPR</h2><table class="key">';
   h+='<tr><th>DNA strip (20 bases)</th><td>'+DNA20.join(" ")+'</td></tr><tr><th>Boxed bases 5 to 14</th><td>'+DNA20.slice(T0,T0+10).join(" ")+'</td></tr><tr><th>Guide RNA</th><td>'+GUIDE.join(" ")+'</td></tr>';
   h+='<tr><th>Where Cas9 cuts</th><td>Between the 7th and 8th boxed bases (strip bases 11 and 12, C | A), at the red &#9660;.</td></tr>';
@@ -1097,6 +1290,10 @@ function teacherKey(){
   h+='<tr><th>Ring labels</th><td>A sticky end and the place where ligase seals: both are at the joints between the gene and the plasmid.</td></tr>';
   h+='<tr><th>Done early</th><td>The gel (Station 2). The bigger plasmid runs less far.</td></tr></table>';
   h+='<p class="fine">SOL General skips the predict, sees the cut end as a puzzle tab with no base letters, and gets step 1 placed on the order screen. Order check: only 1-2-3-4 passes; one miss shows a hint, a second adds Show me. <code>?timer=1</code> shows the times on the last screen.</p></div>';
+  h+='<div class="panel" style="margin-top:1rem"><h2>Teacher key: Which Tool?</h2>'+sKeyTable(true)+'<table class="key">';
+  h+='<tr><th>p. 6A line</th><td>Write one card that needed two tools, and the two tools in order: <b>card A, PCR then gel</b>.</td></tr>';
+  h+='<tr><th>Card A, gel tapped first</th><td>'+SA_ORDER+'</td></tr><tr><th>Card A, second tool missed</th><td>'+SA_THEN+'</td></tr></table>';
+  h+='<p class="fine">The same eight cards, letters, piles and reasons as the paper set and the key slide. The deck is shuffled each time. One miss shows the hint; a second adds Show me. SOL General keeps each tool&rsquo;s job line on screen in larger type; SOL Advanced hides the job lines after the first card, behind the What each tool does button. Review day: open <code>toolbox.html?review=1#sort</code> (or <code>#sort?review=1</code>). The reasons stay hidden until Show all reasons on the last screen. Add <code>&amp;projector=1</code> for the projector. <code>?timer=1</code> shows the times on the last screen.</p></div>';
   t.innerHTML=h;t.classList.remove("hidden");
 }
 
@@ -1109,7 +1306,7 @@ if(start>=0&&CASES[start].twist&&!LEVELS[S.level].twist){S.level="advanced";pain
 if(TEACHER)teacherKey();
 newCase(start>=0?start:randomCase(-1));
 showSec();
-window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit,PC:PC,PL:PL};
+window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit,PC:PC,PL:PL,SO:SO,SCARDS:SCARDS,STOOLS:STOOLS};
 })();
 </script>
 </body>
