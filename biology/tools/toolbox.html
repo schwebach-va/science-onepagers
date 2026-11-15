@@ -109,10 +109,26 @@ table.pcrt th{text-align:left;font-size:.95rem;font-weight:700;padding:.3rem .55
 table.pcrt td{text-align:center;font-size:1.2rem;font-weight:700;padding:.3rem .4rem;border:1.5px solid var(--shell);width:15%}
 table.pcrt td.new{background:var(--next)}
 @media (min-width:900px) and (max-height:860px){.pcrgrid{grid-template-columns:minmax(0,1fr) 15.5rem;align-items:center}}
+.choices.row3{grid-template-columns:repeat(3,1fr)}
+.stage.tap svg{touch-action:none;cursor:pointer}
+.ord{display:grid;gap:.45rem;margin:.5rem 0 .2rem}
+.strip{display:flex;align-items:center;gap:.7rem;text-align:left;min-height:60px;padding:.45rem .7rem;border-radius:8px;border:2px solid var(--shell);background:var(--card);color:var(--ink);font-family:var(--sans);font-weight:600;font-size:1.02rem;line-height:1.25}
+.strip .num{flex:0 0 2.4rem;height:2.4rem;border:2px solid var(--ink);border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700}
+.strip.set{border-color:var(--bond);background:var(--bond-soft)}
+.strip.right{border-color:var(--solid);background:var(--solid-soft)}
+.strip.wrong{border-color:var(--flag);background:var(--flag-soft)}
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr) 22rem;gap:.3rem .8rem;align-items:center}
+.pgrid .stage{border:0}
+.pgrid .cer{font-family:var(--sans);font-size:1.05rem;font-weight:600}
+.stage.tap svg:focus:not(:focus-visible){outline:none}
+@media (max-width:700px){.pgrid{grid-template-columns:1fr}}
 .sop-foot{margin-top:1.6rem;padding-top:.7rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--ink-soft)}
 .sop-foot a{color:inherit}
 @media (max-height:800px){.stage svg{max-height:44vh}.stage.sm svg{max-height:32vh}.bigcase{font-size:2.2rem}}
-@media (max-width:520px){.secbar a{font-size:.74rem}.choices{grid-template-columns:1fr}.sus{grid-template-columns:1fr}}
+@media (max-width:520px){.secbar a{font-size:.74rem}.choices,.choices.row3{grid-template-columns:1fr}.sus{grid-template-columns:1fr}}
+@media (max-height:860px){.stage.pl svg{max-height:27vh}}
+@media (min-width:900px) and (max-height:860px){.plg{display:grid;grid-template-columns:17rem minmax(0,1fr);grid-template-areas:"say stage" "fb stage";grid-template-rows:auto 1fr;column-gap:.9rem;align-items:start}.plg .say{grid-area:say}.plg .stage{grid-area:stage}.plg .fb{grid-area:fb;margin-top:0}.plg .stage.pl svg{max-height:50vh}.plg .stage.pl.short svg{max-height:26vh}}
+@media (max-height:780px){.ord{gap:.35rem}.strip{min-height:46px;padding:.25rem .7rem}.strip .num{flex-basis:2rem;height:2rem;font-size:1.15rem}.pgrid .cer li{margin-bottom:.25rem}.pgrid .stage svg{max-height:21vh}}
 </style>
 </head>
 <body>
@@ -138,9 +154,9 @@ table.pcrt td.new{background:var(--next)}
 
   <section class="panel sec hidden" id="sec-pcr"><div id="pcrroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec" id="sec-gel"><div id="gelroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
-  <section class="panel sec hidden" id="sec-plasmid"><h2>Plasmid: paste a gene into bacteria</h2><p class="soon">This section is next in the build. PCR, the Crime Lab and CRISPR are ready: tap them above.</p></section>
+  <section class="panel sec hidden" id="sec-plasmid"><div id="plasmidroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
   <section class="panel sec hidden" id="sec-crispr"><div id="crisprroot"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
-  <section class="panel sec hidden" id="sec-sort"><h2>Which tool?</h2><p class="soon">This section is next in the build.</p></section>
+  <section class="panel sec hidden" id="sec-sort"><h2>Which tool?</h2><p class="soon">This section is next in the build. PCR, the Crime Lab, the plasmid and CRISPR are ready: tap them above.</p></section>
 
   <div id="teacher" class="hidden"></div>
 
@@ -816,6 +832,217 @@ proot.addEventListener("click",function(e){
   else if(act==="done"){PC.finished=true;PC.t2=Date.now();prender();}
 });
 
+/* ================= PLASMID (#plasmid): cut, paste, seal =================
+   Station 3. The paper is station card 3 and packet p. 6A box 3 (Canvas Original #70); the last screen
+   carries the four steps of box 3 exactly. The POP beads are the activity at this station, so the section
+   is optional there and has to run in 2½ minutes or less.
+   The picture keeps the bead count honest: the plasmid is 20 beads long and the gene 10, so the ring
+   opens at one cut and closes again half as long again (20 + 10 = 30). Each piece is drawn as two strands,
+   and every cut is stepped, so the ends fit one way only.
+   Colors as on card 3: plasmid black, insulin gene orange, ligase blue dots, cut marks red dashed.
+   Levels: same pictures, same order, same answers. A third level (DE Bio 101) can add the spring lab's
+   detail: add an entry to LLEVELS. */
+var LLEVELS={general:{predict:false,bases:false,first:true},advanced:{predict:true,bases:true,first:false}};
+var PL={i:0,screens:[],pred:null,pasted:false,busy:false,ord:null,t0:0,t1:0,t2:0,finished:false,started:false};
+var lroot=document.getElementById("plasmidroot");
+function lq(s){return lroot.querySelector(s);}
+
+/* ---------- drawings ---------- */
+var LK="#111",LO="#E8590C",LB="#2F6DB5",LR0=46,LR=69,LGL=Math.PI*LR0,LPL=2*Math.PI*LR0,LD=5,LW=7;
+function lerp(a,b,t){return a+(b-a)*t;}
+/* a line of constant curvature k whose top point is (xm,ym); s is the distance along it from the top, clockwise */
+function lCurve(xm,ym,k,sa,sb,off){
+  var n=Math.max(2,Math.ceil(Math.abs(sb-sa)/5)),d="",i,s,r,x,y;
+  for(i=0;i<=n;i++){s=sa+(sb-sa)*i/n;
+    if(k<1e-4){x=xm+s;y=ym-off;}else{r=1/k;x=xm+(r+off)*Math.sin(k*s);y=ym+r-(r+off)*Math.cos(k*s);}
+    d+=(i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1);}
+  return d;}
+/* a two-stranded piece from sa to sb. ea and eb (0 or 1) step the two ends: the outer strand sits LD back, the inner strand LD on */
+function lPiece(xm,ym,k,sa,sb,c,ea,eb){
+  return '<path d="'+lCurve(xm,ym,k,sa-LD*ea,sb-LD*eb,3)+'" fill="none" stroke="'+c+'" stroke-width="'+LW+'"/><path d="'+lCurve(xm,ym,k,sa+LD*ea,sb+LD*eb,-3)+'" fill="none" stroke="'+c+'" stroke-width="'+LW+'"/>';}
+function lGene(xm,ym,k){return lPiece(xm,ym,k,-LGL/2,LGL/2,LO,1,1);}
+function lRing(cx,cy,R){var g=Math.max(0,2*Math.PI*R-LPL);return lPiece(cx,cy-R,1/R,g/2,g/2+LPL,LK,1,1);}
+function lJoint(cx,cy,sg){var th=sg*LGL/2/LR;return [cx+LR*Math.sin(th),cy-LR*Math.cos(th)];}
+function lDash(x,y0,y1){return '<line x1="'+x+'" y1="'+y0+'" x2="'+x+'" y2="'+y1+'" stroke="#C62828" stroke-width="2.5" stroke-dasharray="4 3"/>';}
+var ZX=398,ZY=22,ZW=230,ZH=150;
+function lPanel(bx,by,title){
+  var s='<rect x="'+(bx-17)+'" y="'+(by-15)+'" width="34" height="30" rx="5" fill="none" stroke="#5A544A" stroke-width="1.5" stroke-dasharray="5 4"/>';
+  s+='<path d="M'+(bx+17)+' '+(by-15)+' L'+ZX+' '+ZY+' M'+(bx+17)+' '+(by+15)+' L'+ZX+' '+(ZY+ZH)+'" stroke="#5A544A" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>';
+  return s+'<rect x="'+ZX+'" y="'+ZY+'" width="'+ZW+'" height="'+ZH+'" rx="8" fill="#F8FAFB" stroke="#5A544A" stroke-width="1.5"/>'+tx(ZX+ZW/2,ZY+19,13,title,{f:"#5A544A"});}
+function lRungs(xs,c){var s='<g stroke="#7C8A98" stroke-width="2">';xs.forEach(function(x){s+='<line x1="'+x+'" y1="'+(ZY+38)+'" x2="'+x+'" y2="'+(ZY+98)+'"/>';});return s+'</g>';}
+function lBar(x0,x1,y,c){return '<rect x="'+x0+'" y="'+y+'" width="'+(x1-x0)+'" height="8" rx="3" fill="'+c+'"/>';}
+/* close-up of the right-hand end of the gene. joined: the plasmid end is on it */
+function lZoom(bases,joined,n){
+  var s="",yT=ZY+30,yB=ZY+98,x0=ZX+10,xa=ZX+72,xb=ZX+192,x1=ZX+220,i,T="TTAA",A="AATT";
+  if(!bases){                                                   /* SOL General: the tab, no letters */
+    if(joined)s+='<rect x="'+(ZX+106)+'" y="'+(ZY+52)+'" width="114" height="40" rx="4" fill="'+LK+'"/>';
+    s+='<rect x="'+x0+'" y="'+(ZY+52)+'" width="96" height="40" rx="4" fill="'+LO+'"/><circle cx="'+(ZX+118)+'" cy="'+(ZY+72)+'" r="15" fill="'+LO+'"/>';
+    return s+tx(ZX+ZW/2,ZY+122,15,joined?"the tabs fit":"sticky end",{w:700})+(joined?"":tx(ZX+ZW/2,ZY+141,13,"a tab, like a puzzle piece",{f:"#5A544A"}));}
+  s+=lBar(x0,xa-2,yT,LO)+lBar(x0,xb-2,yB,LO)+lRungs([x0+14,x0+42]);
+  for(i=0;i<(n==null?4:n);i++)s+=dTile(T.charAt(i),xa+1+i*30,yB-29);
+  if(joined){s+=lBar(xa+2,x1,yT,LK)+lBar(xb+2,x1,yB,LK)+lRungs([x1-14]);
+    for(i=0;i<4;i++)s+=dTile(A.charAt(i),xa+1+i*30,yT+10);
+    return s+tx(ZX+ZW/2,ZY+134,15,"A pairs with T",{w:700});}
+  return s+tx(xa+60,ZY+58,15,"sticky end",{w:700})+tx(xa+60,ZY+134,13,"4 single bases",{f:"#5A544A"});}
+function lMini(cx,cy){var r=13,dx=r*Math.sin(Math.PI/3),dy=r*Math.cos(Math.PI/3);
+  return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+LK+'" stroke-width="5"/><path d="M'+(cx-dx).toFixed(1)+' '+(cy-dy).toFixed(1)+' A'+r+' '+r+' 0 0 1 '+(cx+dx).toFixed(1)+' '+(cy-dy).toFixed(1)+'" fill="none" stroke="'+LO+'" stroke-width="5"/>';}
+var LDOT=[[14,-20],[40,8],[62,-14],[22,22],[-14,-26]];
+function lDots(x,y,op){var s='<g fill="'+LO+'" opacity="'+op.toFixed(2)+'">';LDOT.forEach(function(d){s+='<circle cx="'+(x+d[0])+'" cy="'+(y+d[1])+'" r="5.5"/>';});return s+'</g>';}
+function lRod(x,y,w,h,mode){return '<rect x="'+(x-w/2).toFixed(1)+'" y="'+(y-h/2).toFixed(1)+'" width="'+w+'" height="'+h+'" rx="'+(h/2)+'" '+(mode?'fill="#F3F0E6"':'fill="none" stroke="#1D1A15" stroke-width="5"')+'/>';}
+function drawLWhy(){
+  var s='<rect width="640" height="200" fill="#fff"/>';
+  s+=lRod(210,90,200,104,0)+lRod(210,90,200,104,1)+lMini(170,90)+lDots(190,90,1)+tx(210,172,17,"bacteria",{w:700});
+  s+=tx(368,100,30,"→",{f:"#8FA3B5"});
+  s+='<rect x="452" y="52" width="56" height="92" rx="7" fill="#EAF2F7" stroke="#6E8898" stroke-width="3"/><rect x="462" y="34" width="36" height="20" rx="3" fill="#6E8898"/><rect x="452" y="84" width="56" height="34" fill="#fff" stroke="#6E8898" stroke-width="1.5"/>'+tx(480,106,13,"insulin",{w:700,f:LO});
+  return s+tx(480,172,17,"insulin",{w:700});
+}
+function drawLCut(p,bases){
+  var XM=190,YH=52,CX=190,CY=198,h=LGL/2,s='<rect width="640" height="300" fill="#fff"/>',t,sx,sy;
+  var c1=p>=.16,c2=p>=.3,free=ease(seg(p,.3,.42)),c3=p>=.54,open=ease(seg(p,.56,.72)),zo=seg(p,.74,.82);
+  s+='<g opacity="'+(1-.7*free).toFixed(2)+'">'+tx(XM-150,YH-17,14,"human DNA",{a:"start",f:"#5A544A"});
+  s+='<g transform="translate('+(-16*free).toFixed(1)+',0)">'+lPiece(XM,YH,0,-150,-h,LK,0,c1?1:0)+'</g><g transform="translate('+(16*free).toFixed(1)+',0)">'+lPiece(XM,YH,0,h,150,LK,c2?1:0,0)+'</g></g>';
+  s+=lPiece(XM,YH,0,-h,h,LO,c1?1:0,c2?1:0)+tx(XM,YH+27,15,"insulin gene",{w:700,f:"#A8400A"});
+  s+=lRing(CX,CY,lerp(LR0,LR,open))+tx(CX,CY+LR+23,15,open>=1?"plasmid, opened":"plasmid",{w:700});
+  if(!c1)s+=lDash(XM-h,YH-15,YH+15);if(!c2)s+=lDash(XM+h,YH-15,YH+15);if(!c3)s+=lDash(CX,CY-LR0-15,CY-LR0+15);
+  if(p>0&&p<.66){
+    var K1=[XM-h,YH-24],K2=[XM+h,YH-24],K3=[CX,CY-LR0-24];
+    if(p<.2){sx=K1[0];sy=lerp(-40,K1[1],ease(seg(p,.02,.12)));}
+    else if(p<.36){sx=lerp(K1[0],K2[0],ease(seg(p,.2,.27)));sy=K1[1];}
+    else{t=ease(seg(p,.38,.5));sx=lerp(K2[0],K3[0],t);sy=lerp(K2[1],K3[1],t);}
+    var snip=Math.min(Math.abs(cl((p-.13)/.06)*2-1),Math.abs(cl((p-.27)/.06)*2-1),Math.abs(cl((p-.51)/.06)*2-1)),sop=1-seg(p,.58,.66);
+    s+=scissors(sx,sy,snip,.5,sop)+tx(sx+24,sy-18,13,"restriction enzyme",{a:"start",w:700,f:"#6B4E8C",op:sop});
+  }
+  if(zo>0)s+='<g opacity="'+zo.toFixed(2)+'">'+lPanel(XM+h,YH,"close-up")+lZoom(bases,false,p>=1?4:Math.floor(seg(p,.82,.96)*4+1e-6))+'</g>';
+  return s;
+}
+function drawLPaste(o){
+  var CX=190,CY=198,t=o.t||0,s='<rect width="640" height="300" fill="#fff"/>',j;
+  s+=lRing(CX,CY,LR)+tx(CX,CY+LR+23,15,t>=1?"plasmid + gene":"plasmid, opened",{w:700});
+  if(t<1)s+='<path d="'+lCurve(CX,CY-LR,1/LR,-LGL/2,LGL/2,0)+'" fill="none" stroke="'+LO+'" stroke-width="2" stroke-dasharray="6 5" opacity=".7"/>';
+  if(t<=0&&!o.dx&&!o.dy)s+=tx(CX,30,15,"insulin gene",{w:700,f:"#A8400A"})+'<path d="M'+CX+' 70 V104 M'+(CX-8)+' 95 L'+CX+' 106 L'+(CX+8)+' 95" fill="none" stroke="#8FA3B5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+  s+=lGene(CX+(o.dx||0),lerp(52,CY-LR,t)+(o.dy||0),t/LR);
+  if(o.zoom){j=lJoint(CX,CY,1);s+=lPanel(j[0],j[1],"close-up")+lZoom(o.bases,true);}
+  return s;
+}
+function drawLSeal(p){
+  var CX=320,CY=132,s='<rect width="640" height="236" fill="#fff"/>',fly=ease(seg(p,.08,.6)),pop=seg(p,.6,.76),lab=seg(p,.72,.95);
+  s+=lRing(CX,CY,LR)+lGene(CX,CY-LR,1/LR)+tx(CX,CY-LR-16,15,"insulin gene",{w:700,f:"#A8400A"})+tx(CX,CY+LR+24,15,"plasmid",{w:700});
+  [-1,1].forEach(function(sg){var j=lJoint(CX,CY,sg),x=lerp(CX+sg*250,j[0],fly),y=lerp(30,j[1],fly),r=9+4*Math.sin(Math.PI*pop);
+    s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="'+LB+'" stroke="#fff" stroke-width="1.5"/>';
+    s+=tx(x+sg*18,y+5,16,"ligase",{a:sg<0?"end":"start",w:700,f:LB});});
+  s+=tx(CX,CY-3,15,"recombinant",{w:700,op:lab})+tx(CX,CY+16,15,"DNA",{w:700,op:lab});
+  return s;
+}
+function drawLBac(p){
+  var s='<rect width="640" height="240" fill="#fff"/>',inn=ease(seg(p,.04,.24)),dots=seg(p,.26,.4),d1=ease(seg(p,.46,.66)),d2=ease(seg(p,.72,.92)),C=[],n=d2>.5?4:(d1>.5?2:1),k;
+  [-1,1].forEach(function(i){[-1,1].forEach(function(j){C.push([320+i*108*d1,128+j*48*d2]);});});
+  for(k=0;k<2;k++)C.forEach(function(c){s+=lRod(c[0],c[1],176,86,k);});          /* outlines first, then fills, so a dividing cell reads as one shape */
+  C.forEach(function(c){if(inn>=1)s+=lMini(c[0]-44,c[1]);s+=lDots(c[0]-26,c[1],dots);});
+  if(inn<1)s+=lMini(lerp(60,276,inn),128);
+  s+=tx(320,24,17,n+(n===1?" bacterium":" bacteria"),{w:700})+'<circle cx="26" cy="222" r="5.5" fill="'+LO+'" opacity="'+dots.toFixed(2)+'"/>'+tx(38,227,14,"insulin",{a:"start",f:"#5A544A",op:dots});
+  return s;
+}
+function drawLRing(){
+  var CX=200,CY=114,s='<rect width="400" height="200" fill="#fff"/>',a=lJoint(CX,CY,-1),b=lJoint(CX,CY,1);
+  s+=lRing(CX,CY,LR)+lGene(CX,CY-LR,1/LR)+tx(CX,CY-LR-13,15,"insulin gene",{f:"#A8400A",w:700})+tx(CX,CY+5,15,"plasmid",{f:"#5A544A"});
+  s+='<path d="M'+(a[0]-12)+' '+(a[1]-10)+' L70 44 M'+(b[0]+12)+' '+(b[1]-10)+' L330 44" stroke="#1D1A15" stroke-width="1.5" fill="none"/>';
+  s+='<circle cx="'+a[0].toFixed(1)+'" cy="'+a[1].toFixed(1)+'" r="8" fill="'+LB+'" stroke="#fff" stroke-width="1.5"/><circle cx="'+b[0].toFixed(1)+'" cy="'+b[1].toFixed(1)+'" r="8" fill="'+LB+'" stroke="#fff" stroke-width="1.5"/>';
+  return s+tx(2,36,16,"ligase seals here",{a:"start",w:700})+tx(398,36,16,"sticky end",{a:"end",w:700});
+}
+
+/* ---------- screens ---------- */
+var LSTEPS=["A restriction enzyme cuts the insulin gene out and opens the plasmid.","Ligase seals the gene into the plasmid.","A bacterium takes in the recombinant plasmid.","The bacterium reads the gene and makes insulin."];
+var LSHOW=[2,0,3,1];   /* the strips as first shown: steps 3, 1, 4, 2. The paper lists them 2, 4, 1, 3, so the screen cannot be copied by position */
+var LPRED=["So the gene gets copied.","So the ends match.","So the cuts go faster."];
+var LHINT="What has to happen before ligase can seal?";
+function lhead(title,say){
+  var n=PL.i+1,tot=PL.screens.length,d='',i;for(i=1;i<=tot;i++)d+='<i'+(i<=n?' class="on"':'')+'></i>';
+  return '<div class="stepline"><span class="chip case">Plasmid</span><span class="chip">Station 3 &middot; Step '+n+' of '+tot+'</span><span class="dots" aria-hidden="true">'+d+'</span></div><h2>'+title+'</h2>'+(say?'<p class="say">'+say+'</p>':'');
+}
+/* say, picture and feedback sit in one wrapper: stacked on a tall screen, side by side on a short wide one (an iPad on its side) */
+function lAnim(o){
+  return {html:lhead(o.title)+'<div class="plg"><p class="say">'+o.say+'</p><div class="stage sm pl"><svg id="lstage" viewBox="'+o.vb+'" role="img" aria-label="'+o.aria+'"></svg></div><p class="fb" id="lfb" aria-live="polite"></p></div><div class="btnrow">'+B("back","&larr; Back")+B("replay","Replay")+B("skip","Skip &#9654;","hidden")+B("next",o.next,"go","disabled")+'</div>',
+    enter:function(){this.play();},
+    play:function(){
+      var st=document.getElementById("lstage"),nx=lq('[data-act="next"]'),sk=lq('[data-act="skip"]'),fb=document.getElementById("lfb"),was=!!S.seen[o.key];
+      nx.disabled=!was;sk.classList.toggle("hidden",!was);fb.innerHTML="";
+      run(o.key,o.dur*(PROJ?1.3:1),function(p){st.innerHTML=o.draw(p);},function(){nx.disabled=false;sk.classList.add("hidden");fb.innerHTML=o.after();});
+    }};
+}
+function paintPaste(){
+  var st=document.getElementById("lstage"),fb=document.getElementById("lfb"),nx=lq('[data-act="next"]'),L=LLEVELS[S.level];if(!st)return;
+  st.innerHTML=drawLPaste({t:PL.pasted?1:0,zoom:PL.pasted,bases:L.bases});
+  fb.innerHTML=PL.pasted?('<b>Both ends snap.</b> '+(L.bases?'Sticky ends pair up by matching bases.':'Sticky ends fit like puzzle tabs.')):'';
+  nx.disabled=!PL.pasted;
+}
+function pasteGo(dx,dy){
+  var st=document.getElementById("lstage");if(!st||PL.pasted||PL.busy)return;PL.busy=true;
+  run("pl-paste",650,function(p){var e=ease(p);st.innerHTML=drawLPaste({t:e,dx:dx*(1-e),dy:dy*(1-e)});},function(){PL.busy=false;PL.pasted=true;paintPaste();});
+}
+function bindPaste(){
+  var st=document.getElementById("lstage"),down=false,grab=false,moved=false,sx=0,sy=0;
+  function vx(e){var r=st.getBoundingClientRect(),k=Math.max(640/r.width,300/r.height);return {x:(e.clientX-r.left-(r.width-640/k)/2)*k,y:(e.clientY-r.top-(r.height-300/k)/2)*k};}
+  st.addEventListener("pointerdown",function(e){if(PL.pasted||PL.busy)return;var q=vx(e);down=true;moved=false;sx=q.x;sy=q.y;grab=Math.abs(q.x-190)<100&&q.y<100;try{st.setPointerCapture(e.pointerId);}catch(x){}});
+  st.addEventListener("pointermove",function(e){if(!down||!grab)return;var q=vx(e);if(Math.abs(q.x-sx)+Math.abs(q.y-sy)>10)moved=true;if(moved)st.innerHTML=drawLPaste({t:0,dx:q.x-sx,dy:q.y-sy});});
+  st.addEventListener("pointerup",function(e){if(!down)return;down=false;var q=vx(e),dx=q.x-sx,dy=q.y-sy;
+    if(!moved){pasteGo(0,0);return;}                                   /* a tap anywhere on the picture pastes: no drag needed */
+    if(Math.abs(dx)<100&&dy>20&&dy<150)pasteGo(dx,dy);
+    else{paintPaste();document.getElementById("lfb").textContent="Drop it in the gap, or just tap the gene.";}});
+  st.addEventListener("pointercancel",function(){down=false;if(!PL.pasted&&!PL.busy)paintPaste();});
+  st.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){pasteGo(0,0);e.preventDefault();}});
+}
+var LSC={
+  why:function(){return {html:lhead("Cut, paste, seal: insulin from bacteria")+'<div class="plg"><p class="say">People with type 1 diabetes need insulin every day. Most of it comes from bacteria.</p><div class="stage sm pl"><svg viewBox="0 0 640 200" role="img" aria-label="A bacterium carrying a small ring of DNA with an orange gene makes insulin, shown as orange dots, for an insulin bottle">'+drawLWhy()+'</svg></div></div><div class="btnrow">'+B("next","Cut &#9654;","go")+'</div>'};},
+  predict:function(){var h=lhead("Predict first")+'<div class="plg"><p class="say">Why use the same enzyme for both cuts, the gene and the plasmid?</p>';
+    h+='<div class="stage sm pl short"><svg viewBox="0 0 390 300" role="img" aria-label="Human DNA with the insulin gene between two red dashed cut marks, and a plasmid ring with one red dashed cut mark">'+drawLCut(0,false)+'</svg></div></div><div class="choices row3">';
+    LPRED.forEach(function(o,k){h+='<button type="button" class="choice" data-act="pred" data-k="'+k+'">'+o+'</button>';});
+    return {html:h+'</div><div class="btnrow">'+B("back","&larr; Back")+'</div>'};},
+  cut:function(){var L=LLEVELS[S.level];return lAnim({key:"pl-cut",title:"Cut",say:"One <b>restriction enzyme</b> cuts the insulin gene out and opens the <b>plasmid</b>, a small ring of bacterial DNA.",vb:"0 0 640 300",aria:"Scissors cut the orange insulin gene out of a strand of human DNA at two red dashed marks, then cut the black plasmid ring once so it opens. A close-up of one cut end shows a short single-stranded tail"+(L.bases?" of four bases, T T A A":", drawn as a puzzle tab"),dur:8000,draw:function(p){return drawLCut(p,L.bases);},next:"Paste &#9654;",
+    after:function(){return (PL.pred!=null?(PL.pred===1?'<b>Right:</b> so the ends match. ':'<b>So the ends match.</b> '):'')+(L.bases?'The enzyme leaves the same short, single-stranded tail on every end it cuts: <b>sticky ends</b>.':'The enzyme leaves the same tab on every end it cuts: <b>sticky ends</b>.');}});},
+  paste:function(){
+    var h=lhead("Paste")+'<div class="plg"><p class="say">Tap the gene to paste it into the gap, or drag it there.</p><div class="stage sm pl tap"><svg id="lstage" viewBox="0 0 640 300" role="img" tabindex="0" aria-label="The opened plasmid with a gap at the top, and the insulin gene above it. Tap the picture or press Enter to paste the gene into the gap."></svg></div><p class="fb" id="lfb" aria-live="polite"></p></div>';
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Seal &#9654;","go","disabled")+'</div>',enter:function(){PL.busy=false;paintPaste();bindPaste();}};},
+  seal:function(){return lAnim({key:"pl-seal",title:"Seal",say:"<b>Ligase</b> seals the gene into the plasmid.",vb:"0 0 640 236",aria:"Two blue ligase dots land on the two joints between the orange gene and the black plasmid. The closed ring is labeled recombinant DNA",dur:3500,draw:drawLSeal,next:"Into a bacterium &#9654;",after:function(){return "The ring is now <b>recombinant DNA</b>: DNA from two sources.";}});},
+  bac:function(){return lAnim({key:"pl-bac",title:"Into a bacterium",say:"A bacterium takes in the recombinant plasmid, reads the gene and makes insulin. It is now a <b>GMO</b>.",vb:"0 0 640 240",aria:"The ring enters a rod-shaped bacterium and orange insulin dots appear. The bacterium divides into 2 and then 4, and every one holds the ring and makes insulin",dur:7000,draw:drawLBac,next:"Put it in order &#9654;",after:function(){return "<b>1 &rarr; 2 &rarr; 4.</b> Every copy makes insulin.";}});},
+  order:function(){var L=LLEVELS[S.level],o=PL.ord,h=lhead("Put it in order",L.first?"Step 1 is in place. Tap the other three in order.":"Tap the steps in order.")+'<div class="ord">';
+    (o.done?[0,1,2,3]:LSHOW).forEach(function(id){var n=o.num[id],lock=o.done||(L.first&&id===0);
+      h+='<button type="button" class="strip'+(o.done?' right':(o.bad[id]?' wrong':(n?' set':'')))+'" data-act="strip" data-id="'+id+'"'+(lock?' disabled':'')+'><span class="num">'+(n||'')+'</span><span>'+LSTEPS[id]+'</span></button>';});
+    h+='</div><p class="fb" aria-live="polite">'+(o.done?'<b>Right.</b> Cut, seal, take in, make insulin.':(o.tries>=1?LHINT+(o.tries>=2?B("ordshow","Show me","small"):''):''))+'</p>';
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("next","Station Record &#9654;","go",o.done?"":"disabled")+'</div>'};},
+  paper:function(){if(!PL.t1)PL.t1=Date.now();
+    var h=lhead("Packet p. 6A, box 3","Number the steps 1&ndash;4 in order. On the small ring, label a sticky end and the place where ligase seals.")+'<div class="pgrid"><ol class="cer">';
+    LSTEPS.forEach(function(t,i){h+='<li><b>'+(i+1)+'</b>'+t+'</li>';});
+    h+='</ol><div class="stage"><svg viewBox="0 0 400 200" role="img" aria-label="The new ring: the black plasmid with the orange insulin gene at the top. A blue dot at each joint: one is labeled ligase seals here, the other sticky end.">'+drawLRing()+'</svg></div></div>';
+    h+='<div class="frame"><p>Beads in the new ring: <span class="fill">20 + 10 = 30</span></p></div>';
+    if(PL.finished)h+='<p class="done">&#10003; Plasmid done.</p><div class="early"><b>Done early?</b> A scientist wants to check that the plasmid really got the gene. The new plasmid is bigger. Which station\'s tool would show that, and would the bigger plasmid run farther or less far?</div>';
+    if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(PL.t1-PL.t0)+(PL.t2?'. Done tapped at '+fmt(PL.t2-PL.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
+    return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Start over")+(PL.finished?'':B("done","Done","go"))+'</div><p class="fine" style="margin-top:.7rem">For home, not station time: <a href="mechanism-reel.html?anim=cloning" target="_blank" rel="noopener">See it run</a> in the Mechanism Reel (Bio Tool #28).</p>'};}
+};
+function lScreens(){var a=["why"];if(LLEVELS[S.level].predict)a.push("predict");a.push("cut","paste","seal","bac","order","paper");return a;}
+var LCUR=null;
+function lrender(){stopAnim();LCUR=LSC[PL.screens[PL.i]]();lroot.innerHTML=LCUR.html;if(LCUR.enter)LCUR.enter();}
+function lgo(i){if(i<0||i>=PL.screens.length)return;PL.i=i;lrender();try{document.getElementById("sec-plasmid").scrollIntoView({block:"nearest"});}catch(e){}}
+function lStart(){stopAnim();PL.started=true;PL.i=0;PL.pred=null;PL.pasted=false;PL.busy=false;PL.ord={num:LLEVELS[S.level].first?{0:1}:{},bad:{},tries:0,done:false,shown:false};PL.finished=false;PL.t0=Date.now();PL.t1=0;PL.t2=0;PL.screens=lScreens();lrender();}
+lroot.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("[data-act]"):null;if(!b||b.disabled)return;
+  var act=b.getAttribute("data-act"),o=PL.ord,id,n,k,used;
+  if(act==="next")lgo(PL.i+1);
+  else if(act==="back")lgo(PL.i-1);
+  else if(act==="replay"){if(LCUR&&LCUR.play)LCUR.play();}
+  else if(act==="skip"){if(anim)anim.skip();}
+  else if(act==="pred"){PL.pred=+b.getAttribute("data-k");lgo(PL.i+1);}
+  else if(act==="strip"){id=+b.getAttribute("data-id");o.bad={};
+    if(o.num[id])delete o.num[id];                                     /* tap a numbered step to take its number off */
+    else{used={};for(k in o.num)used[o.num[k]]=1;n=1;while(used[n])n++;o.num[id]=n;
+      if(Object.keys(o.num).length===4){                               /* all four numbered: only 1-2-3-4 passes */
+        for(k=0,n=0;k<4;k++)if(o.num[k]!==k+1){n++;o.bad[k]=true;}
+        if(!n)o.done=true;else{o.tries++;for(k=0;k<4;k++)if(o.bad[k])delete o.num[k];}}}
+    lrender();}
+  else if(act==="ordshow"){o.num={0:1,1:2,2:3,3:4};o.bad={};o.done=true;o.shown=true;lrender();}
+  else if(act==="again")lStart();
+  else if(act==="done"){PL.finished=true;PL.t2=Date.now();lrender();}
+});
+
 /* level switch */
 function paintLevel(){Array.prototype.forEach.call(document.querySelectorAll("#levelsw button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-level")===S.level?"true":"false");});}
 document.getElementById("levelsw").addEventListener("click",function(e){
@@ -825,6 +1052,7 @@ document.getElementById("levelsw").addEventListener("click",function(e){
   newCase(allowed().indexOf(S.ci)>=0?S.ci:randomCase(-1));
   if(CR.started){CR.started=false;crLeave();if(showSec.cur==="crispr")crStart();}
   if(PC.started){PC.started=false;if(showSec.cur==="pcr")pcStart();}
+  if(PL.started){PL.started=false;if(showSec.cur==="plasmid")lStart();}
 });
 
 /* sections: one on screen at a time, each with its own anchor */
@@ -838,6 +1066,7 @@ function showSec(){
   if(h!=="gel")stopAnim();else if(CUR&&CUR.play&&!anim)render();
   if(h==="crispr"){if(CR.started)crender();else crStart();}
   if(h==="pcr"){if(PC.started)prender();else pcStart();}
+  if(h==="plasmid"){if(PL.started)lrender();else lStart();}
 }
 window.addEventListener("hashchange",showSec);
 
@@ -860,6 +1089,14 @@ function teacherKey(){
   h+='<tr><th>p. 6A box 1</th><td>Cycles 0&ndash;3: 1, 2, 4, 8 DNA. The PCR machine heats and cools over and over because <b>heat pulls the strands apart so each can be a template</b>, and each cycle <b>doubles</b> the DNA.</td></tr>';
   h+='<tr><th>Done early</th><td>10 cycles make 1,024 copies.</td></tr></table>';
   h+='<p class="fine">SOL General skips the predict and sees the box 1 sentence filled in; SOL Advanced gets the blanks, as on the paper. Back on the cycle screen steps back one cycle, and the table follows. The 30-cycle count can be skipped. <code>?timer=1</code> shows the times on the last screen.</p></div>';
+  h+='<div class="panel" style="margin-top:1rem"><h2>Teacher key: Plasmid</h2><table class="key">';
+  LSTEPS.forEach(function(x,i){h+='<tr><th>Step '+(i+1)+'</th><td>'+x+'</td></tr>';});
+  h+='<tr><th>p. 6A box 3, top to bottom</th><td>The paper lists the steps as 2, 4, 1, 3. The screen shows them as 3, 1, 4, 2 before they are sorted.</td></tr>';
+  h+='<tr><th>Predict (Advanced only)</th><td>So the ends match. One enzyme leaves the same short, single-stranded tail on every end it cuts.</td></tr>';
+  h+='<tr><th>Beads in the new ring</th><td>20 white + 10 red = 30, in one closed ring.</td></tr>';
+  h+='<tr><th>Ring labels</th><td>A sticky end and the place where ligase seals: both are at the joints between the gene and the plasmid.</td></tr>';
+  h+='<tr><th>Done early</th><td>The gel (Station 2). The bigger plasmid runs less far.</td></tr></table>';
+  h+='<p class="fine">SOL General skips the predict, sees the cut end as a puzzle tab with no base letters, and gets step 1 placed on the order screen. Order check: only 1-2-3-4 passes; one miss shows a hint, a second adds Show me. <code>?timer=1</code> shows the times on the last screen.</p></div>';
   t.innerHTML=h;t.classList.remove("hidden");
 }
 
@@ -872,7 +1109,7 @@ if(start>=0&&CASES[start].twist&&!LEVELS[S.level].twist){S.level="advanced";pain
 if(TEACHER)teacherKey();
 newCase(start>=0?start:randomCase(-1));
 showSec();
-window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit,PC:PC};
+window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit,PC:PC,PL:PL};
 })();
 </script>
 </body>
