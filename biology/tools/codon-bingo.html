@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta name="author" content="J. R. Schwebach"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Codon Bingo</title>
-<meta name="description" content="Bio Tool #37. Whole-class codon bingo for iPads and paper: the projector reads a codon from template DNA, mRNA, tRNA or the amino acid, every student has a different card of 25 mRNA codons, a code on the board opens each call, and a wrong tap makes the card wait. SOL Biology Unit 4, protein synthesis.">
+<meta name="description" content="Bio Tool #37. Whole-class codon bingo for iPads and paper: the projector reads a codon from template DNA, mRNA, tRNA or the amino acid, every student has a different card of 25 mRNA codons, a code on the board opens each call, and a wrong tap makes the card wait. A Mutation round reads a gene with one changed base: silent, changed or stopped. SOL Biology Unit 4, protein synthesis and mutation.">
 <link rel="canonical" href="https://scienceonepagers.org/biology/tools/codon-bingo.html">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
@@ -135,6 +135,7 @@ footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;colo
 .coderow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
 .coderow label{font-size:1rem}
 .coderow .openstat{flex:1 1 auto;white-space:nowrap}
+.coderow input.three{width:6.4em}
 .coderow input{width:5.2em;font:700 1.7rem/1 var(--mono);letter-spacing:.18em;text-align:center;text-transform:uppercase;padding:6px 4px;min-height:52px}
 .openstat{font:600 .95rem var(--mono);color:var(--muted)}
 .openstat b{color:var(--ink)}
@@ -202,6 +203,68 @@ footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;colo
 .pchart.half .pb{font-size:10pt;width:1.5em;height:1.5em}
 .pchart.half .lic{font-size:7.5pt;margin-top:5pt}
 
+/* ---------- Mutation round ---------- */
+.mstrip{display:grid;grid-template-columns:max-content repeat(var(--cols),minmax(0,1fr));gap:calc(var(--u)*.3) calc(var(--u)*.35);align-items:center;padding:calc(var(--u)*.5) calc(var(--u)*.7);border:1.5px solid var(--rule);border-radius:6px;background:var(--paper)}
+.mstrip .ml{font:600 calc(var(--u)*1.1)/1.15 var(--mono);color:var(--muted);padding-right:calc(var(--u)*.5);white-space:nowrap}
+.mstrip .ml b{color:var(--ink);font-weight:600}
+.mstrip .mn{font:600 calc(var(--u)*.9) var(--mono);color:var(--muted);text-align:center}
+.mstrip .mc{display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*.12);min-height:calc(var(--u)*2.3);border-radius:4px;padding:calc(var(--u)*.15) 0}
+.mstrip .mc .bt{width:calc(var(--u)*1.7);height:calc(var(--u)*1.7);font-size:calc(var(--u)*1.05);border-radius:calc(var(--u)*.2)}
+.mstrip .mc .bt.u{border-radius:50%}
+.mstrip .mc.cur{outline:3px solid var(--ink);outline-offset:1px}
+.mstrip .mc.aa{font:700 calc(var(--u)*1.35) var(--display)}
+.mstrip .mc.aa.stop{color:var(--bad)}
+.mstrip .mc.hid{font:700 calc(var(--u)*1.1) var(--mono);color:var(--muted);letter-spacing:.15em}
+.mstrip .mc.chg{background:var(--ember-soft);outline:2.5px solid var(--ember)}
+.mstrip .mc.chg.same{background:var(--ok-soft);outline-color:var(--ok)}
+.mstrip .mc.chgcol{outline:2px dashed var(--ember)}
+.mstrip .mc.shift{background:var(--bad-soft)}
+.mstrip .mc.gone{color:var(--bad);opacity:.7;text-decoration:line-through;text-decoration-thickness:3px}
+.bt.lit{outline:3px solid var(--ember);outline-offset:2px;box-shadow:0 0 0 6px var(--ember-soft)}
+.bt.was{outline:2.5px dashed var(--ember);outline-offset:2px}
+.bt.lost{outline:3px solid var(--bad);outline-offset:2px;text-decoration:line-through;text-decoration-thickness:3px;opacity:.85}
+.mh{font-size:calc(var(--u)*2.1)}
+.mopts{font:700 calc(var(--u)*1.6)/1.3 var(--display);gap:calc(var(--u)*.3);max-width:none}
+.zoom{display:flex;flex-direction:column;gap:calc(var(--u)*.6);padding:calc(var(--u)*1);border:1.5px solid var(--rule);border-radius:6px;background:var(--paper)}
+.zrow{display:flex;align-items:center;gap:calc(var(--u)*1)}
+.zl{font:600 calc(var(--u)*1.3) var(--mono);color:var(--muted);min-width:calc(var(--u)*17)}
+.zc{display:flex;gap:calc(var(--u)*.35)}
+.zc .bt{width:calc(var(--u)*3.6);height:calc(var(--u)*3.6);font-size:calc(var(--u)*2.2);border-radius:calc(var(--u)*.35)}
+.zc .bt.u{border-radius:50%}
+.zc.cover{font:700 calc(var(--u)*2.4) var(--mono);color:var(--muted);letter-spacing:.3em}
+.zc+.zc{margin-left:calc(var(--u)*1)}
+.tstep{display:flex;flex-direction:column;gap:calc(var(--u)*.6);border-top:1.5px dashed var(--rule);padding-top:calc(var(--u)*.6)}
+.chgtag{font:700 calc(var(--u)*1)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--paper);background:var(--ember);border-radius:3px;padding:.2em .5em;margin-left:.6em;vertical-align:.15em}
+.chgtag.shift{background:var(--bad)}
+.verdict{margin-top:calc(var(--u)*.6);font:700 calc(var(--u)*2.8)/1.05 var(--display);padding:calc(var(--u)*.5) calc(var(--u)*1);border-radius:6px;border:3px solid}
+.verdict span{display:block;font:400 calc(var(--u)*1.35)/1.3 var(--body);color:var(--ink);margin-top:.35em}
+.verdict.silent{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+.verdict.missense{color:var(--ember);border-color:var(--ember);background:var(--ember-soft)}
+.verdict.nonsense,.verdict.frameshift{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.gonenote{font:700 calc(var(--u)*1.35)/1.3 var(--body);color:var(--bad);max-width:none}
+.called span.gone{color:var(--bad);opacity:.75;text-decoration:line-through;border-style:dashed}
+.tallybox{display:flex;flex-direction:column;gap:10px;padding:12px 14px;border:2px solid var(--moss);border-radius:6px;background:var(--moss-soft)}
+.tallybox .lbl{font:700 max(1rem,calc(var(--u)*1.4)) var(--display)}
+.tally{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:max(1rem,calc(var(--u)*1.3))}
+.tally .num{font:700 max(2rem,calc(var(--u)*3)) var(--mono);min-width:2.2ch;text-align:center}
+.tally input{font-size:1.1rem}
+.mtab td,.mtab th{font-size:max(1rem,calc(var(--u)*1.3))}
+.takeaways{font-size:max(1rem,calc(var(--u)*1.3));max-width:none}
+.msetup{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 24px}
+.msetup .lbl{font-weight:700;display:block;margin-bottom:4px}
+.roundseg button{min-height:40px;padding:4px 12px}
+.pred{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border:2px solid var(--ember);border-radius:6px;background:var(--ember-soft)}
+.pred .opts{display:flex;flex-wrap:wrap;gap:8px}
+.pred .opts button{flex:1 1 9em}
+.pred .cmp{display:flex;gap:6px 16px;align-items:center;flex-wrap:wrap;font:600 .95rem var(--mono)}
+.pred .cmp .bt{width:1.7em;height:1.7em}
+.pred .cmp .gap{display:inline-block;width:.5em}
+.pred.right{border-color:var(--ok);background:var(--ok-soft)} .pred.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.sq.gone{opacity:.4;border-style:dashed;border-color:var(--bad);background:repeating-linear-gradient(45deg,var(--paper),var(--paper) 7px,var(--bad-soft) 7px,var(--bad-soft) 14px)}
+.score p{font-size:1.05rem}
+@media (orientation:landscape) and (min-width:900px){ .haspred .cardwrap{max-width:min(560px,calc(100vh - 430px))} }
+.pred.right,.pred.wrong{gap:4px;padding:8px 12px}
+
 @media print{
   @page{size:letter;margin:.45in}
   body{background:#fff!important}
@@ -261,8 +324,8 @@ const BRS = (function () {
   const BINGO_VOICE = '';
   const LOCKS = [0, 10, 15, 30], WINS = [1, 2, 12], PRESETS = ['dna', 'mrna', 'trna', 'aa'];
   const fresh = () => ({
-    c: { game: '', n: 0, on: false, ending: false, preset: 'aa', lock: 10, win: 1, rev: { dna: false, mrna: false, trna: false, aa: true }, pcheck: '' },
-    s: { game: '', cardId: null, marks: {}, hi: 0, lock: 10, win: 1, lockUntil: 0, ask: '' }
+    c: { game: '', n: 0, on: false, ending: false, preset: 'aa', lock: 10, win: 1, rev: { dna: false, mrna: false, trna: false, aa: true }, pcheck: '', round: 'classic', mset: { pick: 'shuffle', picks: ['silent', 'missense', 'nonsense'], fs: false }, m: null },
+    s: { game: '', cardId: null, marks: {}, hi: 0, lock: 10, win: 1, lockUntil: 0, ask: '', round: 'classic', mr: { hi: null, marks: {}, lock: 10, lockUntil: 0, preds: {}, res: {} } }
   });
   let S = fresh();
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.c && j.s) { S = fresh(); Object.assign(S.c, j.c, { ending: false }); Object.assign(S.s, j.s, { ask: '' }); if (j.p) S.p = j.p; } } catch (e) { /* storage is a convenience only */ }
@@ -413,7 +476,7 @@ const BRS = (function () {
 
   /* ---------- home, how to play, the printable chart ---------- */
   function homeView() {
-    return '<section class="block"><span class="eyebrow">Unit 4 · LT 4.3</span><h2>One caller, a different card on every iPad</h2><p class="lede">The projector reads one codon at a time, from template DNA, mRNA, tRNA or the amino acid itself. Each student works out the amino acid and taps every codon on their own card that codes for it. A code on the board opens each call on the iPads, and a wrong tap makes the card wait.</p>' +
+    return '<section class="block"><span class="eyebrow">Unit 4 · LT 4.3</span><h2>One caller, a different card on every iPad</h2><p class="lede">The projector reads one codon at a time, from template DNA, mRNA, tRNA or the amino acid itself. Each student works out the amino acid and taps every codon on their own card that codes for it. A code on the board opens each call on the iPads, and a wrong tap makes the card wait. The <b>Mutation round</b> reads a short gene, then the same gene with one changed base, and every iPad predicts what the change does before the ribosome reads it.</p>' +
       '<p>▶ <a href="https://youtu.be/hzQ_7oHHpr8" target="_blank" rel="noopener">Watch how to play Codon Bingo on YouTube</a> (5½ min): a round from the call on the board to a checked bingo, with codons, anticodons and the tRNA’s job explained along the way.</p>' +
       '<div class="row"><a class="btn" href="#caller">Run the game on the projector</a><a class="btn ghost" href="#card">Open my card</a><a class="btn quiet" href="#paper">Print paper cards</a><a class="btn quiet" href="#chart">Print a codon chart</a><a class="btn quiet" href="#howto">How to play</a></div></section>';
   }
@@ -425,6 +488,13 @@ const BRS = (function () {
       '<p><b>Stop is an ordinary call.</b> When Stop is called, students mark every stop codon on their card (UAA, UAG, UGA). The calls are not one protein read in order: each call is its own codon.</p>' +
       '<p><b>Setting the length.</b> In a class of 30, the first true line usually comes around call 7 and the first two-line card around call 10. A full card is rare before call 19, and every card is full by call 21.</p>' +
       '<h3>Paper</h3><p>Students without an iPad play on a printed card from <b>Print paper cards</b> with the same game word. On the projector, <b>Check a paper card</b> lights the called squares green.</p>' +
+      '<h3>The Mutation round</h3><p class="lede">The same game and the same cards, after students have played Classic once. Three short genes, about 6 to 7 minutes each, so about 20 minutes for the round.</p><ol>' +
+      '<li>Start a new game word and choose <b>Mutation round</b>. Shuffle the three outcomes or pick one per gene: <b>silent</b> (same amino acid), <b>changed</b> (a different amino acid) or <b>stopped</b> (a new stop codon). Advanced classes can add a fourth gene with one base added or lost.</li>' +
+      '<li>Students tap <b>Mutation round</b> at the top of their card. They keep the same card.</li>' +
+      '<li><b>The normal gene.</b> The ribosome reads it codon by codon: the protein the cell is supposed to make. No marking yet.</li>' +
+      '<li><b>Change one base.</b> The template DNA shows the changed base lit. <b>Show the T → U step</b> if the class needs the mRNA. The board shows a predict code; every iPad predicts same, different or stop, and the choice locks.</li>' +
+      '<li><b>Read the changed gene</b> as bingo, with a code for each codon. When the ribosome reaches the changed codon, every iPad says whether its prediction was right. A stop brings a release factor instead of a tRNA: the protein is done, the gene’s later calls are crossed out, and squares waiting on them can’t be won.</li>' +
+      '<li>After each gene, count the hands for right predictions; the board keeps the tally and shows it at the end. Each gene is its own game, and iPads clear their marks when the next gene opens. A gene that stops early rarely has a winner, and that is the point.</li></ol>' +
       '<h3>Playing on a salamander</h3><p>Classes running the Blue Ridge Salamander Project have a second round, the Ember Round, on <a href="blue-ridge-salamander-codon-bingo.html">the salamander project’s copy of Codon Bingo</a>.</p>' +
       '<div class="row"><a class="btn ghost" href="#home">Back</a></div></section>';
   }
@@ -459,7 +529,8 @@ const BRS = (function () {
   function paperCheckHTML() {
     const c = S.c, id = c.pcheck || '';
     let h = '<details class="noprint"' + (id ? ' open' : '') + '><summary>Check a paper card</summary><form data-form="pcheck" class="row"><div class="field"><label for="pcn">Paper card number</label><input type="text" id="pcn" maxlength="4" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="P07 or D07" value="' + esc(id) + '" style="max-width:8rem"></div><button style="align-self:flex-end">Show it</button></form>';
-    if (id) { const called = {}; callList(c.game, 'classic').slice(0, c.n).forEach(x => { called[x.aa] = 1; }); h += '<div class="pcheck">' + pcardHTML(c.game, id, called) + '</div><p class="small muted">Green squares code for an amino acid called so far (calls 1 to ' + c.n + '). A student’s mark on any other square is a wrong mark.</p>'; }
+    if (id && c.round === 'mut' && c.m) { const M = c.m, hi = M.phase === 'read' ? { g: M.g, kind: M.plan[M.g - 1], step: M.step } : null; h += '<div class="pcheck">' + pcardHTML(c.game, id, mCalledSet(c.game, hi)) + '</div><p class="small muted">Green squares code for an amino acid called so far in gene ' + M.g + (hi ? ' (codons 1 to ' + M.step + ')' : '') + '. A mark on any other square is a wrong mark.</p>'; }
+    else if (id) { const called = {}; callList(c.game, 'classic').slice(0, c.n).forEach(x => { called[x.aa] = 1; }); h += '<div class="pcheck">' + pcardHTML(c.game, id, called) + '</div><p class="small muted">Green squares code for an amino acid called so far (calls 1 to ' + c.n + '). A student’s mark on any other square is a wrong mark.</p>'; }
     return h + '</details>';
   }
 
@@ -477,10 +548,12 @@ const BRS = (function () {
     const c = S.c;
     if (!c.on) {
       return '<section class="block" style="max-width:820px"><span class="eyebrow">Projector</span><h2>Start a game</h2><form data-form="start" class="stack"><div class="field"><label for="gw">Game word</label><input type="text" id="gw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" value="' + esc(c.game || 'RIDGE' + (10 + Math.floor(Math.random() * 89))) + '" style="max-width:14rem"><span class="small muted">Students type this word to get their cards. Use a new word each class, so codes from one class don’t work in the next.</span></div>' +
-        '<p class="small muted">Calls: all 20 amino acids and Stop, in a shuffled order.</p>' +
-        '<div class="settings"><div><span class="lbl">Start each call from</span>' + segHTML('preset', presetOpts, c.preset) + '</div><div><span class="lbl">A win is</span>' + segHTML('win', winOpts, c.win) + '</div><div><span class="lbl">A wrong tap waits</span>' + segHTML('lock', lockOpts, c.lock) + '</div></div>' +
+        '<div><span class="lbl">Round</span>' + segHTML('round', [['classic', 'Classic'], ['mut', 'Mutation round']], c.round) + '</div>' +
+        (c.round === 'mut' ? '<p class="small muted">Three short genes. Each is read normally, then with one changed base: silent, changed or stopped. Students predict before the ribosome reads the changed codon. Play Classic first.</p>' + mutSetupHTML(c) : '<p class="small muted">Calls: all 20 amino acids and Stop, in a shuffled order.</p>') +
+        '<div class="settings"><div><span class="lbl">Start each call from</span>' + segHTML('preset', presetOpts, c.preset) + '</div>' + (c.round === 'mut' ? '' : '<div><span class="lbl">A win is</span>' + segHTML('win', winOpts, c.win) + '</div>') + '<div><span class="lbl">A wrong tap waits</span>' + segHTML('lock', lockOpts, c.lock) + '</div></div>' +
         '<div class="row"><button>Start</button><a class="btn quiet" href="#howto">How to play</a></div></form></section>';
     }
+    if (c.round === 'mut' && c.m) return mutCallerView();
     const calls = callList(c.game, 'classic'), cur = c.n ? calls[c.n - 1] : null, total = calls.length, r = c.rev, stop = cur && cur.aa === 'STOP';
     let h = '<section class="block"><div class="bbar"><span>Game word <b class="gw">' + esc(norm(c.game)) + '</b></span><span>Win: <b>' + winWords(c.win) + '</b></span><span>Wrong tap waits: <b>' + lockWords(c.lock) + '</b></span><span class="callno">' + (cur ? 'Call ' + c.n + ' of ' + total : 'Ready') + '</span></div>';
     h += '<div class="board"><div class="rows">';
@@ -540,13 +613,14 @@ const BRS = (function () {
   }
   const calledSet = (game, hi) => { const o = {}; callList(game, 'classic').slice(0, hi).forEach(c => { o[c.aa] = 1; }); return o; };
   function hasWin(marks, win) { if (win === 12) { for (let i = 0; i < 25; i++) if (!marks[i]) return false; return true; } return LINES.filter(L => L.every(i => marks[i])).length >= win; }
-  const lockLeft = () => Math.max(0, Math.ceil((S.s.lockUntil - Date.now()) / 1000));
+  const lockLeft = () => Math.max(0, Math.ceil(((S.s.round === 'mut' ? S.s.mr : S.s).lockUntil - Date.now()) / 1000));
   let lockTimer = null;
   function cardView() {
     const s = S.s;
     if (!s.game) return '<section class="block" style="max-width:820px"><span class="eyebrow">My card</span><h2>Type the game word from the projector</h2><form data-form="join" class="row"><div class="field"><label for="jw">Game word</label><input type="text" id="jw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="RIDGE42"></div><button style="align-self:flex-end">Get my card</button></form>' + (fb ? '<p class="say warn">' + esc(fb.text) + '</p>' : '') + '</section>';
+    if (s.round === 'mut') return mutCardView();
     const codons = cardCodons(s.game, s.cardId), won = s.hi && hasWin(s.marks, s.win), left = lockLeft();
-    let h = '<div class="cardlayout"><section class="block cardpane"><div class="gamebar"><span>Game <b class="gw">' + esc(norm(s.game)) + '</b></span><span>Card ' + s.cardId + '</span><button class="quiet" data-act="sound" aria-pressed="' + sound + '" style="min-height:40px;padding:4px 12px">Sound: ' + (sound ? 'on' : 'off') + '</button></div>';
+    let h = '<div class="cardlayout"><section class="block cardpane"><div class="gamebar"><span>Game <b class="gw">' + esc(norm(s.game)) + '</b></span><span>Card ' + s.cardId + '</span>' + roundSeg() + soundBtn() + '</div>';
     h += '<form data-form="code" class="coderow"><label for="cc">Code from the board</label><input type="text" id="cc" maxlength="2" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" inputmode="text" aria-describedby="openstat"><button>Open</button><span class="openstat" id="openstat">' + (s.hi ? 'Call <b>' + s.hi + '</b> open · win: <b>' + winWords(s.win) + '</b> · wait <b>' + lockWords(s.lock) + '</b>' : 'No call open yet') + '</span></form>';
     let m = '';
     if (fb) m = '<div class="msg ' + fb.kind + '" role="status">' + esc(fb.text) + (fb.hint ? '<small>' + esc(fb.hint) + '</small>' : '') + '</div>';
@@ -574,6 +648,7 @@ const BRS = (function () {
     }, 200);
   }
   function tap(i, el) {
+    if (S.s.round === 'mut') { mtap(i); return; }
     const s = S.s;
     if (!s.hi) { fb = { kind: '', text: 'Type the code from the board.' }; render(); return; }
     if (lockLeft()) return;
@@ -593,6 +668,342 @@ const BRS = (function () {
     void el;
   }
 
+
+  /* ================= Mutation round: the same gene with one changed base =================
+     Each gene is its own short bingo game. The projector reads the normal gene on the ribosome (no marking),
+     shows the template DNA with one base changed, every iPad predicts (same, different or stop), then the
+     changed gene is read call by call with a code for each codon. A stop cancels the rest of that gene's calls.
+     Genes come from the game word, so the projector and every iPad build the same genes with no server. */
+  const MK3 = ['silent', 'missense', 'nonsense'];
+  const MWORD = { silent: 'Silent', missense: 'Changed', nonsense: 'Stopped', frameshift: 'Shifted' };
+  const MSHORT = { silent: 'same amino acid', missense: 'a different amino acid', nonsense: 'a stop', frameshift: 'a new reading frame' };
+  const ANSWER = { silent: 'same', missense: 'diff', nonsense: 'stop', frameshift: 'all' };
+  const PRED = { same: 'Same amino acid', diff: 'Different amino acid', stop: 'Stop', one: 'Only that one amino acid changes', all: 'Every amino acid after it can change' };
+  const predOpts = kind => kind === 'frameshift' ? ['one', 'all', 'stop'] : ['same', 'diff', 'stop'];
+  const STOPC = ['UAA', 'UAG', 'UGA'];
+  const MPOOL = ALLCODONS.filter(cd => BRS.CODON[cd] !== 'STOP' && cd !== 'AUG');
+  const ALLREV = { dna: true, mrna: true, trna: true, aa: true };
+  const triplets = s => { const o = []; for (let i = 0; i + 3 <= s.length; i += 3) o.push(s.slice(i, i + 3)); return o; };
+  function readFrame(codons) { const o = []; for (const cd of codons) { o.push(cd); if (BRS.CODON[cd] === 'STOP') return o; } return null; }
+  /* every one-base change in codons 3 to 7 that gives this outcome; never a new AUG, never Glu to Val */
+  function pointCands(m, kind) {
+    const out = [];
+    for (let ci = 2; ci <= 6; ci++) for (let pos = 0; pos < 3; pos++) for (const b of 'UCAG') {
+      const old = m[ci]; if (old[pos] === b) continue;
+      const neu = old.slice(0, pos) + b + old.slice(pos + 1), oa = BRS.CODON[old], na = BRS.CODON[neu];
+      const k = na === oa ? 'silent' : na === 'STOP' ? 'nonsense' : 'missense';
+      if (k !== kind || neu === 'AUG' || (oa === 'Glu' && na === 'Val')) continue;
+      out.push({ ci: ci, pos: pos, old: old, neu: neu, oa: oa, na: na });
+    }
+    const pref = out.filter(x => kind === 'silent' ? x.pos === 2 : kind === 'missense' ? x.pos < 2 : x.ci <= 4);
+    return pref.length ? pref : out;
+  }
+  /* gene 4 (Advanced): one base added or lost; the new frame must run at least two codons and stop by codon 12 */
+  function shiftOf(m, r) {
+    for (let t = 0; t < 600; t++) {
+      let tail = ''; for (let i = 0; i < 9; i++) tail += 'UCAG'[Math.floor(r() * 4)];
+      const seq = m.join('') + tail, ci = 2 + Math.floor(r() * 3), pos = Math.floor(r() * 3), ins = r() < 0.5, b = 'UCAG'[Math.floor(r() * 4)], i = ci * 3 + pos;
+      const seq2 = ins ? seq.slice(0, i) + b + seq.slice(i) : seq.slice(0, i) + seq.slice(i + 1);
+      const rf = readFrame(triplets(seq2)); if (!rf) continue;
+      const s = rf.length - 1;
+      if (s < ci + 2 || s > 11 || s === 8) continue;
+      if (BRS.CODON[rf[ci]] === BRS.CODON[m[ci]] || BRS.CODON[rf[ci + 1]] === BRS.CODON[m[ci + 1]]) continue;
+      if (rf.slice(ci, s).some(cd => cd === 'AUG')) continue;
+      return { type: ins ? 'ins' : 'del', ci: ci, pos: pos, base: ins ? b : seq[i], tail: tail, codons: rf };
+    }
+    return null;
+  }
+  const mgCache = {};
+  function mutGene(game, g) {
+    const key = norm(game) + '|' + g; if (mgCache[key]) return mgCache[key];
+    const r = BRS.rng('bingo|' + norm(game) + '|mgene|' + g), pick = a => a[Math.floor(r() * a.length)];
+    for (let t = 0; t < 5000; t++) {
+      const m = ['AUG']; for (let i = 1; i < 8; i++) m.push(pick(MPOOL)); m.push(pick(STOPC));
+      const prot = m.map(cd => BRS.CODON[cd]);
+      if (new Set(prot.slice(1, 8)).size < 6) continue;
+      if (prot.slice(0, 4).join(' ') === 'Met Val His Leu') continue;
+      const mut = {}; let ok = true;
+      MK3.forEach(function (k) { const cs = pointCands(m, k); if (!cs.length) { ok = false; return; } const rk = BRS.rng('bingo|' + norm(game) + '|mgene|' + g + '|' + k); mut[k] = cs[Math.floor(rk() * cs.length)]; });
+      if (!ok) continue;
+      let fs = null;
+      if (g === 4) { fs = shiftOf(m, r); if (!fs) continue; }
+      return (mgCache[key] = { g: g, m: m, prot: prot, mut: mut, fs: fs });
+    }
+    return null;
+  }
+  /* the changed gene as the ribosome reads it, from AUG to the first stop */
+  function mutRead(game, g, kind) {
+    const G = mutGene(game, g);
+    if (kind === 'frameshift') { const f = G.fs; return { kind: kind, g: g, codons: f.codons, ci: f.ci, pos: f.pos, fs: f, calls: f.codons.map((cd, i) => ({ aa: BRS.CODON[cd], codon: cd, i: i })) }; }
+    const x = G.mut[kind], codons = G.m.slice(); codons[x.ci] = x.neu;
+    const rf = readFrame(codons);
+    return { kind: kind, g: g, codons: codons, ci: x.ci, pos: x.pos, x: x, calls: rf.map((cd, i) => ({ aa: BRS.CODON[cd], codon: cd, i: i })) };
+  }
+  function mPlan(game, set) {
+    let k = set.pick === 'teacher' ? set.picks.slice(0, 3) : shuffled(MK3, BRS.rng('bingo|' + norm(game) + '|morder'));
+    if (set.fs) k = k.concat(['frameshift']);
+    return k;
+  }
+  /* the codes: one per step of each gene (step 0 = predict, then one per codon), for each outcome and each wait.
+     Mutation codes have three characters, and their first two are never a Classic code for the same game word,
+     so a code typed into the wrong round is caught instead of opening a wrong call. */
+  const MSTEPS = 14, NMSLOT = 10 * MSTEPS * LOCKS.length;
+  const mcombo = (g, kind) => kind === 'frameshift' ? 9 : (g - 1) * 3 + MK3.indexOf(kind);
+  const mcodeCache = {};
+  function mcodeTable(game) {
+    const g = norm(game);
+    if (!mcodeCache[g]) {
+      const all = []; codeTable(game).perm.slice(NSLOT).forEach(function (two) { for (const x of CODEALPH) all.push(two + x); });
+      const perm = shuffled(all, BRS.rng('bingo|' + g + '|mcodes')).slice(0, NMSLOT), back = {}, pre = {};
+      perm.forEach(function (cd, i) { back[cd] = i; pre[cd.slice(0, 2)] = 1; });
+      mcodeCache[g] = { perm: perm, back: back, pre: pre };
+    }
+    return mcodeCache[g];
+  }
+  const mcodeFor = (game, g, kind, step, lock) => mcodeTable(game).perm[(mcombo(g, kind) * MSTEPS + step) * LOCKS.length + LOCKS.indexOf(lock)];
+  const cleanCode = code => String(code || '').toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/B/g, '8').replace(/G/g, '6').replace(/U/g, 'V');
+  function mdecode(game, code) {
+    const k = cleanCode(code), i = mcodeTable(game).back[k];
+    if (i == null) return null;
+    const lock = LOCKS[i % LOCKS.length], step = Math.floor(i / LOCKS.length) % MSTEPS, combo = Math.floor(i / (LOCKS.length * MSTEPS));
+    const g = combo === 9 ? 4 : Math.floor(combo / 3) + 1, kind = combo === 9 ? 'frameshift' : MK3[combo % 3];
+    if (step > mutRead(game, g, kind).calls.length) return null;
+    return { g: g, kind: kind, step: step, lock: lock, code: k };
+  }
+  function mCalledSet(game, hi) { const o = {}; if (!hi) return o; mutRead(game, hi.g, hi.kind).calls.slice(0, hi.step).forEach(c => { o[c.aa] = 1; }); return o; }
+  /* after an early stop has been read, the normal gene's later amino acids can no longer be called in this gene */
+  function mGoneSet(game, hi) {
+    const o = {}; if (!hi || hi.kind !== 'nonsense') return o;
+    const R = mutRead(game, hi.g, hi.kind); if (hi.step < R.ci + 1) return o;
+    const called = mCalledSet(game, hi);
+    mutGene(game, hi.g).prot.slice(R.ci + 1).forEach(aa => { if (!called[aa]) o[aa] = 1; });
+    return o;
+  }
+  const lit = (s, at, cls) => s.split('').map((b, i) => i === at ? bt(b).replace('class="bt', 'class="bt ' + (cls || 'lit')) : bt(b)).join('');
+  const mcell = (html, cls) => '<span class="mc' + (cls ? ' ' + cls : '') + '">' + html + '</span>';
+  const aaCell = (aa, cls) => mcell(aa === 'STOP' ? 'Stop' : aa, 'aa' + (aa === 'STOP' ? ' stop' : '') + (cls ? ' ' + cls : ''));
+  function mstrip(rows, cols) {
+    return '<div class="mstrip" style="--cols:' + cols + '"><span class="ml"></span>' + Array.from({ length: cols }, (x, i) => '<span class="mn">' + (i + 1) + '</span>').join('') +
+      rows.map(r => '<span class="ml">' + r.label + '</span>' + Array.from({ length: cols }, (x, i) => r.cells[i] == null ? '<span></span>' : r.cells[i]).join('')).join('') + '</div>';
+  }
+  /* the template DNA rows, normal and changed, with the changed base lit */
+  function templRows(GN, R) {
+    const fs = R.fs, del = fs && fs.type === 'del';
+    const normal = GN.m.map((cd, i) => mcell(i === R.ci && (del || !fs) ? lit(templ(cd), R.pos, del ? 'lost' : 'was') : tiles(templ(cd)), i === R.ci ? 'chgcol' : ''));
+    const changed = R.codons.map((cd, i) => mcell(i === R.ci && !del ? lit(templ(cd), R.pos) : tiles(templ(cd)), i === R.ci ? 'chg' : fs && i > R.ci ? 'shift' : ''));
+    return [{ label: 'normal gene · <b>template DNA</b> 3′→5′', cells: normal }, { label: 'changed gene · <b>template DNA</b>', cells: changed }];
+  }
+  function whatChanged(R) {
+    if (R.fs) return 'codon ' + (R.ci + 1) + ': one base ' + (R.fs.type === 'ins' ? 'added' : 'lost');
+    return 'codon ' + (R.ci + 1) + ': ' + R.x.old + ' → ' + R.x.neu + ' (mRNA)';
+  }
+  function verdictText(R, GN, full) {
+    const n = R.ci + 1;
+    if (R.kind === 'silent') return { big: 'Silent', small: 'Same amino acid. ' + R.x.old + ' and ' + R.x.neu + ' both code for ' + R.x.oa + ', so the protein comes out the same.' };
+    if (R.kind === 'missense') return { big: 'Changed', small: 'A different amino acid: ' + R.x.na + ' where the normal protein has ' + R.x.oa + '.' };
+    if (R.kind === 'nonsense') return { big: 'Stopped', small: 'Codon ' + n + ' is now a stop. The protein is done after ' + R.ci + ' amino acids instead of ' + (GN.m.length - 1) + '.' };
+    const s = R.calls.length - 1;
+    return { big: 'Shifted', small: 'Every codon after the ' + (R.fs.type === 'ins' ? 'added' : 'lost') + ' base is read in a new frame.' + (full ? ' The new frame hits a stop at codon ' + (s + 1) + (s < 8 ? ', earlier than the normal stop.' : ', past where the normal stop was.') : '') };
+  }
+  function mCaption(R, GN, cur) {
+    const n = R.ci + 1;
+    if (R.kind === 'silent') return 'Codon ' + n + ' changed from ' + R.x.old + ' to ' + R.x.neu + ', and both code for ' + R.x.oa + '. A tRNA carrying ' + R.x.oa + ' still fits, so the protein is the same. A changed base does not always change the protein.';
+    if (R.kind === 'missense') return 'Codon ' + n + ' changed from ' + R.x.old + ' to ' + R.x.neu + '. A different tRNA comes in, anticodon ' + anti(R.x.neu) + ', and it brings ' + R.x.na + ' instead of ' + R.x.oa + '. One amino acid in the chain is different, and that can change how the protein folds and does its job.';
+    if (R.kind === 'nonsense') return 'Codon ' + n + ' changed from ' + R.x.old + ' to ' + R.x.neu + ', a stop codon. No tRNA fits it: a release factor comes in and the ribosome lets go. The protein is done after ' + R.ci + ' amino acids, and the rest of this gene’s calls are cancelled.';
+    return 'One base was ' + (R.fs.type === 'ins' ? 'added' : 'lost') + ' in codon ' + n + ', so from here the ribosome reads the bases in a new frame of three. ' + (cur && cur.i > R.ci ? 'This codon would have been ' + (GN.m[cur.i] ? GN.m[cur.i] + ' (' + GN.prot[cur.i] + ')' : 'past the end of the normal gene') + ' in the normal gene.' : 'Every amino acid after it can change.');
+  }
+
+  /* ---------- projector, Mutation round ---------- */
+  const mStepWords = (M, R) => M.phase === 'normal' ? 'The normal gene' : M.step ? 'Codon ' + M.step + (M.step === R.calls.length && R.calls[M.step - 1].aa === 'STOP' ? ' · the end' : '') : 'Predict';
+  function mutCallerView() {
+    const c = S.c, M = c.m, G = M.plan.length;
+    let h = '<section class="block"><div class="bbar"><span>Game word <b class="gw">' + esc(norm(c.game)) + '</b></span><span>Mutation round' + (M.phase === 'done' ? '' : ' · <b>gene ' + M.g + ' of ' + G + '</b>') + '</span><span>Wrong tap waits: <b>' + lockWords(c.lock) + '</b></span>';
+    if (M.phase === 'done') return h + '<span class="callno">Tally</span></div>' + mSummary() + '</section>' + mSettings();
+    const g = M.g, kind = M.plan[g - 1], GN = mutGene(c.game, g), R = mutRead(c.game, g, kind), cols = Math.max(GN.m.length, M.phase === 'read' ? M.step : 0);
+    h += '<span class="callno">' + mStepWords(M, R) + '</span></div>';
+    if (M.phase === 'normal') {
+      const p = M.play, calls = GN.m.map((cd, i) => ({ aa: BRS.CODON[cd], codon: cd, i: i }));
+      h += mstrip([
+        { label: '<b>template DNA</b> 3′→5′', cells: GN.m.map((cd, i) => mcell(tiles(templ(cd)), i === p - 1 ? 'cur' : '')) },
+        { label: '<b>mRNA</b> 5′→3′', cells: GN.m.map((cd, i) => i < p ? mcell(tiles(cd), i === p - 1 ? 'cur' : '') : mcell('· · ·', 'hid')) },
+        { label: 'normal <b>protein</b>', cells: GN.m.map((cd, i) => i < p ? aaCell(BRS.CODON[cd], i === p - 1 ? 'cur' : '') : mcell('', '')) }], cols);
+      h += '<div class="board"><div class="rows"><h2 class="mh">Gene ' + g + ': the normal gene</h2><p class="caption">Watch the ribosome read it, codon by codon. No marking yet. This is the protein the cell is supposed to make.</p>' +
+        '<div class="row ctl">' + (p < calls.length ? '<button data-act="mnorm">Read the next codon</button><button class="ghost" data-act="mnormall">' + (playT ? 'Reading…' : 'Read it all') + '</button>' : '') + '<button' + (p < calls.length ? ' class="ghost"' : '') + ' data-act="mpredict">Change one base →</button>' + (p ? '<button class="quiet" data-act="mback">Back one</button>' : '') + '</div></div>';
+      h += '<div>' + ribosome(calls, p, p ? ALLREV : {}, fx) + '<p class="caption" aria-live="polite">' + (!p ? 'Press <b>Read the next codon</b>, or <b>Read it all</b>.' : p === calls.length ? 'The normal protein: ' + GN.prot.slice(0, -1).join(' – ') + '. Then the stop codon lets it go.' : '') + '</p></div></div></section>';
+      return h + mSettings();
+    }
+    if (M.step === 0) {
+      const t = M.showT, hideFrom = R.fs ? R.ci : R.ci, hideTo = R.fs ? R.codons.length - 1 : R.ci;
+      h += mstrip(templRows(GN, R).concat([
+        { label: 'changed gene · <b>mRNA</b> 5′→3′', cells: R.codons.map((cd, i) => i >= hideFrom && i <= hideTo && !t ? mcell('? ? ?', 'hid chg') : mcell(tiles(cd), i === R.ci ? 'chg' : R.fs && i > R.ci ? 'shift' : '')) },
+        { label: 'normal <b>protein</b>', cells: GN.prot.map(aa => aaCell(aa)) }]), cols);
+      const n = R.ci + 1;
+      h += '<div class="board"><div class="rows"><h2 class="mh">Gene ' + g + ': the same gene, ' + (R.fs ? 'one base ' + (R.fs.type === 'ins' ? 'added' : 'lost') : 'one base changed') + '</h2>' +
+        '<p class="caption">' + (R.fs ? 'Find where a base was ' + (R.fs.type === 'ins' ? 'added' : 'lost') + '. Before the ribosome gets there, predict on your iPad: what happens to the protein from codon ' + n + ' on?' : 'Find the changed base in codon ' + n + '. Before the ribosome reads it, predict on your iPad: will it bring the same amino acid, a different amino acid, or stop?') + '</p>' +
+        '<ul class="mopts">' + predOpts(kind).map(o => '<li>' + PRED[o] + '</li>').join('') + '</ul>' +
+        '<div class="codebox"><span class="k">Code<b>predict</b></span><span class="code" aria-label="Predict code">' + mcodeFor(c.game, g, kind, 0, c.lock) + '</span></div></div>';
+      h += '<div class="zoom"><p class="eyebrow">Codon ' + n + (R.fs ? ' on' : '') + '</p>' + mZoom(GN, R, t) + '</div></div>';
+      h += '<div class="row ctl"><button data-act="mread">Read the changed gene</button>' + (t ? '' : '<button class="ghost" data-act="mshowt">Show the T → U step</button>') + '<button class="quiet" data-act="mback">Back one</button></div></section>';
+      return h + mSettings();
+    }
+    /* reading the changed gene, one bingo call per codon */
+    const calls = R.calls, L = calls.length, cur = calls[M.step - 1], r = c.rev, stop = cur.aa === 'STOP', isChg = cur.i === R.ci, shown = r.aa || r.trna;
+    const stopRead = R.kind === 'nonsense' && (M.step > R.ci + 1 || (M.step === R.ci + 1 && shown));
+    const pastChg = M.step - 1 > R.ci || (isChg && shown);
+    const protCells = [];
+    for (let i = 0; i < cols; i++) {
+      if (i < M.step - 1 || (i === M.step - 1 && shown && !rollT)) protCells.push(aaCell(calls[i].aa, i === R.ci ? 'chg' + (R.kind === 'silent' ? ' same' : '') : R.fs && i > R.ci ? 'shift' : ''));
+      else if (i === M.step - 1) protCells.push(mcell('?', 'hid cur'));
+      else if (stopRead && i < GN.prot.length) protCells.push(aaCell(GN.prot[i], 'gone'));
+      else protCells.push(i < L ? mcell('', '') : null);
+    }
+    h += mstrip([
+      { label: 'normal <b>protein</b>', cells: GN.prot.map((aa, i) => aaCell(aa, i === R.ci ? 'chgcol' : '')) },
+      { label: 'this <b>protein</b>', cells: protCells }], cols);
+    h += '<div class="board"><div class="rows">';
+    const rolling = !!rollT;
+    const tl = (s, at) => '<span class="tiles' + (rolling ? ' rolling' : '') + '">' + (at == null ? tiles(s) : lit(s, at)) + '</span>';
+    const litAt = isChg && !R.fs ? R.pos : isChg && R.fs.type === 'ins' ? R.pos : null;
+    const tag = isChg ? ' <span class="chgtag">changed codon</span>' : R.fs && cur.i > R.ci ? ' <span class="chgtag shift">new frame</span>' : '';
+    h += crow('dna', 'template DNA', '3′ → 5′' + tag, r.dna, 'dna', tl(templ(cur.codon), litAt));
+    h += crow('mrna', '<b>codon</b> · on the mRNA', '5′ → 3′', r.mrna, 'mrna', tl(cur.codon, litAt));
+    h += crow('trna', '<b>anticodon</b> · on the tRNA', stop ? '' : '3′ → 5′', r.trna, 'trna', stop ? '<span class="notrna">no tRNA</span>' : tl(anti(cur.codon)));
+    h += crow('aa', '<b>amino acid</b> · on the tRNA', '', r.aa, 'aa', '<span class="aaname' + (stop ? ' stop' : '') + (rolling ? ' pending' : '') + '">' + (stop ? 'STOP <span>release factor</span>' : FULL[cur.aa] + ' <span>' + cur.aa + '</span>') + '</span>');
+    h += '<div class="codebox"><span class="k">Code<b>codon ' + M.step + '</b></span><span class="code" aria-label="Code for this codon">' + mcodeFor(c.game, g, kind, M.step, c.lock) + '</span></div></div>';
+    let cap;
+    if (rolling) cap = '';
+    else if (isChg && shown) cap = mCaption(R, GN, cur);
+    else if (R.fs && cur.i > R.ci && shown) cap = mCaption(R, GN, cur);
+    else if (stop && shown) cap = cur.i === GN.m.length - 1 ? 'The normal stop codon. A release factor comes in and the finished protein is let go.' : 'No tRNA fits a stop codon, so the protein is let go here. A release factor fits instead.';
+    else if (isChg) cap = 'This is the changed codon. Predictions are locked. Work out the amino acid, then mark your card.';
+    else cap = 'Work out the amino acid, then tap every codon on your card that codes for it.';
+    let side = '';
+    if (pastChg && !rolling) { const v = verdictText(R, GN, M.step === L); side += '<div class="verdict ' + R.kind + '">' + v.big + '<span>' + v.small + '</span></div>'; }
+    if (stopRead) side += '<p class="gonenote">Cancelled: the protein is done. These calls never come, and squares waiting on them can’t be won in this gene.</p>';
+    h += '<div>' + ribosome(calls, M.step, rolling ? {} : r, fx) + '<p class="caption" aria-live="polite">' + cap + '</p>' + side + '</div></div>';
+    const chips = calls.slice(0, M.step).map((x, i) => ({ x: x, i: i })).filter(o => o.i < M.step - 1 || (shown && !rolling));
+    let ch = chips.map(o => '<span class="' + (o.i === M.step - 1 ? 'now' : '') + (o.x.aa === 'STOP' ? ' stopchip' : '') + '"><i>' + (o.i + 1) + '</i>' + o.x.aa + '</span>').join('');
+    if (stopRead) ch += GN.prot.slice(R.ci + 1).map((aa, k) => '<span class="gone"><i>' + (R.ci + 2 + k) + '</i>' + aa + '</span>').join('');
+    if (ch) h += '<div class="called" aria-label="Called in this gene">' + ch + '</div>';
+    const hidden = PRESETS.some(k => !r[k]);
+    h += '<div class="row ctl">' + (M.step < L ? '<button data-act="mnext">Read the next codon</button>' : '') + (hidden ? '<button class="ghost" data-act="revall">Reveal all</button>' : '') + '<button class="quiet" data-act="mback">Back one</button></div>';
+    if (M.step === L && shown && !rolling) h += mTallyBox(g, G);
+    return h + '</section>' + mSettings();
+  }
+  function mZoom(GN, R, t) {
+    const del = R.fs && R.fs.type === 'del', a = R.ci, b = R.fs ? Math.min(R.ci + 1, R.codons.length - 1) : R.ci;
+    const nrm = GN.m.slice(a, b + 1), chg = R.codons.slice(a, b + 1);
+    const row = (lab, cds, mark, cls) => '<div class="zrow"><span class="zl">' + lab + '</span>' + cds.map((cd, k) => '<span class="zc">' + (k === 0 && mark != null ? lit(cd, mark, cls) : tiles(cd)) + '</span>').join('') + '</div>';
+    let h = row('normal · template DNA', nrm.map(templ), del || !R.fs ? R.pos : null, del ? 'lost' : 'was') + row('changed · template DNA', chg.map(templ), del ? null : R.pos);
+    if (t) h += '<div class="tstep">' + row('normal · mRNA', nrm, null) + row('changed · mRNA', chg, del ? null : R.pos) + '<p class="note">Each template base pairs with its partner: A with U (RNA has no T), T with A, G with C, C with G.</p></div>';
+    else h += '<div class="zrow"><span class="zl">changed · mRNA</span><span class="zc cover">? ? ?</span></div>';
+    return h;
+  }
+  function mTallyBox(g, G) {
+    const M = S.c.m, n = M.tally[g] || 0;
+    return '<div class="tallybox"><span class="lbl">Gene ' + g + ' tally. Hands up if your iPad says your prediction was right.</span><div class="tally"><button class="ghost" data-act="mtally" data-d="-1" aria-label="One fewer">−</button><span class="num">' + n + '</span><button class="ghost" data-act="mtally" data-d="1" aria-label="One more">+</button><span>right' + (M.classN ? ' of ' + M.classN : '') + '</span><label class="small">Students here <input type="number" id="mclassn" min="0" max="60" value="' + esc(M.classN || '') + '" style="max-width:5.5rem"></label></div>' +
+      '<div class="row ctl"><button data-act="mnextgene">' + (g < G ? 'Next gene →' : 'See the round’s tally →') + '</button></div></div>';
+  }
+  function mSummary() {
+    const c = S.c, M = c.m;
+    let right = 0, h = '<h2 class="mh">The round’s tally</h2><div class="scroll"><table class="mtab"><thead><tr><th>Gene</th><th>What changed</th><th>What happened</th><th>Predicted right</th></tr></thead><tbody>';
+    M.plan.forEach(function (kind, k) {
+      const g = k + 1, R = mutRead(c.game, g, kind), GN = mutGene(c.game, g), v = verdictText(R, GN, true), n = M.tally[g] || 0; right += n;
+      h += '<tr><td>' + g + '</td><td>' + whatChanged(R) + '</td><td><b>' + v.big + '.</b> ' + v.small + '</td><td><b>' + n + '</b>' + (M.classN ? ' of ' + esc(M.classN) : '') + '</td></tr>';
+    });
+    h += '</tbody></table></div><ul class="takeaways"><li><b>Silent:</b> the base changed and the protein did not. A mutation is not always harmful.</li><li><b>Changed:</b> one different amino acid can change how a protein folds and works.</li><li><b>Stopped:</b> a new stop codon ends the protein early, and everything after it is never made.</li>' + (M.plan.indexOf('frameshift') >= 0 ? '<li><b>Shifted:</b> one base added or lost moves the reading frame, so every codon after it changes.</li>' : '') + '</ul>';
+    return h + '<div class="row ctl"><button class="ghost" data-act="mback">Back to the last gene</button><button class="quiet" data-act="askend">End this game</button></div>';
+  }
+  function mSettings() {
+    const c = S.c;
+    return '<section class="block" style="max-width:1200px"><div class="settings"><div><span class="lbl">Start each codon from</span>' + segHTML('preset', presetOpts, c.preset) + '</div><div><span class="lbl">A wrong tap waits</span>' + segHTML('lock', lockOpts, c.lock) + '</div></div><p class="small muted">A win is one line in each gene. Each gene is its own game: iPads clear their marks when the next gene opens.</p>' +
+      (c.ending ? '<div class="confirm"><span>End this game and set up a new one?</span><button data-act="end">Yes, end it</button><button class="ghost" data-act="keepgame">Keep playing</button></div>' : '<div class="row"><button class="quiet" data-act="askend">End this game</button><a class="btn quiet" href="#howto">How to play</a></div>') + paperCheckHTML() + '</section>';
+  }
+  function mutSetupHTML(c) {
+    const ms = c.mset, kindOpts = MK3.map(k => [k, MWORD[k]]);
+    return '<div class="msetup"><div><span class="lbl">Outcomes, one per gene</span>' + segHTML('mpick', [['shuffle', 'Shuffle the three'], ['teacher', 'I pick']], ms.pick) + '</div>' +
+      (ms.pick === 'teacher' ? [0, 1, 2].map(i => '<div><span class="lbl">Gene ' + (i + 1) + '</span>' + segHTML('mpk' + i, kindOpts, ms.picks[i]) + '</div>').join('') : '') +
+      '<div><span class="lbl">Advanced</span>' + segHTML('mfs', [['0', 'Three genes'], ['1', 'Add a fourth gene: one base added or lost']], ms.fs ? '1' : '0') + '</div></div>';
+  }
+  let playT = null;
+  function mPlayAll() {
+    clearInterval(playT);
+    playT = setInterval(function () {
+      const M = S.c.m;
+      if (view() !== 'caller' || !M || M.phase !== 'normal' || M.play >= mutGene(S.c.game, M.g).m.length) { clearInterval(playT); playT = null; render(); return; }
+      M.play++; fx = { slide: true, release: false }; save(); render(); fx = { slide: false, release: false };
+    }, 1700);
+  }
+
+  /* ---------- the student card, Mutation round ---------- */
+  function mPredPanel(hi) {
+    if (!hi) return '';
+    const s = S.s, r = s.mr, g = hi.g, R = mutRead(s.game, g, hi.kind), GN = mutGene(s.game, g), mine = r.preds[g], read = hi.step > R.ci, n = R.ci + 1;
+    const del = R.fs && R.fs.type === 'del', b = R.fs ? R.ci + 1 : R.ci;
+    const seg = (cds, mark, cls) => cds.map((cd, k) => k === 0 && mark != null ? lit(templ(cd), mark, cls) : tiles(templ(cd))).join('<span class="gap"></span>');
+    const cmp = '<div class="cmp"><span>Codon ' + n + (R.fs ? '–' + (b + 1) : '') + ', template DNA</span><span>normal ' + seg(GN.m.slice(R.ci, b + 1), del || !R.fs ? R.pos : null, del ? 'lost' : 'was') + '</span><span>changed ' + seg(R.codons.slice(R.ci, b + 1), del ? null : R.pos) + '</span></div>';
+    if (!read) {
+      if (mine) return '<div class="pred"><b>Gene ' + g + ': locked in. You predicted “' + PRED[mine] + '.”</b>' + cmp + '<span class="small">You find out when the ribosome reads codon ' + n + '.</span></div>';
+      return '<div class="pred"><b>Gene ' + g + ': ' + (R.fs ? 'one base ' + (R.fs.type === 'ins' ? 'added' : 'lost') + '. What happens from codon ' + n + ' on?' : 'one base changed. When the ribosome reads codon ' + n + ', what comes in?') + '</b>' + cmp +
+        '<div class="opts">' + predOpts(hi.kind).map(o => '<button data-act="pred" data-v="' + o + '">' + PRED[o] + '</button>').join('') + '</div><span class="small">Work out the new mRNA codon and find it on the chart. One tap, and it locks.</span></div>';
+    }
+    const res = r.res[g], v = verdictText(R, GN, hi.step === R.calls.length);
+    return '<div class="pred ' + (res === 'right' ? 'right' : res === 'wrong' ? 'wrong' : '') + '"><b>' + (res === 'right' ? 'Right. ' : res === 'wrong' ? 'Not this time. ' : 'No prediction for gene ' + g + '. ') + 'Gene ' + g + ' was ' + v.big.toLowerCase() + '.</b><span>' + v.small + '</span>' + (mine ? '<span class="small">You predicted “' + PRED[mine] + '.”</span>' : '') + '</div>';
+  }
+  function mutCardView() {
+    const s = S.s, r = s.mr, hi = r.hi, codons = cardCodons(s.game, s.cardId), left = lockLeft();
+    const open = hi && hi.step > 0, won = open && hasWin(r.marks, 1), gone = mGoneSet(s.game, hi);
+    let h = '<div class="cardlayout"><section class="block cardpane' + (hi ? ' haspred' : '') + '"><div class="gamebar"><span>Game <b class="gw">' + esc(norm(s.game)) + '</b></span><span>Card ' + s.cardId + '</span>' + roundSeg() + soundBtn() + '</div>';
+    h += '<form data-form="code" class="coderow"><label for="cc">Code from the board</label><input type="text" id="cc" maxlength="3" class="three" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" inputmode="text" aria-describedby="openstat"><button>Open</button><span class="openstat" id="openstat">' + (hi ? 'Gene <b>' + hi.g + '</b> · ' + (hi.step ? 'codon <b>' + hi.step + '</b> open' : 'predict') + ' · wait <b>' + lockWords(r.lock) + '</b>' : 'No gene open yet') + '</span></form>';
+    h += mPredPanel(hi);
+    if (fb) h += '<div class="msg ' + fb.kind + '" role="status">' + esc(fb.text) + (fb.hint ? '<small>' + esc(fb.hint) + '</small>' : '') + '</div>';
+    else h += '<div class="msg" role="status">' + (!hi ? 'Watch the normal gene on the board. Then type the predict code.' : !open ? 'Marking opens with the first codon of the changed gene.' : '') + '</div>';
+    h += '<div class="cardhead"><h2>Your card: 25 mRNA codons.</h2><span class="small muted">One line wins. Each gene is a new game.</span></div>';
+    h += '<div class="cardwrap"><div class="card' + (open ? '' : ' idle') + '" role="group" aria-label="Bingo card">' + codons.map((cd, i) => { const x = gone[BRS.CODON[cd]] && !r.marks[i]; return '<button class="sq' + (x ? ' gone' : '') + '" data-act="mark" data-i="' + i + '" aria-pressed="' + !!r.marks[i] + '" aria-label="' + cd + (x ? ', cancelled' : '') + '">' + tiles(cd) + '</button>'; }).join('') + '</div>' +
+      (left ? '<div class="lock" role="status" aria-live="polite"><span>Card locked</span><b>' + left + '</b><span>seconds</span></div>' : '') +
+      (won ? '<div class="win" role="status"><b>BINGO</b><span>Card ' + s.cardId + ' · game ' + esc(norm(s.game)) + ' · gene ' + hi.g + ', codon ' + hi.step + '</span><span class="wc">' + mcodeFor(s.game, hi.g, hi.kind, hi.step, r.lock) + '</span></div>' : '') + '</div>';
+    const done = Object.keys(r.res), nr = done.filter(k => r.res[k] === 'right').length;
+    h += '</section><div class="side">' + (done.length ? '<section class="block score"><span class="eyebrow">Your predictions</span><p><b>' + nr + ' of ' + done.length + '</b> right so far.</p></section>' : '') + '<section class="block chartpane"><h2>Codon chart</h2><p class="small muted">First base on the left, second across the top, third read down the box. <span style="color:var(--ok);font-weight:700">AUG</span> is start.</p>' + chart() + '</section>';
+    if (s.ask === 'clear') h += '<div class="confirm"><span>Clear every mark on this card?</span><button data-act="clear">Yes, clear</button><button class="ghost" data-act="noask">Keep my marks</button></div>';
+    else if (s.ask === 'leave') h += '<div class="confirm"><span>Leave this game? You get a new card and lose these marks.</span><button data-act="leave">Yes, leave</button><button class="ghost" data-act="noask">Stay</button></div>';
+    else h += '<div class="row"><button class="quiet" data-act="askclear">Clear my marks</button><button class="quiet" data-act="askleave">Join a different game</button></div>';
+    return h + '</div></div>';
+  }
+  function mtap(i) {
+    const s = S.s, r = s.mr;
+    if (!r.hi || !r.hi.step) { fb = { kind: '', text: r.hi ? 'Predict first. Marking opens with the first codon of the changed gene.' : 'Type the code from the board.' }; render(); return; }
+    if (lockLeft()) return;
+    if (r.marks[i]) { delete r.marks[i]; fb = null; save(); render(); return; }
+    const aa = BRS.CODON[cardCodons(s.game, s.cardId)[i]];
+    if (mGoneSet(s.game, r.hi)[aa]) { fb = { kind: 'bad', text: 'That call was cancelled. The protein is done.', hint: 'A stop codon ended this gene early, so its last calls never come.' }; render(); return; }
+    if (mCalledSet(s.game, r.hi)[aa]) { const before = hasWin(r.marks, 1); r.marks[i] = 1; fb = null; save(); render(); if (!before && hasWin(r.marks, 1)) chime('bingo'); return; }
+    fb = { kind: 'bad', text: 'Not this one. Check the chart.', hint: 'Is the new code in? Your card is on codon ' + r.hi.step + ' of gene ' + r.hi.g + '.' };
+    if (r.lock) r.lockUntil = Date.now() + r.lock * 1000;
+    save(); render(); chime('wrong');
+    const sq = app.querySelector('.sq[data-i="' + i + '"]'); if (sq) { sq.classList.add('nope'); setTimeout(function () { sq.classList.remove('nope'); }, 650); }
+    tickLock();
+  }
+  function mCode(val) {
+    const s = S.s, r = s.mr, d = mdecode(s.game, val);
+    if (!d) { fb = { kind: 'bad', text: cleanCode(val).length === 2 && decode(s.game, val) ? 'That code is for the Classic round. Tap Classic at the top.' : 'That code isn’t from this game. Check the board and your game word.', hint: 'Mutation round codes have three characters.' }; return false; }
+    if (r.hi && (d.g < r.hi.g || (d.g === r.hi.g && d.step < r.hi.step))) { fb = { kind: 'bad', text: 'That code is from an earlier step.' }; return false; }
+    const newGene = !r.hi || d.g !== r.hi.g, R = mutRead(s.game, d.g, d.kind);
+    if (newGene) r.marks = {};
+    if (d.step > R.ci && r.res[d.g] == null) r.res[d.g] = r.preds[d.g] ? (r.preds[d.g] === ANSWER[d.kind] ? 'right' : 'wrong') : 'none';
+    const before = !newGene && r.hi.step && hasWin(r.marks, 1);
+    r.hi = { g: d.g, kind: d.kind, step: d.step }; r.lock = d.lock;
+    fb = newGene && r.hi.g > 1 ? { kind: 'ok', text: 'Gene ' + d.g + ': a new protein, so your marks are cleared.' } : null;
+    save(); render(); if (!before && d.step && hasWin(r.marks, 1)) chime('bingo');
+    return true;
+  }
+  const roundSeg = () => '<span class="seg roundseg" role="group" aria-label="Round"><button type="button" data-act="sround" data-v="classic" aria-pressed="' + (S.s.round !== 'mut') + '">Classic</button><button type="button" data-act="sround" data-v="mut" aria-pressed="' + (S.s.round === 'mut') + '">Mutation round</button></span>';
+  const soundBtn = () => '<button class="quiet" data-act="sound" aria-pressed="' + sound + '" style="min-height:40px;padding:4px 12px">Sound: ' + (sound ? 'on' : 'off') + '</button>';
+
+  function curCall() {
+    const c = S.c;
+    if (c.round === 'mut' && c.m) { const M = c.m; return M.phase === 'read' && M.step ? mutRead(c.game, M.g, M.plan[M.g - 1]).calls[M.step - 1] : null; }
+    return c.n ? callList(c.game, 'classic')[c.n - 1] : null;
+  }
   /* ---------- render and events ---------- */
   function render() {
     const v = view(); document.body.dataset.view = v;
@@ -603,10 +1014,31 @@ const BRS = (function () {
     const a = t.dataset.act, c = S.c, s = S.s;
     if (a === 'mark') { tap(+t.dataset.i, t); return; }
     if (a === 'next') { clearInterval(rollT); rollT = -1; c.n++; c.rev = revFor(c.preset); fx = { slide: true, release: false }; save(); render(); fx = { slide: false, release: false }; rollTiles(); return; }
-    if (a === 'rev') { c.rev[t.dataset.k] = true; if (c.n && callList(c.game, 'classic')[c.n - 1].aa === 'STOP' && (t.dataset.k === 'trna' || t.dataset.k === 'aa')) fx.release = true; save(); render(); fx.release = false; return; }
-    if (a === 'revall') { const st = c.n && callList(c.game, 'classic')[c.n - 1].aa === 'STOP' && !(c.rev.trna || c.rev.aa); c.rev = { dna: true, mrna: true, trna: true, aa: true }; fx.release = !!st; save(); render(); fx.release = false; return; }
+    if (a === 'rev') { const cc = curCall(); c.rev[t.dataset.k] = true; if (cc && cc.aa === 'STOP' && (t.dataset.k === 'trna' || t.dataset.k === 'aa')) fx.release = true; save(); render(); fx.release = false; return; }
+    if (a === 'revall') { const cc = curCall(), st = cc && cc.aa === 'STOP' && !(c.rev.trna || c.rev.aa); c.rev = { dna: true, mrna: true, trna: true, aa: true }; fx.release = !!st; save(); render(); fx.release = false; return; }
+    if (a === 'sround') { s.round = t.dataset.v === 'mut' ? 'mut' : 'classic'; fb = null; save(); render(); tickLock(); return; }
+    if (a === 'pred') { const r = s.mr, hi = r.hi; if (hi && !r.preds[hi.g] && hi.step <= mutRead(s.game, hi.g, hi.kind).ci && predOpts(hi.kind).indexOf(t.dataset.v) >= 0) { r.preds[hi.g] = t.dataset.v; fb = null; } save(); render(); return; }
+    if (a.charAt(0) === 'm' && a !== 'mark' && c.m) {
+      const M = c.m, GN = mutGene(c.game, M.g);
+      if (a === 'mnorm') { if (M.play < GN.m.length) { M.play++; fx = { slide: true, release: false }; } save(); render(); fx = { slide: false, release: false }; return; }
+      if (a === 'mnormall') { if (!playT) mPlayAll(); render(); return; }
+      if (a === 'mpredict') { clearInterval(playT); playT = null; M.phase = 'read'; M.step = 0; M.showT = false; anim = { n: -1, arrived: false, released: false }; }
+      else if (a === 'mshowt') M.showT = true;
+      else if (a === 'mread' || a === 'mnext') { clearInterval(rollT); rollT = -1; M.step++; c.rev = revFor(c.preset); fx = { slide: true, release: false }; save(); render(); fx = { slide: false, release: false }; rollTiles(); return; }
+      else if (a === 'mback') {
+        clearInterval(rollT); rollT = null; clearInterval(playT); playT = null;
+        if (M.phase === 'done') { M.phase = 'read'; M.g = M.plan.length; M.step = mutRead(c.game, M.g, M.plan[M.g - 1]).calls.length; c.rev = Object.assign({}, ALLREV); }
+        else if (M.phase === 'normal') M.play = Math.max(0, M.play - 1);
+        else if (M.step > 0) { M.step--; c.rev = Object.assign({}, ALLREV); }
+        else { M.phase = 'normal'; M.play = GN.m.length; }
+        anim = { n: -1, arrived: true, released: true };
+      }
+      else if (a === 'mtally') { M.tally[M.g] = Math.max(0, (M.tally[M.g] || 0) + (+t.dataset.d)); }
+      else if (a === 'mnextgene') { if (M.g < M.plan.length) { M.g++; M.phase = 'normal'; M.play = 0; M.step = 0; M.showT = false; } else M.phase = 'done'; anim = { n: -1, arrived: false, released: false }; }
+      save(); render(); return;
+    }
     if (a === 'back') { clearInterval(rollT); rollT = null; c.n = Math.max(0, c.n - 1); c.rev = { dna: true, mrna: true, trna: true, aa: true }; anim = { n: c.n, arrived: true, released: true }; }
-    else if (a === 'set') { const k = t.dataset.k, v = t.dataset.v; if (!c.on && $('#gw')) c.game = norm($('#gw').value); if (k === 'preset') c.preset = v; else c[k] = +v; }
+    else if (a === 'set') { const k = t.dataset.k, v = t.dataset.v; if (!c.on && $('#gw')) c.game = norm($('#gw').value); if (k === 'preset') c.preset = v; else if (k === 'round') c.round = v === 'mut' ? 'mut' : 'classic'; else if (k === 'mpick') c.mset.pick = v; else if (k === 'mfs') c.mset.fs = v === '1'; else if (/^mpk\d$/.test(k)) c.mset.picks[+k.slice(3)] = v; else c[k] = +v; }
     else if (a === 'askend') c.ending = true;
     else if (a === 'keepgame') c.ending = false;
     else if (a === 'end') { S.c = fresh().c; }
@@ -621,27 +1053,29 @@ const BRS = (function () {
   });
   app.addEventListener('input', function (ev) {
     const t = ev.target;
-    if (t.id === 'cc') { t.value = t.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 2); if (t.value.length === 2) t.form.requestSubmit ? t.form.requestSubmit() : t.form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true })); }
+    if (t.id === 'cc') { const n = S.s.round === 'mut' ? 3 : 2; t.value = t.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, n); if (t.value.length === n) t.form.requestSubmit ? t.form.requestSubmit() : t.form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true })); }
   });
   app.addEventListener('submit', function (ev) {
     ev.preventDefault();
     const f = ev.target.dataset.form, s = S.s;
-    if (f === 'start') { const g = norm($('#gw').value); if (g.length < 3) { $('#gw').focus(); return; } const k = S.c; S.c = Object.assign(fresh().c, { game: g, on: true, preset: k.preset, lock: k.lock, win: k.win }); S.c.rev = revFor(S.c.preset); }
+    if (f === 'start') { const g = norm($('#gw').value); if (g.length < 3) { $('#gw').focus(); return; } const k = S.c; S.c = Object.assign(fresh().c, { game: g, on: true, preset: k.preset, lock: k.lock, win: k.win, round: k.round, mset: k.mset }); S.c.rev = revFor(S.c.preset); if (S.c.round === 'mut') { S.c.m = { plan: mPlan(g, k.mset), g: 1, phase: 'normal', play: 0, step: 0, showT: false, tally: {}, classN: k.m ? k.m.classN : '' }; anim = { n: -1, arrived: false, released: false }; } }
     else if (f === 'paper') { const g = norm($('#pw').value); if (g.length < 3) { $('#pw').focus(); return; } let k = Math.round(+$('#pn').value || 30); k = Math.max(2, Math.min(60, k + (k % 2))); S.p = { game: g, count: k }; }
     else if (f === 'pcheck') { const m = String($('#pcn').value).toUpperCase().replace(/\s/g, '').match(/^([PD])?0*(\d{1,2})$/); S.c.pcheck = m && +m[2] >= 1 && +m[2] <= 60 ? (m[1] || 'P') + (+m[2] < 10 ? '0' : '') + (+m[2]) : ''; }
     else if (f === 'join') { const g = norm($('#jw').value); if (g.length < 3) { fb = { kind: 'bad', text: 'Type the game word exactly as the projector shows it.' }; render(); return; } fb = null; S.s = Object.assign(fresh().s, { game: g, cardId: 1000 + Math.floor(Math.random() * 9000) }); }
+    else if (f === 'code' && s.round === 'mut') { if (mCode($('#cc').value)) return; }
     else if (f === 'code') {
       const d = decode(s.game, $('#cc').value);
-      if (!d) fb = { kind: 'bad', text: 'That code isn’t from this game. Check the board and your game word.' };
+      if (!d) fb = { kind: 'bad', text: mcodeTable(s.game).pre[cleanCode($('#cc').value).slice(0, 2)] ? 'That looks like a Mutation round code. Tap Mutation round at the top.' : 'That code isn’t from this game. Check the board and your game word.' };
       else if (d.call < s.hi) fb = { kind: 'bad', text: 'That code is from an earlier call.' };
       else { const before = s.hi && hasWin(s.marks, s.win); s.hi = d.call; s.lock = d.lock; s.win = d.win; fb = null; save(); render(); if (!before && hasWin(s.marks, s.win)) chime('bingo'); return; }
     }
     save(); render();
   });
+  app.addEventListener('change', function (ev) { const t = ev.target; if (t.id === 'mclassn' && S.c.m) { S.c.m.classN = String(Math.max(0, Math.min(60, Math.round(+t.value || 0))) || ''); save(); render(); } });
   window.addEventListener('hashchange', function () { fb = null; render(); window.scrollTo(0, 0); tickLock(); });
   render(); tickLock();
   /* for the build and test scripts only */
-  window.CodonBingo = { callList: callList, cardCodons: cardCodons, codeFor: codeFor, decode: decode, hasWin: hasWin, LINES: LINES, LOCKS: LOCKS, WINS: WINS, CODEALPH: CODEALPH, played: played, templ: templ, anti: anti, FULL: FULL, printChart: printChart };
+  window.CodonBingo = { callList: callList, cardCodons: cardCodons, codeFor: codeFor, decode: decode, hasWin: hasWin, LINES: LINES, LOCKS: LOCKS, WINS: WINS, CODEALPH: CODEALPH, played: played, templ: templ, anti: anti, FULL: FULL, printChart: printChart, mutGene: mutGene, mutRead: mutRead, mPlan: mPlan, mcodeFor: mcodeFor, mdecode: mdecode, mCalledSet: mCalledSet, mGoneSet: mGoneSet, MK3: MK3 };
 })();
 </script>
 

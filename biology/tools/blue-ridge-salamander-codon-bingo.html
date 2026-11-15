@@ -106,6 +106,46 @@ th{background:var(--moss-soft)} .chart td{font:400 .82rem/1.45 var(--mono);white
 footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 @media (max-width:520px){ body{font-size:16px} .block{padding:12px} .six{gap:3px} .chart td{font-size:.7rem} .chart th,.chart td{padding:4px} }
 @media (prefers-reduced-motion:reduce){ .arrive{animation:none} }
+.mstrip{display:grid;grid-template-columns:max-content repeat(var(--cols),minmax(0,1fr));gap:4px 5px;align-items:center;padding:8px 10px;border:1.5px solid var(--rule);border-radius:6px;background:var(--paper);overflow-x:auto}
+.mstrip .ml{font:600 .78rem/1.15 var(--mono);color:var(--muted);padding-right:8px}
+.mstrip .ml b{color:var(--ink);font-weight:600}
+.mstrip .mn{font:600 .7rem var(--mono);color:var(--muted);text-align:center}
+.mstrip .mc{display:flex;justify-content:center;align-items:center;gap:1px;min-height:30px;border-radius:4px;padding:2px 0}
+.mstrip .mc .bt{flex:1 1 0;min-width:0;max-width:1.55em;width:auto;height:auto;aspect-ratio:1/1;font-size:.8rem}
+.mstrip .mc.aa{font:700 .95rem var(--display)} .mstrip .mc.aa.stop{color:var(--bad)}
+.mstrip .mc.hid{font:700 .8rem var(--mono);color:var(--muted);letter-spacing:.1em}
+.mstrip .mc.chg{background:var(--ember-soft);outline:2.5px solid var(--ember)}
+.mstrip .mc.chg.same{background:var(--ok-soft);outline-color:var(--ok)}
+.mstrip .mc.chgcol{outline:2px dashed var(--ember)}
+.mstrip .mc.gone{color:var(--bad);opacity:.7;text-decoration:line-through;text-decoration-thickness:2.5px}
+.bt.lit{outline:3px solid var(--ember);outline-offset:1px}
+.bt.was{outline:2px dashed var(--ember);outline-offset:1px}
+@media (max-width:620px){ .mstrip{grid-template-columns:repeat(var(--cols),minmax(0,1fr))} .mstrip .ml{grid-column:1/-1;padding-top:4px} .mstrip>.ml:first-child{display:none} .mstrip .mc .bt{font-size:.62rem} .mstrip .mc.aa{font-size:.72rem} }
+.verdict{font:700 2rem/1.05 var(--display);padding:10px 14px;border-radius:6px;border:3px solid}
+.verdict span{display:block;font:400 1rem/1.4 var(--body);color:var(--ink);margin-top:.35em}
+.verdict.silent{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+.verdict.missense{color:var(--ember);border-color:var(--ember);background:var(--ember-soft)}
+.verdict.nonsense{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.verdict.none{color:var(--moss);border-color:var(--moss);background:var(--moss-soft)}
+.gonenote{font-weight:700;color:var(--bad)}
+.tallies{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tal{display:flex;flex-direction:column;gap:4px;padding:8px 10px;border:1.5px solid var(--rule);border-radius:6px;background:var(--paper)}
+.tal .lbl{font-weight:700} .tal .num{font:700 2rem var(--mono);min-width:2ch;text-align:center}
+.msteps{gap:10px} .msteps li .row{margin-top:6px}
+.mopts button{flex:1 1 9em;justify-content:center}
+.pred{display:flex;flex-direction:column;gap:4px;padding:10px 12px;border:2px solid var(--ember);border-radius:6px;background:var(--ember-soft)}
+.pred.right{border-color:var(--ok);background:var(--ok-soft)} .pred.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.tabs{flex-wrap:wrap}
+.wrap:has(.mutcall){max-width:1400px}
+.mutcall .mstrip{gap:8px 8px;padding:12px 14px}
+.mutcall .mstrip .ml{font-size:1rem}
+.mutcall .mstrip .mn{font-size:.95rem}
+.mutcall .mstrip .mc{min-height:46px}
+.mutcall .mstrip .mc .bt{font-size:1.3rem;max-width:1.6em}
+.mutcall .mstrip .mc.aa{font-size:1.45rem}
+.mutcall .caption{font-size:1.4rem}
+.mutcall .verdict{font-size:2.6rem} .mutcall .verdict span{font-size:1.3rem}
+.mutcall .ribo{max-width:900px;margin:0 auto}
 </style>
 <div class="wrap"><header class="top"><h1><a href="#home">Codon Bingo</a></h1><span class="small muted">Blue Ridge Salamander Project</span></header><main id="app" class="sheet"></main><footer><span>© J. R. Schwebach. All rights reserved. Free to use with your own students. Draft for classroom testing.</span><span><a href="blue-ridge-salamander-3d.html">See it in 3D</a> · genome mark <span id="gm"></span></span></footer></div>
 <script>
@@ -587,7 +627,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const app = $('#app');
   const KEY = 'codon-bingo-v3';
-  const fresh = () => ({ c: { game: '', round: 'classic', pattern: 1, n: 0, shown: false, on: false, ending: false }, s: { game: '', cardId: null, tab: 'classic', marks: {}, pattern: 1, upto: '', code: '', m: [], yn: [], done: false } });
+  const fresh = () => ({ c: { game: '', round: 'classic', pattern: 1, n: 0, shown: false, on: false, ending: false, mu: null }, s: { game: '', cardId: null, tab: 'classic', marks: {}, pattern: 1, upto: '', code: '', m: [], yn: [], done: false, mu: null } });
   let S = fresh();
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.c && j.s) { S = fresh(); Object.assign(S.c, j.c, { ending: false }); Object.assign(S.s, j.s); } } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
@@ -653,7 +693,8 @@ if (typeof module !== 'undefined') module.exports = BRS;
       '<h3>Round 1 · Classic</h3><ol><li>Press <b>Next call</b> and read the amino acid aloud.</li><li>Students find <b>every</b> codon on their card that codes for it and tap each one. Give them about half a minute.</li><li>Press <b>Show the tRNA</b>. Say what the picture shows: the tRNA carries the amino acid, and its anticodon pairs with the codon on the mRNA.</li><li>Call again. A student with a full line of five taps <b>Check my bingo</b> and enters the call number from the projector. A green screen is a true bingo. A red message outlines any marked square that does not code for something called, and one wrong mark anywhere on the card blocks the bingo.</li></ol>' +
       '<p><b>Setting the length.</b> In a class of 30, the first true line usually comes around call 7 and the first two-line card around call 10. A full card is rare before call 19, and every card is full by call 21.</p>' +
       '<h3>Round 2 · The Ember Round</h3><ol><li>Start a new game and choose <b>Ember Round</b>. Students switch their card to <b>Ember Round</b> and type their Creature Code.</li><li>Each iPad shows that salamander’s own copy of the ember gene as template DNA. Students transcribe it into mRNA first.</li><li>Call the normal ember protein in order: eight amino acids, then the stop. For each call, students check their own codon and tap <b>codes for it</b> or <b>does not</b>.</li><li>Students press Check. Anyone with a mismatch has found their salamander’s changed amino acid. Anyone whose chain stops early has found a stop codon. Anyone whose calls all match checks the lab slip: either one base changed without changing the protein, a silent change, or the animal has no new mutation.</li></ol>' +
-      '<p>Codon Bingo without a salamander, for any class, is also <a href="codon-bingo.html">its own tool</a>.</p><p class="muted">A DE Bio round, with a TATA box, the AUG start and a poly-A tail on the projector, is not built yet.</p><div class="row"><a class="btn ghost" href="#home">Back</a></div></section>';
+      '<h3>Round 3 · The Mutation Round</h3><ol><li>Start a new game and choose <b>Mutation Round</b>. Type up to three Creature Codes for class salamanders, or leave the boxes empty and the page picks one silent, one changed and one stopped from the game word.</li><li>For each class salamander, the board lines up the ridge copy (from the father) and the mother’s copy, with the changed base lit. Students transcribe it and predict by hands: same amino acid, different amino acid, or stop. Then <b>Read it on the ribosome</b>. A stop crosses out the rest of the protein.</li><li>Then <b>Now yours</b>: students switch their card to <b>Mutation Round</b> and type their Creature Code. The iPad lines up their two copies, they transcribe the changed codon, predict (it locks), and read it. A salamander with no new mutation says so, and its owner looks under the next rock at a neighbor that does carry a change.</li><li>Count hands for each result and for right predictions; the board keeps the tally.</li></ol>' +
+      '<p>Codon Bingo without a salamander, for any class, is also <a href="codon-bingo.html">its own tool</a>, with a Mutation round of its own.</p><p class="muted">A DE Bio round, with a TATA box, the AUG start and a poly-A tail on the projector, is not built yet.</p><div class="row"><a class="btn ghost" href="#home">Back</a></div></section>';
   }
 
   /* ---------- caller ---------- */
@@ -661,9 +702,11 @@ if (typeof module !== 'undefined') module.exports = BRS;
     const c = S.c;
     if (!c.on) {
       return '<section class="block"><span class="eyebrow">Projector</span><h2>Start a game</h2><form data-form="start" class="stack"><div class="field"><label for="gw">Game word</label><input type="text" id="gw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" value="' + esc(c.game || 'RIDGE' + (10 + Math.floor(Math.random() * 89))) + '" style="max-width:14rem"><span class="small muted">Students type this word to get their cards.</span></div>' +
-        '<fieldset><legend>Round</legend><label class="opt"><input type="radio" name="round" id="r-classic" value="classic"' + (c.round !== 'ember' ? ' checked' : '') + '><span><b>Classic.</b> All 20 amino acids and Stop, in a shuffled order.</span></label><label class="opt"><input type="radio" name="round" id="r-ember" value="ember"' + (c.round === 'ember' ? ' checked' : '') + '><span><b>Ember Round.</b> The nine calls of the normal ember protein: eight amino acids and the stop, checked against each student’s own salamander.</span></label></fieldset>' +
+        '<fieldset><legend>Round</legend><label class="opt"><input type="radio" name="round" id="r-classic" value="classic"' + (c.round !== 'ember' ? ' checked' : '') + '><span><b>Classic.</b> All 20 amino acids and Stop, in a shuffled order.</span></label><label class="opt"><input type="radio" name="round" id="r-ember" value="ember"' + (c.round === 'ember' ? ' checked' : '') + '><span><b>Ember Round.</b> The nine calls of the normal ember protein: eight amino acids and the stop, checked against each student’s own salamander.</span></label><label class="opt"><input type="radio" name="round" id="r-mutation" value="mutation"' + (c.round === 'mutation' ? ' checked' : '') + '><span><b>Mutation Round.</b> The ember gene with one changed base: a few class salamanders on the board first, then each student’s own. Silent, changed or stopped.</span></label></fieldset>' +
+        '<fieldset><legend>Mutation Round: class salamanders</legend><span class="small muted">Up to three Creature Codes for the board. Leave them empty and the page picks one silent, one changed and one stopped salamander from the game word.</span><div class="row">' + [0, 1, 2].map(i => '<input type="text" id="ms' + i + '" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="TF-·····" value="' + esc((c.mu && c.mu.typed && c.mu.typed[i]) || '') + '" style="max-width:9.5rem" aria-label="Class salamander ' + (i + 1) + '">').join('') + '</div></fieldset>' +
         '<div class="field"><label for="pat">A classic win is</label><select id="pat" style="max-width:14rem">' + [[1, 'one line of five'], [2, 'two lines'], [12, 'the whole card']].map(p => '<option value="' + p[0] + '"' + (c.pattern === p[0] ? ' selected' : '') + '>' + p[1] + '</option>').join('') + '</select></div><div class="row"><button>Start</button><a class="btn quiet" href="#howto">How to play</a></div></form></section>';
     }
+    if (c.round === 'mutation' && c.mu) return mutCaller();
     const calls = callList(c.game, c.round), cur = c.n ? calls[c.n - 1] : null, total = calls.length;
     let cap = '';
     if (cur && c.shown) cap = cur.aa === 'STOP' ? 'No tRNA has an anticodon for ' + cur.codon + '. A release factor fits there instead, and the finished chain is set free.' : 'The tRNA with anticodon ' + anti(cur.codon) + ' carries ' + cur.aa + ' to the codon ' + cur.codon + '. ' + (BRS.SYN[cur.aa].length > 1 ? BRS.SYN[cur.aa].length + ' different codons code for ' + cur.aa + '.' : 'Only this one codon codes for ' + cur.aa + '.');
@@ -688,7 +731,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
   function cardView() {
     const s = S.s;
     if (!s.game) return '<section class="block"><span class="eyebrow">My card</span><h2>Type the game word from the projector</h2><form data-form="join" class="row"><div class="field"><label for="jw">Game word</label><input type="text" id="jw" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="RIDGE42"></div><button style="align-self:flex-end">Get my card</button></form>' + (fb ? '<p class="say warn">' + fb + '</p>' : '') + '</section>';
-    let h = '<section class="block"><div class="gamebar"><span>Game <b class="gw">' + esc(norm(s.game)) + '</b></span><span>Card ' + s.cardId + '</span></div><div class="tabs" role="group" aria-label="Round"><button data-act="tab" data-t="classic" aria-pressed="' + (s.tab === 'classic') + '">Classic card</button><button data-act="tab" data-t="ember" aria-pressed="' + (s.tab === 'ember') + '">Ember Round</button></div>';
+    let h = '<section class="block"><div class="gamebar"><span>Game <b class="gw">' + esc(norm(s.game)) + '</b></span><span>Card ' + s.cardId + '</span></div><div class="tabs" role="group" aria-label="Round"><button data-act="tab" data-t="classic" aria-pressed="' + (s.tab === 'classic') + '">Classic card</button><button data-act="tab" data-t="ember" aria-pressed="' + (s.tab === 'ember') + '">Ember Round</button><button data-act="tab" data-t="mutation" aria-pressed="' + (s.tab === 'mutation') + '">Mutation Round</button></div>';
     if (s.tab === 'classic') {
       const codons = cardCodons(s.game, s.cardId);
       const bad = claim && claim.bad ? claim.bad : {};
@@ -696,7 +739,8 @@ if (typeof module !== 'undefined') module.exports = BRS;
       if (claim && claim.ok) h += '<div class="win" role="status"><b>BINGO</b><span>Card ' + s.cardId + ' · game ' + esc(norm(s.game)) + ' · true at call ' + claim.n + '</span></div>';
       else if (claim) h += '<p class="say warn" role="status">' + claim.msg + '</p>';
       h += '<div class="row"><div class="field"><label for="upto">Call number on the projector</label><select id="upto" style="max-width:9rem"><option value="">Choose</option>' + Array.from({ length: 21 }, (x, i) => '<option' + (String(s.upto) === String(i + 1) ? ' selected' : '') + '>' + (i + 1) + '</option>').join('') + '</select></div><div class="field"><label for="spat">A win is</label><select id="spat" style="max-width:11rem">' + [[1, 'one line'], [2, 'two lines'], [12, 'the whole card']].map(p => '<option value="' + p[0] + '"' + (s.pattern === p[0] ? ' selected' : '') + '>' + p[1] + '</option>').join('') + '</select></div><button data-act="claim" style="align-self:flex-end">Check my bingo</button></div><div class="row"><button class="quiet" data-act="clear">Clear my marks</button><button class="quiet" data-act="leave">Join a different game</button></div>';
-    } else {
+    } else if (s.tab === 'mutation') h += mutTab();
+    else {
       const cr = s.code ? BRS.creature(s.code) : null;
       if (!cr) h += '<p>The Ember Round is played on your own salamander.</p><form data-form="code" class="row"><div class="field"><label for="cc">Creature Code</label><input type="text" id="cc" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="TF-7K3QM"></div><button style="align-self:flex-end">Load my salamander</button></form>' + (fb ? '<p class="say warn">' + fb + '</p>' : '');
       else {
@@ -711,7 +755,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
         h += '<div class="row"><button class="quiet" data-act="ecode">Use a different Creature Code</button></div>';
       }
     }
-    return h + '</section><details' + (S.s.tab === 'ember' ? ' open' : '') + '><summary>Codon chart</summary><p class="small muted">First base on the left, second base across the top, third base inside the box.</p>' + chart() + '</details>';
+    return h + '</section><details' + (S.s.tab !== 'classic' ? ' open' : '') + '><summary>Codon chart</summary><p class="small muted">First base on the left, second base across the top, third base inside the box.</p>' + chart() + '</details>';
   }
   function checkClaim() {
     const s = S.s, n = +s.upto;
@@ -726,6 +770,121 @@ if (typeof module !== 'undefined') module.exports = BRS;
     if (nbad) return { bad: bad, msg: nbad + ' marked ' + (nbad === 1 ? 'square does' : 'squares do') + ' not code for anything called by call ' + n + '. They are outlined with dashes. Check them on the chart, unmark them, and try again.' };
     if (s.pattern === 12 ? marked.length === 25 : full >= s.pattern) return { ok: true, n: n };
     return { msg: s.pattern === 12 ? 'The whole card is not marked yet.' : s.pattern === 2 ? 'Two full lines are needed. This card has ' + full + '.' : 'No full line of five yet.' };
+  }
+
+
+  /* ================= Ember Mutation Round =================
+     Reads each salamander's own ember gene: the mother's copy lined up under the ridge reference (the father's copy).
+     Nothing here changes an animal: every sequence comes from BRS.creature(), which this round only reads. */
+  const MK = { silent: 'Silent', missense: 'Changed', nonsense: 'Stopped', none: 'No new mutation' };
+  const MANS = { silent: 'same', missense: 'diff', nonsense: 'stop' };
+  const MPRED = { same: 'Same amino acid', diff: 'Different amino acid', stop: 'Stop' };
+  const litT = (s, at, cls) => s.split('').map((b, i) => i === at ? bt(b).replace('class="bt', 'class="bt ' + (cls || 'lit')) : bt(b)).join('');
+  const EREF = BRS.EMB;
+  function readTo(mrna) { const o = []; for (const cd of mrna) { o.push(BRS.CODON[cd]); if (BRS.CODON[cd] === 'STOP') break; } return o; }
+  /* one salamander's ember gene, ready to show */
+  function ember(code) {
+    const cr = BRS.creature(code); if (!cr) return null;
+    const m = cr.mut;
+    if (!m) return { code: cr.code, kind: 'none', cr: cr };
+    return { code: cr.code, kind: m.kind, cr: cr, ci: m.codon, pos: m.pos, old: m.oldCodon, neu: m.newCodon, oa: m.oldAA, na: m.newAA, mrna: m.mrna, template: m.template, prot: readTo(m.mrna) };
+  }
+  /* a neighbor under the next rock that does carry a change, for a student whose own animal has none */
+  function neighbor(code) {
+    const c = BRS.parseCode(code); if (!c.ok) return null;
+    const r = BRS.rng(c.code + '|ember-neighbor');
+    for (let t = 0; t < 400; t++) { const n = BRS.codeFrom(r, c.site); if (n !== c.code && BRS.hasMutation(n)) return n; }
+    return null;
+  }
+  /* three class salamanders from the game word when the teacher leaves the boxes empty: one silent, one changed, one stopped */
+  function classPicks(game) {
+    const r = BRS.rng('ember-mutation|' + norm(game)), want = { silent: null, missense: null, nonsense: null };
+    for (let t = 0; t < 3000 && (!want.silent || !want.missense || !want.nonsense); t++) {
+      const code = BRS.codeFrom(r, BRS.SITES[Math.floor(r() * 3)].id); if (!BRS.hasMutation(code)) continue;
+      const e = ember(code); if (e && !want[e.kind]) want[e.kind] = code;
+    }
+    return shuffledBy([want.silent, want.missense, want.nonsense].filter(Boolean), BRS.rng('ember-mutation|' + norm(game) + '|order'));
+  }
+  function shuffledBy(a, r) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function verdict(e) {
+    if (e.kind === 'none') return 'The two copies match at every base. This salamander carries no new ember mutation.';
+    const n = e.ci + 1;
+    if (e.kind === 'silent') return 'Codon ' + n + ' changed from ' + e.old + ' to ' + e.neu + ', and both code for ' + e.oa + '. The protein comes out the same. A changed base does not always change the protein.';
+    if (e.kind === 'missense') return 'Codon ' + n + ' changed from ' + e.old + ' to ' + e.neu + '. A different tRNA brings ' + e.na + ' where the ridge protein has ' + e.oa + '. One amino acid in the chain is different.';
+    return 'Codon ' + n + ' changed from ' + e.old + ' to ' + e.neu + ', a stop codon. A release factor comes in instead of a tRNA, and the protein is done after ' + e.ci + ' amino acid' + (e.ci === 1 ? '' : 's') + ' instead of ' + (EREF.mrna.length - 1) + '.';
+  }
+  /* the two copies, lined up codon by codon, with the changed base lit */
+  function emStrip(e, o) {
+    o = o || {};
+    const n = EREF.mrna.length, has = e.kind !== 'none';
+    const cell = (html, cls) => '<span class="mc' + (cls ? ' ' + cls : '') + '">' + html + '</span>';
+    const rows = [];
+    rows.push(['ridge copy, from the father · <b>template DNA</b>', EREF.template.map((t, i) => cell(has && i === e.ci ? litT(t, e.pos, 'was') : tiles(t), has && i === e.ci ? 'chgcol' : ''))]);
+    rows.push(['mother’s copy · <b>template DNA</b>', (has ? e.template : EREF.template).map((t, i) => cell(has && i === e.ci ? litT(t, e.pos) : tiles(t), has && i === e.ci ? 'chg' : ''))]);
+    if (o.mrna) rows.push(['mother’s copy · <b>mRNA</b>', (has ? e.mrna : EREF.mrna).map((cd, i) => has && i === e.ci && !o.read && !o.tx ? cell('?', 'hid chg') : cell(has && i === e.ci ? litT(cd, e.pos) : tiles(cd), has && i === e.ci ? 'chg' : ''))]);
+    rows.push(['ridge <b>protein</b>', EREF.protein.map(aa => cell(aa === 'STOP' ? 'Stop' : aa, 'aa' + (aa === 'STOP' ? ' stop' : '')))]);
+    if (o.read) {
+      const p = has ? e.prot : EREF.protein;
+      rows.push(['this salamander’s <b>protein</b>', EREF.protein.map((aa, i) => i < p.length ? cell(p[i] === 'STOP' ? 'Stop' : p[i], 'aa' + (p[i] === 'STOP' ? ' stop' : '') + (has && i === e.ci ? ' chg' + (e.kind === 'silent' ? ' same' : '') : '')) : cell(aa === 'STOP' ? 'Stop' : aa, 'aa gone'))]);
+    }
+    return '<div class="mstrip" style="--cols:' + n + '"><span class="ml"></span>' + EREF.mrna.map((x, i) => '<span class="mn">' + (i + 1) + '</span>').join('') + rows.map(r => '<span class="ml">' + r[0] + '</span>' + r[1].join('')).join('') + '</div>';
+  }
+
+  /* ---------- projector ---------- */
+  function mutCaller() {
+    const c = S.c, M = c.mu, list = M.codes, i = M.i;
+    let h = '<section class="block callbox mutcall"><div class="gamebar"><span>Game word <b class="gw">' + esc(norm(c.game)) + '</b></span><span>Mutation Round</span></div>';
+    if (i < list.length) {
+      const e = ember(list[i]), read = M.read;
+      h += '<p class="eyebrow">Class salamander ' + (i + 1) + ' of ' + list.length + '</p><p class="bigcall" style="font-size:clamp(2rem,6vw,3.4rem)">' + e.code + '</p>';
+      h += emStrip(e, { mrna: true, read: read });
+      if (!read) h += '<p class="caption">' + (e.kind === 'none' ? 'This salamander’s two copies match. Is there anything to predict?' : 'Find the changed base in codon ' + (e.ci + 1) + '. Transcribe it, then hands up: same amino acid, different amino acid, or stop?') + '</p><div class="row"><button data-act="mread">Read it on the ribosome</button>' + (i ? '<button class="quiet" data-act="mprev">Back one</button>' : '') + '</div>';
+      else {
+        if (e.kind !== 'none') { const calls = e.mrna.slice(0, e.prot.length).map((cd, k) => ({ aa: BRS.CODON[cd], codon: cd })); h += ribosome(calls, e.ci + 1, true); }
+        h += '<div class="verdict ' + e.kind + '">' + MK[e.kind] + '<span>' + verdict(e) + '</span></div>';
+        if (e.kind === 'nonsense') h += '<p class="gonenote">Crossed out: the rest of the ember protein is never made.</p>';
+        h += '<div class="row"><button data-act="mnextsal">' + (i + 1 < list.length ? 'Next class salamander →' : 'Now yours →') + '</button><button class="quiet" data-act="mprev">Back one</button></div>';
+      }
+    } else {
+      h += '<p class="eyebrow">Now yours</p><h2>Your own salamander’s ember gene</h2><p>On your iPad, open <b>Mutation Round</b> and type your Creature Code. Line up your two copies, find the changed base, transcribe it, predict, then read it on the ribosome.</p>' +
+        '<h3>Class tally</h3><div class="tallies">' + ['silent', 'missense', 'nonsense', 'none', 'right'].map(k => '<div class="tal"><span class="lbl">' + (k === 'right' ? 'Predicted right' : MK[k]) + '</span><div class="row"><button class="ghost" data-act="mtal" data-k="' + k + '" data-d="-1" aria-label="One fewer">−</button><span class="num">' + (M.tally[k] || 0) + '</span><button class="ghost" data-act="mtal" data-k="' + k + '" data-d="1" aria-label="One more">+</button></div></div>').join('') + '</div>' +
+        '<p class="small muted">Count hands for each result, then for right predictions. About half the class carries a new ember mutation; the rest have none.</p>' + (list.length ? '<div class="row"><button class="quiet" data-act="mprev">Back to the class salamanders</button></div>' : '');
+    }
+    h += '</section><section class="block">' + (c.ending ? '<p>End this game and set up a new one?</p><div class="row"><button data-act="end">Yes, end it</button><button class="ghost" data-act="keepgame">Keep playing</button></div>' : '<div class="row"><button class="quiet" data-act="askend">End this game</button><a class="btn quiet" href="#howto">How to play</a></div>') + '</section>';
+    return h;
+  }
+
+  /* ---------- the student's iPad ---------- */
+  function mutTab() {
+    const s = S.s, own = s.code ? ember(s.code) : null;
+    if (!own) return '<p>The Mutation Round is played on your own salamander’s ember gene.</p><form data-form="code" class="row"><div class="field"><label for="cc">Creature Code</label><input type="text" id="cc" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="TF-7K3QM"></div><button style="align-self:flex-end">Load my salamander</button></form>' + (fb ? '<p class="say warn">' + fb + '</p>' : '');
+    const mu = s.mu && s.mu.code === own.code ? s.mu : (s.mu = { code: own.code, nb: '', tx: '', pred: '', read: false, txok: false });
+    let h = '';
+    if (own.kind === 'none' && !mu.nb) {
+      h += '<p><b>' + own.code + '</b> · your two copies of the ember gene.</p>' + emStrip(own, {});
+      h += '<div class="result"><b>No new mutation.</b><span>Your mother’s copy matches the ridge copy at every base, so your salamander builds the ridge ember protein. Report <b>No new mutation</b> for the class tally.</span><span>Then look under the next rock: a neighbor of your salamander does carry a change.</span></div><div class="row"><button data-act="mnb">Look under the next rock</button></div>';
+      return h + '<div class="row"><button class="quiet" data-act="ecode">Use a different Creature Code</button></div>';
+    }
+    const e = mu.nb ? ember(mu.nb) : own, n = e.ci + 1;
+    h += mu.nb ? '<p><b>' + own.code + '</b> carries no new mutation (report <b>No new mutation</b>). Under the next rock: <b>' + e.code + '</b>, its neighbor.</p>' : '<p><b>' + e.code + '</b> · your two copies of the ember gene, lined up.</p>';
+    h += emStrip(e, { mrna: mu.txok, tx: mu.txok, read: mu.read });
+    h += '<ol class="msteps">';
+    h += '<li><b>Find the changed base.</b> It is lit in codon ' + n + ' of the mother’s copy.</li>';
+    if (!mu.txok) h += '<li><b>Transcribe codon ' + n + ' of the mother’s copy into mRNA.</b> Template ' + tiles(e.template[e.ci]) + '<form data-form="mtx" class="row"><input type="text" id="mtx" maxlength="3" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="mRNA codon ' + n + '" value="' + esc(mu.tx) + '" style="max-width:7rem;letter-spacing:.2em"><button>Check</button></form>' + (fb ? '<p class="say warn" role="status">' + fb + '</p>' : '') + '</li>';
+    else {
+      h += '<li><b>Codon ' + n + ' on the mother’s mRNA:</b> ' + tiles(e.mrna[e.ci]) + '</li>';
+      if (!mu.pred) h += '<li><b>Predict.</b> When the ribosome reads codon ' + n + ', what comes in? Find it on the chart, then tap once. It locks.<div class="row mopts">' + ['same', 'diff', 'stop'].map(o => '<button data-act="mpred" data-v="' + o + '">' + MPRED[o] + '</button>').join('') + '</div></li>';
+      else if (!mu.read) h += '<li><b>Locked in:</b> ' + MPRED[mu.pred] + '.</li><li><div class="row"><button data-act="mread">Read it on the ribosome</button></div></li>';
+      else {
+        const right = mu.pred === MANS[e.kind];
+        h += '</ol>';
+        if (e.kind !== 'none') { const calls = e.mrna.slice(0, e.prot.length).map(cd => ({ aa: BRS.CODON[cd], codon: cd })); h += ribosome(calls, e.ci + 1, true); }
+        h += '<div class="verdict ' + e.kind + '">' + MK[e.kind] + '<span>' + verdict(e) + '</span></div>';
+        h += '<div class="pred ' + (right ? 'right' : 'wrong') + '"><b>' + (right ? 'Your prediction was right.' : 'Not this time.') + '</b><span>You predicted “' + MPRED[mu.pred] + '.”</span><span>For the class tally, report <b>' + (mu.nb ? MK.none : MK[e.kind]) + '</b>' + (mu.nb ? ' for your own salamander' : '') + ', and whether your prediction was right.</span></div>';
+        return h + '<div class="row"><button class="quiet" data-act="ecode">Use a different Creature Code</button></div>';
+      }
+    }
+    return h + '</ol><div class="row"><button class="quiet" data-act="ecode">Use a different Creature Code</button></div>';
   }
 
   /* ---------- render and events ---------- */
@@ -744,7 +903,14 @@ if (typeof module !== 'undefined') module.exports = BRS;
     else if (a === 'claim') claim = checkClaim();
     else if (a === 'clear') { s.marks = {}; claim = null; }
     else if (a === 'leave') { const keep = { code: s.code }; S.s = Object.assign(fresh().s, keep); claim = null; fb = ''; }
-    else if (a === 'ecode') { s.code = ''; s.m = []; s.yn = []; s.done = false; fb = ''; }
+    else if (a === 'ecode') { s.code = ''; s.m = []; s.yn = []; s.done = false; s.mu = null; fb = ''; }
+    else if (a === 'mread' && view() === 'caller') { if (c.mu) c.mu.read = true; }
+    else if (a === 'mread') { if (s.mu && s.mu.pred) s.mu.read = true; }
+    else if (a === 'mnextsal') { c.mu.i++; c.mu.read = false; }
+    else if (a === 'mprev') { const M = c.mu; if (M.i >= M.codes.length) { M.i = M.codes.length - 1; M.read = M.i >= 0; if (M.i < 0) M.i = 0; } else if (M.read) M.read = false; else if (M.i > 0) { M.i--; M.read = true; } }
+    else if (a === 'mtal') { const M = c.mu; M.tally[t.dataset.k] = Math.max(0, (M.tally[t.dataset.k] || 0) + (+t.dataset.d)); }
+    else if (a === 'mnb') { if (s.mu) { s.mu.nb = neighbor(s.code) || ''; s.mu.tx = ''; s.mu.txok = false; s.mu.pred = ''; s.mu.read = false; } fb = ''; }
+    else if (a === 'mpred') { if (s.mu && !s.mu.pred && MPRED[t.dataset.v]) s.mu.pred = t.dataset.v; }
     else if (a === 'echeck') {
       const cr = BRS.creature(s.code), m = cr.mut || Object.assign({ kind: 'none' }, cr.ember.copies[0]); let ok = true, sawT = false;
       m.template.forEach(function (x, i) {
@@ -769,11 +935,26 @@ if (typeof module !== 'undefined') module.exports = BRS;
   app.addEventListener('submit', function (ev) {
     ev.preventDefault();
     const f = ev.target.dataset.form;
-    if (f === 'start') { const g = norm($('#gw').value); if (g.length < 3) { $('#gw').focus(); return; } S.c = Object.assign(fresh().c, { game: g, round: $('#r-ember').checked ? 'ember' : 'classic', pattern: +$('#pat').value, on: true }); }
+    if (f === 'start') {
+      const g = norm($('#gw').value); if (g.length < 3) { $('#gw').focus(); return; }
+      const round = $('#r-mutation').checked ? 'mutation' : $('#r-ember').checked ? 'ember' : 'classic';
+      S.c = Object.assign(fresh().c, { game: g, round: round, pattern: +$('#pat').value, on: true });
+      if (round === 'mutation') {
+        const typed = [0, 1, 2].map(i => $('#ms' + i).value.trim()), codes = [];
+        for (const t of typed) { if (!t) continue; const p = BRS.parseCode(t); if (!p.ok) { alertMsg($('#ms' + typed.indexOf(t)), p.why); return; } codes.push(p.code); }
+        S.c.mu = { typed: typed, codes: codes.length ? codes : classPicks(g), i: 0, read: false, tally: {} };
+      }
+    }
+    else if (f === 'mtx') {
+      const mu = S.s.mu, e = ember(mu.nb || S.s.code), v = $('#mtx').value.trim().toUpperCase().replace(/[^A-Z]/g, ''); mu.tx = v;
+      if (v === e.mrna[e.ci]) { mu.txok = true; fb = ''; }
+      else fb = (v.indexOf('T') >= 0 ? 'RNA has no T. Where DNA would use T, RNA uses U. ' : '') + 'Pair each template base with its partner: A with U, T with A, G with C, C with G.';
+    }
     else if (f === 'join') { const g = norm($('#jw').value); if (g.length < 3) { fb = 'Type the game word exactly as the projector shows it.'; render(); return; } fb = ''; S.s = Object.assign(fresh().s, { game: g, cardId: 1000 + Math.floor(Math.random() * 9000), code: S.s.code }); }
-    else if (f === 'code') { const p = BRS.parseCode($('#cc').value); if (!p.ok) { fb = p.why; render(); return; } fb = ''; S.s.code = p.code; S.s.m = []; S.s.yn = []; S.s.done = false; }
+    else if (f === 'code') { const p = BRS.parseCode($('#cc').value); if (!p.ok) { fb = p.why; render(); return; } fb = ''; S.s.code = p.code; S.s.m = []; S.s.yn = []; S.s.done = false; S.s.mu = null; }
     save(); render();
   });
+  function alertMsg(el, why) { const old = document.getElementById('msbad'); if (old) old.remove(); el.focus(); el.insertAdjacentHTML('afterend', '<span id="msbad" class="say warn small" role="status">' + esc(why) + '</span>'); }
   window.addEventListener('hashchange', function () { fb = ''; claim = null; render(); window.scrollTo(0, 0); });
   render();
   (function () { const gm = document.getElementById('gm'); if (gm) gm.textContent = BRS.fingerprint(); })();
