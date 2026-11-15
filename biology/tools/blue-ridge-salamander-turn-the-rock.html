@@ -906,7 +906,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
           : '<p class="say" role="status"><b>Damp soil, nothing else.</b> Most cover objects in a real survey are empty. Set this one back before you lift another.</p>';
         msg += '<div class="row"><button data-act="setback">Set the ' + nm + ' back exactly as it was</button></div>';
       } else if (flash) { msg = '<p class="say' + (flash.warn ? ' warn' : '') + '" role="status">' + flash.t + '</p>'; }
-      else if (S.code && S.placed) msg = '<p class="say good" role="status"><b>Your creature is ' + S.code + ', a ' + st.pop + '.</b> <a href="#decode">Go to step 2 and decode its genes.</a></p>';
+      else if (S.code && S.placed) msg = '<p class="say good" role="status"><b>Your creature is ' + S.code + ', a ' + st.pop + '.</b> Find its genes first. Then <a href="#decode">go to step 2 and decode them.</a></p><div class="row"><a class="btn" id="next-ftg" style="text-decoration:none;display:inline-flex;align-items:center" href="blue-ridge-salamander-find-the-genes.html#c=' + S.code + '">Next: Find the Genes</a></div>';
       else if (have && S.placed) msg = '<p class="say" role="status"><b>The swab is on its way to the lab.</b> Roll the second die below.</p>';
       else if (have) msg = '<p class="say" role="status">You found your animal. Its cover object is still out of place.</p>';
       else msg = '<p class="say" role="status">Tap a rock, the log or the bark to lift one edge and look underneath.</p>';
@@ -1043,6 +1043,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     if (!BRS.GENES.some(g => g.id === S.gene)) S.gene = 'STR';
     const e = BRS.entry(CR, S.gene), g = e.gene, m = e.copies[0], f = e.copies[1] || null, dc = e.diff ? e.diff.codon : undefined;
     let h = '<section class="block"><span class="eyebrow">Step 2 · decode</span><h2>Read ' + S.code + ' one gene at a time</h2>' +
+      '<div class="row"><a class="btn" id="next-ftg2" style="text-decoration:none;display:inline-flex;align-items:center;background:transparent;color:var(--ink)" href="blue-ridge-salamander-find-the-genes.html#c=' + S.code + '">Next: Find the Genes</a><span class="small muted">Not marked your strips yet? Do that first, then come back here.</span></div>' +
       '<p class="lede">Each gene is a short stretch of double-stranded DNA. RNA polymerase unzips it and reads one strand, the template. Build the mRNA by pairing a base with each template base, then use the codon chart to translate the mRNA into a chain of amino acids. The chain is the protein, and the protein gives the animal a trait.</p>' +
       '<p>' + S.code + ' has two copies of most genes, one from each parent. You decode the copy from its mother. Then the copy from its father appears, and you compare the two.</p>' +
       '<p class="muted">' + partsDone() + ' of ' + BRS.PARTS.length + ' parts done (' + nDone() + ' of ' + BRS.GENES.length + ' genes, and the ember gene in step 3). Each gene that checks correct writes its trait into <a href="#notes">your field notes</a> right away.</p>' +

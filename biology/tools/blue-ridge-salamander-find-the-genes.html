@@ -43,6 +43,7 @@ p{margin:0;max-width:65ch} .muted{color:var(--muted)} .small{font-size:.88rem} .
 .chrom.done{border-color:var(--ok)}
 .eyebrow{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
 button,.btn{font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.grouphead{font:700 1.05rem var(--display);margin:10px 0 0}
 button.ghost,.btn.ghost{background:transparent;color:var(--ink)} button.quiet{border-color:var(--rule);background:transparent;color:var(--ink);font-weight:400}
 :focus-visible{outline:3px solid var(--ember);outline-offset:2px}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -572,6 +573,20 @@ if (typeof module !== 'undefined') module.exports = BRS;
   try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.code && BRS.parseCode(j.code).ok) S = Object.assign(fresh(j.code), j); } catch (e) { /* storage is a convenience only */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
   let CR = BRS.creature(S.code), anchor = null, fb = {}, codeMsg = '', downloads = null, saveMsg = '';
+  /* Arriving from Turn the Rock, the address carries the Creature Code (#c=TF-7CBW4), so the page opens on that animal and never on the example. */
+  (function () {
+    const m = /^#c=([A-Za-z0-9-]{7,9})$/.exec(location.hash || ''); if (!m) return;
+    const p = BRS.parseCode(m[1]);
+    if (p.ok) { if (p.code !== S.code) { S = fresh(p.code); CR = BRS.creature(p.code); } save(); }
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* the page still opens on the find view */ }
+  })();
+  /* The strips every student marks: one gene, two genes, no gene, and the Y for males. The rest are optional. */
+  const assigned = () => CR.chroms.filter(c => ['c1', 'c2', 'c13', 'cY'].indexOf(c.key) >= 0);
+  const assignedDone = () => assigned().filter(c => S.ok[c.key]).length;
+  function doneHTML() {
+    const a = assigned(), n = assignedDone();
+    return n === a.length ? '<section class="block"><p class="say good" role="status"><b>You found ' + n + ' of ' + a.length + '. Done.</b> The other strips are optional.</p><div class="row"><a class="btn" id="backttr" href="blue-ridge-salamander-turn-the-rock.html#decode">Back to Turn the Rock</a></div></section>' : '';
+  }
   const PENS = [['r', 'TATA box'], ['g', 'Start · ATG'], ['p', 'Stop · TAA TAG TGA'], ['t', 'Whole gene'], ['x', 'Eraser']];
   const COMP = { A: 'T', T: 'A', G: 'C', C: 'G' }, BASEHEX = { A: '#0072b2', C: '#f0c419', G: '#3d4750', T: '#d55e00' };
   const PENHEX = { r: '#d5362b', g: '#23894a', p: '#7748c2', t: '#5fd3d6' };
@@ -620,8 +635,9 @@ if (typeof module !== 'undefined') module.exports = BRS;
     return '<section class="block"><h3>The 15th pair decides the sex</h3><fieldset id="sexq"><legend>Count the strips. Is one of them a Y chromosome?</legend><label class="opt"><input type="radio" name="sex" id="sex-XX" value="XX"' + (S.sex === 'XX' ? ' checked' : '') + '><span><b>XX, female.</b> Fifteen strips and no Y. The father gave an X.</span></label><label class="opt"><input type="radio" name="sex" id="sex-XY" value="XY"' + (S.sex === 'XY' ? ' checked' : '') + '><span><b>XY, male.</b> A 16th strip, the Y, came from the father.</span></label></fieldset><div class="row"><button data-act="sex">Check</button></div>' + (fb.sex ? '<p class="say warn" role="status">' + fb.sex + '</p>' : '') + '</section>';
   }
   function findView() {
-    const tot = totalGenes(), fd = foundGenes();
+    const tot = totalGenes(), fd = foundGenes(), mine = assigned(), rest = CR.chroms.filter(c => mine.indexOf(c) < 0);
     let h = '<section class="block"><span class="eyebrow">Before decoding · find the genes</span><h2>Most of this DNA is not a gene. Mark the parts that are.</h2>' +
+      '<p class="lede"><b>Mark where each gene starts and stops. Some DNA has no gene.</b> Your strips today: ' + mine.map(c => c.key === 'cY' ? 'the Y chromosome' : c.label.toLowerCase()).join(', ').replace(/, ([^,]*)$/, ' and $1') + '. The other strips are optional.</p>' +
       '<p class="lede">This is the DNA of ' + S.code + ', one strand of each chromosome, read left to right. Somewhere in it are the genes that build this salamander.</p>' +
       '<p class="say"><b>What is drawn.</b> This salamander has 15 pairs of chromosomes. The set it got from its mother is drawn here: one chromosome from each pair. Each of chromosomes 1 to 14 has a partner from the father. That partner is in the animal and is not drawn. If you see a 16th strip, it is a Y chromosome, and it came from the father.</p>' +
       '<ol class="rule"><li><b class="k r">TATA</b> A gene is switched on at a TATA box. Find every one.</li><li><b class="k g">ATG</b> The gene starts at the first ATG after the TATA box.</li><li><b class="k p">TAA · TAG · TGA</b> These three codons are stops. Count by threes from the start. The first TAA, TAG or TGA that lands on a count of three ends the gene.</li><li><b class="k t">Gene</b> Everything from the start through the stop is the gene.</li></ol>' +
@@ -629,12 +645,12 @@ if (typeof module !== 'undefined') module.exports = BRS;
       (S.example ? '<p class="say">This is an example salamander. Type your own Creature Code to load yours.</p>' : '') +
       '<form class="row" data-form="code"><div class="field"><label for="code">Creature Code</label><input type="text" id="code" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="TF-7K3QM" value="' + (S.example ? '' : esc(S.code)) + '"></div><button class="ghost" style="align-self:flex-end">Load</button></form>' + (codeMsg ? '<p class="say warn">' + codeMsg + '</p>' : '') + '</section>';
     h += '<div class="sticky">' + pensHTML() + '<p class="progress" id="prog">' + progressText() + '</p></div>';
-    h += CR.chroms.map(chromHTML).join('') + '<div id="sexbox">' + sexHTML() + '</div>';
-    h += '<section class="block"><h3>Keep your genome</h3><p>Your highlighted genome page is the record of this animal’s DNA. Save it and upload it to Canvas.</p><div class="row"><a class="btn" href="#genome">Open my genome page</a></div></section>';
+    h += '<h3 class="grouphead">Your strips today</h3>' + mine.map(chromHTML).join('') + '<div id="donebox">' + doneHTML() + '</div><h3 class="grouphead">The other strips · optional</h3>' + rest.map(chromHTML).join('') + '<div id="sexbox">' + sexHTML() + '</div>';
+    h += '<section class="block"><h3>Keep your genome</h3><p>Your highlighted genome page is the record of this animal’s DNA. Save it and upload it to Canvas.</p><div class="row"><a class="btn" href="#genome">Open my genome page</a><a class="btn ghost" id="see3d" href="blue-ridge-salamander-3d.html">See it in 3D</a></div><p class="small muted">The 3D page opens once every gene is decoded in Turn the Rock, or with a keeper code.</p></section>';
     void tot; void fd;
     return h;
   }
-  function progressText() { const ck = CR.chroms.filter(c => S.ok[c.key]).length; return allDone() ? 'Every gene found: ' + totalGenes() + ' genes on ' + CR.chroms.length + ' strips.' : 'Genes found: ' + foundGenes() + ' of ' + totalGenes() + ' · chromosomes checked: ' + ck + ' of ' + CR.chroms.length; }
+  function progressText() { const ck = CR.chroms.filter(c => S.ok[c.key]).length; const a = assigned(), n = assignedDone(); return allDone() ? 'Every gene found: ' + totalGenes() + ' genes on ' + CR.chroms.length + ' strips.' : n === a.length ? 'You found ' + n + ' of ' + a.length + '. Done. Optional: ' + ck + ' of ' + CR.chroms.length + ' strips checked' : 'Your strips today: ' + n + ' of ' + a.length + ' checked'; }
   function genomeView(teacher) {
     let h = '<section class="block"><span class="eyebrow">' + (teacher ? 'Teacher key · not for students' : 'My genome page') + '</span><h2>' + (teacher ? 'Key for ' + S.code : 'The genome of ' + (S.name ? esc(S.name) + ', ' : '') + S.code) + '</h2>';
     if (!teacher) h += '<div class="field"><label for="sname">Salamander’s name</label><input type="text" id="sname" maxlength="24" autocomplete="off" value="' + esc(S.name) + '" style="max-width:22rem"></div><p>' + (allDone() ? 'Every gene is found and checked.' : progressText() + '. The page can be saved at any point.') + '</p><div class="row"><button data-act="png" id="pngbtn"' + (downloads ? '' : ' hidden') + '>Save as an image</button><a class="btn ghost" href="#find">Back to highlighting</a></div><p class="small muted" id="savemsg" aria-live="polite">' + (saveMsg || (downloads ? 'The image holds every chromosome with your highlights. Upload it to the Canvas assignment.' : 'To keep this page, take a screenshot, then upload the screenshot to the Canvas assignment.')) + '</p>';
@@ -705,7 +721,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
 
   /* ---------- render and events ---------- */
   function render() { const v = view(); app.innerHTML = v === 'genome' ? genomeView(false) : v === 'teacher' ? genomeView(true) : findView(); }
-  function repaint(key) { const el = $('#ch-' + key), ch = CR.chroms.find(c => c.key === key); if (el && ch) el.outerHTML = chromHTML(ch); const p = $('#prog'); if (p) p.textContent = progressText(); const sb = $('#sexbox'); if (sb) sb.innerHTML = sexHTML(); }
+  function repaint(key) { const el = $('#ch-' + key), ch = CR.chroms.find(c => c.key === key); if (el && ch) el.outerHTML = chromHTML(ch); const p = $('#prog'); if (p) p.textContent = progressText(); const sb = $('#sexbox'); if (sb) sb.innerHTML = sexHTML(); const db = $('#donebox'); if (db) db.innerHTML = doneHTML(); }
   app.addEventListener('click', function (ev) {
     const base = ev.target.closest('.dna[data-k] .b');
     if (base) {
