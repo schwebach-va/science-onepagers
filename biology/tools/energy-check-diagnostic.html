@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Twenty-four questions across the eight ideas of Campbell Chapter 6 - the two laws, free energy, ATP and coupling, activation energy, the active site, temperature and pH, inhibitors and regulation - each one answered with the reasoning and followed by something to draw. Nothing is submitted.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/energy-check-diagnostic.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Energy Check - The Eight Ideas Behind Chapter 6">
+<meta property="og:description" content="Twenty-four questions across the eight ideas of Campbell Chapter 6 - the two laws, free energy, ATP and coupling, activation energy, the active site, temperature and pH, inhibitors and regulation - each one answered with the reasoning and followed by something to draw. Nothing is submitted.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/energy-check-diagnostic.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Energy Check | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;
+  --card:#FFFFFF;
+  --ink:#1D1A15;
+  --ink-soft:#5A544A;
+  --bond:#1F7A8C;
+  --bond-soft:#DEEBEE;
+  --shell:#D2CCC0;
+  --rule:#DDD8CE;
+  --flag:#B85042;
+  --flag-soft:#F7E9E6;
+  --solid:#3F7A55;
+  --solid-soft:#E2EDE6;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#15130F;
+    --card:#1D1A15;
+    --ink:#EDE9E1;
+    --ink-soft:#A8A198;
+    --bond:#6FC0CE;
+    --bond-soft:#172E33;
+    --shell:#423D34;
+    --rule:#332E27;
+    --flag:#E08A7C;
+    --flag-soft:#2E1E1A;
+    --solid:#7FC395;
+    --solid-soft:#18291E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15130F;--card:#1D1A15;--ink:#EDE9E1;--ink-soft:#A8A198;
+  --bond:#6FC0CE;--bond-soft:#172E33;--shell:#423D34;--rule:#332E27;
+  --flag:#E08A7C;--flag-soft:#2E1E1A;--solid:#7FC395;--solid-soft:#18291E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.75rem,5.5vw,2.5rem);
+  line-height:1.1;letter-spacing:-0.015em;margin:0 0 .75rem}
+h2{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:2.5rem 0 .6rem}
+p{margin:0 0 1rem;max-width:36rem}
+.lede{font-size:1.06rem;color:var(--ink-soft)}
+.fine{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.sop-back{display:inline-block;margin:0 0 .9rem;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-back:hover{text-decoration:underline}
+.sop-eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .35rem}
+.sop-foot{margin-top:2.6rem;padding-top:.9rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+
+/* ---- tile grid : one card per idea, coloured the way the board is coloured ---- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin:1.6rem 0 1.8rem}
+@media (max-width:34rem){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:24rem){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{
+  position:relative;background:var(--card);border:1.5px solid var(--shell);
+  border-left:5px solid var(--accent,var(--shell));
+  border-radius:3px;padding:.7rem .6rem .6rem;min-height:6rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.tile .idx{font-family:var(--sans);font-size:.7rem;font-weight:600;color:var(--ink-soft)}
+.tile .sym{font-family:var(--sans);font-size:1.35rem;font-weight:700;line-height:1;margin:.2rem 0 .3rem;letter-spacing:-0.01em;color:var(--accent,var(--ink))}
+.tile .nm{font-family:var(--sans);font-size:.74rem;font-weight:500;color:var(--ink-soft);line-height:1.25}
+.tile.solid{background:var(--solid-soft);border-color:var(--solid)}
+.tile.mid{background:var(--bond-soft);border-color:var(--bond)}
+.tile.flag{background:var(--flag-soft);border-color:var(--flag);border-width:2.5px;border-left-width:5px}
+.tile .score{position:absolute;top:.55rem;right:.6rem;font-family:var(--sans);
+  font-size:.72rem;font-weight:700;color:var(--ink-soft)}
+
+/* ---- buttons ---- */
+button{font:inherit;cursor:pointer}
+.go{
+  font-family:var(--sans);font-weight:600;font-size:1rem;
+  background:var(--bond);color:var(--paper);border:none;border-radius:3px;
+  padding:.85rem 1.5rem;min-height:3rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#12100D}}
+:root[data-theme="dark"] .go{color:#12100D}
+.go:focus-visible,.opt:focus-visible,.ghost:focus-visible{outline:3px solid var(--bond);outline-offset:2px}
+.ghost{background:none;border:1.5px solid var(--rule);color:var(--ink);
+  font-family:var(--sans);font-weight:600;font-size:.92rem;border-radius:3px;padding:.7rem 1.15rem;min-height:2.75rem}
+
+/* ---- question ---- */
+.bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden;margin-bottom:1rem}
+.bar i{display:block;height:100%;background:var(--bond);transition:width .25s}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink-soft);
+  border-bottom:1.5px solid var(--rule);padding-bottom:.5rem;margin-bottom:1.4rem}
+.q{font-size:1.2rem;line-height:1.45;margin:0 0 1.3rem;max-width:34rem}
+.opts{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem}
+.opt{
+  text-align:left;background:var(--card);border:1.5px solid var(--rule);
+  border-radius:3px;padding:.85rem 1rem;min-height:3.1rem;color:var(--ink);
+  font-family:var(--serif);font-size:1rem;line-height:1.4;width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--bond)}
+.opt:disabled{cursor:default;opacity:1}
+.opt.right{border-color:var(--solid);background:var(--solid-soft);font-weight:600}
+.opt.wrong{border-color:var(--flag);background:var(--flag-soft)}
+.why{background:var(--card);border:1.5px solid var(--rule);border-left:5px solid var(--bond);
+  border-radius:3px;padding:1rem 1.1rem;margin-bottom:1.2rem}
+.why .tag{display:block;font-family:var(--sans);font-size:.76rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+.why p{margin:0;font-size:1rem;line-height:1.5}
+
+/* ---- results ---- */
+.band{border-top:1.5px solid var(--rule);padding:1.1rem 0 .3rem}
+.band.flag{border-top-color:var(--flag);border-top-width:2.5px}
+.band h3{font-family:var(--sans);font-weight:700;font-size:1.05rem;margin:0 0 .2rem}
+.band .verdict{font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink-soft);margin:0 0 .7rem}
+.do{background:var(--card);border:1.5px solid var(--rule);border-radius:3px;padding:.9rem 1rem}
+.do h4{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 .4rem}
+.do p{margin:0;font-size:1rem;line-height:1.5}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="sop-back" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+<p class="sop-eyebrow">Bio Tool #40 &middot; DE Bio 101 Unit 6 &middot; Campbell Chapter 6</p>
+
+
+<!-- ========== INTRO ========== -->
+<section id="intro">
+  <h1>Energy Check</h1>
+  <p class="lede">Chapter 6 comes down to two questions a cell answers before anything else happens: which reactions can run at all, and how the ones it needs are made to run fast enough. Twenty-four questions sort out which of the eight ideas you already own. About twenty minutes.</p>
+  <p class="fine">Nothing is submitted. No score leaves this iPad and I never see it. Answer honestly and the result is worth something.</p>
+
+  <div class="grid" id="introGrid"></div>
+
+  <p class="fine" style="margin-bottom:1.6rem">Three questions on each idea. ATP and coupling gets a tile of its own, because that is where the free-energy bookkeeping turns into something a cell actually does, and it is the step people most often skip.</p>
+  <button class="go" id="start">Start the check</button>
+</section>
+
+<!-- ========== QUESTION ========== -->
+<section id="quiz" class="hidden">
+  <div class="bar"><i id="fill" style="width:0%"></i></div>
+  <div class="meta"><span id="bandName"></span><span id="counter"></span></div>
+  <p class="q" id="stem"></p>
+  <div class="opts" id="opts"></div>
+  <div class="why hidden" id="why"><span class="tag" id="whyTag"></span><p id="whyText"></p></div>
+  <button class="go hidden" id="next">Next</button>
+</section>
+
+<!-- ========== RESULTS ========== -->
+<section id="results" class="hidden">
+  <h1>What this maps, and where to start</h1>
+  <p class="lede" id="summary"></p>
+  <div class="grid" id="resultGrid"></div>
+  <p class="fine">The outlined tiles are the ones worth a weekend. The filled ones you can skip.</p>
+  <h2>Where your hands go first</h2>
+  <div id="bands"></div>
+  <h2>How the Checkpoint asks Chapter 6</h2>
+  <p>Checkpoint Chapter 6 sits on the NOVA Canvas Quizzes tab. Unlimited attempts, highest score kept, and it shows the right answer after every try. Take it cold, work the drawings above, take it again. Seven of its thirty-seven questions put a graph in front of you &mdash; an energy diagram with its arrows lettered, a rate curve that levels off, temperature and pH profiles &mdash; and ask you to read ΔG, activation energy or an optimum straight off it, so practise on your own drawings until the arrows mean something without a label.</p>
+  <p>One thing in Unit 6 is built to be handled rather than read. <a href="water-patch.html">The Water Patch</a>, Module 2, folds a protein in water and then runs an enzyme through induced fit, hydrolysis and release, one step at a time. When Unit 7 starts, <a href="organelles-energy.html">the Energy Patch</a> follows the ATP this chapter spends back to where a cell makes it.</p>
+  <p style="margin-top:1.8rem"><button class="ghost" id="again">Run the check again</button></p>
+</section>
+
+
+<footer class="sop-foot">Unit 6, An Introduction to Metabolism &middot; NVCC BIO 101, Campbell Chapter 6 &middot; eight ideas, three questions each, nothing submitted. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>. Teachers: see <a href="../../teaching/classroom-tools-note-to-teachers.html">the note on using these with Canvas</a>.</footer>
+</div>
+<script>
+const BANDS=[{"id": "laws", "sym": "ΔS", "name": "Metabolism, the two laws and heat", "color": "#4C5A56", "task": "Draw a seedling growing into a plant over three frames. In each frame, draw the plant getting more ordered, and around it draw what leaves: heat as wavy lines, carbon dioxide and water as small scattered dots. Label one frame with the first law (energy changed form, none lost) and one with the second (the order inside is paid for by more disorder outside). Write one sentence on where the energy in the plant came from and where it ends up."}, {"id": "freeenergy", "sym": "ΔG", "name": "Free energy, exergonic and endergonic", "color": "#1F7A8C", "task": "Draw two energy diagrams side by side with free energy on the vertical axis. On the first, put the products below the reactants and label ΔG with its sign; on the second, put them above. Name each one exergonic or endergonic and write which one a cell has to pay for. Then draw a short pathway, A to B to C, and add arrows showing B being pulled away as fast as it forms; write one sentence on why that keeps the first step from reaching equilibrium."}, {"id": "atp", "sym": "ATP→", "name": "ATP and energy coupling", "color": "#C98A2E", "task": "Draw ATP as a base, a sugar and three phosphate circles, each phosphate marked with a minus sign. Snip the last one off and draw ADP and the loose phosphate. Then draw an uphill reaction, X plus Y to XY, with ΔG +4 written beside it, and show ATP handing its phosphate to X first. Write the three ΔG values (the uphill step, ATP's −7.3, and the coupled total) and circle the one that tells you the coupled reaction will run."}, {"id": "activation", "sym": "Eₐ", "name": "Activation energy and what an enzyme changes", "color": "#8C5222", "task": "Draw one energy diagram with two humps over the same start and finish: a tall hump in pencil for the reaction alone and a short one in pen for the reaction with its enzyme. Draw Eₐ arrows on both humps and a single ΔG arrow from start to finish. Underneath, make two short lists, what the enzyme changed and what it left alone, and put ΔG and the equilibrium point on the right list."}, {"id": "activesite", "sym": "E+S", "name": "Active site, induced fit and saturation", "color": "#6B4E8C", "task": "Draw an enzyme in three frames: open with the substrate nearby, closed tightly around it, and open again with two products leaving. Under the frames, sketch a rate curve that rises and then levels off, and mark the point where nearly every active site is full. Write one sentence on what will raise the rate once the curve has flattened."}, {"id": "conditions", "sym": "pH", "name": "Temperature, pH and cofactors", "color": "#3F7A55", "task": "Draw two rate curves on one set of temperature axes: a human enzyme peaking near 37 °C and a hot-spring enzyme peaking near 75 °C, each falling steeply past its peak. Beside them, draw pH curves for a stomach enzyme near pH 2 and an intestinal enzyme near pH 8. On the steep side of one curve, draw the folded enzyme coming apart and label the bonds that broke. Add a zinc ion in the active site of one enzyme and label it a cofactor."}, {"id": "inhibitors", "sym": "E·I", "name": "Inhibitors", "color": "#B85042", "task": "Draw the same enzyme twice. In the first, put a look-alike molecule in the active site and crowd plenty of substrate around it; in the second, put a molecule on the far side of the enzyme and bend the active site out of shape. Under each, write what flooding the enzyme with substrate does. Then draw a third enzyme with an inhibitor bolted on permanently and label it irreversible."}, {"id": "regulation", "sym": "A⊣E₁", "name": "Allosteric regulation, cooperativity and feedback", "color": "#7A5C3E", "task": "Draw a four-step pathway with an enzyme on each arrow, from a starting molecule to an end product. Draw the end product curving back to the first enzyme and binding a site away from its active site, and mark that arrow with a T-bar for 'stops'. Write one sentence on why the first enzyme is the one that gets switched off. Then draw a four-part enzyme with one substrate bound and arrows showing the other three sites opening up."}];
+
+const ITEMS=[{"b": 0, "q": "A cell links 300 amino acids into one protein. Which description fits this process?", "o": ["It is catabolic, and it releases energy", "It is anabolic, and it needs an input of energy", "It is catabolic, and it needs an input of energy", "It is anabolic, and it releases energy"], "a": 1, "w": "Building a large molecule from small ones is anabolism, and it runs uphill: the product holds more free energy than the separate amino acids. Breaking big molecules down, catabolism, is the downhill direction. A cell runs both at once, and the energy released by one is what pays for the other, which is the whole story of the next two ideas."}, {"b": 0, "q": "A bean seed grows into an orderly plant with leaves, roots and a stem. How does that fit the second law of thermodynamics?", "o": ["A growing organism is exempt from the second law until it stops growing", "The plant destroys some of its energy as it organizes itself", "Sunlight reverses entropy everywhere it falls", "The plant gives off enough heat and small molecules that the disorder of its surroundings rises by more than its own order does"], "a": 3, "w": "The second law is about the whole system, not one part of it. The plant does become more ordered, but every reaction that builds it also releases heat and scatters small molecules like carbon dioxide and water into its surroundings. Add up the plant and everything around it and the total disorder has gone up. Energy is never destroyed in the bargain; that would break the first law instead."}, {"b": 0, "q": "A classmate says that a cell 'uses up' the energy in glucose. Which correction is accurate?", "o": ["Energy is never used up; the cell converts it to other forms, and some of it always leaves as heat", "The cell destroys a small amount of energy with each reaction", "The energy is stored permanently as heat inside the cell", "The cell turns the energy back into glucose once the work is done"], "a": 0, "w": "The first law says energy is neither created nor destroyed, only changed from one form to another. Glucose's chemical energy becomes ATP, then movement, transport or new molecules, and at every step some of it escapes as heat. That heat is lost to the cell for doing work, because a cell sits at nearly one temperature, but it has not vanished."}, {"b": 1, "q": "A reaction in a cell has ΔG = +5 kcal/mol. What does that tell you?", "o": ["It is exergonic and will run on its own", "It releases 5 kcal of energy for every mole that reacts", "It is endergonic, so it will not run unless energy is supplied from another reaction", "It is at equilibrium, so nothing changes"], "a": 2, "w": "A positive ΔG means the products hold more free energy than the reactants, so the reaction is uphill, or endergonic. On its own it will not proceed. A cell makes it go by coupling it to a downhill reaction whose ΔG is larger and negative, which is exactly what ATP is for. A ΔG of zero, not +5, is the signature of equilibrium."}, {"b": 1, "q": "Splitting sucrose into glucose and fructose has a ΔG of about −7 kcal/mol, yet a jar of sugar water keeps for months. Which statement is true?", "o": ["The reaction must actually be endergonic", "Sucrose can only be split in the presence of light", "The reaction is spontaneous in the thermodynamic sense, but nothing says a spontaneous reaction must be fast", "Its ΔG turns positive at room temperature"], "a": 2, "w": "A negative ΔG says which way a reaction will go, not how quickly it gets there. Sucrose breakdown is downhill, but the molecules first have to climb an energy hill before they can roll down the other side, and at room temperature almost none of them have the energy to do it. That hill is the activation energy, and lowering it is the job of an enzyme."}, {"b": 1, "q": "Why would a cell in which every reaction had reached equilibrium be a dead cell?", "o": ["At equilibrium ΔG is zero, so no reaction can release free energy to do work", "At equilibrium all of the reactants have been used up", "At equilibrium every reaction runs backward", "At equilibrium all of the enzymes have been denatured"], "a": 0, "w": "At equilibrium the forward and reverse reactions run at the same rate and there is no free energy left to release. Nothing can be pushed, pumped or built. A living cell avoids this by keeping its reactions in pathways, where each product is used as the next reactant almost as fast as it forms, so no step ever settles."}, {"b": 2, "q": "Why is free energy released when ATP loses its last phosphate group?", "o": ["The bond holding the last phosphate is unusually strong and releases its strength when it breaks", "The reaction draws heat in from the cell and releases it as ATP", "Water is created during the reaction, and water stores the energy", "ADP and free phosphate are more stable than ATP, whose three negatively charged phosphates crowd and repel one another"], "a": 3, "w": "Breaking any bond costs energy, so the release does not come from the bond itself. It comes from the drop in free energy between ATP, with three negative phosphates packed side by side, and the more stable ADP and phosphate that are left. The products sit lower on the energy scale, and the difference, about 7.3 kcal per mole under standard conditions, is what the cell can spend."}, {"b": 2, "q": "A cell must run the reaction X + Y → XY, which has ΔG = +4 kcal/mol. It couples the reaction to ATP hydrolysis, ΔG = −7.3 kcal/mol. How does the coupling usually work?", "o": ["ATP releases its energy as heat, and the heat pushes X and Y together", "ATP hands a phosphate to X, making a less stable intermediate that then reacts with Y, and the total ΔG is about −3.3 kcal/mol", "ATP becomes part of the product XY", "An enzyme changes the ΔG of the uphill reaction itself to −4 kcal/mol"], "a": 1, "w": "Coupling works through a shared intermediate. ATP phosphorylates X, and the phosphorylated X is reactive enough to combine with Y, releasing the phosphate. Because the two steps share an intermediate, their ΔG values add: +4 plus −7.3 is about −3.3, and a negative total means the coupled reaction runs. Heat cannot be used this way, because a cell has no temperature difference to run work from."}, {"b": 2, "q": "A working muscle cell holds less than a minute's worth of ATP at any moment. How does it keep contracting for an hour?", "o": ["It rebuilds ATP from ADP and phosphate continuously, using energy released by breaking down food molecules", "It switches to running its motor proteins on ADP", "It draws on large stores of ATP kept in fat cells", "Contraction does not actually consume any ATP"], "a": 0, "w": "ATP is a currency, not a savings account. A working muscle cell spends and regenerates millions of ATP every second, rebuilding each one by attaching a phosphate back onto ADP with energy from catabolism. That rebuilding is what cellular respiration in Unit 7 is for, and it is why a cell that loses its supply of food or oxygen runs out of ATP within moments."}, {"b": 3, "q": "Paper has a large negative ΔG for burning in air, yet a notebook does not burst into flames on a desk. Why not?", "o": ["Burning paper is actually an endergonic reaction", "Oxygen cannot reach the paper on a desk", "The molecules must first absorb enough energy to reach an unstable transition state, and at room temperature almost none can", "The ΔG for burning becomes positive at room temperature"], "a": 2, "w": "The sign of ΔG says the reaction is downhill overall, but the reactants first have to strain and break bonds, which takes an input of energy called the activation energy. A match supplies it, and once burning starts it releases enough heat to keep supplying it. Inside a cell, where a match is not an option, enzymes lower that barrier instead."}, {"b": 3, "q": "An enzyme speeds up a reaction a million times. Compared with the same reaction without the enzyme, which of these stays the same?", "o": ["The activation energy", "The difference in free energy between reactants and products", "The rate of the reaction", "How long the reaction takes to reach equilibrium"], "a": 1, "w": "An enzyme lowers the activation energy, which raises the rate and gets the reaction to equilibrium sooner. It does nothing to the starting and ending points, so ΔG is the same with or without it, and so is the position of equilibrium. An enzyme can make a downhill reaction fast; it can never make an uphill reaction run by itself."}, {"b": 3, "q": "Heat would speed up most of the reactions in a cell. Why do cells depend on enzymes instead?", "o": ["Heat cannot reach the inside of a cell", "Heat cannot change how often molecules collide", "Enzymes produce the heat that speeds the reactions", "Heat would denature the cell's proteins and speed every reaction at once, while each enzyme speeds only the reaction it catalyzes"], "a": 3, "w": "Raising the temperature does give more molecules enough energy to clear the activation barrier, but it is a blunt tool. It unfolds proteins and speeds every reaction in the cell indiscriminately, including the ones the cell needs to keep slow. An enzyme lowers the barrier for one reaction only, which is how a cell decides which reactions run and when."}, {"b": 4, "q": "An enzyme moves a phosphate from ATP onto glucose. A water molecule fits into its active site easily, yet the enzyme almost never hands the phosphate to water. Which idea explains this?", "o": ["Lock and key: water is the wrong size to fit the active site at all", "Water acts as a competitive inhibitor of the enzyme", "The enzyme is always saturated with glucose, so water never gets in", "Induced fit: only the right substrate makes the active site close around it, and water is too small to trigger the change"], "a": 3, "w": "Water does fit; that is the puzzle. If the active site were a rigid lock, it would waste ATP on water constantly. Instead the site changes shape when its real substrate binds, closing and gripping it, and only then are the reacting groups brought into position. Glucose is big enough to pull the site shut and water is not, so the enzyme stays selective."}, {"b": 4, "q": "In an experiment, doubling the substrate from 1 to 2 mM nearly doubles the rate, but doubling it from 10 to 20 mM barely changes the rate. What explains the difference?", "o": ["The reaction has already reached equilibrium at 10 mM", "At 10 mM nearly every active site is already occupied, so extra substrate has nowhere to bind", "The enzyme is denatured at 20 mM", "ΔG of the reaction changes with substrate concentration"], "a": 1, "w": "At low substrate most enzyme molecules sit idle, so adding substrate puts more of them to work and the rate climbs. At high substrate the enzymes are saturated: every active site is full, and a molecule has to wait for one to empty. From that point the only way to speed things up is to add more enzyme."}, {"b": 4, "q": "An enzyme is hundreds of amino acids long, but its active site is formed by only a handful of them. Why does the rest of the protein matter?", "o": ["It stores the ATP that the reaction uses", "It sets the ΔG of the reaction", "Its folding holds those few amino acids in exactly the positions that form the active site", "It does nothing and could be removed without effect"], "a": 2, "w": "The amino acids that line the active site are often far apart in the sequence. Folding brings them together, and the whole three-dimensional structure holds them there. Change the fold, by heat, by pH or by a mutation well away from the site, and the active site loses its shape even though none of its own amino acids were touched."}, {"b": 5, "q": "An enzyme from the human stomach works best near pH 2. What happens to its activity in the small intestine, at pH 8?", "o": ["It drops, because the change in H⁺ alters the charges that hold the enzyme's shape and active site", "It rises, because enzymes always work faster at a higher pH", "The enzyme turns into a different enzyme suited to pH 8", "The enzyme becomes a competitive inhibitor of intestinal enzymes"], "a": 0, "w": "Many of the bonds that hold an enzyme's shape depend on charged side chains, and the charge on those side chains depends on how many hydrogen ions are around. Move far from the enzyme's optimum pH and those attractions weaken, the shape drifts and the active site no longer fits its substrate well. Each enzyme's optimum matches where it works: low for the stomach, near neutral or above for the intestine."}, {"b": 5, "q": "Warming a human enzyme from 20 °C to 37 °C speeds it up, but warming it to 55 °C stops it. Why does the trend reverse?", "o": ["At 55 °C the substrate molecules stop moving", "Above its optimum, the weak bonds holding the enzyme's shape break and the active site deforms", "At 55 °C the reaction becomes endergonic", "At 55 °C the enzyme runs out of ATP"], "a": 1, "w": "Up to the optimum, extra heat means faster molecules and more collisions with enough energy to react. Past the optimum, the same extra motion breaks the hydrogen bonds and other weak attractions holding the fold, and the active site comes apart. That unfolding is denaturation, and enzymes from hot springs survive it only because their folds are held together more strongly."}, {"b": 5, "q": "Some enzymes cannot work without a zinc ion bound in or near the active site. What is the zinc?", "o": ["A cofactor, a non-protein helper the enzyme needs in order to catalyze its reaction", "The enzyme's substrate", "The energy source that drives the reaction", "An inhibitor that slows the enzyme"], "a": 0, "w": "Cofactors are small non-protein helpers. Inorganic ones are often metal ions such as zinc, iron or copper; organic ones are called coenzymes, and many are built from vitamins. They are not used up like a substrate and do not supply energy; they take part in the chemistry at the active site. That is part of why trace minerals and vitamins matter in a diet."}, {"b": 6, "q": "A drug is shaped like an enzyme's substrate and binds to the active site. If the substrate concentration is raised a great deal, what happens to the drug's effect?", "o": ["It grows stronger, because more substrate draws more drug into the enzyme", "It stays the same, because the drug and substrate do not interact", "The enzyme denatures, because the active site is overloaded", "It weakens, because the substrate outcompetes the drug for the active site"], "a": 3, "w": "A competitive inhibitor and the substrate are after the same spot. Whichever one is more plentiful wins more of the encounters, so flooding the enzyme with substrate pushes the inhibitor out of most active sites and the rate recovers. That is the test that identifies a competitive inhibitor in an experiment."}, {"b": 6, "q": "An inhibitor binds to an enzyme far from its active site and changes the enzyme's shape. Adding a large excess of substrate does what?", "o": ["It restores full activity, as it would for any inhibitor", "It makes the inhibition stronger", "It does not restore the activity, because the active site itself is now the wrong shape", "It converts the inhibitor into a competitive one"], "a": 2, "w": "A noncompetitive inhibitor never contests the active site. It binds elsewhere and bends the enzyme so the active site no longer fits its substrate well, however much substrate is around. Extra substrate cannot fix a misshapen site, which is how you tell this kind of inhibition apart from the competitive kind."}, {"b": 6, "q": "Penicillin binds permanently to a bacterial enzyme that builds the cell wall. What kind of inhibition is that, and why does it work?", "o": ["Reversible competitive inhibition that the normal substrate easily displaces", "Allosteric activation that makes the enzyme build walls too quickly", "Irreversible inhibition: the enzyme cannot recover, so the bacterium cannot finish building its wall", "Feedback inhibition by the cell wall the enzyme has already built"], "a": 2, "w": "An inhibitor that forms a covalent bond with its enzyme never lets go, so every enzyme it reaches is out of action for good. A bacterium that cannot complete its cell wall bursts as it grows. Human cells have no cell wall and no such enzyme, which is why the drug can target the bacterium and leave you alone."}, {"b": 7, "q": "In a pathway A → B → C → D, product D binds the first enzyme at a site away from its active site and switches it off. Why is the first enzyme the one that gets regulated?", "o": ["The first enzyme is the only one in the pathway with an active site", "D is the substrate of the first enzyme", "Switching off the first enzyme makes the pathway run faster", "Stopping the first step shuts down the whole pathway before any materials or energy are spent"], "a": 3, "w": "This is feedback inhibition. When D has piled up, the cell has enough of it, and the cheapest place to stop making more is at the very beginning. Shutting the last enzyme instead would leave A, B and C piling up, wasting the starting material and the ATP spent along the way. When D runs low, it comes off the first enzyme and the pathway starts again."}, {"b": 7, "q": "An enzyme built from four subunits binds one substrate molecule, and its other three active sites then bind substrate more readily. What is this called?", "o": ["Cooperativity", "Competitive inhibition", "Feedback inhibition", "Denaturation"], "a": 0, "w": "In a multi-subunit enzyme, the subunits switch shape together. When one active site binds substrate, the shape change spreads to the others and holds them in their active form, so the enzyme responds sharply once substrate is present. It is a form of allosteric regulation, with the substrate itself acting as the activator."}, {"b": 7, "q": "An activator molecule binds to a regulatory site on an allosteric enzyme. What does it do?", "o": ["It occupies the active site in place of the substrate", "It holds the enzyme in its active shape, so more of the enzyme molecules are working", "It lowers the ΔG of the reaction", "It splits the enzyme into separate subunits"], "a": 1, "w": "Allosteric enzymes flip between an active shape and an inactive one. An activator binding a regulatory site stabilizes the active shape, and an allosteric inhibitor stabilizes the inactive one. Neither touches the active site or ΔG. The cell turns the enzyme up or down by how much of each regulator is around."}];
+
+const $=id=>document.getElementById(id);
+let i=0,answers=new Array(ITEMS.length).fill(null);
+
+function tile(b,idx,score){
+  const d=document.createElement("div");
+  d.className="tile";
+  d.style.setProperty("--accent",b.color);
+  if(score!==undefined){
+    if(score===3)d.classList.add("solid");
+    else if(score===2)d.classList.add("mid");
+    else d.classList.add("flag");
+  }
+  d.innerHTML='<span class="idx">'+(idx+1)+'</span>'+
+    (score!==undefined?'<span class="score">'+score+'/3</span>':'')+
+    '<span class="sym">'+b.sym+'</span><span class="nm">'+b.name+'</span>';
+  return d;
+}
+BANDS.forEach((b,n)=>$("introGrid").appendChild(tile(b,n)));
+
+function render(){
+  const it=ITEMS[i];
+  $("bandName").textContent=BANDS[it.b].name;
+  $("counter").textContent=(i+1)+" of "+ITEMS.length;
+  $("fill").style.width=(i/ITEMS.length*100)+"%";
+  $("stem").textContent=it.q;
+  $("why").classList.add("hidden");
+  $("next").classList.add("hidden");
+  const box=$("opts");box.innerHTML="";
+  it.o.forEach((text,n)=>{
+    const btn=document.createElement("button");
+    btn.className="opt";btn.type="button";btn.textContent=text;
+    btn.addEventListener("click",()=>choose(n));
+    box.appendChild(btn);
+  });
+  window.scrollTo(0,0);
+}
+
+function choose(n){
+  const it=ITEMS[i];
+  answers[i]=(n===it.a);
+  [...$("opts").children].forEach((b,k)=>{
+    b.disabled=true;
+    if(k===it.a)b.classList.add("right");
+    else if(k===n)b.classList.add("wrong");
+  });
+  $("whyTag").textContent=(n===it.a)?"Right — and here is why":"The reasoning";
+  $("whyText").textContent=it.w;
+  $("why").classList.remove("hidden");
+  $("next").textContent=(i===ITEMS.length-1)?"See what it found":"Next";
+  $("next").classList.remove("hidden");
+  save();
+}
+
+$("next").addEventListener("click",()=>{
+  if(i===ITEMS.length-1){finish();}
+  else{i++;render();save();}
+});
+
+$("start").addEventListener("click",()=>{
+  $("intro").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  render();
+});
+
+function finish(){
+  $("quiz").classList.add("hidden");
+  $("results").classList.remove("hidden");
+  const scores=BANDS.map((b,n)=>
+    ITEMS.reduce((s,it,k)=>s+((it.b===n&&answers[k])?1:0),0));
+  const total=scores.reduce((a,c)=>a+c,0);
+  const weak=scores.filter(s=>s<=1).length;
+  $("summary").textContent=
+    total+" of "+ITEMS.length+" correct. "+
+    (weak===0?"Nothing here is asking for a weekend. Take the two lowest tiles, work their drawings once, and give the rest of your time to the Checkpoint itself. This is a map of where your time goes rather than a score, so run it again another day, rested, and see whether it still reads the same."
+     :weak===1?"One of the eight is where your studying starts. Its drawing is below and the other seven are close enough to leave alone. This is a map rather than a score, so run it again on a different day, after a proper night's sleep, to see whether that one holds."
+     :(weak===BANDS.length?"All eight are":weak+" of the eight are")+" where your studying starts. Take them one at a time in the order below. Work two of the drawings, then come back to this on another day and rested — it is a map of where your time goes, and the map only reads true when you are fresh.");
+  const g=$("resultGrid");g.innerHTML="";
+  BANDS.forEach((b,n)=>g.appendChild(tile(b,n,scores[n])));
+  const holder=$("bands");holder.innerHTML="";
+  BANDS.map((b,n)=>({b,n,s:scores[n]})).sort((x,y)=>x.s-y.s).forEach(({b,n,s})=>{
+    const sec=document.createElement("section");
+    sec.className="band"+(s<=1?" flag":"");
+    sec.innerHTML='<h3>'+b.name+'</h3><p class="verdict">'+s+' of 3 — '+
+      (s===3?"this one is yours":s===2?"one loose end":"start your studying here")+'</p>'+
+      (s<3?'<div class="do"><h4>Draw it before you read it</h4><p>'+b.task+'</p></div>':'');
+    holder.appendChild(sec);
+  });
+  window.scrollTo(0,0);
+  save();
+}
+
+$("again").addEventListener("click",()=>{
+  i=0;answers.fill(null);
+  $("results").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  render();save();
+});
+
+function save(){
+  try{localStorage.setItem("energycheck",JSON.stringify({i,answers}));}catch(e){}
+}
+try{
+  const raw=localStorage.getItem("energycheck");
+  if(raw){
+    const st=JSON.parse(raw);
+    if(st&&Array.isArray(st.answers)&&st.answers.length===ITEMS.length&&st.answers.some(a=>a!==null)){
+      answers=st.answers;i=Math.min(st.i||0,ITEMS.length-1);
+      $("start").textContent="Pick up where you left off";
+    }
+  }
+}catch(e){}
+</script>
+</body>
+</html>
