@@ -149,8 +149,11 @@ footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;colo
 </style>
 <div class="wrap"><header class="top"><h1><a href="#home">Codon Bingo</a></h1><span class="small muted">Blue Ridge Salamander Project</span></header><main id="app" class="sheet"></main><footer><span>© J. R. Schwebach. All rights reserved. Free to use with your own students. Draft for classroom testing.</span><span><a href="blue-ridge-salamander-3d.html">See it in 3D</a> · genome mark <span id="gm"></span></span></footer></div>
 <script>
-/* Blue Ridge Salamander Project genome engine. DRAFT v3 (two alleles, one spelling per allele), 2026-11-11.
-   NOT FROZEN. Reid's answers of 11/11, 2:13 to 3:01 pm, are built in; the freeze waits on the tools and his go.
+/* Blue Ridge Salamander Project genome engine. v3 (two alleles, one spelling per allele), built 2026-11-11.
+   FROZEN for edition 2026-27 at genome mark D3Y-KTT (Reid's decision, 2026-11-15). This school year, do not change genes,
+   alleles, sites, odds, seeds or stamps: every student's Creature Code, stamps and keeper code depend on them. Wording
+   and comments may change. After any edit, fingerprint() must still return D3Y-KTT and TF-7CBW4 must still give
+   final stamp AT7-15M and keeper code TF-7CBW4-AT7. Any rebuild waits for the end of the project.
    A Creature Code regenerates the same genome every time. No server, no student data.
    Every gene draws from its own seeded stream (code + gene id), so adding a gene later
    never changes a gene students already decoded.
@@ -166,7 +169,7 @@ footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;colo
      characters of the final stamp. */
 const BRS = (function () {
   'use strict';
-  const VERSION = 'v3 draft 2026-11-11';
+  const VERSION = 'v3 frozen 2026-11-15';
   const EDITION = { id: '2026-27', mark: 'A', label: 'Edition 2026-27' };
   const EDITIONS = { A: EDITION };
   /* Both rules were settled with Reid on 11/11 (decisions log). They stay switches so the checks can run each way. */
@@ -579,8 +582,25 @@ const BRS = (function () {
     const mask = typeof done === 'number' ? done >>> 0 : maskOf(done);
     return stampHead(code, mask, EDITION) + '-' + (mask === FULL ? '15M' : enc4(mask));
   }
+  function teacherHead(code, mask, ed) {
+    const h = hashStr('teacher-release|' + ed.id + '|' + code + '|' + mask);
+    return ed.mark + ALPHA[h % 31] + ALPHA[(h >>> 5) % 31];
+  }
+  /* done = what the student decoded themselves (ids or a mask). Everything else is "given by teacher". */
+  function teacherStamp(code, done) {
+    const c = parseCode(code); if (!c.ok) return null;
+    const mask = typeof done === 'number' ? done >>> 0 : maskOf(done);
+    return mask === FULL ? stamp(c.code, FULL) : teacherHead(c.code, mask, EDITION) + '-T' + enc4(mask);
+  }
   function readStamp(code, raw) {
     const c = parseCode(code); if (!c.ok) return { ok: false, why: c.why };
+    const tm = /^([A-Z0-9]{3})-?T([A-Z0-9]{4})$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
+    if (tm) {
+      const ted = EDITIONS[tm[1][0]], own = dec4(tm[2]);
+      if (!ted || own < 0 || own >= FULL || teacherHead(c.code, own, ted) !== tm[1]) return { ok: false, why: 'That teacher stamp does not belong to this Creature Code. Check each character.' };
+      const mine = idsOf(own);
+      return { ok: true, edition: ted.id, mask: FULL, final: true, teacher: true, own: mine, given: PARTS.filter(id => mine.indexOf(id) < 0), done: PARTS.slice(), left: [], text: tm[1] + '-T' + tm[2] };
+    }
     const m = /^([A-Z0-9]{3})-?(15M|[A-Z0-9]{4})$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
     if (!m) return { ok: false, why: 'A stamp looks like A4Y-K7Q2, or A4Y-15M when everything is done.' };
     const ed = EDITIONS[m[1][0]]; if (!ed) return { ok: false, why: 'That stamp is from an edition this page does not know.' };
@@ -595,8 +615,24 @@ const BRS = (function () {
     if (s.length !== 10) return { ok: false, why: 'A keeper code is a Creature Code and three more characters, like CE-MKYUK-A4Y.' };
     const c = parseCode(s.slice(0, 7)); if (!c.ok) return { ok: false, why: c.why };
     const ed = EDITIONS[s[7]]; if (!ed) return { ok: false, why: 'That keeper code is from an edition this page does not know.' };
-    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check the pocket card.' };
+    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check your Field Sheet.' };
     return { ok: true, code: c.code, site: c.site, edition: ed.id, text: c.code + '-' + s.slice(7) };
+  }
+
+  /* A release code opens the reveal for one class period on one date (YYYY-MM-DD). The teacher makes it in the lookup;
+     the page checks it against today's date on the device. It carries no Creature Code: it works for any animal that day. */
+  const PERIODS = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8'];
+  function releaseCode(date, period) {
+    const p = String(period || '').toUpperCase();
+    if (PERIODS.indexOf(p) < 0 || !/^\d{4}-\d{2}-\d{2}$/.test(String(date))) return null;
+    const h = hashStr('release|' + EDITION.id + '|' + date + '|' + p), g = hashStr(p + '|' + date + '|release-2');
+    return 'R-' + ALPHA[h % 31] + ALPHA[(h >>> 7) % 31] + ALPHA[g % 31] + ALPHA[(g >>> 7) % 31];
+  }
+  function readRelease(raw, date) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!/^R[A-Z0-9]{4}$/.test(s)) return { ok: false, why: 'A release code looks like R-7K4Q. Ask your teacher.' };
+    for (const p of PERIODS) if (releaseCode(date, p).replace('-', '') === s) return { ok: true, period: p, date: date };
+    return { ok: false, why: 'That release code is not for today. Ask your teacher.' };
   }
 
   const std = make();
@@ -614,7 +650,7 @@ const BRS = (function () {
   return {
     VERSION, EDITION, EDITIONS, DEFAULTS, MUTATION_ODDS, hasMutation, mutationForRoll, codeForRolls, OPTIONS: std.OPTIONS, ALPHA, SITES, STATMAP: std.STATMAP, LAYOUT, site, siteForRoll, GENES, EMB, EMB_POOL, PARTS, FULL,
     CODON, SYN, AMINO, BASES, parseCode, codeFrom, batch, creature: std.creature, entry: std.entry, alleles: std.alleles, make,
-    transcribe, templateOf, translate, stamp, readStamp, keeper, readKeeper, maskOf, idsOf, rng, checkChar, fingerprint
+    transcribe, templateOf, translate, stamp, teacherStamp, readStamp, keeper, readKeeper, PERIODS, releaseCode, readRelease, maskOf, idsOf, rng, checkChar, fingerprint
   };
 })();
 if (typeof module !== 'undefined') module.exports = BRS;

@@ -86,10 +86,13 @@ ol.rule li{padding:8px 10px;border:1.5px solid var(--rule);border-radius:5px;fon
 footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px} footer a{color:var(--ember)}
 @media (max-width:520px){ body{font-size:16px} .block,.chrom{padding:12px} .dna{font-size:17px} .pen{padding:6px 9px;font-size:.82rem} }
 </style>
-<div class="wrap"><header class="top"><h1><a href="#find">Find the Genes</a></h1><span class="small muted">Blue Ridge Salamander Project · test build</span></header><main id="app" class="sheet"></main><footer><span>© J. R. Schwebach. All rights reserved. Free to use with your own students. Draft for classroom testing.</span><span><a href="blue-ridge-salamander.html">All salamander pages</a> · genome mark <span id="gm"></span></span></footer></div>
+<div class="wrap"><header class="top"><h1><a href="#find">Find the Genes</a></h1><span class="small muted">Blue Ridge Salamander Project</span></header><main id="app" class="sheet"></main><footer><span>© J. R. Schwebach. All rights reserved. Free to use with your own students. Draft for classroom testing.</span><span><a href="blue-ridge-salamander.html">All salamander pages</a> · genome mark <span id="gm"></span></span></footer></div>
 <script>
-/* Blue Ridge Salamander Project genome engine. DRAFT v3 (two alleles, one spelling per allele), 2026-11-11.
-   NOT FROZEN. Reid's answers of 11/11, 2:13 to 3:01 pm, are built in; the freeze waits on the tools and his go.
+/* Blue Ridge Salamander Project genome engine. v3 (two alleles, one spelling per allele), built 2026-11-11.
+   FROZEN for edition 2026-27 at genome mark D3Y-KTT (Reid's decision, 2026-11-15). This school year, do not change genes,
+   alleles, sites, odds, seeds or stamps: every student's Creature Code, stamps and keeper code depend on them. Wording
+   and comments may change. After any edit, fingerprint() must still return D3Y-KTT and TF-7CBW4 must still give
+   final stamp AT7-15M and keeper code TF-7CBW4-AT7. Any rebuild waits for the end of the project.
    A Creature Code regenerates the same genome every time. No server, no student data.
    Every gene draws from its own seeded stream (code + gene id), so adding a gene later
    never changes a gene students already decoded.
@@ -105,7 +108,7 @@ footer{border-top:1.5px solid var(--rule);padding-top:12px;font-size:.88rem;colo
      characters of the final stamp. */
 const BRS = (function () {
   'use strict';
-  const VERSION = 'v3 draft 2026-11-11';
+  const VERSION = 'v3 frozen 2026-11-15';
   const EDITION = { id: '2026-27', mark: 'A', label: 'Edition 2026-27' };
   const EDITIONS = { A: EDITION };
   /* Both rules were settled with Reid on 11/11 (decisions log). They stay switches so the checks can run each way. */
@@ -518,8 +521,25 @@ const BRS = (function () {
     const mask = typeof done === 'number' ? done >>> 0 : maskOf(done);
     return stampHead(code, mask, EDITION) + '-' + (mask === FULL ? '15M' : enc4(mask));
   }
+  function teacherHead(code, mask, ed) {
+    const h = hashStr('teacher-release|' + ed.id + '|' + code + '|' + mask);
+    return ed.mark + ALPHA[h % 31] + ALPHA[(h >>> 5) % 31];
+  }
+  /* done = what the student decoded themselves (ids or a mask). Everything else is "given by teacher". */
+  function teacherStamp(code, done) {
+    const c = parseCode(code); if (!c.ok) return null;
+    const mask = typeof done === 'number' ? done >>> 0 : maskOf(done);
+    return mask === FULL ? stamp(c.code, FULL) : teacherHead(c.code, mask, EDITION) + '-T' + enc4(mask);
+  }
   function readStamp(code, raw) {
     const c = parseCode(code); if (!c.ok) return { ok: false, why: c.why };
+    const tm = /^([A-Z0-9]{3})-?T([A-Z0-9]{4})$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
+    if (tm) {
+      const ted = EDITIONS[tm[1][0]], own = dec4(tm[2]);
+      if (!ted || own < 0 || own >= FULL || teacherHead(c.code, own, ted) !== tm[1]) return { ok: false, why: 'That teacher stamp does not belong to this Creature Code. Check each character.' };
+      const mine = idsOf(own);
+      return { ok: true, edition: ted.id, mask: FULL, final: true, teacher: true, own: mine, given: PARTS.filter(id => mine.indexOf(id) < 0), done: PARTS.slice(), left: [], text: tm[1] + '-T' + tm[2] };
+    }
     const m = /^([A-Z0-9]{3})-?(15M|[A-Z0-9]{4})$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
     if (!m) return { ok: false, why: 'A stamp looks like A4Y-K7Q2, or A4Y-15M when everything is done.' };
     const ed = EDITIONS[m[1][0]]; if (!ed) return { ok: false, why: 'That stamp is from an edition this page does not know.' };
@@ -534,8 +554,24 @@ const BRS = (function () {
     if (s.length !== 10) return { ok: false, why: 'A keeper code is a Creature Code and three more characters, like CE-MKYUK-A4Y.' };
     const c = parseCode(s.slice(0, 7)); if (!c.ok) return { ok: false, why: c.why };
     const ed = EDITIONS[s[7]]; if (!ed) return { ok: false, why: 'That keeper code is from an edition this page does not know.' };
-    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check the pocket card.' };
+    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check your Field Sheet.' };
     return { ok: true, code: c.code, site: c.site, edition: ed.id, text: c.code + '-' + s.slice(7) };
+  }
+
+  /* A release code opens the reveal for one class period on one date (YYYY-MM-DD). The teacher makes it in the lookup;
+     the page checks it against today's date on the device. It carries no Creature Code: it works for any animal that day. */
+  const PERIODS = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8'];
+  function releaseCode(date, period) {
+    const p = String(period || '').toUpperCase();
+    if (PERIODS.indexOf(p) < 0 || !/^\d{4}-\d{2}-\d{2}$/.test(String(date))) return null;
+    const h = hashStr('release|' + EDITION.id + '|' + date + '|' + p), g = hashStr(p + '|' + date + '|release-2');
+    return 'R-' + ALPHA[h % 31] + ALPHA[(h >>> 7) % 31] + ALPHA[g % 31] + ALPHA[(g >>> 7) % 31];
+  }
+  function readRelease(raw, date) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!/^R[A-Z0-9]{4}$/.test(s)) return { ok: false, why: 'A release code looks like R-7K4Q. Ask your teacher.' };
+    for (const p of PERIODS) if (releaseCode(date, p).replace('-', '') === s) return { ok: true, period: p, date: date };
+    return { ok: false, why: 'That release code is not for today. Ask your teacher.' };
   }
 
   const std = make();
@@ -553,7 +589,7 @@ const BRS = (function () {
   return {
     VERSION, EDITION, EDITIONS, DEFAULTS, MUTATION_ODDS, hasMutation, mutationForRoll, codeForRolls, OPTIONS: std.OPTIONS, ALPHA, SITES, STATMAP: std.STATMAP, LAYOUT, site, siteForRoll, GENES, EMB, EMB_POOL, PARTS, FULL,
     CODON, SYN, AMINO, BASES, parseCode, codeFrom, batch, creature: std.creature, entry: std.entry, alleles: std.alleles, make,
-    transcribe, templateOf, translate, stamp, readStamp, keeper, readKeeper, maskOf, idsOf, rng, checkChar, fingerprint
+    transcribe, templateOf, translate, stamp, teacherStamp, readStamp, keeper, readKeeper, PERIODS, releaseCode, readRelease, maskOf, idsOf, rng, checkChar, fingerprint
   };
 })();
 if (typeof module !== 'undefined') module.exports = BRS;
@@ -587,7 +623,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     const a = assigned(), n = assignedDone();
     return n === a.length ? '<section class="block"><p class="say good" role="status"><b>You found ' + n + ' of ' + a.length + '. Done.</b> The other strips are optional.</p><div class="row"><a class="btn" id="backttr" href="blue-ridge-salamander-turn-the-rock.html#decode">Back to Turn the Rock</a></div></section>' : '';
   }
-  const PENS = [['r', 'TATA box'], ['g', 'Start · ATG'], ['p', 'Stop · TAA TAG TGA'], ['t', 'Whole gene'], ['x', 'Eraser']];
+  const PENS = [['r', 'TATA box'], ['g', 'Start · ATG'], ['p', 'Stop · TAA TAG TGA'], ['t', 'Coding part'], ['x', 'Eraser']];
   const COMP = { A: 'T', T: 'A', G: 'C', C: 'G' }, BASEHEX = { A: '#0072b2', C: '#f0c419', G: '#3d4750', T: '#d55e00' };
   const PENHEX = { r: '#d5362b', g: '#23894a', p: '#7748c2', t: '#5fd3d6' };
   const view = () => { const h = (location.hash || '').slice(1); return ['genome'].indexOf(h) >= 0 ? h : 'find'; };
@@ -640,7 +676,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       '<p class="lede"><b>Mark where each gene starts and stops. Some DNA has no gene.</b> Your strips today: ' + mine.map(c => c.key === 'cY' ? 'the Y chromosome' : c.label.toLowerCase()).join(', ').replace(/, ([^,]*)$/, ' and $1') + '. The other strips are optional.</p>' +
       '<p class="lede">This is the DNA of ' + S.code + ', one strand of each chromosome, read left to right. Somewhere in it are the genes that build this salamander.</p>' +
       '<p class="say"><b>What is drawn.</b> This salamander has 15 pairs of chromosomes. The set it got from its mother is drawn here: one chromosome from each pair. Each of chromosomes 1 to 14 has a partner from the father. That partner is in the animal and is not drawn. If you see a 16th strip, it is a Y chromosome, and it came from the father.</p>' +
-      '<ol class="rule"><li><b class="k r">TATA</b> A gene is switched on at a TATA box. Find every one.</li><li><b class="k g">ATG</b> The gene starts at the first ATG after the TATA box.</li><li><b class="k p">TAA · TAG · TGA</b> These three codons are stops. Count by threes from the start. The first TAA, TAG or TGA that lands on a count of three ends the gene.</li><li><b class="k t">Gene</b> Everything from the start through the stop is the gene.</li></ol>' +
+      '<ol class="rule"><li><b class="k r">TATA</b> A gene is switched on at a TATA box. Find every one.</li><li><b class="k g">ATG</b> The start codon is the first ATG after the TATA box.</li><li><b class="k p">TAA · TAG · TGA</b> These three codons are stops. Count by threes from the start codon. The first TAA, TAG or TGA that lands on a count of three is the stop codon. A TGA (or TAA, TAG) only stops the gene when it falls in the reading frame, counted in threes from the start codon. One that straddles two codons is not a stop.</li><li><b class="k t">Coding part</b> Everything from the start codon (green) through the stop codon (purple) is the part of the gene that codes for the protein.</li><li><b class="k" style="background:transparent;color:var(--ink);border:1.5px solid var(--ink)">No gene</b> A strip with no TATA box holds no gene. An ATG with no TATA box in front of it does not start one. On a strip like that, tap “No gene here,” then check.</li></ol>' +
       '<p><b>To highlight:</b> pick a pen, tap the first letter, then tap the last letter.</p><p class="basekey" aria-label="Base colors"><span>Under every letter:</span><span><i style="background:var(--bA)"></i>A</span><span><i style="background:var(--bC)"></i>C</span><span><i style="background:var(--bG)"></i>G</span><span><i style="background:var(--bT)"></i>T</span><span>In RNA, U takes T’s color on a round tile.</span></p>' +
       (S.example ? '<p class="say">This is an example salamander. Type your own Creature Code to load yours.</p>' : '') +
       '<form class="row" data-form="code"><div class="field"><label for="code">Creature Code</label><input type="text" id="code" maxlength="10" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" style="text-transform:uppercase" placeholder="TF-7K3QM" value="' + (S.example ? '' : esc(S.code)) + '"></div><button class="ghost" style="align-self:flex-end">Load</button></form>' + (codeMsg ? '<p class="say warn">' + codeMsg + '</p>' : '') + '</section>';
@@ -686,7 +722,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
       hints.push(msg);
     }
     const tF = ch.genes.filter(g => by.t.some(m => same(m, g.start, g.end) || same(m, g.start + 3, g.stop - 1))).length;
-    if (tF < n || by.t.length > tF) hints.push(!by.t.length ? 'Turquoise: cover the whole gene, from the start through the stop.' : 'Turquoise should run from the first letter of the start through the last letter of the stop.');
+    if (tF < n || by.t.length > tF) hints.push(!by.t.length ? 'Turquoise: cover everything from the start codon through the stop codon.' : 'Turquoise should run from the first letter of the start codon through the last letter of the stop codon.');
     return { ok: !hints.length, hints: hints.slice(0, 3) };
   }
 

@@ -211,7 +211,6 @@ button.die:hover{border-color:var(--ember)}
   <p class="small" id="copymsg" role="status" hidden></p>
   <nav aria-label="Survey steps"><ol class="steps" id="steps"></ol></nav>
 </header>
-<p class="draft">Test build, 11/11/2026. Codes and traits can still change until Mr. Schwebach freezes the genome.</p>
 <main id="app" class="sheet"></main>
 <footer>
   <span>© J. R. Schwebach. All rights reserved. Free to use with your own students. Draft for classroom testing.</span>
@@ -219,8 +218,11 @@ button.die:hover{border-color:var(--ember)}
 </footer>
 </div>
 <script>
-/* Blue Ridge Salamander Project genome engine. DRAFT v3 (two alleles, one spelling per allele), 2026-11-11.
-   NOT FROZEN. Reid's answers of 11/11, 2:13 to 3:01 pm, are built in; the freeze waits on the tools and his go.
+/* Blue Ridge Salamander Project genome engine. v3 (two alleles, one spelling per allele), built 2026-11-11.
+   FROZEN for edition 2026-27 at genome mark D3Y-KTT (Reid's decision, 2026-11-15). This school year, do not change genes,
+   alleles, sites, odds, seeds or stamps: every student's Creature Code, stamps and keeper code depend on them. Wording
+   and comments may change. After any edit, fingerprint() must still return D3Y-KTT and TF-7CBW4 must still give
+   final stamp AT7-15M and keeper code TF-7CBW4-AT7. Any rebuild waits for the end of the project.
    A Creature Code regenerates the same genome every time. No server, no student data.
    Every gene draws from its own seeded stream (code + gene id), so adding a gene later
    never changes a gene students already decoded.
@@ -236,7 +238,7 @@ button.die:hover{border-color:var(--ember)}
      characters of the final stamp. */
 const BRS = (function () {
   'use strict';
-  const VERSION = 'v3 draft 2026-11-11';
+  const VERSION = 'v3 frozen 2026-11-15';
   const EDITION = { id: '2026-27', mark: 'A', label: 'Edition 2026-27' };
   const EDITIONS = { A: EDITION };
   /* Both rules were settled with Reid on 11/11 (decisions log). They stay switches so the checks can run each way. */
@@ -1081,7 +1083,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
         '<div class="row"><button data-act="zyg">Check</button></div><div id="zygfb" aria-live="polite"></div></fieldset>';
     } else {
       h += strand(g.id, 0, m.template, { given: m, top: true, label: f ? 'Copy from the mother · you decoded this one' : 'One copy, from the mother', diff: dc });
-      if (f) h += strand(g.id, 1, f.template, { given: f, label: 'Copy from the father · given to you', diff: dc });
+      if (f) h += '<p>Below is the father’s copy of this gene: a second piece of DNA, from the other parent. Compare the two copies.</p>' + strand(g.id, 1, f.template, { given: f, label: 'Copy from the father · given to you', diff: dc });
       h += '<div class="result"><b>Decoded.</b><span class="chain">Mother’s copy: ' + dash(m.protein.slice(0, 8)) + ' → allele ' + m.allele.s + ' (' + m.allele.label + ')</span>' +
         (f ? '<span class="chain">Father’s copy: ' + dash(f.protein.slice(0, 8)) + ' → allele ' + f.allele.s + ' (' + f.allele.label + ')</span><span><b>Genotype ' + esc(e.genotype) + ', ' + e.zyg + '.</b> ' + (e.diff ? 'The copies differ by one base, in codon ' + (e.diff.codon + 1) + ': ' + e.diff.motherAA + ' in one protein, ' + e.diff.fatherAA + ' in the other.' : 'Both copies build the same protein.') + ' Both copies are switched on in this animal’s cells. You decoded one of them to save time.</span>'
           : '<span><b>One copy.</b> This gene sits on the X chromosome, and a male has one X, from his mother. His father gave him a Y, which carries no copy of this gene.</span>') +
@@ -1115,7 +1117,7 @@ if (typeof module !== 'undefined') module.exports = BRS;
     } else {
       h += strand('EMB', 0, mom.template, { label: 'Copy from the mother', withNone: true }) +
         '<p class="small muted">If a stop codon comes early, enter STOP there and “none” in every box after it. The ribosome has already let go.</p>' +
-        '<div class="field"><label for="q-codon">Which codon reads differently from the reference?</label><select id="q-codon" data-q="codon" style="max-width:20rem">' + ['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(v => '<option value="' + v + '"' + (String(q.codon == null ? '' : q.codon) === String(v) ? ' selected' : '') + '>' + (v === '' ? 'Choose' : v === 0 ? 'No codon. The copies match.' : 'Codon ' + v) + '</option>').join('') + '</select></div>' +
+        '<div class="field"><label for="q-codon">Which codon reads differently from the reference?</label><select id="q-codon" data-q="codon" style="max-width:20rem">' + ['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(v => '<option value="' + v + '"' + (String(q.codon == null ? '' : q.codon) === String(v) ? ' selected' : '') + '>' + (v === '' ? 'Codon ?' : v === 0 ? 'No codon. The copies match.' : 'Codon ' + v) + '</option>').join('') + '</select></div>' +
         '<fieldset id="q-kind"><legend>What happened to the protein?</legend>' + KINDS.map(k => '<label class="opt"><input type="radio" name="kind" id="k-' + k[0] + '" value="' + k[0] + '" data-q="kind"' + (q.kind === k[0] ? ' checked' : '') + '><span>' + k[1] + '</span></label>').join('') + '</fieldset>' +
         '<div class="row"><button data-act="checkbase">Check my answers</button></div><div id="fb" aria-live="polite"></div>';
     }

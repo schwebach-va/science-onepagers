@@ -174,8 +174,11 @@ body.embed .low{padding-block:0 8px}
 })();
 </script>
 <script>
-/* Blue Ridge Salamander Project genome engine. DRAFT v3 (two alleles, one spelling per allele), 2026-11-11.
-   NOT FROZEN. Reid's answers of 11/11, 2:13 to 3:01 pm, are built in; the freeze waits on the tools and his go.
+/* Blue Ridge Salamander Project genome engine. v3 (two alleles, one spelling per allele), built 2026-11-11.
+   FROZEN for edition 2026-27 at genome mark D3Y-KTT (Reid's decision, 2026-11-15). This school year, do not change genes,
+   alleles, sites, odds, seeds or stamps: every student's Creature Code, stamps and keeper code depend on them. Wording
+   and comments may change. After any edit, fingerprint() must still return D3Y-KTT and TF-7CBW4 must still give
+   final stamp AT7-15M and keeper code TF-7CBW4-AT7. Any rebuild waits for the end of the project.
    A Creature Code regenerates the same genome every time. No server, no student data.
    Every gene draws from its own seeded stream (code + gene id), so adding a gene later
    never changes a gene students already decoded.
@@ -191,7 +194,7 @@ body.embed .low{padding-block:0 8px}
      characters of the final stamp. */
 const BRS = (function () {
   'use strict';
-  const VERSION = 'v3 draft 2026-11-11';
+  const VERSION = 'v3 frozen 2026-11-15';
   const EDITION = { id: '2026-27', mark: 'A', label: 'Edition 2026-27' };
   const EDITIONS = { A: EDITION };
   /* Both rules were settled with Reid on 11/11 (decisions log). They stay switches so the checks can run each way. */
