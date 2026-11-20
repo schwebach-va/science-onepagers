@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/critical-junctions.html">
+<meta name="description" content="Critical Junctions: short iPad interactives for the places where DNA, RNA and protein ideas turn. Section 1: old strands, new strands (semi-conservative replication). Nothing is saved or submitted.">
+<meta name="author" content="J. R. Schwebach">
+<meta name="copyright" content="Copyright 2026 J. R. Schwebach. Licensed CC BY-NC 4.0. All graphics are drawn in code from scratch.">
+<title>Critical Junctions: DNA, RNA and Protein | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--solid:#3F7A55;--solid-soft:#E2EDE6;
+  --gold-soft:#FBF0DA;--gold-ink:#7A5212;--next:#B8E600;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+.wrap{max-width:54rem;margin:0 auto;padding:.8rem 1rem 3rem}
+html.proj body{font-size:24px}
+html.proj .wrap{max-width:none}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.3rem,4vw,1.7rem);line-height:1.12;letter-spacing:-0.015em;margin:0}
+h2{font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:-0.01em;margin:.2rem 0 .4rem}
+p{margin:0 0 .7rem}
+.fine{font-size:.86rem;color:var(--ink-soft);line-height:1.45}
+.hidden{display:none!important}
+button{font:inherit;cursor:pointer;color:inherit}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:.5rem 1rem;margin:0 0 .6rem}
+.sop-back{display:inline-block;margin:0 .9rem .1rem 0;font-family:var(--sans);font-size:.86rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-eyebrow{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .15rem}
+.seg{display:inline-flex;border:1.5px solid var(--shell);border-radius:6px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;font-family:var(--sans);font-size:.84rem;font-weight:700;padding:.5rem .75rem;min-height:44px;color:var(--ink-soft)}
+.seg button[aria-pressed="true"]{background:var(--bond);color:#fff}
+.secbar{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;margin:0 0 .7rem}
+.secbar a,.secbar span{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:.3rem .25rem;border:1.5px solid var(--shell);border-radius:6px;background:var(--card);font-family:var(--sans);font-size:.86rem;font-weight:700;line-height:1.15;color:var(--ink);text-decoration:none}
+.secbar a[aria-current="true"]{border-color:var(--bond);background:var(--bond-soft);color:var(--bond)}
+.secbar span{color:var(--ink-soft);background:none;border-style:dashed;font-weight:600}
+.secbar small{font-weight:500;font-size:.72rem}
+.panel{background:var(--card);border:1.5px solid var(--rule);border-radius:8px;padding:.8rem .9rem 1rem}
+.stepline{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;font-family:var(--sans);margin-bottom:.4rem}
+.chip{font-size:.8rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;background:var(--bond-soft);color:var(--bond);white-space:nowrap}
+.dots{display:inline-flex;gap:5px;margin-left:auto}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--shell)}
+.dots i.on{background:var(--bond)}
+.say{font-family:var(--sans);font-weight:600;font-size:1.16rem;line-height:1.35;margin:0 0 .55rem;max-width:44rem}
+.say b{color:var(--bond)}
+.stage{border:1.5px solid var(--rule);border-radius:6px;overflow:hidden;background:#fff}
+.stage svg{display:block;width:100%;height:auto;max-height:46vh}
+html.proj .stage svg{max-height:60vh}
+.fb{font-family:var(--sans);font-size:1.02rem;min-height:1.5rem;margin:.55rem 0 .2rem;line-height:1.4}
+.fb.ok{color:var(--solid)}
+.fb.no{color:var(--flag)}
+.btnrow{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem;align-items:center}
+.btn{font-family:var(--sans);font-weight:700;font-size:1.02rem;min-height:52px;padding:.55rem 1.05rem;border-radius:8px;border:1.5px solid var(--shell);background:var(--card)}
+.btn.act{background:var(--bond);border-color:var(--bond);color:#fff}
+.btn.act:disabled{background:var(--rule);border-color:var(--rule);color:var(--ink-soft);cursor:default}
+.btn.go{margin-left:auto;background:var(--next);border-color:#8FB300;color:#1D1A15;padding:.55rem 1.4rem}
+.btn.go:disabled{background:var(--rule);border-color:var(--rule);color:var(--ink-soft);cursor:default}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.6rem}
+.choices.two{grid-template-columns:1fr 1fr}
+.choices.one{grid-template-columns:1fr}
+.choice{display:flex;align-items:center;justify-content:center;text-align:center;min-height:64px;padding:.5rem .75rem;border-radius:8px;border:2px solid var(--shell);background:var(--card);font-family:var(--sans);font-weight:600;font-size:1.05rem;line-height:1.25}
+.choices.one .choice{justify-content:flex-start;text-align:left}
+.choice.pick{border-color:var(--bond);background:var(--bond-soft)}
+.choice.right{border-color:var(--solid);background:var(--solid-soft)}
+.choice.wrong{border-color:var(--flag);background:var(--flag-soft);opacity:.75}
+.legend{display:flex;flex-wrap:wrap;gap:.35rem .9rem;margin:.45rem 0 0;font-family:var(--sans);font-size:.86rem;color:var(--ink-soft)}
+.legend i{display:inline-block;width:22px;height:6px;border-radius:3px;vertical-align:middle;margin-right:.3rem}
+.count{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin:.55rem 0 0;font-family:var(--sans)}
+.count div{border:1.5px solid var(--rule);border-radius:6px;padding:.35rem .5rem;text-align:center}
+.count b{display:block;font-size:1.5rem;line-height:1.1}
+.count small{display:block;font-size:.78rem;color:var(--ink-soft);line-height:1.2}
+.two-ans{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.3rem 0 .5rem}
+.ans{border:2px solid var(--rule);border-radius:8px;padding:.6rem .7rem;font-family:var(--sans)}
+.ans h3{margin:0 0 .25rem;font-size:1.05rem}
+.ans p{margin:0;font-size:1rem;line-height:1.35;font-weight:500}
+.ans.msg{border-color:var(--bond);background:var(--bond-soft)}
+.ans.mol{border-color:#1D1A15}
+.flips{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.4rem 0}
+.flip{min-height:104px;border-radius:8px;border:2px solid var(--shell);background:var(--card);padding:.55rem .65rem;font-family:var(--sans);text-align:left;line-height:1.3}
+.flip b{display:block;font-size:1.02rem}
+.flip span{display:block;font-size:.86rem;color:var(--ink-soft);margin-top:.15rem}
+.flip.open{border-color:var(--bond);background:var(--bond-soft)}
+.flip.open span{color:var(--ink);font-size:.95rem}
+.talk{border-left:5px solid var(--gold-ink);background:var(--gold-soft);padding:.5rem .7rem;border-radius:0 6px 6px 0;font-family:var(--sans);font-weight:600;margin:.6rem 0 .2rem}
+.slider{width:100%;margin:.6rem 0 .2rem;accent-color:var(--bond);height:44px}
+.stops{display:flex;justify-content:space-between;font-family:var(--sans);font-size:.8rem;color:var(--ink-soft)}
+.big{font-family:var(--sans);font-weight:700;font-size:clamp(1.6rem,6vw,2.3rem);line-height:1.1;margin:.4rem 0 .2rem}
+.models{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.5rem}
+.models .choice{flex-direction:column;gap:.2rem;padding:.4rem}
+.models svg{width:100%;height:auto;max-height:150px}
+.sop-foot{margin-top:1.6rem;padding-top:.7rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+#teacher{margin-top:1rem;background:var(--gold-soft);border:1.5px solid var(--gold-ink);border-radius:8px;padding:.8rem .9rem;font-size:.95rem}
+#teacher h2{margin-top:0}
+#teacher li{margin-bottom:.3rem}
+@media (max-width:620px){.choices{grid-template-columns:1fr}.two-ans,.flips{grid-template-columns:1fr}.count b{font-size:1.2rem}.models{grid-template-columns:1fr}.models svg{max-height:110px}}
+html.proj .say{font-size:1.5rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+      <p class="sop-eyebrow">Unit 4 &middot; DNA, RNA &amp; Protein &middot; Interactive &middot; nothing submitted</p>
+      <h1>Critical Junctions</h1>
+    </div>
+    <div class="seg" id="levelsw" role="group" aria-label="Level">
+      <button type="button" data-level="general" aria-pressed="false">SOL General</button>
+      <button type="button" data-level="advanced" aria-pressed="false">SOL Advanced</button>
+    </div>
+  </div>
+  <nav class="secbar" aria-label="Sections">
+    <a href="#old-new" aria-current="true">1 &middot; Old strands,<br>new strands</a>
+    <span>2 &middot; Build the<br>new strand<small>coming</small></span>
+    <span>3 &middot; One gene,<br>many copies<small>coming</small></span>
+    <span>4 &middot; A change that<br>gets copied<small>coming</small></span>
+  </nav>
+
+  <section class="panel" id="sec-old-new"><div id="root"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
+
+  <div id="teacher" class="hidden"></div>
+
+  <footer class="sop-foot">Biology I &middot; Unit 4 &middot; LT 4.2 DNA replication &middot; SOL BIO.5 &middot; nothing is saved or submitted. Cell facts: Bianconi et al. 2013; Spalding et al. 2005 and 2008; Bergmann et al. 2009. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.</footer>
+</div>
+<script>
+(function(){
+"use strict";
+/* Strand colors by generation, from Reid's 11/19 sketch: black = parents, orange = copy 1, pink = copy 2. */
+const COL=["#1D1A15","#E8890C","#E2558F","#1F7A8C","#7B4FA8","#3F7A55"];
+const CNAME=["your parents' strands","copy 1","copy 2","copy 3","copy 4","copy 5"];
+const BASE={A:"#2F6FD0",T:"#E4572E",C:"#F2C230",G:"#9A9A9A"};
+const PAIR={A:"T",T:"A",C:"G",G:"C"};
+const SEQ="ATGCCATG".split("");
+const MAXG=5;
+
+const LEVELS={general:{label:"SOL General",models:false},advanced:{label:"SOL Advanced",models:true}};
+let Q;try{Q=new URLSearchParams(location.search);}catch(e){Q={get:()=>null};}
+const PROJ=Q.get("projector")==="1",TEACHER=Q.get("teacher")==="1",TIMER=TEACHER||Q.get("timer")==="1";
+if(PROJ)document.documentElement.classList.add("proj");
+const S={level:LEVELS[Q.get("level")]?Q.get("level"):"advanced",i:0,ans1:null,ans2:null,copied:false,gen:1,predTries:0,predDone:false,
+  zoom:0,modelTries:0,modelDone:false,tubes:0,checkTries:0,checkDone:false,flips:{},wrong:{},t0:Date.now(),times:{}};
+const root=document.getElementById("root");
+let anim=null;
+
+function stopAnim(){if(anim){cancelAnimationFrame(anim);anim=null;}}
+function play(dur,draw,done){stopAnim();const t0=performance.now();
+  const step=t=>{const p=Math.min(1,(t-t0)/dur);draw(p);if(p<1){anim=requestAnimationFrame(step);}else{anim=null;if(done)done();}};
+  anim=requestAnimationFrame(step);}
+const cl=v=>v<0?0:v>1?1:v, seg=(p,a,b)=>cl((p-a)/(b-a)), ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const F='font-family="Archivo,Helvetica,Arial,sans-serif"';
+function tx(x,y,s,str,o){o=o||{};return `<text x="${x}" y="${y}" ${F} font-size="${s}" font-weight="${o.w||600}" text-anchor="${o.a||"middle"}" fill="${o.f||"#1D1A15"}"${o.op!=null?` opacity="${o.op}"`:""}>${str}</text>`;}
+const $=s=>root.querySelector(s);
+
+/* ---------- the zoomed molecule: unzip and copy ---------- */
+function zoomSVG(p){
+  /* p: 0 = one molecule; 0-.38 helicase unzips; .38-.85 polymerase builds; .85-1 two molecules settle */
+  const W=700,H=360,top=40,gap=34,n=SEQ.length;
+  const heliY=top-20+ease(seg(p,0,.38))*(n*gap+30);
+  const settle=ease(seg(p,.85,1));
+  let h=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="One DNA molecule unzips; each old strand gets a new orange partner.">`;
+  const ys=SEQ.map((_,i)=>top+12+i*gap);
+  function split(i){return p>=.38?1:ease(cl((heliY-ys[i])/36));}
+  /* old strands */
+  const L=[],R=[];
+  ys.forEach((y,i)=>{const s=split(i);const xl=320-s*(85+settle*25),xr=380+s*(85+settle*25);L.push([xl,y]);R.push([xr,y]);});
+  function strand(pts,col,w){let d=`M${pts[0][0]},${pts[0][1]-14}`;pts.forEach(q=>{d+=` L${q[0]},${q[1]}`;});d+=` L${pts[pts.length-1][0]},${pts[pts.length-1][1]+14}`;return `<path d="${d}" stroke="${col}" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;}
+  /* half rungs of the old strands */
+  ys.forEach((y,i)=>{const b=SEQ[i],c=PAIR[b],s=split(i);
+    const lx=L[i][0],rx=R[i][0],mid=350,len=30-s*0;
+    h+=`<line x1="${lx}" y1="${y}" x2="${lx+len}" y2="${y}" stroke="${BASE[b]}" stroke-width="9"/>`;
+    h+=`<line x1="${rx}" y1="${y}" x2="${rx-len}" y2="${y}" stroke="${BASE[c]}" stroke-width="9"/>`;
+    if(p<.02||split(i)<.05){} });
+  /* new strands, built by polymerase */
+  const q=seg(p,.38,.85),built=Math.floor(q*(n+.999)),polyY=top+q*(n*gap+10);
+  if(p>.38){
+    const nl=[],nr=[];
+    for(let i=0;i<Math.min(built,n);i++){const y=ys[i];
+      const lx=L[i][0]+62,rx=R[i][0]-62;nl.push([lx,y]);nr.push([rx,y]);
+      const b=SEQ[i],c=PAIR[b];
+      h+=`<line x1="${lx}" y1="${y}" x2="${lx-30}" y2="${y}" stroke="${BASE[c]}" stroke-width="9"/>`;
+      h+=`<line x1="${rx}" y1="${y}" x2="${rx+30}" y2="${y}" stroke="${BASE[b]}" stroke-width="9"/>`;}
+    if(nl.length){h+=strand(nl,COL[1],7)+strand(nr,COL[1],7);}
+    if(p<.85){h+=`<g opacity="${1-settle}"><ellipse cx="${L[0][0]+46}" cy="${polyY}" rx="30" ry="16" fill="${COL[1]}" opacity=".25"/><ellipse cx="${R[0][0]-46}" cy="${polyY}" rx="30" ry="16" fill="${COL[1]}" opacity=".25"/>`+
+      tx(L[0][0]-60,polyY+5,15,"polymerase",{a:"end",f:"#7A5212",w:700})+`</g>`;}
+  }
+  h+=strand(L,COL[0],7)+strand(R,COL[0],7);
+  /* helicase wedge */
+  if(p>0&&p<.4){h+=`<path d="M350,${heliY+18} l-22,-34 l44,0 z" fill="#5A544A"/>`+tx(395,heliY-2,15,"helicase unzips",{a:"start",w:700,f:"#5A544A"});}
+  /* base letters on the left old strand */
+  ys.forEach((y,i)=>{h+=tx(L[i][0]-16,y+5,13,SEQ[i],{f:"#5A544A",w:700});h+=tx(R[i][0]+16,y+5,13,PAIR[SEQ[i]],{f:"#5A544A",w:700});});
+  if(p===0)h+=tx(350,H-10,16,"One DNA molecule: two black strands from your parents",{w:600,f:"#5A544A"});
+  if(p>=1){h+=tx(L[0][0]+31,H-12,16,"old + new",{w:700})+tx(R[0][0]-31,H-12,16,"new + old",{w:700});}
+  return h+`</svg>`;
+}
+
+/* ---------- the family tree of molecules (Reid's line drawing) ---------- */
+function buildGens(){const g=[[[0,0]]];for(let k=1;k<=MAXG;k++){const prev=g[k-1],row=[];prev.forEach(m=>{row.push([m[0],k]);row.push([k,m[1]]);});g.push(row);}return g;}
+const GENS=buildGens();
+function treeSVG(show,p,hl){
+  /* show = last generation fully drawn; p = progress drawing generation show+1 (0 = none) */
+  const W=960,rowH=74,rows=Math.max(show+1+(p>0?1:0),2),H=24+rows*rowH;
+  let h=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="DNA molecules by generation. Black strands are your parents'; each copy adds a new color.">`;
+  const X0=72,WW=W-84;function slot(g,i){return X0+(i+.5)*WW/Math.pow(2,g);}
+  function molGeom(g){const w=WW/Math.pow(2,g);return {d:Math.min(13,w*.22),sw:Math.min(7,Math.max(2.4,w*.1)),len:44};}
+  for(let g=0;g<=Math.min(show+(p>0?1:0),MAXG);g++){
+    const y=16+g*rowH,frac=g<=show?1:ease(p);
+    const {d,sw,len}=molGeom(g);
+    GENS[g].forEach((m,i)=>{
+      const x=slot(g,i);
+      if(g>0){const px=slot(g-1,i>>1),py=16+(g-1)*rowH+len;
+        h+=`<line x1="${px}" y1="${py+3}" x2="${x}" y2="${y-3}" stroke="#DDD8CE" stroke-width="1.5" opacity="${frac}"/>`;}
+      [0,1].forEach(k=>{const c=m[k],sx=x+(k?d/2:-d/2);
+        const isOld=g>0&&c<g;
+        if(g>show&&isOld){ /* the old strand travels down from its parent */
+          const ppx=slot(g-1,i>>1)+(k?molGeom(g-1).d/2:-molGeom(g-1).d/2),ppy=16+(g-1)*rowH;
+          const cx=ppx+(sx-ppx)*frac,cy=ppy+(y-ppy)*frac;
+          h+=`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy+len}" stroke="${COL[c]}" stroke-width="${sw}" stroke-linecap="round"/>`;
+        }else if(g>show){ /* the new strand grows */
+          h+=`<line x1="${sx}" y1="${y}" x2="${sx}" y2="${y+len*frac}" stroke="${COL[c]}" stroke-width="${sw}" stroke-linecap="round"/>`;
+        }else{
+          const dim=hl&&c!==0?.35:1;
+          h+=`<line x1="${sx}" y1="${y}" x2="${sx}" y2="${y+len}" stroke="${COL[c]}" stroke-width="${hl&&c===0?sw+2:sw}" stroke-linecap="round" opacity="${dim}"/>`;
+        }
+      });
+    });
+    h+=tx(10,y+len/2+5,13,g===0?"start":"copy "+g,{a:"start",f:"#5A544A",w:600});
+  }
+  return h+`</svg>`;
+}
+function legend(upto){let h='<div class="legend">';for(let g=0;g<=upto;g++)h+=`<span><i style="background:${COL[g]}"></i>${CNAME[g]}</span>`;return h+'</div>';}
+function counts(g){const mol=Math.pow(2,g),withB=g===0?1:2,share=g===0?"all":"1 in "+Math.pow(2,g);
+  return `<div class="count"><div><b>${mol}</b><small>DNA molecules</small></div><div><b>${withB}</b><small>still hold a black strand</small></div><div><b>${share}</b><small>of all strands are black</small></div></div>`;}
+
+/* ---------- screens ---------- */
+const A1=[["yes","Yes"],["no","No, it's all new"],["some","Some of it"]];
+function SCREENS(){
+  const L=[
+  {id:"ask",title:"Your answer first",time:20,
+   html:()=>`<p class="say">Do you still have your <b>parents' DNA</b> in your body?</p>
+     <div class="choices">${A1.map(a=>`<button type="button" class="choice${S.ans1===a[0]?" pick":""}" data-a1="${a[0]}">${a[1]}</button>`).join("")}</div>
+     <p class="fb">${S.ans1?"Hold on to that answer. You will come back to it.":""}</p>`,
+   ready:()=>!!S.ans1,
+   mount(){root.querySelectorAll("[data-a1]").forEach(b=>b.onclick=()=>{S.ans1=b.dataset.a1;render();});}},
+
+  {id:"one",title:"You started as one cell",time:15,
+   html:()=>`<p class="say">Every cell in you came from <b>one cell</b>. Its DNA came from your parents' egg and sperm.</p>
+     <div class="stage">${zoomSVG(0)}</div>${legend(0)}`,
+   ready:()=>true},
+
+  {id:"copy",title:"Copy the DNA",time:35,
+   html:()=>`<p class="say">Before a cell divides, it copies its DNA. Tap <b>Copy</b> and watch the black strands.</p>
+     <div class="stage" id="zoom">${zoomSVG(S.copied?1:0)}</div>${legend(S.copied?1:0)}
+     <div class="btnrow"><button type="button" class="btn act" id="docopy">${S.copied?"Replay":"Copy"}</button></div>
+     <p class="fb ok">${S.copied?"Each new DNA molecule keeps <b>one old strand</b> and gets <b>one new strand</b>. That is <b>semi-conservative</b> replication.":""}</p>`,
+   ready:()=>S.copied,
+   mount(){$("#docopy").onclick=()=>{$("#docopy").disabled=true;
+     play(5200,p=>{$("#zoom").innerHTML=zoomSVG(p);},()=>{S.copied=true;render();});};}},
+
+  {id:"predict",title:"Predict, then copy",time:35,
+   html:()=>{const g=S.predDone?2:1;
+     let h=`<p class="say">Both molecules copy again. How many molecules will still hold a <b>black</b> strand?</p>
+     <div class="stage" id="tree">${treeSVG(g,0)}</div>${legend(g)}`;
+     if(S.level==="general"&&!S.predDone)h+=`<p class="fine">Look at each molecule. Each one has one black strand.</p>`;
+     h+=`<div class="choices">${[1,2,4].map(n=>`<button type="button" class="choice${S.predDone&&n===2?" right":S.wrong["pr"+n]?" wrong":""}" data-pr="${n}" ${S.predDone?"disabled":""}>${n}</button>`).join("")}</div>
+     <p class="fb ${S.predDone?"ok":S.predTries?"no":""}" id="prfb">${S.predDone?"<b>Two.</b> A strand is never cut up. Each black strand moves into one new molecule, next to a new pink strand.":S.predTries===1?"Not quite. Does a black strand ever split in two? Follow each one down.":S.predTries>=2?"Try once more, or tap Show me.":""}</p>`;
+     if(S.predTries>=2&&!S.predDone)h+=`<div class="btnrow"><button type="button" class="btn" id="prshow">Show me</button></div>`;
+     return h;},
+   ready:()=>S.predDone,
+   mount(){
+     const finish=()=>{play(1600,p=>{$("#tree").innerHTML=treeSVG(1,p);},()=>{S.predDone=true;S.gen=Math.max(S.gen,2);render();});};
+     root.querySelectorAll("[data-pr]").forEach(b=>b.onclick=()=>{const n=+b.dataset.pr;
+       if(n===2){root.querySelectorAll("[data-pr]").forEach(x=>x.disabled=true);b.classList.add("right");finish();}
+       else if(!S.wrong["pr"+n]){S.predTries++;S.wrong["pr"+n]=1;render();}});
+     const sh=$("#prshow");if(sh)sh.onclick=()=>{sh.disabled=true;finish();};}},
+
+  {id:"keep",title:"Keep copying",time:60,
+   html:()=>`<p class="say">Keep tapping <b>Copy</b>. Watch the count of black strands.</p>
+     <div class="stage" id="tree">${treeSVG(S.gen,0,S.hl)}</div>${legend(S.gen)}${counts(S.gen)}
+     <div class="btnrow"><button type="button" class="btn act" id="more" ${S.gen>=MAXG?"disabled":""}>Copy</button>
+     <button type="button" class="btn" id="hl" aria-pressed="${!!S.hl}">${S.hl?"Show all colors":"Find the black strands"}</button></div>
+     <p class="fb ok">${S.gen>=MAXG?"After five copies there are 32 molecules, and still just <b>2 black strands</b>. They never disappear. They become a smaller and smaller share.":""}</p>`,
+   ready:()=>S.gen>=4,
+   mount(){$("#more").onclick=()=>{if(S.gen>=MAXG)return;$("#more").disabled=true;const g=S.gen;
+       play(1300,p=>{$("#tree").innerHTML=treeSVG(g,p);},()=>{S.gen=g+1;render();});};
+     $("#hl").onclick=()=>{S.hl=!S.hl;render();};}},
+
+  {id:"zoomout",title:"Now zoom out to you",time:35,
+   html:()=>{const st=ZO[S.zoom];return `<p class="say">Your first cell held <b>46 DNA molecules</b>, so <b>92 strands</b> from your parents. Slide to grow.</p>
+     <input type="range" class="slider" id="zo" min="0" max="${ZO.length-1}" step="1" value="${S.zoom}" aria-label="Grow from one cell">
+     <div class="stops">${ZO.map(z=>`<span>${z.stop}</span>`).join("")}</div>
+     <div class="big">${st.cells}</div>
+     <p class="say" style="font-weight:500">${st.line}</p>
+     ${S.level==="advanced"&&S.zoom===ZO.length-1?`<p class="fine">Doubling 45 times would make about 35 trillion cells. A real body divides far more than that, because many cells are replaced.</p>`:""}`;},
+   ready:()=>S.zoom===ZO.length-1,
+   mount(){$("#zo").oninput=e=>{S.zoom=+e.target.value;render();};}},
+
+  {id:"two",title:"Two answers",time:40,
+   html:()=>{const was=A1.find(a=>a[0]===S.ans1);
+     let h=`<p class="say">So, is your parents' DNA in you? It depends what you mean.</p>
+     <div class="two-ans"><div class="ans msg"><h3>The message</h3><p>The order of A, T, C and G. <b>Yes:</b> copied letter for letter into nearly every cell.</p></div>
+     <div class="ans mol"><h3>The molecules</h3><p>The black strands themselves. <b>Yes, but rarely:</b> in at most 92 of your cells.</p></div></div>
+     <p>Every new strand is built from nucleotides your cells made from the <b>food you eat</b>.</p>`;
+     h+=`<p class="say" style="font-size:1rem">You said: <b>${was?was[1]:"—"}</b>. Keep it or change it?</p>
+     <div class="choices">${A1.map(a=>`<button type="button" class="choice${S.ans2===a[0]?" pick":""}" data-a2="${a[0]}">${a[1]}</button>`).join("")}</div>`;
+     if(S.ans2)h+=`<p class="fb ok">${S.ans2==="no"?"The molecules are almost all new, so you have a point. But the message is your parents', and a few of their strands are still in you.":S.ans2==="yes"?"Yes is right about the message, in nearly every cell.":"Some of it is right about the molecules: a few of their strands, in a few cells."}</p>`;
+     return h;},
+   ready:()=>!!S.ans2,
+   mount(){root.querySelectorAll("[data-a2]").forEach(b=>b.onclick=()=>{S.ans2=b.dataset.a2;render();});}},
+
+  {id:"baby",title:"Cells from when you were a baby",time:45,
+   html:()=>`<p class="say">Are any of your cells left from when you were a baby? Tap each card.</p>
+     <div class="flips">${FL.map((f,i)=>`<button type="button" class="flip${S.flips[i]?" open":""}" data-fl="${i}"><b>${f.k}</b><span>${S.flips[i]?f.v:"Tap to find out"}</span></button>`).join("")}</div>
+     <div class="talk">Table talk: Which of your cells still hold DNA that was copied before you were born?</div>
+     <p class="fine">As you grow, the message in your DNA stays the same. What changes is which genes each kind of cell reads.</p>`,
+   ready:()=>Object.keys(S.flips).length>=FL.length,
+   mount(){root.querySelectorAll("[data-fl]").forEach(b=>b.onclick=()=>{S.flips[b.dataset.fl]=true;render();});}}
+  ];
+  if(LEVELS[S.level].models){
+    L.push({id:"models",title:"Three ideas scientists tested",time:45,
+     html:()=>{let h=`<p class="say">Before 1958, scientists had three ideas about copying. Which one matches your lines?</p>
+       <div class="models">${MODELS.map((m,i)=>`<button type="button" class="choice${S.modelDone&&i===1?" right":S.wrong["md"+i]?" wrong":""}" data-md="${i}" ${S.modelDone?"disabled":""}>${modelSVG(m.kind)}<span>${m.name}</span></button>`).join("")}</div>
+       <p class="fb ${S.modelDone?"ok":S.modelTries?"no":""}">${S.modelDone?"Semi-conservative: every molecule keeps one whole old strand.":S.modelTries===1?"Look again. In your lines, does any molecule have two old strands?":S.modelTries>1?"In your lines, each molecule has one whole old strand and one whole new strand.":""}</p>`;
+       if(S.modelDone){h+=`<p class="say" style="margin-top:.6rem">In 1958, Meselson and Stahl gave bacteria <b>heavy</b> DNA, then let them copy it with light parts. Heavy DNA sinks lower in a spinning tube.</p>
+         <div class="stage">${tubesSVG(S.tubes)}</div>
+         <div class="btnrow"><button type="button" class="btn act" id="tb" ${S.tubes>=2?"disabled":""}>${S.tubes===0?"Copy once":"Copy again"}</button></div>
+         <p class="fb ok">${S.tubes===1?"One band, in the middle: half heavy, half light. That ruled out the conservative idea.":S.tubes>=2?"A middle band and a light band. That ruled out the dispersive idea. Copying is semi-conservative.":""}</p>`;}
+       return h;},
+     ready:()=>S.modelDone&&S.tubes>=2,
+     mount(){root.querySelectorAll("[data-md]").forEach(b=>b.onclick=()=>{const i=+b.dataset.md;if(i===1){S.modelDone=true;}else if(!S.wrong["md"+i]){S.modelTries++;S.wrong["md"+i]=1;}render();});
+       const t=$("#tb");if(t)t.onclick=()=>{S.tubes++;render();};}});
+  }
+  L.push({id:"check",title:"One check",time:25,
+   html:()=>{let h=`<p class="say">After DNA replication, each new DNA molecule has&hellip;</p>
+     <div class="choices one">${CHK.map((c,i)=>`<button type="button" class="choice${S.checkDone&&i===1?" right":S.wrong["ck"+i]?" wrong":""}" data-ck="${i}" ${S.checkDone?"disabled":""}>${"ABCD"[i]}. ${c}</button>`).join("")}</div>
+     <p class="fb ${S.checkDone?"ok":S.checkTries?"no":""}">${S.checkDone?"<b>B.</b> One original strand and one new strand: semi-conservative.":S.checkTries===1?"Think back to your lines. What was each molecule made of?":S.checkTries>1?"Each molecule had one black (old) line and one colored (new) line.":""}</p>`;
+     if(S.checkTries>=2&&!S.checkDone)h+=`<div class="btnrow"><button type="button" class="btn" id="ckshow">Show me</button></div>`;
+     return h;},
+   ready:()=>S.checkDone,
+   mount(){root.querySelectorAll("[data-ck]").forEach(b=>b.onclick=()=>{const i=+b.dataset.ck;if(i===1)S.checkDone=true;else if(!S.wrong["ck"+i]){S.checkTries++;S.wrong["ck"+i]=1;}render();});
+     const sh=$("#ckshow");if(sh)sh.onclick=()=>{S.checkDone=true;render();};}});
+  L.push({id:"done",title:"Write it",time:0,
+   html:()=>`<p class="say">Write one sentence in your own words: Do you still have your parents' DNA?</p>
+     <div class="talk">Use these words: <b>message</b>, <b>strand</b>, <b>semi-conservative</b>.</div>
+     <p class="fine">Write it on paper or wherever your teacher asks. Nothing here is saved.</p>
+     ${TIMER?`<p class="fine" id="tm">${timesLine()}</p>`:""}`,
+   ready:()=>false});
+  return L;
+}
+const ZO=[
+  {stop:"1 cell",cells:"1 cell",line:"All 92 of your parents' strands are in this one cell."},
+  {stop:"3 days",cells:"8 cells",line:"The 92 parent strands are shared among 8 cells. Every other strand is new."},
+  {stop:"Newborn",cells:"Trillions of cells",line:"Still only 92 parent strands, so at most 92 cells hold one."},
+  {stop:"You now",cells:"About 37 trillion cells",line:"At most 92 cells hold one of your parents' strands: about 1 cell in 400 billion."}
+];
+const FL=[
+  {k:"Neurons in the back of your brain",v:"As old as you are. Their DNA was copied before you were born, and they were never replaced."},
+  {k:"Heart muscle cells",v:"About 1 in 100 replaced each year at age 25. Fewer than half are ever replaced."},
+  {k:"Fat cells",v:"About 1 in 10 replaced every year in adults."},
+  {k:"Red blood cells",v:"Last about 4 months. A grown red blood cell has no nucleus, so it has no DNA at all."}
+];
+const MODELS=[{kind:"cons",name:"Conservative"},{kind:"semi",name:"Semi-conservative"},{kind:"disp",name:"Dispersive"}];
+const CHK=["two new strands","one original strand and one new strand","two original strands","bits of old and new mixed inside each strand"];
+
+function modelSVG(kind){
+  let h='<svg viewBox="0 0 200 150" aria-hidden="true">';
+  const line=(x,y,c)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+40}" stroke="${c}" stroke-width="6" stroke-linecap="round"/>`;
+  const mixed=(x,y,a)=>{let s="";for(let k=0;k<4;k++){s+=`<line x1="${x}" y1="${y+k*10}" x2="${x}" y2="${y+k*10+10}" stroke="${(k+a)%2?COL[1]:COL[0]}" stroke-width="6"/>`;}return s;};
+  h+=line(92,8,COL[0])+line(108,8,COL[0]);
+  h+=`<line x1="100" y1="54" x2="55" y2="88" stroke="#DDD8CE" stroke-width="2"/><line x1="100" y1="54" x2="145" y2="88" stroke="#DDD8CE" stroke-width="2"/>`;
+  if(kind==="cons")h+=line(47,96,COL[0])+line(63,96,COL[0])+line(137,96,COL[1])+line(153,96,COL[1]);
+  if(kind==="semi")h+=line(47,96,COL[0])+line(63,96,COL[1])+line(137,96,COL[1])+line(153,96,COL[0]);
+  if(kind==="disp")h+=mixed(47,96,0)+mixed(63,96,1)+mixed(137,96,1)+mixed(153,96,0);
+  return h+'</svg>';
+}
+function tubesSVG(n){
+  let h='<svg viewBox="0 0 700 230" role="img" aria-label="Centrifuge tubes: heavy DNA band low, then a middle band, then middle and light bands.">';
+  const T=[["Start: heavy",[180]],["After 1 copy",[140]],["After 2 copies",[140,100]]];
+  T.forEach((t,i)=>{const x=130+i*220,vis=i<=n;
+    h+=`<rect x="${x-28}" y="40" width="56" height="170" rx="26" fill="#F5F3EE" stroke="#D2CCC0" stroke-width="2" opacity="${vis?1:.35}"/>`;
+    if(vis)t[1].forEach(y=>{h+=`<rect x="${x-22}" y="${y}" width="44" height="9" rx="3" fill="${y>=170?COL[0]:y>=130?"#8A5A2B":COL[1]}"/>`;});
+    h+=tx(x,28,15,t[0],{w:700,op:vis?1:.4});});
+  h+=tx(640,95,13,"light",{f:"#5A544A",a:"end"})+tx(640,148,13,"middle",{f:"#5A544A",a:"end"})+tx(640,188,13,"heavy",{f:"#5A544A",a:"end"});
+  return h+'</svg>';
+}
+
+/* ---------- frame ---------- */
+let SC=SCREENS();
+function timesLine(){return "Times: "+SC.map(s=>s.id+" "+(S.times[s.id]?Math.round(S.times[s.id]/1000)+"s":"–")).join(" · ");}
+function render(){
+  stopAnim();
+  const s=SC[S.i];
+  let h=`<div class="stepline"><span class="chip">LT 4.2</span><span class="chip">${S.i+1} of ${SC.length}</span><span class="dots">${SC.map((_,k)=>`<i class="${k<=S.i?"on":""}"></i>`).join("")}</span></div>
+    <h2>${s.title}</h2>${s.html()}
+    <div class="btnrow"><button type="button" class="btn" id="back" ${S.i===0?"disabled":""}>&larr; Back</button>
+    ${S.i<SC.length-1?`<button type="button" class="btn go" id="next" ${s.ready()?"":"disabled"}>Next &rarr;</button>`:`<button type="button" class="btn go" id="again">Start again</button>`}</div>`;
+  root.innerHTML=h;
+  if(s.mount)s.mount();
+  $("#back").onclick=()=>{go(S.i-1);};
+  const n=$("#next");if(n)n.onclick=()=>go(S.i+1);
+  const a=$("#again");if(a)a.onclick=()=>{Object.assign(S,{i:0,ans1:null,ans2:null,copied:false,gen:1,predTries:0,predDone:false,zoom:0,modelTries:0,modelDone:false,tubes:0,checkTries:0,checkDone:false,flips:{},wrong:{},hl:false,times:{},t0:Date.now()});render();};
+}
+function go(i){if(i<0||i>=SC.length)return;const id=SC[S.i].id;S.times[id]=(S.times[id]||0)+(Date.now()-S.t0);S.t0=Date.now();S.i=i;render();root.scrollIntoView({block:"start",behavior:"smooth"});}
+
+function paintLevel(){document.querySelectorAll("#levelsw button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.level===S.level?"true":"false"));}
+document.querySelectorAll("#levelsw button").forEach(b=>b.onclick=()=>{const cur=SC[S.i].id;S.level=b.dataset.level;paintLevel();SC=SCREENS();
+  const k=SC.findIndex(s=>s.id===cur);S.i=k>=0?k:Math.min(S.i,SC.length-1);render();});
+paintLevel();render();
+
+if(TEACHER){const t=document.getElementById("teacher");t.classList.remove("hidden");
+  t.innerHTML=`<h2>Teacher key &middot; Section 1</h2><ul>
+  <li><b>Screen 4 (predict):</b> 2. Each old strand stays whole and goes into one daughter molecule.</li>
+  <li><b>Keep copying:</b> after copy n there are 2<sup>n</sup> molecules; exactly 2 hold a black strand; 1 in 2<sup>n</sup> strands is black.</li>
+  <li><b>Two answers:</b> no wrong answer. Yes = the message (sequence) is in nearly every cell. Some of it = the molecules: the egg and sperm brought 46 chromosomes = 92 strands; each stays whole and ends up in one cell, so at most 92 of about 37 trillion cells hold one. DNA repair also swaps out bits of old strands over a lifetime.</li>
+  <li><b>If a student says the DNA "becomes more of who I am":</b> the sequence stays the same as you grow; cells differ in which genes they read. The new molecules are built from food, so they are "yours"; the message is your parents'.</li>
+  <li><b>Advanced, models:</b> semi-conservative. Meselson &amp; Stahl 1958: after 1 copy one middle band rules out conservative; after 2 copies a middle + light band rules out dispersive.</li>
+  <li><b>Check:</b> B.</li>
+  <li><b>Write it:</b> look for the message/molecule distinction and one old + one new strand per molecule.</li>
+  <li><b>Time cap:</b> about 5 minutes (General) to 6 (Advanced). Add <code>?timer=1</code> to see the times on the last screen. <code>?projector=1</code> for the board. <code>?level=general</code> for Biology I.</li>
+  <li><b>Sources:</b> Bianconi et al. 2013, Ann Hum Biol 40:463 (3.72 &times; 10<sup>13</sup> cells); Spalding et al. 2005, Cell 122:133 (occipital cortex neurons as old as the person); Bergmann et al. 2009, Science 324:98 (cardiomyocytes ~1%/yr at 25, 0.45% at 75, fewer than 50% exchanged in a life); Spalding et al. 2008, Nature 453:783 (~10% of fat cells renewed per year). Red blood cells live about 120 days and lose their nucleus as they mature.</li></ul>
+  <p class="fine">Colors follow Mr. Schwebach's line sketch of 11/19: black = parents' strands, orange = copy 1, pink = copy 2.</p>`;}
+})();
+</script>
+</body>
+</html>
