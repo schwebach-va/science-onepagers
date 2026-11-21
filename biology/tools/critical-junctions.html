@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
 <link rel="canonical" href="https://scienceonepagers.org/biology/tools/critical-junctions.html">
-<meta name="description" content="Critical Junctions: short iPad interactives for the places where DNA, RNA and protein ideas turn. Section 1: old strands, new strands, semi-conservative (semiconservative) DNA replication, drawn generation by generation. Nothing is saved or submitted.">
+<meta name="description" content="Critical Junctions: short iPad interactives for the places where DNA, RNA and protein ideas turn. Section 1: old strands, new strands, semi-conservative (semiconservative) DNA replication, drawn generation by generation. Section 2: at the replication fork. Zoom from a cell in S phase to replication bubbles and one fork, read the antiparallel strands (5 prime and 3 prime), purines, pyrimidines and hydrogen bonds, then watch helicase, DNA polymerase and ligase build the leading strand and the lagging strand (Okazaki fragments), with proofreading (LT 4.2, SOL BIO.2d). Nothing is saved or submitted.">
 <meta name="author" content="J. R. Schwebach">
 <meta name="copyright" content="Copyright 2026 J. R. Schwebach. Licensed CC BY-NC 4.0. All graphics are drawn in code from scratch.">
 <title>Critical Junctions: DNA, RNA and Protein | Science One-Pagers</title>
@@ -106,6 +106,31 @@ html.proj .stage svg{max-height:60vh}
 #teacher li{margin-bottom:.3rem}
 @media (max-width:620px){.choices{grid-template-columns:1fr}.two-ans,.flips{grid-template-columns:1fr}.count b{font-size:1.2rem}.models{grid-template-columns:1fr}.models svg{max-height:110px}}
 html.proj .say{font-size:1.5rem}
+/* ---- Section 2 · At the fork (new rules only; nothing above is changed) ---- */
+#sec-fork .stage svg{max-height:48vh}
+html.proj #sec-fork .stage svg{max-height:60vh}
+.ctl{margin-top:.5rem}
+.ctl .btn{min-width:6.4rem}
+.stopsb{display:grid;gap:.3rem;margin:.1rem 0 .55rem}
+.stopsb button{min-height:46px;border:1.5px solid var(--shell);border-radius:6px;background:var(--card);font-family:var(--sans);font-size:.82rem;font-weight:700;line-height:1.1;color:var(--ink-soft);padding:.2rem .15rem}
+.stopsb button[aria-pressed="true"]{border-color:var(--bond);background:var(--bond-soft);color:var(--bond)}
+.cap{font-family:var(--sans);font-size:1rem;font-weight:500;line-height:1.35;min-height:1.4rem;margin:.5rem 0 0}
+.nts{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem}
+.nt{display:flex;align-items:center;justify-content:center;gap:.55rem;min-height:72px;border-radius:8px;border:2px solid var(--shell);background:var(--card);font-family:var(--sans);font-weight:700;font-size:1.3rem}
+.nt svg{width:40px;height:44px;flex:none}
+.nt.wrong{border-color:var(--flag);background:var(--flag-soft);opacity:.75}
+.nt:disabled{cursor:default}
+.enzrow{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.6rem}
+.enz{display:flex;align-items:center;gap:.5rem;min-height:60px;padding:.4rem .6rem;border-radius:8px;border:2px solid var(--shell);background:var(--card);font-family:var(--sans);font-weight:700;font-size:1.02rem;line-height:1.2;text-align:left}
+.enz svg{width:34px;height:34px;flex:none}
+.enz.pick{border-color:var(--bond);background:var(--bond-soft)}
+.enz.right{border-color:var(--solid);background:var(--solid-soft)}
+.match{display:grid;grid-template-columns:minmax(10.5rem,1fr) 2fr;gap:.6rem;margin-top:.5rem}
+.match .col{display:grid;gap:.5rem;align-content:start}
+.match .choice{justify-content:flex-start;text-align:left;min-height:60px;font-size:1rem}
+@keyframes cjglow{from{opacity:.25}to{opacity:1}}
+.glow{animation:cjglow .7s ease-in-out infinite alternate}
+@media (max-width:620px){.nts{grid-template-columns:repeat(2,1fr)}.enzrow,.match{grid-template-columns:1fr}.stopsb button{font-size:.72rem}}
 </style>
 </head>
 <body>
@@ -123,16 +148,17 @@ html.proj .say{font-size:1.5rem}
   </div>
   <nav class="secbar" aria-label="Sections">
     <a href="#old-new" aria-current="true">1 &middot; Old strands,<br>new strands</a>
-    <span>2 &middot; Build the<br>new strand<small>coming</small></span>
+    <a href="#fork" aria-current="false">2 &middot; At the<br>fork</a>
     <span>3 &middot; One gene,<br>many copies<small>coming</small></span>
     <span>4 &middot; A change that<br>gets copied<small>coming</small></span>
   </nav>
 
   <section class="panel" id="sec-old-new"><div id="root"><noscript>This tool needs JavaScript turned on.</noscript></div></section>
+  <section class="panel hidden" id="sec-fork"><div id="root2"></div></section>
 
   <div id="teacher" class="hidden"></div>
 
-  <footer class="sop-foot">Biology I &middot; Unit 4 &middot; LT 4.2 DNA replication &middot; SOL BIO.5 &middot; nothing is saved or submitted. Cell facts: Bianconi et al. 2013; Spalding et al. 2005 and 2008; Bergmann et al. 2009. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.</footer>
+  <footer class="sop-foot">Biology I &middot; Unit 4 &middot; LT 4.2 DNA replication &middot; SOL BIO.5 &middot; Section 2, At the fork: SOL BIO.2d &middot; nothing is saved or submitted. Cell facts: Bianconi et al. 2013; Spalding et al. 2005 and 2008; Bergmann et al. 2009. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.</footer>
 </div>
 <script>
 (function(){
@@ -430,6 +456,493 @@ if(TEACHER){const t=document.getElementById("teacher");t.classList.remove("hidde
   <li><b>Time cap:</b> about 5 minutes (General) to 6 (Advanced). Add <code>?timer=1</code> to see the times on the last screen. <code>?projector=1</code> for the board. <code>?level=general</code> for Biology I.</li>
   <li><b>Sources:</b> Bianconi et al. 2013, Ann Hum Biol 40:463 (3.72 &times; 10<sup>13</sup> cells); Spalding et al. 2005, Cell 122:133 (occipital cortex neurons as old as the person); Bergmann et al. 2009, Science 324:98 (cardiomyocytes ~1%/yr at 25, 0.45% at 75, fewer than 50% exchanged in a life); Spalding et al. 2008, Nature 453:783 (~10% of fat cells renewed per year). Red blood cells live about 120 days and lose their nucleus as they mature.</li></ul>
   <p class="fine">Colors follow Mr. Schwebach's line sketch of 11/19: black = parents' strands, orange = copy 1, pink = copy 2.</p>`;}
+})();
+</script>
+<script>
+(function(){
+"use strict";
+/* ===== Section 2 · At the fork: the replication fork, zoomed to molecules =====
+   Geometry used everywhere below. The fork moves RIGHT.
+   Top parent strand runs 5' (left) to 3' (right). Bottom parent strand runs 3' (left) to 5' (right).
+   A new strand is antiparallel to its template and gains nucleotides only at its 3' end, so:
+     bottom template -> new strand grows to the right, following helicase  = leading strand (one piece)
+     top template    -> new strand grows to the left, away from the fork   = lagging strand (fragments)
+   At the left fork of the same bubble everything is mirrored. */
+const root=document.getElementById("root2"),sec1=document.getElementById("sec-old-new"),sec2=document.getElementById("sec-fork");
+if(!root||!sec2)return;
+const DEFAULT_SEC="old-new";
+const BLACK="#1D1A15",ORANGE="#E8890C",SOFT="#5A544A",GOLD="#FBF0DA",GOLDINK="#7A5212",LIG="#1F7A8C",FLAG="#B85042",SHELL="#D2CCC0",NEXT="#B8E600";
+const BASE={A:"#2F6FD0",T:"#E4572E",C:"#F2C230",G:"#9A9A9A"};
+const PAIR={A:"T",T:"A",C:"G",G:"C"},PUR={A:1,G:1},HB={A:2,T:2,C:3,G:3};
+const TOP="ATGCCATGCTAAGTCG".split(""),N=TOP.length;   /* top parent strand, 5' to 3' */
+const pairName=b=>(b==="A"||b==="T")?"A&ndash;T":"G&ndash;C";
+/* Levels. "de" is a hook for a third button later: it is not shown in the switcher and, until it is built, uses the Advanced screens. */
+const LEVELS={general:{label:"SOL General",base:"general"},advanced:{label:"SOL Advanced",base:"advanced"},de:{label:"DE",base:"advanced",hidden:true}};
+let Q;try{Q=new URLSearchParams(location.search);}catch(e){Q={get:()=>null};}
+const TEACHER=Q.get("teacher")==="1",TIMER=TEACHER||Q.get("timer")==="1";
+function fresh(){return {i:0,p1:null,z2:0,z2max:0,lq:0,ltries:[0,0],lsel:null,lhi:null,lfb:"",lok:null,d4:false,b5:0,b5tries:0,b5wrong:{},b5fb:"",b5ok:null,r5:false,
+  q6:false,q6tries:0,d6:false,d7:false,enz:null,z8:0,z8max:0,msel:null,mdone:{},mtries:0,mfb:"",mok:null,ckTries:0,ckDone:false,wrong:{},mseen:false,times:{},t0:Date.now()};}
+const S=Object.assign({level:LEVELS[Q.get("level")]?Q.get("level"):"advanced",speed:1},fresh());
+const adv=()=>LEVELS[S.level].base==="advanced";
+const $=s=>root.querySelector(s);
+const cl=v=>v<0?0:v>1?1:v,ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,sm=t=>t*t*(3-2*t),lerp=(a,b,t)=>a+(b-a)*t,r1=v=>Math.round(v*10)/10;
+const F='font-family="Archivo,Helvetica,Arial,sans-serif"';
+function tx(x,y,s,str,o){o=o||{};const halo=o.halo?` paint-order="stroke" stroke="${o.halo===true?"#fff":o.halo}" stroke-width="5" stroke-linejoin="round"`:"";
+  return `<text x="${r1(x)}" y="${r1(y)}" ${F} font-size="${s}" font-weight="${o.w||600}" text-anchor="${o.a||"middle"}" fill="${o.f||BLACK}"${o.op!=null?` opacity="${r1(o.op)}"`:""}${halo}>${str}</text>`;}
+function arrow(x1,y,x2,col,w,op){const d=x2>x1?1:-1,hw=w*2.2;
+  return `<g opacity="${op==null?1:r1(op)}"><line x1="${r1(x1)}" y1="${y}" x2="${r1(x2-d*hw)}" y2="${y}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><path d="M${r1(x2)},${y} l${-d*hw*1.5},${-hw} l0,${2*hw} z" fill="${col}"/></g>`;}
+const svgOpen=(w,h,label)=>`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}">`;
+
+/* ---------- animation player: Play / Pause, Replay, 1x or half speed ---------- */
+let raf=null,PL=null;
+function stopAnim(){if(raf){cancelAnimationFrame(raf);raf=null;}PL=null;}
+function mountPlayer(o){ /* o: dur (ms at 1x), draw(p,t), done(), ended (start in the finished state), auto */
+  const pl={t:o.ended?o.dur:0,dur:o.dur,playing:false};let last=0,lastDraw=0;
+  const pp=$("#pp"),rp=$("#rp"),sp=$("#sp");
+  function sync(){if(pp)pp.textContent=pl.playing?"Pause":"Play";if(sp)sp.textContent=S.speed===1?"Speed: 1×":"Speed: ½×";}
+  function frame(now){if(PL!==pl||!pl.playing){return;}
+    const dt=Math.min(80,now-last);last=now;pl.t=Math.min(pl.dur,pl.t+dt*S.speed);
+    if(now-lastDraw>=30||pl.t>=pl.dur){lastDraw=now;o.draw(pl.t/pl.dur,pl.t);}
+    if(pl.t>=pl.dur){pl.playing=false;raf=null;sync();if(o.done)o.done();return;}
+    raf=requestAnimationFrame(frame);}
+  pl.play=()=>{if(pl.t>=pl.dur)pl.t=0;pl.playing=true;last=performance.now();if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);sync();};
+  pl.pause=()=>{pl.playing=false;if(raf){cancelAnimationFrame(raf);raf=null;}sync();};
+  pl.replay=()=>{pl.t=0;pl.play();};
+  if(pp)pp.onclick=()=>{pl.playing?pl.pause():pl.play();};
+  if(rp)rp.onclick=()=>pl.replay();
+  if(sp)sp.onclick=()=>{S.speed=S.speed===1?.5:1;sync();};
+  PL=pl;sync();if(o.auto)pl.play();return pl;}
+const ctl=(playLabel)=>`<div class="btnrow ctl"><button type="button" class="btn act" id="pp">${playLabel||"Play"}</button><button type="button" class="btn" id="rp">Replay</button><button type="button" class="btn" id="sp">Speed: 1&times;</button></div>`;
+
+/* ---------- molecule zoom: shared pieces ---------- */
+const FW=960,FH=440,X0=72,DX=54,YC=222,R=30,SEP=56,BW=24,LP=32,LS=18,NG=6;
+const X=c=>X0+c*DX,LEN=b=>PUR[b]?LP:LS;
+const YTO=YC-R-SEP,YBO=YC+R+SEP,YNG=YTO+2*R,YNL=YBO-2*R;  /* open template lines; new lagging and new leading backbones */
+/* A purine has two rings (longer half-rung, with a seam); a pyrimidine has one (shorter half-rung). */
+function baseAt(b,x,y0,dir,tag,k){k=k||1;const len=LEN(b)*k,w=BW*k,y=dir>0?y0:y0-len,ink=b==="A"?"#fff":BLACK;
+  let s=`<rect x="${r1(x-w/2)}" y="${r1(y)}" width="${w}" height="${r1(len)}" rx="${3*k}" fill="${BASE[b]}"${tag?` data-b="${b}"`:""}/>`;
+  if(PUR[b]){const ys=dir>0?y0+len*.42:y0-len*.42;s+=`<line x1="${r1(x-w/2)}" y1="${r1(ys)}" x2="${r1(x+w/2)}" y2="${r1(ys)}" stroke="#fff" stroke-opacity=".7" stroke-width="${1.6*k}"/>`;}
+  return s+tx(x,(dir>0?y0+len-8*k:y0-len+8*k)+4.4*k,12*k,b,{w:700,f:ink});}
+function ticks(x,ym,n,op,k){k=k||1;const off=n===2?[-4.5,4.5]:[-7,0,7];let s="";
+  off.forEach(d=>{s+=`<line class="hb" x1="${r1(x+d*k)}" y1="${r1(ym-4*k)}" x2="${r1(x+d*k)}" y2="${r1(ym+4*k)}" stroke="${SOFT}" stroke-width="${2*k}" stroke-linecap="round" opacity="${r1(.75*op)}"/>`;});return s;}
+function nt(b,x,y,dir,rot,op,sc){ /* a free nucleotide: base in its color plus an orange sugar-phosphate stub */
+  return `<g transform="translate(${r1(x)},${r1(y)}) rotate(${r1(rot||0)}) scale(${sc||1})" opacity="${r1(op==null?1:op)}">${baseAt(b,0,0,dir,false)}<line x1="${-BW/2-5}" y1="0" x2="${BW/2+5}" y2="0" stroke="${ORANGE}" stroke-width="7" stroke-linecap="round"/></g>`;}
+const FREE=[];(function(){let s=11;const r=()=>(s=(s*16807)%2147483647)/2147483647,L="ATCGTAGCATGCCA";
+  for(let i=0;i<14;i++)FREE.push({b:L[i],x:36+(i%7)*136+r()*70,y:(i<7?30:356)+r()*46,ax:9+r()*14,ay:4+r()*7,w:.00045+r()*.0005,ph:r()*6.28,rot:(r()-.5)*56,dir:i%2?1:-1});})();
+function freeNts(t){let s="";FREE.forEach(f=>{s+=nt(f.b,f.x+f.ax*Math.sin(t*f.w+f.ph),f.y+f.ay*Math.cos(t*f.w*1.3+f.ph),f.dir,f.rot+8*Math.sin(t*f.w*.7+f.ph),.55,.82);});return s;}
+
+/* ---------- the fork at molecule zoom ----------
+   st.h      helicase position in columns (the junction sits at column h - 0.5)
+   st.lead   {n, f}  n nucleotides joined on the bottom template (columns 0..n-1), f = progress of the next one flying in
+   st.frags  [{start, n, f}] fragments on the top template; each begins at column `start` and adds toward column 0
+   st.seal   {col: 0..1} how far ligase has closed the gap to the left of column col */
+const OPENW=1.8;
+function forkSVG(st){
+  const h=st.h,xh=X(h-.5),t=st.t||0,lab=st.labels||{};
+  const op=x=>ease(cl((xh-x)/(OPENW*DX))),yT=x=>YC-R-op(x)*SEP,yB=x=>YC+R+op(x)*SEP;
+  let s=svgOpen(FW,FH,st.aria||"A replication fork drawn at the level of bases and backbones.");
+  if(st.free!==false)s+=freeNts(t);
+  /* polymerase bodies sit behind the strands, like a hand cupped around them */
+  (st.polys||[]).forEach(p=>{if(p.op<=0)return;const x=X(p.c),y=(p.k==="lead"?YNL-20:YTO-20)+(p.lift||0);
+    s+=`<rect class="poly" data-k="${p.k}" x="${r1(x-35)}" y="${r1(y)}" width="70" height="${2*R+40}" rx="16" fill="${GOLD}" stroke="${GOLDINK}" stroke-width="2.5" opacity="${r1(p.op==null?1:p.op)}"/>`;});
+  /* template bases, hydrogen-bond ticks, and the bases of the new strands */
+  const lead=st.lead||{n:0,f:0},frags=st.frags||[];
+  const lagAt={};frags.forEach(fr=>{for(let j=0;j<fr.n;j++)lagAt[fr.start-j]=1;});
+  for(let c=0;c<N;c++){const x=X(c),o=op(x),yt=yT(x),yb=yB(x),a=TOP[c],b=PAIR[a];
+    s+=baseAt(a,x,yt,1,true)+baseAt(b,x,yb,-1,true);
+    const ym=(yt+LEN(a)+yb-LEN(b))/2;
+    if(o<.02)s+=`<g class="rung" data-kind="parent" data-col="${c}" data-a="${a}" data-b="${b}" data-la="${LEN(a)}" data-lb="${LEN(b)}">${ticks(x,ym,HB[a],1)}</g>`;
+    else if(o<.25)s+=`<g class="fade">${ticks(x,ym,HB[a],1-o*4)}</g>`;
+    if(lagAt[c])s+=baseAt(b,x,YNG,-1,true)+`<g class="rung" data-kind="lag" data-col="${c}" data-a="${a}" data-b="${b}" data-la="${LEN(a)}" data-lb="${LEN(b)}">${ticks(x,(YTO+LEN(a)+YNG-LEN(b))/2,HB[a],1)}</g>`;
+    if(c<lead.n)s+=baseAt(a,x,YNL,1,true)+`<g class="rung" data-kind="lead" data-col="${c}" data-a="${b}" data-b="${a}" data-la="${LEN(b)}" data-lb="${LEN(a)}">${ticks(x,(YNL+LEN(a)+YBO-LEN(b))/2,HB[a],1)}</g>`;
+    if(st.glow===c)s+=`<rect class="glow" x="${r1(x-BW/2-5)}" y="${r1(yb-LEN(b)-5)}" width="${BW+10}" height="${LEN(b)+12}" rx="6" fill="none" stroke="${NEXT}" stroke-width="5"/><rect x="${r1(x-BW/2-5)}" y="${r1(yb-LEN(b)-5)}" width="${BW+10}" height="${LEN(b)+12}" rx="6" fill="none" stroke="${BLACK}" stroke-width="1.2"/>`;}
+  /* new backbones (orange) */
+  const bb=(x1,x2,y,extra)=>`<line x1="${r1(x1)}" y1="${y}" x2="${r1(x2)}" y2="${y}" stroke="${ORANGE}" stroke-width="7"${extra||""}/>`;
+  if(lead.stub!==false&&st.lead)s+=bb(0,X(0)-DX/2,YNL);
+  if(lead.n>0)s+=`<g class="newstrand" data-id="lead" data-template="bottom" data-five="0" data-three="${lead.n-1}">${bb(X(0)-DX/2,X(lead.n-1)+BW/2+4,YNL)}</g>`;
+  if(st.lagStub)s+=bb(0,X(0)-DX/2-NG,YNG);
+  frags.forEach((fr,k)=>{if(fr.n<=0)return;const tip=fr.start-fr.n+1,full=fr.n>=fr.len;
+    s+=`<g class="newstrand" data-id="frag${k}" data-template="top" data-five="${fr.start}" data-three="${tip}">${bb(full?X(tip)-DX/2+NG:X(tip)-BW/2-4,X(fr.start)+DX/2-NG,YNG)}</g>`;});
+  const seal=st.seal||{};Object.keys(seal).forEach(c=>{const v=seal[c];if(v>0)s+=bb(X(+c)-DX/2-NG,X(+c)-DX/2-NG+2*NG*cl(v),YNG);});
+  if(lab.gaps)(st.nicks||[]).forEach(c=>{if(!(seal[c]>=1))s+=tx(X(c)-DX/2,YNG+19,12,"gap",{w:700,f:FLAG,halo:true});});
+  /* parent backbones (black) */
+  const path=f=>{let d="";for(let x=0;x<=FW;x+=8)d+=(x?" L":"M")+x+","+r1(f(x));return `<path d="${d}" stroke="${BLACK}" stroke-width="7" fill="none" stroke-linejoin="round"/>`;};
+  s+=path(yT)+path(yB);
+  /* helicase: a wedge driven into the junction */
+  if(lab.heli!==false){s+=`<path class="heli" d="M${r1(xh+16)},${YC} L${r1(xh-24)},${YC-21} L${r1(xh-24)},${YC+21} Z" fill="${SOFT}" stroke="#fff" stroke-width="1.5"/>`+tx(xh+10,YC-R-13,15,"helicase",{a:"start",w:700,f:SOFT,halo:true});}
+  /* ligase: a staple over the gap it is sealing */
+  if(st.lig&&st.lig.op>0){const lx=st.lig.x;s+=`<g opacity="${r1(st.lig.op)}"><path class="lig" d="M${r1(lx-12)},${YNG+13} v-23 h24 v23" fill="none" stroke="${LIG}" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>${tx(lx,YNG+32,15,"ligase",{w:700,f:LIG,halo:true})}</g>`;}
+  /* nucleotides arriving */
+  if(lead.f>0&&lead.n<N){const c=lead.n,e=ease(lead.f);s+=nt(lead.inc||TOP[c],lerp(X(c)+70,X(c),e),lerp(392,YNL,e),1,lerp(40,0,e),cl(lead.f*5));}
+  frags.forEach(fr=>{if(fr.f>0&&fr.n<fr.len){const c=fr.start-fr.n,e=ease(fr.f);s+=nt(PAIR[TOP[c]],lerp(X(c)-70,X(c),e),lerp(44,YNG,e),-1,lerp(-40,0,e),cl(fr.f*5));}});
+  if(st.mm){const m=st.mm,c=m.col;
+    if(m.wf>0&&m.out<1){const e=ease(m.wf),u=ease(m.out);s+=nt(m.wrong,lerp(X(c)+70,X(c),e)+u*90,lerp(392,YNL,e)+u*150,1,lerp(40,0,e)+u*70,cl(m.wf*5)*(1-u));}
+    if(m.mark)s+=`<circle cx="${X(c)}" cy="${r1((YNL+YBO)/2+2)}" r="40" fill="none" stroke="${FLAG}" stroke-width="3" stroke-dasharray="6 5"/>`+tx(X(c)+48,(YNL+YBO)/2+6,14,"does not pair",{a:"start",w:700,f:FLAG,halo:true});}
+  /* 3' tips of the growing strands */
+  (st.polys||[]).forEach(p=>{if(p.op<.5)return;if(p.k==="lead")s+=tx(X(p.c)-14,YNL-7,13,"3&prime;",{w:700,f:GOLDINK});else s+=tx(X(p.c)+14,YNG+16,13,"3&prime;",{w:700,f:GOLDINK});});
+  /* labels */
+  if(lab.ends!==false){s+=tx(8,YTO-12,15,"5&prime;",{a:"start",w:700,f:SOFT,halo:true})+tx(FW-8,YC-R-12,15,"3&prime;",{a:"end",w:700,f:SOFT,halo:true})+tx(8,YBO+24,15,"3&prime;",{a:"start",w:700,f:SOFT,halo:true})+tx(FW-8,YC+R+24,15,"5&prime;",{a:"end",w:700,f:SOFT,halo:true});}
+  if(lab.tmpl)s+=tx(34,YTO-12,15,"old strand = template",{a:"start",w:700,halo:true})+tx(34,YBO+24,15,"old strand = template",{a:"start",w:700,halo:true});
+  if(lab.lag)s+=tx(34,YTO-12,15,"lagging strand &middot; "+(adv()?"fragments <tspan font-weight=\"500\">(Okazaki fragments)</tspan>":"fragments"),{a:"start",w:700,halo:true});
+  if(lab.leadS)s+=tx(34,YBO+24,15,"leading strand &middot; one piece",{a:"start",w:700,halo:true});
+  (st.polys||[]).forEach(p=>{if(p.op<=0||p.label===false)return;const x=Math.max(118,Math.min(FW-118,X(p.c)));
+    if(p.k==="lead")s+=tx(x,YBO+42,15,p.label||"DNA polymerase",{w:700,f:GOLDINK,halo:true,op:p.op});
+    else if(!lab.polyArrow)s+=tx(x,YTO-34,15,p.label||"DNA polymerase",{w:700,f:GOLDINK,halo:true,op:p.op});});
+  if(lab.fork){const fx=Math.max(110,Math.min(FW-110,xh+10));s+=tx(fx,28,17,"fork moving",{w:700,halo:true})+arrow(fx-52,44,fx+58,BLACK,5);}
+  if(lab.polyArrow!=null){const px=Math.max(118,Math.min(FW-118,X(lab.polyArrow)));s+=tx(px,80,17,"DNA polymerase building",{w:700,f:GOLDINK,halo:true})+arrow(px+56,96,px-56,GOLDINK,5);}
+  return s+"</svg>";}
+
+/* ---------- timelines: each returns the state at progress p (0..1) ---------- */
+const FRAG=[3,7,11],FLEN=4,T6=12600,T7=9000;
+function st4(p,t){return {h:.5+6*p,t,labels:{tmpl:p>=1},aria:"Helicase moves right and unzips the two parent strands into a Y."};}
+function st5b(n,f,t,glow){return {h:6.5,t,lead:{n,f},polys:[{k:"lead",c:n,op:1}],glow:glow?n:null,labels:{}};}
+function st5r(p,t){const L=3+4*p,n=p>=1?7:Math.floor(L),f=p>=1?0:L-Math.floor(L);
+  return {h:6.5+3*cl((p-.15)/.85),t,lead:{n,f},polys:[{k:"lead",c:n,op:1}],labels:{leadS:p>=1,fork:true}};}
+function st6(p,t){const tm=p*T6,q=cl(tm/10000),h=6.5+8*q,L=4+8*q,n=q>=1?12:Math.floor(L),f=q>=1?0:L-Math.floor(L);
+  const frags=[],polys=[{k:"lead",c:n,op:1}];let ax=FRAG[0];
+  FRAG.forEach((start,k)=>{const t0=k*4400,u=(tm-t0)/800,fn=u<0?0:Math.min(FLEN,Math.floor(u)),ff=(u<0||fn>=FLEN)?0:u-Math.floor(u);
+    frags.push({start,n:fn,f:ff,len:FLEN});
+    const land=cl((tm-(t0-500))/500),leave=cl((tm-(t0+3200))/600);
+    if(k===0||land>0){if(leave<1)polys.push({k:"lag",c:start-Math.min(fn,FLEN-1),op:(k===0?1:land)*(1-leave),lift:-16*leave});
+      if(k===0)ax=start-Math.min(fn,FLEN-1);else if(tm>=t0-1200)ax=lerp(FRAG[k-1]-FLEN+1,start,ease(cl((tm-(t0-1200))/1200)))-(tm>=t0?Math.min(fn,FLEN-1):0);}});
+  return {h,t,lead:{n,f},lagStub:true,frags,polys,nicks:[0,4,8].filter((c,k)=>frags[k].n>=FLEN),labels:{fork:true,polyArrow:ax,lag:frags[0].n>=FLEN,leadS:true,gaps:false},
+    aria:"The fork moves right. The lagging strand's polymerase builds to the left, one fragment at a time."};}
+function st7(p,t){const tm=p*T7,b=st6(1,t),nx=[X(0)-DX/2,X(4)-DX/2,X(8)-DX/2];
+  const seal={0:cl(tm/900),4:cl((tm-1800)/900),8:cl((tm-3600)/900)};
+  const lx=tm<900?nx[0]:tm<1800?lerp(nx[0],nx[1],ease((tm-900)/900)):tm<2700?nx[1]:tm<3600?lerp(nx[1],nx[2],ease((tm-2700)/900)):nx[2];
+  const done=tm>=8300,mm={col:12,wrong:"T",wf:cl((tm-5000)/800),out:cl((tm-6700)/700),mark:tm>=5800&&tm<6900};
+  const rf=done?0:cl((tm-7500)/800),bump=Math.sin(Math.PI*cl((tm-6400)/1200));
+  b.seal=seal;b.lig={x:lx,op:p>=1?0:cl(tm/250)*(1-cl((tm-4500)/500))};b.nicks=[0,4,8];b.labels.gaps=true;b.labels.polyArrow=null;b.labels.fork=false;
+  b.lead={n:done?13:12,f:rf};b.mm=tm>=5000&&!done?mm:null;
+  b.polys=[{k:"lead",c:(done?13:12)-.35*bump,op:1,label:tm>=5800&&tm<8300?"DNA polymerase proofreads":tm>=8300?"DNA polymerase &middot; checked":"DNA polymerase"}];
+  b.aria="Ligase seals the gaps in the lagging strand. Polymerase removes a wrong nucleotide and adds the right one.";return b;}
+/* the new strands in a state, 5' to 3', for the direction test */
+function strandsOf(st){const out=[];if(st.lead&&st.lead.n>0)out.push({id:"lead",template:"bottom",cols:Array.from({length:st.lead.n},(_,i)=>i)});
+  (st.frags||[]).forEach((fr,k)=>{if(fr.n>0)out.push({id:"frag"+k,template:"top",cols:Array.from({length:fr.n},(_,i)=>fr.start-i)});});return out;}
+
+/* ---------- the ladder ahead of the fork (screen 3), drawn large so each base is a touch target ---------- */
+const LW=960,LH=380,LX0=170,LDX=92,LYC=190,LR=62,LK=2;
+function ladderSVG(sel,hi){let s=svgOpen(LW,LH,"Eight base pairs of DNA ahead of the fork. The two backbones run in opposite directions.");
+  const yt=LYC-LR,yb=LYC+LR,LXc=c=>LX0+c*LDX;
+  for(let c=0;c<8;c++){const x=LXc(c),a=TOP[c],b=PAIR[a],on=sel&&sel.c===c;
+    if(on||(hi==="gc"&&HB[a]===3))s+=`<rect x="${x-LDX/2+5}" y="${yt-16}" width="${LDX-10}" height="${2*LR+32}" rx="10" fill="#DEEBEE" stroke="${LIG}" stroke-width="2.5"/>`;
+    s+=baseAt(a,x,yt,1,true,LK)+baseAt(b,x,yb,-1,true,LK);
+    if(hi==="pur"){const pb=PUR[a]?[yt,1,a]:[yb,-1,b],len=LEN(pb[2])*LK,y=pb[1]>0?pb[0]:pb[0]-len;s+=`<rect x="${x-BW*LK/2-4}" y="${y-4}" width="${BW*LK+8}" height="${len+8}" rx="9" fill="none" stroke="${LIG}" stroke-width="4"/>`;}
+    s+=`<g class="rung" data-kind="parent" data-col="${c}" data-a="${a}" data-b="${b}" data-la="${LEN(a)}" data-lb="${LEN(b)}">${ticks(x,(yt+LEN(a)*LK+yb-LEN(b)*LK)/2,HB[a],1,LK)}</g>`;}
+  /* backbones: paired on the right, splayed open toward the fork on the left */
+  const op=x=>ease(cl((112-x)/110)),f1=x=>yt-op(x)*46,f2=x=>yb+op(x)*46;
+  [f1,f2].forEach(f=>{let d="";for(let x=0;x<=LW;x+=8)d+=(x?" L":"M")+x+","+r1(f(x));s+=`<path d="${d}" stroke="${BLACK}" stroke-width="10" fill="none" stroke-linejoin="round"/>`;});
+  s+=`<path d="M112,${LYC} L62,${LYC-34} L62,${LYC+34} Z" fill="${SOFT}"/>`+tx(30,LYC+5,14,"fork",{w:700,f:SOFT});
+  /* direction arrows and end labels */
+  s+=tx(150,yt-38,20,"5&prime;",{w:700})+arrow(176,yt-44,560,BLACK,5)+tx(586,yt-38,20,"3&prime;",{w:700});
+  s+=tx(880,yb+52,20,"5&prime;",{w:700})+arrow(854,yb+46,196,BLACK,5)+tx(170,yb+52,20,"3&prime;",{w:700});
+  s+=tx(760,yt-52,15,"sugar-phosphate backbone",{w:700,f:SOFT})+`<line x1="760" y1="${yt-46}" x2="760" y2="${yt-9}" stroke="${SOFT}" stroke-width="2"/>`;
+  s+=tx(908,LYC-4,16,"anti-",{w:700,f:SOFT})+tx(908,LYC+15,16,"parallel",{w:700,f:SOFT});
+  for(let c=0;c<8;c++){const x=LXc(c);["t","b"].forEach(h=>{s+=`<rect class="tap" data-c="${c}" data-s="${h}" x="${x-LDX/2}" y="${h==="t"?yt-34:LYC}" width="${LDX}" height="${LR+34}" fill="#000" fill-opacity="0" style="cursor:pointer"/>`;});}
+  return s+"</svg>";}
+
+/* ---------- zoomed-out views: plain black and orange lines only ---------- */
+function squiggles(cx,cy,r,n,w){let s="",q=5;const rnd=()=>(q=(q*16807)%2147483647)/2147483647;
+  for(let k=0;k<n;k++){const a=rnd()*6.28,b=a+2+rnd()*2.3,r0=r*(.55+rnd()*.4),r2=r*(.55+rnd()*.4),c1=a+.9+rnd(),c2=b-.9-rnd();
+    s+=`<path d="M${r1(cx+r0*Math.cos(a))},${r1(cy+r0*Math.sin(a))} C${r1(cx+r*.9*Math.cos(c1))},${r1(cy+r*.2*Math.sin(c1))} ${r1(cx+r*.25*Math.cos(c2))},${r1(cy+r*.9*Math.sin(c2))} ${r1(cx+r2*Math.cos(b))},${r1(cy+r2*Math.sin(b))}" fill="none" stroke="${BLACK}" stroke-width="${w}" stroke-linecap="round"/>`;}
+  return s;}
+function arc(cx,cy,r,a0,a1,col,w){const p=a=>[cx+r*Math.sin(a*2*Math.PI),cy-r*Math.cos(a*2*Math.PI)],A=p(a0),B=p(a1);
+  return `<path d="M${r1(A[0])},${r1(A[1])} A${r},${r} 0 ${a1-a0>.5?1:0} 1 ${r1(B[0])},${r1(B[1])}" fill="none" stroke="${col}" stroke-width="${w}"/>`;}
+function cellSVG(){let s=svgOpen(960,400,"A cell in S phase of interphase. A ring shows the cell cycle with S phase lit.");
+  s+=`<ellipse cx="320" cy="200" rx="250" ry="160" fill="#fff" stroke="${BLACK}" stroke-width="3.5"/><circle cx="290" cy="200" r="86" fill="none" stroke="${BLACK}" stroke-width="3"/>`+squiggles(290,200,64,5,2.2);
+  s+=tx(290,312,15,"nucleus",{w:700,f:SOFT})+tx(320,388,16,"one cell",{w:700,f:SOFT});
+  const cx=760,cy=186,r=84,g=.012;
+  s+=arc(cx,cy,r,g,.42-g,SHELL,24)+arc(cx,cy,r,.42+g,.70-g,ORANGE,24)+arc(cx,cy,r,.70+g,.88-g,SHELL,24)+arc(cx,cy,r,.88+g,1-g,SHELL,24);
+  const lp=(a,rr)=>[cx+rr*Math.sin(a*2*Math.PI),cy-rr*Math.cos(a*2*Math.PI)+6];
+  [["G1",.21,BLACK],["S",.56,BLACK],["G2",.79,BLACK],["M",.94,BLACK]].forEach(q=>{const P=lp(q[1],r);s+=tx(P[0],P[1],q[0]==="S"?19:15,q[0],{w:700,f:q[2]});});
+  s+=tx(cx,cy-2,15,"cell",{w:700,f:SOFT})+tx(cx,cy+16,15,"cycle",{w:700,f:SOFT});
+  s+=tx(cx,318,17,"S phase: DNA is copied",{w:700})+tx(cx,342,14,"G1, S and G2 = interphase &middot; M = mitosis",{w:500,f:SOFT});
+  return s+"</svg>";}
+function nucleusSVG(){let s=svgOpen(960,400,"The nucleus, holding the cell's DNA as long black threads.");
+  s+=`<circle cx="480" cy="200" r="178" fill="#fff" stroke="${BLACK}" stroke-width="3.5"/>`+squiggles(480,200,150,10,3);
+  s+=`<rect x="452" y="150" width="96" height="46" rx="6" fill="none" stroke="${SOFT}" stroke-width="2.5" stroke-dasharray="7 5"/>`;
+  s+=tx(160,90,18,"nucleus",{w:700})+`<line x1="205" y1="92" x2="318" y2="128" stroke="${SOFT}" stroke-width="2"/>`+tx(800,300,18,"DNA",{w:700})+`<line x1="772" y1="290" x2="610" y2="246" stroke="${SOFT}" stroke-width="2"/>`;
+  return s+"</svg>";}
+function stretchSVG(){let s=svgOpen(960,400,"A short stretch of one chromosome's DNA, drawn as two black lines.");
+  s+=`<line x1="0" y1="193" x2="960" y2="193" stroke="${BLACK}" stroke-width="5"/><line x1="0" y1="207" x2="960" y2="207" stroke="${BLACK}" stroke-width="5"/>`;
+  s+=tx(480,140,18,"one chromosome's DNA",{w:700})+tx(480,164,15,"two strands, each drawn as a line",{w:500,f:SOFT})+tx(14,244,14,"&larr; it keeps going",{a:"start",w:500,f:SOFT})+tx(946,244,14,"it keeps going &rarr;",{a:"end",w:500,f:SOFT});
+  return s+"</svg>";}
+const BC=[190,500,790],BS=[0,.15,.3];
+function multiSVG(p,G,o){o=o||{};const A=46,y0=200,g=6,d=10;
+  const lift=x=>{let m=0;for(let k=0;k<3;k++){const w=G*Math.max(0,p-BS[k]);if(w<=0)continue;m=Math.max(m,sm(cl((w-Math.abs(x-BC[k]))/50)));}return m;};
+  let s=svgOpen(960,400,o.aria||"Replication bubbles open at several places along the DNA and widen."),dt="",db="",ot="",ob="",pen=false;
+  for(let x=0;x<=960;x+=6){const L=lift(x)*A;dt+=(x?" L":"M")+x+","+r1(y0-g-L);db+=(x?" L":"M")+x+","+r1(y0+g+L);
+    if(L>.62*A){ot+=(pen?" L":" M")+x+","+r1(y0-g-L+d);ob+=(pen?" L":" M")+x+","+r1(y0+g+L-d);pen=true;}else pen=false;}
+  s+=`<path d="${ot}" stroke="${ORANGE}" stroke-width="4.5" fill="none"/><path d="${ob}" stroke="${ORANGE}" stroke-width="4.5" fill="none"/><path d="${dt}" stroke="${BLACK}" stroke-width="5" fill="none"/><path d="${db}" stroke="${BLACK}" stroke-width="5" fill="none"/>`;
+  if(o.label&&G*p>42)s+=tx(BC[0],118,17,"replication bubble",{w:700})+`<line x1="${BC[0]}" y1="124" x2="${BC[0]}" y2="${y0-g-A-6}" stroke="${SOFT}" stroke-width="2"/>`;
+  if(o.label)s+=tx(480,330,15,"black = old strands &middot; orange = new strands",{w:500,f:SOFT});
+  if(o.merge){const allUp=lift(0)>.99&&lift(960)>.99&&lift(345)>.99&&lift(645)>.99;
+    s+=tx(480,330,16,allUp?"The bubbles have met: two DNA molecules":"Each bubble grows until it meets the next one",{w:700});}
+  if(o.inset){const ix=838,iy=62,r=40;s+=`<rect x="716" y="6" width="238" height="112" rx="8" fill="#fff" stroke="${SHELL}" stroke-width="1.5"/>`;
+    s+=`<circle cx="${ix}" cy="${iy}" r="${r}" fill="none" stroke="${BLACK}" stroke-width="3"/><circle cx="${ix}" cy="${iy}" r="${r-6}" fill="none" stroke="${BLACK}" stroke-width="3"/>`;
+    s+=`<path d="M${ix-24},${iy-r+5} Q${ix},${iy-r-22} ${ix+24},${iy-r+5}" fill="#fff" stroke="${BLACK}" stroke-width="3"/><path d="M${ix-24},${iy-r+9} Q${ix},${iy-r+26} ${ix+24},${iy-r+9}" fill="#fff" stroke="${BLACK}" stroke-width="3"/><path d="M${ix-17},${iy-r+4} Q${ix},${iy-r-12} ${ix+17},${iy-r+4}" fill="none" stroke="${ORANGE}" stroke-width="2.5"/><path d="M${ix-17},${iy-r+10} Q${ix},${iy-r+18} ${ix+17},${iy-r+10}" fill="none" stroke="${ORANGE}" stroke-width="2.5"/>`;
+    s+=tx(724,40,13,"Bacteria:",{a:"start",w:700})+tx(724,58,12.5,"one circular",{a:"start",w:500})+tx(724,74,12.5,"chromosome,",{a:"start",w:500})+tx(724,90,12.5,"one bubble",{a:"start",w:500});}
+  return s+"</svg>";}
+function finishedSVG(){let s=svgOpen(960,400,"Two finished DNA molecules. Each has one black strand and one orange strand.");
+  [[150,160],[240,250]].forEach((y,i)=>{s+=`<line x1="0" y1="${y[0]}" x2="960" y2="${y[0]}" stroke="${i?ORANGE:BLACK}" stroke-width="5"/><line x1="0" y1="${y[1]}" x2="960" y2="${y[1]}" stroke="${i?BLACK:ORANGE}" stroke-width="5"/>`;});
+  s+=tx(480,122,17,"DNA molecule 1: one old strand + one new strand",{w:700})+tx(480,290,17,"DNA molecule 2: one old strand + one new strand",{w:700});
+  return s+"</svg>";}
+/* one bubble with both forks working. Pieces carry their own direction so it can be tested. */
+const BCX=480,BM=74,BLF=64;
+function bubblePieces(p){const w=90+300*p,xR=BCX+w-BM,xL=BCX-w+BM,out=[];
+  out.push({template:"bottom",fork:"R",kind:"leading",x5:BCX,x3:xR});out.push({template:"top",fork:"L",kind:"leading",x5:BCX,x3:xL});
+  for(let j=0;j<8;j++){const a=BCX+(j+1)*BLF,b=BCX-(j+1)*BLF;
+    if(xR>=a){const g=Math.min(BLF,(xR-a)*2.2+5);out.push({template:"top",fork:"R",kind:"lagging",x5:a,x3:a-g,full:g>=BLF,sealed:(xR-a)>1.7*BLF});}
+    if(xL<=b){const g=Math.min(BLF,(b-xL)*2.2+5);out.push({template:"bottom",fork:"L",kind:"lagging",x5:b,x3:b+g,full:g>=BLF,sealed:(b-xL)>1.7*BLF});}}
+  return out;}
+function bubbleSVG(p){const A=80,y0=200,g=6,d=14,w=90+300*p;
+  const lift=x=>A*sm(cl((w-Math.abs(x-BCX))/BM)),yT=x=>y0-g-lift(x),yB=x=>y0+g+lift(x);
+  let s=svgOpen(960,400,"One replication bubble. Its two forks move apart. At each fork one new strand is built in one piece and the other in fragments."),dt="",db="";
+  for(let x=0;x<=960;x+=6){dt+=(x?" L":"M")+x+","+r1(yT(x));db+=(x?" L":"M")+x+","+r1(yB(x));}
+  bubblePieces(p).forEach(q=>{const dir=q.x3>q.x5?1:-1,y=q.template==="top"?y0-g-A+d:y0+g+A-d,gap=q.kind==="lagging"&&!q.sealed?7:0;
+    const a=q.x5+dir*gap,b=q.x3-dir*(q.kind==="lagging"&&q.sealed?-3:0);if(Math.abs(b-a)<3)return;
+    s+=`<g class="piece" data-template="${q.template}" data-fork="${q.fork}" data-kind="${q.kind}" data-x5="${r1(q.x5)}" data-x3="${r1(q.x3)}"><line x1="${r1(a)}" y1="${y}" x2="${r1(b)}" y2="${y}" stroke="${ORANGE}" stroke-width="5"/>`;
+    if(!(q.kind==="lagging"&&q.sealed))s+=`<path d="M${r1(q.x3+dir*2)},${y} l${-dir*11},-7 l0,14 z" fill="${ORANGE}"/>`;s+=`</g>`;});
+  s+=`<path d="${dt}" stroke="${BLACK}" stroke-width="5" fill="none"/><path d="${db}" stroke="${BLACK}" stroke-width="5" fill="none"/>`;
+  const xr=BCX+w,xl=BCX-w;
+  s+=`<path d="M${r1(xr-6)},${y0} l-26,-13 l0,26 z" fill="${SOFT}"/><path d="M${r1(xl+6)},${y0} l26,-13 l0,26 z" fill="${SOFT}"/>`;
+  s+=tx(Math.min(880,xr+6),y0-34,15,"fork",{w:700,halo:true})+arrow(Math.min(850,xr-18),y0-52,Math.min(910,xr+42),BLACK,4)+tx(Math.max(80,xl-6),y0-34,15,"fork",{w:700,halo:true})+arrow(Math.max(110,xl+18),y0-52,Math.max(50,xl-42),BLACK,4);
+  if(p>.12){const o=cl((p-.12)*6);s+=tx(BCX+w*.42,y0-g-A-12,15,"lagging: fragments",{w:700,op:o})+tx(BCX-w*.42,y0-g-A-12,15,"leading: one piece",{w:700,op:o})+tx(BCX+w*.42,y0+g+A+24,15,"leading: one piece",{w:700,op:o})+tx(BCX-w*.42,y0+g+A+24,15,"lagging: fragments",{w:700,op:o});}
+  s+=tx(10,y0-16,15,"5&prime;",{a:"start",w:700,f:SOFT})+tx(950,y0-16,15,"3&prime;",{a:"end",w:700,f:SOFT})+tx(10,y0+30,15,"3&prime;",{a:"start",w:700,f:SOFT})+tx(950,y0+30,15,"5&prime;",{a:"end",w:700,f:SOFT});
+  s+=tx(480,372,14,"Arrowheads mark the 3&prime; end, where each new strand is growing.",{w:500,f:SOFT});
+  return s+"</svg>";}
+function twoForksSVG(){const A=74,y0=200,g=6,w=330,lift=x=>A*sm(cl((w-Math.abs(x-480))/90));
+  let s=svgOpen(960,400,"One replication bubble with a replication fork at each end. The forks move apart."),dt="",db="",ot="",ob="",pen=false;
+  for(let x=0;x<=960;x+=6){const L=lift(x);dt+=(x?" L":"M")+x+","+r1(y0-g-L);db+=(x?" L":"M")+x+","+r1(y0+g+L);if(L>.8*A){ot+=(pen?" L":" M")+x+","+r1(y0-g-L+13);ob+=(pen?" L":" M")+x+","+r1(y0+g+L-13);pen=true;}else pen=false;}
+  s+=`<path d="${ot}" stroke="${ORANGE}" stroke-width="5" fill="none"/><path d="${ob}" stroke="${ORANGE}" stroke-width="5" fill="none"/><path d="${dt}" stroke="${BLACK}" stroke-width="5" fill="none"/><path d="${db}" stroke="${BLACK}" stroke-width="5" fill="none"/>`;
+  s+=tx(480,84,18,"one replication bubble",{w:700});
+  s+=tx(150,300,17,"replication fork",{w:700})+arrow(210,326,90,BLACK,5)+tx(810,300,17,"replication fork",{w:700})+arrow(750,326,870,BLACK,5);
+  s+=`<circle cx="150" cy="${y0}" r="34" fill="none" stroke="${SOFT}" stroke-width="2.5" stroke-dasharray="7 5"/><circle cx="810" cy="${y0}" r="34" fill="none" stroke="${SOFT}" stroke-width="2.5" stroke-dasharray="7 5"/>`;
+  return s+"</svg>";}
+function forkSchemSVG(informed){const A=86,y0=200,g=7,xj=640,lift=x=>A*sm(cl((xj-x)/250));
+  let s=svgOpen(960,400,informed?"One replication fork. The leading strand is one piece. The lagging strand is in fragments.":"One replication fork. The DNA is unzipped on the left and still paired on the right."),dt="",db="";
+  for(let x=0;x<=960;x+=6){dt+=(x?" L":"M")+x+","+r1(y0-g-lift(x));db+=(x?" L":"M")+x+","+r1(y0+g+lift(x));}
+  const yt=y0-g-A+15,yb=y0+g+A-15;
+  if(informed){[[330,214],[200,84],[70,0]].forEach(q=>{s+=`<line x1="${q[0]}" y1="${yt}" x2="${q[1]+(q[1]?6:0)}" y2="${yt}" stroke="${ORANGE}" stroke-width="5.5"/><path d="M${q[1]+(q[1]?2:0)},${yt} l12,-8 l0,16 z" fill="${ORANGE}"/>`;});
+    s+=`<line x1="0" y1="${yb}" x2="352" y2="${yb}" stroke="${ORANGE}" stroke-width="5.5"/><path d="M366,${yb} l-13,-8 l0,16 z" fill="${ORANGE}"/>`;
+    s+=tx(190,yt-36,16,"lagging strand: fragments",{w:700})+tx(190,yb+50,16,"leading strand: one piece",{w:700});}
+  else{s+=`<line x1="0" y1="${yt}" x2="350" y2="${yt}" stroke="${ORANGE}" stroke-width="5.5"/><line x1="0" y1="${yb}" x2="350" y2="${yb}" stroke="${ORANGE}" stroke-width="5.5"/>`;
+    s+=tx(190,yt-36,16,"unzipped",{w:700})+tx(820,y0-34,16,"still paired",{w:700});}
+  s+=`<path d="${dt}" stroke="${BLACK}" stroke-width="6" fill="none"/><path d="${db}" stroke="${BLACK}" stroke-width="6" fill="none"/>`;
+  s+=`<path d="M${xj+10},${y0} l-40,-20 l0,40 z" fill="${SOFT}"/>`+tx(xj-6,y0+52,15,"helicase",{w:700,f:SOFT});
+  s+=tx(700,96,17,"the fork moves",{w:700})+arrow(640,116,760,BLACK,5);
+  return s+"</svg>";}
+
+/* ---------- screens ---------- */
+const P1=[["one","One spot that moves along the DNA"],["many","Many spots at once"],["whole","The whole molecule at once"]];
+const Z2=[
+  {stop:"Cell",draw:()=>cellSVG(),cap:"This cell is in <b>S phase</b> of interphase: the time when its DNA is copied."},
+  {stop:"Nucleus",draw:()=>nucleusSVG(),cap:"The DNA is inside the <b>nucleus</b>."},
+  {stop:"DNA",draw:()=>stretchSVG(),cap:"A short stretch of one chromosome's DNA. It has two strands."},
+  {stop:"Bubbles",anim:5000,draw:p=>multiSVG(p,115,{label:true,inset:adv()}),cap:"Copying starts at many places. Each opening is a <b>replication bubble</b>."},
+  {stop:"Two forks",draw:()=>twoForksSVG(),cap:"Each bubble has two <b>replication forks</b>. They move apart."},
+  {stop:"One fork",draw:()=>forkSchemSVG(false),cap:"One fork: unzipped on the left, still paired on the right."}];
+const Z8=[
+  {stop:"One fork",draw:()=>forkSchemSVG(true),cap:"One fork, as you just built it."},
+  {stop:"One bubble",anim:9000,draw:p=>bubbleSVG(p),cap:"Both forks work at once. Each old strand is the leading template at one fork and the lagging template at the other."},
+  {stop:"Bubbles meet",anim:6000,draw:p=>multiSVG(p,420,{merge:true,aria:"Replication bubbles widen until they meet and the DNA is two molecules."}),cap:"The bubbles widen until they meet."},
+  {stop:"Finished",draw:()=>finishedSVG(),cap:""}];
+const ENZ=[["heli","helicase","Helicase breaks the hydrogen bonds between the bases and unzips the two strands."],
+  ["poly","DNA polymerase","DNA polymerase adds complementary nucleotides to the 3&prime; end of a new strand, and proofreads each one."],
+  ["lig","ligase","Ligase seals the gaps between the fragments of the lagging strand."]];
+const JOBS=[["poly","adds complementary nucleotides to the 3&prime; end"],["lig","seals the gaps between fragments"],["heli","breaks hydrogen bonds and unzips the DNA"]];
+const CHK=["Ligase cuts it into pieces.","There are not enough nucleotides.","Polymerase builds in only one direction, and the two strands are antiparallel.","Helicase skips parts of it."],CHK_OK=2;
+const enzIcon=k=>k==="heli"?`<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M34,20 L8,6 L8,34 Z" fill="${SOFT}"/></svg>`:k==="poly"?`<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="7" y="5" width="26" height="30" rx="8" fill="${GOLD}" stroke="${GOLDINK}" stroke-width="2.5"/></svg>`:`<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9,31 v-20 h22 v20" fill="none" stroke="${LIG}" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+const ntBtn=b=>`<svg viewBox="-22 -8 44 48" aria-hidden="true">${nt(b,0,0,1,0,1,1)}</svg>`;
+
+function zoomScreen(key,Z,say,readyFn,extra){
+  return {html:()=>{const z=S[key],st=Z[z];
+      return `<p class="say">${say}</p>
+      <input type="range" class="slider" id="zs" min="0" max="${Z.length-1}" step="1" value="${z}" aria-label="Zoom">
+      <div class="stopsb" style="grid-template-columns:repeat(${Z.length},1fr)">${Z.map((q,k)=>`<button type="button" data-z="${k}" aria-pressed="${k===z}">${q.stop}</button>`).join("")}</div>
+      <div class="stage" id="stg">${st.draw(st.anim?0:1)}</div>
+      <div id="zctl" class="${st.anim?"":"hidden"}">${ctl()}</div>
+      <p class="cap" id="zcap"></p><div id="zx"></div>
+      <div class="btnrow"><button type="button" class="btn act" id="zstep">${key==="z2"?"Zoom in":"Zoom out"} &rarr;</button></div>`;},
+    ready:readyFn,
+    mount(){const paint=()=>{const z=S[key],st=Z[z];stopAnim();S[key+"max"]=Math.max(S[key+"max"],z);
+        $("#zs").value=z;root.querySelectorAll("[data-z]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.z===z)));
+        $("#stg").innerHTML=st.draw(st.anim?0:1);$("#zctl").classList.toggle("hidden",!st.anim);
+        $("#zcap").innerHTML=(key==="z8"||!adv())?st.cap:"";$("#zx").innerHTML=extra?extra(z):"";
+        $("#zstep").disabled=z>=Z.length-1;const n=$("#fnext");if(n)n.disabled=!readyFn();
+        if(st.anim)mountPlayer({dur:st.anim,auto:true,draw:p=>{$("#stg").innerHTML=st.draw(p);}});};
+      $("#zs").oninput=e=>{S[key]=+e.target.value;paint();};
+      root.querySelectorAll("[data-z]").forEach(b=>b.onclick=()=>{S[key]=+b.dataset.z;paint();});
+      $("#zstep").onclick=()=>{if(S[key]<Z.length-1){S[key]++;paint();}};
+      paint();}};}
+
+function SCREENS(){
+  const L=[
+  Object.assign({id:"f-predict",title:"Predict first",time:20},{
+   html:()=>`<p class="say">Your cell has to copy all of its DNA before it divides. <b>Where</b> does the copying happen?</p>
+     <div class="choices">${P1.map(a=>`<button type="button" class="choice${S.p1===a[0]?" pick":""}" data-p1="${a[0]}">${a[1]}</button>`).join("")}</div>
+     <p class="fb">${S.p1?"Locked in. You will check it when you zoom back out.":""}</p>`,
+   ready:()=>!!S.p1,
+   mount(){root.querySelectorAll("[data-p1]").forEach(b=>b.onclick=()=>{S.p1=b.dataset.p1;render();});}}),
+
+  Object.assign({id:"f-zoomin",title:"Zoom in to the DNA",time:60},zoomScreen("z2",Z2,"Zoom in, one stop at a time, from a whole cell down to one <b>replication fork</b>.",()=>S.z2max>=Z2.length-1)),
+
+  {id:"f-ladder",title:"Two strands, opposite directions",time:50,
+   html:()=>`<p class="say">Ahead of the fork, the two strands run in opposite directions. They are <b>antiparallel</b>.</p>
+     <div class="stage" id="stg">${ladderSVG(S.lsel,S.lhi)}</div>
+     <div class="talk">${S.lq===0?"Tap a <b>purine</b>.":S.lq===1?"Now tap a rung with <b>3 hydrogen bonds</b>.":"Both found. Tap any base to read its pair."}</div>
+     <p class="fb ${S.lok===true?"ok":S.lok===false?"no":""}">${S.lfb}</p>
+     ${S.lq<2&&S.ltries[S.lq]>=2?`<div class="btnrow"><button type="button" class="btn" id="lshow">Show me</button></div>`:""}
+     <p class="fine">Drawn flat. The real molecule twists into a double helix.</p>`,
+   ready:()=>S.lq>=2,
+   mount(){root.querySelectorAll(".tap").forEach(el=>el.onclick=()=>{const c=+el.dataset.c,top=el.dataset.s==="t",a=TOP[c],b=top?a:PAIR[a];
+       const info=`<b>${pairName(a)}</b> &middot; purine + pyrimidine &middot; <b>${HB[a]} hydrogen bonds</b>.`;
+       S.lsel={c};S.lhi=null;
+       if(S.lq===0){if(PUR[b]){S.lq=1;S.lok=true;S.lfb=`Yes. ${b} is a purine: two rings, the longer half of the rung. ${info}`;}
+         else{S.ltries[0]++;S.lok=false;S.lfb=`${b} is a pyrimidine: one ring, the shorter half. A purine has two rings.`;}}
+       else if(S.lq===1){if(HB[a]===3){S.lq=2;S.lok=true;S.lfb=`Yes. ${info} An A&ndash;T rung has 2.`;}
+         else{S.ltries[1]++;S.lok=false;S.lfb=`That rung is A&ndash;T: 2 hydrogen bonds. Count the small marks between the bases.`;}}
+       else{S.lok=null;S.lfb=`You tapped ${b}, a ${PUR[b]?"purine":"pyrimidine"}. ${info}`;}
+       render();});
+     const sh=$("#lshow");if(sh)sh.onclick=()=>{S.lsel=null;if(S.lq===0){S.lhi="pur";S.lq=1;S.lok=true;S.lfb="The outlined bases are purines (A and G): two rings, the longer half of each rung.";}
+       else{S.lhi="gc";S.lq=2;S.lok=true;S.lfb="The shaded rungs are G&ndash;C: 3 hydrogen bonds each. A&ndash;T rungs have 2.";}render();};}},
+
+  {id:"f-helicase",title:"Helicase unzips the DNA",time:30,
+   html:()=>`<p class="say">Tap <b>Play</b>. Watch what <b>helicase</b> does to the bonds between the bases.</p>
+     <div class="stage" id="stg">${forkSVG(st4(S.d4?1:0,0))}</div>${ctl()}
+     <p class="fb ok">${S.d4?"Helicase breaks the <b>hydrogen bonds</b>. Each old strand is now a <b>template</b>.":""}</p>
+     <p class="fine">Free <b>nucleotides</b> drift in around the fork. Your cells made these nucleotides from the food you ate.</p>`,
+   ready:()=>S.d4,
+   mount(){mountPlayer({dur:6500,ended:S.d4,draw:(p,t)=>{$("#stg").innerHTML=forkSVG(st4(p,t));},done:()=>{S.d4=true;render();}});}},
+
+  {id:"f-leading",title:"Polymerase builds the leading strand",time:50,
+   html:()=>{const first=adv()?0:1,need=S.b5<3;
+     let h=`<p class="say"><b>DNA polymerase</b> adds one nucleotide at a time. ${need?"Tap the nucleotide that is <b>complementary</b> to the glowing base.":"Now tap <b>Play</b> and let it run."}</p>
+     <div class="stage" id="stg">${S.r5?forkSVG(st5r(1,0)):need?forkSVG(st5b(S.b5,0,0,true)):forkSVG(st5r(0,0))}</div>`;
+     if(need){h+=`<div class="nts">${"ATCG".split("").map(b=>`<button type="button" class="nt${S.b5wrong[b]?" wrong":""}" data-nt="${b}" aria-label="Nucleotide ${b}"${first&&S.b5===0?" disabled":""}>${ntBtn(b)}<span>${b}</span></button>`).join("")}</div>
+       <p class="fb ${S.b5ok===true?"ok":S.b5ok===false?"no":""}" id="b5fb">${S.b5fb||(S.b5===0&&first?"Watch the first one. Then you add the next two.":"")}</p>`;
+       if(S.b5tries>=2)h+=`<div class="btnrow"><button type="button" class="btn" id="b5show">Show me</button></div>`;}
+     else{h+=ctl()+`<p class="fb ok">${S.r5?"Polymerase adds to the <b>3&prime; end</b> only. On this strand that is the way the fork is moving: the <b>leading strand</b>, one long piece.":S.b5fb}</p>`;}
+     return h;},
+   ready:()=>S.r5,
+   mount(){
+     if(S.b5<3){const add=(msg)=>{const n=S.b5,b=TOP[n];root.querySelectorAll("[data-nt]").forEach(x=>x.disabled=true);
+         const t0=performance.now();stopAnim();const step=now=>{const f=cl((now-t0)/(800/S.speed));$("#stg").innerHTML=forkSVG(st5b(n,f,0,false));
+           if(f<1)raf=requestAnimationFrame(step);else{raf=null;S.b5=n+1;S.b5tries=0;S.b5wrong={};S.b5ok=true;S.b5fb=msg||`${b} pairs with ${PAIR[b]}: ${HB[b]} hydrogen bonds. The orange backbone joins at the 3&prime; end.`;render();}};
+         raf=requestAnimationFrame(step);};
+       root.querySelectorAll("[data-nt]").forEach(x=>x.onclick=()=>{const want=TOP[S.b5],b=x.dataset.nt;
+         if(b===want)add();else if(!S.b5wrong[b]){S.b5tries++;S.b5wrong[b]=1;S.b5ok=false;S.b5fb=`The glowing base is ${PAIR[want]}. ${b} does not pair with ${PAIR[want]}. A pairs with T, and C pairs with G.`;render();}});
+       const sh=$("#b5show");if(sh)sh.onclick=()=>add();
+       if(!adv()&&S.b5===0){const rid=RID;setTimeout(()=>{if(rid===RID&&started&&S.b5===0)add(`${TOP[0]} pairs with ${PAIR[TOP[0]]}. Your turn: add the next two.`);},900);}}
+     else mountPlayer({dur:5600,ended:S.r5,draw:(p,t)=>{$("#stg").innerHTML=forkSVG(st5r(p,t));},done:()=>{S.r5=true;render();}});}},
+
+  {id:"f-lagging",title:"The lagging strand is built in pieces",time:75,
+   html:()=>{let h=`<p class="say">${S.q6?"Watch the <b>top</b> strand. The fork moves &rarr; while polymerase builds &larr;.":"The fork moves &rarr; this way. Which way can polymerase build on the <b>top</b> strand?"}</p>
+     <div class="stage" id="stg">${forkSVG(S.q6?st6(S.d6?1:0,0):Object.assign(st6(0,0),{polys:[{k:"lead",c:4,op:1}],labels:{fork:true,leadS:true}}))}</div>`;
+     if(!S.q6){h+=`<div class="choices two"><button type="button" class="choice${S.wrong.q6r?" wrong":""}" data-q6="r">&rarr; the same way the fork moves</button><button type="button" class="choice" data-q6="l">&larr; away from the fork</button></div>
+       <p class="fb ${S.q6tries?"no":""}">${S.q6tries?"Find the 3&prime; end of the new strand. A new strand runs opposite to its template.":""}</p>`;}
+     else{h+=ctl()+`<p class="fb ok">${S.d6?"Cells can build DNA in <b>one direction only</b>. So the <b>lagging strand</b> is built in pieces, against the fork's movement.":"&larr; Away from the fork: the only way its 3&prime; end can grow. Tap <b>Play</b>."}</p>`;}
+     return h;},
+   ready:()=>S.d6,
+   mount(){if(!S.q6)root.querySelectorAll("[data-q6]").forEach(b=>b.onclick=()=>{if(b.dataset.q6==="l"){S.q6=true;}else{S.q6tries++;S.wrong.q6r=1;}render();});
+     else mountPlayer({dur:T6,ended:S.d6,draw:(p,t)=>{$("#stg").innerHTML=forkSVG(st6(p,t));},done:()=>{S.d6=true;render();}});}},
+
+  {id:"f-ligase",title:"Ligase seals, polymerase checks",time:45,
+   html:()=>{const e=ENZ.find(q=>q[0]===S.enz);
+     return `<p class="say">The lagging strand still has gaps. Tap <b>Play</b>: first <b>ligase</b>, then polymerase checks its own work.</p>
+     <div class="stage" id="stg">${forkSVG(st7(S.d7?1:0,0))}</div>${ctl()}
+     <p class="fb ok">${S.d7?"<b>Ligase</b> sealed the gaps. Polymerase <b>proofreads</b>: it took out a wrong nucleotide and put in the right one.":""}</p>
+     <div class="enzrow">${ENZ.map(q=>`<button type="button" class="enz${S.enz===q[0]?" pick":""}" data-enz="${q[0]}">${enzIcon(q[0])}<span>${q[1]}</span></button>`).join("")}</div>
+     <p class="cap" id="enzcap">${e?e[2]:"Tap an enzyme to read its job."}</p>`;},
+   ready:()=>S.d7,
+   mount(){mountPlayer({dur:T7,ended:S.d7,draw:(p,t)=>{$("#stg").innerHTML=forkSVG(st7(p,t));},done:()=>{S.d7=true;render();}});
+     const pick=k=>{S.enz=k;root.querySelectorAll("[data-enz]").forEach(x=>x.classList.toggle("pick",x.dataset.enz===k));$("#enzcap").innerHTML=ENZ.find(q=>q[0]===k)[2];};
+     root.querySelectorAll("[data-enz]").forEach(b=>b.onclick=()=>pick(b.dataset.enz));
+     $("#stg").onclick=e=>{const t=e.target,k=!t.closest?null:t.closest(".heli")?"heli":t.closest(".poly")?"poly":t.closest(".lig")?"lig":null;if(k)pick(k);};}},
+
+  Object.assign({id:"f-zoomout",title:"Zoom back out",time:40},zoomScreen("z8",Z8,"Zoom back out. Watch both forks of a bubble, then watch the bubbles meet.",()=>S.z8max>=Z8.length-1,
+    z=>{if(z<Z8.length-1)return "";const was=P1.find(a=>a[0]===S.p1);
+      return `<p class="fb ok">Two DNA molecules, each with one black strand and one orange strand: <b>semi-conservative</b>.</p>
+      <div class="talk">You said: <b>${was?was[1]:"&mdash;"}</b>. Copying happens at <b>many spots at once</b>: each bubble has two forks, and the bubbles meet.</div>`;})),
+
+  {id:"f-check",title:"Check: who does what, and why",time:40,
+   html:()=>{const mAll=Object.keys(S.mdone).length>=3;let h="";
+     if(!mAll||!S.mseen){h+=`<p class="say">Match each enzyme to its job. Tap an enzyme, then tap its job.</p>
+       <div class="match"><div class="col">${ENZ.map(q=>`<button type="button" class="enz${S.mdone[q[0]]?" right":S.msel===q[0]?" pick":""}" data-me="${q[0]}" ${S.mdone[q[0]]?"disabled":""}>${enzIcon(q[0])}<span>${q[1]}</span></button>`).join("")}</div>
+       <div class="col">${JOBS.map(j=>`<button type="button" class="choice${S.mdone[j[0]]?" right":""}" data-mj="${j[0]}" ${S.mdone[j[0]]?"disabled":""}>${S.mdone[j[0]]?`<b>${ENZ.find(q=>q[0]===j[0])[1]}</b>&nbsp;${j[1]}`:j[1]}</button>`).join("")}</div></div>
+       <p class="fb ${S.mok===true?"ok":S.mok===false?"no":""}">${S.mfb}</p>`;
+       if(S.mtries>=2&&!mAll)h+=`<div class="btnrow"><button type="button" class="btn" id="mshow">Show me</button></div>`;
+       if(mAll)h+=`<div class="btnrow"><button type="button" class="btn act" id="mnext">One more question</button></div>`;}
+     else{h+=`<p class="say">Why is the <b>lagging strand</b> built in pieces?</p>
+       <div class="choices one">${CHK.map((c,i)=>`<button type="button" class="choice${S.ckDone&&i===CHK_OK?" right":S.wrong["fk"+i]?" wrong":""}" data-fk="${i}" ${S.ckDone?"disabled":""}>${"ABCD"[i]}. ${c}</button>`).join("")}</div>
+       <p class="fb ${S.ckDone?"ok":S.ckTries?"no":""}">${S.ckDone?"<b>C.</b> Polymerase adds only to a 3&prime; end. On the lagging strand, that end points away from the fork.":S.ckTries===1?"Think about the two arrows: which way the fork moved, and which way polymerase built.":S.ckTries>1?"Ligase joins pieces, and helicase opens every base pair. What can polymerase not do?":""}</p>`;
+       if(S.ckTries>=2&&!S.ckDone)h+=`<div class="btnrow"><button type="button" class="btn" id="fkshow">Show me</button></div>`;
+       if(S.ckDone&&!adv())h+=`<div class="talk">${MODEL}</div>${TIMER?`<p class="fine">${timesLine()}</p>`:""}`;}
+     return h;},
+   ready:()=>S.ckDone,
+   mount(){root.querySelectorAll("[data-me]").forEach(b=>b.onclick=()=>{S.msel=b.dataset.me;S.mok=null;S.mfb="";render();});
+     root.querySelectorAll("[data-mj]").forEach(b=>b.onclick=()=>{if(!S.msel){S.mok=false;S.mfb="Tap an enzyme first.";render();return;}
+       if(b.dataset.mj===S.msel){S.mdone[S.msel]=true;S.msel=null;S.mok=true;S.mfb=Object.keys(S.mdone).length>=3?"All three matched.":"Yes. Next enzyme.";}
+       else{S.mtries++;S.mok=false;S.mfb=S.mtries===1?"Not that one. Think about what each enzyme did on screen: unzip, build or seal.":"Try once more, or tap Show me.";}render();});
+     const ms=$("#mshow");if(ms)ms.onclick=()=>{ENZ.forEach(q=>S.mdone[q[0]]=true);S.msel=null;S.mok=true;S.mfb="Helicase unzips. DNA polymerase builds. Ligase seals.";render();};
+     const mn=$("#mnext");if(mn)mn.onclick=()=>{S.mseen=true;render();};
+     root.querySelectorAll("[data-fk]").forEach(b=>b.onclick=()=>{const i=+b.dataset.fk;if(i===CHK_OK)S.ckDone=true;else if(!S.wrong["fk"+i]){S.ckTries++;S.wrong["fk"+i]=1;}render();});
+     const fs=$("#fkshow");if(fs)fs.onclick=()=>{S.ckDone=true;render();};}}
+  ];
+  if(adv())L.push({id:"f-write",title:"Write it",time:40,
+   html:()=>`<p class="say">Finish each part in your own words.</p>
+     <div class="talk">At a replication fork, helicase ____. DNA polymerase builds the leading strand ____, but the lagging strand ____ because ____. Ligase ____.</div>
+     <p class="fine">Write it on paper or wherever your teacher asks. Nothing here is saved.</p>
+     ${TIMER?`<p class="fine">${timesLine()}</p>`:""}`,
+   ready:()=>false});
+  return L;}
+const MODEL="At a replication fork, <b>helicase</b> unzips the DNA. <b>DNA polymerase</b> builds the leading strand in one piece, but the lagging strand in fragments, because it adds only to the 3&prime; end. <b>Ligase</b> seals the gaps.";
+
+/* ---------- frame ---------- */
+let SC=SCREENS(),started=false,RID=0;
+function timesLine(){let tot=0;const parts=SC.map(s=>{const v=S.times[s.id]||0;tot+=v;return s.id.slice(2)+" "+(v?Math.round(v/1000)+"s":"–");});return "Times: "+parts.join(" · ")+" · total "+Math.round(tot/1000)+"s";}
+function render(){
+  stopAnim();RID++;const s=SC[S.i],last=S.i===SC.length-1;
+  root.innerHTML=`<div class="stepline"><span class="chip">LT 4.2</span><span class="chip">${S.i+1} of ${SC.length}</span><span class="dots">${SC.map((_,k)=>`<i class="${k<=S.i?"on":""}"></i>`).join("")}</span></div>
+    <h2>${s.title}</h2>${s.html()}
+    <div class="btnrow"><button type="button" class="btn" id="fback" ${S.i===0?"disabled":""}>&larr; Back</button>
+    ${last?`<button type="button" class="btn go" id="fagain">Start again</button>`:`<button type="button" class="btn go" id="fnext" ${s.ready()?"":"disabled"}>Next &rarr;</button>`}</div>`;
+  if(s.mount)s.mount();
+  $("#fback").onclick=()=>go(S.i-1);
+  const n=$("#fnext");if(n)n.onclick=()=>go(S.i+1);
+  const a=$("#fagain");if(a)a.onclick=()=>{Object.assign(S,fresh());render();root.scrollIntoView({block:"start",behavior:"smooth"});};}
+function go(i){if(i<0||i>=SC.length)return;const id=SC[S.i].id;S.times[id]=(S.times[id]||0)+(Date.now()-S.t0);S.t0=Date.now();S.i=i;render();root.scrollIntoView({block:"start",behavior:"smooth"});}
+
+/* level buttons are shared with Section 1; this section listens as well */
+document.querySelectorAll("#levelsw button").forEach(b=>b.addEventListener("click",()=>{if(!LEVELS[b.dataset.level]||S.level===b.dataset.level)return;
+  const cur=SC[S.i].id;S.level=b.dataset.level;SC=SCREENS();const k=SC.findIndex(s=>s.id===cur);S.i=k>=0?k:SC.length-1;if(started)render();}));
+
+/* section switch: #fork shows this section, anything else shows Section 1 */
+const links=document.querySelectorAll(".secbar a");
+function show(){let hsh="";try{hsh=location.hash.replace("#","");}catch(e){}
+  const fork=(hsh||DEFAULT_SEC)==="fork";
+  sec1.classList.toggle("hidden",fork);sec2.classList.toggle("hidden",!fork);
+  links.forEach(a=>a.setAttribute("aria-current",String((a.getAttribute("href")==="#fork")===fork)));
+  if(fork){if(!started){started=true;S.t0=Date.now();}render();}else stopAnim();}
+window.addEventListener("hashchange",show);show();
+
+if(TEACHER){const t=document.getElementById("teacher");t.classList.remove("hidden");
+  t.insertAdjacentHTML("beforeend",`<h2 style="margin-top:1rem">Teacher key &middot; Section 2 &middot; At the fork</h2><ul>
+  <li><b>Predict (screen 1):</b> commit only. The answer comes back on Zoom back out: many spots at once.</li>
+  <li><b>The ladder:</b> purines are A and G (two rings, the longer half-rung); pyrimidines are C and T. G&ndash;C rungs have 3 hydrogen bonds, A&ndash;T rungs have 2.</li>
+  <li><b>Direction, as drawn:</b> the fork moves right. The top old strand runs 5&prime; (left) to 3&prime; (right); the bottom old strand runs 3&prime; to 5&prime;. Polymerase adds only to a 3&prime; end, so each new strand grows 5&prime; to 3&prime;, antiparallel to its template. Bottom template: the new strand grows right, behind helicase, in one piece (leading). Top template: the new strand has to grow left, away from the fork, so it is built in fragments (lagging). At the other fork of the same bubble this is mirrored: each old strand is the leading template at one fork and the lagging template at the other.</li>
+  <li><b>Leading strand taps:</b> A, T, G (the glowing template bases are T, A, C).</li>
+  <li><b>Lagging strand prediction:</b> &larr; away from the fork.</li>
+  <li><b>Proofreading:</b> a T goes in opposite C, does not pair, and polymerase replaces it with G. This sets up Section 4: a mistake that is missed gets copied.</li>
+  <li><b>Check:</b> helicase &rarr; breaks hydrogen bonds and unzips; DNA polymerase &rarr; adds complementary nucleotides to the 3&prime; end; ligase &rarr; seals the gaps between fragments. Why in pieces: <b>C</b>.</li>
+  <li><b>Write it (Advanced), look for:</b> helicase unzips or breaks hydrogen bonds; leading strand continuous, toward the fork; lagging strand in fragments, away from the fork; the reason is one-direction building (3&prime; end only) on antiparallel strands; ligase seals the gaps.</li>
+  <li><b>Simplified:</b> each new strand and each fragment actually starts on a short RNA primer, which is later replaced. Primers are for the DE level. Ligase does not travel along the strand in a real cell; it is drawn moving so students see each gap close.</li>
+  <li><b>Words used:</b> helicase, DNA polymerase, ligase, leading strand, lagging strand, fragments (Advanced: Okazaki fragments, label only, never asked), antiparallel, 5&prime;, 3&prime;, purine, pyrimidine, complementary, hydrogen bonds (2 and 3), template, nucleotide, sugar-phosphate backbone, replication fork, replication bubble, S phase, interphase, nucleus, proofread, semi-conservative. SOL guide BIO.2d: nucleic acids have a built-in direction, so cells can build DNA and RNA in only one direction.</li>
+  <li><b>Time cap:</b> about 6 minutes (General) to 7 (Advanced). Cut first from the ladder's two taps and the bubbles-meet stop. No numbers are used in this section, so it has no outside sources.</li>
+  <li><b>Links:</b> <code>#fork</code> opens this section. <code>?level=general#fork</code> for Biology I. <code>?timer=1</code> and <code>?projector=1</code> work here too.</li></ul>`);}
+
+/* for the automated tests: the model only, no controls */
+window.CJ_FORK={TOP:TOP.slice(),PAIR,HB,PUR,st5r,st6,st7,strandsOf,bubblePieces,OPENW};
 })();
 </script>
 </body>
