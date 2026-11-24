@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/enzyme-regulation.html">
+<meta name="description" content="Enzyme Regulation: an enzyme drawn with its active site and its allosteric site marked, beside a live rate-of-reaction graph. Competitive and noncompetitive inhibitors, allosteric regulation, cooperativity, feedback inhibition in the threonine to isoleucine pathway, phosphofructokinase as the glycolysis valve, and tyrosine hydroxylase, the enzyme that sets how much dopamine a neuron makes. Three levels: SOL General, SOL Advanced and DE Biology. Nothing is saved or submitted.">
+<meta name="author" content="J. R. Schwebach">
+<meta name="copyright" content="Copyright 2026 J. R. Schwebach. Licensed CC BY-NC 4.0. All graphics are drawn in code from scratch.">
+<title>Enzyme Regulation: the active site, the other site, and the rate | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;
+  --bond:#1F7A8C;--bond-soft:#DEEBEE;--shell:#D2CCC0;--rule:#DDD8CE;
+  --flag:#B85042;--flag-soft:#F7E9E6;--solid:#3F7A55;--solid-soft:#E2EDE6;
+  --gold-soft:#FBF0DA;--gold-ink:#7A5212;--next:#B8E600;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+.wrap{max-width:54rem;margin:0 auto;padding:.8rem 1rem 3rem}
+html.proj body{font-size:24px}
+html.proj .wrap{max-width:none}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.3rem,4vw,1.7rem);line-height:1.12;letter-spacing:-0.015em;margin:0}
+h2{font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:-0.01em;margin:.2rem 0 .4rem}
+h3{font-family:var(--sans);font-weight:700;font-size:1.05rem;margin:.7rem 0 .3rem}
+p{margin:0 0 .7rem}
+a{color:var(--bond)}
+.fine{font-size:.86rem;color:var(--ink-soft);line-height:1.45}
+.hidden{display:none!important}
+button{font:inherit;cursor:pointer;color:inherit}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:.5rem 1rem;margin:0 0 .6rem}
+.sop-back{display:inline-block;margin:0 .9rem .1rem 0;font-family:var(--sans);font-size:.86rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-eyebrow{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .15rem}
+.seg{display:inline-flex;border:1.5px solid var(--shell);border-radius:6px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;font-family:var(--sans);font-size:.84rem;font-weight:700;padding:.5rem .75rem;min-height:44px;color:var(--ink-soft)}
+.seg button[aria-pressed="true"]{background:var(--bond);color:#fff}
+.secbar{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem;margin:0 0 .7rem}
+.secbar a,.secbar span{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:56px;padding:.3rem .25rem;border:1.5px solid var(--shell);border-radius:6px;background:var(--card);font-family:var(--sans);font-size:.86rem;font-weight:700;line-height:1.15;color:var(--ink);text-decoration:none}
+.secbar a[aria-current="true"]{border-color:var(--bond);background:var(--bond-soft);color:var(--bond)}
+.secbar span{color:var(--ink-soft);background:none;border-style:dashed;font-weight:600}
+.secbar small{font-weight:500;font-size:.72rem}
+.panel{background:var(--card);border:1.5px solid var(--rule);border-radius:8px;padding:.8rem .9rem 1rem}
+.stepline{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;font-family:var(--sans);margin-bottom:.4rem}
+.chip{font-size:.8rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;background:var(--bond-soft);color:var(--bond);white-space:nowrap}
+.dots{display:inline-flex;gap:5px;margin-left:auto}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--shell)}
+.dots i.on{background:var(--bond)}
+.say{font-family:var(--sans);font-weight:600;font-size:1.16rem;line-height:1.35;margin:0 0 .55rem;max-width:46rem}
+.say b{color:var(--bond)}
+.say.sm{font-size:1rem;font-weight:500}
+.stage{border:1.5px solid var(--rule);border-radius:6px;overflow:hidden;background:#fff}
+.stage svg{display:block;width:100%;height:auto;max-height:52vh;margin:0 auto}
+html.proj .stage svg{max-height:62vh}
+.stage.wide{overflow-x:auto}
+.stage.wide svg{min-width:560px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;align-items:start}
+.duo .stage{min-width:0}
+.ptitle{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink-soft);padding:.3rem .55rem .1rem;margin:0}
+.fb{font-family:var(--sans);font-size:1.02rem;min-height:1.5rem;margin:.55rem 0 .2rem;line-height:1.4}
+.fb.ok{color:var(--solid)}
+.fb.no{color:var(--flag)}
+.btnrow{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem;align-items:center}
+.btn{font-family:var(--sans);font-weight:700;font-size:1.02rem;min-height:52px;padding:.55rem 1.05rem;border-radius:8px;border:1.5px solid var(--shell);background:var(--card);text-decoration:none;color:var(--ink);display:inline-flex;align-items:center}
+.btn.act{background:var(--bond);border-color:var(--bond);color:#fff}
+.btn.act:disabled{background:var(--rule);border-color:var(--rule);color:var(--ink-soft);cursor:default}
+.btn[aria-pressed="true"]{border-color:var(--bond);background:var(--bond-soft);color:var(--bond)}
+.btn.go{margin-left:auto;background:var(--next);border-color:#8FB300;color:#1D1A15;padding:.55rem 1.4rem}
+.btn.go:disabled{background:var(--rule);border-color:var(--rule);color:var(--ink-soft);cursor:default}
+@keyframes ecpulse{from{box-shadow:0 0 0 0 rgba(184,230,0,.95)}to{box-shadow:0 0 0 9px rgba(184,230,0,0)}}
+.btn.nextup:not(:disabled){animation:ecpulse 1.1s ease-out infinite;outline:3px solid var(--next);outline-offset:1px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.6rem}
+.choices.one{grid-template-columns:1fr}
+.choice{display:flex;align-items:center;justify-content:center;text-align:center;min-height:60px;padding:.5rem .75rem;border-radius:8px;border:2px solid var(--shell);background:var(--card);font-family:var(--sans);font-weight:600;font-size:1.05rem;line-height:1.25}
+.choices.one .choice{justify-content:flex-start;text-align:left}
+.choice.pick{border-color:var(--bond);background:var(--bond-soft)}
+.choice.right{border-color:var(--solid);background:var(--solid-soft)}
+.choice.wrong{border-color:var(--flag);background:var(--flag-soft);opacity:.75}
+.choice:disabled{cursor:default;color:inherit}
+.talk{border-left:5px solid var(--gold-ink);background:var(--gold-soft);padding:.5rem .7rem;border-radius:0 6px 6px 0;font-family:var(--sans);font-weight:600;margin:.6rem 0 .2rem}
+.note{border-left:5px solid var(--bond);background:var(--bond-soft);padding:.5rem .7rem;border-radius:0 6px 6px 0;font-size:.98rem;margin:.6rem 0 .2rem}
+.slider{width:100%;margin:.2rem 0 .1rem;accent-color:var(--bond);height:40px}
+.ctl{display:grid;grid-template-columns:repeat(2,1fr);gap:.2rem 1rem;margin-top:.5rem;font-family:var(--sans)}
+.ctl label{display:block;font-size:.92rem;font-weight:700}
+.ctl label span{font-weight:500;color:var(--ink-soft)}
+.stopsb{display:grid;gap:.3rem;margin:.1rem 0 .55rem}
+.stopsb button{min-height:48px;border:1.5px solid var(--shell);border-radius:6px;background:var(--card);font-family:var(--sans);font-size:.86rem;font-weight:700;line-height:1.1;color:var(--ink-soft);padding:.2rem .15rem}
+.stopsb button[aria-pressed="true"]{border-color:var(--bond);background:var(--bond-soft);color:var(--bond)}
+.stopsb button.nextup{outline:3px solid var(--next);outline-offset:1px;animation:ecpulse 1.1s ease-out infinite}
+.cap{font-family:var(--sans);font-size:1rem;font-weight:500;line-height:1.35;min-height:1.4rem;margin:.5rem 0 0}
+.ten{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:.5rem 0 0}
+.ten svg{width:30px;height:30px;flex:none}
+.pools{display:grid;gap:.3rem;margin:.6rem 0 0;font-family:var(--sans)}
+.pools.few{max-width:24rem}
+.pools.few .col{height:90px}
+.pool{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0}
+.pool .col{width:100%;height:120px;display:flex;align-items:flex-end;border-bottom:2px solid var(--ink)}
+.pool .bar{width:100%;background:var(--bond);border-radius:4px 4px 0 0;transition:height .5s ease;min-height:2px}
+.pool.first .bar{background:#E8890C}
+.pool.last .bar{background:var(--gold-ink)}
+.pool b{font-size:.86rem;line-height:1.15;text-align:center;margin-top:.25rem;overflow-wrap:anywhere}
+.pool small{font-size:.86rem;color:var(--ink-soft)}
+.dtab{border-collapse:collapse;font-family:var(--sans);font-size:1rem;margin:.3rem 0;width:100%;max-width:26rem}
+.dtab th,.dtab td{border:1.5px solid var(--rule);padding:.3rem .5rem;text-align:center}
+.dtab th{background:var(--paper)}
+.links{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.45rem}
+.links li{border:1.5px solid var(--rule);border-radius:6px;padding:.45rem .6rem;font-size:.98rem;line-height:1.4}
+.links b{font-family:var(--sans)}
+.links .rc{font-family:var(--sans);font-size:.86rem;white-space:nowrap}
+.hist{margin:.3rem 0 0;padding-left:1.1rem;font-size:.98rem}
+.hist li{margin-bottom:.2rem}
+.sop-foot{margin-top:1.6rem;padding-top:.7rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--ink-soft)}
+.sop-foot a{color:inherit}
+#teacher{margin-top:1rem;background:var(--gold-soft);border:1.5px solid var(--gold-ink);border-radius:8px;padding:.8rem .9rem;font-size:.95rem}
+#teacher h2{margin-top:0}
+#teacher li{margin-bottom:.3rem}
+@media (max-width:700px){.duo{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.ctl{grid-template-columns:1fr}.secbar{grid-template-columns:repeat(3,1fr)}.secbar a,.secbar span{font-size:.8rem}.pool b{font-size:.74rem}.pool .col{height:90px}}
+html.proj .say{font-size:1.5rem}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Enzyme Regulation: the active site, the other site, and the rate">
+<meta property="og:description" content="An enzyme drawn with its active site and allosteric site marked, beside a live rate graph: competitive and noncompetitive inhibitors, allosteric regulation, feedback inhibition, and the enzyme that sets how much dopamine a neuron makes.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/enzyme-regulation.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <a class="sop-back" id="backlink" href="../de-biology-101-resources.html">&larr; DE Biology 101 Resources</a>
+      <p class="sop-eyebrow">Bio Tool #43 &middot; Enzymes &middot; Interactive &middot; nothing submitted</p>
+      <h1>Enzyme Regulation</h1>
+    </div>
+    <div class="seg" id="levelsw" role="group" aria-label="Level">
+      <button type="button" data-level="general" aria-pressed="false">SOL General</button>
+      <button type="button" data-level="advanced" aria-pressed="false">SOL Advanced</button>
+      <button type="button" data-level="de" aria-pressed="false">DE Biology</button>
+    </div>
+  </div>
+  <nav class="secbar" id="secbar" aria-label="Sections"></nav>
+
+  <section class="panel"><div id="root"><noscript>JavaScript needs to be turned on for the enzyme model to run.</noscript></div></section>
+
+  <div id="teacher" class="hidden"></div>
+
+  <footer class="sop-foot">Biology I and DE Biology 101 &middot; Enzymes &middot; SOL BIO.2 &middot; AP Bio ENE-1.D&ndash;G &middot; nothing is saved or submitted. The rate curves are a model (Michaelis&ndash;Menten and Hill forms), not measurements. ALDH2 figures: Gross et al. 2015, <i>Annu Rev Pharmacol Toxicol</i> 55:107. Tyrosine hydroxylase: Bueno-Carrasco et al. 2022, <i>Nat Commun</i> 13:74. Structures are public entries in the RCSB Protein Data Bank. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.</footer>
+</div>
+<script>
+(function(){
+"use strict";
+/* Enzyme Regulation · Bio Tool #43 · (c) J. R. Schwebach, CC BY-NC 4.0. Every figure is drawn here in code.
+   Site colors and shapes are fixed in every tab:
+     active site      = rounded pocket, teal (--bond), labelled
+     allosteric site  = square notch, gold-brown (--gold-ink), labelled
+     subunit boundary = dashed line
+     substrate = circle · look-alike (competitive) inhibitor = flat-topped arch · other-site inhibitor = plug with a pointed head · activator = plug with a round head and a plus */
+const INK="#1D1A15",SOFT="#5A544A",BOND="#1F7A8C",BONDS="#DEEBEE",GOLD="#7A5212",GOLDS="#FBF0DA",FLAG="#B85042",FLAGS="#F7E9E6",SOLID="#3F7A55",SOLIDS="#E2EDE6",SHELL="#D2CCC0",RULE="#DDD8CE",SUB="#E8890C",BODY="#EDE8DD";
+const LEVELS={general:{label:"SOL General",tabs:2},advanced:{label:"SOL Advanced",tabs:4},de:{label:"DE Biology",tabs:5}};
+const TABS=[
+ {id:"pocket",name:"Shape makes<br>the pocket",chip:"Shape makes the pocket"},
+ {id:"jam",name:"Jamming<br>the pocket",chip:"Jamming the pocket"},
+ {id:"other-site",name:"The<br>other site",chip:"The other site",lock:"Advanced and DE"},
+ {id:"collective",name:"Enzymes in<br>the collective",chip:"Enzymes in the collective",lock:"Advanced and DE"},
+ {id:"rate",name:"Rate on<br>the graph",chip:"Rate on the graph",lock:"DE"}];
+let Q;try{Q=new URLSearchParams(location.search);}catch(e){Q={get:()=>null};}
+const PROJ=Q.get("projector")==="1",TEACHER=Q.get("teacher")==="1";
+if(PROJ)document.documentElement.classList.add("proj");
+function remembered(){try{const v=localStorage.getItem("ec-level");return LEVELS[v]?v:null;}catch(e){return null;}}
+function remember(v){try{localStorage.setItem("ec-level",v);}catch(e){}}
+function freshTab(){return {i:0,q:{}};}
+function freshAll(){const t={};TABS.forEach(x=>t[x.id]=freshTab());return t;}
+const S={level:LEVELS[Q.get("level")]?Q.get("level"):(remembered()||"de"),tab:"pocket",hook:null,hook2:null,t:freshAll()};
+const root=document.getElementById("root");
+const $=s=>root.querySelector(s),$$=s=>root.querySelectorAll(s);
+const lv=()=>S.level,GEN=()=>S.level==="general",DE=()=>S.level==="de";
+const cl=v=>v<0?0:v>1?1:v,lerp=(a,b,t)=>a+(b-a)*t,r1=v=>Math.round(v*10)/10;
+const F='font-family="Archivo,Helvetica,Arial,sans-serif"';
+function tx(x,y,s,str,o){o=o||{};const halo=o.halo?` paint-order="stroke" stroke="#fff" stroke-width="5" stroke-linejoin="round"`:"";
+  return `<text x="${r1(x)}" y="${r1(y)}" ${F} font-size="${s}" font-weight="${o.w||600}" text-anchor="${o.a||"middle"}" fill="${o.f||INK}"${o.rot?` transform="rotate(${o.rot} ${r1(x)} ${r1(y)})"`:""}${halo}>${str}</text>`;}
+
+/* ---------- the rate model ---------- */
+const M={
+  mm:(s,Vm,Km)=>Vm*s/(Km+s),
+  comp:(s,Vm,Km,f)=>Vm*s/(Km*f+s),            /* f = 1 + [I]/Ki : Km rises, Vmax unchanged */
+  non:(s,Vm,Km,f)=>(Vm/f)*s/(Km+s),            /* f = 1 + [I]/Ki : Vmax falls, Km unchanged */
+  hill:(s,Vm,K,n)=>s<=0?0:Vm*Math.pow(s,n)/(Math.pow(K,n)+Math.pow(s,n))
+};
+/* Tab 2 numbers */
+const T2={Vm:100,Km:2,cf:2.5,nf:2,steps:[10,50,100,200],xmax:200};
+function t2rate(mode,s){return mode==="comp"?M.comp(s,T2.Vm,T2.Km,T2.cf):mode==="non"?M.non(s,T2.Vm,T2.Km,T2.nf):M.mm(s,T2.Vm,T2.Km);}
+function t2ten(mode,s){ /* of every 10 enzymes: [hold substrate, hold look-alike, bent by other-site inhibitor] */
+  if(mode==="comp"){const a=s/T2.Km,i=T2.cf-1,den=1+a+i;return {sub:Math.round(10*a/den),inh:Math.round(10*i/den),bent:0};}
+  if(mode==="non"){const bent=Math.round(10*(1-1/T2.nf));return {sub:Math.round((10-bent)*s/(T2.Km+s)),inh:0,bent:bent};}
+  return {sub:Math.round(10*s/(T2.Km+s)),inh:0,bent:0};}
+/* Tab 3 numbers: an allosteric enzyme. K is the substrate level that gives half the top rate. */
+const T3={Vm:100,K:40,Kact:22,Kinh:66,n:2.8,xmax:120};
+function t3rate(eff,s){return M.hill(s,T3.Vm,eff==="act"?T3.Kact:eff==="inh"?T3.Kinh:T3.K,T3.n);}
+/* Tab 3 pathway: threonine -> A -> B -> C -> D -> isoleucine. ile = isoleucine level 0..1; val = valine present. */
+function pathway(ile,val){
+  const inh=1/(1+Math.pow(ile/0.35,2));              /* isoleucine at the allosteric site holds the inactive form */
+  const rate=Math.min(100,70*inh*(val?1.4:1)+2);       /* threonine deaminase rate, percent of its top rate */
+  const mid=rate*0.6;                                   /* A to D follow the first step */
+  const thr=22+72*(1-rate/100);                         /* threonine is still supplied, so what is not used piles up */
+  return {rate:rate,thr:thr,A:mid,B:mid*.95,C:mid*.9,D:mid*.85,ile:10+ile*85};}
+/* Tab 4: PFK. ATP is a substrate and, at high level, an allosteric inhibitor; AMP is an activator. */
+const T4={rest:{atp:92,amp:8},sprint:{atp:74,amp:62}};
+function pfkActive(mode){return T4[mode].amp>T4[mode].atp*0.5;}
+function pfkRate(mode,s){return mode==="sprint"?M.hill(s,100,18,1.3):M.hill(s,88,58,3);}
+/* tyrosine hydroxylase loop */
+function thState(da,p){const locked=da&&!p;return {locked:locked,rate:locked?12:p?95:80};}
+/* Tab 1: temperature and pH */
+function tempFit(t,opt){return t<=opt?1:Math.exp(-Math.pow((t-opt)/7,2));}        /* shape of the active site */
+function tempRate(t,opt){const rise=Math.pow(2,(t-opt)/14);return 100*(t<=opt?rise:rise*tempFit(t,opt)*Math.pow(.5,(t-opt)/14));}
+function phFit(p,opt){return Math.exp(-Math.pow((p-opt)/1.7,2));}
+
+/* ---------- graph ---------- */
+function graph(o){
+  const W=400,H=330,x0=64,x1=388,y0=266,y1=24,X=x=>x0+(x/o.xmax)*(x1-x0),Y=y=>y0-(y/o.ymax)*(y0-y1);
+  let h=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria||"Rate of reaction against substrate"}">`;
+  h+=`<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y0}" stroke="${INK}" stroke-width="2"/><line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1-6}" stroke="${INK}" stroke-width="2"/>`;
+  (o.hl||[]).forEach(g=>{h+=`<line x1="${x0}" y1="${r1(Y(g.y))}" x2="${x1}" y2="${r1(Y(g.y))}" stroke="${g.col||SOFT}" stroke-width="1.5" stroke-dasharray="6 5"/>`+tx(g.lx!=null?X(g.lx):x1-4,Y(g.y)+(g.below?19:-7),16,g.label,{a:g.lx!=null?"middle":"end",f:g.col||SOFT,w:700,halo:1});});
+  (o.vl||[]).forEach(g=>{h+=`<line x1="${r1(X(g.x))}" y1="${y0}" x2="${r1(X(g.x))}" y2="${r1(Y(g.y))}" stroke="${g.col||SOFT}" stroke-width="1.5" stroke-dasharray="6 5"/>`+tx(X(g.x),y0+19,16,g.label,{f:g.col||SOFT,w:700});});
+  (o.curves||[]).forEach(c=>{const up=c.upto==null?o.xmax:c.upto;let d="";const n=90;
+    for(let k=0;k<=n;k++){const x=up*k/n;d+=(k?" L":"M")+r1(X(x))+","+r1(Y(Math.min(o.ymax,c.f(x))));}
+    h+=`<path d="${d}" fill="none" stroke="${c.col||INK}" stroke-width="${c.w||4}"${c.dash?` stroke-dasharray="${c.dash}"`:""} stroke-linecap="round" stroke-linejoin="round" opacity="${c.op||1}"/>`;
+    if(c.label){const lxv=c.lx!=null?c.lx:up;h+=tx(X(lxv)-(c.la==="start"?-6:4),Y(Math.min(o.ymax,c.f(lxv)))+(c.dy!=null?c.dy:-9),16,c.label,{a:c.la||"end",f:c.lf||c.col||INK,w:700,halo:1});}});
+  (o.pts||[]).forEach(p=>{h+=p.sq?`<rect x="${r1(X(p.x)-6)}" y="${r1(Y(p.y)-6)}" width="12" height="12" fill="${p.col||INK}" stroke="#fff" stroke-width="1.5"/>`:p.tri?`<path d="M${r1(X(p.x))},${r1(Y(p.y)-8)} l7.5,13 l-15,0 z" fill="${p.col||INK}" stroke="#fff" stroke-width="1.5"/>`:`<circle cx="${r1(X(p.x))}" cy="${r1(Y(p.y))}" r="${p.r||8}" fill="${p.col||INK}" stroke="#fff" stroke-width="2"/>`;});
+  (o.legend||[]).forEach((g,k,a)=>{const y=246-(a.length-1-k)*24,lg=o.lgx||214;h+=`<line x1="${lg}" y1="${y-5}" x2="${lg+30}" y2="${y-5}" stroke="${g.col||INK}" stroke-width="${g.w||5}"${g.dash?` stroke-dasharray="${g.dash}"`:""} stroke-linecap="round"/>`+tx(lg+37,y,16,g.label,{a:"start",f:g.lf||INK,w:700,halo:1});});
+  if(o.xt)o.xt.forEach(v=>{h+=`<line x1="${r1(X(v))}" y1="${y0}" x2="${r1(X(v))}" y2="${y0+5}" stroke="${INK}" stroke-width="2"/>`+tx(X(v),y0+21,16,v,{f:SOFT});});
+  if(o.yt)o.yt.forEach(v=>{h+=`<line x1="${x0-5}" y1="${r1(Y(v))}" x2="${x0}" y2="${r1(Y(v))}" stroke="${INK}" stroke-width="2"/>`+tx(x0-8,Y(v)+6,16,v,{a:"end",f:SOFT});});
+  h+=tx((x0+x1)/2,H-8,16,o.xl,{w:700})+tx(18,(y0+y1)/2,16,o.yl,{w:700,rot:-90});
+  return h+`</svg>`;}
+/* the SOL General read-out: a products-per-minute meter, no curve */
+function meter(v,ref,refLabel,unit,foot){
+  const W=400,H=330,x0=40,x1=360,y=196,X=q=>x0+(q/100)*(x1-x0);v=Math.round(v);
+  let h=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${unit||"Products per minute"}: ${v}">`;
+  h+=tx(200,110,84,v,{w:700,f:INK})+tx(200,146,18,unit||"products per minute",{w:700,f:SOFT});
+  h+=`<rect x="${x0}" y="${y}" width="${x1-x0}" height="38" rx="6" fill="${BODY}" stroke="${SHELL}" stroke-width="2"/><rect x="${x0}" y="${y}" width="${r1(Math.max(4,X(v)-x0))}" height="38" rx="6" fill="${BOND}"/>`;
+  if(ref!=null){h+=`<line x1="${r1(X(ref))}" y1="${y-12}" x2="${r1(X(ref))}" y2="${y+50}" stroke="${INK}" stroke-width="3" stroke-dasharray="5 4"/>`+tx(Math.min(X(ref),x1-4),y+72,16,refLabel||"no inhibitor",{a:"end",f:SOFT,w:700});}
+  h+=tx(x0,y+72,16,"0",{a:"start",f:SOFT})+tx(200,300,16,foot||"how fast the enzyme works",{f:SOFT,w:700});
+  return h+`</svg>`;}
+
+/* ---------- molecules ---------- */
+function mSub(x,y,rr){rr=rr||22;return `<circle cx="${r1(x)}" cy="${r1(y)}" r="${rr}" fill="${SUB}" stroke="${INK}" stroke-width="2"/>`;}
+function mComp(x,y){const a=22;return `<path d="M${r1(x-a)},${r1(y-a)} L${r1(x+a)},${r1(y-a)} L${r1(x+a)},${r1(y)} A${a},${a} 0 0 1 ${r1(x-a)},${r1(y)} Z" fill="${FLAG}" stroke="${INK}" stroke-width="2"/><path d="M${r1(x-12)},${r1(y-13)} L${r1(x+12)},${r1(y-13)}" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`;}
+function mInh(x,y){return `<path d="M${r1(x-30)},${r1(y-15)} L${r1(x+2)},${r1(y-15)} L${r1(x+2)},${r1(y-27)} L${r1(x+42)},${r1(y)} L${r1(x+2)},${r1(y+27)} L${r1(x+2)},${r1(y+15)} L${r1(x-30)},${r1(y+15)} Z" fill="${FLAG}" stroke="${INK}" stroke-width="2"/>`;}
+function mAct(x,y){return `<path d="M${r1(x-30)},${r1(y-15)} L${r1(x+4)},${r1(y-15)} L${r1(x+4)},${r1(y+15)} L${r1(x-30)},${r1(y+15)} Z" fill="${SOLID}" stroke="${INK}" stroke-width="2"/><circle cx="${r1(x+22)}" cy="${r1(y)}" r="21" fill="${SOLID}" stroke="${INK}" stroke-width="2"/><path d="M${r1(x+11)},${r1(y)} h22 M${r1(x+22)},${r1(y-11)} v22" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`;}
+function mDA(x,y){let d="";for(let k=0;k<6;k++){const a=Math.PI/6+k*Math.PI/3;d+=(k?" L":"M")+r1(x+17*Math.cos(a))+","+r1(y+17*Math.sin(a));}return `<path d="${d} Z" fill="#7B4FA8" stroke="${INK}" stroke-width="2"/>`;}
+function mProd(x,y){return `<path d="M${r1(x-3)},${r1(y-18)} A18,18 0 0 0 ${r1(x-3)},${r1(y+18)} Z" fill="${SUB}" stroke="${INK}" stroke-width="2"/><path d="M${r1(x+5)},${r1(y-18)} A18,18 0 0 1 ${r1(x+5)},${r1(y+18)} Z" fill="${SUB}" stroke="${INK}" stroke-width="2"/>`;}
+
+/* ---------- one enzyme, with both sites marked ----------
+   o.open 1 = active form (pocket open), 0 = inactive form (pocket pinched). o.site: "sub" | "comp" | null.
+   o.allo: "inh" | "act" | null (bound at the allosteric site). o.free: molecules drawn waiting outside. */
+function enz(o){o=o||{};
+  const op=o.open==null?1:cl(o.open),L=40,R=258,T=94,B=274,r=22,cx=148;
+  const hw=lerp(19,37,op),bw=lerp(7,30,op),d=lerp(40,62,op),sk=lerp(15,0,op),bul=lerp(11,0,op);
+  const pk=`${cx-hw} ${T} C ${cx-hw} ${r1(T+d*.6)} ${r1(cx-bw+sk)} ${T+d} ${r1(cx+sk)} ${T+d} C ${r1(cx+bw+sk)} ${T+d} ${cx+hw} ${r1(T+d*.6)} ${cx+hw} ${T}`;
+  const nt=184,nb=220,nd=32,ny=(nt+nb)/2;
+  const nch=`${R} ${nt} L ${R-nd} ${nt} L ${R-nd} ${nb} L ${R} ${nb}`;
+  const body=`M ${L+r} ${T} L ${pk} L ${R-r} ${T} Q ${R} ${T} ${R} ${T+r} ${o.noAllo?"":"L "+nch} L ${R} ${B-r} Q ${R} ${B} ${R-r} ${B} L ${L+r} ${B} Q ${L} ${B} ${L} ${B-r} Q ${r1(L-bul*2)} ${(T+B)/2} ${L} ${T+r} Q ${L} ${T} ${L+r} ${T} Z`;
+  const siteName=o.alloName||(GEN()?"other site":"allosteric site");
+  let h=`<svg viewBox="0 0 400 330" role="img" aria-label="${o.aria||"An enzyme with its active site at the top and its "+siteName+" on the right side."}">`;
+  h+=`<path d="${body}" fill="${BODY}" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`;
+  h+=`<path d="M ${pk}" fill="none" stroke="${BOND}" stroke-width="8" stroke-linecap="round"/>`;
+  if(!o.noAllo)h+=`<path d="M ${nch}" fill="none" stroke="${GOLD}" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>`+tx(R-nd-8,ny+6,16,siteName,{a:"end",f:GOLD,w:700});
+  h+=tx(cx,T+d+24,16,"active site",{f:BOND,w:700});
+  if(o.name)h+=tx(cx-6,246,16,o.name,{f:SOFT,w:600});
+  if(o.form!==false)h+=tx(cx-6,266,16,o.form||(op>.6?"active form":op<.4?"inactive form":"changing shape"),{f:op>.6?SOLID:op<.4?FLAG:SOFT,w:700});
+  /* what sits in the active site */
+  const sy=T+d-25;
+  if(o.site==="sub")h+=mSub(cx,sy);
+  if(o.site==="comp")h+=mComp(cx,sy+1);
+  if(o.site==="half")h+=mSub(cx+sk,T+4,20);
+  if(o.site==="da")h+=mDA(cx,sy+4);
+  if(o.fe)h+=`<circle cx="${cx}" cy="${T+d-7}" r="6" fill="${INK}"><title>iron atom</title></circle>`;   /* substrate that cannot settle in a pinched site */
+  /* what sits at the allosteric site */
+  if(o.allo==="inh")h+=mInh(R-1,ny)+tx(398,ny-36,16,o.inhName1||"",{a:"end",f:FLAG,w:700})+tx(398,ny+52,16,o.inhName||"inhibitor",{a:"end",f:FLAG,w:700});
+  if(o.allo==="act")h+=mAct(R-1,ny)+tx(398,ny-36,16,o.actName1||"",{a:"end",f:SOLID,w:700})+tx(398,ny+52,16,o.actName||"activator",{a:"end",f:SOLID,w:700});
+  /* molecules waiting outside */
+  (o.free||[]).forEach(m=>{
+    if(m.k==="sub")h+=mSub(m.x,m.y,m.r||20);
+    if(m.k==="comp")h+=mComp(m.x,m.y);
+    if(m.k==="prod")h+=mProd(m.x,m.y);
+    if(m.k==="inh")h+=mInh(m.x,m.y);
+    if(m.k==="act")h+=mAct(m.x,m.y);
+    if(m.label)h+=tx(m.lx!=null?m.lx:m.x,m.ly!=null?m.ly:m.y+44,16,m.label,{a:m.la||"middle",f:m.lf||INK,w:700,halo:1});});
+  if(o.extra)h+=o.extra;
+  if(o.cap)h+=tx(200,318,16,o.cap,{f:SOFT,w:600});
+  return h+`</svg>`;}
+/* a small enzyme for the "of every 10 enzymes" strip: st = "sub" | "inh" | "bent" | "free" */
+function mini(st){const open=st==="bent"?0:1,hw=open?9:4;
+  let h=`<svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3,9 L${15-hw},9 L${15-hw+(open?0:3)},19 L${15+hw-(open?0:1)},19 L${15+hw},9 L27,9 L27,27 L3,27 Z" fill="${BODY}" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/>`;
+  if(st==="sub")h+=`<circle cx="15" cy="12" r="6.5" fill="${SUB}" stroke="${INK}" stroke-width="1.2"/>`;
+  if(st==="inh")h+=`<rect x="8.5" y="5" width="13" height="13" fill="${FLAG}" stroke="${INK}" stroke-width="1.2"/>`;
+  if(st==="bent")h+=`<path d="M27,17 l8,5 l-8,5 z" fill="${FLAG}" stroke="${INK}" stroke-width="1.2" transform="translate(-6 0)"/>`;
+  return h+`</svg>`;}
+function tenStrip(c){let h='<div class="ten" aria-hidden="true">';const a=[];
+  for(let k=0;k<10;k++){let st="free";if(k<c.bent)st="bent";else if(k<c.bent+c.sub)st="sub";else if(k<c.bent+c.sub+c.inh)st="inh";a.push(st);}
+  a.sort((p,q)=>["sub","inh","bent","free"].indexOf(p)-["sub","inh","bent","free"].indexOf(q));
+  a.forEach(st=>h+=mini(st));return h+'</div>';}
+
+/* ---------- a four-subunit enzyme ----------
+   o.open[4] openness of each active site (TL, TR, BL, BR). o.sub[4] substrate bound. o.bad[4] changed subunit.
+   o.eff "inh" | "act" at the regulatory notches where subunits join. */
+function tetra(o){o=o||{};const open=o.open||[1,1,1,1],sub=o.sub||[0,0,0,0],bad=o.bad||[0,0,0,0];
+  const L=50,R=350,T=58,B=262,r=20,cs=[125,275],my=(T+B)/2;
+  const pk=(cx,op,top)=>{const hw=lerp(11,25,op),bw=lerp(4,20,op),d=lerp(26,42,op),y=top?T:B,s=top?1:-1;
+    const a=`${cx-hw} ${y} C ${cx-hw} ${r1(y+s*d*.6)} ${cx-bw} ${y+s*d} ${cx} ${y+s*d} C ${cx+bw} ${y+s*d} ${cx+hw} ${r1(y+s*d*.6)} ${cx+hw} ${y}`;
+    const b=`${cx+hw} ${y} C ${cx+hw} ${r1(y+s*d*.6)} ${cx+bw} ${y+s*d} ${cx} ${y+s*d} C ${cx-bw} ${y+s*d} ${cx-hw} ${r1(y+s*d*.6)} ${cx-hw} ${y}`;
+    return {fwd:a,rev:b,d:d};};
+  const P=[pk(cs[0],open[0],1),pk(cs[1],open[1],1),pk(cs[0],open[2],0),pk(cs[1],open[3],0)];
+  const nR=`${R} ${my-17} L ${R-26} ${my-17} L ${R-26} ${my+17} L ${R} ${my+17}`,nL=`${L} ${my+17} L ${L+26} ${my+17} L ${L+26} ${my-17} L ${L} ${my-17}`;
+  const body=`M ${L+r} ${T} L ${P[0].fwd} L ${P[1].fwd} L ${R-r} ${T} Q ${R} ${T} ${R} ${T+r} L ${nR} L ${R} ${B-r} Q ${R} ${B} ${R-r} ${B} L ${P[3].rev} L ${P[2].rev} L ${L+r} ${B} Q ${L} ${B} ${L} ${B-r} L ${nL} L ${L} ${T+r} Q ${L} ${T} ${L+r} ${T} Z`;
+  let h=`<svg viewBox="0 0 400 330" role="img" aria-label="${o.aria||"An enzyme made of four subunits, each with its own active site."}">`;
+  h+=`<path d="${body}" fill="${BODY}" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`;
+  /* changed subunits get a cross-hatch, never color alone */
+  const quad=[[L,T,200,my],[200,T,R,my],[L,my,200,B],[200,my,R,B]];
+  bad.forEach((b,k)=>{if(!b)return;const q=quad[k];let s="";for(let x=q[0]-80;x<q[2];x+=16)s+=`M${x},${q[3]} L${x+(q[3]-q[1])},${q[1]} `;
+    h+=`<clipPath id="bq${k}"><rect x="${q[0]+3}" y="${q[1]+3}" width="${q[2]-q[0]-6}" height="${q[3]-q[1]-6}"/></clipPath><path d="${s}" stroke="${FLAG}" stroke-width="3" clip-path="url(#bq${k})" opacity=".8"/>`;});
+  h+=`<line x1="200" y1="${T+4}" x2="200" y2="${B-4}" stroke="${INK}" stroke-width="2.5" stroke-dasharray="7 6"/><line x1="${L+30}" y1="${my}" x2="${R-30}" y2="${my}" stroke="${INK}" stroke-width="2.5" stroke-dasharray="7 6"/>`;
+  [[0,1],[1,1],[2,0],[3,0]].forEach(([k,top])=>{const cx=cs[k%2];h+=`<path d="M ${P[k].fwd}" fill="none" stroke="${BOND}" stroke-width="7" stroke-linecap="round"/>`;
+    if(sub[k])h+=mSub(cx,top?T+P[k].d-18:B-P[k].d+18,15);});
+  h+=`<path d="M ${nR}" fill="none" stroke="${GOLD}" stroke-width="7" stroke-linecap="square"/><path d="M ${nL}" fill="none" stroke="${GOLD}" stroke-width="7" stroke-linecap="square"/>`;
+  if(o.eff==="inh")h+=`<g transform="translate(${R-1} ${my}) scale(.78)">${mInh(0,0)}</g><g transform="translate(${L+1} ${my}) scale(-.78 .78)">${mInh(0,0)}</g>`;
+  if(o.eff==="act")h+=`<g transform="translate(${R-1} ${my}) scale(.78)">${mAct(0,0)}</g><g transform="translate(${L+1} ${my}) scale(-.78 .78)">${mAct(0,0)}</g>`;
+  if(o.center)h+=tx(200,my-8,16,o.center,{f:SOFT,w:700,halo:1});
+  if(o.center2)h+=tx(200,my+24,16,o.center2,{f:o.c2f||SOFT,w:700,halo:1});
+  if(o.top)h+=tx(200,26,16,o.top,{f:BOND,w:700});
+  if(o.cap)h+=tx(200,292,16,o.cap,{f:SOFT,w:600});
+  if(o.cap2)h+=tx(200,316,16,o.cap2,{f:o.cap2f||SOFT,w:700});
+  return h+`</svg>`;}
+
+/* ---------- small shared pieces ---------- */
+function Qs(st,key){return st.q[key]||(st.q[key]={tries:0,done:false,wrong:{},last:null});}
+function mcHTML(st,key,d){const q=Qs(st,key);
+  let h=`<div class="choices ${d.cls==null?"one":d.cls}">`+d.opts.map((o,i)=>`<button type="button" class="choice${q.done&&i===d.ok?" right":q.wrong[i]?" wrong":""}" data-q="${key}" data-i="${i}" ${q.done?"disabled":""}>${d.letters?"ABCD"[i]+". ":""}${o}</button>`).join("")+`</div>`;
+  let fb="",c="";
+  if(q.done){fb=d.right;c="ok";}
+  else if(q.tries){c="no";fb=(d.fb?d.fb[q.last]:(q.tries===1?d.hint1:(d.hint2||d.hint1)))+(q.tries>=2?" Try once more, or tap Show me.":"");}
+  h+=`<p class="fb ${c}">${fb}</p>`;
+  if(q.tries>=2&&!q.done)h+=`<div class="btnrow"><button type="button" class="btn" data-show="${key}">Show me</button></div>`;
+  return h;}
+function mcMount(st,key,d,after){$$(`[data-q="${key}"]`).forEach(b=>b.onclick=()=>{const i=+b.dataset.i,q=Qs(st,key);
+    if(i===d.ok){q.done=true;if(after)after();}else{if(!q.wrong[i]){q.tries++;q.wrong[i]=1;}q.last=i;}render();});
+  const sh=$(`[data-show="${key}"]`);if(sh)sh.onclick=()=>{Qs(st,key).done=true;if(after)after();render();};}
+const done=(st,key)=>!!(st.q[key]&&st.q[key].done);
+function links(list){return `<ul class="links">`+list.map(l=>`<li><b>${l.what}</b> <a href="https://molstar.org/viewer/?pdb-provider=rcsb&amp;pdb=${l.id}" target="_blank" rel="noopener">${l.id} in 3D</a> <a class="rc" href="https://www.rcsb.org/structure/${l.id}" target="_blank" rel="noopener">RCSB entry</a><br>${l.look}</li>`).join("")+`</ul>`;}
+function pools(list,cap){return (cap?`<p class="ptitle" style="padding-left:0;margin-top:.6rem">how much is ${cap}</p>`:"")+`<div class="pools${list.length<4?" few":""}" style="grid-template-columns:${list.length===6?"1.5fr repeat(4,1fr) 1.5fr":"repeat("+list.length+",1fr)"}">`+list.map((p,k)=>`<div class="pool${k===0?" first":k===list.length-1?" last":""}" data-pool="${p.id}" data-v="${Math.round(p.v)}"><div class="col"><div class="bar" style="height:${Math.round(cl(p.v/100)*100)}%"></div></div><b>${p.name}</b></div>`).join("")+`</div>`;}
+const HOOK=[["nothing","Nothing; it runs out of raw material"],["switch","Something switches the enzyme off"],["leaves","The dopamine leaves the brain"]];
+
+/* ================= Tab 1 · Shape makes the pocket ================= */
+function zoomSVG(k){
+  if(k===3)return tetra({top:"four active sites, one in each subunit",cap:"dashed lines: where the subunits touch",aria:"Quaternary structure: four folded chains joined into one enzyme."});
+  let h=`<svg viewBox="0 0 700 300" role="img" aria-label="${["Primary structure: a chain of amino acids.","Secondary structure: a helix and a sheet.","Tertiary structure: the chain folded so that a pocket forms."][k]}">`;
+  if(k===0){const cols=[SUB,BOND,"#7B4FA8",SOLID,FLAG,"#C9A227"];let d="";const pts=[];
+    for(let i=0;i<14;i++){const x=62+i*44,y=150+Math.sin(i*.9)*34;pts.push([x,y]);d+=(i?" L":"M")+x+","+r1(y);}
+    h+=`<path d="${d}" fill="none" stroke="${SOFT}" stroke-width="5"/>`;
+    pts.forEach((p,i)=>{h+=`<circle cx="${p[0]}" cy="${r1(p[1])}" r="17" fill="${cols[(i*5)%6]}" stroke="${INK}" stroke-width="2"/>`;});
+    h+=tx(62,250,18,"first amino acid",{a:"start",f:SOFT,w:700})+tx(638,250,18,"last amino acid",{a:"end",f:SOFT,w:700})+tx(350,52,18,"one chain, amino acids in a set order",{w:700});}
+  if(k===1){let d="";for(let i=0;i<=120;i++){const t=i/120*Math.PI*8,x=70+i*2.2+Math.cos(t)*14,y=150-Math.sin(t)*46;d+=(i?" L":"M")+r1(x)+","+r1(y);}
+    h+=`<path d="${d}" fill="none" stroke="${BOND}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`;
+    [0,1,2].forEach(i=>{const x=108+i*66;h+=`<line x1="${x}" y1="122" x2="${x+66}" y2="122" stroke="${INK}" stroke-width="2" stroke-dasharray="3 5"/>`;});
+    [96,150,204].forEach((y,i)=>{const a=i%2?[660,420]:[420,660];let z=`M${a[0]},${y}`;for(let s=1;s<=6;s++){z+=` L${r1(a[0]+(a[1]-a[0])*s/6.6)},${y+(s%2?-9:9)}`;}
+      h+=`<path d="${z}" fill="none" stroke="${GOLD}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M${a[1]},${y-15} L${a[1]+(i%2?-22:22)},${y} L${a[1]},${y+15} Z" fill="${GOLD}" transform="translate(${i%2?12:-12} 0)"/>`;
+      if(i<2)[470,540,610].forEach(x=>{h+=`<line x1="${x}" y1="${y+12}" x2="${x}" y2="${y+42}" stroke="${INK}" stroke-width="2" stroke-dasharray="3 5"/>`;});});
+    h+=tx(190,258,18,"helix",{w:700,f:BOND})+tx(540,258,18,"sheet",{w:700,f:GOLD})+tx(350,40,18,"dotted lines: hydrogen bonds along the backbone",{f:SOFT,w:700});}
+  if(k===2){const P=[[225,80],[305,80],[314,108],[326,136],[300,162],[236,162],[236,208],[300,208],[300,256],[400,256],[400,208],[464,208],[464,162],[400,162],[374,136],[386,108],[395,80],[475,80]];
+    h+=`<path d="M${P.map(p=>p.join(",")).join(" L")}" fill="none" stroke="#B9B2A4" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>`;
+    h+=`<path d="M305,80 L314,108 L326,136" fill="none" stroke="${BOND}" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M374,136 L386,108 L395,80" fill="none" stroke="${BOND}" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>`;
+    h+=mSub(350,106,21)+`<circle cx="314" cy="108" r="10" fill="#fff" stroke="${INK}" stroke-width="2"/><circle cx="386" cy="108" r="10" fill="#fff" stroke="${INK}" stroke-width="2"/>`;
+    h+=tx(350,58,18,"substrate",{w:700,f:INK})+tx(350,184,18,"active site",{w:700,f:BOND});
+    h+=tx(288,112,18,"early in the chain",{a:"end",f:SOFT,w:700})+tx(412,112,18,"late in the chain",{a:"start",f:SOFT,w:700});
+    h+=`<line x1="210" y1="80" x2="150" y2="80" stroke="${SOFT}" stroke-width="2" stroke-dasharray="4 5"/><line x1="470" y1="162" x2="540" y2="162" stroke="${SOFT}" stroke-width="2" stroke-dasharray="4 5"/>`;
+    h+=tx(145,86,18,"start",{a:"end",f:SOFT,w:700})+tx(546,168,18,"end",{a:"start",f:SOFT,w:700});}
+  return h+`</svg>`;}
+const ZCAP=[
+ "<b>Primary structure.</b> Amino acids joined in one set order. Change one, and every level above it can change.",
+ "<b>Secondary structure.</b> Stretches of the chain coil into a helix or line up as a sheet, held by hydrogen bonds.",
+ "<b>Tertiary structure.</b> The whole chain folds. Amino acids from far-apart stretches of the chain end up side by side and wall off a pocket: the <b>active site</b>. The pocket exists only while the fold holds.",
+ "<b>Quaternary structure.</b> Some enzymes are several folded chains, called subunits, joined together. The subunits touch, so a shape change in one is felt by the others."];
+function grid16(){
+  const pat=[[],[0],[1],[2],[3],[0,1],[0,2],[0,3],[1,2],[1,3],[2,3],[0,1,2],[0,1,3],[0,2,3],[1,2,3],[0,1,2,3]];
+  let h=`<svg viewBox="0 0 700 270" role="img" aria-label="Sixteen enzymes built from random pairs of normal and changed subunits. Only one of the sixteen has four normal subunits.">`;
+  const sq=(x,y,bad)=>`<rect x="${x}" y="${y}" width="27" height="27" rx="4" fill="${bad?FLAGS:BODY}" stroke="${INK}" stroke-width="2"/>`+(bad?`<path d="M${x+6},${y+6} l15,15 M${x+21},${y+6} l-15,15" stroke="${FLAG}" stroke-width="3.5" stroke-linecap="round"/>`:"");
+  pat.forEach((b,k)=>{const x=34+(k%8)*82,y=k<8?26:108;
+    [0,1,2,3].forEach(q=>{h+=sq(x+(q%2)*30,y+(q>>1)*30,b.indexOf(q)>=0);});
+    if(k===0)h+=`<rect x="${x-7}" y="${y-7}" width="71" height="71" rx="8" fill="none" stroke="${SOLID}" stroke-width="4"/>`;});
+  h+=tx(34,196,16,"↑ the only one with",{a:"start",f:SOLID,w:700})+tx(34,216,16,"four normal subunits",{a:"start",f:SOLID,w:700});
+  h+=sq(300,226,false)+tx(336,246,16,"normal subunit",{a:"start",f:SOFT,w:700})+sq(490,226,true)+tx(526,246,16,"changed subunit",{a:"start",f:SOFT,w:700});
+  return h+`</svg>`;}
+function scrPocket(st){
+  if(st.z==null)Object.assign(st,{z:0,zseen:{0:1},temp:37,ph:7,src:"human",hot:false,acid:false});
+  const L=[];
+  L.push({id:"hook",title:"Your answer first",
+    html:()=>`<p class="say">Your brain makes <b>dopamine</b>, the chemical behind reward and wanting. What keeps it from making too much?</p>
+      <div class="choices">${HOOK.map(a=>`<button type="button" class="choice${S.hook===a[0]?" pick":""}" data-hk="${a[0]}">${a[1]}</button>`).join("")}</div>
+      <p class="fb">${S.hook?"Hold on to that answer. You will come back to it.":""}</p>`,
+    ready:()=>!!S.hook,
+    mount(){$$("[data-hk]").forEach(b=>b.onclick=()=>{S.hook=b.dataset.hk;render();});}});
+  L.push({id:"zoom",title:"From a chain to a pocket",
+    html:()=>`<p class="say">Dopamine is made by an <b>enzyme</b>, and an enzyme is a folded protein. Tap each level of its structure.</p>
+      <div class="stopsb" style="grid-template-columns:repeat(4,1fr)">${["1 &middot; Primary","2 &middot; Secondary","3 &middot; Tertiary","4 &middot; Quaternary"].map((n,k)=>`<button type="button" data-z="${k}" aria-pressed="${st.z===k}"${!st.zseen[k]&&k===Object.keys(st.zseen).length?' class="nextup"':""}>${n}</button>`).join("")}</div>
+      <div class="stage${st.z===3?"":" wide"}"${st.z===3?' style="max-width:30rem;margin:0 auto"':""}>${zoomSVG(st.z)}</div>
+      <p class="cap">${ZCAP[st.z]}</p>`,
+    ready:()=>!!(st.zseen[2]&&st.zseen[3]),
+    mount(){$$("[data-z]").forEach(b=>b.onclick=()=>{st.z=+b.dataset.z;st.zseen[st.z]=1;render();});}});
+  const A={opts:["About a quarter","About half","Well over half"],ok:2,cls:"",
+    hint1:"Half of the subunits are changed. Would the loss stop at half if each changed subunit also disturbed the subunits it touches?",
+    hint2:"Four subunits are drawn at random, half of them changed. How often would an enzyme get four normal ones?",
+    right:"<b>Well over half.</b> An estimated 60 to 80 percent of the activity is gone (Gross et al. 2015). Only 1 enzyme in 16 draws four normal subunits. A changed subunit disturbs the subunits it touches, so one bad chain spoils more than itself."};
+  L.push({id:"aldh2",title:"One changed subunit, four subunits hurt",
+    html:()=>`<p class="say">The liver enzyme <b>ALDH2</b> clears acetaldehyde, the toxic product made from alcohol. It works as four subunits joined together.</p>
+      <p>About 560 million people of East Asian descent carry one gene copy with a single amino acid changed. Half of the subunits they make are changed, and each enzyme draws its four subunits at random. <b>How much of the enzyme's work is lost?</b></p>
+      <div class="stage${done(st,"aldh")?" wide":""}"${done(st,"aldh")?"":' style="max-width:30rem;margin:0 auto"'}>${done(st,"aldh")?grid16():tetra({bad:[0,1,0,0],center:"ALDH2",cap:"hatched: a subunit with one changed amino acid"})}</div>
+      ${mcHTML(st,"aldh",A)}
+      ${done(st,"aldh")?`<p class="fine">Acetaldehyde then builds up after a drink, and the face flushes red. Breaking quaternary structure can stop an enzyme without unfolding any single chain.</p>`:""}`,
+    ready:()=>done(st,"aldh"),
+    mount(){mcMount(st,"aldh",A);}});
+  L.push({id:"heat",title:"Heat and pH bend the pocket",
+    html:()=>{const opt=st.src==="human"?37:75,fit=tempFit(st.temp,opt)*phFit(st.ph,7),rate=tempRate(st.temp,opt)*phFit(st.ph,7);
+      const who=st.src==="human"?"a human enzyme":"an enzyme from a hot-spring bacterium";
+      let h=`<p class="say">Slide the temperature up past body temperature and watch the <b>active site</b>. Then try the pH.</p>
+      <div class="duo"><div class="stage"><p class="ptitle">${who}</p>${enz({open:fit,site:fit>.72?"sub":fit>.3?"half":null,noAllo:true,form:fit>.72?"shape holds":fit>.3?"shape slipping":"denatured",free:fit<=.3?[{k:"sub",x:148,y:44,label:"substrate no longer fits",lx:176,ly:50,la:"start"}]:[]})}</div>
+      <div class="stage"><p class="ptitle">${GEN()?"how fast it works":"rate against temperature, at pH "+st.ph}</p>${GEN()?meter(rate,100,"at its best"):graph({xmax:100,ymax:112,xl:"temperature (°C)",yl:"rate of reaction",xt:[0,37,75,100],curves:[{f:t=>tempRate(t,opt)*phFit(st.ph,7),col:BOND}],pts:[{x:st.temp,y:rate,col:INK}],aria:"Rate of reaction against temperature"})}</div></div>
+      <div class="ctl"><div><label for="tmp">Temperature <span>${st.temp} °C</span></label><input type="range" class="slider" id="tmp" min="0" max="100" step="1" value="${st.temp}"></div>
+      <div><label for="ph">pH <span>${st.ph}</span></label><input type="range" class="slider" id="ph" min="1" max="13" step="1" value="${st.ph}"></div></div>
+      <div class="btnrow"><button type="button" class="btn" data-src="human" aria-pressed="${st.src==="human"}">Human enzyme</button><button type="button" class="btn" data-src="spring" aria-pressed="${st.src==="spring"}">Hot-spring bacterium</button></div>`;
+      if(st.hot)h+=`<p class="fb ok">Warming speeds the reaction up to the <b>optimal temperature</b>. Past it, the weak bonds that hold the fold break, the active site loses its shape, and the enzyme is <b>denatured</b>.${GEN()?"":" The ΔG of the reaction has not changed. Only the catalyst has."}</p>`;
+      if(st.hot&&st.src==="spring")h+=`<p class="fine">Bacteria in hot springs stay active because their enzymes have high optimal temperatures. The fold is held more tightly, so it survives the heat.</p>`;
+      h+=`<p class="fine">An athlete's enzymes face the same limit: <a href="../cer-u1-lt1-3-heat-enzymes-practice.html">Thirty Minutes: What Heat Does to the Enzymes Running an Athlete</a> (Biology #14).</p>`;
+      return h;},
+    ready:()=>st.hot,
+    mount(){const upd=()=>{const opt=st.src==="human"?37:75;if(st.temp>=opt+12)st.hot=true;render();};
+      $("#tmp").onchange=e=>{st.temp=+e.target.value;upd();};$("#tmp").oninput=e=>{st.temp=+e.target.value;live();};
+      $("#ph").onchange=e=>{st.ph=+e.target.value;upd();};$("#ph").oninput=e=>{st.ph=+e.target.value;live();};
+      function live(){const lab=$$(".ctl label span");lab[0].textContent=st.temp+" °C";lab[1].textContent=st.ph;}
+      $$("[data-src]").forEach(b=>b.onclick=()=>{st.src=b.dataset.src;render();});}});
+  if(DE())L.push({id:"real1",title:"The real molecules",
+    html:()=>`<p class="say">Each link opens a measured structure in a 3D viewer. Drag to turn it.</p>
+      ${links([
+       {id:"2YHX",what:"Yeast hexokinase, open.",look:"No glucose is bound. Find the deep cleft between the two lobes: that cleft is the active site."},
+       {id:"1HKG",what:"Yeast hexokinase, closed.",look:"Glucose is bound and the two lobes have swung together around it. Compare with 2YHX to see induced fit."},
+       {id:"1A4Z",what:"ALDH2, four subunits.",look:"Aldehyde dehydrogenase from cow mitochondria, a close match to the human enzyme. Color by chain, then find the surfaces where the four chains touch."}])}
+      <p class="fine">Induced fit and catalysis are built step by step in <a href="water-patch.html">The Water Patch, Module 2</a>.</p>`,
+    ready:()=>true});
+  const C={letters:true,ok:1,opts:["Its molecules slowed down and stopped colliding.","Heat broke the weak bonds that hold its shape, so the active site no longer fits the substrate.","Heat raised the activation energy of the reaction.","The reaction used the enzyme up."],
+    fb:{0:"Not this one. Heat makes molecules move faster and collide more often.",2:"Not this one. Heat does not raise the energy barrier. Look at what happened to the enzyme itself.",3:"Not this one. An enzyme is a catalyst, and a catalyst is not used up by the reaction it speeds up."},
+    right:"<b>B.</b> Above its optimal temperature an enzyme denatures: weak bonds break and the active site loses its shape."};
+  L.push({id:"check1",title:"One check",
+    html:()=>`<div class="talk">Table talk: Which level of structure would you have to break to stop an enzyme that is made of four chains, without touching any one chain's fold?</div>
+      <p class="say" style="margin-top:.8rem">A human enzyme works well at 37 °C and barely works at 60 °C. What happened to it?</p>${mcHTML(st,"ck",C)}`,
+    ready:()=>done(st,"ck"),mount(){mcMount(st,"ck",C);}});
+  L.push(endScreen(0));
+  return L;}
+
+/* ================= Tab 2 · Jamming the pocket ================= */
+function t2panel(mode,s,traced){ /* the right-hand panel */
+  const v=t2rate(mode,s),ref=t2rate(null,s);
+  if(GEN())return meter(v,mode?ref:null,"no inhibitor");
+  const curves=[{f:x=>t2rate(null,x),col:SOFT,w:3,dash:"7 6",op:.8}],legend=[{col:SOFT,w:3,dash:"7 6",label:"no inhibitor",lf:SOFT}];
+  if(mode){curves.push({f:x=>t2rate(mode,x),col:FLAG,upto:traced,w:5});legend.push({col:FLAG,label:"with inhibitor",lf:FLAG});}
+  return graph({legend:legend,xmax:T2.xmax,ymax:112,xl:DE()?"substrate concentration":"how much substrate",yl:DE()?"rate of reaction":"how fast",curves:curves,pts:[{x:s,y:v,col:INK}]});}
+function runScreen(st,mode){
+  const key=mode,R=st[mode]||(st[mode]={added:false,step:0});
+  const nm=mode==="comp"?(GEN()?"look-alike":"competitive inhibitor"):(GEN()?"other-site inhibitor":"noncompetitive inhibitor");
+  const P={cls:"",opts:["Climb back to the same top","Level off at a lower top","Drop to zero"],ok:mode==="comp"?0:1,
+    hint1:mode==="comp"?"The look-alike and the substrate want the same spot. Which one gets it when one of them hugely outnumbers the other?":"Look at where the inhibitor sits. Is the substrate competing with it for that spot?",
+    hint2:mode==="comp"?"Count the molecules near the active site once substrate floods in.":"The active site has changed shape. Does more substrate change it back?",
+    right:mode==="comp"?"Now run it: tap <b>Add more substrate</b> until the tube is flooded.":"Now run it: tap <b>Add more substrate</b> and watch the top of the "+(GEN()?"meter":"curve")+"."};
+  return {id:"run-"+mode,title:mode==="comp"?"An inhibitor in the active site":"An inhibitor at the other site",
+    html:()=>{const s=T2.steps[R.step],last=R.step===T2.steps.length-1,ten=t2ten(R.added?mode:null,s);
+      let cart;
+      if(!R.added)cart=enz({site:"sub",name:mode==="comp"&&!GEN()?"succinate dehydrogenase":"enzyme",free:[{k:mode==="comp"?"comp":"inh",x:mode==="comp"?330:340,y:mode==="comp"?52:60,label:mode==="comp"&&GEN()?"look-alike":"inhibitor",lx:mode==="comp"?330:398,ly:mode==="comp"?96:104,la:mode==="comp"?"middle":"end",lf:FLAG}]});
+      else if(mode==="comp")cart=enz(last?{site:"sub",name:GEN()?"enzyme":"succinate dehydrogenase",free:[{k:"comp",x:330,y:52,label:"crowded out",ly:96,lf:FLAG},{k:"sub",x:60,y:46,r:16},{k:"sub",x:104,y:34,r:16},{k:"sub",x:196,y:38,r:16},{k:"sub",x:240,y:54,r:16}]}
+        :{site:"comp",name:GEN()?"enzyme":"succinate dehydrogenase",free:[{k:"sub",x:66,y:46,r:18,label:R.step?"":"substrate, shut out",lx:92,ly:38,la:"start"}].concat(R.step>0?[{k:"sub",x:196,y:38,r:16}]:[]).concat(R.step>1?[{k:"sub",x:240,y:56,r:16},{k:"sub",x:112,y:30,r:16}]:[])});
+      else cart=enz({open:0,site:"half",allo:"inh",inhName:GEN()?"inhibitor":"inhibitor",inhName1:GEN()?"":"noncompetitive",name:"enzyme",free:R.step>0?[{k:"sub",x:60,y:44,r:16},{k:"sub",x:236,y:42,r:16}].concat(R.step>1?[{k:"sub",x:104,y:30,r:16},{k:"sub",x:286,y:60,r:16}]:[]):[]});
+      let h=`<p class="say">${mode==="comp"
+        ?(GEN()?"A <b>look-alike</b> molecule has nearly the shape of the substrate. The enzyme cannot change it into product.":"<b>Malonate</b> has nearly the shape of succinate, the real substrate. The enzyme cannot act on it. A molecule like this is a <b>competitive inhibitor</b>.")
+        :(GEN()?"A different inhibitor does not look like the substrate at all. It fits the <b>other site</b>.":"A <b>noncompetitive inhibitor</b> does not resemble the substrate. It binds the other site, away from the active site.")}</p>
+      <div class="duo"><div class="stage"><p class="ptitle">where it binds</p><div id="cart">${cart}</div></div><div class="stage"><p class="ptitle">${GEN()?"how fast":"rate of reaction"}</p><div id="plot">${t2panel(R.added?mode:null,s,s)}</div></div></div>
+      ${tenStrip(ten)}<p class="cap">Of every 10 enzymes: <b>${ten.sub}</b> hold substrate${ten.inh?`, <b>${ten.inh}</b> hold the ${GEN()?"look-alike":"inhibitor"}`:""}${ten.bent?`, <b>${ten.bent}</b> have a bent active site`:""}.</p>`;
+      if(!R.added)h+=`<div class="btnrow"><button type="button" class="btn act nextup" id="addI">Add the ${nm}</button></div>`;
+      else{h+=`<p class="say" style="margin-top:.7rem">The rate fell. Now predict: the tube is flooded with substrate. What will the rate do?</p>${mcHTML(st,key+"p",P)}`;
+        if(done(st,key+"p"))h+=`<div class="btnrow"><button type="button" class="btn act${last?"":" nextup"}" id="more" ${last?"disabled":""}>Add more substrate</button></div>`;
+        if(last)h+=`<p class="fb ok">${mode==="comp"
+          ?"<b>The same top.</b> The inhibitor is still in the tube, but substrate crowds it out of the active site."
+          :"<b>A lower top.</b> The inhibitor works by changing the shape of the enzyme's active site. No amount of substrate changes it back."}</p>`;}
+      return h;},
+    ready:()=>R.added&&R.step===T2.steps.length-1,
+    mount(){const a=$("#addI");if(a)a.onclick=()=>{R.added=true;render();};
+      mcMount(st,key+"p",P);
+      const m=$("#more");if(m)m.onclick=()=>{if(R.step<T2.steps.length-1){R.step++;render();}};}};}
+function hookReturn(st,lead){
+  return {id:"hookback",title:"Back to dopamine",
+    html:()=>{const was=HOOK.find(a=>a[0]===S.hook);
+      let h=lead+`<p class="say sm">You said: <b>${was?was[1]:"—"}</b>. Keep it or change it?</p>
+      <div class="choices">${HOOK.map(a=>`<button type="button" class="choice${S.hook2===a[0]?" pick":""}" data-hk2="${a[0]}">${a[1]}</button>`).join("")}</div>`;
+      if(S.hook2)h+=`<p class="fb ok">${S.hook2==="switch"?"Yes. The switch is dopamine itself: the end product turns off the enzyme that starts its own production line."
+        :S.hook2==="nothing"?"The raw material, tyrosine, comes from food and rarely runs short. The control is on the enzyme: dopamine itself switches it off."
+        :"Used dopamine is taken back up or broken down, and that clears it. It does not set how much gets made. Production is set at the enzyme, which dopamine switches off."}</p>`;
+      return h;},
+    ready:()=>!!S.hook2,
+    mount(){$$("[data-hk2]").forEach(b=>b.onclick=()=>{S.hook2=b.dataset.hk2;render();});}};}
+function scrJam(st){
+  const L=[];
+  L.push({id:"two",title:"Two places a molecule can bind",
+    html:()=>`<p class="say">The substrate fits the <b>active site</b>, and the enzyme turns it into product. This enzyme also has a second site${GEN()?".":", the <b>allosteric site</b>."}</p>
+      <div class="duo"><div class="stage"><p class="ptitle">the enzyme</p>${enz(st.cyc%2?{site:null,free:[{k:"prod",x:148,y:44,label:"products",lx:180,ly:50,la:"start"}],form:"active form"}:{site:"sub",free:[{k:"sub",x:330,y:46,r:18,label:"substrate",ly:88}]})}</div>
+      <div class="stage"><p class="ptitle">${GEN()?"how fast":"rate of reaction"}</p>${t2panel(null,T2.steps[0],T2.steps[0])}</div></div>
+      <div class="btnrow"><button type="button" class="btn act${st.seenRun?"":" nextup"}" id="run">${st.cyc%2?"Bind the next substrate":"Run the reaction"}</button></div>
+      <p class="fb ok">${st.seenRun?"Rounded and teal marks an active site. A square, gold-brown notch marks the other site.":""}</p>`,
+    ready:()=>!!st.seenRun,
+    mount(){$("#run").onclick=()=>{st.cyc=(st.cyc||0)+1;st.seenRun=true;render();};}});
+  L.push(runScreen(st,"comp"));
+  L.push(runScreen(st,"non"));
+  const W={letters:true,ok:2,opts:[
+     "The first inhibitor binds somewhere else on the enzyme. The second sits in the active site.",
+     "The first inhibitor gets used up by the reaction. The second does not.",
+     "The first inhibitor sits in the active site, where substrate can crowd it out. The second binds somewhere else.",
+     "The first inhibitor is weaker than the second."],
+    fb:{0:"Not this one. That swaps the two. Which inhibitor did you watch leave the active site?",1:"Not this one. Neither inhibitor is used up. The difference is where each one binds.",3:"Not this one. Strength is not the issue. Even a strong look-alike can be crowded out, because it competes for the same site."},
+    right:"<b>C.</b> Substrate can push an inhibitor out only if the two compete for the same site."+(GEN()?"":" That is the meaning of <b>competitive</b>. A <b>noncompetitive</b> inhibitor never competes for the active site, so extra substrate has nothing to push against.")};
+  L.push({id:"why",title:"Same enzyme, two different jams",
+    html:()=>`<p class="say">Why can a flood of substrate beat one inhibitor and not the other?</p>${mcHTML(st,"why",W)}
+      ${done(st,"why")&&!GEN()?`<p class="fine">Neither inhibitor changes the ΔG of the reaction. Both change only how fast the enzyme works.</p>`:""}`,
+    ready:()=>done(st,"why"),mount(){mcMount(st,"why",W);}});
+  if(DE()){const H={ok:0,opts:["In or near the active site","In a pocket far from the active site","In a part of the enzyme that touches neither substrate nor drug"],
+      fb:{1:"Not this one. A second drug family does bind a separate pocket, and resistance to those drugs maps there. These drugs compete with the substrate, so think about where the substrate binds.",2:"Not this one. To dodge a drug, the change has to be where the drug binds."},
+      right:"<b>In or near the active site.</b> A competitive drug binds there, so a change there can shut the drug out. The cost to the virus is a change in the site it needs for its own substrate."};
+    L.push({id:"hiv",title:"Medicines use both jams",
+      html:()=>`<p class="say">HIV copies its genes with the enzyme <b>reverse transcriptase</b>. One family of drugs (NRTIs) competes with the enzyme's normal substrates at the active site.</p>
+        <p>HIV mutates quickly. In viruses that resist these competitive drugs, where is the changed amino acid most likely to be?</p>${mcHTML(st,"hiv",H)}
+        ${done(st,"hiv")?`<p>A second family (NNRTIs, such as nevirapine) binds a separate pocket and distorts the enzyme from there.</p>
+        ${links([{id:"1VRT",what:"HIV-1 reverse transcriptase with nevirapine.",look:"Two chains. Find the small drug molecule tucked into a pocket beside the active site, not in it."}])}
+        <div class="note"><b>Irreversible inhibitors</b> form covalent bonds with the enzyme and do not let go. Many toxins and poisons work this way; the nerve agent sarin is one.</div>`:""}`,
+      ready:()=>done(st,"hiv"),mount(){mcMount(st,"hiv",H);}});}
+  const C={letters:true,ok:1,opts:["It sits in the active site, where the substrate should be.","It changes the shape of the active site from another place on the enzyme.","It uses up the substrate.","It lowers the activation energy of the reaction."],
+    fb:{0:"Not this one. An inhibitor in the active site can be crowded out by more substrate, and here more substrate did not help.",2:"Not this one. The substrate is all still there. Look at what changed about the enzyme.",3:"Not this one. Lowering the activation energy is how an enzyme speeds a reaction up, not how an inhibitor slows it."},
+    right:"<b>B.</b> "+(GEN()?"An inhibitor at the other site":"A noncompetitive inhibitor")+" slows the reaction by changing the shape of the enzyme's active site."};
+  L.push({id:"check2",title:"One check",
+    html:()=>`<div class="talk">Table talk: A drug has to keep working even when a cell is packed with the enzyme's substrate. Which kind of inhibitor would you design, and why?</div>
+      <p class="say" style="margin-top:.8rem">An inhibitor that binds an enzyme and lets go again slows it down, and adding more substrate does not bring the rate back. What is the inhibitor doing?</p>${mcHTML(st,"ck",C)}`,
+    ready:()=>done(st,"ck"),mount(){mcMount(st,"ck",C);}});
+  if(GEN())L.push(hookReturn(st,`<p class="say">A brain cell makes dopamine with an enzyme. When dopamine piles up, the dopamine itself acts as an <b>inhibitor</b> of that enzyme.</p>`));
+  L.push(endScreen(1));
+  return L;}
+
+/* ================= Tab 3 · The other site ================= */
+function t3panel(eff,s){
+  const curves=[{f:x=>t3rate(null,x),col:SOFT,w:3,dash:"7 6",op:.85}],legend=[{col:SOFT,w:3,dash:"7 6",label:"no regulator",lf:SOFT}];
+  if(eff){curves.push({f:x=>t3rate(eff,x),col:eff==="act"?SOLID:FLAG,w:5});legend.push({col:eff==="act"?SOLID:FLAG,label:eff==="act"?"with activator":"with inhibitor",lf:eff==="act"?SOLID:FLAG});}
+  else curves.push({f:x=>t3rate(null,x),col:INK,w:5});
+  return graph({legend:legend,xmax:T3.xmax,ymax:112,xl:DE()?"substrate concentration":"how much substrate",yl:DE()?"rate of reaction":"how fast",curves:curves,pts:s!=null?[{x:s,y:t3rate(eff,s),col:INK}]:[]});}
+function scrOther(st){
+  if(st.eff===undefined)Object.assign(st,{eff:null,seen:{},co:0,ile:0.08,val:false,built:false,valSeen:false,flip:1});
+  const L=[];
+  const P={ok:0,opts:["Yes: it changes the shape of the whole enzyme","No: only the active site matters","Only if it blocks the path to the active site"],cls:"",
+    hint1:"You have already met one molecule that did this. Where did the noncompetitive inhibitor bind?",hint2:"A protein is one connected fold. Push on one part and other parts move.",
+    right:"Yes. Now try both regulators and watch the active site."};
+  L.push({id:"twostate",title:"One enzyme, an active form and an inactive form",
+    html:()=>{const open=st.eff==="inh"?0:st.eff==="act"?1:st.flip;
+      let h=`<p class="say">The gold notch is the <b>allosteric site</b>. It is far from the active site. Can a molecule that binds there change what the active site does?</p>${mcHTML(st,"p",P)}`;
+      h+=`<div class="duo" style="margin-top:.6rem"><div class="stage"><p class="ptitle">${st.eff?"held in one form":"with no regulator, the enzyme flips between two forms"}</p><div id="cart">${enz({open:open,site:open>.5?"sub":"half",allo:st.eff,inhName:"inhibitor",inhName1:"allosteric",actName:"activator",actName1:"allosteric"})}</div></div>
+        <div class="stage"><p class="ptitle">${DE()?"rate of reaction":"how fast"}</p>${t3panel(st.eff,null)}</div></div>`;
+      if(done(st,"p")){h+=`<div class="btnrow"><button type="button" class="btn${st.seen.inh?"":" nextup"}" data-eff="inh" aria-pressed="${st.eff==="inh"}">Add an allosteric inhibitor</button><button type="button" class="btn${st.seen.inh&&!st.seen.act?" nextup":""}" data-eff="act" aria-pressed="${st.eff==="act"}">Add an allosteric activator</button><button type="button" class="btn" data-eff="">Take it off</button></div>
+        <p class="fb ok">${st.eff==="inh"?"The inhibitor holds the enzyme in its <b>inactive form</b>. The active site is pinched, and the curve shifts right: it takes more substrate to reach the same rate."
+          :st.eff==="act"?"The activator holds the enzyme in its <b>active form</b>. The active site stays open, and the curve shifts left: less substrate is needed. Regulation can turn an enzyme <b>up</b> as well as down."
+          :st.seen.inh&&st.seen.act?"Alone, the enzyme flips between its two forms. A regulatory molecule at the allosteric site stabilizes one of them.":""}</p>`;}
+      return h;},
+    ready:()=>!!(st.seen.inh&&st.seen.act),
+    mount(){mcMount(st,"p",P);
+      $$("[data-eff]").forEach(b=>b.onclick=()=>{st.eff=b.dataset.eff||null;if(st.eff)st.seen[st.eff]=1;render();});
+      if(!st.eff)timer=setInterval(()=>{st.flip=st.flip?0:1;const c=$("#cart");if(c)c.innerHTML=enz({open:st.flip,site:st.flip?"sub":"half",allo:null});},1500);}});
+  const CO={ok:0,opts:["They lock into the active form, ready to bind","They close, so only one site works at a time","Nothing: each subunit works alone"],cls:"",
+    hint1:"The four subunits touch. A shape change in one is passed to its neighbors.",hint2:"Think of an activator. Here the substrate itself plays that part for the other subunits.",
+    right:"Run it: tap <b>Bind one substrate</b>."};
+  L.push({id:"coop",title:"In a four-subunit enzyme, one substrate helps the next",
+    html:()=>{const n=st.co,open=n>0?[1,1,1,1]:[.12,.12,.12,.12],sub=[n>0,n>1,n>1,n>1];
+      let h=`<p class="say">This enzyme has four subunits, each with its own active site. All four start in the inactive form. A substrate manages to bind <b>one</b> site. What happens at the other three?</p>${mcHTML(st,"co",CO)}
+      <div class="duo" style="margin-top:.6rem"><div class="stage"><p class="ptitle">four subunits, four active sites</p>${tetra({open:open,sub:sub,cap2:n>0?"all four in the active form":"all four in the inactive form",cap2f:n>0?SOLID:FLAG})}</div>
+      <div class="stage"><p class="ptitle">${DE()?"rate of reaction":"how fast"}</p>${graph({xmax:T3.xmax,ymax:112,xl:DE()?"substrate concentration":"how much substrate",yl:DE()?"rate of reaction":"how fast",legend:[{col:SOFT,w:3,dash:"7 6",label:"one subunit alone",lf:SOFT},{col:BOND,label:"four subunits",lf:BOND}],curves:[{f:x=>M.mm(x,100,22),col:SOFT,w:3,dash:"7 6",op:.85},{f:x=>t3rate(null,x),col:BOND,w:5}]})}</div></div>`;
+      if(done(st,"co"))h+=`<div class="btnrow"><button type="button" class="btn act${n<2?" nextup":""}" id="bind" ${n>=2?"disabled":""}>${n===0?"Bind one substrate":"Fill the other three"}</button></div>
+        <p class="fb ok">${n===1?"One substrate bound, and all four subunits locked into the active form.":n>=2?"This is <b>cooperativity</b>. Slow to start, then fast: the rate curve bends into an S. A small rise in substrate gives a big rise in rate.":""}</p>
+        ${n>=2?`<p class="fine">Hemoglobin picks up oxygen the same cooperative way, with four subunits. Hemoglobin is <b>not an enzyme</b>: it carries oxygen and changes nothing.</p>`:""}`;
+      return h;},
+    ready:()=>st.co>=2,
+    mount(){mcMount(st,"co",CO);const b=$("#bind");if(b)b.onclick=()=>{st.co++;render();};}});
+  const PW={letters:true,ok:1,opts:["Threonine drains, while A, B, C and D pile up.","Threonine piles up, while A, B, C and D drain.","Threonine and A, B, C and D all pile up.","Threonine and A, B, C and D all drain."],
+    fb:{0:"Not this one. The slowed enzyme is the one that uses threonine, so threonine is not being used.",2:"Not this one. Only what sits before the slowed step piles up. A to D come after it.",3:"Not this one. Threonine is still being supplied and is no longer being used, so it cannot drain."},
+    right:"<b>B.</b> Now run it: tap <b>Let isoleucine build up</b>."};
+  L.push({id:"path",title:"The end product shuts off the first enzyme",
+    html:()=>{const m=pathway(st.ile,st.val);
+      let h=`<p class="say">Five enzymes turn threonine into <b>isoleucine</b>. Isoleucine, the end product, fits the allosteric site of enzyme 1${GEN()?"":", <b>threonine deaminase</b>"}. Isoleucine is about to build up. What piles up, and what drains?</p>${mcHTML(st,"pw",PW)}
+      <div class="duo" style="margin-top:.6rem"><div class="stage"><p class="ptitle">enzyme 1 of the pathway</p><div id="cart">${enz({open:m.rate>45?1:m.rate>25?.5:0,site:m.rate>45?"sub":"half",allo:st.ile>.5?"inh":st.val?"act":null,inhName:"isoleucine",actName:"valine",name:"threonine deaminase"})}</div></div>
+      <div class="stage"><p class="ptitle">how fast enzyme 1 works</p><div id="plot">${meter(m.rate,null,null,"percent of its top rate","rate of enzyme 1")}</div></div></div>
+      ${pools([{id:"thr",name:"threonine",v:m.thr},{id:"A",name:"A",v:m.A},{id:"B",name:"B",v:m.B},{id:"C",name:"C",v:m.C},{id:"D",name:"D",v:m.D},{id:"ile",name:"isoleucine",v:m.ile}])}`;
+      if(done(st,"pw"))h+=`<div class="btnrow"><button type="button" class="btn act${st.built?"":" nextup"}" id="build" aria-pressed="${st.ile>.5}">${st.ile>.5?"Let the cell use up isoleucine":"Let isoleucine build up"}</button>
+        <button type="button" class="btn${st.built&&!st.valSeen?" nextup":""}" id="val" aria-pressed="${st.val}">${st.val?"Remove valine":"Add valine"}</button></div>
+        <p class="fb ok">${st.ile>.5?"<b>Feedback inhibition.</b> Isoleucine holds enzyme 1 in its inactive form. Threonine piles up, and A to D drain away as the later enzymes finish them off."+(st.val?" Valine cannot overcome a full load of isoleucine.":"")
+          :st.val?"<b>Valine</b>, the end product of a neighboring pathway, is an activator of the same enzyme. Enzyme 1 speeds up: the two pathways stay in balance."
+          :st.built?"With isoleucine used up, it falls off the enzyme and the line starts again.":""}</p>`;
+      if(DE()&&st.built)h+=`<p class="fine">Edwin Umbarger worked this out in bacteria in 1956: add isoleucine, and the cell stops making it at once.</p>`;
+      return h;},
+    ready:()=>st.built&&st.valSeen,
+    mount(){mcMount(st,"pw",PW);
+      const b=$("#build");if(b)b.onclick=()=>{st.ile=st.ile>.5?0.08:1;st.built=true;movePools();};
+      const v=$("#val");if(v)v.onclick=()=>{st.val=!st.val;st.valSeen=true;movePools();};
+      function movePools(){const m=pathway(st.ile,st.val);[["thr",m.thr],["A",m.A],["B",m.B],["C",m.C],["D",m.D],["ile",m.ile]].forEach(p=>{const e=$(`[data-pool="${p[0]}"] .bar`);if(e)e.style.height=Math.round(cl(p[1]/100)*100)+"%";});
+        $$("#build,#val").forEach(x=>x.disabled=true);timer=setTimeout(()=>{timer=null;render();},650);}}});
+  if(DE())L.push({id:"real3",title:"The real molecules, and who found them",
+    html:()=>`${links([
+      {id:"1TDJ",what:"Threonine deaminase.",look:"Each chain has two parts. The catalytic part holds the active site; the regulatory part, where isoleucine and valine bind, sits well apart from it."},
+      {id:"4FYW",what:"ATCase, inactive (T) form, with CTP.",look:"CTP, an end product of the pathway ATCase starts, sits on the small regulatory chains, far from the active sites. The enzyme is squeezed shut."},
+      {id:"1D09",what:"ATCase, active (R) form.",look:"The same enzyme opened up, with a substrate look-alike in its active sites. Compare its height with 4FYW. ATP, a signal of plentiful energy, favors this form."},
+      {id:"2HHB",what:"Hemoglobin without oxygen. Not an enzyme.",look:"Four chains, each holding a flat heme group with iron at its center."},
+      {id:"1HHO",what:"Hemoglobin with oxygen. Not an enzyme.",look:"Oxygen sits on the iron of each heme, and the chains have shifted against one another. Compare with 2HHB."}])}
+      <h3>Three discoveries</h3><ul class="hist">
+      <li><b>1956.</b> Edwin Umbarger shows that isoleucine shuts off threonine deaminase, the first enzyme of its own pathway.</li>
+      <li><b>Early 1960s.</b> John Gerhart and Arthur Pardee find that CTP inhibits ATCase at a site separate from the active site.</li>
+      <li><b>1965.</b> Jacques Monod, Jeffries Wyman and Jean-Pierre Changeux propose the two-state model: an active form and an inactive form, with regulators tipping the balance.</li></ul>`,
+    ready:()=>true});
+  const C={letters:true,ok:3,opts:["a catalyst","an allosteric inhibitor","an intermediate","the substrate"],
+    fb:{0:"Not this one. The enzyme is the catalyst. P is the molecule it changes.",1:"Not this one. S is the allosteric inhibitor here: it binds away from the active site and slows the enzyme. P is what the first enzyme works on.",2:"Not this one. Q and R are the intermediates, made and used inside the pathway. P is where the pathway starts."},
+    right:"<b>D.</b> P is the substrate of the first enzyme. S, the end product, is the allosteric inhibitor: feedback inhibition."};
+  L.push({id:"check3",title:"One check",
+    html:()=>`<div class="talk">Table talk: Why would a cell put the off switch on the FIRST enzyme of a pathway instead of the last?</div>
+      <p class="say" style="margin-top:.8rem">In the pathway P → Q → R → S, the end product S binds the first enzyme at a place away from its active site, and that enzyme slows down. For that first enzyme, what is P?</p>${mcHTML(st,"ck",C)}`,
+    ready:()=>done(st,"ck"),mount(){mcMount(st,"ck",C);}});
+  L.push(endScreen(2));
+  return L;}
+
+/* ================= Tab 4 · Enzymes in the collective ================= */
+function zz(x1,y1,x2,y2,n,amp){const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy),nx=-dy/len,ny=dx/len;let d=`M${r1(x1)},${r1(y1)}`;
+  for(let k=1;k<n;k++){const t=k/n,s=k%2?amp:-amp;d+=` L${r1(x1+dx*t+nx*s)},${r1(y1+dy*t+ny*s)}`;}return d+` L${r1(x2)},${r1(y2)}`;}
+function thSVG(da,p){const s=thState(da,p),locked=s.locked;
+  let ex=`<line x1="258" y1="172" x2="284" y2="172" stroke="${INK}" stroke-width="4"/><ellipse cx="338" cy="172" rx="56" ry="42" fill="${BODY}" stroke="${INK}" stroke-width="3"/>`+tx(338,168,16,"regulatory",{f:SOFT,w:700})+tx(338,188,16,"domain",{f:SOFT,w:700});
+  if(locked)ex+=`<path d="M338,130 Q300,84 214,82" fill="none" stroke="${GOLD}" stroke-width="5"/><path d="${zz(214,82,92,82,9,8)}" fill="none" stroke="${GOLD}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`+tx(148,62,16,"helix locked over the site",{f:GOLD,w:700})+tx(148,40,16,"dopamine inside",{f:"#7B4FA8",w:700});
+  else ex+=`<path d="${zz(344,130,378,34,7,8)}" fill="none" stroke="${GOLD}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`+tx(366,24,16,"helix, free",{a:"end",f:GOLD,w:700,halo:1})+mProd(64,48)+tx(92,54,16,"L-DOPA out",{a:"start",f:INK,w:700});
+  if(p)ex+=`<circle cx="318" cy="118" r="15" fill="${GOLD}" stroke="${INK}" stroke-width="2"/>`+tx(318,124,16,"P",{f:"#fff",w:700});
+  return enz({noAllo:true,fe:true,site:locked?"da":"sub",name:"tyrosine hydroxylase",form:locked?"switched off":"switched on",open:1,extra:ex,aria:"Tyrosine hydroxylase, one of its four subunits. "+(locked?"Dopamine sits in the active site and a helix from the regulatory domain is locked over it.":"The active site is open and tyrosine is being changed to L-DOPA.")});}
+function mitoSVG(){
+  let h=`<svg viewBox="0 0 700 300" role="img" aria-label="A mitochondrion: some respiration enzymes are dissolved in the matrix and others are set in the folded inner membrane.">`;
+  h+=`<rect x="90" y="40" width="520" height="196" rx="98" fill="#EFE8D8" stroke="${INK}" stroke-width="3"/><rect x="108" y="58" width="484" height="160" rx="80" fill="#FBF7EE" stroke="${GOLD}" stroke-width="5"/>`;
+  [200,300,400,500].forEach((x,k)=>{const top=k%2===0;h+=top?`<path d="M${x-12},58 L${x-12},136 Q${x},156 ${x+12},136 L${x+12},58" fill="#EFE8D8" stroke="${GOLD}" stroke-width="5"/>`:`<path d="M${x-12},218 L${x-12},140 Q${x},120 ${x+12},140 L${x+12},218" fill="#EFE8D8" stroke="${GOLD}" stroke-width="5"/>`;
+    [0,1,2].forEach(j=>{const y=top?78+j*24:198-j*24;h+=`<rect x="${x-19}" y="${y-7}" width="14" height="14" fill="${GOLD}" stroke="${INK}" stroke-width="1.5"/><rect x="${x+5}" y="${y-7}" width="14" height="14" fill="${GOLD}" stroke="${INK}" stroke-width="1.5"/>`;});});
+  [[150,120],[160,170],[245,180],[250,100],[340,90],[352,196],[448,186],[450,96],[540,120],[548,170],[250,140],[450,140]].forEach(p=>{h+=`<circle cx="${p[0]}" cy="${p[1]}" r="8" fill="${BOND}" stroke="${INK}" stroke-width="1.5"/>`;});
+  h+=tx(350,26,18,"one mitochondrion",{w:700})+`<circle cx="112" cy="268" r="8" fill="${BOND}" stroke="${INK}" stroke-width="1.5"/>`+tx(128,274,16,"enzymes dissolved in the matrix",{a:"start",f:SOFT,w:700});
+  h+=`<rect x="398" y="261" width="14" height="14" fill="${GOLD}" stroke="${INK}" stroke-width="1.5"/>`+tx(420,274,16,"enzymes set in the inner membrane",{a:"start",f:SOFT,w:700});
+  return h+`</svg>`;}
+function scrColl(st){
+  if(st.mode===undefined)Object.assign(st,{mode:"rest",seen:{rest:1},da:false,p:false,daSeen:false,pSeen:false});
+  const L=[];
+  const P={ok:0,cls:"",opts:["Slow down","Speed up","Keep the same pace"],
+    hint1:"Glycolysis makes ATP. Would a cell that is already full of ATP spend glucose to make more?",hint2:"Think of the isoleucine pathway: what did plenty of end product do to the first enzyme?",
+    right:"Slow down. Now switch the cell between <b>resting</b> and <b>sprinting</b> and watch the enzyme that sets the pace."};
+  L.push({id:"pfk",title:"PFK reads the cell's energy and sets the pace of glycolysis",
+    html:()=>{const act=pfkActive(st.mode),a=T4[st.mode];
+      let h=`<p class="say">Glycolysis breaks down glucose to make ATP. A muscle cell at rest is already full of ATP. What should glycolysis do?</p>${mcHTML(st,"p",P)}
+      <div class="duo" style="margin-top:.6rem"><div class="stage"><p class="ptitle">phosphofructokinase (PFK), an early enzyme of glycolysis</p>${tetra({open:act?[1,1,1,1]:[.12,.12,.12,.12],sub:act?[1,1,1,1]:[0,0,0,0],eff:act?"act":"inh",center:"PFK",cap:act?"AMP at the allosteric sites":"ATP at the allosteric sites",cap2:act?"active form":"inactive form",cap2f:act?SOLID:FLAG})}</div>
+      <div class="stage"><p class="ptitle">${DE()?"PFK activity":"how fast PFK works"}</p>${graph({xmax:120,ymax:112,xl:DE()?"fructose 6-phosphate (its substrate)":"how much substrate",yl:DE()?"rate of reaction":"how fast",
+        lgx:196,legend:[{col:act?SOFT:FLAG,w:act?3:5,dash:act?"7 6":null,label:"resting: high ATP",lf:act?SOFT:FLAG},{col:act?SOLID:SOFT,w:act?5:3,dash:act?null:"7 6",label:"sprinting: low ATP",lf:act?SOLID:SOFT}],
+        curves:[{f:x=>pfkRate("rest",x),col:act?SOFT:FLAG,w:act?3:5,dash:act?"7 6":null},{f:x=>pfkRate("sprint",x),col:act?SOLID:SOFT,w:act?5:3,dash:act?null:"7 6"}]})}</div></div>
+      ${pools([{id:"atp",name:"ATP",v:a.atp},{id:"amp",name:"AMP",v:a.amp}],"in the cell")}`;
+      if(done(st,"p"))h+=`<div class="btnrow"><button type="button" class="btn" data-mode="rest" aria-pressed="${st.mode==="rest"}">Cell is resting</button><button type="button" class="btn${st.seen.sprint?"":" nextup"}" data-mode="sprint" aria-pressed="${st.mode==="sprint"}">Cell is sprinting</button></div>
+        <p class="fb ok">${st.mode==="rest"?"Plenty of ATP. ATP is PFK's substrate, and at high levels it also binds the allosteric sites and holds PFK in its inactive form. Glycolysis slows, and glucose is saved."
+          :"ATP is being spent and <b>AMP</b> climbs. AMP is the activator: it holds PFK in its active form, and glycolysis speeds up to make more ATP."}</p>
+        ${st.seen.sprint?`<p class="fine">ATP dips only a little during hard work, while AMP rises steeply. Reading AMP gives the cell a sharp early signal that energy is running down.</p>`:""}`;
+      if(DE()&&st.seen.sprint)h+=links([{id:"4PFK",what:"PFK, active (R) form.",look:"A bacterial PFK with its substrate and ADP bound. Find the active site, then the separate site where the regulator sits."},{id:"6PFK",what:"PFK, inhibited (T) form.",look:"Four chains with an inhibitor bound. Compare how the chains sit against each other with 4PFK: the quaternary structure has shifted."}]);
+      return h;},
+    ready:()=>!!st.seen.sprint,
+    mount(){mcMount(st,"p",P);$$("[data-mode]").forEach(b=>b.onclick=()=>{st.mode=b.dataset.mode;st.seen[st.mode]=1;render();});}});
+  L.push({id:"where",title:"Where an enzyme sits is regulation too",
+    html:()=>`<p class="say">A cell also controls enzymes by <b>where it keeps them</b>. Many enzymes of cellular respiration are held inside mitochondria.</p>
+      <div class="stage wide">${mitoSVG()}</div>
+      <p class="cap">Kept together, each enzyme hands its product straight to the next one. ${DE()?"This is <b>compartmentalization</b>, and it is where Unit 7 begins.":"Enzymes for other jobs are kept in other parts of the cell."}</p>`,
+    ready:()=>true});
+  L.push({id:"th",title:"The dopamine enzyme has an off switch and an on switch",
+    html:()=>{const s=thState(st.da,st.p);
+      let h=`<p class="say"><b>Tyrosine hydroxylase</b> runs the slowest step on the way to dopamine: tyrosine → L-DOPA → dopamine. Whatever sets its rate sets how much dopamine a neuron makes.</p>
+      <div class="duo"><div class="stage"><p class="ptitle">one of its four subunits</p>${thSVG(st.da,st.p)}</div>
+      <div class="stage"><p class="ptitle">how fast the enzyme works</p>${meter(s.rate,null,null,"percent of its top rate","rate of tyrosine hydroxylase")}</div></div>
+      ${pools([{id:"tyr",name:"tyrosine",v:68},{id:"dopa",name:"L-DOPA",v:s.rate*.55},{id:"da",name:"dopamine",v:st.da?(st.p?62:92):34}],"in the neuron")}
+      <div class="btnrow"><button type="button" class="btn act${st.daSeen?"":" nextup"}" id="da" ${st.da?"disabled":""}>Let dopamine build up</button>
+      <button type="button" class="btn act${st.daSeen&&!st.pSeen?" nextup":""}" id="pka" ${st.da&&!st.p?"":"disabled"}>A signal arrives</button><button type="button" class="btn" id="rs">Reset</button></div>
+      <p class="fb ok">${s.locked?"<b>Feedback inhibition.</b> Dopamine, the end product, binds the enzyme, and a helix from the regulatory domain locks over the active site. Production nearly stops."
+        :st.p?"The neuron is active and needs more dopamine. A signal inside the cell switches on a protein kinase (PKA), which adds a <b>phosphate</b> to the regulatory domain. The helix swings out, dopamine leaves, and the enzyme runs again. Regulation turns enzymes <b>up</b> as well as down."
+        :""}</p>`;
+      if(DE()&&st.pSeen)h+=`<div class="note">In tyrosine hydroxylase, dopamine binds <b>in the active site</b>, at its iron atom. That is feedback inhibition, but not at a remote site. Real enzymes blur the textbook categories. Threonine deaminase is the clean remote-site case. The phosphate goes on serine 40, by the same cAMP and PKA pathway as Unit 5.</div>
+        ${links([{id:"7A2G",what:"Tyrosine hydroxylase, no dopamine.",look:"Four chains. The regulatory domains sit apart from the catalytic domains, and each active site, with its iron atom, is open."},{id:"6ZVP",what:"Tyrosine hydroxylase with dopamine.",look:"Find dopamine at the iron in each active site, and the helix from the regulatory domain lying across the opening."}])}
+        <p class="fine">The 2022 study behind these two structures also examined the phosphorylated enzyme. Its deposited atomic models cover the dopamine-free and dopamine-bound forms.</p>`;
+      return h;},
+    ready:()=>st.daSeen&&st.pSeen,
+    mount(){$("#da").onclick=()=>{st.da=true;st.daSeen=true;render();};$("#pka").onclick=()=>{st.p=true;st.pSeen=true;render();};$("#rs").onclick=()=>{st.da=false;st.p=false;render();};}});
+  L.push(hookReturn(st,`<p class="say">A neuron sets its dopamine supply at one enzyme: the end product switches it off, and a signal switches it back on.</p>`));
+  const C={letters:true,ok:0,opts:["It keeps the steps of a pathway together in one place.","It makes the reactions release more energy.","It removes the need for activation energy.","It changes the order of amino acids in the enzymes."],
+    fb:{1:"Not this one. Where a reaction happens does not change how much energy it releases.",2:"Not this one. Reactions inside an organelle still have an energy barrier, which the enzymes lower.",3:"Not this one. Moving an enzyme into an organelle changes where it works, not what it is made of."},
+    right:"<b>A.</b> Placing enzymes in one organelle brings order to a pathway and keeps its reactions together."};
+  L.push({id:"check4",title:"One check",
+    html:()=>`<div class="talk">Table talk: ATP is what glycolysis makes, and ATP is what slows PFK. Where else today did a product slow its own production line?</div>
+      <p class="say" style="margin-top:.8rem">Many enzymes of cellular respiration are kept inside mitochondria. How does that help a cell control its metabolism?</p>${mcHTML(st,"ck",C)}`,
+    ready:()=>done(st,"ck"),mount(){mcMount(st,"ck",C);}});
+  L.push(endScreen(3));
+  return L;}
+
+/* ================= Tab 5 · Rate on the graph (DE) ================= */
+const T5={Vm:100,Km:20,xmax:200};
+function t5rate(s,e,ci,ni){return (T5.Vm*e/(1+ni))*s/(T5.Km*(1+ci)+s);}
+function interp(xs,ys){return x=>{if(x<=xs[0])return ys[0]*x/xs[0];for(let k=1;k<xs.length;k++)if(x<=xs[k])return ys[k-1]+(ys[k]-ys[k-1])*(x-xs[k-1])/(xs[k]-xs[k-1]);return ys[ys.length-1];};}
+function scrRate(st){
+  if(st.s===undefined)Object.assign(st,{s:10,e:1,eSeen:false,ci:0,ni:0,cSeen:false,nSeen:false,at:null,atSeen:{},plotted:false});
+  const L=[];
+  const SAT={letters:true,ok:1,opts:["Feedback inhibition by the product sets in.","Nearly every enzyme molecule is already busy with a substrate.","The reaction has reached equilibrium.","The activation energy rises as substrate is added."],
+    fb:{0:"Not this one. No product is acting on the enzyme here. Count the busy enzymes.",2:"Not this one. Substrate is still being turned into product at top speed, so the reaction is far from equilibrium.",3:"Not this one. Adding substrate does not change the energy barrier."},
+    right:"<b>B.</b> The enzyme is <b>saturated</b>: every active site is occupied, so extra substrate has to wait its turn. That top rate is <b>V<sub>max</sub></b>."};
+  L.push({id:"sat",title:"The curve flattens when the enzyme is saturated",
+    html:()=>{const v=t5rate(st.s,1,0,0),busy=Math.round(10*st.s/(T5.Km+st.s));
+      return `<p class="say">Slide the substrate up and read the rate. At high substrate the curve goes flat. Why?</p>
+      <div class="duo"><div class="stage"><p class="ptitle">one enzyme of many</p>${enz({site:busy>=5?"sub":null,free:busy>=5?[{k:"sub",x:60,y:46,r:16},{k:"sub",x:236,y:44,r:16}].concat(busy>=9?[{k:"sub",x:104,y:30,r:16},{k:"sub",x:196,y:34,r:16},{k:"sub",x:320,y:60,r:16}]:[]):[{k:"sub",x:230,y:46,r:16}]})}</div>
+      <div class="stage"><p class="ptitle">rate of reaction</p>${graph({xmax:T5.xmax,ymax:112,xl:"substrate concentration [S]",yl:"rate of reaction",curves:[{f:x=>t5rate(x,1,0,0),col:BOND,w:5}],pts:[{x:st.s,y:v,col:INK}],hl:[{y:100,label:"Vmax",col:INK},{y:50,label:"½ Vmax",col:SOFT,below:true}],vl:[{x:T5.Km,y:50,label:"Km",col:INK}]})}</div></div>
+      ${tenStrip({sub:busy,inh:0,bent:0})}<p class="cap">Of every 10 enzymes, <b>${busy}</b> are busy with a substrate.</p>
+      <div class="ctl" style="grid-template-columns:1fr"><div><label for="ss">Substrate concentration <span>${st.s}</span></label><input type="range" class="slider" id="ss" min="2" max="200" step="2" value="${st.s}"></div></div>
+      ${mcHTML(st,"sat",SAT)}
+      <div class="note">The curve follows <b>v = V<sub>max</sub>[S] / (K<sub>m</sub> + [S])</b>. V<sub>max</sub> is the top rate. K<sub>m</sub> is the substrate concentration that gives half of it.</div>`;},
+    ready:()=>done(st,"sat"),
+    mount(){mcMount(st,"sat",SAT);$("#ss").onchange=e=>{st.s=+e.target.value;render();};$("#ss").oninput=e=>{$(".ctl label span").textContent=e.target.value;};}});
+  const ENZ={letters:true,ok:0,opts:["Add more of the enzyme.","Add more substrate.","Heat the solution to 90 °C.","Add an allosteric inhibitor."],
+    fb:{1:"Not this one. Every enzyme is already busy, so extra substrate only joins the queue.",2:"Not this one. At 90 °C most enzymes denature and the rate collapses.",3:"Not this one. An inhibitor lowers the rate."},
+    right:"<b>A.</b> More enzyme means more active sites. Slide the enzyme amount up and watch which number moves."};
+  L.push({id:"more",title:"When it is saturated, only more enzyme makes it faster",
+    html:()=>`<p class="say">An enzyme in solution is saturated with substrate. What is the most effective way to get product faster?</p>${mcHTML(st,"enz",ENZ)}
+      ${done(st,"enz")?`<div class="stage" style="max-width:34rem;margin:.6rem auto 0">${graph({xmax:T5.xmax,ymax:330,xl:"substrate concentration [S]",yl:"rate of reaction",curves:[{f:x=>t5rate(x,1,0,0),col:SOFT,w:3,dash:"7 6"},{f:x=>t5rate(x,st.e,0,0),col:BOND,w:5}],hl:[{y:100*st.e,label:"Vmax = "+Math.round(100*st.e),col:INK}],vl:[{x:T5.Km,y:50*st.e,label:"Km = 20",col:INK}],legend:[{col:SOFT,w:3,dash:"7 6",label:"starting amount",lf:SOFT}]})}</div>
+      <div class="ctl" style="grid-template-columns:1fr"><div><label for="ee">Amount of enzyme <span>× ${st.e}</span></label><input type="range" class="slider" id="ee" min="1" max="3" step="0.5" value="${st.e}"></div></div>
+      <p class="fb ok">${st.eSeen?"V<sub>max</sub> scales with the amount of enzyme. K<sub>m</sub> stays at 20: it belongs to the enzyme, not to how much of it there is.":""}</p>`:""}`,
+    ready:()=>done(st,"enz")&&st.eSeen,
+    mount(){mcMount(st,"enz",ENZ);const e=$("#ee");if(e)e.onchange=x=>{st.e=+x.target.value;if(st.e>1)st.eSeen=true;render();};}});
+  L.push({id:"sig",title:"Each inhibitor leaves its own mark on the curve",
+    html:()=>{const Vm=T5.Vm/(1+st.ni),Km=T5.Km*(1+st.ci);
+      return `<p class="say">Add each inhibitor in turn. Watch which number moves: V<sub>max</sub> or K<sub>m</sub>.</p>
+      <div class="duo"><div class="stage"><p class="ptitle">where each one binds</p>${enz({open:st.ni>0?0:1,site:st.ni>0?"half":st.ci>0?"comp":"sub",allo:st.ni>0?"inh":null,inhName1:"noncompetitive",inhName:"inhibitor",free:st.ci>0&&st.ni>0?[{k:"comp",x:60,y:50,label:"competitive",lx:92,ly:44,la:"start",lf:FLAG}]:st.ci>0?[{k:"sub",x:66,y:46,r:18,label:"substrate, shut out",lx:92,ly:40,la:"start"}]:[],cap:st.ci>0&&st.ni===0?"competitive inhibitor in the active site":null})}</div>
+      <div class="stage"><p class="ptitle">rate of reaction</p>${graph({xmax:T5.xmax,ymax:112,xl:"substrate concentration [S]",yl:"rate of reaction",curves:[{f:x=>t5rate(x,1,0,0),col:SOFT,w:3,dash:"7 6"},{f:x=>t5rate(x,1,st.ci,st.ni),col:FLAG,w:5}],hl:[{y:Vm,label:"Vmax = "+Math.round(Vm),col:INK,below:Vm>90}],vl:[{x:Km,y:Vm/2,label:"Km = "+Math.round(Km),col:INK}],legend:[{col:SOFT,w:3,dash:"7 6",label:"no inhibitor",lf:SOFT}]})}</div></div>
+      <div class="ctl"><div><label for="ci">Competitive inhibitor <span>${st.ci}</span></label><input type="range" class="slider" id="ci" min="0" max="3" step="0.5" value="${st.ci}"></div>
+      <div><label for="ni">Noncompetitive inhibitor <span>${st.ni}</span></label><input type="range" class="slider" id="ni" min="0" max="3" step="0.5" value="${st.ni}"></div></div>
+      <p class="fb ok">${st.ci>0&&st.ni===0?"<b>Competitive:</b> K<sub>m</sub> rises, and the same V<sub>max</sub> is still reached. It takes more substrate to get there."
+        :st.ni>0&&st.ci===0?"<b>Noncompetitive:</b> V<sub>max</sub> falls, and K<sub>m</sub> stays where it was. Some of the enzyme is out of action at any substrate level."
+        :st.ci>0&&st.ni>0?"Both at once: K<sub>m</sub> has moved right and V<sub>max</sub> has dropped.":""}</p>
+      ${st.cSeen&&st.nSeen?`<div class="note"><b>One trap.</b> Where an inhibitor binds and what the graph shows are two different questions. Answer each from its own evidence: a structure for the first, rate data for the second.</div>`:""}`;},
+    ready:()=>st.cSeen&&st.nSeen,
+    mount(){$("#ci").onchange=e=>{st.ci=+e.target.value;if(st.ci>0)st.cSeen=true;render();};$("#ni").onchange=e=>{st.ni=+e.target.value;if(st.ni>0)st.nSeen=true;render();};}});
+  L.push({id:"scurve",title:"An allosteric enzyme draws an S, and its regulators slide it sideways",
+    html:()=>`<p class="say"><b>ATCase</b> starts the pathway that builds the nucleotide CTP. CTP, the end product, is its inhibitor. ATP, a sign of plentiful energy, is its activator. Add each one.</p>
+      <div class="duo"><div class="stage"><p class="ptitle">drawn as one unit of a 12-chain enzyme</p>${enz({open:st.at==="inh"?0:1,site:st.at==="inh"?"half":"sub",allo:st.at,inhName:"CTP",actName:"ATP",name:"ATCase"})}</div>
+      <div class="stage"><p class="ptitle">rate of reaction</p>${graph({xmax:T3.xmax,ymax:112,xl:"substrate concentration [S]",yl:"rate of reaction",curves:[{f:x=>t3rate(null,x),col:SOFT,w:3,dash:"7 6"},{f:x=>t3rate(st.at,x),col:st.at==="act"?SOLID:st.at==="inh"?FLAG:INK,w:5}],hl:[{y:100,label:"same top",col:SOFT}],legend:[{col:SOFT,w:3,dash:"7 6",label:"no regulator",lf:SOFT}].concat(st.at?[{col:st.at==="act"?SOLID:FLAG,label:st.at==="act"?"with ATP":"with CTP",lf:st.at==="act"?SOLID:FLAG}]:[])})}</div></div>
+      <div class="btnrow"><button type="button" class="btn${st.atSeen.inh?"":" nextup"}" data-at="inh" aria-pressed="${st.at==="inh"}">Add CTP</button><button type="button" class="btn${st.atSeen.inh&&!st.atSeen.act?" nextup":""}" data-at="act" aria-pressed="${st.at==="act"}">Add ATP</button><button type="button" class="btn" data-at="">Neither</button></div>
+      <p class="fb ok">${st.at==="inh"?"CTP slides the S-curve to the <b>right</b>. The top is unchanged; the enzyme needs more substrate to get going."
+        :st.at==="act"?"ATP slides the S-curve to the <b>left</b>. The top is unchanged; the enzyme responds at lower substrate."
+        :st.atSeen.inh&&st.atSeen.act?"Cooperativity bends the curve into an S. The regulators move it sideways without changing its maximum.":""}</p>
+      <div class="note">An S-curve follows the Hill form, <b>v = V<sub>max</sub>[S]<sup>n</sup> / (K<sub>0.5</sub><sup>n</sup> + [S]<sup>n</sup>)</b>, with n above 1. An activator lowers K<sub>0.5</sub>; an allosteric inhibitor raises it.</div>`,
+    ready:()=>!!(st.atSeen.inh&&st.atSeen.act),
+    mount(){$$("[data-at]").forEach(b=>b.onclick=()=>{st.at=b.dataset.at||null;if(st.at)st.atSeen[st.at]=1;render();});}});
+  const XS=[1,5,25,100],D={none:[20,60,90,100],X:[5,25,70,98],Y:[10,30,45,50]};
+  const F={letters:true,ok:2,opts:["X is noncompetitive and Y is competitive.","X and Y are both competitive inhibitors.","X is competitive and Y is noncompetitive.","X and Y are both noncompetitive inhibitors."],
+    fb:{0:"Not this one. A competitive inhibitor is overcome by excess substrate, which is the pattern seen with X and not Y.",1:"Not this one. Y still cuts the rate in half at 100 mM, so excess substrate does not overcome it.",3:"Not this one. X nearly reaches the uninhibited rate at 100 mM, so excess substrate does overcome it."},
+    right:"<b>C.</b> High substrate overcomes X and nearly restores the top rate, while Y halves the rate at every substrate level."};
+  L.push({id:"final",title:"Name the inhibitor from the data",
+    html:()=>`<div class="talk">Table talk: Two students see a lowered curve. One says competitive, one says noncompetitive. What single measurement would settle it?</div>
+      <p class="say" style="margin-top:.8rem">Rates for one enzyme were measured with no inhibitor and with a fixed amount of inhibitor X or Y. Which conclusion best fits the data?</p>
+      <div class="duo"><div><table class="dtab"><tr><th>Substrate (mM)</th><th>None</th><th>X</th><th>Y</th></tr>${XS.map((x,k)=>`<tr><td>${x}</td><td>${D.none[k]}</td><td>${D.X[k]}</td><td>${D.Y[k]}</td></tr>`).join("")}</table><p class="fine">Rates in units per minute.</p>
+      <div class="btnrow"><button type="button" class="btn${st.plotted?"":" nextup"}" id="plot" aria-pressed="${st.plotted}">${st.plotted?"Hide the plot":"Plot the table"}</button></div></div>
+      <div class="stage">${st.plotted?graph({xmax:100,ymax:112,xl:"substrate (mM)",yl:"rate (units/min)",xt:[25,100],yt:[50,100],
+        curves:[{f:interp(XS,D.none),col:INK,w:2.5},{f:interp(XS,D.X),col:FLAG,w:2.5},{f:interp(XS,D.Y),col:GOLD,w:2.5}],
+        pts:XS.map((x,k)=>({x:x,y:D.none[k],col:INK,r:7})).concat(XS.map((x,k)=>({x:x,y:D.X[k],col:FLAG,sq:1})),XS.map((x,k)=>({x:x,y:D.Y[k],col:GOLD,tri:1}))),
+        legend:[{col:INK,w:2.5,label:"● none"},{col:FLAG,w:2.5,label:"■ with X",lf:FLAG},{col:GOLD,w:2.5,label:"▲ with Y",lf:GOLD}],aria:"The table plotted: rate against substrate for no inhibitor, X and Y."})
+        :graph({xmax:100,ymax:112,xl:"substrate (mM)",yl:"rate (units/min)",xt:[25,100],yt:[50,100],curves:[]})}</div></div>
+      ${mcHTML(st,"final",F)}`,
+    ready:()=>done(st,"final"),
+    mount(){mcMount(st,"final",F);$("#plot").onclick=()=>{st.plotted=!st.plotted;render();};}});
+  L.push(endScreen(4));
+  return L;}
+
+/* ================= endings ================= */
+const WRITE={
+  general:{q:"Write one sentence in your own words: how can two different inhibitors slow the same enzyme?",w:"<b>active site</b>, <b>inhibitor</b>, <b>shape</b>"},
+  advanced:{q:"Write one sentence in your own words: how does a cell keep from making too much of something, such as dopamine?",w:"<b>active site</b>, <b>allosteric site</b>, <b>feedback</b>"},
+  de:{q:"Write one sentence in your own words: how does a cell tune one of its enzymes, and how would a rate graph show it?",w:"<b>active site</b>, <b>allosteric site</b>, <b>feedback</b>, and one of <b>competitive</b> or <b>noncompetitive</b>"}};
+function endScreen(k){
+  const last=k+1>=LEVELS[S.level].tabs;
+  if(last){const w=WRITE[S.level];return {id:"write",title:"Write it",
+    html:()=>`<p class="say">${w.q}</p><div class="talk">Use these words: ${w.w}.</div><p class="fine">Write it on paper or wherever your teacher asks. Nothing here is saved.</p>`,
+    ready:()=>false,next:`<button type="button" class="btn go" id="again">Start again</button>`};}
+  const nx=TABS[k+1];
+  return {id:"onward",title:"Next: "+nx.chip.toLowerCase(),
+    html:()=>`<p class="say">${["An enzyme works because its fold makes a pocket of the right shape. Next: two ways another molecule can spoil that fit.",
+      "An inhibitor can sit in the active site or bend it from somewhere else. Next: the cell's own molecules that use that other site, to switch enzymes off and on.",
+      "A regulator at the allosteric site holds an enzyme in its active or inactive form. Next: what cells do with that switch, in muscle and in the brain.",
+      "Cells set the pace of whole pathways at single enzymes. Next: reading that regulation from a rate graph."][k]}</p>`,
+    ready:()=>true,next:`<a class="btn go" id="nexttab" href="#${nx.id}">${k+2} &middot; ${nx.chip} &rarr;</a>`};}
+
+/* ================= frame ================= */
+let timer=null;
+function stopAnim(){if(timer){clearInterval(timer);clearTimeout(timer);timer=null;}}
+const BUILD={pocket:scrPocket,jam:scrJam,"other-site":scrOther,collective:scrColl,rate:scrRate};
+let SC=[];
+function build(){const st=S.t[S.tab];SC=BUILD[S.tab](st);if(st.i>=SC.length)st.i=SC.length-1;}
+function render(){
+  stopAnim();build();
+  const st=S.t[S.tab],s=SC[st.i],tn=TABS.findIndex(t=>t.id===S.tab);
+  root.innerHTML=`<div class="stepline"><span class="chip">${tn+1} &middot; ${TABS[tn].chip}</span><span class="chip">${st.i+1} of ${SC.length}</span><span class="dots">${SC.map((_,k)=>`<i class="${k<=st.i?"on":""}"></i>`).join("")}</span></div>
+    <h2>${s.title}</h2>${s.html()}
+    <div class="btnrow"><button type="button" class="btn" id="back" ${st.i===0?"disabled":""}>&larr; Back</button>
+    ${s.next||`<button type="button" class="btn go" id="next" ${s.ready()?"":"disabled"}>Next &rarr;</button>`}</div>`;
+  if(s.mount)s.mount();
+  $("#back").onclick=()=>go(st.i-1);
+  const n=$("#next");if(n)n.onclick=()=>go(st.i+1);
+  const a=$("#again");if(a)a.onclick=()=>{S.t=freshAll();S.hook=null;S.hook2=null;if(S.tab==="pocket")render();else location.hash="#pocket";};
+}
+function go(i){const st=S.t[S.tab];if(i<0||i>=SC.length)return;st.i=i;render();try{root.scrollIntoView({block:"start",behavior:"smooth"});}catch(e){}}
+function allowed(id){const k=TABS.findIndex(t=>t.id===id);return k>=0&&k<LEVELS[S.level].tabs;}
+function paint(){
+  document.querySelectorAll("#levelsw button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.level===S.level?"true":"false"));
+  document.getElementById("secbar").innerHTML=TABS.map((t,k)=>k<LEVELS[S.level].tabs?`<a href="#${t.id}" aria-current="${t.id===S.tab}">${k+1} &middot; ${t.name}</a>`:`<span>${k+1} &middot; ${t.name}<small>${t.lock}</small></span>`).join("");
+  const bl=document.getElementById("backlink");
+  if(S.level==="de"){bl.href="../de-biology-101-resources.html";bl.innerHTML="&larr; DE Biology 101 Resources";}else{bl.href="../classroom-tools.html";bl.innerHTML="&larr; Biology Classroom Tools";}}
+function show(){let h="";try{h=location.hash.replace("#","");}catch(e){}
+  S.tab=allowed(h)?h:"pocket";paint();render();}
+document.querySelectorAll("#levelsw button").forEach(b=>b.onclick=()=>{if(!LEVELS[b.dataset.level]||b.dataset.level===S.level)return;
+  const cur=SC[S.t[S.tab].i]?SC[S.t[S.tab].i].id:null;S.level=b.dataset.level;remember(S.level);
+  if(!allowed(S.tab)){S.tab="pocket";try{history.replaceState(null,"","#pocket");}catch(e){}}
+  build();const k=SC.findIndex(s=>s.id===cur);if(k>=0)S.t[S.tab].i=k;paint();render();});
+window.addEventListener("hashchange",show);show();
+
+if(TEACHER){const t=document.getElementById("teacher");t.classList.remove("hidden");
+  t.innerHTML=`<h2>Teacher key</h2><ul>
+  <li><b>Levels.</b> SOL General: sections 1 and 2, a products-per-minute meter, LT 1.3 words only (enzyme, substrate, active site, catalyst, activation energy, denature, inhibitor). SOL Advanced: sections 1 to 4, a curve with plain axes. DE Biology: all five, with Campbell and AP vocabulary, V<sub>max</sub> and K<sub>m</sub>, structure links and history. Links: <code>?level=general</code>, <code>?level=advanced</code>, <code>?level=de</code>; add <code>#jam</code>, <code>#other-site</code>, <code>#collective</code> or <code>#rate</code> to open a section; <code>?projector=1</code> for the board.</li>
+  <li><b>The opener.</b> Commit only. It returns at the end of section 4 (section 2 at General). Dopamine, the end product, switches off tyrosine hydroxylase, the rate-limiting enzyme of its own synthesis; phosphorylation of serine 40 by PKA switches it back on.</li>
+  <li><b>1 &middot; ALDH2.</b> Well over half. With half the subunits changed and four drawn at random, 1 enzyme in 16 has four normal subunits. Measured loss in people with one changed copy is about 60 to 80 percent (Gross et al. 2015). The changed form is semidominant. Table talk: quaternary structure. Check: B.</li>
+  <li><b>1 &middot; Heat and pH.</b> The model keeps the active site intact below the optimal temperature (cold only slows collisions) and deforms it above. Human optimum 37 &deg;C; hot-spring enzyme 75 &deg;C. &Delta;G does not change.</li>
+  <li><b>2 &middot; Runs.</b> Competitive: same top. Noncompetitive: a lower top. Model: V<sub>max</sub> 100, K<sub>m</sub> 2; competitive K<sub>m</sub> &times; 2.5; noncompetitive V<sub>max</sub> &divide; 2; substrate steps 10, 50, 100, 200. Why: C. HIV (DE): in or near the active site. Check: B.</li>
+  <li><b>3 &middot; The other site.</b> First question: yes. Cooperativity: the other sites lock into the active form. Pathway: B (threonine piles up; A to D drain). Valine activates threonine deaminase. The pool bars are a steady-state sketch, not a simulation of real concentrations. Check: D (P is the substrate).</li>
+  <li><b>4 &middot; Collective.</b> PFK: slow down. Resting = high ATP, PFK inactive; sprinting = AMP up, PFK active. The Chapter 7 slides name ATP as the inhibitor; AMP as activator is from the textbook. Check: A.</li>
+  <li><b>5 &middot; Rate (DE).</b> Saturation: B. Faster when saturated: A (more enzyme). Competitive raises K<sub>m</sub>; noncompetitive lowers V<sub>max</sub>. ATCase: CTP right, ATP left, same maximum. Final: C (X competitive, Y noncompetitive). The table is data from the course item bank and is not fitted by the model.</li>
+  <li><b>Simplified.</b> One drawing stands for a population of enzyme molecules; the strip of ten shows the population. Textbook noncompetitive inhibition is drawn in its pure form. PFK and the cooperativity enzyme are drawn with regulatory sites where subunits join. ATCase is drawn as one unit of its 12 chains. In tyrosine hydroxylase dopamine binds at the active-site iron, which is said plainly at DE level.</li>
+  <li><b>Sources.</b> Gross et al. 2015, Annu Rev Pharmacol Toxicol 55:107 (ALDH2*2). Steinmetz et al. 1997, Structure 5:701 (1A4Z). Bueno-Carrasco et al. 2022, Nat Commun 13:74 (tyrosine hydroxylase; 7A2G, 6ZVP). Gallagher et al. 1998, Structure 6:465 (threonine deaminase, 1TDJ). Kantrowitz 2012, Arch Biochem Biophys 519:81 (ATCase). Schirmer and Evans 1990, Nature 343:140 (PFK). Ren et al. 1995, Nat Struct Biol 2:293 (1VRT). PDB-101 Molecule of the Month 50 (glycolytic enzymes) and 215 (ATCase). Umbarger 1956, Science 123:848.</li></ul>`;}
+
+/* for the automated tests: the model only */
+window.EC={M:M,T2:T2,t2rate:t2rate,t2ten:t2ten,T3:T3,t3rate:t3rate,pathway:pathway,T4:T4,pfkActive:pfkActive,pfkRate:pfkRate,thState:thState,tempRate:tempRate,tempFit:tempFit,T5:T5,t5rate:t5rate,state:S,levels:LEVELS,tabs:TABS};
+})();
+</script>
+</body>
+</html>
