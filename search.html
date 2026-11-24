@@ -43,11 +43,13 @@
   <span class="license">All one-pagers &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a> &mdash; free to use, adapt, and hand to a class; not for resale.</span>
 </footer>
 
-<script src="search-index.js?v=20261123a"></script>
+<script src="search-index.js?v=20261123b"></script>
 <script>
 (function () {
   var IDX = window.SEARCH_INDEX || [];
-  var q = document.getElementById('q'), out = document.getElementById('results'), count = document.getElementById('count');
+  // An entry with a missing field must never stop the list from drawing: treat it as empty text.
+  IDX.forEach(function (e) { ['u', 't', 'n', 's', 'e', 'd', 'b'].forEach(function (k) { if (typeof e[k] !== 'string') e[k] = ''; }); });
+  var q =document.getElementById('q'), out = document.getElementById('results'), count = document.getElementById('count');
   function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’]/g, "'"); }
   IDX.forEach(function (e) { e._t = norm(e.t); e._n = norm(e.n); e._h = norm(e.e + ' ' + e.d); e._b = norm(e.b); });
   function esc(s) { return s.replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
