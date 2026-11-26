@@ -8,7 +8,7 @@
 <title>Blue Ridge Salamander Project</title>
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: one field-book column; the pages in the order a class uses them. */
+/* Layout: one field-book column; the pages in the order a class uses them, one list for each quarter. */
 :root{
   --paper:#eef1ea; --panel:#f9faf6; --ink:#1d2925; --muted:#55655d; --rule:#c8d2c7; --ember:#b8480f; --moss:#2f6347;
   --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
@@ -33,9 +33,14 @@ li a:hover b,li a:focus-visible b{color:var(--ember);text-decoration:underline}
 li .when{font:600 .74rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:5px}
 li b{font:700 1.2rem/1.2 var(--display);display:block}
 li span.what{color:var(--muted);font-size:.95rem}
+h2{font:700 1.3rem/1.2 var(--display);margin:10px 0 -8px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+h2 .tag{font:600 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ember);border:1.5px solid var(--ember);border-radius:4px;padding:3px 7px}
+/* a page that is not built yet: the same row as a link, quieter, and not a link */
+li .soon{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:4px 14px;padding:14px 4px;min-height:48px}
+li .soon b{color:var(--muted)}
 :focus-visible{outline:3px solid var(--ember);outline-offset:2px}
 footer{font-size:.88rem;color:var(--muted);border-top:1.5px solid var(--rule);padding-top:14px}
-@media (max-width:480px){ li a{grid-template-columns:1fr} li .when{padding-top:0} h1{font-size:1.5rem} }
+@media (max-width:480px){ li a,li .soon{grid-template-columns:1fr} li .when{padding-top:0} h1{font-size:1.5rem} }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Science One-Pagers">
@@ -55,6 +60,7 @@ footer{font-size:.88rem;color:var(--muted);border-top:1.5px solid var(--rule);pa
   </header>
   <p>Turn over a rock in the Blue Ridge, find the animal's DNA, and decode it gene by gene. The animal stays hidden until every gene checks correct.</p>
   <p>&#9654; <a href="https://youtu.be/WyRZBZbiEX4" target="_blank" rel="noopener">Watch the project start to finish on YouTube</a> (9 min): turning the rock for a Creature Code, finding and decoding the genes, checking the ember gene for a new mutation, and revealing the salamander.</p>
+  <h2 id="quarter-2">Quarter 2: decode your salamander</h2>
   <ol>
     <!--HOWTO-->
     <li><a href="blue-ridge-salamander-turn-the-rock.html"><span class="when">Start here</span><span><b>Turn the Rock and Decode</b><span class="what">Roll for a site, turn a rock, roll for the lab slip, get a Creature Code. Check each gene you decode on paper.</span></span></a></li>
@@ -62,6 +68,16 @@ footer{font-size:.88rem;color:var(--muted);border-top:1.5px solid var(--rule);pa
     <li><a href="blue-ridge-salamander-codon-bingo.html"><span class="when">Whole class</span><span><b>Codon Bingo</b><span class="what">One caller, a different card on every iPad, and a round played on your own animal.</span></span></a></li>
     <li><a href="blue-ridge-salamander-3d.html"><span class="when">When you finish</span><span><b>Your Salamander in 3D</b><span class="what">Enter your keeper code to see your animal&rsquo;s reveal, on this device or any other.</span></span></a></li>
     <li><a href="blue-ridge-salamander-3d-test.html"><span class="when">Preview</span><span><b>The Animal in 3D</b><span class="what">Four sample animals at night, with sound. A device check.</span></span></a></li>
+  </ol>
+  <h2 id="quarter-3">Quarter 3: Salamander Families <span class="tag">Coming in January</span></h2>
+  <p>Two salamanders, one female and one male, start a family. A roll of the die decides which chromosome of each pair goes into the egg and which goes into the sperm. Four eggs hatch, and the genes explain who looks like whom.</p>
+  <ol>
+    <li><a href="blue-ridge-salamander-3d-test.html"><span class="when">Open now</span><span><b>Genes in Motion</b><span class="what">Four sample animals. Every gene changes how an animal moves. Make one walk, tap it, hear its call, and send a red insect past its snout.</span></span></a></li>
+    <li><a href="blue-ridge-salamander-3d.html"><span class="when">After your reveal</span><span><b>Your Own Salamander&rsquo;s Genes at Work</b><span class="what">Open your animal with your keeper code and find each of its genes in the way it moves.</span></span></a></li>
+    <li><div class="soon"><span class="when">January</span><span><b>Salamander Families</b><span class="what">Pair up, roll for each chromosome pair, and watch the egg and the sperm form and meet.</span></span></div></li>
+    <li><div class="soon"><span class="when">January</span><span><b>The Karyotype Card</b><span class="what">A hatchling&rsquo;s fifteen pairs of chromosomes line up. Count the pairs and find the sex pair.</span></span></div></li>
+    <li><div class="soon"><span class="when">January</span><span><b>Hatchlings in 3D</b><span class="what">Each baby opens from its own egg code, small and already awake.</span></span></div></li>
+    <li><div class="soon"><span class="when">January</span><span><b>The Punnett Lab and the Family Poster</b><span class="what">Predict with Punnett squares, compare with your four real eggs, and build the family&rsquo;s poster with a pedigree.</span></span></div></li>
   </ol>
   <footer><a href="../classroom-tools.html#unit-4">&larr; Biology Classroom Tools</a><br>© J. R. Schwebach. All rights reserved. Free to use with your own students.</footer>
 </div>
