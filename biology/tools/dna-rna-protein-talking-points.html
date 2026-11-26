@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<link rel="canonical" href="https://scienceonepagers.org/biology/tools/dna-rna-protein-talking-points.html">
+<meta name="description" content="Talking Points: DNA, RNA and Protein. Board drawings that build one step at a time while the teacher talks: a DNA nucleotide beside an RNA nucleotide (deoxyribose vs ribose, thymine vs uracil), Chargaff and semi-conservative replication with helicase, DNA polymerase and ligase, and the replication fork with leading and lagging strands, 5 prime to 3 prime.">
+<meta name="author" content="J. R. Schwebach">
+<meta name="copyright" content="Copyright 2026 J. R. Schwebach. Licensed CC BY-NC 4.0. All graphics are drawn in code from scratch.">
+<title>Talking Points: DNA, RNA and Protein | Science One-Pagers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="Talking Points: DNA, RNA and Protein">
+<meta property="og:description" content="Board drawings that build one step at a time while you talk: DNA vs RNA nucleotides, the four names for copying DNA, and the replication fork.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/dna-rna-protein-talking-points.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<style>
+:root{
+  --paper:#F5F3EE;--card:#FFFFFF;--ink:#1D1A15;--ink-soft:#5A544A;--bond:#1F7A8C;--bond-soft:#DEEBEE;
+  --shell:#D2CCC0;--rule:#DDD8CE;--board:#EEF2FB;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:72rem;margin:0 auto;padding:.8rem 1rem 3rem}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.35rem,3.4vw,1.9rem);line-height:1.12;margin:0 0 .3rem}
+h2{font-family:var(--sans);font-size:1.15rem;margin:1.4rem 0 .5rem}
+p{margin:0 0 .7rem}
+.sop-back{display:inline-block;margin:0 0 .3rem;font-family:var(--sans);font-size:.86rem;font-weight:600;color:var(--bond);text-decoration:none}
+.sop-eyebrow{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .15rem}
+.lede{max-width:46rem;color:var(--ink-soft)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(15.5rem,1fr));gap:.8rem}
+.tile{display:flex;flex-direction:column;background:var(--card);border:1.5px solid var(--rule);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;min-height:44px}
+.tile:hover,.tile:focus-visible{border-color:var(--bond);outline:none}
+.tile .thumb{background:var(--board);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;border-bottom:1.5px solid var(--rule)}
+.tile .thumb svg{width:92%;height:auto}
+.tile .tx{padding:.6rem .8rem .8rem}
+.tile b{font-family:var(--sans);font-size:1.02rem;display:block;line-height:1.25}
+.tile small{display:block;font-family:var(--sans);color:var(--ink-soft);font-size:.8rem;margin-top:.25rem}
+.tile.soon{border-style:dashed;background:none}
+.tile.soon .thumb{background:none;color:var(--ink-soft);font-family:var(--sans);font-size:.9rem;text-align:center;padding:1rem}
+.links{font-family:var(--sans);font-size:.95rem}
+.links a{color:var(--bond);font-weight:600}
+.view{display:none}
+body.viewing .home{display:none}
+body.viewing .view{display:block}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0 0 .5rem;font-family:var(--sans)}
+.bar h1{font-size:clamp(1.1rem,2.6vw,1.5rem);margin:0 auto 0 0}
+.btn{border:1.5px solid var(--shell);background:var(--card);border-radius:6px;font-family:var(--sans);font-weight:700;font-size:.9rem;padding:.45rem .8rem;min-height:44px;min-width:44px;cursor:pointer;color:var(--ink)}
+.btn.main{background:var(--bond);border-color:var(--bond);color:#fff}
+.btn[disabled]{opacity:.35;cursor:default}
+.count{font-family:var(--sans);font-weight:700;font-size:.9rem;color:var(--ink-soft);min-width:4.5rem;text-align:center}
+.stage{background:var(--board);border:1.5px solid var(--rule);border-radius:10px;overflow:hidden;cursor:pointer;touch-action:manipulation}
+.stage svg{display:block;width:100%;height:auto;max-height:72vh}
+.say{font-family:var(--sans);font-weight:600;font-size:1.12rem;line-height:1.35;margin:.6rem 0 0;min-height:3rem;max-width:60rem}
+body.quiet .say{visibility:hidden}
+.hint{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);margin-top:.4rem}
+.sop-foot{margin-top:2rem;font-family:var(--sans);font-size:.8rem;color:var(--ink-soft)}
+/* step animation */
+.st{opacity:0;transition:opacity .45s ease}
+.st.on{opacity:1}
+.in{animation:fadein .55s ease both}
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.4s ease forwards}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.in,.draw{animation:none;stroke-dashoffset:0}.st{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section class="home">
+  <a class="sop-back" href="../classroom-tools.html">&larr; Biology Classroom Tools</a>
+  <p class="sop-eyebrow">Bio Tool #44 &middot; Unit 4 &middot; DNA, RNA &amp; Protein &middot; for teaching at the board</p>
+  <h1>Talking Points: DNA, RNA and Protein</h1>
+  <p class="lede">Each drawing below starts blank and adds one piece every time you tap it, press the right arrow or click a presentation remote. Talk through each piece, ask a question, give the class a minute to write, then tap on. The left arrow steps back.</p>
+  <div class="tiles">
+    <a class="tile" href="#nucleotides"><span class="thumb" data-v="nucleotides"></span><span class="tx"><b>A DNA nucleotide beside an RNA nucleotide</b><small>Deoxyribose vs ribose · thymine vs uracil · the phosphate · LT 4.1, 4.3 · 6 steps</small></span></a>
+    <a class="tile" href="#four-names"><span class="thumb" data-v="four-names"></span><span class="tx"><b>Copying DNA: Chargaff to two new molecules</b><small>Board of 11/19 · helicase, DNA polymerase, ligase · semi-conservative · LT 4.2 · 7 steps</small></span></a>
+    <a class="tile" href="#fork"><span class="thumb" data-v="fork"></span><span class="tx"><b>The replication fork: leading and lagging</b><small>Board of 11/19 · always 5′ to 3′ · ligase glues short fragments · LT 4.2 · 8 steps</small></span></a>
+    <div class="tile soon"><span class="thumb">The next board drawing joins here as the unit goes: transcription, tRNA at the ribosome, one changed base.</span><span class="tx"><b>Coming</b><small>LT 4.3</small></span></div>
+  </div>
+  <h2>For students, on their own iPads</h2>
+  <p class="links"><a href="critical-junctions.html#old-new">Critical Junctions · old strands, new strands</a> &middot; <a href="critical-junctions.html#fork">Critical Junctions · at the fork</a> &middot; <a href="toolbox.html">The Toolbox</a> &middot; <a href="img/dna-vs-rna-nucleotide.png">The nucleotide drawing as a picture</a></p>
+  <footer class="sop-foot">Biology I and Advanced Biology I &middot; Unit 4 &middot; LT 4.1 structure of DNA, LT 4.2 DNA replication, LT 4.3 DNA, RNA and proteins &middot; SOL BIO.2d, BIO.3c, BIO.5a &middot; nothing is saved or submitted &middot; &copy; 2026 J. R. Schwebach, CC BY-NC 4.0. Drawings made in code from the author&rsquo;s own board work.</footer>
+</section>
+
+<section class="view" aria-live="polite">
+  <div class="bar">
+    <button class="btn" id="home" type="button">&larr; All talking points</button>
+    <h1 id="vtitle"></h1>
+    <button class="btn" id="quiet" type="button" aria-pressed="false">Hide words</button>
+    <button class="btn" id="prev" type="button" aria-label="Back one step">&larr;</button>
+    <span class="count" id="count"></span>
+    <button class="btn main" id="next" type="button" aria-label="Next step">Next &rarr;</button>
+  </div>
+  <div class="stage" id="stage" role="button" tabindex="0" aria-label="Tap to add the next piece"></div>
+  <p class="say" id="say"></p>
+  <p class="hint">Tap the drawing, press &rarr; or space, or click a remote to add the next piece. &larr; steps back. Esc returns to all talking points.</p>
+</section>
+
+</div>
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+var SANS="Archivo, Helvetica Neue, Arial, sans-serif";
+function T(x,y,s,o){o=o||{};return '<text x="'+x+'" y="'+y+'" font-family="'+SANS+'" font-size="'+(o.size||28)+'" font-weight="'+(o.w||700)+'" fill="'+(o.c||"#1D2B6B")+'" text-anchor="'+(o.a||"middle")+'"'+(o.cls?' class="'+o.cls+'"':'')+'>'+s+'</text>';}
+function L(x1,y1,x2,y2,c,w,cls){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+c+'" stroke-width="'+(w||7)+'" stroke-linecap="round"'+(cls?' class="'+cls+'" style="--len:'+Math.ceil(Math.hypot(x2-x1,y2-y1))+'"':'')+'/>';}
+function P(d,c,w,cls,len){return '<path d="'+d+'" fill="none" stroke="'+c+'" stroke-width="'+(w||7)+'" stroke-linecap="round" stroke-linejoin="round"'+(cls?' class="'+cls+'" style="--len:'+(len||1200)+'"':'')+'/>';}
+function arrowHead(x,y,dir,c){var s=dir>0?1:-1;return '<path d="M'+(x-18*s)+' '+(y-13)+' L'+x+' '+y+' L'+(x-18*s)+' '+(y+13)+'" fill="none" stroke="'+c+'" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>';}
+function G(step,n,html){/* element group first shown at step n; animate only when it is new */
+  if(step<n)return "";return '<g'+(step===n?' class="in"':'')+'>'+html+'</g>';}
+var OLD_A="#5B48D0",NEW="#1FA36B",PINK="#E0507A",INKB="#1D2B6B",LIG="#1D1A15";
+
+/* ---------- 1. nucleotides (stepped drawing built from the figure) ---------- */
+var NUC_SVG="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 800\" role=\"img\">\n<title>A DNA nucleotide beside an RNA nucleotide</title>\n<desc>Both nucleotides have a phosphate group, a five-carbon sugar and a nitrogenous base. The DNA sugar is deoxyribose, with only H at the 2-prime carbon; the RNA sugar is ribose, with OH there. DNA uses thymine, which carries a CH3 group; RNA uses uracil in its place. Both use adenine, cytosine and guanine.</desc>\n<rect width=\"1200\" height=\"800\" fill=\"#FFFFFF\"/>\n<text x=\"600.0\" y=\"62\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"34\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"middle\" >A DNA nucleotide and an RNA nucleotide, side by side</text>\n<line x1=\"600\" y1=\"100\" x2=\"600\" y2=\"610\" stroke=\"#DDD8CE\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n<g class=\"st\" data-s=\"0\">\n<text x=\"300\" y=\"128\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"30\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"middle\" >DNA nucleotide</text>\n<text x=\"300\" y=\"160\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#5A544A\" text-anchor=\"middle\" >a building block of DNA</text>\n</g><g class=\"st\" data-s=\"1\">\n<circle cx=\"95\" cy=\"250\" r=\"50\" fill=\"#DEEBEE\" stroke=\"#1F7A8C\" stroke-width=\"4\"/>\n<text x=\"95\" y=\"261\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"34\" font-weight=\"700\" fill=\"#1F7A8C\" text-anchor=\"middle\" >P</text>\n<text x=\"95\" y=\"332\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#1F7A8C\" text-anchor=\"middle\" >Phosphate</text>\n<text x=\"95\" y=\"356\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#1F7A8C\" text-anchor=\"middle\" >group</text>\n</g><g class=\"st\" data-s=\"2\">\n<polygon points=\"250,262 315,214 380,262 356,340 274,340\" fill=\"#ECE6F3\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linejoin=\"round\"/>\n<circle cx=\"315\" cy=\"214\" r=\"15\" fill=\"#fff\" stroke=\"#6B4E8C\" stroke-width=\"3\"/>\n<text x=\"315\" y=\"221\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >O</text>\n<text x=\"272\" y=\"268\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >4\u2032</text>\n<text x=\"358\" y=\"268\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >1\u2032</text>\n<text x=\"342\" y=\"326\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >2\u2032</text>\n<text x=\"288\" y=\"326\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >3\u2032</text>\n<line x1=\"250\" y1=\"262\" x2=\"208\" y2=\"220\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<text x=\"190\" y=\"216\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >CH\u2082</text>\n<text x=\"190\" y=\"190\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >5\u2032</text>\n<line x1=\"142\" y1=\"233\" x2=\"168\" y2=\"214\" stroke=\"#1D1A15\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<line x1=\"274\" y1=\"340\" x2=\"264\" y2=\"382\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<text x=\"260\" y=\"410\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >OH</text>\n</g><g class=\"st\" data-s=\"4\">\n<line x1=\"356\" y1=\"340\" x2=\"366\" y2=\"382\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<circle cx=\"370\" cy=\"402\" r=\"31\" fill=\"#FBF0DA\" stroke=\"#B8860B\" stroke-width=\"3.5\" stroke-dasharray=\"7 5\"/>\n<text x=\"370\" y=\"410\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"23\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"middle\" >H</text>\n</g><g class=\"st\" data-s=\"2\">\n<text x=\"315\" y=\"470\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"26\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >Deoxyribose</text>\n<text x=\"315\" y=\"496\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#6B4E8C\" text-anchor=\"middle\" >five-carbon sugar</text>\n</g><g class=\"st\" data-s=\"3\">\n<line x1=\"380\" y1=\"262\" x2=\"456.69872981077805\" y2=\"237.0\" stroke=\"#1D1A15\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<polygon points=\"543.3,287.0 500.0,312.0 456.7,287.0 456.7,237.0 500.0,212.0 543.3,237.0\" fill=\"#FBE4DE\" stroke=\"#D2462B\" stroke-width=\"4\" stroke-linejoin=\"round\"/>\n<line x1=\"500.0\" y1=\"212.0\" x2=\"500.0\" y2=\"178.0\" stroke=\"#D2462B\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<text x=\"500.0\" y=\"168.0\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"20\" font-weight=\"700\" fill=\"#D2462B\" text-anchor=\"middle\" >CH\u2083</text>\n<rect x=\"418\" y=\"334\" width=\"164\" height=\"44\" rx=\"2\" fill=\"#D2462B\"/>\n<text x=\"500\" y=\"364\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#fff\" text-anchor=\"middle\" >Thymine (T)</text>\n<text x=\"500\" y=\"404\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#D2462B\" text-anchor=\"middle\" >nitrogenous base</text>\n</g><g class=\"st\" data-s=\"4\">\n<text x=\"300\" y=\"562\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"middle\" >At the 2\u2032 carbon: only H.</text>\n<text x=\"300\" y=\"590\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"20\" font-weight=\"500\" fill=\"#5A544A\" text-anchor=\"middle\" >\u201cDe-oxy\u201d means one oxygen missing.</text>\n</g><g class=\"st\" data-s=\"0\">\n<text x=\"900\" y=\"128\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"30\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"middle\" >RNA nucleotide</text>\n<text x=\"900\" y=\"160\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#5A544A\" text-anchor=\"middle\" >a building block of RNA</text>\n</g><g class=\"st\" data-s=\"1\">\n<circle cx=\"695\" cy=\"250\" r=\"50\" fill=\"#DEEBEE\" stroke=\"#1F7A8C\" stroke-width=\"4\"/>\n<text x=\"695\" y=\"261\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"34\" font-weight=\"700\" fill=\"#1F7A8C\" text-anchor=\"middle\" >P</text>\n<text x=\"695\" y=\"332\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#1F7A8C\" text-anchor=\"middle\" >Phosphate</text>\n<text x=\"695\" y=\"356\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#1F7A8C\" text-anchor=\"middle\" >group</text>\n</g><g class=\"st\" data-s=\"2\">\n<polygon points=\"850,262 915,214 980,262 956,340 874,340\" fill=\"#ECE6F3\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linejoin=\"round\"/>\n<circle cx=\"915\" cy=\"214\" r=\"15\" fill=\"#fff\" stroke=\"#6B4E8C\" stroke-width=\"3\"/>\n<text x=\"915\" y=\"221\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >O</text>\n<text x=\"872\" y=\"268\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >4\u2032</text>\n<text x=\"958\" y=\"268\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >1\u2032</text>\n<text x=\"942\" y=\"326\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >2\u2032</text>\n<text x=\"888\" y=\"326\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >3\u2032</text>\n<line x1=\"850\" y1=\"262\" x2=\"808\" y2=\"220\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<text x=\"790\" y=\"216\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >CH\u2082</text>\n<text x=\"790\" y=\"190\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >5\u2032</text>\n<line x1=\"742\" y1=\"233\" x2=\"768\" y2=\"214\" stroke=\"#1D1A15\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<line x1=\"874\" y1=\"340\" x2=\"864\" y2=\"382\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<text x=\"860\" y=\"410\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >OH</text>\n</g><g class=\"st\" data-s=\"4\">\n<line x1=\"956\" y1=\"340\" x2=\"966\" y2=\"382\" stroke=\"#6B4E8C\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<circle cx=\"970\" cy=\"402\" r=\"31\" fill=\"#FBF0DA\" stroke=\"#B8860B\" stroke-width=\"3.5\" stroke-dasharray=\"7 5\"/>\n<text x=\"970\" y=\"410\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"23\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"middle\" >OH</text>\n</g><g class=\"st\" data-s=\"2\">\n<text x=\"915\" y=\"470\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"26\" font-weight=\"700\" fill=\"#6B4E8C\" text-anchor=\"middle\" >Ribose</text>\n<text x=\"915\" y=\"496\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#6B4E8C\" text-anchor=\"middle\" >five-carbon sugar</text>\n</g><g class=\"st\" data-s=\"3\">\n<line x1=\"980\" y1=\"262\" x2=\"1056.698729810778\" y2=\"237.0\" stroke=\"#1D1A15\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<polygon points=\"1143.3,287.0 1100.0,312.0 1056.7,287.0 1056.7,237.0 1100.0,212.0 1143.3,237.0\" fill=\"#FBE4DE\" stroke=\"#D2462B\" stroke-width=\"4\" stroke-linejoin=\"round\"/>\n<rect x=\"1018\" y=\"334\" width=\"164\" height=\"44\" rx=\"22\" fill=\"#D2462B\"/>\n<text x=\"1100\" y=\"364\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#fff\" text-anchor=\"middle\" >Uracil (U)</text>\n<text x=\"1100\" y=\"404\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"19\" font-weight=\"500\" fill=\"#D2462B\" text-anchor=\"middle\" >nitrogenous base</text>\n</g><g class=\"st\" data-s=\"4\">\n<text x=\"900\" y=\"562\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"middle\" >At the 2\u2032 carbon: OH.</text>\n<text x=\"900\" y=\"590\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"20\" font-weight=\"500\" fill=\"#5A544A\" text-anchor=\"middle\" >Ribose keeps that oxygen.</text>\n</g><g class=\"st\" data-s=\"5\">\n<rect x=\"40\" y=\"628\" width=\"1120\" height=\"120\" rx=\"10\" fill=\"#F5F3EE\" stroke=\"#DDD8CE\" stroke-width=\"2\"/>\n<text x=\"70\" y=\"668\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"start\" >Same in both:</text>\n<text x=\"232\" y=\"668\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"500\" fill=\"#1D1A15\" text-anchor=\"start\" >a phosphate group, a five-carbon sugar, and the bases A, C and G.</text>\n<text x=\"70\" y=\"700\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"start\" >Different:</text>\n<text x=\"232\" y=\"700\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"500\" fill=\"#1D1A15\" text-anchor=\"start\" >the sugar (deoxyribose vs ribose) and the fourth base (T vs U; U pairs with A).</text>\n<text x=\"70\" y=\"732\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#1D1A15\" text-anchor=\"start\" >Built into:</text>\n<text x=\"232\" y=\"732\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"21\" font-weight=\"500\" fill=\"#1D1A15\" text-anchor=\"start\" >DNA, two strands kept in the nucleus \u00b7 RNA, one strand that leaves it.</text>\n<text x=\"1160\" y=\"786\" font-family=\"Archivo, 'Helvetica Neue', Arial, sans-serif\" font-size=\"15\" font-weight=\"500\" fill=\"#5A544A\" text-anchor=\"end\" >\u00a9 J. R. Schwebach, CC BY-NC 4.0 \u00b7 scienceonepagers.org</text>\n</g></svg>";
+var nuc={title:"A DNA nucleotide beside an RNA nucleotide",steps:[
+ "Every nucleotide has three parts. We'll build two of them side by side: one from DNA, one from RNA.",
+ "Part one, the same in both: a phosphate group. Phosphates link nucleotides into the sides of the ladder, the sugar-phosphate backbone.",
+ "Part two, a five-carbon sugar, a ring of carbons numbered 1′ to 5′. In DNA it's deoxyribose. In RNA it's ribose. Ask: what does “de-” mean in a word like defrost or deactivate?",
+ "Part three, a nitrogenous base, attached at the 1′ carbon. DNA uses thymine, T. RNA uses uracil, U, in its place. Thymine carries one extra CH₃ group. U pairs with A, the same way T does.",
+ "Here is the whole difference in the sugar: at the 2′ carbon, ribose has OH and deoxyribose has only H. Deoxyribose is ribose with one oxygen removed, “de-oxy.”",
+ "Same in both: phosphate, a five-carbon sugar, and A, C, G. Different: the sugar and the fourth base. DNA is two strands that stay in the nucleus; RNA is one strand that carries the message out."],
+ render:function(s){var h=NUC_SVG;var map=[0,1,2,3,4,5];/* steps 0..5 reveal groups <= step */
+   var wrap=document.createElement("div");wrap.innerHTML=h;var svg=wrap.firstElementChild;
+   svg.querySelectorAll(".st").forEach(function(g){var n=+g.getAttribute("data-s");if(n<=map[s])g.classList.add("on");if(n===map[s]&&n>0)g.classList.add("in");});
+   /* the 2' gold circles belong to group 4; group 4 also holds the callouts */
+   return svg.outerHTML;}};
+
+/* ---------- 2. Board 11/19 A: Chargaff to two new molecules ---------- */
+function boardA(s){
+  var o=['<svg xmlns="'+NS+'" viewBox="0 0 1200 640" role="img" aria-label="Board drawing, step '+(s+1)+' of 7">'];
+  // Chargaff ladder
+  var top="ATGCCGTA",bot="TACGGCAT",x0=300;
+  var lad=T(600,62,"Chargaff",{size:44,c:NEW});
+  for(var i=0;i<8;i++){var x=x0+i*80;
+    lad+=L(x,108,x,150,"#9AA3C8",5)+'<circle cx="'+x+'" cy="100" r="22" fill="#fff" stroke="'+OLD_A+'" stroke-width="3"/>'+T(x,110,top[i],{size:24,c:INKB})+
+      '<circle cx="'+x+'" cy="158" r="22" fill="#fff" stroke="'+OLD_A+'" stroke-width="3"/>'+T(x,168,bot[i],{size:24,c:INKB});}
+  lad+=T(1010,118,"A = T",{size:30,c:INKB})+T(1010,160,"C = G",{size:30,c:INKB});
+  o.push(G(s,0,lad));
+  // column 1: parent
+  var c1=180,yT=260,yB=520;
+  o.push(G(s,1,L(c1-20,yT,c1-20,yB,OLD_A)+L(c1+20,yT,c1+20,yB,OLD_A)+T(c1,580,"one DNA molecule",{size:24,w:600})+T(c1,612,"two old strands",{size:22,w:500,c:"#5A544A"})));
+  // arrow
+  o.push(G(s,2,L(290,390,370,390,OLD_A,6)+arrowHead(372,390,1,OLD_A)));
+  // column 2: unzipped, then built
+  var c2=560,stub="";
+  for(var k=0;k<6;k++){var yy=300+k*40;stub+=L(c2-60,yy,c2-44,yy,"#9AA3C8",4)+L(c2+44,yy,c2+60,yy,"#9AA3C8",4);}
+  o.push(G(s,2,L(c2-60,yT,c2-60,yB,OLD_A)+L(c2+60,yT,c2+60,yB,OLD_A)+stub+'<circle cx="'+c2+'" cy="'+(yT-4)+'" r="22" fill="none" stroke="'+OLD_A+'" stroke-width="5"/>'+T(c2,580,"helicase",{size:34,c:NEW})+T(c2,612,"unzips: breaks the bonds between bases",{size:20,w:500,c:"#5A544A"})));
+  var polyLab=T(c2+110,320,"DNA polymerase",{size:26,c:NEW,a:"start"})+T(c2+110,350,"builds each new strand",{size:20,w:500,c:"#5A544A",a:"start"})+T(c2+110,384,"green = new",{size:24,c:NEW,a:"start"});
+  if(s===3){var segs="";[[300,360],[378,438],[456,505]].forEach(function(r){segs+=L(c2-30,r[0],c2-30,r[1],NEW,7,"draw")+L(c2+30,r[0],c2+30,r[1],NEW,7,"draw");});
+    o.push('<g class="in">'+segs+polyLab+'</g>');}
+  if(s>=4){var glue="";[369,447].forEach(function(y){glue+='<circle cx="'+(c2-30)+'" cy="'+y+'" r="9" fill="'+LIG+'"/><circle cx="'+(c2+30)+'" cy="'+y+'" r="9" fill="'+LIG+'"/>';});
+    o.push(L(c2-30,300,c2-30,505,NEW,7)+L(c2+30,300,c2+30,505,NEW,7)+polyLab);
+    o.push(G(s,4,glue+T(c2+110,440,"ligase",{size:34,c:NEW,a:"start"})+T(c2+110,470,"seals the gaps",{size:20,w:500,c:"#5A544A",a:"start"})));}
+  // column 3: two molecules
+  var c3=1030;
+  o.push(G(s,5,L(c3-85,yT,c3-85,yB,OLD_A)+L(c3-50,yT,c3-50,yB,NEW)+L(c3+50,yT,c3+50,yB,NEW)+L(c3+85,yT,c3+85,yB,OLD_A)+
+    T(c3,580,"Semi-conservative",{size:30,c:NEW})+T(c3,612,"each keeps one old strand",{size:20,w:500,c:"#5A544A"})));
+  o.push(G(s,6,'<rect x="20" y="196" width="250" height="44" rx="6" fill="#fff" stroke="'+PINK+'" stroke-width="2"/>'+T(145,227,"Leading · Lagging",{size:28,c:PINK})+T(1030,236,"→ see the fork",{size:24,c:PINK})));
+  o.push("</svg>");return o.join("");}
+var four={title:"Copying DNA: Chargaff to two new molecules",steps:[
+ "Chargaff measured the four bases. In any DNA, A equals T and C equals G. That only works if A pairs with T and C pairs with G.",
+ "Before a cell divides, it copies its DNA. Start with one molecule: two old strands, held together by their base pairs.",
+ "Helicase goes first. It unzips the molecule down the middle, breaking the bonds between the base pairs. Now each old strand is a template.",
+ "DNA polymerase reads each old strand and builds a new one beside it, matching A with T and C with G. Green is new. Notice the new strands go in as pieces.",
+ "Ligase comes last. It seals the gaps between the pieces into one unbroken strand.",
+ "The result is two DNA molecules. Each one is half old and half new: one old strand, one new strand. That is semi-conservative replication. Ask: does each new cell get any of the original DNA?",
+ "One more twist: the two new strands are not built the same way. One is built in one long piece, the leading strand; the other in short pieces, the lagging strand. That happens at the fork."],
+ render:boardA};
+
+/* ---------- 3. Board 11/19 B: the fork ---------- */
+function boardB(s){
+  var FX=(s>=4)?900:700,yT=200,yB=400,yDt=288,yDb=312;
+  var o=['<svg xmlns="'+NS+'" viewBox="0 0 1200 640" role="img" aria-label="Fork drawing, step '+(s+1)+' of 8">'];
+  // templates (old strands, pink as on the board)
+  var tpl=P("M60 "+yT+" L"+(FX-120)+" "+yT+" Q"+(FX-40)+" "+yT+" "+FX+" "+yDt+" L1150 "+yDt,PINK)+
+          P("M60 "+yB+" L"+(FX-120)+" "+yB+" Q"+(FX-40)+" "+yB+" "+FX+" "+yDb+" L1150 "+yDb,PINK);
+  o.push(tpl);
+  // ends: fixed so the top new strand is the leading strand
+  o.push(T(34,yT+10,"3′",{size:30,c:PINK})+T(34,yB+10,"5′",{size:30,c:PINK})+T(1176,yDt-8,"5′",{size:26,c:PINK})+T(1176,yDb+28,"3′",{size:26,c:PINK}));
+  // helicase
+  o.push(G(s,1,'<circle cx="'+(FX+8)+'" cy="300" r="30" fill="none" stroke="#6E4BD8" stroke-width="6"/>'+T(FX+50,250,"helicase",{size:34,c:"#6E4BD8",a:"start"})));
+  // rule card
+  o.push(G(s,2,'<rect x="40" y="520" width="560" height="96" rx="8" fill="#fff" stroke="'+INKB+'" stroke-width="2"/>'+T(320,562,"Always 5′ → 3′",{size:34,c:INKB})+T(320,598,"new DNA grows only at its 3′ end",{size:22,w:500,c:INKB})));
+  // leading strand
+  var yL=yT+26;
+  if(s>=3){var endA=700-170,endB=900-170;
+    o.push(T(90,yL+42,"5′",{size:24,c:NEW}));
+    o.push(s===3?L(110,yL,endA,yL,NEW,7,"draw"):L(110,yL,endA,yL,NEW,7));
+    if(s>=4)o.push(s===4?L(endA,yL,endB,yL,NEW,7,"draw"):L(endA,yL,endB,yL,NEW,7));
+    var hx=(s>=4)?endB:endA;
+    o.push(arrowHead(hx+4,yL,1,NEW)+T(hx-6,yL+32,"3′",{size:24,c:NEW})+'<ellipse cx="'+(hx+28)+'" cy="'+yL+'" rx="24" ry="19" fill="none" stroke="'+LIG+'" stroke-width="4"/>');
+    o.push(G(s,3,T(380,yT-40,"Leading strand",{size:36,c:INKB}))+T(hx-40,yL+62,"DNA polymerase",{size:22,c:NEW}));
+  }
+  if(s>=4)o.push(G(s,4,L(FX+70,340,FX+150,340,"#6E4BD8",5)+arrowHead(FX+152,340,1,"#6E4BD8")+T(FX+110,378,"fork moves",{size:22,c:"#6E4BD8"})));
+  // lagging fragments
+  var yG=yB-26,frs=[[770,620],[606,456],[442,292],[278,128]];
+  if(s>=5){var fr="";frs.forEach(function(f,j){fr+=(s===5?'<g class="in" style="animation-delay:'+(j*0.35)+'s">':'<g>')+L(f[0],yG,f[1]+14,yG,NEW,7)+arrowHead(f[1],yG,-1,NEW)+'</g>';});
+    o.push(fr+T(782,yG+8,"5′",{size:22,c:NEW,a:"start"})+T(642,yG-12,"3′",{size:22,c:NEW})+(s===5?'<ellipse cx="596" cy="'+yG+'" rx="24" ry="19" fill="none" stroke="'+LIG+'" stroke-width="4"/>'+T(560,yG-32,"DNA polymerase",{size:20,c:NEW}):""));
+    o.push(G(s,5,T(330,yB+66,"Lagging strand",{size:36,c:INKB})+T(330,yB+98,"short pieces, built away from the fork",{size:22,w:500,c:INKB})));
+  }
+  if(s>=6){var gl="";[613,449,285].forEach(function(x){gl+='<circle cx="'+x+'" cy="'+yG+'" r="11" fill="'+LIG+'"/>';});
+    o.push(G(s,6,gl+P("M700 452 Q650 420 620 "+(yG+14),LIG,3)+T(660,488,"Ligase glues short fragments",{size:30,c:INKB,a:"start"})+T(660,516,"(Advanced: Okazaki fragments)",{size:18,w:500,c:"#5A544A",a:"start"})));}
+  if(s>=7)o.push(G(s,7,'<rect x="40" y="10" width="1120" height="52" rx="8" fill="#fff" stroke="'+NEW+'" stroke-width="2"/>'+T(600,46,"Leading: one piece, toward the fork · Lagging: short pieces, away from it",{size:26,c:INKB})));
+  o.push("</svg>");return o.join("");}
+var fork={title:"The replication fork: leading and lagging",steps:[
+ "Zoom in on one spot where the DNA is opening: the replication fork. The two old strands run in opposite directions. Look at the ends: 3′ and 5′ are swapped from top to bottom.",
+ "Helicase sits at the fork and unzips, breaking the bonds between the bases.",
+ "Here's the rule DNA polymerase can't break: new DNA is always built 5′ to 3′. It can only add a nucleotide to the 3′ end.",
+ "On the top strand, DNA polymerase can build straight toward the fork, 5′ to 3′, in one long piece. That's the leading strand.",
+ "Helicase keeps opening the fork, and the leading strand keeps up, one unbroken piece.",
+ "The bottom strand runs the other way. To go 5′ to 3′, DNA polymerase has to build away from the fork. So each time the fork opens, it starts a new short piece near the fork and backs away. That's the lagging strand.",
+ "Ligase glues the short fragments into one strand. Ask: why does only the lagging strand need ligase?",
+ "Both new strands end up whole. One was built in a single piece, one in short pieces glued together, both 5′ to 3′."],
+ render:boardB};
+
+var VIEWS={"nucleotides":nuc,"four-names":four,"fork":fork};
+var cur=null,step=0;
+var $=function(id){return document.getElementById(id);};
+function show(){var v=VIEWS[cur];$("vtitle").textContent=v.title;$("stage").innerHTML=v.render(step);
+  $("say").textContent=v.steps[step];$("count").textContent=(step+1)+" of "+v.steps.length;
+  $("prev").disabled=step===0;$("next").disabled=step===v.steps.length-1;
+  var svg=$("stage").querySelector("svg");if(svg)svg.setAttribute("aria-label",v.title+", step "+(step+1)+": "+v.steps[step]);}
+function route(){var h=(location.hash||"").slice(1);
+  if(VIEWS[h]){if(cur!==h){cur=h;step=0;}document.body.classList.add("viewing");show();window.scrollTo(0,0);}
+  else{cur=null;document.body.classList.remove("viewing");}}
+function go(d){if(!cur)return;var n=VIEWS[cur].steps.length;var s=Math.max(0,Math.min(n-1,step+d));if(s!==step){step=s;show();}}
+$("next").addEventListener("click",function(){go(1);});
+$("prev").addEventListener("click",function(){go(-1);});
+$("stage").addEventListener("click",function(){go(1);});
+$("home").addEventListener("click",function(){location.hash="";});
+$("quiet").addEventListener("click",function(){var q=document.body.classList.toggle("quiet");this.setAttribute("aria-pressed",q);this.textContent=q?"Show words":"Hide words";});
+document.addEventListener("keydown",function(e){if(!cur)return;
+  if(["ArrowRight"," ","PageDown","Enter"].indexOf(e.key)>=0){e.preventDefault();go(1);}
+  else if(["ArrowLeft","PageUp","Backspace"].indexOf(e.key)>=0){e.preventDefault();go(-1);}
+  else if(e.key==="Escape"){location.hash="";}});
+document.querySelectorAll(".thumb[data-v]").forEach(function(t){var v=VIEWS[t.getAttribute("data-v")];t.innerHTML=v.render(v.steps.length-1).replace(/ class="(in|draw)"/g,"").replace(/class="st on in"/g,'class="st on"');});
+window.addEventListener("hashchange",route);route();
+})();
+</script>
+</body>
+</html>

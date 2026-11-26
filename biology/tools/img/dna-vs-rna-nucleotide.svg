@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-labelledby="ttl dsc">
+<title id="ttl">A DNA nucleotide beside an RNA nucleotide</title>
+<desc id="dsc">Both nucleotides have a phosphate group, a five-carbon sugar and a nitrogenous base. The DNA sugar is deoxyribose, with only H at the 2-prime carbon; the RNA sugar is ribose, with OH there. DNA uses thymine, which carries a CH3 group; RNA uses uracil in its place. Both use adenine, cytosine and guanine.</desc>
+<rect width="1200" height="800" fill="#FFFFFF"/>
+<text x="600.0" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="700" fill="#1D1A15" text-anchor="middle" >A DNA nucleotide and an RNA nucleotide, side by side</text>
+<line x1="600" y1="100" x2="600" y2="610" stroke="#DDD8CE" stroke-width="2" stroke-linecap="round"/>
+<!--S0-->
+<text x="300" y="128" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="700" fill="#1D1A15" text-anchor="middle" >DNA nucleotide</text>
+<text x="300" y="160" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#5A544A" text-anchor="middle" >a building block of DNA</text>
+<!--S1-->
+<circle cx="95" cy="250" r="50" fill="#DEEBEE" stroke="#1F7A8C" stroke-width="4"/>
+<text x="95" y="261" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="700" fill="#1F7A8C" text-anchor="middle" >P</text>
+<text x="95" y="332" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1F7A8C" text-anchor="middle" >Phosphate</text>
+<text x="95" y="356" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#1F7A8C" text-anchor="middle" >group</text>
+<!--S2-->
+<polygon points="250,262 315,214 380,262 356,340 274,340" fill="#ECE6F3" stroke="#6B4E8C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="315" cy="214" r="15" fill="#fff" stroke="#6B4E8C" stroke-width="3"/>
+<text x="315" y="221" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#6B4E8C" text-anchor="middle" >O</text>
+<text x="272" y="268" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >4′</text>
+<text x="358" y="268" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >1′</text>
+<text x="342" y="326" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >2′</text>
+<text x="288" y="326" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >3′</text>
+<line x1="250" y1="262" x2="208" y2="220" stroke="#6B4E8C" stroke-width="4" stroke-linecap="round"/>
+<text x="190" y="216" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#6B4E8C" text-anchor="middle" >CH₂</text>
+<text x="190" y="190" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >5′</text>
+<line x1="142" y1="233" x2="168" y2="214" stroke="#1D1A15" stroke-width="4" stroke-linecap="round"/>
+<line x1="274" y1="340" x2="264" y2="382" stroke="#6B4E8C" stroke-width="4" stroke-linecap="round"/>
+<text x="260" y="410" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#6B4E8C" text-anchor="middle" >OH</text>
+<!--S4-->
+<line x1="356" y1="340" x2="366" y2="382" stroke="#6B4E8C" stroke-width="4" stroke-linecap="round"/>
+<circle cx="370" cy="402" r="31" fill="#FBF0DA" stroke="#B8860B" stroke-width="3.5" stroke-dasharray="7 5"/>
+<text x="370" y="410" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="23" font-weight="700" fill="#1D1A15" text-anchor="middle" >H</text>
+<!--S2-->
+<text x="315" y="470" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="700" fill="#6B4E8C" text-anchor="middle" >Deoxyribose</text>
+<text x="315" y="496" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#6B4E8C" text-anchor="middle" >five-carbon sugar</text>
+<!--S3-->
+<line x1="380" y1="262" x2="456.69872981077805" y2="237.0" stroke="#1D1A15" stroke-width="4" stroke-linecap="round"/>
+<polygon points="543.3,287.0 500.0,312.0 456.7,287.0 456.7,237.0 500.0,212.0 543.3,237.0" fill="#FBE4DE" stroke="#D2462B" stroke-width="4" stroke-linejoin="round"/>
+<line x1="500.0" y1="212.0" x2="500.0" y2="178.0" stroke="#D2462B" stroke-width="4" stroke-linecap="round"/>
+<text x="500.0" y="168.0" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#D2462B" text-anchor="middle" >CH₃</text>
+<rect x="418" y="334" width="164" height="44" rx="2" fill="#D2462B"/>
+<text x="500" y="364" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#fff" text-anchor="middle" >Thymine (T)</text>
+<text x="500" y="404" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#D2462B" text-anchor="middle" >nitrogenous base</text>
+<!--S4-->
+<text x="300" y="562" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1D1A15" text-anchor="middle" >At the 2′ carbon: only H.</text>
+<text x="300" y="590" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="500" fill="#5A544A" text-anchor="middle" >“De-oxy” means one oxygen missing.</text>
+<!--S0-->
+<text x="900" y="128" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="700" fill="#1D1A15" text-anchor="middle" >RNA nucleotide</text>
+<text x="900" y="160" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#5A544A" text-anchor="middle" >a building block of RNA</text>
+<!--S1-->
+<circle cx="695" cy="250" r="50" fill="#DEEBEE" stroke="#1F7A8C" stroke-width="4"/>
+<text x="695" y="261" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="700" fill="#1F7A8C" text-anchor="middle" >P</text>
+<text x="695" y="332" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1F7A8C" text-anchor="middle" >Phosphate</text>
+<text x="695" y="356" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#1F7A8C" text-anchor="middle" >group</text>
+<!--S2-->
+<polygon points="850,262 915,214 980,262 956,340 874,340" fill="#ECE6F3" stroke="#6B4E8C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="915" cy="214" r="15" fill="#fff" stroke="#6B4E8C" stroke-width="3"/>
+<text x="915" y="221" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#6B4E8C" text-anchor="middle" >O</text>
+<text x="872" y="268" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >4′</text>
+<text x="958" y="268" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >1′</text>
+<text x="942" y="326" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >2′</text>
+<text x="888" y="326" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >3′</text>
+<line x1="850" y1="262" x2="808" y2="220" stroke="#6B4E8C" stroke-width="4" stroke-linecap="round"/>
+<text x="790" y="216" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#6B4E8C" text-anchor="middle" >CH₂</text>
+<text x="790" y="190" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="700" fill="#6B4E8C" text-anchor="middle" >5′</text>
+<line x1="742" y1="233" x2="768" y2="214" stroke="#1D1A15" stroke-width="4" stroke-linecap="round"/>
+<line x1="874" y1="340" x2="864" y2="382" stroke="#6B4E8C" stroke-width="4" stroke-linecap="round"/>
+<text x="860" y="410" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#6B4E8C" text-anchor="middle" >OH</text>
+<!--S4-->
+<line x1="956" y1="340" x2="966" y2="382" stroke="#6B4E8C" stroke-width="4" stroke-linecap="round"/>
+<circle cx="970" cy="402" r="31" fill="#FBF0DA" stroke="#B8860B" stroke-width="3.5" stroke-dasharray="7 5"/>
+<text x="970" y="410" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="23" font-weight="700" fill="#1D1A15" text-anchor="middle" >OH</text>
+<!--S2-->
+<text x="915" y="470" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="700" fill="#6B4E8C" text-anchor="middle" >Ribose</text>
+<text x="915" y="496" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#6B4E8C" text-anchor="middle" >five-carbon sugar</text>
+<!--S3-->
+<line x1="980" y1="262" x2="1056.698729810778" y2="237.0" stroke="#1D1A15" stroke-width="4" stroke-linecap="round"/>
+<polygon points="1143.3,287.0 1100.0,312.0 1056.7,287.0 1056.7,237.0 1100.0,212.0 1143.3,237.0" fill="#FBE4DE" stroke="#D2462B" stroke-width="4" stroke-linejoin="round"/>
+<rect x="1018" y="334" width="164" height="44" rx="22" fill="#D2462B"/>
+<text x="1100" y="364" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#fff" text-anchor="middle" >Uracil (U)</text>
+<text x="1100" y="404" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#D2462B" text-anchor="middle" >nitrogenous base</text>
+<!--S4-->
+<text x="900" y="562" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1D1A15" text-anchor="middle" >At the 2′ carbon: OH.</text>
+<text x="900" y="590" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="500" fill="#5A544A" text-anchor="middle" >Ribose keeps that oxygen.</text>
+<!--S5-->
+<rect x="40" y="628" width="1120" height="120" rx="10" fill="#F5F3EE" stroke="#DDD8CE" stroke-width="2"/>
+<text x="70" y="668" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1D1A15" text-anchor="start" >Same in both:</text>
+<text x="232" y="668" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#1D1A15" text-anchor="start" >a phosphate group, a five-carbon sugar, and the bases A, C and G.</text>
+<text x="70" y="700" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1D1A15" text-anchor="start" >Different:</text>
+<text x="232" y="700" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#1D1A15" text-anchor="start" >the sugar (deoxyribose vs ribose) and the fourth base (T vs U; U pairs with A).</text>
+<text x="70" y="732" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1D1A15" text-anchor="start" >Built into:</text>
+<text x="232" y="732" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#1D1A15" text-anchor="start" >DNA, two strands kept in the nucleus · RNA, one strand that leaves it.</text>
+<text x="1160" y="786" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="500" fill="#5A544A" text-anchor="end" >© J. R. Schwebach, CC BY-NC 4.0 · scienceonepagers.org</text>
+</svg>
