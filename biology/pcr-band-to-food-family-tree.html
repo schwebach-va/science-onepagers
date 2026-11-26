@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From a PCR Band to a Family Tree of Our Foods | Science One-Pagers</title>
+<meta name="description" content="A DE Biology lab extension: BLAST the bands from a GMO food PCR, then align one chloroplast gene from ten organisms and build a family tree, on a school iPad.">
+<link rel="canonical" href="https://scienceonepagers.org/biology/pcr-band-to-food-family-tree.html">
+<meta name="author" content="J. R. Schwebach">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="From a PCR Band to a Family Tree of Our Foods">
+<meta property="og:description" content="BLAST the bands from a GMO food PCR, then align one chloroplast gene from ten organisms and build a family tree, on a school iPad.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/pcr-band-to-food-family-tree.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../style.css">
+<style>
+  article.onepager figure.pcr { margin: 1.25rem 0; background: #fff; border: 1px solid var(--line); padding: 0.6rem; }
+  article.onepager figure.pcr svg { display: block; width: 100%; height: auto; }
+  article.onepager .seqbox { margin: 0.9rem 0 1.1rem; }
+  article.onepager .seqbox label { display: block; font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  article.onepager .seqbox textarea { width: 100%; box-sizing: border-box; font-family: Menlo, Consolas, monospace; font-size: 0.78rem; line-height: 1.35; padding: 0.5rem; border: 1px solid var(--line); border-radius: 6px; background: #fbfbf9; color: var(--ink); resize: vertical; }
+  article.onepager .copybtn { margin-top: 0.4rem; font: 600 1rem "Helvetica Neue", Arial, sans-serif; padding: 0.55rem 1.3rem; min-height: 44px; border: 0; border-radius: 6px; background: var(--bio); color: #fff; cursor: pointer; }
+  article.onepager .copied { margin-left: 0.6rem; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.9rem; color: var(--bio); }
+  article.onepager table.lab { border-collapse: collapse; width: 100%; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.9rem; }
+  article.onepager table.lab th, article.onepager table.lab td { border: 1px solid var(--line); padding: 0.4rem 0.5rem; text-align: left; vertical-align: top; }
+  article.onepager table.lab th { background: #f1f4f2; }
+  article.onepager table.lab td.blankcell { min-width: 5rem; }
+  article.onepager .timebox { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.9rem; color: var(--muted); }
+  @media print { article.onepager .copybtn, article.onepager .copied { display: none; } article.onepager .seqbox textarea { height: auto; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+<h1><a href="../index.html">Science One-Pagers</a></h1>
+<p>A working folder for teachers, students, parents, and anyone putting evidence to use.</p>
+</header>
+
+<nav class="site-nav">
+<a href="../book.html">The Book</a>
+<a href="../index.html#evidence">Evidence</a>
+<a href="../index.html#biology">Biology</a>
+<a href="../index.html#chemistry">Chemistry</a>
+<a href="../index.html#teaching">Teaching</a>
+<a href="../index.html#careers">Careers</a>
+<a class="nav-search" href="../search.html" aria-label="Search the site" title="Search the site"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><line x1="15.4" y1="15.4" x2="21" y2="21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span class="nav-search-label">Search</span></a>
+</nav>
+
+<article class="onepager">
+  <a class="back-link" href="de-biology-101-resources.html#unit-17">&larr; Back to DE Biology 101 resources</a>
+  <div class="eyebrow">Biology &middot; Biotechnology &middot; Bioinformatics &middot; Evolution &middot; DE Biology Labs 9 and 10</div>
+  <h1>From a PCR Band to a Family Tree of Our Foods</h1>
+  <div class="meta">A lab extension in two parts &middot; Part 1 about 35 minutes, Part 2 about 55 minutes &middot; A school iPad and Safari, no account &middot; By J.&nbsp;R. Schwebach</div>
+
+  <p>
+    Your gel gave you bands. The plant-check lane showed a band about 455 bases long for nearly every
+    food, and for some foods the GMO-check lane showed a band about 200 bases long. A band tells you how
+    long a piece of DNA is. It does not tell you what the piece says or where it came from. Scientists answer
+    those questions with free public databases, and you will use the same ones. In Part 1 you look up what
+    each band is made of. In Part 2 you line up one plant gene from ten organisms, eight of them foods,
+    and build a family tree from the differences.
+  </p>
+
+  <h2>How PCR picked out those two pieces</h2>
+  <p>
+    PCR is DNA replication in a tube, the same copying you learned with DNA polymerase. Your kit's
+    thermocycler ran each tube through three temperatures, 40 times over:
+  </p>
+  <div class="protocol-box">
+    <ol>
+      <li><b>94 &deg;C for 1 minute, denature.</b> Heat breaks the hydrogen bonds between the bases, and the two strands come apart. Each strand can now act as a template.</li>
+      <li><b>59 &deg;C for 1 minute, anneal.</b> Two primers, short single strands of DNA about 20 bases long, base-pair with the template at the two edges of the target. The primers are what make PCR choose one stretch out of a whole genome.</li>
+      <li><b>72 &deg;C for 2 minutes, extend.</b> Taq polymerase, an enzyme from a bacterium that lives in hot springs, adds nucleotides to the 3&prime; end of each primer, matching A with T and C with G.</li>
+    </ol>
+  </div>
+  <figure class="pcr"><svg viewBox="0 0 720 300" role="img" aria-labelledby="pcrsvgt">
+<title id="pcrsvgt">One PCR cycle. At 94 degrees the two black strands of the target come apart. At 59 degrees a short primer pairs with each strand at the edge of the target. At 72 degrees Taq polymerase builds a new orange strand from each primer, so one copy of the target becomes two.</title>
+<style>.lbl{font:600 15px "Helvetica Neue",Arial,sans-serif;fill:#1c1c1c}.sm{font:13px "Helvetica Neue",Arial,sans-serif;fill:#5b5b5b}</style>
+<g>
+ <text class="lbl" x="20" y="28">94 &#176;C &#183; strands part</text>
+ <line x1="20" y1="70" x2="220" y2="70" stroke="#1c1c1c" stroke-width="6"/>
+ <line x1="20" y1="110" x2="220" y2="110" stroke="#1c1c1c" stroke-width="6"/>
+ <text class="sm" x="20" y="140">heat breaks the hydrogen bonds</text>
+</g>
+<g>
+ <text class="lbl" x="260" y="28">59 &#176;C &#183; primers pair</text>
+ <line x1="260" y1="70" x2="460" y2="70" stroke="#1c1c1c" stroke-width="6"/>
+ <line x1="260" y1="110" x2="460" y2="110" stroke="#1c1c1c" stroke-width="6"/>
+ <line x1="420" y1="82" x2="458" y2="82" stroke="#e07b00" stroke-width="6"/>
+ <line x1="262" y1="98" x2="300" y2="98" stroke="#e07b00" stroke-width="6"/>
+ <text class="sm" x="260" y="140">primers mark the two edges</text>
+</g>
+<g>
+ <text class="lbl" x="500" y="28">72 &#176;C &#183; Taq builds</text>
+ <line x1="500" y1="70" x2="700" y2="70" stroke="#1c1c1c" stroke-width="6"/>
+ <line x1="500" y1="82" x2="698" y2="82" stroke="#e07b00" stroke-width="6"/>
+ <line x1="502" y1="98" x2="700" y2="98" stroke="#e07b00" stroke-width="6"/>
+ <line x1="500" y1="110" x2="700" y2="110" stroke="#1c1c1c" stroke-width="6"/>
+ <text class="sm" x="500" y="140">one copy has become two</text>
+</g>
+<g transform="translate(0,170)">
+ <line x1="20" y1="20" x2="60" y2="20" stroke="#1c1c1c" stroke-width="6"/><text class="sm" x="68" y="25">original DNA</text>
+ <line x1="190" y1="20" x2="230" y2="20" stroke="#e07b00" stroke-width="6"/><text class="sm" x="238" y="25">new DNA, starting from a primer</text>
+ <text class="sm" x="20" y="70">Repeat 40 times. Only the stretch between the two primers doubles every cycle, so nearly all the DNA in the tube</text>
+ <text class="sm" x="20" y="90">ends up as that one stretch. Its length is the band on your gel.</text>
+</g>
+</svg></figure>
+  <div class="table-scroll">
+  <table class="lab">
+    <tr><th>Cycles</th><td>0</td><td>1</td><td>2</td><td>3</td><td>10</td><td>40</td></tr>
+    <tr><th>Copies of the target</th><td>1</td><td>2</td><td>4</td><td>8</td><td>1,024</td><td>about 1.1 trillion, in theory</td></tr>
+  </table>
+  </div>
+  <p>
+    Real tubes run short of primers and nucleotides before they reach a trillion, but the band is still bright.
+    To watch the doubling in motion, open the PCR station of
+    <a href="tools/toolbox.html#pcr">The Toolbox</a>, Bio Tool #39.
+  </p>
+
+  <h2>Part 1 &middot; Look up what each band is made of</h2>
+  <p>
+    BLAST compares a sequence you give it against every sequence in the public database at the National
+    Center for Biotechnology Information and lists the closest matches. Use these three sequences:
+  </p>
+  <ul>
+    <li><b>Band A</b> stands in for your plant-check band. It is the first 455 bases of <i>psbA</i>, a chloroplast gene for part of Photosystem II, taken from corn. Your kit names its target only as &ldquo;the Photosystem II gene,&rdquo; so the stretch its primers copy may sit elsewhere in the same gene.</li>
+    <li><b>Band B</b> stands in for your GMO-check band. It is the 195 bases between a pair of GMO-screening primers, read from the published genome sequence where those primers bind.</li>
+    <li><b>Band C</b> is a bonus. It is the 118 bases between a second pair of GMO-screening primers. Some kits test for both targets.</li>
+  </ul>
+  <div class="seqbox"><label for="bandA">Band A &middot; 455 bases</label><textarea id="bandA" rows="5" readonly spellcheck="false">ATGACTGCAATTTTAGAGAGACGCGAAAGTACAAGCCTGTGGGGTCGCTTCTGCAACTGGATAACTAGCACCGAAAACCGTCTTTACATTGGATGGTTCGGTGTTTTGATGATCCCTACCTTATTGACCGCAACTTCCGTATTTATTATCGCCTTCATCGCTGCTCCTCCAGTAGATATTGATGGTATTCGTGAGCCTGTTTCTGGTTCTTTACTTTATGGAAACAATATTATCTCTGGTGCTATTATTCCTACTTCTGCGGCGATAGGGTTGCATTTTTACCCAATTTGGGAAGCTGCATCTGTTGATGAATGGTTATACAATGGCGGTCCTTATGAGCTAATTGTTCTACACTTCTTACTTGGTGTAGCTTGTTATATGGGTCGTGAGTGGGAACTTAGTTTCCGTCTGGGTATGCGCCCTTGGATTGCTGTTGCATATTCAGCTCCTGTTGC</textarea><button type="button" class="copybtn" data-target="bandA">Copy</button><span class="copied" aria-live="polite"></span></div>
+  <div class="seqbox"><label for="bandB">Band B &middot; 195 bases</label><textarea id="bandB" rows="3" readonly spellcheck="false">GCTCCTACAAATGCCATCATTGCGATAAAGGAAAGGCCATCGTTGAAGATGCCTCTGCCGACAGTGGTCCCAAAGATGGACCCCCACCCACGAGGAGCATCGTGGAAAAAGAAGACGTTCCAACCACGTCTTCAAAGCAAGTGGATTGATGTGATATCTCCACTGACGTAAGGGATGACGCACAATCCCACTATC</textarea><button type="button" class="copybtn" data-target="bandB">Copy</button><span class="copied" aria-live="polite"></span></div>
+  <div class="seqbox"><label for="bandC">Band C &middot; 118 bases (bonus)</label><textarea id="bandC" rows="2" readonly spellcheck="false">GCATGACGTTATTTATGAGATGGGTTTTTATGATTAGAGTCCCGCAATTATACATTTAATACGCGATAGAAAACAAAATATAGCGCGCAAACTAGGATAAATTATCGCGCGCGGTGTC</textarea><button type="button" class="copybtn" data-target="bandC">Copy</button><span class="copied" aria-live="polite"></span></div>
+
+  <div class="protocol-box">
+    <ol>
+      <li>Open <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome" target="_blank" rel="noopener">Nucleotide BLAST</a> in a new Safari tab.</li>
+      <li>Tap <b>Copy</b> under Band A, then paste into the box labelled <b>Enter Query Sequence</b>.</li>
+      <li>Leave every other setting alone. Scroll down and tap the blue <b>BLAST</b> button. The search takes from 30 seconds to about two minutes.</li>
+      <li>On the <b>Descriptions</b> list, read the top five rows. Record the scientific name, <b>Per. Ident</b> (percent of bases that match), <b>Query Cover</b> (how much of your sequence lined up) and the <b>E value</b> in Table 1.</li>
+      <li>Go back, clear the box, and repeat with Band B. Try Band C if you have time.</li>
+    </ol>
+  </div>
+
+  <h3>Table 1 &middot; What the bands match</h3>
+  <div class="table-scroll">
+  <table class="lab">
+    <tr><th>Band</th><th>Top hit (scientific name)</th><th>Is it a plant, an animal, a bacterium, a virus or a fungus?</th><th>Per. Ident</th><th>Query Cover</th><th>E value</th></tr>
+    <tr><td>A</td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td></tr>
+    <tr><td>B</td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td></tr>
+    <tr><td>C</td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td><td class="blankcell"></td></tr>
+  </table>
+  </div>
+
+  <div class="student-questions">
+    <p><b>Part 1 questions.</b> Answer in your lab report.</p>
+    <ol>
+      <li>Look at the names in the top ten hits for Band A. What kinds of organisms are they? Use that list to explain why the plant check gives a band from nearly every plant food, cooked or raw.</li>
+      <li>What organism did Band B come from? Is it a plant?</li>
+      <li>Band B is part of a promoter, the stretch of DNA that tells RNA polymerase where to start reading a gene. Genetic engineers place this promoter in front of the gene they add to a crop. Using what you know about transcription, explain why borrowing a strong promoter makes sense.</li>
+      <li>A food gave a band in the plant lane and nothing in the GMO lane. Your lab manual lists three reasons that could happen. Which reason does Band B help you understand, and why?</li>
+      <li>The E value estimates how many matches this good you would expect to find by chance alone in a database this size. What does an E value near 0 (for example 1e&minus;100) tell you about the match?</li>
+    </ol>
+  </div>
+
+  <h2>Part 2 &middot; Line up one gene from ten organisms and build the tree</h2>
+  <p>
+    The plant-check gene, <i>psbA</i>, carries the instructions for the D1 protein of Photosystem II, the part of the light
+    reactions that splits water. Every plant and every cyanobacterium makes it, and it has to work or the cell cannot
+    photosynthesize. Because the protein is so important, its gene changes slowly over time, so it can be lined up
+    across organisms whose lineages split hundreds of millions of years ago or more. You will compare the gene from these ten:
+  </p>
+  <div class="table-scroll">
+  <table class="lab">
+    <tr><th>Organism</th><th>Scientific name</th><th>Where you find it</th><th>Record at NCBI</th></tr>
+    <tr><td>Corn</td><td><i>Zea mays</i></td><td>the positive control (cornmeal), and a common GM crop</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_001666.2" target="_blank" rel="noopener">NC_001666.2</a></td></tr>
+<tr><td>Oat</td><td><i>Avena sativa</i></td><td>the negative control (certified non-GM oatmeal)</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_027468.1" target="_blank" rel="noopener">NC_027468.1</a></td></tr>
+<tr><td>Wheat</td><td><i>Triticum aestivum</i></td><td>crackers, bread, flour</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_002762.1" target="_blank" rel="noopener">NC_002762.1</a></td></tr>
+<tr><td>Rice</td><td><i>Oryza sativa</i></td><td>rice, rice cakes</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_001320.1" target="_blank" rel="noopener">NC_001320.1</a></td></tr>
+<tr><td>Soybean</td><td><i>Glycine max</i></td><td>tofu, soy flour, veggie burgers</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_007942.1" target="_blank" rel="noopener">NC_007942.1</a></td></tr>
+<tr><td>Papaya</td><td><i>Carica papaya</i></td><td>fresh or dried papaya</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_010323.1" target="_blank" rel="noopener">NC_010323.1</a></td></tr>
+<tr><td>Canola</td><td><i>Brassica napus</i></td><td>canola meal (the oil carries no DNA)</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_016734.1" target="_blank" rel="noopener">NC_016734.1</a></td></tr>
+<tr><td>Potato</td><td><i>Solanum tuberosum</i></td><td>potato flakes</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_008096.2" target="_blank" rel="noopener">NC_008096.2</a></td></tr>
+<tr><td>Moss</td><td><i>Physcomitrium patens</i></td><td>a moss, the same kind of plant you put under the microscope in Lab 3</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_037465.1" target="_blank" rel="noopener">NC_037465.1</a></td></tr>
+<tr><td>Cyanobacterium</td><td><i>Synechocystis sp. PCC 6803</i></td><td>a photosynthetic bacterium that lives in fresh water</td><td><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000911.1" target="_blank" rel="noopener">NC_000911.1</a></td></tr>
+  </table>
+  </div>
+
+  <h3>Step A &middot; Predict before you align</h3>
+  <p>
+    On paper or in Notes, sketch the family tree you expect for the ten organisms. Then write one sentence each: which two
+    foods you expect to be most alike, and which organism you expect to differ most from corn.
+  </p>
+
+  <h3>Step B &middot; Copy the ten sequences</h3>
+  <div class="seqbox"><label for="fastaset">The ten psbA genes, in FASTA format</label><textarea id="fastaset" rows="8" readonly spellcheck="false">&gt;Corn_Zea
+ATGACTGCAATTTTAGAGAGACGCGAAAGTACAAGCCTGTGGGGTCGCTTCTGCAACTGG
+ATAACTAGCACCGAAAACCGTCTTTACATTGGATGGTTCGGTGTTTTGATGATCCCTACC
+TTATTGACCGCAACTTCCGTATTTATTATCGCCTTCATCGCTGCTCCTCCAGTAGATATT
+GATGGTATTCGTGAGCCTGTTTCTGGTTCTTTACTTTATGGAAACAATATTATCTCTGGT
+GCTATTATTCCTACTTCTGCGGCGATAGGGTTGCATTTTTACCCAATTTGGGAAGCTGCA
+TCTGTTGATGAATGGTTATACAATGGCGGTCCTTATGAGCTAATTGTTCTACACTTCTTA
+CTTGGTGTAGCTTGTTATATGGGTCGTGAGTGGGAACTTAGTTTCCGTCTGGGTATGCGC
+CCTTGGATTGCTGTTGCATATTCAGCTCCTGTTGCAGCTGCTACTGCTGTTTTCTTGATT
+TACCCTATTGGTCAAGGAAGTTTCTCTGATGGTATGCCTTTAGGAATATCTGGTACTTTC
+AACTTTATGATTGTATTCCAGGCAGAGCACAACATCCTTATGCATCCATTTCACATGTTA
+GGTGTAGCTGGTGTATTCGGCGGTTCCCTATTCAGTGCTATGCATGGTTCCCTTGTAACC
+TCTAGTTTGATCAGGGAAACCACTGAAAATGAGTCTGCTAATGAGGGTTACAAATTTGGT
+CAGGAAGAAGAGACTTATAATATTGTGGCTGCTCACGGTTATTTTGGTCGATTAATCTTC
+CAATATGCTAGTTTCAACAATTCTCGTTCTTTACACTTCTTCTTGGCTGCTTGGCCTGTA
+GTAGGGATCTGGTTCACTGCTTTAGGTATTAGTACTATGGCATTCAACCTAAATGGTTTC
+AATTTCAACCAATCTGTAGTTGATAGCCAAGGTCGCGTTATTAATACTTGGGCTGATATC
+ATCAACCGTGCTAATCTTGGTATGGAGGTAATGCACGAACGTAATGCTCACAACTTCCCT
+CTAGACCTAGCTGCTCTTGAAGTTCCTTACCTTAATGGATAA
+&gt;Oat_Avena
+ATGACTGCAATTTTAGAGAGACGCGAAAGTACAAGCCTGTGGGGTCGCTTCTGCAACTGG
+ATAACTAGCACTGAAAATCGTCTTTACATCGGATGGTTCGGTGTTTTGATGATCCCTACT
+TTATTGACCGCAACTTCTGTATTTATTATCGCCTTCATCGCTGCCCCTCCAGTAGATATT
+GATGGTATTCGTGAGCCTGTTTCTGGTTCTTTACTTTATGGAAACAATATTATCTCTGGT
+GCTATTATTCCTACTTCGGCAGCGATCGGATTGCACTTTTACCCAATTTGGGAAGCTGCA
+TCTGTTGATGAGTGGTTATACAATGGTGGTCCTTATGAGCTAATTGTTCTACACTTCTTA
+CTTGGTGTAGCTTGTTATATGGGTCGTGAGTGGGAACTTAGTTTCCGTTTGGGTATGCGT
+CCTTGGATTGCTGTTGCATACTCAGCTCCTGTTGCAGCTGCTACTGCTGTTTTCTTGATT
+TACCCTATTGGTCAAGGAAGCTTCTCTGATGGTATGCCTTTAGGAATCTCTGGTACTTTC
+AACTTTATGATTGTATTCCAGGCAGAGCACAACATCCTTATGCATCCATTCCACATGTTA
+GGTGTAGCTGGTGTATTCGGCGGTTCTTTATTCAGTGCTATGCATGGTTCCTTGGTAACC
+TCTAGTTTGATCAGGGAAACTACTGAAAATGAATCTGCTAATGAGGGTTACAAATTTGGT
+CAAGAGGAAGAGACTTATAATATTGTGGCTGCTCATGGTTATTTCGGCCGATTAATCTTC
+CAATATGCTAGTTTCAACAACTCTCGTTCTTTACACTTCTTCTTGGCTGCTTGGCCTGTA
+GTAGGGATCTGGTTCACTGCTTTAGGTATTAGTACTATGGCTTTCAACCTAAATGGTTTC
+AATTTCAACCAATCTGTAGTTGATAGTCAAGGTCGCGTTATTAATACTTGGGCTGATATC
+ATCAACCGCGCTAATCTTGGTATGGAAGTAATGCACGAACGTAATGCTCACAACTTCCCT
+CTAGACCTAGCTGCTCTTGAAGTTCCATCTCTTAATGGATAA
+&gt;Wheat_Triticum
+ATGACTGCAATTTTAGAGAGACGCGAAAGTACAAGCCTGTGGGGTCGCTTCTGCAACTGG
+ATAACTAGCACTGAAAATCGTCTTTACATCGGATGGTTCGGTGTTTTGATGATCCCTACC
+TTATTGACCGCAACTTCTGTATTTATTATCGCCTTCATCGCTGCCCCTCCAGTAGATATT
+GATGGTATTCGTGAGCCTGTTTCTGGTTCTTTACTTTATGGAAACAATATTATCTCTGGT
+GCTATTATCCCTACTTCTGCGGCGATCGGATTGCACTTTTACCCAATTTGGGAAGCTGCA
+TCTGTTGATGAGTGGTTATACAATGGTGGTCCTTATGAGCTAATTGTTCTACACTTCTTA
+CTTGGTGTAGCTTGTTATATGGGTCGTGAGTGGGAACTTAGTTTCCGTCTGGGTATGCGT
+CCTTGGATTGCTGTTGCATATTCAGCTCCTGTTGCAGCTGCCACTGCTGTTTTCTTGATT
+TACCCTATTGGTCAAGGAAGCTTTTCTGATGGTATGCCTTTAGGAATCTCTGGTACTTTC
+AACTTTATGATTGTATTCCAGGCAGAGCATAACATCCTTATGCATCCATTCCACATGTTA
+GGTGTAGCTGGTGTATTCGGCGGTTCCCTATTCAGTGCTATGCATGGTTCCTTGGTAACC
+TCTAGTTTGATCAGGGAAACTACTGAAAATGAATCTGCTAATGAGGGTTACAAATTTGGT
+CAAGAGGAAGAAACTTATAATATTGTGGCTGCTCATGGTTATTTTGGCCGATTAATCTTC
+CAATATGCTAGTTTCAACAACTCTCGTTCTTTACACTTCTTCTTGGCTGCTTGGCCTGTA
+GTAGGAATCTGGTTCACTGCTTTAGGTATTAGTACTATGGCTTTCAACCTAAATGGTTTC
+AATTTCAACCAATCTGTAGTTGATAGTCAAGGTCGCGTTATTAATACTTGGGCTGATATC
+ATCAACCGTGCTAACCTTGGTATGGAAGTAATGCACGAACGTAATGCTCACAACTTCCCT
+CTAGACTTAGCTGCTGTTGAAGTTCCATCTATTAATGGATAA
+&gt;Rice_Oryza
+ATGACTGCAATTTTAGAGAGACGCGAAAGTACAAGCCTGTGGGGTCGCTTCTGCAACTGG
+ATAACTAGCACCGAAAACCGTCTTTACATCGGATGGTTCGGTGTTTTGATGATCCCTACC
+TTATTGACCGCAACTTCTGTATTTATTATCGCCTTCATCGCTGCCCCTCCAGTAGATATT
+GATGGTATTCGTGAGCCTGTTTCTGGTTCTTTACTTTACGGAAACAATATTATCTCTGGT
+GCCATTATTCCTACTTCTGCGGCGATCGGATTGCACTTTTACCCAATTTGGGAAGCTGCA
+TCTGTTGATGAGTGGTTATACAATGGTGGTCCTTATGAGCTAATTGTTCTACACTTCTTA
+CTTGGTGTAGCTTGTTATATGGGTCGTGAGTGGGAACTGAGTTTCCGTCTGGGTATGCGT
+CCTTGGATTGCTGTTGCATATTCAGCTCCTGTTGCAGCTGCTACTGCTGTTTTCTTGATT
+TACCCTATTGGTCAAGGAAGTTTCTCTGATGGTATGCCTTTAGGAATATCTGGTACTTTC
+AACTTTATGATTGTATTCCAGGCAGAGCATAACATCCTTATGCATCCATTTCACATGTTA
+GGTGTAGCTGGTGTATTCGGCGGTTCCCTATTCAGTGCTATGCATGGTTCCTTGGTAACC
+TCTAGTTTGATCAGGGAAACCACTGAAAACGAATCTGCTAATGAGGGTTACAGATTTGGT
+CAAGAGGAAGAAACTTATAATATTGTGGCCGCTCATGGTTATTTTGGCCGATTAATCTTC
+CAATATGCTAGTTTTAACAACTCTCGTTCTTTACACTTCTTCTTGGCTGCTTGGCCTGTA
+GTAGGGATTTGGTTCACTGCTTTAGGTATTAGTACTATGGCTTTCAATCTAAACGGATTC
+AATTTCAACCAATCTGTAGTTGATAGCCAAGGTCGCGTTATTAATACTTGGGCTGATATC
+ATCAACCGTGCTAATCTTGGTATGGAAGTAATGCACGAACGTAATGCTCACAACTTCCCT
+CTAGACCTAGCTGCTCTTGAAGTTCCATCTCTTAATGGATAA
+&gt;Soybean_Glycine
+ATGACTGCAATTTTAGAGAGACGCGAGAGCGAAAGCCTATGGGGTCGCTTCTGTAACTGG
+ATAACCAGCACCGAAAATCGTCTTTACATTGGATGGTTTGGTGTTTTGATGATTCCTACT
+TTATTGACCGCAACTTCTGTATTTATTATCGCTTTTATTGCTGCCCCTCCAGTAGATATT
+GATGGTATTCGTGAGCCTGTTTCTGGATCTCTACTTTATGGAAACAATATCATTTCTGGT
+GCCATTATTCCTACTTCTGCGGCTATAGGTTTGCACTTTTATCCTATTTGGGAAGCGGCA
+TCTGTTGATGAATGGTTATACAACGGCGGTCCTTATGAACTAATTGTTCTACACTTCTTA
+CTTGGTGTAGCTTGCTACATGGGGCGTGAGTGGGAACTTAGTTTTCGTTTGGGTATGCGT
+CCTTGGATTGCTGTTGCATATTCAGCTCCTGTTGCAGCCGCTACTGCTGTTTTCTTGATC
+TATCCTATTGGTCAGGGAAGCTTTTCAGATGGTATGCCTCTAGGAATTTCAGGTACTTTC
+AATTTTATGATTGTATTTCAGGCTGAGCATAATATTCTTATGCATCCATTTCACATGTTA
+GGTGTAGCTGGTGTATTCGGCGGCTCCCTATTCAGTGCTATGCATGGTTCCTTGGTAACT
+TCTAGTTTGATCAGGGAAACCACAGAAAATGAATCTGCTAATGAAGGTTACAGATTTGGT
+CAAGAGGAAGAAACCTATAATATTGTAGCTGCTCATGGTTATTTTGGCCGATTGATCTTC
+CAATATGCAAGTTTCAACAATTCTCGTTCTTTACATTTCTTCTTAGCTGCTTGGCCTGTA
+GTAGGTATTTGGTTTACCGCTTTAGGTATCAGCACTATGGCTTTCAACTTAAATGGTTTC
+AATTTCAACCAATCCGTAGTTGATAGTCAAGGTCGTGTAATTAATACCTGGGCTGATATT
+ATTAACCGAGCTAACCTTGGTATGGAAGTAATGCATGAACGTAATGCTCATAATTTCCCT
+CTAGATCTAGCTGCGATCGACGCTCCATCTATTAATGGATAA
+&gt;Papaya_Carica
+ATGACTGCAATTTTAGAGAGACGCGAAAGCGAAAGCCTATGGGGTCGCTTCTGTAACTGG
+ATAACCAGCACTGAAAACCGTCTTTACATTGGATGGTTTGGTGTTTTGATGATCCCTACC
+TTATTGACCGCAACTTCTGTATTTATTATCGCATTCATTGCTGCTCCTCCAGTAGATATT
+GATGGTATTCGTGAACCTGTTTCTGGATCTCTACTTTATGGAAACAATATTATTTCTGGT
+GCCATTATTCCTACTTCTGCAGCTATAGGTTTGCACTTTTACCCGATCTGGGAAGCGGCA
+TCCGTTGATGAATGGTTATACAATGGCGGTCCTTATGAACTAATTGTTCTACACTTCTTA
+CTTGGTGTAGCTTGTTACATGGGTCGTGAGTGGGAACTTAGTTTCCGTCTGGGTATGCGT
+CCGTGGATTGCTGTTGCATATTCAGCTCCTGTTGCAGCTGCTACCGCTGTTTTCTTGATC
+TACCCAATCGGTCAAGGAAGTTTTTCTGATGGTATGCCTCTAGGAATCTCTGGTACTTTC
+AACTTCATGATTGTATTCCAGGCTGAGCACAACATTCTTATGCACCCATTTCACATGTTA
+GGCGTAGCTGGTGTATTCGGCGGCTCCCTATTCAGTGCTATGCATGGTTCCTTGGTAACT
+TCTAGTTTGATCAGGGAAACCACAGAAAATGAATCTGCTAATGAAGGTTACAGATTCGGT
+CAAGAGGAAGAAACTTATAATATCGTAGCTGCTCATGGTTATTTTGGCCGATTGATCTTC
+CAATATGCTAGTTTCAACAACTCTCGTTCTTTACATTTCTTCTTAGCGGCTTGGCCTGTA
+GTAGGTATCTGGTTCACTGCTTTAGGTATTAGCACTATGGCTTTCAACCTAAATGGTTTC
+AATTTCAACCAGTCTGTAGTTGATAGTCAAGGTCGTGTAATTAACACTTGGGCTGATATT
+ATTAACCGTGCTAACCTTGGTATGGAAGTTATGCATGAACGTAATGCTCACAACTTCCCT
+CTAGACCTAGCGGCTGTTGAAGCTCCATCTACAAATGGATAA
+&gt;Canola_Brassica
+ATGACTGCAATTTTAGAGAGACGCGAAAGCGAAAGCCTATGGGGTCGCTTCTGTAACTGG
+ATAACTAGTACTGAAAACCGTCTTTACATTGGATGGTTTGGTGTTTTGATGATCCCTACC
+TTATTGACCGCAACTTCCGTTTTTATTATCGCATTCATTGCTGCTCCTCCAGTAGATATT
+GATGGTATTCGTGAACCTGTTTCTGGATCTCTTCTTTACGGAAACAATATTATTTCAGGT
+GCCATTATTCCTACTTCTGCAGCTATTGGTTTGCATTTTTACCCGATCTGGGAAGCTGCA
+TCCGTTGATGAATGGCTATACAACGGTGGTCCTTATGAACTAATTGTTCTACACTTTTTA
+CTTGGTGTAGCTTGTTATATGGGTCGTGAGTGGGAACTTAGTTTCCGTCTGGGTATGCGT
+CCTTGGATTGCTGTTGCATATTCAGCTCCTGTTGCAGCTGCTACTGCTGTTTTCTTGATC
+TACCCAATTGGTCAAGGAAGTTTTTCTGATGGTATGCCTCTAGGAATCTCTGGTACTTTC
+AACTTTATGATTGTATTCCAGGCTGAGCACAACATTCTTATGCACCCATTTCACATGTTA
+GGTGTAGCTGGTGTATTCGGCGGCTCCCTATTTAGTGCTATGCATGGTTCTTTGGTAACT
+TCTAGTTTGATCAGGGAAACCACAGAAAATGAATCTGCTAATGAAGGTTACAGATTCGGT
+CAAGAAGAAGAAACTTACAACATTGTAGCTGCTCACGGTTATTTTGGCCGATTGATCTTC
+CAATATGCTAGTTTCAACAATTCTCGTTCTTTACATTTCTTCTTAGCGGCTTGGCCGGTA
+GTAGGTATTTGGTTTACTGCTTTAGGTATTAGTACTATGGCTTTCAACCTAAATGGTTTC
+AATTTCAACCAATCAGTAGTTGATAGTCAAGGACGTGTTATTAATACTTGGGCTGATATT
+ATTAACCGTGCTAACCTTGGTATGGAAGTTATGCATGAACGTAATGCTCACAACTTCCCT
+CTAGACCTAGCTGCTGTTGAGGCTCCATCTATAAATGGATAA
+&gt;Potato_Solanum
+ATGACTGCAATTTTAGAGAGACGCGAAAGCGAAAGCCTATGGGGTCGCTTCTGTAACTGG
+ATAACTAGCACTGAAAACCGTCTTTACATTGGATGGTTTGGTGTTTTGATGATCCCTACC
+TTATTGACGGCAACTTCTGTATTTATTATTGCCTTCATTGCTGCTCCTCCAGTAGACATT
+GATGGTATTCGTGAACCTGTTTCAGGGTCTCTACTTTACGGAAACAACATTATTTCCGGT
+GCCATTATTCCTACTTCTGCAGCTATAGGTTTACATTTTTACCCAATCTGGGAAGCGGCA
+TCCGTTGATGAATGGTTATACAACGGTGGTCCTTATGAACTAATTGTTCTACACTTCTTA
+CTTGGCGTAGCTTGTTACATGGGTCGTGAGTGGGAGCTTAGCTTCCGTCTGGGTATGCGA
+CCTTGGATTGCTGTTGCATATTCAGCTCCTGTTGCAGCTGCTACCGCAGTTTTCTTGATC
+TACCCAATTGGTCAAGGAAGTTTTTCTGATGGTATGCCTCTAGGAATCTCTGGTACTTTC
+AATTTCATGATTGTATTCCAGGCTGAGCACAACATCCTTATGCACCCATTTCACATGTTA
+GGCGTAGCTGGGGTATTCGGCGGCTCCCTATTCAGTGCTATGCATGGTTCCTTGGTAACT
+TCTAGTTTGATCAGGGAAACCACAGAAAATGAATCTGCTAATGAAGGTTACAGATTCGGT
+CAAGAGGAAGAAACTTATAATATCGTAGCCGCTCATGGTTATTTTGGCCGATTGATCTTC
+CAATATGCTAGTTTCAACAACTCTCGTTCGTTACACTTCTTCTTAGCTGCTTGGCCTGTA
+GTAGGTATCTGGTTTACCGCTTTAGGTATCAGCACTATGGCTTTCAACCTAAATGGTTTC
+AATTTCAACCAATCTGTAGTTGACAGTCAGGGTCGTGTAATTAACACTTGGGCTGATATC
+ATCAACCGTGCTAACCTTGGTATGGAAGTTATGCATGAACGTAATGCTCATAACTTCCCT
+CTAGACCTAGCTGCTATCGAAGCTCCATCTACAAATGGATAA
+&gt;Moss_Physcomitrium
+ATGACTGCTACTTTAGAAAGACGCGAAAGCGCAAGCCTATGGGGTCGCTTCTGCGACTGG
+GTTACCAGCACTGAAAACCGCCTTTACATCGGATGGTTCGGTGTTTTAATGATTCCTACT
+CTATTAACTGCAACTTCTGTATTTATTATTGCTTTCATTGCAGCTCCTCCTGTAGATATT
+GATGGTATCCGTGAGCCTGTTTCTGGTTCTCTTCTTTACGGAAACAACATCATCTCTGCT
+GCTATCATCCCTACTTCTGCAGCTATCGGTTTGCACTTCTACCCAATTTGGGAAGCTGCT
+TCCGTTGATGAATGGCTTTACAACGGTGGTCCTTACGAGTTAATCGTTCTTCACTTCTTA
+CTTGGTGTAGCTTGCTACATGGGTCGTGAGTGGGAACTTAGCTACCGTTTAGGTATGCGT
+CCTTGGATCGCTGTTGCATATTCAGCTCCTGTTGCGGCTGCTACTGCTGTTTTCTTGATC
+TACCCAATTGGTCAAGGAAGCTTCTCTGACGGTATGCCTTTAGGAATCTCTGGTACTTTC
+AACTTCATGATTGTGTTCCAAGCTGAACACAACATCCTTATGCACCCATTCCACATGCTT
+GGTGTAGCTGGTGTATTCGGTGGCTCTCTATTCAGTGCTATGCATGGTTCCTTAGTAACT
+TCAAGTTTAATCCGTGAAACTACTGAGAATGAGTCTGCTAACGCAGGTTACAAGTTTGGT
+CAAGAGGAAGAAACTTACAACATCGTAGCTGCTCACGGTTACTTTGGTAGATTAATTTTC
+CAATACGCTAGCTTTAACAACTCTCGTTCTTTACACTTCTTCTTAGCTGCTTGGCCTGTA
+GTAGGTATCTGGTTCACTGCATTAGGTATCAGCACTATGGCTTTCAACTTAAACGGTTTC
+AACTTCAACCAATCTGTTGTTGACAGTCAAGGTCGTGTTATTAACACTTGGGCTGACATC
+ATCAACCGTGCTAACCTTGGTATGGAAGTTATGCATGAACGTAACGCTCACAACTTCCCT
+CTAGACTTAGCTTCTGTTGAAGCTCCTTCTGTAAACGGTTAA
+&gt;Cyanobacterium_Synechocystis
+ATGACAACGACTCTCCAACAGCGCGAAAGCGCTTCCTTGTGGGAACAGTTTTGTCAGTGG
+GTGACCTCTACCAACAACCGGATTTATGTCGGTTGGTTCGGTACCTTGATGATCCCCACC
+CTCTTAACTGCCACCACTTGCTTCATCATTGCCTTCATCGCCGCTCCCCCCGTTGACATC
+GACGGTATCCGTGAGCCCGTTGCTGGTTCTTTGCTTTACGGTAACAACATCATCTCTGGT
+GCTGTTGTACCTTCTTCCAACGCTATCGGTTTGCACTTCTACCCCATCTGGGAAGCCGCT
+TCCTTAGATGAGTGGTTGTACAACGGTGGTCCTTACCAGTTGGTAGTATTCCACTTCCTC
+ATCGGCATTTTCTGCTACATGGGTCGTCAGTGGGAACTTTCCTACCGCTTAGGTATGCGT
+CCTTGGATTTGTGTGGCTTACTCTGCCCCCGTATCCGCTGCCACCGCCGTATTCTTGATC
+TACCCCATTGGTCAAGGCTCCTTCTCTGATGGTATGCCCTTGGGTATTTCTGGTACCTTC
+AACTTCATGATCGTGTTCCAAGCTGAGCACAACATCCTGATGCACCCCTTCCACATGTTA
+GGTGTGGCTGGTGTATTCGGTGGTAGCTTGTTCTCCGCCATGCACGGTTCCTTGGTAACC
+TCCTCCTTGGTGCGTGAAACCACCGAAGTTGAATCCCAGAACTACGGTTACAAATTCGGT
+CAAGAAGAAGAAACCTACAACATCGTTGCCGCCCACGGCTACTTTGGTCGGTTGATCTTC
+CAATATGCTTCTTTCAACAACAGCCGTTCCTTGCACTTCTTCTTGGGTGCTTGGCCTGTA
+ATCGGCATCTGGTTCACTGCTATGGGTGTAAGCACCATGGCGTTCAACCTGAACGGTTTC
+AACTTCAACCAGTCCATCTTGGATAGCCAAGGCCGGGTAATCGGCACCTGGGCTGATGTA
+TTGAACCGAGCCAACATCGGTTTTGAAGTAATGCACGAACGCAATGCCCACAACTTCCCC
+CTCGACTTAGCGTCTGGGGAGCAAGCTCCTGTGGCTTTGACCGCTCCTGCTGTCAACGGT
+TAA</textarea><button type="button" class="copybtn" data-target="fastaset">Copy</button><span class="copied" aria-live="polite"></span></div>
+
+  <h3>Step C &middot; Align them with Clustal Omega</h3>
+  <div class="protocol-box">
+    <ol>
+      <li>Open <a href="https://www.ebi.ac.uk/jdispatcher/msa/clustalo" target="_blank" rel="noopener">Clustal Omega</a> at the European Bioinformatics Institute in a new Safari tab.</li>
+      <li>Under <b>Sequence type</b>, choose <b>DNA</b>.</li>
+      <li>Paste the ten sequences into the box and tap <b>Submit</b>. Leave the tab open; the job usually finishes in about a minute.</li>
+      <li>On the alignment, a <b>*</b> under a column means all ten organisms have the same base there. Scroll through the first 120 columns. Which organism most often breaks a run of stars?</li>
+      <li>Find the <b>Percent Identity Matrix</b> under the results summary, and fill in Table 2.</li>
+      <li>Open the <b>Phylogenetic Tree</b> view. Sketch the tree beside your prediction.</li>
+      <li>Open the <a href="tree-of-life.html">Tree of Life Explorer</a> and find the grasses, the legumes, the mustards, the nightshades, the mosses and the cyanobacteria. Note where your tree agrees with it and where it does not.</li>
+    </ol>
+  </div>
+
+  <h3>Table 2 &middot; How alike are the genes?</h3>
+  <div class="table-scroll">
+  <table class="lab">
+    <tr><th>Organism 1</th><th>Organism 2</th><th>Percent identity</th></tr>
+    <tr><td>Wheat</td><td>Oat</td><td class="blankcell"></td></tr>
+<tr><td>Corn</td><td>Rice</td><td class="blankcell"></td></tr>
+<tr><td>Corn</td><td>Soybean</td><td class="blankcell"></td></tr>
+<tr><td>Papaya</td><td>Canola</td><td class="blankcell"></td></tr>
+<tr><td>Soybean</td><td>Potato</td><td class="blankcell"></td></tr>
+<tr><td>Corn</td><td>Moss</td><td class="blankcell"></td></tr>
+<tr><td>Corn</td><td>Cyanobacterium</td><td class="blankcell"></td></tr>
+<tr><td>Moss</td><td>Cyanobacterium</td><td class="blankcell"></td></tr>
+  </table>
+  </div>
+
+  <div class="student-questions">
+    <p><b>Part 2 questions.</b> Answer in your lab report.</p>
+    <ol start="6">
+      <li>Which pair in Table 2 matched most closely? Did your tree place corn, rice, wheat and oat together on one branch?</li>
+      <li>List corn&rsquo;s percent identity with soybean, moss and the cyanobacterium from highest to lowest. What does that order suggest about when each lineage split from the line that led to corn?</li>
+      <li>The cyanobacterium is a bacterium, yet its gene lines up with the chloroplast genes of plants along its whole length. Use what you know about where chloroplasts came from to explain why.</li>
+      <li>Papaya and canola belong to the same plant order, Brassicales. Did your tree put them side by side? A gene that changes slowly makes an excellent universal plant check in Part 1. Explain why the same slow change makes it weaker at sorting close relatives.</li>
+      <li>Write a CER for this claim: <i>Corn is more closely related to rice than to soybean.</i> Use at least two numbers from Table 2 and one feature of your tree as evidence.</li>
+    </ol>
+  </div>
+
+  <div class="teacher-note">
+    <p class="teacher-label"><b>For the teacher</b></p>
+    <p>Part 1 fits inside the 45-minute gel run on Day 2, so the time the gel takes becomes analysis time. Part 2 fits the Lab 10 window (GMO Part 2 and evolution). Before the lab day, open both sites on a student iPad on the school network. The expected results and a key are kept with the course, not posted here.</p>
+  </div>
+
+  <p class="sources">
+    Sequences, all from NCBI GenBank and RefSeq, read on 26 November 2026: <i>psbA</i> coding sequences from the
+    chloroplast genomes listed in the table above and from the <i>Synechocystis</i> sp. PCC 6803 genome (NC_000911.1).
+    Band A is bases 1&ndash;455 of the corn <i>psbA</i> coding sequence (protein NP_043004.1). Band B is bases
+    7,190&ndash;7,384 of NC_001497.1, between the primers 5&prime;-GCTCCTACAAATGCCATCA-3&prime; and
+    5&prime;-GATAGTGGGATTGTGCGTCA-3&prime;. Band C is bases 1,965&ndash;2,082 of V00087.1, between the primers
+    5&prime;-GCATGACGTTATTTATGAGATGGG-3&prime; and 5&prime;-GACACCGCGCGCGATAATTTATCC-3&prime;.
+    Thermocycler program and band sizes from the NVCC BIO 101 laboratory manual, Lab 9. Tools: NCBI BLAST
+    (blast.ncbi.nlm.nih.gov) and Clustal Omega at EMBL-EBI (ebi.ac.uk/jdispatcher).
+  </p>
+  <p class="tag-inline">Canvas Original #80 &middot; &copy; J. R. Schwebach, CC BY-NC 4.0</p>
+</article>
+
+<footer class="site-footer">
+  Written and maintained by Mr. Schwebach
+  <span class="license">All one-pagers &copy; J.&nbsp;R. Schwebach, licensed <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a> &mdash; free to use, adapt, and hand to a class; not for resale.</span>
+</footer>
+
+<script>
+document.querySelectorAll('.copybtn').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.getAttribute('data-target'));
+    var note = b.parentNode.querySelector('.copied');
+    function done(ok) { note.textContent = ok ? 'Copied. Now paste it.' : 'Select the text and copy it by hand.'; }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t.value).then(function () { done(true); }, function () { fallback(); });
+      } else { fallback(); }
+    } catch (e) { fallback(); }
+    function fallback() {
+      try { t.focus(); t.select(); t.setSelectionRange(0, t.value.length); done(document.execCommand('copy')); }
+      catch (e) { done(false); }
+    }
+  });
+});
+</script>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82bc6616569842b9ab63b89bf80ed3c5"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
