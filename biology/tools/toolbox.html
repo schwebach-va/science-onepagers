@@ -98,6 +98,12 @@ table.key th,table.key td{border:1px solid var(--rule);padding:.3rem .45rem;text
 .stage.slidable svg{touch-action:pan-y;cursor:grab}
 .btn.cutbtn{margin-left:auto;padding:.55rem 1.4rem}
 .choices.three{grid-template-columns:repeat(3,1fr)}
+.dex{margin:.9rem 0 .3rem;border:2px solid var(--bond);border-radius:8px;padding:.7rem .85rem .8rem;background:var(--card)}
+.dexhead{display:flex;align-items:center;gap:.5rem;font-family:var(--sans);font-size:1.05rem}
+.dext{font-family:var(--sans);font-size:1.08rem;margin:.6rem 0 .3rem}
+.dexsay{font-size:1rem;line-height:1.5;max-width:44rem}
+.dex .stage{margin:.2rem 0 .5rem}
+.dexin{font-family:var(--sans);font-size:1.1rem;min-height:48px;width:9rem;padding:.3rem .5rem;border:2px solid var(--shell);border-radius:6px}
 .choices.three .choice{justify-content:center;font-size:1.7rem;font-weight:700}
 .choice .mini2{flex:0 0 150px;width:150px;height:56px}
 .fill{border-bottom:2px solid var(--ink);font-weight:700;padding:0 .35rem}
@@ -183,6 +189,7 @@ html.proj .scard{font-size:1.3rem}html.proj .pile b{font-size:1.5rem}html.proj .
     <div class="seg" id="levelsw" role="group" aria-label="Level">
       <button type="button" data-level="general" aria-pressed="false">SOL General</button>
       <button type="button" data-level="advanced" aria-pressed="false">SOL Advanced</button>
+      <button type="button" data-level="de" aria-pressed="false">DE Bio</button>
     </div>
   </div>
   <nav class="secbar" aria-label="Sections">
@@ -201,7 +208,7 @@ html.proj .scard{font-size:1.3rem}html.proj .pile b{font-size:1.5rem}html.proj .
 
   <div id="teacher" class="hidden"></div>
 
-  <footer class="sop-foot">Biology I &middot; Unit 4 &middot; SOL BIO.5e &middot; nothing is saved or submitted. The cases, places and suspects are made up. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.</footer>
+  <footer class="sop-foot"><span id="footcourse">Biology I &middot; Unit 4 &middot; SOL BIO.5e</span> &middot; nothing is saved or submitted. The cases, places and suspects are made up. &copy; J.&nbsp;R. Schwebach, <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC&nbsp;BY-NC&nbsp;4.0</a>.</footer>
 </div>
 <script>
 (function(){
@@ -247,7 +254,8 @@ function matchIndex(c){var m=-1;c.sus.forEach(function(s,i){if(isMatch(c.scene,s
    add an entry here (predict, twist cases, ladder labels in bp) and a button in #levelsw. */
 var LEVELS={
   general:{label:"SOL General",predict:false,twist:false,counts:true,reason:true},
-  advanced:{label:"SOL Advanced",predict:true,twist:true,counts:false,reason:false}
+  advanced:{label:"SOL Advanced",predict:true,twist:true,counts:false,reason:false},
+  de:{label:"DE Bio",predict:true,twist:true,counts:false,reason:false}   /* DE: SOL Advanced screens, then the college extension */
 };
 var Q;try{Q=new URLSearchParams(location.search);}catch(e){Q={get:function(){return null;}};}
 var PROJ=Q.get("projector")==="1", TEACHER=Q.get("teacher")==="1",TIMER=TEACHER||Q.get("timer")==="1";
@@ -467,7 +475,7 @@ var SC={
     h+='<div class="stage sm"><svg viewBox="0 70 600 516" role="img" aria-label="The finished gel to copy: ladder, scene and suspects 1, 2, 3">'+drawGel(c,{prog:1,ends:true,guides:true})+'</svg></div><ul class="sus">';
     c.who.forEach(function(w,i){h+='<li><b>'+(i+1)+'</b>'+w+'</li>';});
     h+='</ul><div class="frame"><p><b>Claim:</b> the DNA at the scene came from '+bl+'.</p><p><b>Evidence:</b> '+bl+' bands line up.</p><p><b>Reasoning:</b> '+(L.reason?'same cuts mean the same DNA spelling in those places; small pieces run farther.':'<span class="blank long"></span>')+'</p><p>Does a match prove this person did it? <b>yes / no</b></p></div>';
-    if(S.finished)h+='<p class="done">&#10003; Crime Lab done.</p>';
+    if(S.finished)h+='<p class="done">&#10003; Crime Lab done.</p>'+deCard("gel");
     if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(S.t1-S.t0)+(S.t2?'. Done tapped at '+fmt(S.t2-S.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
     return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Try another case")+(S.finished?'':B("done","Done","go"))+'</div><p class="fine" style="margin-top:.7rem">Crime labs today copy short repeats and read them on a machine instead of a gel. The idea is the same: different people, different DNA pieces.</p>'};}
 };
@@ -527,7 +535,7 @@ var DNA20="GATCCTTGACCAGGTAACTG".split(""),GUIDE="GAACUGGUCC".split(""),T0=4,CUT
 var RPAIR={A:"U",T:"A",C:"G",G:"C"};
 function fits(off,i){return RPAIR[DNA20[off+i]]===GUIDE[i];}
 function nFit(off){var n=0;for(var i=0;i<10;i++)if(fits(off,i))n++;return n;}
-var CLEVELS={general:{predict:false,start:2,pics:true},advanced:{predict:true,start:0,pics:false}};
+var CLEVELS={general:{predict:false,start:2,pics:true},advanced:{predict:true,start:0,pics:false}};CLEVELS.de=CLEVELS.advanced;
 var CR={i:0,screens:[],off:0,locked:false,refused:false,hint:0,mc:{},t0:0,t1:0,t2:0,finished:false,started:false,ht:0,st:0};
 var croot=document.getElementById("crisprroot");
 function cq(s){return croot.querySelector(s);}
@@ -687,6 +695,7 @@ var CSC={
     h+='<div class="stage sm"><svg viewBox="0 0 640 150" role="img" aria-label="DNA G A T C, then boxed C T T G A C C A G G, then T A A C T G. Guide RNA under the boxed bases: G A A C U G G U C C. A red line marks the cut between the seventh and eighth boxed bases.">'+drawStrip({h:150,off:T0,box:true,mark:true,line:true,locked:true})+'</svg></div>';
     h+='<div class="frame"><p>After the cut, the patient\'s cells turn <span class="fill">fetal hemoglobin</span> back on, and the red blood cells stay <span class="fill">round</span>.</p></div>';
     if(CR.finished)h+='<p class="done">&#10003; CRISPR done.</p><div class="early"><b>Done early?</b> Station 3 added a gene. Station 4 cut a gene. Tell your group one way they are alike and one way they are different.</div>';
+    if(CR.finished)h+=deCard("crispr");
     if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(CR.t1-CR.t0)+(CR.t2?'. Done tapped at '+fmt(CR.t2-CR.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
     return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Start over")+(CR.finished?'':B("done","Done","go"))+'</div>'};}
 };
@@ -721,7 +730,7 @@ croot.addEventListener("click",function(e){
    SOL level: heat and cool only, with no lab settings and no numbers on the thermometer.
    Levels: same cycles, same table, same answers. A third level (DE Bio 101) can add the lab detail from
    the spring lab: add an entry to PLEVELS. */
-var PLEVELS={general:{predict:false,frame:true},advanced:{predict:true,frame:false}};
+var PLEVELS={general:{predict:false,frame:true},advanced:{predict:true,frame:false}};PLEVELS.de=PLEVELS.advanced;
 var PC={i:0,screens:[],cyc:0,auto:false,pred:null,mc:{},t0:0,t1:0,t2:0,finished:false,started:false};
 var proot=document.getElementById("pcrroot");
 function pq(s){return proot.querySelector(s);}
@@ -850,6 +859,7 @@ var PSC={
     var h=phead("Packet p. 6A, box 1","Cycles 0&ndash;3: 1, 2, 4, 8 DNA.")+pcTable(3,-1,2);
     h+='<div class="frame"><p>The PCR machine heats and cools over and over because '+(L.frame?'<span class="fill">heat pulls the strands apart so each can be a template</span>':'<span class="blank long"></span>')+', and each cycle '+(L.frame?'<span class="fill">doubles</span>':'<span class="blank"></span>')+' the DNA.</p></div>';
     if(PC.finished)h+='<p class="done">&#10003; PCR done.</p><div class="early"><b>Done early?</b> A police lab has one drop of blood, too little DNA to test. Explain to your group how PCR solves that problem, and how many copies 10 cycles would make.</div>';
+    if(PC.finished)h+=deCard("pcr");
     if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(PC.t1-PC.t0)+(PC.t2?'. Done tapped at '+fmt(PC.t2-PC.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
     return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Start over")+(PC.finished?'':B("done","Done","go"))+'</div>'};}
 };
@@ -883,7 +893,7 @@ proot.addEventListener("click",function(e){
    Colors as on card 3: plasmid black, insulin gene orange, ligase blue dots, cut marks red dashed.
    Levels: same pictures, same order, same answers. A third level (DE Bio 101) can add the spring lab's
    detail: add an entry to LLEVELS. */
-var LLEVELS={general:{predict:false,bases:false,first:true},advanced:{predict:true,bases:true,first:false}};
+var LLEVELS={general:{predict:false,bases:false,first:true},advanced:{predict:true,bases:true,first:false}};LLEVELS.de=LLEVELS.advanced;
 var PL={i:0,screens:[],pred:null,pasted:false,busy:false,ord:null,t0:0,t1:0,t2:0,finished:false,started:false};
 var lroot=document.getElementById("plasmidroot");
 function lq(s){return lroot.querySelector(s);}
@@ -1056,6 +1066,7 @@ var LSC={
     h+='</ol><div class="stage"><svg viewBox="0 0 400 200" role="img" aria-label="The new ring: the black plasmid with the orange insulin gene at the top. A blue dot at each joint: one is labeled ligase seals here, the other sticky end.">'+drawLRing()+'</svg></div></div>';
     h+='<div class="frame"><p>Beads in the new ring: <span class="fill">20 + 10 = 30</span></p></div>';
     if(PL.finished)h+='<p class="done">&#10003; Plasmid done.</p><div class="early"><b>Done early?</b> A scientist wants to check that the plasmid really got the gene. The new plasmid is bigger. Which station\'s tool would show that, and would the bigger plasmid run farther or less far?</div>';
+    if(PL.finished)h+=deCard("plasmid");
     if(TIMER)h+='<p class="fine">Timer: reached this screen at '+fmt(PL.t1-PL.t0)+(PL.t2?'. Done tapped at '+fmt(PL.t2-PL.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
     return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Start over")+(PL.finished?'':B("done","Done","go"))+'</div><p class="fine" style="margin-top:.7rem">For home, not station time: <a href="mechanism-reel.html?anim=cloning" target="_blank" rel="noopener">See it run</a> in the Mechanism Reel (Bio Tool #28).</p>'};}
 };
@@ -1113,7 +1124,7 @@ var SCARDS=[
 var SA_ORDER="Which has to happen first with one drop of blood?";                       /* card A, gel tapped before PCR */
 var SA_THEN="Now there is plenty of DNA. Which tool compares it with each suspect's?";  /* card A, second tool missed */
 var SP6A="Write one card that needed two tools, and the two tools in order:";           /* packet p. 6A, Which Tool? */
-var SLEVELS={general:{jobs:"always"},advanced:{jobs:"first"}};
+var SLEVELS={general:{jobs:"always"},advanced:{jobs:"first"}};SLEVELS.de=SLEVELS.advanced;
 var SO={started:false,i:0,order:[],sel:-1,placed:{},step:{},miss:{},shown:{},fb:"",jobs:false,nope:"",pop:-1,all:false,finished:false,t0:0,t1:0,t2:0};
 var sroot=document.getElementById("sortroot"),sKey=false;
 function isReview(){return Q.get("review")==="1"||/[?&]review=1(&|$)/.test(location.hash);}
@@ -1149,7 +1160,7 @@ function sPaper(){
   if(!SO.t1)SO.t1=Date.now();
   var rev=isReview()||TEACHER,h=shead("Packet p. 6A, Which Tool?")+'<p class="bigcase">'+sCount()+' of '+SCARDS.length+'</p>';
   h+='<div class="frame"><p>'+SP6A+'</p><p><span class="blank long"></span></p></div>';
-  if(SO.finished)h+='<p class="done">&#10003; Which Tool done.</p>';
+  if(SO.finished)h+='<p class="done">&#10003; Which Tool done.</p>'+deCard("sort");
   if(rev&&SO.all)h+=sKeyTable(false);
   if(TIMER)h+='<p class="fine">Timer: all 8 sorted at '+fmt(SO.t1-SO.t0)+(SO.t2?'. Done tapped at '+fmt(SO.t2-SO.t0)+', copying included.':'. Tap Done when the paper is finished.')+'</p>';
   return {html:h+'<div class="btnrow">'+B("back","&larr; Back")+B("again","Sort again")+(rev?B("all",SO.all?"Hide the reasons":"Show all reasons"):'')+(SO.finished?'':B("done","Done","go"))+'</div>'};
@@ -1247,7 +1258,7 @@ sroot.addEventListener("pointercancel",function(e){sUp(e,true);});
 function paintLevel(){Array.prototype.forEach.call(document.querySelectorAll("#levelsw button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-level")===S.level?"true":"false");});}
 document.getElementById("levelsw").addEventListener("click",function(e){
   var b=e.target.closest?e.target.closest("[data-level]"):null;if(!b||b.getAttribute("data-level")===S.level)return;
-  S.level=b.getAttribute("data-level");paintLevel();
+  S.level=b.getAttribute("data-level");paintLevel();dePage();
   try{var u=new URL(location.href);u.searchParams.set("level",S.level);history.replaceState(null,"",u.toString());}catch(x){}
   newCase(allowed().indexOf(S.ci)>=0?S.ci:randomCase(-1));
   if(CR.started){CR.started=false;crLeave();if(showSec.cur==="crispr")crStart();}
@@ -1271,6 +1282,154 @@ function showSec(){
   if(h==="sort"){if(SO.started)srender();else sStart();}
 }
 window.addEventListener("hashchange",showSec);
+
+/* ---------- DE Bio 101: the college extension (?level=de) ----------
+   DE runs every station exactly as SOL Advanced does. After Done on the last screen,
+   a College extension card opens below the paper box: about five minutes, four short steps,
+   each with one check. The SOL screens and their paper words are not touched.
+   Content: Campbell Biology Ch. 20 (DNA tools and biotechnology), DE Units 13-14, Lab 9.
+   To add a step: add an object to DEXT[station]. q.type "mc" (opts, right, hint, ok) or
+   "num" (ask, ans, lo, hi, hint, ok); a step with no q has Next open at once. */
+var DEX_LAD=[1000,800,600,400,300,200,150,100];
+function dexGelFig(){
+  var s='<svg viewBox="0 0 420 300" role="img" aria-label="A gel with a ladder lane labelled 1,000 to 100 base pairs and a sample lane U with one band between the 400 and 300 bands"><rect width="420" height="300" fill="#fff"/>';
+  s+='<rect x="110" y="20" width="200" height="270" rx="5" fill="#E6EDF2" stroke="#9FB2C0" stroke-width="2"/>';
+  s+=tx(165,14,14,"Ladder",{w:700})+tx(255,14,14,"U",{w:700});
+  function y(bp){return 35+((Math.log(1000)-Math.log(bp))/Math.log(10))*240;}
+  DEX_LAD.forEach(function(bp){var yy=y(bp);s+='<rect x="140" y="'+(yy-4)+'" width="50" height="8" rx="2" fill="#23408E"/>'+tx(100,yy+5,13,bp.toLocaleString("en-US")+" bp",{a:"end",f:"#5A544A"});});
+  var yu=y(316.2);
+  s+='<rect x="230" y="'+(yu-4)+'" width="50" height="8" rx="2" fill="#23408E"/>'+tx(290,yu+5,14,"?",{a:"start",w:700,f:"#B3261E"});
+  s+=tx(360,y(1000)+5,11,"top: wells",{f:"#5A544A"})+tx(360,y(100)+5,11,"toward +",{f:"#C62828"});
+  return s+'</svg>';
+}
+function dexPlasmidFig(){
+  var s='<svg viewBox="0 0 420 230" role="img" aria-label="A plasmid ring with three labelled parts: ori, the ampicillin resistance gene, and the multiple cloning site inside lacZ alpha"><rect width="420" height="230" fill="#fff"/>';
+  s+='<circle cx="210" cy="118" r="78" fill="none" stroke="#111" stroke-width="10"/>';
+  function arc(a0,a1,col){var r=78,x0=210+r*Math.cos(a0),y0=118+r*Math.sin(a0),x1=210+r*Math.cos(a1),y1=118+r*Math.sin(a1);return '<path d="M'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+r+' '+r+' 0 0 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+'" fill="none" stroke="'+col+'" stroke-width="12"/>';}
+  s+=arc(-2.6,-1.9,"#0072B2")+arc(-0.5,0.6,"#D55E00")+arc(1.9,2.9,"#009E73");
+  s+='<rect x="186" y="185" width="48" height="16" fill="#E69F00"/>';
+  s+=tx(118,40,15,"ori",{w:700,f:"#0072B2"})+tx(332,122,15,"ampR",{w:700,f:"#D55E00",a:"start"})+tx(82,182,15,"lacZα",{w:700,f:"#009E73",a:"end"});
+  s+=tx(210,222,14,"multiple cloning site",{w:700,f:"#7A5212"});
+  return s+'</svg>';
+}
+function dexPlateFig(){
+  var s='<svg viewBox="0 0 420 222" role="img" aria-label="An agar plate with mostly blue colonies and a few white colonies"><rect width="420" height="222" fill="#fff"/><circle cx="210" cy="100" r="88" fill="#F4EEDC" stroke="#9FB2C0" stroke-width="3"/>';
+  var P=[[160,60,1],[190,90,1],[240,70,0],[255,120,1],[175,135,1],[215,150,0],[140,105,1],[265,90,1],[205,40,1],[230,105,1],[180,110,0],[250,150,1]];
+  P.forEach(function(p){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="8" fill="'+(p[2]?"#2F5FA8":"#FFFFFF")+'" stroke="#5A544A" stroke-width="1.2"/>';});
+  return s+tx(210,214,14,"ampicillin + X-gal",{f:"#5A544A",w:700})+'</svg>';
+}
+var DEXT={
+ gel:{name:"Crime Lab",steps:[
+  {t:"Same charge per base pair",say:"Every nucleotide carries one phosphate with a negative charge, so a DNA piece has about the same charge for each base pair along its length. Long and short pieces feel the same pull per base pair toward the positive end. The agarose does the sorting: a mesh of sugar polymer that a short piece slips through faster than a long one.",
+   q:{type:"mc",ask:"Two pieces, 300 bp and 1,000 bp, run for 30 minutes. Which runs farther, and why?",opts:["The 300 bp piece: it gets through the agarose mesh more easily.","The 1,000 bp piece: it carries more negative charge, so it is pulled harder.","Both run the same distance, since the charge per base pair is the same."],right:0,
+   hint:"The pull per base pair is equal, so charge cancels out. What else differs between them?",ok:"Right. Equal charge per base pair means the mesh decides: shorter pieces travel farther."}},
+  {t:"Reading size from the ladder",say:"Each ladder band is a piece of known length. Distance on a gel follows the logarithm of size, so large pieces crowd together near the wells and small ones spread out lower down. A sample band is read against the ladder bands on either side of it.",svg:dexGelFig,
+   q:{type:"num",ask:"Estimate the length of the band in lane U.",unit:"bp",ans:316,lo:290,hi:360,
+   hint:"It sits between the 400 and 300 bp bands, nearer 300. Halfway in distance is not halfway in base pairs.",ok:"About 316 bp. The band sits halfway between the 1,000 and 100 bp bands in distance, and on a log scale that midpoint is &radic;(1,000 &times; 100) &asymp; 316 bp, not the 550 a straight average gives."}},
+  {t:"What a forensic lab runs now",say:"The Crime Lab compares the pieces a restriction enzyme cuts: the RFLP method of the late 1980s and 1990s. Labs now use <b>short tandem repeats</b> (STRs), places where a unit of 2 to 6 bases repeats and people differ in the number of repeats. PCR copies each STR locus, and capillary electrophoresis measures the lengths. The FBI's CODIS database has used 20 core STR loci since 2017.",
+   q:{type:"mc",ask:"At one STR locus a person carries 9 repeats on one chromosome and 12 on its homolog. How many peaks show at that locus?",opts:["2, one from each homologous chromosome","1, because a person has one version of each locus","21, one for each repeat"],right:0,
+   hint:"The locus sits on a pair of homologous chromosomes, one from each parent.",ok:"Right. Two alleles, two lengths, two peaks. Someone with 11 and 11 would show one."}},
+  {t:"Multiply across loci",say:"CODIS loci are spread across the chromosomes and are inherited independently, so the chance that a random person matches at every locus is the product of the chances at each one.",
+   q:{type:"num",ask:"At three loci the suspect's genotypes occur in 1 of 10, 1 of 20 and 1 of 50 people. A random match is expected in 1 of how many people?",unit:"people",ans:10000,lo:10000,hi:10000,
+   hint:"Multiply: 10 &times; 20 &times; 50.",ok:"1 in 10,000. Across 20 loci the number becomes enormous, so a stranger almost certainly would not match. It still says nothing about how or when the DNA reached the scene, which is why the Crime Lab asks whether a match proves the person did it."}}
+ ]},
+ plasmid:{name:"Plasmid",steps:[
+  {t:"Three parts of a cloning vector",say:"A cloning plasmid carries an <b>origin of replication</b> (ori), where the bacterium starts copying it, so each daughter cell inherits copies; a gene for resistance to an antibiotic such as ampicillin (<b>ampR</b>, which makes the enzyme &beta;-lactamase); and a <b>multiple cloning site</b>, a short stretch holding several restriction sites that each appear only once in the plasmid.",svg:dexPlasmidFig,
+   q:{type:"mc",ask:"Which part lets the plasmid be copied each time the bacterium divides?",opts:["ori","ampR","the multiple cloning site"],right:0,
+   hint:"Copying DNA has to start at a particular sequence.",ok:"Right. Without ori the plasmid is not copied and is lost as the cells divide."}},
+  {t:"Blue colonies, white colonies",say:"In many vectors the multiple cloning site sits inside <b>lacZ&alpha;</b>, part of the gene for &beta;-galactosidase, in host cells built to supply the rest of the enzyme. The cells are spread on a plate with ampicillin and X-gal. An unbroken lacZ&alpha; makes an enzyme that cuts X-gal into a blue product. A gene pasted into the cloning site interrupts lacZ&alpha;, so those colonies stay white.",svg:dexPlateFig,
+   q:{type:"mc",ask:"On this plate, which colonies most likely carry the plasmid with the gene in it?",opts:["The white colonies","The blue colonies","Neither: cells with the gene cannot grow on ampicillin"],right:0,
+   hint:"The gene was pasted into the middle of lacZ&alpha;. What happens to a gene with another gene inside it?",ok:"Right. White means lacZ&alpha; was interrupted by the insert; blue means the plasmid closed up empty. A cell with no plasmid at all makes no colony, because ampicillin kills it."}},
+  {t:"How well did it work?",say:"<b>Transformation efficiency</b> is the number of transformed colonies per microgram of plasmid DNA that reached the plate.",
+   q:{type:"num",ask:"You add 0.05 &micro;g of plasmid to 500 &micro;L of cells, spread 100 &micro;L on an ampicillin plate and count 120 colonies. Transformants per &micro;g?",unit:"per &micro;g",ans:12000,lo:11900,hi:12100,
+   hint:"First the DNA on the plate: 0.05 &micro;g &times; 100/500. Then colonies &divide; that amount.",ok:"0.01 &micro;g reached the plate, so 120 &divide; 0.01 = 12,000, or 1.2 &times; 10<sup>4</sup> transformants per &micro;g."}},
+  {t:"The same steps, as one sequence",say:"Bio Tool #28 runs cutting, pairing, sealing, uptake and selection as one animation at the DE level: <a href=\"mechanism-reel.html?anim=cloning&amp;level=de\" target=\"_blank\" rel=\"noopener\">The Mechanism Reel: gene cloning</a>. It opens in a new tab, so your place here stays."}
+ ]},
+ crispr:{name:"CRISPR",steps:[
+  {t:"Guide and PAM",say:"In a real edit the guide RNA pairs with about 20 bases of DNA; the station's guide pairs with 10. Cas9 from <i>Streptococcus pyogenes</i> cuts only where that stretch is followed by a <b>PAM</b>, the three bases NGG (any base, then two G's). It cuts both strands about 3 bases before the PAM. The station leaves the PAM out to keep the strip short.",
+   q:{type:"mc",ask:"A stretch of DNA matches the guide perfectly, but no NGG follows it. What does Cas9 do?",opts:["Nothing: without a PAM it does not cut","It cuts there, because the guide paired","It cuts at the nearest NGG instead"],right:0,
+   hint:"Cas9 checks two things before it cuts.",ok:"Right. Pairing with the guide and a PAM beside it: both are needed."}},
+  {t:"Why a guide is 20 bases long",say:"The human genome has about 3 billion base pairs. A particular 10-base sequence turns up by chance about once in every 4<sup>10</sup> &asymp; 1 million bases.",
+   q:{type:"num",ask:"About how many perfect matches would a 10-base guide find on one strand of the human genome?",unit:"matches",ans:2900,lo:2000,hi:4000,
+   hint:"3,000,000,000 &divide; 1,048,576.",ok:"About 2,900. For a 20-base guide, 4<sup>20</sup> &asymp; 1.1 &times; 10<sup>12</sup>, far larger than the genome, so a chance match elsewhere is unlikely and the intended site is usually the only perfect one. Near matches with one to three mismatches can still be cut, so every guide is checked for off-target sites."}},
+  {t:"The cell repairs the cut",say:"A cut through both strands is repaired one of two ways. <b>Non-homologous end joining</b> (NHEJ) joins the ends quickly and often adds or deletes a few bases, which can break the gene. <b>Homology-directed repair</b> (HDR) copies a template that matches the DNA on both sides of the cut, so a supplied piece of DNA can write in an exact change; it works mainly in dividing cells.",
+   q:{type:"mc",ask:"To break the switch gene, which repair does the job, and is a template needed?",opts:["NHEJ, with no template: the small insertions and deletions break it","HDR, with a template carrying a new sequence","Neither: the cut alone removes the gene"],right:0,
+   hint:"Breaking a gene only takes a sloppy repair.",ok:"Right. A few added or lost bases are enough to stop the switch from working."}},
+  {t:"The approved therapy",say:"Casgevy (exagamglogene autotemcel), approved by the FDA in December 2023 for sickle cell disease, does what the station does. Doctors collect the patient's own blood stem cells, and Cas9 cuts an enhancer that the switch gene, <b>BCL11A</b>, needs in developing red cells. With BCL11A low, the cells keep making fetal hemoglobin. Chemotherapy clears room in the bone marrow, and the edited cells go back in.",
+   q:{type:"mc",ask:"After Casgevy, is the patient's sickle allele still in the edited cells?",opts:["Yes: the edit turns fetal hemoglobin back on and leaves the sickle allele as it was","No: Cas9 cut it out","No: HDR replaced it"],right:0,
+   hint:"Which gene did Cas9 cut?",ok:"Right. The disease allele stays; fetal hemoglobin keeps the red cells round."}}
+ ]},
+ sort:{name:"Which Tool?",steps:[
+  {t:"A corn chip and one gene",say:"Three more cards at the college level, sorted with the same tools.",
+   q:{type:"mc",ask:"A food lab has a few grams of corn chips and must find out whether the corn carried an inserted Bt gene.",opts:["PCR","Gel","PCR, then gel","Plasmid + ligase","CRISPR","No tool here"],right:2,cls:"two",
+   hint:"Very little DNA, and a yes-or-no question about one gene.",ok:"PCR, then gel. With primers that match the Bt gene, PCR copies it only if it is there; the gel shows whether a band of the right size appeared."}},
+  {t:"A fish without a gene",
+   q:{type:"mc",ask:"A researcher wants zebrafish that lack a working copy of one gene, to learn what the gene does.",opts:["PCR","Gel","PCR, then gel","Plasmid + ligase","CRISPR","No tool here"],right:4,cls:"two",
+   hint:"The gene has to be broken at one exact spot.",ok:"CRISPR. Cas9 cuts the gene and NHEJ's small insertions and deletions knock it out."}},
+  {t:"Every base, in order",
+   q:{type:"mc",ask:"A clinic wants the order of all 3 billion bases in a patient's genome.",opts:["PCR","Gel","PCR, then gel","Plasmid + ligase","CRISPR","No tool here"],right:5,cls:"two",
+   hint:"Copy, sort by size, paste, cut. Does any of those read the bases?",ok:"No tool here. Reading the order of bases takes DNA sequencing, a fifth tool, and comparing the reads with a reference genome takes a computer."}}
+ ]}
+};
+var DX={};
+function dexState(k){return DX[k]||(DX[k]={open:false,i:0,a:{},t0:0,t1:0,done:false});}
+function dexParse(v){
+  v=String(v||"").replace(/[\s,]/g,"").replace(/[×x*]10\^?/i,"e").replace(/\^/g,"");
+  var n=parseFloat(v);return isFinite(n)?n:NaN;
+}
+function dexQ(k,j,q){
+  var st=dexState(k),a=st.a[j]||(st.a[j]={tries:0,ok:false,shown:false,wrong:{},val:""}),h='<p class="say" style="font-size:1.02rem">'+q.ask+'</p>';
+  if(q.type==="mc"){
+    h+='<div class="choices'+(q.cls==="two"?"":(q.opts.length%2?" one":""))+'">';
+    q.opts.forEach(function(o,n){var c="choice";if(a.ok&&n===q.right)c+=" right";else if(a.wrong[n])c+=" wrong";
+      h+='<button type="button" class="'+c+'" data-dx="pick" data-dk="'+k+'" data-n="'+n+'"'+((a.ok||a.wrong[n])?" disabled":"")+'>'+o+'</button>';});
+    h+='</div>';
+  }else{
+    h+='<div class="btnrow"><input type="text" inputmode="decimal" autocomplete="off" class="dexin" id="dexin-'+k+'" value="'+a.val+'" aria-label="Your answer"'+(a.ok?" disabled":"")+'> <span class="fine">'+(q.unit||"")+'</span>'+(a.ok?"":'<button type="button" class="btn small" data-dx="check" data-dk="'+k+'">Check</button>')+'</div>';
+  }
+  h+='<p class="fb" aria-live="polite">';
+  if(a.ok)h+=(a.shown?"":"&#10003; ")+q.ok;
+  else if(a.tries===1)h+=q.hint;
+  else if(a.tries>=2)h+=q.hint+' <button type="button" class="btn small" data-dx="show" data-dk="'+k+'">Show me</button>';
+  return h+'</p>';
+}
+function dexInner(k){
+  var X=DEXT[k],st=dexState(k),n=X.steps.length,h='<div class="dexhead"><b>College extension</b> <span class="chip">DE Bio 101</span>';
+  if(st.open){h+='<span class="dots" aria-hidden="true">';for(var d=0;d<n;d++)h+='<i class="'+(d<=st.i?"on":"")+'"></i>';h+='</span>';}
+  h+='</div>';
+  if(!st.open)return h+'<p class="fine" style="margin:.2rem 0 .4rem">'+["","One","Two","Three","Four","Five","Six"][n]+' short steps past the station, about five minutes.</p><div class="btnrow"><button type="button" class="btn go" data-dx="open" data-dk="'+k+'">Start the college extension &#9654;</button></div>';
+  if(st.done){h+='<p class="done">&#10003; College extension done.'+(TIMER&&st.t1?" "+fmt(st.t1-st.t0):"")+'</p><div class="btnrow"><button type="button" class="btn" data-dx="back" data-dk="'+k+'">&larr; Back</button></div>';return h;}
+  var s=X.steps[st.i],a=st.a[st.i],ready=!s.q||(a&&a.ok);
+  h+='<h3 class="dext">'+(st.i+1)+' &middot; '+s.t+'</h3>';
+  if(s.say)h+='<p class="dexsay">'+s.say+'</p>';
+  if(s.svg)h+='<div class="stage sm">'+s.svg()+'</div>';
+  if(s.q)h+=dexQ(k,st.i,s.q);
+  h+='<div class="btnrow">'+(st.i>0?'<button type="button" class="btn" data-dx="back" data-dk="'+k+'">&larr; Back</button>':'')+'<button type="button" class="btn go" data-dx="next" data-dk="'+k+'"'+(ready?"":" disabled")+'>'+(st.i===n-1?"Done":"Next &#9654;")+'</button></div>';
+  return h;
+}
+function deCard(k){if(S.level!=="de"||!DEXT[k])return "";return '<div class="dex" id="dex-'+k+'">'+dexInner(k)+'</div>';}
+function dexPaint(k){var el=document.getElementById("dex-"+k);if(el)el.innerHTML=dexInner(k);}
+document.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("[data-dx]"):null;if(!b||b.disabled)return;
+  var k=b.getAttribute("data-dk"),act=b.getAttribute("data-dx"),st=dexState(k),X=DEXT[k],s=X.steps[st.i],q=s&&s.q,a=q?(st.a[st.i]||(st.a[st.i]={tries:0,ok:false,shown:false,wrong:{},val:""})):null;
+  if(act==="open"){st.open=true;st.i=0;st.done=false;st.t0=Date.now();}
+  else if(act==="next"){if(st.i<X.steps.length-1)st.i++;else{st.done=true;st.t1=Date.now();}}
+  else if(act==="back"){if(st.done)st.done=false;else if(st.i>0)st.i--;}
+  else if(act==="pick"){var n=+b.getAttribute("data-n");if(n===q.right)a.ok=true;else{a.wrong[n]=true;a.tries++;}}
+  else if(act==="check"){var inp=document.getElementById("dexin-"+k);a.val=inp?inp.value:"";var v=dexParse(a.val);
+    if(!isNaN(v)&&v>=q.lo&&v<=q.hi)a.ok=true;else a.tries++;}
+  else if(act==="show"){a.ok=true;a.shown=true;if(q.type==="mc")a.wrong={};else a.val=String(q.ans);}
+  else return;
+  dexPaint(k);
+  var el=document.getElementById("dex-"+k);if(el&&(act==="next"||act==="back"||act==="open"))try{el.scrollIntoView({block:"start",behavior:"smooth"});}catch(x){}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target&&e.target.classList&&e.target.classList.contains("dexin")){var k=e.target.id.replace("dexin-",""),b=document.querySelector('#dex-'+k+' [data-dx="check"]');if(b){e.preventDefault();b.click();}}});
+function deKey(){
+  var h='<div class="panel" style="margin-top:1rem"><h2>Teacher key: DE Bio 101 college extensions</h2><p class="fine">Open with <code>?level=de</code>. Each station runs as SOL Advanced; the extension opens after Done. Numeric checks accept the range shown.</p><table class="key"><tr><th>Station</th><th>Step</th><th>Answer</th></tr>';
+  Object.keys(DEXT).forEach(function(k){DEXT[k].steps.forEach(function(s,j){if(!s.q)return;var q=s.q;
+    h+='<tr><td>'+DEXT[k].name+'</td><td>'+(j+1)+'. '+s.t+'</td><td>'+(q.type==="mc"?q.opts[q.right]:q.ans.toLocaleString("en-US")+" "+(q.unit||"")+(q.lo!==q.hi?" (accepts "+q.lo.toLocaleString("en-US")+"&ndash;"+q.hi.toLocaleString("en-US")+")":""))+'</td></tr>';});});
+  return h+'</table></div>';
+}
 
 /* teacher key: ?teacher=1 */
 function teacherKey(){
@@ -1303,10 +1462,16 @@ function teacherKey(){
   h+='<tr><th>p. 6A line</th><td>Write one card that needed two tools, and the two tools in order: <b>card A, PCR then gel</b>.</td></tr>';
   h+='<tr><th>Card A, gel tapped first</th><td>'+SA_ORDER+'</td></tr><tr><th>Card A, second tool missed</th><td>'+SA_THEN+'</td></tr></table>';
   h+='<p class="fine">The same eight cards, letters, piles and reasons as the paper set and the key slide. The deck is shuffled each time. One miss shows the hint; a second adds Show me. SOL General keeps each tool&rsquo;s job line on screen in larger type; SOL Advanced hides the job lines after the first card, behind the What each tool does button. Review day: open <code>toolbox.html?review=1#sort</code> (or <code>#sort?review=1</code>). The reasons stay hidden until Show all reasons on the last screen. Add <code>&amp;projector=1</code> for the projector. <code>?timer=1</code> shows the times on the last screen.</p></div>';
+  h+=deKey();
   t.innerHTML=h;t.classList.remove("hidden");
 }
 
 /* start */
+function dePage(){var de=S.level==="de",bk=document.querySelector(".sop-back"),ey=document.querySelector(".sop-eyebrow");
+  if(bk){bk.setAttribute("href",de?"../classroom-tools.html#de":"../classroom-tools.html");bk.innerHTML=de?"&larr; Biology Classroom Tools: DE list":"&larr; Biology Classroom Tools";}
+  var fc=document.getElementById("footcourse");if(fc)fc.innerHTML=de?"Biology I &middot; Unit 4 &middot; SOL BIO.5e &middot; DE Biology 101 (NVCC BIO 101) &middot; Units 13&ndash;14":"Biology I &middot; Unit 4 &middot; SOL BIO.5e";
+  if(ey)ey.innerHTML=de?"Bio Tool #39 &middot; DE Bio 101 &middot; Units 13&ndash;14 &middot; Interactive &middot; nothing submitted":"Bio Tool #39 &middot; Unit 4 &middot; Interactive &middot; nothing submitted";}
+dePage();
 paintLevel();
 if(!TEACHER)document.getElementById("levelsw").classList.add("hidden"); /* students stay on the level their link sets */
 var start=-1,want=Q.get("case");
@@ -1315,7 +1480,7 @@ if(start>=0&&CASES[start].twist&&!LEVELS[S.level].twist){S.level="advanced";pain
 if(TEACHER)teacherKey();
 newCase(start>=0?start:randomCase(-1));
 showSec();
-window.__toolbox={S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit,PC:PC,PL:PL,SO:SO,SCARDS:SCARDS,STOOLS:STOOLS};
+window.__toolbox={DEXT:DEXT,DX:DX,render:render,srender:srender,S:S,CASES:CASES,CR:CR,fits:fits,nFit:nFit,PC:PC,PL:PL,SO:SO,SCARDS:SCARDS,STOOLS:STOOLS};
 })();
 </script>
 </body>
