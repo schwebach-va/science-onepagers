@@ -1,0 +1,2139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="author" content="J. R. Schwebach">
+<meta name="description" content="Bio Tool #36, Quarter 3. A hatchling's thirty chromosomes coil up, find their partners and line up as a karyotype: fifteen pairs, the sex pair last, each chromosome in its parent's color with the hatchling's allele at every gene. Count the pairs, find the sex pair, and read daughter or son. SOL Biology meiosis and inheritance.">
+<title>The Karyotype Card: Blue Ridge Salamander Project</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Science One-Pagers">
+<meta property="og:title" content="The Karyotype Card: Blue Ridge Salamander Project">
+<meta property="og:description" content="A hatchling's fifteen pairs of chromosomes line up. Count the pairs, find the sex pair, and read each allele it carries.">
+<meta property="og:url" content="https://scienceonepagers.org/biology/tools/blue-ridge-salamander-karyotype.html">
+<meta property="og:image" content="https://scienceonepagers.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout and colors: the Salamander Families page (Run C), so a student sees the same chromosomes they rolled. Run D additions are at the end. */
+:root{
+  --paper:#eef1ea; --panel:#f9faf6; --ink:#1d2925; --muted:#55655d; --rule:#c8d2c7;
+  --ember:#b8480f; --ember-soft:#f6dfd0; --moss:#2f6347; --moss-soft:#dbe9de;
+  --ok:#236b41; --ok-soft:#d9eedf; --bad:#a8301f; --bad-soft:#f6ddd8;
+  --mom:#c4561c; --mom-soft:#fbe3d4; --dad:#1f67a8; --dad-soft:#dbe9f7;
+  --slip:#fbfaf2; --tray-ink:#1d2925;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Verdana","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#131a17; --panel:#1a2320; --ink:#e3eae4; --muted:#9aaca2; --rule:#2f3c36;
+  --ember:#f2935a; --ember-soft:#3a2518; --moss:#86c09a; --moss-soft:#1f3327;
+  --ok:#74c990; --ok-soft:#183324; --bad:#f09283; --bad-soft:#3b1d18;
+  --mom:#ff9a62; --mom-soft:#3a2518; --dad:#6cb8f5; --dad-soft:#172a3b;
+  --slip:#e9e7da; --tray-ink:#1d2925; color-scheme:dark } }
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:17px/1.5 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:18px;padding-block:0 48px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:1.45rem}
+h2{font-size:1.4rem}
+h3{font-size:1.08rem}
+p{margin:0;max-width:66ch}
+.muted{color:var(--muted)} .small{font-size:.9rem}
+.eyebrow{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
+a{color:var(--moss);font-weight:700}
+.bar{position:sticky;top:0;z-index:9;background:var(--paper);border-bottom:2px solid var(--ink);padding:10px 0 8px;display:flex;flex-direction:column;gap:8px}
+.bar .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{font:600 .82rem var(--mono);letter-spacing:.03em;padding:2px 8px;border:1.5px solid var(--rule);border-radius:3px;background:var(--panel);white-space:nowrap}
+.chip.mom{border-color:var(--mom);color:var(--mom)} .chip.dad{border-color:var(--dad);color:var(--dad)}
+.chip.now{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.progress{display:flex;gap:4px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.progress li{font:600 .7rem var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:3px;border:1.5px solid var(--rule);color:var(--muted)}
+.progress li.done{color:var(--ok);border-color:var(--ok)} .progress li.now{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.block{background:var(--panel);border:1.5px solid var(--rule);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.lede{font-size:1.05rem}
+button{font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;touch-action:manipulation}
+button.ghost{background:transparent;color:var(--ink)}
+button.small{min-height:38px;padding:5px 11px;font-size:.9rem}
+a.see3d{display:inline-flex;align-items:center;font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);color:var(--ink);text-decoration:none;touch-action:manipulation}
+a.see3d.small{min-height:38px;padding:5px 11px;font-size:.9rem;align-self:flex-start}
+button:disabled{opacity:.4;cursor:default}
+button.quiet{border:none;background:none;color:var(--moss);padding:0 2px;min-height:0;text-decoration:underline;font-weight:700}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btnrow .grow{flex:1}
+input.code{font:600 1.15rem var(--mono);letter-spacing:.06em;text-transform:uppercase;width:15rem;max-width:100%;padding:8px 10px;border:2px solid var(--ink);border-radius:5px;background:var(--slip);color:#14201c}
+label{font-weight:700}
+.field{display:flex;flex-direction:column;gap:6px}
+.say{font-size:1.02rem}
+.ok{color:var(--ok);font-weight:700} .bad{color:var(--bad);font-weight:700}
+.note{border-left:4px solid var(--moss);padding:4px 0 4px 12px}
+.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.animal{border:2px solid var(--rule);border-radius:6px;padding:10px 12px;background:var(--paper)}
+.animal.mom{border-color:var(--mom)} .animal.dad{border-color:var(--dad)}
+.animal b{font-family:var(--mono)}
+/* the dice grid */
+.dgrid{display:grid;grid-template-columns:7.2rem repeat(2,minmax(0,1fr));gap:4px 10px;align-items:center}
+.dgrid .h{font:600 .74rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dgrid .pl{font:600 .86rem var(--mono)}
+.dcell{display:flex;align-items:center;gap:8px;min-height:40px;padding:2px 6px;border-radius:5px;border:2px solid transparent;cursor:pointer;background:none;color:var(--ink);font:inherit;text-align:left;min-width:0}
+.dcell[aria-disabled]{cursor:default}
+.dcell.sel{border-color:var(--ink);background:var(--slip);color:#14201c}
+.dcell .w{font-size:.82rem;color:var(--muted);line-height:1.15}
+.dcell.sel .w{color:#3b4a43}
+.dcell .empty{width:30px;height:30px;border:2px dashed var(--rule);border-radius:6px;flex:none}
+.pad{display:flex;gap:8px;flex-wrap:wrap;position:sticky;bottom:8px;background:var(--panel);padding:8px;border:2px solid var(--ink);border-radius:8px;z-index:5}
+.pad{align-items:center}
+.pad button{min-height:56px}
+.pad .face{min-width:56px;padding:4px;background:var(--slip);border-color:var(--tray-ink)}
+.pad details{margin-left:auto}
+/* the roll screen: a parent's genome above, its egg or sperm below */
+.gpanel{display:flex;flex-direction:column;gap:6px}
+.gtitle{margin:0}
+.gchr{transition:transform .45s cubic-bezier(.3,.7,.2,1),opacity .3s}
+.gchr.still{transition:none}
+.extra{display:flex;gap:10px;align-items:center;flex-wrap:wrap;min-height:40px}
+.xd{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:2px solid transparent;border-radius:6px}
+.xd.sel{border-color:var(--ember)}
+.xd .empty{width:28px;height:28px;border:2px dashed var(--rule);border-radius:6px}
+@media (prefers-reduced-motion: reduce){ .gchr{transition:none} }
+.spin{animation:spin .6s ease-out}
+@keyframes spin{0%{transform:rotate(-200deg) scale(.6);opacity:.2}100%{transform:none;opacity:1}}
+/* the microscope stage */
+.stage{background:#0c171c;border-radius:8px;overflow:hidden;position:relative;border:1.5px solid #253a40}
+.stage svg,.stage canvas{display:block;width:100%;height:auto}
+.phase{font:700 1.05rem/1.25 var(--display);min-height:2.6em}
+.phase .n{font:600 .74rem var(--mono);letter-spacing:.08em;color:var(--muted);display:block;text-transform:uppercase}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ctrl button{min-width:48px}
+.ctrl .dots{display:flex;gap:5px;margin-left:4px}
+.ctrl .dots i{width:10px;height:10px;border-radius:50%;background:var(--rule);display:block}
+.ctrl .dots i.on{background:var(--ink)}
+.legend{display:flex;gap:6px 18px;flex-wrap:wrap;font-size:.9rem}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend svg{flex:none}
+/* tables */
+.tbl{border-collapse:collapse;width:100%;font-size:.95rem}
+.tbl th,.tbl td{border-bottom:1.5px solid var(--rule);padding:6px 6px;text-align:left;vertical-align:top}
+.tbl th{font:600 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tbl .a{font:600 1rem var(--mono)}
+.tbl td.m{color:var(--mom)} .tbl td.d{color:var(--dad)}
+.tbl tr.hi td{background:var(--ember-soft)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* checks and predictions */
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.choice{background:var(--paper);color:var(--ink);border:2px solid var(--rule);text-align:left;font-weight:400;line-height:1.35;min-height:52px}
+.choice.right{border-color:var(--ok);background:var(--ok-soft);color:var(--ink);font-weight:700;opacity:1}
+.choice.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--ink);opacity:1;text-decoration:line-through}
+.fb{min-height:1.5em}
+.q{font:700 1.12rem/1.3 var(--display)}
+.check{border:2px solid var(--ink)}
+.check .tag{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ember)}
+.gene{border-top:1.5px solid var(--rule);padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.gene:first-of-type{border-top:none;padding-top:0}
+.gene .gt{display:flex;gap:8px 14px;flex-wrap:wrap;align-items:baseline}
+.gene .gt b{font-family:var(--display);font-size:1.05rem}
+.al{font:600 1rem var(--mono);padding:1px 7px;border-radius:3px}
+.al.m{background:var(--mom-soft);color:var(--mom)} .al.d{background:var(--dad-soft);color:var(--dad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts .choice{min-height:44px;padding:6px 12px}
+.score{font:600 .9rem var(--mono)}
+.eggcode{font:700 1.6rem var(--mono);letter-spacing:.08em;padding:4px 12px;border:2px solid var(--ink);border-radius:5px;background:var(--slip);color:#14201c;display:inline-block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.kid{border:2px solid var(--rule);border-radius:6px;padding:10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
+.hidden{display:none!important}
+.draft{font-size:.85rem;color:var(--muted);border-left:3px solid var(--ember);padding:2px 0 2px 10px}
+:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+footer{font-size:.88rem;color:var(--muted);border-top:1.5px solid var(--rule);padding-top:14px}
+@media (max-width:560px){ .dgrid{grid-template-columns:4.6rem repeat(2,minmax(0,1fr))} .dcell .w{display:none} h1{font-size:1.25rem} }
+/* projector: big type, the stage first, the steps by arrow key */
+html.proj body{font-size:22px}
+html.proj .wrap{max-width:1500px}
+html.proj .phase{font-size:1.6rem}
+html.proj .stage svg{height:min(66vh,calc((100vw - 60px) * 0.583))}
+html.proj .stage canvas{width:auto;max-width:100%;height:min(66vh,calc((100vw - 60px) * 0.5625));margin:0 auto}
+html.proj .block h2{font-size:1.1rem}
+html.proj .phase .n{font-size:.9rem}
+html.proj .bar .progress, html.proj .hide-proj{display:none!important}
+html.proj .keys{display:block}
+.keys{display:none;font:600 .8rem var(--mono);color:var(--muted)}
+/* the Gene Key on the Predict screen (11/26) */
+.keybox{border:1.5px solid var(--rule);border-radius:6px;padding:8px 12px;background:var(--paper)}
+.keybox summary{cursor:pointer;min-height:40px;display:flex;align-items:center;gap:6px}
+.key td{font-size:.92rem}
+.key .kgs .kg{display:block;white-space:nowrap}
+.key .kgs .kg b{font-family:var(--mono);display:inline-block;min-width:2.4em}
+.key .kh{display:block;font:600 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.pad .make{background:var(--ember);border-color:var(--ember);color:#fff}
+.pad .grow{flex-basis:100%;height:0}
+.shot{border-left:4px solid var(--ember);padding-left:10px}
+details.note summary{cursor:pointer}
+details.note p{margin-top:6px}
+@media (prefers-reduced-motion: reduce){ .spin{animation:none} }
+/* Run D, the karyotype card (11/27) */
+button.chip{min-height:38px;padding:4px 10px;cursor:pointer;color:var(--ink);font:600 .82rem var(--mono)}
+button.chip.now{color:var(--paper)}
+.stage .hit{cursor:pointer;outline:none}
+.stage .hit:focus-visible{stroke:#ffe27a;stroke-width:2}
+.pairgrid{display:grid;grid-template-columns:minmax(200px,280px) minmax(0,1fr);gap:14px;align-items:start}
+.pairgrid .mini{background:#0c171c;border-radius:8px;border:1.5px solid #253a40}
+.pairgrid .mini svg{display:block;width:100%;height:auto}
+.origin{display:flex;flex-direction:column;gap:4px;font-size:.95rem}
+.origin > span{display:flex;align-items:flex-start;gap:8px}
+.origin svg{flex:none;margin-top:6px}
+.parts{display:flex;flex-direction:column;gap:18px}
+.part{display:flex;flex-direction:column;gap:10px}
+.part + .part{border-top:1.5px solid var(--rule);padding-top:14px}
+.read{font:700 1.2rem/1.3 var(--display)}
+html.proj .pairgrid{grid-template-columns:minmax(260px,380px) minmax(0,1fr)}
+@media (max-width:640px){ .pairgrid{grid-template-columns:1fr} .pairgrid .mini{max-width:300px} }
+@media print{ .bar,.ctrl,.pad,.btnrow{display:none!important} .stage{display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar" id="bar">
+    <div class="top"><div><span class="eyebrow">Blue Ridge Salamander Project &middot; Quarter 3</span><h1>The Karyotype Card</h1></div><div class="chips" id="chips"></div></div>
+    <div class="chips" id="sibs" aria-label="The eggs of this family"></div>
+  </div>
+  <p class="draft hide-proj" id="draftline">Draft for classroom testing.</p>
+  <main id="app" aria-live="polite"></main>
+  <footer><a href="blue-ridge-salamander-families.html">&larr; Salamander Families</a> &middot; <a href="blue-ridge-salamander.html">Blue Ridge Salamander Project</a><br>© J. R. Schwebach. All rights reserved. Free to use with your own students.</footer>
+</div>
+<script>
+/* Blue Ridge Salamander Project genome engine. v3 (two alleles, one spelling per allele), built 2026-11-11.
+   FROZEN for edition 2026-27 at genome mark D3Y-KTT (Reid's decision, 2026-11-15). This school year, do not change genes,
+   alleles, sites, odds, seeds or stamps: every student's Creature Code, stamps and keeper code depend on them. Wording
+   and comments may change. After any edit, fingerprint() must still return D3Y-KTT and TF-7CBW4 must still give
+   final stamp AT7-15M and keeper code TF-7CBW4-AT7. Any rebuild waits for the end of the project.
+   A Creature Code regenerates the same genome every time. No server, no student data.
+   Every gene draws from its own seeded stream (code + gene id), so adding a gene later
+   never changes a gene students already decoded.
+
+   What changed from v2 (decisions of 11/11, 1:04 to 1:40 pm):
+   - One DNA spelling per allele for the whole ridge. Any two alleles of a gene differ at exactly one base.
+   - Within one animal, the father's copy of a chromosome uses the mother's copy's filler DNA and gene
+     positions, and differs only at the allele letters. Filler and positions stay unique to each animal.
+   - The drawn set is the mother's: chromosomes 1 to 14 and the X she gave (15 strips). Males get a 16th
+     strip, the Y from the father. A female's second X is a partner, not a strip.
+   - Power gene (four codominant alleles) in place of Breath.
+   - The stamp carries the edition and which genes are done. Keeper code = Creature Code + first three
+     characters of the final stamp. */
+const BRS = (function () {
+  'use strict';
+  const VERSION = 'v3 frozen 2026-11-15';
+  const EDITION = { id: '2026-27', mark: 'A', label: 'Edition 2026-27' };
+  const EDITIONS = { A: EDITION };
+  /* Both rules were settled with Reid on 11/11 (decisions log). They stay switches so the checks can run each way. */
+  const DEFAULTS = {
+    emberOnMotherCopy: true, // a new mutation sits on the mother's copy of chromosome 9; the father's copy is the ridge reference
+    toxinGraded: true        // TT strong toxin, Tt mild, tt none (decided 2:17 pm)
+  };
+  const MUTATION_ODDS = 0.5; // a second die roll at the rock: 1 to 3 means the animal carries a new mutation (decided 2:13 pm)
+  const ALPHA = '23456789ABCDEFGHJKMNPQRSTUVWXYZ'; // 31 characters, no 0 O 1 I L
+
+  function hashStr(s) {
+    let h = 1779033703 ^ s.length;
+    for (let i = 0; i < s.length; i++) {
+      h = Math.imul(h ^ s.charCodeAt(i), 3432918353);
+      h = (h << 13) | (h >>> 19);
+    }
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return (h ^ (h >>> 16)) >>> 0;
+  }
+  function rng(seed) {
+    let a = hashStr(seed);
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  /* ---------- Three sites, three populations. Every fact here has a source in the session record. ---------- */
+  const SITES = [
+    { id: 'TF', die: [1, 2], pop: 'Talus Firetail', place: 'Hawksbill', region: 'Shenandoah National Park · Page and Madison counties', elev: '4,050 ft', lat: 38.555, lon: -78.395,
+      rocks: ['greenstone slab', 'greenstone block', 'mossy greenstone'],
+      text: 'The rock is greenstone, basalt lava changed by heat and pressure, and on the steep sides it breaks into slopes of loose blocks called talus. Balsam fir grows at the summit, one of the few places in the park where it does. The real Shenandoah salamander lives on this mountain and two others, and nowhere else on Earth.',
+      legend: '' },
+    { id: 'CE', die: [3, 4], pop: 'Cinder Eft', place: 'James River water gap', region: 'Blue Ridge Parkway at Otter Creek', elev: '649 ft', lat: 37.555, lon: -79.367,
+      rocks: ['flat river stone', 'river cobble', 'mossy boulder'],
+      text: 'The James River cuts straight through the Blue Ridge here, and the bank is the lowest point on the whole Blue Ridge Parkway. Stone locks from the old James River and Kanawha Canal still stand beside the water. In the mountains to the south, the real Peaks of Otter salamander lives in old hardwood forest in three Virginia counties and nowhere outside the state.',
+      legend: '' },
+    { id: 'HE', die: [5, 6], pop: 'Highland Emberback', place: 'Mount Rogers', region: 'Grayson and Smyth counties', elev: '5,729 ft', lat: 36.66, lon: -81.545,
+      rocks: ['rhyolite slab', 'rhyolite block', 'mossy rhyolite'],
+      text: 'Mount Rogers is the highest point in Virginia. Its rock is rhyolite, left by volcanoes that erupted here long ago, and a dark forest of spruce and Fraser fir covers the top. In the rivers of this corner of the state lives the real eastern hellbender, a salamander more than two feet long that local people call the snot-otter and the devil dog.',
+      legend: '' }
+  ];
+  const site = id => SITES.find(s => s.id === id);
+  const siteForRoll = n => SITES.find(s => s.die.indexOf(n) >= 0);
+
+  /* ---------- Creature Codes: two site letters + four characters + one check character ---------- */
+  function checkChar(six) {
+    let sum = 0;
+    for (let i = 0; i < six.length; i++) sum += ALPHA.indexOf(six[i]) * (i + 1);
+    return ALPHA[sum % 31];
+  }
+  function parseCode(raw) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (s.length !== 7) return { ok: false, why: 'A Creature Code is two site letters and five characters, like TF-7K3QM.' };
+    const pre = s.slice(0, 2), body = s.slice(2);
+    if (!site(pre)) return { ok: false, why: 'A Creature Code starts with TF, CE or HE, the letters of the site where it was found.' };
+    for (const ch of body) if (ALPHA.indexOf(ch) < 0) return { ok: false, why: 'Codes never use 0, 1, I, L or O. Look at the slip again.' };
+    if (checkChar(pre + body.slice(0, 4)) !== body[4]) return { ok: false, why: 'That code has a typo in it. Check each character against the slip.' };
+    return { ok: true, code: pre + '-' + body, site: pre };
+  }
+  function codeFrom(rand, siteId) {
+    let four = '';
+    for (let i = 0; i < 4; i++) four += ALPHA[Math.floor(rand() * 31)];
+    return siteId + '-' + four + checkChar(siteId + four);
+  }
+  /* The second die roll. 1 to 3: the animal carries a new mutation. 4 to 6: it does not.
+     The page draws codes until the animal behind one matches the roll, so the code alone still rebuilds the animal. */
+  const mutationForRoll = n => n >= 1 && n <= 3;
+  function codeForRolls(rand, siteRoll, mutationRoll) {
+    const s = siteForRoll(siteRoll); if (!s || !(mutationRoll >= 1 && mutationRoll <= 6)) return null;
+    for (;;) { const c = codeFrom(rand, s.id); if (hasMutation(c) === mutationForRoll(mutationRoll)) return c; }
+  }
+  function batch(word, n, siteId) {
+    const r = rng('batch|' + String(word).trim().toLowerCase() + '|' + siteId);
+    const out = [];
+    while (out.length < n) { const c = codeFrom(r, siteId); if (out.indexOf(c) < 0) out.push(c); }
+    return out;
+  }
+
+  /* ---------- The universal genetic code ---------- */
+  const BASES = 'UCAG';
+  const AA1 = 'FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG';
+  const THREE = { F: 'Phe', L: 'Leu', S: 'Ser', Y: 'Tyr', '*': 'STOP', C: 'Cys', W: 'Trp', P: 'Pro', H: 'His', Q: 'Gln', R: 'Arg', I: 'Ile', M: 'Met', T: 'Thr', N: 'Asn', K: 'Lys', V: 'Val', A: 'Ala', D: 'Asp', E: 'Glu', G: 'Gly' };
+  const CODON = {}, SYN = {};
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) {
+    const c = BASES[i] + BASES[j] + BASES[k], aa = THREE[AA1[i * 16 + j * 4 + k]];
+    CODON[c] = aa; (SYN[aa] = SYN[aa] || []).push(c);
+  }
+  const AMINO = Object.keys(SYN).filter(a => a !== 'STOP').sort();
+  const toRNA = { A: 'U', T: 'A', G: 'C', C: 'G' }, toDNA = { A: 'T', U: 'A', G: 'C', C: 'G' };
+  const transcribe = dna => dna.split('').map(b => toRNA[b]).join('');
+  const templateOf = rna => rna.split('').map(b => toDNA[b]).join('');
+  function translate(codons) {
+    const out = []; let stopped = false;
+    for (const c of codons) {
+      if (stopped) { out.push('none'); continue; }
+      const aa = CODON[c]; out.push(aa); if (aa === 'STOP') stopped = true;
+    }
+    return out;
+  }
+
+  /* ---------- Trait list, genome format v3 ----------
+     15 chromosome pairs: 1 to 14 plus the sex pair. A gene on the coding strand: TATAAA, a short spacer,
+     ATG, seven more codons, a stop.
+     ref = the gene's one spelling for the whole ridge, written as mRNA and carrying the first allele.
+     at  = the codon (start codon = 0) where the alleles differ. Each allele swaps in its own codon there,
+           and every pair of those codons is exactly one base apart.
+     pf  = allele frequencies per site, as Reid approved them on 11/11 (decisions log). An animal's two alleles are drawn
+           independently from pf, so every site is in Hardy-Weinberg proportions by construction. */
+  const GENES = [
+    { id: 'STR', chr: '1', name: 'Back stripe', kind: 'complete dominance', real: 'modeled on the striped and lead-backed forms of the red-backed salamander',
+      ref: 'AUG GCU UGU CCU CUG GGA GAU UCU UAG', at: 2,
+      alleles: [{ s: 'S', label: 'striped', codon: 'UGU' }, { s: 's', label: 'lead-backed', codon: 'CGU' }], pf: { TF: [0.3, 0.7], CE: [0.6, 0.4], HE: [0.7, 0.3] } },
+    { id: 'COL', chr: '2', name: 'Ember color', kind: 'incomplete dominance', real: 'real stripes run from red to yellow',
+      ref: 'AUG CAC GUC UCU GGG AAA GCU CUU UAG', at: 3,
+      alleles: [{ s: 'R', label: 'red', codon: 'UCU' }, { s: 'Y', label: 'yellow', codon: 'UUU' }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+    { id: 'TOX', chr: '2', name: 'Skin toxin', kind: 'incomplete dominance', real: 'many salamanders secrete skin toxins',
+      ref: 'AUG AAA GAC ACG AUA GGG GCA UUC UGA', at: 2,
+      alleles: [{ s: 'T', label: 'toxin glands', codon: 'GAC' }, { s: 't', label: 'no toxin', codon: 'AAC' }], pf: { TF: [0.6, 0.4], CE: [0.4, 0.6], HE: [0.5, 0.5] } },
+    { id: 'SPT', chr: '3', name: 'Flecks and spots', kind: 'codominance', real: 'brass flecks occur on real woodland salamanders of the Blue Ridge',
+      ref: 'AUG GAG CUC CAG AGU GUG ACU GAU UGA', at: 2,
+      alleles: [{ s: 'B', label: 'brass flecks', codon: 'CUC' }, { s: 'W', label: 'white spots', codon: 'CCC' }], pf: { TF: [0.7, 0.3], CE: [0.3, 0.7], HE: [0.68, 0.32] } },
+    { id: 'GLO', chr: '4', name: 'Glow', kind: 'multiple alleles', real: 'fantasy trait',
+      ref: 'AUG UUC ACG GGU GUG AAC GGU CCG UAA', at: 3,
+      alleles: [{ s: 'E', label: 'ember glow', codon: 'GGU' }, { s: 'F', label: 'foxfire glow', codon: 'UGU' }, { s: 'n', label: 'no glow', codon: 'CGU' }], pf: { TF: [0.45, 0.15, 0.4], CE: [0.15, 0.5, 0.35], HE: [0.3, 0.3, 0.4] } },
+    { id: 'CLW', chr: '4', name: 'Claws', kind: 'complete dominance', real: 'fantasy trait: real salamanders have no claws',
+      ref: 'AUG UCG UAC GAC GCG UUG AAG ACC UAA', at: 2,
+      alleles: [{ s: 'C', label: 'clawed', codon: 'UAC' }, { s: 'c', label: 'no claws', codon: 'CAC' }], pf: { TF: [0.6, 0.4], CE: [0.3, 0.7], HE: [0.5, 0.5] } },
+    { id: 'GIL', chr: '5', name: 'Gills', kind: 'complete dominance', real: 'some salamanders keep larval gills as adults',
+      ref: 'AUG AAC AUC GAA AAG GUU AGC AGA UAA', at: 3,
+      alleles: [{ s: 'G', label: 'gills lost', codon: 'GAA' }, { s: 'g', label: 'gills kept', codon: 'GGA' }], pf: { TF: [0.9, 0.1], CE: [0.225, 0.775], HE: [0.7, 0.3] } },
+    { id: 'REG', chr: '6', name: 'Healing skin', kind: 'complete dominance', real: 'fantasy trait; a poultice is a real folk remedy, and Appalachian healers were known for them',
+      ref: 'AUG CUA GAU UGC CAG GCA AUC GAA UAG', at: 3,
+      alleles: [{ s: 'H', label: 'healing poultice', codon: 'UGC' }, { s: 'h', label: 'plain skin', codon: 'UAC' }], pf: { TF: [0.6, 0.4], CE: [0.4, 0.6], HE: [0.5, 0.5] } },
+    { id: 'POW', chr: '7', name: 'Power', kind: 'multiple alleles, codominant', real: 'fantasy trait; the fire legend about salamanders is real folklore',
+      ref: 'AUG UGU GAA CAC CGC ACC GUA GGG UGA', at: 3,
+      alleles: [{ s: 'F', label: 'fire', codon: 'CAC' }, { s: 'T', label: 'strike tongue', codon: 'UAC' }, { s: 'A', label: 'acid spray', codon: 'GAC' }, { s: 'H', label: 'heat sight', codon: 'AAC' }], pf: { TF: [0.55, 0.2, 0.1, 0.15], CE: [0.2, 0.55, 0.1, 0.15], HE: [0.2, 0.15, 0.1, 0.55] } },
+    { id: 'AUR', chr: '8', name: 'Gift', kind: 'multiple alleles, codominant', real: 'fantasy trait; a species that helps many others thrive is called a keystone species',
+      ref: 'AUG AUU GGC ACC UGG GAA GAU UUG UGA', at: 3,
+      alleles: [{ s: 'P', label: 'plants grow', codon: 'ACC' }, { s: 'A', label: 'animals thrive', codon: 'GCC' }, { s: 'K', label: 'friendships form', codon: 'UCC' }], pf: { TF: [1 / 3, 1 / 3, 1 / 3], CE: [1 / 3, 1 / 3, 1 / 3], HE: [1 / 3, 1 / 3, 1 / 3] } },
+    { id: 'VOC', chr: 'X', name: 'Call', kind: 'sex-linked, three alleles', real: 'fantasy trait: most real salamanders are nearly silent',
+      ref: 'AUG CCG CAG UUA ACG GGC AAA UCC UAA', at: 4,
+      alleles: [{ s: 'S', label: 'a woman’s singing voice', codon: 'ACG' }, { s: 'B', label: 'a man’s singing voice', codon: 'GCG' }, { s: 'c', label: 'clicks', codon: 'CCG' }], pf: { TF: [0.3, 0.3, 0.4], CE: [0.4, 0.3, 0.3], HE: [0.4, 0.45, 0.15] } },
+    { id: 'VIS', chr: 'X', name: 'Color vision', kind: 'sex-linked recessive', real: 'modeled on red-green colorblindness, the classic sex-linked trait',
+      ref: 'AUG UGG AGC GCC CAU CUC GUA CGG UGA', at: 3,
+      alleles: [{ s: 'V', label: 'full color vision', codon: 'GCC' }, { s: 'v', label: 'red-blind', codon: 'GAC' }], pf: { TF: [0.7, 0.3], CE: [0.7, 0.3], HE: [0.7, 0.3] } },
+    { id: 'LN1', chr: '10', name: 'Length gene 1', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      ref: 'AUG GGC AGA GUU GAC AGC CCA GCC UAA', at: 4,
+      alleles: [{ s: '+', label: 'adds length', codon: 'GAC' }, { s: '0', label: 'adds none', codon: 'GAG' }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
+    { id: 'LN2', chr: '11', name: 'Length gene 2', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      ref: 'AUG ACC UUG UCU AAG GGC GAA AUU UAA', at: 4,
+      alleles: [{ s: '+', label: 'adds length', codon: 'AAG' }, { s: '0', label: 'adds none', codon: 'AAC' }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } },
+    { id: 'LN3', chr: '12', name: 'Length gene 3', kind: 'polygenic', real: 'body size in real animals comes from many genes',
+      ref: 'AUG GUA GCU CAU UUU AAA ACC GGG UAA', at: 3,
+      alleles: [{ s: '+', label: 'adds length', codon: 'CAU' }, { s: '0', label: 'adds none', codon: 'CAA' }], pf: { TF: [0.35, 0.65], CE: [0.7, 0.3], HE: [0.5, 0.5] } }
+  ];
+  /* Every allele gets its fixed mRNA, template, coding DNA and protein once, here. Nothing below varies by animal. */
+  GENES.forEach(function (g) {
+    const ref = g.ref.split(' ');
+    g.alleles.forEach(function (a) {
+      const m = ref.slice(); m[g.at] = a.codon;
+      a.mrna = m; a.template = m.map(templateOf); a.dna = m.join('').replace(/U/g, 'T');
+      a.protein = translate(m); a.p = a.protein.slice(1, 8); a.aa = CODON[a.codon];
+    });
+  });
+  /* Which genes sit on which chromosome, in order along it. Chromosomes 13 and 14 carry no gene in this set. */
+  const LAYOUT = { 1: ['STR'], 2: ['COL', 'TOX'], 3: ['SPT'], 4: ['GLO', 'CLW'], 5: ['GIL'], 6: ['REG'], 7: ['POW'], 8: ['AUR'], 9: ['EMB'], 10: ['LN1'], 11: ['LN2'], 12: ['LN3'], 13: [], 14: [], X: ['VOC', 'VIS'], Y: [] };
+  const STOPDNA = { TAA: 1, TAG: 1, TGA: 1 };
+
+  /* The ember gene, on chromosome 9: one fixed reference sequence for the whole ridge. It has no second AUG in any frame. */
+  const EMB = { id: 'EMB', chr: '9', name: 'Ember gene', mrna: ['AUG', 'UGG', 'AAA', 'GGA', 'UAU', 'CAA', 'CUU', 'UCA', 'UAA'] };
+  EMB.template = EMB.mrna.map(templateOf);
+  EMB.protein = translate(EMB.mrna);
+  EMB.dna = EMB.mrna.join('').replace(/U/g, 'T');
+  /* Every single-base change the ember gene may carry. A change is left out if it would write a second TATA box
+     or a second ATG into the gene, because the changed copy can now sit on a chromosome strip. */
+  const EMB_POOL = { silent: [], missense: [], nonsense: [] };
+  for (let ci = 1; ci <= EMB.mrna.length - 2; ci++) for (let pos = 0; pos < 3; pos++) for (const b of BASES) {
+    const old = EMB.mrna[ci]; if (old[pos] === b) continue;
+    const neu = old.slice(0, pos) + b + old.slice(pos + 1);
+    const m = EMB.mrna.slice(); m[ci] = neu; const s = m.join('');
+    if (s.indexOf('UAUA') >= 0 || s.indexOf('AUG', 1) >= 0) continue;
+    const kind = CODON[neu] === CODON[old] ? 'silent' : CODON[neu] === 'STOP' ? 'nonsense' : 'missense';
+    EMB_POOL[kind].push({ codon: ci, pos: pos, oldCodon: old, newCodon: neu, kind: kind });
+  }
+  const EMB_ALL = EMB_POOL.silent.concat(EMB_POOL.missense, EMB_POOL.nonsense);
+  /* Half the animals carry a new mutation. Each allowed one-letter change is equally likely, so the kinds
+     fall at this gene's own odds: about 1 in 5 silent, 1 in 7 a stop, the rest a changed amino acid. */
+  function hasMutation(id) { return rng(id + '|EMB|has')() < MUTATION_ODDS; }
+  function mutation(id) {
+    if (!hasMutation(id)) return null;
+    const r = rng(id + '|EMB|m');
+    const m = EMB_ALL[Math.floor(r() * EMB_ALL.length)];
+    const mrna = EMB.mrna.slice(); mrna[m.codon] = m.newCodon;
+    return {
+      kind: m.kind, codon: m.codon, pos: m.pos, oldCodon: m.oldCodon, newCodon: m.newCodon,
+      oldAA: CODON[m.oldCodon], newAA: CODON[m.newCodon],
+      dnaFrom: toDNA[m.oldCodon[m.pos]], dnaTo: toDNA[m.newCodon[m.pos]],       // on the template strand
+      codingFrom: m.oldCodon[m.pos].replace('U', 'T'), codingTo: m.newCodon[m.pos].replace('U', 'T'), // on the strand students highlight
+      mrna: mrna, template: mrna.map(templateOf), dna: mrna.join('').replace(/U/g, 'T'), protein: translate(mrna)
+    };
+  }
+
+  /* One copy of a gene as it sits in one animal: the allele's fixed spelling plus where it came from. */
+  function copyOf(allele, from) {
+    return { allele: allele, from: from, mrna: allele.mrna, template: allele.template, dna: allele.dna, protein: allele.protein };
+  }
+  /* Where two lined-up copies differ. Returns null when they are letter-for-letter the same. */
+  function diffOf(a, b) {
+    const out = [];
+    for (let i = 0; i < a.dna.length; i++) if (a.dna[i] !== b.dna[i]) out.push(i);
+    if (!out.length) return null;
+    const i = out[0], ci = Math.floor(i / 3);
+    return { count: out.length, base: i, codon: ci, pos: i % 3, mother: a.dna[i], father: b.dna[i], motherCodon: a.mrna[ci], fatherCodon: b.mrna[ci], motherAA: CODON[a.mrna[ci]], fatherAA: CODON[b.mrna[ci]] };
+  }
+
+  /* ---------- chromosomes: the coding strand, 5' to 3', as students see it ---------- */
+  function countAll(s, sub) { const out = []; let i = s.indexOf(sub); while (i >= 0) { out.push(i); i = s.indexOf(sub, i + 1); } return out; }
+  function coords(b, t, s) {
+    let off = 0; while (off + 3 <= b.dna.length && !STOPDNA[b.dna.substr(off, 3)]) off += 3; // the first stop that lands on the count
+    return { id: b.id, tata: t, start: s, stop: s + off, end: s + off + 2, refEnd: s + b.dna.length - 1 };
+  }
+  function findable(seq, genes) {
+    const boxes = countAll(seq, 'TATA');
+    return boxes.length === genes.length && genes.every((g, i) => boxes[i] === g.tata && seq.indexOf('ATG', g.tata + 5) === g.start); // from +5: an ATG may not borrow the box's last A
+  }
+  /* Builds the mother's copy and, when the animal has one, the father's copy on the same filler and positions. */
+  function buildPair(id, name, mats, pats) {
+    const r = rng(id + '|chr|' + name);
+    const junk = n => { let s = ''; while (s.length < n) s += 'ACGT'[Math.floor(r() * 4)]; return s; };
+    for (let tries = 0; tries < 4000; tries++) {
+      let m = junk(8 + Math.floor(r() * 7)), p = m; const gm = [], gp = [];
+      if (!mats.length) { const d = 'ATG' + junk(name === 'Y' ? 22 + Math.floor(r() * 8) : 34 + Math.floor(r() * 14)); m += d; p += d; }
+      mats.forEach(function (b, i) {
+        const pre = 'TATAAA' + junk(6 + Math.floor(r() * 4)); const t = m.length; m += pre; p += pre;
+        const s = m.length; m += b.dna; gm.push(coords(b, t, s));
+        if (pats) { p += pats[i].dna; gp.push(coords(pats[i], t, s)); }
+        const post = junk(8 + Math.floor(r() * 6)); m += post; p += post;
+      });
+      if (!findable(m, gm) || (pats && !findable(p, gp))) continue;
+      const out = { name: name, seq: m, genes: gm, partner: null };
+      if (pats) { const d = []; for (let i = 0; i < m.length; i++) if (m[i] !== p[i]) d.push(i); out.partner = { from: 'father', seq: p, genes: gp, diffs: d }; }
+      return out;
+    }
+    throw new Error('could not build chromosome ' + name);
+  }
+
+  function make(options) {
+    const OPT = Object.assign({}, DEFAULTS, options || {});
+
+    function chromosomes(cr) {
+      const body = function (gid, k) {
+        if (gid === 'EMB') return { id: 'EMB', dna: cr.ember.copies[k].dna };
+        return { id: gid, dna: entry(cr, gid).copies[k].dna };
+      };
+      const out = [];
+      for (let n = 1; n <= 14; n++) {
+        const c = buildPair(cr.code, String(n), LAYOUT[n].map(g => body(g, 0)), LAYOUT[n].map(g => body(g, 1)));
+        c.key = 'c' + n; c.n = n; c.from = 'mother'; c.label = 'Chromosome ' + n; out.push(c);
+      }
+      const x = buildPair(cr.code, 'X', LAYOUT.X.map(g => body(g, 0)), cr.sex === 'XX' ? LAYOUT.X.map(g => body(g, 1)) : null);
+      x.key = 'cX'; x.n = 15; x.from = 'mother'; x.label = 'X chromosome, from the mother'; out.push(x);
+      if (cr.sex === 'XY') { const y = buildPair(cr.code, 'Y', [], null); y.key = 'cY'; y.n = 15; y.from = 'father'; y.label = 'Y chromosome, from the father'; out.push(y); }
+      return out;
+    }
+
+    function creature(raw) {
+      const c = parseCode(raw); if (!c.ok) return null;
+      const id = c.code;
+      const sex = rng(id + '|sex')() < 0.5 ? 'XX' : 'XY';
+      const genes = GENES.map(function (g) {
+        const r = rng(id + '|' + g.id + '|a'), f = g.pf[c.site];
+        const pick = function () { const x = r(); let acc = 0; for (let i = 0; i < g.alleles.length; i++) { acc += f[i]; if (x < acc) return g.alleles[i]; } return g.alleles[g.alleles.length - 1]; };
+        const mat = pick(), pat = pick();
+        const one = g.chr === 'X' && sex === 'XY';
+        const copies = one ? [copyOf(mat, 'from the mother')] : [copyOf(mat, 'from the mother'), copyOf(pat, 'from the father')];
+        const diff = one ? null : diffOf(copies[0], copies[1]);
+        const letters = copies.map(cp => cp.allele).sort((a, b) => g.alleles.indexOf(a) - g.alleles.indexOf(b)).map(a => a.s);
+        return { gene: g, copies: copies, same: !one && !diff, diff: diff, zyg: one ? 'one copy' : diff ? 'heterozygous' : 'homozygous', genotype: letters.join('') };
+      });
+      const cr = { code: id, site: c.site, sex: sex, edition: EDITION.id, genes: genes, mut: mutation(id) };
+      /* The ember gene: every animal carries one new single-base change. */
+      const refCopy = { allele: null, from: 'from the father', mrna: EMB.mrna, template: EMB.template, dna: EMB.dna, protein: EMB.protein };
+      if (OPT.emberOnMotherCopy && cr.mut) {
+        const mom = { allele: null, from: 'from the mother', mrna: cr.mut.mrna, template: cr.mut.template, dna: cr.mut.dna, protein: cr.mut.protein };
+        cr.ember = { gene: EMB, copies: [mom, refCopy], diff: diffOf(mom, refCopy), zyg: 'heterozygous', onStrip: true };
+      } else {
+        const mom = Object.assign({}, refCopy, { from: 'from the mother' });
+        cr.ember = { gene: EMB, copies: [mom, refCopy], diff: null, zyg: 'homozygous', onStrip: false };
+      }
+      const plus = ['LN1', 'LN2', 'LN3'].reduce((n, gid) => n + alleles(cr, gid).filter(s => s === '+').length, 0);
+      const r = rng(id + '|size');
+      const n1 = (r() + r() + r()) / 3 - 0.5, n2 = (r() + r() + r()) / 3 - 0.5;
+      cr.plus = plus;
+      cr.length = Math.round((9 + 1.5 * plus + n1 * 4.0) * 10) / 10;
+      cr.mass = Math.round(0.012 * Math.pow(cr.length, 3) * (1 + n2 * 0.3) * 10) / 10;
+      cr.ph = phenotype(cr);
+      cr.stats = stats(cr);
+      cr.chroms = chromosomes(cr); // the strips that are drawn: 15 for a female, 16 for a male
+      return cr;
+    }
+    function entry(cr, gid) { return cr.genes.find(e => e.gene.id === gid); }
+    function alleles(cr, gid) { return entry(cr, gid).copies.map(c => c.allele.s); }
+
+    function phenotype(cr) {
+      const has = (gid, s) => alleles(cr, gid).indexOf(s) >= 0;
+      const col = alleles(cr, 'COL').slice().sort().join('');
+      const tox = alleles(cr, 'TOX').filter(s => s === 'T').length;
+      const ph = {
+        striped: has('STR', 'S'),
+        color: col === 'RR' ? 'red' : col === 'YY' ? 'yellow' : 'orange',
+        brass: has('SPT', 'B'), white: has('SPT', 'W'),
+        glow: has('GLO', 'E') && has('GLO', 'F') ? 'both' : has('GLO', 'E') ? 'ember' : has('GLO', 'F') ? 'foxfire' : 'none',
+        claws: has('CLW', 'C'), toxin: tox > 0, toxinLevel: tox === 0 ? 'none' : !OPT.toxinGraded ? 'glands' : tox === 2 ? 'strong' : 'mild',
+        gills: !has('GIL', 'G'),
+        heals: has('REG', 'H'), color_vision: has('VIS', 'V'),
+        calls: has('VOC', 'S') || has('VOC', 'B') ? ['soprano', 'baritone'].filter((c, i) => has('VOC', 'SB'[i])) : ['clicks'],
+        powers: ['fire', 'tongue', 'acid', 'heat'].filter((b, i) => has('POW', 'FTAH'[i])),
+        gifts: ['plants', 'animals', 'friends'].filter((b, i) => has('AUR', 'PAK'[i]))
+      };
+      const size = 'Its length comes from three genes working together. This animal carries ' + cr.plus + ' of 6 possible length-adding alleles.';
+      /* DRAFT wording for Reid. Fantasy only: the real Blue Ridge anchor for each power goes in after its source is checked. */
+      const PT = {
+        fire: 'a short jet of fire',
+        tongue: 'a strike tongue that shoots out farther than its body is long',
+        acid: 'a burning spray it spits at anything that grabs it',
+        heat: 'heat sight that finds warm bodies in the dark, with a beam of light from each eye when it locks on'
+      };
+      const PD = {
+        fire: 'the mouth open with a jet of fire leaving it',
+        tongue: 'the tongue shot straight out past the snout, longer than the body',
+        acid: 'a fan of spray leaving the mouth',
+        heat: 'both eyes glowing, with a thin beam of light from each'
+      };
+      const GT = { plants: 'plants grow taller where it has passed', animals: 'deer and other animals gather and do well near it', friends: 'people who meet it become friends' };
+      ph.lines = {
+        POW: [(ph.powers.length === 2 ? 'Two powers: ' : 'Power: ') + ph.powers.map(b => PT[b]).join('; and ') + '.', 'Draw ' + ph.powers.map(b => PD[b]).join('; and ') + '.'],
+        AUR: [(ph.gifts.length === 2 ? 'Two gifts: ' : 'Gift: ') + ph.gifts.map(b => GT[b]).join(', and ') + '.', ''],
+        STR: ph.striped
+          ? ['One stripe runs down the middle of the back, from the head onto the tail.', 'Draw one stripe down the center of the back, about a third as wide as the body, narrowing toward the tail tip.']
+          : ['No stripe. The back is one even dark gray, the form field biologists call lead-backed.', 'Leave the back unstriped: even dark gray from head to tail.'],
+        COL: ['Ember color: ' + ph.color + '. It shows on the cheeks, the tail tip, and the stripe if there is one.', 'Color a small patch on each cheek and the last centimeter of the tail ' + ph.color + '. A stripe takes the same color.'],
+        SPT: ph.brass && ph.white
+          ? ['Brass flecks on the back and white spots along the sides, both at once.', 'Scatter small brass flecks over the back, and add a row of white spots low on each side.']
+          : ph.brass ? ['Brass-colored flecks are scattered over the back and sides.', 'Scatter small brass flecks over the back and sides. No white spots.']
+            : ['A row of small white spots runs along each side.', 'Add a row of white spots low on each side. No brass flecks.'],
+        GLO: ph.glow === 'both' ? ['Two glows: dull orange along the body and pale green along the tail.', 'Shade a soft orange halo around the body and a pale green halo around the tail.']
+          : ph.glow === 'ember' ? ['The skin gives off a dull orange glow, like coals.', 'Shade a soft orange halo around the whole animal.']
+            : ph.glow === 'foxfire' ? ['The skin gives off a pale green glow, like foxfire on a rotting log.', 'Shade a soft pale green halo around the whole animal.']
+              : ['No glow.', 'No halo. Leave the outline clean.'],
+        CLW: ph.claws ? ['A small dark claw tips every toe.', 'Four toes on each front foot, five on each hind foot, each ending in a sharp dark claw.']
+          : ['Toes end in soft rounded tips. No claws.', 'Four toes on each front foot, five on each hind foot, each ending in a round tip.'],
+        TOX: ph.toxinLevel === 'strong' ? ['Glands along the base of the tail ooze a strong milky toxin when the animal is disturbed.', 'Draw two rows of small raised dots along the top of the tail base.']
+          : ph.toxinLevel === 'mild' ? ['Glands along the base of the tail ooze a mild toxin: bitter enough that a predator drops the animal.', 'Draw one row of small raised dots along the top of the tail base.']
+            : ph.toxinLevel === 'glands' ? ['Glands along the base of the tail ooze a milky toxin when the animal is disturbed.', 'Draw two rows of small raised dots along the top of the tail base.']
+              : ['No toxin glands. The skin of the tail base is smooth.', 'No gland dots on the tail.'],
+        GIL: ph.gills ? ['Three feathery red gills on each side of the neck, kept from its larval stage.', 'Draw three feathery gills on each side of the neck, sweeping back.']
+          : ['No gills. The neck is smooth.', 'Leave the neck smooth.'],
+        REG: ph.heals ? ['Healing skin: it oozes a glowing poultice. A cut, a scrape or even a tumor touched to its skin is gone.', 'Dot the back with a few glowing gold drops.']
+          : ['Plain skin: no healing poultice.', 'No gold drops on the back.'],
+        VOC: ph.calls.length === 2 ? ['Call: two voices singing together, a woman’s and a man’s.', 'In the margin, sketch the call as two long lines, one high and one low.']
+          : ph.calls[0] === 'soprano' ? ['Call: a woman’s voice singing, far off.', 'In the margin, sketch the call as one long rising and falling line.']
+            : ph.calls[0] === 'baritone' ? ['Call: a man’s voice singing, low and steady.', 'In the margin, sketch the call as one long low line.']
+              : ['Call: a quick run of dry clicks.', 'In the margin, sketch the call as a row of short ticks.'],
+        VIS: ph.color_vision ? ['Sees in full color.', ''] : ['Red-blind: red and green look alike to this animal.', ''],
+        LN1: [size, ''], LN2: [size, ''], LN3: [size, '']
+      };
+      return ph;
+    }
+
+    /* Field stats. Each one is fed by several genes, and several genes feed more than one stat (pleiotropy). */
+    const STATMAP = [['Lifespan', 'REG, TOX, GLO, GIL, LN1–LN3'], ['Land speed', 'LN1–LN3, CLW, GIL'], ['Stealth', 'STR, GLO, VOC, LN1–LN3'], ['Strike range', 'POW, LN1–LN3'], ['Time underwater', 'GIL, LN1–LN3']];
+    function stats(cr) {
+      const ph = cr.ph, r = rng(cr.code + '|stats'), j = () => r() - 0.5, cl = (v, a, b) => Math.max(a, Math.min(b, Math.round(v)));
+      const toxYears = ph.toxinLevel === 'none' ? 0 : ph.toxinLevel === 'mild' ? 1.5 : 3;
+      const life = cl(12 + (ph.heals ? 7 : 0) + toxYears + 0.8 * cr.plus - (ph.glow !== 'none' ? 2 : 0) + (ph.gills ? 2 : 0) + j() * 3, 6, 32);
+      const speed = cl(8 - 0.6 * cr.plus + (ph.claws ? 2 : 0) - (ph.gills ? 1 : 0) + j() * 1.5, 1, 10);
+      const stealth = cl(5 + (ph.striped ? -1 : 2) + (ph.glow === 'none' ? 2 : -2) - 0.3 * cr.plus + (ph.calls[0] === 'clicks' ? 1 : -1) + j(), 1, 10);
+      const reach = cl(cr.length * (0.9 + 0.35 * ph.powers.length) + j() * 3, 4, 40);
+      const dive = cl(5 + 1.5 * cr.plus + j() * 2, 2, 20);
+      return [
+        { k: 'Lifespan', v: life + ' years', bar: life / 32 }, { k: 'Land speed', v: speed + ' of 10', bar: speed / 10 }, { k: 'Stealth', v: stealth + ' of 10', bar: stealth / 10 },
+        { k: 'Strike range', v: reach + ' cm', bar: reach / 40 }, { k: 'Time underwater', v: ph.gills ? 'no limit' : dive + ' min', bar: ph.gills ? 1 : dive / 20 }
+      ];
+    }
+
+    return { OPTIONS: OPT, STATMAP, creature, entry, alleles };
+  }
+
+  /* ---------- Stamps: edition, progress that can be picked up, and the keeper code ----------
+     A stamp is: edition mark + two check characters + hyphen + what is done.
+       A4Y-15M   final: all 15 genes and the ember gene are done
+       A4Y-K7Q2  progress: the last four characters record exactly which genes are done
+     The check characters are tied to the Creature Code, the edition and what is done, so a stamp from one
+     animal does not pass for another. Keeper code = Creature Code + hyphen + first three characters of the final stamp. */
+  const PARTS = GENES.map(g => g.id).concat(['EMB']);            // 16 things a student finishes
+  const FULL = Math.pow(2, PARTS.length) - 1;
+  function maskOf(ids) { let m = 0; ids.forEach(function (id) { const i = PARTS.indexOf(id); if (i >= 0) m |= (1 << i); }); return m >>> 0; }
+  function idsOf(mask) { return PARTS.filter((id, i) => (mask >>> i) & 1); }
+  function enc4(n) { let s = ''; for (let i = 0; i < 4; i++) { s = ALPHA[n % 31] + s; n = Math.floor(n / 31); } return s; }
+  function dec4(s) { let n = 0; for (const ch of s) { const v = ALPHA.indexOf(ch); if (v < 0) return -1; n = n * 31 + v; } return n; }
+  function stampHead(code, mask, ed) {
+    const h = hashStr('field-stamp|' + ed.id + '|' + code + '|' + mask);
+    return ed.mark + ALPHA[h % 31] + ALPHA[(h >>> 5) % 31];
+  }
+  function stamp(code, done) {
+    const mask = typeof done === 'number' ? done >>> 0 : maskOf(done);
+    return stampHead(code, mask, EDITION) + '-' + (mask === FULL ? '15M' : enc4(mask));
+  }
+  function teacherHead(code, mask, ed) {
+    const h = hashStr('teacher-release|' + ed.id + '|' + code + '|' + mask);
+    return ed.mark + ALPHA[h % 31] + ALPHA[(h >>> 5) % 31];
+  }
+  /* done = what the student decoded themselves (ids or a mask). Everything else is "given by teacher". */
+  function teacherStamp(code, done) {
+    const c = parseCode(code); if (!c.ok) return null;
+    const mask = typeof done === 'number' ? done >>> 0 : maskOf(done);
+    return mask === FULL ? stamp(c.code, FULL) : teacherHead(c.code, mask, EDITION) + '-T' + enc4(mask);
+  }
+  function readStamp(code, raw) {
+    const c = parseCode(code); if (!c.ok) return { ok: false, why: c.why };
+    const tm = /^([A-Z0-9]{3})-?T([A-Z0-9]{4})$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
+    if (tm) {
+      const ted = EDITIONS[tm[1][0]], own = dec4(tm[2]);
+      if (!ted || own < 0 || own >= FULL || teacherHead(c.code, own, ted) !== tm[1]) return { ok: false, why: 'That teacher stamp does not belong to this Creature Code. Check each character.' };
+      const mine = idsOf(own);
+      return { ok: true, edition: ted.id, mask: FULL, final: true, teacher: true, own: mine, given: PARTS.filter(id => mine.indexOf(id) < 0), done: PARTS.slice(), left: [], text: tm[1] + '-T' + tm[2] };
+    }
+    const m = /^([A-Z0-9]{3})-?(15M|[A-Z0-9]{4})$/.exec(String(raw || '').toUpperCase().replace(/\s/g, ''));
+    if (!m) return { ok: false, why: 'A stamp looks like A4Y-K7Q2, or A4Y-15M when everything is done.' };
+    const ed = EDITIONS[m[1][0]]; if (!ed) return { ok: false, why: 'That stamp is from an edition this page does not know.' };
+    const mask = m[2] === '15M' ? FULL : dec4(m[2]);
+    if (mask < 0 || mask > FULL || (m[2] !== '15M' && mask === FULL) || stampHead(c.code, mask, ed) !== m[1]) return { ok: false, why: 'That stamp does not belong to this Creature Code. Check each character.' };
+    const done = idsOf(mask);
+    return { ok: true, edition: ed.id, mask: mask, final: mask === FULL, done: done, left: PARTS.filter(id => done.indexOf(id) < 0), text: m[1] + '-' + m[2] };
+  }
+  function keeper(code) { const c = parseCode(code); return c.ok ? c.code + '-' + stampHead(c.code, FULL, EDITION) : null; }
+  function readKeeper(raw) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (s.length !== 10) return { ok: false, why: 'A keeper code is a Creature Code and three more characters, like CE-MKYUK-A4Y.' };
+    const c = parseCode(s.slice(0, 7)); if (!c.ok) return { ok: false, why: c.why };
+    const ed = EDITIONS[s[7]]; if (!ed) return { ok: false, why: 'That keeper code is from an edition this page does not know.' };
+    if (stampHead(c.code, FULL, ed) !== s.slice(7)) return { ok: false, why: 'The last three characters do not match this Creature Code. Check your Field Sheet.' };
+    return { ok: true, code: c.code, site: c.site, edition: ed.id, text: c.code + '-' + s.slice(7) };
+  }
+
+  /* A release code opens the reveal for one class period on one date (YYYY-MM-DD). The teacher makes it in the lookup;
+     the page checks it against today's date on the device. It carries no Creature Code: it works for any animal that day. */
+  const PERIODS = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8'];
+  function releaseCode(date, period) {
+    const p = String(period || '').toUpperCase();
+    if (PERIODS.indexOf(p) < 0 || !/^\d{4}-\d{2}-\d{2}$/.test(String(date))) return null;
+    const h = hashStr('release|' + EDITION.id + '|' + date + '|' + p), g = hashStr(p + '|' + date + '|release-2');
+    return 'R-' + ALPHA[h % 31] + ALPHA[(h >>> 7) % 31] + ALPHA[g % 31] + ALPHA[(g >>> 7) % 31];
+  }
+  function readRelease(raw, date) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!/^R[A-Z0-9]{4}$/.test(s)) return { ok: false, why: 'A release code looks like R-7K4Q. Ask your teacher.' };
+    for (const p of PERIODS) if (releaseCode(date, p).replace('-', '') === s) return { ok: true, period: p, date: date };
+    return { ok: false, why: 'That release code is not for today. Ask your teacher.' };
+  }
+
+  const std = make();
+  /* A short mark of the whole genome build. Two pages that print the same mark draw the same animal for every code. */
+  function fingerprint() {
+    const r = rng('fingerprint'); let h = 2166136261;
+    for (let n = 0; n < 12; n++) {
+      const a = std.creature(codeFrom(r, SITES[n % 3].id));
+      const t = a.code + a.sex + a.chroms.map(c => c.seq + (c.partner ? c.partner.seq : '')).join('') + a.genes.map(e => e.genotype).join('') + stamp(a.code, FULL);
+      for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    }
+    let out = ''; for (let i = 0; i < 6; i++) { out += ALPHA[h % ALPHA.length]; h = Math.floor(h / ALPHA.length); }
+    return out.slice(0, 3) + '-' + out.slice(3);
+  }
+  return {
+    VERSION, EDITION, EDITIONS, DEFAULTS, MUTATION_ODDS, hasMutation, mutationForRoll, codeForRolls, OPTIONS: std.OPTIONS, ALPHA, SITES, STATMAP: std.STATMAP, LAYOUT, site, siteForRoll, GENES, EMB, EMB_POOL, PARTS, FULL,
+    CODON, SYN, AMINO, BASES, parseCode, codeFrom, batch, creature: std.creature, entry: std.entry, alleles: std.alleles, make,
+    transcribe, templateOf, translate, stamp, teacherStamp, readStamp, keeper, readKeeper, PERIODS, releaseCode, readRelease, maskOf, idsOf, rng, checkChar, fingerprint
+  };
+})();
+</script>
+<script>
+/* Blue Ridge Salamander Project · Salamander Families rules. Stage 2, Run B, built 2026-11-26.
+   Loaded AFTER the genome engine (BRS). It reads the engine and never changes it: no gene, allele, site, seed,
+   stamp or code in the engine is touched, and nothing here is written back into an engine object.
+
+   What is here
+     animal(x)                         a Creature Code, a keeper code, or a baby, as one plain "animal"
+     makeBaby(mother, father, rolls)   two animals and the dice in, one baby out (rules below)
+     eggCode / readEgg                 eight characters, XXXX-XXXX, written beside the two parent codes
+     babyFromEgg(mother, father, egg)  the same baby on any device
+     family(mother, father, list)      four eggs
+     partnerFor(code, want)            draws a partner of the other sex; can ask for a carrier of a changed ember gene
+     classCross(babyA, babyB, rolls)   a cross between two babies from different families: the third generation
+     pedigree(famA, famB, cross, gene) the three generations as rows a chart can draw
+     punnett(mother, father, gene)     the square for one gene; punnett2 for two genes, linked or not
+     testcross(a, b, { genes, eggs })  DE: one linked pair WITH crossing over, counted over many eggs; linkagePair() draws the two animals
+     traits / measure / stats          the baby's trait rules. The engine does not export its own, so they are written
+                                       again here and PROVED against the engine by scripts/test_run_b_families_2026-11-26.js:
+                                       for thousands of existing animals they give the engine's own answer in every field.
+
+   Rules, as Reid settled them on Thu 2026-11-26
+     1. A baby is genotypes and traits. No DNA strips. The one exception: a new power shows its changed codon.
+     2. One roll for each chromosome pair for each parent, fifteen rolls a parent: chromosomes 1 to 14, then the sex pair.
+        A roll of 1, 2 or 3 sends the copy this parent got from its own MOTHER. A roll of 4, 5 or 6 sends the copy
+        from its FATHER. Same rule for every pair and both parents. For a father's sex pair that means 1 to 3 sends
+        his X (a daughter) and 4 to 6 sends his Y (a son).
+     3. Crossing over (v1.2, Reid 11/26 afternoon). Three chromosomes carry two of our genes each: 2 (ember color,
+        skin toxin), 4 (glow, claws) and the X (call, color vision). On those three, while the partners are paired,
+        the page decides whether one strand from each partner trades ends between the two genes: in 2 x mapUnits % of
+        meioses (20, 60 and 40). The die then picks the member, as before, and the page picks which of that member's
+        two strands goes in, so mapUnits % of eggs or sperm carry a mixed strand (10, 30, 20). A male has one X, so
+        his call and color-vision genes never trade. On the other twelve pairs a trade would change nothing we follow,
+        so it is not drawn. Per parent, per linked pair: 0 no trade, 1 traded but the strand that went in kept its own
+        ends, 2 the strand that went in is mixed.
+     4. The ember gene, chromosome 9: a parent's changed copy passes when the pair 9 roll picks it. A copy is BROKEN
+        only when its change wrote an early stop codon. Two broken copies make an albino.
+     5. A new power: each parent rolls two extra dice. A double six changes one base of the power codon in that egg
+        or sperm. The table is NEW_POWERS below (Reid locked it 11/26). Never a stop codon.
+     6. The egg code holds which copy each of the thirty rolls sent, the two new-power events, and which of the five
+        possible mixed strands went in (v1.2: nine characters, XXX-XXX-XXX). It does not hold the parents, the die
+        faces, or a trade whose mixed strand stayed behind; a page that brings an egg back from its code draws that
+        last fact again from the code itself, at the right odds.
+     7. Dual enrollment: testcross() runs the same crossing-over rule for one linked pair over many eggs and counts the
+        recombinants. One map unit is 1% recombinant offspring (Reid approved 10, 20 and 30 on 11/26). */
+const BRSF = (function (BRS) {
+  'use strict';
+  const VERSION = 'families v1.2 · 2026-11-26';
+  const ALPHA = BRS.ALPHA, GENES = BRS.GENES, LAYOUT = BRS.LAYOUT, EMB = BRS.EMB, CODON = BRS.CODON;
+  const GENE = {}; GENES.forEach(function (g) { GENE[g.id] = g; });
+
+  /* ---------- the fifteen pairs ---------- */
+  const PAIRS = []; for (let n = 1; n <= 14; n++) PAIRS.push(String(n)); PAIRS.push('sex');
+  const PAIR_LABEL = PAIRS.map(p => p === 'sex' ? 'Sex pair' : 'Chromosome ' + p);
+  const pairIndexOfChr = chr => chr === 'X' || chr === 'Y' ? 14 : (+chr - 1);
+  const pairIndexOfGene = gid => gid === 'EMB' ? 8 : pairIndexOfChr(GENE[gid].chr);
+  const POW_PAIR = pairIndexOfGene('POW');
+  const lowFace = n => n >= 1 && n <= 3;            // 1 to 3: the copy this parent got from its own mother
+  const NEED_FOR_NEW_POWER = [6, 6];                // a double six on the two extra dice
+
+  /* ---------- the four new powers: baby-only alleles of the power gene ----------
+     The four ridge alleles differ at the FIRST base of codon 4 (CAC, UAC, GAC, AAC). Each new allele changes the
+     second or third base of one of them, so it is one base from the allele it came from and from no other.
+     Eight alleles, eight different amino acids. Locked by Reid 2026-11-26. */
+  const POW = GENE.POW;
+  const NEW_POWERS = [
+    { s: 'Z', id: 'frost', label: 'frost sleep', codon: 'CAA', from: 'F' },
+    { s: 'D', id: 'decoy', label: 'decoy tail', codon: 'UUC', from: 'T' },
+    { s: 'Q', id: 'quills', label: 'rib quills', codon: 'GGC', from: 'A' },
+    { s: 'R', id: 'rain', label: 'rain caller', codon: 'AAG', from: 'H' }
+  ];
+  const OLD_POWER_IDS = ['fire', 'tongue', 'acid', 'heat'];   // the engine's own names, in allele order F T A H
+  (function () {
+    const ref = POW.ref.split(' '), seenAA = {};
+    POW.alleles.forEach(function (a) { seenAA[a.aa] = a.s; });
+    NEW_POWERS.forEach(function (a) {
+      const src = POW.alleles.find(x => x.s === a.from);
+      const m = ref.slice(); m[POW.at] = a.codon;
+      a.mrna = m; a.template = m.map(BRS.templateOf); a.dna = m.join('').replace(/U/g, 'T');
+      a.protein = BRS.translate(m); a.p = a.protein.slice(1, 8); a.aa = CODON[a.codon];
+      a.isNew = true; a.source = src;
+      const diff = [0, 1, 2].filter(i => a.codon[i] !== src.codon[i]);
+      a.pos = diff[0];                                    // 0, 1 or 2 within the codon
+      a.change = { codonNumber: POW.at + 1, base: diff[0] + 1, from: src.codon[diff[0]], to: a.codon[diff[0]], oldCodon: src.codon, newCodon: a.codon, oldAA: src.aa, newAA: a.aa };
+      const s = m.join('');
+      const ok = diff.length === 1 && diff[0] > 0 && a.aa !== 'STOP' && !seenAA[a.aa] && s.indexOf('AUG', 1) < 0 && a.dna.indexOf('TATA') < 0 &&
+        POW.alleles.every(x => x === src || [0, 1, 2].filter(i => x.codon[i] !== a.codon[i]).length > 1) && POW.alleles.concat(NEW_POWERS).every(x => x === a || x.s !== a.s);
+      if (!ok) throw new Error('new power ' + a.id + ' breaks its rules');
+      seenAA[a.aa] = a.s;
+    });
+  })();
+  const NEW_BY_SOURCE = {}; NEW_POWERS.forEach(function (a) { NEW_BY_SOURCE[a.from] = a; });
+  const allelesOf = gid => gid === 'POW' ? POW.alleles.concat(NEW_POWERS) : GENE[gid].alleles;
+  const alleleBy = (gid, s) => allelesOf(gid).find(a => a.s === s) || null;
+
+  /* ---------- small tools ---------- */
+  function hashStr(s) {                                   // the engine's own string hash, written again (the engine does not export it)
+    let h = 1779033703 ^ s.length;
+    for (let i = 0; i < s.length; i++) { h = Math.imul(h ^ s.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+    h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return (h ^ (h >>> 16)) >>> 0;
+  }
+  function diffOf(a, b) {                                 // the engine's rule for where two lined-up copies differ
+    const out = [];
+    for (let i = 0; i < a.dna.length; i++) if (a.dna[i] !== b.dna[i]) out.push(i);
+    if (!out.length) return null;
+    const i = out[0], ci = Math.floor(i / 3);
+    return { count: out.length, base: i, codon: ci, pos: i % 3, mother: a.dna[i], father: b.dna[i], motherCodon: a.mrna[ci], fatherCodon: b.mrna[ci], motherAA: CODON[a.mrna[ci]], fatherAA: CODON[b.mrna[ci]] };
+  }
+  const sexWord = an => an.sex === 'XX' ? 'female' : 'male';
+
+  /* ---------- trait rules, written again from the engine and proved against it ---------- */
+  const PT = {
+    fire: 'a short jet of fire',
+    tongue: 'a strike tongue that shoots out farther than its body is long',
+    acid: 'a burning spray it spits at anything that grabs it',
+    heat: 'heat sight that finds warm bodies in the dark, with a beam of light from each eye when it locks on',
+    /* DRAFT wording for Reid, fantasy only, like the four above. Not on any student page yet. */
+    frost: 'frost sleep: it lets the cold freeze it stiff, and it wakes unharmed when the ice melts',
+    decoy: 'a decoy tail that drops off and keeps thrashing while the animal slips away',
+    quills: 'rib quills: sharp rib tips that push out through its sides as a row of spines',
+    rain: 'a rain call: when it sings, rain begins to fall around it'
+  };
+  const PD = {
+    fire: 'the mouth open with a jet of fire leaving it',
+    tongue: 'the tongue shot straight out past the snout, longer than the body',
+    acid: 'a fan of spray leaving the mouth',
+    heat: 'both eyes glowing, with a thin beam of light from each',
+    frost: 'a coat of frost over the back, with the eyes closed',
+    decoy: 'the tail dropped behind it and still curling',
+    quills: 'a row of short spines standing out along each side',
+    rain: 'the head raised, with rain falling around it'
+  };
+  const GT = { plants: 'plants grow taller where it has passed', animals: 'deer and other animals gather and do well near it', friends: 'people who meet it become friends' };
+  /* al(gid) gives that gene's allele letters in one animal, one or two of them. plus = how many length-adding alleles. */
+  function traits(al, plus) {
+    const has = (gid, s) => al(gid).indexOf(s) >= 0;
+    const col = al('COL').slice().sort().join('');
+    const tox = al('TOX').filter(s => s === 'T').length;
+    const ph = {
+      striped: has('STR', 'S'),
+      color: col === 'RR' ? 'red' : col === 'YY' ? 'yellow' : 'orange',
+      brass: has('SPT', 'B'), white: has('SPT', 'W'),
+      glow: has('GLO', 'E') && has('GLO', 'F') ? 'both' : has('GLO', 'E') ? 'ember' : has('GLO', 'F') ? 'foxfire' : 'none',
+      claws: has('CLW', 'C'), toxin: tox > 0, toxinLevel: tox === 0 ? 'none' : tox === 2 ? 'strong' : 'mild',
+      gills: !has('GIL', 'G'),
+      heals: has('REG', 'H'), color_vision: has('VIS', 'V'),
+      calls: has('VOC', 'S') || has('VOC', 'B') ? ['soprano', 'baritone'].filter((c, i) => has('VOC', 'SB'[i])) : ['clicks'],
+      powers: OLD_POWER_IDS.filter((b, i) => has('POW', 'FTAH'[i])).concat(NEW_POWERS.filter(a => has('POW', a.s)).map(a => a.id)),
+      gifts: ['plants', 'animals', 'friends'].filter((b, i) => has('AUR', 'PAK'[i]))
+    };
+    const size = 'Its length comes from three genes working together. This animal carries ' + plus + ' of 6 possible length-adding alleles.';
+    ph.lines = {
+      POW: [(ph.powers.length === 2 ? 'Two powers: ' : 'Power: ') + ph.powers.map(b => PT[b]).join('; and ') + '.', 'Draw ' + ph.powers.map(b => PD[b]).join('; and ') + '.'],
+      AUR: [(ph.gifts.length === 2 ? 'Two gifts: ' : 'Gift: ') + ph.gifts.map(b => GT[b]).join(', and ') + '.', ''],
+      STR: ph.striped
+        ? ['One stripe runs down the middle of the back, from the head onto the tail.', 'Draw one stripe down the center of the back, about a third as wide as the body, narrowing toward the tail tip.']
+        : ['No stripe. The back is one even dark gray, the form field biologists call lead-backed.', 'Leave the back unstriped: even dark gray from head to tail.'],
+      COL: ['Ember color: ' + ph.color + '. It shows on the cheeks, the tail tip, and the stripe if there is one.', 'Color a small patch on each cheek and the last centimeter of the tail ' + ph.color + '. A stripe takes the same color.'],
+      SPT: ph.brass && ph.white
+        ? ['Brass flecks on the back and white spots along the sides, both at once.', 'Scatter small brass flecks over the back, and add a row of white spots low on each side.']
+        : ph.brass ? ['Brass-colored flecks are scattered over the back and sides.', 'Scatter small brass flecks over the back and sides. No white spots.']
+          : ['A row of small white spots runs along each side.', 'Add a row of white spots low on each side. No brass flecks.'],
+      GLO: ph.glow === 'both' ? ['Two glows: dull orange along the body and pale green along the tail.', 'Shade a soft orange halo around the body and a pale green halo around the tail.']
+        : ph.glow === 'ember' ? ['The skin gives off a dull orange glow, like coals.', 'Shade a soft orange halo around the whole animal.']
+          : ph.glow === 'foxfire' ? ['The skin gives off a pale green glow, like foxfire on a rotting log.', 'Shade a soft pale green halo around the whole animal.']
+            : ['No glow.', 'No halo. Leave the outline clean.'],
+      CLW: ph.claws ? ['A small dark claw tips every toe.', 'Four toes on each front foot, five on each hind foot, each ending in a sharp dark claw.']
+        : ['Toes end in soft rounded tips. No claws.', 'Four toes on each front foot, five on each hind foot, each ending in a round tip.'],
+      TOX: ph.toxinLevel === 'strong' ? ['Glands along the base of the tail ooze a strong milky toxin when the animal is disturbed.', 'Draw two rows of small raised dots along the top of the tail base.']
+        : ph.toxinLevel === 'mild' ? ['Glands along the base of the tail ooze a mild toxin: bitter enough that a predator drops the animal.', 'Draw one row of small raised dots along the top of the tail base.']
+          : ['No toxin glands. The skin of the tail base is smooth.', 'No gland dots on the tail.'],
+      GIL: ph.gills ? ['Three feathery red gills on each side of the neck, kept from its larval stage.', 'Draw three feathery gills on each side of the neck, sweeping back.']
+        : ['No gills. The neck is smooth.', 'Leave the neck smooth.'],
+      REG: ph.heals ? ['Healing skin: it oozes a glowing poultice. A cut, a scrape or even a tumor touched to its skin is gone.', 'Dot the back with a few glowing gold drops.']
+        : ['Plain skin: no healing poultice.', 'No gold drops on the back.'],
+      VOC: ph.calls.length === 2 ? ['Call: two voices singing together, a woman’s and a man’s.', 'In the margin, sketch the call as two long lines, one high and one low.']
+        : ph.calls[0] === 'soprano' ? ['Call: a woman’s voice singing, far off.', 'In the margin, sketch the call as one long rising and falling line.']
+          : ph.calls[0] === 'baritone' ? ['Call: a man’s voice singing, low and steady.', 'In the margin, sketch the call as one long low line.']
+            : ['Call: a quick run of dry clicks.', 'In the margin, sketch the call as a row of short ticks.'],
+      VIS: ph.color_vision ? ['Sees in full color.', ''] : ['Red-blind: red and green look alike to this animal.', ''],
+      LN1: [size, ''], LN2: [size, ''], LN3: [size, '']
+    };
+    return ph;
+  }
+  /* Length and mass. seed is the animal's id: a Creature Code for a ridge animal, the baby's id for a baby. */
+  function measure(seed, plus) {
+    const r = BRS.rng(seed + '|size');
+    const n1 = (r() + r() + r()) / 3 - 0.5, n2 = (r() + r() + r()) / 3 - 0.5;
+    const length = Math.round((9 + 1.5 * plus + n1 * 4.0) * 10) / 10;
+    return { length: length, mass: Math.round(0.012 * Math.pow(length, 3) * (1 + n2 * 0.3) * 10) / 10 };
+  }
+  function stats(seed, ph, plus, length) {
+    const r = BRS.rng(seed + '|stats'), j = () => r() - 0.5, cl = (v, a, b) => Math.max(a, Math.min(b, Math.round(v)));
+    const toxYears = ph.toxinLevel === 'none' ? 0 : ph.toxinLevel === 'mild' ? 1.5 : 3;
+    const life = cl(12 + (ph.heals ? 7 : 0) + toxYears + 0.8 * plus - (ph.glow !== 'none' ? 2 : 0) + (ph.gills ? 2 : 0) + j() * 3, 6, 32);
+    const speed = cl(8 - 0.6 * plus + (ph.claws ? 2 : 0) - (ph.gills ? 1 : 0) + j() * 1.5, 1, 10);
+    const stealth = cl(5 + (ph.striped ? -1 : 2) + (ph.glow === 'none' ? 2 : -2) - 0.3 * plus + (ph.calls[0] === 'clicks' ? 1 : -1) + j(), 1, 10);
+    const reach = cl(length * (0.9 + 0.35 * ph.powers.length) + j() * 3, 4, 40);
+    const dive = cl(5 + 1.5 * plus + j() * 2, 2, 20);
+    return [
+      { k: 'Lifespan', v: life + ' years', bar: life / 32 }, { k: 'Land speed', v: speed + ' of 10', bar: speed / 10 }, { k: 'Stealth', v: stealth + ' of 10', bar: stealth / 10 },
+      { k: 'Strike range', v: reach + ' cm', bar: reach / 40 }, { k: 'Time underwater', v: ph.gills ? 'no limit' : dive + ' min', bar: ph.gills ? 1 : dive / 20 }
+    ];
+  }
+  /* A short word for each gene's trait, for tables. */
+  function traitWord(an, gid) {
+    const ph = an.ph;
+    switch (gid) {
+      case 'STR': return ph.striped ? 'striped' : 'lead-backed';
+      case 'COL': return ph.color;
+      case 'TOX': return ph.toxinLevel === 'none' ? 'no toxin' : ph.toxinLevel + ' toxin';
+      case 'SPT': return ph.brass && ph.white ? 'brass flecks and white spots' : ph.brass ? 'brass flecks' : 'white spots';
+      case 'GLO': return ph.glow === 'both' ? 'ember and foxfire glow' : ph.glow === 'none' ? 'no glow' : ph.glow + ' glow';
+      case 'CLW': return ph.claws ? 'clawed' : 'no claws';
+      case 'GIL': return ph.gills ? 'gills kept' : 'gills lost';
+      case 'REG': return ph.heals ? 'healing poultice' : 'plain skin';
+      case 'POW': return entry(an, 'POW').copies.map(c => c.allele).filter((a, i, l) => l.indexOf(a) === i).sort((a, b) => allelesOf('POW').indexOf(a) - allelesOf('POW').indexOf(b)).map(a => a.label).join(' and ');
+      case 'AUR': return entry(an, 'AUR').copies.map(c => c.allele).filter((a, i, l) => l.indexOf(a) === i).sort((a, b) => GENE.AUR.alleles.indexOf(a) - GENE.AUR.alleles.indexOf(b)).map(a => a.label).join(' and ');
+      case 'VOC': return ph.calls.length === 2 ? 'two voices' : ph.calls[0] === 'soprano' ? 'a woman’s voice' : ph.calls[0] === 'baritone' ? 'a man’s voice' : 'clicks';
+      case 'VIS': return ph.color_vision ? 'full color vision' : 'red-blind';
+      case 'LN1': case 'LN2': case 'LN3': return an.plus + ' of 6 length alleles, ' + an.length + ' cm';
+      case 'EMB': return an.albino ? 'albino' : an.ember.stops === 1 ? 'carries one broken copy' : an.ember.changed ? 'changed copy, still working' : 'ridge reference';
+    }
+    return '';
+  }
+
+  /* ---------- one animal, wild or baby, in one shape ----------
+     pairs[0..14]: chromosomes 1 to 14, then the sex pair. copies[0] came from this animal's mother, copies[1] from its father.
+     A chromosome is { chr, alleles: { geneId: allele }, ember (pair 9 only: null for the ridge reference, or the change), line }.
+     line says which ridge animal's chromosome this is. With no crossing over a chromosome passes down whole, so the line never changes. */
+  const emberCopy = (mut, from) => mut
+    ? { allele: null, from: from, mrna: mut.mrna, template: mut.template, dna: mut.dna, protein: mut.protein, mut: mut }
+    : { allele: null, from: from, mrna: EMB.mrna, template: EMB.template, dna: EMB.dna, protein: EMB.protein, mut: null };
+  function entryFrom(an, g) {
+    const order = allelesOf(g.id), cps = [];
+    an.pairs[pairIndexOfChr(g.chr)].copies.forEach(function (c, k) {
+      if (c.chr === 'Y') return;
+      const a = c.alleles[g.id];
+      cps.push({ allele: a, from: k === 0 ? 'from the mother' : 'from the father', mrna: a.mrna, template: a.template, dna: a.dna, protein: a.protein });
+    });
+    const one = cps.length === 1, diff = one ? null : diffOf(cps[0], cps[1]);
+    const letters = cps.map(c => c.allele).sort((a, b) => order.indexOf(a) - order.indexOf(b)).map(a => a.s);
+    return { gene: g, copies: cps, same: !one && !diff, diff: diff, zyg: one ? 'one copy' : diff ? 'heterozygous' : 'homozygous', genotype: letters.join('') };
+  }
+  function entry(an, gid) { return an.genes.find(e => e.gene.id === gid); }
+  function alleles(an, gid) { return entry(an, gid).copies.map(c => c.allele.s); }
+  /* Fills in everything that follows from the pairs: genes, ember gene, traits, length, stats. */
+  function finish(an) {
+    an.genes = GENES.map(g => entryFrom(an, g));
+    const e9 = an.pairs[8].copies, mom = emberCopy(e9[0].ember, 'from the mother'), dad = emberCopy(e9[1].ember, 'from the father');
+    const d = diffOf(mom, dad), muts = [mom.mut, dad.mut].filter(Boolean), stops = muts.filter(m => m.kind === 'nonsense').length;
+    an.ember = { gene: EMB, copies: [mom, dad], diff: d, zyg: d ? 'heterozygous' : 'homozygous', changed: muts.length, stops: stops };
+    an.albino = stops === 2;                              // two broken copies: both stop early
+    an.carrier = stops === 1;                             // one broken copy and one that works
+    an.plus = ['LN1', 'LN2', 'LN3'].reduce((n, gid) => n + alleles(an, gid).filter(s => s === '+').length, 0);
+    const m = measure(an.id, an.plus); an.length = m.length; an.mass = m.mass;
+    an.ph = traits(gid => alleles(an, gid), an.plus);
+    an.stats = stats(an.id, an.ph, an.plus, an.length);
+    return an;
+  }
+  const wildCache = {};
+  function wild(raw) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    let code;
+    if (s.length === 10) { const k = BRS.readKeeper(s); if (!k.ok) return { ok: false, why: k.why }; code = k.code; }
+    else { const c = BRS.parseCode(s); if (!c.ok) return { ok: false, why: c.why }; code = c.code; }
+    if (wildCache[code]) return wildCache[code];
+    const cr = BRS.creature(code), pairs = [];
+    const line = (name, k) => ({ founder: code, copy: k, chr: name });
+    for (let n = 1; n <= 14; n++) {
+      const copies = [0, 1].map(function (k) {
+        const al = {}; LAYOUT[n].forEach(function (gid) { if (gid !== 'EMB') al[gid] = BRS.entry(cr, gid).copies[k].allele; });
+        const c = { chr: String(n), alleles: al, line: line(String(n), k) };
+        if (n === 9) c.ember = cr.ember.copies[k].dna !== EMB.dna ? Object.assign({ arose: code }, cr.mut) : null;
+        return c;
+      });
+      pairs.push({ name: String(n), copies: copies });
+    }
+    const x = k => { const al = {}; LAYOUT.X.forEach(function (gid) { al[gid] = BRS.entry(cr, gid).copies[k].allele; }); return { chr: 'X', alleles: al, line: line('X', k) }; };
+    pairs.push({ name: 'sex', copies: [x(0), cr.sex === 'XX' ? x(1) : { chr: 'Y', alleles: {}, line: line('Y', 1) }] });
+    const an = finish({ ok: true, kind: 'wild', gen: 0, id: code, code: code, keeper: BRS.keeper(code), site: cr.site, sex: cr.sex, pairs: pairs });
+    an.name = code;
+    return (wildCache[code] = an);
+  }
+  /* Anything that names an animal: a Creature Code, a keeper code, an animal already made, or { mother, father, egg }. */
+  function animal(x) {
+    if (x && typeof x === 'object') {
+      if (x.pairs && x.genes) return x;
+      if (x.ok === false) return x;
+      if (x.mother && x.father && x.egg) return babyFromEgg(x.mother, x.father, x.egg);
+      return { ok: false, why: 'That is not an animal this page knows how to read.' };
+    }
+    return wild(x);
+  }
+
+  /* ---------- rolls ---------- */
+  function rollDice(rand) {
+    const d = () => 1 + Math.floor(rand() * 6), fifteen = () => PAIRS.map(d);
+    const out = { mother: fifteen(), father: fifteen(), motherPower: [d(), d()], fatherPower: [d(), d()] };
+    /* the crossing over is drawn from the dice themselves, not from rand, so every seed still gives v1.1's dice in v1.1's order */
+    const rx = BRS.rng('dice-cross|' + out.mother.join('') + out.father.join('') + out.motherPower.join('') + out.fatherPower.join(''));
+    out.motherCross = rollCross(rx, 'XX'); out.fatherCross = rollCross(rx, 'XY');
+    return out;
+  }
+  /* The page's part of meiosis on the three linked pairs, in CROSS order (2, X, 4): 0, 1 or 2 as in rule 3. */
+  function rollCross(rand, sex) {
+    return CROSS.map(function (c) {
+      if (sex === 'XY' && c.chr === 'X') return 0;
+      if (rand() < c.chiasma) return rand() < 0.5 ? 2 : 1;
+      return 0;
+    });
+  }
+  function crossOk(a, male) { return Array.isArray(a) && a.length === CROSS.length && a.every(v => v === 0 || v === 1 || v === 2) && !(male && a[CROSS_X] !== 0); }
+  /* Turns whatever was given into which copy each roll sent. Returns { ok, m[15], f[15], mNew, fNew, faces }. */
+  function choices(rolls, M, F) {
+    if (typeof rolls === 'string') rolls = { egg: rolls };
+    if (!rolls) return { ok: false, why: 'No rolls yet. Each parent rolls once for each of the fifteen chromosome pairs.' };
+    if (rolls.egg) { const r = readEgg(rolls.egg, M, F); return r.ok ? { ok: true, m: r.sent.mother, f: r.sent.father, mNew: r.sent.motherNew, fNew: r.sent.fatherNew, mX: r.sent.motherCross, fX: r.sent.fatherCross, faces: null } : r; }
+    if (rolls.sent) {
+      const s = rolls.sent, bits = a => Array.isArray(a) && a.length === 15 && a.every(b => b === 0 || b === 1);
+      if (!bits(s.mother) || !bits(s.father)) return { ok: false, why: 'Each parent needs fifteen choices, one for each chromosome pair.' };
+      const mX = s.motherCross || [0, 0, 0], fX = s.fatherCross || [0, 0, 0];
+      if (!crossOk(mX, false) || !crossOk(fX, true)) return { ok: false, why: CROSS_WHY };
+      return { ok: true, m: s.mother.slice(), f: s.father.slice(), mNew: s.motherNew ? 1 : 0, fNew: s.fatherNew ? 1 : 0, mX: mX.slice(), fX: fX.slice(), faces: null };
+    }
+    const out = { ok: true, faces: {} };
+    for (const who of ['mother', 'father']) {
+      const a = rolls[who], p = rolls[who + 'Power'] || [1, 1];
+      if (!Array.isArray(a) || a.length !== 15) return { ok: false, why: 'Each parent needs 15 rolls, one for each chromosome pair. The ' + who + ' has ' + (Array.isArray(a) ? a.length : 0) + '.' };
+      for (let i = 0; i < 15; i++) if (!(a[i] === Math.floor(a[i]) && a[i] >= 1 && a[i] <= 6)) return { ok: false, why: 'A die shows 1 to 6. Look at roll ' + (i + 1) + ' for the ' + who + '.' };
+      if (!Array.isArray(p) || p.length !== 2 || !p.every(v => v === Math.floor(v) && v >= 1 && v <= 6)) return { ok: false, why: 'The ' + who + ' rolls two extra dice for a new power, and each shows 1 to 6.' };
+      out[who === 'mother' ? 'm' : 'f'] = a.map(n => lowFace(n) ? 0 : 1);
+      out[who === 'mother' ? 'mNew' : 'fNew'] = p[0] === NEED_FOR_NEW_POWER[0] && p[1] === NEED_FOR_NEW_POWER[1] ? 1 : 0;
+      out.faces[who] = a.slice(); out.faces[who + 'Power'] = p.slice();
+    }
+    /* Crossing over is the page's part, not a die. Given with the rolls, or drawn from the parents and the dice when it is not. */
+    let mX = rolls.motherCross, fX = rolls.fatherCross;
+    if (mX == null || fX == null) {
+      /* seeded by which copy each roll sent, not the faces, so a 2 and a 3 still make the same baby */
+      const r = BRS.rng('cross|' + M.id + '|' + F.id + '|' + out.m.join('') + out.f.join('') + out.mNew + out.fNew);
+      if (mX == null) mX = rollCross(r, 'XX'); else rollCross(r, 'XX');
+      if (fX == null) fX = rollCross(r, 'XY');
+    }
+    if (!crossOk(mX, false) || !crossOk(fX, true)) return { ok: false, why: CROSS_WHY };
+    out.mX = mX.slice(); out.fX = fX.slice(); out.faces.motherCross = mX.slice(); out.faces.fatherCross = fX.slice();
+    return out;
+  }
+
+  /* ---------- the egg code: XXX-XXX-XXX (v1.2) ----------
+     37 facts: which copy each of the 30 rolls sent, whether each parent's two extra dice came up double six, and which
+     of the five possible mixed strands went in (the mother's 2, X and 4; the father's 2 and 4). They are stirred so
+     that near rolls do not give near codes, joined to a small check tied to the two parents, and written as eight
+     characters plus one check character. Any single wrong character is refused. A code written beside the wrong
+     parents is refused 185 times in 186. v1.1's eight-character codes were never given to students. */
+  const K0 = 0x5BD1E995, M1 = 0x9E3779B1, M2 = 0x85EBCA6B, SIX = 6, TWO32 = 4294967296;
+  const inv32 = function (a) { let x = a; for (let i = 0; i < 5; i++) x = Math.imul(x, 2 - Math.imul(a, x)); return x >>> 0; };
+  const I1 = inv32(M1), I2 = inv32(M2);
+  function stir(n) { let x = (n ^ K0) >>> 0; x = Math.imul(x, M1) >>> 0; x = (x ^ (x >>> 16)) >>> 0; x = Math.imul(x, M2) >>> 0; return (x ^ (x >>> 16)) >>> 0; }
+  function unstir(y) { let x = y >>> 0; x = (x ^ (x >>> 16)) >>> 0; x = Math.imul(x, I2) >>> 0; x = (x ^ (x >>> 16)) >>> 0; x = Math.imul(x, I1) >>> 0; return (x ^ K0) >>> 0; }
+  const idOf = x => typeof x === 'string' ? x : x.id;
+  function pack(ch) {
+    let n = 0;
+    for (let i = 0; i < 15; i++) { if (ch.m[i]) n |= (1 << i); if (ch.f[i]) n |= (1 << (15 + i)); }
+    if (ch.mNew) n |= (1 << 30); if (ch.fNew) n |= (1 << 31);
+    return n >>> 0;
+  }
+  function unpack(n) {
+    const m = [], f = [];
+    for (let i = 0; i < 15; i++) { m.push((n >>> i) & 1); f.push((n >>> (15 + i)) & 1); }
+    return { mother: m, father: f, motherNew: (n >>> 30) & 1, fatherNew: (n >>> 31) & 1 };
+  }
+  const tie31 = (mid, fid) => hashStr('egg-check|' + mid + '|' + fid) % 31;
+  const tie6 = (mid, fid, s) => hashStr('egg-six|' + mid + '|' + fid + '|' + s) % SIX;
+  const DATA = 8, GROUP = s => s.slice(0, 3) + '-' + s.slice(3, 6) + '-' + s.slice(6);
+  const recBits = ch => (ch.mX[0] === 2 ? 1 : 0) | (ch.mX[1] === 2 ? 2 : 0) | (ch.mX[2] === 2 ? 4 : 0) | (ch.fX[0] === 2 ? 8 : 0) | (ch.fX[2] === 2 ? 16 : 0);
+  const recMask = r5 => hashStr('egg-rec|' + r5);
+  function eggCodeOf(M, F, ch) {
+    const mid = idOf(M), fid = idOf(F), r5 = recBits(ch), s = stir((pack(ch) ^ recMask(r5)) >>> 0), w = s * 32 + r5;
+    let v = w * SIX + tie6(mid, fid, w), data = '';
+    for (let i = 0; i < DATA; i++) { data = ALPHA[v % 31] + data; v = Math.floor(v / 31); }
+    let sum = tie31(mid, fid);
+    for (let i = 0; i < DATA; i++) sum += ALPHA.indexOf(data[i]) * (i + 1);
+    return GROUP(data + ALPHA[sum % 31]);
+  }
+  /* A mixed strand that went in is in the code. A trade whose mixed strand stayed behind is not; it is drawn again
+     from the code at its true odds given no mixed strand, d / (1 - d) with d = mapUnits / 100, so a brought-back egg
+     still shows trades as often as a rolled one. */
+  function crossFromCode(code, r5, who) {
+    const r = BRS.rng('cross-shown|' + code + '|' + who), bit = who === 'mother' ? [1, 2, 4] : [8, 0, 16];
+    return CROSS.map(function (c, k) {
+      if (who === 'father' && c.chr === 'X') return 0;
+      if (r5 & bit[k]) return 2;
+      const d = c.mapUnits / 100;
+      return r() < d / (1 - d) ? 1 : 0;
+    });
+  }
+  const EGG_WHY = {
+    shape: 'An egg code is nine characters in three groups of three, like K7Q-2M4-XPA.',
+    letters: 'Codes never use 0, 1, I, L or O. Look at your sheet again.',
+    check: 'That egg code does not fit these two parents. Check each character of the egg code, then check both parent codes.'
+  };
+  function readEgg(raw, M, F) {
+    const s = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (s.length !== DATA + 1) return { ok: false, why: EGG_WHY.shape };
+    for (const c of s) if (ALPHA.indexOf(c) < 0) return { ok: false, why: EGG_WHY.letters };
+    const mid = idOf(M), fid = idOf(F);
+    let sum = tie31(mid, fid), v = 0;
+    for (let i = 0; i < DATA; i++) { const d = ALPHA.indexOf(s[i]); sum += d * (i + 1); v = v * 31 + d; }
+    if (ALPHA[sum % 31] !== s[DATA]) return { ok: false, why: EGG_WHY.check };
+    const w = Math.floor(v / SIX), r5 = w % 32, st = Math.floor(w / 32);
+    if (st >= TWO32 || tie6(mid, fid, w) !== v % SIX) return { ok: false, why: EGG_WHY.check };
+    const code = GROUP(s), sent = unpack((unstir(st) ^ recMask(r5)) >>> 0);
+    sent.motherCross = crossFromCode(code, r5, 'mother'); sent.fatherCross = crossFromCode(code, r5, 'father');
+    return { ok: true, egg: code, sent: sent };
+  }
+  /* For the paper sheet and the lookup: the egg code two parents and a set of rolls will make, without building the baby. */
+  function eggCode(mother, father, rolls) {
+    const M = animal(mother), F = animal(father); if (!M.ok) return M; if (!F.ok) return F;
+    const ch = choices(rolls, M, F); if (!ch.ok) return ch;
+    return { ok: true, egg: eggCodeOf(M, F, ch) };
+  }
+
+  /* ---------- the baby maker ---------- */
+  const COPY_WORD = { XX: ['the copy she got from her mother', 'the copy she got from her father'], XY: ['the copy he got from his mother', 'the copy he got from his father'] };
+  function makeBaby(mother, father, rolls) {
+    const M = animal(mother), F = animal(father);
+    if (!M.ok) return { ok: false, who: 'mother', why: M.why };
+    if (!F.ok) return { ok: false, who: 'father', why: F.why };
+    if (M.sex !== 'XX' || F.sex !== 'XY') {
+      if (M.sex === 'XY' && F.sex === 'XX') return { ok: false, swap: true, why: 'These two are in the wrong boxes. ' + M.name + ' is the male, so it is the father, and ' + F.name + ' is the mother.' };
+      return { ok: false, why: 'A family needs one female and one male. Both of these animals are ' + sexWord(M) + '.' };
+    }
+    const ch = choices(rolls, M, F); if (!ch.ok) return ch;
+    const events = [], crossings = [];
+    const gamete = function (P, bits, isNew, who) {
+      return bits.map(function (b, i) {
+        const src = P.pairs[i].copies[b];
+        const c = { chr: src.chr, alleles: src.alleles, line: src.line, givenBy: who, parentCopy: b, sentWord: COPY_WORD[P.sex][b], face: ch.faces ? ch.faces[who][i] : null };
+        if (i === 8) c.ember = src.ember || null;
+        const k = CROSS_AT[i], st = k == null ? 0 : (who === 'mother' ? ch.mX : ch.fX)[k];
+        if (st === 2) {                                   // a mixed strand: this member up to the trade point, the other member beyond it
+          const cp = CROSS[k], other = P.pairs[i].copies[1 - b], far = LAYOUT[src.chr].filter(g => g !== 'EMB' && KARYO.locus[g] > cp.at);
+          c.alleles = Object.assign({}, src.alleles); far.forEach(function (g) { c.alleles[g] = other.alleles[g]; });
+          const tipLine = other.tail ? other.tail.line : other.line;
+          c.cross = { at: cp.at, tipCopy: 1 - b, tipLine: tipLine, genes: far, tipWord: COPY_WORD[P.sex][1 - b] };
+          c.tail = { at: cp.at, line: tipLine, genes: far };   /* for tracing: past this point the strand came from tail.line */
+          crossings.push({ in: who === 'mother' ? 'egg' : 'sperm', givenBy: who, chr: cp.chr, pair: i, near: cp.near, far: cp.far,
+            nearAllele: c.alleles[cp.near].s, farAllele: c.alleles[cp.far].s, nearFrom: COPY_WORD[P.sex][b], farFrom: COPY_WORD[P.sex][1 - b],
+            wasNear: src.alleles[cp.near].s, wasFar: src.alleles[cp.far].s, changes: src.alleles[cp.far].s !== other.alleles[cp.far].s });
+        } else {
+          if (st === 1) c.traded = true;                  // a trade happened, but the strand that went in kept its own ends
+          if (src.tail) c.tail = src.tail;                // a mixed strand from an earlier generation passes on whole
+        }
+        if (i === POW_PAIR && isNew) {
+          const old = src.alleles.POW, neu = NEW_BY_SOURCE[old.s];
+          if (neu) {
+            c.alleles = Object.assign({}, src.alleles, { POW: neu }); c.newPower = true;
+            events.push({ changed: true, in: who === 'mother' ? 'egg' : 'sperm', givenBy: who, from: old.s, to: neu.s, fromLabel: old.label, toLabel: neu.label, id: neu.id, oldCodon: old.codon, newCodon: neu.codon, oldAA: old.aa, newAA: neu.aa, codonNumber: POW.at + 1, base: neu.pos + 1, baseFrom: neu.change.from, baseTo: neu.change.to });
+          } else {
+            /* Model choice: a power that is already new does not change again. The double six is on record and does nothing. */
+            events.push({ changed: false, in: who === 'mother' ? 'egg' : 'sperm', givenBy: who, from: old.s, fromLabel: old.label, note: 'This copy already carries a new power, so it does not change again.' });
+          }
+        }
+        return c;
+      });
+    };
+    const egg = gamete(M, ch.m, ch.mNew, 'mother'), sperm = gamete(F, ch.f, ch.fNew, 'father');
+    const code = eggCodeOf(M, F, ch);
+    const wrap = a => a.kind === 'baby' ? '(' + a.id + ')' : a.id;
+    const baby = {
+      ok: true, kind: 'baby', gen: Math.max(M.gen, F.gen) + 1,
+      id: wrap(M) + 'x' + wrap(F) + '/' + code,
+      name: 'egg ' + code, egg: code, mother: M.id, father: F.id,
+      sex: sperm[14].chr === 'Y' ? 'XY' : 'XX',
+      rolls: ch.faces,                                    // the die faces when they were given; null when the baby was rebuilt from its egg code
+      sent: { mother: ch.m.slice(), father: ch.f.slice(), motherNew: ch.mNew, fatherNew: ch.fNew, motherCross: ch.mX.slice(), fatherCross: ch.fX.slice() },
+      newPower: events.filter(e => e.changed), doubleSix: events, crossings: crossings,
+      pairs: PAIRS.map((name, i) => ({ name: name, copies: [egg[i], sperm[i]] }))
+    };
+    Object.defineProperty(baby, 'parents', { value: [M, F], enumerable: false });
+    finish(baby);
+    baby.hatchLength = Math.round(baby.length * 0.3 * 10) / 10;   // model choice for Run E: a hatchling is drawn at three tenths of its grown length
+    if (baby.albino) baby.ph.albino = true;
+    baby.ph.lines.EMB = baby.albino
+      ? ['Albino: both copies of its ember gene stop early, so the ember protein is never finished. The body is pale and no ember color shows.', 'Leave the whole animal pale. No ember color on the cheeks, tail tip or stripe.']
+      : baby.carrier ? ['Carries one broken copy of the ember gene. The other copy works, so nothing shows.', '']
+        : ['Both copies of the ember gene work.', ''];
+    baby.karyotype = karyotype(baby);
+    return baby;
+  }
+  function babyFromEgg(mother, father, egg) { return makeBaby(mother, father, { egg: egg }); }
+  /* Four eggs. list: four sets of rolls or egg codes, or { seed } to have them drawn (the same seed draws the same four). */
+  function family(mother, father, list) {
+    const M = animal(mother), F = animal(father);
+    if (!M.ok) return { ok: false, who: 'mother', why: M.why };
+    if (!F.ok) return { ok: false, who: 'father', why: F.why };
+    if (!Array.isArray(list)) {
+      const r = BRS.rng('family|' + M.id + '|' + F.id + '|' + ((list && list.seed) || 'a')), n = (list && list.eggs) || 4;
+      list = []; for (let i = 0; i < n; i++) list.push(rollDice(r));
+    }
+    const babies = list.map(r => makeBaby(M, F, r)), bad = babies.find(b => !b.ok);
+    if (bad) return bad;
+    return { ok: true, mother: M, father: F, babies: babies };
+  }
+
+  /* ---------- what Run D needs to draw a karyotype ----------
+     Sizes, centromere places and gene places are a MODEL CHOICE made for the picture. The engine's strips have no fixed
+     length from animal to animal. Pairs run from the longest to the shortest, with the sex pair last. */
+  const KARYO = {
+    size: { 1: 1, 2: 0.94, 3: 0.88, 4: 0.83, 5: 0.78, 6: 0.73, 7: 0.68, 8: 0.64, 9: 0.6, 10: 0.56, 11: 0.52, 12: 0.48, 13: 0.44, 14: 0.4, X: 0.7, Y: 0.34 },
+    centromere: { 1: 0.48, 2: 0.4, 3: 0.46, 4: 0.3, 5: 0.28, 6: 0.38, 7: 0.42, 8: 0.34, 9: 0.36, 10: 0.4, 11: 0.44, 12: 0.3, 13: 0.18, 14: 0.2, X: 0.42, Y: 0.3 },
+    locus: { STR: 0.68, COL: 0.56, TOX: 0.66, SPT: 0.72, GLO: 0.44, CLW: 0.74, GIL: 0.66, REG: 0.72, POW: 0.7, AUR: 0.68, EMB: 0.7, LN1: 0.72, LN2: 0.7, LN3: 0.68, VOC: 0.54, VIS: 0.74 }   // linked genes sit as far apart as their map distance: 10, 30 and 20 hundredths of the chromosome
+  };
+  function karyotype(an) {
+    const pairs = an.pairs.map(function (p, i) {
+      return {
+        name: p.name, label: PAIR_LABEL[i], sexPair: i === 14,
+        chromosomes: p.copies.map(function (c, k) {
+          const loci = LAYOUT[c.chr].map(function (gid) {
+            if (gid === 'EMB') return { gene: 'EMB', name: EMB.name, at: KARYO.locus.EMB, allele: c.ember ? 'changed' : 'ref', label: c.ember ? (c.ember.kind === 'nonsense' ? 'changed copy: early stop' : c.ember.kind === 'missense' ? 'changed copy: one amino acid changed' : 'changed copy: silent') : 'ridge reference', broken: !!(c.ember && c.ember.kind === 'nonsense') };
+            const a = c.alleles[gid]; return { gene: gid, name: GENE[gid].name, at: KARYO.locus[gid], allele: a.s, label: a.label, isNew: !!a.isNew };
+          });
+          return { chr: c.chr, from: k === 0 ? 'mother' : 'father', size: KARYO.size[c.chr], centromere: KARYO.centromere[c.chr], loci: loci, line: c.line, parentCopy: c.parentCopy == null ? null : c.parentCopy, face: c.face == null ? null : c.face,
+            cross: c.cross ? { at: c.cross.at, tipCopy: c.cross.tipCopy, tipLine: c.cross.tipLine, genes: c.cross.genes.slice() } : null, tail: c.tail || null };
+        })
+      };
+    });
+    return { pairs: pairs, pairCount: 15, chromosomeCount: 30, sex: an.sex, sexWord: sexWord(an), sexPair: an.sex === 'XX' ? 'XX' : 'XY' };
+  }
+
+  /* ---------- a partner from the lookup ----------
+     Draws Creature Codes the way the engine's batch does, and keeps the first of the other sex that fits.
+     want: { site: 'TF' | 'CE' | 'HE' (default: the animal's own site), carrier: false | 'changed' | 'stop', skip: n }.
+     The same code and the same want always draw the same partner. skip: 1 gives the next one, and so on. */
+  function partnerFor(code, want) {
+    const A = animal(code); if (!A.ok) return A;
+    if (A.kind !== 'wild') return { ok: false, why: 'A partner is drawn for a ridge animal, by its Creature Code.' };
+    const w = want || {}, siteId = w.site || A.site, carrier = w.carrier || false;
+    if (!BRS.site(siteId)) return { ok: false, why: 'A site is TF, CE or HE.' };
+    const r = BRS.rng('partner|' + A.id + '|' + siteId + '|' + (carrier || 'any'));
+    let left = w.skip || 0;
+    for (let tries = 1; tries <= 200000; tries++) {
+      const c = BRS.codeFrom(r, siteId); if (c === A.id) continue;
+      const P = wild(c);
+      if (P.sex === A.sex) continue;
+      if (carrier === 'stop' && P.ember.stops !== 1) continue;
+      if (carrier === 'changed' && P.ember.changed !== 1) continue;
+      if (left-- > 0) continue;
+      return { ok: true, code: P.code, keeper: P.keeper, sex: P.sex, sexWord: sexWord(P), site: P.site, changed: P.ember.changed === 1, stop: P.ember.stops === 1, tries: tries, animal: P };
+    }
+    return { ok: false, why: 'No partner of that kind turned up. Try another site.' };
+  }
+
+  /* ---------- the class cross: one baby from each of two families ----------
+     Each baby is given as { mother, father, egg } or as a baby already made. rolls: one set, a list of sets,
+     or nothing (then they are drawn from a seed made of the two babies, so the lookup draws the same ones). */
+  function classCross(a, b, rolls) {
+    const A = animal(a), B = animal(b);
+    if (!A.ok) return A; if (!B.ok) return B;
+    if (A.kind !== 'baby' || B.kind !== 'baby') return { ok: false, why: 'The class cross is between two babies, each named by its two parents and its egg code.' };
+    if (A.sex === B.sex) return { ok: false, why: 'The class cross needs one daughter and one son. Both of these babies are ' + sexWord(A) + '.' };
+    const shared = [A.mother, A.father].filter(p => p === B.mother || p === B.father);
+    if (shared.length) return { ok: false, why: 'These two babies share a parent (' + shared.join(', ') + '). Pick babies from two different families.' };
+    const M = A.sex === 'XX' ? A : B, F = M === A ? B : A;
+    let list = rolls;
+    const isRolls = x => typeof x === 'string' || !!(x && (x.mother || x.egg || x.sent));
+    if (!Array.isArray(list) && !isRolls(list)) {         // nothing, or { seed, eggs }: the rolls are drawn
+      const r = BRS.rng('class-cross|' + M.id + '|' + F.id + '|' + ((list && list.seed) || 'a')), n = (list && list.eggs) || 1;
+      list = []; for (let i = 0; i < n; i++) list.push(rollDice(r));
+    } else if (!Array.isArray(list)) list = [list];
+    const kids = list.map(r => makeBaby(M, F, r)), bad = kids.find(k => !k.ok);
+    if (bad) return bad;
+    return { ok: true, mother: M, father: F, child: kids[0], children: kids };
+  }
+  /* Which traits a pedigree can follow: who shows it, and who carries it without showing it. */
+  const PEDIGREE_TRAITS = {
+    VIS: { gene: 'VIS', name: 'Red-blind', shows: an => !an.ph.color_vision, carries: an => an.sex === 'XX' && entry(an, 'VIS').genotype === 'Vv', note: 'X-linked recessive' },
+    STR: { gene: 'STR', name: 'Lead-backed (no stripe)', shows: an => !an.ph.striped, carries: an => entry(an, 'STR').genotype === 'Ss', note: 'recessive' },
+    CLW: { gene: 'CLW', name: 'No claws', shows: an => !an.ph.claws, carries: an => entry(an, 'CLW').genotype === 'Cc', note: 'recessive' },
+    GIL: { gene: 'GIL', name: 'Gills kept', shows: an => an.ph.gills, carries: an => entry(an, 'GIL').genotype === 'Gg', note: 'recessive' },
+    REG: { gene: 'REG', name: 'Plain skin (no poultice)', shows: an => !an.ph.heals, carries: an => entry(an, 'REG').genotype === 'Hh', note: 'recessive' },
+    EMB: { gene: 'EMB', name: 'Albino', shows: an => an.albino, carries: an => an.carrier, note: 'recessive; a broken copy is one with an early stop' }
+  };
+  /* famA and famB are results of family(); cross is a result of classCross() or null. Returns people in three generations. */
+  function pedigree(famA, famB, cross, traitId) {
+    const T = PEDIGREE_TRAITS[traitId || 'VIS']; if (!T) return { ok: false, why: 'No pedigree rule for that gene.' };
+    const people = [], unions = [], byId = {};
+    const add = function (an, gen, extra) {
+      const n = people.filter(p => p.gen === gen).length + 1;
+      const p = Object.assign({ id: an.id, label: ['I', 'II', 'III'][gen - 1] + '-' + n, gen: gen, sex: an.sex, name: an.name, shows: !!T.shows(an), carries: !T.shows(an) && !!T.carries(an), genotype: T.gene === 'EMB' ? traitWord(an, 'EMB') : entry(an, T.gene).genotype, animal: an }, extra || {});
+      people.push(p); byId[an.id] = p; return p;
+    };
+    /* Drawn left to right: the father then the mother of each family, and the two crossed babies side by side in the middle. */
+    const crossed = b => !!(cross && cross.ok && (b.id === cross.mother.id || b.id === cross.father.id));
+    [famA, famB].forEach(function (fam, k) {
+      if (!fam || !fam.ok) return;
+      const f = add(fam.father, 1, { family: k }), m = add(fam.mother, 1, { family: k });
+      unions.push({ mother: m.label, father: f.label, children: [], family: k });
+    });
+    [famA, famB].forEach(function (fam, k) {
+      if (!fam || !fam.ok) return;
+      const u = unions.find(x => x.family === k), list = fam.babies.map((b, i) => ({ b: b, egg: i + 1 }));
+      const at = list.findIndex(x => crossed(x.b));
+      if (at >= 0) { const x = list.splice(at, 1)[0]; if (k === 0) list.push(x); else list.unshift(x); }
+      list.forEach(function (x) { const p = add(x.b, 2, { family: k, mother: u.mother, father: u.father, eggNumber: x.egg, crossed: crossed(x.b) }); u.children.push(p.label); });
+    });
+    if (cross && cross.ok) {
+      const m = byId[cross.mother.id], f = byId[cross.father.id];
+      if (m && f) {
+        const u = { mother: m.label, father: f.label, children: [], family: 'cross' }; unions.push(u);
+        cross.children.forEach(function (b, i) { const p = add(b, 3, { family: 'cross', mother: m.label, father: f.label, eggNumber: i + 1 }); u.children.push(p.label); });
+      }
+    }
+    return { ok: true, trait: T, people: people, unions: unions };
+  }
+
+  /* ---------- Punnett squares, for Run F and for the tests ----------
+     One gene: each parent's two gametes across the top and down the side, four boxes.
+     For an X-linked gene the father's gametes are his X allele and his Y. */
+  function boxOf(gid, a, b) {                             // a from the mother, b from the father (null = Y)
+    const order = allelesOf(gid), two = b ? [a, b] : [a];
+    return { genotype: two.slice().sort((p, q) => order.indexOf(p) - order.indexOf(q)).map(x => x.s).join(''), sex: GENE[gid].chr === 'X' ? (b ? 'XX' : 'XY') : null, mother: a.s, father: b ? b.s : 'Y' };
+  }
+  function punnett(mother, father, gid) {
+    const M = animal(mother), F = animal(father); if (!M.ok) return M; if (!F.ok) return F;
+    const i = pairIndexOfGene(gid);
+    const mg = M.pairs[i].copies.map(c => c.alleles[gid]), fg = F.pairs[i].copies.map(c => c.chr === 'Y' ? null : c.alleles[gid]);
+    const boxes = []; mg.forEach(function (a) { fg.forEach(function (b) { boxes.push(boxOf(gid, a, b)); }); });
+    const count = {}; boxes.forEach(function (b) { const k = (b.sex ? (b.sex === 'XX' ? 'daughter ' : 'son ') : '') + b.genotype; count[k] = (count[k] || 0) + 1; });
+    return { ok: true, gene: gid, motherGametes: mg.map(a => a.s), fatherGametes: fg.map(a => a ? a.s : 'Y'), boxes: boxes, count: count };
+  }
+  /* Two genes, four kinds of gamete from each parent. Unlinked: a quarter each. Linked (v1.2): the two parental kinds
+     at (100 - mapUnits) / 2 % each and the two mixed kinds at mapUnits / 2 % each; a male's X genes never mix.
+     count gives each genotype as a percent of the offspring. */
+  function punnett2(mother, father, g1, g2) {
+    const M = animal(mother), F = animal(father); if (!M.ok) return M; if (!F.ok) return F;
+    const i1 = pairIndexOfGene(g1), i2 = pairIndexOfGene(g2), linked = i1 === i2, cp = linked ? CROSS[CROSS_AT[i1]] : null;
+    const gam = function (P) {
+      const out = [], al = (c, g) => c.chr === 'Y' ? null : c.alleles[g], cs = P.pairs[i1].copies;
+      if (linked) {
+        const rec = cp && !(P.sex === 'XY' && cp.chr === 'X') ? cp.mapUnits / 100 : 0;
+        cs.forEach(function (c) { out.push({ al: [al(c, g1), al(c, g2)], p: (1 - rec) / 2, kind: 'parental' }); });
+        if (rec > 0) [0, 1].forEach(function (k) { out.push({ al: [al(cs[k], g1), al(cs[1 - k], g2)], p: rec / 2, kind: 'mixed' }); });
+      } else cs.forEach(function (c1) { P.pairs[i2].copies.forEach(function (c2) { out.push({ al: [al(c1, g1), al(c2, g2)], p: 0.25, kind: 'independent' }); }); });
+      return out;
+    };
+    const mg = gam(M), fg = gam(F), boxes = [], count = {};
+    mg.forEach(function (a) { fg.forEach(function (b) { const x = boxOf(g1, a.al[0], b.al[0]), y = boxOf(g2, a.al[1], b.al[1]), k = x.genotype + ' ' + y.genotype, p = a.p * b.p; boxes.push({ a: x, b: y, p: p }); count[k] = Math.round(((count[k] || 0) + 100 * p) * 1e6) / 1e6; }); });
+    const g = p => p.al.map(a => a ? a.s : 'Y').join(' ');
+    return { ok: true, genes: [g1, g2], linked: linked, mapUnits: cp ? cp.mapUnits : null, motherGametes: mg.map(g), fatherGametes: fg.map(g),
+      motherGameteShare: mg.map(p => ({ gamete: g(p), percent: 100 * p.p, kind: p.kind })), fatherGameteShare: fg.map(p => ({ gamete: g(p), percent: 100 * p.p, kind: p.kind })), boxes: boxes, count: count };
+  }
+
+  /* ---------- linkage WITH crossing over: the dual-enrollment testcross ----------
+     The same rule as every family (rule 3), run over many eggs for one linked pair and counted. A trade between the two
+     genes happens in 2 x mapUnits % of meioses, and half the strands are mixed, so mapUnits % of eggs or sperm are
+     recombinant. One map unit = 1% recombinants. MODEL CHOICES: the three distances; no double crossovers; a male
+     never recombines his X genes (he has one X). */
+  const LINKAGE = [
+    { chr: '2', genes: ['COL', 'TOX'], mapUnits: 10, name: 'Ember color and skin toxin', tester: ['Y', 't'] },
+    { chr: 'X', genes: ['VOC', 'VIS'], mapUnits: 20, name: 'Call and color vision', tester: ['c', 'v'] },
+    { chr: '4', genes: ['GLO', 'CLW'], mapUnits: 30, name: 'Glow and claws', tester: ['n', 'c'] }
+  ];
+  /* The three linked pairs as meiosis uses them. near is the gene nearer the centromere; the trade point sits halfway
+     between the two genes (a model choice for the picture). chiasma: how often a trade happens between them. */
+  const CROSS = LINKAGE.map(function (L) {
+    const a = KARYO.locus[L.genes[0]], b = KARYO.locus[L.genes[1]], near = a <= b ? L.genes[0] : L.genes[1];
+    return { i: pairIndexOfGene(L.genes[0]), chr: L.chr, genes: L.genes.slice(), near: near, far: near === L.genes[0] ? L.genes[1] : L.genes[0], at: (a + b) / 2, mapUnits: L.mapUnits, chiasma: Math.min(1, 2 * L.mapUnits / 100), name: L.name };
+  });
+  const CROSS_AT = {}; CROSS.forEach(function (c, k) { CROSS_AT[c.i] = k; });
+  const CROSS_X = CROSS.findIndex(c => c.chr === 'X');
+  const CROSS_WHY = 'Crossing over is given as three numbers for each parent, one for chromosome 2, the X and chromosome 4: 0, 1 or 2. A male has one X, so his X number is 0.';
+  function linkageOf(x) {
+    if (x && typeof x === 'object' && !Array.isArray(x)) return LINKAGE.indexOf(x) >= 0 ? x : null;
+    const key = Array.isArray(x) ? x[0] : String(x == null ? '' : x).toUpperCase();
+    return LINKAGE.find(l => l.chr === key || l.genes.indexOf(key) >= 0) || null;
+  }
+  const DEFAULT_LETTERS = {}; GENES.forEach(function (g) { DEFAULT_LETTERS[g.id] = [g.alleles[0].s, g.alleles[0].s]; });
+  /* The trait word for one gene from its letters alone, by the same trait rules as everything else. */
+  function wordFor(gid, letters) {
+    return traitWord({ ph: traits(g => g === gid ? letters : DEFAULT_LETTERS[g], 0) }, gid);
+  }
+  /* a, b: two animals of opposite sex. opts: { genes or chr, eggs (default 100), seed, mapUnits (to try another distance) }.
+     Returns the offspring classes with counts, which of them are recombinant, the recombination frequency and the
+     map distance the count gives. One parent must be heterozygous for both genes, or there is nothing to see. */
+  function testcross(a, b, opts) {
+    const A = animal(a), B = animal(b); if (!A.ok) return A; if (!B.ok) return B;
+    const o = opts || {}, L = linkageOf(o.genes || o.chr || '2');
+    if (!L) return { ok: false, why: 'The three linked pairs are ember color with skin toxin, glow with claws, and call with color vision.' };
+    if (A.sex === B.sex) return { ok: false, why: 'A cross needs one female and one male. Both of these animals are ' + sexWord(A) + '.' };
+    const M = A.sex === 'XX' ? A : B, D = M === A ? B : A, g1 = L.genes[0], g2 = L.genes[1], i = pairIndexOfGene(g1);
+    const n = Math.max(1, Math.min(100000, o.eggs || 100)), rf = (o.mapUnits == null ? L.mapUnits : o.mapUnits) / 100;
+    const hap = c => c.chr === 'Y' ? null : [c.alleles[g1], c.alleles[g2]];
+    const info = function (P) {
+      const h = P.pairs[i].copies.map(hap), two = !!(h[0] && h[1]);
+      return { id: P.id, name: P.name, sex: P.sex, haplotypes: h.map(x => x ? x[0].s + ' ' + x[1].s : 'Y'), canRecombine: two,
+        doubleHet: two && h[0][0] !== h[1][0] && h[0][1] !== h[1][1], homozygous: two && h[0][0] === h[1][0] && h[0][1] === h[1][1], h: h };
+    };
+    const mi = info(M), di = info(D), xl = L.chr === 'X';
+    if (!mi.doubleHet && !di.doubleHet) return { ok: false, needs: 'doubleHet', why: 'Neither parent is heterozygous for both genes, so a recombinant could not be told from a parental type. One parent needs two different alleles of each gene' + (xl ? ', and for genes on the X that parent is the mother.' : '.') };
+    const r = BRS.rng('testcross|' + M.id + '|' + D.id + '|' + L.chr + '|' + (o.seed || 'a'));
+    const chi = Math.min(1, 2 * rf);
+    const gamete = function (pi) {
+      const k = r() < 0.5 ? 0 : 1, traded = r() < chi && pi.canRecombine, mixed = traded && r() < 0.5, lead = pi.h[k], other = pi.h[1 - k];
+      if (!lead) return { y: true, text: 'Y', crossed: false, recombinant: false };
+      const al = [lead[0], mixed ? other[1] : lead[1]], text = al[0].s + ' ' + al[1].s;
+      return { y: false, alleles: al, text: text, crossed: mixed, traded: traded, recombinant: pi.haplotypes.indexOf(text) < 0 };
+    };
+    const order = gid => allelesOf(gid), geno = (gid, two) => two.slice().sort((p, q) => order(gid).indexOf(p) - order(gid).indexOf(q)).map(x => x.s);
+    /* Whose gametes can be read straight off the offspring: the doubly heterozygous parent, when the other is
+       homozygous at both genes (a true testcross), or the mother of sons for the X pair. */
+    const sonsOnly = xl, who = mi.doubleHet && (xl || di.homozygous) ? 'mother' : di.doubleHet && !xl && mi.homozygous ? 'father' : null;
+    const offspring = [], tally = {}; let counted = 0, parental = 0, recombinant = 0, crossedSeen = 0;
+    for (let e = 0; e < n; e++) {
+      const gm = gamete(mi), gf = gamete(di), sex = xl ? (gf.y ? 'XY' : 'XX') : (r() < 0.5 ? 'XX' : 'XY');
+      const l1 = geno(g1, gf.y ? [gm.alleles[0]] : [gm.alleles[0], gf.alleles[0]]), l2 = geno(g2, gf.y ? [gm.alleles[1]] : [gm.alleles[1], gf.alleles[1]]);
+      const kid = { sex: sex, fromMother: gm.text, fromFather: gf.text, genotype: [l1.join(''), l2.join('')], traits: [wordFor(g1, l1), wordFor(g2, l2)], recombinantFromMother: gm.recombinant, recombinantFromFather: gf.recombinant };
+      offspring.push(kid);
+      if (sonsOnly && sex !== 'XY') continue;
+      counted++;
+      const src = who === 'mother' ? gm : who === 'father' ? gf : null, key = kid.traits.join(' · ');
+      if (src) { if (src.recombinant) recombinant++; else parental++; if (src.crossed) crossedSeen++; }
+      const c = tally[key] || (tally[key] = { traits: kid.traits, genotype: kid.genotype, gamete: src ? src.text : null, kind: src ? (src.recombinant ? 'recombinant' : 'parental') : null, count: 0 });
+      c.count++;
+    }
+    const classes = Object.keys(tally).map(k => tally[k]).sort((x, y) => y.count - x.count);
+    const strip = pi => ({ id: pi.id, name: pi.name, sex: pi.sex, haplotypes: pi.haplotypes, doubleHet: pi.doubleHet, homozygous: pi.homozygous });
+    return {
+      ok: true, linkage: L, genes: L.genes, mapUnits: rf * 100, eggs: n, mother: strip(mi), father: strip(di),
+      readFrom: who, trueTestcross: !!who, counted: counted, countedWho: sonsOnly ? 'sons only' : 'all offspring',
+      classes: classes, parental: who ? parental : null, recombinant: who ? recombinant : null,
+      frequency: who && counted ? recombinant / counted : null, mapDistance: who && counted ? Math.round(1000 * recombinant / counted) / 10 : null,
+      note: who ? '' : 'Both parents are heterozygous, or the other parent is not homozygous at both genes, so the classes cannot be read as one parent’s gametes. Use a tester from linkagePair().',
+      offspring: offspring
+    };
+  }
+  /* Draws the two animals for a testcross on one linked pair: one heterozygous for both genes, and a tester of the
+     other sex that is homozygous for the allele that hides nothing (yellow and no toxin; no glow and no claws; for
+     the X pair a clicks, red-blind father). The same call always draws the same two. skip: 1 gives the next pair. */
+  function linkagePair(x, want) {
+    const L = linkageOf(x || '2'); if (!L) return { ok: false, why: 'The three linked pairs are ember color with skin toxin, glow with claws, and call with color vision.' };
+    const w = want || {}, siteId = w.site || 'CE'; if (!BRS.site(siteId)) return { ok: false, why: 'A site is TF, CE or HE.' };
+    const r = BRS.rng('linkage-pair|' + L.chr + '|' + siteId), g1 = L.genes[0], g2 = L.genes[1], xl = L.chr === 'X';
+    let left = w.skip || 0, het = null;
+    for (let tries = 0; tries < 400000; tries++) {
+      const P = wild(BRS.codeFrom(r, siteId));
+      if (!het) {
+        if (xl && P.sex !== 'XX') continue;
+        if (entry(P, g1).zyg !== 'heterozygous' || entry(P, g2).zyg !== 'heterozygous') continue;
+        if (left-- > 0) continue;
+        het = P; continue;
+      }
+      if (P.sex === het.sex || P.id === het.id) continue;
+      const a1 = alleles(P, g1), a2 = alleles(P, g2);
+      if (!a1.every(s => s === L.tester[0]) || !a2.every(s => s === L.tester[1])) continue;
+      const M = het.sex === 'XX' ? het : P, D = M === het ? P : het;
+      return { ok: true, linkage: L, het: het, tester: P, mother: M, father: D, phase: het.pairs[pairIndexOfGene(g1)].copies.filter(c => c.chr !== 'Y').map(c => c.alleles[g1].s + ' ' + c.alleles[g2].s) };
+    }
+    return { ok: false, why: 'No pair of that kind turned up at that site. Try another site.' };
+  }
+
+  return {
+    VERSION, PAIRS, PAIR_LABEL, NEW_POWERS, PEDIGREE_TRAITS, KARYO, EGG_WHY, PT, PD, LINKAGE, CROSS, CROSS_AT,
+    lowFace, pairIndexOfGene, allelesOf, alleleBy,
+    animal, wild, entry, alleles, traitWord, sexWord,
+    traits, measure, stats,
+    rollDice, rollCross, choices, eggCode, readEgg, makeBaby, babyFromEgg, family, karyotype,
+    partnerFor, classCross, pedigree, punnett, punnett2, linkageOf, testcross, linkagePair
+  };
+})(typeof BRS !== 'undefined' ? BRS : require('./engine-v3-live.js'));
+</script>
+<script>
+/* Blue Ridge Salamander Project · The Karyotype Card (student page). Stage 2, Run D, built 2026-11-27.
+   Runs on the frozen genome engine (window.BRS) and the family rules (window.BRSF, src/families.js). It reads both
+   and changes neither. Nothing leaves the device: no network call.
+
+   One hatchling at a time. A hatchling is opened from three codes, never from the egg code alone:
+     #m=<mother's keeper code>&f=<father's keeper code>&egg=<egg code, XXX-XXX-XXX>
+   the same address the 3D viewer takes. The page also offers the eggs of the families made on this iPad. It READS the
+   Families page's storage (brs-families-v1) and never writes it. Its own key (brs-karyotype-v1) holds only which cards
+   were watched and the answers to the karyotype check.
+
+   Every chromosome is drawn from BRSF.karyotype(baby): 15 pairs, the sex pair last, each chromosome with its parent,
+   size, centromere, the allele at each gene, and cross { at, tipCopy } when it is a mixed strand. Colors and banding
+   are the Families page's: orange from the mother, blue from the father, solid for the copy that parent got from its
+   own mother, banded for the copy from its own father. chromatid(), place(), defs() and Player() are copied from
+   src/families-page.js (Run C) and sized for the card.
+
+   Reid's answers, Fri 2026-11-27: the card is reached from each hatch card and each baby of the family screen on the
+   Families page, and from the start page; one baby at a time, with a way to step to the next; the check asks for the
+   pair count, the sex pair, and daughter or son, two tries each, and at Advanced also the mixed strand when there is one.
+
+   URL options: ?level=general (three choices on a check, no mixed-strand part), ?level=de (Advanced, with map units
+   printed), ?projector=1 (big type; Right plays the next step, Left goes back one, Space plays the step again,
+   1 to 4 jump to that egg of the family), ?teacher=1 (level switch and the two teaching families). */
+(function () {
+  'use strict';
+  const F = BRSF, $ = (s, r) => (r || document).querySelector(s), app = $('#app');
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  let Q; try { Q = new URLSearchParams(location.search); } catch (e) { Q = { get: () => null }; }
+  const PROJ = Q.get('projector') === '1', TEACHER = Q.get('teacher') === '1';
+  let LEVEL = Q.get('level') === 'general' ? 'general' : Q.get('level') === 'de' ? 'de' : 'advanced';
+  const REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if (PROJ) document.documentElement.classList.add('proj');
+
+  /* ---------- storage: this page's own key. The Families page's key is read and never written. ---------- */
+  const KEY = 'brs-karyotype-v1', FAM_KEY = 'brs-families-v1';
+  let ST = { v: 1, seen: {}, chk: {} };
+  try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j && j.v === 1) { ST.seen = j.seen || {}; ST.chk = j.chk || {}; } } catch (e) { /* storage is a convenience only */ }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (e) { /* ignore */ } };
+  function storedFamilies() {
+    let fams = {};
+    try { const j = JSON.parse(localStorage.getItem(FAM_KEY) || 'null'); if (j && j.v === 1 && j.fams) fams = j.fams; } catch (e) { /* none */ }
+    const out = [];
+    Object.keys(fams).forEach(function (k) {
+      const f = fams[k]; if (!f || !f.p || !f.eggs) return;
+      const M = F.animal(f.p[0]), D = F.animal(f.p[1]); if (!M.ok || !D.ok) return;
+      const eggs = [];
+      f.eggs.forEach(function (e, i) {
+        if (!e) return;
+        let b = null; try { b = e.rolls ? F.makeBaby(M, D, e.rolls) : e.code ? F.makeBaby(M, D, { egg: e.code }) : null; } catch (x) { b = null; }
+        if (b && b.ok) eggs.push({ n: i + 1, egg: b.egg });
+      });
+      if (eggs.length) out.push({ m: M.keeper, f: D.keeper, eggs: eggs });
+    });
+    return out;
+  }
+  /* The two teaching families of the Families page, worked out again here so that nothing has to be stored. */
+  const BREED = { m: 'TF-QHYWH-APN', f: 'TF-K4BR9-ASK', eggs: [{ n: 1, egg: 'SSW-SRP-NR9' }] };
+  let DEMO = null;
+  function demoFamily() {
+    if (DEMO) return DEMO;
+    const mom = F.partnerFor('TF-7CBW4'), r = BRS.rng('projector-demo'), M = F.animal(mom.keeper), D = F.animal('TF-7CBW4-AT7'), eggs = [];
+    for (let i = 0; i < 4; i++) eggs.push({ n: i + 1, egg: F.makeBaby(M, D, F.rollDice(r)).egg });
+    return (DEMO = { m: mom.keeper, f: 'TF-7CBW4-AT7', eggs: eggs });
+  }
+
+  /* ---------- opening a hatchling from three codes ---------- */
+  const SHORT = { STR: 'Back stripe', COL: 'Ember color', TOX: 'Skin toxin', SPT: 'Flecks and spots', GLO: 'Glow', CLW: 'Claws', GIL: 'Gills', REG: 'Healing skin', POW: 'Power', AUR: 'Gift', VOC: 'Call', VIS: 'Color vision', LN1: 'Length gene 1', LN2: 'Length gene 2', LN3: 'Length gene 3', EMB: 'Ember gene' };
+  const AA = { His: 'histidine', Gln: 'glutamine', Tyr: 'tyrosine', Phe: 'phenylalanine', Asp: 'aspartic acid', Gly: 'glycine', Asn: 'asparagine', Lys: 'lysine' };
+  const sexW = an => an.sex === 'XX' ? 'female' : 'male', kidW = an => an.sex === 'XX' ? 'daughter' : 'son';
+  function readKeeperBox(v, whose) {
+    const s = String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!s) return { ok: false, why: '' };
+    if (s.length === 7) return { ok: false, why: 'That is a Creature Code. A card needs the ' + whose + '’s keeper code: the Creature Code and three more characters, from the end of the Field Sheet.' };
+    const k = BRS.readKeeper(s); if (!k.ok) return k;
+    const an = F.animal(k.text); if (!an.ok) return an;
+    return { ok: true, an: an, keeper: k.text };
+  }
+  function openFrom(m, f, egg) {
+    const A = readKeeperBox(m, 'mother'), B = readKeeperBox(f, 'father');
+    if (!A.ok || !B.ok) return { ok: false, why: (A.ok ? B.why : A.why) || 'Type both keeper codes and the egg code.' };
+    if (A.an.id === B.an.id) return { ok: false, why: 'Those two keeper codes are the same animal. A hatchling has two parents.' };
+    if (A.an.sex === B.an.sex) return { ok: false, why: 'A hatchling has a mother and a father. Both of these salamanders are ' + sexW(A.an) + '.' };
+    const M = A.an.sex === 'XX' ? A : B, D = M === A ? B : A;
+    if (!String(egg || '').trim()) return { ok: false, why: 'Type the egg code too. It is on the Family Field Sheet, beside the two parent codes.' };
+    const r = F.readEgg(egg, M.an, D.an); if (!r.ok) return { ok: false, why: r.why };
+    const baby = F.makeBaby(M.an, D.an, { egg: r.egg }); if (!baby.ok) return { ok: false, why: baby.why };
+    return { ok: true, M: M, D: D, baby: baby };
+  }
+  function readHash() {
+    const o = {};
+    String(location.hash || '').replace(/^#/, '').split('&').forEach(function (p) { const i = p.indexOf('='); if (i > 0) { try { o[p.slice(0, i)] = decodeURIComponent(p.slice(i + 1)); } catch (e) { /* skip */ } } });
+    return o;
+  }
+  const hashOf = o => '#m=' + o.m + '&f=' + o.f + '&egg=' + o.egg;
+  const link3d = o => 'blue-ridge-salamander-3d.html' + hashOf(o);
+  const pass = () => { const a = []; if (LEVEL !== 'advanced') a.push('level=' + LEVEL); if (PROJ) a.push('projector=1'); if (TEACHER) a.push('teacher=1'); return a.length ? '?' + a.join('&') : ''; };
+
+  let OPEN = null, SEL = null, PLAYER = null, MSG = '', IN = { m: '', f: '', egg: '' };
+  function sibsFor(mk, dk, egg) {
+    let list = null;
+    storedFamilies().forEach(function (fm) { if (fm.m === mk && fm.f === dk) list = fm.eggs; });
+    if (!list && mk === BREED.m && dk === BREED.f) list = BREED.eggs;
+    if (!list) { const d = demoFamily(); if (mk === d.m && dk === d.f) list = d.eggs; }
+    list = (list || []).slice();
+    if (!list.some(x => x.egg === egg)) list.push({ n: 0, egg: egg });
+    return list;
+  }
+  function setOpen(r) {
+    OPEN = { M: r.M.an, D: r.D.an, mk: r.M.keeper, dk: r.D.keeper, egg: r.baby.egg, baby: r.baby, K: F.karyotype(r.baby), sibs: sibsFor(r.M.keeper, r.D.keeper, r.baby.egg) };
+    SEL = null; MSG = ''; CS = null;
+  }
+  function fromHash() {
+    const h = readHash();
+    OPEN = null; SEL = null; CS = null;
+    if (h.m || h.f || h.egg) {
+      IN = { m: h.m || '', f: h.f || '', egg: h.egg || '' };
+      const r = openFrom(IN.m, IN.f, IN.egg);
+      if (r.ok) setOpen(r); else MSG = r.why;
+    }
+  }
+  function go(o) {                                         // open another hatchling, or none; the address follows
+    const h = o ? hashOf(o) : '#';
+    try { history.replaceState(null, '', h); } catch (e) { try { location.replace(h); } catch (x) { /* ignore */ } }
+    if (o) { IN = { m: o.m, f: o.f, egg: o.egg }; const r = openFrom(o.m, o.f, o.egg); if (r.ok) setOpen(r); else { OPEN = null; MSG = r.why; } }
+    else { OPEN = null; SEL = null; }
+    CS = null; render(true);
+  }
+
+  /* ---------- small drawing tools (the Families page's) ---------- */
+  const NS = 'http://www.w3.org/2000/svg';
+  function el(tag, at, parent) { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); if (parent) parent.appendChild(e); return e; }
+  const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+  const HUE = { mom: { fill: '#ff8a4c', band: '#9c3b0b', halo: '#ffc59e', ink: '#ffd9c2' }, dad: { fill: '#52b4ff', band: '#164a80', halo: '#b5ddff', ink: '#d2ebff' } };
+  const hex = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+  const blend = (a, b, t) => { const A = hex(a), B = hex(b); return 'rgb(' + [0, 1, 2].map(i => Math.round(lerp(A[i], B[i], t))).join(',') + ')'; };
+  function defs(svg) {
+    const d = el('defs', {}, svg);
+    ['mom', 'dad'].forEach(function (h) {
+      const p = el('pattern', { id: 'band-' + h, patternUnits: 'userSpaceOnUse', width: 10, height: 7 }, d);
+      el('rect', { width: 10, height: 7, fill: HUE[h].fill }, p); el('rect', { y: 0, width: 10, height: 2.8, fill: HUE[h].band }, p);
+    });
+    return d;
+  }
+  /* One chromosome: a capsule with its centromere, solid or banded, a pale outline behind it when it is the one
+     looked at, a tick at each gene, and the allele letters beside it. From the Families page's chromatid(), with
+     the ticks, the trade-point line and a larger letter added for the card. */
+  function chromatid(layer, haloLayer, letterLayer, c, font) {
+    const L = c.len, w = 6;
+    c.halo = el('rect', { x: -w / 2 - 2.2, y: -L / 2 - 3.6, width: w + 4.4, height: L + 7.2, rx: (w + 4.4) / 2, fill: 'none', stroke: HUE[c.hue].halo, 'stroke-width': 1.8, 'vector-effect': 'non-scaling-stroke', opacity: 0 }, haloLayer);
+    c.g = el('g', {}, layer);
+    c.body = el('rect', { x: -w / 2, y: -L / 2, width: w, height: L, rx: w / 2, fill: c.banded ? 'url(#band-' + c.hue + ')' : HUE[c.hue].fill }, c.g);
+    if (c.xo) {                                           // crossing over: past the trade point this strand carries its partner's piece
+      const y0 = -L / 2 + c.xo.at * L, r = w / 2;
+      c.tip = el('path', { d: 'M' + (-r) + ' ' + y0.toFixed(2) + ' H' + r + ' V' + (L / 2 - r).toFixed(2) + ' A' + r + ' ' + r + ' 0 0 1 ' + (-r) + ' ' + (L / 2 - r).toFixed(2) + ' Z', fill: c.xo.banded ? 'url(#band-' + c.hue + ')' : HUE[c.hue].fill }, c.g);
+      c.trade = el('rect', { x: -w / 2 - 2.2, y: y0 - 1.1, width: w + 4.4, height: 2.2, rx: 1, fill: '#ffd23c', opacity: 0 }, c.g);
+    }
+    el('circle', { cx: 0, cy: -L / 2 + c.cen * L, r: 3.4, fill: '#0e1c21', opacity: 0.55 }, c.g);
+    (c.loci || []).forEach(function (lo) { el('rect', { x: -w / 2, y: -L / 2 + lo.at * L - 0.9, width: w, height: 1.8, fill: '#0e1c21', opacity: 0.8 }, c.g); });
+    c.letters = (c.loci || []).filter(lo => lo.s).map(lo => { const t = el('text', { 'font-size': font || 14, 'font-family': 'IBM Plex Mono, monospace', 'font-weight': 600, fill: HUE[c.hue].ink, opacity: 0 }, letterLayer); t.textContent = lo.s; return { t: t, at: lo.at }; });
+  }
+  function place(c, s) {                                  // s: { x, y, r, l, w, op, sc, halo, let, side }
+    const tr = 'translate(' + s.x.toFixed(1) + ' ' + s.y.toFixed(1) + ') rotate(' + s.r.toFixed(1) + ') scale(' + (s.sc * (s.w / 6)).toFixed(3) + ' ' + (s.sc * s.l).toFixed(3) + ')';
+    c.g.setAttribute('transform', tr); c.g.setAttribute('opacity', s.op.toFixed(3));
+    c.halo.setAttribute('transform', tr); c.halo.setAttribute('opacity', (s.halo * s.op * 0.9).toFixed(3));
+    const rad = s.r * Math.PI / 180, co = Math.cos(rad), si = Math.sin(rad), side = s.side || 1;
+    c.letters.forEach(function (o) {
+      const ly = (-c.len / 2 + o.at * c.len) * s.sc * s.l, lx = side * (s.w / 2 + 6) * s.sc;
+      o.t.setAttribute('x', (s.x + lx * co - ly * si).toFixed(1)); o.t.setAttribute('y', (s.y + lx * si + ly * co + 5).toFixed(1));
+      o.t.setAttribute('text-anchor', side > 0 ? 'start' : 'end'); o.t.setAttribute('opacity', (s.let * s.op).toFixed(3));
+    });
+  }
+  const mix = (a, b, t) => ({ x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t), r: lerp(a.r, b.r, t), l: lerp(a.l, b.l, t), w: lerp(a.w, b.w, t), op: lerp(a.op, b.op, t), sc: lerp(a.sc, b.sc, t), halo: lerp(a.halo, b.halo, t), let: lerp(a.let, b.let, t), side: b.side || a.side });
+  function shuffleBy(seed, arr) { const r = BRS.rng(seed), a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function swatch(h, banded) { return '<svg width="34" height="12" aria-hidden="true"><rect x="1" y="2" width="32" height="8" rx="4" fill="' + HUE[h].fill + '"/>' + (banded ? [6, 13, 20, 27].map(x => '<rect x="' + x + '" y="2" width="3" height="8" fill="' + HUE[h].band + '"/>').join('') : '') + '</svg>'; }
+
+  /* what one chromosome of the karyotype is, as the drawing needs it */
+  const letterOf = lo => lo.gene === 'EMB' ? (lo.allele === 'changed' ? (lo.broken ? 'e*' : 'e') : '') : lo.allele;
+  function chrOf(kc, i, k, base) {
+    const c = { i: i, k: k, chr: kc.chr, len: base * kc.size, cen: kc.centromere, hue: k ? 'dad' : 'mom', banded: kc.parentCopy === 1, loci: kc.loci.map(lo => ({ s: letterOf(lo), at: lo.at, gene: lo.gene, isNew: !!lo.isNew })) };
+    if (kc.cross) c.xo = { at: kc.cross.at, banded: kc.cross.tipCopy === 1 };
+    return c;
+  }
+  const mixedOf = K => { const out = []; K.pairs.forEach((p, i) => p.chromosomes.forEach((c, k) => { if (c.cross) out.push({ i: i, k: k }); })); return out; };
+
+  /* ---------- the scene player (the Families page's, with repaint() added) ---------- */
+  function Player(host, def) {
+    const P = { k: 0, u: 0, playing: false, mode: 'all', raf: 0, last: 0, clock: 0, done: false, def: def };
+    const n = def.phases.length;
+    host.innerHTML = '<p class="phase" aria-live="polite"></p><div class="stage"></div>' +
+      '<div class="ctrl"><button type="button" class="ghost small" data-p="back" aria-label="Back one step">&#9664;</button>' +
+      '<button type="button" class="small" data-p="play" aria-label="Play">&#9654; Play</button>' +
+      '<button type="button" class="ghost small" data-p="fwd" aria-label="Next step">&#9654;&#9646;</button>' +
+      '<button type="button" class="ghost small" data-p="again">&#8634; Watch again</button><span class="dots">' + def.phases.map(() => '<i></i>').join('') + '</span></div>' +
+      '<p class="keys">&larr; &rarr; step &middot; Space plays the step again &middot; 1&ndash;4 jump to that egg</p>';
+    const cap = $('.phase', host), stage = $('.stage', host), playB = $('[data-p="play"]', host), dots = host.querySelectorAll('.dots i');
+    def.mount(stage);
+    const dur = k => def.phases[k].dur / (def.speed || 1);
+    function paint() {
+      def.draw(P.k, ease(clamp(P.u, 0, 1)), P.clock);
+      const ph = def.phases[P.k];
+      cap.innerHTML = '<span class="n">Step ' + (P.k + 1) + ' of ' + n + '</span>' + ph.text;
+      dots.forEach((d, i) => d.classList.toggle('on', i <= P.k));
+      playB.innerHTML = P.playing ? '&#10073;&#10073; Pause' : '&#9654; Play';
+      if (def.aria) def.aria(P.k);
+    }
+    function finish() { if (!P.done) { P.done = true; if (def.onDone) def.onDone(); } }
+    function tick(now) {
+      if (PLAYER !== api) return;
+      const dt = P.last ? Math.min(0.05, (now - P.last) / 1000) : 0; P.last = now; P.clock += dt;
+      if (P.playing) {
+        P.u += dt / dur(P.k);
+        if (P.u >= 1) {
+          P.u = 1;
+          if (P.k === n - 1) { P.playing = false; finish(); }
+          else if (P.mode === 'one') P.playing = false;
+          else { P.k++; P.u = 0; }
+        }
+      }
+      paint();
+      if (P.playing || (typeof def.idle === 'function' ? def.idle(P.k) : def.idle)) P.raf = requestAnimationFrame(tick); else { P.raf = 0; P.last = 0; }
+    }
+    function kick() { if (!P.raf) { P.last = 0; P.raf = requestAnimationFrame(tick); } }
+    function play(mode) {
+      if (REDUCED) { if (mode === 'all') { P.k = n - 1; } P.u = 1; P.playing = false; paint(); if (P.k === n - 1) finish(); return; }
+      P.mode = mode; P.playing = true; kick();
+    }
+    const api = {
+      P: P,
+      start() { if (PROJ) { P.k = 0; P.u = 1; paint(); kick(); } else { P.k = 0; P.u = 0; play('all'); } },
+      toggle() { if (P.playing) { P.playing = false; paint(); } else { if (P.u >= 1 && P.k === n - 1) { P.k = 0; P.u = 0; } else if (P.u >= 1) { P.k++; P.u = 0; } play('all'); } },
+      fwd() { if (P.playing) { P.u = 1; P.playing = false; paint(); if (P.k === n - 1) finish(); return true; } if (P.u < 1) { play('one'); return true; } if (P.k < n - 1) { P.k++; P.u = 0; play('one'); return true; } finish(); return false; },
+      back() { P.playing = false; if (P.k === 0 && P.u <= 0.001) return false; if (P.k === 0) { P.u = 0; } else { P.k--; P.u = 1; } paint(); kick(); return true; },
+      again() { P.u = 0; play('one'); },
+      replayAll() { P.k = 0; P.u = 0; play('all'); },
+      jumpEnd() { P.k = n - 1; P.u = 1; P.playing = false; paint(); finish(); kick(); },
+      stop() { P.playing = false; if (P.raf) cancelAnimationFrame(P.raf); P.raf = 0; },
+      repaint() { paint(); },
+      atEnd() { return P.k === n - 1 && P.u >= 1; },
+      show(k, u, clock) { P.playing = false; P.k = k; P.u = u; if (clock != null) P.clock = clock; paint(); }       /* for tests and screenshots */
+    };
+    host.addEventListener('click', function (e) {
+      const b = e.target.closest('[data-p]'); if (!b) return;
+      const a = b.getAttribute('data-p');
+      if (a === 'play') api.toggle(); else if (a === 'fwd') api.fwd(); else if (a === 'back') api.back(); else if (a === 'again') api.replayAll();
+    });
+    PLAYER = api;
+    return api;
+  }
+
+  /* ---------- the karyotype scene ----------
+     Six steps, about 25 seconds: loose chromatin; the threads coil up; partners find each other; pairs 1 to 14 line up
+     from the longest to the shortest; the sex pair goes last; the alleles are lettered. The card is two rows, with
+     every pair lined up on its centromeres. */
+  const BASE = 150, CW = 10, LAST = 5, NT = 22;
+  const KARYO_DUR = [3.4, 4.6, 4.6, 5.0, 3.6, 3.8];
+  function slotOf(i) { return i < 8 ? { x: 78 + i * 115, y0: 160 } : i < 14 ? { x: 78 + (i - 8) * 115, y0: 392 } : { x: 852, y0: 392 }; }
+  const numY = i => i < 8 ? 270 : 484;
+  function finalOf(c) { const s = slotOf(c.i); return { x: s.x + (c.k ? 14 : -14), y: s.y0 + c.len * (0.5 - c.cen), r: 0, l: 1, w: CW, op: 1, sc: 1, halo: 0, let: 0, side: c.k ? 1 : -1 }; }
+  function karyoText(baby, K) {
+    const mixed = mixedOf(K).length;
+    return [
+      'Inside one cell of the hatchling. Its thirty chromosomes are long, loose threads, too tangled to count.',
+      'When a cell gets ready to divide, each thread coils up short and thick. Now the chromosomes can be told apart. Orange came in the egg from the mother. Blue came in the sperm from the father.',
+      'Each chromosome has a partner with the same genes in the same places. One partner came in the egg and one in the sperm.',
+      'A karyotype puts the pairs in order, from the longest to the shortest. These are pairs 1 to 14.',
+      'The sex pair goes last, set apart from the numbered pairs. A daughter has two X chromosomes. A son has an X and a shorter Y.',
+      'The karyotype of this hatchling. Each tick is a gene, and the letter beside it is the allele this hatchling carries there.' + (mixed ? ' A chromosome with two patterns is a mixed strand, from crossing over.' : '') + ' Tap a chromosome to see its genes.'
+    ];
+  }
+  function karyoDef(O) {
+    const baby = O.baby, K = O.K, TXT = karyoText(baby, K), rnd = BRS.rng(baby.id + '|karyotype'), CH = [];
+    const grid = (n, cols, w, h, cx, cy) => { const out = [], rows = Math.ceil(n / cols); for (let j = 0; j < n; j++) { const c = j % cols, r = Math.floor(j / cols); out.push([cx + (c - (cols - 1) / 2) * w / cols + (rnd() - 0.5) * w / cols * 0.5, cy + (r - (rows - 1) / 2) * h / rows + (rnd() - 0.5) * h / rows * 0.45]); } return out; };
+    const g0 = shuffleBy(baby.id + '|k0', grid(30, 6, 340, 310, 480, 290)), g2 = shuffleBy(baby.id + '|k2', grid(15, 5, 640, 330, 480, 290));
+    let svg, nuc, card, threadL, haloL, body, letL, labG, hitG, selBox, sexLab, divider, sparks = [], nums = [], caps = [];
+    function mount(stage) {
+      svg = el('svg', { viewBox: '0 0 960 560', role: 'img' }, stage); defs(svg);
+      nuc = el('circle', { cx: 480, cy: 290, r: 238, fill: '#163640', stroke: '#5fa59c', 'stroke-width': 2, 'stroke-dasharray': '6 5' }, svg);
+      card = el('g', { opacity: 0 }, svg);
+      el('rect', { x: 12, y: 40, width: 936, height: 492, rx: 12, fill: '#10242b', stroke: '#2f4a50', 'stroke-width': 1.5 }, card);
+      [160, 392].forEach(y => el('line', { x1: 30, x2: 930, y1: y, y2: y, stroke: '#2f4a50', 'stroke-width': 1, 'stroke-dasharray': '3 6' }, card));
+      const head = el('g', { 'font-family': 'IBM Plex Mono, monospace', 'font-size': 13, 'font-weight': 600, fill: '#a9c9c3' }, card);
+      el('text', { x: 30, y: 66 }, head).textContent = 'KARYOTYPE · EGG ' + baby.egg;
+      el('text', { x: 930, y: 66, 'text-anchor': 'end' }, head).textContent = '♀ ' + O.M.code + ' × ♂ ' + O.D.code;
+      threadL = el('g', { fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, svg);
+      haloL = el('g', {}, svg); selBox = el('rect', { rx: 12, fill: 'none', stroke: '#ffe27a', 'stroke-width': 2, opacity: 0 }, svg);
+      body = el('g', {}, svg); letL = el('g', {}, svg);
+      labG = el('g', { 'font-family': 'IBM Plex Mono, monospace', 'text-anchor': 'middle', 'font-weight': 600 }, svg);
+      K.pairs.forEach(function (p, i) {
+        p.chromosomes.forEach(function (kc, k) {
+          const c = chrOf(kc, i, k, BASE);
+          chromatid(body, haloL, letL, c);
+          /* the loose thread this chromosome coils up from */
+          let a = rnd() * 6.283, x = 0, y = 0; const pts = [[0, 0]];
+          for (let j = 1; j < NT; j++) { a += (rnd() - 0.5) * 2.3; x += Math.cos(a) * 11; y += Math.sin(a) * 11; pts.push([x, y]); }
+          const mx = pts.reduce((s, q) => s + q[0], 0) / NT, my = pts.reduce((s, q) => s + q[1], 0) / NT;
+          const far = Math.max.apply(null, pts.map(q => Math.hypot(q[0] - mx, q[1] - my))) || 1, fit = Math.min(1.7, 90 / far);
+          c.pts = pts.map(q => [(q[0] - mx) * fit, (q[1] - my) * fit]); c.ph = rnd() * 6.283;
+          c.thread = el('path', {}, threadL);
+          c.s0 = { x: g0[i * 2 + k][0], y: g0[i * 2 + k][1], r: rnd() * 180 - 90, l: 1, w: CW, op: 1, sc: 0.5, halo: 0, let: 0, side: k ? 1 : -1 };
+          c.fin = finalOf(c);
+          c.pts = c.pts.map(function (q) { const dx = c.s0.x + q[0] - 480, dy = c.s0.y + q[1] - 290, d = Math.hypot(dx, dy); return d > 224 ? [480 + dx * 224 / d - c.s0.x, 290 + dy * 224 / d - c.s0.y] : q; });   // the threads stay inside the nucleus
+          /* a new power's changed allele gets a ring, as in the fertilization scene */
+          c.loci.forEach(function (lo) { if (lo.isNew) sparks.push({ c: c, at: lo.at, o: el('circle', { r: 9, fill: 'none', stroke: '#ffe27a', 'stroke-width': 2.4, opacity: 0 }, svg) }); });
+          CH.push(c);
+        });
+        const a2 = rnd() * 70 - 35;
+        [0, 1].forEach(function (k) {
+          const c = CH[i * 2 + k], rad = a2 * Math.PI / 180, off = (k ? 9 : -9);
+          c.s2 = { x: g2[i][0] + Math.cos(rad) * off, y: g2[i][1] + Math.sin(rad) * off, r: a2, l: 1, w: CW, op: 1, sc: 0.66, halo: 0, let: 0, side: k ? 1 : -1 };
+          c.s3 = i < 14 ? c.fin : { x: 742 + (k ? 11 : -11), y: 430, r: 22, l: 1, w: CW, op: 1, sc: 0.8, halo: 0, let: 0, side: k ? 1 : -1 };
+        });
+        const s = slotOf(i);
+        if (i < 14) { const t = el('text', { x: s.x, y: numY(i), 'font-size': 15, fill: '#a9c9c3', opacity: 0 }, labG); t.textContent = String(i + 1); nums.push(t); }
+        const cp = F.CROSS.find(x => x.i === i);
+        if (cp) { const t = el('text', { x: s.x, y: numY(i) + 16, 'font-size': 10.5, fill: '#7fa39c', opacity: 0 }, labG); t.textContent = LEVEL === 'de' ? 'linked · ' + cp.mapUnits + ' map units' : 'two genes, linked'; caps.push(t); }
+      });
+      sexLab = el('text', { x: 852, y: numY(14), 'font-size': 15, fill: '#ffe27a', opacity: 0 }, labG);
+      divider = el('line', { x1: 748, x2: 748, y1: 330, y2: 500, stroke: '#2f4a50', 'stroke-width': 1.5, opacity: 0 }, svg);
+      /* one target for a finger on every chromosome, wide enough to take in its letters */
+      hitG = el('g', {}, svg);
+      CH.forEach(function (c) {
+        const f = c.fin, top = f.y - c.len / 2 - 12, x0 = c.k ? f.x - 14 : f.x - 32;
+        const h = el('rect', { x: x0, y: top, width: 46, height: c.len + 24, fill: '#000', 'fill-opacity': 0, class: 'hit', tabindex: 0, role: 'button', 'data-i': c.i, 'data-k': c.k }, hitG);
+        h.setAttribute('aria-label', (c.i < 14 ? 'Chromosome ' + (c.i + 1) : 'The last pair') + ', from the ' + (c.k ? 'father' : 'mother'));
+      });
+    }
+    function thread(c, k, u, t) {
+      if (k > 1) { c.thread.setAttribute('opacity', 0); return; }
+      const s = c.s0, m = k === 0 ? 0 : u, L = c.len * s.sc, rad = s.r * Math.PI / 180, co = Math.cos(rad), si = Math.sin(rad);
+      let d = '', px = 0, py = 0;
+      for (let j = 0; j < NT; j++) {
+        const wx = c.pts[j][0] + Math.sin(t * 0.9 + j * 0.7 + c.ph) * 3, wy = c.pts[j][1] + Math.cos(t * 0.8 + j * 0.5 + c.ph) * 3;
+        const ay = -L / 2 + j / (NT - 1) * L, coil = Math.sin(j * 2.4 + m * 9) * 7 * Math.sin(Math.PI * m);
+        const qx = coil * co - ay * si, qy = coil * si + ay * co, x = s.x + lerp(wx, qx, m), y = s.y + lerp(wy, qy, m);
+        /* a smooth curve through the midpoints, so the thread bends and never kinks */
+        if (j === 0) d = 'M' + x.toFixed(1) + ' ' + y.toFixed(1);
+        else if (j === NT - 1) d += ' Q' + px.toFixed(1) + ' ' + py.toFixed(1) + ' ' + x.toFixed(1) + ' ' + y.toFixed(1);
+        else if (j > 1) d += ' Q' + px.toFixed(1) + ' ' + py.toFixed(1) + ' ' + ((px + x) / 2).toFixed(1) + ' ' + ((py + y) / 2).toFixed(1);
+        px = x; py = y;
+      }
+      c.thread.setAttribute('d', d);
+      c.thread.setAttribute('stroke', blend('#8fc7bf', HUE[c.hue].fill, k === 0 ? 0 : clamp(m * 1.6, 0, 1)));
+      c.thread.setAttribute('stroke-width', lerp(1.7, CW * s.sc * 0.85, m).toFixed(2));
+      c.thread.setAttribute('opacity', (k === 0 ? 0.8 : m < 0.72 ? 0.8 : 0.8 * (1 - (m - 0.72) / 0.28)).toFixed(3));
+    }
+    function draw(k, u, t) {
+      const chk = checkState();
+      nuc.setAttribute('opacity', (k < 2 ? 1 : k === 2 ? 1 - u : 0).toFixed(3));
+      card.setAttribute('opacity', (k < 3 ? 0 : k === 3 ? u : 1).toFixed(3));
+      CH.forEach(function (c) {
+        thread(c, k, u, t);
+        const wob = k < 3 ? Math.sin(t * 1.2 + c.i + c.k) * 3 : 0;
+        let s;
+        if (k === 0) s = Object.assign({}, c.s0, { op: 0 });
+        else if (k === 1) s = Object.assign({}, c.s0, { op: clamp((u - 0.68) / 0.32, 0, 1), r: c.s0.r + wob });
+        else if (k === 2) s = mix(Object.assign({}, c.s0, { r: c.s0.r + wob }), Object.assign({}, c.s2, { r: c.s2.r + wob * (1 - u), halo: Math.sin(Math.PI * u) }), u);
+        else if (k === 3) s = mix(c.s2, c.i < 14 ? c.s3 : Object.assign({}, c.s3, { halo: 0 }), u);
+        else if (k === 4) s = mix(c.s3, Object.assign({}, c.fin, { halo: c.i === 14 ? Math.sin(Math.PI * u) : 0 }), u);
+        else s = Object.assign({}, c.fin, { let: u });
+        if (k === LAST && SEL && SEL.i === c.i && SEL.k === c.k) s.halo = 1;
+        place(c, s);
+        if (c.trade) c.trade.setAttribute('opacity', (k === LAST && chk.showMixed ? u : 0).toFixed(2));
+      });
+      nums.forEach(n => n.setAttribute('opacity', (k < 3 ? 0 : k === 3 ? u : 1).toFixed(2)));
+      caps.forEach(n => n.setAttribute('opacity', (k < LAST ? 0 : u).toFixed(2)));
+      sparks.forEach(function (sp) { const f = sp.c.fin; sp.o.setAttribute('cx', f.x); sp.o.setAttribute('cy', (f.y - sp.c.len / 2 + sp.at * sp.c.len).toFixed(1)); sp.o.setAttribute('opacity', (k === LAST ? u : 0).toFixed(2)); });
+      divider.setAttribute('opacity', (k < 4 ? 0 : k === 4 ? u : 1).toFixed(2));
+      sexLab.textContent = chk.sexShown ? (baby.sex === 'XX' ? 'X X' : 'X Y') : chk.pairShown ? 'sex pair' : '';
+      sexLab.setAttribute('opacity', (k < 4 ? 0 : k === 4 ? u : 1).toFixed(2));
+      const live = k === LAST && u >= 0.999;
+      hitG.style.display = live ? '' : 'none';
+      if (live && SEL) {
+        const s = slotOf(SEL.i), a = CH[SEL.i * 2].fin, b = CH[SEL.i * 2 + 1].fin, la = CH[SEL.i * 2].len, lb = CH[SEL.i * 2 + 1].len;
+        const top = Math.min(a.y - la / 2, b.y - lb / 2) - 12, bot = Math.max(a.y + la / 2, b.y + lb / 2) + 12;
+        selBox.setAttribute('x', s.x - 48); selBox.setAttribute('y', top); selBox.setAttribute('width', 96); selBox.setAttribute('height', bot - top); selBox.setAttribute('opacity', 0.9);
+      } else selBox.setAttribute('opacity', 0);
+    }
+    return { phases: TXT.map((x, k) => ({ text: x, dur: KARYO_DUR[k] })), mount: mount, draw: draw, speed: 1, idle: k => k < 2,
+      aria: k => svg.setAttribute('aria-label', 'The karyotype card: ' + TXT[k]), CH: CH };
+  }
+
+  /* ---------- the karyotype check: count the pairs, find the sex pair, daughter or son; at Advanced, the mixed strand ----------
+     Selected response, scored by the page, two tries each, as on the Families page. Each wrong answer names what went
+     wrong and points back at the card. */
+  const chrName = (i, k, sexKnown, K) => (i < 14 ? 'Chromosome ' + (i + 1) : sexKnown ? 'The ' + K.pairs[14].chromosomes[k].chr : 'The last chromosome') + ' from the ' + (k ? 'father (blue)' : 'mother (orange)');
+  function parts() {
+    const b = OPEN.baby, K = OPEN.K, gen = LEVEL === 'general', girl = b.sex === 'XX', P = [];
+    P.push({ id: 'count', q: 'Count the pairs on the card. How many pairs of chromosomes does this hatchling have, and how many chromosomes in all?', opts: [
+      { k: '15-30', t: '15 pairs, 30 chromosomes', ok: true, fb: 'Right. Fourteen numbered pairs and the sex pair make 15 pairs. That is 30 chromosomes: 15 that came in the egg and 15 that came in the sperm.' },
+      { k: '14-28', t: '14 pairs, 28 chromosomes', fb: 'The last pair has no number, and it still counts. The sex pair is a pair like the others: one chromosome from the egg and one from the sperm. Count again, with the last pair.' },
+      { k: '15', t: '15 chromosomes in all', fb: 'Fifteen is the count in one egg or one sperm. This cell has both sets, so every chromosome on the card has a partner. Count the pairs, then count the chromosomes.' },
+      gen ? null : { k: '30-60', t: '30 pairs, 60 chromosomes', fb: 'Each pair is two chromosomes, an orange one and a blue one. Thirty is the number of chromosomes, not the number of pairs.' }
+    ].filter(Boolean) });
+    P.push({ id: 'sexpair', q: 'Which pair on the card is the sex pair?', opts: [
+      { k: 'last', t: 'The last pair, set apart after pair 14', ok: true, fb: 'Right. The numbered pairs run from the longest to the shortest, and the sex pair is set apart at the end.' },
+      { k: 'one', t: 'Pair 1, the longest pair', fb: 'Pair 1 is the longest pair, and it looks the same in a daughter and a son. The sex pair is the one pair that can differ between them. Look at the end of the second row.' },
+      { k: 'nine', t: 'Pair 9, which carries the ember gene', fb: 'The ember gene on pair 9 decides ember color. A daughter and a son both have two copies of chromosome 9. Look at the end of the second row.' },
+      gen ? null : { k: 'every', t: 'Every pair, because each has one chromosome from the mother and one from the father', fb: 'Every pair does have one chromosome from each parent, in a daughter and in a son alike. Only one pair decides which of the two a hatchling is. Look at the end of the second row.' }
+    ].filter(Boolean) });
+    P.push({ id: 'sex', q: 'Look at the two chromosomes of the sex pair. What do they show?', opts: [
+      { k: 'XX', t: 'Two X chromosomes, the same length: a daughter', ok: girl, fb: girl ? 'Right. One X came in the egg and one X came in the sperm. A father’s X goes to every daughter.' : 'Compare the two lengths. The blue chromosome of this sex pair is about half as long as the orange one, so it is a Y, not a second X.' },
+      { k: 'XY', t: 'An X and a shorter Y: a son', ok: !girl, fb: girl ? 'Compare the two lengths. Both chromosomes of this sex pair are the same length, so both are X. A Y is about half as long as an X.' : 'Right. The X came in the egg and the shorter Y came in the sperm. A father’s X goes to no son.' },
+      gen ? null : { k: 'YY', t: 'Two Y chromosomes: a son', fb: 'An egg always carries an X, so no hatchling has two Y chromosomes. Look at the orange chromosome of the sex pair: it came in the egg, and it is an X.' },
+      { k: 'none', t: 'A karyotype cannot show whether a hatchling is a daughter or a son', fb: 'It can. The sex pair is two X chromosomes in a daughter and an X with a shorter Y in a son. Compare the lengths of the two chromosomes in the last pair.' }
+    ].filter(Boolean) });
+    const mixed = mixedOf(K);
+    if (!gen && mixed.length) {
+      const target = mixed[0], isMixed = (i, k) => mixed.some(x => x.i === i && x.k === k);
+      const cand = []; [1, 3, 14].forEach(i => [0, 1].forEach(k => { if (!isMixed(i, k) && !(i === 14 && k === 1 && !girl)) cand.push({ i: i, k: k }); }));
+      const partner = cand.find(x => x.i === target.i && x.k !== target.k), rest = shuffleBy(b.id + '|mixed', cand.filter(x => x !== partner));
+      const wrong = (partner ? [partner] : []).concat(rest).slice(0, 3);
+      const x = b.crossings.find(c => c.pair === target.i && (c.givenBy === 'father') === (target.k === 1));
+      const why = x ? ' It carries ' + SHORT[x.near].toLowerCase() + ' ' + x.nearAllele + ' from ' + x.nearFrom + ' and ' + SHORT[x.far].toLowerCase() + ' ' + x.farAllele + ' from ' + x.farFrom + '.' : '';
+      P.push({ id: 'mixed', q: mixed.length > 1 ? 'Crossing over made more than one mixed strand in this hatchling. Which of these chromosomes is a mixed strand?' : 'One chromosome on this card is a mixed strand, made by crossing over. Which one?', opts: [
+        { k: target.i + '-' + target.k, t: chrName(target.i, target.k, true, K), ok: true, fb: 'Right. It changes pattern at the trade point, so it holds pieces of both of that parent’s chromosomes.' + why }
+      ].concat(wrong.map(w => ({ k: w.i + '-' + w.k, t: chrName(w.i, w.k, true, K), fb: chrName(w.i, w.k, true, K) + ' has one pattern from end to end. A mixed strand changes pattern at the trade point: part of it solid and part of it banded.' + (w.i === 14 && w.k === 1 ? ' A father has one X, so his X never trades our genes.' : '') }))) });
+    }
+    return P;
+  }
+  const blankPart = () => ({ tries: 0, done: false, shown: false, wrong: {}, last: null });
+  function chkOf(create) { const id = OPEN.baby.id; if (!ST.chk[id] && create) ST.chk[id] = {}; return ST.chk[id] || {}; }
+  const partDone = s => !!(s && (s.done || s.shown));
+  let CS = null;                                         // the check's state, worked out once and kept until an answer, a level or the hatchling changes
+  const checkState = () => CS || (CS = checkStateNow());
+  function checkStateNow() {
+    if (!OPEN) return { pairShown: false, sexShown: false, showMixed: false, all: false };
+    const c = chkOf(false), P = parts(), all = P.every(p => partDone(c[p.id])), hasMixedPart = P.some(p => p.id === 'mixed');
+    return { pairShown: partDone(c.sexpair), sexShown: partDone(c.sex), showMixed: hasMixedPart ? partDone(c.mixed) : true, all: all, n: P.length };
+  }
+  function checkHtml() {
+    const b = OPEN.baby, P = parts(), c = chkOf(false);
+    let h = '<section class="block check" id="check"><span class="tag">Karyotype check</span><div class="parts">', open = true;
+    P.forEach(function (def, j) {
+      if (!open) return;
+      const st = c[def.id] || blankPart(), opts = shuffleBy(def.id + '|' + b.id, def.opts);
+      h += '<div class="part" data-part="' + def.id + '"><span class="tag">Part ' + (j + 1) + ' of ' + P.length + '</span><p class="q">' + esc(def.q) + '</p><div class="choices">';
+      opts.forEach(function (o) {
+        let cls = 'choice';
+        if ((st.done || st.shown) && o.ok) cls += ' right'; else if (st.wrong[o.k]) cls += ' wrong';
+        h += '<button type="button" class="' + cls + '" data-act="pick" data-id="' + def.id + '" data-k="' + esc(o.k) + '"' + ((st.done || st.shown || st.wrong[o.k]) ? ' disabled' : '') + '>' + esc(o.t) + '</button>';
+      });
+      h += '</div><p class="fb" aria-live="polite">';
+      const last = st.last != null ? def.opts.find(o => o.k === st.last) : null, right = def.opts.find(o => o.ok);
+      if (st.done) h += '<span class="ok">' + esc(right.fb) + '</span>';
+      else if (st.shown) h += '<span class="ok">The answer: ' + esc(right.t) + '.</span> ' + (last && !last.ok ? esc(last.fb) : '');
+      else if (last) h += '<span class="bad">Not yet.</span> ' + esc(last.fb) + (st.tries >= 2 ? ' <button type="button" class="ghost small" data-act="show" data-id="' + def.id + '">Show me</button>' : ' Try once more.');
+      h += '</p></div>';
+      if (!partDone(st)) open = false;
+    });
+    h += '</div>';
+    if (P.every(p => partDone(c[p.id]))) {
+      h += '<p class="read">15 pairs, 30 chromosomes. The sex pair is ' + (b.sex === 'XX' ? 'X X: a daughter.' : 'X Y: a son.') + '</p>' +
+        '<p class="say">Write the number of pairs, and daughter or son, on your Family Field Sheet.</p>';
+    }
+    return h + '</section>';
+  }
+
+  /* ---------- one pair, close up: tapped on the card ---------- */
+  function copyWord(kc, sexKnown) {
+    const she = kc.from === 'mother', own = c => 'the copy the ' + (she ? 'mother' : 'father') + ' got from ' + (she ? 'her' : 'his') + ' own ' + (c ? 'father' : 'mother');
+    if (kc.chr === 'Y') return sexKnown ? 'his Y, which the father got from his own father' : own(1);
+    if (kc.chr === 'X' && !she) return sexKnown ? 'his X, which the father got from his own mother' : own(0);
+    return own(kc.parentCopy);
+  }
+  function pairHtml() {
+    if (!SEL) return '<p class="say muted" id="pairhint">Tap a chromosome on the card to see its genes.</p>';
+    const b = OPEN.baby, K = OPEN.K, i = SEL.i, p = K.pairs[i], chk = checkState(), sexPair = i === 14, sexKnown = !sexPair || chk.sexShown;
+    const title = !sexPair ? 'Chromosome ' + (i + 1) : chk.sexShown ? 'The sex pair: ' + (b.sex === 'XX' ? 'X and X' : 'X and Y') : chk.pairShown ? 'The sex pair' : 'The last pair';
+    let h = '<section class="block" id="pairbox"><h3>' + title + ' <span class="muted small">pair ' + (i + 1) + ' of 15</span></h3><div class="pairgrid"><div class="mini" id="mini"></div><div class="origin">';
+    p.chromosomes.forEach(function (kc, k) {
+      const hue = k ? 'dad' : 'mom', lead = '<b>' + (k ? 'Blue, from the sperm' : 'Orange, from the egg') + '</b>';
+      if (kc.cross && chk.showMixed) {
+        h += '<span>' + swatch(hue, kc.parentCopy === 1) + swatch(hue, kc.cross.tipCopy === 1) + '<span>' + lead + ': a mixed strand. Down to the yellow trade point it is ' + copyWord(kc, sexKnown) + '. Past the trade point it is ' + copyWord({ from: kc.from, chr: kc.chr === 'Y' ? 'Y' : 'n', parentCopy: kc.cross.tipCopy }, true) + '.</span></span>';
+      } else if (kc.cross) {
+        h += '<span>' + swatch(hue, kc.parentCopy === 1) + '<span>' + lead + '.</span></span>';
+      } else {
+        h += '<span>' + swatch(hue, kc.parentCopy === 1) + '<span>' + lead + ': ' + copyWord(kc, sexKnown) + (sexPair && !sexKnown ? '' : kc.parentCopy === 1 ? ' (banded)' : ' (solid)') + '.</span></span>';
+      }
+    });
+    h += '</div></div>';
+    const genes = p.chromosomes[0].loci;
+    if (!genes.length) h += '<p class="say">None of the sixteen genes we follow is on this chromosome. It still has a partner, and it still came one from each parent.</p>';
+    else {
+      h += '<div class="scroll"><table class="tbl"><thead><tr><th>Gene</th><th>From the mother (egg)</th><th>From the father (sperm)</th><th>Genotype</th><th>It shows</th></tr></thead><tbody>';
+      genes.forEach(function (lo) {
+        const fa = p.chromosomes[1].loci.find(x => x.gene === lo.gene), gid = lo.gene;
+        const cell = x => gid === 'EMB' ? (x.allele === 'changed' ? '<span class="a">' + (x.broken ? 'e*' : 'e') + '</span> ' + esc(x.label) : esc(x.label)) : '<span class="a">' + esc(x.allele) + '</span> ' + esc(x.label) + (x.isNew ? ' <span class="ok">(new)</span>' : '');
+        let geno, shows;
+        if (gid === 'EMB') { geno = b.albino ? 'two broken copies' : b.carrier ? 'one broken copy' : ''; shows = b.albino ? 'albino: pale body, pink eyes, no ember color' : b.carrier ? 'ember color shows; a carrier' : 'ember color shows'; }
+        else { geno = F.entry(b, gid).genotype; shows = F.traitWord(b, gid); }
+        h += '<tr' + (lo.isNew || (fa && fa.isNew) ? ' class="hi"' : '') + '><td>' + SHORT[gid] + '</td><td class="m">' + cell(lo) + '</td><td class="d">' + (fa ? cell(fa) : (sexKnown ? 'none: the Y carries no copy' : 'none on this chromosome')) + '</td><td class="a">' + esc(geno) + '</td><td>' + esc(shows) + '</td></tr>';
+      });
+      h += '</tbody></table></div>';
+    }
+    b.newPower.forEach(function (n) { if (i === 6) h += '<p class="note">New power: <b>' + esc(n.toLabel) + '</b>. In the ' + n.in + ', codon ' + n.codonNumber + ' of the power gene changed from <span class="a">' + n.oldCodon + '</span> to <span class="a">' + n.newCodon + '</span>, so ' + esc(AA[n.oldAA] || n.oldAA) + ' became ' + esc(AA[n.newAA] || n.newAA) + '. The ring on the card marks it.</p>'; });
+    const cp = F.CROSS.find(x => x.i === i);
+    if (cp) {
+      h += '<p class="note">' + esc(cp.name) + ' sit on the same chromosome, so they are linked. They pass into an egg or a sperm together unless crossing over trades the piece between them.' +
+        (LEVEL === 'de' ? ' They are ' + cp.mapUnits + ' map units apart: about ' + cp.mapUnits + '% of eggs or sperm carry a mixed strand between them.' : '') +
+        (sexPair && chk.sexShown ? (b.sex === 'XX' ? ' A father has one X, and every daughter gets it.' : ' A son has one X, from his mother, so he has one copy of each of these two genes.') : '') + '</p>';
+      if (chk.showMixed) b.crossings.filter(x => x.pair === i).forEach(function (x) { h += '<p class="note">Crossing over: the ' + x.in + '’s ' + (x.chr === 'X' ? 'X' : 'chromosome ' + x.chr) + ' is a mixed strand. It carries ' + SHORT[x.near].toLowerCase() + ' <span class="a">' + esc(x.nearAllele) + '</span> from ' + esc(x.nearFrom) + ' and ' + SHORT[x.far].toLowerCase() + ' <span class="a">' + esc(x.farAllele) + '</span> from ' + esc(x.farFrom) + '.' + (x.changes ? '' : ' Both copies carried ' + esc(x.farAllele) + ' there, so this trade changed nothing you can see.') + '</p>'; });
+    }
+    return h + '</section>';
+  }
+  function miniDraw() {
+    const host = $('#mini'); if (!host || !SEL) return;
+    const K = OPEN.K, i = SEL.i, p = K.pairs[i], chk = checkState();
+    const svg = el('svg', { viewBox: '0 0 300 244', role: 'img', 'aria-label': 'The two chromosomes of this pair, close up' }, host); defs(svg);
+    const haloL = el('g', {}, svg), lineL = el('g', { stroke: '#3d5a60', 'stroke-width': 1.2, 'stroke-dasharray': '2 4' }, svg), body = el('g', {}, svg), letL = el('g', {}, svg);
+    const nameL = el('g', { 'font-family': 'Atkinson Hyperlegible, Verdana, sans-serif', 'font-size': 12.5, 'text-anchor': 'middle', fill: '#d6e6e2', stroke: '#0c171c', 'stroke-width': 5, 'paint-order': 'stroke', 'stroke-linejoin': 'round' }, svg);
+    const y0 = 104, X = [100, 200];
+    p.chromosomes.forEach(function (kc, k) {
+      const c = chrOf(kc, i, k, 196);
+      chromatid(body, haloL, letL, c, 18);
+      place(c, { x: X[k], y: y0 + c.len * (0.5 - c.cen), r: 0, l: 1, w: 15, op: 1, sc: 1, halo: 0, let: 1, side: k ? 1 : -1 });
+      if (c.trade) c.trade.setAttribute('opacity', chk.showMixed ? 1 : 0);
+      if (k === 0 || !p.chromosomes[0].loci.length) c.loci.forEach(function (lo) {
+        const y = y0 - c.len * c.cen + lo.at * c.len;
+        if (p.chromosomes[1].loci.length) el('line', { x1: X[0] + 9, x2: X[1] - 9, y1: y, y2: y }, lineL);
+        const t = el('text', { x: p.chromosomes[1].loci.length ? 150 : 150, y: y + 4 }, nameL); t.textContent = SHORT[lo.gene].toLowerCase();
+      });
+    });
+    const foot = el('g', { 'font-family': 'IBM Plex Mono, monospace', 'font-size': 11, 'text-anchor': 'middle', 'font-weight': 600 }, svg);
+    el('text', { x: X[0], y: 234, fill: HUE.mom.ink }, foot).textContent = 'from the egg';
+    el('text', { x: X[1], y: 234, fill: HUE.dad.ink }, foot).textContent = 'from the sperm';
+  }
+
+  /* ---------- screens ---------- */
+  function chips() {
+    const c = $('#chips'), s = $('#sibs');
+    if (!OPEN) { c.innerHTML = ''; s.innerHTML = ''; return; }
+    c.innerHTML = '<span class="chip mom">♀ ' + esc(OPEN.M.code) + '</span><span class="chip dad">♂ ' + esc(OPEN.D.code) + '</span>';
+    s.innerHTML = OPEN.sibs.map(x => '<button type="button" class="chip' + (x.egg === OPEN.egg ? ' now' : '') + '" data-act="sib" data-egg="' + x.egg + '"' + (x.egg === OPEN.egg ? ' aria-current="true"' : '') + '>' + (x.n ? 'Egg ' + x.n + ' · ' : 'Egg · ') + x.egg + '</button>').join('');
+  }
+  const sibIndex = () => OPEN.sibs.findIndex(x => x.egg === OPEN.egg);
+  function openScreen() {
+    const fams = storedFamilies();
+    let h = '<section class="block"><h2>Open a hatchling’s card</h2><p class="lede">A karyotype is a picture of every chromosome in one cell, sorted into pairs. To open a hatchling’s card, type its three codes from the Family Field Sheet.</p>' +
+      '<div class="who"><div class="field"><label for="km">The mother’s keeper code</label><input id="km" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="TF-H5UHE-AMN" value="' + esc(IN.m) + '"></div>' +
+      '<div class="field"><label for="kf">The father’s keeper code</label><input id="kf" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="TF-7CBW4-AT7" value="' + esc(IN.f) + '"></div>' +
+      '<div class="field"><label for="ke">The egg code</label><input id="ke" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXX-XXX-XXX" value="' + esc(IN.egg) + '"></div></div>' +
+      '<div class="btnrow"><button type="button" data-act="opencodes">Open the card</button>' + (PROJ || TEACHER ? '<button type="button" class="ghost" data-act="demo">Teach with the Test Salamander family</button><button type="button" class="ghost" data-act="breed">Open the Breeding Program pair’s egg 1</button>' : '') + '</div>' +
+      '<p class="fb" id="ms">' + (MSG ? '<span class="bad">' + esc(MSG) + '</span>' : '') + '</p></section>';
+    if (fams.length) {
+      h += '<section class="block"><h3>Hatchlings on this iPad</h3>';
+      fams.forEach(function (fm) {
+        h += '<p class="small"><b>' + esc(F.animal(fm.m).code) + '</b> and <b>' + esc(F.animal(fm.f).code) + '</b></p><div class="btnrow">' + fm.eggs.map(x => '<button type="button" class="ghost small" data-act="openegg" data-m="' + fm.m + '" data-f="' + fm.f + '" data-egg="' + x.egg + '">Egg ' + x.n + ' · ' + x.egg + '</button>').join('') + '</div>';
+      });
+      h += '</section>';
+    } else h += '<p class="say muted">No hatchlings have been made on this iPad yet. Make a family on <a href="blue-ridge-salamander-families.html' + pass() + '">Salamander Families</a>, or type the three codes above.</p>';
+    app.innerHTML = h;
+  }
+  const NOTES = '<details class="note"><summary><b>How is a real karyotype made?</b></summary>' +
+    '<p class="small">A real karyotype is a photograph. Cells are stopped while they divide, when the chromosomes are coiled tightest. The chromosomes are stained and photographed, and the pictures are sorted into pairs by length, by where the centromere sits and by the pattern of stained bands. By then the cell has copied every chromosome, so each one in the photograph is two joined copies. We draw one copy of each so the alleles are easy to read. A person has 23 pairs.</p>' +
+    '<p class="small">The bands on this card are not stain. A banded chromosome is the copy that parent got from its own father, and a solid one is the copy from its own mother, the same as on the Salamander Families page.</p></details>' +
+    '<p class="small muted">A model choice: how long each chromosome is drawn, where its centromere sits and where each gene sits. Our salamanders have 15 pairs of chromosomes. Red-backed salamanders have 14.</p>';
+  function legendHtml() {
+    return '<div class="legend"><span>' + swatch('mom', false) + 'from the egg (the mother)</span><span>' + swatch('dad', false) + 'from the sperm (the father)</span>' +
+      '<span>' + swatch('mom', false) + swatch('dad', false) + 'solid: the copy that parent got from its own mother</span><span>' + swatch('mom', true) + swatch('dad', true) + 'banded: the copy from its own father</span>' +
+      '<span class="muted">Two patterns on one chromosome: a mixed strand, from crossing over</span></div>';
+  }
+  function afterHtml() {
+    return '<div id="pairwrap">' + pairHtml() + '</div><div id="checkwrap">' + checkHtml() + '</div>';
+  }
+  function paintAfter() {
+    const a = $('#after'); if (!a) return;
+    a.innerHTML = afterHtml(); miniDraw();
+  }
+  const seen = () => PROJ || !!ST.seen[OPEN.baby.id];
+  function render(scroll) {
+    if (PLAYER) { PLAYER.stop(); PLAYER = null; }
+    chips();
+    if (!OPEN) { openScreen(); if (scroll) window.scrollTo(0, 0); return; }
+    const O = OPEN, i = sibIndex(), prev = O.sibs[i - 1], next = O.sibs[i + 1], n = O.sibs[i].n;
+    const me = { m: O.mk, f: O.dk, egg: O.egg };
+    app.innerHTML = '<section class="block"><h2>' + (n ? 'Egg ' + n + ': the chromosomes of one hatchling' : 'The chromosomes of one hatchling') + '</h2><div id="player"></div>' + legendHtml() + '</section>' +
+      '<div id="after"></div>' +
+      '<div class="btnrow">' + (prev ? '<button type="button" class="ghost" data-act="sib" data-egg="' + prev.egg + '">&larr; ' + (prev.n ? 'Egg ' + prev.n : 'Back') + '</button>' : '') +
+      '<a class="see3d hide-proj" href="' + esc(link3d(me)) + '">See this hatchling in 3D</a>' +
+      '<a class="see3d" href="blue-ridge-salamander-families.html' + pass() + '">Back to Salamander Families</a><span class="grow"></span>' +
+      (next ? '<button type="button" data-act="sib" data-egg="' + next.egg + '">' + (next.n ? 'Egg ' + next.n : 'Next') + ' &#9654;</button>' : '') + '</div>' +
+      '<div class="btnrow hide-proj"><button type="button" class="ghost small" data-act="other">Open another hatchling</button></div>' + NOTES;
+    const def = karyoDef(O);
+    def.onDone = function () { if (!ST.seen[O.baby.id]) { ST.seen[O.baby.id] = 1; save(); } if (!$('#checkwrap')) paintAfter(); };
+    const pl = Player($('#player'), def); pl.start();
+    if (seen()) paintAfter();
+    if (scroll) window.scrollTo(0, 0);
+  }
+
+  /* ---------- events ---------- */
+  function pick(i, k) {
+    if (!OPEN || !PLAYER || !PLAYER.atEnd()) return;
+    SEL = { i: i, k: k }; PLAYER.repaint();
+    const w = $('#pairwrap'); if (!w) { paintAfter(); } else { w.innerHTML = pairHtml(); miniDraw(); }
+    const box = $('#pairbox'); if (box && box.scrollIntoView) { try { box.scrollIntoView({ block: 'nearest', behavior: REDUCED ? 'auto' : 'smooth' }); } catch (e) { /* older Safari */ } }
+  }
+  document.addEventListener('click', function (e) {
+    const hit = e.target.closest && e.target.closest('.hit');
+    if (hit) { pick(+hit.getAttribute('data-i'), +hit.getAttribute('data-k')); return; }
+    const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
+    const act = b.getAttribute('data-act');
+    if (act === 'opencodes') { IN = { m: ($('#km') || {}).value || '', f: ($('#kf') || {}).value || '', egg: ($('#ke') || {}).value || '' }; const r = openFrom(IN.m, IN.f, IN.egg); if (r.ok) go({ m: r.M.keeper, f: r.D.keeper, egg: r.baby.egg }); else { MSG = r.why || 'Type both keeper codes and the egg code.'; openScreen(); } return; }
+    if (act === 'openegg') { go({ m: b.getAttribute('data-m'), f: b.getAttribute('data-f'), egg: b.getAttribute('data-egg') }); return; }
+    if (act === 'demo') { const d = demoFamily(); go({ m: d.m, f: d.f, egg: d.eggs[0].egg }); return; }
+    if (act === 'breed') { go({ m: BREED.m, f: BREED.f, egg: BREED.eggs[0].egg }); return; }
+    if (act === 'other') { IN = { m: '', f: '', egg: '' }; MSG = ''; go(null); return; }
+    if (!OPEN) return;
+    if (act === 'sib') { const egg = b.getAttribute('data-egg'); if (egg !== OPEN.egg) go({ m: OPEN.mk, f: OPEN.dk, egg: egg }); return; }
+    if (act === 'pick' || act === 'show') {
+      const id = b.getAttribute('data-id'), c = chkOf(true), st = c[id] || (c[id] = blankPart()), def = parts().find(p => p.id === id); if (!def) return;
+      if (act === 'show') st.shown = true;
+      else { const k = b.getAttribute('data-k'), o = def.opts.find(x => x.k === k); if (!o) return; st.last = k; if (o.ok) st.done = true; else { st.tries++; st.wrong[k] = true; } }
+      save(); CS = null;
+      const y = window.scrollY; $('#checkwrap').innerHTML = checkHtml(); $('#pairwrap').innerHTML = pairHtml(); miniDraw(); if (PLAYER) PLAYER.repaint(); window.scrollTo(0, y);
+      return;
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    const t = e.target;
+    if (t && t.classList && t.classList.contains('hit') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pick(+t.getAttribute('data-i'), +t.getAttribute('data-k')); return; }
+    if (t && /INPUT|TEXTAREA|SELECT/.test(t.tagName)) { if (e.key === 'Enter' && !OPEN) { const b = $('[data-act="opencodes"]'); if (b) b.click(); } return; }
+    if (!OPEN) return;
+    const i = sibIndex();
+    if (e.key === 'ArrowRight') { e.preventDefault(); if (PLAYER && PLAYER.fwd()) return; const nx = OPEN.sibs[i + 1]; if (nx) go({ m: OPEN.mk, f: OPEN.dk, egg: nx.egg }); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); if (PLAYER && PLAYER.back()) return; const pv = OPEN.sibs[i - 1]; if (pv) { go({ m: OPEN.mk, f: OPEN.dk, egg: pv.egg }); if (PLAYER) PLAYER.jumpEnd(); } }
+    else if (e.key === ' ' && PLAYER && !(t && t.tagName === 'BUTTON')) { e.preventDefault(); PLAYER.again(); }
+    else if (e.key >= '1' && e.key <= '4') { const x = OPEN.sibs.find(s => s.n === +e.key); if (x && x.egg !== OPEN.egg) go({ m: OPEN.mk, f: OPEN.dk, egg: x.egg }); }
+  });
+  window.addEventListener('hashchange', function () {
+    const h = readHash();
+    if (OPEN && h.egg && String(h.egg).toUpperCase() === OPEN.egg && h.m === OPEN.mk && h.f === OPEN.dk) return;
+    fromHash(); render(true);
+  });
+
+  /* level switch for a teacher, as on the Families page */
+  if (TEACHER) {
+    const d = document.createElement('div'); d.className = 'btnrow'; d.innerHTML = '<span class="small">Level:</span><button type="button" class="small" data-level="general">SOL General</button><button type="button" class="small" data-level="advanced">SOL Advanced</button><button type="button" class="small" data-level="de">Dual enrollment</button>';
+    $('#bar').appendChild(d);
+    const paint = () => d.querySelectorAll('[data-level]').forEach(x => x.classList.toggle('ghost', x.getAttribute('data-level') !== LEVEL));
+    d.addEventListener('click', function (e) {
+      const x = e.target.closest('[data-level]'); if (!x) return;
+      LEVEL = x.getAttribute('data-level'); CS = null; paint();
+      try { const u = new URL(location.href); if (LEVEL === 'advanced') u.searchParams.delete('level'); else u.searchParams.set('level', LEVEL); history.replaceState(null, '', u.toString()); } catch (z) { /* ignore */ }
+      render(false);
+    });
+    paint();
+  }
+  fromHash(); render(false);
+  window.__brsk = { open: () => OPEN, sel: () => SEL, player: () => PLAYER, level: () => LEVEL, parts: () => parts(), check: () => checkState(), state: () => ST, pick: pick, go: go, KEY: KEY, FAM_KEY: FAM_KEY, slotOf: slotOf, finalOf: finalOf, stored: storedFamilies, demo: demoFamily, BREED: BREED, DUR: KARYO_DUR };
+})();
+</script>
+</body>
+</html>

@@ -60,8 +60,8 @@ a{color:var(--moss);font-weight:700}
 button{font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;touch-action:manipulation}
 button.ghost{background:transparent;color:var(--ink)}
 button.small{min-height:38px;padding:5px 11px;font-size:.9rem}
-a.see3d{display:inline-flex;align-items:center;font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);color:var(--ink);text-decoration:none;touch-action:manipulation}
-a.see3d.small{min-height:38px;padding:5px 11px;font-size:.9rem;align-self:flex-start}
+a.see3d,a.seek{display:inline-flex;align-items:center;font:700 1rem var(--body);min-height:46px;padding:10px 16px;border-radius:5px;border:2px solid var(--ink);color:var(--ink);text-decoration:none;touch-action:manipulation}
+a.see3d.small,a.seek.small{min-height:38px;padding:5px 11px;font-size:.9rem;align-self:flex-start}
 button:disabled{opacity:.4;cursor:default}
 button.quiet{border:none;background:none;color:var(--moss);padding:0 2px;min-height:0;text-decoration:underline;font-weight:700}
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -2292,6 +2292,8 @@ const BRSKEY = (function () {
   }
   /* Run E: the 3D viewer opens a hatchling from its two parents' keeper codes and its egg code */
   const link3d = b => 'blue-ridge-salamander-3d.html#m=' + b.parents[0].keeper + '&f=' + b.parents[1].keeper + '&egg=' + b.egg;
+  /* Run D: the karyotype card opens the same way, and keeps the level and the projector view */
+  const linkKaryo = b => 'blue-ridge-salamander-karyotype.html' + (function () { const a = []; if (LEVEL === 'general') a.push('level=general'); if (PROJ) a.push('projector=1'); return a.length ? '?' + a.join('&') : ''; })() + '#m=' + b.parents[0].keeper + '&f=' + b.parents[1].keeper + '&egg=' + b.egg;
   function babyCard(b, e) {
     const traits = ['STR', 'COL', 'TOX', 'SPT', 'GLO', 'CLW', 'GIL', 'REG', 'POW', 'AUR', 'VOC', 'VIS'].map(g => '<li>' + SHORT[g] + ': ' + esc(F.traitWord(b, g)) + '</li>').join('');
     return '<section class="block"><span class="eyebrow">Egg ' + (e + 1) + '</span><p><span class="eggcode">' + b.egg + '</span></p>' +
@@ -2299,6 +2301,7 @@ const BRSKEY = (function () {
       '<p><b>A ' + kidW(b) + '</b>, ' + b.hatchLength.toFixed(1) + ' cm at hatching; it grows to about ' + b.length.toFixed(1) + ' cm. ' + (b.albino ? '<b>Albino:</b> both copies of its ember gene stop early. ' : b.carrier ? 'It carries one broken copy of the ember gene. ' : '') + '</p>' +
       (b.newPower.length ? '<p class="note">' + newPowerLine(b) + '</p>' : '') +
       '<p class="hide-proj"><a class="see3d" href="' + esc(link3d(b)) + '">See this hatchling in 3D</a></p>' +
+      '<p><a class="seek" href="' + esc(linkKaryo(b)) + '">See its karyotype card</a></p>' +
       '<ul class="small">' + traits + '<li>Length: ' + b.plus + ' of 6 length alleles</li></ul></section>';
   }
 
@@ -2676,7 +2679,7 @@ const BRSKEY = (function () {
   function doneHtml(D) {
     const f = D.f, res = id => { const s = f.mc[id]; return !s ? '' : s.restored ? 'brought back' : s.done && s.tries === 0 ? 'right on the first try' : s.done ? 'right on the second try' : 'shown'; };
     let h = '<section class="block"><h2>Your family is complete</h2><p class="say shot">Keep these codes on your Family Field Sheet. Take a screenshot now: press the top button and volume up together (on an iPad with a Home button, the top button and Home). The two keeper codes and four egg codes bring the whole family back on any iPad.</p><div class="cards">';
-    D.babies.forEach((b, i) => { h += '<div class="kid"><b>Egg ' + (i + 1) + '</b><span class="eggcode" style="font-size:1.15rem">' + b.egg + '</span><span>' + kidW(b) + ', ' + F.traitWord(b, 'COL') + ', ' + F.traitWord(b, 'STR') + '</span>' + (b.newPower.length ? '<span class="ok">new power: ' + esc(b.newPower[0].toLabel) + '</span>' : '') + (b.albino ? '<span class="ok">albino</span>' : '') + '<a class="see3d small" href="' + esc(link3d(b)) + '">See it in 3D</a></div>'; });
+    D.babies.forEach((b, i) => { h += '<div class="kid"><b>Egg ' + (i + 1) + '</b><span class="eggcode" style="font-size:1.15rem">' + b.egg + '</span><span>' + kidW(b) + ', ' + F.traitWord(b, 'COL') + ', ' + F.traitWord(b, 'STR') + '</span>' + (b.newPower.length ? '<span class="ok">new power: ' + esc(b.newPower[0].toLabel) + '</span>' : '') + (b.albino ? '<span class="ok">albino</span>' : '') + '<a class="see3d small" href="' + esc(link3d(b)) + '">See it in 3D</a><a class="seek small" href="' + esc(linkKaryo(b)) + '">Karyotype card</a></div>'; });
     h += '</div><table class="tbl"><tbody>' + ['c1', 'c2', 'c3', 'c4'].map(id => '<tr><td>Check ' + id.slice(1) + '</td><td>' + res(id) + '</td></tr>').join('') +
       [0, 1, 2, 3].map(e => { const s = predScore(D, e); return '<tr><td>Egg ' + (e + 1) + ' predictions</td><td>' + s.first + ' of ' + s.n + ' right on the first try</td></tr>'; }).join('') + '</tbody></table>' +
       '<div class="btnrow"><button type="button" data-act="copy">Copy my codes</button><button type="button" class="ghost" data-act="back">&larr; Back</button><button type="button" class="ghost" data-act="newfam">Start another family</button></div></section>';
