@@ -175,6 +175,7 @@ details.note summary{cursor:pointer}
 details.note p{margin-top:6px}
 @media (prefers-reduced-motion: reduce){ .spin{animation:none} }
 /* Run D, the karyotype card (11/27) */
+.phase{min-height:4.7em}   /* room for three lines, so the stage does not move as the captions change */
 button.chip{min-height:38px;padding:4px 10px;cursor:pointer;color:var(--ink);font:600 .82rem var(--mono)}
 button.chip.now{color:var(--paper)}
 .stage .hit{cursor:pointer;outline:none}
@@ -1743,14 +1744,16 @@ const BRSF = (function (BRS) {
   const numY = i => i < 8 ? 270 : 484;
   function finalOf(c) { const s = slotOf(c.i); return { x: s.x + (c.k ? 14 : -14), y: s.y0 + c.len * (0.5 - c.cen), r: 0, l: 1, w: CW, op: 1, sc: 1, halo: 0, let: 0, side: c.k ? 1 : -1 }; }
   function karyoText(baby, K) {
-    const mixed = mixedOf(K).length;
+    /* Reid, 11/27: steps 3 to 5 are a person sorting a photograph, and the captions say so, because partners do not
+       pair or line up in a body cell; no caption gives the count the check asks for; the colors are ours. */
+    const mixed = mixedOf(K).length, working = K.pairs[8].chromosomes.some(c => c.loci.some(lo => lo.gene === 'EMB' && lo.allele !== 'changed'));
     return [
-      'Inside one cell of the hatchling. Its thirty chromosomes are long, loose threads, too tangled to count.',
-      'When a cell gets ready to divide, each thread coils up short and thick. Now the chromosomes can be told apart. Orange came in the egg from the mother. Blue came in the sperm from the father.',
-      'Each chromosome has a partner with the same genes in the same places. One partner came in the egg and one in the sperm.',
-      'A karyotype puts the pairs in order, from the longest to the shortest. These are pairs 1 to 14.',
+      'Inside one cell of the hatchling. Its chromosomes are long, loose threads, too tangled to count.',
+      'When a cell gets ready to divide, each thread coils up short and thick. Now the chromosomes can be told apart. We color them orange if they came in the egg from the mother, and blue if they came in the sperm from the father.',
+      'The rest is done by a person, with a photograph of the chromosomes. Each chromosome is matched with its partner. One partner came in the egg and one in the sperm. In the numbered pairs, partners carry the same genes in the same places.',
+      'The pairs are set in order, from the longest to the shortest. These are pairs 1 to 14. Inside the cell, chromosomes never line up this way.',
       'The sex pair goes last, set apart from the numbered pairs. A daughter has two X chromosomes. A son has an X and a shorter Y.',
-      'The karyotype of this hatchling. Each tick is a gene, and the letter beside it is the allele this hatchling carries there.' + (mixed ? ' A chromosome with two patterns is a mixed strand, from crossing over.' : '') + ' Tap a chromosome to see its genes.'
+      'The karyotype of this hatchling. Each tick is one of the genes we follow, and the letter beside it is the allele this hatchling carries there.' + (working ? ' A tick with no letter on pair 9 is a working copy of the ember gene.' : '') + (mixed ? ' A chromosome with two patterns is a mixed strand, from crossing over.' : '') + ' Tap a chromosome to see its genes.'
     ];
   }
   function karyoDef(O) {
