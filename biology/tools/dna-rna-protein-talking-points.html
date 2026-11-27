@@ -84,7 +84,10 @@ body.quiet .say{visibility:hidden}
     <a class="tile" href="#nucleotides"><span class="thumb" data-v="nucleotides"></span><span class="tx"><b>A DNA nucleotide beside an RNA nucleotide</b><small>Deoxyribose vs ribose · thymine vs uracil · the phosphate · LT 4.1, 4.3 · 6 steps</small></span></a>
     <a class="tile" href="#four-names"><span class="thumb" data-v="four-names"></span><span class="tx"><b>Copying DNA: Chargaff to two new molecules</b><small>Board of 11/19 · helicase, DNA polymerase, ligase · semi-conservative · LT 4.2 · 7 steps</small></span></a>
     <a class="tile" href="#fork"><span class="thumb" data-v="fork"></span><span class="tx"><b>The replication fork: leading and lagging</b><small>Board of 11/19 · always 5′ to 3′ · ligase glues short fragments · LT 4.2 · 8 steps</small></span></a>
-    <div class="tile soon"><span class="thumb">The next board drawing joins here as the unit goes: transcription, tRNA at the ribosome, one changed base.</span><span class="tx"><b>Coming</b><small>LT 4.3</small></span></div>
+    <a class="tile" href="#transcription"><span class="thumb" data-v="transcription"></span><span class="tx"><b>Transcription: DNA to mRNA in the nucleus</b><small>Coding strand, template strand, RNA polymerase · U for T · LT 4.3 · 6 steps</small></span></a>
+    <a class="tile" href="#trna"><span class="thumb" data-v="trna"></span><span class="tx"><b>Translation: tRNA at the ribosome</b><small>Codon and anticodon · peptide bond · STOP · LT 4.3 · 7 steps</small></span></a>
+    <a class="tile" href="#one-base"><span class="thumb" data-v="one-base"></span><span class="tx"><b>One changed base</b><small>Same amino acid, a different one, or STOP · Advanced: one base added · LT 4.3 · 5 steps</small></span></a>
+    <div class="tile soon"><span class="thumb">The next board drawing joins here as the unit goes.</span><span class="tx"><b>Coming</b><small>Unit 4</small></span></div>
   </div>
   <h2>For students, on their own iPads</h2>
   <p class="links"><a href="critical-junctions.html#old-new">Critical Junctions · old strands, new strands</a> &middot; <a href="critical-junctions.html#fork">Critical Junctions · at the fork</a> &middot; <a href="toolbox.html">The Toolbox</a> &middot; <a href="img/dna-vs-rna-nucleotide.png">The nucleotide drawing as a picture</a></p>
@@ -222,7 +225,103 @@ var fork={title:"The replication fork: leading and lagging",steps:[
  "Both new strands end up whole. One was built in a single piece, one in short pieces glued together, both 5′ to 3′."],
  render:boardB};
 
-var VIEWS={"nucleotides":nuc,"four-names":four,"fork":fork};
+
+/* ---------- 4. Transcription: DNA to mRNA in the nucleus (LT 4.3) ---------- */
+var CODE="ATGGCTTTCCAATAA",TPL="TACCGAAAGGTTATT",MRNA="AUGGCUUUCCAAUAA";
+var BLU="#2F6FB5",GRAY="#5A544A";
+function bx(i,x0){return x0+i*38+Math.floor(i/3)*18;}
+function baseRow(str,x0,y,col,round,n,hiT){var h="";n=(n===undefined)?str.length:n;
+  for(var i=0;i<n;i++){var x=bx(i,x0),ch=str[i],hl=hiT&&(ch===hiT);
+    h+='<rect x="'+x+'" y="'+(y-26)+'" width="34" height="38" rx="'+(round?17:3)+'" fill="'+(hl?"#FFF2C2":"#fff")+'" stroke="'+col+'" stroke-width="3"/>'+T(x+17,y+2,ch,{size:24,c:col});}
+  return h;}
+function transcription(s){
+  var x0=330,yC=150,yT=262,yM=352,o=['<svg xmlns="'+NS+'" viewBox="0 0 1200 640" role="img">'];
+  o.push('<rect x="20" y="20" width="1160" height="430" rx="40" fill="#FBFAF6" stroke="#B8B0A0" stroke-width="3" stroke-dasharray="12 9"/>'+T(60,62,"nucleus",{size:26,c:GRAY,a:"start"}));
+  o.push(T(x0-30,yC+2,"5′",{size:24,c:OLD_A,a:"end"})+baseRow(CODE,x0,yC,OLD_A,false)+T(bx(14,x0)+64,yC+2,"3′",{size:24,c:OLD_A,a:"start"})+T(x0-60,yC-40,"coding strand",{size:24,c:OLD_A,a:"start"}));
+  o.push(T(x0-30,yT+2,"3′",{size:24,c:PINK,a:"end"})+baseRow(TPL,x0,yT,PINK,false)+T(bx(14,x0)+64,yT+2,"5′",{size:24,c:PINK,a:"start"})+T(x0-60,yT-40,"template strand",{size:24,c:PINK,a:"start"}));
+  if(s===0){var r="";for(var i=0;i<15;i++){r+=L(bx(i,x0)+17,yC+14,bx(i,x0)+17,yT-28,"#B8B0A0",3);}o.push(r+T(600,yC+66,"base pairs hold the two strands together",{size:20,w:500,c:GRAY}));}
+  if(s>=1)o.push(G(s,1,'<ellipse cx="160" cy="'+((yT+yM)/2)+'" rx="74" ry="34" fill="#EEF4FB" stroke="'+BLU+'" stroke-width="4"/>'+T(160,(yT+yM)/2+8,"RNA pol.",{size:20,c:BLU})+T(160,(yT+yM)/2+62,"unzips and reads",{size:18,w:500,c:BLU})));
+  if(s>=2){var n=(s===2)?6:15;o.push(G(s,2,T(x0-30,yM+2,"5′",{size:24,c:NEW,a:"end"})+T(x0-60,yM+56,"mRNA",{size:26,c:NEW,a:"start"})));
+    o.push((s===2?'<g class="in">':'<g>')+baseRow(MRNA,x0,yM,NEW,true,n)+'</g>');
+    if(s===2)o.push(T(bx(6,x0)+10,yM+2,"T→A · A→U · C→G · G→C",{size:22,c:NEW,a:"start"}));
+    if(s>=3)o.push(T(bx(14,x0)+64,yM+2,"3′",{size:24,c:NEW,a:"start"}));}
+  if(s>=3)o.push(G(s,3,'<rect x="'+(x0+380)+'" y="'+(yM+34)+'" width="300" height="44" rx="8" fill="#fff" stroke="'+NEW+'" stroke-width="2"/>'+T(x0+530,yM+64,"A on the template → U",{size:22,c:NEW})));
+  if(s>=4){var hc="";for(var j=0;j<15;j++){if(CODE[j]==="T"){var x=bx(j,x0)+17;hc+='<circle cx="'+x+'" cy="'+(yC-7)+'" r="25" fill="none" stroke="#E0A800" stroke-width="4"/><circle cx="'+x+'" cy="'+(yM-7)+'" r="25" fill="none" stroke="#E0A800" stroke-width="4"/>';}}
+    o.push(G(s,4,hc+T(1160,yC-46,"mRNA = coding strand, with U for T",{size:24,c:"#9A6F00",a:"end"})));}
+  if(s>=5)o.push(G(s,5,P("M"+(bx(14,x0)+90)+" "+yM+" C 1120 "+yM+" 1150 420 1150 500",NEW,6)+'<path d="M1136 494 L1150 512 L1164 494" fill="none" stroke="'+NEW+'" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>'+
+    '<rect x="40" y="480" width="1060" height="140" rx="10" fill="#F5F3EE" stroke="#DDD8CE" stroke-width="2"/>'+
+    T(70,520,"Transcription",{size:28,c:INKB,a:"start"})+T(70,556,"Where: the nucleus · Reads: the DNA template strand · Worker: RNA polymerase",{size:21,w:500,c:LIG,a:"start"})+
+    T(70,590,"Makes: mRNA, which leaves the nucleus for a ribosome",{size:21,w:500,c:LIG,a:"start"})));
+  o.push("</svg>");return o.join("");}
+var trx={title:"Transcription: DNA to mRNA in the nucleus",steps:[
+ "Start in the nucleus with one gene. Two strands, held together by base pairs. The top strand is the coding strand; the bottom one is the template strand.",
+ "RNA polymerase binds at the start of the gene and unzips a short stretch. It reads only the template strand.",
+ "RNA polymerase builds mRNA by matching each template base: T to A, A to U, C to G, G to C. Ask: what goes across from an A on the template?",
+ "The whole gene is copied into one strand of mRNA. RNA has no thymine. Wherever the template has A, the mRNA gets U.",
+ "Lay the mRNA beside the coding strand. Same letters, except U wherever the coding strand has T. That is why it is called the coding strand.",
+ "The mRNA leaves the nucleus for a ribosome. Transcription: in the nucleus, reads DNA, makes mRNA. Write it in one sentence."],
+ render:transcription};
+
+/* ---------- 5. Translation: tRNA at the ribosome (LT 4.3) ---------- */
+var COD=["AUG","GCU","UUC","CAA","UAA"],ANT=["UAC","CGA","AAG","GUU"],AMI=["Met","Ala","Phe","Gln"],ACOL=["#D2462B","#1F7A8C","#B8860B","#6B4E8C"];
+function cx(i){return 230+i*170;}
+function tRNA(i,chain,faded){var x=cx(i)+70,y=330,h='<g'+(faded?' opacity="0.35"':'')+'>';
+  h+='<path d="M'+(x-48)+' '+(y+40)+' L'+(x-48)+' '+(y-60)+' Q'+x+' '+(y-110)+' '+(x+48)+' '+(y-60)+' L'+(x+48)+' '+(y+40)+'" fill="#F3EEF8" stroke="#6B4E8C" stroke-width="4"/>';
+  for(var k=0;k<3;k++){var bxx=x-48+k*32;h+='<rect x="'+bxx+'" y="'+(y+40)+'" width="32" height="38" rx="16" fill="#fff" stroke="#6B4E8C" stroke-width="3"/>'+T(bxx+16,y+68,ANT[i][k],{size:22,c:"#6B4E8C"});}
+  h+=T(x,y-4,"tRNA",{size:18,w:500,c:"#6B4E8C"});
+  if(chain){for(var c=0;c<chain.length;c++){var ax=x-(chain.length-1-c)*62,ay=y-128;
+      if(c>0)h+=L(ax-62+26,ay,ax-26,ay,LIG,5);
+      h+='<circle cx="'+ax+'" cy="'+ay+'" r="26" fill="'+ACOL[chain[c]]+'"/>'+T(ax,ay+7,AMI[chain[c]],{size:17,c:"#fff"});}
+    h+=L(x,y-102,x,y-88,LIG,4);}
+  return h+'</g>';}
+function ribo(i){var x=Math.min(cx(i)-30,780);return '<rect x="'+x+'" y="250" width="400" height="300" rx="120" fill="#EFE9DD" fill-opacity="0.55" stroke="#8A7F6A" stroke-width="4"/>'+T(x+300,540,"ribosome",{size:22,c:"#8A7F6A"});}
+function translation(s){var yM=470,o=['<svg xmlns="'+NS+'" viewBox="0 0 1200 640" role="img">'];
+  o.push(T(40,52,"cytoplasm",{size:24,c:GRAY,a:"start"}));
+  var rp=(s>=6)?4:(s>=5)?2:0;
+  if(s>=1)o.push(G(s,1,ribo(rp)));
+  var m="";for(var i=0;i<5;i++){m+=baseRow(COD[i],cx(i),yM,NEW,true);}o.push(m+T(cx(0)-30,yM+2,"5′",{size:24,c:NEW,a:"end"})+T(cx(4)+150,yM+2,"3′",{size:24,c:NEW,a:"start"})+T(cx(0)-90,yM+60,"mRNA",{size:24,c:NEW,a:"start"}));
+  if(s===0)o.push(T(600,170,"mRNA arrives from the nucleus, read three bases at a time",{size:24,c:INKB}));
+  if(s===1)o.push(T(cx(0)+57,yM+60,"start codon",{size:20,c:NEW}));
+  if(s>=2&&s<=3)o.push(G(s,2,tRNA(0,[0])));
+  if(s===2)o.push(T(cx(0)+128,396,"← anticodon (on the tRNA)",{size:20,c:"#6B4E8C",a:"start"})+T(cx(0)+4,522,"↑ codon (on the mRNA)",{size:20,c:NEW,a:"start"}));
+  if(s===3)o.push('<g class="in">'+tRNA(1,[1])+'</g>');
+  if(s===4)o.push(tRNA(0,null,true)+'<g class="in">'+tRNA(1,[0,1])+T(cx(1)+40,160,"peptide bond",{size:22,c:LIG})+'</g>'+T(cx(0)+70,212,"empty tRNA leaves",{size:18,w:500,c:GRAY}));
+  if(s===5)o.push('<g class="in">'+tRNA(3,[0,1,2,3])+'</g>'+T(cx(2)+70,600,"one codon at a time",{size:20,c:INKB}));
+  if(s>=6){o.push(G(s,6,T(cx(4)+57,240,"STOP: no tRNA fits",{size:24,c:PINK})+(function(){var h="";for(var c=0;c<4;c++){var ax=420+c*62;if(c>0)h+=L(ax-36,110,ax-26,110,LIG,5);h+='<circle cx="'+ax+'" cy="110" r="26" fill="'+ACOL[c]+'"/>'+T(ax,117,AMI[c],{size:17,c:"#fff"});}return h;})()+T(700,118,"the protein is let go",{size:24,c:INKB,a:"start"})+
+    '<rect x="40" y="590" width="1120" height="44" rx="8" fill="#F5F3EE" stroke="#DDD8CE" stroke-width="2"/>'+T(600,620,"Translation · where: ribosome · reads: mRNA codons · tRNA brings amino acids · makes: protein",{size:21,c:LIG})));}
+  o.push("</svg>");return o.join("");}
+var trl={title:"Translation: tRNA at the ribosome",steps:[
+ "The mRNA leaves the nucleus and reaches the cytoplasm. It is read in groups of three bases. Each group is a codon.",
+ "A ribosome clamps onto the mRNA at the start codon, AUG.",
+ "A tRNA arrives carrying one amino acid, methionine. Its anticodon, UAC, pairs with the codon AUG. The codon is on the mRNA; the anticodon is on the tRNA.",
+ "The next tRNA brings alanine. Its anticodon CGA pairs with the codon GCU. Ask: which molecule decides which amino acid comes next?",
+ "A peptide bond joins methionine to alanine. The first tRNA leaves empty, free to pick up another methionine.",
+ "The ribosome moves along one codon at a time. Each new tRNA pairs with its codon and adds one amino acid to the chain.",
+ "At a STOP codon no tRNA fits. The finished protein is let go. Translation: at the ribosome, reads mRNA, makes protein."],
+ render:translation};
+
+/* ---------- 6. One changed base (LT 4.3) ---------- */
+function codRow(str,x0,y,chg,col){var h="";for(var i=0;i<str.length;i++){var x=bx(i,x0),hl=(chg.indexOf(i)>=0);
+  h+='<rect x="'+x+'" y="'+(y-26)+'" width="34" height="38" rx="17" fill="'+(hl?"#FFE1E8":"#fff")+'" stroke="'+(hl?PINK:col)+'" stroke-width="'+(hl?4:3)+'"/>'+T(x+17,y+2,str[i],{size:22,c:hl?PINK:col});}return h;}
+function aaRow(list,x0,y,hl){var h="";list.forEach(function(a,i){var x=bx(i*3,x0)+57;h+=T(x,y,a,{size:20,c:(hl.indexOf(i)>=0)?PINK:INKB});});return h;}
+function oneBase(s){var x0=270,o=['<svg xmlns="'+NS+'" viewBox="0 0 1200 640" role="img">'];
+  var rows=[["Normal gene","AUGGCUUUCCAAUAA",[],["Met","Ala","Phe","Gln","STOP"],[],""],
+   ["Swap: GCU → GCC","AUGGCCUUCCAAUAA",[5],["Met","Ala","Phe","Gln","STOP"],[1],"same amino acid"],
+   ["Swap: UUC → UCC","AUGGCUUCCCAAUAA",[7],["Met","Ala","Ser","Gln","STOP"],[2],"different amino acid"],
+   ["Swap: CAA → UAA","AUGGCUUUCUAAUAA",[9],["Met","Ala","Phe","STOP"],[3],"stops early: 3 amino acids"],
+   ["Advanced: G added","AUGGGCUUUCCAAUAA",[3],["Met","Gly","Phe","Pro","Ile …"],[1,2,3,4],"every codon after it shifts"]];
+  rows.forEach(function(r,k){if(s<k)return;var y=80+k*112;
+    o.push(G(s,k,T(40,y+2,r[0],{size:22,c:k?PINK:INKB,a:"start"})+codRow(r[1],x0,y,r[2],NEW)+aaRow(r[3],x0,y+40,r[4])+(r[5]?T(1175,y+40,r[5],{size:20,c:PINK,a:"end"}):"")));});
+  o.push("</svg>");return o.join("");}
+var one={title:"One changed base",steps:[
+ "Here is a gene's mRNA, read codon by codon: methionine, alanine, phenylalanine, glutamine, then STOP. A change in the DNA shows up here as a changed codon.",
+ "Swap one base: GCU becomes GCC. Look it up. Still alanine. The protein is the same. Ask: how can a change do nothing?",
+ "Swap a different base: UUC becomes UCC. Now serine goes in where phenylalanine was. One amino acid is different.",
+ "Swap one more: CAA becomes UAA. That is a STOP codon. The protein stops after three amino acids.",
+ "Advanced: add one base instead of swapping. Every codon after it is read in a new group of three, so every amino acid after it can change. That is why an added or lost base usually does more harm than a swap."],
+ render:oneBase};
+
+var VIEWS={"nucleotides":nuc,"four-names":four,"fork":fork,"transcription":trx,"trna":trl,"one-base":one};
 var cur=null,step=0;
 var $=function(id){return document.getElementById(id);};
 function show(){var v=VIEWS[cur];$("vtitle").textContent=v.title;$("stage").innerHTML=v.render(step);
